@@ -1,0 +1,17 @@
+{
+  "id": "003-goal-evidence-ab",
+  "purpose": "Paired public-game screen, not a competition submission",
+  "games": ["sk48", "lf52", "bp35", "wa30", "g50t", "sc25", "ls20", "su15", "tn36", "m0r0", "cd82", "tu93", "ar25", "lp85", "ft09", "r11l"],
+  "arm_order": ["baseline", "goal_evidence"],
+  "requested_arm_seconds": 4642,
+  "hard_limit_seconds": 10800,
+  "startup_limit_seconds": 1200,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "expected_gpu_hours": 2.8,
+  "weekly_gpu_hours_limit": 30,
+  "quota_before_hours_remaining": 27.654825,
+  "quota_checked_date": "2026-10-10",
+  "selection_note": "Mechanism/goal bottlenecks, variable cases and solved controls; nine other public games reserved for expansion. No game-specific solution logic.",
+  "comparison_note": "Sequential arms share weights and compiled kernels, but use fresh CPU processes and prompt-cache flushes. One run per arm is a screening result, not proof of statistical significance."
+}

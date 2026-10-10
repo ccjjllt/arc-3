@@ -1,0 +1,634 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-10T16:12:58.250260+00:00",
+  "scope": "One completed public OFFLINE paired experiment; no additional GPU runs.",
+  "sources": {
+    "runs/003-goal-evidence-ab/experiment-manifest.json": {
+      "sha256": "9713cb93eaca002b2825f7d31d97a8724e7f83636a99ffb9518efb78a9ce4b10",
+      "bytes": 3159
+    },
+    "runs/003-goal-evidence-ab/serve.log": {
+      "sha256": "3109da764fcf690db606327d586dc8dcb244c05c928a13fa41ec93d505497674",
+      "bytes": 3556716
+    },
+    "runs/003-goal-evidence-ab/gpu-utilization.jsonl": {
+      "sha256": "59ada213d4fc4e82ce6ba0c27f0dd24118f4f92a6eecd8e3d54d51420e29181b",
+      "bytes": 16973
+    },
+    "runs/003-goal-evidence-ab/baseline/arm-metadata.json": {
+      "sha256": "f04252cf47f7397d9e68e1fcef30045fb593de1ab88c3ef4ab993f0c4c3057f4",
+      "bytes": 8819
+    },
+    "runs/003-goal-evidence-ab/goal_evidence/arm-metadata.json": {
+      "sha256": "bb1492fa25fbf370a2ab2b1ddffe486027484dfd01d1d001d8447deed4ec94a1",
+      "bytes": 8814
+    },
+    "runs/003-goal-evidence-ab/baseline/benchmark.json": {
+      "sha256": "de69891c29464da3b24ec315f5ae133510271e270703d5b95858d9f253165981",
+      "bytes": 809825
+    },
+    "runs/003-goal-evidence-ab/goal_evidence/benchmark.json": {
+      "sha256": "de5001e33a9053814acf927553783f72404c88191699c7612a5fd0ce15d926bb",
+      "bytes": 788840
+    },
+    "experiments/003-quota-after.json": {
+      "sha256": "6955c06dc9698aa808873d904ac38b3bbf9ab948d63ee6e4bebc7e81838630e6",
+      "bytes": 350
+    }
+  },
+  "runtime": {
+    "started_beijing": "2026-10-10T21:19:31.379896+08:00",
+    "finished_beijing": "2026-10-11T00:04:06.391468+08:00",
+    "session_seconds": 9875.011571645737,
+    "session_gpu_wall_hours": 2.7430587699015936,
+    "model_ready_seconds": 526.5418062210083,
+    "startup_fraction": 0.053320626755808107,
+    "solve_budget_seconds": 9284,
+    "solve_budget_fraction": 0.9401507970539785,
+    "arm_overhead_seconds": 59.246537923812866,
+    "shutdown_and_outer_overhead_seconds": 5.223227500915527,
+    "non_startup_non_solve_budget_seconds": 64.4697654247284,
+    "non_startup_non_solve_budget_fraction": 0.0065285761902134235,
+    "startup_known_parts": {
+      "target_weight_load_seconds": 263.6,
+      "draft_weight_load_seconds": 0.82,
+      "target_verify_cuda_graph_seconds": 144.89,
+      "draft_decode_cuda_graph_seconds": 7.07,
+      "draft_extend_cuda_graph_seconds": 0.96
+    },
+    "startup_other_seconds": 109.20180622100833,
+    "gpu_server_stopped": true,
+    "estimated_saved_seconds_by_one_load_instead_of_two": 526.5418062210083,
+    "estimated_saved_fraction_of_two_separate_equivalent_sessions": 0.050621458843005694
+  },
+  "quota": {
+    "total_weekly_seconds": 108000.0,
+    "before_account_used_seconds": 8442.63,
+    "after_account_used_seconds": 19226.113756,
+    "account_snapshot_delta_seconds": 10783.483756,
+    "account_snapshot_delta_hours": 2.9954121544444443,
+    "remaining_hours": 24.659412845555554,
+    "snapshot_delta_minus_manifest_seconds": 908.4721843542629,
+    "attribution_warning": "Kaggle quota is account-wide; the snapshot gap may include settlement timing or other sessions and is not established framework waste.",
+    "refresh_beijing": "2026-10-17T08:00:00+08:00"
+  },
+  "cache_flush": {
+    "manifest_http_statuses": [
+      200,
+      200
+    ],
+    "server_success_log_records": [
+      {
+        "line": 228,
+        "utc": "2026-10-10 13:28:17",
+        "epoch": 1791638897.0
+      },
+      {
+        "line": 8292,
+        "utc": "2026-10-10 14:46:26",
+        "epoch": 1791643586.0
+      }
+    ],
+    "confirmed_success_count": 2
+  },
+  "http_status_counts": {
+    "200": 3011,
+    "503": 2
+  },
+  "non200_context": "Only two /health HTTP 503 while server startup was finishing; no non-200 generation response in the downloaded serve.log.",
+  "arms": {
+    "baseline": {
+      "parent_elapsed_seconds": 4688.126588582993,
+      "runner_wall_seconds": 4687.127643992,
+      "benchmark_call_wall_seconds": 4684.2309608529995,
+      "benchmark_serialized_elapsed_seconds": 4681.09659,
+      "solve_budget_seconds": 4642,
+      "benchmark_call_over_budget_seconds": 42.23096085299949,
+      "parent_over_budget_seconds": 46.126588582992554,
+      "last_batch_log_seconds_relative_to_soft_deadline": 31.015214920043945,
+      "seconds_from_last_batch_log_to_parent_end": 12.048489332199097,
+      "gpu": {
+        "sample_count": 79,
+        "invalid_sample_count": 0,
+        "sample_interval_seconds": {
+          "count": 78,
+          "mean": 60.026918444878014,
+          "median": 60.027522683143616,
+          "p05": 60.01954840421676,
+          "p95": 60.030130207538605,
+          "min": 60.01834511756897,
+          "max": 60.0359091758728
+        },
+        "covered_span_seconds": 4682.099638700485,
+        "coverage_of_parent_wall": 0.9987144225377393,
+        "utilization_percent_sample_statistics": {
+          "count": 79,
+          "mean": 91.21518987341773,
+          "median": 98.0,
+          "p05": 0.0,
+          "p95": 99.0,
+          "min": 0.0,
+          "max": 99.0
+        },
+        "utilization_percent_time_weighted_trapezoid": 92.38480232976606,
+        "power_watts_sample_mean": 385.78835443037974,
+        "power_watts_time_weighted_trapezoid": 389.4666447756542,
+        "memory_mib_sample_mean": 95909.45569620254,
+        "memory_mib_peak": 96189.0,
+        "memory_total_mib": 97887.0,
+        "low_utilization_samples": [
+          {
+            "seconds_relative_to_arm": 0.026274919509887695,
+            "utc": "2026-10-10T13:28:17.948176+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 96.28,
+            "nearest_batch_log_gap_seconds": 10.05182433128357
+          },
+          {
+            "seconds_relative_to_arm": 2281.0461761951447,
+            "utc": "2026-10-10T14:06:18.968077+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 307.57,
+            "nearest_batch_log_gap_seconds": 0.03192305564880371
+          },
+          {
+            "seconds_relative_to_arm": 2641.198219060898,
+            "utc": "2026-10-10T14:12:19.120120+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 369.68,
+            "nearest_batch_log_gap_seconds": 0.12011981010437012
+          },
+          {
+            "seconds_relative_to_arm": 3241.4790482521057,
+            "utc": "2026-10-10T14:22:19.400949+00:00",
+            "gpu_utilization_percent": 30.0,
+            "power_watts": 338.49,
+            "nearest_batch_log_gap_seconds": 0.40094900131225586
+          },
+          {
+            "seconds_relative_to_arm": 4562.079082250595,
+            "utc": "2026-10-10T14:44:20.000983+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 337.74,
+            "nearest_batch_log_gap_seconds": 0.0009829998016357422
+          },
+          {
+            "seconds_relative_to_arm": 4682.125913619995,
+            "utc": "2026-10-10T14:46:20.047814+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 101.54,
+            "nearest_batch_log_gap_seconds": 6.04781436920166
+          }
+        ]
+      },
+      "tokens": {
+        "completed_server_request_count": 1562,
+        "unique_request_count": 1562,
+        "server_output_tokens": 2876390,
+        "server_input_tokens": 114119775,
+        "server_cached_input_tokens": 107352256,
+        "server_uncached_input_tokens": 6767519,
+        "cache_hit_ratio_token_weighted": 0.940698104250556,
+        "server_output_tokens_per_benchmark_call_second": 614.0581077317778,
+        "server_output_tokens_per_parent_arm_second": 613.5478523563934,
+        "solver_note_tokens": 2856116,
+        "action_history_plus_final_tokens": 2810615,
+        "solver_note_minus_action_history_tokens": 45501,
+        "server_minus_solver_note_tokens": 20274,
+        "per_game_solver_note_differences": [
+          {
+            "game_id": "sk48-d8078629",
+            "action_history_plus_final_tokens": 156178,
+            "solver_note_tokens": 171039,
+            "difference": 14861
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "action_history_plus_final_tokens": 176221,
+            "solver_note_tokens": 179731,
+            "difference": 3510
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "action_history_plus_final_tokens": 180624,
+            "solver_note_tokens": 186514,
+            "difference": 5890
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "action_history_plus_final_tokens": 156422,
+            "solver_note_tokens": 156422,
+            "difference": 0
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "action_history_plus_final_tokens": 172628,
+            "solver_note_tokens": 175313,
+            "difference": 2685
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "action_history_plus_final_tokens": 158928,
+            "solver_note_tokens": 158928,
+            "difference": 0
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "action_history_plus_final_tokens": 207912,
+            "solver_note_tokens": 207912,
+            "difference": 0
+          },
+          {
+            "game_id": "su15-1944f8ab",
+            "action_history_plus_final_tokens": 239090,
+            "solver_note_tokens": 239090,
+            "difference": 0
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "action_history_plus_final_tokens": 202589,
+            "solver_note_tokens": 205271,
+            "difference": 2682
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "action_history_plus_final_tokens": 231909,
+            "solver_note_tokens": 231909,
+            "difference": 0
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "action_history_plus_final_tokens": 144787,
+            "solver_note_tokens": 144787,
+            "difference": 0
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "action_history_plus_final_tokens": 223225,
+            "solver_note_tokens": 239098,
+            "difference": 15873
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "action_history_plus_final_tokens": 138249,
+            "solver_note_tokens": 138249,
+            "difference": 0
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "action_history_plus_final_tokens": 135117,
+            "solver_note_tokens": 135117,
+            "difference": 0
+          },
+          {
+            "game_id": "ft09-0d8bbf25",
+            "action_history_plus_final_tokens": 105112,
+            "solver_note_tokens": 105112,
+            "difference": 0
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "action_history_plus_final_tokens": 181624,
+            "solver_note_tokens": 181624,
+            "difference": 0
+          }
+        ]
+      },
+      "server": {
+        "request_queue_ms": {
+          "count": 1562,
+          "mean": 127.00191421254802,
+          "median": 1.48,
+          "p05": 0.7205000000000001,
+          "p95": 4.2279999999999935,
+          "min": 0.3,
+          "max": 10599.02
+        },
+        "request_prefill_ms": {
+          "count": 1562,
+          "mean": 540.7222471190781,
+          "median": 265.025,
+          "p05": 124.70450000000001,
+          "p95": 1308.499,
+          "min": 115.31,
+          "max": 7665.88
+        },
+        "request_forward_ms": {
+          "count": 1562,
+          "mean": 27008.079987195903,
+          "median": 16942.989999999998,
+          "p05": 2758.4500000000003,
+          "p95": 84357.94549999994,
+          "min": 894.31,
+          "max": 192547.43
+        },
+        "decode_log_samples": 3016,
+        "decode_running_requests_sample_mean": 9.001657824933687,
+        "decode_running_requests_max": 10.0,
+        "decode_running_requests_median": 9.0,
+        "decode_accept_length_sample_mean": 2.6516114058355438,
+        "decode_accept_rate_sample_mean": 0.5505006631299735,
+        "decode_throughput_log_sample_mean_not_end_to_end": 673.3097911140584,
+        "max_batch_log_gap_seconds": 3.0
+      },
+      "diagnostics": {
+        "render_calls": 8,
+        "total_render_seconds": 16.429999999999996,
+        "render_seconds": [
+          2.04,
+          1.89,
+          1.54,
+          1.46,
+          2.19,
+          2.62,
+          1.63,
+          3.06
+        ],
+        "render_wall_fraction": 0.003504598199206485,
+        "client_read_timeouts": 7,
+        "crashes": 0,
+        "forced_cpu_process_exit": false,
+        "lingering_worker_threads": [],
+        "warmup_reset_game": "bp35-0a0ad940"
+      }
+    },
+    "goal_evidence": {
+      "parent_elapsed_seconds": 4655.11994934082,
+      "runner_wall_seconds": 4653.386258559,
+      "benchmark_call_wall_seconds": 4651.732672271999,
+      "benchmark_serialized_elapsed_seconds": 4648.514551,
+      "solve_budget_seconds": 4642,
+      "benchmark_call_over_budget_seconds": 9.732672271999036,
+      "parent_over_budget_seconds": 13.119949340820312,
+      "last_batch_log_seconds_relative_to_soft_deadline": 8.177321910858154,
+      "seconds_from_last_batch_log_to_parent_end": 3.1695380210876465,
+      "gpu": {
+        "sample_count": 78,
+        "invalid_sample_count": 0,
+        "sample_interval_seconds": {
+          "count": 77,
+          "mean": 60.027132768135566,
+          "median": 60.02796244621277,
+          "p05": 60.02034888267517,
+          "p95": 60.02953767776489,
+          "min": 60.01925849914551,
+          "max": 60.03077006340027
+        },
+        "covered_span_seconds": 4622.089223146439,
+        "coverage_of_parent_wall": 0.9929044307012843,
+        "utilization_percent_sample_statistics": {
+          "count": 78,
+          "mean": 92.16666666666667,
+          "median": 98.0,
+          "p05": 39.1,
+          "p95": 99.0,
+          "min": 0.0,
+          "max": 99.0
+        },
+        "utilization_percent_time_weighted_trapezoid": 92.72739056815915,
+        "power_watts_sample_mean": 379.1588461538461,
+        "power_watts_time_weighted_trapezoid": 380.9144051588453,
+        "memory_mib_sample_mean": 95864.0,
+        "memory_mib_peak": 95947.0,
+        "memory_total_mib": 97887.0,
+        "low_utilization_samples": [
+          {
+            "seconds_relative_to_arm": 0.02933955192565918,
+            "utc": "2026-10-10T14:46:26.078928+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 99.44,
+            "nearest_batch_log_gap_seconds": 2.921071767807007
+          },
+          {
+            "seconds_relative_to_arm": 1500.686945438385,
+            "utc": "2026-10-10T15:11:26.736534+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 284.6,
+            "nearest_batch_log_gap_seconds": 0.26346588134765625
+          },
+          {
+            "seconds_relative_to_arm": 1980.9017736911774,
+            "utc": "2026-10-10T15:19:26.951362+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 344.32,
+            "nearest_batch_log_gap_seconds": 0.04863762855529785
+          },
+          {
+            "seconds_relative_to_arm": 2641.2132527828217,
+            "utc": "2026-10-10T15:30:27.262841+00:00",
+            "gpu_utilization_percent": 0.0,
+            "power_watts": 298.87,
+            "nearest_batch_log_gap_seconds": 0.26284146308898926
+          },
+          {
+            "seconds_relative_to_arm": 3181.4636282920837,
+            "utc": "2026-10-10T15:39:27.513217+00:00",
+            "gpu_utilization_percent": 46.0,
+            "power_watts": 365.48,
+            "nearest_batch_log_gap_seconds": 0.4867830276489258
+          }
+        ]
+      },
+      "tokens": {
+        "completed_server_request_count": 1455,
+        "unique_request_count": 1455,
+        "server_output_tokens": 2940738,
+        "server_input_tokens": 104443262,
+        "server_cached_input_tokens": 97762176,
+        "server_uncached_input_tokens": 6681086,
+        "cache_hit_ratio_token_weighted": 0.9360314311132871,
+        "server_output_tokens_per_benchmark_call_second": 632.1812122887287,
+        "server_output_tokens_per_parent_arm_second": 631.7212084763611,
+        "solver_note_tokens": 2922797,
+        "action_history_plus_final_tokens": 2813917,
+        "solver_note_minus_action_history_tokens": 108880,
+        "server_minus_solver_note_tokens": 17941,
+        "per_game_solver_note_differences": [
+          {
+            "game_id": "sk48-d8078629",
+            "action_history_plus_final_tokens": 100819,
+            "solver_note_tokens": 133440,
+            "difference": 32621
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "action_history_plus_final_tokens": 238898,
+            "solver_note_tokens": 247596,
+            "difference": 8698
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "action_history_plus_final_tokens": 180439,
+            "solver_note_tokens": 216708,
+            "difference": 36269
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "action_history_plus_final_tokens": 200529,
+            "solver_note_tokens": 200529,
+            "difference": 0
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "action_history_plus_final_tokens": 170353,
+            "solver_note_tokens": 170353,
+            "difference": 0
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "action_history_plus_final_tokens": 167220,
+            "solver_note_tokens": 167220,
+            "difference": 0
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "action_history_plus_final_tokens": 188100,
+            "solver_note_tokens": 188100,
+            "difference": 0
+          },
+          {
+            "game_id": "su15-1944f8ab",
+            "action_history_plus_final_tokens": 218558,
+            "solver_note_tokens": 218558,
+            "difference": 0
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "action_history_plus_final_tokens": 149968,
+            "solver_note_tokens": 149968,
+            "difference": 0
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "action_history_plus_final_tokens": 249967,
+            "solver_note_tokens": 278471,
+            "difference": 28504
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "action_history_plus_final_tokens": 121122,
+            "solver_note_tokens": 121122,
+            "difference": 0
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "action_history_plus_final_tokens": 242233,
+            "solver_note_tokens": 245021,
+            "difference": 2788
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "action_history_plus_final_tokens": 153717,
+            "solver_note_tokens": 153717,
+            "difference": 0
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "action_history_plus_final_tokens": 132266,
+            "solver_note_tokens": 132266,
+            "difference": 0
+          },
+          {
+            "game_id": "ft09-0d8bbf25",
+            "action_history_plus_final_tokens": 82595,
+            "solver_note_tokens": 82595,
+            "difference": 0
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "action_history_plus_final_tokens": 217133,
+            "solver_note_tokens": 217133,
+            "difference": 0
+          }
+        ]
+      },
+      "server": {
+        "request_queue_ms": {
+          "count": 1455,
+          "mean": 151.0714089347079,
+          "median": 1.47,
+          "p05": 0.71,
+          "p95": 4.920999999999906,
+          "min": 0.38,
+          "max": 10958.05
+        },
+        "request_prefill_ms": {
+          "count": 1455,
+          "mean": 535.4999312714776,
+          "median": 269.41,
+          "p05": 124.644,
+          "p95": 1319.5599999999988,
+          "min": 114.06,
+          "max": 9098.53
+        },
+        "request_forward_ms": {
+          "count": 1455,
+          "mean": 28993.332962199314,
+          "median": 17243.23,
+          "p05": 3282.829,
+          "p95": 92044.0409999999,
+          "min": 1102.89,
+          "max": 196171.31
+        },
+        "decode_log_samples": 3033,
+        "decode_running_requests_sample_mean": 9.061325420375866,
+        "decode_running_requests_max": 10.0,
+        "decode_running_requests_median": 9.0,
+        "decode_accept_length_sample_mean": 2.6763336630398946,
+        "decode_accept_rate_sample_mean": 0.5587899769205408,
+        "decode_throughput_log_sample_mean_not_end_to_end": 689.2358259149357,
+        "max_batch_log_gap_seconds": 3.0
+      },
+      "diagnostics": {
+        "render_calls": 8,
+        "total_render_seconds": 15.709999999999999,
+        "render_seconds": [
+          1.91,
+          2.08,
+          1.27,
+          1.35,
+          1.35,
+          3.34,
+          1.27,
+          3.14
+        ],
+        "render_wall_fraction": 0.0033747787749754087,
+        "client_read_timeouts": 6,
+        "crashes": 0,
+        "forced_cpu_process_exit": false,
+        "lingering_worker_threads": [],
+        "warmup_reset_game": "sk48-d8078629"
+      }
+    }
+  },
+  "combined_server_output_tokens": 5817128,
+  "gross_server_output_tokens_per_session_second": 589.0755628786101,
+  "methods": [
+    "GPU arithmetic means weight samples equally; trapezoidal means weight actual timestamp intervals only between first and last sample in each arm. No extrapolation into startup or unobserved tail.",
+    "One-minute nvidia-smi observations are sparse; time-weighted interpolation is an estimate, not continuous GPU utilization. A zero observation is not one idle minute.",
+    "Server request attribution uses entry_time within the parent arm interval. Output-token counts sum unique ReqTimeStats requests, including requests finishing near cancellation. They are a serving metric, not necessarily useful model-visible tokens.",
+    "Client solver_note tokens and action-history tokens are separate counts. The former includes additional generated tokens not charged to an action; server totals can additionally include outputs whose response is cancelled/unconsumed.",
+    "Sum of per-game elapsed times is not GPU quota because all games overlap.",
+    "Decode batch throughput log means are conditional samples and are not end-to-end throughput.",
+    "Periodic diagnostics rendering overlaps live solver threads; its CPU seconds must not be added wholesale to GPU idle time."
+  ],
+  "next_budget_estimates": {
+    "repeat_16_game_pair_estimated_hours": 2.7430587699015936,
+    "repeat_16_game_pair_hard_cap_hours": 3.0,
+    "12_game_pair_estimate_hours": 2.098614325457149,
+    "12_game_pair_recommended_cap_hours": 2.5,
+    "25_game_single_baseline_estimate_hours": 2.173761612839169,
+    "25_game_single_baseline_recommended_cap_hours": 2.5,
+    "remaining_after_one_2_5h_cap_hours": 22.159412845555554
+  },
+  "implemented_next_run_fixes": [
+    {
+      "file": "src/arc3_research/run_arm.py",
+      "change": "Set ARC3_WARMUP_ACTION_GAMES=0 before importing inference; record warmup_action_games=0 in metadata.",
+      "scope": "Future OFFLINE research runners only; parent waits for model readiness; competition reruns rejected by this entry point.",
+      "motivation": "Remove nondeterministic extra RESET to a different game in each arm. Measurement repair, not a score-improvement claim.",
+      "historical_003_outputs_changed": false,
+      "new_gpu_run_started": false
+    }
+  ]
+}

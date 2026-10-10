@@ -1,0 +1,49 @@
+{
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/goal_evidence.py": "685bb02f6618d8dc2e37814164ffeb716704cc901bd64b5c482d9e7551602fa9",
+    "src/arc3_research/run_arm.py": "1e8701b55d8c4a58bcf45ff9b0d4b922783ca8a352a3c6e2884791afdc4ad84e",
+    "src/arc3_research/session_runner.py": "10189a3a8976345b01b15071e3896f3e918a7b33a9b2a77d85da7dc9cf28bce9",
+    "scripts/summarize_experiment.py": "acd18c0c77b1dc646ade6b3cd2222312fd20d84512479960b7ac5eab763c64a1"
+  },
+  "config": {
+    "id": "003-goal-evidence-ab",
+    "purpose": "Paired public-game screen, not a competition submission",
+    "games": [
+      "sk48",
+      "lf52",
+      "bp35",
+      "wa30",
+      "g50t",
+      "sc25",
+      "ls20",
+      "su15",
+      "tn36",
+      "m0r0",
+      "cd82",
+      "tu93",
+      "ar25",
+      "lp85",
+      "ft09",
+      "r11l"
+    ],
+    "arm_order": [
+      "baseline",
+      "goal_evidence"
+    ],
+    "requested_arm_seconds": 4642,
+    "hard_limit_seconds": 10800,
+    "startup_limit_seconds": 1200,
+    "active_streams": 10,
+    "n_passes_per_arm": 1,
+    "expected_gpu_hours": 2.8,
+    "weekly_gpu_hours_limit": 30,
+    "quota_before_hours_remaining": 27.654825,
+    "quota_checked_date": "2026-10-10",
+    "selection_note": "Mechanism/goal bottlenecks, variable cases and solved controls; nine other public games reserved for expansion. No game-specific solution logic.",
+    "comparison_note": "Sequential arms share weights and compiled kernels, but use fresh CPU processes and prompt-cache flushes. One run per arm is a screening result, not proof of statistical significance."
+  },
+  "notebook_sha256": "61fb18ca348e47b4f00bb546de80965870da6ab85680f86c5431c3b946761af8"
+}

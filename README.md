@@ -2,7 +2,7 @@
 
 目标：争取竞赛奖牌，优先冲击金牌与终局奖金。研究截止快照：**2026-10-10，Asia/Shanghai**。
 
-当前决策：以 **dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next** 为强离线基线，主攻**目标与机制发现、突破首个未解关、后续关卡迁移**；证据记忆、局部程序规划及计算分配作为支撑。尚未完成我们自己的强模型 GPU 复现，也没有本项目隐藏榜单成绩。
+当前决策：以 **dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next** 为强离线基线，主攻**目标与机制发现、突破首个未解关、后续关卡迁移**。003已完成：16游戏baseline **49.25分/72关**，goal_evidence **46.88分/68关**，反证提示实际触发0次，因此保留baseline、不晋升该改进版。程序实测2.743h，解题阶段GPU采样均值约91%/92%；10/11查询剩余配额约24.66h。详见[003进展](docs/progress/003-next-experiment.md)。这些是公开开发分，尚无本项目隐藏榜单成绩。
 
 ## 研究入口
 
@@ -10,7 +10,8 @@
 |---|---|
 | [001 计划](docs/plan/001-baseline.md) / [001 进展](docs/progress/001-baseline.md) | 赛制、数据、评分版本、基线选择与实际手动观察 |
 | [002 计划](docs/plan/002-strategy-improvement.md) / [002 进展](docs/progress/002-strategy-improvement.md) | 公开源码、原始轨迹与前沿论文形成的研究方向 |
-| [003 下一轮](docs/plan/003-next-experiment.md) | 可接手的强基线复现与目标假设实验；尚未执行 |
+| [003 计划](docs/plan/003-next-experiment.md) / [003 进展](docs/progress/003-next-experiment.md) | 共享一次模型加载的16游戏A/B，预计2.8h，硬上限3h |
+| [004 下一轮计划](docs/plan/004-observation-evidence.md) | 先用现有轨迹研究实际证据使用，再选择≤2.5h实验；尚未启动GPU |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |
 | [前沿研究](research/frontier-findings.md) | 一手论文/官方报告、可迁移机制、协议与资源限制 |
@@ -20,10 +21,12 @@ docs/
 ├── plan/
 │   ├── 001-baseline.md
 │   ├── 002-strategy-improvement.md
-│   └── 003-next-experiment.md
+│   ├── 003-next-experiment.md
+│   └── 004-observation-evidence.md
 └── progress/
     ├── 001-baseline.md
-    └── 002-strategy-improvement.md
+    ├── 002-strategy-improvement.md
+    └── 003-next-experiment.md
 research/
 ├── snapshots/          # Kaggle MCP 比赛/讨论快照
 ├── notebooks/          # 第三方公开代码、metadata、选取的原始输出
@@ -32,7 +35,7 @@ research/
 └── *-findings.md
 ```
 
-计划和进展使用相同编号与主题。003 尚未开始实现，不提前生成虚构结果。专注研究，不新增测试文件或 CI；所有验证由人工执行命令/Notebook、阅读日志与回放完成。代码完成和效果结论分开记录。
+计划和进展使用相同编号与主题。专注研究，不新增测试文件或 CI；所有验证由人工执行命令/Notebook、阅读日志与回放完成。代码完成和效果结论分开记录。
 
 ## 已核验的比赛事实
 
@@ -147,7 +150,7 @@ CLI 2.2.4 源码核对：`id_no` 会被提交为旧 Notebook ID；新 fork 必�
 
 ### Push、看状态、取日志/输出
 
-这些命令已通过本机 help 与源码核对，**本轮没有实际 push 或提交**：
+以下是未修改原版入口的通用示例。003已实际push私有研究Notebook（3h自有launcher），尚未正式提交比赛：
 
 ```bash
 kaggle kernels push -p notebooks/001-baseline -t 32400 --accelerator NvidiaRtxPro6000
@@ -178,7 +181,24 @@ kaggle competitions submit arc-prize-2026-arc-agi-3 \
 
 - 下载并检查比赛数据与 wheel，手动运行 25 游戏 ×80 动作，得到有效本地 scorecard：**2000 动作，0 关完成，AE=0.0**。这是随机策略接口观察。
 - 阅读公开强实现、获取作者原始 benchmark/部分 requests logs，并独立重算 100 条轨迹；这是第三方记录分析，不是我们的 GPU 重跑。
-- 确认研究重点应是新机制/目标识别与覆盖提升；详细方案待实测，尚无收益结论。
+- 已完成003的真实GPU对照：baseline49.25，目标证据版46.88，后者未晋升；没有证明新的反证机制有效，因为有效提示触发0次。详见003结果与复盘。
 
 参考：[Kaggle CLI 官方 metadata](https://github.com/Kaggle/kaggle-cli/blob/main/docs/kernels_metadata.md)、[ARC 文档](https://docs.arcprize.org/)、[比赛 Code](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/code)、[比赛 Models](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/models)。
 
+## 已完成003实验：共享加载，最多3h
+
+已完成的私有Notebook：[ARC3 003 Goal Evidence AB](https://www.kaggle.com/code/ccjjllt/arc3-003-goal-evidence-ab)。以下命令记录复现方法，不表示应立即原样重跑。本地已补诊断/token统计并关闭研究warmup RESET，均未重新上GPU；003实际源码已归档于`experiments/003-source/`，原Notebook不变。
+
+```bash
+python3 scripts/build_experiment.py
+kaggle kernels push -p notebooks/003-goal-evidence-ab -t 10800 --accelerator NvidiaRtxPro6000
+kaggle kernels status ccjjllt/arc3-003-goal-evidence-ab
+kaggle kernels logs -f ccjjllt/arc3-003-goal-evidence-ab
+kaggle kernels output ccjjllt/arc3-003-goal-evidence-ab \
+  -p runs/003-goal-evidence-ab \
+  --file-pattern '(benchmark.json|arm-metadata.json|goal-evidence.json|experiment-manifest.json|gpu-utilization.jsonl|run.log|serve.log|summary.json|summary.md)$'
+python3 scripts/summarize_experiment.py runs/003-goal-evidence-ab \
+  --reference baseline --source-kind local-experiment --output-dir runs/003-analysis
+```
+
+源数据、模型权重和Pennyroyal运行时沿用基线；10路活跃请求、复用GPU权重、独立CPU会话及等量预算运行成功。[得分分析](research/003-results-analysis.md)、[GPU效率](research/003-efficiency-analysis.md)、[零触发复盘](research/003-intervention-postmortem.md)已完成；原件在`runs/003-goal-evidence-ab/`，校正后的派生汇总在`experiments/003-analysis/`。
