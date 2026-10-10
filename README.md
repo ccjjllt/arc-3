@@ -2,7 +2,7 @@
 
 目标：争取竞赛奖牌，优先冲击金牌与终局奖金。研究截止快照：**2026-10-10，Asia/Shanghai**。
 
-当前决策：以 **dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next** 为强离线基线，主攻**目标与机制发现、突破首个未解关、后续关卡迁移**。003已完成：16游戏baseline **49.25分/72关**，goal_evidence **46.88分/68关**，反证提示实际触发0次，因此保留baseline、不晋升该改进版。程序实测2.743h，解题阶段GPU采样均值约91%/92%；10/11查询剩余配额约24.66h。详见[003进展](docs/progress/003-next-experiment.md)。这些是公开开发分，尚无本项目隐藏榜单成绩。
+当前决策：以 **dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next** 为强离线基线，主攻**目标与机制发现、突破首个未解关、后续关卡迁移**。003已完成：16游戏baseline **49.25分/72关**，goal_evidence **46.88分/68关**，反证提示实际触发0次，因此保留baseline、不晋升该改进版。004第一阶段已用 003 的 su15/tn36/lf52/sk48 轨迹做 CPU 归因：**不实现 observation_evidence**，未启动 GPU。下一 GPU 倾向 25 游戏单遍 baseline。程序实测2.743h，解题阶段GPU采样均值约91%/92%；10/11查询剩余配额约24.66h。详见[003进展](docs/progress/003-next-experiment.md)、[004进展](docs/progress/004-observation-evidence.md)。这些是公开开发分，尚无本项目隐藏榜单成绩。
 
 ## 研究入口
 
@@ -11,7 +11,7 @@
 | [001 计划](docs/plan/001-baseline.md) / [001 进展](docs/progress/001-baseline.md) | 赛制、数据、评分版本、基线选择与实际手动观察 |
 | [002 计划](docs/plan/002-strategy-improvement.md) / [002 进展](docs/progress/002-strategy-improvement.md) | 公开源码、原始轨迹与前沿论文形成的研究方向 |
 | [003 计划](docs/plan/003-next-experiment.md) / [003 进展](docs/progress/003-next-experiment.md) | 共享一次模型加载的16游戏A/B，预计2.8h，硬上限3h |
-| [004 下一轮计划](docs/plan/004-observation-evidence.md) | 先用现有轨迹研究实际证据使用，再选择≤2.5h实验；尚未启动GPU |
+| [004 计划](docs/plan/004-observation-evidence.md) / [004 进展](docs/progress/004-observation-evidence.md) | 用 003 轨迹做观察证据归因；不实现该候选，尚未启动GPU |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |
 | [前沿研究](research/frontier-findings.md) | 一手论文/官方报告、可迁移机制、协议与资源限制 |
@@ -26,7 +26,8 @@ docs/
 └── progress/
     ├── 001-baseline.md
     ├── 002-strategy-improvement.md
-    └── 003-next-experiment.md
+    ├── 003-next-experiment.md
+    └── 004-observation-evidence.md
 research/
 ├── snapshots/          # Kaggle MCP 比赛/讨论快照
 ├── notebooks/          # 第三方公开代码、metadata、选取的原始输出
