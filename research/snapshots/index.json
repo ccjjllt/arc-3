@@ -1,0 +1,57 @@
+{
+  "retrieved_date": "2026-10-10",
+  "timezone": "Asia/Shanghai",
+  "competition": "arc-prize-2026-arc-agi-3",
+  "sources": [
+    {
+      "file": "get_competition.json",
+      "tool": "mcp__kaggle__get_competition",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      }
+    },
+    {
+      "file": "list_competition_pages.json",
+      "tool": "mcp__kaggle__list_competition_pages",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      }
+    },
+    {
+      "file": "get_competition_leaderboard.json",
+      "tool": "mcp__kaggle__get_competition_leaderboard",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      },
+      "scope": "first page (20 teams)"
+    },
+    {
+      "file": "list_competition_data_files.json",
+      "tool": "mcp__kaggle__list_competition_data_files",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      },
+      "scope": "first page (20 files), not full inventory"
+    },
+    {
+      "file": "list_competition_topics.json",
+      "tool": "mcp__kaggle__list_competition_topics",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      },
+      "scope": "first page sorted Recent"
+    },
+    {
+      "file": "search_competition_submissions.json",
+      "tool": "mcp__kaggle__search_competition_submissions",
+      "request": {
+        "competitionName": "arc-prize-2026-arc-agi-3"
+      }
+    }
+  ],
+  "notes": [
+    "Snapshot API fields may change after this date.",
+    "Topic files are public discussion evidence, not official rulings unless STAFF/ADMIN.",
+    "Original API responses can contain stale or inconsistent documentation. See docs/plan/001-baseline.md."
+  ]
+}
