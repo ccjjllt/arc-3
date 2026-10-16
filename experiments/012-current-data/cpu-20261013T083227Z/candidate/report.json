@@ -1,0 +1,342 @@
+{
+  "worker": "candidate",
+  "checks": [
+    {
+      "name": "visibility_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "candidate_only_api_no010",
+      "passed": true
+    },
+    {
+      "name": "ordinary-variable-write_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary-variable-next-snippet_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary_variables_still_not_persistent",
+      "passed": true
+    },
+    {
+      "name": "put-copy_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "stored_ack_no_value",
+      "passed": true
+    },
+    {
+      "name": "get-copy_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "exact_copy_without_alias",
+      "passed": true
+    },
+    {
+      "name": "queries_do_not_mutate_state",
+      "passed": true
+    },
+    {
+      "name": "reject-nan_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "valid-after-reject_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "reject_preserves_valid",
+      "passed": true
+    },
+    {
+      "name": "retained-definition_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "retained-next_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "retained_function_can_read",
+      "passed": true
+    },
+    {
+      "name": "cross-session_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "independent_session_no_value",
+      "passed": true
+    },
+    {
+      "name": "real-noop-invalidate_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "actual_same_frame_noop",
+      "passed": false
+    }
+  ],
+  "calls": [
+    {
+      "label": "visibility",
+      "trace": "000-visibility.json"
+    },
+    {
+      "label": "ordinary-variable-write",
+      "trace": "001-ordinary-variable-write.json"
+    },
+    {
+      "label": "ordinary-variable-next-snippet",
+      "trace": "002-ordinary-variable-next-snippet.json"
+    },
+    {
+      "label": "put-copy",
+      "trace": "003-put-copy.json"
+    },
+    {
+      "label": "get-copy",
+      "trace": "004-get-copy.json"
+    },
+    {
+      "label": "reject-nan",
+      "trace": "005-reject-nan.json"
+    },
+    {
+      "label": "valid-after-reject",
+      "trace": "006-valid-after-reject.json"
+    },
+    {
+      "label": "retained-definition",
+      "trace": "007-retained-definition.json"
+    },
+    {
+      "label": "retained-next",
+      "trace": "008-retained-next.json"
+    },
+    {
+      "label": "cross-session",
+      "trace": "009-cross-session.json"
+    },
+    {
+      "label": "real-noop-invalidate",
+      "trace": "010-real-noop-invalidate.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "6f42ecef178e2c5d1d20b0ad85174469dfc8aa2e90a044817ec2bb674ed16546",
+    "scripts/check_012_current_data.py": "85d28d10bf762e67f32ebf7d39127bc3f1c5109e5b05a178ca60393c8c3b1666"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "current_data": {
+    "enabled": true,
+    "limits": {
+      "max_value_bytes": 16384,
+      "max_session_bytes": 65536,
+      "max_keys": 32,
+      "max_sessions": 128,
+      "max_depth": 16
+    },
+    "max_key_utf8_bytes": 128,
+    "counts": {
+      "sessions_seen": 2,
+      "queries": 12,
+      "context_requests": 3,
+      "status_current": 7,
+      "context_current": 3,
+      "response_json_bytes": 2981,
+      "put_requests": 3,
+      "committed_puts": 1,
+      "written_value_bytes": 51,
+      "status_stored": 1,
+      "put_stored": 1,
+      "get_requests": 6,
+      "read_value_bytes": 204,
+      "get_current": 4,
+      "status_rejected": 1,
+      "status_missing": 1,
+      "get_missing": 1,
+      "invalidated_entries": 1,
+      "invalidated_bytes": 51,
+      "executed_action_boundaries": 1,
+      "status_stale": 1,
+      "get_stale": 1,
+      "status_stale_context": 1,
+      "put_stale_context": 1
+    },
+    "stored_value_bytes": 0,
+    "peak_stored_value_bytes": 51,
+    "query_cpu_seconds": 0.003971414999999978,
+    "action_boundary_cpu_seconds": 0.00036274999999996727,
+    "sessions": [
+      {
+        "binding": {
+          "game_id": "tn36-ef4dde99",
+          "session_id": "493fb49d439347a288291d01b078cd4c",
+          "attempt": 0,
+          "revision": 1,
+          "action_num": 1,
+          "level": 1,
+          "frame_sha256": "f24a3446b02c98c27121094c895ca2e13920190943b4c47a102483d057316a2a"
+        },
+        "keys": 1,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "queries": 11,
+          "status_current": 7,
+          "context_current": 3,
+          "put_requests": 2,
+          "status_stored": 1,
+          "put_stored": 1,
+          "get_requests": 5,
+          "get_current": 4,
+          "status_rejected": 1,
+          "invalidated_entries": 1,
+          "status_stale": 1,
+          "get_stale": 1,
+          "status_stale_context": 1,
+          "put_stale_context": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "tn36-ef4dde99",
+          "session_id": "4486b2e7f8ae4b81b3696d49cd91b2ec",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "get_requests": 1,
+          "queries": 1,
+          "status_missing": 1,
+          "get_missing": 1
+        }
+      }
+    ],
+    "recent_queries": [
+      {
+        "op": "context",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "rejected",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "rejected"
+      },
+      {
+        "op": "get",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "session_id": "4486b2e7f8ae4b81b3696d49cd91b2ec",
+        "action_num": 0,
+        "status": "missing"
+      },
+      {
+        "op": "context",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 1,
+        "status": "stale"
+      },
+      {
+        "op": "put",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 1,
+        "status": "stale_context"
+      },
+      {
+        "op": "context",
+        "session_id": "493fb49d439347a288291d01b078cd4c",
+        "action_num": 1,
+        "status": "current"
+      }
+    ],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "93206ffe039789ab24d547e3b484fbb796bd9cb54da79095a8a92cd9e8651958"
+    },
+    "api_note": "In python, current_data.put(key, value) stores a JSON value for the current observation; current_data.get(key) returns {status, value, written_at} only when status=='current'. Other statuses contain no saved value. Values survive snippets, but any executed action (including no-op or RESET) makes them stale. For example: entry=current_data.get('measurement'); value=entry['value'] if entry['status']=='current' else None. Optionally obtain at=current_data.context()['context'] before computing, then put(key, value, at=at); a changed observation rejects this write. A stored response confirms a host commit, including if the snippet later fails or times out; missing acknowledgment means the write outcome is unknown. written_at identifies the observation at commit, not the value's source or correctness. Previously read local aliases do not auto-invalidate. JSON only: null/bool/int/finite float/string/list/dict with string keys; no objects, tuples, cycles or depth over 16. Default limits are 16 KiB/value, 64 KiB/session and 32 keys; keys are nonempty strings of at most 128 UTF-8 bytes. Rejected writes preserve existing valid values. No value is printed automatically.",
+    "semantics": {
+      "binding": "Host observation at commit; does not prove value source or correctness.",
+      "invalidation": "Any executed action including no-op/RESET; get/put recheck live host identity.",
+      "commit": "Synchronous host replacement before IPC ack; no snippet-end commit or rollback. Unacknowledged write is unknown.",
+      "aliases": "Each get is a JSON copy; previously returned local aliases cannot auto-invalidate.",
+      "bytes": "Canonical UTF-8 JSON value bytes, not RSS; keys/stale metadata separately bounded.",
+      "hash": "SHA256 canonical sorted-key compact UTF-8 JSON. Frame hash uses compact settled grid JSON.",
+      "cpu": "Host thread CPU for query/action-boundary bookkeeping, excluding original actions and child validation.",
+      "eviction": "FIFO sessions; no resurrection. Up to max_keys current or stale records; new keys reject when full."
+    }
+  },
+  "status": "failed",
+  "failure": {
+    "type": "AssertionError",
+    "message": "actual_same_frame_noop"
+  }
+}

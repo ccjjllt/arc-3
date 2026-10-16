@@ -1,0 +1,255 @@
+{
+  "api_call_index": [
+    {
+      "tool_call_id": "call_b74bdb41de044075b47d4b30",
+      "first_request_line": 23,
+      "message_sha256": "048cd5d4dcc8c837e3dc747342af4fa9aaf9eef17724d44be5ac69c64c74a60f",
+      "code_has_get": false,
+      "code_has_put": true,
+      "code_has_context": false
+    },
+    {
+      "tool_call_id": "call_ac7add4d409c49fa9f6912b1",
+      "first_request_line": 37,
+      "message_sha256": "fe8b482613d3aef8d1f77ac718b6a5454d0f5a7eded3bc55cf7eec6b4389240d",
+      "code_has_get": false,
+      "code_has_put": true,
+      "code_has_context": false
+    }
+  ],
+  "selected_evidence": [
+    {
+      "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+      "first_request_line": 23,
+      "message_index_zero_based": 27,
+      "message_sha256_canonical_json": "048cd5d4dcc8c837e3dc747342af4fa9aaf9eef17724d44be5ac69c64c74a60f",
+      "role": "assistant",
+      "tool_call_id": "call_b74bdb41de044075b47d4b30",
+      "tool_result": {
+        "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+        "first_request_line": 23,
+        "message_index_zero_based": 28,
+        "message_sha256_canonical_json": "355d0f796958c94aa98297a73e0d5bccf3b60f34423f5ebe79177515fea6dc19",
+        "role": "tool",
+        "returncode": 0
+      },
+      "code_excerpts": [
+        "clicks=[(RC[r]+3, CC[c]+3) for (r,c) in need]",
+        "current_data.put('clicks', clicks)"
+      ],
+      "stdout_excerpts": [
+        "conflicts [('conflict', (4, 2), 'R', 'O')] unconstrained [(1, 2), (3, 1), (3, 3), (5, 2)]",
+        "{'status': 'rejected', 'reason': 'unsupported_type'}"
+      ],
+      "ledger_action_num": 11,
+      "interpretation": "Tuple-valued click entries rejected by JSON-only contract; no value committed."
+    },
+    {
+      "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+      "first_request_line": 37,
+      "message_index_zero_based": 45,
+      "message_sha256_canonical_json": "fe8b482613d3aef8d1f77ac718b6a5454d0f5a7eded3bc55cf7eec6b4389240d",
+      "role": "assistant",
+      "tool_call_id": "call_ac7add4d409c49fa9f6912b1",
+      "tool_result": {
+        "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+        "first_request_line": 37,
+        "message_index_zero_based": 46,
+        "message_sha256_canonical_json": "71192b68907eba57fee102b8605b106a207c4be3e7e04d668ed8e127b4cb7553",
+        "role": "tool",
+        "returncode": 0
+      },
+      "code_excerpts": [
+        "tgt={c:sols[0][1][c] for c in sorted(cells)}",
+        "current_data.put('tgt', {f'{r},{c}':v for (r,c),v in tgt.items()})"
+      ],
+      "stdout_excerpts": [
+        "solutions 12",
+        "{'status': 'stored', 'key': 'tgt', 'written_at': {'game_id': 'ft09-0d8bbf25', 'session_id': 'c60d81b097db43fca7eda6681dda2cc6', 'attempt': 0, 'revision': 28, 'action_num': 28, 'level': 4, 'frame_sha256': '9231bf5b31923a5278cc0f5e865c7bc1dd34d57810864af256bffa11d36d42ed'}, 'bytes': 181, 'value_sha256': 'f6dd1acd3159d84e753555fd23709edbdf02abb321f3414a136953305d646c49'}"
+      ],
+      "ledger_action_num": 28,
+      "interpretation": "Stores first of 12 solutions, before next-turn model selects a different target."
+    },
+    {
+      "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+      "first_request_line": 39,
+      "message_index_zero_based": 47,
+      "message_sha256_canonical_json": "93ef1fc0c12c8a8eb894a43b21ba7702364ff0c4dd05eac6c052c268b1f5c4bf",
+      "role": "assistant",
+      "tool_call_id": "call_ef6e8ff54d684dcfb788bfaf",
+      "tool_result": {
+        "source_path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+        "first_request_line": 39,
+        "message_index_zero_based": 48,
+        "message_sha256_canonical_json": "f33200fe210f3398440e54993356b0dbbae2a1289370dc516e4b72c43be96247",
+        "role": "tool",
+        "returncode": 0
+      },
+      "reasoning_excerpt": "My printed target used sols[0] which was a wrong combo.",
+      "code_excerpts": [
+        "tgt={",
+        "for (r,c),t in sorted(tgt.items()):",
+        "    steps=(cyc[t]-cyc[cur[(r,c)]])%3",
+        "res=action(acts)"
+      ],
+      "code_observations": {
+        "defines_new_target_dict_literal": true,
+        "calls_current_data_get": false,
+        "passes_actions_to_action": true
+      },
+      "stdout_excerpts": [
+        "clicks 21",
+        "[action] batch of 21 actions, 21 executed: MOUSE(row=16, col=14), MOUSE(row=16, col=22), MOUSE(row=16, col=22), MOUSE(row=16, col=30), MOUSE(row=16, col=46), MOUSE(row=24, col=14), MOUSE(row=24, col=30), MOUSE(row=24, col=46), MOUSE(row=32, col=14), MOUSE(row=32, col=22), MOUSE(row=32, col=22), MOUSE(row=32, col=30), MOUSE(row=32, col=38), MOUSE(row=40, col=22), MOUSE(row=40, col=38), MOUSE(row=48, col=22), MOUSE(row=48, col=22), MOUSE(row=48, col=30), MOUSE(row=48, col=30), MOUSE(row=48, col=38), MOUSE(row=48, col=38) | stop_reason: level_completed",
+        "{'level': 5, 'state': 'NOT_FINISHED', 'done': False, 'level_completed': True, 'game_over': False, 'stop_reason': 'level_completed'}"
+      ],
+      "interpretation": "Explicitly rejects prior sols[0] selection, rewrites target in next snippet, acts directly; no cache read."
+    }
+  ],
+  "events": {
+    "baseline": {
+      "source_path": "runs/012-current-data/baseline/artifacts/ft09-0d8bbf25_p0_events.jsonl",
+      "selected_action_rows": [
+        {
+          "type": "action",
+          "action_num": 11,
+          "level": 3,
+          "score": 2,
+          "level_completed": true,
+          "action_name": "ACTION6",
+          "source_line": 15,
+          "frame_sha256": "12b42753f4af6b72d9c9a52328e95a0763295ab1ae414c9039266e3edfb00608"
+        },
+        {
+          "type": "action",
+          "action_num": 25,
+          "level": 4,
+          "score": 3,
+          "level_completed": true,
+          "action_name": "ACTION6",
+          "source_line": 31,
+          "frame_sha256": "eedafefca71b9ed5041b4ded5d7b9e9805eb5f495d747823d49957bced6f52bb"
+        },
+        {
+          "type": "action",
+          "action_num": 28,
+          "level": 4,
+          "score": 3,
+          "level_completed": false,
+          "action_name": "ACTION6",
+          "source_line": 37,
+          "frame_sha256": "9fd4cc3555a579dd0593ac1db681403592b73bd274e044a86a14b50725a3a35b"
+        },
+        {
+          "type": "action",
+          "action_num": 29,
+          "level": 4,
+          "score": 3,
+          "level_completed": false,
+          "action_name": "ACTION6",
+          "source_line": 38,
+          "frame_sha256": "5b3adb39b45bf7a447c03a9c86c23040de6f5e1029533cd9d78516891be567ae"
+        },
+        {
+          "type": "action",
+          "action_num": 49,
+          "level": 5,
+          "score": 4,
+          "level_completed": false,
+          "action_name": "ACTION6",
+          "source_line": 66,
+          "frame_sha256": "c719c635c81c8bab043687d8e73d49265608655d9790631d946e3dbfbca28425"
+        }
+      ]
+    },
+    "current_data": {
+      "source_path": "runs/012-current-data/current_data/artifacts/ft09-0d8bbf25_p0_events.jsonl",
+      "selected_action_rows": [
+        {
+          "type": "action",
+          "action_num": 11,
+          "level": 3,
+          "score": 2,
+          "level_completed": true,
+          "action_name": "ACTION6",
+          "source_line": 16,
+          "frame_sha256": "12b42753f4af6b72d9c9a52328e95a0763295ab1ae414c9039266e3edfb00608"
+        },
+        {
+          "type": "action",
+          "action_num": 25,
+          "level": 4,
+          "score": 3,
+          "level_completed": true,
+          "action_name": "ACTION6",
+          "source_line": 33,
+          "frame_sha256": "eedafefca71b9ed5041b4ded5d7b9e9805eb5f495d747823d49957bced6f52bb"
+        },
+        {
+          "type": "action",
+          "action_num": 28,
+          "level": 4,
+          "score": 3,
+          "level_completed": false,
+          "action_name": "ACTION6",
+          "source_line": 37,
+          "frame_sha256": "9231bf5b31923a5278cc0f5e865c7bc1dd34d57810864af256bffa11d36d42ed"
+        },
+        {
+          "type": "action",
+          "action_num": 29,
+          "level": 4,
+          "score": 3,
+          "level_completed": false,
+          "action_name": "ACTION6",
+          "source_line": 39,
+          "frame_sha256": "dc8057e722609b3835d5e71be50feb4e06ed3dc59ed638122a0dcec0a460dfd0"
+        },
+        {
+          "type": "action",
+          "action_num": 49,
+          "level": 5,
+          "score": 4,
+          "level_completed": true,
+          "action_name": "ACTION6",
+          "source_line": 59,
+          "frame_sha256": "77716da8d4ce63eb642933c41a18902e2ef9987300d9b07f859e3b13e4a459fe"
+        }
+      ]
+    }
+  },
+  "baseline_ft09": {
+    "state": "won",
+    "actions_per_level": [
+      4,
+      7,
+      14,
+      21,
+      64,
+      15
+    ],
+    "levels_completed": 6,
+    "final_score": 100.0
+  },
+  "current_data_ft09": {
+    "state": "cancelled",
+    "actions_per_level": [
+      4,
+      7,
+      14,
+      24,
+      73,
+      0
+    ],
+    "levels_completed": 4,
+    "final_score": 47.61904761904761
+  },
+  "source_sha256": {
+    "runs/012-current-data/baseline/artifacts/ft09-0d8bbf25_p0_events.jsonl": "ae4be1211683b764c1f0c3944d2cf177be393ef4b58389b68c5ce42ecfd4e68c",
+    "runs/012-current-data/baseline/benchmark.json": "64df7636474edbf1d0b88240e967be9f54adef2cc74cf98043a522a029867ce5",
+    "runs/012-current-data/baseline/ft09-0d8bbf25_p0_requests.jsonl": "12d10c195a4f200e1acad71cad5f55d252a7f81d0362fefa8615fb8ada8aa1ea",
+    "runs/012-current-data/current_data/artifacts/ft09-0d8bbf25_p0_events.jsonl": "34a829249a23228a23f3ed2d43380da5919a9325ee5a4089dd1f5ef31ea6d7f4",
+    "runs/012-current-data/current_data/benchmark.json": "75a2f4994ab0fa922968215104b8f8c623b0034d95518a49adf026f0f7373b7c",
+    "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl": "bf3488631365638a38941b29884e844956b2146f9f218459e398ba3df7fd4e9d"
+  },
+  "scope": "Read-only JSON/message parsing. Historical Python code was never executed. Excerpts document use, not a game policy."
+}

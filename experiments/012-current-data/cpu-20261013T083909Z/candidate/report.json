@@ -1,0 +1,632 @@
+{
+  "worker": "candidate",
+  "checks": [
+    {
+      "name": "visibility_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "candidate_only_api_no010",
+      "passed": true
+    },
+    {
+      "name": "ordinary-variable-write_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary-variable-next-snippet_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary_variables_still_not_persistent",
+      "passed": true
+    },
+    {
+      "name": "put-copy_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "stored_ack_no_value",
+      "passed": true
+    },
+    {
+      "name": "get-copy_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "exact_copy_without_alias",
+      "passed": true
+    },
+    {
+      "name": "queries_do_not_mutate_state",
+      "passed": true
+    },
+    {
+      "name": "reject-nan_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "valid-after-reject_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "reject_preserves_valid",
+      "passed": true
+    },
+    {
+      "name": "retained-definition_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "retained-next_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "retained_function_can_read",
+      "passed": true
+    },
+    {
+      "name": "cross-session_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "independent_session_no_value",
+      "passed": true
+    },
+    {
+      "name": "real-noop-invalidate_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "sdk_reports_executed_gameplay_noop",
+      "passed": true
+    },
+    {
+      "name": "real_sdk_action_executed",
+      "passed": true,
+      "settled_grid_unchanged": false
+    },
+    {
+      "name": "noop_stale_no_payload",
+      "passed": true
+    },
+    {
+      "name": "pinned_old_write_refused",
+      "passed": true
+    },
+    {
+      "name": "put-before-reset_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "real-reset_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "reset_stale_and_attempt",
+      "passed": true
+    },
+    {
+      "name": "get-after-error_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ack_survives_snippet_error",
+      "passed": true
+    },
+    {
+      "name": "actual_sandbox_timeout",
+      "passed": true,
+      "dispatch": {
+        "tool": "python",
+        "function_retention": "Your previous function stored_number is no longer retained; redefine it if needed.",
+        "error": "Tool timed out after 0.5s"
+      }
+    },
+    {
+      "name": "after-ack-marker_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "first_ack_received_before_timeout",
+      "passed": true
+    },
+    {
+      "name": "get-after-timeout_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "timeout_ack_commit_survives",
+      "passed": true,
+      "dispatch": {
+        "tool": "python",
+        "function_retention": "Your previous function stored_number is no longer retained; redefine it if needed.",
+        "error": "Tool timed out after 0.5s"
+      }
+    },
+    {
+      "name": "level-action-1_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "level-action-2_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "level-action-3_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "level-action-4_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "after-real-level_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "real_level_completed",
+      "passed": true
+    },
+    {
+      "name": "level_change_stale_no_value",
+      "passed": true
+    },
+    {
+      "name": "latest-disabled_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "latest_disabled_preserved",
+      "passed": true
+    },
+    {
+      "name": "no_http_or_model",
+      "passed": true
+    }
+  ],
+  "calls": [
+    {
+      "label": "visibility",
+      "trace": "000-visibility.json"
+    },
+    {
+      "label": "ordinary-variable-write",
+      "trace": "001-ordinary-variable-write.json"
+    },
+    {
+      "label": "ordinary-variable-next-snippet",
+      "trace": "002-ordinary-variable-next-snippet.json"
+    },
+    {
+      "label": "put-copy",
+      "trace": "003-put-copy.json"
+    },
+    {
+      "label": "get-copy",
+      "trace": "004-get-copy.json"
+    },
+    {
+      "label": "reject-nan",
+      "trace": "005-reject-nan.json"
+    },
+    {
+      "label": "valid-after-reject",
+      "trace": "006-valid-after-reject.json"
+    },
+    {
+      "label": "retained-definition",
+      "trace": "007-retained-definition.json"
+    },
+    {
+      "label": "retained-next",
+      "trace": "008-retained-next.json"
+    },
+    {
+      "label": "cross-session",
+      "trace": "009-cross-session.json"
+    },
+    {
+      "label": "real-noop-invalidate",
+      "trace": "010-real-noop-invalidate.json"
+    },
+    {
+      "label": "put-before-reset",
+      "trace": "011-put-before-reset.json"
+    },
+    {
+      "label": "real-reset",
+      "trace": "012-real-reset.json"
+    },
+    {
+      "label": "put-then-error",
+      "trace": "013-put-then-error.json"
+    },
+    {
+      "label": "get-after-error",
+      "trace": "014-get-after-error.json"
+    },
+    {
+      "label": "put-then-timeout",
+      "trace": "015-put-then-timeout.json"
+    },
+    {
+      "label": "after-ack-marker",
+      "trace": "016-after-ack-marker.json"
+    },
+    {
+      "label": "get-after-timeout",
+      "trace": "017-get-after-timeout.json"
+    },
+    {
+      "label": "level-action-1",
+      "trace": "018-level-action-1.json"
+    },
+    {
+      "label": "level-action-2",
+      "trace": "019-level-action-2.json"
+    },
+    {
+      "label": "level-action-3",
+      "trace": "020-level-action-3.json"
+    },
+    {
+      "label": "level-action-4",
+      "trace": "021-level-action-4.json"
+    },
+    {
+      "label": "after-real-level",
+      "trace": "022-after-real-level.json"
+    },
+    {
+      "label": "latest-disabled",
+      "trace": "023-latest-disabled.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "scripts/check_012_current_data.py": "69ed8257425e2c190e3af14c47a1a9bcc2e10ab0b011181c6088e2e9dd4bbb13"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "current_data": {
+    "enabled": true,
+    "limits": {
+      "max_value_bytes": 16384,
+      "max_session_bytes": 65536,
+      "max_keys": 32,
+      "max_sessions": 128,
+      "max_depth": 16
+    },
+    "max_key_utf8_bytes": 128,
+    "counts": {
+      "sessions_seen": 3,
+      "queries": 24,
+      "context_requests": 5,
+      "status_current": 12,
+      "context_current": 5,
+      "response_json_bytes": 6794,
+      "put_requests": 8,
+      "committed_puts": 6,
+      "written_value_bytes": 84,
+      "status_stored": 6,
+      "put_stored": 6,
+      "get_requests": 11,
+      "read_value_bytes": 218,
+      "get_current": 7,
+      "status_rejected": 1,
+      "put_rejected": 1,
+      "status_missing": 1,
+      "get_missing": 1,
+      "invalidated_entries": 3,
+      "invalidated_bytes": 70,
+      "executed_action_boundaries": 6,
+      "status_stale": 3,
+      "get_stale": 3,
+      "status_stale_context": 1,
+      "put_stale_context": 1
+    },
+    "stored_value_bytes": 14,
+    "peak_stored_value_bytes": 51,
+    "query_cpu_seconds": 0.00717666699999997,
+    "action_boundary_cpu_seconds": 0.0028159579999997852,
+    "sessions": [
+      {
+        "binding": {
+          "game_id": "tn36-ef4dde99",
+          "session_id": "c7976195ceff43939d2309e77650c583",
+          "attempt": 1,
+          "revision": 2,
+          "action_num": 2,
+          "level": 1,
+          "frame_sha256": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+        },
+        "keys": 4,
+        "stored_value_bytes": 14,
+        "current_keys": 3,
+        "counts": {
+          "context_requests": 4,
+          "queries": 20,
+          "status_current": 11,
+          "context_current": 4,
+          "put_requests": 7,
+          "status_stored": 5,
+          "put_stored": 5,
+          "get_requests": 9,
+          "get_current": 7,
+          "status_rejected": 1,
+          "put_rejected": 1,
+          "invalidated_entries": 2,
+          "status_stale": 2,
+          "get_stale": 2,
+          "status_stale_context": 1,
+          "put_stale_context": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "tn36-ef4dde99",
+          "session_id": "e09394434e3f498bbdb9e659f24587b4",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "get_requests": 1,
+          "queries": 1,
+          "status_missing": 1,
+          "get_missing": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "ft09-0d8bbf25",
+          "session_id": "cf09a089716646b4a4576dfe2c903010",
+          "attempt": 0,
+          "revision": 4,
+          "action_num": 4,
+          "level": 2,
+          "frame_sha256": "0de356a6d88c25ea9fa45eaef4f517dca5d6037912fef83889cfa89e52839bf1"
+        },
+        "keys": 1,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "invalidated_entries": 1,
+          "put_requests": 1,
+          "queries": 3,
+          "status_stored": 1,
+          "put_stored": 1,
+          "get_requests": 1,
+          "status_stale": 1,
+          "get_stale": 1,
+          "context_requests": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      }
+    ],
+    "recent_queries": [
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "rejected",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "rejected"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "e09394434e3f498bbdb9e659f24587b4",
+        "action_num": 0,
+        "status": "missing"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 1,
+        "status": "stale"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 1,
+        "status": "stale_context"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 1,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 1,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "stale"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "stored"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "c7976195ceff43939d2309e77650c583",
+        "action_num": 2,
+        "status": "current"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "cf09a089716646b4a4576dfe2c903010",
+        "action_num": 3,
+        "status": "stored"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "cf09a089716646b4a4576dfe2c903010",
+        "action_num": 4,
+        "status": "stale"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "cf09a089716646b4a4576dfe2c903010",
+        "action_num": 4,
+        "status": "current"
+      }
+    ],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "93206ffe039789ab24d547e3b484fbb796bd9cb54da79095a8a92cd9e8651958"
+    },
+    "api_note": "In python, current_data.put(key, value) stores a JSON value for the current observation; current_data.get(key) returns {status, value, written_at} only when status=='current'. Other statuses contain no saved value. Values survive snippets, but any executed action (including no-op or RESET) makes them stale. For example: entry=current_data.get('measurement'); value=entry['value'] if entry['status']=='current' else None. Optionally obtain at=current_data.context()['context'] before computing, then put(key, value, at=at); a changed observation rejects this write. A stored response confirms a host commit, including if the snippet later fails or times out; missing acknowledgment means the write outcome is unknown. written_at identifies the observation at commit, not the value's source or correctness. Previously read local aliases do not auto-invalidate. JSON only: null/bool/int/finite float/string/list/dict with string keys; no objects, tuples, cycles or depth over 16. Default limits are 16 KiB/value, 64 KiB/session and 32 keys; keys are nonempty strings of at most 128 UTF-8 bytes. Rejected writes preserve existing valid values. No value is printed automatically.",
+    "semantics": {
+      "binding": "Host observation at commit; does not prove value source or correctness.",
+      "invalidation": "Any executed action including no-op/RESET; get/put recheck live host identity.",
+      "commit": "Synchronous host replacement before IPC ack; no snippet-end commit or rollback. Unacknowledged write is unknown.",
+      "aliases": "Each get is a JSON copy; previously returned local aliases cannot auto-invalidate.",
+      "bytes": "Canonical UTF-8 JSON value bytes, not RSS; keys/stale metadata separately bounded.",
+      "hash": "SHA256 canonical sorted-key compact UTF-8 JSON. Frame hash uses compact settled grid JSON.",
+      "cpu": "Host thread CPU for query/action-boundary bookkeeping, excluding original actions and child validation.",
+      "eviction": "FIFO sessions; no resurrection. Up to max_keys current or stale records; new keys reject when full."
+    }
+  },
+  "level_probe_action_source": "runs/011-animation-confirmation/baseline/benchmark.json",
+  "level_probe_action_source_sha256": "b8c42e753446f4aba3c31a9863909dbb379398109317c3c64e0a3ff0bc01364a",
+  "status": "passed"
+}

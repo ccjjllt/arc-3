@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 182, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 164, in main
+    if a.worker:worker(a);return
+                ~~~~~~^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 114, in worker
+    check('actual_same_frame_noop',s.action_count==step+1 and _grid_from_state(s.game.current_state)==grid)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 54, in check
+    if not ok: raise AssertionError(name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: actual_same_frame_noop

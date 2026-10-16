@@ -1,0 +1,12 @@
+{
+  "label": "snippet2-recompute",
+  "handwritten_code": "try:\n    measurement\n    local_variable_survived=True\nexcept NameError:\n    local_variable_survived=False\nrecomputed=compute_measurement(current_frame)\noutput={'local_variable_survived':local_variable_survived,'recomputed':recomputed}\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"local_variable_survived\":false,\"recomputed\":{\"status\":\"measured\",\"step\":11,\"level\":3,\"square_size\":6,\"row_starts\":[4,12,20,28,36,44,52],\"col_starts\":[12,20,28,36,44],\"selection\":\"topmost mixed tile in the inferred lattice\",\"selected\":{\"pixel_top_left\":[12,28],\"logical_row_col\":[1,2]}}}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}

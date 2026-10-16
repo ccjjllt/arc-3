@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 185, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 167, in main
+    if a.worker:worker(a);return
+                ~~~~~~^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 128, in worker
+    check('actual_sandbox_timeout',('timed out' in timeout_error or 'timeout' in timeout_error) and 'ACK=stored' in timeout.get('stdout',''), dispatch=timeout)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 54, in check
+    if not ok: raise AssertionError(name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: actual_sandbox_timeout

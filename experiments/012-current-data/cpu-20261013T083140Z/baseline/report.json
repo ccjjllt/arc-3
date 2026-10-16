@@ -1,0 +1,29 @@
+{
+  "worker": "baseline",
+  "checks": [
+    {
+      "name": "visibility_sandbox_success",
+      "passed": false,
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nNameError: name 'globals' is not defined"
+    }
+  ],
+  "calls": [
+    {
+      "label": "visibility",
+      "trace": "000-visibility.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "6f42ecef178e2c5d1d20b0ad85174469dfc8aa2e90a044817ec2bb674ed16546",
+    "scripts/check_012_current_data.py": "642feae6482ba92d73fbe02c7a965509a1005f6c4c0ef72d059786f0d400dff9"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "status": "failed",
+  "failure": {
+    "type": "AssertionError",
+    "message": "visibility_sandbox_success"
+  }
+}

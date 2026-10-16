@@ -1,0 +1,67 @@
+{
+  "worker": "candidate",
+  "checks": [
+    {
+      "name": "visibility_sandbox_success",
+      "passed": false,
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nNameError: name 'globals' is not defined"
+    }
+  ],
+  "calls": [
+    {
+      "label": "visibility",
+      "trace": "000-visibility.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "6f42ecef178e2c5d1d20b0ad85174469dfc8aa2e90a044817ec2bb674ed16546",
+    "scripts/check_012_current_data.py": "642feae6482ba92d73fbe02c7a965509a1005f6c4c0ef72d059786f0d400dff9"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "current_data": {
+    "enabled": true,
+    "limits": {
+      "max_value_bytes": 16384,
+      "max_session_bytes": 65536,
+      "max_keys": 32,
+      "max_sessions": 128,
+      "max_depth": 16
+    },
+    "max_key_utf8_bytes": 128,
+    "counts": {},
+    "stored_value_bytes": 0,
+    "peak_stored_value_bytes": 0,
+    "query_cpu_seconds": 0.0,
+    "action_boundary_cpu_seconds": 0.0,
+    "sessions": [],
+    "recent_queries": [],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "93206ffe039789ab24d547e3b484fbb796bd9cb54da79095a8a92cd9e8651958"
+    },
+    "api_note": "In python, current_data.put(key, value) stores a JSON value for the current observation; current_data.get(key) returns {status, value, written_at} only when status=='current'. Other statuses contain no saved value. Values survive snippets, but any executed action (including no-op or RESET) makes them stale. For example: entry=current_data.get('measurement'); value=entry['value'] if entry['status']=='current' else None. Optionally obtain at=current_data.context()['context'] before computing, then put(key, value, at=at); a changed observation rejects this write. A stored response confirms a host commit, including if the snippet later fails or times out; missing acknowledgment means the write outcome is unknown. written_at identifies the observation at commit, not the value's source or correctness. Previously read local aliases do not auto-invalidate. JSON only: null/bool/int/finite float/string/list/dict with string keys; no objects, tuples, cycles or depth over 16. Default limits are 16 KiB/value, 64 KiB/session and 32 keys; keys are nonempty strings of at most 128 UTF-8 bytes. Rejected writes preserve existing valid values. No value is printed automatically.",
+    "semantics": {
+      "binding": "Host observation at commit; does not prove value source or correctness.",
+      "invalidation": "Any executed action including no-op/RESET; get/put recheck live host identity.",
+      "commit": "Synchronous host replacement before IPC ack; no snippet-end commit or rollback. Unacknowledged write is unknown.",
+      "aliases": "Each get is a JSON copy; previously returned local aliases cannot auto-invalidate.",
+      "bytes": "Canonical UTF-8 JSON value bytes, not RSS; keys/stale metadata separately bounded.",
+      "hash": "SHA256 canonical sorted-key compact UTF-8 JSON. Frame hash uses compact settled grid JSON.",
+      "cpu": "Host thread CPU for query/action-boundary bookkeeping, excluding original actions and child validation.",
+      "eviction": "FIFO sessions; no resurrection. Up to max_keys current or stale records; new keys reject when full."
+    }
+  },
+  "status": "failed",
+  "failure": {
+    "type": "AssertionError",
+    "message": "visibility_sandbox_success"
+  }
+}

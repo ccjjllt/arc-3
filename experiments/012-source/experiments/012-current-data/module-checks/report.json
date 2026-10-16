@@ -1,0 +1,3865 @@
+{
+  "scope": "Manual CPU contract diagnosis: real wrappers, synthetic game carriers only.\n\nNo SDK environment/action, model, HTTP, GPU, logged code, tests or CI is run.\nReal sandbox/SDK lifecycle checks are separately owned by the root integration\nscript; these probes isolate strict JSON, capacity, identity and failure paths.\n",
+  "module_sha256": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+  "checks": [
+    {
+      "name": "exact_json_roundtrip",
+      "passed": true
+    },
+    {
+      "name": "canonical_value_hash",
+      "passed": true
+    },
+    {
+      "name": "put_ack_never_contains_value",
+      "passed": true
+    },
+    {
+      "name": "get_copy_isolation",
+      "passed": true
+    },
+    {
+      "name": "put_copy_isolation",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_nan",
+      "passed": true,
+      "reason": "invalid_scalar"
+    },
+    {
+      "name": "rejected_overwrite_preserves_nan",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_positive_inf",
+      "passed": true,
+      "reason": "invalid_scalar"
+    },
+    {
+      "name": "rejected_overwrite_preserves_positive_inf",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_negative_inf",
+      "passed": true,
+      "reason": "invalid_scalar"
+    },
+    {
+      "name": "rejected_overwrite_preserves_negative_inf",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_tuple",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "rejected_overwrite_preserves_tuple",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_set",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "rejected_overwrite_preserves_set",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_object",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "rejected_overwrite_preserves_object",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_callable",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "rejected_overwrite_preserves_callable",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_numeric_dict_key",
+      "passed": true,
+      "reason": "non_string_key"
+    },
+    {
+      "name": "rejected_overwrite_preserves_numeric_dict_key",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_cycle",
+      "passed": true,
+      "reason": "cyclic_value"
+    },
+    {
+      "name": "rejected_overwrite_preserves_cycle",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_depth17",
+      "passed": true,
+      "reason": "value_too_deep"
+    },
+    {
+      "name": "rejected_overwrite_preserves_depth17",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_too_large",
+      "passed": true,
+      "reason": "value_too_large"
+    },
+    {
+      "name": "rejected_overwrite_preserves_too_large",
+      "passed": true
+    },
+    {
+      "name": "strict_reject_invalid_unicode",
+      "passed": true,
+      "reason": "invalid_scalar"
+    },
+    {
+      "name": "rejected_overwrite_preserves_invalid_unicode",
+      "passed": true
+    },
+    {
+      "name": "invalid_key_NoneType_4",
+      "passed": true
+    },
+    {
+      "name": "invalid_key_int_1",
+      "passed": true
+    },
+    {
+      "name": "invalid_key_str_0",
+      "passed": true
+    },
+    {
+      "name": "invalid_key_str_129",
+      "passed": true
+    },
+    {
+      "name": "invalid_key_str_43",
+      "passed": true
+    },
+    {
+      "name": "depth16_allowed",
+      "passed": true
+    },
+    {
+      "name": "unexecuted_guard_preserves_current",
+      "passed": true
+    },
+    {
+      "name": "unexecuted_guard_preserves_binding",
+      "passed": true
+    },
+    {
+      "name": "synthetic_identical_grid_executed_action_invalidates",
+      "passed": true,
+      "same_frame_hash": true,
+      "before_action_num": 0,
+      "after_action_num": 1
+    },
+    {
+      "name": "same_grid_revision_and_action_advance",
+      "passed": true
+    },
+    {
+      "name": "stale_pin_rejects_write",
+      "passed": true
+    },
+    {
+      "name": "pin_checks_json_types_not_python_coercion",
+      "passed": true
+    },
+    {
+      "name": "current_pin_write_succeeds",
+      "passed": true
+    },
+    {
+      "name": "host_frame_change_without_wrapper_detected",
+      "passed": true
+    },
+    {
+      "name": "frame_A_B_A_never_revives",
+      "passed": true
+    },
+    {
+      "name": "post_execution_error_identity_preserved",
+      "passed": true
+    },
+    {
+      "name": "post_execution_error_invalidates_same_grid",
+      "passed": true
+    },
+    {
+      "name": "synthetic_reset_attempt_increments",
+      "passed": true
+    },
+    {
+      "name": "synthetic_reset_removes_payload",
+      "passed": true
+    },
+    {
+      "name": "old_latest_record_untouched",
+      "passed": true
+    },
+    {
+      "name": "separate_session_same_game_does_not_share",
+      "passed": true
+    },
+    {
+      "name": "separate_session_uuid",
+      "passed": true
+    },
+    {
+      "name": "exact_16KiB_value_0",
+      "passed": true
+    },
+    {
+      "name": "exact_16KiB_value_1",
+      "passed": true
+    },
+    {
+      "name": "exact_16KiB_value_2",
+      "passed": true
+    },
+    {
+      "name": "exact_16KiB_value_3",
+      "passed": true
+    },
+    {
+      "name": "exact_64KiB_session",
+      "passed": true
+    },
+    {
+      "name": "session_capacity_rejects_atomic",
+      "passed": true
+    },
+    {
+      "name": "capacity_reject_preserves_previous",
+      "passed": true
+    },
+    {
+      "name": "32_keys_then_reject",
+      "passed": true
+    },
+    {
+      "name": "stale_metadata_counts_toward_key_capacity",
+      "passed": true
+    },
+    {
+      "name": "existing_stale_key_can_be_rewritten",
+      "passed": true
+    },
+    {
+      "name": "clock_failure_keeps_return_identity",
+      "passed": true
+    },
+    {
+      "name": "clock_failure_keeps_exception_identity",
+      "passed": true
+    },
+    {
+      "name": "maintenance_failure_keeps_return_identity",
+      "passed": true
+    },
+    {
+      "name": "maintenance_failure_keeps_exception_identity",
+      "passed": true
+    },
+    {
+      "name": "four_fault_cases_execute_exactly_four_times",
+      "passed": true
+    },
+    {
+      "name": "fault_cleanup_releases_inflight",
+      "passed": true
+    },
+    {
+      "name": "session_metadata_bounded_128",
+      "passed": true
+    },
+    {
+      "name": "old_session_get_is_evicted_without_value",
+      "passed": true
+    },
+    {
+      "name": "old_session_put_is_evicted",
+      "passed": true
+    },
+    {
+      "name": "old_session_not_resurrected",
+      "passed": true
+    },
+    {
+      "name": "all_evicted_values_freed",
+      "passed": true
+    }
+  ],
+  "python": "3.13.14 (main, Jul 23 2026, 14:48:16) [Clang 22.1.3 ]",
+  "python_executable": "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+  "python_paths": [
+    "/private/tmp/arc3-010-sdk",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/src",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/runtime-bundle/src/ARC3-Inference",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/runtime-bundle/src/tufa-arc-agi-framework/src"
+  ],
+  "extra_paths": [
+    "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+  ],
+  "no_model_or_sdk_execution": true,
+  "no_network": true,
+  "limits": {
+    "max_value_bytes": 16384,
+    "max_session_bytes": 65536,
+    "max_keys": 32,
+    "max_sessions": 128,
+    "max_depth": 16
+  },
+  "status": "passed",
+  "final_module_sha256": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+  "source_unchanged": true,
+  "diagnostics": {
+    "enabled": true,
+    "limits": {
+      "max_value_bytes": 16384,
+      "max_session_bytes": 65536,
+      "max_keys": 32,
+      "max_sessions": 128,
+      "max_depth": 16
+    },
+    "max_key_utf8_bytes": 128,
+    "counts": {
+      "sessions_seen": 133,
+      "queries": 229,
+      "put_requests": 65,
+      "committed_puts": 42,
+      "written_value_bytes": 65766,
+      "status_stored": 42,
+      "put_stored": 42,
+      "response_json_bytes": 73114,
+      "get_requests": 25,
+      "read_value_bytes": 17489,
+      "status_current": 157,
+      "get_current": 18,
+      "status_rejected": 20,
+      "put_rejected": 20,
+      "context_requests": 139,
+      "context_current": 139,
+      "invalidated_entries": 37,
+      "invalidated_bytes": 229,
+      "executed_action_boundaries": 4,
+      "status_stale": 5,
+      "get_stale": 5,
+      "status_stale_context": 2,
+      "put_stale_context": 2,
+      "observation_resyncs": 2,
+      "status_missing": 1,
+      "get_missing": 1,
+      "action_observer_errors": 2,
+      "evicted_sessions": 5,
+      "evicted_bytes": 65537,
+      "status_session_evicted": 2,
+      "get_session_evicted": 1,
+      "put_session_evicted": 1
+    },
+    "stored_value_bytes": 0,
+    "peak_stored_value_bytes": 65664,
+    "query_cpu_seconds": 0.002310803999999833,
+    "action_boundary_cpu_seconds": 4.487499999972222e-05,
+    "sessions": [
+      {
+        "binding": {
+          "game_id": "eviction-1",
+          "session_id": "87b73c491cb64331a6b596bd7b2894ef",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-2",
+          "session_id": "d04996421e4140d0bba7793548d12aab",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-3",
+          "session_id": "993917f9f442433e8bb73021a61109cc",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-4",
+          "session_id": "fa2f141de43e4271928022cb6af309cd",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-5",
+          "session_id": "cd669ac838424c8e9bd71afb56806995",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-6",
+          "session_id": "50f1b92ab9834a458ae095d2d3776a16",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-7",
+          "session_id": "31e9a952d2ac4f87ae23b7427b18ccf2",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-8",
+          "session_id": "89c7e74f07a144d08c17729ee352febc",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-9",
+          "session_id": "206724f07f724ae99efe0e43e6070ca5",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-10",
+          "session_id": "c2e10c117fd64359b1c8cd06be442c71",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-11",
+          "session_id": "e9f2731c942d401a94a6fa5d0693439c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-12",
+          "session_id": "1067b487c56e459695a82813e94fe2af",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-13",
+          "session_id": "850d380b5f714ffcaf624378d7e948e7",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-14",
+          "session_id": "12693342d39a4e569ed0d8984e624b0b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-15",
+          "session_id": "716f9332b2554c0195a76aa2fe73d219",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-16",
+          "session_id": "8ea765448c5b46c4aeb61321087a8e92",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-17",
+          "session_id": "7a2ef5aa5c734d9d9d054a28032b2dea",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-18",
+          "session_id": "bbb8c17f760a4e20852707cf5d84b339",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-19",
+          "session_id": "c1a093f060e04e838fd2a3d17c06cade",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-20",
+          "session_id": "b51fae32eda346ea9feab3b6b90e8f70",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-21",
+          "session_id": "af0acf37312f4abd828d1129f1ee63d9",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-22",
+          "session_id": "b9d5b662a4ad48d3ab221c212c222eaf",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-23",
+          "session_id": "1a92e372266340d8bc7a05ebf3d9f627",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-24",
+          "session_id": "80d8a43c3bfb4cfa9e8085389b6c9be4",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-25",
+          "session_id": "925b527427c04eeab07cb7fd849b1b96",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-26",
+          "session_id": "a055f083016d47ddb29ec138979584db",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-27",
+          "session_id": "3479d55f2fdf403392905fa07423c24f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-28",
+          "session_id": "ded388b7e9d64c9d89c3f7f49f348f9d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-29",
+          "session_id": "6260c56507e04c54afb7e3154c6d2111",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-30",
+          "session_id": "c6b18b8de67242ee96211a6fd85b52b2",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-31",
+          "session_id": "ddcb6b2c83de4dd688e48270a6f0e998",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-32",
+          "session_id": "94e4509c5ab74934ae2950d4120c6d8c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-33",
+          "session_id": "9b34666956b84962b346ada52111fc9c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-34",
+          "session_id": "4ba1b49da0c348cdbc1a7cea744f34c8",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-35",
+          "session_id": "5a8da2a5462b42a4ba6cfb8f48eb999b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-36",
+          "session_id": "458386d5af5045ab94e5868ec06ed207",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-37",
+          "session_id": "e86780ed9bf643779761ed1ca355f957",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-38",
+          "session_id": "8b9390bbd7624f1d975249ca33f15e0d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-39",
+          "session_id": "5643e73dac6042a69fd7dd15af3fff0d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-40",
+          "session_id": "f30a2e7633fc47a0b565a0a5dc390844",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-41",
+          "session_id": "779bb5b6dd2548feb61b624691c29af9",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-42",
+          "session_id": "b7f99e155a714876bcfc9fe70149ec69",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-43",
+          "session_id": "b3f6cbc451ea40bea6aa99eb98338cce",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-44",
+          "session_id": "44642b440dc64975a8ac3fe1bba0310c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-45",
+          "session_id": "47a7bb776b674fccaab2c8dbe98e6f98",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-46",
+          "session_id": "a8db9abc49cd4be89ce6afee9d5abfa1",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-47",
+          "session_id": "67dcf9c00cec44d88926de3433c9b65d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-48",
+          "session_id": "d2b98979421e48b58a48a734a66f7317",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-49",
+          "session_id": "846ddea5d9744d458dc7053b7cabea3f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-50",
+          "session_id": "1b06ff988fff4d0b85dde6c60d71da63",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-51",
+          "session_id": "51ee2d3b9d5847b8b2d186ee6081c6ff",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-52",
+          "session_id": "0ede19096b6747afa4d23629c100cb7b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-53",
+          "session_id": "9ad4b078684a4a84b38a3e11db67cab5",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-54",
+          "session_id": "d40ebc402215405391462d024d81973d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-55",
+          "session_id": "e09528a33b5842bebf03e005cd09ee9f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-56",
+          "session_id": "80af04b8523145dbbdc16b6351360f12",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-57",
+          "session_id": "50408601bfd341b0b1af7289b28be19a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-58",
+          "session_id": "554ca9d7718048f08c528a99e005a741",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-59",
+          "session_id": "a7a95dc5432d4ec288bc91f4268642e8",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-60",
+          "session_id": "c65327da820147bc90c31bddae58c27f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-61",
+          "session_id": "190e242fb2b445c2b5ee886ec032957d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-62",
+          "session_id": "310fb99f62984ef483d0ff1f107776ef",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-63",
+          "session_id": "d4f1bfb1bf1a458ab1465b20c635766f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-64",
+          "session_id": "2f4f7510c77f40989ef3475fbaf73ec8",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-65",
+          "session_id": "638949274e734c93b19db7fd46ff654d",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-66",
+          "session_id": "49f4b42b049744b8b598492c1af37da0",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-67",
+          "session_id": "73f511bfdac54408b8b8f66e09781f23",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-68",
+          "session_id": "57cc896f4c0a4b2eaf1ce013bc5234c5",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-69",
+          "session_id": "2fe6ea1f5a9f4c0a9c76e76a008e896a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-70",
+          "session_id": "e7e69e3a3ba24406944f0722a69a17cd",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-71",
+          "session_id": "a541b5612387481d841e8facf64f49db",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-72",
+          "session_id": "c1c4e571a1574ac9a969a2145a946ca9",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-73",
+          "session_id": "09b729f276734b9bb8de3e106cadf2ee",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-74",
+          "session_id": "77663e4ddd554adcab976556b6c9de07",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-75",
+          "session_id": "5ae49455f8884fb0b37d320cc9e6122b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-76",
+          "session_id": "157473ea0f90422785ef128cf4c9f013",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-77",
+          "session_id": "917d72d8d10c453ba3e3f81c9063106b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-78",
+          "session_id": "0ad17277f25b48a182fe05e268d2a202",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-79",
+          "session_id": "f13fdac086b043a0b8aeef87fa091296",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-80",
+          "session_id": "a494d885f55842559af2e243d44d5963",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-81",
+          "session_id": "51ca9de6f0f84e56a158200cb0447d20",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-82",
+          "session_id": "84fadc1e2a6941a586087e7daf47944f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-83",
+          "session_id": "6bb5f6a68e454927984d4c631d4235d3",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-84",
+          "session_id": "3dcd0e898f984fa3ac595791e6e49721",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-85",
+          "session_id": "eaef2e2474354aeb8880d282a12e770b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-86",
+          "session_id": "718a8c7d391d4377b1221495743d0f02",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-87",
+          "session_id": "9f222e48966744f8aabdd34235ff58b2",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-88",
+          "session_id": "69b3cfbc40e24396be776ca5bc80e58b",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-89",
+          "session_id": "1af7ecd108774473b08981906261ee0a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-90",
+          "session_id": "7856526a859d4c3c8621bf8c990f4726",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-91",
+          "session_id": "cfb97b7961b0420fafabdd8bea8c0fec",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-92",
+          "session_id": "d6dc0411a1b1443e8d41ac8701a69268",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-93",
+          "session_id": "8cf261ce683f4a6bba933ae6a8219587",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-94",
+          "session_id": "1d3c0d71cfc1441590cec812135c3d28",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-95",
+          "session_id": "a4bb792453bb46dcbd5aca4844393e87",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-96",
+          "session_id": "43853c2dea134215902953e5f3071eee",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-97",
+          "session_id": "940d8c38a34a425aa5bb7e8701f91ef2",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-98",
+          "session_id": "842ee32c88ca42b793151b74d4045a1a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-99",
+          "session_id": "62f11b1aed614a4f8a474f83fd7aad8f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-100",
+          "session_id": "44a48283527742cbae8e73e6d818085a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-101",
+          "session_id": "3cdb75e73d81420b82730d467306f658",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-102",
+          "session_id": "84d3b9be8f504e248bcd0ca3c5e58981",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-103",
+          "session_id": "d8c05740f95449e5af8be4471f38b63c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-104",
+          "session_id": "1c66eca691bd445f91e560351dac9621",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-105",
+          "session_id": "13922e2fdaea40408dac0790f1b7ca09",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-106",
+          "session_id": "68bd106fbee341db8f4f28bca40e3988",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-107",
+          "session_id": "6233712c2da747559226f4ebb28c513a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-108",
+          "session_id": "0b14ae0e89fb479fa3ea6671b7ea085c",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-109",
+          "session_id": "7590da58f24146b38cdd7d97e7516d83",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-110",
+          "session_id": "80b00e2c82e2492c92dfd37f6e4cb9a3",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-111",
+          "session_id": "33b82549a68543029661ee881af4b261",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-112",
+          "session_id": "a174da5e68ca400aa39a6d85b428c65e",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-113",
+          "session_id": "7c43c6cde9eb41a7863abc55bf98e677",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-114",
+          "session_id": "e2353689d7e04ce1b3d6a4fa7dd69c3a",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-115",
+          "session_id": "cb84b98bb8d2486a84b8e2e367b4cb17",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-116",
+          "session_id": "9068c69e21124d55a6ce57dccee31326",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-117",
+          "session_id": "ee269f58793d45909323ff15dd56548f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-118",
+          "session_id": "812eb17b45354e5486c0803141bf0065",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-119",
+          "session_id": "97e17c8b905041cba085e5e5b7fb7d9f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-120",
+          "session_id": "4dd2656eb1fd410e9510da9ce5eade02",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-121",
+          "session_id": "2d7fcf3a1d0d4e2bbd938a40dfa6d705",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-122",
+          "session_id": "cfd97236585643c3b3a641445917a6da",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-123",
+          "session_id": "8033a07a7c224d47a50535c26ae833c4",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-124",
+          "session_id": "5f1617644dde4ac1b74409b262f38438",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-125",
+          "session_id": "73ed296a690f4013bc4f0a62f695d9a1",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-126",
+          "session_id": "7b8484135e4d4debb181d3bdc34d34bd",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-127",
+          "session_id": "1ea379a2e6c74c14b1557bddf5bafe51",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      },
+      {
+        "binding": {
+          "game_id": "eviction-128",
+          "session_id": "8e947e68ca09454fbe45f5451de7660f",
+          "attempt": 0,
+          "revision": 0,
+          "action_num": 0,
+          "level": 1,
+          "frame_sha256": "03a4cc702aa6e4f169ff34dd055714141eae3d2d7c50f6f053150cc72ef12638"
+        },
+        "keys": 0,
+        "stored_value_bytes": 0,
+        "current_keys": 0,
+        "counts": {
+          "context_requests": 1,
+          "queries": 1,
+          "status_current": 1,
+          "context_current": 1
+        }
+      }
+    ],
+    "recent_queries": [
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "993917f9f442433e8bb73021a61109cc",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "fa2f141de43e4271928022cb6af309cd",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "cd669ac838424c8e9bd71afb56806995",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "50f1b92ab9834a458ae095d2d3776a16",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "31e9a952d2ac4f87ae23b7427b18ccf2",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "89c7e74f07a144d08c17729ee352febc",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "206724f07f724ae99efe0e43e6070ca5",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c2e10c117fd64359b1c8cd06be442c71",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "e9f2731c942d401a94a6fa5d0693439c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1067b487c56e459695a82813e94fe2af",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "850d380b5f714ffcaf624378d7e948e7",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "12693342d39a4e569ed0d8984e624b0b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "716f9332b2554c0195a76aa2fe73d219",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "8ea765448c5b46c4aeb61321087a8e92",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "7a2ef5aa5c734d9d9d054a28032b2dea",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "bbb8c17f760a4e20852707cf5d84b339",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c1a093f060e04e838fd2a3d17c06cade",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "b51fae32eda346ea9feab3b6b90e8f70",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "af0acf37312f4abd828d1129f1ee63d9",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "b9d5b662a4ad48d3ab221c212c222eaf",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1a92e372266340d8bc7a05ebf3d9f627",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "80d8a43c3bfb4cfa9e8085389b6c9be4",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "925b527427c04eeab07cb7fd849b1b96",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a055f083016d47ddb29ec138979584db",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "3479d55f2fdf403392905fa07423c24f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "ded388b7e9d64c9d89c3f7f49f348f9d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "6260c56507e04c54afb7e3154c6d2111",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c6b18b8de67242ee96211a6fd85b52b2",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "ddcb6b2c83de4dd688e48270a6f0e998",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "94e4509c5ab74934ae2950d4120c6d8c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "9b34666956b84962b346ada52111fc9c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "4ba1b49da0c348cdbc1a7cea744f34c8",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "5a8da2a5462b42a4ba6cfb8f48eb999b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "458386d5af5045ab94e5868ec06ed207",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "e86780ed9bf643779761ed1ca355f957",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "8b9390bbd7624f1d975249ca33f15e0d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "5643e73dac6042a69fd7dd15af3fff0d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "f30a2e7633fc47a0b565a0a5dc390844",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "779bb5b6dd2548feb61b624691c29af9",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "b7f99e155a714876bcfc9fe70149ec69",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "b3f6cbc451ea40bea6aa99eb98338cce",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "44642b440dc64975a8ac3fe1bba0310c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "47a7bb776b674fccaab2c8dbe98e6f98",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a8db9abc49cd4be89ce6afee9d5abfa1",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "67dcf9c00cec44d88926de3433c9b65d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "d2b98979421e48b58a48a734a66f7317",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "846ddea5d9744d458dc7053b7cabea3f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1b06ff988fff4d0b85dde6c60d71da63",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "51ee2d3b9d5847b8b2d186ee6081c6ff",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "0ede19096b6747afa4d23629c100cb7b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "9ad4b078684a4a84b38a3e11db67cab5",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "d40ebc402215405391462d024d81973d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "e09528a33b5842bebf03e005cd09ee9f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "80af04b8523145dbbdc16b6351360f12",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "50408601bfd341b0b1af7289b28be19a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "554ca9d7718048f08c528a99e005a741",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a7a95dc5432d4ec288bc91f4268642e8",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c65327da820147bc90c31bddae58c27f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "190e242fb2b445c2b5ee886ec032957d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "310fb99f62984ef483d0ff1f107776ef",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "d4f1bfb1bf1a458ab1465b20c635766f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "2f4f7510c77f40989ef3475fbaf73ec8",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "638949274e734c93b19db7fd46ff654d",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "49f4b42b049744b8b598492c1af37da0",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "73f511bfdac54408b8b8f66e09781f23",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "57cc896f4c0a4b2eaf1ce013bc5234c5",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "2fe6ea1f5a9f4c0a9c76e76a008e896a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "e7e69e3a3ba24406944f0722a69a17cd",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a541b5612387481d841e8facf64f49db",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "c1c4e571a1574ac9a969a2145a946ca9",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "09b729f276734b9bb8de3e106cadf2ee",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "77663e4ddd554adcab976556b6c9de07",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "5ae49455f8884fb0b37d320cc9e6122b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "157473ea0f90422785ef128cf4c9f013",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "917d72d8d10c453ba3e3f81c9063106b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "0ad17277f25b48a182fe05e268d2a202",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "f13fdac086b043a0b8aeef87fa091296",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a494d885f55842559af2e243d44d5963",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "51ca9de6f0f84e56a158200cb0447d20",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "84fadc1e2a6941a586087e7daf47944f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "6bb5f6a68e454927984d4c631d4235d3",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "3dcd0e898f984fa3ac595791e6e49721",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "eaef2e2474354aeb8880d282a12e770b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "718a8c7d391d4377b1221495743d0f02",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "9f222e48966744f8aabdd34235ff58b2",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "69b3cfbc40e24396be776ca5bc80e58b",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1af7ecd108774473b08981906261ee0a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "7856526a859d4c3c8621bf8c990f4726",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "cfb97b7961b0420fafabdd8bea8c0fec",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "d6dc0411a1b1443e8d41ac8701a69268",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "8cf261ce683f4a6bba933ae6a8219587",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1d3c0d71cfc1441590cec812135c3d28",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a4bb792453bb46dcbd5aca4844393e87",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "43853c2dea134215902953e5f3071eee",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "940d8c38a34a425aa5bb7e8701f91ef2",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "842ee32c88ca42b793151b74d4045a1a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "62f11b1aed614a4f8a474f83fd7aad8f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "44a48283527742cbae8e73e6d818085a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "3cdb75e73d81420b82730d467306f658",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "84d3b9be8f504e248bcd0ca3c5e58981",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "d8c05740f95449e5af8be4471f38b63c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1c66eca691bd445f91e560351dac9621",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "13922e2fdaea40408dac0790f1b7ca09",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "68bd106fbee341db8f4f28bca40e3988",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "6233712c2da747559226f4ebb28c513a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "0b14ae0e89fb479fa3ea6671b7ea085c",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "7590da58f24146b38cdd7d97e7516d83",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "80b00e2c82e2492c92dfd37f6e4cb9a3",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "33b82549a68543029661ee881af4b261",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "a174da5e68ca400aa39a6d85b428c65e",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "7c43c6cde9eb41a7863abc55bf98e677",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "e2353689d7e04ce1b3d6a4fa7dd69c3a",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "cb84b98bb8d2486a84b8e2e367b4cb17",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "9068c69e21124d55a6ce57dccee31326",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "ee269f58793d45909323ff15dd56548f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "812eb17b45354e5486c0803141bf0065",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "97e17c8b905041cba085e5e5b7fb7d9f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "4dd2656eb1fd410e9510da9ce5eade02",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "2d7fcf3a1d0d4e2bbd938a40dfa6d705",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "cfd97236585643c3b3a641445917a6da",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "8033a07a7c224d47a50535c26ae833c4",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "5f1617644dde4ac1b74409b262f38438",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "73ed296a690f4013bc4f0a62f695d9a1",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "7b8484135e4d4debb181d3bdc34d34bd",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "1ea379a2e6c74c14b1557bddf5bafe51",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "context",
+        "requested_op": "context",
+        "session_id": "8e947e68ca09454fbe45f5451de7660f",
+        "action_num": 0,
+        "status": "current"
+      },
+      {
+        "op": "get",
+        "requested_op": "get",
+        "session_id": "3876169ec4d3472787f6286a7eeafd8b",
+        "action_num": 3,
+        "status": "session_evicted"
+      },
+      {
+        "op": "put",
+        "requested_op": "put",
+        "session_id": "3876169ec4d3472787f6286a7eeafd8b",
+        "action_num": 3,
+        "status": "session_evicted"
+      }
+    ],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "93206ffe039789ab24d547e3b484fbb796bd9cb54da79095a8a92cd9e8651958"
+    },
+    "api_note": "In python, current_data.put(key, value) stores a JSON value for the current observation; current_data.get(key) returns {status, value, written_at} only when status=='current'. Other statuses contain no saved value. Values survive snippets, but any executed action (including no-op or RESET) makes them stale. For example: entry=current_data.get('measurement'); value=entry['value'] if entry['status']=='current' else None. Optionally obtain at=current_data.context()['context'] before computing, then put(key, value, at=at); a changed observation rejects this write. A stored response confirms a host commit, including if the snippet later fails or times out; missing acknowledgment means the write outcome is unknown. written_at identifies the observation at commit, not the value's source or correctness. Previously read local aliases do not auto-invalidate. JSON only: null/bool/int/finite float/string/list/dict with string keys; no objects, tuples, cycles or depth over 16. Default limits are 16 KiB/value, 64 KiB/session and 32 keys; keys are nonempty strings of at most 128 UTF-8 bytes. Rejected writes preserve existing valid values. No value is printed automatically.",
+    "semantics": {
+      "binding": "Host observation at commit; does not prove value source or correctness.",
+      "invalidation": "Any executed action including no-op/RESET; get/put recheck live host identity.",
+      "commit": "Synchronous host replacement before IPC ack; no snippet-end commit or rollback. Unacknowledged write is unknown.",
+      "aliases": "Each get is a JSON copy; previously returned local aliases cannot auto-invalidate.",
+      "bytes": "Canonical UTF-8 JSON value bytes, not RSS; keys/stale metadata separately bounded.",
+      "hash": "SHA256 canonical sorted-key compact UTF-8 JSON. Frame hash uses compact settled grid JSON.",
+      "cpu": "Host thread CPU for query/action-boundary bookkeeping, excluding original actions and child validation.",
+      "eviction": "FIFO sessions; no resurrection. Up to max_keys current or stale records; new keys reject when full."
+    }
+  },
+  "checks_count": 72,
+  "manual_script_sha256": "6edda09a17f777359de649c833a937fd7bf8b34344e68c114775fe513eb6529d"
+}

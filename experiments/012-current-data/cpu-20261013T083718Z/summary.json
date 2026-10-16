@@ -1,0 +1,24 @@
+{
+  "status": "failed",
+  "check_count": 39,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "scripts/check_012_current_data.py": "0cfa5589984db9281ec7a9212eb324ed9275e181e9444639aec7f0c40f3d376d"
+  },
+  "sources_stable_during_check": true,
+  "workers": {
+    "baseline": {
+      "status": "passed",
+      "checks": 10
+    },
+    "candidate": {
+      "status": "failed",
+      "checks": 29
+    }
+  },
+  "limitations": [
+    "Handwritten CPU delivery probes; no model adoption or score claim.",
+    "No production concurrency pressure or real fatal auto-reset sequence.",
+    "Local aliases already returned to Python do not auto-invalidate."
+  ]
+}

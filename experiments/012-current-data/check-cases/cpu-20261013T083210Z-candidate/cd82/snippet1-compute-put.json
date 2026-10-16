@@ -1,0 +1,13 @@
+{
+  "label": "snippet1-compute-put",
+  "handwritten_code": "binding_before=current_data.context()['context']\ndef compute_measurement(frame):\n    # Historical diagnostic region/foreground only, not a production game rule.\n    rows = frame.ascii.splitlines()\n    cells = [(row, col) for row in range(18, 62)\n             for col, symbol in enumerate(rows[row]) if symbol == \"g\"]\n    if not cells:\n        return {\"status\": \"empty\", \"step\": frame.step, \"level\": frame.level}\n    row_values = [row for row, col in cells]\n    col_values = [col for row, col in cells]\n    return {\n        \"status\": \"measured\",\n        \"step\": frame.step,\n        \"level\": frame.level,\n        \"pixel_count\": len(cells),\n        \"bbox_tlbr_inclusive\": [min(row_values), min(col_values),\n                                max(row_values), max(col_values)],\n    }\n\n\nmeasurement = compute_measurement(current_frame)\n\nack=current_data.put('measurement',measurement,at=binding_before)\noutput={'computed':measurement,'put_ack':ack}\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "function_retention": "Retained your function compute_measurement(frame) for later Python calls in this game.",
+    "returncode": 0,
+    "stdout": "RESULT={\"computed\":{\"status\":\"measured\",\"step\":21,\"level\":1,\"pixel_count\":30,\"bbox_tlbr_inclusive\":[45,25,53,38]},\"put_ack\":{\"status\":\"stored\",\"key\":\"measurement\",\"written_at\":{\"game_id\":\"cpu-saved-observation-cd82\",\"session_id\":\"0eb35c2ab7fb4a8b9a28ceab6cc2ef51\",\"attempt\":0,\"revision\":0,\"action_num\":21,\"level\":1,\"frame_sha256\":\"4c99f21295c646fdf16f337a52bdb9e9258ff7f0fb2fde7e55f03a60804a3509\"},\"bytes\":94,\"value_sha256\":\"d42401958c570a3d7bf268591f81c5da5d3ae205e4145f5b263abcfbb95dd378\"}}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}

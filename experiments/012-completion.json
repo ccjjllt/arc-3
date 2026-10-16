@@ -1,0 +1,105 @@
+{
+  "checked_at_utc": "2026-10-13T12:13:47.645655+00:00",
+  "kernel_id": "ccjjllt/arc3-012-current-data",
+  "version": 1,
+  "platform_status": "COMPLETE",
+  "manifest_status": "completed",
+  "arm_order": [
+    "baseline",
+    "current_data"
+  ],
+  "reference_arm": "baseline",
+  "started_utc": "2026-10-13T09:21:25.635201+00:00",
+  "finished_utc": "2026-10-13T11:37:28.544304+00:00",
+  "session_wall_seconds": 8162.9091029167175,
+  "session_wall_hours": 2.2674747508101993,
+  "model_ready_seconds": 560.5897324085236,
+  "gpu_server_stopped": true,
+  "notebook_sha256": "6789f075141fb81cd82b958eb8a851a726720c231efd4d99d477fd78c72dd7dc",
+  "comparison": "experiments/012-analysis/comparison.json",
+  "independent_review": "experiments/012-results-review.json",
+  "summary": {
+    "baseline": {
+      "games": 13,
+      "mean_AE": 45.076430730326145,
+      "mean_completion_ceiling": 47.58186258186258,
+      "mean_efficiency_gap": 2.5054318515364384,
+      "wins": 3,
+      "state_counts": {
+        "cancelled": 10,
+        "won": 3
+      },
+      "levels_completed": 51,
+      "number_of_levels": 97,
+      "actions": 2633,
+      "reset_actions": 13,
+      "analyzer_tokens": 2364169,
+      "history_tokens": 2292625,
+      "final_tokens": 0,
+      "recorded_tokens": 2292625,
+      "unattached_tokens": 71544,
+      "uncached_input_tokens": 0
+    },
+    "current_data": {
+      "games": 13,
+      "mean_AE": 27.758211108778994,
+      "mean_completion_ceiling": 29.816294816294814,
+      "mean_efficiency_gap": 2.0580837075158227,
+      "wins": 1,
+      "state_counts": {
+        "cancelled": 12,
+        "won": 1
+      },
+      "levels_completed": 38,
+      "number_of_levels": 97,
+      "actions": 2356,
+      "reset_actions": 11,
+      "analyzer_tokens": 2378190,
+      "history_tokens": 2243619,
+      "final_tokens": 0,
+      "recorded_tokens": 2243619,
+      "unattached_tokens": 134571,
+      "uncached_input_tokens": 0
+    }
+  },
+  "delta": {
+    "mean_AE": -17.31821962154715,
+    "mean_completion_ceiling": -17.765567765567766,
+    "mean_efficiency_gap": -0.44734814402061573,
+    "levels_completed": -13,
+    "wins": -2,
+    "actions": -277,
+    "analyzer_tokens": 14021,
+    "recorded_tokens": -49006,
+    "unattached_tokens": 63027,
+    "relative_AE_change": -0.3841967817983411,
+    "better_equal_worse": {
+      "better": 2,
+      "equal": 3,
+      "worse": 8
+    }
+  },
+  "budget_seconds_per_arm": 3772,
+  "post_deadline_actions": {
+    "baseline": 0,
+    "current_data": 0
+  },
+  "model_data_handoff_observed": false,
+  "data_put_attempts": 2,
+  "data_put_stored": 1,
+  "data_get_requests": 0,
+  "formal_submission_made": false,
+  "decision": "Do not promote. The intended model cross-snippet reuse chain did not occur and the candidate lost this paired screen.",
+  "source_sha256": {
+    "runs/012-current-data/experiment-manifest.json": "a7966c088bee64b04a4aca4a62d87a15ee8e7a63a2e6d91fae701817da1bb9e4",
+    "experiments/012-analysis/comparison.json": "a23f8b08583be0f44ea5e3da4611f151afe86d979a68bbdcb327aac3e7f8023a"
+  },
+  "timing_analysis": "experiments/012-timing-analysis.json",
+  "intervention_analysis": "research/012-intervention-analysis.md",
+  "results_report": "research/012-results-analysis.md",
+  "late_client_requests": 2,
+  "late_client_request_games": [
+    "tn36-ef4dde99",
+    "lf52-271a04aa"
+  ]
+}

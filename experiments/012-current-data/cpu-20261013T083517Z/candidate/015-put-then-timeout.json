@@ -1,0 +1,11 @@
+{
+  "code": "r=current_data.put('ack_timeout',[6,7])\nassert r['status']=='stored'\nprint('ACK=stored',flush=True)\nimport time\ntime.sleep(3)",
+  "dispatch": {
+    "tool": "python",
+    "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nImportError: Module 'time' is not allowed in the sandbox.",
+    "stdout": "ACK=stored\n"
+  },
+  "step_before": 2,
+  "step_after": 2,
+  "step_executed": false
+}

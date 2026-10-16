@@ -1,0 +1,76 @@
+{
+  "worker": "baseline",
+  "checks": [
+    {
+      "name": "visibility_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "candidate_only_api_no010",
+      "passed": true
+    },
+    {
+      "name": "ordinary-variable-write_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary-variable-next-snippet_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ordinary_variables_still_not_persistent",
+      "passed": true
+    },
+    {
+      "name": "baseline_not_installed",
+      "passed": true
+    },
+    {
+      "name": "baseline_prompt_unchanged",
+      "passed": true
+    },
+    {
+      "name": "latest-disabled_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "latest_disabled_preserved",
+      "passed": true
+    },
+    {
+      "name": "no_http_or_model",
+      "passed": true
+    }
+  ],
+  "calls": [
+    {
+      "label": "visibility",
+      "trace": "000-visibility.json"
+    },
+    {
+      "label": "ordinary-variable-write",
+      "trace": "001-ordinary-variable-write.json"
+    },
+    {
+      "label": "ordinary-variable-next-snippet",
+      "trace": "002-ordinary-variable-next-snippet.json"
+    },
+    {
+      "label": "latest-disabled",
+      "trace": "003-latest-disabled.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/current_data.py": "6f42ecef178e2c5d1d20b0ad85174469dfc8aa2e90a044817ec2bb674ed16546",
+    "scripts/check_012_current_data.py": "85d28d10bf762e67f32ebf7d39127bc3f1c5109e5b05a178ca60393c8c3b1666"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "status": "passed"
+}

@@ -1,0 +1,677 @@
+{
+  "reviewed_at_utc": "2026-10-13T12:11:07.994640+00:00",
+  "status": "valid_execution_candidate_failed_paired_screen",
+  "decision": "Do not promote current_data to the formal baseline from this screen. The candidate underperformed across the complete matched13-game pool. One fixed-order run does not establish that the API causally reduced scores; adoption/trajectory analysis is separate.",
+  "metric": "Unweighted arithmetic mean of bundled TAAF per-game scores; completed-level action counts independently recomputed. These are public diagnostic results, not official leaderboard scores.",
+  "overall_delta": {
+    "score": -17.31821962154715,
+    "levels_completed": -13,
+    "wins": -2,
+    "improved_games": 2,
+    "worse_games": 8,
+    "equal_games": 3
+  },
+  "verification": {
+    "all26_scores_match_independent_formula": true,
+    "max_score_absolute_error": 0.0,
+    "fixed_game_count": 13,
+    "both_game_orders_match_frozen_config": true,
+    "actual_arm_order": [
+      "baseline",
+      "current_data"
+    ],
+    "budgets_match_formula": true,
+    "both_exit_zero": true,
+    "distinct_cpu_pids": true,
+    "both_environments_equal": true,
+    "runtime_common_source_hashes_equal": {
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "benchmark_initial.pkl": true,
+      "tool_agent.py": true,
+      "inference_timing.py": true
+    },
+    "manifest_source_hash_count": 16,
+    "all_manifest_hashes_match_frozen_archive": true,
+    "frozen_file_count": 27,
+    "all_frozen_files_intact": true,
+    "frozen_notebook_sha256": "6789f075141fb81cd82b958eb8a851a726720c231efd4d99d477fd78c72dd7dc",
+    "frozen_current_data_sha256": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "003_006_007_disabled_reports_verified": true,
+    "010_archive_not_installed_by_frozen_arm_branch_and_runtime_metadata": true,
+    "legacy_latest_animation_preserved": true,
+    "cache_flush_http_status": [
+      200,
+      200
+    ],
+    "cache_flush_actual_success_records": [
+      {
+        "physical_line": 143,
+        "text": "[2026-10-13 09:30:46] Cache flushed successfully!"
+      },
+      {
+        "physical_line": 6523,
+        "text": "[2026-10-13 10:33:58] Cache flushed successfully!"
+      }
+    ],
+    "session_status": "completed",
+    "gpu_server_stopped": true,
+    "session_elapsed_seconds": 8162.9091029167175,
+    "session_elapsed_hours": 2.2674747508101993,
+    "no_OOM_or_generation_traceback_found_in_serve_log": true
+  },
+  "arms": {
+    "baseline": {
+      "mean_score": 45.076430730326145,
+      "levels_completed": 51,
+      "levels_available": 97,
+      "wins": 3,
+      "actions": 2633,
+      "state_counts": {
+        "cancelled": 10,
+        "won": 3
+      },
+      "budget_seconds": 3772,
+      "deadline_utc": "2026-10-13T10:33:41.358702+00:00",
+      "benchmark_wall_seconds": 3786.49876051,
+      "post_deadline_actions": 0,
+      "post_deadline_completed_levels": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "pid": 1318,
+      "soft_deadline_fired": true,
+      "forced_cpu_process_exit": false,
+      "lingering_worker_threads": [],
+      "warmup_action_games": 0,
+      "warmup_reset_log_count": 0,
+      "all_first_actions_nonreset": true,
+      "analyzer_timeout_log_count": 7,
+      "old_interventions": {
+        "disabled_003_006_007": {
+          "goal-evidence": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          },
+          "transient-history": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          },
+          "program-state": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          }
+        },
+        "archive010_metadata_present": false,
+        "archive010_runtime_source_hash_present": false,
+        "legacy_latest_animation_env": "1"
+      },
+      "timing": {
+        "enabled": true,
+        "provisional": false,
+        "sessions_recorded": 13,
+        "sessions_omitted": 0,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "open_plays": 0,
+        "open_slots": 0
+      },
+      "games": [
+        {
+          "game_id": "tn36-ef4dde99",
+          "score": 66.40233741084117,
+          "recomputed_score": 66.40233741084117,
+          "levels_completed": 6,
+          "levels_available": 7,
+          "state": "cancelled",
+          "actions": 297,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -4.8170013427734375,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "score": 63.82291522996922,
+          "recomputed_score": 63.82291522996922,
+          "levels_completed": 5,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 323,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -2.9306774139404297,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "score": 47.61904761904761,
+          "recomputed_score": 47.61904761904761,
+          "levels_completed": 4,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 163,
+          "first_action": "ACTION3",
+          "last_action_minus_deadline_seconds": -47.65537071228027,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "score": 2.2222222222222223,
+          "recomputed_score": 2.2222222222222223,
+          "levels_completed": 1,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 56,
+          "first_action": "ACTION3",
+          "last_action_minus_deadline_seconds": -389.5486509799957,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "score": 2.7777777777777777,
+          "recomputed_score": 2.7777777777777777,
+          "levels_completed": 1,
+          "levels_available": 8,
+          "state": "cancelled",
+          "actions": 132,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -608.8347327709198,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "score": 1.8181818181818181,
+          "recomputed_score": 1.8181818181818181,
+          "levels_completed": 1,
+          "levels_available": 10,
+          "state": "cancelled",
+          "actions": 89,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -141.8966042995453,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "score": 24.670688932710615,
+          "recomputed_score": 24.670688932710615,
+          "levels_completed": 5,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 274,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -8.924587965011597,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "score": 2.2222222222222223,
+          "recomputed_score": 2.2222222222222223,
+          "levels_completed": 1,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 161,
+          "first_action": "ACTION2",
+          "last_action_minus_deadline_seconds": -183.1053647994995,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "score": 10.714285714285714,
+          "recomputed_score": 10.714285714285714,
+          "levels_completed": 2,
+          "levels_available": 7,
+          "state": "cancelled",
+          "actions": 267,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -136.5133707523346,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "score": 71.42857142857143,
+          "recomputed_score": 71.42857142857143,
+          "levels_completed": 5,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 264,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -2.575364351272583,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "score": 100.0,
+          "recomputed_score": 100.0,
+          "levels_completed": 6,
+          "levels_available": 6,
+          "state": "won",
+          "actions": 125,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -658.1491677761078,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "cd82-fb555c5d",
+          "score": 92.29534911841006,
+          "recomputed_score": 92.29534911841006,
+          "levels_completed": 6,
+          "levels_available": 6,
+          "state": "won",
+          "actions": 152,
+          "first_action": "ACTION2",
+          "last_action_minus_deadline_seconds": -1221.1923139095306,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "score": 100.0,
+          "recomputed_score": 100.0,
+          "levels_completed": 8,
+          "levels_available": 8,
+          "state": "won",
+          "actions": 330,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -59.14952373504639,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        }
+      ]
+    },
+    "current_data": {
+      "mean_score": 27.758211108778994,
+      "levels_completed": 38,
+      "levels_available": 97,
+      "wins": 1,
+      "actions": 2356,
+      "state_counts": {
+        "cancelled": 12,
+        "won": 1
+      },
+      "budget_seconds": 3772,
+      "deadline_utc": "2026-10-13T11:36:52.336498+00:00",
+      "benchmark_wall_seconds": 3799.733069092,
+      "post_deadline_actions": 0,
+      "post_deadline_completed_levels": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "pid": 5173,
+      "soft_deadline_fired": true,
+      "forced_cpu_process_exit": false,
+      "lingering_worker_threads": [],
+      "warmup_action_games": 0,
+      "warmup_reset_log_count": 0,
+      "all_first_actions_nonreset": true,
+      "analyzer_timeout_log_count": 8,
+      "old_interventions": {
+        "disabled_003_006_007": {
+          "goal-evidence": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          },
+          "transient-history": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          },
+          "program-state": {
+            "enabled": false,
+            "events": 0,
+            "guidance_count": 0,
+            "calls_observed": 0,
+            "counts": {}
+          }
+        },
+        "archive010_metadata_present": false,
+        "archive010_runtime_source_hash_present": false,
+        "legacy_latest_animation_env": "1"
+      },
+      "timing": {
+        "enabled": true,
+        "provisional": false,
+        "sessions_recorded": 13,
+        "sessions_omitted": 0,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "open_plays": 0,
+        "open_slots": 0
+      },
+      "games": [
+        {
+          "game_id": "tn36-ef4dde99",
+          "score": 3.571428571428571,
+          "recomputed_score": 3.571428571428571,
+          "levels_completed": 1,
+          "levels_available": 7,
+          "state": "cancelled",
+          "actions": 78,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -705.9238286018372,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "score": 31.94635446465041,
+          "recomputed_score": 31.94635446465041,
+          "levels_completed": 4,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 313,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -57.280996322631836,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "score": 4.761904761904762,
+          "recomputed_score": 4.761904761904762,
+          "levels_completed": 1,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 52,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -371.18141198158264,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "score": 5.200617283950617,
+          "recomputed_score": 5.200617283950617,
+          "levels_completed": 2,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 107,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -225.05556726455688,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "score": 2.7777777777777777,
+          "recomputed_score": 2.7777777777777777,
+          "levels_completed": 1,
+          "levels_available": 8,
+          "state": "cancelled",
+          "actions": 49,
+          "first_action": "ACTION4",
+          "last_action_minus_deadline_seconds": -327.4813549518585,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "score": 1.8181818181818181,
+          "recomputed_score": 1.8181818181818181,
+          "levels_completed": 1,
+          "levels_available": 10,
+          "state": "cancelled",
+          "actions": 165,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -763.8441033363342,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "score": 13.333333333333334,
+          "recomputed_score": 13.333333333333334,
+          "levels_completed": 3,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 72,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -1.1321187019348145,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "score": 5.908839043102989,
+          "recomputed_score": 5.908839043102989,
+          "levels_completed": 2,
+          "levels_available": 9,
+          "state": "cancelled",
+          "actions": 618,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -20.555261850357056,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "score": 2.8058589138134593,
+          "recomputed_score": 2.8058589138134593,
+          "levels_completed": 1,
+          "levels_available": 7,
+          "state": "cancelled",
+          "actions": 88,
+          "first_action": "ACTION2",
+          "last_action_minus_deadline_seconds": -34.435017824172974,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "score": 71.42857142857143,
+          "recomputed_score": 71.42857142857143,
+          "levels_completed": 5,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 281,
+          "first_action": "ACTION3",
+          "last_action_minus_deadline_seconds": -418.66256856918335,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "score": 47.61904761904761,
+          "recomputed_score": 47.61904761904761,
+          "levels_completed": 4,
+          "levels_available": 6,
+          "state": "cancelled",
+          "actions": 122,
+          "first_action": "ACTION6",
+          "last_action_minus_deadline_seconds": -519.7700901031494,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "cd82-fb555c5d",
+          "score": 91.90705162058636,
+          "recomputed_score": 91.90705162058636,
+          "levels_completed": 6,
+          "levels_available": 6,
+          "state": "won",
+          "actions": 164,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -729.4784967899323,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "score": 77.77777777777779,
+          "recomputed_score": 77.77777777777779,
+          "levels_completed": 7,
+          "levels_available": 8,
+          "state": "cancelled",
+          "actions": 247,
+          "first_action": "ACTION1",
+          "last_action_minus_deadline_seconds": -76.37669801712036,
+          "post_deadline_actions": 0,
+          "post_deadline_completed_levels": []
+        }
+      ]
+    }
+  },
+  "all13_games": [
+    {
+      "game_id": "tn36-ef4dde99",
+      "baseline_score": 66.40233741084117,
+      "current_data_score": 3.571428571428571,
+      "score_delta": -62.8309088394126,
+      "baseline_levels": 6,
+      "current_data_levels": 1
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "baseline_score": 63.82291522996922,
+      "current_data_score": 31.94635446465041,
+      "score_delta": -31.87656076531881,
+      "baseline_levels": 5,
+      "current_data_levels": 4
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "baseline_score": 47.61904761904761,
+      "current_data_score": 4.761904761904762,
+      "score_delta": -42.857142857142854,
+      "baseline_levels": 4,
+      "current_data_levels": 1
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "baseline_score": 2.2222222222222223,
+      "current_data_score": 5.200617283950617,
+      "score_delta": 2.9783950617283947,
+      "baseline_levels": 1,
+      "current_data_levels": 2
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "baseline_score": 2.7777777777777777,
+      "current_data_score": 2.7777777777777777,
+      "score_delta": 0.0,
+      "baseline_levels": 1,
+      "current_data_levels": 1
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "baseline_score": 1.8181818181818181,
+      "current_data_score": 1.8181818181818181,
+      "score_delta": 0.0,
+      "baseline_levels": 1,
+      "current_data_levels": 1
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "baseline_score": 24.670688932710615,
+      "current_data_score": 13.333333333333334,
+      "score_delta": -11.33735559937728,
+      "baseline_levels": 5,
+      "current_data_levels": 3
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "baseline_score": 2.2222222222222223,
+      "current_data_score": 5.908839043102989,
+      "score_delta": 3.686616820880767,
+      "baseline_levels": 1,
+      "current_data_levels": 2
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "baseline_score": 10.714285714285714,
+      "current_data_score": 2.8058589138134593,
+      "score_delta": -7.908426800472254,
+      "baseline_levels": 2,
+      "current_data_levels": 1
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "baseline_score": 71.42857142857143,
+      "current_data_score": 71.42857142857143,
+      "score_delta": 0.0,
+      "baseline_levels": 5,
+      "current_data_levels": 5
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "baseline_score": 100.0,
+      "current_data_score": 47.61904761904761,
+      "score_delta": -52.38095238095239,
+      "baseline_levels": 6,
+      "current_data_levels": 4
+    },
+    {
+      "game_id": "cd82-fb555c5d",
+      "baseline_score": 92.29534911841006,
+      "current_data_score": 91.90705162058636,
+      "score_delta": -0.38829749782370016,
+      "baseline_levels": 6,
+      "current_data_levels": 6
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "baseline_score": 100.0,
+      "current_data_score": 77.77777777777779,
+      "score_delta": -22.222222222222214,
+      "baseline_levels": 8,
+      "current_data_levels": 7
+    }
+  ],
+  "limits": [
+    "No comparison of01213-game mean to010/01112-game means: pool, dispatch positions and normalized total budgets differ.",
+    "All per-game results retained; no removal of difficult games or post-hoc subgroup used as overall decision.",
+    "No game actions or completed-level boundary actions were after the configured deadline. Tail model requests/tokens are separate and were not relabeled as extra game action budget.",
+    "Timeout log entries are retained; normal deadline cancellations are not crashes.",
+    "Same wall-clock budget does not guarantee equal per-game requests, tokens or GPU opportunity.",
+    "First action, logical chat request, HTTP attempt and gate return remain distinct; no queue-causality claim is made here.",
+    "The old010 animation archive is disabled, while the original latest-animation interface remains enabled; these are different features.",
+    "Runtime benchmark_initial.pkl identity is reported-hash equality only; no pickle was loaded.",
+    "Session elapsed hours are this run duration, not account-balance difference or GPU-busy compute time.",
+    "No model adoption finding is made here; that review is assigned separately.",
+    "No model/GPU/game engine/logged code was executed, and no artifact was uploaded by this review."
+  ],
+  "input_sha256": {
+    "runs/012-current-data/experiment-manifest.json": "a7966c088bee64b04a4aca4a62d87a15ee8e7a63a2e6d91fae701817da1bb9e4",
+    "runs/012-current-data/serve.log": "ead48a9a18df66071ec8551443b5c6f429a19b00ee51765f97cae799a4c0df68",
+    "experiments/012-source/source-hashes.json": "2150e1b37ca9cfabff7ee72b2f7028f88805a3cd2f78883f6a9e8ac10dd95737",
+    "experiments/012-source/build-manifest.json": "7988b44c73c5dfe22c59b03b02cac55b099a657b03dcaa7c825cd2777257327c",
+    "experiments/012-source/experiment.ipynb": "6789f075141fb81cd82b958eb8a851a726720c231efd4d99d477fd78c72dd7dc",
+    "runs/012-current-data/baseline/benchmark.json": "64df7636474edbf1d0b88240e967be9f54adef2cc74cf98043a522a029867ce5",
+    "runs/012-current-data/baseline/arm-metadata.json": "5174cf605bc540828978ca75c1260e1bf3e7c0b5482eabc7a9f2d56ae2e6bfcb",
+    "runs/012-current-data/baseline/run.log": "10416d203c4cf891bebfe3048bc9e75ef455d7dbcb590cf5cc053fa9529198be",
+    "runs/012-current-data/baseline/inference-timing.json": "ccb16ee3a3e18f29ad696b9a232942c1c9b6d624f97867c5611058a0bffc352c",
+    "runs/012-current-data/baseline/goal-evidence.json": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593",
+    "runs/012-current-data/baseline/transient-history.json": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665",
+    "runs/012-current-data/baseline/program-state.json": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303",
+    "runs/012-current-data/current_data/benchmark.json": "75a2f4994ab0fa922968215104b8f8c623b0034d95518a49adf026f0f7373b7c",
+    "runs/012-current-data/current_data/arm-metadata.json": "4e5f3d0b19d7a512368948a11d4dee8fa3bc61a904c7fe812cc8fcd9af4bfd6c",
+    "runs/012-current-data/current_data/run.log": "33acead606e63199acf0e95b20ba3a4204eb308863eea6eeb53119b5dee79478",
+    "runs/012-current-data/current_data/inference-timing.json": "066b0d392220aa2965bf7304defa462936c709f293e6ea7ddf5fc15587e58826",
+    "runs/012-current-data/current_data/goal-evidence.json": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593",
+    "runs/012-current-data/current_data/transient-history.json": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665",
+    "runs/012-current-data/current_data/program-state.json": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303"
+  }
+}

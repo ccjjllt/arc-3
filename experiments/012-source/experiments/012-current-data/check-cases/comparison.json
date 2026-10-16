@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "reports": {
+    "baseline": {
+      "path": "experiments/012-current-data/check-cases/cpu-20261013T083209Z-baseline/report.json",
+      "sha256": "9436429d4f137b6765fe8e1d5a92457c1702c4abc26580f0d0e16b3ddf834fcf"
+    },
+    "candidate": {
+      "path": "experiments/012-current-data/check-cases/cpu-20261013T083813Z-candidate/report.json",
+      "sha256": "e599c45980ccd59513248e76fbc8c0fa6364076c0e449cca1996cceaa5cdf6ac"
+    }
+  },
+  "source_and_trace_hashes_reverified": true,
+  "cases": [
+    {
+      "case": "cd82",
+      "baseline_compute_candidate_compute_host_ack_candidate_get_hash_equal": true,
+      "value_sha256": "d42401958c570a3d7bf268591f81c5da5d3ae205e4145f5b263abcfbb95dd378",
+      "baseline_ordinary_value_survived": false,
+      "baseline_pure_function_recompute_equal": true,
+      "candidate_direct_consumer": {
+        "height": 9,
+        "width": 14,
+        "filled_fraction": 0.23809523809523808
+      }
+    },
+    {
+      "case": "ft09",
+      "baseline_compute_candidate_compute_host_ack_candidate_get_hash_equal": true,
+      "value_sha256": "5c86cd8207475ca304805e4c7a75e715a81eb84b8d6b26a63b9dee7118a4c288",
+      "baseline_ordinary_value_survived": false,
+      "baseline_pure_function_recompute_equal": true,
+      "candidate_direct_consumer": {
+        "logical_column": 2,
+        "round_trip_pixel_top_left": [
+          12,
+          28
+        ],
+        "round_trip_matches": true
+      }
+    }
+  ],
+  "scope": "Handwritten CPU data-channel probes on saved public frames; no model adoption or game improvement claim.",
+  "candidate_module_sha256": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+  "candidate_host_query_cpu_seconds": 0.0022999169999999847,
+  "candidate_stored_value_bytes": 335
+}

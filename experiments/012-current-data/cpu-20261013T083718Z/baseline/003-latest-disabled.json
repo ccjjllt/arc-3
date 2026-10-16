@@ -1,0 +1,11 @@
+{
+  "code": "try:\n    last_animation_frames\n    fr=True\nexcept NameError:\n    fr=False\ntry:\n    last_animation_timeline\n    tl=True\nexcept NameError:\n    tl=False\ntry:\n    current_data\n    cd=True\nexcept NameError:\n    cd=False\nimport json\nprint('RESULT='+json.dumps({'frames':fr,'timeline':tl,'current_data':cd},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"frames\":false,\"timeline\":false,\"current_data\":false}\n"
+  },
+  "step_before": 0,
+  "step_after": 0,
+  "step_executed": false
+}

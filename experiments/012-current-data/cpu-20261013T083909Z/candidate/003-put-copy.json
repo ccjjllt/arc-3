@@ -1,0 +1,11 @@
+{
+  "code": "v={'nested':[1,True,None,{'text':'数据','v':1.25}]}\na=current_data.context()['context']\nr=current_data.put('v',v,at=a)\nv['nested'][0]=999\nimport json\nprint('RESULT='+json.dumps(r,separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"status\":\"stored\",\"key\":\"v\",\"written_at\":{\"game_id\":\"tn36-ef4dde99\",\"session_id\":\"c7976195ceff43939d2309e77650c583\",\"attempt\":0,\"revision\":0,\"action_num\":0,\"level\":1,\"frame_sha256\":\"3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b\"},\"bytes\":51,\"value_sha256\":\"1c3ad0628e007a68c1e5f129e5e4a5fda481190c333d035ddab56e336b41ad0c\"}\n"
+  },
+  "step_before": 0,
+  "step_after": 0,
+  "step_executed": false
+}

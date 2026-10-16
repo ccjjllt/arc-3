@@ -1,0 +1,152 @@
+{
+  "reviewed_at_utc": "2026-10-13T08:49:48.136807+00:00",
+  "status": "passed_cpu_and_local_packaging_review",
+  "blocking_findings": [],
+  "verdict": "Current-data implementation and prepared paired-screen package have no remaining reviewed blocker. CPU evidence establishes data delivery and lifecycle contracts only; it does not establish model adoption, causal score benefit, or permission for a GPU launch.",
+  "module_sha256": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+  "notebook_sha256": "6789f075141fb81cd82b958eb8a851a726720c231efd4d99d477fd78c72dd7dc",
+  "source_review": {
+    "host_binding": "Session UUID, reset attempt, action_num, level, settled frame hash and revision; optional at token compared canonically including JSON types.",
+    "action_boundary": "Original action called once; short bookkeeping locks do not span it. Post-action finally and every query verify current identity. Actual no-op/RESET invalidates; refused action does not. Inflight query returns no payload.",
+    "commit": "Host stores a validated immutable JSON encoding atomically before synchronous IPC acknowledgment. Acknowledged commit survives snippet error/timeout. Missing acknowledgment is unknown outcome.",
+    "scope_and_copy": "Host-owned bounded per-session stores; stale/evicted responses contain no saved value; get decodes an independent JSON copy. Old evicted session identity does not resurrect.",
+    "sandbox_integration": "Existing animation IPC multiplexed with whitelist fields and forced current_data query. Bound session callback captured at sandbox entry. API injected before retained-function available_names. Original latest-animation enablement preserved.",
+    "baseline_boundary": "Only current_data arm imports/installs. 003/006/007 disabled;010 archive not enabled. Original ordinary-variable and function-retention policy preserved.",
+    "limits": {
+      "value_canonical_bytes": 16384,
+      "session_canonical_bytes": 65536,
+      "keys_per_session_including_stale": 32,
+      "retained_sessions": 128,
+      "depth": 16,
+      "key_utf8_bytes": 128
+    },
+    "resolved_during_review": [
+      "Action bookkeeping/clock failures originally could mask original action outcome; fail-open wrapper and sentinel-identity fault checks now cover this.",
+      "IPC request fields originally could override query routing; forwarded fields are now whitelisted and query is forced."
+    ]
+  },
+  "evidence": {
+    "real_toolchain": {
+      "summary": "experiments/012-current-data/cpu-20261013T083909Z/summary.json",
+      "checks": 53,
+      "status": "passed",
+      "source_stable": true,
+      "covered": [
+        "Baseline API absence and prompt unchanged",
+        "Exact cross-snippet JSON copy; reject preserves previous valid entry",
+        "Retained helper references current_data in later snippet",
+        "Independent real session cannot read value",
+        "Actual public SDK gameplay no-op makes value stale; full frame did change HUD",
+        "Actual RESET increments attempt and makes value stale",
+        "Actual public ft09 first-level transition makes value stale",
+        "Confirmed write survives ordinary snippet exception",
+        "Confirmed write survives real sandbox hard timeout; second write witnesses receipt of first ack",
+        "Legacy latest-animation disabled contract remains intact"
+      ],
+      "timeout_precision": "Requested timeout_seconds=0.5; original host deadline clamps max(1,int(timeout_seconds)), hence effective minimum1s. Error text reflects requested0.5, not a measured0.5-second duration.",
+      "no_http_or_model": true
+    },
+    "controlled_module": {
+      "report": "experiments/012-current-data/module-checks/report.json",
+      "checks": 72,
+      "status": "passed",
+      "covered": [
+        "Exact16KiB/64KiB/32keys/128sessions boundaries",
+        "Strict JSON rejection and rejected-write atomicity",
+        "Identical full grid with action_num+1 invalidates",
+        "A→B→A observation changes do not revive old data",
+        "Refused action preserves value and binding",
+        "Post-execution exception invalidates same-grid value while preserving exception identity",
+        "Clock/maintenance faults preserve original return/exception and exactly-once original execution",
+        "FIFO session eviction frees values and does not revive old identities"
+      ],
+      "boundary": "Real installed wrappers with synthetic game carriers; no SDK action/model/GPU execution in this report."
+    },
+    "saved_frame_cases": {
+      "report": "experiments/012-current-data/check-cases/comparison.json",
+      "cases": [
+        "cd82",
+        "ft09"
+      ],
+      "status": "passed",
+      "scope": "Handwritten CPU data-channel probes on saved public frames; no model adoption or game improvement claim.",
+      "interpretation": "Handwritten compute→put→host ack→later get→direct consumer succeeds; baseline pure-function recomputation also reproduces values. This proves an additional data handoff route, not additional observation information or model adoption."
+    }
+  },
+  "prepared_configuration": {
+    "config": "experiments/012-current-data.json",
+    "arm_order": [
+      "baseline",
+      "current_data"
+    ],
+    "reference_arm": "baseline",
+    "games": [
+      "tn36-ef4dde99",
+      "sc25-635fd71a",
+      "sp80-589a99af",
+      "bp35-0a0ad940",
+      "sk48-d8078629",
+      "lf52-271a04aa",
+      "su15-1944f8ab",
+      "wa30-ee6fef47",
+      "g50t-5849a774",
+      "m0r0-492f87ba",
+      "ft09-0d8bbf25",
+      "cd82-fb555c5d",
+      "ar25-0c556536"
+    ],
+    "game_count": 13,
+    "requested_arm_seconds": 3772,
+    "formula_recomputed_seconds": 3772,
+    "hard_limit_seconds": 9900,
+    "timing_both_arms": true,
+    "warmup_action_games": 0,
+    "active_streams": 10,
+    "run_count_per_arm": 1,
+    "expected_gpu_hours": 2.3,
+    "cross_run_comparison_limit": "13 games includes cd82 before ar25; old12 relative order is retained, but means and scheduling are not directly comparable to010/01112-game runs."
+  },
+  "notebook_review": {
+    "cells": 29,
+    "native_helpers": 13,
+    "all_payload_bytes_equal_worktree_and_manifest": true,
+    "all_helpers_end_with_lf": true,
+    "actual_IPython_written_hashes_report_matches": true,
+    "inherited_nonconfig_nongenerated_cells_equal_011": 8,
+    "same_model_serving_docker_gpu_metadata_fields_as011": [
+      "dataset_sources",
+      "competition_sources",
+      "model_sources",
+      "docker_image",
+      "machine_shape",
+      "enable_internet",
+      "is_private"
+    ],
+    "no_case_fixture_code_or_values_in_candidate_runtime": true
+  },
+  "remaining_limits": [
+    "No production concurrency pressure or real fatal auto-reset sequence demonstrated.",
+    "Host current-data values are not verified facts; at omitted binds write time only.",
+    "Previously returned local Python aliases do not auto-invalidate.",
+    "Canonical JSON byte counters are not RSS or model-visible stdout characters.",
+    "Candidate prompt adds API instructions; selection/query behavior and shared scheduling can still affect per-game compute allocation.",
+    "No score, medal or prize improvement is established by these CPU checks."
+  ],
+  "input_sha256": {
+    "src/arc3_research/current_data.py": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "experiments/012-current-data/cpu-20261013T083909Z/summary.json": "41e888e673691e0a014a8f6d3394de4ec1baec39951df755aaa3c586267388e0",
+    "experiments/012-current-data/cpu-20261013T083909Z/candidate/report.json": "0325fa71b2b98330f36ca6fa0314e9fff95758c7b66acb160bd2c91b8fa14434",
+    "experiments/012-current-data/cpu-20261013T083909Z/baseline/report.json": "708fd12c20c56f3179945a2ade71f7882ae6084203b24499bcd55d078269e573",
+    "experiments/012-current-data/module-checks/report.json": "28d5d7ca56ac64139098ec8fa64e823bde49dbc5d6822c419926976576b59668",
+    "experiments/012-current-data/module-checks/manual-checks.py": "6edda09a17f777359de649c833a937fd7bf8b34344e68c114775fe513eb6529d",
+    "experiments/012-current-data/check-cases/comparison.json": "16bc6970b2ca42f5f561d0674e7360680515c5dcda7c6c5c93dce50a4e801437",
+    "experiments/012-current-data.json": "6fde032cd334970815e0f663fcdf6b6ca8e2455fd176a0529a5dc4cfe486416f",
+    "notebooks/012-current-data/experiment.ipynb": "6789f075141fb81cd82b958eb8a851a726720c231efd4d99d477fd78c72dd7dc",
+    "notebooks/012-current-data/build-manifest.json": "7988b44c73c5dfe22c59b03b02cac55b099a657b03dcaa7c825cd2777257327c",
+    "experiments/012-notebook-checks.json": "ada49f286c21de66944f74e7379830158dd70e250f6f7b4eae461f604d6f1e80",
+    "src/arc3_research/run_arm.py": "93c5d8d85da28343e49e52e0c57d26c978155a9c182fc49f29f17e971501aaa5",
+    "src/arc3_research/session_runner.py": "4908b4a9e6806f7c125e13017d5add5be92871c810cede2e55e4991a2b2ca506",
+    "scripts/build_experiment.py": "acda9b56a036960c38988705f636ee0c46bb30f22436a0a0a4f18042780fba99",
+    "scripts/check_012_current_data.py": "69ed8257425e2c190e3af14c47a1a9bcc2e10ab0b011181c6088e2e9dd4bbb13"
+  }
+}

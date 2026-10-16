@@ -1,0 +1,11 @@
+{
+  "code": "try:\n    current_data\n    cd=True\nexcept NameError:\n    cd=False\ntry:\n    animation_at\n    ar=True\nexcept NameError:\n    ar=False\nimport json\nprint('RESULT='+json.dumps({'current_data':cd,'archive':ar},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"current_data\":true,\"archive\":false}\n"
+  },
+  "step_before": 0,
+  "step_after": 0,
+  "step_executed": false
+}

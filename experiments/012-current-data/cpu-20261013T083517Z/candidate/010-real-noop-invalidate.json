@@ -1,0 +1,11 @@
+{
+  "code": "at=current_data.context()['context']\naction({'action':'MOUSE','row':0,'col':0})\nimport json\nprint('RESULT='+json.dumps({'get':current_data.get('v'),'pinned':current_data.put('v',7,at=at),'at':current_data.context()['context']},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "[action] MOUSE(row=0, col=0) -> NO-OP (executed, no change inside the board area)\nRESULT={\"get\":{\"status\":\"stale\",\"key\":\"v\",\"written_at\":{\"game_id\":\"tn36-ef4dde99\",\"session_id\":\"3078f96133a140cab998dbb01a9fb723\",\"attempt\":0,\"revision\":0,\"action_num\":0,\"level\":1,\"frame_sha256\":\"3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b\"}},\"pinned\":{\"status\":\"stale_context\"},\"at\":{\"game_id\":\"tn36-ef4dde99\",\"session_id\":\"3078f96133a140cab998dbb01a9fb723\",\"attempt\":0,\"revision\":1,\"action_num\":1,\"level\":1,\"frame_sha256\":\"f24a3446b02c98c27121094c895ca2e13920190943b4c47a102483d057316a2a\"}}\n"
+  },
+  "step_before": 0,
+  "step_after": 1,
+  "step_executed": true
+}

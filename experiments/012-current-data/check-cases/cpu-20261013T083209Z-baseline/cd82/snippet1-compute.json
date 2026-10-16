@@ -1,0 +1,13 @@
+{
+  "label": "snippet1-compute",
+  "handwritten_code": "def compute_measurement(frame):\n    # Historical diagnostic region/foreground only, not a production game rule.\n    rows = frame.ascii.splitlines()\n    cells = [(row, col) for row in range(18, 62)\n             for col, symbol in enumerate(rows[row]) if symbol == \"g\"]\n    if not cells:\n        return {\"status\": \"empty\", \"step\": frame.step, \"level\": frame.level}\n    row_values = [row for row, col in cells]\n    col_values = [col for row, col in cells]\n    return {\n        \"status\": \"measured\",\n        \"step\": frame.step,\n        \"level\": frame.level,\n        \"pixel_count\": len(cells),\n        \"bbox_tlbr_inclusive\": [min(row_values), min(col_values),\n                                max(row_values), max(col_values)],\n    }\n\n\nmeasurement = compute_measurement(current_frame)\n\noutput={'computed':measurement}\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "function_retention": "Retained your function compute_measurement(frame) for later Python calls in this game.",
+    "returncode": 0,
+    "stdout": "RESULT={\"computed\":{\"status\":\"measured\",\"step\":21,\"level\":1,\"pixel_count\":30,\"bbox_tlbr_inclusive\":[45,25,53,38]}}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}

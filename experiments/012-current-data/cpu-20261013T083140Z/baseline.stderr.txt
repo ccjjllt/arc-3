@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 182, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 164, in main
+    if a.worker:worker(a);return
+                ~~~~~~^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 91, in worker
+    got=tool(s,emit("{'current_data': 'current_data' in globals(), 'archive': 'animation_at' in globals()}"),'visibility')
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 67, in tool
+    if success: check(label+'_sandbox_success', 'error' not in d, error=d.get('error'))
+                ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_012_current_data.py", line 54, in check
+    if not ok: raise AssertionError(name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: visibility_sandbox_success

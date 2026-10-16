@@ -1,0 +1,12 @@
+{
+  "label": "snippet2-get-consume",
+  "handwritten_code": "entry = current_data.get(\"measurement\")\nif entry[\"status\"] != \"current\":\n    raise ValueError(\"The saved measurement is not current\")\nmeasurement = entry[\"value\"]\nbounds = measurement[\"bbox_tlbr_inclusive\"]\nconsumed = {\n    \"value\": measurement,\n    \"height\": bounds[2] - bounds[0] + 1,\n    \"width\": bounds[3] - bounds[1] + 1,\n    \"filled_fraction\": measurement[\"pixel_count\"] /\n        ((bounds[2] - bounds[0] + 1) * (bounds[3] - bounds[1] + 1)),\n}\n\noutput=consumed\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"value\":{\"bbox_tlbr_inclusive\":[45,25,53,38],\"level\":1,\"pixel_count\":30,\"status\":\"measured\",\"step\":21},\"height\":9,\"width\":14,\"filled_fraction\":0.23809523809523808}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}

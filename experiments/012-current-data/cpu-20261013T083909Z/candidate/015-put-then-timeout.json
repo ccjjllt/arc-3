@@ -1,0 +1,11 @@
+{
+  "code": "r=current_data.put('ack_timeout',[6,7])\nassert r['status']=='stored'\ncurrent_data.put('after_ack_marker',True)\nwhile True:\n    pass",
+  "dispatch": {
+    "tool": "python",
+    "function_retention": "Your previous function stored_number is no longer retained; redefine it if needed.",
+    "error": "Tool timed out after 0.5s"
+  },
+  "step_before": 2,
+  "step_after": 2,
+  "step_executed": false
+}

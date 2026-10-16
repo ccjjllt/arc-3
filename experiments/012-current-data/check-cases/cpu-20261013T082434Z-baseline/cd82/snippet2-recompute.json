@@ -1,0 +1,12 @@
+{
+  "label": "snippet2-recompute",
+  "handwritten_code": "try:\n    measurement\n    local_variable_survived=True\nexcept NameError:\n    local_variable_survived=False\nrecomputed=compute_measurement(current_frame)\noutput={'local_variable_survived':local_variable_survived,'recomputed':recomputed}\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"local_variable_survived\":false,\"recomputed\":{\"status\":\"measured\",\"step\":21,\"level\":1,\"pixel_count\":30,\"bbox_tlbr_inclusive\":[45,25,53,38]}}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}

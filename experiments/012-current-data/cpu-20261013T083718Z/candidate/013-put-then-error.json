@@ -1,0 +1,10 @@
+{
+  "code": "r=current_data.put('ack_error',[4,5])\nassert r['status']=='stored'\nraise RuntimeError('intentional-probe')",
+  "dispatch": {
+    "tool": "python",
+    "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 3, in <module>\nRuntimeError: intentional-probe"
+  },
+  "step_before": 2,
+  "step_after": 2,
+  "step_executed": false
+}

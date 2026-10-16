@@ -1,0 +1,12 @@
+{
+  "label": "snippet2-get-consume",
+  "handwritten_code": "entry = current_data.get(\"measurement\")\nif entry[\"status\"] != \"current\":\n    raise ValueError(\"The saved measurement is not current\")\nmeasurement = entry[\"value\"]\nselected = measurement[\"selected\"]\nrow_index, col_index = selected[\"logical_row_col\"]\nconsumed = {\n    \"value\": measurement,\n    \"logical_column\": col_index,\n    \"round_trip_pixel_top_left\": [measurement[\"row_starts\"][row_index],\n                                   measurement[\"col_starts\"][col_index]],\n    \"round_trip_matches\": selected[\"pixel_top_left\"] ==\n        [measurement[\"row_starts\"][row_index], measurement[\"col_starts\"][col_index]],\n}\n\noutput=consumed\nimport json\nprint('RESULT='+json.dumps(output,separators=(',',':')))\n",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"value\":{\"col_starts\":[12,20,28,36,44],\"level\":3,\"row_starts\":[4,12,20,28,36,44,52],\"selected\":{\"logical_row_col\":[1,2],\"pixel_top_left\":[12,28]},\"selection\":\"topmost mixed tile in the inferred lattice\",\"square_size\":6,\"status\":\"measured\",\"step\":11},\"logical_column\":2,\"round_trip_pixel_top_left\":[12,28],\"round_trip_matches\":true}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "state_file_unchanged": true
+}
