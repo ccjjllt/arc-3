@@ -1,0 +1,1318 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-10-11",
+  "type": "Independent public SDK CPU replay, not recovery of missing005 intermediate frames.",
+  "game_id": "tn36-ef4dde99",
+  "environment_seed": 0,
+  "model_used": false,
+  "gpu_used": false,
+  "game_engine_source_read": false,
+  "whole_logged_python_snippet_executed": false,
+  "total_explicit_actions": 5,
+  "note": "Only one explicit prefix action then the four log-authorized mouse actions were manually sent to the public SDK. No policy/search code from the trajectory was executed.",
+  "sources": {
+    "raw_requests_file": "runs/005-full-baseline/baseline/tn36-ef4dde99_p0_requests.jsonl",
+    "raw_line_1based": 11,
+    "event_file": "runs/005-full-baseline/baseline/artifacts/tn36-ef4dde99_p0_events.jsonl",
+    "animation_helper": "research/runtime-bundle/src/ARC3-Inference/inference/utils/animation.py",
+    "animation_helper_sha256": "b835584ead6d449c3bfb72f1c1df03186907ae882e4325cfc97dd584684c3824"
+  },
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "packages": {
+    "arc-agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "numpy": "2.5.3",
+    "pydantic": "2.14.0"
+  },
+  "initial_frame_matches005_saved_board": true,
+  "elapsed_action_replay_seconds": 0.010062250075861812,
+  "actions": [
+    {
+      "action_number": 1,
+      "role": "prefix from005 action1",
+      "model_mouse_row": 14,
+      "model_mouse_col": 31,
+      "sdk_action": "ACTION6",
+      "sdk_data": {
+        "x": 31,
+        "y": 14
+      },
+      "raw_returned_frames": 1,
+      "collapsed_states_including_before": 2,
+      "baseline_helper_summary": null,
+      "independently_counted_transient_pixels": 0,
+      "transient_bbox_inclusive_rowcol": null,
+      "transient_cells_rowcol": [],
+      "state": "NOT_FINISHED",
+      "levels_completed": 0,
+      "final_changed_pixels_vs_before": 1,
+      "gameplay_changed_pixels_excluding4border": 0,
+      "changed_pixels_each_collapsed_transition": [
+        1
+      ],
+      "raw_frame_hashes_int8": [
+        "6de0226b4dc2d34c6ef6687b11b9784e82c9a29e5c78391f9f28011915001793"
+      ],
+      "final_frame_matches005_saved_board": true,
+      "original_event_line": 2,
+      "baseline_animation_timeline": {
+        "error": "No animation is available: the last executed action returned a single frame."
+      }
+    },
+    {
+      "action_number": 2,
+      "role": "first probe / blue blob",
+      "model_mouse_row": 55,
+      "model_mouse_col": 35,
+      "sdk_action": "ACTION6",
+      "sdk_data": {
+        "x": 35,
+        "y": 55
+      },
+      "raw_returned_frames": 7,
+      "collapsed_states_including_before": 8,
+      "baseline_helper_summary": {
+        "frames": 7,
+        "transient_pixels": 256,
+        "transient_bbox": [
+          13,
+          19,
+          59,
+          43
+        ]
+      },
+      "independently_counted_transient_pixels": 256,
+      "transient_bbox_inclusive_rowcol": [
+        13,
+        19,
+        59,
+        43
+      ],
+      "transient_cells_rowcol": [
+        [
+          13,
+          30
+        ],
+        [
+          13,
+          31
+        ],
+        [
+          13,
+          32
+        ],
+        [
+          13,
+          33
+        ],
+        [
+          14,
+          30
+        ],
+        [
+          14,
+          31
+        ],
+        [
+          14,
+          32
+        ],
+        [
+          14,
+          33
+        ],
+        [
+          15,
+          30
+        ],
+        [
+          15,
+          31
+        ],
+        [
+          15,
+          32
+        ],
+        [
+          15,
+          33
+        ],
+        [
+          16,
+          30
+        ],
+        [
+          16,
+          33
+        ],
+        [
+          17,
+          30
+        ],
+        [
+          17,
+          31
+        ],
+        [
+          17,
+          32
+        ],
+        [
+          17,
+          33
+        ],
+        [
+          18,
+          30
+        ],
+        [
+          18,
+          31
+        ],
+        [
+          18,
+          32
+        ],
+        [
+          18,
+          33
+        ],
+        [
+          19,
+          30
+        ],
+        [
+          19,
+          31
+        ],
+        [
+          19,
+          32
+        ],
+        [
+          19,
+          33
+        ],
+        [
+          20,
+          30
+        ],
+        [
+          20,
+          33
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          31
+        ],
+        [
+          21,
+          32
+        ],
+        [
+          21,
+          33
+        ],
+        [
+          22,
+          30
+        ],
+        [
+          22,
+          31
+        ],
+        [
+          22,
+          32
+        ],
+        [
+          22,
+          33
+        ],
+        [
+          23,
+          30
+        ],
+        [
+          23,
+          31
+        ],
+        [
+          23,
+          32
+        ],
+        [
+          23,
+          33
+        ],
+        [
+          24,
+          30
+        ],
+        [
+          24,
+          33
+        ],
+        [
+          41,
+          19
+        ],
+        [
+          41,
+          20
+        ],
+        [
+          41,
+          21
+        ],
+        [
+          41,
+          22
+        ],
+        [
+          41,
+          23
+        ],
+        [
+          41,
+          24
+        ],
+        [
+          41,
+          25
+        ],
+        [
+          41,
+          26
+        ],
+        [
+          41,
+          27
+        ],
+        [
+          41,
+          28
+        ],
+        [
+          41,
+          29
+        ],
+        [
+          41,
+          30
+        ],
+        [
+          41,
+          31
+        ],
+        [
+          41,
+          32
+        ],
+        [
+          41,
+          33
+        ],
+        [
+          41,
+          34
+        ],
+        [
+          41,
+          35
+        ],
+        [
+          41,
+          36
+        ],
+        [
+          41,
+          37
+        ],
+        [
+          41,
+          38
+        ],
+        [
+          41,
+          39
+        ],
+        [
+          41,
+          40
+        ],
+        [
+          41,
+          41
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          41,
+          43
+        ],
+        [
+          42,
+          19
+        ],
+        [
+          42,
+          23
+        ],
+        [
+          42,
+          24
+        ],
+        [
+          42,
+          28
+        ],
+        [
+          42,
+          29
+        ],
+        [
+          42,
+          33
+        ],
+        [
+          42,
+          34
+        ],
+        [
+          42,
+          38
+        ],
+        [
+          42,
+          39
+        ],
+        [
+          42,
+          43
+        ],
+        [
+          43,
+          19
+        ],
+        [
+          43,
+          20
+        ],
+        [
+          43,
+          21
+        ],
+        [
+          43,
+          22
+        ],
+        [
+          43,
+          23
+        ],
+        [
+          43,
+          24
+        ],
+        [
+          43,
+          25
+        ],
+        [
+          43,
+          26
+        ],
+        [
+          43,
+          27
+        ],
+        [
+          43,
+          28
+        ],
+        [
+          43,
+          29
+        ],
+        [
+          43,
+          30
+        ],
+        [
+          43,
+          31
+        ],
+        [
+          43,
+          32
+        ],
+        [
+          43,
+          33
+        ],
+        [
+          43,
+          34
+        ],
+        [
+          43,
+          35
+        ],
+        [
+          43,
+          36
+        ],
+        [
+          43,
+          37
+        ],
+        [
+          43,
+          38
+        ],
+        [
+          43,
+          39
+        ],
+        [
+          43,
+          40
+        ],
+        [
+          43,
+          41
+        ],
+        [
+          43,
+          42
+        ],
+        [
+          43,
+          43
+        ],
+        [
+          44,
+          19
+        ],
+        [
+          44,
+          20
+        ],
+        [
+          44,
+          22
+        ],
+        [
+          44,
+          23
+        ],
+        [
+          44,
+          24
+        ],
+        [
+          44,
+          25
+        ],
+        [
+          44,
+          27
+        ],
+        [
+          44,
+          28
+        ],
+        [
+          44,
+          29
+        ],
+        [
+          44,
+          30
+        ],
+        [
+          44,
+          32
+        ],
+        [
+          44,
+          33
+        ],
+        [
+          44,
+          34
+        ],
+        [
+          44,
+          35
+        ],
+        [
+          44,
+          37
+        ],
+        [
+          44,
+          38
+        ],
+        [
+          44,
+          39
+        ],
+        [
+          44,
+          40
+        ],
+        [
+          44,
+          42
+        ],
+        [
+          44,
+          43
+        ],
+        [
+          45,
+          19
+        ],
+        [
+          45,
+          20
+        ],
+        [
+          45,
+          22
+        ],
+        [
+          45,
+          23
+        ],
+        [
+          45,
+          24
+        ],
+        [
+          45,
+          25
+        ],
+        [
+          45,
+          27
+        ],
+        [
+          45,
+          28
+        ],
+        [
+          45,
+          29
+        ],
+        [
+          45,
+          30
+        ],
+        [
+          45,
+          32
+        ],
+        [
+          45,
+          33
+        ],
+        [
+          45,
+          34
+        ],
+        [
+          45,
+          35
+        ],
+        [
+          45,
+          37
+        ],
+        [
+          45,
+          38
+        ],
+        [
+          45,
+          39
+        ],
+        [
+          45,
+          40
+        ],
+        [
+          45,
+          42
+        ],
+        [
+          45,
+          43
+        ],
+        [
+          46,
+          19
+        ],
+        [
+          46,
+          20
+        ],
+        [
+          46,
+          22
+        ],
+        [
+          46,
+          23
+        ],
+        [
+          46,
+          24
+        ],
+        [
+          46,
+          25
+        ],
+        [
+          46,
+          27
+        ],
+        [
+          46,
+          28
+        ],
+        [
+          46,
+          29
+        ],
+        [
+          46,
+          30
+        ],
+        [
+          46,
+          32
+        ],
+        [
+          46,
+          33
+        ],
+        [
+          46,
+          34
+        ],
+        [
+          46,
+          35
+        ],
+        [
+          46,
+          37
+        ],
+        [
+          46,
+          38
+        ],
+        [
+          46,
+          39
+        ],
+        [
+          46,
+          40
+        ],
+        [
+          46,
+          42
+        ],
+        [
+          46,
+          43
+        ],
+        [
+          47,
+          19
+        ],
+        [
+          47,
+          20
+        ],
+        [
+          47,
+          21
+        ],
+        [
+          47,
+          22
+        ],
+        [
+          47,
+          23
+        ],
+        [
+          47,
+          24
+        ],
+        [
+          47,
+          25
+        ],
+        [
+          47,
+          26
+        ],
+        [
+          47,
+          27
+        ],
+        [
+          47,
+          28
+        ],
+        [
+          47,
+          29
+        ],
+        [
+          47,
+          30
+        ],
+        [
+          47,
+          31
+        ],
+        [
+          47,
+          32
+        ],
+        [
+          47,
+          33
+        ],
+        [
+          47,
+          34
+        ],
+        [
+          47,
+          35
+        ],
+        [
+          47,
+          36
+        ],
+        [
+          47,
+          37
+        ],
+        [
+          47,
+          38
+        ],
+        [
+          47,
+          39
+        ],
+        [
+          47,
+          40
+        ],
+        [
+          47,
+          41
+        ],
+        [
+          47,
+          42
+        ],
+        [
+          47,
+          43
+        ],
+        [
+          51,
+          34
+        ],
+        [
+          51,
+          35
+        ],
+        [
+          51,
+          36
+        ],
+        [
+          51,
+          37
+        ],
+        [
+          51,
+          38
+        ],
+        [
+          52,
+          33
+        ],
+        [
+          52,
+          34
+        ],
+        [
+          52,
+          35
+        ],
+        [
+          52,
+          36
+        ],
+        [
+          52,
+          37
+        ],
+        [
+          52,
+          38
+        ],
+        [
+          52,
+          39
+        ],
+        [
+          53,
+          32
+        ],
+        [
+          53,
+          33
+        ],
+        [
+          53,
+          34
+        ],
+        [
+          53,
+          35
+        ],
+        [
+          53,
+          36
+        ],
+        [
+          53,
+          37
+        ],
+        [
+          53,
+          38
+        ],
+        [
+          53,
+          39
+        ],
+        [
+          53,
+          40
+        ],
+        [
+          54,
+          32
+        ],
+        [
+          54,
+          33
+        ],
+        [
+          54,
+          34
+        ],
+        [
+          54,
+          35
+        ],
+        [
+          54,
+          36
+        ],
+        [
+          54,
+          37
+        ],
+        [
+          54,
+          38
+        ],
+        [
+          54,
+          39
+        ],
+        [
+          54,
+          40
+        ],
+        [
+          55,
+          32
+        ],
+        [
+          55,
+          33
+        ],
+        [
+          55,
+          34
+        ],
+        [
+          55,
+          35
+        ],
+        [
+          55,
+          36
+        ],
+        [
+          55,
+          37
+        ],
+        [
+          55,
+          38
+        ],
+        [
+          55,
+          39
+        ],
+        [
+          55,
+          40
+        ],
+        [
+          56,
+          32
+        ],
+        [
+          56,
+          33
+        ],
+        [
+          56,
+          34
+        ],
+        [
+          56,
+          35
+        ],
+        [
+          56,
+          36
+        ],
+        [
+          56,
+          37
+        ],
+        [
+          56,
+          38
+        ],
+        [
+          56,
+          39
+        ],
+        [
+          56,
+          40
+        ],
+        [
+          57,
+          32
+        ],
+        [
+          57,
+          33
+        ],
+        [
+          57,
+          34
+        ],
+        [
+          57,
+          35
+        ],
+        [
+          57,
+          36
+        ],
+        [
+          57,
+          37
+        ],
+        [
+          57,
+          38
+        ],
+        [
+          57,
+          39
+        ],
+        [
+          57,
+          40
+        ],
+        [
+          58,
+          33
+        ],
+        [
+          58,
+          34
+        ],
+        [
+          58,
+          35
+        ],
+        [
+          58,
+          36
+        ],
+        [
+          58,
+          37
+        ],
+        [
+          58,
+          38
+        ],
+        [
+          58,
+          39
+        ],
+        [
+          59,
+          34
+        ],
+        [
+          59,
+          35
+        ],
+        [
+          59,
+          36
+        ],
+        [
+          59,
+          37
+        ],
+        [
+          59,
+          38
+        ]
+      ],
+      "state": "NOT_FINISHED",
+      "levels_completed": 0,
+      "final_changed_pixels_vs_before": 1,
+      "gameplay_changed_pixels_excluding4border": 0,
+      "changed_pixels_each_collapsed_transition": [
+        70,
+        126,
+        58,
+        86,
+        58,
+        58,
+        57
+      ],
+      "raw_frame_hashes_int8": [
+        "237ce5f7a38438874b74c076d22218747a6fd46a1dea12dbf621eb813973d3f5",
+        "e8c681c4add89795f68ffc894e815099cb5e345e270c8b8adf57ca3b667b7f18",
+        "c43826553979e0cec0d48c244bb6afe93bb84394c416bc2e3b7ea50117b1bac2",
+        "3e8ec798582c946a4c46dc5658c309a39f821580ebfbd2e11ee88c7347f00ee7",
+        "d83af68a923bc8f1b136f83d8d84f7a7cd1d5f73741530ddcff739be9fb0a0db",
+        "147f168baf6eed4b67d6f8e0e4a7156741553aad0069eede71c10244466b8640",
+        "e605e616274058f5342cb11711da5d0217b1d7021976cded10a72c64b727b691"
+      ],
+      "final_frame_matches005_saved_board": true,
+      "original_event_line": 4,
+      "baseline_animation_timeline": {
+        "action": "MOUSE(row=55, col=35)",
+        "frames": 7,
+        "steps": [
+          {
+            "step": 1,
+            "changed": 70,
+            "bbox": "rows 1-59, cols 32-60",
+            "transitions": {
+              "b>G": 1,
+              "b>S": 69
+            }
+          },
+          {
+            "step": 2,
+            "changed": 126,
+            "bbox": "rows 13-59, cols 19-40",
+            "transitions": {
+              "Y>c": 14,
+              "B>Y": 14,
+              "W>b": 29,
+              "S>b": 69
+            }
+          },
+          {
+            "step": 3,
+            "changed": 58,
+            "bbox": "rows 41-47, cols 19-28",
+            "transitions": {
+              "b>W": 29,
+              "W>b": 29
+            }
+          },
+          {
+            "step": 4,
+            "changed": 86,
+            "bbox": "rows 17-47, cols 24-33",
+            "transitions": {
+              "Y>B": 14,
+              "c>Y": 14,
+              "b>W": 29,
+              "W>b": 29
+            }
+          },
+          {
+            "step": 5,
+            "changed": 58,
+            "bbox": "rows 41-47, cols 29-38",
+            "transitions": {
+              "b>W": 29,
+              "W>b": 29
+            }
+          },
+          {
+            "step": 6,
+            "changed": 58,
+            "bbox": "rows 41-47, cols 34-43",
+            "transitions": {
+              "b>W": 29,
+              "W>b": 29
+            }
+          },
+          {
+            "step": 7,
+            "changed": 57,
+            "bbox": "rows 13-47, cols 30-43",
+            "transitions": {
+              "c>Y": 14,
+              "Y>c": 14,
+              "b>W": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "action_number": 3,
+      "role": "second probe / T glyph black",
+      "model_mouse_row": 45,
+      "model_mouse_col": 21,
+      "sdk_action": "ACTION6",
+      "sdk_data": {
+        "x": 21,
+        "y": 45
+      },
+      "raw_returned_frames": 1,
+      "collapsed_states_including_before": 2,
+      "baseline_helper_summary": null,
+      "independently_counted_transient_pixels": 0,
+      "transient_bbox_inclusive_rowcol": null,
+      "transient_cells_rowcol": [],
+      "state": "NOT_FINISHED",
+      "levels_completed": 0,
+      "final_changed_pixels_vs_before": 4,
+      "gameplay_changed_pixels_excluding4border": 3,
+      "changed_pixels_each_collapsed_transition": [
+        4
+      ],
+      "raw_frame_hashes_int8": [
+        "4206d7e74d133035785992a7b7ead1c5b727cd71edf07c4f0f0a02e8f956dde7"
+      ],
+      "final_frame_matches005_saved_board": true,
+      "original_event_line": 5,
+      "baseline_animation_timeline": {
+        "error": "No animation is available: the last executed action returned a single frame."
+      }
+    },
+    {
+      "action_number": 4,
+      "role": "third probe / T glyph gray",
+      "model_mouse_row": 45,
+      "model_mouse_col": 36,
+      "sdk_action": "ACTION6",
+      "sdk_data": {
+        "x": 36,
+        "y": 45
+      },
+      "raw_returned_frames": 1,
+      "collapsed_states_including_before": 2,
+      "baseline_helper_summary": null,
+      "independently_counted_transient_pixels": 0,
+      "transient_bbox_inclusive_rowcol": null,
+      "transient_cells_rowcol": [],
+      "state": "NOT_FINISHED",
+      "levels_completed": 0,
+      "final_changed_pixels_vs_before": 4,
+      "gameplay_changed_pixels_excluding4border": 3,
+      "changed_pixels_each_collapsed_transition": [
+        4
+      ],
+      "raw_frame_hashes_int8": [
+        "b7c0df6ca83cc49ea11d695896aee8ebc5768f75ad3142e63e064d1fb90b42a3"
+      ],
+      "final_frame_matches005_saved_board": true,
+      "original_event_line": 6,
+      "baseline_animation_timeline": {
+        "error": "No animation is available: the last executed action returned a single frame."
+      }
+    },
+    {
+      "action_number": 5,
+      "role": "fourth probe / checker cell",
+      "model_mouse_row": 20,
+      "model_mouse_col": 20,
+      "sdk_action": "ACTION6",
+      "sdk_data": {
+        "x": 20,
+        "y": 20
+      },
+      "raw_returned_frames": 1,
+      "collapsed_states_including_before": 2,
+      "baseline_helper_summary": null,
+      "independently_counted_transient_pixels": 0,
+      "transient_bbox_inclusive_rowcol": null,
+      "transient_cells_rowcol": [],
+      "state": "NOT_FINISHED",
+      "levels_completed": 0,
+      "final_changed_pixels_vs_before": 1,
+      "gameplay_changed_pixels_excluding4border": 0,
+      "changed_pixels_each_collapsed_transition": [
+        1
+      ],
+      "raw_frame_hashes_int8": [
+        "927a1bc8f2378744056869890e15c9c19f3bb330772f16bf75804ca1a30ecc82"
+      ],
+      "final_frame_matches005_saved_board": true,
+      "original_event_line": 7,
+      "baseline_animation_timeline": {
+        "error": "No animation is available: the last executed action returned a single frame."
+      }
+    }
+  ],
+  "interpretation_limits": [
+    "Saved005 boards contain only action endpoints, not intermediate chains; matching endpoints does not restore historical intermediate frames or prove hidden internal state equivalence.",
+    "Replay uses a separately initialized seed0 public environment;005 did not record an explicit environment seed here.",
+    "Positive transient counts validate observational information that final frame differencing omits, not a game-specific winning rule or a score improvement."
+  ]
+}
