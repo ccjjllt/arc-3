@@ -83,6 +83,11 @@ def run_arm(args: argparse.Namespace) -> int:
     }
     metadata_path = job_dir / "arm-metadata.json"
     patch = None
+    transient_patch = None
+    program_patch = None
+    animation_patch = None
+    current_data_patch = None
+    timing_patch = None
     bm = None
     exit_code = 0
     _write_json(metadata_path, metadata)
@@ -110,6 +115,8 @@ def run_arm(args: argparse.Namespace) -> int:
         import arc_agi
         import taaf.game_api
         from arc3_research.goal_evidence import install_goal_evidence
+        from arc3_research.transient_history import install_transient_history
+        from arc3_research.program_state import install_program_state
 
         env_dir = Path(os.environ.get(
             "ARC3_RESEARCH_ENV_DIR",
@@ -155,6 +162,18 @@ def run_arm(args: argparse.Namespace) -> int:
         bm.games = [taaf.game_api.GameAPI(env_name=game_id, arcade_spec=spec)
                     for game_id in ids]
         patch = install_goal_evidence(enabled=args.arm == "goal_evidence")
+        transient_patch = install_transient_history(enabled=args.arm == "transient_history")
+        program_patch = install_program_state(enabled=args.arm == "program_state")
+        if args.arm == "retrievable_animation":
+            # The reference arm never imports or installs this intervention.
+            from arc3_research.retrievable_animation import install_retrievable_animation
+            animation_patch = install_retrievable_animation()
+        if args.arm == "current_data":
+            from arc3_research.current_data import install_current_data
+            current_data_patch = install_current_data()
+        if getattr(args, "inference_timing", False):
+            from arc3_research.inference_timing import install_inference_timing
+            timing_patch = install_inference_timing()
         git_status = bundle_dir / "git_status.txt"
         if git_status.is_file():
             (job_dir / "git_status.txt").write_bytes(git_status.read_bytes())
@@ -180,12 +199,27 @@ def run_arm(args: argparse.Namespace) -> int:
             "source_sha256": {
                 "run_arm.py": _sha256(Path(__file__)),
                 "goal_evidence.py": _sha256(Path(__file__).with_name("goal_evidence.py")),
+                "transient_history.py": _sha256(Path(__file__).with_name("transient_history.py")),
+                "program_state.py": _sha256(Path(__file__).with_name("program_state.py")),
                 "benchmark_initial.pkl": _sha256(bundle_dir / "benchmark_initial.pkl"),
                 "tool_agent.py": _sha256(bundle_dir / "src/ARC3-Inference/inference/agent/tool_agent.py"),
             },
             "environment": relevant_env,
             "public_environment_dir": str(env_dir),
         })
+        if animation_patch is not None:
+            metadata["source_sha256"]["retrievable_animation.py"] = _sha256(
+                Path(__file__).with_name("retrievable_animation.py"))
+            metadata["retrievable_animation"] = animation_patch.snapshot()
+        if current_data_patch is not None:
+            metadata["source_sha256"]["current_data.py"] = _sha256(
+                Path(__file__).with_name("current_data.py"))
+            metadata["current_data"] = current_data_patch.snapshot()
+        metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
+        if timing_patch is not None:
+            metadata["source_sha256"]["inference_timing.py"] = _sha256(
+                Path(__file__).with_name("inference_timing.py"))
+            metadata["inference_timing"] = timing_patch.snapshot()
 
         async def play() -> None:
             loop = asyncio.get_running_loop()
@@ -235,6 +269,12 @@ def run_arm(args: argparse.Namespace) -> int:
             } for run in runs]
         if patch is not None:
             _write_json(job_dir / "goal-evidence.json", patch.snapshot())
+        if transient_patch is not None:
+            _write_json(job_dir / "transient-history.json", transient_patch.snapshot())
+        if program_patch is not None:
+            _write_json(job_dir / "program-state.json", program_patch.snapshot())
+        if animation_patch is not None:
+            _write_json(job_dir / "retrievable-animation.json", animation_patch.snapshot())
         # TAAF shutdown(wait=False) can return before cancelled workers leave.
         # Briefly allow completed workers to exit, but never wait without a cap.
         join_end = time.monotonic() + 2.0
@@ -250,6 +290,23 @@ def run_arm(args: argparse.Namespace) -> int:
             "forced_cpu_process_exit": bool(live),
             "exit_code": exit_code,
         })
+        if timing_patch is not None:
+            try:
+                timing = timing_patch.snapshot()
+                timing["snapshot_after_worker_join"] = True
+                timing["lingering_worker_threads"] = live
+                _write_json(job_dir / "inference-timing.json", timing)
+            except Exception as exc:
+                # A diagnostic export failure must not rewrite solver outcome.
+                metadata["inference_timing_export_error"] = f"{type(exc).__name__}: {exc}"
+        if current_data_patch is not None:
+            try:
+                data = current_data_patch.snapshot()
+                data["snapshot_after_worker_join"] = True
+                data["lingering_worker_threads"] = live
+                _write_json(job_dir / "current-data.json", data)
+            except Exception as exc:
+                metadata["current_data_export_error"] = f"{type(exc).__name__}: {exc}"
         _write_json(metadata_path, metadata)
         _stage("arm_finished", arm=args.arm, status=metadata["status"],
                wall_seconds=metadata["wall_seconds"], exit_code=exit_code,
@@ -266,13 +323,17 @@ def run_arm(args: argparse.Namespace) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--arm", required=True, choices=("baseline", "goal_evidence"))
+    parser.add_argument("--arm", required=True,
+                        choices=("baseline", "goal_evidence", "transient_history", "program_state",
+                                 "retrievable_animation", "current_data"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")
     parser.add_argument("--game-list", required=True,
                         help="Comma-separated prefixes, or JSON file with an array/game_ids.")
     parser.add_argument("--budget-seconds", required=True, type=int)
+    parser.add_argument("--inference-timing", action="store_true",
+                        help="Record passive request/gate timing in both confirmation arms.")
     return run_arm(parser.parse_args())
 
 
