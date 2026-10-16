@@ -1,0 +1,5230 @@
+{
+  "experiment": "006-transient-history",
+  "recorded_at": "2026-10-11T12:31:25.252231+08:00",
+  "review_status": "diagnostics_complete_selected_requests_and_behaviors_reviewed",
+  "sources": [
+    {
+      "path": "runs/006-transient-history/baseline/transient-history.json",
+      "sha256": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665"
+    },
+    {
+      "path": "runs/006-transient-history/baseline/benchmark.json",
+      "sha256": "97ac44dcd8456cd6d3d743f413d6aff71f5474889eeba075e325e07240177c8a"
+    },
+    {
+      "path": "runs/006-transient-history/baseline/arm-metadata.json",
+      "sha256": "38b63b67ccae43cfe58c1dd4778a193233a055bee411741565da2832cff58a58"
+    },
+    {
+      "path": "runs/006-transient-history/transient_history/transient-history.json",
+      "sha256": "776e873ac767a769ac03788ad3cc5df43f80db3bb889d63395fa0225d85d08fb"
+    },
+    {
+      "path": "runs/006-transient-history/transient_history/benchmark.json",
+      "sha256": "98beedd62fcda0799593c31b4732e4c69295532530642220b34d6bdf11430976"
+    },
+    {
+      "path": "runs/006-transient-history/transient_history/arm-metadata.json",
+      "sha256": "a50ce61bdc501df65b308d92897759765a42c3e03f56acab644f75dedc1ea439"
+    }
+  ],
+  "arm_totals": {
+    "baseline": {
+      "intervention": "transient-history-v1",
+      "enabled": false,
+      "max_events_per_call": 4,
+      "max_added_chars_per_call": 1600,
+      "calls_observed": 0,
+      "calls_with_attachment": 0,
+      "new_executed_actions": 0,
+      "captured_transient_events": 0,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "filtered_reasons": {}
+    },
+    "transient_history": {
+      "intervention": "transient-history-v1",
+      "enabled": true,
+      "max_events_per_call": 4,
+      "max_added_chars_per_call": 1600,
+      "calls_observed": 1016,
+      "calls_with_attachment": 101,
+      "new_executed_actions": 2065,
+      "captured_transient_events": 640,
+      "eligible_earlier_events": 335,
+      "attached_events": 246,
+      "omitted_events": 89,
+      "added_chars": 95100,
+      "filtered_reasons": {
+        "latest_action_already_has_baseline_channel": 229,
+        "at_or_before_terminal_reset_boundary": 76
+      }
+    }
+  },
+  "diagnostic_audit": {
+    "issues": [],
+    "attached_event_count": 246,
+    "all_attached_action_numbers_strictly_inside_call_step_range": true,
+    "all_attached_levels_match_before_and_after": true,
+    "no_repeated_attached_game_action": true,
+    "chars_per_attached_call": {
+      "min": 598,
+      "median": 860,
+      "max": 1346,
+      "mean": 941.5841584158416
+    },
+    "status_counts": {
+      "no_new_executed_actions": 514,
+      "no_eligible_earlier_transients": 401,
+      "attached": 101
+    },
+    "benchmark_actions_b": 2079,
+    "hook_new_actions_b": 2065,
+    "benchmark_resets_b": 14,
+    "all_per_game_action_count_gaps_equal_resets": true
+  },
+  "by_game": [
+    {
+      "game_id": "ar25-0c556536",
+      "run_ref": "ar25-0c556536_p0",
+      "calls_observed": 104,
+      "statuses": {
+        "no_new_executed_actions": 62,
+        "no_eligible_earlier_transients": 42
+      },
+      "calls_with_attachment": 0,
+      "max_added_chars": 0,
+      "by_level": {
+        "2": {
+          "captured_transient_events": 1
+        },
+        "3": {
+          "captured_transient_events": 1
+        },
+        "4": {
+          "captured_transient_events": 1
+        },
+        "5": {
+          "captured_transient_events": 1
+        },
+        "6": {
+          "captured_transient_events": 1
+        },
+        "7": {
+          "captured_transient_events": 1
+        }
+      },
+      "first_attachment": null,
+      "new_executed_actions": 273,
+      "captured_transient_events": 6,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 8,
+          "number_of_levels": 8,
+          "final_score": 100.0,
+          "actions_per_level": [
+            21,
+            31,
+            41,
+            30,
+            33,
+            62,
+            48,
+            48
+          ],
+          "solver_note": "tokens=153068"
+        },
+        "transient_history": {
+          "levels_completed": 6,
+          "number_of_levels": 8,
+          "final_score": 58.333333333333336,
+          "actions_per_level": [
+            20,
+            17,
+            48,
+            35,
+            39,
+            59,
+            55,
+            0
+          ],
+          "solver_note": "tokens=161515"
+        }
+      },
+      "benchmark_actions_b": 273,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "run_ref": "bp35-0a0ad940_p0",
+      "calls_observed": 90,
+      "statuses": {
+        "no_new_executed_actions": 59,
+        "no_eligible_earlier_transients": 14,
+        "attached": 17
+      },
+      "calls_with_attachment": 17,
+      "max_added_chars": 1342,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 34,
+          "eligible_earlier_events": 24,
+          "attached_calls": 5,
+          "attached_events": 14,
+          "omitted_events": 10,
+          "added_chars": 5091
+        },
+        "2": {
+          "captured_transient_events": 50,
+          "eligible_earlier_events": 32,
+          "attached_calls": 12,
+          "attached_events": 30,
+          "omitted_events": 2,
+          "added_chars": 11406
+        }
+      },
+      "first_attachment": {
+        "before_step": 4,
+        "after_step": 8,
+        "before_level": 1,
+        "after_level": 1,
+        "attached_metadata": [
+          {
+            "action_num": 5,
+            "level": 1,
+            "action": "RIGHT",
+            "frames": 4,
+            "transient_pixels": 29,
+            "bbox": [
+              37,
+              27,
+              41,
+              34
+            ]
+          },
+          {
+            "action_num": 6,
+            "level": 1,
+            "action": "RIGHT",
+            "frames": 4,
+            "transient_pixels": 29,
+            "bbox": [
+              37,
+              33,
+              41,
+              40
+            ]
+          },
+          {
+            "action_num": 7,
+            "level": 1,
+            "action": "RIGHT",
+            "frames": 22,
+            "transient_pixels": 1844,
+            "bbox": [
+              0,
+              1,
+              62,
+              62
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 88,
+      "captured_transient_events": 84,
+      "eligible_earlier_events": 56,
+      "attached_events": 44,
+      "omitted_events": 12,
+      "added_chars": 16497,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 1,
+          "number_of_levels": 9,
+          "final_score": 2.2222222222222223,
+          "actions_per_level": [
+            21,
+            30,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=196555"
+        },
+        "transient_history": {
+          "levels_completed": 1,
+          "number_of_levels": 9,
+          "final_score": 0.756172839506173,
+          "actions_per_level": [
+            36,
+            53,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=229974"
+        }
+      },
+      "benchmark_actions_b": 89,
+      "benchmark_resets_b": 1,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "run_ref": "ft09-0d8bbf25_p0",
+      "calls_observed": 39,
+      "statuses": {
+        "no_new_executed_actions": 23,
+        "no_eligible_earlier_transients": 16
+      },
+      "calls_with_attachment": 0,
+      "max_added_chars": 0,
+      "by_level": {
+        "2": {
+          "captured_transient_events": 1
+        },
+        "3": {
+          "captured_transient_events": 1
+        },
+        "4": {
+          "captured_transient_events": 1
+        },
+        "5": {
+          "captured_transient_events": 1
+        },
+        "6": {
+          "captured_transient_events": 1
+        }
+      },
+      "first_attachment": null,
+      "new_executed_actions": 79,
+      "captured_transient_events": 5,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 6,
+          "number_of_levels": 6,
+          "final_score": 95.07319952774499,
+          "actions_per_level": [
+            4,
+            7,
+            14,
+            19,
+            24,
+            55
+          ],
+          "solver_note": "tokens=81138"
+        },
+        "transient_history": {
+          "levels_completed": 6,
+          "number_of_levels": 6,
+          "final_score": 100.0,
+          "actions_per_level": [
+            4,
+            7,
+            14,
+            16,
+            25,
+            13
+          ],
+          "solver_note": "tokens=54330"
+        }
+      },
+      "benchmark_actions_b": 79,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "run_ref": "g50t-5849a774_p0",
+      "calls_observed": 61,
+      "statuses": {
+        "no_new_executed_actions": 35,
+        "no_eligible_earlier_transients": 14,
+        "attached": 12
+      },
+      "calls_with_attachment": 12,
+      "max_added_chars": 1272,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 60,
+          "eligible_earlier_events": 44,
+          "attached_calls": 12,
+          "attached_events": 33,
+          "omitted_events": 11,
+          "added_chars": 11880
+        }
+      },
+      "first_attachment": {
+        "before_step": 5,
+        "after_step": 8,
+        "before_level": 1,
+        "after_level": 1,
+        "attached_metadata": [
+          {
+            "action_num": 6,
+            "level": 1,
+            "action": "RIGHT",
+            "frames": 9,
+            "transient_pixels": 33,
+            "bbox": [
+              8,
+              14,
+              12,
+              22
+            ]
+          },
+          {
+            "action_num": 7,
+            "level": 1,
+            "action": "RIGHT",
+            "frames": 8,
+            "transient_pixels": 33,
+            "bbox": [
+              8,
+              20,
+              12,
+              28
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 88,
+      "captured_transient_events": 60,
+      "eligible_earlier_events": 44,
+      "attached_events": 33,
+      "omitted_events": 11,
+      "added_chars": 11880,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 3,
+          "number_of_levels": 7,
+          "final_score": 21.428571428571427,
+          "actions_per_level": [
+            47,
+            67,
+            65,
+            12,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=223166"
+        },
+        "transient_history": {
+          "levels_completed": 0,
+          "number_of_levels": 7,
+          "final_score": 0.0,
+          "actions_per_level": [
+            88,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=189688"
+        }
+      },
+      "benchmark_actions_b": 88,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "run_ref": "lf52-271a04aa_p0",
+      "calls_observed": 68,
+      "statuses": {
+        "no_new_executed_actions": 25,
+        "no_eligible_earlier_transients": 21,
+        "attached": 22
+      },
+      "calls_with_attachment": 22,
+      "max_added_chars": 1345,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 7,
+          "eligible_earlier_events": 1,
+          "attached_calls": 1,
+          "attached_events": 1,
+          "omitted_events": 0,
+          "added_chars": 614
+        },
+        "2": {
+          "captured_transient_events": 144,
+          "eligible_earlier_events": 122,
+          "attached_calls": 21,
+          "attached_events": 64,
+          "omitted_events": 58,
+          "added_chars": 22907
+        }
+      },
+      "first_attachment": {
+        "before_step": 2,
+        "after_step": 4,
+        "before_level": 1,
+        "after_level": 1,
+        "attached_metadata": [
+          {
+            "action_num": 3,
+            "level": 1,
+            "action": "MOUSE(row=20, col=31)",
+            "frames": 2,
+            "transient_pixels": 4,
+            "bbox": [
+              19,
+              42,
+              20,
+              43
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 169,
+      "captured_transient_events": 151,
+      "eligible_earlier_events": 123,
+      "attached_events": 65,
+      "omitted_events": 58,
+      "added_chars": 23521,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 3,
+          "number_of_levels": 10,
+          "final_score": 9.99318228387281,
+          "actions_per_level": [
+            9,
+            121,
+            54,
+            16,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=184726"
+        },
+        "transient_history": {
+          "levels_completed": 1,
+          "number_of_levels": 10,
+          "final_score": 1.8181818181818181,
+          "actions_per_level": [
+            8,
+            161,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=136358"
+        }
+      },
+      "benchmark_actions_b": 169,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "run_ref": "m0r0-492f87ba_p0",
+      "calls_observed": 95,
+      "statuses": {
+        "no_new_executed_actions": 60,
+        "no_eligible_earlier_transients": 35
+      },
+      "calls_with_attachment": 0,
+      "max_added_chars": 0,
+      "by_level": {
+        "2": {
+          "captured_transient_events": 2
+        },
+        "3": {
+          "captured_transient_events": 1
+        },
+        "4": {
+          "captured_transient_events": 3
+        }
+      },
+      "first_attachment": null,
+      "new_executed_actions": 197,
+      "captured_transient_events": 6,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 1,
+          "number_of_levels": 6,
+          "final_score": 0.07826930903853979,
+          "actions_per_level": [
+            234,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=161248"
+        },
+        "transient_history": {
+          "levels_completed": 3,
+          "number_of_levels": 6,
+          "final_score": 28.57142857142857,
+          "actions_per_level": [
+            29,
+            58,
+            88,
+            22,
+            0,
+            0
+          ],
+          "solver_note": "tokens=167906"
+        }
+      },
+      "benchmark_actions_b": 197,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "run_ref": "sc25-635fd71a_p0",
+      "calls_observed": 124,
+      "statuses": {
+        "no_new_executed_actions": 43,
+        "no_eligible_earlier_transients": 76,
+        "attached": 5
+      },
+      "calls_with_attachment": 5,
+      "max_added_chars": 858,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 11,
+          "eligible_earlier_events": 2,
+          "attached_calls": 1,
+          "attached_events": 2,
+          "omitted_events": 0,
+          "added_chars": 858
+        },
+        "2": {
+          "captured_transient_events": 2
+        },
+        "3": {
+          "captured_transient_events": 4
+        },
+        "4": {
+          "captured_transient_events": 13,
+          "eligible_earlier_events": 4,
+          "attached_calls": 4,
+          "attached_events": 4,
+          "omitted_events": 0,
+          "added_chars": 2472
+        },
+        "5": {
+          "captured_transient_events": 19
+        }
+      },
+      "first_attachment": {
+        "before_step": 32,
+        "after_step": 35,
+        "before_level": 1,
+        "after_level": 1,
+        "attached_metadata": [
+          {
+            "action_num": 33,
+            "level": 1,
+            "action": "MOUSE(row=20, col=14)",
+            "frames": 4,
+            "transient_pixels": 81,
+            "bbox": [
+              49,
+              24,
+              61,
+              36
+            ]
+          },
+          {
+            "action_num": 34,
+            "level": 1,
+            "action": "MOUSE(row=19, col=25)",
+            "frames": 4,
+            "transient_pixels": 81,
+            "bbox": [
+              49,
+              24,
+              61,
+              36
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 377,
+      "captured_transient_events": 49,
+      "eligible_earlier_events": 6,
+      "attached_events": 6,
+      "omitted_events": 0,
+      "added_chars": 3330,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 6,
+          "number_of_levels": 6,
+          "final_score": 81.57086646803586,
+          "actions_per_level": [
+            27,
+            5,
+            39,
+            64,
+            99,
+            107
+          ],
+          "solver_note": "tokens=189832"
+        },
+        "transient_history": {
+          "levels_completed": 4,
+          "number_of_levels": 6,
+          "final_score": 32.91870781381271,
+          "actions_per_level": [
+            54,
+            5,
+            33,
+            143,
+            147,
+            0
+          ],
+          "solver_note": "tokens=202502"
+        }
+      },
+      "benchmark_actions_b": 382,
+      "benchmark_resets_b": 5,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "run_ref": "sk48-d8078629_p0",
+      "calls_observed": 87,
+      "statuses": {
+        "no_new_executed_actions": 55,
+        "no_eligible_earlier_transients": 18,
+        "attached": 14
+      },
+      "calls_with_attachment": 14,
+      "max_added_chars": 1280,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 39,
+          "eligible_earlier_events": 21,
+          "attached_calls": 6,
+          "attached_events": 16,
+          "omitted_events": 5,
+          "added_chars": 5842
+        },
+        "2": {
+          "captured_transient_events": 30,
+          "eligible_earlier_events": 3,
+          "attached_calls": 1,
+          "attached_events": 3,
+          "omitted_events": 0,
+          "added_chars": 1042
+        },
+        "3": {
+          "captured_transient_events": 33,
+          "eligible_earlier_events": 26,
+          "attached_calls": 7,
+          "attached_events": 23,
+          "omitted_events": 3,
+          "added_chars": 7786
+        }
+      },
+      "first_attachment": {
+        "before_step": 8,
+        "after_step": 11,
+        "before_level": 1,
+        "after_level": 1,
+        "attached_metadata": [
+          {
+            "action_num": 9,
+            "level": 1,
+            "action": "LEFT",
+            "frames": 2,
+            "transient_pixels": 10,
+            "bbox": [
+              25,
+              28,
+              28,
+              31
+            ]
+          },
+          {
+            "action_num": 10,
+            "level": 1,
+            "action": "LEFT",
+            "frames": 2,
+            "transient_pixels": 10,
+            "bbox": [
+              25,
+              22,
+              28,
+              25
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 151,
+      "captured_transient_events": 102,
+      "eligible_earlier_events": 50,
+      "attached_events": 42,
+      "omitted_events": 8,
+      "added_chars": 14670,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 3,
+          "number_of_levels": 8,
+          "final_score": 16.666666666666664,
+          "actions_per_level": [
+            50,
+            147,
+            108,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=217141"
+        },
+        "transient_history": {
+          "levels_completed": 2,
+          "number_of_levels": 8,
+          "final_score": 8.333333333333332,
+          "actions_per_level": [
+            56,
+            38,
+            57,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=198802"
+        }
+      },
+      "benchmark_actions_b": 151,
+      "benchmark_resets_b": 0,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "run_ref": "sp80-589a99af_p0",
+      "calls_observed": 78,
+      "statuses": {
+        "no_new_executed_actions": 47,
+        "no_eligible_earlier_transients": 31
+      },
+      "calls_with_attachment": 0,
+      "max_added_chars": 0,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 2
+        },
+        "2": {
+          "captured_transient_events": 11
+        }
+      },
+      "first_attachment": null,
+      "new_executed_actions": 105,
+      "captured_transient_events": 13,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 1,
+          "number_of_levels": 6,
+          "final_score": 4.761904761904762,
+          "actions_per_level": [
+            11,
+            105,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=194589"
+        },
+        "transient_history": {
+          "levels_completed": 1,
+          "number_of_levels": 6,
+          "final_score": 4.761904761904762,
+          "actions_per_level": [
+            17,
+            90,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=233373"
+        }
+      },
+      "benchmark_actions_b": 107,
+      "benchmark_resets_b": 2,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "run_ref": "su15-1944f8ab_p0",
+      "calls_observed": 103,
+      "statuses": {
+        "no_new_executed_actions": 31,
+        "no_eligible_earlier_transients": 44,
+        "attached": 28
+      },
+      "calls_with_attachment": 28,
+      "max_added_chars": 1346,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 9
+        },
+        "2": {
+          "captured_transient_events": 53,
+          "eligible_earlier_events": 21,
+          "attached_calls": 12,
+          "attached_events": 21,
+          "omitted_events": 0,
+          "added_chars": 9586
+        },
+        "3": {
+          "captured_transient_events": 22,
+          "eligible_earlier_events": 11,
+          "attached_calls": 5,
+          "attached_events": 11,
+          "omitted_events": 0,
+          "added_chars": 4542
+        },
+        "4": {
+          "captured_transient_events": 43,
+          "eligible_earlier_events": 21,
+          "attached_calls": 11,
+          "attached_events": 21,
+          "omitted_events": 0,
+          "added_chars": 9224
+        }
+      },
+      "first_attachment": {
+        "before_step": 13,
+        "after_step": 15,
+        "before_level": 2,
+        "after_level": 2,
+        "attached_metadata": [
+          {
+            "action_num": 14,
+            "level": 2,
+            "action": "MOUSE(row=53, col=12)",
+            "frames": 5,
+            "transient_pixels": 112,
+            "bbox": [
+              45,
+              4,
+              61,
+              20
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 159,
+      "captured_transient_events": 127,
+      "eligible_earlier_events": 53,
+      "attached_events": 53,
+      "omitted_events": 0,
+      "added_chars": 23352,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 2,
+          "number_of_levels": 9,
+          "final_score": 5.147291092745638,
+          "actions_per_level": [
+            15,
+            55,
+            13,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=214618"
+        },
+        "transient_history": {
+          "levels_completed": 3,
+          "number_of_levels": 9,
+          "final_score": 12.813957759412304,
+          "actions_per_level": [
+            10,
+            55,
+            22,
+            75,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=220326"
+        }
+      },
+      "benchmark_actions_b": 162,
+      "benchmark_resets_b": 3,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "run_ref": "tn36-ef4dde99_p0",
+      "calls_observed": 100,
+      "statuses": {
+        "no_new_executed_actions": 51,
+        "no_eligible_earlier_transients": 46,
+        "attached": 3
+      },
+      "calls_with_attachment": 3,
+      "max_added_chars": 617,
+      "by_level": {
+        "1": {
+          "captured_transient_events": 3
+        },
+        "2": {
+          "captured_transient_events": 19,
+          "eligible_earlier_events": 1,
+          "attached_calls": 1,
+          "attached_events": 1,
+          "omitted_events": 0,
+          "added_chars": 616
+        },
+        "3": {
+          "captured_transient_events": 11,
+          "eligible_earlier_events": 1,
+          "attached_calls": 1,
+          "attached_events": 1,
+          "omitted_events": 0,
+          "added_chars": 617
+        },
+        "4": {
+          "captured_transient_events": 3,
+          "eligible_earlier_events": 1,
+          "attached_calls": 1,
+          "attached_events": 1,
+          "omitted_events": 0,
+          "added_chars": 617
+        }
+      },
+      "first_attachment": {
+        "before_step": 32,
+        "after_step": 34,
+        "before_level": 2,
+        "after_level": 2,
+        "attached_metadata": [
+          {
+            "action_num": 33,
+            "level": 2,
+            "action": "MOUSE(row=58, col=10)",
+            "frames": 6,
+            "transient_pixels": 350,
+            "bbox": [
+              16,
+              6,
+              50,
+              25
+            ]
+          }
+        ]
+      },
+      "new_executed_actions": 154,
+      "captured_transient_events": 36,
+      "eligible_earlier_events": 3,
+      "attached_events": 3,
+      "omitted_events": 0,
+      "added_chars": 1850,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 1,
+          "number_of_levels": 7,
+          "final_score": 1.4628571428571429,
+          "actions_per_level": [
+            50,
+            128,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=205239"
+        },
+        "transient_history": {
+          "levels_completed": 3,
+          "number_of_levels": 7,
+          "final_score": 12.52981137053159,
+          "actions_per_level": [
+            15,
+            76,
+            60,
+            4,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=204998"
+        }
+      },
+      "benchmark_actions_b": 155,
+      "benchmark_resets_b": 1,
+      "action_count_gap_equals_resets": true
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "run_ref": "wa30-ee6fef47_p0",
+      "calls_observed": 67,
+      "statuses": {
+        "no_new_executed_actions": 23,
+        "no_eligible_earlier_transients": 44
+      },
+      "calls_with_attachment": 0,
+      "max_added_chars": 0,
+      "by_level": {
+        "2": {
+          "captured_transient_events": 1
+        }
+      },
+      "first_attachment": null,
+      "new_executed_actions": 225,
+      "captured_transient_events": 1,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "omitted_events": 0,
+      "added_chars": 0,
+      "outcomes": {
+        "baseline": {
+          "levels_completed": 1,
+          "number_of_levels": 9,
+          "final_score": 2.2222222222222223,
+          "actions_per_level": [
+            58,
+            101,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=184880"
+        },
+        "transient_history": {
+          "levels_completed": 1,
+          "number_of_levels": 9,
+          "final_score": 2.2222222222222223,
+          "actions_per_level": [
+            39,
+            188,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=210194"
+        }
+      },
+      "benchmark_actions_b": 227,
+      "benchmark_resets_b": 2,
+      "action_count_gap_equals_resets": true
+    }
+  ],
+  "request_payload_audit": {
+    "scope": "B tn36, lf52, su15, sc25; other three games with attachments not inspected at request level",
+    "deduplication": "Stable tool_call_id, counting only first real request occurrence; repeated request history is not a new event.",
+    "unique_payload_calls": 58,
+    "unique_attached_events": 127,
+    "all_payload_calls_followed_by_successful_tool_calls_response": true,
+    "all_event_metadata_and_omissions_exactly_match_diagnostics": true,
+    "all_event_action_and_level_bindings_match": true,
+    "issues": [],
+    "by_game": {
+      "tn36": {
+        "path": "runs/006-transient-history/transient_history/tn36-ef4dde99_p0_requests.jsonl",
+        "sha256": "43fa5c4a16f9275721a3786f4439d66f815b8e9277a47817be37496ad78d54f6",
+        "events_path": "runs/006-transient-history/transient_history/artifacts/tn36-ef4dde99_p0_events.jsonl",
+        "events_sha256": "5acf25b9e8e49244a5af240e8b02475d1d5cbc804f61c8067033e79c698531b0",
+        "unique_payload_calls": 3,
+        "unique_attached_events": 3,
+        "raw_request_payload_occurrences_including_history_replay": 47,
+        "diagnostic_attachment_calls": 3,
+        "diagnostic_attached_events": 3,
+        "receipts": [
+          {
+            "request_source_line": 53,
+            "source_message_index": 69,
+            "tool_call_id": "call_fb1eb64f56ab490b8f7bd9a5",
+            "events": [
+              {
+                "action_num": 33,
+                "level": 2,
+                "action": "MOUSE(row=58, col=10)",
+                "frames": 6,
+                "transient_pixels": 350,
+                "bbox": [
+                  16,
+                  6,
+                  50,
+                  25
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 54,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 33,
+                "event_source_line": 50,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 32,
+            "diagnostic_after_step": 34,
+            "diagnostic_added_chars": 616
+          },
+          {
+            "request_source_line": 173,
+            "source_message_index": 86,
+            "tool_call_id": "call_83564a47cbe64a77862a092f",
+            "events": [
+              {
+                "action_num": 124,
+                "level": 3,
+                "action": "MOUSE(row=58, col=28)",
+                "frames": 6,
+                "transient_pixels": 364,
+                "bbox": [
+                  16,
+                  6,
+                  50,
+                  25
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 174,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 124,
+                "event_source_line": 185,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 123,
+            "diagnostic_after_step": 125,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 193,
+            "source_message_index": 66,
+            "tool_call_id": "call_2e927b884bfd4e9f89f9d921",
+            "events": [
+              {
+                "action_num": 152,
+                "level": 4,
+                "action": "MOUSE(row=58, col=15)",
+                "frames": 5,
+                "transient_pixels": 231,
+                "bbox": [
+                  32,
+                  9,
+                  50,
+                  23
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 194,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 152,
+                "event_source_line": 222,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 151,
+            "diagnostic_after_step": 153,
+            "diagnostic_added_chars": 617
+          }
+        ],
+        "diagnostic_added_chars": 1850
+      },
+      "lf52": {
+        "path": "runs/006-transient-history/transient_history/lf52-271a04aa_p0_requests.jsonl",
+        "sha256": "7614b491fd6cb2c09f4ecde09d9a3a98579eee3424814bc76409ccbbb5fe62c6",
+        "events_path": "runs/006-transient-history/transient_history/artifacts/lf52-271a04aa_p0_events.jsonl",
+        "events_sha256": "154bd9e489b5d4a6acab67dcf2d1a0b4bfdf3ca8180384718bdd1dda3ee7b60a",
+        "unique_payload_calls": 22,
+        "unique_attached_events": 65,
+        "raw_request_payload_occurrences_including_history_replay": 395,
+        "diagnostic_attachment_calls": 22,
+        "diagnostic_attached_events": 65,
+        "receipts": [
+          {
+            "request_source_line": 15,
+            "source_message_index": 17,
+            "tool_call_id": "call_e95e6a78b3784d8b83e2a750",
+            "events": [
+              {
+                "action_num": 3,
+                "level": 1,
+                "action": "MOUSE(row=20, col=31)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  19,
+                  42,
+                  20,
+                  43
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 16,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 3,
+                "event_source_line": 6,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 2,
+            "diagnostic_after_step": 4,
+            "diagnostic_added_chars": 614
+          },
+          {
+            "request_source_line": 21,
+            "source_message_index": 25,
+            "tool_call_id": "call_7b5eb3ee843a46e1b1fce3f5",
+            "events": [
+              {
+                "action_num": 9,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 22,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 9,
+                "event_source_line": 14,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 8,
+            "diagnostic_after_step": 10,
+            "diagnostic_added_chars": 614
+          },
+          {
+            "request_source_line": 23,
+            "source_message_index": 28,
+            "tool_call_id": "call_5618c55e57304db4be6458b0",
+            "events": [
+              {
+                "action_num": 11,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  38,
+                  17,
+                  39
+                ]
+              },
+              {
+                "action_num": 12,
+                "level": 2,
+                "action": "MOUSE(row=17, col=39)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  27,
+                  18,
+                  40
+                ]
+              },
+              {
+                "action_num": 13,
+                "level": 2,
+                "action": "MOUSE(row=17, col=45)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  32,
+                  17,
+                  33
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 24,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 11,
+                "event_source_line": 17,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 12,
+                "event_source_line": 18,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 13,
+                "event_source_line": 19,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 10,
+            "diagnostic_after_step": 14,
+            "diagnostic_added_chars": 1098
+          },
+          {
+            "request_source_line": 39,
+            "source_message_index": 49,
+            "tool_call_id": "call_71b92396d6ec49dfa9531592",
+            "events": [
+              {
+                "action_num": 19,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 20,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 21,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  38,
+                  17,
+                  39
+                ]
+              },
+              {
+                "action_num": 22,
+                "level": 2,
+                "action": "MOUSE(row=17, col=39)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  27,
+                  18,
+                  40
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 40,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 19,
+                "event_source_line": 30,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 20,
+                "event_source_line": 31,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 21,
+                "event_source_line": 32,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 22,
+                "event_source_line": 33,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 18,
+            "diagnostic_after_step": 23,
+            "diagnostic_added_chars": 1340
+          },
+          {
+            "request_source_line": 47,
+            "source_message_index": 60,
+            "tool_call_id": "call_77eeb21a5eb346b6bab51bb5",
+            "events": [
+              {
+                "action_num": 24,
+                "level": 2,
+                "action": "MOUSE(row=17, col=45)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  32,
+                  17,
+                  33
+                ]
+              },
+              {
+                "action_num": 25,
+                "level": 2,
+                "action": "MOUSE(row=17, col=33)",
+                "frames": 19,
+                "transient_pixels": 175,
+                "bbox": [
+                  12,
+                  2,
+                  63,
+                  48
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 48,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 24,
+                "event_source_line": 38,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 25,
+                "event_source_line": 39,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 23,
+            "diagnostic_after_step": 26,
+            "diagnostic_added_chars": 858
+          },
+          {
+            "request_source_line": 57,
+            "source_message_index": 73,
+            "tool_call_id": "call_f15291d5a6a347fdb55e243f",
+            "events": [
+              {
+                "action_num": 28,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3568,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              },
+              {
+                "action_num": 29,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 30,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 31,
+                "level": 2,
+                "action": "MOUSE(row=17, col=33)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  20,
+                  17,
+                  21
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 58,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 28,
+                "event_source_line": 45,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 29,
+                "event_source_line": 46,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 30,
+                "event_source_line": 47,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 31,
+                "event_source_line": 48,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 27,
+            "diagnostic_after_step": 32,
+            "diagnostic_added_chars": 1340
+          },
+          {
+            "request_source_line": 59,
+            "source_message_index": 76,
+            "tool_call_id": "call_3688dd567517461788f62807",
+            "events": [
+              {
+                "action_num": 33,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3568,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              },
+              {
+                "action_num": 34,
+                "level": 2,
+                "action": "MOUSE(row=17, col=21)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  8,
+                  17,
+                  9
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 60,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 33,
+                "event_source_line": 51,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 34,
+                "event_source_line": 52,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 32,
+            "diagnostic_after_step": 35,
+            "diagnostic_added_chars": 855
+          },
+          {
+            "request_source_line": 61,
+            "source_message_index": 79,
+            "tool_call_id": "call_e728f4e3f2de427596358270",
+            "events": [
+              {
+                "action_num": 36,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3568,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              },
+              {
+                "action_num": 37,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  25,
+                  38,
+                  33
+                ]
+              },
+              {
+                "action_num": 38,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  26,
+                  38,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 62,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 36,
+                "event_source_line": 55,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 37,
+                "event_source_line": 56,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 38,
+                "event_source_line": 57,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 35,
+            "diagnostic_after_step": 39,
+            "diagnostic_added_chars": 1067
+          },
+          {
+            "request_source_line": 69,
+            "source_message_index": 90,
+            "tool_call_id": "call_047c18d294d44a178a6eea59",
+            "events": [
+              {
+                "action_num": 40,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  25,
+                  38,
+                  33
+                ]
+              },
+              {
+                "action_num": 41,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  19,
+                  38,
+                  27
+                ]
+              },
+              {
+                "action_num": 42,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 31,
+                "bbox": [
+                  32,
+                  13,
+                  38,
+                  21
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 70,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 40,
+                "event_source_line": 62,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 41,
+                "event_source_line": 63,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 42,
+                "event_source_line": 64,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 39,
+            "diagnostic_after_step": 43,
+            "diagnostic_added_chars": 1049
+          },
+          {
+            "request_source_line": 71,
+            "source_message_index": 93,
+            "tool_call_id": "call_c0711ab155534c3dada4ae5a",
+            "events": [
+              {
+                "action_num": 44,
+                "level": 2,
+                "action": "DOWN",
+                "frames": 3,
+                "transient_pixels": 42,
+                "bbox": [
+                  34,
+                  12,
+                  44,
+                  18
+                ]
+              },
+              {
+                "action_num": 45,
+                "level": 2,
+                "action": "DOWN",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  40,
+                  12,
+                  50,
+                  18
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 72,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 44,
+                "event_source_line": 67,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 45,
+                "event_source_line": 68,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 43,
+            "diagnostic_after_step": 46,
+            "diagnostic_added_chars": 824
+          },
+          {
+            "request_source_line": 73,
+            "source_message_index": 36,
+            "tool_call_id": "call_859fe248781e4ec58a381894",
+            "events": [
+              {
+                "action_num": 47,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 42,
+                "bbox": [
+                  50,
+                  14,
+                  56,
+                  24
+                ]
+              },
+              {
+                "action_num": 48,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  50,
+                  20,
+                  56,
+                  30
+                ]
+              },
+              {
+                "action_num": 49,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  50,
+                  26,
+                  56,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 74,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 47,
+                "event_source_line": 71,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 48,
+                "event_source_line": 72,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 49,
+                "event_source_line": 73,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 46,
+            "diagnostic_after_step": 50,
+            "diagnostic_added_chars": 1052
+          },
+          {
+            "request_source_line": 79,
+            "source_message_index": 45,
+            "tool_call_id": "call_63096ecabb584d0cbf7844cf",
+            "events": [
+              {
+                "action_num": 53,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 54,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 55,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  38,
+                  17,
+                  39
+                ]
+              },
+              {
+                "action_num": 56,
+                "level": 2,
+                "action": "MOUSE(row=17, col=39)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  27,
+                  18,
+                  40
+                ]
+              }
+            ],
+            "omitted_events": 1,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 80,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 53,
+                "event_source_line": 80,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 54,
+                "event_source_line": 81,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 55,
+                "event_source_line": 82,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 56,
+                "event_source_line": 83,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 52,
+            "diagnostic_after_step": 58,
+            "diagnostic_added_chars": 1340
+          },
+          {
+            "request_source_line": 83,
+            "source_message_index": 51,
+            "tool_call_id": "call_7f9a64888bc841179a136286",
+            "events": [
+              {
+                "action_num": 60,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  32,
+                  38,
+                  42
+                ]
+              },
+              {
+                "action_num": 61,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  38,
+                  38,
+                  48
+                ]
+              },
+              {
+                "action_num": 62,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  44,
+                  38,
+                  54
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 84,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 60,
+                "event_source_line": 89,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 61,
+                "event_source_line": 90,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 62,
+                "event_source_line": 91,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 59,
+            "diagnostic_after_step": 63,
+            "diagnostic_added_chars": 1052
+          },
+          {
+            "request_source_line": 87,
+            "source_message_index": 57,
+            "tool_call_id": "call_c5fc19b0f68e4c9ca5ae2013",
+            "events": [
+              {
+                "action_num": 64,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  43,
+                  38,
+                  51
+                ]
+              },
+              {
+                "action_num": 65,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  37,
+                  38,
+                  45
+                ]
+              },
+              {
+                "action_num": 66,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  31,
+                  38,
+                  39
+                ]
+              },
+              {
+                "action_num": 67,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  32,
+                  25,
+                  38,
+                  33
+                ]
+              }
+            ],
+            "omitted_events": 4,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 88,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 64,
+                "event_source_line": 95,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 65,
+                "event_source_line": 96,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 66,
+                "event_source_line": 97,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 67,
+                "event_source_line": 98,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 63,
+            "diagnostic_after_step": 72,
+            "diagnostic_added_chars": 1274
+          },
+          {
+            "request_source_line": 89,
+            "source_message_index": 60,
+            "tool_call_id": "call_426ff884c2ea4d2491560a00",
+            "events": [
+              {
+                "action_num": 73,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 42,
+                "bbox": [
+                  50,
+                  14,
+                  56,
+                  24
+                ]
+              },
+              {
+                "action_num": 74,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  50,
+                  20,
+                  56,
+                  30
+                ]
+              },
+              {
+                "action_num": 75,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  50,
+                  26,
+                  56,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 90,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 73,
+                "event_source_line": 105,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 74,
+                "event_source_line": 106,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 75,
+                "event_source_line": 107,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 72,
+            "diagnostic_after_step": 76,
+            "diagnostic_added_chars": 1052
+          },
+          {
+            "request_source_line": 95,
+            "source_message_index": 69,
+            "tool_call_id": "call_f6f22607a29f46728a1e8874",
+            "events": [
+              {
+                "action_num": 79,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  50,
+                  31,
+                  56,
+                  39
+                ]
+              },
+              {
+                "action_num": 80,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  50,
+                  25,
+                  56,
+                  33
+                ]
+              },
+              {
+                "action_num": 81,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 29,
+                "bbox": [
+                  50,
+                  19,
+                  56,
+                  27
+                ]
+              },
+              {
+                "action_num": 82,
+                "level": 2,
+                "action": "LEFT",
+                "frames": 2,
+                "transient_pixels": 31,
+                "bbox": [
+                  50,
+                  13,
+                  56,
+                  21
+                ]
+              }
+            ],
+            "omitted_events": 5,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 96,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 79,
+                "event_source_line": 114,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 80,
+                "event_source_line": 115,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 81,
+                "event_source_line": 116,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 82,
+                "event_source_line": 117,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 78,
+            "diagnostic_after_step": 88,
+            "diagnostic_added_chars": 1274
+          },
+          {
+            "request_source_line": 97,
+            "source_message_index": 72,
+            "tool_call_id": "call_1512f63820b1429fa7c5c12c",
+            "events": [
+              {
+                "action_num": 89,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 90,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 91,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  38,
+                  17,
+                  39
+                ]
+              },
+              {
+                "action_num": 92,
+                "level": 2,
+                "action": "MOUSE(row=17, col=39)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  27,
+                  18,
+                  40
+                ]
+              }
+            ],
+            "omitted_events": 18,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 98,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 89,
+                "event_source_line": 125,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 90,
+                "event_source_line": 126,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 91,
+                "event_source_line": 127,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 92,
+                "event_source_line": 128,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 88,
+            "diagnostic_after_step": 111,
+            "diagnostic_added_chars": 1341
+          },
+          {
+            "request_source_line": 101,
+            "source_message_index": 78,
+            "tool_call_id": "call_eea6bf9c29754bb3914e7bbd",
+            "events": [
+              {
+                "action_num": 112,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3540,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              },
+              {
+                "action_num": 113,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 114,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 115,
+                "level": 2,
+                "action": "MOUSE(row=17, col=33)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  20,
+                  17,
+                  21
+                ]
+              }
+            ],
+            "omitted_events": 10,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 102,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 112,
+                "event_source_line": 150,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 113,
+                "event_source_line": 151,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 114,
+                "event_source_line": 152,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 115,
+                "event_source_line": 153,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 111,
+            "diagnostic_after_step": 126,
+            "diagnostic_added_chars": 1345
+          },
+          {
+            "request_source_line": 103,
+            "source_message_index": 81,
+            "tool_call_id": "call_cc05f758071f4f77b25229b5",
+            "events": [
+              {
+                "action_num": 127,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3540,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              },
+              {
+                "action_num": 128,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 104,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 127,
+                "event_source_line": 166,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 128,
+                "event_source_line": 167,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 126,
+            "diagnostic_after_step": 129,
+            "diagnostic_added_chars": 859
+          },
+          {
+            "request_source_line": 115,
+            "source_message_index": 47,
+            "tool_call_id": "call_3252ffb007174d008cf0e53e",
+            "events": [
+              {
+                "action_num": 133,
+                "level": 2,
+                "action": "MOUSE(row=17, col=21)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  8,
+                  17,
+                  9
+                ]
+              },
+              {
+                "action_num": 134,
+                "level": 2,
+                "action": "MOUSE(row=17, col=9)",
+                "frames": 19,
+                "transient_pixels": 219,
+                "bbox": [
+                  12,
+                  2,
+                  63,
+                  48
+                ]
+              },
+              {
+                "action_num": 135,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  26,
+                  38,
+                  36
+                ]
+              },
+              {
+                "action_num": 136,
+                "level": 2,
+                "action": "RIGHT",
+                "frames": 3,
+                "transient_pixels": 44,
+                "bbox": [
+                  32,
+                  32,
+                  38,
+                  42
+                ]
+              }
+            ],
+            "omitted_events": 15,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 116,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 133,
+                "event_source_line": 177,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 134,
+                "event_source_line": 178,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 135,
+                "event_source_line": 179,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 136,
+                "event_source_line": 180,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 132,
+            "diagnostic_after_step": 152,
+            "diagnostic_added_chars": 1312
+          },
+          {
+            "request_source_line": 129,
+            "source_message_index": 68,
+            "tool_call_id": "call_391da12b861e4698bf27a6ee",
+            "events": [
+              {
+                "action_num": 157,
+                "level": 2,
+                "action": "MOUSE(row=55, col=6)",
+                "frames": 20,
+                "transient_pixels": 3540,
+                "bbox": [
+                  1,
+                  0,
+                  63,
+                  63
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 130,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 157,
+                "event_source_line": 208,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 156,
+            "diagnostic_after_step": 158,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 133,
+            "source_message_index": 29,
+            "tool_call_id": "call_9f2c13244377417ab6e56cf0",
+            "events": [
+              {
+                "action_num": 159,
+                "level": 2,
+                "action": "MOUSE(row=17, col=15)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  26,
+                  17,
+                  27
+                ]
+              },
+              {
+                "action_num": 160,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  15,
+                  18,
+                  28
+                ]
+              },
+              {
+                "action_num": 161,
+                "level": 2,
+                "action": "MOUSE(row=17, col=27)",
+                "frames": 2,
+                "transient_pixels": 4,
+                "bbox": [
+                  16,
+                  38,
+                  17,
+                  39
+                ]
+              },
+              {
+                "action_num": 162,
+                "level": 2,
+                "action": "MOUSE(row=17, col=39)",
+                "frames": 8,
+                "transient_pixels": 45,
+                "bbox": [
+                  12,
+                  27,
+                  18,
+                  40
+                ]
+              }
+            ],
+            "omitted_events": 5,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 134,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 159,
+                "event_source_line": 211,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 160,
+                "event_source_line": 212,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 161,
+                "event_source_line": 213,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 162,
+                "event_source_line": 214,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 158,
+            "diagnostic_after_step": 168,
+            "diagnostic_added_chars": 1344
+          }
+        ],
+        "diagnostic_added_chars": 23521
+      },
+      "su15": {
+        "path": "runs/006-transient-history/transient_history/su15-1944f8ab_p0_requests.jsonl",
+        "sha256": "1d0608699887e689be9360ce5de04261e5d0a2e3fe0f5310d825d2e0f014ab38",
+        "events_path": "runs/006-transient-history/transient_history/artifacts/su15-1944f8ab_p0_events.jsonl",
+        "events_sha256": "415fffaac7cf4ba11af25e0f6ea37824b8cadd825101b4753de287dd8fc568ba",
+        "unique_payload_calls": 28,
+        "unique_attached_events": 53,
+        "raw_request_payload_occurrences_including_history_replay": 541,
+        "diagnostic_attachment_calls": 28,
+        "diagnostic_attached_events": 53,
+        "receipts": [
+          {
+            "request_source_line": 35,
+            "source_message_index": 45,
+            "tool_call_id": "call_2190205d43ef4ac380139625",
+            "events": [
+              {
+                "action_num": 14,
+                "level": 2,
+                "action": "MOUSE(row=53, col=12)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  45,
+                  4,
+                  61,
+                  20
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 36,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 14,
+                "event_source_line": 25,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 13,
+            "diagnostic_after_step": 15,
+            "diagnostic_added_chars": 616
+          },
+          {
+            "request_source_line": 41,
+            "source_message_index": 54,
+            "tool_call_id": "call_1f4ef13f1a1d49528481f7c3",
+            "events": [
+              {
+                "action_num": 18,
+                "level": 2,
+                "action": "MOUSE(row=51, col=11)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  43,
+                  3,
+                  59,
+                  19
+                ]
+              },
+              {
+                "action_num": 19,
+                "level": 2,
+                "action": "MOUSE(row=50, col=11)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  42,
+                  3,
+                  58,
+                  19
+                ]
+              },
+              {
+                "action_num": 20,
+                "level": 2,
+                "action": "MOUSE(row=50, col=10)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  42,
+                  2,
+                  58,
+                  18
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 42,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 18,
+                "event_source_line": 32,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 19,
+                "event_source_line": 33,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 20,
+                "event_source_line": 34,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 17,
+            "diagnostic_after_step": 21,
+            "diagnostic_added_chars": 1100
+          },
+          {
+            "request_source_line": 63,
+            "source_message_index": 85,
+            "tool_call_id": "call_b62cf88d117e4567b1c0845b",
+            "events": [
+              {
+                "action_num": 29,
+                "level": 2,
+                "action": "MOUSE(row=33, col=37)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  25,
+                  29,
+                  41,
+                  45
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 64,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 29,
+                "event_source_line": 52,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 28,
+            "diagnostic_after_step": 30,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 87,
+            "source_message_index": 50,
+            "tool_call_id": "call_650713aa186c4bd19dbc062c",
+            "events": [
+              {
+                "action_num": 33,
+                "level": 2,
+                "action": "MOUSE(row=54, col=49)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  46,
+                  41,
+                  62,
+                  57
+                ]
+              },
+              {
+                "action_num": 34,
+                "level": 2,
+                "action": "MOUSE(row=52, col=47)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  44,
+                  39,
+                  60,
+                  55
+                ]
+              },
+              {
+                "action_num": 35,
+                "level": 2,
+                "action": "MOUSE(row=50, col=45)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  42,
+                  37,
+                  58,
+                  53
+                ]
+              },
+              {
+                "action_num": 36,
+                "level": 2,
+                "action": "MOUSE(row=48, col=43)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  40,
+                  35,
+                  56,
+                  51
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 88,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 33,
+                "event_source_line": 62,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 34,
+                "event_source_line": 63,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 35,
+                "event_source_line": 64,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 36,
+                "event_source_line": 65,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 32,
+            "diagnostic_after_step": 37,
+            "diagnostic_added_chars": 1346
+          },
+          {
+            "request_source_line": 89,
+            "source_message_index": 53,
+            "tool_call_id": "call_6fe664407c234140864e35b5",
+            "events": [
+              {
+                "action_num": 38,
+                "level": 2,
+                "action": "MOUSE(row=46, col=43)",
+                "frames": 5,
+                "transient_pixels": 111,
+                "bbox": [
+                  38,
+                  35,
+                  54,
+                  51
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 90,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 38,
+                "event_source_line": 68,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 37,
+            "diagnostic_after_step": 39,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 95,
+            "source_message_index": 62,
+            "tool_call_id": "call_19301882b4fc4b1bb6eab869",
+            "events": [
+              {
+                "action_num": 42,
+                "level": 2,
+                "action": "MOUSE(row=33, col=37)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  25,
+                  29,
+                  41,
+                  45
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 96,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 42,
+                "event_source_line": 75,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 41,
+            "diagnostic_after_step": 43,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 97,
+            "source_message_index": 65,
+            "tool_call_id": "call_19969c10cdeb4388a72745dd",
+            "events": [
+              {
+                "action_num": 44,
+                "level": 2,
+                "action": "MOUSE(row=33, col=30)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  25,
+                  22,
+                  41,
+                  38
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 98,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 44,
+                "event_source_line": 78,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 43,
+            "diagnostic_after_step": 45,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 103,
+            "source_message_index": 74,
+            "tool_call_id": "call_434806ea464b48919b7731d8",
+            "events": [
+              {
+                "action_num": 50,
+                "level": 2,
+                "action": "MOUSE(row=33, col=37)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  25,
+                  29,
+                  41,
+                  45
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 104,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 50,
+                "event_source_line": 87,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 49,
+            "diagnostic_after_step": 51,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 105,
+            "source_message_index": 77,
+            "tool_call_id": "call_f72392c31a8e4fdd83b438d2",
+            "events": [
+              {
+                "action_num": 52,
+                "level": 2,
+                "action": "MOUSE(row=39, col=17)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  31,
+                  9,
+                  47,
+                  25
+                ]
+              },
+              {
+                "action_num": 53,
+                "level": 2,
+                "action": "MOUSE(row=36, col=21)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  28,
+                  13,
+                  44,
+                  29
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 106,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 52,
+                "event_source_line": 90,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 53,
+                "event_source_line": 91,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 51,
+            "diagnostic_after_step": 54,
+            "diagnostic_added_chars": 859
+          },
+          {
+            "request_source_line": 109,
+            "source_message_index": 33,
+            "tool_call_id": "call_49ec1380197a480c8c2e1352",
+            "events": [
+              {
+                "action_num": 56,
+                "level": 2,
+                "action": "MOUSE(row=55, col=48)",
+                "frames": 5,
+                "transient_pixels": 108,
+                "bbox": [
+                  47,
+                  40,
+                  62,
+                  56
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 110,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 56,
+                "event_source_line": 96,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 55,
+            "diagnostic_after_step": 57,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 111,
+            "source_message_index": 36,
+            "tool_call_id": "call_90f77dc7210a451c926fab9e",
+            "events": [
+              {
+                "action_num": 58,
+                "level": 2,
+                "action": "MOUSE(row=55, col=23)",
+                "frames": 5,
+                "transient_pixels": 107,
+                "bbox": [
+                  47,
+                  15,
+                  62,
+                  31
+                ]
+              },
+              {
+                "action_num": 59,
+                "level": 2,
+                "action": "MOUSE(row=54, col=31)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  46,
+                  23,
+                  62,
+                  39
+                ]
+              },
+              {
+                "action_num": 60,
+                "level": 2,
+                "action": "MOUSE(row=54, col=40)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  46,
+                  32,
+                  62,
+                  48
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 112,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 58,
+                "event_source_line": 99,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 59,
+                "event_source_line": 100,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 60,
+                "event_source_line": 101,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 57,
+            "diagnostic_after_step": 61,
+            "diagnostic_added_chars": 1103
+          },
+          {
+            "request_source_line": 113,
+            "source_message_index": 39,
+            "tool_call_id": "call_75e32232a748462081656e0b",
+            "events": [
+              {
+                "action_num": 62,
+                "level": 2,
+                "action": "MOUSE(row=48, col=36)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  40,
+                  28,
+                  56,
+                  44
+                ]
+              },
+              {
+                "action_num": 63,
+                "level": 2,
+                "action": "MOUSE(row=42, col=36)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  34,
+                  28,
+                  50,
+                  44
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 114,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 62,
+                "event_source_line": 104,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 63,
+                "event_source_line": 105,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 61,
+            "diagnostic_after_step": 64,
+            "diagnostic_added_chars": 860
+          },
+          {
+            "request_source_line": 119,
+            "source_message_index": 47,
+            "tool_call_id": "call_798208f95d2242d5a93a7e63",
+            "events": [
+              {
+                "action_num": 66,
+                "level": 3,
+                "action": "MOUSE(row=23, col=58)",
+                "frames": 5,
+                "transient_pixels": 100,
+                "bbox": [
+                  15,
+                  50,
+                  31,
+                  63
+                ]
+              },
+              {
+                "action_num": 67,
+                "level": 3,
+                "action": "MOUSE(row=25, col=10)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  17,
+                  2,
+                  33,
+                  18
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 120,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 66,
+                "event_source_line": 110,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 67,
+                "event_source_line": 111,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 65,
+            "diagnostic_after_step": 68,
+            "diagnostic_added_chars": 859
+          },
+          {
+            "request_source_line": 121,
+            "source_message_index": 50,
+            "tool_call_id": "call_91322228fe3845edbefe19a8",
+            "events": [
+              {
+                "action_num": 69,
+                "level": 3,
+                "action": "MOUSE(row=23, col=51)",
+                "frames": 5,
+                "transient_pixels": 117,
+                "bbox": [
+                  15,
+                  43,
+                  31,
+                  59
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 122,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 69,
+                "event_source_line": 114,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 68,
+            "diagnostic_after_step": 70,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 123,
+            "source_message_index": 53,
+            "tool_call_id": "call_1349da875d6d48938766ef22",
+            "events": [
+              {
+                "action_num": 71,
+                "level": 3,
+                "action": "MOUSE(row=25, col=31)",
+                "frames": 5,
+                "transient_pixels": 116,
+                "bbox": [
+                  17,
+                  23,
+                  33,
+                  39
+                ]
+              },
+              {
+                "action_num": 72,
+                "level": 3,
+                "action": "MOUSE(row=29, col=31)",
+                "frames": 5,
+                "transient_pixels": 112,
+                "bbox": [
+                  21,
+                  23,
+                  37,
+                  39
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 124,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 71,
+                "event_source_line": 117,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 72,
+                "event_source_line": 118,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 70,
+            "diagnostic_after_step": 73,
+            "diagnostic_added_chars": 860
+          },
+          {
+            "request_source_line": 125,
+            "source_message_index": 56,
+            "tool_call_id": "call_e23e2a25626a48f69318ea68",
+            "events": [
+              {
+                "action_num": 74,
+                "level": 3,
+                "action": "MOUSE(row=26, col=46)",
+                "frames": 5,
+                "transient_pixels": 113,
+                "bbox": [
+                  18,
+                  38,
+                  34,
+                  54
+                ]
+              },
+              {
+                "action_num": 75,
+                "level": 3,
+                "action": "MOUSE(row=29, col=40)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  21,
+                  32,
+                  37,
+                  48
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 126,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 74,
+                "event_source_line": 121,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 75,
+                "event_source_line": 122,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 73,
+            "diagnostic_after_step": 76,
+            "diagnostic_added_chars": 860
+          },
+          {
+            "request_source_line": 129,
+            "source_message_index": 61,
+            "tool_call_id": "call_95f95b017b1c45a99d2d0ae8",
+            "events": [
+              {
+                "action_num": 77,
+                "level": 3,
+                "action": "MOUSE(row=35, col=34)",
+                "frames": 5,
+                "transient_pixels": 107,
+                "bbox": [
+                  27,
+                  26,
+                  43,
+                  42
+                ]
+              },
+              {
+                "action_num": 78,
+                "level": 3,
+                "action": "MOUSE(row=40, col=31)",
+                "frames": 5,
+                "transient_pixels": 106,
+                "bbox": [
+                  32,
+                  23,
+                  48,
+                  39
+                ]
+              },
+              {
+                "action_num": 79,
+                "level": 3,
+                "action": "MOUSE(row=44, col=28)",
+                "frames": 5,
+                "transient_pixels": 107,
+                "bbox": [
+                  36,
+                  20,
+                  52,
+                  36
+                ]
+              },
+              {
+                "action_num": 80,
+                "level": 3,
+                "action": "MOUSE(row=48, col=26)",
+                "frames": 5,
+                "transient_pixels": 107,
+                "bbox": [
+                  40,
+                  18,
+                  56,
+                  34
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 130,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 77,
+                "event_source_line": 125,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 78,
+                "event_source_line": 126,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 79,
+                "event_source_line": 127,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 80,
+                "event_source_line": 128,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 76,
+            "diagnostic_after_step": 81,
+            "diagnostic_added_chars": 1346
+          },
+          {
+            "request_source_line": 137,
+            "source_message_index": 72,
+            "tool_call_id": "call_5b953089603344a5a8e361e5",
+            "events": [
+              {
+                "action_num": 88,
+                "level": 4,
+                "action": "MOUSE(row=26, col=8)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  18,
+                  0,
+                  34,
+                  54
+                ]
+              },
+              {
+                "action_num": 89,
+                "level": 4,
+                "action": "MOUSE(row=28, col=33)",
+                "frames": 5,
+                "transient_pixels": 125,
+                "bbox": [
+                  20,
+                  25,
+                  36,
+                  50
+                ]
+              },
+              {
+                "action_num": 90,
+                "level": 4,
+                "action": "MOUSE(row=44, col=10)",
+                "frames": 5,
+                "transient_pixels": 129,
+                "bbox": [
+                  26,
+                  2,
+                  52,
+                  47
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 138,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 88,
+                "event_source_line": 139,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 89,
+                "event_source_line": 140,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 90,
+                "event_source_line": 141,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 87,
+            "diagnostic_after_step": 91,
+            "diagnostic_added_chars": 1100
+          },
+          {
+            "request_source_line": 139,
+            "source_message_index": 75,
+            "tool_call_id": "call_5e0fc80391f742c183d73286",
+            "events": [
+              {
+                "action_num": 92,
+                "level": 4,
+                "action": "MOUSE(row=33, col=32)",
+                "frames": 5,
+                "transient_pixels": 122,
+                "bbox": [
+                  25,
+                  24,
+                  41,
+                  40
+                ]
+              },
+              {
+                "action_num": 93,
+                "level": 4,
+                "action": "MOUSE(row=32, col=9)",
+                "frames": 11,
+                "transient_pixels": 129,
+                "bbox": [
+                  24,
+                  1,
+                  40,
+                  38
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 140,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 92,
+                "event_source_line": 144,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 93,
+                "event_source_line": 145,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 91,
+            "diagnostic_after_step": 94,
+            "diagnostic_added_chars": 859
+          },
+          {
+            "request_source_line": 153,
+            "source_message_index": 56,
+            "tool_call_id": "call_282dd957edbf4180baad8e84",
+            "events": [
+              {
+                "action_num": 102,
+                "level": 4,
+                "action": "MOUSE(row=33, col=8)",
+                "frames": 11,
+                "transient_pixels": 140,
+                "bbox": [
+                  25,
+                  0,
+                  44,
+                  38
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 154,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 102,
+                "event_source_line": 160,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 101,
+            "diagnostic_after_step": 103,
+            "diagnostic_added_chars": 617
+          },
+          {
+            "request_source_line": 157,
+            "source_message_index": 62,
+            "tool_call_id": "call_52e9f0fbbb4346be8e4a7bcc",
+            "events": [
+              {
+                "action_num": 112,
+                "level": 4,
+                "action": "MOUSE(row=44, col=10)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  21,
+                  2,
+                  52,
+                  54
+                ]
+              },
+              {
+                "action_num": 113,
+                "level": 4,
+                "action": "MOUSE(row=49, col=31)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  25,
+                  23,
+                  57,
+                  50
+                ]
+              },
+              {
+                "action_num": 114,
+                "level": 4,
+                "action": "MOUSE(row=26, col=8)",
+                "frames": 5,
+                "transient_pixels": 129,
+                "bbox": [
+                  18,
+                  0,
+                  34,
+                  47
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 158,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 112,
+                "event_source_line": 172,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 113,
+                "event_source_line": 173,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 114,
+                "event_source_line": 174,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 111,
+            "diagnostic_after_step": 115,
+            "diagnostic_added_chars": 1103
+          },
+          {
+            "request_source_line": 163,
+            "source_message_index": 70,
+            "tool_call_id": "call_4de68a206e9946f8be4911f1",
+            "events": [
+              {
+                "action_num": 117,
+                "level": 4,
+                "action": "MOUSE(row=48, col=24)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  21,
+                  16,
+                  56,
+                  42
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 164,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 117,
+                "event_source_line": 179,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 116,
+            "diagnostic_after_step": 118,
+            "diagnostic_added_chars": 618
+          },
+          {
+            "request_source_line": 177,
+            "source_message_index": 88,
+            "tool_call_id": "call_d66016a51b4a4463a1ff305d",
+            "events": [
+              {
+                "action_num": 128,
+                "level": 4,
+                "action": "MOUSE(row=28, col=33)",
+                "frames": 5,
+                "transient_pixels": 124,
+                "bbox": [
+                  20,
+                  25,
+                  36,
+                  54
+                ]
+              },
+              {
+                "action_num": 129,
+                "level": 4,
+                "action": "MOUSE(row=49, col=31)",
+                "frames": 5,
+                "transient_pixels": 125,
+                "bbox": [
+                  25,
+                  23,
+                  57,
+                  50
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 178,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 128,
+                "event_source_line": 194,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 129,
+                "event_source_line": 195,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 127,
+            "diagnostic_after_step": 130,
+            "diagnostic_added_chars": 862
+          },
+          {
+            "request_source_line": 179,
+            "source_message_index": 32,
+            "tool_call_id": "call_faf9cf247eee4fea9170f9f2",
+            "events": [
+              {
+                "action_num": 131,
+                "level": 4,
+                "action": "MOUSE(row=34, col=28)",
+                "frames": 5,
+                "transient_pixels": 122,
+                "bbox": [
+                  26,
+                  20,
+                  42,
+                  42
+                ]
+              },
+              {
+                "action_num": 132,
+                "level": 4,
+                "action": "MOUSE(row=41, col=29)",
+                "frames": 5,
+                "transient_pixels": 125,
+                "bbox": [
+                  32,
+                  21,
+                  49,
+                  38
+                ]
+              },
+              {
+                "action_num": 133,
+                "level": 4,
+                "action": "MOUSE(row=44, col=10)",
+                "frames": 12,
+                "transient_pixels": 140,
+                "bbox": [
+                  36,
+                  2,
+                  52,
+                  34
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 180,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 131,
+                "event_source_line": 198,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 132,
+                "event_source_line": 199,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 133,
+                "event_source_line": 200,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 130,
+            "diagnostic_after_step": 134,
+            "diagnostic_added_chars": 1106
+          },
+          {
+            "request_source_line": 181,
+            "source_message_index": 35,
+            "tool_call_id": "call_db9b9e36cb244b5d975a5fb6",
+            "events": [
+              {
+                "action_num": 136,
+                "level": 4,
+                "action": "MOUSE(row=43, col=22)",
+                "frames": 5,
+                "transient_pixels": 120,
+                "bbox": [
+                  35,
+                  14,
+                  51,
+                  30
+                ]
+              },
+              {
+                "action_num": 137,
+                "level": 4,
+                "action": "MOUSE(row=44, col=10)",
+                "frames": 5,
+                "transient_pixels": 123,
+                "bbox": [
+                  36,
+                  2,
+                  52,
+                  18
+                ]
+              },
+              {
+                "action_num": 138,
+                "level": 4,
+                "action": "MOUSE(row=26, col=8)",
+                "frames": 10,
+                "transient_pixels": 122,
+                "bbox": [
+                  18,
+                  0,
+                  45,
+                  16
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 182,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 136,
+                "event_source_line": 204,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 137,
+                "event_source_line": 205,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 138,
+                "event_source_line": 206,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 134,
+            "diagnostic_after_step": 139,
+            "diagnostic_added_chars": 1104
+          },
+          {
+            "request_source_line": 185,
+            "source_message_index": 41,
+            "tool_call_id": "call_69ba06e2e427427290ec7e6d",
+            "events": [
+              {
+                "action_num": 147,
+                "level": 4,
+                "action": "MOUSE(row=33, col=27)",
+                "frames": 5,
+                "transient_pixels": 121,
+                "bbox": [
+                  25,
+                  19,
+                  41,
+                  42
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 186,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 147,
+                "event_source_line": 217,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 146,
+            "diagnostic_after_step": 148,
+            "diagnostic_added_chars": 618
+          },
+          {
+            "request_source_line": 189,
+            "source_message_index": 47,
+            "tool_call_id": "call_8de13573f7ec48c18c8c1359",
+            "events": [
+              {
+                "action_num": 150,
+                "level": 4,
+                "action": "MOUSE(row=38, col=19)",
+                "frames": 11,
+                "transient_pixels": 133,
+                "bbox": [
+                  30,
+                  11,
+                  48,
+                  29
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 190,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 150,
+                "event_source_line": 222,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 149,
+            "diagnostic_after_step": 151,
+            "diagnostic_added_chars": 619
+          },
+          {
+            "request_source_line": 193,
+            "source_message_index": 53,
+            "tool_call_id": "call_0f73f69b22434a4699f7b27f",
+            "events": [
+              {
+                "action_num": 155,
+                "level": 4,
+                "action": "MOUSE(row=35, col=30)",
+                "frames": 5,
+                "transient_pixels": 121,
+                "bbox": [
+                  27,
+                  22,
+                  43,
+                  38
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 194,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 155,
+                "event_source_line": 229,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 154,
+            "diagnostic_after_step": 156,
+            "diagnostic_added_chars": 618
+          }
+        ],
+        "diagnostic_added_chars": 23352
+      },
+      "sc25": {
+        "path": "runs/006-transient-history/transient_history/sc25-635fd71a_p0_requests.jsonl",
+        "sha256": "9da14b071ab1e5d0686de835cc663f69c7a7143f741819ae621dd0699a81f9fb",
+        "events_path": "runs/006-transient-history/transient_history/artifacts/sc25-635fd71a_p0_events.jsonl",
+        "events_sha256": "799120b63cbeca542d7f8c19ab55efd2cc502d7af73eef570bb29f5a7cb2e6e8",
+        "unique_payload_calls": 5,
+        "unique_attached_events": 6,
+        "raw_request_payload_occurrences_including_history_replay": 128,
+        "diagnostic_attachment_calls": 5,
+        "diagnostic_attached_events": 6,
+        "receipts": [
+          {
+            "request_source_line": 47,
+            "source_message_index": 61,
+            "tool_call_id": "call_be278b4dc50f414686330f28",
+            "events": [
+              {
+                "action_num": 33,
+                "level": 1,
+                "action": "MOUSE(row=20, col=14)",
+                "frames": 4,
+                "transient_pixels": 81,
+                "bbox": [
+                  49,
+                  24,
+                  61,
+                  36
+                ]
+              },
+              {
+                "action_num": 34,
+                "level": 1,
+                "action": "MOUSE(row=19, col=25)",
+                "frames": 4,
+                "transient_pixels": 81,
+                "bbox": [
+                  49,
+                  24,
+                  61,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 48,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 33,
+                "event_source_line": 48,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              },
+              {
+                "action_num": 34,
+                "event_source_line": 49,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 32,
+            "diagnostic_after_step": 35,
+            "diagnostic_added_chars": 858
+          },
+          {
+            "request_source_line": 139,
+            "source_message_index": 119,
+            "tool_call_id": "call_20568c6e4efe48719d59c8d0",
+            "events": [
+              {
+                "action_num": 134,
+                "level": 4,
+                "action": "MOUSE(row=60, col=30)",
+                "frames": 10,
+                "transient_pixels": 50,
+                "bbox": [
+                  19,
+                  24,
+                  61,
+                  38
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 140,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 134,
+                "event_source_line": 179,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 129,
+            "diagnostic_after_step": 151,
+            "diagnostic_added_chars": 618
+          },
+          {
+            "request_source_line": 153,
+            "source_message_index": 68,
+            "tool_call_id": "call_5fc922dead6f417d9bfbef4d",
+            "events": [
+              {
+                "action_num": 174,
+                "level": 4,
+                "action": "MOUSE(row=60, col=30)",
+                "frames": 10,
+                "transient_pixels": 50,
+                "bbox": [
+                  27,
+                  24,
+                  61,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 154,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 174,
+                "event_source_line": 226,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 166,
+            "diagnostic_after_step": 189,
+            "diagnostic_added_chars": 618
+          },
+          {
+            "request_source_line": 159,
+            "source_message_index": 77,
+            "tool_call_id": "call_8e7938fa4e314d509b35364a",
+            "events": [
+              {
+                "action_num": 211,
+                "level": 4,
+                "action": "MOUSE(row=60, col=30)",
+                "frames": 10,
+                "transient_pixels": 50,
+                "bbox": [
+                  27,
+                  24,
+                  61,
+                  36
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 160,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 211,
+                "event_source_line": 266,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 203,
+            "diagnostic_after_step": 212,
+            "diagnostic_added_chars": 618
+          },
+          {
+            "request_source_line": 161,
+            "source_message_index": 80,
+            "tool_call_id": "call_018bcf1d7345478aa722c1e8",
+            "events": [
+              {
+                "action_num": 216,
+                "level": 4,
+                "action": "MOUSE(row=60, col=30)",
+                "frames": 10,
+                "transient_pixels": 43,
+                "bbox": [
+                  30,
+                  29,
+                  61,
+                  32
+                ]
+              }
+            ],
+            "omitted_events": 0,
+            "matched_diagnostic_calls": 1,
+            "following_response_source_line": 162,
+            "following_response_finish_reason": "tool_calls",
+            "event_binding": [
+              {
+                "action_num": 216,
+                "event_source_line": 272,
+                "level_matches": true,
+                "action_matches": true,
+                "level_completed": false,
+                "game_over": false
+              }
+            ],
+            "exact_diagnostic_event_metadata_and_omissions_match": true,
+            "diagnostic_before_step": 212,
+            "diagnostic_after_step": 221,
+            "diagnostic_added_chars": 618
+          }
+        ],
+        "diagnostic_added_chars": 3330
+      }
+    },
+    "interpretation": "Successful response proves the request completed with payload in context, not that every event was read, correctly understood, or beneficial."
+  },
+  "behavior_cases": [
+    {
+      "case_id": "lf52-motion-discovery",
+      "arm": "transient_history",
+      "game": "lf52",
+      "classification": [
+        "explicit_use",
+        "followup_real_frame_check"
+      ],
+      "raw_request_lines": [
+        61,
+        63,
+        65
+      ],
+      "action_nums": [
+        36,
+        37,
+        38,
+        39
+      ],
+      "event_source_lines": [
+        55,
+        56,
+        57,
+        58
+      ],
+      "finding": "Historical LEFT/RIGHT bboxes localize orange object despite final DOWN no-op; next code reads transitions and confirms settled motion.",
+      "causal_limit": "Stdout already exposed122changed cells per arrow; no counterfactual establishes added field was necessary."
+    },
+    {
+      "case_id": "lf52-known-key-animation",
+      "arm": "transient_history",
+      "game": "lf52",
+      "classification": [
+        "explicit_use",
+        "semantic_repetition"
+      ],
+      "raw_request_lines": [
+        115,
+        117
+      ],
+      "action_nums": [
+        133,
+        134,
+        135,
+        136
+      ],
+      "event_source_lines": [
+        177,
+        178,
+        179,
+        180
+      ],
+      "finding": "Model examines action13419-frame/219-pixel event then calls key appearance known: Fine, no new info. Payload states15events omitted.",
+      "causal_limit": "Not evidence that repeated explanation caused L2 failure."
+    },
+    {
+      "case_id": "lf52-same-coordinate-misattribution",
+      "arm": "transient_history",
+      "game": "lf52",
+      "classification": [
+        "verified_evidence_attribution_error"
+      ],
+      "raw_request_lines": [
+        39,
+        41,
+        117,
+        135
+      ],
+      "action_nums": [
+        22,
+        23
+      ],
+      "event_source_lines": [
+        33,
+        34
+      ],
+      "finding": "Action22 jump:8frames/45pixels/bbox[12,27,18,40]. Action23 same coordinate next click:3frames/16pixels/bbox[15,36,18,41]. Later reasoning assigns action22bbox to state-C selection probe.",
+      "causal_limit": "Both observations lacked right-side ghost; incorrect evidence citation does not establish outcome would change. Transient bbox is not all settled changes."
+    },
+    {
+      "case_id": "tn36-first-level-before-first-attachment",
+      "arm": "transient_history",
+      "game": "tn36",
+      "classification": [
+        "no_direct_payload_before_outcome"
+      ],
+      "raw_request_lines": [
+        9,
+        11,
+        13,
+        17,
+        21,
+        23,
+        53
+      ],
+      "action_nums": [
+        15,
+        33
+      ],
+      "event_source_lines": [
+        22,
+        50
+      ],
+      "finding": "B completes L1 action15 using native latest-animation inspection. First historical attachment is L2action33. A L1 took50actions.",
+      "causal_limit": "No direct historical-payload explanation for B L1 speedup; not proof of no shared-service indirect effect, nor reproduction of005 missing-nonfinal-blue-button scenario."
+    },
+    {
+      "case_id": "tn36-level2-card",
+      "arm": "transient_history",
+      "game": "tn36",
+      "classification": [
+        "receipt_confirmed_increment_uncertain"
+      ],
+      "raw_request_lines": [
+        53,
+        55
+      ],
+      "action_nums": [
+        33,
+        34
+      ],
+      "event_source_lines": [
+        50,
+        51
+      ],
+      "finding": "Action33event arrives; discovery primarily grounded in printed moved/rotated settled objects.",
+      "causal_limit": "No explicit use of added action33metadata established."
+    },
+    {
+      "case_id": "tn36-level3-card",
+      "arm": "transient_history",
+      "game": "tn36",
+      "classification": [
+        "explicit_use",
+        "insufficient_state_resolution"
+      ],
+      "raw_request_lines": [
+        173,
+        175
+      ],
+      "action_nums": [
+        124,
+        125,
+        151
+      ],
+      "event_source_lines": [
+        185,
+        186,
+        219
+      ],
+      "finding": "Reasoning references card transient bbox yet says After card C: unknown; then checks program/actual animation positions. L3 later completes.",
+      "causal_limit": "Several experiments intervene; summary not sufficient explanation of success."
+    },
+    {
+      "case_id": "tn36-level4-card",
+      "arm": "transient_history",
+      "game": "tn36",
+      "classification": [
+        "receipt_confirmed_increment_uncertain"
+      ],
+      "raw_request_lines": [
+        193,
+        195
+      ],
+      "action_nums": [
+        152,
+        153
+      ],
+      "event_source_lines": [
+        222,
+        223
+      ],
+      "finding": "First-card5-frame/231-pixel event preserved despite later no-op; next code inspects settled ASCII.",
+      "causal_limit": "Only4L4actions before budget ends; no success conclusion."
+    },
+    {
+      "case_id": "sc25-redundant-keypad-flash",
+      "arm": "transient_history",
+      "game": "sc25",
+      "classification": [
+        "no_increment_over_same_stdout"
+      ],
+      "raw_request_lines": [
+        47,
+        49
+      ],
+      "action_nums": [
+        33,
+        34,
+        35
+      ],
+      "event_source_lines": [
+        48,
+        49,
+        50
+      ],
+      "finding": "Code already prints three complete red-flash timelines; metadata repeats first two counts/bboxes.",
+      "causal_limit": "Subsequent error-feedback inference supported by richer stdout; added field independent effect not established."
+    },
+    {
+      "case_id": "sc25-level4-route",
+      "arm": "transient_history",
+      "game": "sc25",
+      "classification": [
+        "receipt_confirmed_use_uncertain",
+        "settled_state_driven_update"
+      ],
+      "raw_request_lines": [
+        139,
+        141,
+        153,
+        155,
+        159,
+        161,
+        163
+      ],
+      "action_nums": [
+        134,
+        174,
+        211,
+        216,
+        221,
+        235
+      ],
+      "event_source_lines": [
+        179,
+        226,
+        266,
+        272,
+        277,
+        292
+      ],
+      "finding": "Decisions use head position, bar budget and rwall/socket removal. Distance ladder(29,31)/(29,29) enables14-action route and L4completion.",
+      "causal_limit": "No explicit transient-metadata contribution to route update established; no overall score causal inference."
+    },
+    {
+      "case_id": "su15-click-ripple",
+      "arm": "transient_history",
+      "game": "su15",
+      "classification": [
+        "semantic_repetition",
+        "potentially_mixed_content"
+      ],
+      "raw_request_lines": [
+        17,
+        35,
+        41
+      ],
+      "action_nums": [],
+      "event_source_lines": [],
+      "finding": "Common click-location ripple recognized before first historical attachment;48of53events have5frames.",
+      "causal_limit": "Five frames alone does not prove decoration; some events mix ripple with object motion."
+    },
+    {
+      "case_id": "su15-merge-model-update",
+      "arm": "transient_history",
+      "game": "su15",
+      "classification": [
+        "settled_state_driven_update"
+      ],
+      "raw_request_lines": [
+        103,
+        105,
+        107,
+        109,
+        111,
+        113,
+        115
+      ],
+      "action_nums": [
+        65,
+        87
+      ],
+      "event_source_lines": [
+        108,
+        136
+      ],
+      "finding": "Object colors/sizes/positions falsify circle-entry-only upgrade and support merge chains; L2/L3complete.",
+      "causal_limit": "Summary presence is not causal proof."
+    },
+    {
+      "case_id": "su15-moving-glyph",
+      "arm": "transient_history",
+      "game": "su15",
+      "classification": [
+        "explicit_use",
+        "mixed_bbox_insufficient"
+      ],
+      "raw_request_lines": [
+        137,
+        139,
+        141,
+        155,
+        165,
+        181,
+        183
+      ],
+      "action_nums": [
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "event_source_lines": [
+        139,
+        140,
+        141,
+        142,
+        144,
+        145,
+        146
+      ],
+      "finding": "Model explicitly references historical transient bboxes, notes ripple+glyph mixture/uncertainty, then prints glyph bbox per action. Later downgrade/UNDO order confusion persists; L4fails.",
+      "causal_limit": "Does not establish summary caused bad world model or failure."
+    }
+  ],
+  "limitations": [
+    "Full diagnostics for12games; request delivery only four trigger games(58calls/127events), not all101calls/246events.",
+    "Receipt/response do not prove semantic adoption; categories are qualitative episodes, not exhaustive frequency labels.",
+    "Single A/B with divergent sampled trajectories/shared service; no fixed-trajectory counterfactual/repeated effect estimate.",
+    "tn36L1 completed before historical attachment;006 did not reproduce005 early non-final blue-button omission.",
+    "No engine code read, no model trace code executed, no GPU, no tests or solver changes in analysis.",
+    "No-attachment games are not independent controls; sampling/serving interference possible.",
+    "Metadata is counts/bbox, not archived midframes, object identity, or semantic success labels."
+  ],
+  "research_decision": {
+    "continue_unchanged_006_gpu_runs": false,
+    "merge_as_default_solver": false,
+    "preserve_optional_branch": true,
+    "reason": "Delivery/use confirmed, not repeated causal gain; redundant episodes, same-coordinate attribution error, mixed-object bboxes remain. Overall B-A descriptive.",
+    "comparison_to_003": "003 chiefly changed initial guidance because marker mechanism almost never activated;006 reached model context and was cited. No proven universal ignored-prompt explanation.",
+    "candidate_transferable_defect": "Later reasoning loses action/state binding between same-coordinate actions despite correct action_num; record lead, not next stacked reminder.",
+    "next_priority": "Keep006 off next single-factor run; root pursuing CPU-reproducible missing retained-function snapshot semantics before another GPU experiment."
+  }
+}

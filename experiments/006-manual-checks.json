@@ -1,0 +1,204 @@
+{
+  "experiment": "006-transient-history",
+  "recorded_at": "2026-10-11T09:37:43+08:00",
+  "recorded_at_utc": "2026-10-11T01:37:43Z",
+  "time_note": "Time records this evidence file being written after the manual checks; individual check start/end timestamps were not recorded.",
+  "source_sha256": {
+    "transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "run_arm.py": "d34e129a96ef6863612b5787761915ed066a25282bf885022535cc3af88bee95",
+    "baseline_tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+  },
+  "runtime": {
+    "python": "/private/tmp/arc3-data-inspection-venv/bin/python",
+    "python_version": "3.12.13",
+    "harness_source": "research/runtime-bundle/src/ARC3-Inference",
+    "taaf_source": "research/runtime-bundle/src/tufa-arc-agi-framework/src",
+    "environment_files": "research/data/extracted/environment_files",
+    "mode": "OFFLINE",
+    "model_called": false,
+    "gpu_started": false,
+    "notebook_pushed": false,
+    "test_files_created": false,
+    "game_implementation_source_read": false,
+    "logged_model_code_executed": false,
+    "action_code_origin": "Handwritten short action probes using already observed coordinates; no model-generated functions, search, or full trajectories were executed.",
+    "environment_switches": {
+      "ARC3_ANIMATION": "1",
+      "ARC3_ACTION_ECHO": "1",
+      "ARC3_NEW_CHANGED_PROMPTS": "1",
+      "ARC3_BATCH_NOOP_BLOCK": "1",
+      "ARC3_GUARDS_FROM_LEVEL": "2",
+      "ARC3_STALE_STATE_BLOCK": "1"
+    }
+  },
+  "implementation_limits": {
+    "max_events_per_call": 4,
+    "max_added_json_chars_per_call": 1600,
+    "length_measure": "len(rendered augmented tool JSON) minus len(original dispatch.content); not a token count"
+  },
+  "real_harness_checks": [
+    {
+      "case": "tn36_multiple_action_calls",
+      "components": ["GameAPI", "_HarnessGameSession", "ToolAgent._run_python_tool", "original Python sandbox"],
+      "game_id": "tn36-ef4dde99",
+      "state_path": "/private/tmp/arc3-006-harness-sl27hofo/multi/tn36-ef4dde99_p0_tool_runtime_state.json",
+      "prefix_mouse_row_col": [[14, 31]],
+      "probe_mouse_row_col": [[55, 35], [45, 21], [45, 36], [20, 20]],
+      "before_step": 1,
+      "after_step": 5,
+      "new_executed_actions": 4,
+      "captured_transient_events": 1,
+      "eligible_earlier_events": 1,
+      "attached_events": 1,
+      "omitted_events": 0,
+      "added_chars": 616,
+      "attached_metadata": [
+        {"action_num": 2, "level": 1, "action": "MOUSE(row=55, col=35)", "frames": 7, "transient_pixels": 256, "bbox": [13, 19, 59, 43]}
+      ],
+      "dispatch_flags": {"step_executed": true, "made_progress": true},
+      "tool_error": null,
+      "result": "Earlier real action 2 was attached after actions 3-5, with correct level and metadata. No additional game action was executed by the patch."
+    },
+    {
+      "case": "inspection_only_after_tn36_probe",
+      "state_path": "/private/tmp/arc3-006-harness-sl27hofo/multi/tn36-ef4dde99_p0_tool_runtime_state.json",
+      "handwritten_tool_code": "print(current_frame.step)",
+      "before_step": 5,
+      "after_step": 5,
+      "attached_events": 0,
+      "result": "Previous call's transient event was not repeated."
+    },
+    {
+      "case": "disabled_baseline_passthrough",
+      "state_path": "/private/tmp/arc3-006-harness-sl27hofo/multi/tn36-ef4dde99_p0_tool_runtime_state.json",
+      "handwritten_tool_code": "print(current_frame.step)",
+      "comparison": "Disabled wrapper dispatch compared equal to the original method dispatch for the same inspect-only call.",
+      "same_dispatch": true,
+      "extra_patch_state_reads": 0,
+      "io_check_method": "The patch's own runtime loader was temporarily replaced with a sentinel that would raise if called. The disabled call completed without invoking it. Original baseline runtime reads were not replaced or counted as extra reads.",
+      "after_step": 5,
+      "result": "Disabled wrapper immediately calls the original tool method; no additional patch I/O or prompt output."
+    },
+    {
+      "case": "tn36_action_list_stopped_on_noop",
+      "components": ["GameAPI", "_HarnessGameSession", "ToolAgent._run_python_tool", "original Python sandbox"],
+      "game_id": "tn36-ef4dde99",
+      "state_path": "/private/tmp/arc3-006-harness-sl27hofo/batch_stopped/tn36-ef4dde99_p0_tool_runtime_state.json",
+      "prefix_mouse_row_col": [[14, 31]],
+      "submitted_batch_mouse_row_col": [[55, 35], [45, 21]],
+      "before_step": 1,
+      "after_step": 2,
+      "submitted_count": 2,
+      "new_executed_actions": 1,
+      "stop_reason": "no_op_action",
+      "captured_transient_events": 1,
+      "eligible_earlier_events": 0,
+      "attached_events": 0,
+      "filtered_reasons": {"latest_action_already_has_baseline_channel": 1},
+      "result": "Skipped second action was not fabricated. The actual single/latest animated action was left to the original feedback channel."
+    },
+    {
+      "case": "sc25_real_batch_with_nonfinal_transient",
+      "components": ["GameAPI", "_HarnessGameSession", "ToolAgent._run_python_tool", "original Python sandbox"],
+      "game_id": "sc25-635fd71a",
+      "state_path": "/private/tmp/arc3-006-batch-pfgmgs2m/sc25-635fd71a_p0_tool_runtime_state.json",
+      "prefix_action": "UP",
+      "submitted_batch": [
+        {"action": "MOUSE", "row": 50, "col": 30},
+        {"action": "MOUSE", "row": 55, "col": 25},
+        {"action": "MOUSE", "row": 55, "col": 35},
+        {"action": "MOUSE", "row": 60, "col": 30},
+        "RIGHT"
+      ],
+      "before_step": 1,
+      "after_step": 6,
+      "new_executed_actions": 5,
+      "captured_transient_events": 1,
+      "eligible_earlier_events": 1,
+      "attached_events": 1,
+      "omitted_events": 0,
+      "added_chars": 616,
+      "attached_metadata": [
+        {"action_num": 5, "level": 1, "action": "MOUSE(row=60, col=30)", "frames": 10, "transient_pixels": 52, "bbox": [19, 24, 61, 42]}
+      ],
+      "dispatch_flags": {"step_executed": true, "made_progress": true},
+      "tool_error": null,
+      "result": "Actual action-list execution retained the fourth member's transient metadata even though RIGHT was the last member."
+    }
+  ],
+  "synthetic_history_checks": {
+    "method": "Manually constructed real Frame/HistoryEntry objects were saved with the original runtime-state writer, then processed with the patch and the original frozen _ToolDispatchResult type. These cases executed no game actions and are not ARC game results.",
+    "directory": "/private/tmp/arc3-006-batch-pfgmgs2m",
+    "cases": [
+      {
+        "case": "event_limit",
+        "new_executed_actions": 8,
+        "captured_transient_events": 8,
+        "eligible_earlier_events": 7,
+        "attached_events": 4,
+        "attached_action_nums": [1, 2, 3, 4],
+        "omitted_events": 3,
+        "added_chars": 1342,
+        "filtered_reasons": {"latest_action_already_has_baseline_channel": 1},
+        "dispatch_flags_preserved": true
+      },
+      {
+        "case": "game_over_then_automatic_reset",
+        "sequence": "normal transient action 1, terminal transient action 2, automatic RESET action 3",
+        "new_executed_actions": 3,
+        "captured_transient_events": 2,
+        "eligible_earlier_events": 0,
+        "attached_events": 0,
+        "added_chars": 0,
+        "filtered_reasons": {"at_or_before_terminal_reset_boundary": 2},
+        "dispatch_flags_preserved": true
+      },
+      {
+        "case": "level_transition",
+        "sequence": "normal transient action 1 at level 1, completed-level transient action 2 entering level 2",
+        "before_level": 1,
+        "after_level": 2,
+        "captured_transient_events": 2,
+        "eligible_earlier_events": 0,
+        "attached_events": 0,
+        "added_chars": 0,
+        "filtered_reasons": {"at_or_before_terminal_reset_boundary": 2},
+        "dispatch_flags_preserved": true
+      },
+      {
+        "case": "latest_action_only",
+        "new_executed_actions": 1,
+        "captured_transient_events": 1,
+        "eligible_earlier_events": 0,
+        "attached_events": 0,
+        "added_chars": 0,
+        "dispatch_flags_preserved": true
+      },
+      {
+        "case": "no_transient_metadata",
+        "new_executed_actions": 2,
+        "captured_transient_events": 0,
+        "eligible_earlier_events": 0,
+        "attached_events": 0,
+        "added_chars": 0,
+        "dispatch_flags_preserved": true
+      }
+    ]
+  },
+  "integration_checks": {
+    "run_arm_help_lists_transient_history": true,
+    "source_ast_parsed": ["transient_history.py", "run_arm.py"],
+    "diff_whitespace_check_passed": true,
+    "runner_diagnostic_output": "transient-history.json",
+    "runner_source_hash_includes_new_module": true,
+    "deadline_serving_or_scheduling_changed": false
+  },
+  "limitations": [
+    "Terminal/reset/level-boundary cases used synthetic runtime history rather than playing a real game through those boundaries.",
+    "The real SDK probes are new CPU runs; they do not restore unrecorded historical animation frames from 005.",
+    "No model interpretation, strategy adoption, completion improvement, leaderboard score, or GPU performance was measured.",
+    "The patch exposes existing compact metadata, not an archived full animation timeline.",
+    "The disabled equality comparison used an inspect-only tool call; source inspection and the loader sentinel establish the direct-return/no-extra-I/O branch.",
+    "No new full benchmark or end-to-end run_arm model-server execution was performed in these checks."
+  ]
+}
