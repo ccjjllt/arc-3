@@ -1,0 +1,2606 @@
+{
+  "kind": "fixed_observation_priority_sensitivity_not_score_replay",
+  "run_date_local": "2026-10-13 Asia/Shanghai",
+  "source_hashes": {
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "research/notebooks/2026-10-13/tail-priority-cpu.py": "8662e42ccf927c8bb62a37418cf074532fb20e056ec0724b4288aacd1bcf1f6e"
+  },
+  "method": [
+    "Use small baseline benchmark JSON files only; do not read request logs or game engines.",
+    "ActionRecord.wallclock_seconds is elapsed since game start, not an inter-action duration.",
+    "Use each fixed clock's last observed action; infer completed level boundaries from final monotone per-level action counters.",
+    "Sum action-attached generated tokens within the inferred current level, with pace=1 as in baseline.",
+    "Evaluate the unchanged priority_value function twice: tail_lookup='remaining' versus True, preserving score normalization and final-20-percent tail fade.",
+    "Rank all observed unfinished game states as a sensitivity check, not the unknown real waiting queue."
+  ],
+  "limitations": [
+    "No context-trim or gate-entry timestamps exist in these compact benchmarks; actual waiting/admitted sets are not reconstructed.",
+    "In-flight/no-action model tokens and within-tool level-transition accounting are not fully represented by action-attached records.",
+    "All clocks, action histories, completions, and first-action coverage are the original baseline's observed values and are held fixed.",
+    "Changed priorities do not imply changed slot admissions, compute use, coverage time, levels, or score.",
+    "The candidate's coverage-time difference is unknown (null), not zero; an actual paired run is required.",
+    "Fresh-game priority bands remain unchanged by this switch. It primarily affects post-trim handovers and queue repricing."
+  ],
+  "B_tables": [
+    {
+      "total_levels": 6,
+      "remaining_B": [
+        8.0,
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        0.0
+      ],
+      "empirical_80k_B_after_default_efficiency": [
+        3.126586,
+        4.060555,
+        4.282633,
+        4.486409,
+        3.271909,
+        0.0
+      ]
+    },
+    {
+      "total_levels": 7,
+      "remaining_B": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        0.0
+      ],
+      "empirical_80k_B_after_default_efficiency": [
+        3.140979,
+        4.133572,
+        4.555481,
+        5.320003,
+        5.32503,
+        3.817228,
+        0.0
+      ]
+    },
+    {
+      "total_levels": 8,
+      "remaining_B": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        0.0
+      ],
+      "empirical_80k_B_after_default_efficiency": [
+        3.143301,
+        4.14845,
+        4.628116,
+        5.604296,
+        6.277709,
+        6.163651,
+        4.362546,
+        0.0
+      ]
+    },
+    {
+      "total_levels": 9,
+      "remaining_B": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        0.0
+      ],
+      "empirical_80k_B_after_default_efficiency": [
+        3.1436,
+        4.150813,
+        4.642872,
+        5.676686,
+        6.597539,
+        7.235416,
+        7.002272,
+        4.907864,
+        0.0
+      ]
+    },
+    {
+      "total_levels": 10,
+      "remaining_B": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        0.0
+      ],
+      "empirical_80k_B_after_default_efficiency": [
+        3.143632,
+        4.151115,
+        4.645238,
+        5.690935,
+        6.677973,
+        7.590782,
+        8.193122,
+        7.840894,
+        5.453182,
+        0.0
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "folder": "005-full-baseline",
+      "budget_seconds": 7254,
+      "game_count": 25,
+      "source_hashes": {
+        "runs/005-full-baseline/baseline/benchmark.json": "1b7f47e9a82aa2908be42cfd149fba66c7afaf4ad877310ed38d56136f389609",
+        "runs/005-full-baseline/baseline/arm-metadata.json": "8549f142a3849b4638717c49bf2040829249903df5a79f7dcced47dd72053da5"
+      },
+      "observed_first_actions": [
+        {
+          "game_id": "cd82-fb555c5d",
+          "seconds": 22.399325001000197
+        },
+        {
+          "game_id": "cn04-2fe56bfb",
+          "seconds": 23.532402516999912
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "seconds": 30.333125732
+        },
+        {
+          "game_id": "ka59-38d34dbb",
+          "seconds": 36.02323255900019
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "seconds": 37.06886976000003
+        },
+        {
+          "game_id": "lp85-305b61c3",
+          "seconds": 38.222474363999886
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "seconds": 40.54253196699993
+        },
+        {
+          "game_id": "dc22-fdcac232",
+          "seconds": 48.22342587499987
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "seconds": 74.77834646800012
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "seconds": 75.71078921499995
+        },
+        {
+          "game_id": "ls20-9607627b",
+          "seconds": 800.7119768719996
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "seconds": 936.2330813690003
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "seconds": 938.7081559069998
+        },
+        {
+          "game_id": "re86-8af5384d",
+          "seconds": 965.7555452990002
+        },
+        {
+          "game_id": "s5i5-18d95033",
+          "seconds": 996.6266670619998
+        },
+        {
+          "game_id": "sb26-7fbdac44",
+          "seconds": 1001.1615914899996
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "seconds": 1037.491660872
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "seconds": 1092.6810417139998
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "seconds": 1129.1097943169998
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "seconds": 1240.492465855
+        },
+        {
+          "game_id": "tn36-ef4dde99",
+          "seconds": 1485.0735128410001
+        },
+        {
+          "game_id": "tr87-cd924810",
+          "seconds": 1796.01509493
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "seconds": 1871.7305528030004
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "seconds": 1988.7047384110003
+        },
+        {
+          "game_id": "vc33-5430563c",
+          "seconds": 2000.2823912009999
+        }
+      ],
+      "observed_first_action_coverage_seconds": {
+        "50_percent": 938.7081559069998,
+        "90_percent": 1871.7305528030004,
+        "100_percent": 2000.2823912009999
+      },
+      "candidate_coverage_time_difference_seconds": null,
+      "snapshots": [
+        {
+          "budget_fraction": 0.1,
+          "seconds": 725.4000000000001,
+          "tail_fraction": 1.0,
+          "state_count": 10,
+          "strictly_comparable_pairs": 45,
+          "pairwise_order_reversals": 2,
+          "remaining_top3": [
+            "ar25-0c556536",
+            "cd82-fb555c5d",
+            "lp85-305b61c3"
+          ],
+          "empirical_80k_top3": [
+            "ar25-0c556536",
+            "lp85-305b61c3",
+            "cd82-fb555c5d"
+          ],
+          "states": [
+            {
+              "game_id": "ar25-0c556536",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 683.040926068,
+              "remaining_priority": 1563,
+              "empirical_80k_priority": 1391
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 1,
+              "total_levels": 9,
+              "actions_at_observed_level": 13,
+              "action_attached_tokens_at_observed_level": 48415,
+              "last_observed_action_seconds": 717.1610916869996,
+              "remaining_priority": 630,
+              "empirical_80k_priority": 271
+            },
+            {
+              "game_id": "cd82-fb555c5d",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 608.161611547,
+              "remaining_priority": 1323,
+              "empirical_80k_priority": 929
+            },
+            {
+              "game_id": "cn04-2fe56bfb",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 15,
+              "action_attached_tokens_at_observed_level": 29853,
+              "last_observed_action_seconds": 631.1691502650002,
+              "remaining_priority": 889,
+              "empirical_80k_priority": 540
+            },
+            {
+              "game_id": "dc22-fdcac232",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 3,
+              "action_attached_tokens_at_observed_level": 4704,
+              "last_observed_action_seconds": 672.3618354079998,
+              "remaining_priority": 1213,
+              "empirical_80k_priority": 821
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 4,
+              "action_attached_tokens_at_observed_level": 34489,
+              "last_observed_action_seconds": 699.1390143250003,
+              "remaining_priority": 1183,
+              "empirical_80k_priority": 865
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 36,
+              "action_attached_tokens_at_observed_level": 48891,
+              "last_observed_action_seconds": 723.8905625809998,
+              "remaining_priority": 600,
+              "empirical_80k_priority": 250
+            },
+            {
+              "game_id": "ka59-38d34dbb",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 7,
+              "action_attached_tokens_at_observed_level": 26523,
+              "last_observed_action_seconds": 648.1051278680004,
+              "remaining_priority": 946,
+              "empirical_80k_priority": 594
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 43,
+              "action_attached_tokens_at_observed_level": 30521,
+              "last_observed_action_seconds": 657.550740775,
+              "remaining_priority": 712,
+              "empirical_80k_priority": 380
+            },
+            {
+              "game_id": "lp85-305b61c3",
+              "level": 4,
+              "total_levels": 8,
+              "actions_at_observed_level": 2,
+              "action_attached_tokens_at_observed_level": 6152,
+              "last_observed_action_seconds": 658.1500027449997,
+              "remaining_priority": 1317,
+              "empirical_80k_priority": 1078
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.25,
+          "seconds": 1813.5,
+          "tail_fraction": 1.0,
+          "state_count": 21,
+          "strictly_comparable_pairs": 210,
+          "pairwise_order_reversals": 19,
+          "remaining_top3": [
+            "r11l-495a7899",
+            "ar25-0c556536",
+            "lp85-305b61c3"
+          ],
+          "empirical_80k_top3": [
+            "ar25-0c556536",
+            "lp85-305b61c3",
+            "r11l-495a7899"
+          ],
+          "states": [
+            {
+              "game_id": "ar25-0c556536",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 683.040926068,
+              "remaining_priority": 1563,
+              "empirical_80k_priority": 1391
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 7,
+              "action_attached_tokens_at_observed_level": 4194,
+              "last_observed_action_seconds": 916.055635416,
+              "remaining_priority": 946,
+              "empirical_80k_priority": 562
+            },
+            {
+              "game_id": "cd82-fb555c5d",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 8,
+              "action_attached_tokens_at_observed_level": 20715,
+              "last_observed_action_seconds": 928.5165714029998,
+              "remaining_priority": 1038,
+              "empirical_80k_priority": 666
+            },
+            {
+              "game_id": "cn04-2fe56bfb",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 16,
+              "action_attached_tokens_at_observed_level": 50388,
+              "last_observed_action_seconds": 964.3421261240002,
+              "remaining_priority": 717,
+              "empirical_80k_priority": 433
+            },
+            {
+              "game_id": "dc22-fdcac232",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 20,
+              "action_attached_tokens_at_observed_level": 23168,
+              "last_observed_action_seconds": 952.270962075,
+              "remaining_priority": 890,
+              "empirical_80k_priority": 525
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 15,
+              "action_attached_tokens_at_observed_level": 69293,
+              "last_observed_action_seconds": 1229.9488551480001,
+              "remaining_priority": 622,
+              "empirical_80k_priority": 413
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 59,
+              "action_attached_tokens_at_observed_level": 64874,
+              "last_observed_action_seconds": 972.7920869220002,
+              "remaining_priority": 457,
+              "empirical_80k_priority": 185
+            },
+            {
+              "game_id": "ka59-38d34dbb",
+              "level": 3,
+              "total_levels": 7,
+              "actions_at_observed_level": 18,
+              "action_attached_tokens_at_observed_level": 12572,
+              "last_observed_action_seconds": 1072.592362865,
+              "remaining_priority": 973,
+              "empirical_80k_priority": 638
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 44,
+              "action_attached_tokens_at_observed_level": 35842,
+              "last_observed_action_seconds": 741.548663122,
+              "remaining_priority": 678,
+              "empirical_80k_priority": 362
+            },
+            {
+              "game_id": "lp85-305b61c3",
+              "level": 6,
+              "total_levels": 8,
+              "actions_at_observed_level": 4,
+              "action_attached_tokens_at_observed_level": 1893,
+              "last_observed_action_seconds": 903.274827832,
+              "remaining_priority": 1380,
+              "empirical_80k_priority": 1296
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 79,
+              "action_attached_tokens_at_observed_level": 36228,
+              "last_observed_action_seconds": 1659.750442833,
+              "remaining_priority": 635,
+              "empirical_80k_priority": 336
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 43,
+              "action_attached_tokens_at_observed_level": 41831,
+              "last_observed_action_seconds": 1573.7452345550003,
+              "remaining_priority": 646,
+              "empirical_80k_priority": 269
+            },
+            {
+              "game_id": "r11l-495a7899",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 1747.0498983559996,
+              "remaining_priority": 1585,
+              "empirical_80k_priority": 1213
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 4,
+              "total_levels": 8,
+              "actions_at_observed_level": 28,
+              "action_attached_tokens_at_observed_level": 19213,
+              "last_observed_action_seconds": 1768.463476187,
+              "remaining_priority": 881,
+              "empirical_80k_priority": 655
+            },
+            {
+              "game_id": "s5i5-18d95033",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 15,
+              "action_attached_tokens_at_observed_level": 41649,
+              "last_observed_action_seconds": 1794.837489655,
+              "remaining_priority": 731,
+              "empirical_80k_priority": 425
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 60,
+              "action_attached_tokens_at_observed_level": 50354,
+              "last_observed_action_seconds": 1806.816564656,
+              "remaining_priority": 560,
+              "empirical_80k_priority": 228
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 3,
+              "total_levels": 8,
+              "actions_at_observed_level": 7,
+              "action_attached_tokens_at_observed_level": 2269,
+              "last_observed_action_seconds": 1804.8656268449997,
+              "remaining_priority": 1078,
+              "empirical_80k_priority": 741
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 18,
+              "action_attached_tokens_at_observed_level": 31064,
+              "last_observed_action_seconds": 1745.0800476669997,
+              "remaining_priority": 855,
+              "empirical_80k_priority": 510
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 3,
+              "total_levels": 9,
+              "actions_at_observed_level": 3,
+              "action_attached_tokens_at_observed_level": 6425,
+              "last_observed_action_seconds": 1789.4737305639999,
+              "remaining_priority": 1086,
+              "empirical_80k_priority": 752
+            },
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 26,
+              "action_attached_tokens_at_observed_level": 22779,
+              "last_observed_action_seconds": 1802.3191098150005,
+              "remaining_priority": 783,
+              "empirical_80k_priority": 333
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 4252,
+              "last_observed_action_seconds": 1796.01509493,
+              "remaining_priority": 1039,
+              "empirical_80k_priority": 553
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.5,
+          "seconds": 3627.0,
+          "tail_fraction": 1.0,
+          "state_count": 21,
+          "strictly_comparable_pairs": 209,
+          "pairwise_order_reversals": 14,
+          "remaining_top3": [
+            "re86-8af5384d",
+            "vc33-5430563c",
+            "tu93-0768757b"
+          ],
+          "empirical_80k_top3": [
+            "re86-8af5384d",
+            "vc33-5430563c",
+            "tu93-0768757b"
+          ],
+          "states": [
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 39,
+              "action_attached_tokens_at_observed_level": 51800,
+              "last_observed_action_seconds": 3566.7891461259997,
+              "remaining_priority": 580,
+              "empirical_80k_priority": 313
+            },
+            {
+              "game_id": "cn04-2fe56bfb",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 19,
+              "action_attached_tokens_at_observed_level": 58608,
+              "last_observed_action_seconds": 3411.818715668,
+              "remaining_priority": 628,
+              "empirical_80k_priority": 373
+            },
+            {
+              "game_id": "dc22-fdcac232",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 28,
+              "action_attached_tokens_at_observed_level": 29447,
+              "last_observed_action_seconds": 3551.9817025469997,
+              "remaining_priority": 859,
+              "empirical_80k_priority": 531
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 15,
+              "action_attached_tokens_at_observed_level": 69293,
+              "last_observed_action_seconds": 1229.9488551480001,
+              "remaining_priority": 622,
+              "empirical_80k_priority": 413
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 59,
+              "action_attached_tokens_at_observed_level": 64874,
+              "last_observed_action_seconds": 972.7920869220002,
+              "remaining_priority": 457,
+              "empirical_80k_priority": 185
+            },
+            {
+              "game_id": "ka59-38d34dbb",
+              "level": 6,
+              "total_levels": 7,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 30577,
+              "last_observed_action_seconds": 3606.3223684170002,
+              "remaining_priority": 611,
+              "empirical_80k_priority": 508
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 3,
+              "total_levels": 10,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 3528.1261376030006,
+              "remaining_priority": 1100,
+              "empirical_80k_priority": 764
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 79,
+              "action_attached_tokens_at_observed_level": 36228,
+              "last_observed_action_seconds": 1659.750442833,
+              "remaining_priority": 635,
+              "empirical_80k_priority": 336
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 46,
+              "action_attached_tokens_at_observed_level": 61138,
+              "last_observed_action_seconds": 1860.9343514530003,
+              "remaining_priority": 504,
+              "empirical_80k_priority": 209
+            },
+            {
+              "game_id": "r11l-495a7899",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 9,
+              "action_attached_tokens_at_observed_level": 25896,
+              "last_observed_action_seconds": 3624.518267213,
+              "remaining_priority": 776,
+              "empirical_80k_priority": 776
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 6,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 3567.7523441559997,
+              "remaining_priority": 1616,
+              "empirical_80k_priority": 1533
+            },
+            {
+              "game_id": "s5i5-18d95033",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 15,
+              "action_attached_tokens_at_observed_level": 41649,
+              "last_observed_action_seconds": 1794.837489655,
+              "remaining_priority": 731,
+              "empirical_80k_priority": 425
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 107,
+              "action_attached_tokens_at_observed_level": 61308,
+              "last_observed_action_seconds": 1979.4607359090005,
+              "remaining_priority": 419,
+              "empirical_80k_priority": 166
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 3,
+              "total_levels": 8,
+              "actions_at_observed_level": 24,
+              "action_attached_tokens_at_observed_level": 52884,
+              "last_observed_action_seconds": 3309.49944128,
+              "remaining_priority": 639,
+              "empirical_80k_priority": 404
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 23,
+              "action_attached_tokens_at_observed_level": 43422,
+              "last_observed_action_seconds": 1915.3451273959995,
+              "remaining_priority": 732,
+              "empirical_80k_priority": 425
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 4,
+              "total_levels": 9,
+              "actions_at_observed_level": 19,
+              "action_attached_tokens_at_observed_level": 30112,
+              "last_observed_action_seconds": 3592.756398367,
+              "remaining_priority": 844,
+              "empirical_80k_priority": 640
+            },
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 74,
+              "action_attached_tokens_at_observed_level": 78178,
+              "last_observed_action_seconds": 2676.881263107,
+              "remaining_priority": 354,
+              "empirical_80k_priority": 142
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 62,
+              "action_attached_tokens_at_observed_level": 10091,
+              "last_observed_action_seconds": 3368.39071051,
+              "remaining_priority": 122,
+              "empirical_80k_priority": 122
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 5,
+              "total_levels": 9,
+              "actions_at_observed_level": 5,
+              "action_attached_tokens_at_observed_level": 2674,
+              "last_observed_action_seconds": 3483.84034974,
+              "remaining_priority": 1222,
+              "empirical_80k_priority": 1082
+            },
+            {
+              "game_id": "vc33-5430563c",
+              "level": 5,
+              "total_levels": 7,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 8650,
+              "last_observed_action_seconds": 3579.176317357,
+              "remaining_priority": 1591,
+              "empirical_80k_priority": 1426
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 37,
+              "action_attached_tokens_at_observed_level": 51639,
+              "last_observed_action_seconds": 3054.6940467320005,
+              "remaining_priority": 584,
+              "empirical_80k_priority": 316
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.75,
+          "seconds": 5440.5,
+          "tail_fraction": 1.0,
+          "state_count": 19,
+          "strictly_comparable_pairs": 171,
+          "pairwise_order_reversals": 12,
+          "remaining_top3": [
+            "vc33-5430563c",
+            "g50t-5849a774",
+            "tu93-0768757b"
+          ],
+          "empirical_80k_top3": [
+            "vc33-5430563c",
+            "tu93-0768757b",
+            "g50t-5849a774"
+          ],
+          "states": [
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 39,
+              "action_attached_tokens_at_observed_level": 51800,
+              "last_observed_action_seconds": 3566.7891461259997,
+              "remaining_priority": 580,
+              "empirical_80k_priority": 313
+            },
+            {
+              "game_id": "cn04-2fe56bfb",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 21,
+              "action_attached_tokens_at_observed_level": 26999,
+              "last_observed_action_seconds": 5282.608968726,
+              "remaining_priority": 418,
+              "empirical_80k_priority": 418
+            },
+            {
+              "game_id": "dc22-fdcac232",
+              "level": 5,
+              "total_levels": 6,
+              "actions_at_observed_level": 34,
+              "action_attached_tokens_at_observed_level": 39988,
+              "last_observed_action_seconds": 5373.900870050999,
+              "remaining_priority": 586,
+              "empirical_80k_priority": 448
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 5266.974668573001,
+              "remaining_priority": 1192,
+              "empirical_80k_priority": 806
+            },
+            {
+              "game_id": "ka59-38d34dbb",
+              "level": 6,
+              "total_levels": 7,
+              "actions_at_observed_level": 36,
+              "action_attached_tokens_at_observed_level": 71444,
+              "last_observed_action_seconds": 4245.450915354,
+              "remaining_priority": 371,
+              "empirical_80k_priority": 308
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 4,
+              "total_levels": 10,
+              "actions_at_observed_level": 8,
+              "action_attached_tokens_at_observed_level": 21569,
+              "last_observed_action_seconds": 5408.011025491999,
+              "remaining_priority": 966,
+              "empirical_80k_priority": 749
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 3,
+              "total_levels": 7,
+              "actions_at_observed_level": 83,
+              "action_attached_tokens_at_observed_level": 44155,
+              "last_observed_action_seconds": 5440.052150902,
+              "remaining_priority": 583,
+              "empirical_80k_priority": 341
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 16,
+              "action_attached_tokens_at_observed_level": 14771,
+              "last_observed_action_seconds": 5370.474986293,
+              "remaining_priority": 962,
+              "empirical_80k_priority": 581
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 7,
+              "total_levels": 8,
+              "actions_at_observed_level": 39,
+              "action_attached_tokens_at_observed_level": 37326,
+              "last_observed_action_seconds": 5438.634632369,
+              "remaining_priority": 539,
+              "empirical_80k_priority": 488
+            },
+            {
+              "game_id": "s5i5-18d95033",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 167,
+              "action_attached_tokens_at_observed_level": 106089,
+              "last_observed_action_seconds": 5074.963852327999,
+              "remaining_priority": 126,
+              "empirical_80k_priority": 65
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 160,
+              "action_attached_tokens_at_observed_level": 80917,
+              "last_observed_action_seconds": 5420.218798871,
+              "remaining_priority": 237,
+              "empirical_80k_priority": 93
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 3,
+              "total_levels": 8,
+              "actions_at_observed_level": 65,
+              "action_attached_tokens_at_observed_level": 93176,
+              "last_observed_action_seconds": 4834.2036127129995,
+              "remaining_priority": 298,
+              "empirical_80k_priority": 177
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 31,
+              "action_attached_tokens_at_observed_level": 107373,
+              "last_observed_action_seconds": 4970.442169615,
+              "remaining_priority": 299,
+              "empirical_80k_priority": 169
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 4,
+              "total_levels": 9,
+              "actions_at_observed_level": 113,
+              "action_attached_tokens_at_observed_level": 67246,
+              "last_observed_action_seconds": 4225.167724791,
+              "remaining_priority": 375,
+              "empirical_80k_priority": 268
+            },
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 74,
+              "action_attached_tokens_at_observed_level": 78178,
+              "last_observed_action_seconds": 2676.881263107,
+              "remaining_priority": 354,
+              "empirical_80k_priority": 142
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 62,
+              "action_attached_tokens_at_observed_level": 10091,
+              "last_observed_action_seconds": 3368.39071051,
+              "remaining_priority": 122,
+              "empirical_80k_priority": 122
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 9,
+              "total_levels": 9,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 9219,
+              "last_observed_action_seconds": 5403.636530909,
+              "remaining_priority": 1005,
+              "empirical_80k_priority": 1005
+            },
+            {
+              "game_id": "vc33-5430563c",
+              "level": 7,
+              "total_levels": 7,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 5289.161808808001,
+              "remaining_priority": 1375,
+              "empirical_80k_priority": 1375
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 107,
+              "action_attached_tokens_at_observed_level": 90646,
+              "last_observed_action_seconds": 4912.109315683,
+              "remaining_priority": 248,
+              "empirical_80k_priority": 130
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.9,
+          "seconds": 6528.6,
+          "tail_fraction": 0.49999999999999967,
+          "state_count": 16,
+          "strictly_comparable_pairs": 119,
+          "pairwise_order_reversals": 9,
+          "remaining_top3": [
+            "ls20-9607627b",
+            "m0r0-492f87ba",
+            "su15-1944f8ab"
+          ],
+          "empirical_80k_top3": [
+            "ls20-9607627b",
+            "m0r0-492f87ba",
+            "su15-1944f8ab"
+          ],
+          "states": [
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 39,
+              "action_attached_tokens_at_observed_level": 51800,
+              "last_observed_action_seconds": 3566.7891461259997,
+              "remaining_priority": 303,
+              "empirical_80k_priority": 169
+            },
+            {
+              "game_id": "dc22-fdcac232",
+              "level": 5,
+              "total_levels": 6,
+              "actions_at_observed_level": 70,
+              "action_attached_tokens_at_observed_level": 101402,
+              "last_observed_action_seconds": 6528.190787656001,
+              "remaining_priority": 105,
+              "empirical_80k_priority": 79
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 3,
+              "total_levels": 7,
+              "actions_at_observed_level": 29,
+              "action_attached_tokens_at_observed_level": 42735,
+              "last_observed_action_seconds": 6512.870423728,
+              "remaining_priority": 409,
+              "empirical_80k_priority": 275
+            },
+            {
+              "game_id": "ka59-38d34dbb",
+              "level": 6,
+              "total_levels": 7,
+              "actions_at_observed_level": 80,
+              "action_attached_tokens_at_observed_level": 112885,
+              "last_observed_action_seconds": 6277.678671005,
+              "remaining_priority": 80,
+              "empirical_80k_priority": 65
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 4,
+              "total_levels": 10,
+              "actions_at_observed_level": 14,
+              "action_attached_tokens_at_observed_level": 84771,
+              "last_observed_action_seconds": 6483.484323434,
+              "remaining_priority": 255,
+              "empirical_80k_priority": 203
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 5,
+              "total_levels": 7,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 6418.226051978,
+              "remaining_priority": 1332,
+              "empirical_80k_priority": 1248
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 4,
+              "total_levels": 6,
+              "actions_at_observed_level": 11,
+              "action_attached_tokens_at_observed_level": 7527,
+              "last_observed_action_seconds": 6528.505158915001,
+              "remaining_priority": 847,
+              "empirical_80k_priority": 722
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 7,
+              "total_levels": 8,
+              "actions_at_observed_level": 140,
+              "action_attached_tokens_at_observed_level": 65242,
+              "last_observed_action_seconds": 6150.0281758440005,
+              "remaining_priority": 120,
+              "empirical_80k_priority": 106
+            },
+            {
+              "game_id": "s5i5-18d95033",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 167,
+              "action_attached_tokens_at_observed_level": 106089,
+              "last_observed_action_seconds": 5074.963852327999,
+              "remaining_priority": 63,
+              "empirical_80k_priority": 33
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 196,
+              "action_attached_tokens_at_observed_level": 89892,
+              "last_observed_action_seconds": 5617.271325703,
+              "remaining_priority": 83,
+              "empirical_80k_priority": 33
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 3,
+              "total_levels": 8,
+              "actions_at_observed_level": 65,
+              "action_attached_tokens_at_observed_level": 93176,
+              "last_observed_action_seconds": 4834.2036127129995,
+              "remaining_priority": 155,
+              "empirical_80k_priority": 95
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 34,
+              "action_attached_tokens_at_observed_level": 119039,
+              "last_observed_action_seconds": 6436.932725455001,
+              "remaining_priority": 145,
+              "empirical_80k_priority": 87
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 5,
+              "total_levels": 9,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 25720,
+              "last_observed_action_seconds": 6519.973125845,
+              "remaining_priority": 455,
+              "empirical_80k_priority": 392
+            },
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 188,
+              "action_attached_tokens_at_observed_level": 125296,
+              "last_observed_action_seconds": 6435.774758085001,
+              "remaining_priority": 33,
+              "empirical_80k_priority": 13
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 62,
+              "action_attached_tokens_at_observed_level": 10091,
+              "last_observed_action_seconds": 3368.39071051,
+              "remaining_priority": 122,
+              "empirical_80k_priority": 122
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 107,
+              "action_attached_tokens_at_observed_level": 90646,
+              "last_observed_action_seconds": 4912.109315683,
+              "remaining_priority": 125,
+              "empirical_80k_priority": 66
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "006-transient-history",
+      "budget_seconds": 3482,
+      "game_count": 12,
+      "source_hashes": {
+        "runs/006-transient-history/baseline/benchmark.json": "97ac44dcd8456cd6d3d743f413d6aff71f5474889eeba075e325e07240177c8a",
+        "runs/006-transient-history/baseline/arm-metadata.json": "38b63b67ccae43cfe58c1dd4778a193233a055bee411741565da2832cff58a58"
+      },
+      "observed_first_actions": [
+        {
+          "game_id": "sp80-589a99af",
+          "seconds": 18.104951140999976
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "seconds": 19.003528982000088
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "seconds": 22.623617755999945
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "seconds": 23.736740474999987
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "seconds": 28.207199119999995
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "seconds": 34.03162890899997
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "seconds": 35.72691705600005
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "seconds": 51.779575996000034
+        },
+        {
+          "game_id": "tn36-ef4dde99",
+          "seconds": 60.20108849599999
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "seconds": 64.25703958700002
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "seconds": 812.627234174
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "seconds": 853.1483029489999
+        }
+      ],
+      "observed_first_action_coverage_seconds": {
+        "50_percent": 34.03162890899997,
+        "90_percent": 812.627234174,
+        "100_percent": 853.1483029489999
+      },
+      "candidate_coverage_time_difference_seconds": null,
+      "snapshots": [
+        {
+          "budget_fraction": 0.1,
+          "seconds": 348.20000000000005,
+          "tail_fraction": 1.0,
+          "state_count": 10,
+          "strictly_comparable_pairs": 45,
+          "pairwise_order_reversals": 4,
+          "remaining_top3": [
+            "sc25-635fd71a",
+            "sp80-589a99af",
+            "m0r0-492f87ba"
+          ],
+          "empirical_80k_top3": [
+            "sc25-635fd71a",
+            "sp80-589a99af",
+            "su15-1944f8ab"
+          ],
+          "states": [
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 17,
+              "action_attached_tokens_at_observed_level": 19910,
+              "last_observed_action_seconds": 316.97662066500004,
+              "remaining_priority": 821,
+              "empirical_80k_priority": 362
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 343.7931063239999,
+              "remaining_priority": 1585,
+              "empirical_80k_priority": 1213
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 2,
+              "action_attached_tokens_at_observed_level": 5392,
+              "last_observed_action_seconds": 240.2167250389999,
+              "remaining_priority": 1244,
+              "empirical_80k_priority": 851
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 1,
+              "total_levels": 9,
+              "actions_at_observed_level": 9,
+              "action_attached_tokens_at_observed_level": 22889,
+              "last_observed_action_seconds": 346.4447818810001,
+              "remaining_priority": 806,
+              "empirical_80k_priority": 354
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 18,
+              "action_attached_tokens_at_observed_level": 16408,
+              "last_observed_action_seconds": 258.05343819199993,
+              "remaining_priority": 817,
+              "empirical_80k_priority": 351
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 12385,
+              "last_observed_action_seconds": 322.033447308,
+              "remaining_priority": 871,
+              "empirical_80k_priority": 495
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 9,
+              "action_attached_tokens_at_observed_level": 12269,
+              "last_observed_action_seconds": 340.70513715999994,
+              "remaining_priority": 912,
+              "empirical_80k_priority": 535
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 1,
+              "total_levels": 9,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 20215,
+              "last_observed_action_seconds": 311.7757821510001,
+              "remaining_priority": 764,
+              "empirical_80k_priority": 312
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 7,
+              "action_attached_tokens_at_observed_level": 15669,
+              "last_observed_action_seconds": 249.17998641600002,
+              "remaining_priority": 889,
+              "empirical_80k_priority": 419
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 8,
+              "action_attached_tokens_at_observed_level": 15580,
+              "last_observed_action_seconds": 238.015925902,
+              "remaining_priority": 918,
+              "empirical_80k_priority": 447
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.25,
+          "seconds": 870.5,
+          "tail_fraction": 1.0,
+          "state_count": 12,
+          "strictly_comparable_pairs": 66,
+          "pairwise_order_reversals": 5,
+          "remaining_top3": [
+            "ft09-0d8bbf25",
+            "ar25-0c556536",
+            "sc25-635fd71a"
+          ],
+          "empirical_80k_top3": [
+            "ft09-0d8bbf25",
+            "sc25-635fd71a",
+            "sp80-589a99af"
+          ],
+          "states": [
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 36,
+              "action_attached_tokens_at_observed_level": 43926,
+              "last_observed_action_seconds": 669.9018700810001,
+              "remaining_priority": 635,
+              "empirical_80k_priority": 264
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 4,
+              "total_levels": 6,
+              "actions_at_observed_level": 29,
+              "action_attached_tokens_at_observed_level": 8370,
+              "last_observed_action_seconds": 758.4941670649999,
+              "remaining_priority": 905,
+              "empirical_80k_priority": 659
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 14,
+              "action_attached_tokens_at_observed_level": 41849,
+              "last_observed_action_seconds": 776.654300688,
+              "remaining_priority": 806,
+              "empirical_80k_priority": 493
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 1,
+              "total_levels": 9,
+              "actions_at_observed_level": 10,
+              "action_attached_tokens_at_observed_level": 30146,
+              "last_observed_action_seconds": 450.3246000379999,
+              "remaining_priority": 763,
+              "empirical_80k_priority": 333
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 29,
+              "action_attached_tokens_at_observed_level": 56956,
+              "last_observed_action_seconds": 832.5916226060001,
+              "remaining_priority": 547,
+              "empirical_80k_priority": 228
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 33,
+              "action_attached_tokens_at_observed_level": 46548,
+              "last_observed_action_seconds": 865.4591689960001,
+              "remaining_priority": 622,
+              "empirical_80k_priority": 336
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 34539,
+              "last_observed_action_seconds": 656.421092686,
+              "remaining_priority": 777,
+              "empirical_80k_priority": 449
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 21,
+              "action_attached_tokens_at_observed_level": 31498,
+              "last_observed_action_seconds": 835.928545726,
+              "remaining_priority": 760,
+              "empirical_80k_priority": 424
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 1,
+              "total_levels": 7,
+              "actions_at_observed_level": 25,
+              "action_attached_tokens_at_observed_level": 55234,
+              "last_observed_action_seconds": 820.5734974019999,
+              "remaining_priority": 572,
+              "empirical_80k_priority": 245
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 41,
+              "action_attached_tokens_at_observed_level": 54659,
+              "last_observed_action_seconds": 818.917003067,
+              "remaining_priority": 558,
+              "empirical_80k_priority": 233
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 1948,
+              "last_observed_action_seconds": 866.331752159,
+              "remaining_priority": 1283,
+              "empirical_80k_priority": 889
+            },
+            {
+              "game_id": "ar25-0c556536",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 1265,
+              "last_observed_action_seconds": 853.1483029489999,
+              "remaining_priority": 941,
+              "empirical_80k_priority": 455
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.5,
+          "seconds": 1741.0,
+          "tail_fraction": 1.0,
+          "state_count": 12,
+          "strictly_comparable_pairs": 66,
+          "pairwise_order_reversals": 6,
+          "remaining_top3": [
+            "ar25-0c556536",
+            "bp35-0a0ad940",
+            "sk48-d8078629"
+          ],
+          "empirical_80k_top3": [
+            "ar25-0c556536",
+            "bp35-0a0ad940",
+            "ft09-0d8bbf25"
+          ],
+          "states": [
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 56,
+              "action_attached_tokens_at_observed_level": 41624,
+              "last_observed_action_seconds": 1727.286214653,
+              "remaining_priority": 637,
+              "empirical_80k_priority": 342
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 5,
+              "total_levels": 6,
+              "actions_at_observed_level": 47,
+              "action_attached_tokens_at_observed_level": 36719,
+              "last_observed_action_seconds": 1722.5393399430002,
+              "remaining_priority": 533,
+              "empirical_80k_priority": 393
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 36,
+              "action_attached_tokens_at_observed_level": 89693,
+              "last_observed_action_seconds": 1522.79656479,
+              "remaining_priority": 363,
+              "empirical_80k_priority": 202
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 3,
+              "action_attached_tokens_at_observed_level": 4965,
+              "last_observed_action_seconds": 1673.4164337680002,
+              "remaining_priority": 991,
+              "empirical_80k_priority": 607
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 11,
+              "action_attached_tokens_at_observed_level": 33050,
+              "last_observed_action_seconds": 1539.2730886590002,
+              "remaining_priority": 818,
+              "empirical_80k_priority": 485
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 99,
+              "action_attached_tokens_at_observed_level": 78189,
+              "last_observed_action_seconds": 1571.373402385,
+              "remaining_priority": 322,
+              "empirical_80k_priority": 168
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 20,
+              "action_attached_tokens_at_observed_level": 83155,
+              "last_observed_action_seconds": 1471.7983422089999,
+              "remaining_priority": 403,
+              "empirical_80k_priority": 225
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 52,
+              "action_attached_tokens_at_observed_level": 65691,
+              "last_observed_action_seconds": 1512.354184013,
+              "remaining_priority": 463,
+              "empirical_80k_priority": 247
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 16,
+              "action_attached_tokens_at_observed_level": 34818,
+              "last_observed_action_seconds": 1699.9124171899998,
+              "remaining_priority": 803,
+              "empirical_80k_priority": 475
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 46,
+              "action_attached_tokens_at_observed_level": 72127,
+              "last_observed_action_seconds": 1694.7424398179999,
+              "remaining_priority": 430,
+              "empirical_80k_priority": 178
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 16,
+              "action_attached_tokens_at_observed_level": 9093,
+              "last_observed_action_seconds": 1544.4261239229997,
+              "remaining_priority": 575,
+              "empirical_80k_priority": 575
+            },
+            {
+              "game_id": "ar25-0c556536",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 1601.697168677,
+              "remaining_priority": 1563,
+              "empirical_80k_priority": 1391
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.75,
+          "seconds": 2611.5,
+          "tail_fraction": 1.0,
+          "state_count": 11,
+          "strictly_comparable_pairs": 55,
+          "pairwise_order_reversals": 1,
+          "remaining_top3": [
+            "ar25-0c556536",
+            "g50t-5849a774",
+            "lf52-271a04aa"
+          ],
+          "empirical_80k_top3": [
+            "ar25-0c556536",
+            "g50t-5849a774",
+            "lf52-271a04aa"
+          ],
+          "states": [
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 101,
+              "action_attached_tokens_at_observed_level": 92678,
+              "last_observed_action_seconds": 2542.940469074,
+              "remaining_priority": 249,
+              "empirical_80k_priority": 131
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 28,
+              "action_attached_tokens_at_observed_level": 24804,
+              "last_observed_action_seconds": 2406.382966779,
+              "remaining_priority": 318,
+              "empirical_80k_priority": 318
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 38,
+              "action_attached_tokens_at_observed_level": 107340,
+              "last_observed_action_seconds": 1792.661054692,
+              "remaining_priority": 287,
+              "empirical_80k_priority": 159
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 30,
+              "action_attached_tokens_at_observed_level": 40313,
+              "last_observed_action_seconds": 2196.7606466830002,
+              "remaining_priority": 678,
+              "empirical_80k_priority": 371
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 64,
+              "action_attached_tokens_at_observed_level": 91717,
+              "last_observed_action_seconds": 2495.880569193,
+              "remaining_priority": 301,
+              "empirical_80k_priority": 160
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 3,
+              "total_levels": 10,
+              "actions_at_observed_level": 21,
+              "action_attached_tokens_at_observed_level": 41152,
+              "last_observed_action_seconds": 2597.705460574,
+              "remaining_priority": 708,
+              "empirical_80k_priority": 440
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 33,
+              "action_attached_tokens_at_observed_level": 128929,
+              "last_observed_action_seconds": 2386.2214541270005,
+              "remaining_priority": 231,
+              "empirical_80k_priority": 125
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 87,
+              "action_attached_tokens_at_observed_level": 132584,
+              "last_observed_action_seconds": 2583.505691771,
+              "remaining_priority": 162,
+              "empirical_80k_priority": 85
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 3,
+              "total_levels": 7,
+              "actions_at_observed_level": 11,
+              "action_attached_tokens_at_observed_level": 33575,
+              "last_observed_action_seconds": 2584.886824412,
+              "remaining_priority": 932,
+              "empirical_80k_priority": 636
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 89,
+              "action_attached_tokens_at_observed_level": 112022,
+              "last_observed_action_seconds": 2341.7852219150004,
+              "remaining_priority": 197,
+              "empirical_80k_priority": 79
+            },
+            {
+              "game_id": "ar25-0c556536",
+              "level": 7,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 2239.5501335159997,
+              "remaining_priority": 1569,
+              "empirical_80k_priority": 1505
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.9,
+          "seconds": 3133.8,
+          "tail_fraction": 0.49999999999999967,
+          "state_count": 11,
+          "strictly_comparable_pairs": 55,
+          "pairwise_order_reversals": 3,
+          "remaining_top3": [
+            "ar25-0c556536",
+            "g50t-5849a774",
+            "lf52-271a04aa"
+          ],
+          "empirical_80k_top3": [
+            "ar25-0c556536",
+            "g50t-5849a774",
+            "lf52-271a04aa"
+          ],
+          "states": [
+            {
+              "game_id": "tn36-ef4dde99",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 122,
+              "action_attached_tokens_at_observed_level": 125927,
+              "last_observed_action_seconds": 3072.1740514239996,
+              "remaining_priority": 64,
+              "empirical_80k_priority": 34
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 75,
+              "action_attached_tokens_at_observed_level": 70024,
+              "last_observed_action_seconds": 3128.997257464,
+              "remaining_priority": 48,
+              "empirical_80k_priority": 48
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 83,
+              "action_attached_tokens_at_observed_level": 163603,
+              "last_observed_action_seconds": 3115.7028245480005,
+              "remaining_priority": 77,
+              "empirical_80k_priority": 41
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 30,
+              "action_attached_tokens_at_observed_level": 40313,
+              "last_observed_action_seconds": 2196.7606466830002,
+              "remaining_priority": 359,
+              "empirical_80k_priority": 205
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 3,
+              "total_levels": 8,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 3997,
+              "last_observed_action_seconds": 3089.117636742,
+              "remaining_priority": 606,
+              "empirical_80k_priority": 438
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 4,
+              "total_levels": 10,
+              "actions_at_observed_level": 3,
+              "action_attached_tokens_at_observed_level": 2581,
+              "last_observed_action_seconds": 3126.1875887889996,
+              "remaining_priority": 718,
+              "empirical_80k_priority": 602
+            },
+            {
+              "game_id": "su15-1944f8ab",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 51,
+              "action_attached_tokens_at_observed_level": 176440,
+              "last_observed_action_seconds": 3062.4925724460004,
+              "remaining_priority": 94,
+              "empirical_80k_priority": 51
+            },
+            {
+              "game_id": "wa30-ee6fef47",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 87,
+              "action_attached_tokens_at_observed_level": 132584,
+              "last_observed_action_seconds": 2583.505691771,
+              "remaining_priority": 82,
+              "empirical_80k_priority": 43
+            },
+            {
+              "game_id": "g50t-5849a774",
+              "level": 4,
+              "total_levels": 7,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 2911.31610089,
+              "remaining_priority": 1185,
+              "empirical_80k_priority": 1051
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 145,
+              "action_attached_tokens_at_observed_level": 144807,
+              "last_observed_action_seconds": 3124.2613285370003,
+              "remaining_priority": 40,
+              "empirical_80k_priority": 16
+            },
+            {
+              "game_id": "ar25-0c556536",
+              "level": 8,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 2984.7728661419997,
+              "remaining_priority": 1222,
+              "empirical_80k_priority": 1222
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "007-program-state",
+      "budget_seconds": 3482,
+      "game_count": 12,
+      "source_hashes": {
+        "runs/007-program-state/baseline/benchmark.json": "1d29a389986db8a5e2761575d90d388d822055a828368431cba821d29077684b",
+        "runs/007-program-state/baseline/arm-metadata.json": "91ed8530c54a0337997dd73319340462e3e24a5bdaa09b0c2dce2171ce8b951d"
+      },
+      "observed_first_actions": [
+        {
+          "game_id": "m0r0-492f87ba",
+          "seconds": 22.91618838000001
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "seconds": 23.357537460999943
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "seconds": 24.89615836400003
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "seconds": 29.48598992500002
+        },
+        {
+          "game_id": "tr87-cd924810",
+          "seconds": 32.22875560999992
+        },
+        {
+          "game_id": "re86-8af5384d",
+          "seconds": 36.144232915999986
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "seconds": 38.06233300900003
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "seconds": 44.44025228000004
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "seconds": 49.63883177799994
+        },
+        {
+          "game_id": "ls20-9607627b",
+          "seconds": 57.16320331100006
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "seconds": 856.437745594
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "seconds": 932.547677614
+        }
+      ],
+      "observed_first_action_coverage_seconds": {
+        "50_percent": 36.144232915999986,
+        "90_percent": 856.437745594,
+        "100_percent": 932.547677614
+      },
+      "candidate_coverage_time_difference_seconds": null,
+      "snapshots": [
+        {
+          "budget_fraction": 0.1,
+          "seconds": 348.20000000000005,
+          "tail_fraction": 1.0,
+          "state_count": 10,
+          "strictly_comparable_pairs": 45,
+          "pairwise_order_reversals": 1,
+          "remaining_top3": [
+            "ft09-0d8bbf25",
+            "sp80-589a99af",
+            "ls20-9607627b"
+          ],
+          "empirical_80k_top3": [
+            "ft09-0d8bbf25",
+            "sp80-589a99af",
+            "ls20-9607627b"
+          ],
+          "states": [
+            {
+              "game_id": "ar25-0c556536",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 6,
+              "action_attached_tokens_at_observed_level": 12474,
+              "last_observed_action_seconds": 291.0851893750001,
+              "remaining_priority": 977,
+              "empirical_80k_priority": 600
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 10,
+              "action_attached_tokens_at_observed_level": 20521,
+              "last_observed_action_seconds": 320.27203553799995,
+              "remaining_priority": 881,
+              "empirical_80k_priority": 421
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 14,
+              "action_attached_tokens_at_observed_level": 14894,
+              "last_observed_action_seconds": 320.3804229079999,
+              "remaining_priority": 895,
+              "empirical_80k_priority": 523
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 18,
+              "action_attached_tokens_at_observed_level": 18640,
+              "last_observed_action_seconds": 300.815958723,
+              "remaining_priority": 844,
+              "empirical_80k_priority": 381
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 1,
+              "action_attached_tokens_at_observed_level": 2791,
+              "last_observed_action_seconds": 221.51211481400009,
+              "remaining_priority": 1282,
+              "empirical_80k_priority": 889
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 32,
+              "action_attached_tokens_at_observed_level": 15448,
+              "last_observed_action_seconds": 248.446836728,
+              "remaining_priority": 792,
+              "empirical_80k_priority": 328
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 286.23911082300003,
+              "remaining_priority": 1192,
+              "empirical_80k_priority": 806
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 14,
+              "action_attached_tokens_at_observed_level": 7489,
+              "last_observed_action_seconds": 320.89643125900005,
+              "remaining_priority": 891,
+              "empirical_80k_priority": 510
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 11239,
+              "last_observed_action_seconds": 340.18830326400007,
+              "remaining_priority": 874,
+              "empirical_80k_priority": 496
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 255.520957362,
+              "remaining_priority": 1585,
+              "empirical_80k_priority": 1213
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.25,
+          "seconds": 870.5,
+          "tail_fraction": 1.0,
+          "state_count": 11,
+          "strictly_comparable_pairs": 55,
+          "pairwise_order_reversals": 6,
+          "remaining_top3": [
+            "tr87-cd924810",
+            "ar25-0c556536",
+            "sc25-635fd71a"
+          ],
+          "empirical_80k_top3": [
+            "tr87-cd924810",
+            "ar25-0c556536",
+            "ft09-0d8bbf25"
+          ],
+          "states": [
+            {
+              "game_id": "ar25-0c556536",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 857.317333167,
+              "remaining_priority": 1563,
+              "empirical_80k_priority": 1391
+            },
+            {
+              "game_id": "tr87-cd924810",
+              "level": 5,
+              "total_levels": 6,
+              "actions_at_observed_level": 0,
+              "action_attached_tokens_at_observed_level": 0,
+              "last_observed_action_seconds": 852.728952075,
+              "remaining_priority": 1809,
+              "empirical_80k_priority": 1636
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 4,
+              "total_levels": 8,
+              "actions_at_observed_level": 54,
+              "action_attached_tokens_at_observed_level": 9507,
+              "last_observed_action_seconds": 870.2468059299999,
+              "remaining_priority": 820,
+              "empirical_80k_priority": 592
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 32,
+              "action_attached_tokens_at_observed_level": 56199,
+              "last_observed_action_seconds": 870.4208365090001,
+              "remaining_priority": 562,
+              "empirical_80k_priority": 240
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 6,
+              "action_attached_tokens_at_observed_level": 38557,
+              "last_observed_action_seconds": 741.156296617,
+              "remaining_priority": 938,
+              "empirical_80k_priority": 614
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 38,
+              "action_attached_tokens_at_observed_level": 51649,
+              "last_observed_action_seconds": 782.6742406240002,
+              "remaining_priority": 573,
+              "empirical_80k_priority": 235
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 2,
+              "total_levels": 7,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 27114,
+              "last_observed_action_seconds": 676.8492631350001,
+              "remaining_priority": 773,
+              "empirical_80k_priority": 429
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 4,
+              "total_levels": 9,
+              "actions_at_observed_level": 25,
+              "action_attached_tokens_at_observed_level": 15339,
+              "last_observed_action_seconds": 845.7795334320001,
+              "remaining_priority": 886,
+              "empirical_80k_priority": 662
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 2,
+              "total_levels": 10,
+              "actions_at_observed_level": 37,
+              "action_attached_tokens_at_observed_level": 43758,
+              "last_observed_action_seconds": 839.3087640860001,
+              "remaining_priority": 635,
+              "empirical_80k_priority": 341
+            },
+            {
+              "game_id": "ft09-0d8bbf25",
+              "level": 5,
+              "total_levels": 6,
+              "actions_at_observed_level": 13,
+              "action_attached_tokens_at_observed_level": 19647,
+              "last_observed_action_seconds": 823.5060118270001,
+              "remaining_priority": 1010,
+              "empirical_80k_priority": 846
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 1,
+              "total_levels": 6,
+              "actions_at_observed_level": 2,
+              "action_attached_tokens_at_observed_level": 1797,
+              "last_observed_action_seconds": 870.4213248789999,
+              "remaining_priority": 1024,
+              "empirical_80k_priority": 536
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.5,
+          "seconds": 1741.0,
+          "tail_fraction": 1.0,
+          "state_count": 10,
+          "strictly_comparable_pairs": 45,
+          "pairwise_order_reversals": 5,
+          "remaining_top3": [
+            "tu93-0768757b",
+            "sc25-635fd71a",
+            "ar25-0c556536"
+          ],
+          "empirical_80k_top3": [
+            "tu93-0768757b",
+            "ar25-0c556536",
+            "sc25-635fd71a"
+          ],
+          "states": [
+            {
+              "game_id": "ar25-0c556536",
+              "level": 6,
+              "total_levels": 8,
+              "actions_at_observed_level": 4,
+              "action_attached_tokens_at_observed_level": 30773,
+              "last_observed_action_seconds": 1686.1857984560002,
+              "remaining_priority": 1218,
+              "empirical_80k_priority": 1144
+            },
+            {
+              "game_id": "re86-8af5384d",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 168,
+              "action_attached_tokens_at_observed_level": 35010,
+              "last_observed_action_seconds": 1506.162299584,
+              "remaining_priority": 535,
+              "empirical_80k_priority": 421
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 16,
+              "action_attached_tokens_at_observed_level": 15585,
+              "last_observed_action_seconds": 1672.2077141720001,
+              "remaining_priority": 959,
+              "empirical_80k_priority": 579
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 14,
+              "action_attached_tokens_at_observed_level": 91159,
+              "last_observed_action_seconds": 1539.02923535,
+              "remaining_priority": 421,
+              "empirical_80k_priority": 257
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 1,
+              "total_levels": 8,
+              "actions_at_observed_level": 48,
+              "action_attached_tokens_at_observed_level": 66332,
+              "last_observed_action_seconds": 1012.9027046940001,
+              "remaining_priority": 458,
+              "empirical_80k_priority": 186
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 3,
+              "total_levels": 7,
+              "actions_at_observed_level": 41,
+              "action_attached_tokens_at_observed_level": 30743,
+              "last_observed_action_seconds": 1726.2788807450002,
+              "remaining_priority": 761,
+              "empirical_80k_priority": 465
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 7,
+              "total_levels": 9,
+              "actions_at_observed_level": 4,
+              "action_attached_tokens_at_observed_level": 5622,
+              "last_observed_action_seconds": 1737.2903433169997,
+              "remaining_priority": 1329,
+              "empirical_80k_priority": 1330
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 3,
+              "total_levels": 10,
+              "actions_at_observed_level": 8,
+              "action_attached_tokens_at_observed_level": 13222,
+              "last_observed_action_seconds": 1713.349550324,
+              "remaining_priority": 948,
+              "empirical_80k_priority": 621
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 4,
+              "total_levels": 6,
+              "actions_at_observed_level": 10,
+              "action_attached_tokens_at_observed_level": 5934,
+              "last_observed_action_seconds": 1681.1744963689998,
+              "remaining_priority": 1227,
+              "empirical_80k_priority": 977
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 1,
+              "total_levels": 9,
+              "actions_at_observed_level": 26,
+              "action_attached_tokens_at_observed_level": 48660,
+              "last_observed_action_seconds": 1654.2150972180002,
+              "remaining_priority": 605,
+              "empirical_80k_priority": 251
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.75,
+          "seconds": 2611.5,
+          "tail_fraction": 1.0,
+          "state_count": 9,
+          "strictly_comparable_pairs": 36,
+          "pairwise_order_reversals": 5,
+          "remaining_top3": [
+            "lf52-271a04aa",
+            "tu93-0768757b",
+            "ls20-9607627b"
+          ],
+          "empirical_80k_top3": [
+            "tu93-0768757b",
+            "lf52-271a04aa",
+            "sc25-635fd71a"
+          ],
+          "states": [
+            {
+              "game_id": "re86-8af5384d",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 276,
+              "action_attached_tokens_at_observed_level": 98131,
+              "last_observed_action_seconds": 2549.980599018,
+              "remaining_priority": 110,
+              "empirical_80k_priority": 86
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 38902,
+              "last_observed_action_seconds": 2557.147419956,
+              "remaining_priority": 754,
+              "empirical_80k_priority": 454
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 28,
+              "action_attached_tokens_at_observed_level": 153941,
+              "last_observed_action_seconds": 2457.722354329,
+              "remaining_priority": 229,
+              "empirical_80k_priority": 130
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 25427,
+              "last_observed_action_seconds": 2590.2728846249997,
+              "remaining_priority": 860,
+              "empirical_80k_priority": 507
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 4,
+              "total_levels": 7,
+              "actions_at_observed_level": 25,
+              "action_attached_tokens_at_observed_level": 31590,
+              "last_observed_action_seconds": 2582.028949458,
+              "remaining_priority": 865,
+              "empirical_80k_priority": 632
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 8,
+              "total_levels": 9,
+              "actions_at_observed_level": 9,
+              "action_attached_tokens_at_observed_level": 23673,
+              "last_observed_action_seconds": 2467.820048468,
+              "remaining_priority": 953,
+              "empirical_80k_priority": 944
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 4,
+              "total_levels": 10,
+              "actions_at_observed_level": 12,
+              "action_attached_tokens_at_observed_level": 13519,
+              "last_observed_action_seconds": 2601.920932299,
+              "remaining_priority": 956,
+              "empirical_80k_priority": 732
+            },
+            {
+              "game_id": "sc25-635fd71a",
+              "level": 6,
+              "total_levels": 6,
+              "actions_at_observed_level": 13,
+              "action_attached_tokens_at_observed_level": 7915,
+              "last_observed_action_seconds": 2611.060216058,
+              "remaining_priority": 672,
+              "empirical_80k_priority": 672
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 34,
+              "action_attached_tokens_at_observed_level": 33514,
+              "last_observed_action_seconds": 2599.67500377,
+              "remaining_priority": 715,
+              "empirical_80k_priority": 389
+            }
+          ]
+        },
+        {
+          "budget_fraction": 0.9,
+          "seconds": 3133.8,
+          "tail_fraction": 0.49999999999999967,
+          "state_count": 8,
+          "strictly_comparable_pairs": 28,
+          "pairwise_order_reversals": 2,
+          "remaining_top3": [
+            "tu93-0768757b",
+            "m0r0-492f87ba",
+            "lf52-271a04aa"
+          ],
+          "empirical_80k_top3": [
+            "tu93-0768757b",
+            "lf52-271a04aa",
+            "m0r0-492f87ba"
+          ],
+          "states": [
+            {
+              "game_id": "re86-8af5384d",
+              "level": 5,
+              "total_levels": 8,
+              "actions_at_observed_level": 322,
+              "action_attached_tokens_at_observed_level": 119035,
+              "last_observed_action_seconds": 2920.305216144,
+              "remaining_priority": 23,
+              "empirical_80k_priority": 18
+            },
+            {
+              "game_id": "m0r0-492f87ba",
+              "level": 3,
+              "total_levels": 6,
+              "actions_at_observed_level": 37,
+              "action_attached_tokens_at_observed_level": 47988,
+              "last_observed_action_seconds": 2684.222821437,
+              "remaining_priority": 384,
+              "empirical_80k_priority": 248
+            },
+            {
+              "game_id": "sp80-589a99af",
+              "level": 2,
+              "total_levels": 6,
+              "actions_at_observed_level": 44,
+              "action_attached_tokens_at_observed_level": 187729,
+              "last_observed_action_seconds": 2975.10543537,
+              "remaining_priority": 106,
+              "empirical_80k_priority": 61
+            },
+            {
+              "game_id": "sk48-d8078629",
+              "level": 2,
+              "total_levels": 8,
+              "actions_at_observed_level": 38,
+              "action_attached_tokens_at_observed_level": 58757,
+              "last_observed_action_seconds": 3072.0958022819996,
+              "remaining_priority": 284,
+              "empirical_80k_priority": 162
+            },
+            {
+              "game_id": "ls20-9607627b",
+              "level": 4,
+              "total_levels": 7,
+              "actions_at_observed_level": 115,
+              "action_attached_tokens_at_observed_level": 65098,
+              "last_observed_action_seconds": 3117.75323168,
+              "remaining_priority": 201,
+              "empirical_80k_priority": 138
+            },
+            {
+              "game_id": "tu93-0768757b",
+              "level": 8,
+              "total_levels": 9,
+              "actions_at_observed_level": 9,
+              "action_attached_tokens_at_observed_level": 23673,
+              "last_observed_action_seconds": 2467.820048468,
+              "remaining_priority": 721,
+              "empirical_80k_priority": 717
+            },
+            {
+              "game_id": "lf52-271a04aa",
+              "level": 4,
+              "total_levels": 10,
+              "actions_at_observed_level": 35,
+              "action_attached_tokens_at_observed_level": 39117,
+              "last_observed_action_seconds": 3012.7733324009996,
+              "remaining_priority": 377,
+              "empirical_80k_priority": 284
+            },
+            {
+              "game_id": "bp35-0a0ad940",
+              "level": 2,
+              "total_levels": 9,
+              "actions_at_observed_level": 45,
+              "action_attached_tokens_at_observed_level": 67674,
+              "last_observed_action_seconds": 3079.876746401,
+              "remaining_priority": 238,
+              "empirical_80k_priority": 132
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

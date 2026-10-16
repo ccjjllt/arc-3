@@ -1,0 +1,290 @@
+{
+  "id": "009-baseline-submission",
+  "revision": 2,
+  "config": {
+    "id": "009-baseline-submission",
+    "kernel_id": "ccjjllt/arc3-009-baseline-submission",
+    "kernel_title": "ARC3 009 Baseline Submission",
+    "purpose": "First formal competition baseline; ordinary Franzen v3 notebook cells, mounted input-path resolution, and a real GPU save smoke before submission",
+    "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+    "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "hard_limit_seconds": 32400,
+    "machine_shape": "NvidiaRtxPro6000",
+    "enable_internet": false,
+    "input_resolution_timeout_seconds": 60,
+    "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+    "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+    "save_placeholder_is_scored": false,
+    "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+    "solver": {
+      "n_passes": 1,
+      "concurrency": 120,
+      "active_streams": 10,
+      "max_runtime_s_per_game": 31920,
+      "warmup_action_games": 1,
+      "save_request_logs": false,
+      "research_interventions": []
+    },
+    "official_save_protocol": {
+      "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+      "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+      "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+      "observed_date_local": "2026-10-12",
+      "relevant_lines": "2-10, 75-78, 114-133",
+      "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+    },
+    "revision": 2,
+    "save_smoke": {
+      "game_ids": [
+        "sb26-7fbdac44",
+        "cd82-fb555c5d"
+      ],
+      "budget_seconds": 300,
+      "n_passes": 1,
+      "concurrency": 2,
+      "startup_timeout_seconds": 1500,
+      "total_timeout_seconds": 2400,
+      "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+      "cleanup": "Only the process group of the model Popen started by this save"
+    }
+  },
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "research/notebooks/cli-baseline/kernel-metadata.json": "b773051660141dacf75172d576791739c6bf8bb151841d0d03b7e30555d0d4a2",
+    "scripts/build_submission.py": "17c22285d2c2ac95f197484eaf28c3165eff3a83373570fac5eb2f0a50ed8562",
+    "experiments/009-baseline-submission.json": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "experiments/009-source/support/official-starter-build_notebook.py": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318"
+  },
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "notebook_sha256": "203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5",
+  "metadata_sha256": "3be6e7036db8fa54ebb5078fad5a6b922bb5db8d612552acc671528243584105",
+  "cell_count": 25,
+  "original_cell_count": 23,
+  "original_patch_cell_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+  "generated_patch_cell_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+  "new_cells": [
+    {
+      "index": 0,
+      "changes": [
+        "Readable dictionaries, save status, owned-process cleanup and 2400-second timeout"
+      ]
+    },
+    {
+      "index": 1,
+      "changes": [
+        "Readable input helper definitions; removed only future import for direct embedding"
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "original_index": 0,
+      "generated_index": 2,
+      "cell_type": "markdown",
+      "original_source_sha256": "d5158aceb9a6992c6e019b043e6b04531e9907bf65e603e9dca851830180d609",
+      "generated_source_sha256": "5ca4abcc0d2d4ee61390fa843e45a085f02065c3fbcb991484fb47e6fbdb46ff",
+      "changes": [
+        "Add revision 2 identity and truthful GPU save-smoke scope; retain original attribution"
+      ]
+    },
+    {
+      "original_index": 1,
+      "generated_index": 3,
+      "cell_type": "markdown",
+      "original_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "generated_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "changes": []
+    },
+    {
+      "original_index": 2,
+      "generated_index": 4,
+      "cell_type": "code",
+      "original_source_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+      "generated_source_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+      "changes": []
+    },
+    {
+      "original_index": 3,
+      "generated_index": 5,
+      "cell_type": "markdown",
+      "original_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "generated_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "changes": []
+    },
+    {
+      "original_index": 4,
+      "generated_index": 6,
+      "cell_type": "code",
+      "original_source_sha256": "9850ba064f46a851bfe7d29817a46c5fddd76f8eafcd6735a499da57cadac50c",
+      "generated_source_sha256": "17930e3cfc63369359451e573bf103045b03ed935d1b39f9eaf65ad119b308d8",
+      "changes": [
+        "Resolve four attached input paths; retain original shell magics, warmup, flags and serving settings"
+      ]
+    },
+    {
+      "original_index": 5,
+      "generated_index": 7,
+      "cell_type": "markdown",
+      "original_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "generated_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "changes": []
+    },
+    {
+      "original_index": 6,
+      "generated_index": 8,
+      "cell_type": "code",
+      "original_source_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "generated_source_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "changes": []
+    },
+    {
+      "original_index": 7,
+      "generated_index": 9,
+      "cell_type": "markdown",
+      "original_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "generated_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "changes": []
+    },
+    {
+      "original_index": 8,
+      "generated_index": 10,
+      "cell_type": "code",
+      "original_source_sha256": "0acc65bba3dd5435f5e25a73cb378b3ff269364f0f7a5a99226fc4a41060ae44",
+      "generated_source_sha256": "09dc3d3282a62d509f9c0f34655f6dff2f3f44643af5933fe6aad046ecc2cc28",
+      "changes": [
+        "Resolve mounted competition wheelhouse; install original wheel"
+      ]
+    },
+    {
+      "original_index": 9,
+      "generated_index": 11,
+      "cell_type": "markdown",
+      "original_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "generated_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "changes": []
+    },
+    {
+      "original_index": 10,
+      "generated_index": 12,
+      "cell_type": "code",
+      "original_source_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "generated_source_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "changes": []
+    },
+    {
+      "original_index": 11,
+      "generated_index": 13,
+      "cell_type": "markdown",
+      "original_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "generated_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "changes": []
+    },
+    {
+      "original_index": 12,
+      "generated_index": 14,
+      "cell_type": "code",
+      "original_source_sha256": "c362ce556dc35ed0725c31b3f5c60b86bc83a2d94152fd1a109116813a4b5cf8",
+      "generated_source_sha256": "4f20381acf0dba40e150b5ba99703d19098007724f9623a04c12518cb2721a7c",
+      "changes": [
+        "Retain serving configuration and native source; record only this save's Popen process group",
+        "Formal startup condition unchanged; save allows 1500 seconds from bootstrap and requires health 200"
+      ]
+    },
+    {
+      "original_index": 13,
+      "generated_index": 15,
+      "cell_type": "markdown",
+      "original_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "generated_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "changes": []
+    },
+    {
+      "original_index": 14,
+      "generated_index": 16,
+      "cell_type": "code",
+      "original_source_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "generated_source_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "changes": []
+    },
+    {
+      "original_index": 15,
+      "generated_index": 17,
+      "cell_type": "markdown",
+      "original_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "generated_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "changes": []
+    },
+    {
+      "original_index": 16,
+      "generated_index": 18,
+      "cell_type": "code",
+      "original_source_sha256": "f07004157034433dca3cae84e0000980649f21c32a70f2c17c6cb4111f1f3f7f",
+      "generated_source_sha256": "2b0fa3c2367b5056b0827ec815d55db193064cec08a4624a26e779253c4756c9",
+      "changes": [
+        "Replace only non-formal 25x4 demo settings with two games, one pass, concurrency 2 and 300 seconds"
+      ]
+    },
+    {
+      "original_index": 17,
+      "generated_index": 19,
+      "cell_type": "markdown",
+      "original_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "generated_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "changes": []
+    },
+    {
+      "original_index": 18,
+      "generated_index": 20,
+      "cell_type": "code",
+      "original_source_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "generated_source_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "changes": []
+    },
+    {
+      "original_index": 19,
+      "generated_index": 21,
+      "cell_type": "markdown",
+      "original_source_sha256": "172484ce3fc09a0f036895497cac61fe0f119caecc2ee2b250a062dd538d2b88",
+      "generated_source_sha256": "2de145e1fb95a4b66a91925f403dccf37e4f456066dc82baeeaec095735d2ac1",
+      "changes": [
+        "Describe actual GPU smoke and formal gateway semantics"
+      ]
+    },
+    {
+      "original_index": 20,
+      "generated_index": 22,
+      "cell_type": "code",
+      "original_source_sha256": "d390c0bc7cfb9d2e67fddd20e1be24b11930e886789916ce0cf467c492922266",
+      "generated_source_sha256": "8fe59e95a11e2c8d0730a33bff86a5c4328e490860901d83383d8661c6e4ba5f",
+      "changes": [
+        "Preserve live competition gateway helper and branch verbatim",
+        "Resolve save environment path and select exact sb26/cd82 IDs; no environment code inspection",
+        "Begin 300-second save deadline only after successful model readiness; native await bm.run",
+        "Require both games to have real non-RESET actions, generated tokens, and won/cancelled state",
+        "Write official placeholder only after smoke validation; report failures and clean up owned save server"
+      ]
+    },
+    {
+      "original_index": 21,
+      "generated_index": 23,
+      "cell_type": "markdown",
+      "original_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "generated_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "changes": []
+    },
+    {
+      "original_index": 22,
+      "generated_index": 24,
+      "cell_type": "code",
+      "original_source_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "generated_source_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "changes": []
+    }
+  ],
+  "ordinary_notebook_source": true,
+  "cell_exec_compile_eval_wrappers": false,
+  "submission_command_template": "kaggle competitions submit arc-prize-2026-arc-agi-3 -k ccjjllt/arc3-009-baseline-submission -v <actual-successful-gpu-smoke-version> -f submission.parquet -m <message>",
+  "push_timeout_seconds": 32400,
+  "state": "built_locally_not_pushed_not_submitted"
+}

@@ -1,0 +1,16 @@
+{
+  "method": "AST read of the python -c string in the saved source; compile only, no execution",
+  "records": [
+    {
+      "source": "franzen_v3",
+      "python_c_payload": "import pathlib, sglang, torch\nprint(\"sglang\", sglang.__version__, \"| torch\", torch.__version__)\nassert torch.cuda.is_available(), \"CUDA unavailable\"\nprint(\"GPU:\", torch.cuda.get_device_name(0), \"capability:\", torch.cuda.get_device_capability(0))\n",
+      "compile": "ok"
+    },
+    {
+      "source": "heliosli_v2",
+      "python_c_payload": "import pathlib, sglang, torch\nprint(\"sglang\", sglang.__version__, \"| torch\", torch.__version__)\nassert torch.cuda.is_available(), \"CUDA unavailable\"\nprint(\"GPU:\", torch.cuda.get_device_name(0), \"capability:\", torch.cuda.get_device_capability(0))\n",
+      "compile": "ok"
+    }
+  ],
+  "boundary": "This demonstrates the downloaded candidate source defect, not a retrieved remote run traceback."
+}

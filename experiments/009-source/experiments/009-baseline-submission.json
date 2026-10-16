@@ -1,0 +1,33 @@
+{
+  "id": "009-baseline-submission",
+  "kernel_id": "ccjjllt/arc3-009-baseline-submission",
+  "kernel_title": "ARC3 009 Baseline Submission",
+  "purpose": "First formal competition baseline; unchanged Franzen v3 solver and serving, with input-path resolution and official-starter save-only packaging",
+  "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "hard_limit_seconds": 32400,
+  "machine_shape": "NvidiaRtxPro6000",
+  "enable_internet": false,
+  "input_resolution_timeout_seconds": 60,
+  "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+  "save_mode": "official_starter_placeholder_only_no_model_load_no_game_actions",
+  "save_placeholder_is_scored": false,
+  "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+  "solver": {
+    "n_passes": 1,
+    "concurrency": 120,
+    "active_streams": 10,
+    "max_runtime_s_per_game": 31920,
+    "warmup_action_games": 1,
+    "save_request_logs": false,
+    "research_interventions": []
+  },
+  "official_save_protocol": {
+    "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+    "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+    "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "observed_date_local": "2026-10-12",
+    "relevant_lines": "2-10, 75-78, 114-133",
+    "scope": "Official organizer starter explicitly uses dummy parquet only during save; the gateway produces the real file during competition rerun. Save completion is not a model or leaderboard validation."
+  }
+}

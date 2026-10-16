@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "manual_cpu_patch_serialization_diagnosis",
+  "python_executable": "/tmp/arc3-009-native-validation/bin/python",
+  "python_version": "3.12.14",
+  "ipython_version": "9.6.0",
+  "git_version": "git version 2.54.0 (Apple Git-157)",
+  "sources": [
+    {
+      "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+      "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd"
+    },
+    {
+      "path": "experiments/009-source/submission.ipynb",
+      "sha256": "f5fab5275d54b1f84817bd86e07f4eaf307dd604a11ad7286f943998543735e6"
+    },
+    {
+      "path": "experiments/009-source-v2/submission.ipynb",
+      "sha256": "203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5"
+    }
+  ],
+  "original_cell_index": 2,
+  "v1_cell_index": 2,
+  "v2_cell_index": 4,
+  "original_cell_source_equals_v2_cell_source": true,
+  "v1_literal_equals_original_patch_source_body": true,
+  "original_magic_output_equals_v2_magic_output": true,
+  "magic_transform": {
+    "adds_final_newline": true,
+    "also_strips_whitespace_only_lines": true,
+    "whitespace_bytes_removed_from_raw_plus_final_newline": 177,
+    "not_just_a_CRLF_change": true
+  },
+  "artifacts": [
+    {
+      "path": "runs/009-v1-patch-diagnosis/v1-direct.patch",
+      "bytes": 498779,
+      "sha256": "07fd859e7ce7ad8ac8a2f8f726d862660c1be1abc97560a63b5985703ddf7f4f",
+      "ends_with_newline": false,
+      "CRLF_count": 0,
+      "CR_count": 0,
+      "LF_count": 10085,
+      "tail_repr": "b'ls\"]),\\n                 \"boundary\": [[r, c] for r, c in boundary],\\n                 \"children\": children[cid],'",
+      "parse_command": [
+        "git",
+        "apply",
+        "--stat",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v1-patch-diagnosis/v1-direct.patch"
+      ],
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "error: corrupt patch at /Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v1-patch-diagnosis/v1-direct.patch:10086\n"
+    },
+    {
+      "path": "runs/009-v1-patch-diagnosis/v1-plus-final-newline.patch",
+      "bytes": 498780,
+      "sha256": "80aef535ee80970622127f3ee1917e1b127db22ebe07ece40fc8558a63b4484d",
+      "ends_with_newline": true,
+      "CRLF_count": 0,
+      "CR_count": 0,
+      "LF_count": 10086,
+      "tail_repr": "b's\"]),\\n                 \"boundary\": [[r, c] for r, c in boundary],\\n                 \"children\": children[cid],\\n'",
+      "parse_command": [
+        "git",
+        "apply",
+        "--stat",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v1-patch-diagnosis/v1-plus-final-newline.patch"
+      ],
+      "returncode": 0,
+      "stdout": " ARC3-Inference/inference/agent/action_names.py     |   27 \n .../inference/agent/noop_repeat_guard.py           |  178 +\n .../inference/agent/priority_pace_reference.json   |   16 \n .../inference/agent/priority_scheduler.py          |  134 \n ARC3-Inference/inference/agent/prompts.py          |  254 +\n .../inference/agent/python_tool_sandbox.py         |  434 ++\n ARC3-Inference/inference/agent/runtime_state.py    |    9 \n ARC3-Inference/inference/agent/tool_agent.py       | 5482 +++++++++++++++++++-\n ARC3-Inference/inference/agent/vision_context.py   |  252 +\n ARC3-Inference/inference/framework/run.py          |   10 \n ARC3-Inference/inference/framework/solver.py       |  676 ++\n ARC3-Inference/inference/utils/animation.py        |  333 +\n ARC3-Inference/inference/utils/frame_diff.py       |  307 +\n ARC3-Inference/inference/utils/openai_compat.py    |  126 \n .../inference/utils/retained_functions.py          |  301 +\n ARC3-Inference/inference/utils/segmentation.py     |   63 \n 16 files changed, 8405 insertions(+), 197 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "path": "runs/009-v1-patch-diagnosis/original-ipython-magic.patch",
+      "bytes": 498603,
+      "sha256": "238dfbde7d6ce10f36f730e22cf28630532ca55c5d86b7ad026bef6165f87a87",
+      "ends_with_newline": true,
+      "CRLF_count": 0,
+      "CR_count": 0,
+      "LF_count": 10086,
+      "tail_repr": "b's\"]),\\n                 \"boundary\": [[r, c] for r, c in boundary],\\n                 \"children\": children[cid],\\n'",
+      "parse_command": [
+        "git",
+        "apply",
+        "--stat",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v1-patch-diagnosis/original-ipython-magic.patch"
+      ],
+      "returncode": 0,
+      "stdout": " ARC3-Inference/inference/agent/action_names.py     |   27 \n .../inference/agent/noop_repeat_guard.py           |  178 +\n .../inference/agent/priority_pace_reference.json   |   16 \n .../inference/agent/priority_scheduler.py          |  134 \n ARC3-Inference/inference/agent/prompts.py          |  254 +\n .../inference/agent/python_tool_sandbox.py         |  434 ++\n ARC3-Inference/inference/agent/runtime_state.py    |    9 \n ARC3-Inference/inference/agent/tool_agent.py       | 5482 +++++++++++++++++++-\n ARC3-Inference/inference/agent/vision_context.py   |  252 +\n ARC3-Inference/inference/framework/run.py          |   10 \n ARC3-Inference/inference/framework/solver.py       |  676 ++\n ARC3-Inference/inference/utils/animation.py        |  333 +\n ARC3-Inference/inference/utils/frame_diff.py       |  307 +\n ARC3-Inference/inference/utils/openai_compat.py    |  126 \n .../inference/utils/retained_functions.py          |  301 +\n ARC3-Inference/inference/utils/segmentation.py     |   63 \n 16 files changed, 8405 insertions(+), 197 deletions(-)\n",
+      "stderr": ""
+    },
+    {
+      "path": "runs/009-v1-patch-diagnosis/v2-ipython-magic.patch",
+      "bytes": 498603,
+      "sha256": "238dfbde7d6ce10f36f730e22cf28630532ca55c5d86b7ad026bef6165f87a87",
+      "ends_with_newline": true,
+      "CRLF_count": 0,
+      "CR_count": 0,
+      "LF_count": 10086,
+      "tail_repr": "b's\"]),\\n                 \"boundary\": [[r, c] for r, c in boundary],\\n                 \"children\": children[cid],\\n'",
+      "parse_command": [
+        "git",
+        "apply",
+        "--stat",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v1-patch-diagnosis/v2-ipython-magic.patch"
+      ],
+      "returncode": 0,
+      "stdout": " ARC3-Inference/inference/agent/action_names.py     |   27 \n .../inference/agent/noop_repeat_guard.py           |  178 +\n .../inference/agent/priority_pace_reference.json   |   16 \n .../inference/agent/priority_scheduler.py          |  134 \n ARC3-Inference/inference/agent/prompts.py          |  254 +\n .../inference/agent/python_tool_sandbox.py         |  434 ++\n ARC3-Inference/inference/agent/runtime_state.py    |    9 \n ARC3-Inference/inference/agent/tool_agent.py       | 5482 +++++++++++++++++++-\n ARC3-Inference/inference/agent/vision_context.py   |  252 +\n ARC3-Inference/inference/framework/run.py          |   10 \n ARC3-Inference/inference/framework/solver.py       |  676 ++\n ARC3-Inference/inference/utils/animation.py        |  333 +\n ARC3-Inference/inference/utils/frame_diff.py       |  307 +\n ARC3-Inference/inference/utils/openai_compat.py    |  126 \n .../inference/utils/retained_functions.py          |  301 +\n ARC3-Inference/inference/utils/segmentation.py     |   63 \n 16 files changed, 8405 insertions(+), 197 deletions(-)\n",
+      "stderr": ""
+    }
+  ],
+  "manual_steps": [
+    "Parse the immutable original and v1/v2 archived notebooks; locate the literal passed to v1 Path.write_text without executing v1.",
+    "Run only the original and v2 %%writefile cells with actual InteractiveShell.run_cell, replacing their output path with this diagnosis directory.",
+    "Write v1 literal verbatim and a comparison differing only by one trailing LF.",
+    "Run git apply --stat on each artifact; this checks patch parseability and changes no source tree."
+  ],
+  "conclusion": "The v1 emitted patch is syntactically corrupt because its final context line lacks a terminating LF; adding that LF alone changes git apply --stat from exit 128 to 0. The v2 original magic source and its local IPython output exactly match the upstream original.",
+  "boundaries": [
+    "No GPU, model, external session, submission, or game action was started.",
+    "No real runtime bundle source was modified.",
+    "git apply --stat establishes patch syntax, not successful application to Kaggle mounted inputs.",
+    "Earlier exploratory checks only used a temporary copy; raw-plus-LF reverse/apply succeeded, while this IPython version strips whitespace-only context lines and produced a prompts.py context mismatch. Those reconstructed-tree checks are not treated as proof about the exact remote original dataset.",
+    "The CPU reproduction proves an introduced v1 startup defect; the generic Kaggle system-error response still does not expose the actual remote traceback or execution phase."
+  ]
+}

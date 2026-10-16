@@ -1,0 +1,274 @@
+{
+  "id": "009-baseline-submission",
+  "config": {
+    "id": "009-baseline-submission",
+    "kernel_id": "ccjjllt/arc3-009-baseline-submission",
+    "kernel_title": "ARC3 009 Baseline Submission",
+    "purpose": "First formal competition baseline; unchanged Franzen v3 solver and serving, with input-path resolution and official-starter save-only packaging",
+    "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+    "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "hard_limit_seconds": 32400,
+    "machine_shape": "NvidiaRtxPro6000",
+    "enable_internet": false,
+    "input_resolution_timeout_seconds": 60,
+    "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+    "save_mode": "official_starter_placeholder_only_no_model_load_no_game_actions",
+    "save_placeholder_is_scored": false,
+    "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+    "solver": {
+      "n_passes": 1,
+      "concurrency": 120,
+      "active_streams": 10,
+      "max_runtime_s_per_game": 31920,
+      "warmup_action_games": 1,
+      "save_request_logs": false,
+      "research_interventions": []
+    },
+    "official_save_protocol": {
+      "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+      "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+      "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+      "observed_date_local": "2026-10-12",
+      "relevant_lines": "2-10, 75-78, 114-133",
+      "scope": "Official organizer starter explicitly uses dummy parquet only during save; the gateway produces the real file during competition rerun. Save completion is not a model or leaderboard validation."
+    }
+  },
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "research/notebooks/cli-baseline/kernel-metadata.json": "b773051660141dacf75172d576791739c6bf8bb151841d0d03b7e30555d0d4a2",
+    "scripts/build_submission.py": "17654aff97ef7d4dd2e2fea34e8ddb28df19fca081c43a67cd55e6632f55a6f9",
+    "experiments/009-baseline-submission.json": "c73943147f3fa10857e594f28ecda6804b79e51ea618fb0f463bf7b2b48c9a39",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "experiments/009-source/support/official-starter-build_notebook.py": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318"
+  },
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "notebook_sha256": "f5fab5275d54b1f84817bd86e07f4eaf307dd604a11ad7286f943998543735e6",
+  "metadata_sha256": "3be6e7036db8fa54ebb5078fad5a6b922bb5db8d612552acc671528243584105",
+  "cell_count": 23,
+  "original_patch_sha256": "07fd859e7ce7ad8ac8a2f8f726d862660c1be1abc97560a63b5985703ddf7f4f",
+  "generated_patch_sha256": "07fd859e7ce7ad8ac8a2f8f726d862660c1be1abc97560a63b5985703ddf7f4f",
+  "cells": [
+    {
+      "index": 0,
+      "cell_type": "markdown",
+      "original_source_sha256": "d5158aceb9a6992c6e019b043e6b04531e9907bf65e603e9dca851830180d609",
+      "generated_source_sha256": "a22929b769d61ade87451f985533a9cdae9ec25ab174ee80a7a5e872d22ac1ae",
+      "rerun_body_sha256": null,
+      "changes": [
+        "Prepend 009 identity and explicit save-versus-scoring distinction; retain attribution"
+      ]
+    },
+    {
+      "index": 1,
+      "cell_type": "markdown",
+      "original_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "generated_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 2,
+      "cell_type": "code",
+      "original_source_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+      "generated_source_sha256": "85821c5e7354808801168ed9c880da9a9f51bf5f4296fc4579fc44f7f42f3992",
+      "rerun_body_sha256": null,
+      "changes": [
+        "Strict platform rerun gate; non-rerun uses the official organizer save-only placeholder",
+        "Resolve read-only input markers during save and rerun; no requirement for public environment_files",
+        "Replace writefile magic with Path.write_text of the byte-identical original patch",
+        "Record mode and build source hashes; no scored-file write in the rerun branch"
+      ]
+    },
+    {
+      "index": 3,
+      "cell_type": "markdown",
+      "original_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "generated_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 4,
+      "cell_type": "code",
+      "original_source_sha256": "9850ba064f46a851bfe7d29817a46c5fddd76f8eafcd6735a499da57cadac50c",
+      "generated_source_sha256": "bc41aa6e9b5322bf8f128424c5155fd10cd9273b99d0d4656b329abd6e9d1cb4",
+      "rerun_body_sha256": "fcde693d9b3b3d067cde0440e43980bd1f3caf9aebac3c3c2fb28095c90ef2da",
+      "changes": [
+        "Resolve four attached input roots; retain warmup RESET, all solver env and serving config",
+        "Replace two shell magics with checked subprocess calls so the body compiles as Python",
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 5,
+      "cell_type": "markdown",
+      "original_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "generated_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 6,
+      "cell_type": "code",
+      "original_source_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "generated_source_sha256": "267f52b2ecbae67023df79ac1135ca663c14ef7dc87c8951a71e5f2dcefec6e3",
+      "rerun_body_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 7,
+      "cell_type": "markdown",
+      "original_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "generated_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 8,
+      "cell_type": "code",
+      "original_source_sha256": "0acc65bba3dd5435f5e25a73cb378b3ff269364f0f7a5a99226fc4a41060ae44",
+      "generated_source_sha256": "d6dd8861d77ff858d1f3923da6f80dfb8e32a26050c1b7eefa0400f9df502f01",
+      "rerun_body_sha256": "09dc3d3282a62d509f9c0f34655f6dff2f3f44643af5933fe6aad046ecc2cc28",
+      "changes": [
+        "Install the same competition arc-agi wheel from its resolved mounted root",
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 9,
+      "cell_type": "markdown",
+      "original_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "generated_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 10,
+      "cell_type": "code",
+      "original_source_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "generated_source_sha256": "b6ce7bfd2b32b94176b3d2d39743afa13f7dffc227d7d9f894a0dd3017c98908",
+      "rerun_body_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 11,
+      "cell_type": "markdown",
+      "original_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "generated_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 12,
+      "cell_type": "code",
+      "original_source_sha256": "c362ce556dc35ed0725c31b3f5c60b86bc83a2d94152fd1a109116813a4b5cf8",
+      "generated_source_sha256": "483374319ae364b3f988c2c3ae3a4b6d90d254b2cfa124f72825f05f41a8e742",
+      "rerun_body_sha256": "c362ce556dc35ed0725c31b3f5c60b86bc83a2d94152fd1a109116813a4b5cf8",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 13,
+      "cell_type": "markdown",
+      "original_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "generated_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 14,
+      "cell_type": "code",
+      "original_source_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "generated_source_sha256": "4f1541e321e82543f725630a65f2b9607788cfdec32288ecb9e21cd1264a51b4",
+      "rerun_body_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 15,
+      "cell_type": "markdown",
+      "original_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "generated_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 16,
+      "cell_type": "code",
+      "original_source_sha256": "f07004157034433dca3cae84e0000980649f21c32a70f2c17c6cb4111f1f3f7f",
+      "generated_source_sha256": "8519b63007c2fc8b5a5730444baf6eb514365a96a1b28b938058b71beba2d581",
+      "rerun_body_sha256": "8ff422e21ae5e48f4ab3e4ce0759d58d5185d99c34026b41dd14e61d2b86e173",
+      "changes": [
+        "Assert the original target is also 32400 seconds during formal rerun; original solver settings retained",
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 17,
+      "cell_type": "markdown",
+      "original_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "generated_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 18,
+      "cell_type": "code",
+      "original_source_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "generated_source_sha256": "2ff2e6bf15e835e494f271fc80e6e523e25132f27e00b58637d87ad66ef6d6cf",
+      "rerun_body_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 19,
+      "cell_type": "markdown",
+      "original_source_sha256": "172484ce3fc09a0f036895497cac61fe0f119caecc2ee2b250a062dd538d2b88",
+      "generated_source_sha256": "45006cffb1054545cb9f3544317157f8ab075ccef20e2f99839db33be0a7822b",
+      "rerun_body_sha256": null,
+      "changes": [
+        "Document the actual formal-only execution and light save behavior"
+      ]
+    },
+    {
+      "index": 20,
+      "cell_type": "code",
+      "original_source_sha256": "d390c0bc7cfb9d2e67fddd20e1be24b11930e886789916ce0cf467c492922266",
+      "generated_source_sha256": "7f447bcda4bcffc24b16afac738ae2bb90deb782112787b52176f363660ce75a",
+      "rerun_body_sha256": "6e2c23c6ff6f229a7803054524a50dda9cb142c4b92f90f6a5cce7c3e6946dd2",
+      "changes": [
+        "Remove public OFFLINE game enumeration and branch; formal gateway code retained",
+        "Remove non-submission soft deadline and duplicate placeholder writer; formal soft_end remains None",
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    },
+    {
+      "index": 21,
+      "cell_type": "markdown",
+      "original_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "generated_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "rerun_body_sha256": null,
+      "changes": []
+    },
+    {
+      "index": 22,
+      "cell_type": "code",
+      "original_source_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "generated_source_sha256": "b96bb5b97d67bc4ec49837fc4680de597f9c8822a7b6fc06928ab885273446de",
+      "rerun_body_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "changes": [
+        "Guard a compile/exec of the exact body; await coroutine cells; skipped during save"
+      ]
+    }
+  ],
+  "submission_command_template": "kaggle competitions submit arc-prize-2026-arc-agi-3 -k ccjjllt/arc3-009-baseline-submission -v <actual-successful-saved-version> -f submission.parquet -m <message>",
+  "push_timeout_seconds": 32400,
+  "state": "built_locally_not_pushed_not_submitted"
+}

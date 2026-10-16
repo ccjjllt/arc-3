@@ -1,0 +1,62 @@
+"""Resolve attached resources under both observed Kaggle mount layouts."""
+from pathlib import Path
+import time
+
+
+def resolve_inputs(input_root="/kaggle/input"):
+    root = Path(input_root)
+    candidates = {
+        "source_bundle": [root/"datasets/dfranzen/taaf-kaggle-source-bundle-copy", root/"taaf-kaggle-source-bundle-copy"],
+        "wheelhouse": [root/"datasets/dfranzen/pennyroyal-v253", root/"pennyroyal-v253"],
+        "competition": [root/"competitions/arc-prize-2026-arc-agi-3", root/"arc-prize-2026-arc-agi-3"],
+        "model": [root/"models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1", root/"intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1"],
+        "draft_model": [root/"models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1", root/"albucino-qwen3-8-flash-next-drafter/transformers/default/1"],
+    }
+    markers = {
+        "source_bundle": ("deploy_target.pkl", "benchmark_initial.pkl", "src"),
+        "wheelhouse": ("requirements.lock", "wheels"),
+        "competition": ("arc_agi_3_wheels", "environment_files"),
+        "model": ("config.json", "model.safetensors.index.json"),
+        "draft_model": ("config.json", "model.safetensors.index.json"),
+    }
+    paths, missing = {}, {}
+    for name, options in candidates.items():
+        found = [p for p in options if all((p/marker).exists() for marker in markers[name])]
+        if found:
+            paths[name] = str(found[0])
+        else:
+            missing[name] = [str(p) for p in options]
+    if missing:
+        raise FileNotFoundError(f"Missing declared resources: {missing}")
+    paths["competition_wheels"] = str(Path(paths["competition"])/"arc_agi_3_wheels")
+    paths["environment_files"] = str(Path(paths["competition"])/"environment_files")
+    return paths
+
+
+def wait_for_inputs(timeout=60, input_root="/kaggle/input"):
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            paths = resolve_inputs(input_root)
+            print("Resolved declared inputs:", paths, flush=True)
+            return paths
+        except FileNotFoundError as exc:
+            if time.monotonic() >= deadline:
+                root = Path(input_root)
+                entries = sorted(str(p) for p in root.iterdir()) if root.exists() else []
+                raise FileNotFoundError(f"{exc}; input roots: {entries}") from None
+        time.sleep(2)
+
+
+def adapt_notebook_inputs(source):
+    """Replace only the known resource literals in the pinned original notebook."""
+    replacements = {
+        "'/kaggle/input/datasets/dfranzen/pennyroyal-v253'": "INPUT_PATHS['wheelhouse']",
+        "'/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy'": "INPUT_PATHS['source_bundle']",
+        "'/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1'": "INPUT_PATHS['model']",
+        "'/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1'": "INPUT_PATHS['draft_model']",
+        '"/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels"': "INPUT_PATHS['competition_wheels']",
+    }
+    for before, after in replacements.items():
+        source = source.replace(before, after)
+    return source
