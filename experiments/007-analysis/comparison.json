@@ -1,0 +1,2166 @@
+{
+  "sources": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/baseline/benchmark.json",
+      "sha256": "1d29a389986db8a5e2761575d90d388d822055a828368431cba821d29077684b"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/baseline/arm-metadata.json",
+      "sha256": "91ed8530c54a0337997dd73319340462e3e24a5bdaa09b0c2dce2171ce8b951d"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/baseline/program-state.json",
+      "sha256": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/program_state/benchmark.json",
+      "sha256": "95d0d0dee20391afbd2e293442bb50ad3de1faf42861aa346978596a002a97ba"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/program_state/arm-metadata.json",
+      "sha256": "94287b578f3c29c2549b1d79c63447d689c4cc92e48348f61e0336fc5f3fc274"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/program_state/program-state.json",
+      "sha256": "6da05b04b9f6f28b3bb5b4a3344a14d10865758204883d1d42f29f8ba81f2a2e"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/007-program-state/experiment-manifest.json",
+      "sha256": "6fa0c5f0d6332849aa84ec38493acbf9e280f7c2afe32f0d0982d38bdce03998"
+    }
+  ],
+  "arms": {
+    "baseline": {
+      "summary": {
+        "run_count": 12,
+        "scored_run_count": 12,
+        "mean_score": 46.35778261499965,
+        "mean_completion_ceiling": 49.36147186147186,
+        "mean_efficiency_gap": 3.003689246472208,
+        "levels_completed": 51,
+        "levels_available": 89,
+        "mean_levels_completed": 4.25,
+        "mean_completion_fraction": 0.593452380952381,
+        "wins": 4,
+        "actions": 2655,
+        "generated_tokens": 2025627,
+        "action_attached_generated_tokens": 2025627,
+        "analyzer_reported_generated_tokens": 2107894,
+        "analyzer_reported_run_count": 12,
+        "unattached_generated_tokens": 82267,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "sum_run_elapsed_seconds": 36242.311693981,
+        "mean_run_elapsed_seconds": 3020.1926411650834,
+        "state_counts": {
+          "cancelled": 8,
+          "won": 4
+        },
+        "stop_reason_counts": {
+          "unknown": 8,
+          "won": 4
+        },
+        "game_count": 12,
+        "mean_game_score": 46.35778261499965,
+        "benchmark_elapsed_seconds": 3490.02185,
+        "generated_tokens_per_benchmark_second": 580.4052487522391
+      },
+      "warnings": [
+        "run 3: analyzer-reported minus history+final generated tokens = 7531; retain both accounting views",
+        "run 4: analyzer-reported minus history+final generated tokens = 37863; retain both accounting views",
+        "run 5: analyzer-reported minus history+final generated tokens = 19466; retain both accounting views",
+        "run 7: analyzer-reported minus history+final generated tokens = 5518; retain both accounting views",
+        "run 8: analyzer-reported minus history+final generated tokens = 2895; retain both accounting views",
+        "run 11: analyzer-reported minus history+final generated tokens = 8994; retain both accounting views",
+        "arm metadata records the shared budget deadline fired; 8 cancelled runs are observed in this budget context, not evidence of random crashes; exact per-run stop reasons remain unchanged"
+      ],
+      "post_deadline_actions": 0,
+      "post_deadline_levels": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "forced_cpu_process_exit": false
+    },
+    "program_state": {
+      "summary": {
+        "run_count": 12,
+        "scored_run_count": 12,
+        "mean_score": 40.32349358058185,
+        "mean_completion_ceiling": 45.33549783549784,
+        "mean_efficiency_gap": 5.012004254915989,
+        "levels_completed": 50,
+        "levels_available": 89,
+        "mean_levels_completed": 4.166666666666667,
+        "mean_completion_fraction": 0.5871031746031746,
+        "wins": 2,
+        "actions": 2591,
+        "generated_tokens": 2114430,
+        "action_attached_generated_tokens": 2114430,
+        "analyzer_reported_generated_tokens": 2159836,
+        "analyzer_reported_run_count": 12,
+        "unattached_generated_tokens": 45406,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "sum_run_elapsed_seconds": 38668.87872789,
+        "mean_run_elapsed_seconds": 3222.4065606575,
+        "state_counts": {
+          "cancelled": 10,
+          "won": 2
+        },
+        "stop_reason_counts": {
+          "unknown": 10,
+          "won": 2
+        },
+        "game_count": 12,
+        "mean_game_score": 40.32349358058185,
+        "benchmark_elapsed_seconds": 3513.267308,
+        "generated_tokens_per_benchmark_second": 601.8414810581786
+      },
+      "warnings": [
+        "run 4: analyzer-reported minus history+final generated tokens = 16245; retain both accounting views",
+        "run 5: analyzer-reported minus history+final generated tokens = 6095; retain both accounting views",
+        "run 6: analyzer-reported minus history+final generated tokens = 4205; retain both accounting views",
+        "run 8: analyzer-reported minus history+final generated tokens = 14898; retain both accounting views",
+        "run 10: analyzer-reported minus history+final generated tokens = 3963; retain both accounting views",
+        "arm metadata records the shared budget deadline fired; 10 cancelled runs are observed in this budget context, not evidence of random crashes; exact per-run stop reasons remain unchanged"
+      ],
+      "post_deadline_actions": 0,
+      "post_deadline_levels": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "forced_cpu_process_exit": false
+    }
+  },
+  "overall_delta": {
+    "score": -6.034289034417806,
+    "ceiling": -4.025974025974025,
+    "completed_levels": -1,
+    "wins": -2,
+    "analyzer_tokens": 51942,
+    "games_better_equal_worse": [
+      5,
+      2,
+      5
+    ]
+  },
+  "games": [
+    {
+      "game_id": "ar25-0c556536",
+      "baseline": {
+        "game_id": "ar25-0c556536",
+        "run_index": 0,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 8,
+        "number_of_levels": 8,
+        "completion_fraction": 1.0,
+        "actions": 288,
+        "history_actions": 288,
+        "actions_per_level": [
+          19,
+          20,
+          44,
+          29,
+          31,
+          57,
+          41,
+          47
+        ],
+        "generated_tokens": 150337,
+        "action_attached_generated_tokens": 150337,
+        "analyzer_reported_generated_tokens": 150337,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 150337,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 2504.8809390590004,
+        "final_wallclock_seconds": 2504.8809390590004,
+        "last_action_seconds": 2503.9709552980003,
+        "started_at": "2026-10-11T07:46:41.860007",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=150337",
+        "warnings": [],
+        "start_benchmark_second": 0.892623,
+        "last_action_benchmark_second": 2504.8635782980004,
+        "finish_benchmark_second": 2505.7735620590006,
+        "last_action_to_finish_seconds": 0.9099837610001487,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 106.75866389299999
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 474.448055698
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 766.0741042709999
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 857.317333167
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1220.810832131
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1852.973087363
+          },
+          {
+            "level": 7,
+            "at_benchmark_second": 2332.2403322220002
+          },
+          {
+            "level": 8,
+            "at_benchmark_second": 2504.8635782980004
+          }
+        ],
+        "actions_on_completed_levels": 288,
+        "actions_on_uncompleted_levels": 0
+      },
+      "program_state": {
+        "game_id": "ar25-0c556536",
+        "run_index": 0,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 8,
+        "number_of_levels": 8,
+        "completion_fraction": 1.0,
+        "actions": 324,
+        "history_actions": 324,
+        "actions_per_level": [
+          27,
+          57,
+          44,
+          23,
+          30,
+          59,
+          37,
+          47
+        ],
+        "generated_tokens": 171343,
+        "action_attached_generated_tokens": 171343,
+        "analyzer_reported_generated_tokens": 171343,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 171343,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 2813.1028441589997,
+        "final_wallclock_seconds": 2813.1028441589997,
+        "last_action_seconds": 2812.244080976,
+        "started_at": "2026-10-11T08:44:57.290931",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=171343",
+        "warnings": [],
+        "start_benchmark_second": 0.389807,
+        "last_action_benchmark_second": 2812.633887976,
+        "finish_benchmark_second": 2813.4926511589997,
+        "last_action_to_finish_seconds": 0.8587631829996099,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 112.22189119600033
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 540.9186201279995
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 736.5191098909995
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 835.1517932040001
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1285.6857228530002
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 2260.1618337100003
+          },
+          {
+            "level": 7,
+            "at_benchmark_second": 2617.5903919039997
+          },
+          {
+            "level": 8,
+            "at_benchmark_second": 2812.633887976
+          }
+        ],
+        "actions_on_completed_levels": 324,
+        "actions_on_uncompleted_levels": 0
+      },
+      "score_delta": 0.0,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": 21006,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 0.0
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "baseline": {
+        "game_id": "tr87-cd924810",
+        "run_index": 1,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "completion_fraction": 1.0,
+        "actions": 261,
+        "history_actions": 261,
+        "actions_per_level": [
+          60,
+          37,
+          39,
+          29,
+          38,
+          58
+        ],
+        "generated_tokens": 106791,
+        "action_attached_generated_tokens": 106791,
+        "analyzer_reported_generated_tokens": 106791,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 106791,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 1729.612386408,
+        "final_wallclock_seconds": 1729.612386408,
+        "last_action_seconds": 1728.8890816010003,
+        "started_at": "2026-10-11T07:46:41.898456",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=106791",
+        "warnings": [],
+        "start_benchmark_second": 0.931072,
+        "last_action_benchmark_second": 1729.8201536010004,
+        "finish_benchmark_second": 1730.543458408,
+        "last_action_to_finish_seconds": 0.7233048069997494,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 510.1947916639999
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 723.9756218789998
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 802.4299840609999
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 852.728952075
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1137.3101113320001
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1729.8201536010004
+          }
+        ],
+        "actions_on_completed_levels": 261,
+        "actions_on_uncompleted_levels": 0
+      },
+      "program_state": {
+        "game_id": "tr87-cd924810",
+        "run_index": 1,
+        "game_occurrence": 0,
+        "score": 47.61904761904761,
+        "reported_score": 47.61904761904761,
+        "recomputed_score": 47.61904761904761,
+        "score_source": "final_score",
+        "completion_ceiling": 47.61904761904762,
+        "efficiency_gap": 7.105427357601002e-15,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "completion_fraction": 0.6666666666666666,
+        "actions": 171,
+        "history_actions": 171,
+        "actions_per_level": [
+          24,
+          50,
+          39,
+          28,
+          30,
+          0
+        ],
+        "generated_tokens": 176480,
+        "action_attached_generated_tokens": 176480,
+        "analyzer_reported_generated_tokens": 176480,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 176480,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3482.0111766110003,
+        "final_wallclock_seconds": 3482.0111766110003,
+        "last_action_seconds": 3470.518403586,
+        "started_at": "2026-10-11T08:44:57.311761",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=176480",
+        "warnings": [],
+        "start_benchmark_second": 0.410637,
+        "last_action_benchmark_second": 3470.929040586,
+        "finish_benchmark_second": 3482.4218136110003,
+        "last_action_to_finish_seconds": 11.492773025000133,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 363.09544751300024
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 2699.7059737600002
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 3026.2758965069997
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 3133.406318405
+          }
+        ],
+        "actions_on_completed_levels": 141,
+        "actions_on_uncompleted_levels": 30
+      },
+      "score_delta": -52.38095238095239,
+      "ceiling_delta": -52.38095238095238,
+      "levels_delta": -2,
+      "analyzer_tokens_delta": 69689,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": -4.365079365079366
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "baseline": {
+        "game_id": "re86-8af5384d",
+        "run_index": 2,
+        "game_occurrence": 0,
+        "score": 36.24717554097339,
+        "reported_score": 36.24717554097339,
+        "recomputed_score": 36.24717554097339,
+        "score_source": "final_score",
+        "completion_ceiling": 41.666666666666664,
+        "efficiency_gap": 5.419491125693277,
+        "levels_completed": 5,
+        "number_of_levels": 8,
+        "completion_fraction": 0.625,
+        "actions": 586,
+        "history_actions": 586,
+        "actions_per_level": [
+          24,
+          40,
+          72,
+          101,
+          327,
+          22,
+          0,
+          0
+        ],
+        "generated_tokens": 212072,
+        "action_attached_generated_tokens": 212072,
+        "analyzer_reported_generated_tokens": 212072,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 212072,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.8369031240004,
+        "final_wallclock_seconds": 3481.8369031240004,
+        "last_action_seconds": 3457.45564487,
+        "started_at": "2026-10-11T07:46:41.965366",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=212072",
+        "warnings": [],
+        "start_benchmark_second": 0.997982,
+        "last_action_benchmark_second": 3458.45362687,
+        "finish_benchmark_second": 3482.8348851240003,
+        "last_action_to_finish_seconds": 24.381258254000386,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 111.40374224099993
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 403.53230893299997
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 709.879864237
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 891.889223741
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 3236.509343778
+          }
+        ],
+        "actions_on_completed_levels": 564,
+        "actions_on_uncompleted_levels": 22
+      },
+      "program_state": {
+        "game_id": "re86-8af5384d",
+        "run_index": 2,
+        "game_occurrence": 0,
+        "score": 41.66666666666667,
+        "reported_score": 41.66666666666667,
+        "recomputed_score": 41.66666666666667,
+        "score_source": "final_score",
+        "completion_ceiling": 41.666666666666664,
+        "efficiency_gap": -7.105427357601002e-15,
+        "levels_completed": 5,
+        "number_of_levels": 8,
+        "completion_fraction": 0.625,
+        "actions": 351,
+        "history_actions": 351,
+        "actions_per_level": [
+          21,
+          37,
+          47,
+          62,
+          75,
+          109,
+          0,
+          0
+        ],
+        "generated_tokens": 204965,
+        "action_attached_generated_tokens": 204965,
+        "analyzer_reported_generated_tokens": 204965,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 204965,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3483.487780761,
+        "final_wallclock_seconds": 3483.487780761,
+        "last_action_seconds": 3341.6755830069997,
+        "started_at": "2026-10-11T08:44:57.365146",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=204965",
+        "warnings": [],
+        "start_benchmark_second": 0.464022,
+        "last_action_benchmark_second": 3342.139605007,
+        "finish_benchmark_second": 3483.951802761,
+        "last_action_to_finish_seconds": 141.8121977540004,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 86.0288512120004
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 204.3274087110002
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 393.2197022979998
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 887.4672190190003
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1271.4444748389997
+          }
+        ],
+        "actions_on_completed_levels": 242,
+        "actions_on_uncompleted_levels": 109
+      },
+      "score_delta": 5.419491125693284,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": -7107,
+      "direct_missing_snapshot_events": 2,
+      "nonempty_preservation_events": 1,
+      "preserved_function_occurrences": 17,
+      "mean_score_contribution": 0.4516242604744403
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "baseline": {
+        "game_id": "m0r0-492f87ba",
+        "run_index": 3,
+        "game_occurrence": 0,
+        "score": 13.38192419825073,
+        "reported_score": 13.38192419825073,
+        "recomputed_score": 13.38192419825073,
+        "score_source": "final_score",
+        "completion_ceiling": 14.285714285714286,
+        "efficiency_gap": 0.9037900874635572,
+        "levels_completed": 2,
+        "number_of_levels": 6,
+        "completion_fraction": 0.3333333333333333,
+        "actions": 121,
+        "history_actions": 121,
+        "actions_per_level": [
+          42,
+          39,
+          40,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 194538,
+        "action_attached_generated_tokens": 194538,
+        "analyzer_reported_generated_tokens": 202069,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 7531,
+        "history_generated_tokens": 194538,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3484.4119738870004,
+        "final_wallclock_seconds": 3484.4119738870004,
+        "last_action_seconds": 3373.332473882,
+        "started_at": "2026-10-11T07:46:41.996658",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=202069",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 7531; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.029274,
+        "last_action_benchmark_second": 3374.361747882,
+        "finish_benchmark_second": 3485.4412478870004,
+        "last_action_to_finish_seconds": 111.07950000500023,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 1423.006791675
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1917.321035554
+          }
+        ],
+        "actions_on_completed_levels": 81,
+        "actions_on_uncompleted_levels": 40
+      },
+      "program_state": {
+        "game_id": "m0r0-492f87ba",
+        "run_index": 3,
+        "game_occurrence": 0,
+        "score": 30.372518439009575,
+        "reported_score": 30.372518439009575,
+        "recomputed_score": 30.372518439009575,
+        "score_source": "final_score",
+        "completion_ceiling": 47.61904761904762,
+        "efficiency_gap": 17.246529180038046,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "completion_fraction": 0.6666666666666666,
+        "actions": 298,
+        "history_actions": 298,
+        "actions_per_level": [
+          99,
+          38,
+          90,
+          71,
+          0,
+          0
+        ],
+        "generated_tokens": 207958,
+        "action_attached_generated_tokens": 207958,
+        "analyzer_reported_generated_tokens": 207958,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 207958,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.794772542,
+        "final_wallclock_seconds": 3481.794772542,
+        "last_action_seconds": 3474.976985057,
+        "started_at": "2026-10-11T08:44:57.379197",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=207958",
+        "warnings": [],
+        "start_benchmark_second": 0.478073,
+        "last_action_benchmark_second": 3475.4550580570003,
+        "finish_benchmark_second": 3482.272845542,
+        "last_action_to_finish_seconds": 6.817787484999826,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 990.3285209059993
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1407.687814914
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 2517.3521672939996
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 3475.4550580570003
+          }
+        ],
+        "actions_on_completed_levels": 298,
+        "actions_on_uncompleted_levels": 0
+      },
+      "score_delta": 16.990594240758846,
+      "ceiling_delta": 33.333333333333336,
+      "levels_delta": 2,
+      "analyzer_tokens_delta": 5889,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 1.4158828533965704
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "baseline": {
+        "game_id": "sp80-589a99af",
+        "run_index": 4,
+        "game_occurrence": 0,
+        "score": 4.761904761904762,
+        "reported_score": 4.761904761904762,
+        "recomputed_score": 4.761904761904762,
+        "score_source": "final_score",
+        "completion_ceiling": 4.761904761904762,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 6,
+        "completion_fraction": 0.16666666666666666,
+        "actions": 50,
+        "history_actions": 50,
+        "actions_per_level": [
+          6,
+          44,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 198812,
+        "action_attached_generated_tokens": 198812,
+        "analyzer_reported_generated_tokens": 236675,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 37863,
+        "history_generated_tokens": 198812,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.0838799519997,
+        "final_wallclock_seconds": 3481.0838799519997,
+        "last_action_seconds": 2974.06673037,
+        "started_at": "2026-10-11T07:46:42.006089",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=236675",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 37863; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.038705,
+        "last_action_benchmark_second": 2975.10543537,
+        "finish_benchmark_second": 3482.1225849519997,
+        "last_action_to_finish_seconds": 507.01714958199955,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 180.63576046299994
+          }
+        ],
+        "actions_on_completed_levels": 6,
+        "actions_on_uncompleted_levels": 44
+      },
+      "program_state": {
+        "game_id": "sp80-589a99af",
+        "run_index": 4,
+        "game_occurrence": 0,
+        "score": 47.61904761904761,
+        "reported_score": 47.61904761904761,
+        "recomputed_score": 47.61904761904761,
+        "score_source": "final_score",
+        "completion_ceiling": 47.61904761904762,
+        "efficiency_gap": 7.105427357601002e-15,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "completion_fraction": 0.6666666666666666,
+        "actions": 121,
+        "history_actions": 121,
+        "actions_per_level": [
+          10,
+          18,
+          22,
+          70,
+          1,
+          0
+        ],
+        "generated_tokens": 204864,
+        "action_attached_generated_tokens": 204864,
+        "analyzer_reported_generated_tokens": 221109,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 16245,
+        "history_generated_tokens": 204864,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.776988593,
+        "final_wallclock_seconds": 3481.776988593,
+        "last_action_seconds": 3245.3574187570002,
+        "started_at": "2026-10-11T08:44:57.405657",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=221109",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 16245; retain both accounting views"
+        ],
+        "start_benchmark_second": 0.504533,
+        "last_action_benchmark_second": 3245.861951757,
+        "finish_benchmark_second": 3482.281521593,
+        "last_action_to_finish_seconds": 236.41956983599994,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 219.40057835400032
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1074.5304741690004
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 1715.1788560439998
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 3151.359062109
+          }
+        ],
+        "actions_on_completed_levels": 120,
+        "actions_on_uncompleted_levels": 1
+      },
+      "score_delta": 42.857142857142854,
+      "ceiling_delta": 42.85714285714286,
+      "levels_delta": 3,
+      "analyzer_tokens_delta": -15566,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 3.571428571428571
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "baseline": {
+        "game_id": "sk48-d8078629",
+        "run_index": 5,
+        "game_occurrence": 0,
+        "score": 1.5003790261447396,
+        "reported_score": 1.5003790261447396,
+        "recomputed_score": 1.5003790261447396,
+        "score_source": "final_score",
+        "completion_ceiling": 2.7777777777777777,
+        "efficiency_gap": 1.277398751633038,
+        "levels_completed": 1,
+        "number_of_levels": 8,
+        "completion_fraction": 0.125,
+        "actions": 122,
+        "history_actions": 122,
+        "actions_per_level": [
+          83,
+          39,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 169029,
+        "action_attached_generated_tokens": 169029,
+        "analyzer_reported_generated_tokens": 188495,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 19466,
+        "history_generated_tokens": 169029,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3488.9421107489998,
+        "final_wallclock_seconds": 3488.9421107489998,
+        "last_action_seconds": 3144.8818803589998,
+        "started_at": "2026-10-11T07:46:42.036863",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=188495",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 19466; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.069479,
+        "last_action_benchmark_second": 3145.9513593589995,
+        "finish_benchmark_second": 3490.0115897489995,
+        "last_action_to_finish_seconds": 344.06023039,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 2166.7025386669998
+          }
+        ],
+        "actions_on_completed_levels": 83,
+        "actions_on_uncompleted_levels": 39
+      },
+      "program_state": {
+        "game_id": "sk48-d8078629",
+        "run_index": 5,
+        "game_occurrence": 0,
+        "score": 2.7777777777777777,
+        "reported_score": 2.7777777777777777,
+        "recomputed_score": 2.7777777777777777,
+        "score_source": "final_score",
+        "completion_ceiling": 2.7777777777777777,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 8,
+        "completion_fraction": 0.125,
+        "actions": 133,
+        "history_actions": 133,
+        "actions_per_level": [
+          42,
+          91,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 206275,
+        "action_attached_generated_tokens": 206275,
+        "analyzer_reported_generated_tokens": 212370,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 6095,
+        "history_generated_tokens": 206275,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.756973093,
+        "final_wallclock_seconds": 3481.756973093,
+        "last_action_seconds": 3383.8113898110005,
+        "started_at": "2026-10-11T08:44:57.426203",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=212370",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 6095; retain both accounting views"
+        ],
+        "start_benchmark_second": 0.525079,
+        "last_action_benchmark_second": 3384.3364688110005,
+        "finish_benchmark_second": 3482.282052093,
+        "last_action_to_finish_seconds": 97.94558328199946,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 589.1000052620002
+          }
+        ],
+        "actions_on_completed_levels": 42,
+        "actions_on_uncompleted_levels": 91
+      },
+      "score_delta": 1.277398751633038,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": 23875,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 0.10644989596941984
+    },
+    {
+      "game_id": "ls20-9607627b",
+      "baseline": {
+        "game_id": "ls20-9607627b",
+        "run_index": 6,
+        "game_occurrence": 0,
+        "score": 21.67462843467701,
+        "reported_score": 21.67462843467701,
+        "recomputed_score": 21.67462843467701,
+        "score_source": "final_score",
+        "completion_ceiling": 35.714285714285715,
+        "efficiency_gap": 14.039657279608704,
+        "levels_completed": 4,
+        "number_of_levels": 7,
+        "completion_fraction": 0.5714285714285714,
+        "actions": 350,
+        "history_actions": 350,
+        "actions_per_level": [
+          34,
+          80,
+          91,
+          141,
+          4,
+          0,
+          0
+        ],
+        "generated_tokens": 216007,
+        "action_attached_generated_tokens": 216007,
+        "analyzer_reported_generated_tokens": 216007,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 216007,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.5165939060003,
+        "final_wallclock_seconds": 3481.5165939060003,
+        "last_action_seconds": 3469.7913451990003,
+        "started_at": "2026-10-11T07:46:42.075538",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=216007",
+        "warnings": [],
+        "start_benchmark_second": 1.108154,
+        "last_action_benchmark_second": 3470.8994991990003,
+        "finish_benchmark_second": 3482.6247479060003,
+        "last_action_to_finish_seconds": 11.725248706999992,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 286.23911082300003
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1213.178089468
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 2068.7247288040003
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 3152.2913874940004
+          }
+        ],
+        "actions_on_completed_levels": 346,
+        "actions_on_uncompleted_levels": 4
+      },
+      "program_state": {
+        "game_id": "ls20-9607627b",
+        "run_index": 6,
+        "game_occurrence": 0,
+        "score": 8.604671467062747,
+        "reported_score": 8.604671467062747,
+        "recomputed_score": 8.604671467062747,
+        "score_source": "final_score",
+        "completion_ceiling": 21.428571428571427,
+        "efficiency_gap": 12.82389996150868,
+        "levels_completed": 3,
+        "number_of_levels": 7,
+        "completion_fraction": 0.42857142857142855,
+        "actions": 408,
+        "history_actions": 408,
+        "actions_per_level": [
+          34,
+          163,
+          137,
+          74,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 201814,
+        "action_attached_generated_tokens": 201814,
+        "analyzer_reported_generated_tokens": 206019,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 4205,
+        "history_generated_tokens": 201814,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.7249047230007,
+        "final_wallclock_seconds": 3481.7249047230007,
+        "last_action_seconds": 3345.1762569870007,
+        "started_at": "2026-10-11T08:44:57.457894",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=206019",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 4205; retain both accounting views"
+        ],
+        "start_benchmark_second": 0.55677,
+        "last_action_benchmark_second": 3345.733026987001,
+        "finish_benchmark_second": 3482.281674723001,
+        "last_action_to_finish_seconds": 136.54864773600002,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 524.8329273990001
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1435.3870140650004
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 2641.4949957280005
+          }
+        ],
+        "actions_on_completed_levels": 334,
+        "actions_on_uncompleted_levels": 74
+      },
+      "score_delta": -13.069956967614264,
+      "ceiling_delta": -14.285714285714288,
+      "levels_delta": -1,
+      "analyzer_tokens_delta": -9988,
+      "direct_missing_snapshot_events": 1,
+      "nonempty_preservation_events": 1,
+      "preserved_function_occurrences": 21,
+      "mean_score_contribution": -1.089163080634522
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "baseline": {
+        "game_id": "tu93-0768757b",
+        "run_index": 7,
+        "game_occurrence": 0,
+        "score": 67.0182885089543,
+        "reported_score": 67.0182885089543,
+        "recomputed_score": 67.0182885089543,
+        "score_source": "final_score",
+        "completion_ceiling": 80.0,
+        "efficiency_gap": 12.9817114910457,
+        "levels_completed": 8,
+        "number_of_levels": 9,
+        "completion_fraction": 0.8888888888888888,
+        "actions": 275,
+        "history_actions": 275,
+        "actions_per_level": [
+          69,
+          31,
+          24,
+          42,
+          29,
+          31,
+          17,
+          30,
+          2
+        ],
+        "generated_tokens": 217638,
+        "action_attached_generated_tokens": 217638,
+        "analyzer_reported_generated_tokens": 223156,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 5518,
+        "history_generated_tokens": 217638,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.629068675,
+        "final_wallclock_seconds": 3481.629068675,
+        "last_action_seconds": 3386.5598259319995,
+        "started_at": "2026-10-11T07:46:42.094253",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=223156",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 5518; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.126869,
+        "last_action_benchmark_second": 3387.6866949319997,
+        "finish_benchmark_second": 3482.755937675,
+        "last_action_to_finish_seconds": 95.06924274300036,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 204.31074669000003
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 457.08621872
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 621.3720279890001
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 945.391183384
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1222.995521686
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1624.3161963749997
+          },
+          {
+            "level": 7,
+            "at_benchmark_second": 2077.1704652010003
+          },
+          {
+            "level": 8,
+            "at_benchmark_second": 3162.220267708
+          }
+        ],
+        "actions_on_completed_levels": 273,
+        "actions_on_uncompleted_levels": 2
+      },
+      "program_state": {
+        "game_id": "tu93-0768757b",
+        "run_index": 7,
+        "game_occurrence": 0,
+        "score": 56.23137773002181,
+        "reported_score": 56.23137773002181,
+        "recomputed_score": 56.23137773002181,
+        "score_source": "final_score",
+        "completion_ceiling": 80.0,
+        "efficiency_gap": 23.768622269978188,
+        "levels_completed": 8,
+        "number_of_levels": 9,
+        "completion_fraction": 0.8888888888888888,
+        "actions": 301,
+        "history_actions": 301,
+        "actions_per_level": [
+          19,
+          23,
+          19,
+          22,
+          34,
+          30,
+          24,
+          129,
+          1
+        ],
+        "generated_tokens": 219273,
+        "action_attached_generated_tokens": 219273,
+        "analyzer_reported_generated_tokens": 219273,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 219273,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.778243652,
+        "final_wallclock_seconds": 3481.778243652,
+        "last_action_seconds": 3452.003913548,
+        "started_at": "2026-10-11T08:44:57.476224",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=219273",
+        "warnings": [],
+        "start_benchmark_second": 0.5751,
+        "last_action_benchmark_second": 3452.579013548,
+        "finish_benchmark_second": 3482.353343652,
+        "last_action_to_finish_seconds": 29.774330104,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 143.04090496500064
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 429.3406556330001
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 538.1326647150008
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 765.8891094690007
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 946.8512402680008
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1364.4330227130004
+          },
+          {
+            "level": 7,
+            "at_benchmark_second": 1670.8716337180003
+          },
+          {
+            "level": 8,
+            "at_benchmark_second": 3322.645524918001
+          }
+        ],
+        "actions_on_completed_levels": 300,
+        "actions_on_uncompleted_levels": 1
+      },
+      "score_delta": -10.786910778932487,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": -3883,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": -0.8989092315777073
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "baseline": {
+        "game_id": "lf52-271a04aa",
+        "run_index": 8,
+        "game_occurrence": 0,
+        "score": 10.909090909090908,
+        "reported_score": 10.909090909090908,
+        "recomputed_score": 10.909090909090908,
+        "score_source": "final_score",
+        "completion_ceiling": 10.909090909090908,
+        "efficiency_gap": 0.0,
+        "levels_completed": 3,
+        "number_of_levels": 10,
+        "completion_fraction": 0.3,
+        "actions": 210,
+        "history_actions": 210,
+        "actions_per_level": [
+          14,
+          88,
+          56,
+          52,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 195521,
+        "action_attached_generated_tokens": 195521,
+        "analyzer_reported_generated_tokens": 198416,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 2895,
+        "history_generated_tokens": 195521,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.6775798840004,
+        "final_wallclock_seconds": 3481.6775798840004,
+        "last_action_seconds": 3441.810236172,
+        "started_at": "2026-10-11T07:46:42.145881",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=198416",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 2895; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.178497,
+        "last_action_benchmark_second": 3442.9887331719997,
+        "finish_benchmark_second": 3482.8560768840002,
+        "last_action_to_finish_seconds": 39.86734371200055,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 175.49096059299995
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1489.909964058
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 2363.48715455
+          }
+        ],
+        "actions_on_completed_levels": 158,
+        "actions_on_uncompleted_levels": 52
+      },
+      "program_state": {
+        "game_id": "lf52-271a04aa",
+        "run_index": 8,
+        "game_occurrence": 0,
+        "score": 3.547096946022727,
+        "reported_score": 3.547096946022727,
+        "recomputed_score": 3.547096946022727,
+        "score_source": "final_score",
+        "completion_ceiling": 5.454545454545454,
+        "efficiency_gap": 1.907448508522727,
+        "levels_completed": 2,
+        "number_of_levels": 10,
+        "completion_fraction": 0.2,
+        "actions": 165,
+        "history_actions": 165,
+        "actions_per_level": [
+          11,
+          128,
+          26,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 146030,
+        "action_attached_generated_tokens": 146030,
+        "analyzer_reported_generated_tokens": 160928,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 14898,
+        "history_generated_tokens": 146030,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3512.64517797,
+        "final_wallclock_seconds": 3512.64517797,
+        "last_action_seconds": 3219.4639187620005,
+        "started_at": "2026-10-11T08:44:57.514757",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=160928",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 14898; retain both accounting views"
+        ],
+        "start_benchmark_second": 0.613633,
+        "last_action_benchmark_second": 3220.0775517620004,
+        "finish_benchmark_second": 3513.25881097,
+        "last_action_to_finish_seconds": 293.1812592079996,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 210.7462120159999
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 2407.6807040510002
+          }
+        ],
+        "actions_on_completed_levels": 139,
+        "actions_on_uncompleted_levels": 26
+      },
+      "score_delta": -7.361993963068182,
+      "ceiling_delta": -5.454545454545454,
+      "levels_delta": -1,
+      "analyzer_tokens_delta": -37488,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": -0.6134994969223485
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "baseline": {
+        "game_id": "ft09-0d8bbf25",
+        "run_index": 9,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "completion_fraction": 1.0,
+        "actions": 93,
+        "history_actions": 93,
+        "actions_per_level": [
+          5,
+          7,
+          14,
+          24,
+          25,
+          18
+        ],
+        "generated_tokens": 88590,
+        "action_attached_generated_tokens": 88590,
+        "analyzer_reported_generated_tokens": 88590,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 88590,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 1355.59723565,
+        "final_wallclock_seconds": 1355.59723565,
+        "last_action_seconds": 1355.400641632,
+        "started_at": "2026-10-11T07:46:42.159476",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=88590",
+        "warnings": [],
+        "start_benchmark_second": 1.192092,
+        "last_action_benchmark_second": 1356.592733632,
+        "finish_benchmark_second": 1356.78932765,
+        "last_action_to_finish_seconds": 0.19659401799981424,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 214.63664500000004
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 255.520957362
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 419.609071523
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 522.38523328
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 1162.5726496329999
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1356.592733632
+          }
+        ],
+        "actions_on_completed_levels": 93,
+        "actions_on_uncompleted_levels": 0
+      },
+      "program_state": {
+        "game_id": "ft09-0d8bbf25",
+        "run_index": 9,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "completion_fraction": 1.0,
+        "actions": 84,
+        "history_actions": 84,
+        "actions_per_level": [
+          4,
+          7,
+          14,
+          21,
+          25,
+          13
+        ],
+        "generated_tokens": 66195,
+        "action_attached_generated_tokens": 66195,
+        "analyzer_reported_generated_tokens": 66195,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 66195,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 1005.483131598,
+        "final_wallclock_seconds": 1005.483131598,
+        "last_action_seconds": 1005.2414253500001,
+        "started_at": "2026-10-11T08:44:57.532877",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=66195",
+        "warnings": [],
+        "start_benchmark_second": 0.631753,
+        "last_action_benchmark_second": 1005.8731783500001,
+        "finish_benchmark_second": 1006.114884598,
+        "last_action_to_finish_seconds": 0.24170624799990037,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 130.90544120300035
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 192.19956004999983
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 371.2811907099998
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 470.2931401899999
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 926.8451770189998
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 1005.8731783500001
+          }
+        ],
+        "actions_on_completed_levels": 84,
+        "actions_on_uncompleted_levels": 0
+      },
+      "score_delta": 0.0,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": -22395,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 0.0
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "baseline": {
+        "game_id": "sc25-635fd71a",
+        "run_index": 10,
+        "game_occurrence": 0,
+        "score": 100.0,
+        "reported_score": 100.0,
+        "recomputed_score": 100.0,
+        "score_source": "final_score",
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "completion_fraction": 1.0,
+        "actions": 217,
+        "history_actions": 217,
+        "actions_per_level": [
+          26,
+          7,
+          28,
+          54,
+          50,
+          52
+        ],
+        "generated_tokens": 116223,
+        "action_attached_generated_tokens": 116223,
+        "analyzer_reported_generated_tokens": 116223,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 116223,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 2789.656695043,
+        "final_wallclock_seconds": 2789.656695043,
+        "last_action_seconds": 2789.204441011,
+        "started_at": "2026-10-11T07:46:42.213401",
+        "state": "won",
+        "stop_reason": "won",
+        "stop_reason_source": "state",
+        "solver_note": "tokens=116223",
+        "warnings": [],
+        "start_benchmark_second": 1.246017,
+        "last_action_benchmark_second": 2790.450458011,
+        "finish_benchmark_second": 2790.902712043,
+        "last_action_to_finish_seconds": 0.452254031999928,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 1227.093814799
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1292.0651000879998
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 1570.8536783589998
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 1940.2968327600001
+          },
+          {
+            "level": 5,
+            "at_benchmark_second": 2488.235963124
+          },
+          {
+            "level": 6,
+            "at_benchmark_second": 2790.450458011
+          }
+        ],
+        "actions_on_completed_levels": 217,
+        "actions_on_uncompleted_levels": 0
+      },
+      "program_state": {
+        "game_id": "sc25-635fd71a",
+        "run_index": 10,
+        "game_occurrence": 0,
+        "score": 44.27843927307474,
+        "reported_score": 44.27843927307474,
+        "recomputed_score": 44.27843927307474,
+        "score_source": "final_score",
+        "completion_ceiling": 47.61904761904762,
+        "efficiency_gap": 3.340608345972882,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "completion_fraction": 0.6666666666666666,
+        "actions": 194,
+        "history_actions": 194,
+        "actions_per_level": [
+          37,
+          5,
+          46,
+          62,
+          44,
+          0
+        ],
+        "generated_tokens": 149937,
+        "action_attached_generated_tokens": 149937,
+        "analyzer_reported_generated_tokens": 153900,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 3963,
+        "history_generated_tokens": 149937,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.5941926739997,
+        "final_wallclock_seconds": 3481.5941926739997,
+        "last_action_seconds": 3347.2958073189993,
+        "started_at": "2026-10-11T08:44:57.580422",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=153900",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 3963; retain both accounting views"
+        ],
+        "start_benchmark_second": 0.679298,
+        "last_action_benchmark_second": 3347.9751053189993,
+        "finish_benchmark_second": 3482.2734906739997,
+        "last_action_to_finish_seconds": 134.2983853550004,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 1636.8074896399994
+          },
+          {
+            "level": 2,
+            "at_benchmark_second": 1725.8633880709995
+          },
+          {
+            "level": 3,
+            "at_benchmark_second": 2405.947663756
+          },
+          {
+            "level": 4,
+            "at_benchmark_second": 2891.3250677739998
+          }
+        ],
+        "actions_on_completed_levels": 150,
+        "actions_on_uncompleted_levels": 44
+      },
+      "score_delta": -55.72156072692526,
+      "ceiling_delta": -52.38095238095238,
+      "levels_delta": -2,
+      "analyzer_tokens_delta": 37677,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": -4.643463393910438
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "baseline": {
+        "game_id": "bp35-0a0ad940",
+        "run_index": 11,
+        "game_occurrence": 0,
+        "score": 0.8,
+        "reported_score": 0.8,
+        "recomputed_score": 0.8,
+        "score_source": "final_score",
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 1.4222222222222223,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "completion_fraction": 0.1111111111111111,
+        "actions": 82,
+        "history_actions": 82,
+        "actions_per_level": [
+          35,
+          47,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 160069,
+        "action_attached_generated_tokens": 160069,
+        "analyzer_reported_generated_tokens": 169063,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 8994,
+        "history_generated_tokens": 160069,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.4663276440006,
+        "final_wallclock_seconds": 3481.4663276440006,
+        "last_action_seconds": 3333.6493345400004,
+        "started_at": "2026-10-11T07:46:42.256880",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=169063",
+        "warnings": [
+          "analyzer-reported minus history+final generated tokens = 8994; retain both accounting views"
+        ],
+        "start_benchmark_second": 1.289496,
+        "last_action_benchmark_second": 3334.9388305400003,
+        "finish_benchmark_second": 3482.7558236440004,
+        "last_action_to_finish_seconds": 147.81699310400018,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 2057.1189034120002
+          }
+        ],
+        "actions_on_completed_levels": 35,
+        "actions_on_uncompleted_levels": 47
+      },
+      "program_state": {
+        "game_id": "bp35-0a0ad940",
+        "run_index": 11,
+        "game_occurrence": 0,
+        "score": 1.165279429250892,
+        "reported_score": 1.165279429250892,
+        "recomputed_score": 1.165279429250892,
+        "score_source": "final_score",
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 1.0569427929713304,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "completion_fraction": 0.1111111111111111,
+        "actions": 41,
+        "history_actions": 41,
+        "actions_per_level": [
+          29,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "generated_tokens": 159296,
+        "action_attached_generated_tokens": 159296,
+        "analyzer_reported_generated_tokens": 159296,
+        "analyzer_reported_generated_tokens_source": "solver_note_exact_tokens_format",
+        "unattached_generated_tokens": 0,
+        "history_generated_tokens": 159296,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "history_uncached_input_tokens": 0,
+        "final_uncached_input_tokens": 0,
+        "run_elapsed_seconds": 3481.722541514,
+        "final_wallclock_seconds": 3481.722541514,
+        "last_action_seconds": 3350.4706955519996,
+        "started_at": "2026-10-11T08:44:57.616738",
+        "state": "cancelled",
+        "stop_reason": "unknown",
+        "stop_reason_source": "not_recorded",
+        "solver_note": "tokens=159296",
+        "warnings": [],
+        "start_benchmark_second": 0.715614,
+        "last_action_benchmark_second": 3351.186309552,
+        "finish_benchmark_second": 3482.4381555140003,
+        "last_action_to_finish_seconds": 131.25184596200052,
+        "post_deadline_action_count": 0,
+        "post_deadline_completed_levels": [],
+        "level_completion_times": [
+          {
+            "level": 1,
+            "at_benchmark_second": 2145.4764218980004
+          }
+        ],
+        "actions_on_completed_levels": 29,
+        "actions_on_uncompleted_levels": 12
+      },
+      "score_delta": 0.36527942925089185,
+      "ceiling_delta": 0.0,
+      "levels_delta": 0,
+      "analyzer_tokens_delta": -9767,
+      "direct_missing_snapshot_events": 0,
+      "nonempty_preservation_events": 0,
+      "preserved_function_occurrences": 0,
+      "mean_score_contribution": 0.03043995243757432
+    }
+  ],
+  "descriptive_groups": {
+    "direct_event_games": {
+      "games": [
+        "re86-8af5384d",
+        "ls20-9607627b"
+      ],
+      "mean_score_contribution": -0.6375388201600817,
+      "levels_delta": -1
+    },
+    "zero_direct_event_games": {
+      "games": [
+        "ar25-0c556536",
+        "tr87-cd924810",
+        "m0r0-492f87ba",
+        "sp80-589a99af",
+        "sk48-d8078629",
+        "tu93-0768757b",
+        "lf52-271a04aa",
+        "ft09-0d8bbf25",
+        "sc25-635fd71a",
+        "bp35-0a0ad940"
+      ],
+      "mean_score_contribution": -5.396750214257724,
+      "levels_delta": 0
+    },
+    "tr87_sc25": {
+      "games": [
+        "tr87-cd924810",
+        "sc25-635fd71a"
+      ],
+      "mean_score_contribution": -9.008542758989805,
+      "levels_delta": -4
+    }
+  },
+  "intervention": {
+    "intervention": "program-state-v1",
+    "enabled": true,
+    "counts": {
+      "snapshot_passthrough_calls": 1039,
+      "missing_snapshot_calls": 3,
+      "calls_preserving_nonempty_set": 2,
+      "preserved_function_occurrences": 38
+    },
+    "events": [
+      {
+        "state_path": "/kaggle/working/program_state/artifacts/re86-8af5384d_p0_tool_runtime_state.json",
+        "run_ref": "re86-8af5384d_p0",
+        "dispatch_id": "g02",
+        "scope": "game",
+        "status": "missing_snapshot_preserved",
+        "retained_function_count": 0,
+        "retained_function_names": [],
+        "sandbox_error": "Tool timed out after 30s",
+        "executed_action_calls": 0,
+        "last_action_num": null,
+        "last_level": null,
+        "terminal_feedback_seen": false
+      },
+      {
+        "state_path": "/kaggle/working/program_state/artifacts/ls20-9607627b_p0_tool_runtime_state.json",
+        "run_ref": "ls20-9607627b_p0",
+        "dispatch_id": "g06",
+        "scope": "game",
+        "status": "missing_snapshot_preserved",
+        "retained_function_count": 21,
+        "retained_function_names": [
+          "block_bbox",
+          "block_pos",
+          "block_pos2",
+          "block_pos3",
+          "blockpose",
+          "budget",
+          "build_map",
+          "build_map2",
+          "build_map3",
+          "build_map4",
+          "build_map5",
+          "icon3",
+          "icon3b",
+          "icon_pattern",
+          "icon_state",
+          "macro",
+          "macro2",
+          "macro3",
+          "macro_pos",
+          "nook3",
+          "top_pattern"
+        ],
+        "sandbox_error": "Tool timed out after 30s",
+        "executed_action_calls": 36,
+        "last_action_num": 329,
+        "last_level": 3,
+        "terminal_feedback_seen": false
+      },
+      {
+        "state_path": "/kaggle/working/program_state/artifacts/re86-8af5384d_p0_tool_runtime_state.json",
+        "run_ref": "re86-8af5384d_p0",
+        "dispatch_id": "g02",
+        "scope": "game",
+        "status": "missing_snapshot_preserved",
+        "retained_function_count": 17,
+        "retained_function_names": [
+          "Pcells",
+          "Rcells",
+          "Wpos",
+          "X",
+          "Xcells",
+          "dots_covered",
+          "extent",
+          "leg_positions",
+          "line",
+          "lines",
+          "onb",
+          "probe",
+          "route",
+          "simulate",
+          "sq",
+          "supmin",
+          "xsh"
+        ],
+        "sandbox_error": "Tool timed out after 30s",
+        "executed_action_calls": 0,
+        "last_action_num": null,
+        "last_level": null,
+        "terminal_feedback_seen": false
+      }
+    ],
+    "boundary": "Only absent keepable_functions preserves the previous set; present snapshots use baseline semantics."
+  },
+  "comparability": {
+    "equal_metadata_fields": {
+      "game_ids": true,
+      "game_order_sha256": true,
+      "budget_seconds": true,
+      "normalized_budget_seconds": true,
+      "active_streams": true,
+      "concurrency": true,
+      "n_passes": true,
+      "warmup_action_games": true,
+      "analyzer_timeout_seconds": true,
+      "source_sha256": true,
+      "environment": true
+    },
+    "distinct_cpu_pids": true,
+    "arm_order": [
+      "baseline",
+      "program_state"
+    ]
+  },
+  "notes": [
+    "Same 12 known public games, one run each, baseline first, shared 10-stream scheduling; no independent random-seed replications.",
+    "Event groups are post hoc descriptive accounting, not treatment-effect estimates. Zero direct events do not exclude shared scheduling effects.",
+    "Baseline disabled-patch diagnostics are empty by design; baseline timeout counts require raw-trace inspection.",
+    "Scores are public-development results, not hidden leaderboard scores. No promotion supported by this run."
+  ]
+}

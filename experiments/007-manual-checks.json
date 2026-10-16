@@ -1,0 +1,162 @@
+{
+  "experiment": "007-program-state",
+  "date_local": "2026-10-11",
+  "timezone": "Asia/Shanghai",
+  "status": "cpu_manual_checks_complete",
+  "scope": "Manual checks of the retained-source protocol and opt-in repair, not a game-performance experiment.",
+  "gpu_used": false,
+  "model_calls": 0,
+  "game_actions_executed": 0,
+  "trajectory_code_executed": false,
+  "game_engine_source_read": false,
+  "test_files_created": false,
+  "runtime": {
+    "python": "/private/tmp/arc3-data-inspection-venv/bin/python",
+    "python_version": "3.12.13",
+    "pythonpath": "src:research/runtime-bundle/src/ARC3-Inference",
+    "harness": "Locally extracted Franzen bundle with the published baseline Notebook patch applied.",
+    "sandbox": "Real run_sandboxed_python subprocess using Python -I -S; timeout reduced to 1 second for the small timeout cases.",
+    "full_tool_path": "Real ToolAgent._dispatch_tool with a manually constructed runtime-state fixture. Local model configuration was supplied only to construct the agent; no model endpoint was called."
+  },
+  "source_sha256": {
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "4c678152603b9ccfbd9fbf4ed04137d11d61d8def75e0ef37818537b83a7f302"
+  },
+  "real_trace_evidence": [
+    {
+      "run": "005",
+      "arm": "baseline",
+      "game": "tr87-cd924810",
+      "source": "runs/005-full-baseline/baseline/tr87-cd924810_p0_requests.jsonl",
+      "source_line": 133,
+      "action": 292,
+      "analysis_step": 29,
+      "error": "Tool timed out after 30s",
+      "previous_functions_reported_no_longer_retained": 34
+    },
+    {
+      "run": "006",
+      "arm": "baseline",
+      "game": "ar25-0c556536",
+      "source": "runs/006-compact/baseline__ar25-0c556536_p0_requests.compact.json",
+      "source_line": 159,
+      "action": 219,
+      "analysis_step": 44,
+      "error": "Tool timed out after 30s",
+      "previous_functions_reported_no_longer_retained": 39
+    },
+    {
+      "run": "006",
+      "arm": "transient_history",
+      "game": "ar25-0c556536",
+      "source": "runs/006-compact/transient_history__ar25-0c556536_p0_requests.compact.json",
+      "source_line": 91,
+      "action": 136,
+      "analysis_step": 25,
+      "error": "Tool timed out after 30s",
+      "previous_functions_reported_no_longer_retained": 15
+    }
+  ],
+  "manual_checks": [
+    {
+      "id": "baseline_missing_snapshot",
+      "method": "Real isolated sandbox and original _record_retained_functions",
+      "observation": "After retaining f and dependent g, defining h then entering a short infinite loop returned a hard-timeout result with no keepable_functions key. The original commit path cleared f and g.",
+      "result": "confirmed"
+    },
+    {
+      "id": "patched_last_committed_sources",
+      "method": "Real ToolAgent._dispatch_tool and isolated sandbox",
+      "observation": "Committed f and dependent g with math import. A timed-out call attempted to replace f, define h and create a snippet variable. The patch kept the previous source dictionary unchanged, including the import; the feedback explicitly said this failed call's definitions, changes and deletions were not saved.",
+      "result": "confirmed"
+    },
+    {
+      "id": "subsequent_fresh_sandbox_call",
+      "method": "A later real ToolAgent._dispatch_tool call in a fresh sandbox",
+      "observation": "g(2.9) returned 6 from the pre-timeout math-backed implementation. The failed call's new_variable was absent and raised NameError, handled by the hand-written snippet.",
+      "return_value": 6,
+      "result": "confirmed"
+    },
+    {
+      "id": "legal_empty_snapshot",
+      "method": "Real ToolAgent._dispatch_tool and isolated sandbox",
+      "observation": "A normal del f removed f; the collector also pruned g because it depended on f. The resulting present empty snapshot cleared the committed pool. The patch did not resurrect either function.",
+      "result": "confirmed"
+    },
+    {
+      "id": "ordinary_exception_with_snapshot",
+      "method": "Real ToolAgent._dispatch_tool and isolated sandbox",
+      "observation": "After committing ok(x)=x+4, a call successfully redefined ok(x)=x+8 and then raised ValueError. The valid snapshot accompanying that ordinary exception committed the new definition. A later fresh sandbox returned ok(1)=9.",
+      "return_value": 9,
+      "result": "confirmed"
+    },
+    {
+      "id": "old_binding_when_definition_not_executed",
+      "method": "Real isolated sandbox and original retention path",
+      "observation": "An exception before a replacement def, or a replacement def whose default-value evaluation failed, left the old restored function binding and its dependent function retained.",
+      "result": "confirmed"
+    },
+    {
+      "id": "invalid_new_dependency",
+      "method": "Real isolated sandbox and original retention path",
+      "observation": "A new same-name definition depending on an unavailable snippet variable was rejected, and its dependent function was pruned. The original code did not fall back to the old version; the opt-in patch leaves this present-snapshot behavior unchanged.",
+      "result": "confirmed"
+    },
+    {
+      "id": "same_level_reset_metadata",
+      "method": "Synthetic action-result metadata passed through the original summary and scope-update helpers",
+      "observation": "A same-level RESET summary did not itself clear the retained pool under levelup scope.",
+      "actual_game_reset_executed": false,
+      "result": "confirmed"
+    },
+    {
+      "id": "levelup_reset_after_missing_snapshot",
+      "method": "Synthetic missing-snapshot record and level-transition summary passed through the real commit and scope-update methods",
+      "observation": "The repair preserved the old pool at the missing-snapshot commit point, then the normal levelup boundary cleared it. No wrapper restored the pool after that reset.",
+      "actual_game_transition_executed": false,
+      "result": "confirmed"
+    },
+    {
+      "id": "game_scope_cross_level",
+      "method": "Synthetic level-transition summary passed through the real scope-update method",
+      "observation": "Game scope kept the retained helper across the transition, matching the baseline scope behavior.",
+      "actual_game_transition_executed": false,
+      "result": "confirmed"
+    },
+    {
+      "id": "new_session_reset",
+      "method": "Real _ensure_session with a different runtime directory",
+      "observation": "Changing the runtime session directory cleared the retained pool.",
+      "result": "confirmed"
+    },
+    {
+      "id": "disabled_baseline_behavior",
+      "method": "Real ToolAgent._dispatch_tool and hard timeout with the patch disabled",
+      "observation": "The same missing-snapshot hard timeout cleared the old function set through the original path. Pure-function dispatch step_executed and made_progress flags remained false.",
+      "result": "confirmed"
+    },
+    {
+      "id": "runner_arm_registration",
+      "method": "Manual run_arm --help invocation",
+      "observation": "CLI choices contain baseline, goal_evidence, transient_history and program_state. Source inspection confirms the arm-specific installer, program_state.py source hash and final program-state.json diagnostics output.",
+      "runner_experiment_started": false,
+      "result": "confirmed"
+    }
+  ],
+  "source_review_only": [
+    "Turn scope clears on a new non-resumption analyzer turn; this boundary was inspected, not exercised through a model turn.",
+    "Existing game actions remain in sandbox_result.action_results and flow through the original summary and dispatch. No action rollback or replay is added; no live game action was used in this CPU check.",
+    "The repair only recognizes an absent key. Present empty, malformed or collector-failure snapshots retain the original behavior; repairing those would require a separate protocol decision."
+  ],
+  "independent_review": {
+    "reviewer": "/root/run_analysis",
+    "mode": "read-only source review",
+    "result": "No substantive issue found in missing-versus-empty handling, import/source retention, ordinary exception snapshots, reset order, action semantics or disabled behavior."
+  },
+  "evidence_limitations": [
+    "This JSON summarizes manual commands and their outputs from the task conversation; it is not an automated test suite or a saved raw sandbox transcript.",
+    "Scope transition cases used synthetic metadata and real baseline helper methods, not reconstructed original game executions.",
+    "No GPU score or game outcome has been measured for program_state. This does not establish that retained old logic is correct or explain all of experiment 006's regression."
+  ],
+  "research_document": "research/007-program-state-design.md"
+}
