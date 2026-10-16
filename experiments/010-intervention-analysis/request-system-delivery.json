@@ -1,0 +1,46 @@
+[
+  {
+    "source": "runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+    "source_line": 1,
+    "event": "request",
+    "analysis_step": 1,
+    "action": 1,
+    "system_chars": 19626,
+    "system_sha256": "710d38ac15006c4a92dd36c4495dfdc407932d4b18b027cc7276ed461664e47d",
+    "api_note_present": true,
+    "api_note_text": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning."
+  },
+  {
+    "source": "runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl",
+    "source_line": 1,
+    "event": "request",
+    "analysis_step": 1,
+    "action": 1,
+    "system_chars": 19626,
+    "system_sha256": "710d38ac15006c4a92dd36c4495dfdc407932d4b18b027cc7276ed461664e47d",
+    "api_note_present": true,
+    "api_note_text": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning."
+  },
+  {
+    "source": "runs/010-retrievable-animation/retrievable_animation/lf52-271a04aa_p0_requests.jsonl",
+    "source_line": 1,
+    "event": "request",
+    "analysis_step": 1,
+    "action": 1,
+    "system_chars": 19626,
+    "system_sha256": "710d38ac15006c4a92dd36c4495dfdc407932d4b18b027cc7276ed461664e47d",
+    "api_note_present": true,
+    "api_note_text": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning."
+  },
+  {
+    "source": "runs/010-retrievable-animation/retrievable_animation/bp35-0a0ad940_p0_requests.jsonl",
+    "source_line": 1,
+    "event": "request",
+    "analysis_step": 1,
+    "action": 1,
+    "system_chars": 19626,
+    "system_sha256": "710d38ac15006c4a92dd36c4495dfdc407932d4b18b027cc7276ed461664e47d",
+    "api_note_present": true,
+    "api_note_text": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning."
+  }
+]

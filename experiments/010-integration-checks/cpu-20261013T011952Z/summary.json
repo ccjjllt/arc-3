@@ -1,0 +1,82 @@
+{
+  "status": "passed",
+  "workers": [
+    {
+      "worker": "baseline",
+      "exit_code": 0,
+      "command": [
+        "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_010_animation_integration.py",
+        "--sdk-path",
+        "/private/tmp/arc3-010-sdk",
+        "--output-dir",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/010-integration-checks/cpu-20261013T011952Z",
+        "--worker",
+        "baseline",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+      ]
+    },
+    {
+      "worker": "candidate",
+      "exit_code": 0,
+      "command": [
+        "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_010_animation_integration.py",
+        "--sdk-path",
+        "/private/tmp/arc3-010-sdk",
+        "--output-dir",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/010-integration-checks/cpu-20261013T011952Z",
+        "--worker",
+        "candidate",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+      ]
+    },
+    {
+      "worker": "boundaries",
+      "exit_code": 0,
+      "command": [
+        "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/check_010_animation_integration.py",
+        "--sdk-path",
+        "/private/tmp/arc3-010-sdk",
+        "--output-dir",
+        "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/010-integration-checks/cpu-20261013T011952Z",
+        "--worker",
+        "boundaries",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+        "--extra-python-path",
+        "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "scripts/check_010_animation_integration.py": "720fc77155be3ac6edb7928b278a30ece76d9d604402f6f1be39edc58a054883",
+    "src/arc3_research/retrievable_animation.py": "07e72359a6c9ea4bd672493ff4782bca28a7a8ddf0b63b8a832ad48d662c2651",
+    "research/runtime-bundle/src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943",
+    "research/runtime-bundle/src/tufa-arc-agi-framework/src/taaf/game_api.py": "51639e22cc0d35db49137f0168b2de557b1848482a4c2cf65ade2a1202511221"
+  },
+  "baseline_candidate_latest_interface_exact_match": true,
+  "check_count": 88,
+  "limitations": [
+    "Handwritten CPU probes verify delivery, not model adoption or score gains.",
+    "One public game and explicit RESET; no real level transition, game-over autoreset, model benchmark or production concurrency.",
+    "Capacity and malformed-frame cases are synthetic; exact stored JSON byte limits are not process RSS limits.",
+    "Disabled means a separate original process that does not install the patch; no in-process uninstall is claimed.",
+    "Sandbox equality probes embed saved oracle ASCII for manual validation; model-selected cropping/interpretation is unmeasured."
+  ]
+}

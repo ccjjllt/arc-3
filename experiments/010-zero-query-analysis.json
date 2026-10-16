@@ -1,0 +1,202 @@
+{
+  "scope": "Descriptive audit of zero-query large movers, not causal treatment effects",
+  "source_sha256": {
+    "runs/010-retrievable-animation/baseline/benchmark.json": "17ee07b4c8743e5daabcccf469c6b60926b85841b00e8ce13321712c6647f72c",
+    "runs/010-retrievable-animation/baseline/artifacts/m0r0-492f87ba_p0_events.jsonl": "43d15276f352e9d5d32dea4df26de8e55b2887889a7f16e5344ba6010ef15f6b",
+    "runs/010-retrievable-animation/retrievable_animation/benchmark.json": "fce69f48164f8890a0d3c41a8cce716a591ec2a1a90d666e4ed2923df4c2660d",
+    "runs/010-retrievable-animation/retrievable_animation/artifacts/m0r0-492f87ba_p0_events.jsonl": "e0589eab4fc67068c8f48ff338201572d8fc030bf5d2965e9d58fb19a7b5d1d7",
+    "runs/010-retrievable-animation/baseline/artifacts/ft09-0d8bbf25_p0_events.jsonl": "6da7429fc619d2a3d56c2f2ad08a883f73ab0a5a5254595fdc36c53a3c86728f",
+    "runs/010-retrievable-animation/retrievable_animation/artifacts/ft09-0d8bbf25_p0_events.jsonl": "20a69817baef6fc6b9116083bf6ac7d12c9868657fcc2bb82cb4889ea6065753",
+    "runs/010-retrievable-animation/retrievable_animation/retrievable-animation.json": "4387975ad8e409a03a932000b22e86bf438c5c185ae577a0fa8610b80d9581b9"
+  },
+  "games": {
+    "m0r0-492f87ba": {
+      "arms": {
+        "baseline": {
+          "initial_board_sha256": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+          "first_action_game_elapsed_seconds": 966.7955222560001,
+          "final_score": 0.5063462057790981,
+          "levels_completed": 1,
+          "actions_per_level": [
+            92,
+            28,
+            0,
+            0,
+            0,
+            0
+          ],
+          "completions": [
+            {
+              "events_line": 125,
+              "action_num": 92,
+              "levels_completed": 1,
+              "game_elapsed_seconds": 2723.794849191,
+              "action_attached_tokens": 109687
+            }
+          ]
+        },
+        "retrievable_animation": {
+          "initial_board_sha256": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+          "first_action_game_elapsed_seconds": 26.976308683000752,
+          "final_score": 71.42857142857143,
+          "levels_completed": 5,
+          "actions_per_level": [
+            26,
+            35,
+            106,
+            21,
+            46,
+            11
+          ],
+          "completions": [
+            {
+              "events_line": 43,
+              "action_num": 26,
+              "levels_completed": 1,
+              "game_elapsed_seconds": 637.942200689,
+              "action_attached_tokens": 43945
+            },
+            {
+              "events_line": 88,
+              "action_num": 61,
+              "levels_completed": 2,
+              "game_elapsed_seconds": 1034.0597487080004,
+              "action_attached_tokens": 68742
+            },
+            {
+              "events_line": 232,
+              "action_num": 167,
+              "levels_completed": 3,
+              "game_elapsed_seconds": 2423.8529286890007,
+              "action_attached_tokens": 152958
+            },
+            {
+              "events_line": 263,
+              "action_num": 188,
+              "levels_completed": 4,
+              "game_elapsed_seconds": 2820.6085251290006,
+              "action_attached_tokens": 174326
+            },
+            {
+              "events_line": 315,
+              "action_num": 234,
+              "levels_completed": 5,
+              "game_elapsed_seconds": 3140.7339972929994,
+              "action_attached_tokens": 193654
+            }
+          ]
+        }
+      },
+      "initial_visible_board_identical": true,
+      "candidate_animation_queries": 0
+    },
+    "ft09-0d8bbf25": {
+      "arms": {
+        "baseline": {
+          "initial_board_sha256": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+          "first_action_game_elapsed_seconds": 57.46683125499999,
+          "final_score": 95.00194245384131,
+          "levels_completed": 6,
+          "actions_per_level": [
+            4,
+            8,
+            16,
+            19,
+            68,
+            46
+          ],
+          "completions": [
+            {
+              "events_line": 7,
+              "action_num": 4,
+              "levels_completed": 1,
+              "game_elapsed_seconds": 72.58750074799991,
+              "action_attached_tokens": 4344
+            },
+            {
+              "events_line": 20,
+              "action_num": 12,
+              "levels_completed": 2,
+              "game_elapsed_seconds": 216.118881933,
+              "action_attached_tokens": 13620
+            },
+            {
+              "events_line": 40,
+              "action_num": 28,
+              "levels_completed": 3,
+              "game_elapsed_seconds": 332.00511066900003,
+              "action_attached_tokens": 21762
+            },
+            {
+              "events_line": 62,
+              "action_num": 47,
+              "levels_completed": 4,
+              "game_elapsed_seconds": 582.2600486319998,
+              "action_attached_tokens": 39195
+            },
+            {
+              "events_line": 160,
+              "action_num": 115,
+              "levels_completed": 5,
+              "game_elapsed_seconds": 2533.4833524180003,
+              "action_attached_tokens": 141454
+            },
+            {
+              "events_line": 217,
+              "action_num": 161,
+              "levels_completed": 6,
+              "game_elapsed_seconds": 3258.7768301309998,
+              "action_attached_tokens": 188356
+            }
+          ]
+        },
+        "retrievable_animation": {
+          "initial_board_sha256": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+          "first_action_game_elapsed_seconds": 876.4258381369991,
+          "final_score": 39.71338133500296,
+          "levels_completed": 4,
+          "actions_per_level": [
+            4,
+            7,
+            74,
+            24,
+            42,
+            0
+          ],
+          "completions": [
+            {
+              "events_line": 7,
+              "action_num": 4,
+              "levels_completed": 1,
+              "game_elapsed_seconds": 903.3389637539995,
+              "action_attached_tokens": 7957
+            },
+            {
+              "events_line": 16,
+              "action_num": 11,
+              "levels_completed": 2,
+              "game_elapsed_seconds": 951.3005037659996,
+              "action_attached_tokens": 11453
+            },
+            {
+              "events_line": 100,
+              "action_num": 85,
+              "levels_completed": 3,
+              "game_elapsed_seconds": 1542.3951866829993,
+              "action_attached_tokens": 49873
+            },
+            {
+              "events_line": 126,
+              "action_num": 109,
+              "levels_completed": 4,
+              "game_elapsed_seconds": 1628.9954433369994,
+              "action_attached_tokens": 55348
+            }
+          ]
+        }
+      },
+      "initial_visible_board_identical": true,
+      "candidate_animation_queries": 0
+    }
+  }
+}

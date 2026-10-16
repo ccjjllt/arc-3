@@ -1,0 +1,15 @@
+{
+  "label": "batch-actions-3-5",
+  "code": "action([{'action': 'MOUSE', 'row': 45, 'col': 21}, {'action': 'MOUSE', 'row': 45, 'col': 36}, {'action': 'MOUSE', 'row': 20, 'col': 20}])",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "[action] batch of 3 actions, 3 executed: MOUSE(row=45, col=21), MOUSE(row=45, col=36), MOUSE(row=20, col=20) | stop_reason: no_op_action\n{'executed': True, 'action_num': 5, 'level': 1, 'score': 0, 'state': 'NOT_FINISHED', 'valid_actions': ['RESET', 'MOUSE'], 'board_changed': True, 'done': False, 'level_completed': False, 'game_over': False, 'run_complete': False, 'action_display': 'MOUSE(row=20, col=20)', 'gameplay_changed': False, 'executed_actions': ['MOUSE(row=45, col=21)', 'MOUSE(row=45, col=36)', 'MOUSE(row=20, col=20)'], 'requested_count': 3, 'executed_count': 3, 'stopped_early': False, 'no_op_action_index': 3, 'no_op_action': 'MOUSE(row=20, col=20)', 'gameplay_changed_per_action': [True, True, False], 'action_trace': ['1: MOUSE(row=45, col=21) -> effect', '2: MOUSE(row=45, col=36) -> effect', '3: MOUSE(row=20, col=20) -> NO-OP (executed, no change inside the board area)'], 'no_op': True, 'stop_reason': 'no_op_action', 'stop_detail': \"Action 3 of 3 ('MOUSE(row=20, col=20)') EXECUTED but produced no change inside the board area - only the outer 4 cells, where a timer or remaining-steps bar usually sits, could have moved. Actions 4-3 ([]) were SKIPPED and did not execute. Indices are 1-based positions in your submitted list. Net effect: only the first 2 executed action(s) changed the board; the final executed action moved nothing. Do NOT update your position estimate by counting submitted moves - re-locate the player from current_frame before planning. The per-action verdicts are listed in action_trace. This stop is about one action from one board state, not about batch size - batching is still the right approach, and the stop is what keeps a wrong movement model from costing the whole sequence.\", 'run_elapsed_seconds': 0.1849179999990156, 'time_remaining_seconds': None}\n"
+  },
+  "step_executed": true,
+  "made_progress": false,
+  "step_before": 2,
+  "step_after": 5,
+  "elapsed_seconds": 0.03912608300015563,
+  "output_chars": 1867
+}

@@ -1,0 +1,688 @@
+{
+  "worker": "boundaries",
+  "checks": [
+    {
+      "name": "callback_read_did_not_act",
+      "passed": true
+    },
+    {
+      "name": "synthetic_duplicate_frames_preserved",
+      "passed": true
+    },
+    {
+      "name": "synthetic_byte_evicted_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_byte_evicted",
+      "passed": true,
+      "status": "evicted",
+      "expected": "evicted"
+    },
+    {
+      "name": "synthetic_metadata_window_expired_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_metadata_window_expired",
+      "passed": true,
+      "status": "outside_retained_history",
+      "expected": "outside_retained_history"
+    },
+    {
+      "name": "synthetic_empty_chain_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_empty_chain",
+      "passed": true,
+      "status": "missing_frames",
+      "expected": "missing_frames"
+    },
+    {
+      "name": "synthetic_oversize_not_truncated_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_oversize_not_truncated",
+      "passed": true,
+      "status": "too_large",
+      "expected": "too_large"
+    },
+    {
+      "name": "synthetic_invalid_color_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_invalid_color",
+      "passed": true,
+      "status": "invalid_frames",
+      "expected": "invalid_frames"
+    },
+    {
+      "name": "synthetic_global_byte_evicted_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_global_byte_evicted",
+      "passed": true,
+      "status": "evicted",
+      "expected": "evicted"
+    },
+    {
+      "name": "synthetic_session_evicted_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_session_evicted",
+      "passed": true,
+      "status": "session_evicted",
+      "expected": "session_evicted"
+    },
+    {
+      "name": "synthetic_wrong_live_session_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_wrong_live_session",
+      "passed": true,
+      "status": "wrong_scope",
+      "expected": "wrong_scope"
+    },
+    {
+      "name": "invalid_limit_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "synthetic_invalid_limit",
+      "passed": true
+    },
+    {
+      "name": "synthetic_capacity_limits_hold",
+      "passed": true,
+      "snapshot": {
+        "intervention": "retrievable-animation-v1",
+        "enabled": true,
+        "limits": {
+          "max_records_per_session": 3,
+          "max_bytes_per_session": 400,
+          "max_total_bytes": 600,
+          "max_sessions": 2
+        },
+        "counts": {
+          "sessions_seen": 3,
+          "capture_calls": 9,
+          "capture_available": 6,
+          "captured_bytes": 1324,
+          "captured_raw_frames": 7,
+          "query_calls": 10,
+          "get_queries": 9,
+          "retrieved_blob_bytes": 39,
+          "query_status_hit": 1,
+          "hits": 1,
+          "response_json_bytes": 4180,
+          "evicted_records": 4,
+          "evicted_bytes": 978,
+          "query_status_evicted": 2,
+          "misses": 8,
+          "nonlatest_queries": 1,
+          "capture_missing_frames": 1,
+          "query_status_outside_retained_history": 1,
+          "query_status_missing_frames": 1,
+          "capture_too_large": 1,
+          "query_status_too_large": 1,
+          "capture_invalid_frames": 1,
+          "query_status_invalid_frames": 1,
+          "evicted_sessions": 1,
+          "query_status_session_evicted": 1,
+          "query_status_wrong_scope": 1,
+          "list_queries": 1,
+          "query_status_invalid_limit": 1
+        },
+        "stored_frame_json_bytes": 346,
+        "peak_frame_json_bytes": 352,
+        "capture_cpu_seconds": 0.0,
+        "query_cpu_seconds": 0.0004015430000000597,
+        "retained_sessions": 2,
+        "retained_frame_records": 2,
+        "sessions": [
+          {
+            "game_id": "synthetic-b",
+            "session_id": "13ea6a7d8ab841368eb75ce18dbb1c7c",
+            "attempt": 0,
+            "captured_actions": 1,
+            "stored_frame_json_bytes": 313,
+            "metadata_records": 1,
+            "metadata_evicted": 0,
+            "counts": {
+              "capture_calls": 1,
+              "capture_available": 1
+            }
+          },
+          {
+            "game_id": "synthetic-c",
+            "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+            "attempt": 0,
+            "captured_actions": 1,
+            "stored_frame_json_bytes": 33,
+            "metadata_records": 1,
+            "metadata_evicted": 0,
+            "counts": {
+              "capture_calls": 1,
+              "capture_available": 1,
+              "query_calls": 2,
+              "misses": 1
+            }
+          }
+        ],
+        "recent_queries": [
+          {
+            "op": "get",
+            "status": "hit",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 1
+            },
+            "nonlatest": false,
+            "response_json_bytes": 1081
+          },
+          {
+            "op": "get",
+            "status": "evicted",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 2
+            },
+            "nonlatest": true,
+            "response_json_bytes": 601
+          },
+          {
+            "op": "get",
+            "status": "outside_retained_history",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 1
+            },
+            "nonlatest": null,
+            "response_json_bytes": 231
+          },
+          {
+            "op": "get",
+            "status": "missing_frames",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 4
+            },
+            "nonlatest": null,
+            "response_json_bytes": 499
+          },
+          {
+            "op": "get",
+            "status": "too_large",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 5
+            },
+            "nonlatest": null,
+            "response_json_bytes": 489
+          },
+          {
+            "op": "get",
+            "status": "invalid_frames",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 6
+            },
+            "nonlatest": null,
+            "response_json_bytes": 499
+          },
+          {
+            "op": "get",
+            "status": "evicted",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 7
+            },
+            "nonlatest": null,
+            "response_json_bytes": 583
+          },
+          {
+            "op": "get",
+            "status": "session_evicted",
+            "session_id": "f89f1625d70945bab71360365a5e80b4",
+            "ref": {
+              "game_id": "synthetic-a",
+              "session_id": "f89f1625d70945bab71360365a5e80b4",
+              "attempt": 0,
+              "action_num": 6
+            },
+            "nonlatest": null,
+            "response_json_bytes": 135
+          },
+          {
+            "op": "get",
+            "status": "wrong_scope",
+            "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+            "ref": null,
+            "nonlatest": null,
+            "response_json_bytes": 24
+          },
+          {
+            "op": "list",
+            "status": "invalid_limit",
+            "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+            "ref": null,
+            "nonlatest": null,
+            "response_json_bytes": 38
+          }
+        ],
+        "baseline_source_sha256": {
+          "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+          "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+          "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+          "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+          "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+          "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+          "sandbox_bootstrap_after": "1f555166e589c75ad44950d8230d331444f8128c0f648c01e9ad0b651451aed3"
+        },
+        "api_note": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning.",
+        "semantics": {
+          "frames": "All public raw SDK return frames, duplicates retained, zero-based; before is separate.",
+          "attempt": "0 initially; increments on each executed RESET, whose result belongs to the new attempt.",
+          "nonlatest": "Reference precedes the latest actually executed action in this session, including RESET.",
+          "bytes": "Exact stored frame JSON / compact response JSON bytes; not process RSS or prompt tokens.",
+          "hash": "SHA256 of UTF-8 json.dumps(grid, separators=(',', ':')); archive_sha256 hashes the full before+frames JSON blob.",
+          "eviction": "FIFO frames by byte/record limits; bounded session metadata; no latest fallback.",
+          "cpu": "thread_time spent in capture bookkeeping/copy and archive queries; excludes actions/models."
+        }
+      }
+    },
+    {
+      "name": "no_http_or_model",
+      "passed": true
+    }
+  ],
+  "tool_calls": [
+    {
+      "label": "synthetic_byte_evicted",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.027612624995526858,
+      "output_chars": 77,
+      "trace": "tool-000-synthetic_byte_evicted.json"
+    },
+    {
+      "label": "synthetic_metadata_window_expired",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.02584283299802337,
+      "output_chars": 94,
+      "trace": "tool-001-synthetic_metadata_window_expired.json"
+    },
+    {
+      "label": "synthetic_empty_chain",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.0252097499978845,
+      "output_chars": 84,
+      "trace": "tool-002-synthetic_empty_chain.json"
+    },
+    {
+      "label": "synthetic_oversize_not_truncated",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.025672582996776327,
+      "output_chars": 79,
+      "trace": "tool-003-synthetic_oversize_not_truncated.json"
+    },
+    {
+      "label": "synthetic_invalid_color",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.025622749999456573,
+      "output_chars": 84,
+      "trace": "tool-004-synthetic_invalid_color.json"
+    },
+    {
+      "label": "synthetic_global_byte_evicted",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.025391458002559375,
+      "output_chars": 77,
+      "trace": "tool-005-synthetic_global_byte_evicted.json"
+    },
+    {
+      "label": "synthetic_session_evicted",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.025404624997463543,
+      "output_chars": 85,
+      "trace": "tool-006-synthetic_session_evicted.json"
+    },
+    {
+      "label": "synthetic_wrong_live_session",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.02540825000323821,
+      "output_chars": 81,
+      "trace": "tool-007-synthetic_wrong_live_session.json"
+    },
+    {
+      "label": "invalid_limit",
+      "step_executed": false,
+      "made_progress": false,
+      "step_before": 0,
+      "step_after": 0,
+      "elapsed_seconds": 0.025556583001161925,
+      "output_chars": 83,
+      "trace": "tool-008-invalid_limit.json"
+    }
+  ],
+  "source_sha256": {
+    "scripts/check_010_animation_integration.py": "41d7397d77901b6ed9609d134e3e4b1da43c0fdbf63057de485fa06ac97ef35d",
+    "src/arc3_research/retrievable_animation.py": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875",
+    "research/runtime-bundle/src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943",
+    "research/runtime-bundle/src/tufa-arc-agi-framework/src/taaf/game_api.py": "51639e22cc0d35db49137f0168b2de557b1848482a4c2cf65ade2a1202511221"
+  },
+  "environment": {
+    "ARC3_ANIMATION": "1",
+    "ARC3_ACTION_ECHO": "1",
+    "ARC3_NEW_CHANGED_PROMPTS": "1",
+    "ARC3_BATCH_NOOP_BLOCK": "1",
+    "ARC3_GUARDS_FROM_LEVEL": "2",
+    "ARC3_STALE_STATE_BLOCK": "1",
+    "ARC3_NOOP_REPEAT_GUARD": "0",
+    "ARC3_DEATH_REPEAT_GUARD": "0",
+    "LOCAL_ANALYZER_MODEL_ID": "cpu-no-model",
+    "EXPOSE_RESET": "on",
+    "MPLCONFIGDIR": "/private/tmp/arc3-010-mpl",
+    "MPLBACKEND": "Agg"
+  },
+  "python": "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+  "python_version": "3.13.14 (main, Jul 23 2026, 14:48:16) [Clang 22.1.3 ]",
+  "sdk_path": "/private/tmp/arc3-010-sdk",
+  "extra_python_paths": [
+    "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+  ],
+  "versions": {
+    "arc-agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "numpy": "2.5.2",
+    "pydantic": "2.13.5",
+    "matplotlib": "3.11.1"
+  },
+  "http_calls_blocked": 0,
+  "model_called": false,
+  "gpu_started": false,
+  "logged_model_code_executed": false,
+  "engine_source_read": false,
+  "synthetic": true,
+  "archive_diagnostics": {
+    "intervention": "retrievable-animation-v1",
+    "enabled": true,
+    "limits": {
+      "max_records_per_session": 3,
+      "max_bytes_per_session": 400,
+      "max_total_bytes": 600,
+      "max_sessions": 2
+    },
+    "counts": {
+      "sessions_seen": 3,
+      "capture_calls": 9,
+      "capture_available": 6,
+      "captured_bytes": 1324,
+      "captured_raw_frames": 7,
+      "query_calls": 10,
+      "get_queries": 9,
+      "retrieved_blob_bytes": 39,
+      "query_status_hit": 1,
+      "hits": 1,
+      "response_json_bytes": 4180,
+      "evicted_records": 4,
+      "evicted_bytes": 978,
+      "query_status_evicted": 2,
+      "misses": 8,
+      "nonlatest_queries": 1,
+      "capture_missing_frames": 1,
+      "query_status_outside_retained_history": 1,
+      "query_status_missing_frames": 1,
+      "capture_too_large": 1,
+      "query_status_too_large": 1,
+      "capture_invalid_frames": 1,
+      "query_status_invalid_frames": 1,
+      "evicted_sessions": 1,
+      "query_status_session_evicted": 1,
+      "query_status_wrong_scope": 1,
+      "list_queries": 1,
+      "query_status_invalid_limit": 1
+    },
+    "stored_frame_json_bytes": 346,
+    "peak_frame_json_bytes": 352,
+    "capture_cpu_seconds": 0.0,
+    "query_cpu_seconds": 0.0004015430000000597,
+    "retained_sessions": 2,
+    "retained_frame_records": 2,
+    "sessions": [
+      {
+        "game_id": "synthetic-b",
+        "session_id": "13ea6a7d8ab841368eb75ce18dbb1c7c",
+        "attempt": 0,
+        "captured_actions": 1,
+        "stored_frame_json_bytes": 313,
+        "metadata_records": 1,
+        "metadata_evicted": 0,
+        "counts": {
+          "capture_calls": 1,
+          "capture_available": 1
+        }
+      },
+      {
+        "game_id": "synthetic-c",
+        "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+        "attempt": 0,
+        "captured_actions": 1,
+        "stored_frame_json_bytes": 33,
+        "metadata_records": 1,
+        "metadata_evicted": 0,
+        "counts": {
+          "capture_calls": 1,
+          "capture_available": 1,
+          "query_calls": 2,
+          "misses": 1
+        }
+      }
+    ],
+    "recent_queries": [
+      {
+        "op": "get",
+        "status": "hit",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 1
+        },
+        "nonlatest": false,
+        "response_json_bytes": 1081
+      },
+      {
+        "op": "get",
+        "status": "evicted",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 2
+        },
+        "nonlatest": true,
+        "response_json_bytes": 601
+      },
+      {
+        "op": "get",
+        "status": "outside_retained_history",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 1
+        },
+        "nonlatest": null,
+        "response_json_bytes": 231
+      },
+      {
+        "op": "get",
+        "status": "missing_frames",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 4
+        },
+        "nonlatest": null,
+        "response_json_bytes": 499
+      },
+      {
+        "op": "get",
+        "status": "too_large",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 5
+        },
+        "nonlatest": null,
+        "response_json_bytes": 489
+      },
+      {
+        "op": "get",
+        "status": "invalid_frames",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 6
+        },
+        "nonlatest": null,
+        "response_json_bytes": 499
+      },
+      {
+        "op": "get",
+        "status": "evicted",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 7
+        },
+        "nonlatest": null,
+        "response_json_bytes": 583
+      },
+      {
+        "op": "get",
+        "status": "session_evicted",
+        "session_id": "f89f1625d70945bab71360365a5e80b4",
+        "ref": {
+          "game_id": "synthetic-a",
+          "session_id": "f89f1625d70945bab71360365a5e80b4",
+          "attempt": 0,
+          "action_num": 6
+        },
+        "nonlatest": null,
+        "response_json_bytes": 135
+      },
+      {
+        "op": "get",
+        "status": "wrong_scope",
+        "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+        "ref": null,
+        "nonlatest": null,
+        "response_json_bytes": 24
+      },
+      {
+        "op": "list",
+        "status": "invalid_limit",
+        "session_id": "7979bc72f7f849909b32762c0b1a8c1c",
+        "ref": null,
+        "nonlatest": null,
+        "response_json_bytes": 38
+      }
+    ],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "session.step_env": "252fb3b8211aa56d3bd6dd6e9476b1a8d33a1860d65b17b1615ecf33f4cc9ad2",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "1f555166e589c75ad44950d8230d331444f8128c0f648c01e9ad0b651451aed3"
+    },
+    "api_note": "Historical SDK frames are available read-only in python: animation_refs(limit=16) returns {status, records}; each record has an exact ref with game_id/session_id/attempt/action_num. animation_at(ref) returns {status, frames, before_frame, metadata}; use frames only when status=='hit'. For a nonempty refs=animation_refs()['records'], a=animation_at(refs[0]['ref']) fetches that chosen action. On a hit, a['frames'][i].ascii is raw SDK frame i (zero-based, duplicates retained); a['before_frame'] is separate. FrameView supports the usual ascii/shape/segmentation access, plus content_sha256. Print selected frames or cells, not the whole archive. The ref's attempt starts at 0 and increases on each executed RESET; metadata reports level_before/level_after. Old frames are historical observations, not current_frame. Storage is bounded: missing, evicted and wrong-scope refs return explicit statuses, never the latest frames. last_animation_frames and last_animation_timeline keep their existing meaning.",
+    "semantics": {
+      "frames": "All public raw SDK return frames, duplicates retained, zero-based; before is separate.",
+      "attempt": "0 initially; increments on each executed RESET, whose result belongs to the new attempt.",
+      "nonlatest": "Reference precedes the latest actually executed action in this session, including RESET.",
+      "bytes": "Exact stored frame JSON / compact response JSON bytes; not process RSS or prompt tokens.",
+      "hash": "SHA256 of UTF-8 json.dumps(grid, separators=(',', ':')); archive_sha256 hashes the full before+frames JSON blob.",
+      "eviction": "FIFO frames by byte/record limits; bounded session metadata; no latest fallback.",
+      "cpu": "thread_time spent in capture bookkeeping/copy and archive queries; excludes actions/models."
+    }
+  },
+  "status": "passed"
+}

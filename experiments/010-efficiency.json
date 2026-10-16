@@ -1,0 +1,1496 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-13T03:58:36.581199+00:00",
+  "scope": "Completed 010 public 12-game paired run; offline log analysis only.",
+  "runtime": {
+    "started_beijing": "2026-10-13T09:25:09.274996+08:00",
+    "finished_beijing": "2026-10-13T11:32:45.177593+08:00",
+    "elapsed_seconds": 7655.902597427368,
+    "wall_hours": 2.126639610396491,
+    "model_ready_seconds": 581.6635737419128,
+    "startup_fraction": 0.07597583254747398,
+    "planned_solve_seconds": 6964,
+    "remaining_preparation_drain_shutdown_seconds": 110.23902368545532,
+    "status": "completed",
+    "gpu_server_stopped": true,
+    "gpu_identification": [
+      "GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)"
+    ],
+    "startup_parts": [
+      {
+        "line": 47,
+        "text": "[2026-10-13 01:31:45] Load weight end. elapsed=324.33 s, type=Qwen4ExpForConditionalGeneration, quant=auto-round, bits=4, avail mem=24.32 GB, mem usage=69.85 GB.",
+        "elapsed_seconds": 324.33
+      },
+      {
+        "line": 58,
+        "text": "[2026-10-13 01:31:48] Load weight end. elapsed=0.86 s, type=Qwen4ExpForCausalLMMTP, quant=compressed-tensors, avail mem=20.53 GB, mem usage=3.79 GB.",
+        "elapsed_seconds": 0.86
+      },
+      {
+        "line": 94,
+        "text": "[2026-10-13 01:34:15] Capture target verify CUDA graph end. elapsed=144.83 s, mem usage=0.48 GB, avail mem=4.91 GB.",
+        "elapsed_seconds": 144.83
+      },
+      {
+        "line": 99,
+        "text": "[2026-10-13 01:34:29] Capture draft decode CUDA graph end. elapsed=7.05 s, mem usage=0.37 GB, avail mem=4.54 GB.",
+        "elapsed_seconds": 7.05
+      },
+      {
+        "line": 102,
+        "text": "[2026-10-13 01:34:30] Capture draft extend CUDA graph end. elapsed=0.96 s, mem usage=0.29 GB, avail mem=4.25 GB.",
+        "elapsed_seconds": 0.96
+      }
+    ],
+    "input_resolution": {
+      "paths": {
+        "bundle": "/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy",
+        "wheelhouse": "/kaggle/input/datasets/dfranzen/pennyroyal-v253",
+        "model": "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+        "draft": "/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1",
+        "competition": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3",
+        "competition_wheels": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels",
+        "environment_files": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/environment_files"
+      },
+      "missing": [],
+      "resolution_seconds": 0.007372170000053302,
+      "input_root_children": [
+        "competitions",
+        "datasets",
+        "models"
+      ]
+    }
+  },
+  "validity": {
+    "runtime_source_hashes_match_frozen_archive": {
+      "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": true,
+      "scripts/build_experiment.py": true,
+      "src/arc3_research/__init__.py": true,
+      "src/arc3_research/goal_evidence.py": true,
+      "src/arc3_research/input_paths.py": true,
+      "src/arc3_research/observation_representation.py": true,
+      "src/arc3_research/program_state.py": true,
+      "src/arc3_research/retrievable_animation.py": true,
+      "src/arc3_research/run_arm.py": true,
+      "src/arc3_research/session_runner.py": true,
+      "src/arc3_research/submission_inputs.py": true,
+      "src/arc3_research/transient_history.py": true,
+      "scripts/summarize_experiment.py": true,
+      "experiments/010-retrievable-animation.json": true
+    },
+    "archive_index_matches_files": {
+      "build-manifest.json": true,
+      "experiment.ipynb": true,
+      "experiments/010-notebook-checks.json": true,
+      "experiments/010-retrievable-animation.json": true,
+      "kernel-metadata.json": true,
+      "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": true,
+      "scripts/build_experiment.py": true,
+      "scripts/check_010_animation_integration.py": true,
+      "scripts/check_010_notebook.py": true,
+      "scripts/summarize_experiment.py": true,
+      "src/arc3_research/__init__.py": true,
+      "src/arc3_research/goal_evidence.py": true,
+      "src/arc3_research/input_paths.py": true,
+      "src/arc3_research/observation_representation.py": true,
+      "src/arc3_research/program_state.py": true,
+      "src/arc3_research/retrievable_animation.py": true,
+      "src/arc3_research/run_arm.py": true,
+      "src/arc3_research/session_runner.py": true,
+      "src/arc3_research/submission_inputs.py": true,
+      "src/arc3_research/transient_history.py": true
+    },
+    "manifest_source_map_matches_build_manifest": true,
+    "manifest_config_matches_build_config": true,
+    "frozen_notebook_sha256": "36fae12d8d6e536f280d94632b1f0cc93af2852295e3919c9081e4c10dc17d35",
+    "cache_flush_success_log_records": [
+      {
+        "line": 143,
+        "epoch": 1791855290.0,
+        "beijing": "2026-10-13T09:34:50+08:00"
+      },
+      {
+        "line": 5823,
+        "epoch": 1791858795.0,
+        "beijing": "2026-10-13T10:33:15+08:00"
+      }
+    ],
+    "separate_arm_pids": true,
+    "same_environment": true,
+    "same_game_order_hash": true
+  },
+  "gpu": {
+    "raw_samples": 776,
+    "valid_samples": 776,
+    "invalid_samples": 0,
+    "phases": {
+      "startup": 59,
+      "waiting_for_server": 1,
+      "baseline_cache_flush": 1,
+      "baseline": 351,
+      "baseline_cleanup": 1,
+      "retrievable_animation_cache_flush": 1,
+      "retrievable_animation": 357,
+      "retrievable_animation_cleanup": 1,
+      "shutdown": 2,
+      "finished": 2
+    },
+    "sampling_seconds": {
+      "n": 776,
+      "mean": 0.02412154256683035,
+      "median": 0.02538585662841797,
+      "min": 0.013457298278808594,
+      "max": 0.04075431823730469
+    },
+    "whole_session": {
+      "start_beijing": "2026-10-13T09:25:09.274996+08:00",
+      "end_beijing": "2026-10-13T11:32:45.177593+08:00",
+      "wall_seconds": 7655.902597427368,
+      "sample_count": 776,
+      "utilization_samples": {
+        "n": 776,
+        "mean": 83.66237113402062,
+        "median": 98.0,
+        "min": 0.0,
+        "max": 100.0
+      },
+      "covered_seconds": 7655.659479141235,
+      "time_weighted_util_percent": 84.76533184282813,
+      "time_weighted_memory_mib": 93710.88863092416,
+      "time_weighted_power_watts": 345.5448017986952,
+      "peak_sampled_memory_mib": 96093.0,
+      "sustained_low_util_candidates": [
+        {
+          "start_beijing": "2026-10-13T09:25:09.502795+08:00",
+          "end_beijing": "2026-10-13T09:34:29.507730+08:00",
+          "samples": 57,
+          "observed_span_seconds": 560.0049352645874,
+          "utilization": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            12.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "startup": {
+      "start_beijing": "2026-10-13T09:25:09.274996+08:00",
+      "end_beijing": "2026-10-13T09:34:50.938569+08:00",
+      "wall_seconds": 581.6635737419128,
+      "sample_count": 60,
+      "utilization_samples": {
+        "n": 60,
+        "mean": 1.8666666666666667,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 100.0
+      },
+      "covered_seconds": 581.4357740879059,
+      "time_weighted_util_percent": 1.926284597468897,
+      "time_weighted_memory_mib": 67838.6807841954,
+      "time_weighted_power_watts": 82.34543729968904,
+      "peak_sampled_memory_mib": 93241.0,
+      "sustained_low_util_candidates": [
+        {
+          "start_beijing": "2026-10-13T09:25:09.502795+08:00",
+          "end_beijing": "2026-10-13T09:34:29.507730+08:00",
+          "samples": 57,
+          "observed_span_seconds": 560.0049352645874,
+          "utilization": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            12.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  },
+  "server": {
+    "http_non200": [
+      {
+        "line": 121,
+        "text": "[2026-10-13 01:34:39] INFO:     127.0.0.1:60818 - \"GET /health HTTP/1.1\" 503 Service Unavailable"
+      },
+      {
+        "line": 126,
+        "text": "[2026-10-13 01:34:42] INFO:     127.0.0.1:60844 - \"GET /health HTTP/1.1\" 503 Service Unavailable"
+      },
+      {
+        "line": 127,
+        "text": "[2026-10-13 01:34:45] INFO:     127.0.0.1:37228 - \"GET /health HTTP/1.1\" 503 Service Unavailable"
+      }
+    ],
+    "warnings_and_shutdown": [
+      {
+        "line": 2,
+        "text": "ModuleNotFoundError: No module named 'wrapt'"
+      },
+      {
+        "line": 14,
+        "text": "ModuleNotFoundError: No module named 'wrapt'"
+      },
+      {
+        "line": 16,
+        "text": "ModuleNotFoundError: No module named 'wrapt'"
+      },
+      {
+        "line": 19,
+        "text": "ModuleNotFoundError: No module named 'wrapt'"
+      },
+      {
+        "line": 79,
+        "text": "\r  0%|          | 0/7 [00:00<?, ?it/s]\rCapturing batches (bs=10 avail_mem=5.37 GB):   0%|          | 0/7 [00:00<?, ?it/s]\r                                                                                  \r\rCapturing batches (bs=10 avail_mem=5.37 GB):   0%|          | 0/7 [02:03<?, ?it/s][01:33:54] : Warning: Data race detected: `Logits(bx, position)`is written by multiple threads in loop (token,), Example:"
+      },
+      {
+        "line": 124,
+        "text": "/tmp/sgl-intel/venv/lib/python3.12/site-packages/flashinfer/api_logging.py:2333: RuntimeWarning: CP delta rule heuristic matched but CP dispatch is unavailable: CP delta rule does not support state checkpointing yet; falling back to non-CP delta rule."
+      },
+      {
+        "line": 145,
+        "text": "/tmp/sgl-intel/venv/lib/python3.12/site-packages/flashinfer/api_logging.py:2333: RuntimeWarning: CP delta rule heuristic matched but CP dispatch is unavailable: CP delta rule does not support state checkpointing yet; falling back to non-CP delta rule."
+      },
+      {
+        "line": 11769,
+        "text": "[2026-10-13 03:32:39] SIGTERM received. signum=None frame=None. Draining requests and shutting down..."
+      },
+      {
+        "line": 11770,
+        "text": "[2026-10-13 03:32:40] Subprocess detokenizer (pid=580) crashed with exit code -15. Triggering SIGQUIT for cleanup..."
+      },
+      {
+        "line": 11771,
+        "text": "[2026-10-13 03:32:40] SIGQUIT received. signum=None, frame=None. It usually means one child failed."
+      }
+    ],
+    "fatal_oom_or_traceback": [],
+    "request_count": 2122,
+    "network_boundary": "Observed HTTP logs concern local serving. Internet disabled in notebook metadata; logs are not a full network audit."
+  },
+  "arms": {
+    "baseline": {
+      "pid": 1323,
+      "status": "completed",
+      "exit_code": 0,
+      "budget_seconds": 3482,
+      "parent_arm_wall_seconds": 3504.1783332824707,
+      "benchmark_wall_seconds": 3500.446720297,
+      "budget_window_seconds": 3481.9999918937683,
+      "post_deadline_parent_seconds": 19.30005431175232,
+      "soft_deadline_fired": true,
+      "deadline_beijing": "2026-10-13T10:32:55.817065+08:00",
+      "forced_exit": false,
+      "lingering_workers": [],
+      "game_state_counts": {
+        "cancelled": 10,
+        "won": 2
+      },
+      "game_order_sha256": "da21612abe54f9d3401bcf77463bab7d0950171211bc6419432b365f8a64d7c8",
+      "game_order_matches_config": true,
+      "environment": {
+        "ARC3_RESEARCH_ENV_DIR": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/environment_files",
+        "ARC3_WARMUP_ACTION_GAMES": "0",
+        "ARC3_HTTP_RETRY_INITIAL_SECONDS": "900",
+        "ARC3_HISTORY_ASSISTANT_TURNS": "150",
+        "ARC3_HISTORY_TURN_DRAIN": "30",
+        "ARC3_HISTORY_DRAIN_COALESCE": "1",
+        "ARC3_MIDDLE_TRUNCATION": "1",
+        "ARC3_ACTION_ECHO": "1",
+        "ARC3_EXPLAIN_GAMEPLAY_CHANGED": "1",
+        "ARC3_NEW_CHANGED_PROMPTS": "1",
+        "ARC3_LEVEL_TRANSFER_GUIDANCE": "1",
+        "ARC3_ACTION_INFO": "1",
+        "ARC3_DEDUPE_MULTICALL_LINE": "1",
+        "ARC3_FRAME_DIFF_HINT": "1",
+        "MULTIMODAL_CONTEXT": "current_grid",
+        "MULTIMODAL_UPSCALE": "10",
+        "ARC3_DIFF_IMAGE": "1",
+        "ARC3_GAMEOVER_DIFF_IMAGE": "1",
+        "ARC3_ANIMATION": "1",
+        "ARC3_GUARDS_FROM_LEVEL": "2",
+        "ARC3_BATCH_NOOP_BLOCK": "1",
+        "ARC3_STALE_STATE_BLOCK": "1",
+        "ARC3_MEMORY_SECTIONS": "off",
+        "ARC3_PERSISTENT_FUNCTIONS": "1",
+        "ARC3_PERSISTENT_FUNCTIONS_SCOPE": "game",
+        "ARC3_PERSISTENT_FUNCTIONS_IMPORTS": "1",
+        "ARC3_MAX_ACTIVE_STREAMS": "10",
+        "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+        "ARC3_PRIORITY_PACE": "0",
+        "ARC3_PRIORITY_TAIL_FADE": "1",
+        "ARC3_PRIORITY_TAIL_FADE_FRACTION": "0.2",
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_SCORE_NORMALIZATION": "1",
+        "ARC3_CONTEXT_DRAIN_TOKENS": "59392",
+        "LOCAL_ANALYZER_MAX_OUTPUT": "12288",
+        "LOCAL_ANALYZER_TEMPERATURE": "0.7",
+        "LOCAL_ANALYZER_TOP_P": "0.95",
+        "LOCAL_ANALYZER_TOP_K": "20",
+        "LOCAL_ANALYZER_CONTEXT_WINDOW": "131072"
+      },
+      "source_sha256": {
+        "run_arm.py": "f1955c2f8e919d2f634b904f0f458529b6fef319c7926e89bc5d955d9ea3d75a",
+        "goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "benchmark_initial.pkl": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+        "tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+      },
+      "active_streams": 10,
+      "concurrency": 12,
+      "n_passes": 1,
+      "warmup_action_games": 0,
+      "all_first_actions_are_non_reset": true,
+      "post_deadline_actions": 0,
+      "post_deadline_completed_levels": 0,
+      "old_intervention_reports": {
+        "goal-evidence.json": {
+          "enabled": false,
+          "counts": null,
+          "events": 0,
+          "calls_observed": null
+        },
+        "transient-history.json": {
+          "enabled": false,
+          "counts": null,
+          "events": 0,
+          "calls_observed": 0
+        },
+        "program-state.json": {
+          "enabled": false,
+          "counts": {},
+          "events": 0,
+          "calls_observed": null
+        }
+      },
+      "gpu_budget_window": {
+        "start_beijing": "2026-10-13T09:34:53.817073+08:00",
+        "end_beijing": "2026-10-13T10:32:55.817065+08:00",
+        "wall_seconds": 3481.9999918937683,
+        "sample_count": 348,
+        "utilization_samples": {
+          "n": 348,
+          "mean": 90.61781609195403,
+          "median": 99.0,
+          "min": 0.0,
+          "max": 99.0
+        },
+        "covered_seconds": 3481.9999918937683,
+        "time_weighted_util_percent": 90.60254266332487,
+        "time_weighted_memory_mib": 95790.77651412855,
+        "time_weighted_power_watts": 368.6298126967171,
+        "peak_sampled_memory_mib": 96051.0,
+        "sustained_low_util_candidates": []
+      },
+      "gpu_drain_window": {
+        "start_beijing": "2026-10-13T10:32:55.817065+08:00",
+        "end_beijing": "2026-10-13T10:33:15.117119+08:00",
+        "wall_seconds": 19.30005431175232,
+        "sample_count": 3,
+        "utilization_samples": {
+          "n": 3,
+          "mean": 32.666666666666664,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 98.0
+        },
+        "covered_seconds": 19.30005431175232,
+        "time_weighted_util_percent": 44.28816930191545,
+        "time_weighted_memory_mib": 96051.0,
+        "time_weighted_power_watts": 212.02192685915142,
+        "peak_sampled_memory_mib": 96051.0,
+        "sustained_low_util_candidates": []
+      },
+      "server": {
+        "requests": 1018,
+        "output_tokens": 2158369,
+        "input_tokens": 71478160,
+        "cached_input_tokens": 66002944,
+        "uncached_input_tokens": 5475216,
+        "input_token_weighted_cache_hit_percent": 92.34001546766173,
+        "output_tokens_per_benchmark_second": 616.5981580250622,
+        "queue_ms": {
+          "n": 1018,
+          "mean": 210.89406679764244,
+          "median": 1.41,
+          "min": 0.37,
+          "max": 17810.69
+        },
+        "initial_prefill_ms": {
+          "n": 1018,
+          "mean": 616.1976915520629,
+          "median": 261.96000000000004,
+          "min": 115.08,
+          "max": 10497.89
+        },
+        "decode_running_requests": {
+          "n": 2251,
+          "mean": 9.08262994224789,
+          "median": 9.0,
+          "min": 3.0,
+          "max": 10.0
+        },
+        "decode_accept_length": {
+          "n": 2251,
+          "mean": 2.638627276765882,
+          "median": 2.63,
+          "min": 2.25,
+          "max": 3.15
+        },
+        "last_batch_seconds_after_deadline": 9.182934999465942,
+        "max_batch_log_gap_seconds": 3.0
+      },
+      "server_recorded_entry_after_deadline": [
+        {
+          "line": 5808,
+          "rid": "0f405bc0704d42f4ae1ad8e9126581dd",
+          "completed_log_epoch": 1791858779.0,
+          "input_len": 58059.0,
+          "cached_input_len": 57600.0,
+          "output_len": 316.0,
+          "queue_duration": 0.88,
+          "initial_prefill_elapsed": 122.38,
+          "entry_time": 1791858776.813
+        }
+      ],
+      "requests_crossing_deadline": [
+        {
+          "line": 5799,
+          "entry_seconds_before_deadline": 23.320065021514893,
+          "completion_log_seconds_after_deadline": 0.18293499946594238,
+          "whole_request_output_tokens_not_tail_only": 1424
+        },
+        {
+          "line": 5801,
+          "entry_seconds_before_deadline": 22.619065046310425,
+          "completion_log_seconds_after_deadline": 1.1829349994659424,
+          "whole_request_output_tokens_not_tail_only": 1583
+        },
+        {
+          "line": 5802,
+          "entry_seconds_before_deadline": 162.50406503677368,
+          "completion_log_seconds_after_deadline": 1.1829349994659424,
+          "whole_request_output_tokens_not_tail_only": 11535
+        },
+        {
+          "line": 5805,
+          "entry_seconds_before_deadline": 96.85006499290466,
+          "completion_log_seconds_after_deadline": 2.1829349994659424,
+          "whole_request_output_tokens_not_tail_only": 6770
+        },
+        {
+          "line": 5807,
+          "entry_seconds_before_deadline": 24.117064952850342,
+          "completion_log_seconds_after_deadline": 3.1829349994659424,
+          "whole_request_output_tokens_not_tail_only": 1732
+        },
+        {
+          "line": 5820,
+          "entry_seconds_before_deadline": 16.487065076828003,
+          "completion_log_seconds_after_deadline": 9.182934999465942,
+          "whole_request_output_tokens_not_tail_only": 2298
+        }
+      ],
+      "analyzer_tokens": 2133883,
+      "recorded_tokens": 2037821,
+      "diagnostics_render_seconds": [
+        2.15,
+        1.54,
+        1.29,
+        1.12,
+        1.76,
+        2.55
+      ],
+      "client_read_timeouts": 5,
+      "warmup_log_lines": [],
+      "games": [
+        {
+          "game_id": "tn36-ef4dde99",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 3.571428571428571,
+          "recorded_tokens": 153926,
+          "analyzer_tokens": 153926,
+          "actions": 114,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 37,
+              "y": 55
+            }
+          },
+          "first_action_seconds_from_benchmark": 77.94146800041199,
+          "last_action_seconds_from_benchmark": 3456.106444120407,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "score": 60.329098794246626,
+          "recorded_tokens": 194201,
+          "analyzer_tokens": 201722,
+          "actions": 361,
+          "reset_actions": 5,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 34.746944427490234,
+          "last_action_seconds_from_benchmark": 3365.9965171813965,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 4.761904761904762,
+          "recorded_tokens": 169793,
+          "analyzer_tokens": 200617,
+          "actions": 57,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 20.933976888656616,
+          "last_action_seconds_from_benchmark": 3013.9575493335724,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 2.2222222222222223,
+          "recorded_tokens": 178830,
+          "analyzer_tokens": 217056,
+          "actions": 34,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION3",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 43.04308533668518,
+          "last_action_seconds_from_benchmark": 2739.325873851776,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "state": "cancelled",
+          "levels_completed": 0,
+          "score": 0.0,
+          "recorded_tokens": 133531,
+          "analyzer_tokens": 133531,
+          "actions": 112,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION4",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 51.07098627090454,
+          "last_action_seconds_from_benchmark": 3379.406355381012,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "state": "cancelled",
+          "levels_completed": 3,
+          "score": 10.909090909090908,
+          "recorded_tokens": 199055,
+          "analyzer_tokens": 210942,
+          "actions": 179,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 12,
+              "y": 13
+            }
+          },
+          "first_action_seconds_from_benchmark": 25.38046884536743,
+          "last_action_seconds_from_benchmark": 3315.0547666549683,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "state": "cancelled",
+          "levels_completed": 3,
+          "score": 13.333333333333334,
+          "recorded_tokens": 208063,
+          "analyzer_tokens": 208063,
+          "actions": 130,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 59
+            }
+          },
+          "first_action_seconds_from_benchmark": 18.511785745620728,
+          "last_action_seconds_from_benchmark": 3457.5469105243683,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "state": "cancelled",
+          "levels_completed": 3,
+          "score": 11.535043134589836,
+          "recorded_tokens": 182435,
+          "analyzer_tokens": 182435,
+          "actions": 586,
+          "reset_actions": 3,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 18.54721164703369,
+          "last_action_seconds_from_benchmark": 3481.148042678833,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "state": "cancelled",
+          "levels_completed": 2,
+          "score": 10.431260658533386,
+          "recorded_tokens": 174550,
+          "analyzer_tokens": 177316,
+          "actions": 132,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION4",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 64.45555233955383,
+          "last_action_seconds_from_benchmark": 3417.737385034561,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 0.5063462057790981,
+          "recorded_tokens": 154542,
+          "analyzer_tokens": 159380,
+          "actions": 120,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 967.065299987793,
+          "last_action_seconds_from_benchmark": 3410.0755698680878,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "state": "won",
+          "levels_completed": 6,
+          "score": 95.00194245384131,
+          "recorded_tokens": 188356,
+          "analyzer_tokens": 188356,
+          "actions": 161,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 38,
+              "y": 38
+            }
+          },
+          "first_action_seconds_from_benchmark": 57.74653720855713,
+          "last_action_seconds_from_benchmark": 3259.0565361976624,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "state": "won",
+          "levels_completed": 8,
+          "score": 100.0,
+          "recorded_tokens": 100539,
+          "analyzer_tokens": 100539,
+          "actions": 310,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION4",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 995.1716976165771,
+          "last_action_seconds_from_benchmark": 2741.209351539612,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        }
+      ]
+    },
+    "retrievable_animation": {
+      "pid": 4742,
+      "status": "completed",
+      "exit_code": 0,
+      "budget_seconds": 3482,
+      "parent_arm_wall_seconds": 3564.189090490341,
+      "benchmark_wall_seconds": 3561.1440506,
+      "budget_window_seconds": 3481.999993085861,
+      "post_deadline_parent_seconds": 80.41594743728638,
+      "soft_deadline_fired": true,
+      "deadline_beijing": "2026-10-13T11:31:18.891123+08:00",
+      "forced_exit": false,
+      "lingering_workers": [],
+      "game_state_counts": {
+        "cancelled": 11,
+        "won": 1
+      },
+      "game_order_sha256": "da21612abe54f9d3401bcf77463bab7d0950171211bc6419432b365f8a64d7c8",
+      "game_order_matches_config": true,
+      "environment": {
+        "ARC3_RESEARCH_ENV_DIR": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/environment_files",
+        "ARC3_WARMUP_ACTION_GAMES": "0",
+        "ARC3_HTTP_RETRY_INITIAL_SECONDS": "900",
+        "ARC3_HISTORY_ASSISTANT_TURNS": "150",
+        "ARC3_HISTORY_TURN_DRAIN": "30",
+        "ARC3_HISTORY_DRAIN_COALESCE": "1",
+        "ARC3_MIDDLE_TRUNCATION": "1",
+        "ARC3_ACTION_ECHO": "1",
+        "ARC3_EXPLAIN_GAMEPLAY_CHANGED": "1",
+        "ARC3_NEW_CHANGED_PROMPTS": "1",
+        "ARC3_LEVEL_TRANSFER_GUIDANCE": "1",
+        "ARC3_ACTION_INFO": "1",
+        "ARC3_DEDUPE_MULTICALL_LINE": "1",
+        "ARC3_FRAME_DIFF_HINT": "1",
+        "MULTIMODAL_CONTEXT": "current_grid",
+        "MULTIMODAL_UPSCALE": "10",
+        "ARC3_DIFF_IMAGE": "1",
+        "ARC3_GAMEOVER_DIFF_IMAGE": "1",
+        "ARC3_ANIMATION": "1",
+        "ARC3_GUARDS_FROM_LEVEL": "2",
+        "ARC3_BATCH_NOOP_BLOCK": "1",
+        "ARC3_STALE_STATE_BLOCK": "1",
+        "ARC3_MEMORY_SECTIONS": "off",
+        "ARC3_PERSISTENT_FUNCTIONS": "1",
+        "ARC3_PERSISTENT_FUNCTIONS_SCOPE": "game",
+        "ARC3_PERSISTENT_FUNCTIONS_IMPORTS": "1",
+        "ARC3_MAX_ACTIVE_STREAMS": "10",
+        "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+        "ARC3_PRIORITY_PACE": "0",
+        "ARC3_PRIORITY_TAIL_FADE": "1",
+        "ARC3_PRIORITY_TAIL_FADE_FRACTION": "0.2",
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_SCORE_NORMALIZATION": "1",
+        "ARC3_CONTEXT_DRAIN_TOKENS": "59392",
+        "LOCAL_ANALYZER_MAX_OUTPUT": "12288",
+        "LOCAL_ANALYZER_TEMPERATURE": "0.7",
+        "LOCAL_ANALYZER_TOP_P": "0.95",
+        "LOCAL_ANALYZER_TOP_K": "20",
+        "LOCAL_ANALYZER_CONTEXT_WINDOW": "131072"
+      },
+      "source_sha256": {
+        "run_arm.py": "f1955c2f8e919d2f634b904f0f458529b6fef319c7926e89bc5d955d9ea3d75a",
+        "goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "benchmark_initial.pkl": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+        "tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+        "retrievable_animation.py": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875"
+      },
+      "active_streams": 10,
+      "concurrency": 12,
+      "n_passes": 1,
+      "warmup_action_games": 0,
+      "all_first_actions_are_non_reset": true,
+      "post_deadline_actions": 0,
+      "post_deadline_completed_levels": 0,
+      "old_intervention_reports": {
+        "goal-evidence.json": {
+          "enabled": false,
+          "counts": null,
+          "events": 0,
+          "calls_observed": null
+        },
+        "transient-history.json": {
+          "enabled": false,
+          "counts": null,
+          "events": 0,
+          "calls_observed": 0
+        },
+        "program-state.json": {
+          "enabled": false,
+          "counts": {},
+          "events": 0,
+          "calls_observed": null
+        }
+      },
+      "gpu_budget_window": {
+        "start_beijing": "2026-10-13T10:33:16.891130+08:00",
+        "end_beijing": "2026-10-13T11:31:18.891123+08:00",
+        "wall_seconds": 3481.999993085861,
+        "sample_count": 348,
+        "utilization_samples": {
+          "n": 348,
+          "mean": 93.10632183908046,
+          "median": 99.0,
+          "min": 0.0,
+          "max": 100.0
+        },
+        "covered_seconds": 3481.999993085861,
+        "time_weighted_util_percent": 93.08696875356237,
+        "time_weighted_memory_mib": 95956.80811621787,
+        "time_weighted_power_watts": 368.91170022687953,
+        "peak_sampled_memory_mib": 96093.0,
+        "sustained_low_util_candidates": []
+      },
+      "gpu_drain_window": {
+        "start_beijing": "2026-10-13T11:31:18.891123+08:00",
+        "end_beijing": "2026-10-13T11:32:39.307070+08:00",
+        "wall_seconds": 80.41594743728638,
+        "sample_count": 9,
+        "utilization_samples": {
+          "n": 9,
+          "mean": 86.22222222222223,
+          "median": 97.0,
+          "min": 0.0,
+          "max": 99.0
+        },
+        "covered_seconds": 80.41594743728638,
+        "time_weighted_util_percent": 91.00958626306564,
+        "time_weighted_memory_mib": 96093.0,
+        "time_weighted_power_watts": 300.45247594971715,
+        "peak_sampled_memory_mib": 96093.0,
+        "sustained_low_util_candidates": []
+      },
+      "server": {
+        "requests": 1100,
+        "output_tokens": 2205524,
+        "input_tokens": 79521624,
+        "cached_input_tokens": 74314368,
+        "uncached_input_tokens": 5207256,
+        "input_token_weighted_cache_hit_percent": 93.45177357041904,
+        "output_tokens_per_benchmark_second": 619.3301839695033,
+        "queue_ms": {
+          "n": 1100,
+          "mean": 192.0254909090909,
+          "median": 1.4849999999999999,
+          "min": 0.32,
+          "max": 17242.09
+        },
+        "initial_prefill_ms": {
+          "n": 1100,
+          "mean": 563.3864909090909,
+          "median": 269.84000000000003,
+          "min": 116.91,
+          "max": 8145.46
+        },
+        "decode_running_requests": {
+          "n": 2254,
+          "mean": 9.133540372670808,
+          "median": 9.0,
+          "min": 2.0,
+          "max": 10.0
+        },
+        "decode_accept_length": {
+          "n": 2254,
+          "mean": 2.6610913930789706,
+          "median": 2.66,
+          "min": 2.26,
+          "max": 3.13
+        },
+        "last_batch_seconds_after_deadline": 75.10887694358826,
+        "max_batch_log_gap_seconds": 4.0
+      },
+      "server_recorded_entry_after_deadline": [
+        {
+          "line": 11767,
+          "rid": "77e495bed53f4021b81276dc0a9cf055",
+          "completed_log_epoch": 1791862354.0,
+          "input_len": 59542.0,
+          "cached_input_len": 4864.0,
+          "output_len": 11161.0,
+          "queue_duration": 0.68,
+          "initial_prefill_elapsed": 4486.79,
+          "entry_time": 1791862279.818
+        }
+      ],
+      "requests_crossing_deadline": [
+        {
+          "line": 11647,
+          "entry_seconds_before_deadline": 27.315123081207275,
+          "completion_log_seconds_after_deadline": 0.10887694358825684,
+          "whole_request_output_tokens_not_tail_only": 1507
+        },
+        {
+          "line": 11648,
+          "entry_seconds_before_deadline": 41.5021231174469,
+          "completion_log_seconds_after_deadline": 1.1088769435882568,
+          "whole_request_output_tokens_not_tail_only": 2210
+        },
+        {
+          "line": 11656,
+          "entry_seconds_before_deadline": 28.838123083114624,
+          "completion_log_seconds_after_deadline": 5.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 1474
+        },
+        {
+          "line": 11657,
+          "entry_seconds_before_deadline": 24.0501229763031,
+          "completion_log_seconds_after_deadline": 5.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 1054
+        },
+        {
+          "line": 11658,
+          "entry_seconds_before_deadline": 17.356122970581055,
+          "completion_log_seconds_after_deadline": 5.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 1162
+        },
+        {
+          "line": 11659,
+          "entry_seconds_before_deadline": 8.06212306022644,
+          "completion_log_seconds_after_deadline": 5.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 696
+        },
+        {
+          "line": 11660,
+          "entry_seconds_before_deadline": 4.8741230964660645,
+          "completion_log_seconds_after_deadline": 5.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 363
+        },
+        {
+          "line": 11671,
+          "entry_seconds_before_deadline": 45.37212300300598,
+          "completion_log_seconds_after_deadline": 14.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 3744
+        },
+        {
+          "line": 11672,
+          "entry_seconds_before_deadline": 13.406123161315918,
+          "completion_log_seconds_after_deadline": 14.108876943588257,
+          "whole_request_output_tokens_not_tail_only": 2146
+        },
+        {
+          "line": 11700,
+          "entry_seconds_before_deadline": 54.16212296485901,
+          "completion_log_seconds_after_deadline": 33.10887694358826,
+          "whole_request_output_tokens_not_tail_only": 6091
+        }
+      ],
+      "analyzer_tokens": 2183455,
+      "recorded_tokens": 1986610,
+      "diagnostics_render_seconds": [
+        1.32,
+        1.36,
+        1.57,
+        2.36,
+        22.46,
+        2.7
+      ],
+      "client_read_timeouts": 10,
+      "warmup_log_lines": [],
+      "games": [
+        {
+          "game_id": "tn36-ef4dde99",
+          "state": "cancelled",
+          "levels_completed": 4,
+          "score": 35.42857142857143,
+          "recorded_tokens": 185094,
+          "analyzer_tokens": 189437,
+          "actions": 193,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 14
+            }
+          },
+          "first_action_seconds_from_benchmark": 49.583390951156616,
+          "last_action_seconds_from_benchmark": 3371.258501291275,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "score": 71.42857142857143,
+          "recorded_tokens": 214225,
+          "analyzer_tokens": 214225,
+          "actions": 228,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION3",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 24.643316984176636,
+          "last_action_seconds_from_benchmark": 3452.5895516872406,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 4.761904761904762,
+          "recorded_tokens": 203919,
+          "analyzer_tokens": 212508,
+          "actions": 78,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION3",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 16.016262531280518,
+          "last_action_seconds_from_benchmark": 3294.635183095932,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "state": "cancelled",
+          "levels_completed": 2,
+          "score": 6.666666666666667,
+          "recorded_tokens": 192075,
+          "analyzer_tokens": 233464,
+          "actions": 83,
+          "reset_actions": 2,
+          "first_action": {
+            "id": "ACTION4",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 52.242594957351685,
+          "last_action_seconds_from_benchmark": 2865.4531395435333,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 2.7777777777777777,
+          "recorded_tokens": 109485,
+          "analyzer_tokens": 175713,
+          "actions": 71,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION4",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 28.019425630569458,
+          "last_action_seconds_from_benchmark": 2414.169090270996,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 1.8181818181818181,
+          "recorded_tokens": 133221,
+          "analyzer_tokens": 133221,
+          "actions": 204,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 19.36513900756836,
+          "last_action_seconds_from_benchmark": 3449.5820775032043,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "state": "cancelled",
+          "levels_completed": 4,
+          "score": 22.22222222222222,
+          "recorded_tokens": 208206,
+          "analyzer_tokens": 208206,
+          "actions": 323,
+          "reset_actions": 8,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 53
+            }
+          },
+          "first_action_seconds_from_benchmark": 16.998610734939575,
+          "last_action_seconds_from_benchmark": 3471.3464267253876,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 2.2222222222222223,
+          "recorded_tokens": 128417,
+          "analyzer_tokens": 147186,
+          "actions": 243,
+          "reset_actions": 3,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 11.71229887008667,
+          "last_action_seconds_from_benchmark": 2555.2118031978607,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "state": "cancelled",
+          "levels_completed": 1,
+          "score": 0.7698615160349854,
+          "recorded_tokens": 153681,
+          "analyzer_tokens": 153681,
+          "actions": 184,
+          "reset_actions": 1,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 58.174269676208496,
+          "last_action_seconds_from_benchmark": 3462.9964883327484,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "score": 71.42857142857143,
+          "recorded_tokens": 210457,
+          "analyzer_tokens": 212513,
+          "actions": 245,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION1",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 27.26625967025757,
+          "last_action_seconds_from_benchmark": 3422.110822916031,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "state": "cancelled",
+          "levels_completed": 4,
+          "score": 39.71338133500296,
+          "recorded_tokens": 115656,
+          "analyzer_tokens": 171127,
+          "actions": 151,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 38,
+              "y": 38
+            }
+          },
+          "first_action_seconds_from_benchmark": 876.7270991802216,
+          "last_action_seconds_from_benchmark": 2580.7838683128357,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "state": "won",
+          "levels_completed": 8,
+          "score": 100.0,
+          "recorded_tokens": 132174,
+          "analyzer_tokens": 132174,
+          "actions": 287,
+          "reset_actions": 0,
+          "first_action": {
+            "id": "ACTION2",
+            "data": {}
+          },
+          "first_action_seconds_from_benchmark": 893.2036607265472,
+          "last_action_seconds_from_benchmark": 3075.9763100147247,
+          "post_deadline_actions": [],
+          "post_deadline_completed_levels": [],
+          "actions_per_level_sum_matches_history": true
+        }
+      ]
+    }
+  },
+  "paired_resource_comparison": {
+    "server_output_tokens_B_over_A": 1.0218475154155753,
+    "analyzer_tokens_B_over_A": 1.0232308894161488,
+    "server_throughput_B_over_A": 1.0044308045829908
+  },
+  "archive_overhead": {
+    "limits": {
+      "max_records_per_session": 128,
+      "max_bytes_per_session": 4194304,
+      "max_total_bytes": 67108864,
+      "max_sessions": 128
+    },
+    "counts": {
+      "sessions_seen": 12,
+      "capture_calls": 2290,
+      "capture_available": 2290,
+      "captured_bytes": 93519896,
+      "captured_raw_frames": 8030,
+      "query_calls": 48,
+      "list_queries": 19,
+      "query_status_ok": 19,
+      "response_json_bytes": 11040475,
+      "get_queries": 29,
+      "retrieved_blob_bytes": 7819755,
+      "query_status_hit": 28,
+      "hits": 28,
+      "nonlatest_queries": 28,
+      "nonlatest_hits": 28,
+      "evicted_records": 1162,
+      "evicted_bytes": 53906474,
+      "query_status_outside_retained_history": 1,
+      "misses": 1
+    },
+    "stored_frame_json_bytes": 39613422,
+    "peak_frame_json_bytes": 39974777,
+    "capture_cpu_seconds": 3.7503863679998437,
+    "query_cpu_seconds": 0.6872455710000058
+  },
+  "combined_arm_server_output_tokens": 4363893,
+  "gross_session_tokens_per_second": 570.003725160559,
+  "sources": {
+    "scripts/analyze_010_efficiency.py": {
+      "sha256": "2e7b4f3104df241a00cd2c8fbac7a7866d00f25005994234f23b1ca1a289fa77",
+      "bytes": 19897
+    },
+    "runs/010-retrievable-animation/experiment-manifest.json": {
+      "sha256": "f259bf80363c0be57678b191d105a7ce00dbad685e7ea01b86f5cff8d1e1d3cc",
+      "bytes": 5186
+    },
+    "runs/010-retrievable-animation/gpu-utilization.jsonl": {
+      "sha256": "d398045cbc5be12b63511a7fbd45aab47f6afa6fa9dc6fc84e2ba9e4ca045540",
+      "bytes": 150368
+    },
+    "runs/010-retrievable-animation/serve.log": {
+      "sha256": "cb8294e8bc127de1bfa67fcc58efef2714228d738a1f396ae6212e8a6b1b52e0",
+      "bytes": 2630015
+    },
+    "runs/010-retrievable-animation/input-paths.json": {
+      "sha256": "2c988fd8edc17ef01c0cd5dc8ffad5d09cc31f19f5153d5c13013117bca5414b",
+      "bytes": 798
+    },
+    "runs/010-retrievable-animation/arc3-010-retrievable-animation.log": {
+      "sha256": "969cabf9d3b7a83599f1b3189ba95500d9f14839ffa3624b969a6eda036b822a",
+      "bytes": 87106
+    },
+    "experiments/010-source/build-manifest.json": {
+      "sha256": "df1c558459887431a2fac27729ae9c4a7e21dfbbe965806b88e9b85ee277c9b7",
+      "bytes": 3920
+    },
+    "experiments/010-source/source-hashes.json": {
+      "sha256": "9986eaec534b79ca66592f5919aa9b60dd0de355b8f5c99a2a720f044437661c",
+      "bytes": 2371
+    },
+    "runs/010-retrievable-animation/baseline/arm-metadata.json": {
+      "sha256": "54786c0dbc373757adc72c897d7a1dc7cc2da9ce4af2ead86b44d879e0830d9f",
+      "bytes": 7807
+    },
+    "runs/010-retrievable-animation/baseline/benchmark.json": {
+      "sha256": "17ee07b4c8743e5daabcccf469c6b60926b85841b00e8ce13321712c6647f72c",
+      "bytes": 573049
+    },
+    "runs/010-retrievable-animation/baseline/run.log": {
+      "sha256": "625719e303b50ca97d5a4c999cbde34c4c1339bf05f5122e11b1caab41cde829",
+      "bytes": 11330
+    },
+    "runs/010-retrievable-animation/baseline/goal-evidence.json": {
+      "sha256": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593",
+      "bytes": 253
+    },
+    "runs/010-retrievable-animation/baseline/transient-history.json": {
+      "sha256": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665",
+      "bytes": 385
+    },
+    "runs/010-retrievable-animation/baseline/program-state.json": {
+      "sha256": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303",
+      "bytes": 211
+    },
+    "runs/010-retrievable-animation/retrievable_animation/arm-metadata.json": {
+      "sha256": "8db0b9a8b6941ccc1bec930f7ef2ef5c8cc77255ac291c5377926054e0aab878",
+      "bytes": 11013
+    },
+    "runs/010-retrievable-animation/retrievable_animation/benchmark.json": {
+      "sha256": "fce69f48164f8890a0d3c41a8cce716a591ec2a1a90d666e4ed2923df4c2660d",
+      "bytes": 587892
+    },
+    "runs/010-retrievable-animation/retrievable_animation/run.log": {
+      "sha256": "53c87269c580aa9b0aabb9c54390481f70b5e70c02cda6a0c856ed273a1e8a55",
+      "bytes": 12422
+    },
+    "runs/010-retrievable-animation/retrievable_animation/goal-evidence.json": {
+      "sha256": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593",
+      "bytes": 253
+    },
+    "runs/010-retrievable-animation/retrievable_animation/transient-history.json": {
+      "sha256": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665",
+      "bytes": 385
+    },
+    "runs/010-retrievable-animation/retrievable_animation/program-state.json": {
+      "sha256": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303",
+      "bytes": 211
+    },
+    "runs/010-retrievable-animation/retrievable_animation/retrievable-animation.json": {
+      "sha256": "4387975ad8e409a03a932000b22e86bf438c5c185ae577a0fa8610b80d9581b9",
+      "bytes": 21416
+    }
+  },
+  "methods": [
+    "Naive timestamps in benchmark/server logs are UTC; display timezone Asia/Shanghai.",
+    "GPU interpolation uses timestamp=time, clipped trapezoids between actual samples, with no extrapolation. Sparse samples are not continuous kernel measurements.",
+    "Low-util candidates require at least 3 consecutive samples below 50%, spanning at least 19.5 seconds with gaps at most 16 seconds.",
+    "Server requests are deduplicated by rid+entry_time, attributed by entry_time within each parent arm. Completed log timestamps have one-second resolution.",
+    "A server entry_time after the deadline does not establish when the client sent the request or identify its game; no such attribution is assumed.",
+    "Whole output of a request crossing the deadline is not output generated only after that deadline.",
+    "Action absolute time = game.started_at + history.wallclock_seconds. First-action delay may include waiting, action-free inference and CPU processing; it does not establish the first LLM request, GPU-slot admission or queue time.",
+    "Capture/query CPU counters exclude thread lock waiting and total IPC/child processing; stored JSON bytes are not process RSS.",
+    "No account-balance delta is attributed to this run. Session wall hours are measured duration, not a billing claim.",
+    "A single baseline-first paired run with stochastic decoding/shared admission does not establish intervention efficacy."
+  ]
+}

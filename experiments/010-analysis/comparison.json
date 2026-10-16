@@ -1,0 +1,4479 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/baseline/benchmark.json",
+      "sha256": "17ee07b4c8743e5daabcccf469c6b60926b85841b00e8ce13321712c6647f72c"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/baseline/arm-metadata.json",
+      "sha256": "54786c0dbc373757adc72c897d7a1dc7cc2da9ce4af2ead86b44d879e0830d9f"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/baseline/run.log",
+      "sha256": "625719e303b50ca97d5a4c999cbde34c4c1339bf05f5122e11b1caab41cde829"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/benchmark.json",
+      "sha256": "fce69f48164f8890a0d3c41a8cce716a591ec2a1a90d666e4ed2923df4c2660d"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/arm-metadata.json",
+      "sha256": "8db0b9a8b6941ccc1bec930f7ef2ef5c8cc77255ac291c5377926054e0aab878"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/run.log",
+      "sha256": "53c87269c580aa9b0aabb9c54390481f70b5e70c02cda6a0c856ed273a1e8a55"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/experiment-manifest.json",
+      "sha256": "f259bf80363c0be57678b191d105a7ce00dbad685e7ea01b86f5cff8d1e1d3cc"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/retrievable-animation.json",
+      "sha256": "4387975ad8e409a03a932000b22e86bf438c5c185ae577a0fa8610b80d9581b9"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/010-source/source-hashes.json",
+      "sha256": "9986eaec534b79ca66592f5919aa9b60dd0de355b8f5c99a2a720f044437661c"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/010-launch.json",
+      "sha256": "44120eef8e439b589ce91fbca8ba142e9bb25d40aeaf06f4a0a91911095a68ad"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/scripts/analyze_010_results.py",
+      "sha256": "9838c06cbcfb5d9050a02082dff60107671d53e1d70fd16f405bcca76bf49356"
+    }
+  ],
+  "arms": {
+    "baseline": {
+      "summary": {
+        "games": 12,
+        "mean_AE": 26.050139253747506,
+        "mean_completion_ceiling": 27.91967291967292,
+        "mean_efficiency_gap": 1.8695336659254143,
+        "wins": 2,
+        "state_counts": {
+          "cancelled": 10,
+          "won": 2
+        },
+        "levels_completed": 34,
+        "number_of_levels": 91,
+        "actions": 2296,
+        "reset_actions": 11,
+        "analyzer_tokens": 2133883,
+        "history_tokens": 2037821,
+        "final_tokens": 0,
+        "recorded_tokens": 2037821,
+        "unattached_tokens": 96062,
+        "uncached_input_tokens": 0
+      },
+      "status": "completed",
+      "exit_code": 0,
+      "timing": {
+        "budget_seconds": 3482,
+        "deadline_benchmark_second": 3481.999803,
+        "post_deadline_actions": 0,
+        "post_deadline_levels": 0,
+        "benchmark_wall_seconds": 3500.446720297,
+        "benchmark_datetime_seconds": 3497.840554,
+        "soft_deadline_fired": true,
+        "forced_cpu_process_exit": false,
+        "lingering_worker_threads": [],
+        "timeout_log_count": 5
+      }
+    },
+    "retrievable_animation": {
+      "summary": {
+        "games": 12,
+        "mean_AE": 29.93649438381064,
+        "mean_completion_ceiling": 30.852573352573355,
+        "mean_efficiency_gap": 0.9160789687627106,
+        "wins": 1,
+        "state_counts": {
+          "cancelled": 11,
+          "won": 1
+        },
+        "levels_completed": 37,
+        "number_of_levels": 91,
+        "actions": 2290,
+        "reset_actions": 16,
+        "analyzer_tokens": 2183455,
+        "history_tokens": 1986610,
+        "final_tokens": 0,
+        "recorded_tokens": 1986610,
+        "unattached_tokens": 196845,
+        "uncached_input_tokens": 0
+      },
+      "status": "completed",
+      "exit_code": 0,
+      "timing": {
+        "budget_seconds": 3482,
+        "deadline_benchmark_second": 3481.999775,
+        "post_deadline_actions": 0,
+        "post_deadline_levels": 0,
+        "benchmark_wall_seconds": 3561.1440506,
+        "benchmark_datetime_seconds": 3558.389613,
+        "soft_deadline_fired": true,
+        "forced_cpu_process_exit": false,
+        "lingering_worker_threads": [],
+        "timeout_log_count": 10
+      }
+    }
+  },
+  "overall_delta": {
+    "mean_AE": 3.8863551300631336,
+    "mean_completion_ceiling": 2.9329004329004356,
+    "mean_efficiency_gap": -0.9534546971627037,
+    "levels_completed": 3,
+    "wins": -1,
+    "actions": -6,
+    "analyzer_tokens": 49572,
+    "recorded_tokens": -51211,
+    "unattached_tokens": 100783,
+    "AE_relative_change": 0.14918749923780358,
+    "analyzer_tokens_relative_change": 0.02323088941614887,
+    "AE_better_equal_worse": {
+      "better": 6,
+      "equal": 2,
+      "worse": 4
+    }
+  },
+  "games": [
+    {
+      "game_id": "tn36-ef4dde99",
+      "baseline": {
+        "game_id": "tn36-ef4dde99",
+        "AE": 3.571428571428571,
+        "reported_AE": 3.571428571428571,
+        "uncapped_AE": 4.107142857142857,
+        "cap_adjustment": -0.5357142857142856,
+        "completion_ceiling": 3.571428571428571,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 114,
+        "actions_per_level": [
+          9,
+          105,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 153926,
+        "history_tokens": 153926,
+        "final_tokens": 0,
+        "recorded_tokens": 153926,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 9,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 4.107142857142857
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 105,
+            "baseline_actions": 72,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 40,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 30,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 55,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 62,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.088498,
+          "last_action_benchmark_second": 3456.1062550650004,
+          "finish_benchmark_second": 3482.54194919,
+          "last_action_to_finish_seconds": 26.435694124999827,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 189.70956666700013
+            }
+          ],
+          "actions_on_completed_levels": 9,
+          "actions_on_uncompleted_levels": 105
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "tn36-ef4dde99",
+        "AE": 35.42857142857143,
+        "reported_AE": 35.42857142857143,
+        "uncapped_AE": 35.42857142857143,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 35.714285714285715,
+        "efficiency_gap": 0.2857142857142847,
+        "levels_completed": 4,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 193,
+        "actions_per_level": [
+          26,
+          120,
+          16,
+          20,
+          11,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 189437,
+        "history_tokens": 185094,
+        "final_tokens": 0,
+        "recorded_tokens": 185094,
+        "unattached_tokens": 4343,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 26,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 4.107142857142857
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 120,
+            "baseline_actions": 72,
+            "level_AE": 36.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 2.5714285714285716
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 12.321428571428571
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 40,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 11,
+            "baseline_actions": 30,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 55,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 62,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.097839,
+          "last_action_benchmark_second": 3371.258283257999,
+          "finish_benchmark_second": 3482.3487622579996,
+          "last_action_to_finish_seconds": 111.09047900000041,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 264.41583632899983
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 2678.7720651629998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 2836.5304262789996
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 3109.988206037
+            }
+          ],
+          "actions_on_completed_levels": 182,
+          "actions_on_uncompleted_levels": 11
+        }
+      },
+      "AE_delta": 31.85714285714286,
+      "levels_delta": 3,
+      "actions_delta": 79,
+      "analyzer_tokens_delta": 35511,
+      "mean_AE_contribution": 2.654761904761905,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 31.32142857142857,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.5357142857142856
+      },
+      "common_action_token_section": {
+        "cap": 153926,
+        "baseline": {
+          "cap_action_attached_tokens": 153926,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 3.571428571428571,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 9,
+              "attached_tokens": 12000,
+              "included_at_cap": true,
+              "wallclock_seconds": 189.62106866700015
+            }
+          ],
+          "prefix_executed_actions": 114,
+          "prefix_attached_tokens": 153926,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 153926
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 153926,
+          "levels_completed_at_cap": 3,
+          "AE_at_cap": 19.0,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 26,
+              "attached_tokens": 16916,
+              "included_at_cap": true,
+              "wallclock_seconds": 264.3179973289998
+            },
+            {
+              "level": 2,
+              "action_num": 146,
+              "attached_tokens": 142859,
+              "included_at_cap": true,
+              "wallclock_seconds": 2678.6742261629997
+            },
+            {
+              "level": 3,
+              "action_num": 162,
+              "attached_tokens": 150752,
+              "included_at_cap": true,
+              "wallclock_seconds": 2836.4325872789996
+            },
+            {
+              "level": 4,
+              "action_num": 182,
+              "attached_tokens": 167763,
+              "included_at_cap": false,
+              "wallclock_seconds": 3109.890367037
+            }
+          ],
+          "prefix_executed_actions": 162,
+          "prefix_attached_tokens": 150752,
+          "unused_cap_before_next_whole_action": 3174,
+          "raw_total_action_attached_tokens": 185094
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 193,
+        "capture_available": 193,
+        "query_calls": 4,
+        "hits": 3,
+        "nonlatest_hits": 3
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 1.3435562457831616
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "baseline": {
+        "game_id": "sc25-635fd71a",
+        "AE": 60.329098794246626,
+        "reported_AE": 60.329098794246626,
+        "uncapped_AE": 60.329098794246626,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 71.42857142857143,
+        "efficiency_gap": 11.099472634324805,
+        "levels_completed": 5,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 361,
+        "actions_per_level": [
+          114,
+          7,
+          64,
+          58,
+          59,
+          59
+        ],
+        "reset_actions": 5,
+        "analyzer_tokens": 201722,
+        "history_tokens": 194201,
+        "final_tokens": 0,
+        "recorded_tokens": 194201,
+        "unattached_tokens": 7521,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 114,
+            "baseline_actions": 36,
+            "level_AE": 9.972299168975068,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 0.47487138899881276
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 6,
+            "level_AE": 73.46938775510203,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 6.997084548104955
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 64,
+            "baseline_actions": 32,
+            "level_AE": 25.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 3.5714285714285716
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 58,
+            "baseline_actions": 83,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 59,
+            "baseline_actions": 143,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 59,
+            "baseline_actions": 50,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.125956,
+          "last_action_benchmark_second": 3365.9963281829996,
+          "finish_benchmark_second": 3482.785748325,
+          "last_action_to_finish_seconds": 116.78942014200038,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 784.7196624950001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 859.7555540839998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1401.741738479
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1717.1843848039998
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 2291.345224846
+            }
+          ],
+          "actions_on_completed_levels": 302,
+          "actions_on_uncompleted_levels": 59
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "sc25-635fd71a",
+        "AE": 71.42857142857143,
+        "reported_AE": 71.42857142857143,
+        "uncapped_AE": 71.57855523161646,
+        "cap_adjustment": -0.149983803045032,
+        "completion_ceiling": 71.42857142857143,
+        "efficiency_gap": 0.0,
+        "levels_completed": 5,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 228,
+        "actions_per_level": [
+          45,
+          5,
+          42,
+          32,
+          56,
+          48
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 214225,
+        "history_tokens": 214225,
+        "final_tokens": 0,
+        "recorded_tokens": 214225,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 45,
+            "baseline_actions": 36,
+            "level_AE": 64.00000000000001,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 3.0476190476190483
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 5,
+            "baseline_actions": 6,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 42,
+            "baseline_actions": 32,
+            "level_AE": 58.04988662131518,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 8.292840945902169
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 32,
+            "baseline_actions": 83,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 56,
+            "baseline_actions": 143,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 48,
+            "baseline_actions": 50,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.135665,
+          "last_action_benchmark_second": 3452.5893336120007,
+          "finish_benchmark_second": 3482.1383592420007,
+          "last_action_to_finish_seconds": 29.54902562999996,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 879.6729473890002
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 962.5144631390006
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1817.974769842
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 2114.626448008
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 2544.9258909170003
+            }
+          ],
+          "actions_on_completed_levels": 180,
+          "actions_on_uncompleted_levels": 48
+        }
+      },
+      "AE_delta": 11.099472634324805,
+      "levels_delta": 0,
+      "actions_delta": -133,
+      "analyzer_tokens_delta": 12503,
+      "mean_AE_contribution": 0.9249560528604004,
+      "score_decomposition": {
+        "shared_completed_levels": 11.24945643736983,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -0.149983803045032
+      },
+      "common_action_token_section": {
+        "cap": 194201,
+        "baseline": {
+          "cap_action_attached_tokens": 194201,
+          "levels_completed_at_cap": 5,
+          "AE_at_cap": 60.329098794246626,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 114,
+              "attached_tokens": 49034,
+              "included_at_cap": true,
+              "wallclock_seconds": 784.5937064950001
+            },
+            {
+              "level": 2,
+              "action_num": 121,
+              "attached_tokens": 53462,
+              "included_at_cap": true,
+              "wallclock_seconds": 859.6295980839998
+            },
+            {
+              "level": 3,
+              "action_num": 185,
+              "attached_tokens": 78782,
+              "included_at_cap": true,
+              "wallclock_seconds": 1401.615782479
+            },
+            {
+              "level": 4,
+              "action_num": 243,
+              "attached_tokens": 96663,
+              "included_at_cap": true,
+              "wallclock_seconds": 1717.0584288039997
+            },
+            {
+              "level": 5,
+              "action_num": 302,
+              "attached_tokens": 129834,
+              "included_at_cap": true,
+              "wallclock_seconds": 2291.219268846
+            }
+          ],
+          "prefix_executed_actions": 361,
+          "prefix_attached_tokens": 194201,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 194201
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 194201,
+          "levels_completed_at_cap": 5,
+          "AE_at_cap": 71.42857142857143,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 45,
+              "attached_tokens": 56014,
+              "included_at_cap": true,
+              "wallclock_seconds": 879.5372823890002
+            },
+            {
+              "level": 2,
+              "action_num": 50,
+              "attached_tokens": 61506,
+              "included_at_cap": true,
+              "wallclock_seconds": 962.3787981390005
+            },
+            {
+              "level": 3,
+              "action_num": 92,
+              "attached_tokens": 113821,
+              "included_at_cap": true,
+              "wallclock_seconds": 1817.8391048419999
+            },
+            {
+              "level": 4,
+              "action_num": 124,
+              "attached_tokens": 131223,
+              "included_at_cap": true,
+              "wallclock_seconds": 2114.490783008
+            },
+            {
+              "level": 5,
+              "action_num": 180,
+              "attached_tokens": 158576,
+              "included_at_cap": true,
+              "wallclock_seconds": 2544.7902259170005
+            }
+          ],
+          "prefix_executed_actions": 219,
+          "prefix_attached_tokens": 190865,
+          "unused_cap_before_next_whole_action": 3336,
+          "raw_total_action_attached_tokens": 214225
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 228,
+        "capture_available": 228
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 3.2306171751302575
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "baseline": {
+        "game_id": "sp80-589a99af",
+        "AE": 4.761904761904762,
+        "reported_AE": 4.761904761904762,
+        "uncapped_AE": 5.476190476190476,
+        "cap_adjustment": -0.7142857142857144,
+        "completion_ceiling": 4.761904761904762,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 57,
+        "actions_per_level": [
+          14,
+          43,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 200617,
+        "history_tokens": 169793,
+        "final_tokens": 0,
+        "recorded_tokens": 169793,
+        "unattached_tokens": 30824,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 14,
+            "baseline_actions": 39,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 43,
+            "baseline_actions": 58,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 25,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 148,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 152,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.134203,
+          "last_action_benchmark_second": 3013.9573605369997,
+          "finish_benchmark_second": 3482.593838989,
+          "last_action_to_finish_seconds": 468.6364784520001,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 181.4578952660001
+            }
+          ],
+          "actions_on_completed_levels": 14,
+          "actions_on_uncompleted_levels": 43
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "sp80-589a99af",
+        "AE": 4.761904761904762,
+        "reported_AE": 4.761904761904762,
+        "uncapped_AE": 5.476190476190476,
+        "cap_adjustment": -0.7142857142857144,
+        "completion_ceiling": 4.761904761904762,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 78,
+        "actions_per_level": [
+          15,
+          63,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 212508,
+        "history_tokens": 203919,
+        "final_tokens": 0,
+        "recorded_tokens": 203919,
+        "unattached_tokens": 8589,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 15,
+            "baseline_actions": 39,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 63,
+            "baseline_actions": 58,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 25,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 148,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 152,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.145261,
+          "last_action_benchmark_second": 3294.634965238001,
+          "finish_benchmark_second": 3494.022905933001,
+          "last_action_to_finish_seconds": 199.387940695,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 137.0912015560001
+            }
+          ],
+          "actions_on_completed_levels": 15,
+          "actions_on_uncompleted_levels": 63
+        }
+      },
+      "AE_delta": 0.0,
+      "levels_delta": 0,
+      "actions_delta": 21,
+      "analyzer_tokens_delta": 11891,
+      "mean_AE_contribution": 0.0,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.0
+      },
+      "common_action_token_section": {
+        "cap": 169793,
+        "baseline": {
+          "cap_action_attached_tokens": 169793,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 4.761904761904762,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 14,
+              "attached_tokens": 11309,
+              "included_at_cap": true,
+              "wallclock_seconds": 181.32369226600008
+            }
+          ],
+          "prefix_executed_actions": 57,
+          "prefix_attached_tokens": 169793,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 169793
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 169793,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 4.761904761904762,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 15,
+              "attached_tokens": 8924,
+              "included_at_cap": true,
+              "wallclock_seconds": 136.9459405560001
+            }
+          ],
+          "prefix_executed_actions": 72,
+          "prefix_attached_tokens": 159903,
+          "unused_cap_before_next_whole_action": 9890,
+          "raw_total_action_attached_tokens": 203919
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 78,
+        "capture_available": 78,
+        "query_calls": 32,
+        "hits": 20,
+        "nonlatest_hits": 20
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 4.239660141887058
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "baseline": {
+        "game_id": "bp35-0a0ad940",
+        "AE": 2.2222222222222223,
+        "reported_AE": 2.2222222222222223,
+        "uncapped_AE": 2.5555555555555554,
+        "cap_adjustment": -0.33333333333333304,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 34,
+        "actions_per_level": [
+          18,
+          16,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 217056,
+        "history_tokens": 178830,
+        "final_tokens": 0,
+        "recorded_tokens": 178830,
+        "unattached_tokens": 38226,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 18,
+            "baseline_actions": 21,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 16,
+            "baseline_actions": 48,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 44,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 38,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 33,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 87,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 86,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 163,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.161281,
+          "last_action_benchmark_second": 2739.325684975,
+          "finish_benchmark_second": 3483.0566260299997,
+          "last_action_to_finish_seconds": 743.7309410549997,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 711.0804987429998
+            }
+          ],
+          "actions_on_completed_levels": 18,
+          "actions_on_uncompleted_levels": 16
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "bp35-0a0ad940",
+        "AE": 6.666666666666667,
+        "reported_AE": 6.666666666666667,
+        "uncapped_AE": 7.191137266737085,
+        "cap_adjustment": -0.5244706000704182,
+        "completion_ceiling": 6.666666666666667,
+        "efficiency_gap": 0.0,
+        "levels_completed": 2,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 83,
+        "actions_per_level": [
+          19,
+          47,
+          17,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 2,
+        "analyzer_tokens": 233464,
+        "history_tokens": 192075,
+        "final_tokens": 0,
+        "recorded_tokens": 192075,
+        "unattached_tokens": 41389,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 19,
+            "baseline_actions": 21,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 47,
+            "baseline_actions": 48,
+            "level_AE": 104.30058850158441,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 4.63558171118153
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 17,
+            "baseline_actions": 44,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 38,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 33,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 87,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 86,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 163,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.172019,
+          "last_action_benchmark_second": 2865.452921589,
+          "finish_benchmark_second": 3494.0675392440003,
+          "last_action_to_finish_seconds": 628.6146176550001,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 506.1611023950003
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1772.9808291080003
+            }
+          ],
+          "actions_on_completed_levels": 66,
+          "actions_on_uncompleted_levels": 17
+        }
+      },
+      "AE_delta": 4.444444444444445,
+      "levels_delta": 1,
+      "actions_delta": 49,
+      "analyzer_tokens_delta": 16408,
+      "mean_AE_contribution": 0.3703703703703704,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 4.63558171118153,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -0.1911372667370852
+      },
+      "common_action_token_section": {
+        "cap": 178830,
+        "baseline": {
+          "cap_action_attached_tokens": 178830,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 2.2222222222222223,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 18,
+              "attached_tokens": 48010,
+              "included_at_cap": true,
+              "wallclock_seconds": 710.9192177429998
+            }
+          ],
+          "prefix_executed_actions": 34,
+          "prefix_attached_tokens": 178830,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 178830
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 178830,
+          "levels_completed_at_cap": 2,
+          "AE_at_cap": 6.666666666666667,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 19,
+              "attached_tokens": 34268,
+              "included_at_cap": true,
+              "wallclock_seconds": 505.9890833950003
+            },
+            {
+              "level": 2,
+              "action_num": 66,
+              "attached_tokens": 119488,
+              "included_at_cap": true,
+              "wallclock_seconds": 1772.8088101080002
+            }
+          ],
+          "prefix_executed_actions": 82,
+          "prefix_attached_tokens": 175970,
+          "unused_cap_before_next_whole_action": 2860,
+          "raw_total_action_attached_tokens": 192075
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 83,
+        "capture_available": 83,
+        "query_calls": 3,
+        "hits": 2,
+        "nonlatest_hits": 2
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 3.8356197378466543
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "baseline": {
+        "game_id": "sk48-d8078629",
+        "AE": 0.0,
+        "reported_AE": 0.0,
+        "uncapped_AE": 0.0,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 0.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 0,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 112,
+        "actions_per_level": [
+          112,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 133531,
+        "history_tokens": 133531,
+        "final_tokens": 0,
+        "recorded_tokens": 133531,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": false,
+            "actions": 112,
+            "baseline_actions": 61,
+            "level_AE": 0.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 177,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 101,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 103,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 230,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 181,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 125,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 92,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.171756,
+          "last_action_benchmark_second": 3379.406166503001,
+          "finish_benchmark_second": 3482.938992082001,
+          "last_action_to_finish_seconds": 103.53282557900002,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [],
+          "actions_on_completed_levels": 0,
+          "actions_on_uncompleted_levels": 112
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "sk48-d8078629",
+        "AE": 2.7777777777777777,
+        "reported_AE": 2.7777777777777777,
+        "uncapped_AE": 2.7777777777777777,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 2.7777777777777777,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 71,
+        "actions_per_level": [
+          61,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 175713,
+        "history_tokens": 109485,
+        "final_tokens": 0,
+        "recorded_tokens": 109485,
+        "unattached_tokens": 66228,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 61,
+            "baseline_actions": 61,
+            "level_AE": 100.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 2.7777777777777777
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 10,
+            "baseline_actions": 177,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 101,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 103,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 230,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 181,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 125,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 92,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.181455,
+          "last_action_benchmark_second": 2414.168872135,
+          "finish_benchmark_second": 3512.73697619,
+          "last_action_to_finish_seconds": 1098.5681040549998,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 2133.3271235390002
+            }
+          ],
+          "actions_on_completed_levels": 61,
+          "actions_on_uncompleted_levels": 10
+        }
+      },
+      "AE_delta": 2.7777777777777777,
+      "levels_delta": 1,
+      "actions_delta": -41,
+      "analyzer_tokens_delta": 42182,
+      "mean_AE_contribution": 0.23148148148148148,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 2.7777777777777777,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.0
+      },
+      "common_action_token_section": {
+        "cap": 109485,
+        "baseline": {
+          "cap_action_attached_tokens": 109485,
+          "levels_completed_at_cap": 0,
+          "AE_at_cap": 0,
+          "completed_level_boundaries": [],
+          "prefix_executed_actions": 102,
+          "prefix_attached_tokens": 105793,
+          "unused_cap_before_next_whole_action": 3692,
+          "raw_total_action_attached_tokens": 133531
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 109485,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 2.7777777777777777,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 61,
+              "attached_tokens": 91573,
+              "included_at_cap": true,
+              "wallclock_seconds": 2133.1456685390003
+            }
+          ],
+          "prefix_executed_actions": 71,
+          "prefix_attached_tokens": 109485,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 109485
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 71,
+        "capture_available": 71
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 3.9871348893618053
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "baseline": {
+        "game_id": "lf52-271a04aa",
+        "AE": 10.909090909090908,
+        "reported_AE": 10.909090909090908,
+        "uncapped_AE": 12.545454545454545,
+        "cap_adjustment": -1.6363636363636367,
+        "completion_ceiling": 10.909090909090908,
+        "efficiency_gap": 0.0,
+        "levels_completed": 3,
+        "number_of_levels": 10,
+        "state": "cancelled",
+        "actions": 179,
+        "actions_per_level": [
+          18,
+          74,
+          52,
+          35,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 210942,
+        "history_tokens": 199055,
+        "final_tokens": 0,
+        "recorded_tokens": 199055,
+        "unattached_tokens": 11887,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 18,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.01818181818181818,
+            "uncapped_game_contribution": 2.090909090909091
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 74,
+            "baseline_actions": 81,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.03636363636363636,
+            "uncapped_game_contribution": 4.181818181818182
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 52,
+            "baseline_actions": 60,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.05454545454545454,
+            "uncapped_game_contribution": 6.2727272727272725
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 35,
+            "baseline_actions": 71,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.07272727272727272,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 205,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.09090909090909091,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 148,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.10909090909090909,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 244,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.12727272727272726,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 109,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.14545454545454545,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 164,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.16363636363636364,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 10,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 225,
+            "level_AE": 0.0,
+            "weight": 10,
+            "weight_fraction": 0.18181818181818182,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.202628,
+          "last_action_benchmark_second": 3315.0545777810003,
+          "finish_benchmark_second": 3494.8342178949997,
+          "last_action_to_finish_seconds": 179.77964011399945,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 363.938021274
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1308.2296565119998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 2512.441831454
+            }
+          ],
+          "actions_on_completed_levels": 144,
+          "actions_on_uncompleted_levels": 35
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "lf52-271a04aa",
+        "AE": 1.8181818181818181,
+        "reported_AE": 1.8181818181818181,
+        "uncapped_AE": 2.090909090909091,
+        "cap_adjustment": -0.2727272727272727,
+        "completion_ceiling": 1.8181818181818181,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 10,
+        "state": "cancelled",
+        "actions": 204,
+        "actions_per_level": [
+          16,
+          188,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 133221,
+        "history_tokens": 133221,
+        "final_tokens": 0,
+        "recorded_tokens": 133221,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.01818181818181818,
+            "uncapped_game_contribution": 2.090909090909091
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 188,
+            "baseline_actions": 81,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.03636363636363636,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 60,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.05454545454545454,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 71,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.07272727272727272,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 205,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.09090909090909091,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 148,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.10909090909090909,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 244,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.12727272727272726,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 109,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.14545454545454545,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 164,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.16363636363636364,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 10,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 225,
+            "level_AE": 0.0,
+            "weight": 10,
+            "weight_fraction": 0.18181818181818182,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.21196,
+          "last_action_benchmark_second": 3449.5818593999998,
+          "finish_benchmark_second": 3482.1296457329995,
+          "last_action_to_finish_seconds": 32.54778633299975,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 211.15721146900015
+            }
+          ],
+          "actions_on_completed_levels": 16,
+          "actions_on_uncompleted_levels": 188
+        }
+      },
+      "AE_delta": -9.09090909090909,
+      "levels_delta": -2,
+      "actions_delta": 25,
+      "analyzer_tokens_delta": -77721,
+      "mean_AE_contribution": -0.7575757575757575,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -10.454545454545453,
+        "cap_adjustment_delta": 1.363636363636364
+      },
+      "common_action_token_section": {
+        "cap": 133221,
+        "baseline": {
+          "cap_action_attached_tokens": 133221,
+          "levels_completed_at_cap": 2,
+          "AE_at_cap": 5.454545454545454,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 18,
+              "attached_tokens": 23601,
+              "included_at_cap": true,
+              "wallclock_seconds": 363.735393274
+            },
+            {
+              "level": 2,
+              "action_num": 92,
+              "attached_tokens": 77198,
+              "included_at_cap": true,
+              "wallclock_seconds": 1308.0270285119998
+            },
+            {
+              "level": 3,
+              "action_num": 144,
+              "attached_tokens": 154467,
+              "included_at_cap": false,
+              "wallclock_seconds": 2512.239203454
+            }
+          ],
+          "prefix_executed_actions": 119,
+          "prefix_attached_tokens": 127539,
+          "unused_cap_before_next_whole_action": 5682,
+          "raw_total_action_attached_tokens": 199055
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 133221,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 1.8181818181818181,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 16,
+              "attached_tokens": 14241,
+              "included_at_cap": true,
+              "wallclock_seconds": 210.94525146900014
+            }
+          ],
+          "prefix_executed_actions": 204,
+          "prefix_attached_tokens": 133221,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 133221
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 204,
+        "capture_available": 204,
+        "query_calls": 9,
+        "hits": 3,
+        "nonlatest_hits": 3,
+        "misses": 1
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 5.066106422878793
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "baseline": {
+        "game_id": "su15-1944f8ab",
+        "AE": 13.333333333333334,
+        "reported_AE": 13.333333333333334,
+        "uncapped_AE": 15.333333333333332,
+        "cap_adjustment": -1.9999999999999982,
+        "completion_ceiling": 13.333333333333334,
+        "efficiency_gap": 0.0,
+        "levels_completed": 3,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 130,
+        "actions_per_level": [
+          13,
+          28,
+          20,
+          69,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 208063,
+        "history_tokens": 208063,
+        "final_tokens": 0,
+        "recorded_tokens": 208063,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 13,
+            "baseline_actions": 22,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 28,
+            "baseline_actions": 42,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 5.111111111111111
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 7.666666666666667
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 69,
+            "baseline_actions": 115,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 36,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 31,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 8,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 40,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 41,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.2161,
+          "last_action_benchmark_second": 3457.546721734,
+          "finish_benchmark_second": 3482.5673797710006,
+          "last_action_to_finish_seconds": 25.02065803700043,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 166.39114825100015
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1257.309466528
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1724.3207977310003
+            }
+          ],
+          "actions_on_completed_levels": 61,
+          "actions_on_uncompleted_levels": 69
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "su15-1944f8ab",
+        "AE": 22.22222222222222,
+        "reported_AE": 22.22222222222222,
+        "uncapped_AE": 24.31604938271605,
+        "cap_adjustment": -2.093827160493827,
+        "completion_ceiling": 22.22222222222222,
+        "efficiency_gap": 0.0,
+        "levels_completed": 4,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 323,
+        "actions_per_level": [
+          19,
+          45,
+          16,
+          13,
+          230,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 8,
+        "analyzer_tokens": 208206,
+        "history_tokens": 208206,
+        "final_tokens": 0,
+        "recorded_tokens": 208206,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 19,
+            "baseline_actions": 22,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 45,
+            "baseline_actions": 42,
+            "level_AE": 87.11111111111111,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 3.871604938271605
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 7.666666666666667
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 13,
+            "baseline_actions": 115,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 10.222222222222221
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 230,
+            "baseline_actions": 36,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 31,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 8,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 40,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 41,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.225409,
+          "last_action_benchmark_second": 3471.3462087390003,
+          "finish_benchmark_second": 3482.326974471,
+          "last_action_to_finish_seconds": 10.980765731999782,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 99.9896099430001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1391.3254382389998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1528.733542319
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1689.45050183
+            }
+          ],
+          "actions_on_completed_levels": 93,
+          "actions_on_uncompleted_levels": 230
+        }
+      },
+      "AE_delta": 8.888888888888888,
+      "levels_delta": 1,
+      "actions_delta": 193,
+      "analyzer_tokens_delta": 143,
+      "mean_AE_contribution": 0.7407407407407406,
+      "score_decomposition": {
+        "shared_completed_levels": -1.2395061728395058,
+        "new_completed_levels": 10.222222222222221,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -0.093827160493829
+      },
+      "common_action_token_section": {
+        "cap": 208063,
+        "baseline": {
+          "cap_action_attached_tokens": 208063,
+          "levels_completed_at_cap": 3,
+          "AE_at_cap": 13.333333333333334,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 13,
+              "attached_tokens": 10470,
+              "included_at_cap": true,
+              "wallclock_seconds": 166.17504825100013
+            },
+            {
+              "level": 2,
+              "action_num": 41,
+              "attached_tokens": 62184,
+              "included_at_cap": true,
+              "wallclock_seconds": 1257.093366528
+            },
+            {
+              "level": 3,
+              "action_num": 61,
+              "attached_tokens": 96186,
+              "included_at_cap": true,
+              "wallclock_seconds": 1724.1046977310002
+            }
+          ],
+          "prefix_executed_actions": 130,
+          "prefix_attached_tokens": 208063,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 208063
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 208063,
+          "levels_completed_at_cap": 4,
+          "AE_at_cap": 22.22222222222222,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 19,
+              "attached_tokens": 6570,
+              "included_at_cap": true,
+              "wallclock_seconds": 99.7642009430001
+            },
+            {
+              "level": 2,
+              "action_num": 64,
+              "attached_tokens": 88501,
+              "included_at_cap": true,
+              "wallclock_seconds": 1391.100029239
+            },
+            {
+              "level": 3,
+              "action_num": 80,
+              "attached_tokens": 96805,
+              "included_at_cap": true,
+              "wallclock_seconds": 1528.508133319
+            },
+            {
+              "level": 4,
+              "action_num": 93,
+              "attached_tokens": 106947,
+              "included_at_cap": true,
+              "wallclock_seconds": 1689.22509283
+            }
+          ],
+          "prefix_executed_actions": 321,
+          "prefix_attached_tokens": 202718,
+          "unused_cap_before_next_whole_action": 5345,
+          "raw_total_action_attached_tokens": 208206
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 323,
+        "capture_available": 323
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 3.4315793338062504
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "baseline": {
+        "game_id": "wa30-ee6fef47",
+        "AE": 11.535043134589836,
+        "reported_AE": 11.535043134589836,
+        "uncapped_AE": 11.535043134589836,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 13.333333333333334,
+        "efficiency_gap": 1.7982901987434978,
+        "levels_completed": 3,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 586,
+        "actions_per_level": [
+          74,
+          138,
+          190,
+          184,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 3,
+        "analyzer_tokens": 182435,
+        "history_tokens": 182435,
+        "final_tokens": 0,
+        "recorded_tokens": 182435,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 74,
+            "baseline_actions": 71,
+            "level_AE": 92.0562454346238,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.04569434299164
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 138,
+            "baseline_actions": 119,
+            "level_AE": 74.35937828187356,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 3.304861256972158
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 190,
+            "baseline_actions": 183,
+            "level_AE": 92.76731301939058,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 6.184487534626038
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 184,
+            "baseline_actions": 98,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 368,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 68,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 79,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 442,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 415,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.226861,
+          "last_action_benchmark_second": 3481.1478537529997,
+          "finish_benchmark_second": 3497.820007238,
+          "last_action_to_finish_seconds": 16.672153485000308,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 601.2725553599997
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1612.338085801
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 2450.187748917
+            }
+          ],
+          "actions_on_completed_levels": 402,
+          "actions_on_uncompleted_levels": 184
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "wa30-ee6fef47",
+        "AE": 2.2222222222222223,
+        "reported_AE": 2.2222222222222223,
+        "uncapped_AE": 2.5555555555555554,
+        "cap_adjustment": -0.33333333333333304,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 243,
+        "actions_per_level": [
+          30,
+          213,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 3,
+        "analyzer_tokens": 147186,
+        "history_tokens": 128417,
+        "final_tokens": 0,
+        "recorded_tokens": 128417,
+        "unattached_tokens": 18769,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 30,
+            "baseline_actions": 71,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 213,
+            "baseline_actions": 119,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 183,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 98,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 368,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 68,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 79,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 442,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 415,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.236912,
+          "last_action_benchmark_second": 2555.2115853259997,
+          "finish_benchmark_second": 3558.378848519999,
+          "last_action_to_finish_seconds": 1003.1672631939991,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 248.27757131500007
+            }
+          ],
+          "actions_on_completed_levels": 30,
+          "actions_on_uncompleted_levels": 213
+        }
+      },
+      "AE_delta": -9.312820912367613,
+      "levels_delta": -2,
+      "actions_delta": -343,
+      "analyzer_tokens_delta": -35249,
+      "mean_AE_contribution": -0.7760684093639677,
+      "score_decomposition": {
+        "shared_completed_levels": 0.5098612125639153,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -9.489348791598196,
+        "cap_adjustment_delta": -0.33333333333333304
+      },
+      "common_action_token_section": {
+        "cap": 128417,
+        "baseline": {
+          "cap_action_attached_tokens": 128417,
+          "levels_completed_at_cap": 2,
+          "AE_at_cap": 5.350555599963798,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 74,
+              "attached_tokens": 40382,
+              "included_at_cap": true,
+              "wallclock_seconds": 601.0456943599997
+            },
+            {
+              "level": 2,
+              "action_num": 212,
+              "attached_tokens": 99710,
+              "included_at_cap": true,
+              "wallclock_seconds": 1612.111224801
+            },
+            {
+              "level": 3,
+              "action_num": 402,
+              "attached_tokens": 137797,
+              "included_at_cap": false,
+              "wallclock_seconds": 2449.960887917
+            }
+          ],
+          "prefix_executed_actions": 310,
+          "prefix_attached_tokens": 127789,
+          "unused_cap_before_next_whole_action": 628,
+          "raw_total_action_attached_tokens": 182435
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 128417,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 2.2222222222222223,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 30,
+              "attached_tokens": 16426,
+              "included_at_cap": true,
+              "wallclock_seconds": 248.04065931500008
+            }
+          ],
+          "prefix_executed_actions": 243,
+          "prefix_attached_tokens": 128417,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 128417
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 243,
+        "capture_available": 243
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 5.086280224829569
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "baseline": {
+        "game_id": "g50t-5849a774",
+        "AE": 10.431260658533386,
+        "reported_AE": 10.431260658533386,
+        "uncapped_AE": 10.431260658533386,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 10.714285714285714,
+        "efficiency_gap": 0.2830250557523275,
+        "levels_completed": 2,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 132,
+        "actions_per_level": [
+          99,
+          33,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 177316,
+        "history_tokens": 174550,
+        "final_tokens": 0,
+        "recorded_tokens": 174550,
+        "unattached_tokens": 2766,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 99,
+            "baseline_actions": 78,
+            "level_AE": 62.0752984389348,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 2.2169749442476716
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 33,
+            "baseline_actions": 175,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 8.214285714285714
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 179,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 230,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 54,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 67,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.260761,
+          "last_action_benchmark_second": 3417.7371960800006,
+          "finish_benchmark_second": 3482.58104152,
+          "last_action_to_finish_seconds": 64.84384543999931,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 2905.356752948
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 3417.7371960800006
+            }
+          ],
+          "actions_on_completed_levels": 132,
+          "actions_on_uncompleted_levels": 0
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "g50t-5849a774",
+        "AE": 0.7698615160349854,
+        "reported_AE": 0.7698615160349854,
+        "uncapped_AE": 0.7698615160349854,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 3.571428571428571,
+        "efficiency_gap": 2.8015670553935856,
+        "levels_completed": 1,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 184,
+        "actions_per_level": [
+          168,
+          16,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 153681,
+        "history_tokens": 153681,
+        "final_tokens": 0,
+        "recorded_tokens": 153681,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 168,
+            "baseline_actions": 78,
+            "level_AE": 21.556122448979593,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 0.7698615160349854
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 16,
+            "baseline_actions": 175,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 179,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 230,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 54,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 67,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.275138,
+          "last_action_benchmark_second": 3462.9962701839995,
+          "finish_benchmark_second": 3482.1083972449997,
+          "last_action_to_finish_seconds": 19.112127061000137,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 3103.024888219001
+            }
+          ],
+          "actions_on_completed_levels": 168,
+          "actions_on_uncompleted_levels": 16
+        }
+      },
+      "AE_delta": -9.6613991424984,
+      "levels_delta": -1,
+      "actions_delta": 52,
+      "analyzer_tokens_delta": -23635,
+      "mean_AE_contribution": -0.8051165952082,
+      "score_decomposition": {
+        "shared_completed_levels": -1.447113428212686,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -8.214285714285714,
+        "cap_adjustment_delta": 0.0
+      },
+      "common_action_token_section": {
+        "cap": 153681,
+        "baseline": {
+          "cap_action_attached_tokens": 153681,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 2.2169749442476716,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 99,
+              "attached_tokens": 140005,
+              "included_at_cap": true,
+              "wallclock_seconds": 2905.095991948
+            },
+            {
+              "level": 2,
+              "action_num": 132,
+              "attached_tokens": 174550,
+              "included_at_cap": false,
+              "wallclock_seconds": 3417.4764350800006
+            }
+          ],
+          "prefix_executed_actions": 101,
+          "prefix_attached_tokens": 149110,
+          "unused_cap_before_next_whole_action": 4571,
+          "raw_total_action_attached_tokens": 174550
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 153681,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 0.7698615160349854,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 168,
+              "attached_tokens": 131315,
+              "included_at_cap": true,
+              "wallclock_seconds": 3102.749750219001
+            }
+          ],
+          "prefix_executed_actions": 184,
+          "prefix_attached_tokens": 153681,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 153681
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 184,
+        "capture_available": 184
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 5.117969154841458
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "baseline": {
+        "game_id": "m0r0-492f87ba",
+        "AE": 0.5063462057790981,
+        "reported_AE": 0.5063462057790981,
+        "uncapped_AE": 0.5063462057790981,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 4.761904761904762,
+        "efficiency_gap": 4.2555585561256635,
+        "levels_completed": 1,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 120,
+        "actions_per_level": [
+          92,
+          28,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 159380,
+        "history_tokens": 154542,
+        "final_tokens": 0,
+        "recorded_tokens": 154542,
+        "unattached_tokens": 4838,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 92,
+            "baseline_actions": 30,
+            "level_AE": 10.633270321361058,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 0.5063462057790981
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 28,
+            "baseline_actions": 111,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 203,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 500,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 237,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.269589,
+          "last_action_benchmark_second": 3410.0753812120006,
+          "finish_benchmark_second": 3487.1198111080007,
+          "last_action_to_finish_seconds": 77.04442989600011,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 2724.064438191
+            }
+          ],
+          "actions_on_completed_levels": 92,
+          "actions_on_uncompleted_levels": 28
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "m0r0-492f87ba",
+        "AE": 71.42857142857143,
+        "reported_AE": 71.42857142857143,
+        "uncapped_AE": 82.14285714285714,
+        "cap_adjustment": -10.714285714285708,
+        "completion_ceiling": 71.42857142857143,
+        "efficiency_gap": 0.0,
+        "levels_completed": 5,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 245,
+        "actions_per_level": [
+          26,
+          35,
+          106,
+          21,
+          46,
+          11
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 212513,
+        "history_tokens": 210457,
+        "final_tokens": 0,
+        "recorded_tokens": 210457,
+        "unattached_tokens": 2056,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 26,
+            "baseline_actions": 30,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 35,
+            "baseline_actions": 111,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 106,
+            "baseline_actions": 203,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 21,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 46,
+            "baseline_actions": 500,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 11,
+            "baseline_actions": 237,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.289733,
+          "last_action_benchmark_second": 3422.1106047160006,
+          "finish_benchmark_second": 3482.1189117749996,
+          "last_action_to_finish_seconds": 60.00830705899898,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 638.2319336889999
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1034.3494817080004
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 2424.1426616890008
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 2820.8982581290006
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 3141.0237302929995
+            }
+          ],
+          "actions_on_completed_levels": 234,
+          "actions_on_uncompleted_levels": 11
+        }
+      },
+      "AE_delta": 70.92222522279233,
+      "levels_delta": 4,
+      "actions_delta": 125,
+      "analyzer_tokens_delta": 53133,
+      "mean_AE_contribution": 5.910185435232695,
+      "score_decomposition": {
+        "shared_completed_levels": 4.969844270411378,
+        "new_completed_levels": 76.66666666666666,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -10.714285714285708
+      },
+      "common_action_token_section": {
+        "cap": 154542,
+        "baseline": {
+          "cap_action_attached_tokens": 154542,
+          "levels_completed_at_cap": 1,
+          "AE_at_cap": 0.5063462057790981,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 92,
+              "attached_tokens": 109687,
+              "included_at_cap": true,
+              "wallclock_seconds": 2723.794849191
+            }
+          ],
+          "prefix_executed_actions": 120,
+          "prefix_attached_tokens": 154542,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 154542
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 154542,
+          "levels_completed_at_cap": 3,
+          "AE_at_cap": 28.57142857142857,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 26,
+              "attached_tokens": 43945,
+              "included_at_cap": true,
+              "wallclock_seconds": 637.942200689
+            },
+            {
+              "level": 2,
+              "action_num": 61,
+              "attached_tokens": 68742,
+              "included_at_cap": true,
+              "wallclock_seconds": 1034.0597487080004
+            },
+            {
+              "level": 3,
+              "action_num": 167,
+              "attached_tokens": 152958,
+              "included_at_cap": true,
+              "wallclock_seconds": 2423.8529286890007
+            },
+            {
+              "level": 4,
+              "action_num": 188,
+              "attached_tokens": 174326,
+              "included_at_cap": false,
+              "wallclock_seconds": 2820.6085251290006
+            },
+            {
+              "level": 5,
+              "action_num": 234,
+              "attached_tokens": 193654,
+              "included_at_cap": false,
+              "wallclock_seconds": 3140.7339972929994
+            }
+          ],
+          "prefix_executed_actions": 167,
+          "prefix_attached_tokens": 152958,
+          "unused_cap_before_next_whole_action": 1584,
+          "raw_total_action_attached_tokens": 210457
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 245,
+        "capture_available": 245
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": -2.2078148783667904
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "baseline": {
+        "game_id": "ft09-0d8bbf25",
+        "AE": 95.00194245384132,
+        "reported_AE": 95.00194245384131,
+        "uncapped_AE": 95.00194245384132,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 4.998057546158677,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "state": "won",
+        "actions": 161,
+        "actions_per_level": [
+          4,
+          8,
+          16,
+          19,
+          68,
+          46
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 188356,
+        "history_tokens": 188356,
+        "final_tokens": 0,
+        "recorded_tokens": 188356,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 4,
+            "baseline_actions": 43,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 8,
+            "baseline_actions": 12,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 23,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 19,
+            "baseline_actions": 28,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 68,
+            "baseline_actions": 65,
+            "level_AE": 91.37110726643598,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 21.755025539627614
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 46,
+            "baseline_actions": 37,
+            "level_AE": 64.69754253308129,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 18.48501215230894
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.279517,
+          "last_action_benchmark_second": 3259.0563471309997,
+          "finish_benchmark_second": 3260.0078300099995,
+          "last_action_to_finish_seconds": 0.9514828789997409,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 72.86701774799991
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 216.398398933
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 332.28462766900003
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 582.5395656319998
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 2533.7628694180003
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 3259.0563471309997
+            }
+          ],
+          "actions_on_completed_levels": 161,
+          "actions_on_uncompleted_levels": 0
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "ft09-0d8bbf25",
+        "AE": 39.71338133500296,
+        "reported_AE": 39.71338133500296,
+        "uncapped_AE": 39.71338133500296,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 47.61904761904761,
+        "efficiency_gap": 7.905666284044656,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 151,
+        "actions_per_level": [
+          4,
+          7,
+          74,
+          24,
+          42,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 171127,
+        "history_tokens": 115656,
+        "final_tokens": 0,
+        "recorded_tokens": 115656,
+        "unattached_tokens": 55471,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 4,
+            "baseline_actions": 43,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 12,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 74,
+            "baseline_actions": 23,
+            "level_AE": 9.660336011687361,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 1.380048001669623
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 24,
+            "baseline_actions": 28,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 42,
+            "baseline_actions": 65,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 37,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.301043,
+          "last_action_benchmark_second": 2580.7836503509993,
+          "finish_benchmark_second": 3482.0888493750003,
+          "last_action_to_finish_seconds": 901.305199024001,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 903.6400067539995
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 951.6015467659996
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1542.6962296829993
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1629.2964863369994
+            }
+          ],
+          "actions_on_completed_levels": 109,
+          "actions_on_uncompleted_levels": 42
+        }
+      },
+      "AE_delta": -55.288561118838366,
+      "levels_delta": -2,
+      "actions_delta": -10,
+      "analyzer_tokens_delta": -17229,
+      "mean_AE_contribution": -4.6073800932365305,
+      "score_decomposition": {
+        "shared_completed_levels": -15.048523426901804,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -40.24003769193655,
+        "cap_adjustment_delta": 0.0
+      },
+      "common_action_token_section": {
+        "cap": 115656,
+        "baseline": {
+          "cap_action_attached_tokens": 115656,
+          "levels_completed_at_cap": 4,
+          "AE_at_cap": 47.61904761904762,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 4,
+              "attached_tokens": 4344,
+              "included_at_cap": true,
+              "wallclock_seconds": 72.58750074799991
+            },
+            {
+              "level": 2,
+              "action_num": 12,
+              "attached_tokens": 13620,
+              "included_at_cap": true,
+              "wallclock_seconds": 216.118881933
+            },
+            {
+              "level": 3,
+              "action_num": 28,
+              "attached_tokens": 21762,
+              "included_at_cap": true,
+              "wallclock_seconds": 332.00511066900003
+            },
+            {
+              "level": 4,
+              "action_num": 47,
+              "attached_tokens": 39195,
+              "included_at_cap": true,
+              "wallclock_seconds": 582.2600486319998
+            },
+            {
+              "level": 5,
+              "action_num": 115,
+              "attached_tokens": 141454,
+              "included_at_cap": false,
+              "wallclock_seconds": 2533.4833524180003
+            },
+            {
+              "level": 6,
+              "action_num": 161,
+              "attached_tokens": 188356,
+              "included_at_cap": false,
+              "wallclock_seconds": 3258.7768301309998
+            }
+          ],
+          "prefix_executed_actions": 84,
+          "prefix_attached_tokens": 109427,
+          "unused_cap_before_next_whole_action": 6229,
+          "raw_total_action_attached_tokens": 188356
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 115656,
+          "levels_completed_at_cap": 4,
+          "AE_at_cap": 39.71338133500296,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 4,
+              "attached_tokens": 7957,
+              "included_at_cap": true,
+              "wallclock_seconds": 903.3389637539995
+            },
+            {
+              "level": 2,
+              "action_num": 11,
+              "attached_tokens": 11453,
+              "included_at_cap": true,
+              "wallclock_seconds": 951.3005037659996
+            },
+            {
+              "level": 3,
+              "action_num": 85,
+              "attached_tokens": 49873,
+              "included_at_cap": true,
+              "wallclock_seconds": 1542.3951866829993
+            },
+            {
+              "level": 4,
+              "action_num": 109,
+              "attached_tokens": 55348,
+              "included_at_cap": true,
+              "wallclock_seconds": 1628.9954433369994
+            }
+          ],
+          "prefix_executed_actions": 151,
+          "prefix_attached_tokens": 115656,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 115656
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 151,
+        "capture_available": 151
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 9.265892970872365
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "baseline": {
+        "game_id": "ar25-0c556536",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 115.00000000000001,
+        "cap_adjustment": -15.000000000000014,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 8,
+        "number_of_levels": 8,
+        "state": "won",
+        "actions": 310,
+        "actions_per_level": [
+          17,
+          31,
+          50,
+          22,
+          30,
+          64,
+          46,
+          50
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 100539,
+        "history_tokens": 100539,
+        "final_tokens": 0,
+        "recorded_tokens": 100539,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 17,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 31,
+            "baseline_actions": 50,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 50,
+            "baseline_actions": 75,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 22,
+            "baseline_actions": 37,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 30,
+            "baseline_actions": 89,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 15.972222222222221
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 64,
+            "baseline_actions": 159,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 19.166666666666668
+          },
+          {
+            "level": 7,
+            "completed": true,
+            "actions": 46,
+            "baseline_actions": 233,
+            "level_AE": 115.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 22.36111111111111
+          },
+          {
+            "level": 8,
+            "completed": true,
+            "actions": 50,
+            "baseline_actions": 73,
+            "level_AE": 115.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 25.555555555555557
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.290975,
+          "last_action_benchmark_second": 2741.2091626609995,
+          "finish_benchmark_second": 2743.510748209,
+          "last_action_to_finish_seconds": 2.3015855480007303,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 1036.7546174989998
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1487.8055781849998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1716.7231852099999
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1852.3599511989996
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 2068.0855968409996
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 2362.435344301
+            },
+            {
+              "level": 7,
+              "at_benchmark_second": 2593.4934333059996
+            },
+            {
+              "level": 8,
+              "at_benchmark_second": 2741.2091626609995
+            }
+          ],
+          "actions_on_completed_levels": 310,
+          "actions_on_uncompleted_levels": 0
+        }
+      },
+      "retrievable_animation": {
+        "game_id": "ar25-0c556536",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 115.00000000000001,
+        "cap_adjustment": -15.000000000000014,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 8,
+        "number_of_levels": 8,
+        "state": "won",
+        "actions": 287,
+        "actions_per_level": [
+          18,
+          20,
+          45,
+          25,
+          31,
+          60,
+          37,
+          51
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 132174,
+        "history_tokens": 132174,
+        "final_tokens": 0,
+        "recorded_tokens": 132174,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 18,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 50,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 45,
+            "baseline_actions": 75,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 25,
+            "baseline_actions": 37,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 31,
+            "baseline_actions": 89,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 15.972222222222221
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 60,
+            "baseline_actions": 159,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 19.166666666666668
+          },
+          {
+            "level": 7,
+            "completed": true,
+            "actions": 37,
+            "baseline_actions": 233,
+            "level_AE": 115.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 22.36111111111111
+          },
+          {
+            "level": 8,
+            "completed": true,
+            "actions": 51,
+            "baseline_actions": 73,
+            "level_AE": 115.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 25.555555555555557
+          }
+        ],
+        "timing": {
+          "start_benchmark_second": 0.312535,
+          "last_action_benchmark_second": 3075.9760920279996,
+          "finish_benchmark_second": 3076.9593150559995,
+          "last_action_to_finish_seconds": 0.9832230279998839,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 972.7878575209998
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1242.2314923499998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1585.7905949529995
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1904.031441309
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 2131.5545938469995
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 2459.8089006239998
+            },
+            {
+              "level": 7,
+              "at_benchmark_second": 2796.566185584
+            },
+            {
+              "level": 8,
+              "at_benchmark_second": 3075.9760920279996
+            }
+          ],
+          "actions_on_completed_levels": 287,
+          "actions_on_uncompleted_levels": 0
+        }
+      },
+      "AE_delta": 0.0,
+      "levels_delta": 0,
+      "actions_delta": -23,
+      "analyzer_tokens_delta": 31635,
+      "mean_AE_contribution": 0.0,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.0
+      },
+      "common_action_token_section": {
+        "cap": 100539,
+        "baseline": {
+          "cap_action_attached_tokens": 100539,
+          "levels_completed_at_cap": 8,
+          "AE_at_cap": 100.0,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 17,
+              "attached_tokens": 4705,
+              "included_at_cap": true,
+              "wallclock_seconds": 1036.463642499
+            },
+            {
+              "level": 2,
+              "action_num": 48,
+              "attached_tokens": 32500,
+              "included_at_cap": true,
+              "wallclock_seconds": 1487.514603185
+            },
+            {
+              "level": 3,
+              "action_num": 98,
+              "attached_tokens": 47438,
+              "included_at_cap": true,
+              "wallclock_seconds": 1716.43221021
+            },
+            {
+              "level": 4,
+              "action_num": 120,
+              "attached_tokens": 54926,
+              "included_at_cap": true,
+              "wallclock_seconds": 1852.0689761989997
+            },
+            {
+              "level": 5,
+              "action_num": 150,
+              "attached_tokens": 67921,
+              "included_at_cap": true,
+              "wallclock_seconds": 2067.7946218409998
+            },
+            {
+              "level": 6,
+              "action_num": 214,
+              "attached_tokens": 83571,
+              "included_at_cap": true,
+              "wallclock_seconds": 2362.144369301
+            },
+            {
+              "level": 7,
+              "action_num": 260,
+              "attached_tokens": 94455,
+              "included_at_cap": true,
+              "wallclock_seconds": 2593.2024583059997
+            },
+            {
+              "level": 8,
+              "action_num": 310,
+              "attached_tokens": 100539,
+              "included_at_cap": true,
+              "wallclock_seconds": 2740.9181876609996
+            }
+          ],
+          "prefix_executed_actions": 310,
+          "prefix_attached_tokens": 100539,
+          "unused_cap_before_next_whole_action": 0,
+          "raw_total_action_attached_tokens": 100539
+        },
+        "retrievable_animation": {
+          "cap_action_attached_tokens": 100539,
+          "levels_completed_at_cap": 6,
+          "AE_at_cap": 58.33333333333333,
+          "completed_level_boundaries": [
+            {
+              "level": 1,
+              "action_num": 18,
+              "attached_tokens": 7393,
+              "included_at_cap": true,
+              "wallclock_seconds": 972.4753225209997
+            },
+            {
+              "level": 2,
+              "action_num": 38,
+              "attached_tokens": 23507,
+              "included_at_cap": true,
+              "wallclock_seconds": 1241.9189573499998
+            },
+            {
+              "level": 3,
+              "action_num": 83,
+              "attached_tokens": 44043,
+              "included_at_cap": true,
+              "wallclock_seconds": 1585.4780599529995
+            },
+            {
+              "level": 4,
+              "action_num": 108,
+              "attached_tokens": 64648,
+              "included_at_cap": true,
+              "wallclock_seconds": 1903.718906309
+            },
+            {
+              "level": 5,
+              "action_num": 139,
+              "attached_tokens": 79194,
+              "included_at_cap": true,
+              "wallclock_seconds": 2131.2420588469995
+            },
+            {
+              "level": 6,
+              "action_num": 199,
+              "attached_tokens": 99170,
+              "included_at_cap": true,
+              "wallclock_seconds": 2459.4963656239997
+            },
+            {
+              "level": 7,
+              "action_num": 236,
+              "attached_tokens": 117893,
+              "included_at_cap": false,
+              "wallclock_seconds": 2796.253650584
+            },
+            {
+              "level": 8,
+              "action_num": 287,
+              "attached_tokens": 132174,
+              "included_at_cap": false,
+              "wallclock_seconds": 3075.6635570279996
+            }
+          ],
+          "prefix_executed_actions": 199,
+          "prefix_attached_tokens": 99170,
+          "unused_cap_before_next_whole_action": 1369,
+          "raw_total_action_attached_tokens": 132174
+        }
+      },
+      "archive_counts": {
+        "capture_calls": 287,
+        "capture_available": 287
+      },
+      "capture_actions_match_benchmark": true,
+      "leave_one_out_mean_delta": 4.239660141887058
+    }
+  ],
+  "post_hoc_query_groups": {
+    "queried_games": {
+      "games": [
+        "tn36-ef4dde99",
+        "sp80-589a99af",
+        "bp35-0a0ad940",
+        "lf52-271a04aa"
+      ],
+      "mean_AE_contribution": 2.267556517556518,
+      "levels_delta": 2
+    },
+    "zero_query_games": {
+      "games": [
+        "sc25-635fd71a",
+        "sk48-d8078629",
+        "su15-1944f8ab",
+        "wa30-ee6fef47",
+        "g50t-5849a774",
+        "m0r0-492f87ba",
+        "ft09-0d8bbf25",
+        "ar25-0c556536"
+      ],
+      "mean_AE_contribution": 1.6187986125066187,
+      "levels_delta": 1
+    }
+  },
+  "score_decomposition": {
+    "shared_completed_levels": -0.08383175896740609,
+    "new_completed_levels": 10.468639745773062,
+    "lost_completed_levels": -5.699851471030493,
+    "cap_adjustment_delta": -0.7986013857120282
+  },
+  "comparability": {
+    "equal_metadata_fields": {
+      "game_ids": true,
+      "requested_game_ids": true,
+      "game_order_sha256": true,
+      "operation_mode": true,
+      "budget_seconds": true,
+      "normalized_budget_seconds": true,
+      "active_streams": true,
+      "concurrency": true,
+      "n_passes": true,
+      "warmup_action_games": true,
+      "analyzer_timeout_seconds": true,
+      "environment": true
+    },
+    "game_order_hash_recomputed": "da21612abe54f9d3401bcf77463bab7d0950171211bc6419432b365f8a64d7c8",
+    "game_order_hash_matches_metadata": true,
+    "both_raw_game_orders_equal_fixed_plan": true,
+    "same_exact_ids_and_order_as_006": true,
+    "all_game_weights_null": true,
+    "common_source_hashes_equal": {
+      "tool_agent.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "benchmark_initial.pkl": true
+    },
+    "candidate_extra_source_keys": [
+      "retrievable_animation.py"
+    ],
+    "candidate_module_matches_frozen_and_launch": true,
+    "manifest_matches_frozen_sources": {
+      "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": true,
+      "scripts/build_experiment.py": true,
+      "src/arc3_research/__init__.py": true,
+      "src/arc3_research/goal_evidence.py": true,
+      "src/arc3_research/input_paths.py": true,
+      "src/arc3_research/observation_representation.py": true,
+      "src/arc3_research/program_state.py": true,
+      "src/arc3_research/retrievable_animation.py": true,
+      "src/arc3_research/run_arm.py": true,
+      "src/arc3_research/session_runner.py": true,
+      "src/arc3_research/submission_inputs.py": true,
+      "src/arc3_research/transient_history.py": true,
+      "scripts/summarize_experiment.py": true,
+      "experiments/010-retrievable-animation.json": true
+    },
+    "frozen_archive_file_hashes_match": {
+      "build-manifest.json": true,
+      "experiment.ipynb": true,
+      "experiments/010-notebook-checks.json": true,
+      "experiments/010-retrievable-animation.json": true,
+      "kernel-metadata.json": true,
+      "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": true,
+      "scripts/build_experiment.py": true,
+      "scripts/check_010_animation_integration.py": true,
+      "scripts/check_010_notebook.py": true,
+      "scripts/summarize_experiment.py": true,
+      "src/arc3_research/__init__.py": true,
+      "src/arc3_research/goal_evidence.py": true,
+      "src/arc3_research/input_paths.py": true,
+      "src/arc3_research/observation_representation.py": true,
+      "src/arc3_research/program_state.py": true,
+      "src/arc3_research/retrievable_animation.py": true,
+      "src/arc3_research/run_arm.py": true,
+      "src/arc3_research/session_runner.py": true,
+      "src/arc3_research/submission_inputs.py": true,
+      "src/arc3_research/transient_history.py": true
+    },
+    "benchmark_initial_pickle_hash_equal_only": true,
+    "distinct_cpu_pids": true,
+    "arm_order": [
+      "baseline",
+      "retrievable_animation"
+    ],
+    "cache_flush_http_status": [
+      200,
+      200
+    ],
+    "cache_flush_success_log_count": 2
+  },
+  "sensitivity": {
+    "leave_one_out_min": -2.2078148783667904,
+    "leave_one_out_max": 9.265892970872365,
+    "without_m0r0_mean_delta": -2.2078148783667904,
+    "without_ft09_mean_delta": 9.265892970872365
+  },
+  "session": {
+    "status": "completed",
+    "elapsed_seconds": 7655.902597427368,
+    "model_ready_seconds": 581.6635737419128,
+    "gpu_server_stopped": true
+  },
+  "notes": [
+    "每臂只有一次运行；固定baseline先、候选后、共享10活跃流调度。相同墙钟不保证逐游戏tokens、prefill或GPU计算机会相同，无显著性或因果结论。",
+    "所有24个game-run分数由逐关原始动作数独立重算，与final_score逐项误差<1e-9。游戏等权，每个游戏贡献为ΔAE/12。",
+    "两臂requested budget均3482秒，截止后动作和关卡均为0。候选较长收尾不增加游戏动作预算，但尾部生成tokens仍应保留。",
+    "analyzer tokens来自solver_note的完整tokens=格式；history+final为动作/收尾记账，未归属差额不是再加一次的tokens。input tokens记录不足，不能据此比较完整推理成本。",
+    "零query游戏也接收新API说明且参与共享调度。query分组由实际轨迹形成，只是事后记账，不是有/无检索的随机对照。",
+    "最大加分m0r0无archive查询，最大回退ft09也无查询；不能把总增益都归因检索，也不能从零查询直接认定没有间接影响。",
+    "删去单游戏后的均值只展示集中度，不替代完整12游戏结果；已知诊断池不是未见holdout，也不是正式排行榜分数。",
+    "原始benchmark_initial.pkl仅核对两臂运行时记录的同一hash；没有反序列化或声称核验未下载的blob。"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "label": "legacy-animation-disabled",
+  "code": "try:\n    last_animation_frames\n    frames_present=True\nexcept NameError:\n    frames_present=False\ntry:\n    last_animation_timeline\n    timeline_present=True\nexcept NameError:\n    timeline_present=False\ntry:\n    animation_refs\n    archive_present=True\nexcept NameError:\n    archive_present=False\narchive_status=None\nimport json\nprint('RESULT='+json.dumps({'latest_frames':frames_present,'latest_timeline':timeline_present,'archive':archive_present,'archive_status':archive_status},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"latest_frames\":false,\"latest_timeline\":false,\"archive\":false,\"archive_status\":null}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "step_before": 5,
+  "step_after": 5,
+  "elapsed_seconds": 0.029287458994076587,
+  "output_chars": 159
+}

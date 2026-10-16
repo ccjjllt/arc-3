@@ -1,0 +1,15 @@
+{
+  "label": "helper_visibility",
+  "code": "try:\n    animation_refs\n    available=True\nexcept NameError:\n    available=False\nimport json\nprint('RESULT='+json.dumps(available,separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT=true\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "step_before": 0,
+  "step_after": 0,
+  "elapsed_seconds": 0.02895737500512041,
+  "output_chars": 70
+}

@@ -1,0 +1,15 @@
+{
+  "label": "single-frame",
+  "code": "a=animation_at({'game_id': 'tn36-ef4dde99', 'session_id': '1c51c9d601094ac589b7a4e1647f269a', 'attempt': 0, 'action_num': 5})\nimport json\nprint('RESULT='+json.dumps({'status':a['status'],'count':len(a['frames'])},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"status\":\"hit\",\"count\":1}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "step_before": 5,
+  "step_after": 5,
+  "elapsed_seconds": 0.03039383400027873,
+  "output_chars": 98
+}

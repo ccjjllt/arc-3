@@ -1,0 +1,15 @@
+{
+  "label": "legacy-animation-disabled",
+  "code": "try:\n    last_animation_frames\n    frames_present=True\nexcept NameError:\n    frames_present=False\ntry:\n    last_animation_timeline\n    timeline_present=True\nexcept NameError:\n    timeline_present=False\ntry:\n    animation_refs\n    archive_present=True\nexcept NameError:\n    archive_present=False\narchive_status=None\narchive_status=animation_at({'game_id': 'tn36-ef4dde99', 'session_id': 'ccb1235a86694d0cbc019e74eea57973', 'attempt': 0, 'action_num': 2})[\"status\"]\nimport json\nprint('RESULT='+json.dumps({'latest_frames':frames_present,'latest_timeline':timeline_present,'archive':archive_present,'archive_status':archive_status},separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT={\"latest_frames\":false,\"latest_timeline\":false,\"archive\":true,\"archive_status\":\"hit\"}\n"
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "step_before": 6,
+  "step_after": 6,
+  "elapsed_seconds": 0.0351955000005546,
+  "output_chars": 161
+}
