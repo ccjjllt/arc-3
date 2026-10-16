@@ -1,0 +1,2149 @@
+{
+  "created_at_utc": "2026-10-13T05:07:33.875073+00:00",
+  "status": "pass",
+  "module_sha256": "5ff98e60341015277b84cf88dbe4d54abe842e03834b6fd4f6080c3721db00f8",
+  "python": "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+  "python_version": "3.13.14 (main, Jul 23 2026, 14:48:16) [Clang 22.1.3 ]",
+  "checks": [
+    {
+      "name": "usage_None",
+      "passed": true
+    },
+    {
+      "name": "usage_{}",
+      "passed": true
+    },
+    {
+      "name": "usage_{'completion_tokens': 0}",
+      "passed": true
+    },
+    {
+      "name": "usage_{'completion_tokens': '13'}",
+      "passed": true
+    },
+    {
+      "name": "usage_{'output_tokens': 9}",
+      "passed": true
+    },
+    {
+      "name": "usage_{'completion_tokens': 'bad', 'generated_tokens': 2}",
+      "passed": true
+    },
+    {
+      "name": "usage_{'completion_tokens': -2}",
+      "passed": true
+    },
+    {
+      "name": "control_stream_original_consumes_once",
+      "passed": true
+    },
+    {
+      "name": "requests_global_post_not_patched",
+      "passed": true
+    },
+    {
+      "name": "proxy_preserves_exception_types",
+      "passed": true
+    },
+    {
+      "name": "logical_and_play_return_identity",
+      "passed": true
+    },
+    {
+      "name": "payload_timeout_stream_unchanged",
+      "passed": true
+    },
+    {
+      "name": "nonstream_original_body_read_once",
+      "passed": true
+    },
+    {
+      "name": "stream_payload_unchanged",
+      "passed": true
+    },
+    {
+      "name": "stream_consumed_only_by_original",
+      "passed": true
+    },
+    {
+      "name": "original_retry_count_two",
+      "passed": true
+    },
+    {
+      "name": "original_exception_identity",
+      "passed": true
+    },
+    {
+      "name": "clock_failure_return_identity",
+      "passed": true
+    },
+    {
+      "name": "clock_failure_original_exception_identity",
+      "passed": true
+    },
+    {
+      "name": "real_gate_handover_order",
+      "passed": true,
+      "observed": [
+        "A",
+        "B",
+        "A-after"
+      ],
+      "errors": []
+    },
+    {
+      "name": "real_gate_final_state_unchanged",
+      "passed": true
+    },
+    {
+      "name": "gate_wait_positive",
+      "passed": true
+    },
+    {
+      "name": "handover_credit_and_readmission",
+      "passed": true
+    },
+    {
+      "name": "first_http_delay_uses_session_start",
+      "passed": true
+    },
+    {
+      "name": "usage_from_original_return",
+      "passed": true
+    },
+    {
+      "name": "retry_logical_vs_http_distinct",
+      "passed": true
+    },
+    {
+      "name": "session_cap",
+      "passed": true
+    },
+    {
+      "name": "events_bounded_aggregates_survive",
+      "passed": true
+    },
+    {
+      "name": "no_unclosed_slot_or_active_play",
+      "passed": true
+    },
+    {
+      "name": "clock_errors_visible",
+      "passed": true
+    },
+    {
+      "name": "010_frozen_unchanged",
+      "passed": true
+    }
+  ],
+  "timing_snapshot": {
+    "observer": "inference-timing-v1",
+    "limits": {
+      "max_sessions": 16,
+      "max_events_per_session": 32
+    },
+    "clock_origin_monotonic": 57649.724517916,
+    "clock_origin_utc": "2026-10-13T05:07:33.634594+00:00",
+    "snapshot_t": 0.240100208997319,
+    "provisional": false,
+    "sessions_seen": 19,
+    "sessions_recorded": 16,
+    "sessions_omitted_by_limit": 3,
+    "source_sha256": {
+      "session.play": null,
+      "agent._chat_completion": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+      "gate.acquire": "08c5a76d18ea8a99611ab56db0c836984ca1d8b73e0dafff3de70e85a3e215a0",
+      "gate.handover": "ca24c4d98796b06a7c62ced2f9ac46e71cce8c5e566c3a8c3c952c712ba9db26",
+      "gate.release": "307704ba29413344f0c2871972c13b98b300060b371b83e820059e3b832dce20",
+      "gate._enqueue_and_wait": "c0a49c82861823899e70cc7e431dce3a793d311a1a625629948fd3a04d5df75e",
+      "gate._pump": "d87719242b883365d9de724369c6d1ed49fbad9cf6d5e1ca1e6ccfa6ce6d74f5"
+    },
+    "sessions": [
+      {
+        "session_id": "s0001",
+        "game_id": "single",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 9.162499918602407e-05,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.00010150000161956996,
+          "gate_call_begin": 0.00010633399506332353,
+          "gate_enqueue_begin": 0.00011029199959011748,
+          "gate_admitted_return": 0.00012033399980282411,
+          "gate_call_return": 0.00012416699610184878,
+          "chat_begin": 0.0001266249964828603,
+          "http_attempt_begin": 0.0001387919983244501,
+          "http_attempt_return": 0.00014637500134995207,
+          "chat_return": 0.00015141699986997992,
+          "gate_release_credit": 0.00015691699809394777,
+          "play_return": 0.0001612919950275682
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 1,
+          "http_attempt_return": 1,
+          "chat_return": 1,
+          "responses_with_known_tokens": 1,
+          "observed_generated_tokens": 7,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 1.0042000212706625e-05,
+          "gate_call_return": 2.1875006495974958e-05,
+          "http_attempt_return": 7.5830030255019665e-06,
+          "chat_return": 2.479200338711962e-05,
+          "observed_slot_held": 3.658299829112366e-05
+        },
+        "first_http_delay_from_session_start_s": 4.7166999138426036e-05,
+        "events_observed": 13,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.00010150000161956996,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.00010633399506332353,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.00011029199959011748,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.00012033399980282411,
+            "kind": "gate_admitted_return",
+            "duration_s": 1.0042000212706625e-05,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.00012416699610184878,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 1.712500670691952e-05
+          },
+          {
+            "seq": 6,
+            "t": 0.0001266249964828603,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.0001387919983244501,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.00014637500134995207,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 7.5830030255019665e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.00015141699986997992,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 2.479200338711962e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 10,
+            "t": 0.0001551669993204996,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.00015691699809394777,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.00016033399879233912,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 4.749999789055437e-06
+          },
+          {
+            "seq": 13,
+            "t": 0.0001612919950275682,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0002",
+        "game_id": "stream",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.00016725000023143366,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.00017074999777833,
+          "gate_call_begin": 0.00017204199684783816,
+          "gate_enqueue_begin": 0.00017358399782096967,
+          "gate_admitted_return": 0.0001779589947545901,
+          "gate_call_return": 0.0001801249964046292,
+          "chat_begin": 0.00018149999959859997,
+          "http_attempt_begin": 0.00019245899602537975,
+          "http_attempt_return": 0.00019912499556085095,
+          "chat_return": 0.00021066699991934001,
+          "gate_release_credit": 0.00021474999812198803,
+          "play_return": 0.0002180419978685677
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 1,
+          "http_attempt_return": 1,
+          "chat_return": 1,
+          "responses_with_known_tokens": 1,
+          "observed_generated_tokens": 7,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 4.374996933620423e-06,
+          "gate_call_return": 1.1250005627516657e-05,
+          "http_attempt_return": 6.665999535471201e-06,
+          "chat_return": 2.9167000320740044e-05,
+          "observed_slot_held": 3.6791003367397934e-05
+        },
+        "first_http_delay_from_session_start_s": 2.5208995793946087e-05,
+        "events_observed": 13,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.00017074999777833,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.00017204199684783816,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.00017358399782096967,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.0001779589947545901,
+            "kind": "gate_admitted_return",
+            "duration_s": 4.374996933620423e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.0001801249964046292,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 7.792004907969385e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.00018149999959859997,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.00019245899602537975,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.00019912499556085095,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 6.665999535471201e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.00021066699991934001,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 2.9167000320740044e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 10,
+            "t": 0.0002135419999831356,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.00021474999812198803,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.0002172919994336553,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.4580007195472717e-06
+          },
+          {
+            "seq": 13,
+            "t": 0.0002180419978685677,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0003",
+        "game_id": "retry",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.0002241670008515939,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.00022650000028079376,
+          "gate_call_begin": 0.00022733399964636192,
+          "gate_enqueue_begin": 0.00022841699683340266,
+          "gate_admitted_return": 0.00023141699784900993,
+          "gate_call_return": 0.00023304199567064643,
+          "chat_begin": 0.00023408400011248887,
+          "http_attempt_begin": 0.00024116699933074415,
+          "http_attempt_exception": 0.00024737499916227534,
+          "http_attempt_return": 0.18781058400054462,
+          "chat_return": 0.1878389170014998,
+          "gate_release_credit": 0.18787158399936743,
+          "play_return": 0.18789074999949662
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 2,
+          "http_attempt_exception": 1,
+          "http_attempt_return": 1,
+          "chat_return": 1,
+          "responses_with_known_tokens": 1,
+          "observed_generated_tokens": 7,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 3.0000010156072676e-06,
+          "gate_call_return": 3.891700180247426e-05,
+          "http_attempt_exception": 5.374997272156179e-06,
+          "http_attempt_return": 0.0001049999991664663,
+          "chat_return": 0.1876048330013873,
+          "observed_slot_held": 0.18764016700151842
+        },
+        "first_http_delay_from_session_start_s": 1.6999998479150236e-05,
+        "events_observed": 15,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.00022650000028079376,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.00022733399964636192,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.00022841699683340266,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.00023141699784900993,
+            "kind": "gate_admitted_return",
+            "duration_s": 3.0000010156072676e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.00023304199567064643,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 5.4580013966187835e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.00023408400011248887,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.00024116699933074415,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.00024737499916227534,
+            "kind": "http_attempt_exception",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 5.374997272156179e-06,
+            "exception_type": "ConnectionError"
+          },
+          {
+            "seq": 9,
+            "t": 0.18770558400137816,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 2
+          },
+          {
+            "seq": 10,
+            "t": 0.18781058400054462,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 2,
+            "duration_s": 0.0001049999991664663
+          },
+          {
+            "seq": 11,
+            "t": 0.1878389170014998,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 0.1876048330013873,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 12,
+            "t": 0.18785462500090944,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 13,
+            "t": 0.18787158399936743,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 14,
+            "t": 0.1878887919956469,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.345900040585548e-05
+          },
+          {
+            "seq": 15,
+            "t": 0.18789074999949662,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0004",
+        "game_id": "error",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.18793866699706996,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.1879548340002657,
+          "gate_call_begin": 0.18795741700159851,
+          "gate_enqueue_begin": 0.18796220899821492,
+          "gate_admitted_return": 0.18798208399675786,
+          "gate_call_return": 0.1879859589971602,
+          "chat_begin": 0.18798970899661072,
+          "http_attempt_begin": 0.188029999997525,
+          "http_attempt_exception": 0.18804979199921945,
+          "chat_exception": 0.1880637089998345,
+          "gate_release_credit": 0.18806983399554156,
+          "play_exception": 0.18807741699856706
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 1,
+          "http_attempt_exception": 1,
+          "chat_exception": 1,
+          "gate_release_credit": 1,
+          "play_exception": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 1.9874998542945832e-05,
+          "gate_call_return": 3.5041994124185294e-05,
+          "http_attempt_exception": 1.6167003195732832e-05,
+          "chat_exception": 7.300000288523734e-05,
+          "observed_slot_held": 8.774999878369272e-05
+        },
+        "first_http_delay_from_session_start_s": 9.133300045505166e-05,
+        "events_observed": 13,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.1879548340002657,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.18795741700159851,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.18796220899821492,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.18798208399675786,
+            "kind": "gate_admitted_return",
+            "duration_s": 1.9874998542945832e-05,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.1879859589971602,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 2.7916998078580946e-05
+          },
+          {
+            "seq": 6,
+            "t": 0.18798970899661072,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.188029999997525,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.18804979199921945,
+            "kind": "http_attempt_exception",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 1.6167003195732832e-05,
+            "exception_type": "ConnectionError"
+          },
+          {
+            "seq": 9,
+            "t": 0.1880637089998345,
+            "kind": "chat_exception",
+            "request_id": 1,
+            "duration_s": 7.300000288523734e-05,
+            "exception_type": "ConnectionError"
+          },
+          {
+            "seq": 10,
+            "t": 0.188067458999285,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.18806983399554156,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.18807512499915902,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 7.124996045604348e-06
+          },
+          {
+            "seq": 13,
+            "t": 0.18807741699856706,
+            "kind": "play_exception",
+            "exception_type": "ConnectionError"
+          }
+        ]
+      },
+      {
+        "session_id": "s0005",
+        "game_id": "clock-success",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.18808687500131782,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {},
+        "counts": {
+          "observer_record_errors": 13
+        },
+        "durations_s": {},
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 0,
+        "events_dropped": 0,
+        "events": []
+      },
+      {
+        "session_id": "s0006",
+        "game_id": "clock-error",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.18817083400062984,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {},
+        "counts": {
+          "observer_record_errors": 13
+        },
+        "durations_s": {},
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 0,
+        "events_dropped": 0,
+        "events": []
+      },
+      {
+        "session_id": "s0007",
+        "game_id": "gate-A",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.18824587499693735,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.18837108399748104,
+          "gate_call_begin": 0.18837858399638208,
+          "gate_enqueue_begin": 0.188384249995579,
+          "gate_admitted_return": 0.18840025000099558,
+          "gate_call_return": 0.18840787500084843,
+          "chat_begin": 0.18841358400095487,
+          "http_attempt_begin": 0.188446333995671,
+          "http_attempt_return": 0.18847583399474388,
+          "chat_return": 0.1884900419972837,
+          "gate_release_credit": 0.2157728749953094,
+          "play_return": 0.21618474999559112
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 3,
+          "gate_enqueue_begin": 2,
+          "gate_admitted_return": 2,
+          "gate_call_return": 3,
+          "chat_begin": 2,
+          "http_attempt_begin": 2,
+          "http_attempt_return": 2,
+          "chat_return": 2,
+          "responses_with_known_tokens": 2,
+          "observed_generated_tokens": 14,
+          "gate_release_credit": 2,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 0.00031312500505009666,
+          "gate_call_return": 0.00036762400122825056,
+          "http_attempt_return": 5.920900002820417e-05,
+          "chat_return": 0.00015387499297503382,
+          "observed_slot_held": 0.027477625000756234
+        },
+        "first_http_delay_from_session_start_s": 0.0002004589987336658,
+        "events_observed": 22,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.18837108399748104,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.18837858399638208,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.188384249995579,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.18840025000099558,
+            "kind": "gate_admitted_return",
+            "duration_s": 1.6000005416572094e-05,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.18840787500084843,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 2.8166003176011145e-05
+          },
+          {
+            "seq": 6,
+            "t": 0.18841358400095487,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.188446333995671,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.18847583399474388,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 2.9499999072868377e-05
+          },
+          {
+            "seq": 9,
+            "t": 0.1884900419972837,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 7.6457996328827e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 10,
+            "t": 0.21575216700148303,
+            "kind": "gate_call_begin",
+            "operation": "handover",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.2157728749953094,
+            "kind": "gate_release_credit",
+            "operation": "handover",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.2157728749953094,
+            "kind": "gate_enqueue_begin",
+            "operation": "handover",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 13,
+            "t": 0.21606999999494292,
+            "kind": "gate_admitted_return",
+            "duration_s": 0.00029712499963352457,
+            "operation": "handover",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 14,
+            "t": 0.21608191699488088,
+            "kind": "gate_call_return",
+            "operation": "handover",
+            "gate_call_id": 2,
+            "duration_s": 0.0003284999984316528
+          },
+          {
+            "seq": 15,
+            "t": 0.216087291999429,
+            "kind": "chat_begin",
+            "request_id": 2,
+            "tools_present": false
+          },
+          {
+            "seq": 16,
+            "t": 0.21612137500051176,
+            "kind": "http_attempt_begin",
+            "request_id": 2,
+            "attempt": 1
+          },
+          {
+            "seq": 17,
+            "t": 0.2161510840014671,
+            "kind": "http_attempt_return",
+            "request_id": 2,
+            "attempt": 1,
+            "duration_s": 2.9709000955335796e-05
+          },
+          {
+            "seq": 18,
+            "t": 0.2161647089960752,
+            "kind": "chat_return",
+            "request_id": 2,
+            "duration_s": 7.741699664620683e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 19,
+            "t": 0.21617133399558952,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 3
+          },
+          {
+            "seq": 20,
+            "t": 0.21617500000138534,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 3
+          },
+          {
+            "seq": 21,
+            "t": 0.21618312499776948,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 3,
+            "duration_s": 1.0957999620586634e-05
+          },
+          {
+            "seq": 22,
+            "t": 0.21618474999559112,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0008",
+        "game_id": "gate-B",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.18824725000013132,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.1885737499978859,
+          "gate_call_begin": 0.18857708400173578,
+          "gate_enqueue_begin": 0.18858020899642725,
+          "gate_admitted_return": 0.21582683399901725,
+          "gate_call_return": 0.2158367090014508,
+          "chat_begin": 0.21584920899476856,
+          "http_attempt_begin": 0.21589958399999887,
+          "http_attempt_return": 0.2159462089985027,
+          "chat_return": 0.2159661670011701,
+          "gate_release_credit": 0.2159801250018063,
+          "play_return": 0.21603374999540392
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 1,
+          "http_attempt_return": 1,
+          "chat_return": 1,
+          "responses_with_known_tokens": 1,
+          "observed_generated_tokens": 7,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 0.027246625002590008,
+          "gate_call_return": 0.02730729199538473,
+          "http_attempt_return": 4.6624998503830284e-05,
+          "chat_return": 0.0001169580064015463,
+          "observed_slot_held": 0.00015329100278904662
+        },
+        "first_http_delay_from_session_start_s": 0.02765233399986755,
+        "events_observed": 13,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.1885737499978859,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.18857708400173578,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.18858020899642725,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.21582683399901725,
+            "kind": "gate_admitted_return",
+            "duration_s": 0.027246625002590008,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.2158367090014508,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 0.027258207999693695
+          },
+          {
+            "seq": 6,
+            "t": 0.21584920899476856,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.21589958399999887,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.2159462089985027,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 4.6624998503830284e-05
+          },
+          {
+            "seq": 9,
+            "t": 0.2159661670011701,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 0.0001169580064015463,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 10,
+            "t": 0.21597599999950035,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.2159801250018063,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.21602791699842783,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 4.908399569103494e-05
+          },
+          {
+            "seq": 13,
+            "t": 0.21603374999540392,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0009",
+        "game_id": "bounded-performance",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.21625320900056977,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.2162694169965107,
+          "gate_call_begin": 0.21627299999818206,
+          "gate_enqueue_begin": 0.216277125000488,
+          "gate_admitted_return": 0.2162903339994955,
+          "gate_call_return": 0.21629616699647158,
+          "chat_begin": 0.21630404199822806,
+          "http_attempt_begin": 0.21633129199472023,
+          "http_attempt_return": 0.21636287499859463,
+          "chat_return": 0.21637524999823654,
+          "gate_release_credit": 0.23989699999947334,
+          "play_return": 0.2399087919984595
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1000,
+          "http_attempt_begin": 1000,
+          "http_attempt_return": 1000,
+          "chat_return": 1000,
+          "responses_with_known_tokens": 1000,
+          "observed_generated_tokens": 7000,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 1.3208999007474631e-05,
+          "gate_call_return": 3.6375000490807e-05,
+          "http_attempt_return": 0.007265379019372631,
+          "chat_return": 0.021013528923504055,
+          "observed_slot_held": 0.02360666599997785
+        },
+        "first_http_delay_from_session_start_s": 7.808299415046349e-05,
+        "events_observed": 4009,
+        "events_dropped": 3977,
+        "events": [
+          {
+            "seq": 3978,
+            "t": 0.23975274999975227,
+            "kind": "chat_begin",
+            "request_id": 994,
+            "tools_present": false
+          },
+          {
+            "seq": 3979,
+            "t": 0.23976466699969023,
+            "kind": "http_attempt_begin",
+            "request_id": 994,
+            "attempt": 1
+          },
+          {
+            "seq": 3980,
+            "t": 0.2397700840010657,
+            "kind": "http_attempt_return",
+            "request_id": 994,
+            "attempt": 1,
+            "duration_s": 5.41700137546286e-06
+          },
+          {
+            "seq": 3981,
+            "t": 0.23977329199988162,
+            "kind": "chat_return",
+            "request_id": 994,
+            "duration_s": 2.0542000129353255e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 3982,
+            "t": 0.2397753749974072,
+            "kind": "chat_begin",
+            "request_id": 995,
+            "tools_present": false
+          },
+          {
+            "seq": 3983,
+            "t": 0.23978274999535643,
+            "kind": "http_attempt_begin",
+            "request_id": 995,
+            "attempt": 1
+          },
+          {
+            "seq": 3984,
+            "t": 0.23978804199578008,
+            "kind": "http_attempt_return",
+            "request_id": 995,
+            "attempt": 1,
+            "duration_s": 5.292000423651189e-06
+          },
+          {
+            "seq": 3985,
+            "t": 0.239791249994596,
+            "kind": "chat_return",
+            "request_id": 995,
+            "duration_s": 1.587499718880281e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 3986,
+            "t": 0.2397934170003282,
+            "kind": "chat_begin",
+            "request_id": 996,
+            "tools_present": false
+          },
+          {
+            "seq": 3987,
+            "t": 0.23980095899605658,
+            "kind": "http_attempt_begin",
+            "request_id": 996,
+            "attempt": 1
+          },
+          {
+            "seq": 3988,
+            "t": 0.23980624999967404,
+            "kind": "http_attempt_return",
+            "request_id": 996,
+            "attempt": 1,
+            "duration_s": 5.2910036174580455e-06
+          },
+          {
+            "seq": 3989,
+            "t": 0.23980945899529615,
+            "kind": "chat_return",
+            "request_id": 996,
+            "duration_s": 1.6041994967963547e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 3990,
+            "t": 0.23981158399692504,
+            "kind": "chat_begin",
+            "request_id": 997,
+            "tools_present": false
+          },
+          {
+            "seq": 3991,
+            "t": 0.23981904199899873,
+            "kind": "http_attempt_begin",
+            "request_id": 997,
+            "attempt": 1
+          },
+          {
+            "seq": 3992,
+            "t": 0.239824584001326,
+            "kind": "http_attempt_return",
+            "request_id": 997,
+            "attempt": 1,
+            "duration_s": 5.542002327274531e-06
+          },
+          {
+            "seq": 3993,
+            "t": 0.23982779200014193,
+            "kind": "chat_return",
+            "request_id": 997,
+            "duration_s": 1.6208003216888756e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 3994,
+            "t": 0.2398298749976675,
+            "kind": "chat_begin",
+            "request_id": 998,
+            "tools_present": false
+          },
+          {
+            "seq": 3995,
+            "t": 0.23983724999561673,
+            "kind": "http_attempt_begin",
+            "request_id": 998,
+            "attempt": 1
+          },
+          {
+            "seq": 3996,
+            "t": 0.23984466699766926,
+            "kind": "http_attempt_return",
+            "request_id": 998,
+            "attempt": 1,
+            "duration_s": 7.417002052534372e-06
+          },
+          {
+            "seq": 3997,
+            "t": 0.2398479170005885,
+            "kind": "chat_return",
+            "request_id": 998,
+            "duration_s": 1.8042002920992672e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 3998,
+            "t": 0.23984995899809292,
+            "kind": "chat_begin",
+            "request_id": 999,
+            "tools_present": false
+          },
+          {
+            "seq": 3999,
+            "t": 0.23985762499796692,
+            "kind": "http_attempt_begin",
+            "request_id": 999,
+            "attempt": 1
+          },
+          {
+            "seq": 4000,
+            "t": 0.23986304199934239,
+            "kind": "http_attempt_return",
+            "request_id": 999,
+            "attempt": 1,
+            "duration_s": 5.41700137546286e-06
+          },
+          {
+            "seq": 4001,
+            "t": 0.2398662499981583,
+            "kind": "chat_return",
+            "request_id": 999,
+            "duration_s": 1.6291000065393746e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 4002,
+            "t": 0.2398683749997872,
+            "kind": "chat_begin",
+            "request_id": 1000,
+            "tools_present": false
+          },
+          {
+            "seq": 4003,
+            "t": 0.2398760419964674,
+            "kind": "http_attempt_begin",
+            "request_id": 1000,
+            "attempt": 1
+          },
+          {
+            "seq": 4004,
+            "t": 0.2398813749969122,
+            "kind": "http_attempt_return",
+            "request_id": 1000,
+            "attempt": 1,
+            "duration_s": 5.333000444807112e-06
+          },
+          {
+            "seq": 4005,
+            "t": 0.23988454199570697,
+            "kind": "chat_return",
+            "request_id": 1000,
+            "duration_s": 1.6166995919775218e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 4006,
+            "t": 0.2398919589977595,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 4007,
+            "t": 0.23989699999947334,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 4008,
+            "t": 0.23990683399460977,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 1.412499841535464e-05
+          },
+          {
+            "seq": 4009,
+            "t": 0.2399087919984595,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0010",
+        "game_id": "capacity-0",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.23992524999630405,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.23993437500030268,
+          "gate_call_begin": 0.2399364169978071,
+          "gate_enqueue_begin": 0.23993899999913992,
+          "gate_admitted_return": 0.23994720899645472,
+          "gate_call_return": 0.23995108399685705,
+          "gate_release_credit": 0.23995450000074925,
+          "play_return": 0.23995954199926928
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 8.208997314795852e-06,
+          "gate_call_return": 1.904200325952843e-05,
+          "observed_slot_held": 7.291004294529557e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.23993437500030268,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.2399364169978071,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.23993899999913992,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.23994720899645472,
+            "kind": "gate_admitted_return",
+            "duration_s": 8.208997314795852e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.23995108399685705,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 1.412499841535464e-05
+          },
+          {
+            "seq": 6,
+            "t": 0.23995299999660347,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.23995450000074925,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.23995845899480628,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 4.917004844173789e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.23995954199926928,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0011",
+        "game_id": "capacity-1",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.2399645839977893,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.23996829200041248,
+          "gate_call_begin": 0.23996954199537868,
+          "gate_enqueue_begin": 0.23997124999732478,
+          "gate_admitted_return": 0.2399755419974099,
+          "gate_call_return": 0.23997816699557006,
+          "gate_release_credit": 0.23998091699468205,
+          "play_return": 0.23998483399918769
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 4.292000085115433e-06,
+          "gate_call_return": 1.2250005966052413e-05,
+          "observed_slot_held": 5.374997272156179e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.23996829200041248,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.23996954199537868,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.23997124999732478,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.2399755419974099,
+            "kind": "gate_admitted_return",
+            "duration_s": 4.292000085115433e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.23997816699557006,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 8.167000487446785e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.23997945899463957,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.23998091699468205,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.23998395899980096,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 4.083005478605628e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.23998483399918769,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0012",
+        "game_id": "capacity-2",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.2399884589976864,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.2399908340012189,
+          "gate_call_begin": 0.23999183400155744,
+          "gate_enqueue_begin": 0.23999320899747545,
+          "gate_admitted_return": 0.23999662500136765,
+          "gate_call_return": 0.2399989170007757,
+          "gate_release_credit": 0.24000154199893586,
+          "play_return": 0.24000525000155903
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 3.416003892198205e-06,
+          "gate_call_return": 1.0373994882684201e-05,
+          "observed_slot_held": 4.916997568216175e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.2399908340012189,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.23999183400155744,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.23999320899747545,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.23999662500136765,
+            "kind": "gate_admitted_return",
+            "duration_s": 3.416003892198205e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.2399989170007757,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 6.582995411008596e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.2400002089998452,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.24000154199893586,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.24000441699899966,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.7909994716756046e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.24000525000155903,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0013",
+        "game_id": "capacity-3",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.24000816699845018,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.2400102089959546,
+          "gate_call_begin": 0.24001116699946579,
+          "gate_enqueue_begin": 0.24001249999855645,
+          "gate_admitted_return": 0.24001566699735122,
+          "gate_call_return": 0.2400177919989801,
+          "gate_release_credit": 0.24002016699523665,
+          "play_return": 0.24002387499785982
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 3.1669987947680056e-06,
+          "gate_call_return": 1.0040996130555868e-05,
+          "observed_slot_held": 4.499997885432094e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.2400102089959546,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.24001116699946579,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.24001249999855645,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.24001566699735122,
+            "kind": "gate_admitted_return",
+            "duration_s": 3.1669987947680056e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.2400177919989801,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 6.207999831531197e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.24001891700027045,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.24002016699523665,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.2400231249994249,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.832996299024671e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.24002387499785982,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0014",
+        "game_id": "capacity-4",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.24002658399695065,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.24002858399762772,
+          "gate_call_begin": 0.2400294999970356,
+          "gate_enqueue_begin": 0.2400307089992566,
+          "gate_admitted_return": 0.24003375000029337,
+          "gate_call_return": 0.2400357919977978,
+          "gate_release_credit": 0.240038124997227,
+          "play_return": 0.240041791999829
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 3.0410010367631912e-06,
+          "gate_call_return": 9.499999578110874e-06,
+          "observed_slot_held": 4.374996933620423e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.24002858399762772,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.2400294999970356,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.2400307089992566,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.24003375000029337,
+            "kind": "gate_admitted_return",
+            "duration_s": 3.0410010367631912e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.2400357919977978,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 5.875001079402864e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.24003691699908813,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.240038124997227,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.24004095899726963,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.6249984987080097e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.240041791999829,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0015",
+        "game_id": "capacity-5",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.24004395899828523,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.24004566700023133,
+          "gate_call_begin": 0.24004662499646656,
+          "gate_enqueue_begin": 0.24004787499870872,
+          "gate_admitted_return": 0.24005083399970317,
+          "gate_call_return": 0.24005291699722875,
+          "gate_release_credit": 0.2400552089966368,
+          "play_return": 0.24005866699735634
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 2.959000994451344e-06,
+          "gate_call_return": 9.251001756638288e-06,
+          "observed_slot_held": 4.374996933620423e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.24004566700023133,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.24004662499646656,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.24004787499870872,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.24005083399970317,
+            "kind": "gate_admitted_return",
+            "duration_s": 2.959000994451344e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.24005291699722875,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 5.83400105824694e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.2400540419985191,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.2400552089966368,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.24005791699892143,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.417000698391348e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.24005866699735634,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0016",
+        "game_id": "capacity-6",
+        "game_index": 0,
+        "pass_index": 0,
+        "session_started_t": 0.24006091699993704,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.24006262499460718,
+          "gate_call_begin": 0.24006350000126986,
+          "gate_enqueue_begin": 0.24006466699938755,
+          "gate_admitted_return": 0.24006766700040316,
+          "gate_call_return": 0.24006962499697693,
+          "gate_release_credit": 0.24007191699638497,
+          "play_return": 0.24007533399708336
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 3.0000010156072676e-06,
+          "gate_call_return": 9.126000804826617e-06,
+          "observed_slot_held": 4.249995981808752e-06
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 9,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.24006262499460718,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.24006350000126986,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.24006466699938755,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.24006766700040316,
+            "kind": "gate_admitted_return",
+            "duration_s": 3.0000010156072676e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.24006962499697693,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 5.709000106435269e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.24007074999826727,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 7,
+            "t": 0.24007191699638497,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 8,
+            "t": 0.24007458399864845,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 3.417000698391348e-06
+          },
+          {
+            "seq": 9,
+            "t": 0.24007533399708336,
+            "kind": "play_return"
+          }
+        ]
+      }
+    ],
+    "semantics": {
+      "clock": "All t values are seconds since observer install; original session.started_at is on the same monotonic clock.",
+      "chat": "_chat_completion entry to original return/exception: includes payload build, retries, stream consumption and parsing. Includes summary calls; tools_present only labels whether a tools argument is supplied, not the call's purpose.",
+      "http": "Entry to existing requests.post, then original return/exception. A streamed return may contain only headers; this does not measure server decode or full generation latency. No body/headers/payload is inspected.",
+      "gate_wait": "Original _enqueue_and_wait entry to normal return, under the existing Condition: includes enqueue/pump/wait/wakeup, not just Condition.wait sleep. Admission is caller-observed ownership, not the earlier pump selection instant.",
+      "release": "handover: enqueue entry immediately after original _free increment; final release: pump entry immediately after original _free increment. Neither hook performs release itself.",
+      "slot_held": "Sum of admitted-return to release-credit intervals; includes model calls, Python work and idle time while the game owns a slot. Open intervals are reported separately.",
+      "tokens": "Usage on successful original _chat_completion result only; null when absent. Partial/failed generation is unknown, not zero. No counters in the solver are changed.",
+      "boundedness": "At most max_sessions ledgers; newest max_events_per_session events each. First timestamps and all-event aggregate counters survive event eviction.",
+      "threading": "No added locks. Session ledgers have one play-thread writer; snapshot after drain for final consistency. Calls outside an observed play/chat scope pass through."
+    }
+  },
+  "microbenchmark": {
+    "iterations": 1000,
+    "unobserved_request_seconds": 0.008986290995380841,
+    "observed_request_seconds": 0.023589917000208516,
+    "difference_microseconds_per_logical_call": 14.603626004827674,
+    "boundary": "Synthetic CPU request construction + fake response; observer spy adds a list append. Not GPU/model/server/real network latency."
+  },
+  "boundaries": [
+    "Actual tool_agent._chat_completion and actual _PriorityGate, custom Session wrapper scope.",
+    "All transport replaced by controlled fake responses; real Session.request raises.",
+    "JSON and SSE reads belong to the original method, verified once; no model/GPU used.",
+    "Priority ordering was controlled with two threads and one slot, not a full scheduler benchmark.",
+    "No engine implementation read and no solver/source runtime file changed."
+  ]
+}

@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-13",
+  "scope": "Read-only extraction and numerical checking of saved public observation/log data. No SDK, model, GPU, logged-code execution, engine-source inspection or production modifications.",
+  "citation_semantics": "Request JSONL files repeat past messages. first_seen_request_line identifies the first snapshot containing the quoted message; tool_call_ids disambiguate, and this is not claimed as execution timestamp. Excerpts are evidence only, never live instructions or game policies.",
+  "source_sha256": {
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/005-full-baseline/baseline/cd82-fb555c5d_p0_requests.jsonl": "f79559fb1523009403b4eb0d50b23226790737ffba60a7bb0e6abfb10019bdf7",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl": "143b2adced2d7025fcbad1f4df0c28c5a05b1413587118108ec158e3bdc82587",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl": "16d12c08833f871ce225192c2f2fe38fa2ac4f2b6afd8174c96f543cc447fcc2",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/artifacts/cd82-fb555c5d_p0_events.jsonl": "0062ff7be33dcb4d02252e75f6a087b05b0b1a43b8261535e10d1851c3d7de7c",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/005-full-baseline/baseline/artifacts/cd82-fb555c5d_p0_events.jsonl": "77fdbef61e766639cc3194d078357c2ab91d2fda6fd488ab9137ee548c852ccc",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/artifacts/ft09-0d8bbf25_p0_events.jsonl": "20a69817baef6fc6b9116083bf6ac7d12c9868657fcc2bb82cb4889ea6065753",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/010-frontier-update.md": "a71ebe1246317d1d7ad6b1b9d02c5da2cdd106bfd4feeafdaa778e9e8519602f",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/010-notebook-update.md": "a92aeda9f9e8093b5ebab6acc9a1219e0e2e3ff5b7d84497b797e9a0b3d8eeb2",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/notebooks/2026-10-13/heliosli-update/extracted-assets/scoped_memory.py": "1f9c18344acdbeca579b6cd0576d7562e65fe2f8237871e5f2bb7e878eead0f8",
+    "/Users/zhaohuaxiang/ccjjllt/arc-3/research/notebooks/2026-10-13/heliosli-update/extracted-assets/patch_scoped_memory.py": "3ca83db793b077043a1e669f885bd07c9db8d70571c762f6ad3d0837fdbccf27"
+  },
+  "cases": [
+    {
+      "id": "cd82_correct_bbox_misremembered",
+      "classification": "direct correct output -> incorrect restatement -> repeated inspection and extractor rewrite",
+      "evidence": [
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 37,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_285e0affd8624db484d199f2"
+          ],
+          "message_sha256": "287fd3438f0eebfb9acc1ebd84a0596486cd010feb4db8ea18fed4945853d905",
+          "excerpt": "RIGHT back EFFECT [('W', 90, 34, 43, 27, 36), ('g', 30, 45, 53, 25, 38), ('W', 84, 46, 52, 26, 37), ('c', 51, 63, 63, 0, 50)]\n"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 39,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_1ef6b66679334b3db57ee758"
+          ],
+          "message_sha256": "aa833f66b07f03873157737d66e56868c999f9ecf0c734affd1dc6956577b97c",
+          "excerpt": "Wait, RIGHT from 135° moved the stamp to a new position: g rows 30-45, cols 25-38; W pad rows 46-52, cols 26-37. That's a 180° rotation! The frame is now at rows 30-45 (16 rows?) hmm, g bbox rows 30-45 = 16 rows, cols 25-38 = 14 cols. And the pad is rows 46-52 (7 rows) x cols 26-37 (12 cols) — below the frame! \nHmm, so the state after RIGHT is: the frame (open at top now) at rows 30-45 and the pad at rows 46-52 below it. That looks like 180° rotation: the frame's bar at the bottom (row 45) and the rails going up to row 30, with the pad below the frame at rows 46-52?? That doesn't look like a rigid rotation.\nHmm, actually wait. Maybe the object is: the frame + pad, and the pad is attached to "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 39,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_1ef6b66679334b3db57ee758"
+          ],
+          "message_sha256": "c10dea7a9ac1f7d8e8c69f82e2bae685d691c0ad5af509f79f6601b982adff28",
+          "excerpt": "nframes 0\n"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 41,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_9d263558fc734938ad56b35e"
+          ],
+          "message_sha256": "2013fd0ebb4b8d4fc36a361726b5f5be5ac884c5c1251884fb885f7cb5adc5eb",
+          "excerpt": "No animation frames for that action (it wasn't recorded as animated?). Hmm, but the state changed. Let me check the current state fresh and also look at the last transition's after frame.\nActually the stamp_state() after RIGHT printed: g 43 px rows 30-45 cols 25-38; W 84 px rows 46-52 cols 26-37. Let me look at the current frame image: the image shows the frame at rows ~44-54 (a U-shape opening up) with the white pad inside at rows 46-52, and the canvas above with the purple triangle. Looking at the image: there's "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 43,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_0c949790ece14008a7dfbd0e"
+          ],
+          "message_sha256": "053f46792e39c946f4d1d6970bcbb7eed2f6e09b659d1256f8a508d5e6a6ee9f",
+          "excerpt": "Earlier the segmentation reported g bbox rows 30-45 because... hmm, whatever, the ascii is authoritative: rows 45-53. (The boundary list from segmentation gave a confusing bbox; my min/max over boundary points may be wrong for non-convex shapes. Right — boundary points are only corner points, so min/max over corners can miss extremes. My stamp_state() is unreliable. I should use the ascii crop or a proper bbox from the pixels.)\nI need a better state reader: compute the bbox from the ascii rows for a given region. Let me write a function that, given the frame ascii, extracts the region of non-background cells in rows 18-62 and returns bboxes per color.\nOK so now: 180° state. The pad is at rows 46-52, cols 26-37, BELOW the canvas (canvas rows 34-43). The press direction at 180° = up (local down rotate"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/009-v2-smoke/cd82-fb555c5d_p0_requests.jsonl",
+          "source_sha256": "caea7ca015f5d622085bbc083c63d7e1b0dc836bf39ea1063b2cbba76fefa774",
+          "first_seen_request_line": 43,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_0c949790ece14008a7dfbd0e"
+          ],
+          "message_sha256": "701ffdd919e6d11f281ec6df04d889597d00168cb40c279a301c871856f985be",
+          "excerpt": "{'frame': (45, 53, 25, 38, 30), 'pad': (46, 52, 26, 37, 84)}\n"
+        }
+      ],
+      "observed_cost": {
+        "inspection_only_tool_calls": 3,
+        "associated_response_lines": [
+          38,
+          40,
+          42
+        ],
+        "associated_completion_tokens": 4567,
+        "caveat": "These responses include useful orientation reasoning too; 4567 is observed span generation, not a validated amount that a cache would save. No additional action is attributed to this mistaken bbox."
+      },
+      "verified_data": {
+        "original_stdout_geometry": {
+          "pixel_count": 30,
+          "row_min": 45,
+          "row_max": 53,
+          "col_min": 25,
+          "col_max": 38
+        },
+        "incorrect_restatement": {
+          "pixel_count": 43,
+          "row_min": 30,
+          "row_max": 45
+        },
+        "corrected_output_geometry": {
+          "pixel_count": 30,
+          "row_min": 45,
+          "row_max": 53,
+          "col_min": 25,
+          "col_max": 38
+        }
+      },
+      "counterfactual_not_established": "More region output or memo storage does not guarantee the model will consult or use the correct values."
+    },
+    {
+      "id": "ft09_correct_pixel_location_wrong_grid_label",
+      "classification": "correct current pixel geometry -> wrong hand-derived logical columns -> action batch and rederivation",
+      "evidence": [
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 23,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_3b886471a3344674af25f757"
+          ],
+          "message_sha256": "04c7487f0a1c13b86d5e6c931487818e469b676529b0287441a784efc349467a",
+          "excerpt": "7 W 16 [12, 28] [13, 33]\n8 R 36 [12, 36] [17, 41]\n9 O 4 [14, 30] [15, 31]\n10 g 8 [14, 32] [17, 33]\n11 g 4 [16, 28] [17, 29]\n12 W 4 [16, 30] [17, 31]\n13 R 36 [20, 12] [25, 17]\n14 R 36 [20, 20] [25, 25]"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 25,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_789b56b61d8043f1aa89d618"
+          ],
+          "message_sha256": "26135d7f1f99410eeea1ef9e1e01327b9080e0bdb1fd1c87f9614a38a34a1736",
+          "excerpt": "Maps at:\nA: rows 12-17, cols 28-33 → grid (1,1)\nB: rows 28-33, cols 20-25 → grid (3,1)\nC: rows 28-33, cols 36-41 → grid (3,3)\nD: rows 44-49, cols 28-33 → grid (5,1)\nGrid layout (7 rows x 5 cols): row bands 4,12,20,28,36,44,52; col bands 12,20,28,36,44.\nCells present: rows0,1: cols1-3; rows2,3,4: cols0-4; rows5,6: cols1-3.\nMap centers: A has O at (14,30) → center orang"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 29,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_a0f220f75f3f4c30aa528682"
+          ],
+          "message_sha256": "74fa7f1ba9976d9ac3f5006e97903aff2b2e158b5cb80127ce6002cd132033eb",
+          "excerpt": "he rule: white → orange, gray → red (base, leave).\nTarget orange cells: (0,1),(0,2),(2,1),(2,3),(2,4),(3,2),(4,0),(4,1),(4,3),(6,1),(6,2) → 11 clicks.\nLet me batch them and check completion. If not completed, I'll re-evaluate (maybe unconstrained cells need something, or map-own cells).\nActually, let me reconsider one thing before spending 11 clicks: what if the rule involves the map center color as the color to paint and the pattern is per-map, with the overlaps being consistent in a different way? We showed conflicts, so no.\nBut one more consideration: maybe the two-color scheme means the target pattern uses BOTH colors: white→orange, gray→red. Since base is red, gray needs nothing. So 11 "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 29,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_a0f220f75f3f4c30aa528682"
+          ],
+          "message_sha256": "602270adfbfc05f19a966ea428de6324af03a63f59a963420f4b1474dd3cc6bc",
+          "excerpt": "{'level_completed': False, 'game_over': False, 'done': False, 'run_complete': False}\n['MOUSE(row=6, col=22)', "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 33,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_4ea8c08041814e39abef7f71"
+          ],
+          "message_sha256": "29c02369f66fce103e5e6ae5a60cc8f4dc5d22eefdb8fe576148eb42251a1fbe",
+          "excerpt": "Oh no. I mis-assigned map columns. Let me recompute: col bands: cs=[12,20,28,36,44] → col indices 0,1,2,3,4. Map A at cols 28-33 → col 2. Map B at cols 20-25 → col 1. Map C at cols 36-41 → col 3. Map D at cols 28-33 → col 2.\nRow bands: rs=[4,12,20,28,36,44,52] → row indices 0..6. Map A at rows 12-17 → row 1. Map B at rows 28-33 → row 3. Map C rows 28-33 → row 3. Map D rows 44-49 → row 5.\nSo maps are at: A=(1,2), B=(3,1), C=(3,3), D=(5,2).\nThat changes the window positions! Let me redo the coverage:\nA (1,2) covers rows 0-2, cols 1-3.\nB (3,1) covers rows 2-4, cols 0-2.\nC (3,3) covers rows 2-4, cols 2-4.\nD (5,2) covers rows 4-6, cols 1-3.\nNow the plus-shape validity: A's window rows0-2 cols1-3 → row0 cols1,2,3 exist ✓, row1 cols1,2,3 ✓ (center is map), row2 cols1,2,3 ✓. All exist!\nB's window rows2-4 cols0-2 → all exist ✓.\nC's window rows2-4 cols2-4 → all exist ✓.\nD's window rows4-6 cols1-3 → row4 ✓, "
+        }
+      ],
+      "observed_cost": {
+        "batch_actions_executed_under_wrong_geometry": 11,
+        "level_completed_by_batch": false,
+        "subsequent_correction_plan_actions": 13,
+        "caveat": "The geometric error is certain, but target semantics were also changing. Neither all 11 actions nor the subsequent 13 are measured avoidable regret."
+      },
+      "verified_data": {
+        "model_stated_column_bands": [
+          12,
+          20,
+          28,
+          36,
+          44
+        ],
+        "observed_anchor_column": 28,
+        "zero_based_index_from_same_bands": 2,
+        "incorrect_hand_label": 1
+      },
+      "counterfactual_not_established": "A cache of already incorrect logical labels would preserve the error. Reuse must begin with code-derived values, not hand-written claims."
+    },
+    {
+      "id": "ft09_transcription_error_harmless_to_solver_domain",
+      "classification": "negative control: transcription error caused repeated reading, but affected only an excluded non-cell",
+      "evidence": [
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 69,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_3080417652c846839cd92a27"
+          ],
+          "message_sha256": "c397d92a05f82a4af008d2bdb8f6d0149e5aa4954068de97054f161800d73d12",
+          "excerpt": "(1, 4)\n   WWGGGG\n   WWGGGG\n   ggppGG\n   ggppGG\n   WWggWW\n   WWggWW\n(3, 0)\n   GGggWW\n   GGggWW\n   GGppgg\n   GGppgg\n "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 85,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_a288748c9c03466b81f43ea6"
+          ],
+          "message_sha256": "de08480fd932d35a8a49e5c1a090c55534a5a63901cca329c7ebbe83164762e6",
+          "excerpt": "(1, 4) DIFF ['WGG', 'gpG', 'WgW']\n(3, 0) same\n(3, 2) same\n(3, 4) same\n(3, 6) same\n(4, 2) same\n("
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 89,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_d37fec95d53a45909e4fe608"
+          ],
+          "message_sha256": "819cabb979dd089a1d131ab595031a5df8a8bdb9a50655511c4b1203e2f908f1",
+          "excerpt": "My init dict 'WWG' was WRONG — I transcribed the first two chars of the raw row instead of sampling. So the map patterns in my CSP dict may have transcription errors!\nI must re-derive all map patterns by proper 2x2 sub-block sampling. Let me redo that carefully and re-run the CSP.\nProper sampling: sub-block (i,j) = a[r0+2i+? ][c0+2j+?] — take the pixel at (r0+2i, c0+2j)... but careful: sub-block (i,j) covers rows r0+2i..r0+2i+1, cols c0+2j..c0+2j+1. So sample a[r0+2i][c0+2j]. In the region dump: row 12 = 'WWGGGG' → sub-blocks (0,0)='W',(0,1)='G',(0,2)='G'. Yes.\nSo map (1,4) = 'WGG'/'gp'... let me redo all maps with correct sampling and print."
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 89,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_d37fec95d53a45909e4fe608"
+          ],
+          "message_sha256": "066b6da3e21679590ec5eb3a966bf6fbc6582f8c88cd3b673f507191ac608642",
+          "excerpt": "(1, 4) ['WGG', 'gpG', 'WgW']\n(3, 0) ['GgW', 'Gpg', 'GgW']\n(3, 2) ['NMN', 'M"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/ft09-0d8bbf25_p0_requests.jsonl",
+          "source_sha256": "a032b4698f6347c92d124aa75118347fce873dd9e8600aaad1e4c64b674c98bd",
+          "first_seen_request_line": 91,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_d4b8ee36469f462e94c91a9a"
+          ],
+          "message_sha256": "2ff62e0a950898c71e4f25f8168d9fe3c4c7167bc75b2bb79ab51897fb76d721",
+          "excerpt": "My earlier CSP used 'WWG','gpG','WgW' → it wrongly included cell (0,4) as symbol 'W'... but (0,4) doesn't exist per exists2(), so it was skipped! And (0,5)='G' → skipped. So actually the CSP's coverage of real cells was identical! Because the mis-transcribed positions were all holes/nonexistent. Let me verify: in the wrong pattern 'WWG', the entries at (0,0)='W'→cell(0,3) ✓ same; (0,1)='W'→cell(0,4) nonexistent → skipped; (0,2)='G'→(0,5) skipped. In the correct pattern 'WGG': (0,0)='W'→(0,3) same, others holes. So no difference. \nSimilarly, let me double check the other maps' transcriptions against the raw dumps I printed earlier (full 6x6). Earlier raw dumps:\n(0,1): GGGGGG/GGGGGG/GGNNWW/GGNNWW/GGWWgg/GGWWgg → sampled: (0,*)=G,G,G; (1,0)=G,(1,1)=N,(1,2)=W; (2,0)=G,(2,1)=W,(2,2)=g → 'GGG','GNW','GWg' ✓ matches.\n(1,2): NNMMNN×2, MMNNMM×2, NNMMNN×2 → 'NMN','MNM','NMN' ✓.\n(1,4): WWGGGG,ggppGG,WWggWW → 'WGG','gpG','WgW' ✓ (my dict had 'WWG' — wrong but harmless as shown).\n(3,0): GGggWW,GGggWW,GGppgg,GGppgg,GGggWW,GGggWW → 'GgW','Gpg','GgW' ✓.\n(3,4): ggWWgg,WWNNWW,ggWWgg → 'gWg','WNW','gWg' ✓.\n(3,6): ggWWGG,WWNNGG,ggWWGG → 'gWG','WNG','gW"
+        }
+      ],
+      "observed_cost": {
+        "inspection_tool_calls_in_recheck": 3,
+        "associated_response_lines": [
+          84,
+          86,
+          88
+        ],
+        "associated_completion_tokens": 3881,
+        "caveat": "Raw six-by-six inspection, comparison and resampling; no claim that this error caused the earlier unsuccessful action batches."
+      },
+      "verified_data": {
+        "raw_first_row": "WWGGGG",
+        "stride2_sample": "WGG",
+        "handwritten_first_row": "WWG",
+        "changed_symbol_projects_to_excluded_non_cell": true
+      },
+      "counterfactual_not_established": "Correcting this row does not resolve the unknown level mechanism; model itself notes CSP constraints on actual cells are identical."
+    },
+    {
+      "id": "tn36_layout_constants_in_new_reader",
+      "classification": "supporting stale-assumption risk, not a proven correct-output handoff loss",
+      "evidence": [
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+          "source_sha256": "143b2adced2d7025fcbad1f4df0c28c5a05b1413587118108ec158e3bdc82587",
+          "first_seen_request_line": 193,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_44bb786f4c83486881d89b26"
+          ],
+          "message_sha256": "fa3d8333b8a4ca1228cb53e9a8900a2c50a95960b68e3b5e4978b6862e40d8e2",
+          "excerpt": "L4 init [('h', 0, 0), ('h', 0, 1), ('h', 0, 2), ('h', 0, 3), ('h', 1, 0), ('h', 1, 1), ('h', 1, 2), ('h', 1, 3), ('h', 2, 0), ('h', 2, 1), ('h', 2, 2), ('h', 2, 3), ('v', 0, 0), ('v', 0, 1), ('v', 0, 2), ('v', 0, 3), ('v', 1, 0), ('v', 1, 1), ('v', 1, 2), ('v', 1, 3), ('v', 2, 0), ('v', 2, 1), ('v', 2, 2), ('v', 2, 3)] 16,19,22,25 ####;####;####;#..#;\n[action] MOUSE(row=58, col=37) -> effect\ntiny   [('h', 0, 0), ('h', 0, 1), ('h', 0, 2), ('h', 0, 3), ('h', 1, 0), ('h', 1, 1), ('h', 1, 2), ('h', "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+          "source_sha256": "143b2adced2d7025fcbad1f4df0c28c5a05b1413587118108ec158e3bdc82587",
+          "first_seen_request_line": 195,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_1cc872381b494130b8948092"
+          ],
+          "message_sha256": "6c0163900026a30f8b7bf138c46f3f5eb3e3683ed283d0ceb239d403b5b7c6c3",
+          "excerpt": "my lmarks returned ALL 24 marks as dark?! That's because the marks are 'w' when light and... hmm, in level 4 the left keyboard's light color might be different. Let me recheck: lmarks collects marks that are NOT 'w' → it returned all 24, meaning none are 'w' → the left keyboard's light color in level 4 is something else (e.g., 'W' white or 'g'). Earlier (level 3) the left keyboard used 'w' for light and 'B' for dark. In level 4, from the image, the left keyboard shows: row0 hbars light gray, vbars DARK (black), row1 hbars light, vbars light, row2 hbars light, vbars dark... Hmm, but the current image shows: hbars light, vbars at rows 41-43 dark (3 of them), others light.\nLet me read the actua"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+          "source_sha256": "143b2adced2d7025fcbad1f4df0c28c5a05b1413587118108ec158e3bdc82587",
+          "first_seen_request_line": 195,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_1cc872381b494130b8948092"
+          ],
+          "message_sha256": "4e92c4d88a3d9cea7d42ef7bc038cb2fccc725a4fb68d1d920e5507b308fb453",
+          "excerpt": "now(big robot): h0 gggg | v0 gggg | h1 gggg | v1 gggg | h2 gggg | v2 gggg\nscreen: 4,19,2,17 ################;################;################;################;################;################;################;################;################;#####"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+          "source_sha256": "143b2adced2d7025fcbad1f4df0c28c5a05b1413587118108ec158e3bdc82587",
+          "first_seen_request_line": 197,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_eca3d7a6592f4bd58e109de7"
+          ],
+          "message_sha256": "fd315bb992e8254811a1afbdd78920fbf8e5aa904c731c88bc1351a316f50b88",
+          "excerpt": "Now I see the left keyboard's mark colors are 'g' at those exact positions in the current frame — meaning the marks are at slightly different columns than my HC=[8,13,18,23]? Hmm, the kgrid shows all 'g' — but the image clearly shows dark marks at row 33 (hbars) and rows 41-43 (vbars). So my column indices are off by a bit. The 'g' is probably the background gray of the keyboard area. Let me find the exact mark positions in the left panel by scanning for 'B' (dark) in rows 33,36,39,42,45,48.\nFrom the current image: the left keyboard has 3 columns (not 4) with hbars at row 33 DARK, and vbars at rows 41-43 DARK.\nLet me scan rows 32-50 for 'B' chars in cols 0-30 to get exact positions.\nAlso the screen's plug after the tiny click = 1x1 at (0,0) facing down.\nKey: the tiny robot's program. Let me read the keyboard's dark marks exactly."
+        }
+      ],
+      "source_code_reference": {
+        "requests_file": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/tn36-ef4dde99_p0_requests.jsonl",
+        "first_seen_request_line": 191,
+        "description": "A newly defined lmarks reader uses four hard-coded column positions and a single assumed light color; not evidence that a retained old function was silently restored."
+      },
+      "counterfactual_not_established": "Frame-scoped value storage cannot detect wrong constants inside arbitrary function source or validate an object projector."
+    },
+    {
+      "id": "sp80_preserved_simulator_failure_not_forgotten",
+      "classification": "negative control: accessible observations and acknowledged model mismatch still fail to identify mechanics",
+      "evidence": [
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl",
+          "source_sha256": "16d12c08833f871ce225192c2f2fe38fa2ac4f2b6afd8174c96f543cc447fcc2",
+          "first_seen_request_line": 147,
+          "role": "tool",
+          "tool_call_ids": [
+            "call_8f66eb071ebb4559bad318d5"
+          ],
+          "message_sha256": "fa1b98a757f102f14db362674142a4d3561a3b2291c50d6a972c85cb06d26d49",
+          "excerpt": "seq20 [0, 2] [0, 2] OK\nseq18 [2] [2] OK\nseq19 [0, 2] [0, 2] OK\nseq28 [2] [2] OK\nseq30 [1, 2] [1, 2] OK\nshot5 [1, 2] [2] ***\nshot6 [0, 2] [0, 2] OK\n"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl",
+          "source_sha256": "16d12c08833f871ce225192c2f2fe38fa2ac4f2b6afd8174c96f543cc447fcc2",
+          "first_seen_request_line": 149,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_4551dc730e6145398162705b"
+          ],
+          "message_sha256": "f02fe7c124b9a5d942fa7bc26536efaab4a9b6bf93f95dbc68f0349bedf6e18f",
+          "excerpt": "6/7 OK. shot5 mismatch: predicted {1,2}, actual {2}.\nshot5: phase B with P=32 → bars bar1 (16-19, 8-19) and barX (16-19, 32-51); the platform (12 wide) at rows 16-19 cols 32-43 (overlapping barX's left part) → the visible bar = 44-51.\nThe beam at 40-43 → hits the platform (rows 16-19) → the band at rows 20-23 spanning 28-47 (free) → rays at 28-31 and 44-47.\n"
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl",
+          "source_sha256": "16d12c08833f871ce225192c2f2fe38fa2ac4f2b6afd8174c96f543cc447fcc2",
+          "first_seen_request_line": 155,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_a55d64ad0ec84cdc9e8530e4"
+          ],
+          "message_sha256": "62bf6948cdd97b8a407471af779b1e313a3229ee015bf35ce77d8e6cfe26ac87",
+          "excerpt": " 20-23 cols 24-43? Let me recheck: transition 24 showed the platform at (20,24,23,43) and seq20's shot was from (20,24,23,43)? Earlier I labeled seq20 as plat (20,24,43) → and sim4 gave {0,2} ✓. With my hand analysis above I got only {2}. So my hand analysis of the band segments is wrong somewhere (sim4 handles it correctly, presumably because the band flood can go AROUND the blockage via rows 25-27? Hmm, the band is 4 rows tall (rows 24-27); bar2 occupies rows 24-27 at cols 28-39 → the band can't pass at any of those rows → the segments are as I said.\nHmm, so how did sim4 get cup0 for seq20? Let me trace sim4 on seq20 to see the rays. Maybe the ray at 20-23 came from the segment (20,27) because my condition `if L<c0` uses c0 = the object's run start = 24 → L=20 < 24 → a ray at 20-23 ✓ (I mistakenly used c0=20 above — the object's run is the PLATFORM's run at the hit row = 24-43, so c0=24 → L=20 < 24 ✓ a ray at 20-23 → cup1 ✓✓).\nRight! So for the platform at rows 20-23 cols 20-39 (the "
+        },
+        {
+          "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/010-retrievable-animation/retrievable_animation/sp80-589a99af_p0_requests.jsonl",
+          "source_sha256": "16d12c08833f871ce225192c2f2fe38fa2ac4f2b6afd8174c96f543cc447fcc2",
+          "first_seen_request_line": 157,
+          "role": "assistant",
+          "tool_call_ids": [
+            "call_53beb29beba743e087b860d0"
+          ],
+          "message_sha256": "6822cdd114637ead1ef2becc5dcea776a3c5e432d1558f73f40e3314df2b7b0f",
+          "excerpt": "Achievable subsets (per sim4): {1}, {2}, {0,2}, {1,2}, {}, {0}. Notably {0,1} and {0,1,2} are NOT achievable, and {0} is achievable only in B24/B36 configs.\nSince the level-1 win was \"all cups in one shot\" and here all-3 is impossible under my model, my model must be incomplete. The most likely missing piece: what happens when a ray hits a cup's PRONG — maybe the prong band's rays can also hit the OTHER cups' prongs producing longer chains. My sim does model chains. Hmm.\nLet me reconsider the WHITE flash once more,"
+        }
+      ],
+      "counterfactual_not_established": "The model explicitly acknowledges the failed regression example. A persistent record of that fact is not itself the missing mechanism."
+    }
+  ],
+  "005_cd82_context": {
+    "event_file": "runs/005-full-baseline/baseline/artifacts/cd82-fb555c5d_p0_events.jsonl",
+    "line": 73,
+    "observation": "At action 51 the model enumerates observed poses and transitions after contradicting a fixed control-sign theory; the run later completes its first level at action 54. This is a historical association, not a controlled memory ablation; no successful action sequence is exported."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "kernel_id": "ccjjllt/arc3-011-animation-confirmation",
+  "kernel_url": "https://www.kaggle.com/code/ccjjllt/arc3-011-animation-confirmation",
+  "prepared_at_utc": "2026-10-13T05:10:04.474120+00:00",
+  "status": "COMPLETE",
+  "push_succeeded": true,
+  "notebook_sha256": "4d7bd650af420bcaf47d71fe8dc2e63e9198cf783badfa4e93e9b1dd3f580211",
+  "animation_module_sha256": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875",
+  "timing_module_sha256": "5ff98e60341015277b84cf88dbe4d54abe842e03834b6fd4f6080c3721db00f8",
+  "source_archive": "experiments/011-source",
+  "cpu_timing_checks": "experiments/011-timing-checks/manual-report.json",
+  "cpu_timing_check_count": 31,
+  "native_notebook_checks": "experiments/011-notebook-checks.json",
+  "independent_review": "passed; final source, native payload, IPython report and manifest hashes agree; no unresolved blocking findings",
+  "game_count": 12,
+  "arms": [
+    "retrievable_animation",
+    "baseline"
+  ],
+  "reference_arm": "baseline",
+  "requested_arm_seconds": 3482,
+  "hard_limit_seconds": 9000,
+  "expected_gpu_hours": 2.2,
+  "formal_submitted": false,
+  "limitations": [
+    "CPU validation used real gate/chat with custom session and fake HTTP; it is not production concurrency or GPU performance evidence.",
+    "Gate admission is observed at enqueue return, not exact GPU execution start.",
+    "This is a known 12-game diagnostic pool, not an unseen holdout."
+  ],
+  "attempted_at_utc": "2026-10-13T05:10:15.395602+00:00",
+  "stage": "completed",
+  "gpu_started": true,
+  "approval_requested": false,
+  "updated_at_utc": "2026-10-13T07:51:29.590906+00:00",
+  "approval_rejections": [
+    {
+      "attempt": 1,
+      "process_created": false,
+      "reason": "Notebook external upload to Kaggle and approximately2.2h shared GPU use were judged not explicitly authorized."
+    },
+    {
+      "attempt": 2,
+      "process_created": false,
+      "additional_evidence": "experiments/011-authorization-context.json",
+      "reason": "Prior turn proposal plus user follow-up was reviewed but still judged insufficient specific authorization."
+    }
+  ],
+  "explicit_upload_and_gpu_authorization": "授权上传并启动011",
+  "authorization_received_at_utc": "2026-10-13T05:26:13.368436+00:00",
+  "version": 1,
+  "push_response": "Kernel version 1 successfully pushed.",
+  "push_response_received_at_utc": "2026-10-13T05:27:58Z",
+  "quota_refresh_note": "Immediate pre-push quota query failed SSL EOF; earlier successful quota was5.40h.",
+  "status_checked_at_utc": "2026-10-13T07:51:29.590906+00:00",
+  "remote_source_cells_verified": true,
+  "remote_source_check": "experiments/011-remote-source-check.json",
+  "startup_observation": "experiments/011-startup-observation.json",
+  "model_health_confirmed": true,
+  "startup_observed_at_utc": "2026-10-13T05:30:36.443855+00:00",
+  "model_ready_seconds": 567.6603150367737,
+  "gpu_server_stopped": true,
+  "session_wall_hours": 2.104446792933676,
+  "session_finished_utc": "2026-10-13T07:34:22.845765+00:00",
+  "completion_record": "experiments/011-completion.json",
+  "results_available": true
+}

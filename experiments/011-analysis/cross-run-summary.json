@@ -1,0 +1,316 @@
+{
+  "created_at_utc": "2026-10-13T07:50:01.175824+00:00",
+  "experiments": [
+    {
+      "id": "010",
+      "arm_order": [
+        "baseline",
+        "retrievable_animation"
+      ],
+      "summaries": {
+        "baseline": {
+          "games": 12,
+          "mean_AE": 26.050139253747506,
+          "mean_completion_ceiling": 27.91967291967292,
+          "mean_efficiency_gap": 1.8695336659254143,
+          "wins": 2,
+          "state_counts": {
+            "cancelled": 10,
+            "won": 2
+          },
+          "levels_completed": 34,
+          "number_of_levels": 91,
+          "actions": 2296,
+          "reset_actions": 11,
+          "analyzer_tokens": 2133883,
+          "history_tokens": 2037821,
+          "final_tokens": 0,
+          "recorded_tokens": 2037821,
+          "unattached_tokens": 96062,
+          "uncached_input_tokens": 0
+        },
+        "retrievable_animation": {
+          "games": 12,
+          "mean_AE": 29.93649438381064,
+          "mean_completion_ceiling": 30.852573352573355,
+          "mean_efficiency_gap": 0.9160789687627106,
+          "wins": 1,
+          "state_counts": {
+            "cancelled": 11,
+            "won": 1
+          },
+          "levels_completed": 37,
+          "number_of_levels": 91,
+          "actions": 2290,
+          "reset_actions": 16,
+          "analyzer_tokens": 2183455,
+          "history_tokens": 1986610,
+          "final_tokens": 0,
+          "recorded_tokens": 1986610,
+          "unattached_tokens": 196845,
+          "uncached_input_tokens": 0
+        }
+      },
+      "delta": {
+        "mean_AE": 3.8863551300631336,
+        "mean_completion_ceiling": 2.9329004329004356,
+        "mean_efficiency_gap": -0.9534546971627037,
+        "levels_completed": 3,
+        "wins": -1,
+        "actions": -6,
+        "analyzer_tokens": 49572,
+        "recorded_tokens": -51211,
+        "unattached_tokens": 100783,
+        "AE_relative_change": 0.14918749923780358,
+        "analyzer_tokens_relative_change": 0.02323088941614887,
+        "AE_better_equal_worse": {
+          "better": 6,
+          "equal": 2,
+          "worse": 4
+        }
+      }
+    },
+    {
+      "id": "011",
+      "arm_order": [
+        "retrievable_animation",
+        "baseline"
+      ],
+      "summaries": {
+        "baseline": {
+          "games": 12,
+          "mean_AE": 33.97939688381654,
+          "mean_completion_ceiling": 36.1537999037999,
+          "mean_efficiency_gap": 2.1744030199833606,
+          "wins": 2,
+          "state_counts": {
+            "cancelled": 10,
+            "won": 2
+          },
+          "levels_completed": 42,
+          "number_of_levels": 91,
+          "actions": 2501,
+          "reset_actions": 12,
+          "analyzer_tokens": 2138116,
+          "history_tokens": 2081423,
+          "final_tokens": 0,
+          "recorded_tokens": 2081423,
+          "unattached_tokens": 56693,
+          "uncached_input_tokens": 0
+        },
+        "retrievable_animation": {
+          "games": 12,
+          "mean_AE": 32.11570557712921,
+          "mean_completion_ceiling": 33.19925444925445,
+          "mean_efficiency_gap": 1.0835488721252409,
+          "wins": 2,
+          "state_counts": {
+            "cancelled": 10,
+            "won": 2
+          },
+          "levels_completed": 41,
+          "number_of_levels": 91,
+          "actions": 2517,
+          "reset_actions": 15,
+          "analyzer_tokens": 2185737,
+          "history_tokens": 2113287,
+          "final_tokens": 0,
+          "recorded_tokens": 2113287,
+          "unattached_tokens": 72450,
+          "uncached_input_tokens": 0
+        }
+      },
+      "delta": {
+        "mean_AE": -1.863691306687329,
+        "mean_completion_ceiling": -2.9545454545454533,
+        "mean_efficiency_gap": -1.0908541478581197,
+        "levels_completed": -1,
+        "wins": 0,
+        "actions": 16,
+        "analyzer_tokens": 47621,
+        "recorded_tokens": 31864,
+        "unattached_tokens": 15757,
+        "AE_relative_change": -0.05484768646894243,
+        "analyzer_tokens_relative_change": 0.02227241178682541,
+        "AE_better_equal_worse": {
+          "better": 3,
+          "equal": 2,
+          "worse": 7
+        }
+      }
+    }
+  ],
+  "combined_descriptive": {
+    "baseline": {
+      "mean_AE": 30.014768068782026,
+      "total_levels_across_two_runs": 76,
+      "total_wins_across_two_runs": 4,
+      "game_runs": 24,
+      "unique_games": 12
+    },
+    "retrievable_animation": {
+      "mean_AE": 31.026099980469926,
+      "total_levels_across_two_runs": 78,
+      "total_wins_across_two_runs": 3,
+      "game_runs": 24,
+      "unique_games": 12
+    }
+  },
+  "combined_mean_delta": 1.0113319116879005,
+  "game_rows": [
+    {
+      "game_id": "tn36-ef4dde99",
+      "delta_010": 31.85714285714286,
+      "delta_011": 32.8581596659828,
+      "mean_delta_descriptive": 32.35765126156283,
+      "levels_delta_010": 3,
+      "levels_delta_011": 3,
+      "query_calls_010": 4,
+      "query_calls_011": 0,
+      "both_positive": true,
+      "both_negative": false
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "delta_010": 11.099472634324805,
+      "delta_011": -21.63438106274129,
+      "mean_delta_descriptive": -5.267454214208243,
+      "levels_delta_010": 0,
+      "levels_delta_011": -1,
+      "query_calls_010": 0,
+      "query_calls_011": 1,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "delta_010": 0.0,
+      "delta_011": -13.54202298436703,
+      "mean_delta_descriptive": -6.771011492183515,
+      "levels_delta_010": 0,
+      "levels_delta_011": -2,
+      "query_calls_010": 32,
+      "query_calls_011": 5,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "delta_010": 4.444444444444445,
+      "delta_011": -1.322314049586777,
+      "mean_delta_descriptive": 1.5610651974288339,
+      "levels_delta_010": 1,
+      "levels_delta_011": 0,
+      "query_calls_010": 3,
+      "query_calls_011": 31,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "delta_010": 2.7777777777777777,
+      "delta_011": -7.112148183154798,
+      "mean_delta_descriptive": -2.1671852026885103,
+      "levels_delta_010": 1,
+      "levels_delta_011": -1,
+      "query_calls_010": 0,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "delta_010": -9.09090909090909,
+      "delta_011": -4.130100124196937,
+      "mean_delta_descriptive": -6.610504607553013,
+      "levels_delta_010": -2,
+      "levels_delta_011": -1,
+      "query_calls_010": 9,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": true
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "delta_010": 8.888888888888888,
+      "delta_011": 8.888888888888888,
+      "mean_delta_descriptive": 8.888888888888888,
+      "levels_delta_010": 1,
+      "levels_delta_011": 1,
+      "query_calls_010": 0,
+      "query_calls_011": 2,
+      "both_positive": true,
+      "both_negative": false
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "delta_010": -9.312820912367613,
+      "delta_011": -0.03451458166969168,
+      "mean_delta_descriptive": -4.673667747018652,
+      "levels_delta_010": -2,
+      "levels_delta_011": 0,
+      "query_calls_010": 0,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": true
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "delta_010": -9.6613991424984,
+      "delta_011": 26.52127960773968,
+      "mean_delta_descriptive": 8.42994023262064,
+      "levels_delta_010": -1,
+      "levels_delta_011": 2,
+      "query_calls_010": 0,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "delta_010": 70.92222522279233,
+      "delta_011": -42.85714285714286,
+      "mean_delta_descriptive": 14.032541182824737,
+      "levels_delta_010": 4,
+      "levels_delta_011": -2,
+      "query_calls_010": 0,
+      "query_calls_011": 5,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "delta_010": -55.288561118838366,
+      "delta_011": 0.0,
+      "mean_delta_descriptive": -27.644280559419183,
+      "levels_delta_010": -2,
+      "levels_delta_011": 0,
+      "query_calls_010": 0,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": false
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "delta_010": 0.0,
+      "delta_011": 0.0,
+      "mean_delta_descriptive": 0.0,
+      "levels_delta_010": 0,
+      "levels_delta_011": 0,
+      "query_calls_010": 0,
+      "query_calls_011": 0,
+      "both_positive": false,
+      "both_negative": false
+    }
+  ],
+  "decision": "Do not promote frozen010 animation candidate or spend a full25 confirmation run now; positive overall direction failed to replicate in011.",
+  "limitations": [
+    "Same12 diagnostic games repeated;24 game-runs per arm are not24 independent games.",
+    "Two orders each run once, stochastic decoding, shared scheduling, and011 passive timing instrumentation.",
+    "Descriptive pooling is not a significant improvement, causal estimate, or hidden-test generalization evidence."
+  ],
+  "source_sha256": {
+    "experiments/010-analysis/comparison.json": "99aa87544c8627cc81352882a19357c579e006388c4771c64e872d31dee4dc51",
+    "experiments/011-analysis/comparison.json": "7b3ae0804e7535b6667d6c5bc4a991a8c1abc1e09298f4d884fd1b65cb381486"
+  }
+}

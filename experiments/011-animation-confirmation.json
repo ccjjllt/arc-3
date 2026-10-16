@@ -1,0 +1,45 @@
+{
+  "id": "011-animation-confirmation",
+  "kernel_id": "ccjjllt/arc3-011-animation-confirmation",
+  "kernel_title": "ARC3 011 Animation Confirmation",
+  "purpose": "Reverse-order confirmation of frozen010 historical-animation retrieval, with identical passive timing in both arms; not a competition submission",
+  "games": [
+    "tn36-ef4dde99",
+    "sc25-635fd71a",
+    "sp80-589a99af",
+    "bp35-0a0ad940",
+    "sk48-d8078629",
+    "lf52-271a04aa",
+    "su15-1944f8ab",
+    "wa30-ee6fef47",
+    "g50t-5849a774",
+    "m0r0-492f87ba",
+    "ft09-0d8bbf25",
+    "ar25-0c556536"
+  ],
+  "game_source": "Exact same IDs/order as010 and006; unchanged12-game known diagnostic pool",
+  "game_count": 12,
+  "arm_order": [
+    "retrievable_animation",
+    "baseline"
+  ],
+  "requested_arm_seconds": 3482,
+  "budget_formula": "532 * 60 * game_count // 110",
+  "hard_limit_seconds": 9000,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 2.2,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true,
+  "intervention": "Capture public action animation frames and expose bounded read-only retrieval of older actions through the model tool interface; no automatic history summaries",
+  "selection_note": "Known diagnostic pool and successful controls, identical to006. Not an unseen holdout. No game-specific solution logic.",
+  "comparison_note": "Candidate first, baseline second. Frozen010 animation source, same12 full game IDs/order,3482s per arm,10 active streams,warmup0,one GPU model load,isolated CPU processes and cache flush. Passive request/gate observation installed in both arms; no scheduler/model/prompt/timeout/animation-API changes. Logging has nonzero overhead and does not make runs seed-matched. Report deltas relative to baseline regardless of run order; combine010 and011 descriptively, not as proof of hidden generalization.",
+  "reference_arm": "baseline",
+  "inference_timing": true,
+  "frozen_source_sha256": {
+    "src/arc3_research/retrievable_animation.py": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875"
+  }
+}
