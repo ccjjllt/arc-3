@@ -1,0 +1,58 @@
+{
+  "source_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+  "script_sha256": "c9eba8bc8e0047136a0be3e22d78d216b08a42b1dd7a520dd364589a097da6ad",
+  "kind": "synthetic_extracted_summary_and_accounting_block_not_live_toolagent_validation",
+  "checks": [
+    {
+      "name": "one_transition_records_one_reference_cost",
+      "passed": true
+    },
+    {
+      "name": "next_transition_records_second_reference_cost",
+      "passed": true
+    },
+    {
+      "name": "artificial_two_transition_summary_is_one_record",
+      "passed": true,
+      "semantic_boundary": "Artificial malformed caller input; normal action batch and snippet terminal guards prevent this sequence."
+    },
+    {
+      "name": "level_completed_is_terminal_for_host",
+      "passed": true
+    }
+  ],
+  "artificial_multi_summary": {
+    "start_action_num": 1,
+    "end_action_num": 2,
+    "executed_count": 2,
+    "executed_actions": [
+      "synthetic",
+      "synthetic"
+    ],
+    "level": 3,
+    "level_transition": true,
+    "run_complete": false,
+    "game_over": false,
+    "game_over_trace": [],
+    "fatal_action": "",
+    "board_changed": false,
+    "gameplay_changed": false,
+    "stop_reason": null,
+    "no_op_stops": [],
+    "animation": null,
+    "animation_action": "synthetic",
+    "guard_stops": []
+  },
+  "artificial_multi_recorded_completed_count": 1,
+  "artificial_multi_multiplier": 1.1119694069986104,
+  "normal_path_static_guards": [
+    "inference/framework/solver.py:1118-1126 stops batch at first level completion",
+    "inference/agent/tool_agent.py:5784-5810 refuses further snippet actions after terminal result",
+    "inference/agent/python_tool_sandbox.py:490 and :534-540 latch level completion"
+  ],
+  "limitations": [
+    "Did not instantiate full ToolAgent, invoke sandbox, or validate live session usage ledger.",
+    "Synthetic multi-transition input is not evidence of a production-reachable bug.",
+    "No model, game action, engine source, logged code execution, network or GPU."
+  ]
+}

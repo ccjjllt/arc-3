@@ -1,0 +1,150 @@
+[
+  {
+    "path": "runs/005-full-baseline/baseline/bp35-0a0ad940_p0_requests.jsonl",
+    "sha256": "c28529437257d944e88997aa3cef69ced0f0cbb3deab4d1784db3cf5105bf165",
+    "missing_name": "cams",
+    "previous_call": {
+      "call_first_line": 53,
+      "code": "def best_offset(gA, gB, lo=-40, hi=40, cols=(13,54)):\n    best=(-1,0)\n    for k in range(lo,hi+1):\n        m=0; tot=0\n        for r in range(64):\n            r2=r+k\n            if 0<=r2<64:\n                for c in range(*cols):\n                    tot+=1\n                    if rock(gA,r,c)==rock(gB,r2,c): m+=1\n        if tot and m/tot>best[0]: best=(m/tot,k)\n    return best\ncams=[0]\nfor i in range(1,len(history)):\n    gA=grid(history[i-1].frame); gB=grid(history[i].frame)\n    q,k = best_offset(gA,gB)\n    cams.append(cams[-1]-k)  # frame_i screen row r = world row r + cam_i ; gA[r] ~ gB[r+k] => cam_i = cam_{i-1} - k\n    print(i, history[i].action, 'k',k,'score',round(q,3),'cam',cams[-1])\nprint('cams', cams)\n",
+      "request_action": 13,
+      "result_first_line": 53,
+      "result": {
+        "tool": "python",
+        "function_retention": "Retained your function best_offset(gA, gB, lo=-40, hi=40, cols=(13, 54)) for later Python calls in this game.",
+        "returncode": 0,
+        "stdout": "1 RIGHT k 0 score 0.989 cam 0\n2 LEFT k 0 score 0.989 cam 0\n3 MOUSE(row=50, col=40) k 0 score 1.0 cam 0\n4 RIGHT k 0 score 0.989 cam 0\n5 RIGHT k 0 score 0.989 cam 0\n6 RIGHT k 0 score 0.989 cam 0\n7 RIGHT k 18 score 0.984 cam -18\n8 MOUSE(row=33, col=33) k 0 score 0.988 cam -18\n9 LEFT k 0 score 0.989 cam -18\n10 LEFT k 24 score 0.986 cam -42\n11 LEFT k 0 score 1.0 cam -42\n12 MOUSE(row=33, col=27) k 0 score 0.99 cam -42\ncams [0, 0, 0, 0, 0, 0, 0, -18, -18, -18, -42, -42, -42]\n"
+      },
+      "message_sha256": "a4c800c0ede8999ce440076910d265c9dce78624d3adf4e44cd5e80d54ce707d"
+    },
+    "error_call": {
+      "call_first_line": 55,
+      "code": "W0,W1 = -120, 80\nrockmap = {}\ngreenmap = {}\nwatermap = {}\nfor i,h in enumerate(history):\n    g = grid(h.frame); c = cams[i]\n    for r in range(64):\n        wr = r + c\n        if not (W0<=wr<W1): continue\n        row = g[r]\n        for cc in range(64):\n            ch = row[cc]\n            if ch in 'BG': rockmap[(wr,cc)] = 1\n            elif ch=='N': greenmap[(wr,cc)] = 1\n            elif ch=='S': watermap[(wr,cc)] = 1\nprint('rock cells', len(rockmap), 'green', len(greenmap), 'water', len(watermap))\n# print world map rows where anything exists\nimport collections\nrows = sorted({p[0] for p in rockmap}|{p[0] for p in greenmap})\nprint('world rows range', min(rows), max(rows))\n# render map compactly for world rows -120..80 step 1, cols 10..56: chars: # rock, N green, . water-only\ndef cell(wr,cc):\n    if (wr,cc) in greenmap: return 'N'\n    if (wr,cc) in rockmap: return '#'\n    if (wr,cc) in watermap: return '.'\n    return ' '\nlines=[]\nfor wr in range(-120,80):\n    s = ''.join(cell(wr,cc) for cc in range(10,57))\n    if s.strip(): lines.append((wr,s))\nprint(len(lines))\nfor wr,s in lines:\n    print(f'{wr:4d} {s}')\n",
+      "request_action": 13,
+      "result_first_line": 55,
+      "result": {
+        "tool": "python",
+        "function_retention": "Your function cell was not retained: definition did not execute, was removed/replaced, or conflicts with a provided name. Pass snippet-specific data as arguments or redefine it if needed.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nNameError: name 'cams' is not defined"
+      },
+      "message_sha256": "442e16bfba58a7aaa2979eaa809bdb538db00d5e30401785724f1891c0e7db1d"
+    }
+  },
+  {
+    "path": "runs/005-full-baseline/baseline/cd82-fb555c5d_p0_requests.jsonl",
+    "sha256": "f79559fb1523009403b4eb0d50b23226790737ffba60a7bb0e6abfb10019bdf7",
+    "missing_name": "STAMPS",
+    "previous_call": {
+      "call_first_line": 57,
+      "code": "def make_target():\n    prev = [\"pppppppppO\",\"ppppppppOO\",\"pppppppOOO\",\"ppppppOOOO\",\"pppppOOOOO\",\n            \"WWWWOOOOOO\",\"WWWOOOOOOO\",\"WWOOOOOOOO\",\"WOOOOOOOOO\",\"OOOOOOOOOO\"]\n    return [[prev[i][j] for j in range(10)] for i in range(10)]\n# stamps as predicate on (u,v): u=row-34, v=col-27\nSTAMPS = {\n 'top':   lambda u,v: u<=4,\n 'ul':    lambda u,v: u+v<=9,\n 'ur':    lambda u,v: u<=v,\n 'right': lambda u,v: v>=5,\n 'lr':    lambda u,v: u+v>=10,\n 'bottom':lambda u,v: u>=5,\n 'll':    lambda u,v: u>v,\n}\ndef cells(f): return [(u,v) for u in range(10) for v in range(10) if f(u,v)]\nfor k,f in STAMPS.items(): print(k, len(cells(f)))\ntgt = make_target()\nfrom collections import Counter\nprint(Counter(tgt[u][v] for u in range(10) for v in range(10)))\n",
+      "request_action": 55,
+      "result_first_line": 57,
+      "result": {
+        "tool": "python",
+        "function_retention": "Retained your function make_target() for later Python calls in this game.\nRetained your function cells(f) for later Python calls in this game.",
+        "returncode": 0,
+        "stdout": "top 50\nul 55\nur 55\nright 50\nlr 45\nbottom 50\nll 45\nCounter({'O': 55, 'p': 35, 'W': 10})\n"
+      },
+      "message_sha256": "eed425645b425f71c06915b7f6706e9db637ddd79eaff199e271699a8e76c164"
+    },
+    "error_call": {
+      "call_first_line": 59,
+      "code": "def solve_layering(tgt, stamps, maxd=5):\n    colors = ['p','O','W']\n    full = [[tgt[u][v] for v in range(10)] for u in range(10)]\n    def rec(con, depth, path):\n        # con: dict (u,v)->color or None if don't care\n        rem = [k for k,c in con.items() if c is not None]\n        if not rem or all(con[k]=='W' for k in rem):\n            return list(path)\n        if depth == 0:\n            return None\n        # candidate last-pour: stamp region must be monochrome among constrained cells\n        cands = []\n        for sname,f in stamps.items():\n            reg = cells(f)\n            for col in colors:\n                ok = True; covers = 0\n                for (u,v) in reg:\n                    c = con[(u,v)]\n                    if c is not None:\n                        if c != col: ok = False; break\n                        covers += 1\n                if ok and covers>0:\n                    cands.append((covers, sname, col, reg))\n        cands.sort(reverse=True)\n        for covers, sname, col, reg in cands:\n            newcon = dict(con)\n            for cell in reg: newcon[cell] = None\n            path.append((sname,col))\n            res = rec(newcon, depth-1, path)\n            if res: return res\n            path.pop()\n        return None\n    con = {(u,v): full[u][v] for u in range(10) for v in range(10)}\n    for d in range(1, maxd+1):\n        r = rec(con, d, [])\n        if r: return d, r\n    return None, None\nres = solve_layering(make_target(), STAMPS, 5)\nprint(res)\n",
+      "request_action": 55,
+      "result_first_line": 59,
+      "result": {
+        "tool": "python",
+        "function_retention": "Retained your function solve_layering(tgt, stamps, maxd=5) for later Python calls in this game.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 38, in <module>\nNameError: name 'STAMPS' is not defined"
+      },
+      "message_sha256": "2b7c69bbb086ba3817c288b77c2ca2f821410ad30c69e74e8535debc496d2500"
+    }
+  },
+  {
+    "path": "runs/005-full-baseline/baseline/re86-8af5384d_p0_requests.jsonl",
+    "sha256": "e291971493fd993b3c7a821b44ae9412dfcd4000676f82a54be84a8515292250",
+    "missing_name": "sols",
+    "previous_call": {
+      "call_first_line": 113,
+      "code": "import itertools\nbdots=[(6,21),(6,39),(45,33),(51,24),(51,45),(60,33)]\nrdots=[(27,51),(36,42)]\nbblk={(r,c) for r in range(53,57) for c in range(4,8)}\nrblk={(r,c) for r in range(53,57) for c in range(55,59)}\nshapes={'X':(lambda c: xcells(c,11),(42,24)),\n        'D':(lambda c: diamond_cells(c,9),(18,30)),\n        'P':(lambda c: plus_cells(c,14),(33,54))}\nallpos=[(r,c) for r in range(0,64,3) for c in range(0,64,3)]\ncellcache={s:{p:shapes[s][0](p) for p in allpos} for s in shapes}\ndef d3(a,b): return (abs(a[0]-b[0])+abs(a[1]-b[1]))//3\n# masks for blue\nmaskb={s:{p:sum(1<<i for i,dd in enumerate(bdots) if dd in cellcache[s][p]) for p in allpos} for s in shapes}\nmaskr={s:{p:all(dd in cellcache[s][p] for dd in rdots) for p in allpos} for s in shapes}\ndef pickup(s,start,final,blk):\n    best=None\n    for T in allpos:\n        if cellcache[s][T] & blk:\n            t=d3(start,T)+d3(T,final)\n            if best is None or t<best: best=t\n    return best\nfull=63\nsols=[]\nfor A,B,C in itertools.permutations(shapes,3):\n    for pA in allpos:\n        mA=maskb[A][pA]\n        if not mA: continue\n        cA=d3(shapes[A][1],pA)\n        for pB in allpos:\n            mB=maskb[B][pB]\n            if (mA|mB)!=full: continue\n            cB=d3(shapes[B][1],pB)\n            if not maskr[C][pB] and False: continue\n            for pC in allpos:\n                if not maskr[C][pC]: continue\n                cC=d3(shapes[C][1],pC)\n                tot=cA+cB+cC\n                sols.append((tot,A,pA,mA,B,pB,mB,C,pC))\nsols.sort()\nprint('n',len(sols))\nfor s in sols[:3]:\n    print('base',s[0],s[1],s[2],bin(s[3]),s[4],s[5],bin(s[6]),s[7],s[8])\n",
+      "request_action": 207,
+      "result_first_line": 113,
+      "result": {
+        "tool": "python",
+        "function_retention": "Your function pickup was not retained: unavailable dependencies: allpos, cellcache. Pass snippet-specific data as arguments or redefine it if needed.",
+        "returncode": 0,
+        "stdout": "n 16\nbase 25 D (6, 30) 0b11 P (51, 33) 0b111100 X (36, 42)\nbase 25 P (51, 33) 0b111100 D (6, 30) 0b11 X (36, 42)\nbase 27 D (6, 30) 0b11 P (51, 33) 0b111100 X (33, 45)\n"
+      },
+      "message_sha256": "68ffda6f9b86e57f75d4352f662cc0f3b0dd82c678ddc302aa8c5a2a0879ad27"
+    },
+    "error_call": {
+      "call_first_line": 115,
+      "code": "def pickup_cost(s,start,final,blk):\n    best=None\n    for T in allpos:\n        if cellcache[s][T] & blk:\n            t=d3(start,T)+d3(T,final)\n            if best is None or t<best: best=t\n    return best\nres=[]\nfor s in sols:\n    tot,pA,pB,pC = s[0],s[2],s[5],s[8]\n    pa=pickup_cost(s[1],shapes[s[1]][1],pA,bblk)\n    pb=pickup_cost(s[4],shapes[s[4]][1],pB,bblk)\n    pc=pickup_cost(s[7],shapes[s[7]][1],pC,rblk)\n    if None in (pa,pb,pc): continue\n    res.append((pa+pb+pc, s[1],pA,s[4],pB,s[7],pC,(pa,pb,pc)))\nres.sort()\nfor r in res[:6]:\n    print('total',r[0],r[1],r[2],r[3],r[4],r[5],r[6],'pickups',r[7])\n",
+      "request_action": 207,
+      "result_first_line": 115,
+      "result": {
+        "tool": "python",
+        "function_retention": "Your function pickup_cost was not retained: unavailable dependencies: allpos, cellcache. Pass snippet-specific data as arguments or redefine it if needed.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nNameError: name 'sols' is not defined"
+      },
+      "message_sha256": "de67b50479b50aaa3e258c21765ba65fc9f0d4b5b689436e942bf6fa30c70275"
+    }
+  },
+  {
+    "path": "runs/012-current-data/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+    "sha256": "12d10c195a4f200e1acad71cad5f55d252a7f81d0362fefa8615fb8ada8aa1ea",
+    "missing_name": "cl",
+    "previous_call": {
+      "call_first_line": 21,
+      "code": "def solve(fr, verbose=True):\n    cells, rows, cols, ri, ci, minis, A = analyze(fr)\n    found=[]\n    for r in rows:\n        for c in cols:\n            if (r,c) in cells: continue\n            blk = set(A[r+2*i][c+2*j] for i in range(3) for j in range(3))\n            if blk <= set('WgORbY') and len(blk)>1:\n                found.append((r,c))\n    # level colors from top-right swatches (16px blocks near col>=60)\n    sw=[(n['color'],n['pixels']) for n in fr.segmentation['nodes'] if n['pixels'] in (4,16) and n['boundary'][0][1]>=56 and n['boundary'][0][0]<=10]\n    colors=[c for c,_ in sw]\n    if len(colors)!=2: colors=['R','O']\n    target={}\n    conflicts=[]\n    for (r,c) in found:\n        pat = mini_pattern(A,r,c)\n        ctr = pat[1][1]\n        other = [x for x in colors if x!=ctr]\n        other = other[0] if other else None\n        for i in range(3):\n            for j in range(3):\n                if i==1 and j==1: continue\n                gr, gc = rows[ri[r]+i-1] if 0<=ri[r]+i-1<len(rows) else None, cols[ci[c]+j-1] if 0<=ci[c]+j-1<len(cols) else None\n                if gr is None or gc is None: continue\n                if (gr,gc) not in cells: continue\n                col = ctr if pat[i][j]=='W' else (other if pat[i][j]=='g' else None)\n                if col is None: continue\n                if (gr,gc) in target and target[(gr,gc)]!=col: conflicts.append(((gr,gc),target[(gr,gc)],col))\n                target[(gr,gc)]=col\n    clicks=[(r+2,c+2) for (r,c),col in sorted(target.items()) if cells[(r,c)]!=col]\n    if verbose:\n        print('colors',colors,'minis',found,'conflicts',conflicts)\n        print('target grid:')\n        for r in rows:\n            print(' ', ''.join((target.get((r,c)) or ('.' if (r,c) in cells else 'm'))[0] for c in cols))\n        print('current grid:')\n        for r in rows:\n            print(' ', ''.join((cells.get((r,c)) or 'm')[0] for c in cols))\n        print('clicks', len(clicks), clicks)\n    return clicks\n\ncl = solve(current_frame)\n",
+      "request_action": 12,
+      "result_first_line": 21,
+      "result": {
+        "tool": "python",
+        "function_retention": "Retained your function solve(fr, verbose=True) for later Python calls in this game.",
+        "returncode": 0,
+        "stdout": "colors ['R', 'O'] minis [(12, 28), (28, 20), (28, 36), (44, 28)] conflicts []\ntarget grid:\n  mOOOm\n  mOmRm\n  ORORR\n  OmRmO\n  RRORO\n  mOmRm\n  mOOOm\ncurrent grid:\n  mRRRm\n  mRmRm\n  RRRRR\n  RmRmR\n  RRRRR\n  mRmRm\n  mRRRm\nclicks 14 [(6, 22), (6, 30), (6, 38), (14, 22), (22, 14), (22, 30), (30, 14), (30, 46), (38, 30), (38, 46), (46, 22), (54, 22), (54, 30), (54, 38)]\n"
+      },
+      "message_sha256": "ad67109cb7e1a4d6cefe1a33bbf991dd504042f4f613f72a1572b567f74b383d"
+    },
+    "error_call": {
+      "call_first_line": 23,
+      "code": "r = action([{'action':'MOUSE','row':a,'col':b} for a,b in cl])\nprint({k:v for k,v in r.items() if k not in ('frames','action_trace','executed_actions')})\nprint(r.get('action_trace',[])[-3:])\n",
+      "request_action": 12,
+      "result_first_line": 23,
+      "result": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nNameError: name 'cl' is not defined"
+      },
+      "message_sha256": "681f544d40aca4868e44218798e9f119adb004f27c03f38b5e34ba269d3f6bce"
+    }
+  },
+  {
+    "path": "runs/012-current-data/current_data/ft09-0d8bbf25_p0_requests.jsonl",
+    "sha256": "bf3488631365638a38941b29884e844956b2146f9f218459e398ba3df7fd4e9d",
+    "missing_name": "LV",
+    "previous_call": {
+      "call_first_line": 129,
+      "code": "def build(idx_start,idx_final,r0,c0,nR,nC):\n    cs=extract(history[idx_start].frame,r0,c0,nR,nC); cf=extract(history[idx_final].frame,r0,c0,nR,nC)\n    pats={k:v[1] for k,v in cs.items() if v[0]=='P'}\n    plain={k:v[1] for k,v in cf.items() if v[0]=='U'}\n    return dict(pats=pats,plain=plain,present=set(plain)|set(pats),\n                dots={k:v.split('/')[1][1] for k,v in pats.items()},\n                start={k:v[1] for k,v in cs.items() if v[0]=='U'})\nLV={'L2':build(4,10,14,20,5,3),'L3':build(11,24,12,12,6,5),'L4':build(25,48,14,12,5,5)}\ndef dihmap(name,i,j):\n    return {'id':(i,j),'rot90':(j,-i),'rot180':(-i,-j),'rot270':(-j,i),\n            'flipH':(i,-j),'flipV':(-i,j),'flipD':(j,i),'flipAD':(-j,-i)}[name]\nfor name in ['id','rot90','rot180','rot270','flipH','flipV','flipD','flipAD']:\n    f={}; conf=0; oob=0; miss=0\n    for lbl,L in LV.items():\n        for k,s in L['pats'].items():\n            m=s.split('/'); dot=L['dots'][k]\n            for i in range(3):\n                for j in range(3):\n                    if (i,j)==(1,1): continue\n                    c=m[i][j]\n                    if c=='G': continue\n                    di,dj=dihmap(name,i-1,j-1)\n                    cell=(k[0]+di,k[1]+dj)\n                    if cell not in L['present']: oob+=1; continue\n                    obs=L['plain'].get(cell, L['dots'].get(cell))\n                    key=(dot,c)\n                    if key in f:\n                        if f[key]!=obs: conf+=1\n                    else: f[key]=obs\n    print(name,'conflicts',conf,'clue-cells pointing OOB',oob,'f',dict(sorted(f.items())))\n",
+      "request_action": 123,
+      "result_first_line": 129,
+      "result": {
+        "tool": "python",
+        "function_retention": "Retained your function build(idx_start, idx_final, r0, c0, nR, nC) for later Python calls in this game.\nRetained your function dihmap(name, i, j) for later Python calls in this game.",
+        "returncode": 0,
+        "stdout": "id conflicts 19 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'b', ('R', 'W'): 'R', ('R', 'g'): 'O', ('b', 'W'): 'b', ('b', 'g'): 'R'}\nrot90 conflicts 41 clue-cells pointing OOB 3 f {('O', 'W'): 'b', ('O', 'g'): 'O', ('R', 'W'): 'R', ('R', 'g'): 'O', ('b', 'W'): 'R', ('b', 'g'): 'R'}\nrot180 conflicts 40 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'b', ('R', 'W'): 'R', ('R', 'g'): 'O', ('b', 'W'): 'R', ('b', 'g'): 'b'}\nrot270 conflicts 36 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'O', ('R', 'W'): 'O', ('R', 'g'): 'R', ('b', 'W'): 'R', ('b', 'g'): 'R'}\nflipH conflicts 47 clue-cells pointing OOB 3 f {('O', 'W'): 'b', ('O', 'g'): 'b', ('R', 'W'): 'R', ('R', 'g'): 'O', ('b', 'W'): 'b', ('b', 'g'): 'R'}\nflipV conflicts 35 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'b', ('R', 'W'): 'R', ('R', 'g'): 'R', ('b', 'W'): 'R', ('b', 'g'): 'R'}\nflipD conflicts 36 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'O', ('R', 'W'): 'O', ('R', 'g'): 'O', ('b', 'W'): 'R', ('b', 'g'): 'R'}\nflipAD conflicts 34 clue-cells pointing OOB 3 f {('O', 'W'): 'O', ('O', 'g'): 'O', ('R', 'W'): 'R', ('R', 'g'): 'O', ('b', 'W'): 'R', ('b', 'g'): 'b'}\n"
+      },
+      "message_sha256": "83a2a3cc8b59524d4bb305e9afc47b739ef1d87fdcdf8f7f0432c5379ab0199d"
+    },
+    "error_call": {
+      "call_first_line": 131,
+      "code": "for lbl,L in LV.items():\n    W={}; G={}\n    badW=[]; badG=[]\n    colors=set(L['plain'].values())|set(L['dots'].values())\n    for k,s in L['pats'].items():\n        m=s.split('/'); dot=L['dots'][k]\n        for i in range(3):\n            for j in range(3):\n                if (i,j)==(1,1): continue\n                c=m[i][j]\n                if c=='G': continue\n                cell=(k[0]+i-1,k[1]+j-1)\n                if cell not in L['present']: continue\n                obs=L['plain'].get(cell,L['dots'].get(cell))\n                if c=='W':\n                    if obs!=dot: badW.append((k,(i,j),cell,obs,dot))\n                elif c=='g':\n                    if obs==dot: badG.append((k,(i,j),cell,obs,dot))\n                else:\n                    if obs!=c: badG.append(('literal',k,(i,j),cell,c,obs))\n    print(lbl,'colors',sorted(colors),'W!=dot:',len(badW),'g==dot or literal-mismatch:',len(badG))\n    print('   badW',badW)\n    print('   badG',badG)\n    # also: cells never referenced by any clue\n    ref=set()\n    for k,s in L['pats'].items():\n        m=s.split('/')\n        for i in range(3):\n            for j in range(3):\n                if (i,j)==(1,1) or m[i][j]=='G': continue\n                ref.add((k[0]+i-1,k[1]+j-1))\n    unref=[c for c in L['plain'] if c not in ref]\n    print('   unreferenced cells',unref, 'their colors',[L['plain'][c] for c in unref], 'start colors',[L['start'].get(c) for c in unref])\n",
+      "request_action": 123,
+      "result_first_line": 131,
+      "result": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nNameError: name 'LV' is not defined"
+      },
+      "message_sha256": "eef78245f6bf7181e248919536ea6ecda6fdbf567b7624d4158b409341fb79f1"
+    }
+  }
+]

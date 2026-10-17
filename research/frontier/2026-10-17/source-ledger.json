@@ -1,0 +1,98 @@
+{
+  "accessed_date": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "method": "Read primary paper HTML and arXiv version histories, official evaluation pages and author repositories through web tools. No third-party code installed or executed; no GPU/model requests.",
+  "local_baseline_checks": [
+    {
+      "path": "research/notebooks/dfranzen__arc-agi-3-milestone-2-solution.py",
+      "line": 10236,
+      "finding": "Current Franzen configuration sets ARC3_MEMORY_SECTIONS='off'. World/Goal section code exists but is not an enabled baseline capability."
+    },
+    {
+      "path": "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py",
+      "lines": [1490, 3930],
+      "finding": "The off switch removes carried memory sections, guidance, nudges and parsing; memory-section output returns empty. Offline annotation may reuse field concepts, but online reenabling is a separate prompt/memory intervention."
+    }
+  ],
+  "sources": [
+    {
+      "id": "memento3",
+      "url": "https://arxiv.org/html/2610.11794v1",
+      "version_history": "https://arxiv.org/abs/2610.11794",
+      "version": "v1",
+      "published_date": "2026-10-08",
+      "checked": "Sections 2.2-2.4, 3, 4; Tables 1-4; all-public setting, model/effort, exact replay, targeted ablations and population comparison",
+      "unresolved": "Author implementation not located; no matched token/wall-clock budget or independent replicate study; exact model observation encoding not specified clearly enough to label text-only or image-only"
+    },
+    {
+      "id": "prolong",
+      "url": "https://arxiv.org/html/2607.20064v3",
+      "version_history": "https://arxiv.org/abs/2607.20064",
+      "version": "v3",
+      "published_date": "2026-07-22",
+      "revision_date": "2026-10-12",
+      "checked": "Sections 2-3 and Appendices A/B: evaluation caps, repeated runs, pass@1/best@k, tools/workspace/context ablations and billed-token definition",
+      "author_repository": "https://github.com/alexisfox7/PRO-LONG",
+      "research_path": "https://github.com/alexisfox7/PRO-LONG/tree/main/research/arc-agi-3",
+      "unresolved": "No local Flash-Next, single GPU or competition wall-clock matched experiment"
+    },
+    {
+      "id": "vista",
+      "url": "https://arxiv.org/html/2610.02200v1",
+      "version_history": "https://arxiv.org/abs/2610.02200",
+      "version": "v1",
+      "published_date": "2026-10-01",
+      "checked": "Section 4, A.2, B.1/B.2; modality, context/image-scale tradeoffs, budgets and repeat runs",
+      "unresolved": "No competition-eligible Flash-Next and 9-hour replication; live webpage and paper report different VISTA action totals"
+    },
+    {
+      "id": "tracing",
+      "url": "https://arxiv.org/html/2610.11450v1",
+      "version_history": "https://arxiv.org/abs/2610.11450",
+      "version": "v1",
+      "published_date": "2026-10-08",
+      "checked": "Sections 3-4 and Table 1; run conditions, Qwen backbone/hardware, script transfer and prose correction behavior",
+      "unresolved": "Not a matched causal intervention; seven heterogeneous runs; no unified compute budget"
+    },
+    {
+      "id": "tycho",
+      "url": "https://arxiv.org/html/2607.28287v1",
+      "version_history": "https://arxiv.org/abs/2607.28287",
+      "version": "v1",
+      "published_date": "2026-07-30",
+      "checked": "Sections 4, 5 and 7; Tables 2/6/7/8, inference limits, post-action limit boundary, pre-action model diagnostics",
+      "unresolved": "No repeated matched policies or hidden/local-model evaluation; low-budget curves are retrospective prefixes"
+    },
+    {
+      "id": "twin",
+      "url": "https://arxiv.org/html/2608.14490v1",
+      "version_history": "https://arxiv.org/abs/2608.14490",
+      "version": "v1",
+      "published_date": "2026-08-14",
+      "checked": "Main results; Appendices C/D/I/J, no-vision observation, compute accounting and goal vs dynamics distinction",
+      "unresolved": "No equal-compute no-twin comparison or local GPU replication"
+    },
+    {
+      "id": "avo",
+      "url": "https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/",
+      "version": "live official page",
+      "displayed_published_date": "2026-08-21",
+      "checked": "Evaluating AVO on ARC-AGI-3 section: text-only interface, Opus 5, public-only evaluation, non-ablation caveat",
+      "unresolved": "ARC compute/time ceilings and independent repeats not disclosed in checked section; kernel experiment budget is a different task"
+    },
+    {
+      "id": "gemini4_argon",
+      "url": "https://arcprize.org/results/google-gemini-4-argon",
+      "version": "live official result page",
+      "checked": "Semi-private scores, harness definitions, 55-task coverage and standard-harness API incompletions; separate 25-game public table",
+      "unresolved": "Harness score delta confounded by incomplete standard runs; not an offline competition deployment"
+    },
+    {
+      "id": "rellik13_writeup",
+      "url": "https://github.com/LohitSiriki/arc-agi-3-milestone2-solution/blob/main/WRITEUP.md",
+      "version": "main as accessed; no immutable commit captured",
+      "checked": "Local Qwen3.8-Flash-Next and SGLang context/cache narrative, 22.53 historical public result, author-reported variance and prompt regressions",
+      "unresolved": "A historical author account, not current leaderboard rank or isolated randomized evidence; detailed notebook investigation handled separately"
+    }
+  ]
+}
