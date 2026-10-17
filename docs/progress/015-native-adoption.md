@@ -1,6 +1,6 @@
 # 015 采用筛选进展
 
-日期：2026-10-17 夜。状态：**jiyujia/arc3-015-native-adoption-screen v1 RUNNING；完整集成 28 项 CPU 已通过，GPU 采用结果未回。** 对应[计划](../plan/015-native-adoption.md)、[决策](../../research/015-016-research-decision.md)。
+日期：2026-10-17 夜启动，10-18 回包。状态：**jiyujia/arc3-015-native-adoption-screen v1 COMPLETE；21.8289→33.2937（+11.4647），13→15 关，但未过自然采用门，不进全池 A/B。** 对应[计划](../plan/015-native-adoption.md)、[决策](../../research/015-016-research-decision.md)、[结果](../../research/015-results-analysis.md)。
 
 - 集成新增 src/arc3_research/native_values.py：成功无动作整命名空间原子提交，动作/RESET/跨关/错误/超时失效，32 名/64KiB/16 层/4096 节点，exact builtins only。prompt 只纠正短期寿命，不新增 API。
 - CPU：原型 56 项 + 集成 28 项（7+21）通过；修复 NV_LIMITS 缺失与执行器 bootstrap 绑定。无模型/HTTP/引擎动作回放。
