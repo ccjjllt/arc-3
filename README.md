@@ -1,12 +1,12 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目研究：**2026-10-17，Asia/Shanghai**；最新已完成GPU实验为012（10/13）。
+目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目研究：**2026-10-17，Asia/Shanghai**；最新已完成GPU实验为014（10/17）。
 
 **009 v2正式评测已COMPLETE：31.16分；10/17公开榜第324名/4388队。** 当前队数估计金牌附近第18名38.20，前五参照48.92；最终看私榜、有效队数及资格。submission 57101330，原生Notebook和冻结源码未变。历史正式链路见[009进展](docs/progress/009-baseline-submission.md)，最新位置见[013赛情](research/013-competition-update.md)。
 
-**013深度研究已完成，尚无新GPU结果。** 更新12份公开Notebook源码及前沿论文，审计60份选取日志的5445次Python调用；发现106次NameError及多条成功计算后跨snippet丢值链。下一轮先做全25游戏baseline→80k tail单开关对照，预计4.3h，正向才倒序确认；原生同观察普通值交接先CPU合同、再≤1h自然采用筛选。013结题时尚未实现tail臂；现已推进到下方014，代码完成仍不等于提分结果。详见[013综合决策](research/013-research-decision.md)、[计划](docs/plan/013-research-next.md)、[进展](docs/progress/013-research-next.md)。10/17研究启动时共享GPU余额约29.37h、预留0，下次10/24 08:00北京刷新；下文旧余额均为历史快照。10/16工作人员已回复模型许可问题，但表示无法解释，奖金资格仍未明确。
+**013深度研究已完成，014首轮结果已回收。** 更新12份公开Notebook源码及前沿论文，审计60份选取日志的5445次Python调用；发现106次NameError及多条成功计算后跨snippet丢值链。当时确定先做全25游戏baseline→80k tail单开关对照，预计4.3h，通过门槛才倒序确认；原生同观察普通值交接先CPU合同、再≤1h自然采用筛选。014结果与当前决策见下方。详见[013综合决策](research/013-research-decision.md)、[计划](docs/plan/013-research-next.md)、[进展](docs/progress/013-research-next.md)。10/17研究启动时原账号GPU余额约29.37h、预留0，下次10/24 08:00北京刷新；下文旧余额均为历史快照。10/16工作人员已回复模型许可问题，但表示无法解释，奖金资格仍未明确。
 
-**014 v1已推送至队员jiyujia账号，10/17 17:08北京状态QUEUED。** 用户已明确要求使用队员账号运行；[私有Notebook](https://www.kaggle.com/code/jiyujia/arc3-014-tail-allocation)的远端源码与冻结正文一致，GPU/断网/私有设置已核对。全25游戏两臂各7254秒，共用一次模型加载、10活跃流，预计4.3h、硬限5h。队员启动前配额30h、已用/预留0；排队快照仍为0，尚无运行结果。已增加模型前CPU preflight、真实队列观察、截止请求检查、缓存backend确认和整进程组清理；手动CPU与原生Notebook检查通过。[014计划](docs/plan/014-tail-allocation.md)、[进展](docs/progress/014-tail-allocation.md)。另有[015原生值CPU原型](experiments/015-native-values/README.md)：56项人工合同通过，尚无完整ToolAgent/SDK集成及模型采用证据，未加入014。
+**014 v1已COMPLETE，未通过晋升门槛：47.1991→48.6390（+1.4399），110→108关，7→8全通。** 加权完成覆盖50.7665→50.4649下降；去掉最大正向游戏vc33后，其余24游戏平均差−1.7929。同25游戏/顺序、两臂各7254秒、10活跃流、源码与缓存清理均有效；50局得分复算一致。求解GPU平均92.80%/92.91%，会话内部4.2034h；队员账号额度累计增加4.7905h、剩余25.21h/预留0，两个时间口径分开记录。保留正式009/31.16，不提交当前tail、不花4.3h做同版倒序确认；下一步先CPU完成015真实集成，再决定≤1h自然采用筛选。[014结果](research/014-results-analysis.md)、[计划](docs/plan/014-tail-allocation.md)、[进展](docs/progress/014-tail-allocation.md)。[015原型](experiments/015-native-values/README.md)已有56项人工合同，但仍无完整ToolAgent/SDK集成及模型采用证据。
 
 **010 v1已完成：公开同池26.0501→29.9365（+3.8864），关卡34→37/91，全通2→1。** 4局实际使用旧动画，28次非latest命中；最大涨分m0r0没有查询，新API独立收益和稳定性尚未确认。保留候选，不晋升正式版本。实测会话2.1266h，GPU预算内90.60%/93.09%；010完成时账户余额约5.40h（历史快照），10/17 08:00北京刷新。见[010结果](research/010-results-analysis.md)、[采用分析](research/010-intervention-analysis.md)、[010进展与下一步](docs/progress/010-retrievable-animation.md)。
 
@@ -39,7 +39,7 @@
 | [011 计划](docs/plan/011-animation-confirmation.md) / [011 进展](docs/progress/011-animation-confirmation.md) | v1完成：33.9794→32.1157、42→41关；整体增益未复现，暂不晋升 |
 | [012 计划](docs/plan/012-current-data.md) / [012 进展](docs/progress/012-current-data.md) | v1完成：45.0764→27.7582、51→38关；0次get、无复用链，不晋升 |
 | [013 计划](docs/plan/013-research-next.md) / [013 进展](docs/progress/013-research-next.md) | 10/17赛情、12份Notebook、前沿与CPU审计；优先tail全25单因素，原生值采用筛选；未启动GPU |
-| [014 计划](docs/plan/014-tail-allocation.md) / [014 进展](docs/progress/014-tail-allocation.md) | 全25 tail对照v1已推送至队员jiyujia账号，远端源码已核对；10/17 17:08北京QUEUED，尚无结果 |
+| [014 计划](docs/plan/014-tail-allocation.md) / [014 进展](docs/progress/014-tail-allocation.md) | v1完成：47.1991→48.6390、110→108关；覆盖下降，未过门槛，不晋升/不倒序扩跑；转015 CPU集成 |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |
 | [前沿研究](research/frontier-findings.md) | 一手论文/官方报告、可迁移机制、协议与资源限制 |
