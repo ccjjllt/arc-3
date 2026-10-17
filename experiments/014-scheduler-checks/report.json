@@ -1,0 +1,374 @@
+{
+  "checks": [
+    {
+      "name": "idempotent_same_settings",
+      "passed": true
+    },
+    {
+      "name": "timing_wrapper_identity_unchanged",
+      "passed": true
+    },
+    {
+      "name": "priority_and_fifo_admission_preserved",
+      "passed": true
+    },
+    {
+      "name": "real_snapshot_reprice_preserved",
+      "passed": true
+    },
+    {
+      "name": "handover_atomic_competition_preserved",
+      "passed": true
+    },
+    {
+      "name": "original_errors_and_partial_state_preserved",
+      "passed": true
+    },
+    {
+      "name": "all_threads_and_slots_drained",
+      "passed": true
+    },
+    {
+      "name": "selection_precedes_waiter_return",
+      "passed": true
+    },
+    {
+      "name": "selected_true_priority_and_snapshot",
+      "passed": true
+    },
+    {
+      "name": "waiting_owner_not_release_thread",
+      "passed": true
+    },
+    {
+      "name": "real_reprice_timestamp_recorded",
+      "passed": true
+    },
+    {
+      "name": "record_failure_does_not_change_admission",
+      "passed": true
+    },
+    {
+      "name": "call_site_failure_does_not_change_handover",
+      "passed": true
+    },
+    {
+      "name": "uninstall_restores_original_code_inside_timing",
+      "passed": true
+    },
+    {
+      "name": "bounded_events_candidates_and_explicit_omissions",
+      "passed": true
+    },
+    {
+      "name": "source_mismatch_fails_before_mutation",
+      "passed": true
+    },
+    {
+      "name": "second_function_hash_failure_is_atomic",
+      "passed": true
+    },
+    {
+      "name": "reverse_uninstall_restores_all_class_methods",
+      "passed": true
+    }
+  ],
+  "scenarios": {
+    "baseline": {
+      "order": [
+        "worker-1",
+        "worker-2",
+        "worker-0"
+      ],
+      "expected_priority": {
+        "worker-0": 10,
+        "worker-1": 30,
+        "worker-2": 30
+      },
+      "errors": [],
+      "threads_finished": true,
+      "order_before_unlock": [],
+      "selection_before_unlock": null,
+      "gate_drained": true
+    },
+    "observed": {
+      "order": [
+        "worker-1",
+        "worker-2",
+        "worker-0"
+      ],
+      "expected_priority": {
+        "worker-0": 10,
+        "worker-1": 30,
+        "worker-2": 30
+      },
+      "errors": [],
+      "threads_finished": true,
+      "order_before_unlock": [],
+      "selection_before_unlock": {
+        "seq": 13,
+        "monotonic": 363046.666712208,
+        "t": 0.00048687501111999154,
+        "kind": "selection",
+        "gate_id": "g001",
+        "free_slots_at_hook": 1,
+        "gate_seq": 4,
+        "clock_start_monotonic": null,
+        "clock_deadline_monotonic": null,
+        "scored_at_monotonic": null,
+        "candidate_count": 3,
+        "candidates_omitted": 0,
+        "candidates": [
+          {
+            "token": 3,
+            "priority": 30,
+            "snapshot": null,
+            "session": {
+              "session_id": "s0010",
+              "game_id": "worker-1",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          },
+          {
+            "token": 4,
+            "priority": 30,
+            "snapshot": null,
+            "session": {
+              "session_id": "s0011",
+              "game_id": "worker-2",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          },
+          {
+            "token": 2,
+            "priority": 10,
+            "snapshot": null,
+            "session": {
+              "session_id": "s0009",
+              "game_id": "worker-0",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          }
+        ],
+        "selected": {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      },
+      "gate_drained": true
+    },
+    "baseline_reprice": {
+      "order": [
+        "worker-1",
+        "worker-2",
+        "worker-0"
+      ],
+      "expected_priority": {
+        "worker-0": 309,
+        "worker-1": 1336,
+        "worker-2": 1336
+      },
+      "errors": [],
+      "threads_finished": true,
+      "order_before_unlock": [],
+      "selection_before_unlock": null,
+      "gate_drained": true
+    },
+    "observed_reprice": {
+      "order": [
+        "worker-1",
+        "worker-2",
+        "worker-0"
+      ],
+      "expected_priority": {
+        "worker-0": 309,
+        "worker-1": 1336,
+        "worker-2": 1336
+      },
+      "errors": [],
+      "threads_finished": true,
+      "order_before_unlock": [],
+      "selection_before_unlock": {
+        "seq": 34,
+        "monotonic": 363046.66702325,
+        "t": 0.0007979170186445117,
+        "kind": "selection",
+        "gate_id": "g002",
+        "free_slots_at_hook": 1,
+        "gate_seq": 4,
+        "clock_start_monotonic": null,
+        "clock_deadline_monotonic": null,
+        "scored_at_monotonic": null,
+        "candidate_count": 3,
+        "candidates_omitted": 0,
+        "candidates": [
+          {
+            "token": 3,
+            "priority": 1336,
+            "snapshot": {
+              "level": 6,
+              "actions": 5,
+              "tokens": 100,
+              "cost_multiplier": 1.0,
+              "total_levels": 8
+            },
+            "session": {
+              "session_id": "s0013",
+              "game_id": "worker-1",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          },
+          {
+            "token": 4,
+            "priority": 1336,
+            "snapshot": {
+              "level": 6,
+              "actions": 5,
+              "tokens": 100,
+              "cost_multiplier": 1.0,
+              "total_levels": 8
+            },
+            "session": {
+              "session_id": "s0014",
+              "game_id": "worker-2",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          },
+          {
+            "token": 2,
+            "priority": 309,
+            "snapshot": {
+              "level": 1,
+              "actions": 100,
+              "tokens": 80000,
+              "cost_multiplier": 1.0,
+              "total_levels": 8
+            },
+            "session": {
+              "session_id": "s0012",
+              "game_id": "worker-0",
+              "game_index": 0,
+              "pass_index": 0
+            }
+          }
+        ],
+        "selected": {
+          "token": 3,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      },
+      "gate_drained": true
+    },
+    "baseline_handover": {
+      "order": [
+        "waiter",
+        "holder"
+      ],
+      "thread_finished": true,
+      "gate_drained": true
+    },
+    "observed_handover": {
+      "order": [
+        "waiter",
+        "holder"
+      ],
+      "thread_finished": true,
+      "gate_drained": true
+    },
+    "baseline_failures": [
+      {
+        "case": "priority_int",
+        "same_exception": true,
+        "type": "OriginalError",
+        "message": "original int conversion failure",
+        "free": 1,
+        "waiting": [],
+        "seq": 1
+      },
+      {
+        "case": "original_reprice",
+        "type": "ValueError",
+        "message": "ARC3_PRIORITY_TAIL_FADE requires a finite runtime or soft deadline",
+        "free": 1,
+        "waiting": [
+          [
+            -5,
+            1
+          ]
+        ],
+        "seq": 1,
+        "snapshots": [
+          1
+        ]
+      }
+    ],
+    "observed_failures": [
+      {
+        "case": "priority_int",
+        "same_exception": true,
+        "type": "OriginalError",
+        "message": "original int conversion failure",
+        "free": 1,
+        "waiting": [],
+        "seq": 1
+      },
+      {
+        "case": "original_reprice",
+        "type": "ValueError",
+        "message": "ARC3_PRIORITY_TAIL_FADE requires a finite runtime or soft deadline",
+        "free": 1,
+        "waiting": [
+          [
+            -5,
+            1
+          ]
+        ],
+        "seq": 1,
+        "snapshots": [
+          1
+        ]
+      }
+    ]
+  },
+  "model_called": false,
+  "game_called": false,
+  "gate_source": "/Users/zhaohuaxiang/ccjjllt/arc-3/research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py",
+  "source_sha256": {
+    "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+    "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "scripts/check_014_scheduler_observer.py": "fe3e7cade8f44c6816a22aaab6a7e211e5c5a94569cfd1153dcff14243ffa256"
+  },
+  "cpu_cost": {
+    "uncontended_acquire_release_pairs": 3000,
+    "timing_only_seconds": 0.0059223329881206155,
+    "timing_and_observer_seconds": 0.024346416001208127,
+    "extra_seconds_per_pair": 6.141361004362504e-06,
+    "is_gpu_throughput_measurement": false
+  },
+  "all_passed": true
+}

@@ -1,0 +1,297 @@
+{
+  "observer": "scheduler-observer-v1",
+  "installed": true,
+  "limits": {
+    "max_gates": 4,
+    "max_events": 8,
+    "max_candidates": 2
+  },
+  "clock_origin_monotonic": 363046.671190625,
+  "clock_origin_utc": "2026-10-17T04:57:50.402072+00:00",
+  "timing_clock_origin_monotonic": 363046.664834875,
+  "timing_session_mapping_available": true,
+  "config_at_install": {
+    "ARC3_MAX_ACTIVE_STREAMS": null,
+    "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+    "ARC3_PRIORITY_PACE": "0",
+    "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+    "ARC3_PRIORITY_TAIL_FADE": "0",
+    "ARC3_PRIORITY_TAIL_FADE_FRACTION": null,
+    "ARC3_PRIORITY_SCORE_NORMALIZATION": "1"
+  },
+  "source_sha256": {
+    "_enqueue_and_wait": "2566cc1fbfe7ae3c1d9bd477f25c18c648b0b3abf275042994af350948d837c4",
+    "_pump": "ba31553ddbd59e4f6613e7e6789d54484bbfe353bad67274fa8c5bdf4232cadc"
+  },
+  "instrumented_source_sha256": {
+    "_enqueue_and_wait": "cd2c2b74ffb1ce3eafe8bf3ed20f9dc4322429c0249bf6391114cf7dc9518b95",
+    "_pump": "d7bd6dedbfcc410d3f553ba34441669fd5ee103b13d70a9a42dd0599b8f60f35"
+  },
+  "events_observed": 21,
+  "events_dropped": 13,
+  "observer_record_errors": 0,
+  "counts": {
+    "enqueue": 4,
+    "pump_begin": 8,
+    "reprice": 5,
+    "selection": 4
+  },
+  "gates": [
+    {
+      "gate_id": "g001",
+      "counts": {
+        "enqueue": 4,
+        "pump_begin": 8,
+        "reprice": 5,
+        "selection": 4
+      },
+      "max_waiting": 3,
+      "owner_mappings_omitted": 1,
+      "currently_waiting": 0
+    }
+  ],
+  "events": [
+    {
+      "seq": 14,
+      "monotonic": 363046.671415583,
+      "t": 0.00022495799930766225,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": null
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 15,
+      "monotonic": 363046.671418583,
+      "t": 0.00022795802215114236,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.671417125,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": null
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 16,
+      "monotonic": 363046.671420375,
+      "t": 0.00022975000320002437,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": null
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 4,
+        "priority": 30,
+        "snapshot": null,
+        "session": null
+      }
+    },
+    {
+      "seq": 17,
+      "monotonic": 363046.671438083,
+      "t": 0.00024745799601078033,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 18,
+      "monotonic": 363046.671441,
+      "t": 0.00025037501472979784,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.671439875,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 19,
+      "monotonic": 363046.671442833,
+      "t": 0.00025220797397196293,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0022",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 2,
+        "priority": 10,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0022",
+          "game_id": "worker-0",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 20,
+      "monotonic": 363046.671459125,
+      "t": 0.0002685000072233379,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 21,
+      "monotonic": 363046.671462083,
+      "t": 0.0002714580041356385,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.671461333,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    }
+  ],
+  "semantics": {
+    "enqueue": "Immediately after the original heappush, before pump; session mapping comes from the existing timing play scope.",
+    "reprice": "Immediately after the original heapify; scored_at is the original common timestamp used for every refreshed snapshot.",
+    "selection": "Immediately after the original heappop, before snapshot deletion, admitted.add, free decrement or notify. The selected row plus remaining heap reconstructs candidate membership at that decision, not caller-return order.",
+    "priority": "Actual positive heap priority. Snapshot is the original immutable PrioritySnapshot, or null for initial admission without one. Candidate array is heap membership, not sorted rank.",
+    "identity": "Waiting token ownership is captured at enqueue; selection may be performed by a different release/handover thread. Missing mappings stay null.",
+    "limits": "Newest bounded events and bounded candidate prefix. Counts survive eviction; omissions are explicit. No added locks, file I/O, model requests, scoring calls or sorting.",
+    "snapshot": "Call after worker drain for a consistent final report. Live snapshots are best-effort and do not acquire the gate lock."
+  }
+}

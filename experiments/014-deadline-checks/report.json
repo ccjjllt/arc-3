@@ -1,0 +1,713 @@
+{
+  "created_at_utc": "2026-10-17T04:56:05.355858+00:00",
+  "status": "passed",
+  "python": "/Users/zhaohuaxiang/ccjjllt/binance-quant/.venv/bin/python",
+  "python_version": "3.13.14 (main, Jul 23 2026, 14:48:16) [Clang 22.1.3 ]",
+  "argv": [
+    "scripts/check_014_request_deadline.py",
+    "--sdk-path",
+    "/private/tmp/arc3-010-sdk",
+    "--extra-python-path",
+    "/Users/zhaohuaxiang/ccjjllt/quant-research-lab/.venv/lib/python3.13/site-packages",
+    "--extra-python-path",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/0NYjaDD0X1HZ1p_3",
+    "--extra-python-path",
+    "/Users/zhaohuaxiang/.cache/uv/archive-v0/GCIcB4ohHyKQ4LxX/lib/python3.13/site-packages"
+  ],
+  "source_sha256": {
+    "src/arc3_research/request_deadline.py": "204c7bcb86478ee4b60aa9fffbe5b251abf5b27e4bf1534f1e773b9461372112",
+    "scripts/check_014_request_deadline.py": "4466b6c7a61b206d978fa9ec4e402cf9f2229c68bbb65c491cec09ced6f8846b",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "research/runtime-bundle/src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "checks": [
+    {
+      "name": "idempotent_install",
+      "passed": true
+    },
+    {
+      "name": "global_requests_module_unchanged",
+      "passed": true
+    },
+    {
+      "name": "request_exception_types_passthrough",
+      "passed": true
+    },
+    {
+      "name": "before_deadline_payload_timeout_unchanged",
+      "passed": true
+    },
+    {
+      "name": "before_deadline_original_return_identity",
+      "passed": true
+    },
+    {
+      "name": "json_consumed_once_by_original",
+      "passed": true
+    },
+    {
+      "name": "normal_slot_release_once",
+      "passed": true
+    },
+    {
+      "name": "stream_original_consumes_once",
+      "passed": true
+    },
+    {
+      "name": "outside_session_passthrough",
+      "passed": true
+    },
+    {
+      "name": "chat_entry_soft_zero_http",
+      "passed": true
+    },
+    {
+      "name": "chat_entry_soft_slot_release",
+      "passed": true
+    },
+    {
+      "name": "chat_entry_cancel_zero_http",
+      "passed": true
+    },
+    {
+      "name": "chat_entry_cancel_slot_release",
+      "passed": true
+    },
+    {
+      "name": "known_stop_precedes_secondary_clock_failure",
+      "passed": true
+    },
+    {
+      "name": "http_entry_rechecks_after_payload_build",
+      "passed": true
+    },
+    {
+      "name": "retry_after_deadline_not_sent",
+      "passed": true
+    },
+    {
+      "name": "before_deadline_original_retry_count",
+      "passed": true
+    },
+    {
+      "name": "original_transport_exception_identity",
+      "passed": true
+    },
+    {
+      "name": "exception_slot_release",
+      "passed": true
+    },
+    {
+      "name": "check_failure_preserves_cause_and_no_send",
+      "passed": true
+    },
+    {
+      "name": "check_failure_releases_slot",
+      "passed": true
+    },
+    {
+      "name": "foreign_cancel_not_swallowed",
+      "passed": true
+    },
+    {
+      "name": "foreign_cancel_releases_slot",
+      "passed": true
+    },
+    {
+      "name": "real_handover_late_wakeup_zero_http",
+      "passed": true,
+      "errors": [],
+      "order": [
+        "B",
+        "A-ended"
+      ]
+    },
+    {
+      "name": "real_handover_no_duplicate_release",
+      "passed": true
+    },
+    {
+      "name": "full_analyze_cancel_not_crashed_or_retryable",
+      "passed": true,
+      "note": "tokens=0"
+    },
+    {
+      "name": "full_analyze_original_finally_cleanup",
+      "passed": true
+    },
+    {
+      "name": "early_summary_zero_send_and_cleanup",
+      "passed": true
+    },
+    {
+      "name": "inflight_result_not_discarded",
+      "passed": true
+    },
+    {
+      "name": "diagnostic_failure_does_not_suppress_cancel",
+      "passed": true
+    },
+    {
+      "name": "timing_composition_returns_and_cancels",
+      "passed": true
+    },
+    {
+      "name": "uninstall_refuses_overwriting_later_hooks",
+      "passed": true
+    },
+    {
+      "name": "bounded_events_and_no_active_sessions",
+      "passed": true
+    },
+    {
+      "name": "all_three_boundaries_blocked_in_probes",
+      "passed": true
+    },
+    {
+      "name": "uninstall_restores_originals",
+      "passed": true
+    },
+    {
+      "name": "source_files_unchanged_during_probe",
+      "passed": true
+    }
+  ],
+  "boundary": "Actual ToolAgent chat/analyze, Session.play/_play_inner and PriorityGate; synthetic grid/session game and controlled transport. No engine actions or models.",
+  "deadline_snapshot": {
+    "patch": "request-deadline-v1",
+    "installed": false,
+    "active_sessions": 0,
+    "provisional": false,
+    "max_events": 32,
+    "events": [
+      {
+        "t": 1.0780007080174983,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780060000251979,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780111660133116,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.078016249986831,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780215830309317,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.078026666014921,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780318329925649,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780368749983609,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780419160146266,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780470829922706,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780521660344675,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780572080402635,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780622499878518,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780674160341732,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780725000076927,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.078077582991682,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780828749993816,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0780880409874953,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0780932910274714,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.078098250029143,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781035000109114,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0781084159971215,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781134580029175,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.078118707984686,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781239159987308,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0781289580045268,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781340000103228,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0781407080357894,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781458750134334,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0781509160296991,
+        "kind": "check_passed",
+        "boundary": "chat_entry"
+      },
+      {
+        "t": 1.0781559580354951,
+        "kind": "check_passed",
+        "boundary": "http_entry"
+      },
+      {
+        "t": 1.0781649579876103,
+        "kind": "session_end",
+        "game_id": "microbenchmark-guarded"
+      }
+    ],
+    "counts": {
+      "session_begin": 18,
+      "check_passed": 1016,
+      "session_end": 18,
+      "request_blocked": 9,
+      "session_cancelled": 9,
+      "check_failed": 1
+    },
+    "boundary_counts": {
+      "check_passed:chat_entry": 508,
+      "check_passed:http_entry": 508,
+      "request_blocked:chat_entry": 5,
+      "request_blocked:http_entry": 2,
+      "check_failed:chat_entry": 1,
+      "request_blocked:after_handover": 2
+    },
+    "events_dropped": 1039,
+    "clock_origin_utc": "2026-10-17T04:56:05.357696+00:00",
+    "source": {
+      "session.play": {
+        "signature": "(self) -> 'None'",
+        "sha256": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+        "module": "inference.framework.solver",
+        "qualname": "_HarnessGameSession.play"
+      },
+      "session.should_stop": {
+        "signature": "(self) -> 'bool'",
+        "sha256": "30664bbe88af216dfdd2d65fb3d06af8fb767022629598fa8502a92ec9dc0303",
+        "module": "inference.framework.solver",
+        "qualname": "_HarnessGameSession.should_stop"
+      },
+      "agent._maybe_handover": {
+        "signature": "(self) -> 'None'",
+        "sha256": "d6d26ebc69131d50d1218963f648579ee550f58504f3376c71ff4e8f86087569",
+        "module": "inference.agent.tool_agent",
+        "qualname": "ToolAgent._maybe_handover"
+      },
+      "agent._chat_completion": {
+        "signature": "(self, messages: 'list[dict[str, Any]]', *, tools: 'list[dict[str, Any]] | None', request_timeout_seconds: 'float | None' = None, max_tokens: 'int | None' = None, enable_thinking: 'bool | None' = None) -> '_ChatCompletionResult'",
+        "sha256": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+        "module": "inference.agent.tool_agent",
+        "qualname": "ToolAgent._chat_completion"
+      },
+      "requests.post": {
+        "signature": "(*a, **kw)",
+        "sha256": "effdb119cd714b7a0683a4811e6f1e6c8dab291a0c73a5f71fca72d1343f170f",
+        "module": "__main__",
+        "qualname": "main.<locals>.fake_post"
+      }
+    },
+    "semantics": {
+      "scope": "Original Session.play thread; other calls pass through.",
+      "boundaries": "After original handover return, chat entry, and each original transport entry including retries.",
+      "unchanged_before_stop": "Original payload, timeout, retry count/backoff, result identity, exceptions and priority gate operations.",
+      "cancellation": "Private BaseException escapes retry/analyze catches, original finally blocks clean up; outer play consumes only this patch's stop sentinel.",
+      "limitations": "Does not abort in-flight work or guarantee server entry before deadline. A race remains between final client check and actual network send."
+    }
+  },
+  "timing_snapshot": {
+    "observer": "inference-timing-v1",
+    "limits": {
+      "max_sessions": 4,
+      "max_events_per_session": 64
+    },
+    "clock_origin_monotonic": 362942.697232916,
+    "clock_origin_utc": "2026-10-17T04:56:06.428611+00:00",
+    "snapshot_t": 0.0006986249936744571,
+    "provisional": false,
+    "sessions_seen": 2,
+    "sessions_recorded": 2,
+    "sessions_omitted_by_limit": 0,
+    "source_sha256": {
+      "session.play": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+      "agent._chat_completion": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+      "gate.acquire": "08c5a76d18ea8a99611ab56db0c836984ca1d8b73e0dafff3de70e85a3e215a0",
+      "gate.handover": "ca24c4d98796b06a7c62ced2f9ac46e71cce8c5e566c3a8c3c952c712ba9db26",
+      "gate.release": "307704ba29413344f0c2871972c13b98b300060b371b83e820059e3b832dce20",
+      "gate._enqueue_and_wait": "c0a49c82861823899e70cc7e431dce3a793d311a1a625629948fd3a04d5df75e",
+      "gate._pump": "d87719242b883365d9de724369c6d1ed49fbad9cf6d5e1ca1e6ccfa6ce6d74f5"
+    },
+    "sessions": [
+      {
+        "session_id": "s0001",
+        "game_id": "timing-composition",
+        "game_index": 17,
+        "pass_index": 0,
+        "session_started_t": 0.00010520900832489133,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.00011749996338039637,
+          "gate_call_begin": 0.00018908397760242224,
+          "gate_enqueue_begin": 0.00019345898181200027,
+          "gate_admitted_return": 0.00019979197531938553,
+          "gate_call_return": 0.00020383397350087762,
+          "chat_begin": 0.00034233398037031293,
+          "http_attempt_begin": 0.0003612499567680061,
+          "http_attempt_return": 0.0003738749655894935,
+          "chat_return": 0.00038058398058637977,
+          "gate_release_credit": 0.00038770900573581457,
+          "play_return": 0.0003932499676011503
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "http_attempt_begin": 1,
+          "http_attempt_return": 1,
+          "chat_return": 1,
+          "responses_with_known_tokens": 1,
+          "observed_generated_tokens": 7,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 6.332993507385254e-06,
+          "gate_call_return": 1.908303238451481e-05,
+          "http_attempt_return": 1.2625008821487427e-05,
+          "chat_return": 3.825000021606684e-05,
+          "observed_slot_held": 0.00018791703041642904
+        },
+        "first_http_delay_from_session_start_s": 0.00025604094844311476,
+        "events_observed": 13,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.00011749996338039637,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.00018908397760242224,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.00019345898181200027,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.00019979197531938553,
+            "kind": "gate_admitted_return",
+            "duration_s": 6.332993507385254e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.00020383397350087762,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 1.3958022464066744e-05
+          },
+          {
+            "seq": 6,
+            "t": 0.00034233398037031293,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.0003612499567680061,
+            "kind": "http_attempt_begin",
+            "request_id": 1,
+            "attempt": 1
+          },
+          {
+            "seq": 8,
+            "t": 0.0003738749655894935,
+            "kind": "http_attempt_return",
+            "request_id": 1,
+            "attempt": 1,
+            "duration_s": 1.2625008821487427e-05
+          },
+          {
+            "seq": 9,
+            "t": 0.00038058398058637977,
+            "kind": "chat_return",
+            "request_id": 1,
+            "duration_s": 3.825000021606684e-05,
+            "generated_tokens": 7,
+            "finish_reason": "stop"
+          },
+          {
+            "seq": 10,
+            "t": 0.0003857499687001109,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 11,
+            "t": 0.00038770900573581457,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 12,
+            "t": 0.00039124995237216353,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 5.125009920448065e-06
+          },
+          {
+            "seq": 13,
+            "t": 0.0003932499676011503,
+            "kind": "play_return"
+          }
+        ]
+      },
+      {
+        "session_id": "s0002",
+        "game_id": "timing-cancel",
+        "game_index": 18,
+        "pass_index": 0,
+        "session_started_t": 0.00045483396388590336,
+        "play_active": false,
+        "held_since_t": null,
+        "first_times": {
+          "play_begin": 0.00046437495620921254,
+          "gate_call_begin": 0.0005126670002937317,
+          "gate_enqueue_begin": 0.0005147499614395201,
+          "gate_admitted_return": 0.0005193339893594384,
+          "gate_call_return": 0.0005218340083956718,
+          "chat_begin": 0.0006808749749325216,
+          "chat_exception": 0.000687708961777389,
+          "gate_release_credit": 0.0006911249947734177,
+          "play_return": 0.0006976249860599637
+        },
+        "counts": {
+          "play_begin": 1,
+          "gate_call_begin": 2,
+          "gate_enqueue_begin": 1,
+          "gate_admitted_return": 1,
+          "gate_call_return": 2,
+          "chat_begin": 1,
+          "chat_exception": 1,
+          "gate_release_credit": 1,
+          "play_return": 1
+        },
+        "durations_s": {
+          "gate_admitted_return": 4.584027919918299e-06,
+          "gate_call_return": 1.287501072511077e-05,
+          "chat_exception": 5.999987479299307e-06,
+          "observed_slot_held": 0.0001717910054139793
+        },
+        "first_http_delay_from_session_start_s": null,
+        "events_observed": 11,
+        "events_dropped": 0,
+        "events": [
+          {
+            "seq": 1,
+            "t": 0.00046437495620921254,
+            "kind": "play_begin"
+          },
+          {
+            "seq": 2,
+            "t": 0.0005126670002937317,
+            "kind": "gate_call_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 3,
+            "t": 0.0005147499614395201,
+            "kind": "gate_enqueue_begin",
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 4,
+            "t": 0.0005193339893594384,
+            "kind": "gate_admitted_return",
+            "duration_s": 4.584027919918299e-06,
+            "operation": "acquire",
+            "gate_call_id": 1
+          },
+          {
+            "seq": 5,
+            "t": 0.0005218340083956718,
+            "kind": "gate_call_return",
+            "operation": "acquire",
+            "gate_call_id": 1,
+            "duration_s": 8.750008419156075e-06
+          },
+          {
+            "seq": 6,
+            "t": 0.0006808749749325216,
+            "kind": "chat_begin",
+            "request_id": 1,
+            "tools_present": false
+          },
+          {
+            "seq": 7,
+            "t": 0.000687708961777389,
+            "kind": "chat_exception",
+            "request_id": 1,
+            "duration_s": 5.999987479299307e-06,
+            "exception_type": "RequestDeadlineReached"
+          },
+          {
+            "seq": 8,
+            "t": 0.0006896249833516777,
+            "kind": "gate_call_begin",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 9,
+            "t": 0.0006911249947734177,
+            "kind": "gate_release_credit",
+            "operation": "release",
+            "gate_call_id": 2
+          },
+          {
+            "seq": 10,
+            "t": 0.0006941249594092369,
+            "kind": "gate_call_return",
+            "operation": "release",
+            "gate_call_id": 2,
+            "duration_s": 4.125002305954695e-06
+          },
+          {
+            "seq": 11,
+            "t": 0.0006976249860599637,
+            "kind": "play_return"
+          }
+        ]
+      }
+    ],
+    "semantics": {
+      "clock": "All t values are seconds since observer install; original session.started_at is on the same monotonic clock.",
+      "chat": "_chat_completion entry to original return/exception: includes payload build, retries, stream consumption and parsing. Includes summary calls; tools_present only labels whether a tools argument is supplied, not the call's purpose.",
+      "http": "Entry to existing requests.post, then original return/exception. A streamed return may contain only headers; this does not measure server decode or full generation latency. No body/headers/payload is inspected.",
+      "gate_wait": "Original _enqueue_and_wait entry to normal return, under the existing Condition: includes enqueue/pump/wait/wakeup, not just Condition.wait sleep. Admission is caller-observed ownership, not the earlier pump selection instant.",
+      "release": "handover: enqueue entry immediately after original _free increment; final release: pump entry immediately after original _free increment. Neither hook performs release itself.",
+      "slot_held": "Sum of admitted-return to release-credit intervals; includes model calls, Python work and idle time while the game owns a slot. Open intervals are reported separately.",
+      "tokens": "Usage on successful original _chat_completion result only; null when absent. Partial/failed generation is unknown, not zero. No counters in the solver are changed.",
+      "boundedness": "At most max_sessions ledgers; newest max_events_per_session events each. First timestamps and all-event aggregate counters survive event eviction.",
+      "threading": "No added locks. Session ledgers have one play-thread writer; snapshot after drain for final consistency. Calls outside an observed play/chat scope pass through."
+    }
+  },
+  "microbenchmark": {
+    "iterations": 500,
+    "guarded_seconds": 0.005662999988999218,
+    "control_seconds": 0.004065459012053907,
+    "delta_microseconds_per_request": 3.1950819538906217,
+    "boundary": "Synthetic payload/JSON response loop; guarded side also appends result-identity spy. No real transport/model/GPU."
+  },
+  "transport_calls": 1010,
+  "limitations": [
+    "No real serving/network latency or resource-pressure run.",
+    "A race remains between final client check and actual socket send; server arrival after deadline is not ruled out.",
+    "Existing in-flight generations and their timeouts are unchanged.",
+    "Viewer/game are synthetic; real play/analyze/gate code paths execute, no game engine actions."
+  ]
+}

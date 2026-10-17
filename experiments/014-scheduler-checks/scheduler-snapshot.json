@@ -1,0 +1,2287 @@
+{
+  "observer": "scheduler-observer-v1",
+  "installed": true,
+  "limits": {
+    "max_gates": 32,
+    "max_events": 4096,
+    "max_candidates": 128
+  },
+  "clock_origin_monotonic": 363046.666225333,
+  "clock_origin_utc": "2026-10-17T04:57:50.397106+00:00",
+  "timing_clock_origin_monotonic": 363046.664834875,
+  "timing_session_mapping_available": true,
+  "config_at_install": {
+    "ARC3_MAX_ACTIVE_STREAMS": null,
+    "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+    "ARC3_PRIORITY_PACE": "0",
+    "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+    "ARC3_PRIORITY_TAIL_FADE": "0",
+    "ARC3_PRIORITY_TAIL_FADE_FRACTION": null,
+    "ARC3_PRIORITY_SCORE_NORMALIZATION": "1"
+  },
+  "source_sha256": {
+    "_enqueue_and_wait": "2566cc1fbfe7ae3c1d9bd477f25c18c648b0b3abf275042994af350948d837c4",
+    "_pump": "ba31553ddbd59e4f6613e7e6789d54484bbfe353bad67274fa8c5bdf4232cadc"
+  },
+  "instrumented_source_sha256": {
+    "_enqueue_and_wait": "cd2c2b74ffb1ce3eafe8bf3ed20f9dc4322429c0249bf6391114cf7dc9518b95",
+    "_pump": "d7bd6dedbfcc410d3f553ba34441669fd5ee103b13d70a9a42dd0599b8f60f35"
+  },
+  "events_observed": 59,
+  "events_dropped": 0,
+  "observer_record_errors": 0,
+  "counts": {
+    "enqueue": 12,
+    "pump_begin": 22,
+    "reprice": 14,
+    "selection": 11
+  },
+  "gates": [
+    {
+      "gate_id": "g001",
+      "counts": {
+        "enqueue": 4,
+        "pump_begin": 8,
+        "reprice": 5,
+        "selection": 4
+      },
+      "max_waiting": 3,
+      "owner_mappings_omitted": 0,
+      "currently_waiting": 0
+    },
+    {
+      "gate_id": "g002",
+      "counts": {
+        "enqueue": 4,
+        "pump_begin": 8,
+        "reprice": 5,
+        "selection": 4
+      },
+      "max_waiting": 3,
+      "owner_mappings_omitted": 0,
+      "currently_waiting": 0
+    },
+    {
+      "gate_id": "g003",
+      "counts": {
+        "enqueue": 3,
+        "pump_begin": 5,
+        "reprice": 4,
+        "selection": 3
+      },
+      "max_waiting": 2,
+      "owner_mappings_omitted": 0,
+      "currently_waiting": 0
+    },
+    {
+      "gate_id": "g004",
+      "counts": {
+        "enqueue": 1,
+        "pump_begin": 1
+      },
+      "max_waiting": 1,
+      "owner_mappings_omitted": 0,
+      "currently_waiting": 1
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "monotonic": 363046.666576,
+      "t": 0.0003506669891066849,
+      "kind": "enqueue",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 2,
+      "monotonic": 363046.666581291,
+      "t": 0.0003559580072760582,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 3,
+      "monotonic": 363046.666586625,
+      "t": 0.0003612919826991856,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666584458,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 4,
+      "monotonic": 363046.666589333,
+      "t": 0.00036399997770786285,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": {
+        "token": 1,
+        "priority": 1000,
+        "snapshot": null,
+        "session": null
+      }
+    },
+    {
+      "seq": 5,
+      "monotonic": 363046.666630625,
+      "t": 0.0004052920266985893,
+      "kind": "enqueue",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 6,
+      "monotonic": 363046.666633583,
+      "t": 0.0004082500236108899,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 7,
+      "monotonic": 363046.666664291,
+      "t": 0.00043895799899473786,
+      "kind": "enqueue",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 8,
+      "monotonic": 363046.666666041,
+      "t": 0.00044070801232010126,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 9,
+      "monotonic": 363046.666694083,
+      "t": 0.0004687500186264515,
+      "kind": "enqueue",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 10,
+      "monotonic": 363046.666695666,
+      "t": 0.00047033297596499324,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 0,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 11,
+      "monotonic": 363046.666704958,
+      "t": 0.0004796250141225755,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 12,
+      "monotonic": 363046.666709916,
+      "t": 0.00048458302626386285,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666707625,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 13,
+      "monotonic": 363046.666712208,
+      "t": 0.00048687501111999154,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0010",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 3,
+        "priority": 30,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0010",
+          "game_id": "worker-1",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 14,
+      "monotonic": 363046.666764333,
+      "t": 0.0005389999714680016,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 15,
+      "monotonic": 363046.666769333,
+      "t": 0.0005440000095404685,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666767416,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 16,
+      "monotonic": 363046.666771708,
+      "t": 0.0005463749985210598,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 30,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0011",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 4,
+        "priority": 30,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0011",
+          "game_id": "worker-2",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 17,
+      "monotonic": 363046.666789958,
+      "t": 0.0005646250210702419,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 18,
+      "monotonic": 363046.666793458,
+      "t": 0.0005681249895133078,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666792,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 19,
+      "monotonic": 363046.666795375,
+      "t": 0.0005700420006178319,
+      "kind": "selection",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 10,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0009",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 2,
+        "priority": 10,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0009",
+          "game_id": "worker-0",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 20,
+      "monotonic": 363046.666811166,
+      "t": 0.0005858329823240638,
+      "kind": "pump_begin",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 21,
+      "monotonic": 363046.666814166,
+      "t": 0.0005888330051675439,
+      "kind": "reprice",
+      "gate_id": "g001",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666813333,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 22,
+      "monotonic": 363046.666845416,
+      "t": 0.000620083010289818,
+      "kind": "enqueue",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 23,
+      "monotonic": 363046.666847375,
+      "t": 0.0006220419891178608,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 24,
+      "monotonic": 363046.666849791,
+      "t": 0.0006244580144993961,
+      "kind": "reprice",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666848833,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 25,
+      "monotonic": 363046.666851458,
+      "t": 0.0006261250237002969,
+      "kind": "selection",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": {
+        "token": 1,
+        "priority": 1000,
+        "snapshot": null,
+        "session": null
+      }
+    },
+    {
+      "seq": 26,
+      "monotonic": 363046.666896583,
+      "t": 0.0006712499889545143,
+      "kind": "enqueue",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 27,
+      "monotonic": 363046.666899458,
+      "t": 0.0006741249817423522,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 28,
+      "monotonic": 363046.666933958,
+      "t": 0.0007086250116117299,
+      "kind": "enqueue",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 29,
+      "monotonic": 363046.666938375,
+      "t": 0.0007130419835448265,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 30,
+      "monotonic": 363046.666981291,
+      "t": 0.0007559580262750387,
+      "kind": "enqueue",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 31,
+      "monotonic": 363046.666984416,
+      "t": 0.0007590830209665,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 0,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 32,
+      "monotonic": 363046.66699575,
+      "t": 0.0007704169838689268,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 1000,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 1,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 33,
+      "monotonic": 363046.6670195,
+      "t": 0.0007941669900901616,
+      "kind": "reprice",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.666997958,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 34,
+      "monotonic": 363046.66702325,
+      "t": 0.0007979170186445117,
+      "kind": "selection",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 3,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0013",
+            "game_id": "worker-1",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 4,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 3,
+        "priority": 1336,
+        "snapshot": {
+          "level": 6,
+          "actions": 5,
+          "tokens": 100,
+          "cost_multiplier": 1.0,
+          "total_levels": 8
+        },
+        "session": {
+          "session_id": "s0013",
+          "game_id": "worker-1",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 35,
+      "monotonic": 363046.667083625,
+      "t": 0.0008582919836044312,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 36,
+      "monotonic": 363046.667099,
+      "t": 0.0008736670133657753,
+      "kind": "reprice",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667085375,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 37,
+      "monotonic": 363046.667101708,
+      "t": 0.0008763750083744526,
+      "kind": "selection",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 4,
+          "priority": 1336,
+          "snapshot": {
+            "level": 6,
+            "actions": 5,
+            "tokens": 100,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0014",
+            "game_id": "worker-2",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 4,
+        "priority": 1336,
+        "snapshot": {
+          "level": 6,
+          "actions": 5,
+          "tokens": 100,
+          "cost_multiplier": 1.0,
+          "total_levels": 8
+        },
+        "session": {
+          "session_id": "s0014",
+          "game_id": "worker-2",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 38,
+      "monotonic": 363046.667116583,
+      "t": 0.0008912499761208892,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 39,
+      "monotonic": 363046.667129583,
+      "t": 0.0009042500169016421,
+      "kind": "reprice",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667118041,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 40,
+      "monotonic": 363046.66713175,
+      "t": 0.0009064169717021286,
+      "kind": "selection",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 309,
+          "snapshot": {
+            "level": 1,
+            "actions": 100,
+            "tokens": 80000,
+            "cost_multiplier": 1.0,
+            "total_levels": 8
+          },
+          "session": {
+            "session_id": "s0012",
+            "game_id": "worker-0",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 2,
+        "priority": 309,
+        "snapshot": {
+          "level": 1,
+          "actions": 100,
+          "tokens": 80000,
+          "cost_multiplier": 1.0,
+          "total_levels": 8
+        },
+        "session": {
+          "session_id": "s0012",
+          "game_id": "worker-0",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 41,
+      "monotonic": 363046.667145166,
+      "t": 0.0009198330226354301,
+      "kind": "pump_begin",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 42,
+      "monotonic": 363046.667147791,
+      "t": 0.0009224580135196447,
+      "kind": "reprice",
+      "gate_id": "g002",
+      "free_slots_at_hook": 1,
+      "gate_seq": 4,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667146875,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 43,
+      "monotonic": 363046.667166416,
+      "t": 0.0009410830098204315,
+      "kind": "enqueue",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 44,
+      "monotonic": 363046.667168083,
+      "t": 0.0009427500190213323,
+      "kind": "pump_begin",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 45,
+      "monotonic": 363046.66717025,
+      "t": 0.0009449169738218188,
+      "kind": "reprice",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667169333,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 46,
+      "monotonic": 363046.667171666,
+      "t": 0.0009463329915888608,
+      "kind": "selection",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 1000,
+          "snapshot": null,
+          "session": null
+        }
+      ],
+      "selected": {
+        "token": 1,
+        "priority": 1000,
+        "snapshot": null,
+        "session": null
+      }
+    },
+    {
+      "seq": 47,
+      "monotonic": 363046.667204875,
+      "t": 0.0009795419755391777,
+      "kind": "enqueue",
+      "gate_id": "g003",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 48,
+      "monotonic": 363046.667206541,
+      "t": 0.000981207995209843,
+      "kind": "pump_begin",
+      "gate_id": "g003",
+      "free_slots_at_hook": 0,
+      "gate_seq": 2,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 49,
+      "monotonic": 363046.667221625,
+      "t": 0.0009962919866666198,
+      "kind": "enqueue",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 50,
+      "monotonic": 363046.667223333,
+      "t": 0.0009979999740608037,
+      "kind": "pump_begin",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 51,
+      "monotonic": 363046.667226041,
+      "t": 0.0010007080272771418,
+      "kind": "reprice",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667224666,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 52,
+      "monotonic": 363046.667227666,
+      "t": 0.001002333010546863,
+      "kind": "selection",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 2,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 2,
+          "priority": 20,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0015",
+            "game_id": "handover-waiter",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        },
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 2,
+        "priority": 20,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0015",
+          "game_id": "handover-waiter",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 53,
+      "monotonic": 363046.667237583,
+      "t": 0.0010122500243596733,
+      "kind": "pump_begin",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 54,
+      "monotonic": 363046.66724,
+      "t": 0.0010146669810637832,
+      "kind": "reprice",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667238958,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 55,
+      "monotonic": 363046.6672415,
+      "t": 0.0010161669924855232,
+      "kind": "selection",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 3,
+          "priority": 5,
+          "snapshot": null,
+          "session": {
+            "session_id": "s0016",
+            "game_id": "handover-holder",
+            "game_index": 0,
+            "pass_index": 0
+          }
+        }
+      ],
+      "selected": {
+        "token": 3,
+        "priority": 5,
+        "snapshot": null,
+        "session": {
+          "session_id": "s0016",
+          "game_id": "handover-holder",
+          "game_index": 0,
+          "pass_index": 0
+        }
+      }
+    },
+    {
+      "seq": 56,
+      "monotonic": 363046.667256208,
+      "t": 0.00103087502066046,
+      "kind": "pump_begin",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 57,
+      "monotonic": 363046.667258708,
+      "t": 0.0010333749814890325,
+      "kind": "reprice",
+      "gate_id": "g003",
+      "free_slots_at_hook": 1,
+      "gate_seq": 3,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": 363046.667257958,
+      "candidate_count": 0,
+      "candidates_omitted": 0,
+      "candidates": [],
+      "selected": null
+    },
+    {
+      "seq": 58,
+      "monotonic": 363046.667286166,
+      "t": 0.001060832990333438,
+      "kind": "enqueue",
+      "gate_id": "g004",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 5,
+          "snapshot": {
+            "level": 1,
+            "actions": 0,
+            "tokens": 0,
+            "cost_multiplier": 1,
+            "total_levels": 8
+          },
+          "session": null
+        }
+      ],
+      "selected": null
+    },
+    {
+      "seq": 59,
+      "monotonic": 363046.667288208,
+      "t": 0.0010628749732859433,
+      "kind": "pump_begin",
+      "gate_id": "g004",
+      "free_slots_at_hook": 1,
+      "gate_seq": 1,
+      "clock_start_monotonic": null,
+      "clock_deadline_monotonic": null,
+      "scored_at_monotonic": null,
+      "candidate_count": 1,
+      "candidates_omitted": 0,
+      "candidates": [
+        {
+          "token": 1,
+          "priority": 5,
+          "snapshot": {
+            "level": 1,
+            "actions": 0,
+            "tokens": 0,
+            "cost_multiplier": 1,
+            "total_levels": 8
+          },
+          "session": null
+        }
+      ],
+      "selected": null
+    }
+  ],
+  "semantics": {
+    "enqueue": "Immediately after the original heappush, before pump; session mapping comes from the existing timing play scope.",
+    "reprice": "Immediately after the original heapify; scored_at is the original common timestamp used for every refreshed snapshot.",
+    "selection": "Immediately after the original heappop, before snapshot deletion, admitted.add, free decrement or notify. The selected row plus remaining heap reconstructs candidate membership at that decision, not caller-return order.",
+    "priority": "Actual positive heap priority. Snapshot is the original immutable PrioritySnapshot, or null for initial admission without one. Candidate array is heap membership, not sorted rank.",
+    "identity": "Waiting token ownership is captured at enqueue; selection may be performed by a different release/handover thread. Missing mappings stay null.",
+    "limits": "Newest bounded events and bounded candidate prefix. Counts survive eviction; omissions are explicit. No added locks, file I/O, model requests, scoring calls or sorting.",
+    "snapshot": "Call after worker drain for a consistent final report. Live snapshots are best-effort and do not acquire the gate lock."
+  }
+}
