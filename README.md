@@ -1,14 +1,16 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目进展：**2026-10-13，Asia/Shanghai**。
+目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目研究：**2026-10-17，Asia/Shanghai**；最新已完成GPU实验为012（10/13）。
 
-**009 v2正式评测已COMPLETE：31.16分，10/13公开榜快照第247名/4221队。** 当前金牌附近第18名36.98、前五门槛42.66；最终看私榜和有效队数。submission 57101330，原生Notebook和冻结源码未变。首次提交链路已打通，见[009进展](docs/progress/009-baseline-submission.md)。
+**009 v2正式评测已COMPLETE：31.16分；10/17公开榜第324名/4388队。** 当前队数估计金牌附近第18名38.20，前五参照48.92；最终看私榜、有效队数及资格。submission 57101330，原生Notebook和冻结源码未变。历史正式链路见[009进展](docs/progress/009-baseline-submission.md)，最新位置见[013赛情](research/013-competition-update.md)。
+
+**013深度研究已完成，尚无新GPU结果。** 更新12份公开Notebook源码及前沿论文，审计60份选取日志的5445次Python调用；发现106次NameError及多条成功计算后跨snippet丢值链。下一轮先做全25游戏baseline→80k tail单开关对照，预计4.3h，正向才倒序确认；原生同观察普通值交接先CPU合同、再≤1h自然采用筛选。当前run_arm尚未支持tail臂，Notebook未构建/启动，不能将研究设计当运行结果。详见[013综合决策](research/013-research-decision.md)、[计划](docs/plan/013-research-next.md)、[进展](docs/progress/013-research-next.md)。10/17研究启动时共享GPU余额约29.37h、预留0，下次10/24 08:00北京刷新；下文旧余额均为历史快照。10/16工作人员已回复模型许可问题，但表示无法解释，奖金资格仍未明确。
 
 **010 v1已完成：公开同池26.0501→29.9365（+3.8864），关卡34→37/91，全通2→1。** 4局实际使用旧动画，28次非latest命中；最大涨分m0r0没有查询，新API独立收益和稳定性尚未确认。保留候选，不晋升正式版本。实测会话2.1266h，GPU预算内90.60%/93.09%；010完成时账户余额约5.40h（历史快照），10/17 08:00北京刷新。见[010结果](research/010-results-analysis.md)、[采用分析](research/010-intervention-analysis.md)、[010进展与下一步](docs/progress/010-retrievable-animation.md)。
 
 **011 v1倒序确认已COMPLETE：baseline 33.9794→候选32.1157（−1.8637），关卡42→41/91，全通2→2。** 24局分数独立复算一致，两臂各3482秒，源码/预算/缓存/正常退出有效，无截止后动作或客户端新模型请求。010总体正向收益未复现，冻结候选不晋升，暂不全25扩跑或正式提交。实际2.10445h，GPU已停止；共享余额约3.29h，10/17 08:00北京刷新。见[011进展](docs/progress/011-animation-confirmation.md)、[综合结果](research/011-results-analysis.md)。随后转入计算值直接跨snippet交接，已有两种游戏的误写证据；实现进展见下方012，尚无提分证据。设计见[下一候选报告](research/011-evidence-reuse-next.md)。
 
-**012 v1已COMPLETE，筛选未通过：baseline45.0764→current_data27.7582（−17.3182），关卡51→38/97，全通3→1。** 26局独立复算一致，无截止后动作；候选2次put/1次stored、0次get，模型没有形成数据复用链，当前版本不晋升。实际2.26747h、GPU已停；共享余额0h，10/17 08:00北京刷新。后续先验证模型实际采用，再进入完整得分A/B。见[012进展](docs/progress/012-current-data.md)、[综合结果](research/012-results-analysis.md)。
+**012 v1已COMPLETE，筛选未通过：baseline45.0764→current_data27.7582（−17.3182），关卡51→38/97，全通3→1。** 26局独立复算一致，无截止后动作，但有2次截止后约0.6秒的新客户端模型请求，需独立修复handover取消边界；候选2次put/1次stored、0次get，模型没有形成数据复用链，当前版本不晋升。实际2.26747h、GPU已停；10/13完成时共享余额0h（历史快照）。后续先验证模型实际采用，再进入完整得分A/B。见[012进展](docs/progress/012-current-data.md)、[综合结果](research/012-results-analysis.md)。
 
 **008 CPU原型已完成：69份区域表示与保存帧核对一致，但尚未在线接入或验证提分。** 正确裁剪重现pink匹配1/4→4/4、yellow显式D4分类9→7；截断诊断漏掉2个完全遗漏的断开组件，长面板分槽仍未解决。见[008进展](docs/progress/008-observation-representation.md)。
 
@@ -34,6 +36,7 @@
 | [010 计划](docs/plan/010-retrievable-animation.md) / [010 进展](docs/progress/010-retrievable-animation.md) | v1完成：26.0501→29.9365，34→37关、全通2→1；真实采用已核实，尚不晋升 |
 | [011 计划](docs/plan/011-animation-confirmation.md) / [011 进展](docs/progress/011-animation-confirmation.md) | v1完成：33.9794→32.1157、42→41关；整体增益未复现，暂不晋升 |
 | [012 计划](docs/plan/012-current-data.md) / [012 进展](docs/progress/012-current-data.md) | v1完成：45.0764→27.7582、51→38关；0次get、无复用链，不晋升 |
+| [013 计划](docs/plan/013-research-next.md) / [013 进展](docs/progress/013-research-next.md) | 10/17赛情、12份Notebook、前沿与CPU审计；优先tail全25单因素，原生值采用筛选；未启动GPU |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |
 | [前沿研究](research/frontier-findings.md) | 一手论文/官方报告、可迁移机制、协议与资源限制 |
@@ -71,7 +74,7 @@ research/
 - [比赛](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview)：交互游戏；25 个公开开发游戏、110 个隐藏评测游戏，隐藏集 55/55 对应 public/private LB。
 - 截止：**北京时间 2026-11-03 07:59**；每天最多 1 次正式提交，最终可选 2 份。
 - Notebook 最多 9h，评测断网。当前强基线使用 RTX PRO 6000。
-- 10/13 榜首67.49、第5名42.66、第18名36.98；4221队下金牌约前18。本队247名/31.16，最终以有效队数、私榜与Kaggle奖牌分配为准。
+- 10/17 榜首68.91、第5名48.92、第18名38.20；4388队下估计金牌前18。本队324名/31.16，最终以有效队数、私榜与Kaggle奖牌分配为准。已连续读取前400队，非全榜。
 - 两次里程碑奖金截止已过；终局前五奖金分别 $40k/$15k/$10k/$5k/$5k。奖金规则及模型许可未决事项见 001。
 - 已定位评分版本冲突：Kaggle data 文字落后于随比赛提供的 SDK；研究以实际 scorecard 和版本记录为准。
 
