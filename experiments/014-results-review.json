@@ -1,0 +1,55 @@
+{
+  "reviewed_at_utc": "2026-10-17T14:11:06.058182+00:00",
+  "kernel": "jiyujia/arc3-014-tail-allocation",
+  "kernel_version": 1,
+  "status": "complete_not_promoted",
+  "result": {
+    "mean_AE": 1.4399020996210723,
+    "mean_completion_ceiling": -0.30158730158730407,
+    "mean_efficiency_gap": -1.74148940120837,
+    "levels_completed": -2,
+    "wins": 1,
+    "actions": 124,
+    "analyzer_tokens": -139807,
+    "recorded_tokens": -201173,
+    "unattached_tokens": 61366,
+    "relative_AE_change": 0.03050695444862486,
+    "better_equal_worse": {
+      "better": 11,
+      "equal": 7,
+      "worse": 7
+    },
+    "games_with_added_levels": 9,
+    "games_with_lost_levels": 6
+  },
+  "decision": {
+    "criteria": {
+      "mean_AE_positive": true,
+      "weighted_completion_coverage_positive": false,
+      "total_levels_not_lower": false,
+      "at_least_two_games_added_levels": true,
+      "positive_mean_survives_removing_largest_winner": false
+    },
+    "passes_first_round_gate": false,
+    "reverse_confirmation_recommended": false,
+    "formal_submission_ready": false,
+    "reason": "First-round gate fails: coverage and total levels decline; the mean gain also depends on the largest winner."
+  },
+  "raw_selected_artifacts": "runs/014-tail-allocation",
+  "recomputation": "scripts/analyze_014_results.py",
+  "formal_submission_id": 57101330,
+  "formal_public_score": 31.16,
+  "new_gpu_launched": false,
+  "new_competition_submission": false,
+  "download_note": "Initial selected-file transfer ended with a connection reset; all required per-arm JSON/logs and GPU/kernel logs were obtained and parsed. This is not an archive of every remote output file.",
+  "timing_audit": "experiments/014-timing-analysis.json",
+  "allocation_audit": "experiments/014-allocation-review.json",
+  "saved_remote_summary_matches_recomputation": true,
+  "analysis_artifact_hashes": {
+    "scripts/analyze_014_results.py": "174fbfffdc5e1acab03fb24223128deba696c3cd929f58f11c138b8f4cc1cf53",
+    "scripts/analyze_014_timing.py": "4c73a9a551d8adfe4d0e7274d0171e374892d3695d89d6060f1ed89b02211cf0",
+    "experiments/014-analysis/comparison.json": "c263aa2a98599a4457f67bfd0782260be959b940c997b8708b950ce7b4e7779a",
+    "experiments/014-timing-analysis.json": "cb55177e383ca01558f2a489264141be5a90cff1eaa5674a48bfb4c1f776a48e",
+    "experiments/014-allocation-review.json": "48d32e8f80498ddbc0ce008fce871e76ec74704d0be332422f2d58d047468501"
+  }
+}
