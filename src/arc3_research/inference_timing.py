@@ -354,6 +354,30 @@ class InferenceTimingPatch:
             setattr(self._gate_class, name, gate_outer(name))
         self._gate_class._enqueue_and_wait = enqueue
         self._gate_class._pump = pump
+        self._installed = {
+            "play": play, "chat": chat, "requests": self._agent_module.requests,
+            "gate": {name: getattr(self._gate_class, name) for name in self._original_gate},
+        }
+
+    def uninstall(self) -> None:
+        """Reverse installation only after later wrappers have been removed."""
+        installed = getattr(self, "_installed", None)
+        if installed is None:
+            return
+        if (self.session_class.play is not installed["play"]
+                or self.tool_agent_class._chat_completion is not installed["chat"]
+                or self._agent_module.requests is not installed["requests"]
+                or any(getattr(self._gate_class, name) is not function
+                       for name, function in installed["gate"].items())):
+            raise RuntimeError("Uninstall later wrappers before the timing observer.")
+        self.session_class.play = self._original_play
+        self.tool_agent_class._chat_completion = self._original_chat
+        self._agent_module.requests = self._original_requests
+        for name, function in self._original_gate.items():
+            setattr(self._gate_class, name, function)
+        if getattr(self.tool_agent_class, "_research_inference_timing_patch", None) is self:
+            delattr(self.tool_agent_class, "_research_inference_timing_patch")
+        self._installed = None
 
 
 def install_inference_timing(

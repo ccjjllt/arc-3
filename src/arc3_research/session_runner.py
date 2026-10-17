@@ -11,18 +11,54 @@ import threading
 import time
 from urllib.request import Request, urlopen
 
+from arc3_research.experiment_config import validate_config
 
-def stop_group(process: subprocess.Popen, grace: float = 10.0) -> None:
-    if process.poll() is not None:
-        return
+
+def stop_group(process: subprocess.Popen, grace: float = 10.0) -> bool:
+    """Stop an owned start_new_session group, even after its leader exits."""
+    if getattr(process, "_stopped_group_verified", False):
+        return True
+
+    def signal_group(sig: int) -> bool:
+        # Reap our leader before probing. On macOS a zombie leader can make a
+        # vanished group report EPERM until poll() reaps it. Retry that race once;
+        # a genuine permission error remains an error, never a success claim.
+        for attempt in range(2):
+            process.poll()
+            try:
+                os.killpg(process.pid, sig)
+                return True
+            except ProcessLookupError:
+                return False
+            except PermissionError:
+                if attempt:
+                    raise
+        return False
+
+    def group_exists() -> bool:
+        return signal_group(0)
+
+    if not signal_group(signal.SIGTERM):
+        process._stopped_group_verified = True
+        return True
+    until = time.monotonic() + max(0.0, grace)
+    while group_exists() and time.monotonic() < until:
+        process.poll()  # reap our leader without assuming its children exited
+        time.sleep(0.05)
+    if group_exists():
+        signal_group(signal.SIGKILL)
     try:
-        os.killpg(process.pid, signal.SIGTERM)
-        process.wait(timeout=grace)
-    except subprocess.TimeoutExpired:
-        os.killpg(process.pid, signal.SIGKILL)
         process.wait(timeout=10)
-    except ProcessLookupError:
-        pass
+    except subprocess.TimeoutExpired:
+        return False
+    until = time.monotonic() + 2.0
+    while group_exists() and time.monotonic() < until:
+        time.sleep(0.05)
+    stopped = not group_exists()
+    if stopped:
+        # Never send a signal to this old PGID again after an hours-long arm.
+        process._stopped_group_verified = True
+    return stopped
 
 
 def gpu_sample(path: Path, phase: str) -> dict:
@@ -113,6 +149,7 @@ def run_session(namespace: dict) -> dict:
 
     save()
     try:
+        validate_config(config)
         if not arms or len(set(arms)) != len(arms):
             raise ValueError("arm_order must be nonempty with unique output names")
         monitor.set_phase("waiting_for_server")
@@ -140,6 +177,8 @@ def run_session(namespace: dict) -> dict:
         cleanup_reserve = 150 * len(arms) + 60
         arm_budget = min(config["requested_arm_seconds"],
                          int((remaining - cleanup_reserve) / len(arms)))
+        if config.get("strict_arm_budget") and arm_budget != config["requested_arm_seconds"]:
+            raise RuntimeError("Startup consumed the frozen solver budget; aborting instead of shortening the comparison.")
         if arm_budget < 600:
             raise RuntimeError("Insufficient budget left for the configured experiment")
         report["equal_arm_budget_seconds"] = arm_budget
@@ -153,6 +192,8 @@ def run_session(namespace: dict) -> dict:
                      "started_at_epoch": time.time()}
             report["arms"].append(entry)
             monitor.set_phase(arm + "_cache_flush")
+            serve_log = root / "serve.log"
+            flush_offset = serve_log.stat().st_size if serve_log.is_file() else None
             # Flush prompt caches only, retaining weights and compiled kernels.
             # If unsupported, report the limitation rather than reload the GPU.
             try:
@@ -163,6 +204,28 @@ def run_session(namespace: dict) -> dict:
             except Exception as exc:
                 entry["cache_flush_error"] = str(exc)
             save()
+            if config.get("require_cache_flush") and entry.get("cache_flush_http_status") != 200:
+                raise RuntimeError(f"Cache flush failed before {arm}; refusing unmatched cache state.")
+            if config.get("require_cache_flush_log"):
+                # This SGLang version returns HTTP200 even when active requests
+                # prevent flushing. Require its new backend success log too.
+                confirmed = False
+                if flush_offset is not None:
+                    until = time.monotonic() + 30.0
+                    while time.monotonic() < until:
+                        with serve_log.open("rb") as stream:
+                            stream.seek(flush_offset)
+                            recent = stream.read(131072)
+                        if b"Cache flushed successfully!" in recent:
+                            confirmed = True
+                            break
+                        if server.poll() is not None:
+                            break
+                        time.sleep(0.2)
+                entry["cache_flush_backend_confirmed"] = confirmed
+                save()
+                if not confirmed:
+                    raise RuntimeError(f"Backend did not confirm cache flush before {arm}; aborting comparison.")
 
             command = [sys.executable, "-u", "-m", "arc3_research.run_arm",
                        "--arm", arm, "--bundle-dir", str(namespace["BUNDLE_DIR"]),
@@ -170,6 +233,11 @@ def run_session(namespace: dict) -> dict:
                        "--budget-seconds", str(arm_budget)]
             if config.get("inference_timing", False):
                 command.append("--inference-timing")
+            if config.get("request_deadline", False):
+                command.append("--request-deadline")
+            if config.get("scheduler_observer", False):
+                command.append("--scheduler-observer")
+            command.extend(["--environment-json", json.dumps(config.get("arm_environment", {}).get(arm, {}))])
             env = os.environ.copy()
             env["PYTHONPATH"] = "/kaggle/research/src" + os.pathsep + env.get("PYTHONPATH", "")
             print(f"Starting {arm}: {len(config['games'])} games, {arm_budget}s, shared GPU", flush=True)
@@ -182,6 +250,10 @@ def run_session(namespace: dict) -> dict:
                     next_status = 0.0
                     while child.poll() is None:
                         now = time.time()
+                        if server.poll() is not None:
+                            entry["model_server_exited_during_arm"] = server.returncode
+                            stop_group(child)
+                            break
                         if now >= next_status:
                             print(f"{arm}: elapsed {now-entry['started_at_epoch']:.0f}s; "
                                   f"session {now-start:.0f}s", flush=True)
@@ -205,6 +277,13 @@ def run_session(namespace: dict) -> dict:
                 entry["all_games_failed_to_run"] = not results or all(
                     game.get("state") in {"crashed", "not_started"} for game in results
                 )
+                entry["lingering_worker_threads"] = arm_meta.get("lingering_worker_threads", [])
+                entry["environment_overrides"] = arm_meta.get("environment_overrides", {})
+                entry["complete_pool"] = (
+                    len(results) == len(config["games"])
+                    and {game.get("game_id") for game in results} == set(config["games"])
+                    and all(game.get("state") in {"won", "cancelled"} for game in results)
+                )
             tail = (out / "run.log").read_text(errors="replace")[-5000:]
             print(tail, flush=True)
             save()
@@ -214,6 +293,10 @@ def run_session(namespace: dict) -> dict:
                 raise RuntimeError(f"Arm {arm} exited {entry['exit_code']}; see {arm}/run.log")
             if entry.get("all_games_failed_to_run") or not entry["benchmark_exists"]:
                 raise RuntimeError(f"Arm {arm} produced no usable game runs; see {arm}/run.log")
+            if config.get("require_drained_workers") and entry.get("lingering_worker_threads"):
+                raise RuntimeError(f"Arm {arm} has undrained workers; stopping before another arm.")
+            if config.get("require_complete_pool") and not entry.get("complete_pool"):
+                raise RuntimeError(f"Arm {arm} has incomplete/crashed game coverage; stopping before another arm.")
         report["status"] = "completed"
     except BaseException as exc:
         report["status"] = "failed"
@@ -221,11 +304,26 @@ def run_session(namespace: dict) -> dict:
         raise
     finally:
         monitor.set_phase("shutdown")
+        cleanup_errors = []
         for child in namespace["ARC3_CHILD_PROCESSES"]:
-            stop_group(child)
-        stop_group(server)
-        report["gpu_server_stopped"] = server.poll() is not None
+            try:
+                if not stop_group(child):
+                    cleanup_errors.append(f"CPU process group {child.pid} still exists")
+            except Exception as exc:
+                cleanup_errors.append(f"CPU group cleanup: {type(exc).__name__}: {exc}")
+        try:
+            report["gpu_server_process_group_stopped"] = stop_group(server)
+        except Exception as exc:
+            report["gpu_server_process_group_stopped"] = False
+            cleanup_errors.append(f"GPU group cleanup: {type(exc).__name__}: {exc}")
+        report["gpu_server_leader_exited"] = server.poll() is not None
+        report["gpu_server_stopped"] = report["gpu_server_process_group_stopped"]
+        if cleanup_errors or not report["gpu_server_stopped"]:
+            report["status"] = "failed"
+            report["cleanup_errors"] = cleanup_errors
         monitor.set_phase("finished")
         report["gpu_sampling"] = monitor.stop()
         save()
+    if report["status"] != "completed":
+        raise RuntimeError("Session cleanup did not confirm all owned process groups stopped.")
     return report

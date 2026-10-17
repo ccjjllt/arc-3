@@ -6,9 +6,12 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from arc3_research.experiment_config import validate_config
 
 
 def cell(source: str, kind: str = "code") -> dict:
@@ -30,6 +33,7 @@ def main() -> None:
     source = original / "arc-agi-3-milestone-2-solution.ipynb"
     notebook = json.loads(source.read_text())
     config = json.loads(config_path.read_text())
+    validate_config(config)
     arms = config["arm_order"]
     if not arms or len(set(arms)) != len(arms):
         raise ValueError("arm_order must be nonempty with unique output names.")
@@ -47,6 +51,11 @@ def main() -> None:
         required.add("current_data.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
+    for key in ("scheduler_observer", "request_deadline"):
+        if config.get(key, False):
+            required.add(key + ".py")
+    if config.get("preflight_before_serving"):
+        required.add("preflight.py")
     if not required.issubset(p.name for p in payload_paths):
         raise RuntimeError("Research modules are not ready")
     payload = {}
@@ -167,6 +176,29 @@ os.environ["ARC3_RESEARCH_ENV_DIR"] = ARC3_INPUT_PATHS["environment_files"]
                         code = code.replace(quote + literal + quote,
                                             f'ARC3_INPUT_PATHS[{key!r}]')
                 item["source"] = code
+    if config.get("preflight_before_serving"):
+        preflight = '''# Fail on incompatible CPU hooks before loading GPU model weights.
+ARC3_GPU_MONITOR.set_phase("cpu_preflight")
+ARC3_PREFLIGHT_CONFIG = Path("/kaggle/working/research-config.json")
+ARC3_PREFLIGHT_CONFIG.write_text(json.dumps(ARC3_EXPERIMENT, indent=2) + "\\n")
+try:
+    subprocess.run([sys.executable, "-m", "arc3_research.preflight",
+                    "--bundle-dir", str(BUNDLE_DIR),
+                    "--config", str(ARC3_PREFLIGHT_CONFIG),
+                    "--report", "/kaggle/working/cpu-preflight.json"],
+                   env={**os.environ, "PYTHONPATH": "/kaggle/research/src" + os.pathsep + os.environ.get("PYTHONPATH", "")},
+                   check=True, timeout=120)
+except BaseException:
+    ARC3_SESSION_DONE.set()
+    ARC3_GPU_MONITOR.stop()
+    raise
+ARC3_GPU_MONITOR.set_phase("model_startup")
+'''
+        serving_indices = [i for i, item in enumerate(inherited)
+                           if "".join(item["source"]).startswith("# Paste this entire file into the launcher cell.")]
+        if len(serving_indices) != 1:
+            raise RuntimeError("Cannot locate the unchanged model launcher for CPU preflight.")
+        inherited.insert(serving_indices[0], cell(preflight))
     ending = '''from arc3_research.session_runner import run_session
 try:
     report = run_session(globals())

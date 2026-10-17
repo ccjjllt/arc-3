@@ -22,6 +22,8 @@ import time
 import traceback
 from typing import Any
 
+from arc3_research.experiment_config import parse_arm_environment
+
 
 def _stage(name: str, **fields: Any) -> None:
     print("[ARC3_RESEARCH] " + json.dumps({
@@ -88,6 +90,8 @@ def run_arm(args: argparse.Namespace) -> int:
     animation_patch = None
     current_data_patch = None
     timing_patch = None
+    deadline_patch = None
+    scheduler_patch = None
     bm = None
     exit_code = 0
     _write_json(metadata_path, metadata)
@@ -98,6 +102,13 @@ def run_arm(args: argparse.Namespace) -> int:
             raise RuntimeError("run_arm only supports public OFFLINE research.")
         if args.budget_seconds <= 0:
             raise ValueError("budget-seconds must be positive.")
+        overrides = parse_arm_environment(getattr(args, "environment_json", "{}"))
+        if args.arm == "tail_80k" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "1", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("tail_80k requires its explicit frozen environment.")
+        os.environ.update(overrides)
+        metadata["environment_overrides"] = overrides
         requested_ids = _game_ids(args.game_list)
         bundle_dir = args.bundle_dir.resolve()
         sys.path[:0] = _source_paths(bundle_dir)
@@ -143,7 +154,7 @@ def run_arm(args: argparse.Namespace) -> int:
         target.run_as_submission = False
         with (bundle_dir / "benchmark_initial.pkl").open("rb") as file:
             bm = pickle.load(file)
-        bm.label = f"003-{args.arm}"
+        bm.label = f"research-{args.arm}"
         bm.job_dir = job_dir
         bm.n_passes = 1
         bm.game_weights = None
@@ -171,9 +182,15 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "current_data":
             from arc3_research.current_data import install_current_data
             current_data_patch = install_current_data()
+        if getattr(args, "request_deadline", False):
+            from arc3_research.request_deadline import install_request_deadline
+            deadline_patch = install_request_deadline()
         if getattr(args, "inference_timing", False):
             from arc3_research.inference_timing import install_inference_timing
             timing_patch = install_inference_timing()
+        if getattr(args, "scheduler_observer", False):
+            from arc3_research.scheduler_observer import install_scheduler_observer
+            scheduler_patch = install_scheduler_observer()
         git_status = bundle_dir / "git_status.txt"
         if git_status.is_file():
             (job_dir / "git_status.txt").write_bytes(git_status.read_bytes())
@@ -220,6 +237,12 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
                 Path(__file__).with_name("inference_timing.py"))
             metadata["inference_timing"] = timing_patch.snapshot()
+        for name, installed in (("request_deadline", deadline_patch),
+                                ("scheduler_observer", scheduler_patch)):
+            metadata[name + "_enabled"] = installed is not None
+            if installed is not None:
+                metadata["source_sha256"][name + ".py"] = _sha256(Path(__file__).with_name(name + ".py"))
+                metadata[name] = installed.snapshot()
 
         async def play() -> None:
             loop = asyncio.get_running_loop()
@@ -307,6 +330,16 @@ def run_arm(args: argparse.Namespace) -> int:
                 _write_json(job_dir / "current-data.json", data)
             except Exception as exc:
                 metadata["current_data_export_error"] = f"{type(exc).__name__}: {exc}"
+        for name, installed in (("request-deadline", deadline_patch),
+                                ("scheduler-observer", scheduler_patch)):
+            if installed is not None:
+                try:
+                    data = installed.snapshot()
+                    data["snapshot_after_worker_join"] = True
+                    data["lingering_worker_threads"] = live
+                    _write_json(job_dir / (name + ".json"), data)
+                except Exception as exc:
+                    metadata[name + "_export_error"] = f"{type(exc).__name__}: {exc}"
         _write_json(metadata_path, metadata)
         _stage("arm_finished", arm=args.arm, status=metadata["status"],
                wall_seconds=metadata["wall_seconds"], exit_code=exit_code,
@@ -325,7 +358,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arm", required=True,
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
-                                 "retrievable_animation", "current_data"))
+                                 "retrievable_animation", "current_data", "tail_80k"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")
@@ -334,6 +367,12 @@ def main() -> int:
     parser.add_argument("--budget-seconds", required=True, type=int)
     parser.add_argument("--inference-timing", action="store_true",
                         help="Record passive request/gate timing in both confirmation arms.")
+    parser.add_argument("--environment-json", default="{}",
+                        help="Explicit allowed scheduler environment overrides.")
+    parser.add_argument("--request-deadline", action="store_true",
+                        help="Recheck cancellation after gate wait and before transport.")
+    parser.add_argument("--scheduler-observer", action="store_true",
+                        help="Record actual bounded queue/snapshot/selection observations.")
     return run_arm(parser.parse_args())
 
 
