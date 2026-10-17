@@ -1,0 +1,268 @@
+"""LOCAL-ONLY exact-V8 cell-13 experiment wrapper; top-level await is intentional."""
+
+import copy
+from datetime import timezone
+
+if TRUE_SUBMISSION:
+    raise RuntimeError("Matched runtime A/B is public-offline research only; competition rerun refused")
+
+AB_SCHEMA_VERSION = 1
+AB_FIXED_SEED = 20260808
+AB_CONTROL_RUNTIME_S = 7920.0
+AB_CANDIDATE_RUNTIME_S = 22000.0
+AB_ROOT = WORKING_DIR / "arc3_v8_same_session_runtime_ab"
+AB_REQUIRED_ARTIFACTS = (
+    "benchmark.json",
+    "games.pkl",
+    "solver.pkl",
+    "intermediate_states.pkl",
+    "summary.txt",
+    "diagnostics.html",
+)
+AB_EXPECTED_HASHES = {
+    "benchmark_initial.pkl": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+    "deploy_target.pkl": "f0dc4b59f390862326b0e40a6ff0f8910d9e6487ae244efb1ae9ab495f79ba19",
+    "taaf-kaggle-bundle.json": "52f844965b2b80de6e6ef759dfc9ffa3258f42407e0ed1788ec28ff250a7a8cb",
+}
+
+
+def ab_sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def ab_write_json(path, payload):
+    path = Path(path)
+    if path.exists():
+        raise FileExistsError(f"A/B receipt already exists: {path}")
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def ab_server_pid():
+    pid_path = WORKING_DIR / "vllm-openai-server.pid"
+    if not pid_path.is_file():
+        raise FileNotFoundError(f"single-server PID receipt missing: {pid_path}")
+    pid = int(pid_path.read_text(encoding="utf-8").strip())
+    if pid <= 0:
+        raise RuntimeError(f"invalid vLLM PID: {pid}")
+    os.kill(pid, 0)
+    return pid
+
+
+def ab_metrics_snapshot():
+    path = WORKING_DIR / "arc3_progress_stream_metrics.json"
+    if not path.is_file():
+        raise FileNotFoundError(f"progress-stream metrics missing: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        key: int(payload.get(key, 0))
+        for key in (
+            "stream_responses_completed",
+            "stream_chunks_received",
+            "expected_absolute_deadline_closures",
+            "true_transport_failures",
+        )
+    }
+
+
+def ab_metric_delta(before, after):
+    return {key: int(after[key]) - int(before[key]) for key in before}
+
+
+def ab_solver_normalized_sha256(solver):
+    normalized = copy.deepcopy(solver)
+    normalized.max_runtime_s_per_game = AB_CONTROL_RUNTIME_S
+    return hashlib.sha256(pickle.dumps(normalized, protocol=5)).hexdigest()
+
+
+def ab_fresh_arm(label, max_runtime_s, expected_server_pid):
+    arm_dir = AB_ROOT / label
+    arm_dir.mkdir(parents=False, exist_ok=False)
+    with open(BUNDLE_DIR / "benchmark_initial.pkl", "rb") as fh:
+        arm_bm = pickle.load(fh)
+    baseline_runtime_s = float(getattr(arm_bm.solver, "max_runtime_s_per_game"))
+    if baseline_runtime_s != AB_CONTROL_RUNTIME_S:
+        raise RuntimeError(f"unexpected V8 baseline max_runtime_s_per_game: {baseline_runtime_s}")
+    normalized_solver_sha256 = ab_solver_normalized_sha256(arm_bm.solver)
+    arm_bm.solver.max_runtime_s_per_game = float(max_runtime_s)
+    arm_bm.job_dir = arm_dir
+    arm_bm.games = offline_games(str(COMPETITION_ROOT / "environment_files"))
+    arm_bm.n_passes = 1
+    arm_bm.game_weights = None
+    env_names = [game.env_name for game in arm_bm.games]
+    if len(env_names) != 25 or len(set(env_names)) != 25:
+        raise RuntimeError(f"expected 25 unique public games, got {len(env_names)}")
+    if ab_server_pid() != expected_server_pid:
+        raise RuntimeError("vLLM server PID changed while constructing an arm")
+    os.environ["LOCAL_ANALYZER_SEED"] = str(AB_FIXED_SEED)
+    duck_agent._LOCAL_ANALYZER_SEED = AB_FIXED_SEED
+    contract = {
+        "schema_version": AB_SCHEMA_VERSION,
+        "label": label,
+        "max_runtime_s": float(max_runtime_s),
+        "fixed_seed": AB_FIXED_SEED,
+        "benchmark_source_sha256": ab_sha256(BUNDLE_DIR / "benchmark_initial.pkl"),
+        "normalized_solver_sha256": normalized_solver_sha256,
+        "environment_names": env_names,
+        "n_passes": arm_bm.n_passes,
+        "game_weights": arm_bm.game_weights,
+        "job_dir": str(arm_dir),
+        "server_pid": expected_server_pid,
+        "start_local_server": bool(getattr(arm_bm.solver, "start_local_server", False)),
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    if contract["start_local_server"]:
+        raise RuntimeError("arm unexpectedly requests a second local model server")
+    ab_write_json(arm_dir / "arm_contract.json", contract)
+    return arm_bm, contract
+
+
+def ab_summarize_benchmark(path):
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    runs = payload.get("game_runs") or []
+    if len(runs) != 25:
+        raise RuntimeError(f"expected 25 completed run records, got {len(runs)}")
+    states = {}
+    for run in runs:
+        state = str(run.get("state"))
+        states[state] = states.get(state, 0) + 1
+    score_total = float(sum(float(run.get("final_score") or 0.0) for run in runs))
+    return {
+        "game_ids": [str(run["game_id"]) for run in runs],
+        "states": states,
+        "score_total": score_total,
+        "score_mean": score_total / len(runs),
+        "levels_completed_total": int(sum(int(run.get("levels_completed") or 0) for run in runs)),
+        "actions_total": int(sum(len(run.get("history") or []) for run in runs)),
+        "generated_tokens_total": int(
+            sum(
+                sum(int(item.get("generated_tokens") or 0) for item in (run.get("history") or []))
+                + int(run.get("final_generated_tokens") or 0)
+                for run in runs
+            )
+        ),
+    }
+
+
+def ab_finish_arm(label, contract, metrics_before, expected_server_pid):
+    arm_dir = AB_ROOT / label
+    missing = [name for name in AB_REQUIRED_ARTIFACTS if not (arm_dir / name).is_file()]
+    if missing:
+        raise FileNotFoundError(f"{label} missing required artifacts: {missing}")
+    if ab_server_pid() != expected_server_pid:
+        raise RuntimeError(f"vLLM PID changed after {label}")
+    summary = ab_summarize_benchmark(arm_dir / "benchmark.json")
+    metrics_after = ab_metrics_snapshot()
+    receipt = {
+        "schema_version": AB_SCHEMA_VERSION,
+        "label": label,
+        "contract_sha256": ab_sha256(arm_dir / "arm_contract.json"),
+        "contract": contract,
+        "summary": summary,
+        "metrics_before": metrics_before,
+        "metrics_after": metrics_after,
+        "metrics_delta": ab_metric_delta(metrics_before, metrics_after),
+        "server_pid_after": expected_server_pid,
+        "artifact_sha256": {
+            name: ab_sha256(arm_dir / name) for name in AB_REQUIRED_ARTIFACTS
+        },
+        "finished_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    ab_write_json(arm_dir / "arm_receipt.json", receipt)
+    return receipt, metrics_after
+
+
+for relative_name, expected_sha256 in AB_EXPECTED_HASHES.items():
+    observed_sha256 = ab_sha256(BUNDLE_DIR / relative_name)
+    if observed_sha256 != expected_sha256:
+        raise RuntimeError(
+            f"V8 input hash mismatch for {relative_name}: {observed_sha256} != {expected_sha256}"
+        )
+if run_contract.get("stock_prompt_sha256") != "527bb23c0d0de20721112e4d9469bda1f988c53f616cb5e4dcc08f7c77172608":
+    raise RuntimeError("stock prompt receipt drifted from exact V8")
+if run_contract.get("prompt_sha256_after_hygiene") != "6d64094a95032b9e893b7ae24645d977af15938cb2c9cef990a0dba91627cf92":
+    raise RuntimeError("hygiene prompt receipt drifted from exact V8")
+if AB_ROOT.exists():
+    raise FileExistsError(f"A/B root must be fresh: {AB_ROOT}")
+AB_ROOT.mkdir(parents=False, exist_ok=False)
+
+import pandas as pd
+
+submission_path = WORKING_DIR / "submission.parquet"
+submission_columns = ["row_id", "game_id", "end_of_game", "score"]
+pd.DataFrame([["1_0", "1", True, 1.0]], columns=submission_columns).to_parquet(
+    submission_path, index=False
+)
+submission_probe = pd.read_parquet(submission_path)
+if list(submission_probe.columns) != submission_columns or submission_probe.isna().any().any():
+    raise ValueError("submission.parquet failed its exact-column/null audit")
+
+global_budget_s = float(getattr(target, "max_runtime_s", 0.0) or 0.0)
+global_soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(
+    seconds=global_budget_s - min(600.0, global_budget_s / 2)
+)
+server_pid = ab_server_pid()
+metrics_cursor = ab_metrics_snapshot()
+experiment = {
+    "schema_version": AB_SCHEMA_VERSION,
+    "status": "RUNNING",
+    "experiment": "exact-v8-derived-same-session-runtime-ab",
+    "arm_order": ["control", "candidate"],
+    "fixed_seed": AB_FIXED_SEED,
+    "control_runtime_s": AB_CONTROL_RUNTIME_S,
+    "candidate_runtime_s": AB_CANDIDATE_RUNTIME_S,
+    "shared_global_soft_end": global_soft_end.isoformat(),
+    "single_vllm_server_pid": server_pid,
+    "competition_rerun": False,
+    "submission_sha256": ab_sha256(submission_path),
+    "submission_columns": submission_columns,
+    "started_at_utc": datetime.now(timezone.utc).isoformat(),
+}
+ab_write_json(AB_ROOT / "experiment_contract.json", experiment)
+
+arm_receipts = {}
+failure = None
+try:
+    control_bm, control_contract = ab_fresh_arm("control", AB_CONTROL_RUNTIME_S, server_pid)
+    await control_bm.run(
+        soft_end_time=global_soft_end,
+        runtime_environment=target,
+        minimal_diagnostics=False,
+    )
+    arm_receipts["control"], metrics_cursor = ab_finish_arm(
+        "control", control_contract, metrics_cursor, server_pid
+    )
+
+    candidate_bm, candidate_contract = ab_fresh_arm(
+        "candidate", AB_CANDIDATE_RUNTIME_S, server_pid
+    )
+    if candidate_contract["normalized_solver_sha256"] != control_contract["normalized_solver_sha256"]:
+        raise RuntimeError("arm solver configs differ after normalizing max_runtime_s_per_game")
+    if candidate_contract["environment_names"] != control_contract["environment_names"]:
+        raise RuntimeError("arm environment order differs")
+    await candidate_bm.run(
+        soft_end_time=global_soft_end,
+        runtime_environment=target,
+        minimal_diagnostics=False,
+    )
+    arm_receipts["candidate"], metrics_cursor = ab_finish_arm(
+        "candidate", candidate_contract, metrics_cursor, server_pid
+    )
+except BaseException as exc:
+    failure = {"type": type(exc).__name__, "message": str(exc)}
+    raise
+finally:
+    final_payload = {
+        **experiment,
+        "status": "COMPLETE" if failure is None and len(arm_receipts) == 2 else "FAILED",
+        "failure": failure,
+        "arm_receipt_sha256": {
+            label: ab_sha256(AB_ROOT / label / "arm_receipt.json") for label in arm_receipts
+        },
+        "single_vllm_server_pid_end": (
+            ab_server_pid() if failure is None and len(arm_receipts) == 2 else None
+        ),
+        "finished_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    ab_write_json(AB_ROOT / "final_experiment_receipt.json", final_payload)
+    for command in json.loads((BUNDLE_DIR / "teardown_commands.json").read_text()):
+        subprocess.run(command, shell=True, check=False, cwd=WORKING_DIR, env=command_env())

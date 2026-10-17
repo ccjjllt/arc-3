@@ -1,0 +1,170 @@
+--- dfranzen__arc-agi-3-milestone-2-solution.ipynb
++++ 2026-10-17/professorice__arc-agi-3-m2-qwen3-8-27b/source.ipynb
+@@ -1,4 +1,17 @@
+ ### About this notebook
++
++**This is a fork of [David Franzen's ARC-AGI-3 Milestone 2 solution](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution) with one change: the model is [Qwen3-VL-4B-Instruct](https://www.kaggle.com/models/professorice/qwen3-vl-4b-instruct)** (Qwen Team, Apache 2.0) instead of Qwen3.8-Flash-Next. It is a baseline for how far a small open vision-language model gets inside the same harness.
++
++What changed, and nothing else:
++- `MODEL_DIR` points at Qwen3-VL-4B-Instruct (bf16, unmodified from Hugging Face).
++- The serving cell drops the Flash-Next-specific options (AutoRound INT4, the MTP speculative draft model, mamba / linear-attention / PLE flags).
++- Thinking is off (the Instruct edition does not think), tool calls use the Hermes-style parser that Qwen3-VL emits, and sampling follows the model card (temperature 0.7, top_p 0.8, top_k 20).
++- The interactive (non-submission) run is a short 1-game smoke test; the competition rerun is unchanged.
++
++All credit for the solution goes to David Franzen (see his [write-up](https://www.kaggle.com/writeups/dfranzen/arc-agi-3-milestone-2)), and through him to Jeroen Cottaar and Tufa Labs for the [Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner), and to John Pezzulli, Mamy Ratsimbazafy and Gabriel Olympie for the SGLang build. Franzen's original notes follow.
++
++---
++
+ 
+ **Update (v3):** This version reruns the open-sourced submission (v1) with **4 passes on all 25 demo games**, using a runtime budget scaled to match the time available per game in the competition. I couldn’t complete this run before publishing, as I had run out of Kaggle compute. The notebook is otherwise identical.
+ 
+@@ -10134,10 +10147,10 @@
+ 
+ # model and dataset paths
+ WHEELHOUSE_DIR    = '/kaggle/input/datasets/dfranzen/pennyroyal-v253'
+-MODEL_DIR         = '/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1'
+-DRAFT_MODEL_DIR   = '/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1'
++MODEL_DIR         = '/kaggle/input/models/professorice/qwen3-vl-4b-instruct/transformers/official/1'
++DRAFT_MODEL_DIR   = None  # no speculative draft model for Qwen3-VL-4B
+ ORIG_BUNDLE_DIR   = '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy'
+-SERVED_MODEL_NAME = 'flashnext'
++SERVED_MODEL_NAME = 'qwen3vl4b'
+ 
+ # Apply harness patch
+ BUNDLE_DIR = Path('/kaggle/taaf-kaggle-source-share')
+@@ -10185,13 +10198,13 @@
+     
+     ########## analyzer config ##########
+     'ARC3_REASONING_HISTORY_KEY': 'reasoning_content',
+-    'LOCAL_ANALYZER_ENABLE_THINKING': 'true',
++    'LOCAL_ANALYZER_ENABLE_THINKING': 'false',
+     'LOCAL_ANALYZER_TOOL_STEPS': '0',
+     'LOCAL_ANALYZER_TOOL_TIMEOUT': '30',
+     'LOCAL_ANALYZER_YIELD_SECONDS': '0',
+     'LOCAL_ANALYZER_YIELD_TOKENS': '2048',
+     'LOCAL_ANALYZER_TEMPERATURE': '0.7',
+-    'LOCAL_ANALYZER_TOP_P': '0.95',
++    'LOCAL_ANALYZER_TOP_P': '0.8',
+     'LOCAL_ANALYZER_TOP_K': '20',
+ 
+     ########## context pruning ##########
+@@ -10326,7 +10339,7 @@
+ precache_wheels_thread.start()
+ precache_wheels_thread.join()
+ 
+-precache_model_thread = threading.Thread(target=precache, args=(MODEL_DIR, DRAFT_MODEL_DIR), kwargs={'delay': 60, 'threads': 3})
++precache_model_thread = threading.Thread(target=precache, args=(MODEL_DIR,), kwargs={'delay': 60, 'threads': 3})
+ 
+ ## 3. Install the ARC runtime
+ 
+@@ -10404,20 +10417,20 @@
+ LOG = str(Path(WORKING_DIR) / "serve.log")
+ CFG = dict(
+     CTX=(116+12+8)*1024,
+-    MEMFRAC=0.96,
++    MEMFRAC=0.90,
+     MAXREQ=10,
+     CUDAGRAPH_MAXBS=10,
+     MAMBA_CACHE=60,
+     CHUNK=8192,
+     MAX_PREFILL=16384,
+-    SPEC=True,
+-    FRSPEC=True,
++    SPEC=False,
++    FRSPEC=False,
+     AUTOTUNE=True,
+     # Preserve the original Kaggle checkpoint prefetch/cache behavior.
+     PREFETCH_CHECKPOINTS=True,
+     DROP_CACHE_AFTER_LOAD=True,
+     LINEAR_BACKEND="flashinfer",
+-    KVDTYPE="fp8_e4m3",
++    KVDTYPE="auto",
+     SSM_DTYPE="bfloat16",
+     MAMBA_RADIX="extra_buffer",
+     GDN_MTP_CACHE_MODE="none",
+@@ -10654,9 +10667,10 @@
+ # ---- validate target and create the read-only draft's SGLang view ----
+ target_cfg = json.loads(Path(MODEL_DIR, "config.json").read_text())
+ q = target_cfg.get("quantization_config", {})
+-assert q.get("quant_method") == "auto-round" and q.get("bits") == 4, "MODEL_DIR must be the Intel/albucino AutoRound INT4 checkpoint"
++assert not q, f"expected the unquantized bf16 Qwen3-VL checkpoint, got quantization_config={q}"
++assert "Qwen3VL" in "".join(target_cfg.get("architectures", [])), target_cfg.get("architectures")
+ _, target_shards = indexed_shards(MODEL_DIR)
+-print("Target:", MODEL_DIR, "| shards:", len(target_shards), "| PLE dtype:", target_cfg.get("text_config", {}).get("ple_embedding_dtype", "checkpoint default (typically BF16)"))
++print("Target:", MODEL_DIR, "| shards:", len(target_shards), "| PLE dtype:", target_cfg.get("architectures"))
+ DRAFT_VIEW = None
+ if CFG["SPEC"]:
+     assert Path(DRAFT_MODEL_DIR).is_dir(), f"draft dir not found: {DRAFT_MODEL_DIR}"
+@@ -10669,22 +10683,16 @@
+     "--model-loader-extra-config", '{"enable_multithread_load":false}',
+     "--served-model-name", str(CFG["SERVED_NAME"]), "--host", "127.0.0.1",
+     "--port", str(SERVED_MODEL_PORT), "--tensor-parallel-size", "1",
+-    "--dtype", "bfloat16", "--quantization", "auto-round",
++    "--dtype", "bfloat16",
+     "--kv-cache-dtype", CFG["KVDTYPE"], "--mem-fraction-static", str(CFG["MEMFRAC"]),
+     "--context-length", str(CFG["CTX"]), "--page-size", "64",
+     "--max-running-requests", str(CFG["MAXREQ"]), "--chunked-prefill-size", str(CFG["CHUNK"]),
+     "--max-prefill-tokens", str(CFG["MAX_PREFILL"]),
+     "--cuda-graph-max-bs-decode", str(CFG["CUDAGRAPH_MAXBS"]),
+     "--cuda-graph-bs-decode", *map(str, graph_bs),
+-    "--mamba-ssm-dtype", CFG["SSM_DTYPE"], "--max-mamba-cache-size", str(CFG["MAMBA_CACHE"]),
+-    "--mamba-radix-cache-strategy", CFG["MAMBA_RADIX"], "--mamba-track-interval", "64",
+-    "--mamba-backend", CFG["LINEAR_BACKEND"],
+-    "--linear-attn-decode-backend", CFG["LINEAR_BACKEND"],
+-    "--linear-attn-prefill-backend", CFG["LINEAR_BACKEND"],
+-    "--moe-runner-backend", "auto", "--ple-offload-embedding", "--trust-remote-code",
++    "--trust-remote-code",
+     "--mm-feature-transport", "cpu", "--image-processor-backend", "pil",
+-    "--reasoning-parser", "qwen3", "--tool-call-parser", "qwen3_coder",
+-    "--default-chat-template-kwargs", '{"preserve_thinking":true}',
++    "--tool-call-parser", "qwen25",
+     "--watchdog-timeout", "1800", "--schedule-policy", "lpm", "--warmups", "structured_output",
+     "--enable-cache-report", "--enable-metrics", "--enable-request-time-stats-logging"]
+ if CFG["PREFETCH_CHECKPOINTS"]: args += ["--weight-loader-prefetch-checkpoints"]
+@@ -10692,7 +10700,8 @@
+ tmpl = Path(MODEL_DIR, "chat_template.jinja")
+ if tmpl.is_file(): args += ["--chat-template", str(tmpl)]
+ if not CFG["AUTOTUNE"]: args += ["--disable-flashinfer-autotune"]
+-if CFG["GDN_MTP_CACHE_MODE"]: args += ["--gdn-mtp-cache-mode", CFG["GDN_MTP_CACHE_MODE"]]
++# (Flash-Next GDN/MTP cache option dropped)
++if False: args += ["--gdn-mtp-cache-mode", CFG["GDN_MTP_CACHE_MODE"]]
+ if CFG["SPEC"]:
+     args += ["--speculative-algorithm", "NEXTN", "--speculative-num-steps", str(CFG["SPEC_STEPS"]),
+         "--speculative-eagle-topk", "1", "--speculative-num-draft-tokens", str(CFG["SPEC_STEPS"]+1),
+@@ -10774,6 +10783,7 @@
+ bm.game_weights = None
+ 
+ demo_excluded_games = [] if TRUE_SUBMISSION else []
++SMOKE_GAMES = 1  # interactive save run only: 1 demo game, hard stop ~30 min (saves GPU hours)
+ 
+ if TRUE_SUBMISSION:  # overrides for contest run
+     bm.solver.save_request_logs = False
+@@ -10783,8 +10793,9 @@
+         bm.solver.max_runtime_s_per_game = 532*60
+ else:
+     if USE_PRIORITY_SCHEDULING:
+-        bm.solver.concurrency = (25 - len(demo_excluded_games)) * bm.n_passes
+-        bm.solver.max_runtime_s_per_game = 532*60 * bm.solver.concurrency // 110
++        bm.n_passes = 1
++        bm.solver.concurrency = SMOKE_GAMES
++        bm.solver.max_runtime_s_per_game = 12*60
+     if float(getattr(target, 'max_runtime_s', 0.0) or 0.0) != 32400.0:
+         raise RuntimeError(
+             f'Expected the 32400-second notebook budget, got {target.max_runtime_s!r}.'
+@@ -10965,14 +10976,14 @@
+     # Interactive run: play the bundled competition environments offline (no gateway).
+     # The competition's environment files ship alongside the wheelhouse in the competition dataset.
+     competition_env_files = str(Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels").parent / "environment_files")
+-    bm.games = _offline_games(competition_env_files)
++    bm.games = _offline_games(competition_env_files)[:SMOKE_GAMES]
+ 
+ # Outside a real submission, stop ~10 min before the wall-clock budget for a graceful exit.
+ soft_end = None
+ if not TRUE_SUBMISSION:
+     budget = float(getattr(target, "max_runtime_s", 0.0) or 0.0)
+     if budget > 0:
+-        soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(seconds=budget - min(600.0, budget / 2))
++        soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(seconds=min(budget - min(600.0, budget / 2), 30*60))
+ 
+ # Play the benchmark; teardown commands run even if the run raises.
+ await bm.run(soft_end_time=soft_end, runtime_environment=target, minimal_diagnostics=TRUE_SUBMISSION)

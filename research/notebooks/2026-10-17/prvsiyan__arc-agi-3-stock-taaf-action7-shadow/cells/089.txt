@@ -1,0 +1,15 @@
+<div style="padding:18px 20px;border:1px solid #d6dcff;border-radius:16px;background:linear-gradient(135deg,#f7f8ff 0%,#fff9f2 100%);">
+<h2 style="margin:0 0 8px 0;">What changed—and what is measured</h2>
+<p style="margin:0;">This candidate uses the public animation-aware TAAF chassis: compact per-action animation summaries, on-demand transient-frame inspection, and a hard known-no-op guard. It is an experiment, not a score promise.</p>
+</div>
+
+| Evidence | Locked value |
+|---|---|
+| Solver mechanism | Animation summaries + `animation()` inspection + no-op guard |
+| Serving stack | Qwen3.8 Flash-Next NVFP4 · BF16 · NEXTN MTP=3 |
+| Game scheduling | 28-way Duck concurrency · one pass |
+| Runtime budget | 7,920 s per game · 9-hour notebook ceiling |
+| Hardware contract | RTX Pro 6000 · internet disabled |
+| Identity contract | Existing `prvsiyan/arc-agi-3-stock-taaf-action7-shadow` preserved |
+
+> **Evidence boundary.** Local benchmark output and an official competition row are separate. Only a completed Kaggle submission row with a nonempty score is official evidence.

@@ -1,0 +1,40 @@
+from inference.agent import action_names
+import inference.agent.tool_agent as duck_agent
+
+# Fail closed unless the exact audited MIT TAAF base prompt is mounted.
+STOCK_TAAF_PROMPT_BYTES_BEFORE = duck_agent.PYTHON_ADDENDUM.encode("utf-8")
+STOCK_TAAF_PROMPT_SHA256_BEFORE = hashlib.sha256(STOCK_TAAF_PROMPT_BYTES_BEFORE).hexdigest()
+EXPECTED_TAAF_PROMPT_SHA256 = "527bb23c0d0de20721112e4d9469bda1f988c53f616cb5e4dcc08f7c77172608"
+if STOCK_TAAF_PROMPT_SHA256_BEFORE != EXPECTED_TAAF_PROMPT_SHA256:
+    raise RuntimeError(
+        f"stock TAAF prompt hash mismatch: {STOCK_TAAF_PROMPT_SHA256_BEFORE}"
+    )
+
+# The public bundle has no model-facing ACTION7 name; expose the documented undo label.
+ACTION7_BEFORE = action_names.to_engine_action("ACTION7")
+action_names.ENGINE_TO_MODEL_ACTION["ACTION7"] = "UNDO"
+action_names.MODEL_TO_ENGINE_ACTION["UNDO"] = "ACTION7"
+assert action_names.to_model_action("ACTION7") == "UNDO"
+assert action_names.to_engine_action("UNDO") == "ACTION7"
+
+STOCK_TAAF_PROMPT_BYTES_AFTER = duck_agent.PYTHON_ADDENDUM.encode("utf-8")
+if STOCK_TAAF_PROMPT_BYTES_AFTER != STOCK_TAAF_PROMPT_BYTES_BEFORE:
+    raise RuntimeError("ACTION7 compatibility unexpectedly changed the stock TAAF prompt")
+
+source_fingerprint = hashlib.sha256((BUNDLE_DIR / "taaf-kaggle-bundle.json").read_bytes()).hexdigest()
+run_contract = {
+    "candidate": "duck-stock-taaf-prompt-action7-shadow-v1",
+    "source_bundle_sha256": source_fingerprint,
+    "source_dataset": DATASET_SOURCES[0],
+    "model_dataset": DATASET_SOURCES[2],
+    "wheelhouse_dataset": DATASET_SOURCES[1],
+    "official_action7_before": ACTION7_BEFORE,
+    "official_undo_after": action_names.to_engine_action("UNDO"),
+    "stock_prompt_sha256": STOCK_TAAF_PROMPT_SHA256_BEFORE,
+    "stock_prompt_preserved_byte_for_byte": STOCK_TAAF_PROMPT_BYTES_AFTER == STOCK_TAAF_PROMPT_BYTES_BEFORE,
+    "decision_ledger_enabled": False,
+    "competition_rerun": TRUE_SUBMISSION,
+    "internet_requested": False,
+}
+(WORKING_DIR / "run_contract.json").write_text(json.dumps(run_contract, indent=2, sort_keys=True) + "\n")
+print(json.dumps(run_contract, indent=2))

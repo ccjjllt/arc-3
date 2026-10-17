@@ -1,0 +1,161 @@
+"""Apex Deep-Level Persistence Priority & Dynamic Allocation Module."""
+from __future__ import annotations
+
+import math
+import os
+import threading
+import time
+
+SCALE = 1000.0
+
+
+class FormPace:
+    """Track average tokens generated per completed level."""
+
+    def __init__(self):
+        self.completed = 0
+        self.tokens = 0.0
+
+    def record_completion(self, tokens_used: float, reference_tokens: float = 0.0) -> None:
+        self.completed += 1
+        self.tokens += max(0.0, float(tokens_used))
+
+    def cost_multiplier(self) -> float:
+        return self.tokens / self.completed if self.completed else 0.0
+
+
+def _levels(total) -> int | None:
+    try:
+        n = int(total)
+    except (TypeError, ValueError):
+        return None
+    return n if n > 0 else None
+
+
+def apex_value(level: int, actions: float, tokens: float, pace: float, total_levels,
+               phi: float = 1.0) -> float:
+    """
+    Apex Deep-Level Priority Formulation:
+    - Level weighting: Level k has weight k / (N*(N+1)/2). Deep levels dominate game score.
+    - Victory Lap Bonus: When on final level (remaining=0), completing it wins the entire game
+      and awards maximum weight level N. Priority is maximized (b_base=22.0), NEVER zeroed!
+    - Stall Decay Coupling: Prospective reward B decays when the current level stalls,
+      ensuring hopelessly stuck early games quickly yield slots to progressing deep games.
+    """
+    level = max(1, int(level))
+    n = _levels(total_levels) or 10
+    n_clamped = min(10, max(6, n))
+    w_total = n_clamped * (n_clamped + 1) / 2
+    norm = 55 / w_total
+
+    a = max(0.0, float(actions))
+    t = max(0.0, float(tokens))
+
+    # 1. Depth scaling aligned with level scoring weight
+    level_weight_factor = (1.0 + 0.8 * (level - 1)) * norm
+
+    # 2. Efficiency decay with actions on current level
+    eff_decay = (300.0 / (300.0 + a)) ** 2.5
+    A = level_weight_factor * eff_decay
+
+    # 3. Dynamic progress pace boost
+    pace_ref = 30_000.0
+    if pace > 0:
+        A *= min(4.0, max(0.25, (pace_ref / max(1.0, pace)) ** 0.4))
+
+    # 4. Stall hazard C with decay
+    scale = 225_000.0
+    rel = pace if pace > 0 else pace_ref
+    scale *= min(2.0, max(0.5, rel / pace_ref)) ** 0.5
+    floor = 0.05
+    C = (0.15 * max(floor, 1.0 - a / 100.0) + 0.85 * max(floor, 1.0 - t / scale))
+
+    # 5. Victory Lap & Headroom Bonus B (Dynamic level-scaled)
+    remaining = max(0, n - level)
+    level_scale_factor = (n_clamped / 6.0) ** 0.5
+    if remaining == 0:
+        b_base = 22.0 * level_scale_factor
+    elif remaining == 1:
+        b_base = 18.0 * level_scale_factor
+    elif remaining == 2:
+        b_base = 16.0 * level_scale_factor
+    else:
+        b_base = 14.0 * level_scale_factor
+
+    # Coupling: Prospective reward B decays when the current level is stalled
+    B = b_base * (0.2 + 0.8 * C)
+
+    return (A * C) + (B * phi)
+
+
+def apex_priority(state, *, tail_fraction=None, **_ignored) -> int:
+    phi = 1.0 if tail_fraction is None else min(1.0, max(0.0, float(tail_fraction)))
+    val = apex_value(
+        state.level,
+        state.actions,
+        state.tokens,
+        float(getattr(state, "cost_multiplier", 0.0) or 0.0),
+        getattr(state, "total_levels", None),
+        phi,
+    )
+    return max(1, int(val * SCALE))
+
+
+FRESH = {"replaced": 0}
+_TL = threading.local()
+
+
+def install_apex(tool_agent, solver) -> str:
+    for name in ("priority_value", "ProgressPace", "_PriorityGate", "PrioritySnapshot",
+                 "_PRIORITY_UNTRIMMED_BASE", "_PRIORITY_BAND"):
+        if not hasattr(tool_agent, name):
+            raise RuntimeError(f"tool_agent missing required attribute: {name}")
+    session_cls = getattr(solver, "_HarnessGameSession", None)
+    if session_cls is None or not callable(getattr(session_cls, "play", None)):
+        raise RuntimeError("solver missing callable _HarnessGameSession.play")
+    gate_cls = tool_agent._PriorityGate
+    for name in ("acquire", "_enqueue_and_wait", "_snapshot_priority"):
+        if not callable(getattr(gate_cls, name, None)):
+            raise RuntimeError(f"_PriorityGate missing callable: {name}")
+
+    tool_agent.priority_value = apex_priority
+    tool_agent.ProgressPace = FormPace
+    os.environ["ARC3_PRIORITY_PACE"] = "1"
+    os.environ["ARC3_PRIORITY_REFRESH_QUEUE"] = "1"
+    os.environ["ARC3_PRIORITY_TAIL_FADE"] = "1"
+    os.environ["ARC3_PRIORITY_TAIL_FADE_FRACTION"] = "0.4"
+
+    if not getattr(session_cls.play, "_ours_apex", False):
+        orig_play = session_cls.play
+
+        def play(self, *args, **kwargs):
+            run = getattr(getattr(self, "game", None), "game_run", None)
+            _TL.n = getattr(run, "number_of_levels", None)
+            try:
+                return orig_play(self, *args, **kwargs)
+            finally:
+                _TL.n = None
+
+        play._ours_apex = True
+        session_cls.play = play
+
+    if not getattr(gate_cls.acquire, "_ours_apex", False):
+        orig_acquire = gate_cls.acquire
+        fresh_floor = tool_agent._PRIORITY_UNTRIMMED_BASE - tool_agent._PRIORITY_BAND
+        snapshot_cls = tool_agent.PrioritySnapshot
+
+        def acquire(self, priority):
+            if priority < fresh_floor:
+                return orig_acquire(self, priority)
+            snap = snapshot_cls(1, 0, 0.0, 0.0, getattr(_TL, "n", None))
+            value = self._snapshot_priority(snap, time.monotonic())
+            with self._cond:
+                self._enqueue_and_wait(value, snap)
+            FRESH["replaced"] += 1
+
+        acquire._ours_apex = True
+        gate_cls.acquire = acquire
+
+    line = "#APEX_PRIORITY active: deep-level persistence, dynamic victory lap bonus, stall decay coupled"
+    print(line, flush=True)
+    return line

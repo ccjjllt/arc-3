@@ -1,0 +1,46 @@
+from inference.agent import action_names
+import inference.agent.tool_agent as duck_agent
+
+# Fail closed unless the exact audited MIT TAAF base prompt is mounted.
+STOCK_TAAF_PROMPT_BYTES_BEFORE = duck_agent.PYTHON_ADDENDUM.encode("utf-8")
+STOCK_TAAF_PROMPT_SHA256_BEFORE = hashlib.sha256(STOCK_TAAF_PROMPT_BYTES_BEFORE).hexdigest()
+EXPECTED_TAAF_PROMPT_SHA256 = "527bb23c0d0de20721112e4d9469bda1f988c53f616cb5e4dcc08f7c77172608"
+if STOCK_TAAF_PROMPT_SHA256_BEFORE != EXPECTED_TAAF_PROMPT_SHA256:
+    raise RuntimeError(
+        f"stock TAAF prompt hash mismatch: {STOCK_TAAF_PROMPT_SHA256_BEFORE}"
+    )
+
+# The public bundle has no model-facing ACTION7 name; expose the documented undo label.
+ACTION7_BEFORE = action_names.to_engine_action("ACTION7")
+action_names.ENGINE_TO_MODEL_ACTION["ACTION7"] = "UNDO"
+action_names.MODEL_TO_ENGINE_ACTION["UNDO"] = "ACTION7"
+assert action_names.to_model_action("ACTION7") == "UNDO"
+assert action_names.to_engine_action("UNDO") == "ACTION7"
+
+STOCK_TAAF_PROMPT_BYTES_AFTER = duck_agent.PYTHON_ADDENDUM.encode("utf-8")
+ACTION_HYGIENE_ADDENDUM = '\n\n## Kaggle action-call hygiene addendum\n\nThe Python tool starts fresh each call. Define every helper or local variable in\nthe same snippet before using it. In particular, define\n`ascii_lines = current_frame.ascii.splitlines()` before reading rows.\n\n`action(actions)` accepts only strings or mouse dictionaries. For repeated\nmovement use `action(["LEFT"] * 10)`, not tuple-count pairs such as\n`action([("LEFT", 10)])`. For mouse clicks use exactly\n`{"action": "MOUSE", "row": int(row), "col": int(col)}`.\n\nWhen parsing history action text, convert captured row/col substrings to\nintegers before numeric comparisons. If a parse is uncertain, skip that history\nentry rather than raising.\n'
+if ACTION_HYGIENE_ADDENDUM in duck_agent.PYTHON_ADDENDUM:
+    raise RuntimeError("action hygiene addendum was already present before installation")
+duck_agent.PYTHON_ADDENDUM = duck_agent.PYTHON_ADDENDUM + ACTION_HYGIENE_ADDENDUM
+PROMPT_BYTES_AFTER_HYGIENE = duck_agent.PYTHON_ADDENDUM.encode("utf-8")
+PROMPT_SHA256_AFTER_HYGIENE = hashlib.sha256(PROMPT_BYTES_AFTER_HYGIENE).hexdigest()
+
+source_fingerprint = hashlib.sha256((BUNDLE_DIR / "taaf-kaggle-bundle.json").read_bytes()).hexdigest()
+run_contract = {
+    "candidate": "duck-taaf-action7-hygiene-shadow-v2",
+    "source_bundle_sha256": source_fingerprint,
+    "source_dataset": DATASET_SOURCES[0],
+    "model_dataset": DATASET_SOURCES[2],
+    "wheelhouse_dataset": DATASET_SOURCES[1],
+    "official_action7_before": ACTION7_BEFORE,
+    "official_undo_after": action_names.to_engine_action("UNDO"),
+    "stock_prompt_sha256": STOCK_TAAF_PROMPT_SHA256_BEFORE,
+    "stock_prompt_preserved_until_hygiene_addendum": STOCK_TAAF_PROMPT_BYTES_AFTER == STOCK_TAAF_PROMPT_BYTES_BEFORE,
+    "action_hygiene_addendum_enabled": ACTION_HYGIENE_ADDENDUM in duck_agent.PYTHON_ADDENDUM,
+    "prompt_sha256_after_hygiene": PROMPT_SHA256_AFTER_HYGIENE,
+    "decision_ledger_enabled": False,
+    "competition_rerun": TRUE_SUBMISSION,
+    "internet_requested": False,
+}
+(WORKING_DIR / "run_contract.json").write_text(json.dumps(run_contract, indent=2, sort_keys=True) + "\n")
+print(json.dumps(run_contract, indent=2))

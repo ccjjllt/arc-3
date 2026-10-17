@@ -1,0 +1,9 @@
+# ARC-AGI-3: Daniel Franzen's Milestone 2 recipe, rerun with attribution
+
+This version of our notebook runs **Daniel Franzen's public ARC-AGI-3 Milestone 2 solution** (his Version 1, which scored **34.30** on the public leaderboard), built on Tufa Labs' Duck harness. The recipe is not our method. We reuse it under its Apache 2.0 licence, with credit, because it is the strongest public recipe that anyone can reproduce: every input is public, it runs on one RTX PRO 6000, and it stays inside the 9-hour limit.
+
+Our own previous best with this notebook was **2.95**. Other people's reruns of the same recipe have scored between about **26 and 34**: Franzen's own Versions 1 and 3 scored 34.30 and 31.06, and close copies scored 31.93, 31.73, 31.66, 31.54 and 31.27. A fair expectation for one rerun is **around 30**, with a spread of a few points between runs. Scores here are public-leaderboard scores on about half of the hidden games.
+
+How the notebook runs:
+- **Interactive "Save & Run".** It plays 10 of the 25 public demo games offline, for at most 25 minutes each, and writes the one-row placeholder `submission.parquet` that Kaggle expects. This takes about an hour on the RTX PRO 6000.
+- **Competition rerun.** It plays every hidden game through Kaggle's gateway, and the gateway calculates the submission file.

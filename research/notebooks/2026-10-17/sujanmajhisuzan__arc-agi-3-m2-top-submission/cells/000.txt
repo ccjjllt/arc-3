@@ -1,0 +1,9 @@
+# ARC-AGI-3 Milestone 2: Apex Transcendent Agent v29
+### Targeting 1st Rank on ARC Prize 2026 Leaderboard
+- **Engine**: Qwen3.8-Flash-Next W4A16 AutoRound + Albucino MTP Draft Model (Pennyroyal SGLang v2.5.3)
+- **Hardware**: Nvidia RTX Pro 6000 (Blackwell SM120, 96GB VRAM, MEMFRAC 0.96, FP8 KV cache)
+- **World Model Simulator**: DF-WM (`SimFrame`, `compare_grids`, `check_sim`, BFS `search`, `act_checked`)
+- **Scheduler**: Apex Deep-Level Persistence Priority (Monotonic Depth Scaling + Victory Lap Bonus + Stall Decay)
+- **Resilience**: Hyper-Resilient retry session (180s read timeout floor, zero timeout yield, 64-conn pool)
+- **Action Guards**: Board dump suppression, noop repeat guard, death loop lookahead, auto frame diff
+- **Submission Contract**: Pre-materialized submission contract preventing zero-byte evaluation errors

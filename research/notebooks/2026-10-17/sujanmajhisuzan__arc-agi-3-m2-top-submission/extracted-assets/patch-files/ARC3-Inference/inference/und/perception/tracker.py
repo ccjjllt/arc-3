@@ -1,0 +1,508 @@
+"""PersistentObjectTracker: Deterministic frame-to-frame object tracking for ARC-AGI-3.
+
+Maintains identity persistence across frames using greedy nearest-neighbor matching
+with normalized geometric/color costs, velocity EMA, occlusion detection, and shape stability.
+"""
+
+from __future__ import annotations
+
+import math
+from dataclasses import dataclass, field
+from typing import Any, Sequence
+
+from inference.und.config.thresholds import ThresholdsConfig
+from inference.und.perception.arga_lite import ARGALiteSnapshot, PlanningObject
+from inference.und.types import BoundingBox, Centroid
+
+
+def mask_jaccard(
+    mask_a: tuple[tuple[int, ...], ...] | list[list[int]],
+    mask_b: tuple[tuple[int, ...], ...] | list[list[int]],
+) -> float:
+    """Compute exact pixel Intersection-over-Union (Jaccard) between two binary masks aligned at top-left."""
+    if not mask_a and not mask_b:
+        return 1.0
+    if not mask_a or not mask_b:
+        return 0.0
+
+    ha, wa = len(mask_a), len(mask_a[0])
+    hb, wb = len(mask_b), len(mask_b[0])
+
+    max_h = max(ha, hb)
+    max_w = max(wa, wb)
+
+    intersection = 0
+    union = 0
+
+    for r in range(max_h):
+        for c in range(max_w):
+            v_a = mask_a[r][c] if r < ha and c < wa else 0
+            v_b = mask_b[r][c] if r < hb and c < wb else 0
+            if v_a and v_b:
+                intersection += 1
+            if v_a or v_b:
+                union += 1
+
+    if union == 0:
+        return 1.0
+    return intersection / union
+
+
+def observed_extent(
+    objects: Sequence[Any],
+    grid_dims: Any = None,
+) -> tuple[int, int]:
+    """Return the field extent in cells, measured from the objects if unreported.
+
+    The engine is free to omit the field size. Substituting a fixed default would
+    make every normalized distance depend on a fabricated geometry, so the extent
+    is instead measured: the largest row/column any observed object occupies is a
+    lower bound on the real field, and it holds for any size the competition may
+    present. A reference frame with no objects at all degrades to a unit extent,
+    which keeps cost normalization defined without inventing a size.
+    """
+    reported = tuple(grid_dims) if isinstance(grid_dims, (tuple, list)) else ()
+    height = int(reported[0]) if len(reported) > 0 else 0
+    width = int(reported[1]) if len(reported) > 1 else 0
+    if height > 0 and width > 0:
+        return height, width
+    for obj in objects:
+        bbox = getattr(obj, "bbox", None)
+        if bbox is None:
+            continue
+        height = max(height, int(getattr(bbox, "max_row", 0)) + 1)
+        width = max(width, int(getattr(bbox, "max_col", 0)) + 1)
+    return max(height, 1), max(width, 1)
+
+
+def jaccard_similarity(
+    sig_a: str,
+    sig_b: str,
+    mask_a: tuple[tuple[int, ...], ...] | None = None,
+    mask_b: tuple[tuple[int, ...], ...] | None = None,
+) -> float:
+    """Compute shape Jaccard similarity using exact signatures or binary masks."""
+    if sig_a and sig_b and sig_a == sig_b:
+        return 1.0
+    if mask_a is not None and mask_b is not None and len(mask_a) > 0 and len(mask_b) > 0:
+        return mask_jaccard(mask_a, mask_b)
+    # Fallback to signature dimension parsing if masks unavailable
+    try:
+        if sig_a.startswith("shape_") and sig_b.startswith("shape_"):
+            dim_a = sig_a.split("_")[1].split("x")
+            dim_b = sig_b.split("_")[1].split("x")
+            wa, ha = int(dim_a[0]), int(dim_a[1])
+            wb, hb = int(dim_b[0]), int(dim_b[1])
+            inter_area = max(0, min(wa, wb)) * max(0, min(ha, hb))
+            union_area = (wa * ha) + (wb * hb) - inter_area
+            if union_area > 0:
+                return inter_area / union_area
+    except Exception:
+        pass
+    return 0.0
+
+
+@dataclass
+class TrackedObject:
+    """Deterministic persistent object track representation."""
+    persistent_id: str
+    last_frame_id: int
+    color: int
+    shape_signature: str
+    filled_shape_signature: str
+    centroid: Centroid
+    bbox: BoundingBox
+    area: int
+    velocity: tuple[float, float]  # EMA, alpha = 0.3
+    confidence: float  # 1.0 - cost (1.0 on initial spawn)
+    history: list[tuple[int, Centroid]]  # max length = cumulative_window + 1
+    shape_signature_stable: str
+    shape_stability_score: float = 1.0
+    occluded: bool = False
+    occluded_frames: int = 0
+    occluded_by: str | None = None
+    cumulative_delta: tuple[float, float] = (0.0, 0.0)
+    mask: tuple[tuple[int, ...], ...] = ()
+    source_object_id: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "persistent_id": self.persistent_id,
+            "last_frame_id": self.last_frame_id,
+            "color": self.color,
+            "shape_signature": self.shape_signature,
+            "centroid": self.centroid.to_dict(),
+            "bbox": self.bbox.to_dict(),
+            "area": self.area,
+            "velocity": self.velocity,
+            "confidence": self.confidence,
+            "shape_stability_score": self.shape_stability_score,
+            "occluded": self.occluded,
+            "occluded_frames": self.occluded_frames,
+            "occluded_by": self.occluded_by,
+            "cumulative_delta": self.cumulative_delta,
+        }
+
+
+class PersistentObjectTracker:
+    """Tracks detected objects across frames using cost-optimal bipartite matching."""
+
+    def __init__(self, config: ThresholdsConfig | None = None) -> None:
+        self.config = config or ThresholdsConfig()
+        self.tracks: dict[str, TrackedObject] = {}
+        self.next_track_num: int = 1
+        self.frame_index: int = 0
+        self.last_ambiguity_score: float | None = None
+        self.last_ambiguous_track: str | None = None
+        self.ambiguity_by_track: dict[str, Any] = {}
+
+    def reset(self) -> None:
+        """Full reset called on every environmental RESET."""
+        self.tracks.clear()
+        self.next_track_num = 1
+        self.frame_index = 0
+        self.last_ambiguity_score = None
+        self.last_ambiguous_track = None
+        self.ambiguity_by_track = {}
+
+    def get_tracked(self) -> list[TrackedObject]:
+        """Return all currently active or occluded tracked objects sorted by persistent_id."""
+        return sorted(self.tracks.values(), key=lambda t: t.persistent_id)
+
+    def get_track(self, persistent_id: str) -> TrackedObject | None:
+        """Retrieve a tracked object by persistent ID."""
+        return self.tracks.get(persistent_id)
+
+    def _compute_cost(
+        self,
+        track: TrackedObject,
+        comp: PlanningObject,
+        grid_dim: int,
+    ) -> float:
+        """Compute normalized matching cost in [0, 1]."""
+        color_diff = 0.0 if track.color == comp.color else 1.0
+        manhattan = abs(track.centroid.row - comp.centroid.row) + abs(track.centroid.col - comp.centroid.col)
+        centroid_dist = manhattan / max(grid_dim, 1)
+
+        shape_jaccard = jaccard_similarity(
+            track.shape_signature_stable,
+            comp.shape_signature,
+            track.mask,
+            comp.mask,
+        )
+        area_rel_diff = abs(track.area - comp.area) / max(track.area, comp.area, 1)
+
+        cost = (
+            0.30 * color_diff
+            + 0.40 * centroid_dist
+            + 0.20 * (1.0 - shape_jaccard)
+            + 0.10 * area_rel_diff
+        )
+        return min(1.0, max(0.0, cost))
+
+    def update(
+        self,
+        snapshot: ARGALiteSnapshot | Sequence[PlanningObject],
+        frame_index: int,
+    ) -> list[TrackedObject]:
+        """Update tracker state with a new ARGALite perception snapshot or list of objects."""
+        self.frame_index = frame_index
+        min_area = self.config.resolve("track_min_area")
+        if isinstance(snapshot, ARGALiteSnapshot):
+            grid_h, grid_w = observed_extent(snapshot.objects, snapshot.grid_dims)
+            bg_color = snapshot.background_color
+            components: list[PlanningObject] = [
+                obj for obj in snapshot.objects if obj.area >= min_area and obj.color != bg_color
+            ]
+        else:
+            objs = list(snapshot)
+            grid_h, grid_w = observed_extent(objs)
+            components = [obj for obj in objs if getattr(obj, "area", 1) >= min_area]
+
+        grid_dim = max(grid_h, grid_w, 1)
+
+        match_threshold = getattr(self.config, "track_match_threshold", 0.45)
+        track_max_age = getattr(self.config, "track_max_age", 5)
+        occlusion_radius = getattr(self.config, "occlusion_radius", 3)
+        cum_window = getattr(self.config, "cumulative_window", 3)
+
+        active_track_ids = list(self.tracks.keys())
+
+        # 1. Build full cost matrix
+        cost_entries: list[tuple[float, str, int]] = []
+        for trk_id in active_track_ids:
+            track = self.tracks[trk_id]
+            for c_idx, comp in enumerate(components):
+                cost = self._compute_cost(track, comp, grid_dim)
+                cost_entries.append((cost, trk_id, c_idx))
+
+        # 2. Sort pairs by ascending cost; deterministic tie-breaking on persistent_id then c_idx
+        cost_entries.sort(key=lambda x: (x[0], x[1], x[2]))
+
+        matched_tracks: set[str] = set()
+        matched_comps: set[int] = set()
+        accepted_matches: list[tuple[str, int, float]] = []
+
+        # 3. Greedy assignment
+        for cost, trk_id, c_idx in cost_entries:
+            if trk_id in matched_tracks or c_idx in matched_comps:
+                continue
+            if cost < match_threshold:
+                matched_tracks.add(trk_id)
+                matched_comps.add(c_idx)
+                accepted_matches.append((trk_id, c_idx, cost))
+
+        # Check matching ambiguity (difference between best and second-best candidate < matching_ambiguity_threshold)
+        # Evaluated with respect to joint bipartite assignment: if an alternative candidate was cleanly
+        # claimed by another track with equal/better cost, it is not an available ambiguity for this track.
+        comp_to_match = {c_idx: (t_id, cost) for t_id, c_idx, cost in accepted_matches}
+        track_to_match = {t_id: (c_idx, cost) for t_id, c_idx, cost in accepted_matches}
+
+        amb_thresh = getattr(self.config, "matching_ambiguity_threshold", 0.15)
+        ambiguity_scores: list[tuple[float, str]] = []
+        self.ambiguity_by_track = {}
+        for trk_id in active_track_ids:
+            if trk_id not in track_to_match:
+                continue
+            c_idx0, cost0 = track_to_match[trk_id]
+
+            cand_pairs = sorted(
+                [(cost, c_idx) for cost, t_id, c_idx in cost_entries if t_id == trk_id and cost < match_threshold and c_idx != c_idx0],
+                key=lambda x: x[0],
+            )
+
+            # Check if another track genuinely contested c_idx0:
+            # Another track only contests c_idx0 if it was unmatched or its assigned match had higher cost.
+            competing_tracks = []
+            for cost, t_id, c_idx in cost_entries:
+                if c_idx == c_idx0 and t_id != trk_id and cost < match_threshold:
+                    if t_id not in track_to_match:
+                        competing_tracks.append((cost, t_id))
+                    else:
+                        _, assigned_cost = track_to_match[t_id]
+                        if assigned_cost > cost + 0.02:
+                            competing_tracks.append((cost, t_id))
+
+            is_contested = False
+            contested_diff = float("inf")
+            if competing_tracks:
+                min_comp_cost, _ = min(competing_tracks, key=lambda x: x[0])
+                contested_diff = abs(min_comp_cost - cost0)
+                if contested_diff < amb_thresh:
+                    is_contested = True
+
+            if cand_pairs:
+                cost1, c_idx1 = cand_pairs[0]
+                diff = cost1 - cost0
+                comp0 = components[c_idx0]
+                comp1 = components[c_idx1]
+
+                # Point 2: Detect mutual ambiguity between sibling 1x1 micro-dots of the same parent / spatial cluster
+                p0 = getattr(comp0, "parent_id", None)
+                p1 = getattr(comp1, "parent_id", None)
+                same_parent = bool(p0 is not None and p0 == p1)
+                inside_shared_parent = False
+                if comp0.area <= 2 and comp1.area <= 2:
+                    for parent in components:
+                        if getattr(parent, "area", 0) >= 4:
+                            p_bbox = parent.bbox
+                            if (p_bbox.min_row <= comp0.centroid.row <= p_bbox.max_row
+                                and p_bbox.min_col <= comp0.centroid.col <= p_bbox.max_col
+                                and p_bbox.min_row <= comp1.centroid.row <= p_bbox.max_row
+                                and p_bbox.min_col <= comp1.centroid.col <= p_bbox.max_col):
+                                inside_shared_parent = True
+                                break
+
+                is_internal_sibling = bool(same_parent or inside_shared_parent)
+
+                # An alternative candidate c_idx1 is a real ambiguity only if:
+                # 1) c_idx1 was NOT claimed by any track (unclaimed alternative)
+                # 2) OR c_idx1 was claimed by another track that had a WORSE match to it (other_cost > cost1)
+                # If c_idx1 was claimed by another track with equal or better cost (other_cost <= cost1),
+                # c_idx1 definitively belongs to that track and is not an available alternative for trk_id.
+                is_unclaimed_alt = (c_idx1 not in comp_to_match)
+                other_pref = False
+                if not is_unclaimed_alt:
+                    other_tid, other_cost = comp_to_match[c_idx1]
+                    if other_cost > cost1 and abs(other_cost - cost1) < amb_thresh and cost0 > 0.04:
+                        other_pref = True
+
+                real_diff = min(diff, contested_diff) if is_contested else diff
+                is_real_ambiguity = is_contested or is_unclaimed_alt or other_pref
+
+                if is_real_ambiguity and not is_internal_sibling:
+                    ambiguity_scores.append((round(real_diff, 4), trk_id))
+                    self.ambiguity_by_track[trk_id] = {
+                        "diff": round(real_diff, 4),
+                        "is_internal_sibling": False,
+                        "parent_id": p0 if same_parent else None,
+                    }
+                elif is_internal_sibling:
+                    self.ambiguity_by_track[trk_id] = {
+                        "diff": round(diff, 4),
+                        "is_internal_sibling": True,
+                        "parent_id": p0 if same_parent else None,
+                    }
+            elif is_contested:
+                ambiguity_scores.append((round(contested_diff, 4), trk_id))
+                self.ambiguity_by_track[trk_id] = {
+                    "diff": round(contested_diff, 4),
+                    "is_internal_sibling": False,
+                    "parent_id": None,
+                }
+
+        if ambiguity_scores:
+            ambiguity_scores.sort(key=lambda x: x[0])
+            self.last_ambiguity_score = ambiguity_scores[0][0]
+            self.last_ambiguous_track = ambiguity_scores[0][1]
+        else:
+            self.last_ambiguity_score = None
+            self.last_ambiguous_track = None
+
+        # 3b. Detect same-frame rebinding (e.g. build_planning_set called on the same frame
+        # immediately after extract_observed_propositions already advanced the tracker)
+        is_same_frame_rebind = bool(
+            self.tracks
+            and frame_index == self.frame_index
+            and len(accepted_matches) == len(components)
+            and all(
+                abs(components[c_idx].centroid.row - self.tracks[trk_id].centroid.row) < 1e-6
+                and abs(components[c_idx].centroid.col - self.tracks[trk_id].centroid.col) < 1e-6
+                and components[c_idx].color == self.tracks[trk_id].color
+                for trk_id, c_idx, _ in accepted_matches
+            )
+        )
+        if is_same_frame_rebind:
+            for trk_id, c_idx, _ in accepted_matches:
+                track = self.tracks[trk_id]
+                comp = components[c_idx]
+                track.source_object_id = getattr(comp, "id", getattr(track, "source_object_id", None))
+                comp.persistent_id = trk_id
+                comp.track_confidence = track.confidence
+            return self.get_tracked()
+
+        # 4. Update matched tracks
+        for trk_id, c_idx, cost in accepted_matches:
+            track = self.tracks[trk_id]
+            comp = components[c_idx]
+
+            inst_v = (
+                comp.centroid.row - track.centroid.row,
+                comp.centroid.col - track.centroid.col,
+            )
+            # Velocity EMA with fixed alpha = 0.3
+            new_vx = 0.3 * inst_v[0] + 0.7 * track.velocity[0]
+            new_vy = 0.3 * inst_v[1] + 0.7 * track.velocity[1]
+
+            track.last_frame_id = frame_index
+            track.velocity = (round(new_vx, 3), round(new_vy, 3))
+            track.confidence = round(1.0 - cost, 4)
+
+            # Shape stability update: decay score if Jaccard < 0.85
+            jaccard = jaccard_similarity(comp.shape_signature, track.shape_signature_stable, comp.mask, track.mask)
+            if jaccard < 0.85:
+                track.shape_stability_score = round(track.shape_stability_score * 0.9, 4)
+
+            track.color = comp.color
+            track.centroid = comp.centroid
+            track.bbox = comp.bbox
+            track.area = comp.area
+            track.shape_signature = comp.shape_signature
+            track.filled_shape_signature = comp.filled_shape_signature
+            track.mask = comp.mask
+            track.source_object_id = getattr(comp, "id", getattr(track, "source_object_id", None))
+            comp.persistent_id = trk_id
+            comp.track_confidence = track.confidence
+
+            # History ring buffer
+            track.history.append((frame_index, comp.centroid))
+            max_hist_len = cum_window + 1
+            if len(track.history) > max_hist_len:
+                track.history.pop(0)
+
+            # Cumulative motion
+            if len(track.history) >= cum_window:
+                oldest_centroid = track.history[-cum_window][1]
+                track.cumulative_delta = (
+                    round(comp.centroid.row - oldest_centroid.row, 2),
+                    round(comp.centroid.col - oldest_centroid.col, 2),
+                )
+
+            # Occlusion cleared
+            if track.occluded:
+                track.occluded = False
+                track.occluded_frames = 0
+                track.occluded_by = None
+
+        # 5. Handle unmatched tracks (occlusion heuristic or aging out)
+        unmatched_track_ids = [t for t in active_track_ids if t not in matched_tracks]
+        for trk_id in unmatched_track_ids:
+            track = self.tracks[trk_id]
+
+            # Check occlusion heuristic
+            occluding_comp: PlanningObject | None = None
+            min_occl_dist = float("inf")
+            for comp in components:
+                if comp.area > track.area:
+                    manhattan = abs(track.centroid.row - comp.centroid.row) + abs(track.centroid.col - comp.centroid.col)
+                    if manhattan <= occlusion_radius and manhattan < min_occl_dist:
+                        min_occl_dist = manhattan
+                        occluding_comp = comp
+
+            if occluding_comp is not None:
+                track.occluded = True
+                track.occluded_frames += 1
+                # Find persistent_id of occluder if already assigned
+                occluder_id = occluding_comp.id
+                for m_id, m_c_idx, _ in accepted_matches:
+                    if components[m_c_idx] is occluding_comp:
+                        occluder_id = m_id
+                        break
+                track.occluded_by = occluder_id
+            else:
+                track.occluded = False
+                track.occluded_by = None
+
+            # Lifecycle check: kill if unseen for track_max_age frames
+            frames_unseen = frame_index - track.last_frame_id
+            if frames_unseen >= track_max_age and (not track.occluded or track.occluded_frames >= track_max_age * 2):
+                del self.tracks[trk_id]
+
+        # 6. Handle unmatched components (spawn new tracks)
+        for c_idx, comp in enumerate(components):
+            if c_idx not in matched_comps:
+                trk_id = f"trk_{self.next_track_num:04d}"
+                self.next_track_num += 1
+
+                new_track = TrackedObject(
+                    persistent_id=trk_id,
+                    last_frame_id=frame_index,
+                    color=comp.color,
+                    shape_signature=comp.shape_signature,
+                    filled_shape_signature=comp.filled_shape_signature,
+                    centroid=comp.centroid,
+                    bbox=comp.bbox,
+                    area=comp.area,
+                    velocity=(0.0, 0.0),
+                    confidence=1.0,
+                    history=[(frame_index, comp.centroid)],
+                    shape_signature_stable=comp.shape_signature,
+                    shape_stability_score=1.0,
+                    occluded=False,
+                    occluded_frames=0,
+                    occluded_by=None,
+                    cumulative_delta=(0.0, 0.0),
+                    mask=comp.mask,
+                    source_object_id=getattr(comp, "id", None),
+                )
+                self.tracks[trk_id] = new_track
+                comp.persistent_id = trk_id
+                comp.track_confidence = 1.0
+
+        return self.get_tracked()
+
+    def get_common_fate_groups(self, config: Any = None) -> list[Any]:
+        """Detect and cluster tracked objects exhibiting shared velocity dynamics."""
+        from inference.und.perception.common_fate import group_tracks_by_common_fate
+        return group_tracks_by_common_fate(list(self.tracks.values()), config=config)
+

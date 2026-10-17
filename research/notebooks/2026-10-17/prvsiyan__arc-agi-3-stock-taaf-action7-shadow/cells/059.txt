@@ -1,0 +1,505 @@
+# ARC3_CLEAN_ROOM_DEADLINE_SAFE_CONFIRMED_PROGRESS_V1
+"""Fail-closed persistent memory for confirmed no-progress ARC actions.
+
+This clean-room candidate patches only the exact public
+``_HarnessGameSession.step_env`` implementation used by ARC-AGI-3 V3.  It
+remembers an eligible action only after four executions from the same public
+fingerprint produced zero reward, no terminal transition, and the same final
+visible board/state.  Later repetitions from that same fingerprint are
+reported to the analyzer but do not consume an environment action.
+
+The optimization is deliberately narrow:
+
+* eligible: ACTION1..ACTION4 and ACTION7 (UNDO);
+* excluded: RESET, ACTION5 (SPACE), and ACTION6 (MOUSE);
+* the exact public solver source, method AST, and live method source must match;
+* observation/adapter uncertainty disables the optimization for that action.
+"""
+
+from __future__ import annotations
+
+import ast
+import functools
+import hashlib
+import inspect
+import json
+import textwrap
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from types import ModuleType
+from typing import Any, Callable
+
+
+EXPECTED_PUBLIC_SOLVER_SHA256 = (
+    "65ddfcdbe8c24fdc31246ff018b51469827b21c38995243a36a818adbed33370"
+)
+EXPECTED_STEP_ENV_AST_SHA256 = (
+    "500403a36bb55646effd1154a5f0267a040ca3b8c741792ba5e7b756f7918a46"
+)
+EXPECTED_STEP_ENV_SOURCE_SHA256 = (
+    "4c34fa46cfb7acf5ee50af9cafdd85789e430576d79f1fe1817a22b029d2dacd"
+)
+PUBLIC_SESSION_CLASS = "_HarnessGameSession"
+PUBLIC_METHOD = "step_env"
+PATCH_HANDLE_ATTRIBUTE = "__arc3_no_progress_memory_patch_handle__"
+MEMORY_KEY_ATTRIBUTE = "__arc3_no_progress_memory_key__"
+MEMORY_COUNT_ATTRIBUTE = "__arc3_no_progress_memory_count__"
+DEFAULT_CONFIRMATIONS = 4
+ELIGIBLE_ENGINE_ACTIONS = frozenset(
+    {"ACTION1", "ACTION2", "ACTION3", "ACTION4", "ACTION7"}
+)
+
+
+def _sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def _normalized_method_source(value: str) -> str:
+    return textwrap.dedent(value).rstrip("\n")
+
+
+def _stable_ast_value(value: Any) -> Any:
+    """Serialize an AST without version-only empty ``type_params`` fields."""
+
+    if isinstance(value, ast.AST):
+        fields = []
+        for name, child in ast.iter_fields(value):
+            if name == "type_params" and child == []:
+                continue
+            fields.append((name, _stable_ast_value(child)))
+        return (type(value).__name__, fields)
+    if isinstance(value, list):
+        return [_stable_ast_value(child) for child in value]
+    return value
+
+
+def _stable_ast_bytes(node: ast.AST) -> bytes:
+    return json.dumps(
+        _stable_ast_value(node), separators=(",", ":"), ensure_ascii=True
+    ).encode("utf-8")
+
+
+def _find_step_env_node(tree: ast.Module) -> ast.FunctionDef:
+    classes = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.ClassDef) and node.name == PUBLIC_SESSION_CLASS
+    ]
+    if len(classes) != 1:
+        raise RuntimeError(
+            f"Expected exactly one {PUBLIC_SESSION_CLASS}, found {len(classes)}"
+        )
+    methods = [
+        node
+        for node in classes[0].body
+        if isinstance(node, ast.FunctionDef) and node.name == PUBLIC_METHOD
+    ]
+    if len(methods) != 1:
+        raise RuntimeError(
+            f"Expected exactly one {PUBLIC_SESSION_CLASS}.{PUBLIC_METHOD}, "
+            f"found {len(methods)}"
+        )
+    return methods[0]
+
+
+@dataclass(frozen=True)
+class CompatibilityEvidence:
+    source_path: str
+    source_sha256: str
+    step_env_ast_sha256: str
+    step_env_source_sha256: str
+    step_env_first_line: int
+    step_env_last_line: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def assert_exact_public_solver_compatible(
+    source_path: str | Path,
+) -> CompatibilityEvidence:
+    """Fail unless ``source_path`` is the exact completed-public-run solver."""
+
+    path = Path(source_path).expanduser().resolve()
+    source_bytes = path.read_bytes()
+    source_sha = _sha256_bytes(source_bytes)
+    if source_sha != EXPECTED_PUBLIC_SOLVER_SHA256:
+        raise RuntimeError(
+            "Public solver source drift: "
+            f"expected {EXPECTED_PUBLIC_SOLVER_SHA256}, observed {source_sha}"
+        )
+
+    source = source_bytes.decode("utf-8")
+    tree = ast.parse(source, filename=str(path))
+    method = _find_step_env_node(tree)
+    method_ast_sha = _sha256_bytes(_stable_ast_bytes(method))
+    method_source = ast.get_source_segment(source, method)
+    if method_source is None:
+        raise RuntimeError("Could not recover step_env source segment")
+    method_source_sha = _sha256_bytes(
+        _normalized_method_source(method_source).encode("utf-8")
+    )
+    if method_ast_sha != EXPECTED_STEP_ENV_AST_SHA256:
+        raise RuntimeError(
+            "Public step_env AST drift: "
+            f"expected {EXPECTED_STEP_ENV_AST_SHA256}, observed {method_ast_sha}"
+        )
+    if method_source_sha != EXPECTED_STEP_ENV_SOURCE_SHA256:
+        raise RuntimeError(
+            "Public step_env source drift: "
+            f"expected {EXPECTED_STEP_ENV_SOURCE_SHA256}, observed {method_source_sha}"
+        )
+    return CompatibilityEvidence(
+        source_path=str(path),
+        source_sha256=source_sha,
+        step_env_ast_sha256=method_ast_sha,
+        step_env_source_sha256=method_source_sha,
+        step_env_first_line=method.lineno,
+        step_env_last_line=method.end_lineno or method.lineno,
+    )
+
+
+def _validate_confirmations(value: int) -> int:
+    if not isinstance(value, int) or isinstance(value, bool) or value < 1:
+        raise ValueError("required_confirmations must be a positive integer")
+    return value
+
+
+def _reset_memory(session: Any) -> None:
+    setattr(session, MEMORY_KEY_ATTRIBUTE, None)
+    setattr(session, MEMORY_COUNT_ATTRIBUTE, 0)
+
+
+def _memory(session: Any) -> tuple[Any, int]:
+    return (
+        getattr(session, MEMORY_KEY_ATTRIBUTE, None),
+        int(getattr(session, MEMORY_COUNT_ATTRIBUTE, 0) or 0),
+    )
+
+
+def _set_memory(session: Any, key: Any, count: int) -> None:
+    setattr(session, MEMORY_KEY_ATTRIBUTE, key)
+    setattr(session, MEMORY_COUNT_ATTRIBUTE, int(count))
+
+
+def _public_fingerprint(
+    public_solver_module: ModuleType | Any, session: Any
+) -> tuple[Any, ...] | None:
+    """Observe exactly the public final-visible-state fields used by the UI."""
+
+    try:
+        state = session.game.current_state
+        board = tuple(
+            tuple(int(cell) for cell in row)
+            for row in public_solver_module._grid_from_state(state)
+        )
+        valid_actions = tuple(
+            sorted(
+                str(action).strip().upper()
+                for action in public_solver_module.to_model_actions(
+                    public_solver_module._engine_action_names(session.game)
+                )
+            )
+        )
+        return (
+            board,
+            int(public_solver_module._level_number(session.game)),
+            int(state.levels_completed),
+            str(state.raw.state.name),
+            valid_actions,
+        )
+    except Exception:
+        return None
+
+
+def _canonical_action(action: Any) -> tuple[Any, ...]:
+    name = str(action.id.name).strip().upper()
+    data = tuple(sorted((str(key), repr(value)) for key, value in dict(action.data).items()))
+    return (name, data)
+
+
+def _eligible(action: Any) -> bool:
+    try:
+        return (
+            str(action.id.name).strip().upper() in ELIGIBLE_ENGINE_ACTIONS
+            and not dict(action.data)
+        )
+    except Exception:
+        return False
+
+
+def _nonterminal_zero_reward(payload: dict[str, Any]) -> bool:
+    if float(payload.get("reward", 0.0) or 0.0) != 0.0:
+        return False
+    return not any(
+        bool(payload.get(key))
+        for key in ("done", "level_completed", "game_over", "run_complete")
+    )
+
+
+def _build_guarded_step_env(
+    public_solver_module: ModuleType | Any,
+    *,
+    required_confirmations: int = DEFAULT_CONFIRMATIONS,
+) -> Callable[[Any, dict[str, Any]], dict[str, Any]]:
+    """Build the exact public loop plus persistent confirmed-edge memory."""
+
+    confirmations = _validate_confirmations(required_confirmations)
+
+    def guarded_step_env(self: Any, arguments: dict[str, Any]) -> dict[str, Any]:
+        requested_actions, error = self._normalize_actions(arguments)
+        if error is not None or requested_actions is None:
+            return self._error_payload(error or "Could not parse action request.")
+        if self.should_stop() or public_solver_module._is_engine_game_over(self.game):
+            return self._terminal_payload(requested_actions)
+
+        executed_payloads: list[dict[str, Any]] = []
+        total_reward = 0.0
+        stop_reason: str | None = None
+        skipped_count = 0
+        skipped_displays: list[str] = []
+        batch_size = len(requested_actions)
+        requested_displays = [
+            public_solver_module._format_action_display(
+                action.id.name, dict(action.data)
+            )
+            for action in requested_actions
+        ]
+
+        for batch_index, action in enumerate(requested_actions, start=1):
+            if self.should_stop():
+                stop_reason = "stopped"
+                break
+            if action.id.value not in self.game.current_state.available_actions:
+                message = (
+                    f"{public_solver_module._format_action_display(action.id.name, dict(action.data))} "
+                    "is not valid right now."
+                )
+                if executed_payloads:
+                    stop_reason = "invalid_action"
+                    break
+                return self._error_payload(message)
+
+            before = _public_fingerprint(public_solver_module, self)
+            action_key: tuple[Any, ...] | None
+            memory_key: tuple[Any, ...] | None
+            try:
+                action_key = _canonical_action(action)
+                memory_key = (before, action_key) if before is not None else None
+            except Exception:
+                action_key = None
+                memory_key = None
+            stored_key, stored_count = _memory(self)
+
+            # A skip is allowed only after the exact same action was confirmed
+            # four times from the exact same public fingerprint.
+            if (
+                _eligible(action)
+                and memory_key is not None
+                and stored_key == memory_key
+                and stored_count >= confirmations
+            ):
+                skipped_count += 1
+                skipped_displays.append(
+                    public_solver_module._format_action_display(
+                        action.id.name, dict(action.data)
+                    )
+                )
+                continue
+
+            # Any different action/fingerprint invalidates the consecutive edge.
+            if stored_key != memory_key:
+                _reset_memory(self)
+
+            try:
+                payload = self._execute_action(
+                    action,
+                    batch_index=batch_index,
+                    batch_size=batch_size,
+                    flush_viewer_payload=False,
+                )
+            except Exception as exc:
+                _reset_memory(self)
+                if executed_payloads:
+                    stop_reason = "action_error"
+                    break
+                return self._error_payload(f"{type(exc).__name__}: {exc}")
+            executed_payloads.append(payload)
+            total_reward += float(payload.get("reward", 0.0) or 0.0)
+
+            # Preserve the public method's terminal precedence.
+            if payload.get("run_complete"):
+                _reset_memory(self)
+                stop_reason = "run_complete"
+                break
+            if payload.get("game_over"):
+                _reset_memory(self)
+                stop_reason = "game_over"
+                break
+            if payload.get("level_completed"):
+                _reset_memory(self)
+                stop_reason = "level_completed"
+                break
+
+            after = _public_fingerprint(public_solver_module, self)
+            if (
+                _eligible(action)
+                and before is not None
+                and after is not None
+                and before == after
+                and memory_key is not None
+                and _nonterminal_zero_reward(payload)
+            ):
+                previous_key, previous_count = _memory(self)
+                _set_memory(
+                    self,
+                    memory_key,
+                    previous_count + 1 if previous_key == memory_key else 1,
+                )
+            else:
+                _reset_memory(self)
+
+        if not executed_payloads:
+            result = self._error_payload(
+                "Action request skipped: this action was already confirmed "
+                f"no-progress {confirmations} times from the current public state."
+            )
+            result.update(
+                {
+                    "known_no_progress": True,
+                    "batched": batch_size > 1,
+                    "requested_count": batch_size,
+                    "executed_count": 0,
+                    "requested_actions": requested_displays,
+                    "executed_actions": [],
+                    "skipped_count": skipped_count,
+                    "skipped_actions": skipped_displays,
+                    "guard_confirmations": confirmations,
+                    "stopped_early": True,
+                    "stop_reason": "confirmed_no_progress_memory",
+                }
+            )
+            return result
+
+        final_payload = dict(executed_payloads[-1])
+        final_payload["reward"] = total_reward
+        final_payload["last_reward"] = executed_payloads[-1].get("reward", 0.0)
+        final_payload["batched"] = batch_size > 1
+        final_payload["requested_count"] = batch_size
+        final_payload["executed_count"] = len(executed_payloads)
+        final_payload["requested_actions"] = requested_displays
+        final_payload["executed_actions"] = [
+            str(item.get("action_display") or item.get("action_name") or "")
+            for item in executed_payloads
+        ]
+        final_payload["board_changed"] = any(
+            bool(item.get("board_changed")) for item in executed_payloads
+        )
+        final_payload["stopped_early"] = (
+            len(executed_payloads) + skipped_count < batch_size
+            or skipped_count > 0
+        )
+        if stop_reason is not None:
+            final_payload["stop_reason"] = stop_reason
+        elif skipped_count:
+            final_payload["stop_reason"] = "confirmed_no_progress_memory"
+        if skipped_count:
+            final_payload["known_no_progress"] = True
+            final_payload["skipped_count"] = skipped_count
+            final_payload["skipped_actions"] = skipped_displays
+            final_payload["guard_confirmations"] = confirmations
+        self.write_viewer_payload()
+        return final_payload
+
+    return guarded_step_env
+
+
+@dataclass(frozen=True)
+class PatchHandle:
+    session_class: type[Any]
+    original_step_env: Callable[..., dict[str, Any]]
+    guarded_step_env: Callable[..., dict[str, Any]]
+    compatibility: CompatibilityEvidence
+    required_confirmations: int
+
+    def restore(self) -> None:
+        """Restore only the exact method captured by this patch."""
+
+        current = self.session_class.step_env
+        if current is self.original_step_env:
+            return
+        if current is not self.guarded_step_env:
+            raise RuntimeError("Refusing to overwrite an independently changed step_env")
+        self.session_class.step_env = self.original_step_env
+        if getattr(self.session_class, PATCH_HANDLE_ATTRIBUTE, None) is self:
+            delattr(self.session_class, PATCH_HANDLE_ATTRIBUTE)
+
+
+def install_confirmed_no_progress_memory(
+    public_solver_module: ModuleType,
+    *,
+    source_path: str | Path | None = None,
+    required_confirmations: int = DEFAULT_CONFIRMATIONS,
+) -> PatchHandle:
+    """Install once, after exact source and live-method verification."""
+
+    confirmations = _validate_confirmations(required_confirmations)
+    target_path = Path(source_path or public_solver_module.__file__).resolve()
+    compatibility = assert_exact_public_solver_compatible(target_path)
+    session_class = getattr(public_solver_module, PUBLIC_SESSION_CLASS)
+    existing = getattr(session_class, PATCH_HANDLE_ATTRIBUTE, None)
+    if existing is not None:
+        if (
+            isinstance(existing, PatchHandle)
+            and session_class.step_env is existing.guarded_step_env
+            and existing.required_confirmations == confirmations
+        ):
+            return existing
+        raise RuntimeError("A different step_env memory patch is already installed")
+
+    original = session_class.step_env
+    live_source_sha = _sha256_bytes(
+        _normalized_method_source(inspect.getsource(original)).encode("utf-8")
+    )
+    if live_source_sha != EXPECTED_STEP_ENV_SOURCE_SHA256:
+        raise RuntimeError(
+            "Live step_env does not match the validated source: "
+            f"expected {EXPECTED_STEP_ENV_SOURCE_SHA256}, observed {live_source_sha}"
+        )
+
+    guarded = functools.wraps(original)(
+        _build_guarded_step_env(
+            public_solver_module, required_confirmations=confirmations
+        )
+    )
+    handle = PatchHandle(
+        session_class=session_class,
+        original_step_env=original,
+        guarded_step_env=guarded,
+        compatibility=compatibility,
+        required_confirmations=confirmations,
+    )
+    session_class.step_env = guarded
+    setattr(session_class, PATCH_HANDLE_ATTRIBUTE, handle)
+    return handle
+
+import inference.framework.solver as _arc3_public_solver
+_arc3_confirmed_progress_handle = install_confirmed_no_progress_memory(
+    _arc3_public_solver,
+    source_path=_arc3_public_solver.__file__,
+    required_confirmations=4,
+)
+_arc3_confirmed_progress_contract = {
+    "mechanism": "deadline_safe_confirmed_progress_admission",
+    "scope": "local candidate; matched H100 validation required",
+    "required_confirmations": 4,
+    "eligible_engine_actions": sorted(ELIGIBLE_ENGINE_ACTIONS),
+    "excluded_engine_actions": ["RESET", "ACTION5", "ACTION6"],
+    "drain_reserve_seconds": DRAIN_RESERVE_SECONDS,
+    "compatibility": _arc3_confirmed_progress_handle.compatibility.to_dict(),
+}
+(WORKING_DIR / "deadline_safe_confirmed_progress_contract.json").write_text(
+    json.dumps(_arc3_confirmed_progress_contract, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+print(json.dumps(_arc3_confirmed_progress_contract, indent=2, sort_keys=True))

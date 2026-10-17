@@ -1,0 +1,41 @@
+## What we changed, and what we did not
+
+**Unchanged** (the source text is identical to Franzen's Version 1):
+- the 499 KB harness patch;
+- every environment setting and analyzer setting;
+- the precaching, and the model-server launch and its settings. Version 17 replaces three literal values in the launcher with switches: speculative decoding, the FR-Spec map, and the interpreter for the server's environment. When every input check passes, the switches equal Franzen's values;
+- the benchmark settings: 10 resident streams with priority scheduling, a 532-minute per-game cap in the rerun, and 25 minutes per game on the 10 demo games;
+- the system monitor and the diagnostics.
+
+**Changed or added in Version 15**, each marked `V15` in the code:
+1. **Input paths.** Kaggle mounts inputs either at `/kaggle/input/<slug>` or at `/kaggle/input/datasets/<owner>/<slug>` (and likewise for competitions and models), and older notebooks such as this one get the first layout. The recipe's hard-coded input paths go through `v15_input(...)`, which accepts either layout and stops with a clear error if an input is missing.
+2. **Owned time watchdog.** The competition allows 9 hours. The benchmark has a soft end 8 h 51 m after the notebook starts, in every mode.
+   - A background thread acts as a last resort at 8 h 55 m. It stops only the model-server process group that this notebook itself started, and only if that group's leader is still alive and is still its own session and group leader. It then interrupts the run, so the notebook ends before the limit instead of timing out.
+   - It never signals a process chosen by name.
+3. **Checked export (interactive runs only).** The placeholder `submission.parquet` is the same one-row file as in Kaggle's official sample notebook. It is written to a staging file, read back, compared with that sample's columns, values and types, and only then moved into place in one atomic step.
+4. **Commit-run gate (interactive runs only).** If the demo games produced no actions, or every game crashed, the run raises an error, so a broken version cannot be submitted.
+
+**Added in Version 17**, each marked `V17` in the code:
+5. **Input checks before any GPU work.** One cell checks:
+   - Python 3.12;
+   - the wheelhouse;
+   - the target model's configuration, tokenizer and every indexed shard;
+   - the draft model, and the FR-Spec map and tokenizer hashes;
+   - all 73 files of the source bundle, by sha256;
+   - the competition wheels and demo environments.
+
+   In an interactive run, a failed check without a fallback stops the notebook before the GPU is used. In the competition rerun the failure is recorded and the run continues, since a stopped rerun scores zero anyway.
+6. **Fallbacks.** Each one changes serving speed, not the model:
+   - a missing or mismatched FR-Spec map means speculative decoding runs without the hot-token map;
+   - a missing draft model means no speculative decoding;
+   - if the kernel is not Python 3.12, the server's environment is built with a Python 3.12 interpreter found on the machine.
+7. **Placeholder first (interactive runs only).** The official one-row placeholder is written at the start, so any exit still leaves a valid `submission.parquet`. The checked export at the end writes the same file again.
+8. **Startup and teardown checks.**
+   - The launcher's startup wait stays at 12 minutes. In Version 15 the server needed about 767 s from launch to its first answer; the harness deliberately starts early and retries for up to 900 s.
+   - The watchdog's reserves are checked: the hard stop is at least 120 s before the limit, and the soft end at least 120 s before the hard stop.
+   - At the end, the model server this notebook started is stopped through the watchdog's ownership check.
+9. **Per-stream timing log (interactive runs only, logging only).**
+   - It records the start and end of every chat request the harness sends to the local model server, keyed by the harness's per-game thread. A summary gives each stream's idle time between requests and how often the server's 10 request slots were busy.
+   - Requests, responses and errors pass through unchanged. It is off in the competition rerun, whose outputs are never visible, and `V17_TIMING_LOG=0` turns it off entirely.
+
+Apart from the input checks above, the competition rerun's behaviour is unchanged. The notebook writes no submission file there, because the gateway calculates it.

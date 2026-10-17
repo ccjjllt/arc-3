@@ -1,0 +1,558 @@
+"""LOCAL-ONLY exact-V10 adaptive extension; top-level await is intentional.
+
+The ordinary 7,920-second trajectory is preserved.  Only games with zero
+completed levels at that checkpoint may continue, and each extended game stops
+as soon as its first level is completed or the 22,000-second ceiling is reached.
+"""
+
+import asyncio
+import copy
+import importlib
+import inspect
+from datetime import timezone
+
+ADAPT_SCHEMA_VERSION = 1
+ADAPT_FIXED_SEED = 20260808
+ADAPT_BASE_RUNTIME_S = 7920.0
+ADAPT_MAX_RUNTIME_S = 22000.0
+ADAPT_ROOT = WORKING_DIR / "arc3_v11_adaptive_zero_level_extension"
+ADAPT_REQUIRED_ARTIFACTS = (
+    "benchmark.json",
+    "games.pkl",
+    "solver.pkl",
+    "intermediate_states.pkl",
+    "summary.txt",
+    "diagnostics.html",
+)
+ADAPT_EXPECTED_HASHES = {
+    "benchmark_initial.pkl": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+    "deploy_target.pkl": "f0dc4b59f390862326b0e40a6ff0f8910d9e6487ae244efb1ae9ab495f79ba19",
+    "taaf-kaggle-bundle.json": "52f844965b2b80de6e6ef759dfc9ffa3258f42407e0ed1788ec28ff250a7a8cb",
+}
+ADAPT_EXPECTED_SOLVER_SOURCE_SHA256 = (
+    "65ddfcdbe8c24fdc31246ff018b51469827b21c38995243a36a818adbed33370"
+)
+
+
+def adaptive_sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def adaptive_write_json(path, payload):
+    path = Path(path)
+    if path.exists():
+        raise FileExistsError(f"adaptive receipt already exists: {path}")
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def adaptive_write_durable_json(path, payload):
+    """Persist a gate input with exclusive creation, flush, and file fsync."""
+    path = Path(path)
+    if path.exists():
+        raise FileExistsError(f"adaptive durable receipt already exists: {path}")
+    serialized = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    with path.open("x", encoding="utf-8") as stream:
+        stream.write(serialized)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def adaptive_server_pid():
+    pid_path = WORKING_DIR / "vllm-openai-server.pid"
+    if not pid_path.is_file():
+        raise FileNotFoundError(f"single-server PID receipt missing: {pid_path}")
+    pid = int(pid_path.read_text(encoding="utf-8").strip())
+    if pid <= 0:
+        raise RuntimeError(f"invalid vLLM PID: {pid}")
+    os.kill(pid, 0)
+    return pid
+
+
+def adaptive_teardown():
+    """Always release the shared server/runtime, including failure paths."""
+    results = []
+    commands = json.loads((BUNDLE_DIR / "teardown_commands.json").read_text())
+    for command in commands:
+        completed = subprocess.run(
+            command,
+            shell=True,
+            check=False,
+            cwd=WORKING_DIR,
+            env=command_env(),
+        )
+        results.append({"command": command, "returncode": int(completed.returncode)})
+    return results
+
+
+def adaptive_teardown_once(state):
+    """Invoke teardown at most once while retaining an auditable call state."""
+    if bool(state.get("invoked", False)):
+        return state.get("results")
+    state["invoked"] = True
+    try:
+        state["results"] = adaptive_teardown()
+    except BaseException as exc:
+        state["failure"] = {
+            "type": type(exc).__name__,
+            "message": str(exc),
+        }
+        raise
+    return state["results"]
+
+
+def adaptive_metrics_snapshot():
+    path = WORKING_DIR / "arc3_progress_stream_metrics.json"
+    if not path.is_file():
+        raise FileNotFoundError(f"progress-stream metrics missing: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        key: int(payload.get(key, 0))
+        for key in (
+            "stream_responses_completed",
+            "stream_chunks_received",
+            "expected_absolute_deadline_closures",
+            "true_transport_failures",
+        )
+    }
+
+
+def adaptive_metric_delta(before, after):
+    return {key: int(after[key]) - int(before[key]) for key in before}
+
+
+def adaptive_solver_normalized_sha256(solver):
+    normalized = copy.deepcopy(solver)
+    normalized.max_runtime_s_per_game = ADAPT_BASE_RUNTIME_S
+    return hashlib.sha256(pickle.dumps(normalized, protocol=5)).hexdigest()
+
+
+def adaptive_deadline_s(elapsed_s, levels_completed):
+    """Return the only permitted deadline for the current live trajectory."""
+    elapsed_s = float(elapsed_s)
+    levels_completed = int(levels_completed)
+    if elapsed_s < ADAPT_BASE_RUNTIME_S:
+        return ADAPT_BASE_RUNTIME_S
+    if levels_completed >= 1:
+        return ADAPT_BASE_RUNTIME_S
+    return ADAPT_MAX_RUNTIME_S
+
+
+def adaptive_runtime_expired(elapsed_s, levels_completed):
+    return float(elapsed_s) >= adaptive_deadline_s(elapsed_s, levels_completed)
+
+
+def adaptive_baseline_runtime_limit_reached_at(self, elapsed_s):
+    """Exact V10 limit arithmetic using the already-sampled monotonic time."""
+    configured = self.solver.max_runtime_s_per_game
+    if configured is None:
+        return False
+    return float(elapsed_s) >= float(configured)
+
+
+def adaptive_baseline_timing_payload_at(self, elapsed_s):
+    """Exact V10 timing payload without a second boundary-crossing clock read."""
+    configured = self.solver.max_runtime_s_per_game
+    remaining = (
+        None
+        if configured is None
+        else max(0.0, float(configured) - float(elapsed_s))
+    )
+    return {
+        "run_elapsed_seconds": float(elapsed_s),
+        "time_remaining_seconds": remaining,
+    }
+
+
+def adaptive_run_snapshot(run, elapsed_s, kind):
+    return {
+        "game_id": str(run.game_id),
+        "kind": str(kind),
+        "elapsed_seconds": float(elapsed_s),
+        "levels_completed": int(run.levels_completed),
+        "score": float(run._compute_final_score()),
+        "actions_total": int(len(run.history)),
+        "actions_per_level": [int(value) for value in run.actions_per_level],
+        "state": str(run.state),
+        "solver_note": str(getattr(run, "solver_note", "") or ""),
+        "captured_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+adaptive_checkpoints = {}
+
+
+def adaptive_capture_checkpoint(session, elapsed_s):
+    if float(elapsed_s) < ADAPT_BASE_RUNTIME_S:
+        return None
+    run = session.game.game_run
+    if run is None:
+        raise RuntimeError("checkpoint reached without an active GameRun")
+    game_id = str(run.game_id)
+    if game_id not in adaptive_checkpoints:
+        adaptive_checkpoints[game_id] = adaptive_run_snapshot(
+            run, elapsed_s, "base_runtime_boundary"
+        )
+    return adaptive_checkpoints[game_id]
+
+
+def adaptive_runtime_limit_reached(self):
+    elapsed_s = max(0.0, time.monotonic() - self.started_at)
+    if elapsed_s < ADAPT_BASE_RUNTIME_S:
+        return adaptive_baseline_runtime_limit_reached_at(self, elapsed_s)
+    run = self.game.game_run
+    levels_completed = int(run.levels_completed) if run is not None else 0
+    adaptive_capture_checkpoint(self, elapsed_s)
+    return adaptive_runtime_expired(elapsed_s, levels_completed)
+
+
+def adaptive_timing_payload(self):
+    elapsed_s = max(0.0, time.monotonic() - self.started_at)
+    if elapsed_s < ADAPT_BASE_RUNTIME_S:
+        return adaptive_baseline_timing_payload_at(self, elapsed_s)
+    run = self.game.game_run
+    levels_completed = int(run.levels_completed) if run is not None else 0
+    adaptive_capture_checkpoint(self, elapsed_s)
+    deadline_s = adaptive_deadline_s(elapsed_s, levels_completed)
+    return {
+        "run_elapsed_seconds": elapsed_s,
+        "time_remaining_seconds": max(0.0, deadline_s - elapsed_s),
+    }
+
+
+def adaptive_summarize_run(run):
+    game_id = str(run.game_id)
+    terminal = adaptive_run_snapshot(
+        run,
+        float(run.final_wallclock_seconds),
+        "terminal",
+    )
+    checkpoint = adaptive_checkpoints.get(game_id)
+    if checkpoint is None:
+        checkpoint = {
+            **terminal,
+            "kind": "terminal_before_base_or_natural_completion",
+        }
+    score_delta = float(terminal["score"] - checkpoint["score"])
+    return {
+        "game_id": game_id,
+        "checkpoint": checkpoint,
+        "terminal": terminal,
+        "score_delta": score_delta,
+        "levels_delta": int(
+            terminal["levels_completed"] - checkpoint["levels_completed"]
+        ),
+        "actions_delta": int(terminal["actions_total"] - checkpoint["actions_total"]),
+    }
+
+
+async def adaptive_full_lifecycle():
+    """Run every fallible adaptive preflight and benchmark step under cleanup."""
+    if TRUE_SUBMISSION:
+        raise RuntimeError(
+            "Adaptive runtime research is public-offline validation only; "
+            "competition execution is refused"
+        )
+
+    for relative_name, expected_sha256 in ADAPT_EXPECTED_HASHES.items():
+        observed_sha256 = adaptive_sha256(BUNDLE_DIR / relative_name)
+        if observed_sha256 != expected_sha256:
+            raise RuntimeError(
+                f"exact V10 input hash mismatch for {relative_name}: "
+                f"{observed_sha256} != {expected_sha256}"
+            )
+    if run_contract.get("stock_prompt_sha256") != (
+        "527bb23c0d0de20721112e4d9469bda1f988c53f616cb5e4dcc08f7c77172608"
+    ):
+        raise RuntimeError("stock prompt receipt drifted from exact V10")
+    if run_contract.get("prompt_sha256_after_hygiene") != (
+        "6d64094a95032b9e893b7ae24645d977af15938cb2c9cef990a0dba91627cf92"
+    ):
+        raise RuntimeError("hygiene prompt receipt drifted from exact V10")
+    if ADAPT_ROOT.exists():
+        raise FileExistsError(f"adaptive root must be fresh: {ADAPT_ROOT}")
+    ADAPT_ROOT.mkdir(parents=False, exist_ok=False)
+
+    _arc3_solver_module = importlib.import_module("inference.framework.solver")
+    _session_class = _arc3_solver_module._HarnessGameSession
+    _solver_source_path = Path(inspect.getsourcefile(_session_class)).resolve()
+    _solver_source_sha256 = adaptive_sha256(_solver_source_path)
+    if _solver_source_sha256 != ADAPT_EXPECTED_SOLVER_SOURCE_SHA256:
+        raise RuntimeError(
+            "solver source drifted: "
+            f"{_solver_source_sha256} != {ADAPT_EXPECTED_SOLVER_SOURCE_SHA256}"
+        )
+
+    import pandas as pd
+
+    submission_path = WORKING_DIR / "submission.parquet"
+    submission_columns = ["row_id", "game_id", "end_of_game", "score"]
+    pd.DataFrame([['1_0', '1', True, 1.0]], columns=submission_columns).to_parquet(
+        submission_path, index=False
+    )
+    submission_probe = pd.read_parquet(submission_path)
+    if list(submission_probe.columns) != submission_columns or submission_probe.isna().any().any():
+        raise ValueError("submission.parquet failed its exact-column/null audit")
+
+    with open(BUNDLE_DIR / "benchmark_initial.pkl", "rb") as fh:
+        adaptive_bm = pickle.load(fh)
+    baseline_runtime_s = float(getattr(adaptive_bm.solver, "max_runtime_s_per_game"))
+    if baseline_runtime_s != ADAPT_BASE_RUNTIME_S:
+        raise RuntimeError(f"unexpected V10 baseline runtime: {baseline_runtime_s}")
+    normalized_solver_sha256 = adaptive_solver_normalized_sha256(adaptive_bm.solver)
+    adaptive_bm.job_dir = ADAPT_ROOT
+    adaptive_bm.games = offline_games(str(COMPETITION_ROOT / "environment_files"))
+    adaptive_bm.n_passes = 1
+    adaptive_bm.game_weights = None
+    environment_names = [game.env_name for game in adaptive_bm.games]
+    if len(environment_names) != 25 or len(set(environment_names)) != 25:
+        raise RuntimeError(f"expected 25 unique public games, got {len(environment_names)}")
+    if bool(getattr(adaptive_bm.solver, "start_local_server", False)):
+        raise RuntimeError("adaptive run unexpectedly requests a second model server")
+
+    os.environ["LOCAL_ANALYZER_SEED"] = str(ADAPT_FIXED_SEED)
+    duck_agent._LOCAL_ANALYZER_SEED = ADAPT_FIXED_SEED
+    global_budget_s = float(getattr(target, "max_runtime_s", 0.0) or 0.0)
+    global_soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(
+        seconds=global_budget_s - min(600.0, global_budget_s / 2)
+    )
+    remaining_global_s = (global_soft_end - datetime.now()).total_seconds()
+    if remaining_global_s < ADAPT_MAX_RUNTIME_S + 600.0:
+        raise RuntimeError(
+            f"insufficient notebook budget for sealed adaptive run: {remaining_global_s:.3f}s"
+        )
+
+    server_pid = adaptive_server_pid()
+    metrics_before = adaptive_metrics_snapshot()
+    experiment_contract = {
+        "schema_version": ADAPT_SCHEMA_VERSION,
+        "status": "RUNNING",
+        "experiment": "exact-v10-same-trajectory-zero-level-extension",
+        "fixed_seed": ADAPT_FIXED_SEED,
+        "base_runtime_seconds": ADAPT_BASE_RUNTIME_S,
+        "maximum_runtime_seconds": ADAPT_MAX_RUNTIME_S,
+        "policy": (
+            "preserve 7920-second trajectory; after checkpoint continue only zero-level "
+            "games and stop immediately on first completed level"
+        ),
+        "environment_names": environment_names,
+        "normalized_solver_sha256": normalized_solver_sha256,
+        "solver_source_path": str(_solver_source_path),
+        "solver_source_sha256": _solver_source_sha256,
+        "single_vllm_server_pid": server_pid,
+        "shared_global_soft_end": global_soft_end.isoformat(),
+        "competition_execution": False,
+        "submission_sha256": adaptive_sha256(submission_path),
+        "submission_columns": submission_columns,
+        "started_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    async def adaptive_execute_and_validate():
+        adaptive_write_json(ADAPT_ROOT / "experiment_contract.json", experiment_contract)
+
+        global _original_runtime_limit_reached, _original_timing_payload
+        _original_runtime_limit_reached = _session_class.runtime_limit_reached
+        _original_timing_payload = _session_class.timing_payload
+        failure = None
+        try:
+            _session_class.runtime_limit_reached = adaptive_runtime_limit_reached
+            _session_class.timing_payload = adaptive_timing_payload
+            await adaptive_bm.run(
+                soft_end_time=global_soft_end,
+                runtime_environment=target,
+                minimal_diagnostics=False,
+            )
+        except BaseException as exc:
+            failure = {"type": type(exc).__name__, "message": str(exc)}
+            raise
+        finally:
+            _session_class.runtime_limit_reached = _original_runtime_limit_reached
+            _session_class.timing_payload = _original_timing_payload
+            if _session_class.runtime_limit_reached is not _original_runtime_limit_reached:
+                raise RuntimeError("runtime_limit_reached hook restoration failed")
+            if _session_class.timing_payload is not _original_timing_payload:
+                raise RuntimeError("timing_payload hook restoration failed")
+            final_payload = {
+                **experiment_contract,
+                "status": "FAILED" if failure is not None else "VALIDATING",
+                "failure": failure,
+                "finished_at_utc": datetime.now(timezone.utc).isoformat(),
+            }
+            adaptive_write_json(ADAPT_ROOT / "run_completion_receipt.json", final_payload)
+
+        missing_artifacts = [
+            name for name in ADAPT_REQUIRED_ARTIFACTS if not (ADAPT_ROOT / name).is_file()
+        ]
+        if missing_artifacts:
+            raise FileNotFoundError(f"adaptive run missing artifacts: {missing_artifacts}")
+        if adaptive_server_pid() != server_pid:
+            raise RuntimeError("vLLM server PID changed during adaptive run")
+        if adaptive_bm.solver._stop_event.is_set():
+            raise RuntimeError("solver cancellation event remained set after benchmark")
+        if len(adaptive_bm.game_runs) != 25:
+            raise RuntimeError(
+                f"expected 25 terminal GameRuns, got {len(adaptive_bm.game_runs)}"
+            )
+
+        per_game = [adaptive_summarize_run(run) for run in adaptive_bm.game_runs]
+        if len({item["game_id"] for item in per_game}) != 25:
+            raise RuntimeError("adaptive run game IDs are not unique")
+        for item in per_game:
+            terminal_state = item["terminal"]["state"]
+            if terminal_state not in {"won", "gave_up"}:
+                raise RuntimeError(
+                    f"nonterminal/error state for {item['game_id']}: {terminal_state}"
+                )
+            if item["score_delta"] < -1e-12:
+                raise RuntimeError(
+                    f"score regression for {item['game_id']}: {item['score_delta']}"
+                )
+            if item["levels_delta"] < 0 or item["actions_delta"] < 0:
+                raise RuntimeError(f"non-monotonic progress for {item['game_id']}")
+            checkpoint = item["checkpoint"]
+            checkpoint_levels = int(checkpoint["levels_completed"])
+            if checkpoint["kind"] == "base_runtime_boundary":
+                if float(checkpoint["elapsed_seconds"]) < ADAPT_BASE_RUNTIME_S:
+                    raise RuntimeError(
+                        f"early base checkpoint for {item['game_id']}: {checkpoint}"
+                    )
+                if checkpoint_levels >= 1:
+                    if abs(item["score_delta"]) > 1e-12 or item["actions_delta"] != 0:
+                        raise RuntimeError(
+                            "checkpoint-success game continued after boundary: "
+                            f"{item['game_id']}"
+                        )
+                elif item["levels_delta"] > 0:
+                    if item["levels_delta"] != 1 or item["actions_delta"] < 1:
+                        raise RuntimeError(
+                            "extended game did not stop on its first post-checkpoint solve: "
+                            f"{item['game_id']}"
+                        )
+
+        metrics_after_initial = adaptive_metrics_snapshot()
+        post_run_gate_input = {
+            "schema_version": ADAPT_SCHEMA_VERSION,
+            "status": "SERIALIZED_PRE_ASYNC_GATE",
+            "experiment_contract_sha256": adaptive_sha256(
+                ADAPT_ROOT / "experiment_contract.json"
+            ),
+            "game_count": len(per_game),
+            "game_ids": [item["game_id"] for item in per_game],
+            "per_game": per_game,
+            "metrics_before": metrics_before,
+            "metrics_after_initial": metrics_after_initial,
+            "solver_cancellation_event": bool(adaptive_bm.solver._stop_event.is_set()),
+            "server_pid": server_pid,
+            "promotion_gates": {
+                "per_game_score_regressions": 0,
+                "strict_improvement_count_min": 1,
+                "total_score_delta_min_exclusive": 0.0,
+                "true_transport_failures": 0,
+                "terminal_states_allowed": ["won", "gave_up"],
+            },
+            "serialized_at_utc": datetime.now(timezone.utc).isoformat(),
+        }
+        post_run_gate_input_path = ADAPT_ROOT / "post_run_gate_input.json"
+        adaptive_write_durable_json(post_run_gate_input_path, post_run_gate_input)
+        post_run_gate_input_sha256 = adaptive_sha256(post_run_gate_input_path)
+        await asyncio.sleep(2.0)
+        metrics_after = adaptive_metrics_snapshot()
+        if metrics_after != metrics_after_initial:
+            raise RuntimeError(
+                "late stream activity after benchmark completion: "
+                f"{metrics_after_initial} -> {metrics_after}"
+            )
+        metrics_delta = adaptive_metric_delta(metrics_before, metrics_after)
+        checkpoint_total = float(sum(item["checkpoint"]["score"] for item in per_game))
+        terminal_total = float(sum(item["terminal"]["score"] for item in per_game))
+        strict_improvements = [item for item in per_game if item["score_delta"] > 1e-12]
+        clean_transport = int(metrics_delta["true_transport_failures"]) == 0
+        promotion_pass = (
+            clean_transport
+            and terminal_total > checkpoint_total + 1e-12
+            and len(strict_improvements) >= 1
+        )
+        decision = (
+            "PROMOTE_SCORE_LEVER" if promotion_pass else "HOLD_NO_CLEAN_STRICT_GAIN"
+        )
+        return {
+            "schema_version": ADAPT_SCHEMA_VERSION,
+            "status": "PASS" if promotion_pass else "HOLD",
+            "decision": decision,
+            "non_regression_contract": (
+                "at the first post-7920 control point, successful games stop with no "
+                "later action; zero-level games have checkpoint score zero and stop "
+                "on their first completion"
+            ),
+            "checkpoint_score_total": checkpoint_total,
+            "terminal_score_total": terminal_total,
+            "score_total_delta": terminal_total - checkpoint_total,
+            "checkpoint_score_mean": checkpoint_total / len(per_game),
+            "terminal_score_mean": terminal_total / len(per_game),
+            "strict_improvement_count": len(strict_improvements),
+            "per_game_regression_count": sum(
+                item["score_delta"] < -1e-12 for item in per_game
+            ),
+            "metrics_before": metrics_before,
+            "metrics_after": metrics_after,
+            "metrics_delta": metrics_delta,
+            "late_stream_activity": False,
+            "solver_cancellation_event": False,
+            "clean_transport": clean_transport,
+            "server_pid": server_pid,
+            "experiment_contract_sha256": adaptive_sha256(
+                ADAPT_ROOT / "experiment_contract.json"
+            ),
+            "post_run_gate_input_sha256": post_run_gate_input_sha256,
+            "artifact_sha256": {
+                name: adaptive_sha256(ADAPT_ROOT / name)
+                for name in ADAPT_REQUIRED_ARTIFACTS
+            },
+            "per_game": per_game,
+            "finished_at_utc": datetime.now(timezone.utc).isoformat(),
+        }
+
+    return await adaptive_execute_and_validate()
+
+
+async def adaptive_lifecycle_entrypoint():
+    """Preserve the primary failure while guaranteeing exactly-once teardown."""
+    teardown_state = {"invoked": False, "results": None, "failure": None}
+    terminal_receipt = None
+    teardown_results = None
+    primary_failure = None
+    primary_traceback = None
+    teardown_failure = None
+    try:
+        terminal_receipt = await adaptive_full_lifecycle()
+    except BaseException as exc:
+        primary_failure = exc
+        primary_traceback = exc.__traceback__
+    finally:
+        try:
+            teardown_results = adaptive_teardown_once(teardown_state)
+        except BaseException as exc:
+            teardown_failure = exc
+
+    if not teardown_state["invoked"]:
+        raise RuntimeError("adaptive teardown was not invoked")
+    if primary_failure is not None:
+        if teardown_failure is not None and hasattr(primary_failure, "add_note"):
+            primary_failure.add_note(
+                "adaptive teardown also failed: "
+                f"{type(teardown_failure).__name__}: {teardown_failure}"
+            )
+        raise primary_failure.with_traceback(primary_traceback)
+    if teardown_failure is not None:
+        raise teardown_failure
+    return terminal_receipt, teardown_results
+
+
+terminal_receipt, teardown_results = await adaptive_lifecycle_entrypoint()
+
+if any(item["returncode"] != 0 for item in teardown_results):
+    raise RuntimeError(f"adaptive teardown failed: {teardown_results}")
+terminal_receipt["teardown"] = teardown_results
+adaptive_write_json(ADAPT_ROOT / "terminal_adaptive_receipt.json", terminal_receipt)
+(WORKING_DIR / "diagnostics.html").write_bytes(
+    (ADAPT_ROOT / "diagnostics.html").read_bytes()
+)
+print(json.dumps(terminal_receipt, indent=2, sort_keys=True))

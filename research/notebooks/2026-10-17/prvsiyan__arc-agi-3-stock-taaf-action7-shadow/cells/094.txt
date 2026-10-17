@@ -1,0 +1,30 @@
+# thui-animfast: resolve the competition mount instead of assuming its layout -- Kaggle serves either
+# /kaggle/input/competitions/<comp> or /kaggle/input/<comp>, and which one varies between runs.
+_COMP_CANDIDATES = ["/kaggle/input/competitions/arc-prize-2026-arc-agi-3", "/kaggle/input/arc-prize-2026-arc-agi-3"]
+_COMP_DIR = next((_p for _p in _COMP_CANDIDATES if os.path.isdir(_p)), None)
+assert _COMP_DIR is not None, (
+    "thui-animfast: no competition mount found. Tried " + repr(_COMP_CANDIDATES)
+    + "; /kaggle/input holds "
+    + repr(sorted(os.listdir("/kaggle/input")) if os.path.isdir("/kaggle/input") else "MISSING")
+)
+_WHEELS = os.path.join(_COMP_DIR, "arc_agi_3_wheels")
+assert os.path.isdir(_WHEELS), "thui-animfast: resolved wheels dir is not a directory: " + _WHEELS
+print("thui-animfast: competition mount = " + _COMP_DIR, flush=True)
+# Install the ARC runtime from the bundled competition wheels.
+# Quiet: stdout is discarded; stderr (and a non-zero exit) still surface real failures.
+subprocess.check_call(
+    [
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        "--quiet",
+        "--no-index",
+        "--no-warn-conflicts",
+        "--disable-pip-version-check",
+        "--find-links",
+        _WHEELS,
+        "arc-agi",
+    ],
+    stdout=subprocess.DEVNULL,
+)

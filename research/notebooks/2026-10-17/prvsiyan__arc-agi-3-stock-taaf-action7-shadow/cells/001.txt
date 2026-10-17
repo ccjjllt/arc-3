@@ -1,0 +1,16 @@
+## Credits and licences
+
+- **Daniel Franzen**, *ARC-AGI-3 Milestone 2 Solution* (kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution, Version 1; GitHub `da-fr/arc-agi-3-solution`). Released under **Apache 2.0**. His notes are reproduced unchanged below as "About this notebook".
+- **Jeroen Cottaar and Tufa Labs**: the Duck solver, harness and notebook that the recipe builds on. From Version 17 the source bundle is Jeroen Cottaar's own MIT-licensed share, `jeroencottaar/taaf-kaggle-source-share`. We checked it file by file: its 73 files are byte-identical to the copy that Versions 15 and 16 used, and the notebook checks every file's sha256 again before using it.
+- **Qwen** (Qwen3.8-Flash-Next), **Intel** (W4A16 AutoRound quantization) and **Albucino** (MTP draft checkpoint). The model weights are under the **Qwen Community License 1.0**, not Apache 2.0.
+- **John Pezzulli** (Pennyroyal, an SGLang fork, v2.5.3), with patches from **Mamy Ratsimbazafy** and **Gabriel Olympie**.
+
+The attached inputs:
+- datasets `dfranzen/pennyroyal-v253` (Franzen's copy of the Pennyroyal wheelhouse) and `jeroencottaar/taaf-kaggle-source-share` (MIT);
+- models `dfranzen/intel-qwen3.8-flash-next-w4a16-autoround` and `dfranzen/albucino-qwen3-8-flash-next-drafter`.
+
+Third-party code and weights remain under their own licences.
+
+**Licence status, and the fallback we decided in advance.** On Kaggle, `dfranzen/pennyroyal-v253` shows its licence as "Unknown"; its description says the bundled packages keep their upstream licences. Whether unknown-licence inputs and the Qwen weights licence are eligible for prizes has been asked on the forum and is still unanswered. If the host rules these inputs ineligible, or if there is no ruling by the day before the final submission, the plan is to switch the runtime to Apache-2.0 datasets: lordhansolo's patched vLLM (`lordhansolo/vllm-main-e975732-arc3` with `lordhansolo/arc3-vllm-e975732-gdn-recoverssm`) and the mixed NVFP4-FP8 checkpoint of the same model, whose weights stay under the Qwen licence. That stack has one reported score, 23.84, on a different harness. Franzen's patch targets Pennyroyal SGLang and is not a drop-in, so the switch would be a new version with its own checks. This version does not use it.
+
+**Apache 2.0 notice.** This notebook contains code from Daniel Franzen's notebook, licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0). The code is distributed on an "AS IS" basis, without warranties or conditions of any kind. The cells we modified or added are marked `V15` or `V17 (prvsiyan, Apache-2.0)`. Our additions are also released under Apache 2.0.

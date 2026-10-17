@@ -1,0 +1,19 @@
+# ARC-AGI-3 Duck: Stock TAAF Prompt + ACTION7
+
+This local shadow isolates one deliberately small policy change from the current
+public notebook: the first-party Decision Ledger addendum is removed while the
+MIT-licensed TAAF Python guidance remains byte-for-byte unchanged. The official
+`ACTION7 ↔ UNDO` compatibility mapping, environment selection, model, sampling,
+budgets, teardown, and output guards are retained.
+
+The design is intentionally falsifiable:
+
+1. hash the mounted stock TAAF prompt before any compatibility wiring;
+2. install only the independently authored `ACTION7 ↔ UNDO` round trip;
+3. assert that the prompt bytes did not change;
+4. materialize and audit `submission.parquet` with the exact ordered schema
+   `row_id, game_id, end_of_game, score` before the long benchmark begins.
+
+This notebook is a **shadow candidate**, not an official score claim. GPU/model
+execution is intentionally left to a future matched public Kaggle run after the
+current official evidence becomes terminal.
