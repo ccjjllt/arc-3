@@ -1,0 +1,770 @@
+{
+  "scope": "Hand-authored CPU contracts; no model/engine/history-code execution.",
+  "checks": [
+    {
+      "name": "all_supported_types",
+      "passed": true
+    },
+    {
+      "name": "negative_zero",
+      "passed": true
+    },
+    {
+      "name": "tuple_dict_keys_and_frozenset",
+      "passed": true
+    },
+    {
+      "name": "shared_container_alias_preserved",
+      "passed": true
+    },
+    {
+      "name": "snapshot_copy_isolated_from_source",
+      "passed": true
+    },
+    {
+      "name": "reject_cycle",
+      "passed": true,
+      "reason": "cycle"
+    },
+    {
+      "name": "reject_callable",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "reject_module",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "reject_object",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "reject_bytes",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "reject_complex",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "reject_nan",
+      "passed": true,
+      "reason": "nonfinite_float"
+    },
+    {
+      "name": "reject_inf",
+      "passed": true,
+      "reason": "nonfinite_float"
+    },
+    {
+      "name": "reject_surrogate",
+      "passed": true,
+      "reason": "invalid_unicode"
+    },
+    {
+      "name": "reject_int_limit",
+      "passed": true,
+      "reason": "integer_capacity"
+    },
+    {
+      "name": "reject_string_limit",
+      "passed": true,
+      "reason": "scalar_capacity"
+    },
+    {
+      "name": "reject_node_limit",
+      "passed": true,
+      "reason": "node_capacity"
+    },
+    {
+      "name": "exact_builtin_only",
+      "passed": true,
+      "reason": "unsupported_type"
+    },
+    {
+      "name": "custom_protocols_never_called",
+      "passed": true
+    },
+    {
+      "name": "depth_limit",
+      "passed": true,
+      "reason": "depth_capacity"
+    },
+    {
+      "name": "alias_cannot_hide_depth",
+      "passed": true,
+      "reason": "depth_capacity"
+    },
+    {
+      "name": "name_limit",
+      "passed": true,
+      "reason": "name_capacity"
+    },
+    {
+      "name": "aggregate_byte_limit",
+      "passed": true,
+      "reason": "byte_capacity"
+    },
+    {
+      "name": "reserved_dunder_name",
+      "passed": true,
+      "reason": "invalid_name"
+    },
+    {
+      "name": "nonfinite_wire",
+      "passed": true,
+      "reason": "invalid_float"
+    },
+    {
+      "name": "cycle_wire",
+      "passed": true,
+      "reason": "cycle"
+    },
+    {
+      "name": "unknown_wire_tag",
+      "passed": true,
+      "reason": "invalid_reference"
+    },
+    {
+      "name": "duplicate_wire_key",
+      "passed": true,
+      "reason": "duplicate_key"
+    },
+    {
+      "name": "reserved_and_callable_excluded",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_session",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_attempt",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_action",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_level",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_frame_sha256",
+      "passed": true
+    },
+    {
+      "name": "identity_change_clears_revision",
+      "passed": true
+    },
+    {
+      "name": "host_commit",
+      "passed": true
+    },
+    {
+      "name": "old_ticket_cannot_commit",
+      "passed": true
+    },
+    {
+      "name": "error_rolls_back_prior_committed_snapshot",
+      "passed": true
+    },
+    {
+      "name": "successful_capture_failure_clears_prior_names",
+      "passed": true
+    },
+    {
+      "name": "real_sandbox_commit",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "natural_names_alias_and_types",
+      "passed": true
+    },
+    {
+      "name": "delete_and_rebind_replace_snapshot",
+      "passed": true
+    },
+    {
+      "name": "real_error_no_partial_commit",
+      "passed": true
+    },
+    {
+      "name": "real_timeout_no_partial_commit",
+      "passed": true
+    },
+    {
+      "name": "unsupported_rebind_does_not_resurrect",
+      "passed": true
+    },
+    {
+      "name": "frames_modules_callables_absent",
+      "passed": true
+    },
+    {
+      "name": "original_retention_contract",
+      "passed": true
+    },
+    {
+      "name": "pure_function_can_consume_explicit_restored_argument",
+      "passed": true
+    },
+    {
+      "name": "refusal_preserves_previous_but_no_commit",
+      "passed": true
+    },
+    {
+      "name": "executed_noop_clears_snapshot_and_skips_commit",
+      "passed": true
+    },
+    {
+      "name": "post_action_nameerror_expected",
+      "passed": true
+    },
+    {
+      "name": "reset_increments_attempt_and_clears",
+      "passed": true
+    },
+    {
+      "name": "uncertain_action_clears",
+      "passed": true
+    },
+    {
+      "name": "action_then_timeout_stays_cleared",
+      "passed": true
+    },
+    {
+      "name": "no_action_replay",
+      "passed": true
+    },
+    {
+      "name": "original_runner_not_mutated",
+      "passed": true
+    }
+  ],
+  "sandbox_calls": [
+    {
+      "label": "create-values",
+      "code": "xs=[1,2]\nalias=xs\nclicks=[(3,4),(5,6)]\nlookup={(1,2):{3,4}}\nfrozen=frozenset([8,9])",
+      "elapsed_seconds": 0.02566720894537866,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"xs\",[\"r\",0]],[\"alias\",[\"r\",0]],[\"clicks\",[\"r\",1]],[\"lookup\",[\"r\",4]],[\"frozen\",[\"r\",7]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"list\",[[\"r\",2],[\"r\",3]]],[\"tuple\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"tuple\",[[\"i\",\"5\"],[\"i\",\"6\"]]],[\"dict\",[[[\"r\",5],[\"r\",6]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "xs",
+          "alias",
+          "clicks",
+          "lookup",
+          "frozen"
+        ],
+        "bytes": 372
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "consume-natural-names",
+      "code": "xs.append(7)\nprint(alias is xs,clicks[0],lookup[(1,2)],type(frozen).__name__)\ndel clicks\nxs=11",
+      "elapsed_seconds": 0.024928999948315322,
+      "result": {
+        "stdout": "True (3, 4) {3, 4} frozenset\n",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"xs\",[\"i\",\"11\"]],[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "xs",
+          "alias",
+          "lookup",
+          "frozen"
+        ],
+        "bytes": 275
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "error-after-mutation",
+      "code": "alias.append(99)\nnew_value=6\nraise RuntimeError('expected')",
+      "elapsed_seconds": 0.02476050000404939,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": null,
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 3, in <module>\nRuntimeError: expected",
+        "action_results": [],
+        "keepable_functions": [],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "snippet_failed"
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "timeout-after-mutation",
+      "code": "alias.append(99)\nwhile True: pass",
+      "elapsed_seconds": 1.0080173329915851,
+      "result": {
+        "error": "Tool timed out after 1s",
+        "stdout": "",
+        "action_results": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "snippet_failed"
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "unsupported-rebind-removes-old",
+      "code": "xs=lambda:4\nsaved_frame=current_frame\nimport math",
+      "elapsed_seconds": 0.027391791983973235,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": [
+            {
+              "name": "xs",
+              "reason": "unsupported_type"
+            },
+            {
+              "name": "saved_frame",
+              "reason": "unsupported_type"
+            },
+            {
+              "name": "math",
+              "reason": "unsupported_type"
+            }
+          ]
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "alias",
+          "lookup",
+          "frozen"
+        ],
+        "bytes": 257
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "pure-function-and-data-dependent-function",
+      "code": "offset=5\ndef pure(x):\n    return x+1\ndef dependent(x):\n    return x+offset",
+      "elapsed_seconds": 0.024919999996200204,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]],[\"offset\",[\"i\",\"5\"]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": [
+            {
+              "name": "pure",
+              "reason": "unsupported_type"
+            },
+            {
+              "name": "dependent",
+              "reason": "unsupported_type"
+            }
+          ]
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": [
+          {
+            "name": "dependent",
+            "reason": "unavailable dependencies: offset",
+            "missing_dependencies": [
+              "offset"
+            ],
+            "hint": "Pass offset as arguments; snippet variables are not retained."
+          }
+        ]
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "alias",
+          "lookup",
+          "frozen",
+          "offset"
+        ],
+        "bytes": 278
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "restored-functions-and-values",
+      "code": "print(pure(offset))",
+      "elapsed_seconds": 0.025171374960336834,
+      "result": {
+        "stdout": "6\n",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]],[\"offset\",[\"i\",\"5\"]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "alias",
+          "lookup",
+          "frozen",
+          "offset"
+        ],
+        "bytes": 278
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "refused-action-no-commit",
+      "code": "offset=99\naction('ACTION1')",
+      "elapsed_seconds": 0.02492291695671156,
+      "result": {
+        "stdout": "{'executed': False}\n",
+        "result": {
+          "executed": false
+        },
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]],[\"offset\",[\"i\",\"99\"]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [
+          {
+            "executed": false
+          }
+        ],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "action_requested"
+      },
+      "action_requests": 1,
+      "executed_actions": 0
+    },
+    {
+      "label": "executed-noop-invalidates",
+      "code": "action('ACTION1')\nafter_action=123",
+      "elapsed_seconds": 0.02502075000666082,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"alias\",[\"r\",0]],[\"lookup\",[\"r\",1]],[\"frozen\",[\"r\",4]],[\"offset\",[\"i\",\"5\"]],[\"after_action\",[\"i\",\"123\"]]],\"nodes\":[[\"list\",[[\"i\",\"1\"],[\"i\",\"2\"],[\"i\",\"7\"]]],[\"dict\",[[[\"r\",2],[\"r\",3]]]],[\"tuple\",[[\"i\",\"1\"],[\"i\",\"2\"]]],[\"set\",[[\"i\",\"3\"],[\"i\",\"4\"]]],[\"frozenset\",[[\"i\",\"8\"],[\"i\",\"9\"]]]]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [
+          {
+            "executed": true,
+            "gameplay_changed": false
+          }
+        ],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "action_or_observation_change"
+      },
+      "action_requests": 1,
+      "executed_actions": 1
+    },
+    {
+      "label": "old-value-not-restored-after-action",
+      "code": "print(offset)",
+      "elapsed_seconds": 0.02490545902401209,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": null,
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nNameError: name 'offset' is not defined",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "snippet_failed"
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "create-before-reset",
+      "code": "before_reset=42",
+      "elapsed_seconds": 0.024693291983567178,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"before_reset\",[\"i\",\"42\"]]],\"nodes\":[]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "before_reset"
+        ],
+        "bytes": 62
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "reset-invalidates",
+      "code": "action('RESET')",
+      "elapsed_seconds": 0.025294459017459303,
+      "result": {
+        "stdout": "{'executed': True, 'gameplay_changed': False}\n",
+        "result": {
+          "executed": true,
+          "gameplay_changed": false
+        },
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"before_reset\",[\"i\",\"42\"]]],\"nodes\":[]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [
+          {
+            "executed": true,
+            "gameplay_changed": false
+          }
+        ],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "action_or_observation_change"
+      },
+      "action_requests": 1,
+      "executed_actions": 1
+    },
+    {
+      "label": "create-before-uncertain-action",
+      "code": "before_uncertain=42",
+      "elapsed_seconds": 0.02492358401650563,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"before_uncertain\",[\"i\",\"42\"]]],\"nodes\":[]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "before_uncertain"
+        ],
+        "bytes": 66
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "uncertain-action-invalidates",
+      "code": "action('ACTION1')",
+      "elapsed_seconds": 0.02484887500759214,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": null,
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nRuntimeError: action failed in sandbox host.",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": false,
+        "reason": "action_or_observation_change"
+      },
+      "action_requests": 1,
+      "executed_actions": 0
+    },
+    {
+      "label": "create-before-action-timeout",
+      "code": "before_timeout=42",
+      "elapsed_seconds": 0.024857791955582798,
+      "result": {
+        "stdout": "",
+        "result": null,
+        "native_values": {
+          "blob": "{\"version\":1,\"roots\":[[\"before_timeout\",[\"i\",\"42\"]]],\"nodes\":[]}",
+          "rejected": []
+        },
+        "error": "",
+        "action_results": [],
+        "keepable_functions": [
+          {
+            "name": "pure",
+            "source": "def pure(x):\n    return x+1"
+          }
+        ],
+        "retention_rejected": []
+      },
+      "commit": {
+        "committed": true,
+        "reason": "successful_no_action",
+        "names": [
+          "before_timeout"
+        ],
+        "bytes": 64
+      },
+      "action_requests": 0,
+      "executed_actions": 0
+    },
+    {
+      "label": "action-then-timeout",
+      "code": "action('ACTION1')\nwhile True: pass",
+      "elapsed_seconds": 1.0078600000124425,
+      "result": {
+        "error": "Tool timed out after 1s",
+        "stdout": "",
+        "action_results": [
+          {
+            "executed": true,
+            "gameplay_changed": false
+          }
+        ]
+      },
+      "commit": {
+        "committed": false,
+        "reason": "action_or_observation_change"
+      },
+      "action_requests": 1,
+      "executed_actions": 1
+    }
+  ],
+  "model_requests": 0,
+  "gpu_started": false,
+  "game_engine_executed": false,
+  "historical_model_code_executed": false,
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "python_executable": "/Users/zhaohuaxiang/.local/bin/python3.12",
+  "source_sha256": {
+    "codec.py": "b613b311ebc9ec4650c09c488fcd83cc330cf63317accf4249696f847cded384",
+    "prototype.py": "3e873ad05b076305cf9bc19ccb71781e62086847cf51fa4772c5e982df075f65",
+    "manual_probe.py": "a94dd61d46c8ae3a469c450d8166f6ec242eea523603a53eeedc47bc740e2750"
+  },
+  "runner": {
+    "original_bootstrap_sha256": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+    "copied_bootstrap_sha256": "2c2b8ad4706c621d54b26b8a0b8082b6c8a92820853f52c9424fd4face23fd17",
+    "original_runner_unchanged": true
+  },
+  "elapsed_seconds": 2.4235175420180894,
+  "passed": 56,
+  "total": 56
+}
