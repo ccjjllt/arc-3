@@ -1,0 +1,11 @@
+{
+  "code": "offset=5\ndef pure(x):\n    return x+1\ndef dependent(x):\n    return x+offset",
+  "dispatch": {
+    "tool": "python",
+    "function_retention": "Retained your function pure(x) for later Python calls on this level.\nYour function dependent was not retained: unavailable dependencies: offset. Pass snippet-specific data as arguments or redefine it if needed.",
+    "returncode": 0
+  },
+  "step_before": 0,
+  "step_after": 0,
+  "step_executed": false
+}

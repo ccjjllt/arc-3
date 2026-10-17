@@ -51,3 +51,24 @@ def validate_config(config: dict[str, Any]) -> None:
             "strict_arm_budget", "require_cache_flush", "preflight_before_serving",
         )):
             raise ValueError("The tail comparison requires paired diagnostics, deadline checks and strict startup contracts.")
+    if "pace_1x" in arms:
+        expected = {
+            "baseline": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"},
+            "pace_1x": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "1"},
+        }
+        if set(arms) != set(expected) or environments != expected:
+            raise ValueError("pace_1x requires the frozen baseline/pace-only environment pair.")
+        if config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1:
+            raise ValueError("The pace comparison must retain 10 streams and one pass.")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "preflight_before_serving",
+        )):
+            raise ValueError("The pace comparison requires paired diagnostics, deadline checks and strict startup contracts.")
+    if any(a in ("native_values", "native") for a in arms):
+        # Scheduler frozen to baseline; single-factor is native handoff only.
+        for arm in arms:
+            if environments.get(arm, {}) != {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}:
+                raise ValueError("native_values arms require frozen baseline scheduler.")
+        if config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1:
+            raise ValueError("Native comparison must retain 10 streams and one pass.")

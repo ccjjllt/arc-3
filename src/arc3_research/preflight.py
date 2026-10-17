@@ -66,9 +66,14 @@ def main() -> None:
             for arm in config["arm_order"]:
                 os.environ.update(config.get("arm_environment", {}).get(arm, {}))
                 options = tool_agent._priority_level_options()
-                expected = True if arm == "tail_80k" else "remaining"
-                if (options["tail_lookup"] != expected or options["normalize_score"] is not True
-                        or os.environ.get("ARC3_PRIORITY_PACE") != "0"
+                if arm == "tail_80k":
+                    exp_tail, exp_pace = True, "0"
+                elif arm == "pace_1x":
+                    exp_tail, exp_pace = "remaining", "1"
+                else:
+                    exp_tail, exp_pace = "remaining", "0"
+                if (options["tail_lookup"] != exp_tail or options["normalize_score"] is not True
+                        or os.environ.get("ARC3_PRIORITY_PACE") != exp_pace
                         or os.environ.get("ARC3_MAX_ACTIVE_STREAMS") != "10"):
                     raise RuntimeError(f"Frozen scheduler policy did not take effect: {arm}")
                 report["arm_policy_checks"][arm] = options
@@ -85,6 +90,9 @@ def main() -> None:
         if config.get("scheduler_observer"):
             from arc3_research.scheduler_observer import install_scheduler_observer
             patches.append(install_scheduler_observer())
+        if any(a in ("native_values", "native") for a in config.get("arm_order", [])):
+            from arc3_research.native_values import install_native_values
+            patches.append(install_native_values())
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")
         for patch in reversed(patches):

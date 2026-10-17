@@ -253,7 +253,7 @@
     {
       "label": "create-values",
       "code": "xs=[1,2]\nalias=xs\nclicks=[(3,4),(5,6)]\nlookup={(1,2):{3,4}}\nfrozen=frozenset([8,9])",
-      "elapsed_seconds": 0.02566720894537866,
+      "elapsed_seconds": 0.026921792014036328,
       "result": {
         "stdout": "",
         "result": null,
@@ -284,7 +284,7 @@
     {
       "label": "consume-natural-names",
       "code": "xs.append(7)\nprint(alias is xs,clicks[0],lookup[(1,2)],type(frozen).__name__)\ndel clicks\nxs=11",
-      "elapsed_seconds": 0.024928999948315322,
+      "elapsed_seconds": 0.02531920897308737,
       "result": {
         "stdout": "True (3, 4) {3, 4} frozenset\n",
         "result": null,
@@ -314,7 +314,7 @@
     {
       "label": "error-after-mutation",
       "code": "alias.append(99)\nnew_value=6\nraise RuntimeError('expected')",
-      "elapsed_seconds": 0.02476050000404939,
+      "elapsed_seconds": 0.02517679100856185,
       "result": {
         "stdout": "",
         "result": null,
@@ -334,7 +334,7 @@
     {
       "label": "timeout-after-mutation",
       "code": "alias.append(99)\nwhile True: pass",
-      "elapsed_seconds": 1.0080173329915851,
+      "elapsed_seconds": 1.0122235830058344,
       "result": {
         "error": "Tool timed out after 1s",
         "stdout": "",
@@ -350,7 +350,7 @@
     {
       "label": "unsupported-rebind-removes-old",
       "code": "xs=lambda:4\nsaved_frame=current_frame\nimport math",
-      "elapsed_seconds": 0.027391791983973235,
+      "elapsed_seconds": 0.025614875019527972,
       "result": {
         "stdout": "",
         "result": null,
@@ -392,7 +392,7 @@
     {
       "label": "pure-function-and-data-dependent-function",
       "code": "offset=5\ndef pure(x):\n    return x+1\ndef dependent(x):\n    return x+offset",
-      "elapsed_seconds": 0.024919999996200204,
+      "elapsed_seconds": 0.026338917028624564,
       "result": {
         "stdout": "",
         "result": null,
@@ -445,7 +445,7 @@
     {
       "label": "restored-functions-and-values",
       "code": "print(pure(offset))",
-      "elapsed_seconds": 0.025171374960336834,
+      "elapsed_seconds": 0.025879708991851658,
       "result": {
         "stdout": "6\n",
         "result": null,
@@ -480,7 +480,7 @@
     {
       "label": "refused-action-no-commit",
       "code": "offset=99\naction('ACTION1')",
-      "elapsed_seconds": 0.02492291695671156,
+      "elapsed_seconds": 0.027521084004547447,
       "result": {
         "stdout": "{'executed': False}\n",
         "result": {
@@ -514,7 +514,7 @@
     {
       "label": "executed-noop-invalidates",
       "code": "action('ACTION1')\nafter_action=123",
-      "elapsed_seconds": 0.02502075000666082,
+      "elapsed_seconds": 0.027524416975211352,
       "result": {
         "stdout": "",
         "result": null,
@@ -547,7 +547,7 @@
     {
       "label": "old-value-not-restored-after-action",
       "code": "print(offset)",
-      "elapsed_seconds": 0.02490545902401209,
+      "elapsed_seconds": 0.02580933301942423,
       "result": {
         "stdout": "",
         "result": null,
@@ -572,7 +572,7 @@
     {
       "label": "create-before-reset",
       "code": "before_reset=42",
-      "elapsed_seconds": 0.024693291983567178,
+      "elapsed_seconds": 0.02577533305156976,
       "result": {
         "stdout": "",
         "result": null,
@@ -604,7 +604,7 @@
     {
       "label": "reset-invalidates",
       "code": "action('RESET')",
-      "elapsed_seconds": 0.025294459017459303,
+      "elapsed_seconds": 0.025636250036768615,
       "result": {
         "stdout": "{'executed': True, 'gameplay_changed': False}\n",
         "result": {
@@ -640,7 +640,7 @@
     {
       "label": "create-before-uncertain-action",
       "code": "before_uncertain=42",
-      "elapsed_seconds": 0.02492358401650563,
+      "elapsed_seconds": 0.02560870797606185,
       "result": {
         "stdout": "",
         "result": null,
@@ -672,7 +672,7 @@
     {
       "label": "uncertain-action-invalidates",
       "code": "action('ACTION1')",
-      "elapsed_seconds": 0.02484887500759214,
+      "elapsed_seconds": 0.02527679200284183,
       "result": {
         "stdout": "",
         "result": null,
@@ -697,7 +697,7 @@
     {
       "label": "create-before-action-timeout",
       "code": "before_timeout=42",
-      "elapsed_seconds": 0.024857791955582798,
+      "elapsed_seconds": 0.02527766698040068,
       "result": {
         "stdout": "",
         "result": null,
@@ -729,7 +729,7 @@
     {
       "label": "action-then-timeout",
       "code": "action('ACTION1')\nwhile True: pass",
-      "elapsed_seconds": 1.0078600000124425,
+      "elapsed_seconds": 1.0081187920295633,
       "result": {
         "error": "Tool timed out after 1s",
         "stdout": "",
@@ -764,7 +764,7 @@
     "copied_bootstrap_sha256": "2c2b8ad4706c621d54b26b8a0b8082b6c8a92820853f52c9424fd4face23fd17",
     "original_runner_unchanged": true
   },
-  "elapsed_seconds": 2.4235175420180894,
+  "elapsed_seconds": 2.4416677500121295,
   "passed": 56,
   "total": 56
 }

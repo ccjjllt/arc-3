@@ -1,0 +1,85 @@
+{
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "ef28592c90b79bd2e38b7bd81dbdb55f947b74b1ef8996832d64431b72ee88df",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/current_data.py": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "src/arc3_research/experiment_config.py": "f94bf50442ae0442a39045fdee6a2109efc5b70a4e0d77993fc6dc8a541af3ff",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/native_values.py": "703cfc43f791c19e741bd2c80cbce099fde1d6eca690326ae0418c1498367361",
+    "src/arc3_research/observation_representation.py": "e09470a1a41b49c9eadcdee0d88dd8804831f9de79ff862801959dd71c164883",
+    "src/arc3_research/preflight.py": "0d67777b71d776a336b1bfd659ca2be957da058bd4c62edf650652072aa2031e",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/request_deadline.py": "204c7bcb86478ee4b60aa9fffbe5b251abf5b27e4bf1534f1e773b9461372112",
+    "src/arc3_research/retrievable_animation.py": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875",
+    "src/arc3_research/run_arm.py": "51ee11f04ad73d5f2996bb5f7976308ee10d388ec8bdbacc0476119151f7dbb1",
+    "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+    "src/arc3_research/session_runner.py": "4def4ba824e2c84b3830ce3800f19ddb83db7d4d7cbb4901ead0af6ca404691b",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/015-native-adoption.json": "72f63c474361b4e505c52dfb2279ab9d2e2f96850b036e36f97625d528045f88"
+  },
+  "config": {
+    "id": "015-native-adoption",
+    "kernel_id": "jiyujia/arc3-015-native-adoption",
+    "kernel_title": "ARC3 015 Native Adoption Screen",
+    "purpose": "Short adoption screen for automatic native-value handoff; no competition submission",
+    "games": [
+      "ft09-0d8bbf25",
+      "re86-8af5384d",
+      "bp35-0a0ad940",
+      "ar25-0c556536"
+    ],
+    "game_source": "research/data-inventory.json selected mechanism-screening subset; ft09/re86/bp35 have direct cross-snippet NameError chains, ar25 control",
+    "game_count": 4,
+    "arm_order": [
+      "baseline",
+      "native_values"
+    ],
+    "requested_arm_seconds": 1000,
+    "budget_formula": "short screening budget, not 532*60*n//110; both arms equal 1000s",
+    "hard_limit_seconds": 5400,
+    "startup_limit_seconds": 1200,
+    "gpu_sample_interval_seconds": 10,
+    "active_streams": 10,
+    "n_passes_per_arm": 1,
+    "warmup_action_games": 0,
+    "expected_gpu_hours": 1.0,
+    "weekly_gpu_hours_limit": 30,
+    "selection_note": "4 games only for adoption, not holdout and not a score claim. Natural model-generated compute->reuse chains required.",
+    "comparison_note": "Baseline vs automatic native-value handoff only; 4 identical IDs/order, 1000s each, 10 streams, one pass, zero warmup, one shared model load, isolated CPU processes, cache flush. Scheduler frozen remaining/0 both arms. Identical passive timing/scheduler observation and request-deadline correction. CPU preflight before serving, strict equal budgets, no competition submission.",
+    "reference_arm": "baseline",
+    "arm_environment": {
+      "baseline": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "native_values": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "inference_timing": true,
+    "scheduler_observer": true,
+    "request_deadline": true,
+    "strict_arm_budget": true,
+    "require_cache_flush": true,
+    "require_drained_workers": true,
+    "preflight_before_serving": true,
+    "native_payload_cells": true,
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "require_complete_pool": true,
+    "require_cache_flush_log": true
+  },
+  "build_config_path": "experiments/015-native-adoption.json",
+  "payload_write_mode": "native-writefile",
+  "notebook_sha256": "be0250cd7944fc5503368227094d48a5dc7593ffd671829ab18a0b1add35e432"
+}

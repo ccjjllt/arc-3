@@ -1,0 +1,280 @@
+{
+  "worker": "candidate",
+  "checks": [
+    {
+      "name": "prompt_note_candidate_only",
+      "passed": true
+    },
+    {
+      "name": "create-values_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "consume-natural_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "natural_names_restored",
+      "passed": true
+    },
+    {
+      "name": "delete-rebind_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "get-xs_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "rebind_visible",
+      "passed": true
+    },
+    {
+      "name": "alias-after-error_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "error_no_partial",
+      "passed": true
+    },
+    {
+      "name": "unsupported-rebind_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "xs-absent_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "unsupported_gone",
+      "passed": true
+    },
+    {
+      "name": "func-def_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "pure-consume_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "pure_explicit_arg",
+      "passed": true
+    },
+    {
+      "name": "real_sdk_action_executed",
+      "passed": true
+    },
+    {
+      "name": "post-action-gone_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "post_action_cleared",
+      "passed": true
+    },
+    {
+      "name": "before-reset_sandbox_success",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "reset_attempt_and_clear",
+      "passed": true
+    },
+    {
+      "name": "no_http_or_model",
+      "passed": true
+    }
+  ],
+  "calls": [
+    {
+      "label": "create-values",
+      "trace": "000-create-values.json"
+    },
+    {
+      "label": "consume-natural",
+      "trace": "001-consume-natural.json"
+    },
+    {
+      "label": "delete-rebind",
+      "trace": "002-delete-rebind.json"
+    },
+    {
+      "label": "get-xs",
+      "trace": "003-get-xs.json"
+    },
+    {
+      "label": "err-mutate",
+      "trace": "004-err-mutate.json"
+    },
+    {
+      "label": "alias-after-error",
+      "trace": "005-alias-after-error.json"
+    },
+    {
+      "label": "unsupported-rebind",
+      "trace": "006-unsupported-rebind.json"
+    },
+    {
+      "label": "xs-absent",
+      "trace": "007-xs-absent.json"
+    },
+    {
+      "label": "func-def",
+      "trace": "008-func-def.json"
+    },
+    {
+      "label": "pure-consume",
+      "trace": "009-pure-consume.json"
+    },
+    {
+      "label": "real-noop",
+      "trace": "010-real-noop.json"
+    },
+    {
+      "label": "post-action-gone",
+      "trace": "011-post-action-gone.json"
+    },
+    {
+      "label": "before-reset",
+      "trace": "012-before-reset.json"
+    },
+    {
+      "label": "real-reset",
+      "trace": "013-real-reset.json"
+    }
+  ],
+  "http_attempts": 0,
+  "source_sha256": {
+    "src/arc3_research/native_values.py": "703cfc43f791c19e741bd2c80cbce099fde1d6eca690326ae0418c1498367361",
+    "scripts/check_015_native_values.py": "2844e37287eb3d7577a4e6d5ac192b3b8035e8edf9b0ed7869d854769e7881d1"
+  },
+  "model_called": false,
+  "engine_source_read": false,
+  "logged_code_executed": false,
+  "native_values": {
+    "intervention": "native-values-v1",
+    "enabled": true,
+    "limits": {
+      "max_session_bytes": 65536,
+      "max_sessions": 128
+    },
+    "counts": {
+      "sessions_seen": 1,
+      "invalidations": 3,
+      "invalidated_bytes": 213,
+      "snippets": 14,
+      "commits": 11,
+      "committed_bytes": 1300,
+      "committed_names": 24,
+      "rejected_names": 9,
+      "no_commit_snippet_failed": 1,
+      "executed_action_boundaries": 2,
+      "stale_ticket": 2
+    },
+    "stored_value_bytes": 0,
+    "peak_stored_value_bytes": 207,
+    "tool_cpu_seconds": 0.08398620900000042,
+    "action_boundary_cpu_seconds": 0.0011035419999999574,
+    "sessions": [
+      {
+        "game_id": "tn36-ef4dde99",
+        "stored_value_bytes": 0,
+        "counts": {
+          "invalidations": 3,
+          "commits": 11
+        }
+      }
+    ],
+    "recent_events": [
+      {
+        "event": "commit",
+        "names": 3,
+        "bytes": 207
+      },
+      {
+        "event": "commit",
+        "names": 3,
+        "bytes": 207
+      },
+      {
+        "event": "commit",
+        "names": 2,
+        "bytes": 100
+      },
+      {
+        "event": "commit",
+        "names": 2,
+        "bytes": 100
+      },
+      {
+        "event": "commit",
+        "names": 2,
+        "bytes": 100
+      },
+      {
+        "event": "commit",
+        "names": 1,
+        "bytes": 82
+      },
+      {
+        "event": "commit",
+        "names": 2,
+        "bytes": 106
+      },
+      {
+        "event": "commit",
+        "names": 3,
+        "bytes": 127
+      },
+      {
+        "event": "commit",
+        "names": 3,
+        "bytes": 127
+      },
+      {
+        "event": "stale_ticket"
+      },
+      {
+        "event": "commit",
+        "names": 1,
+        "bytes": 58
+      },
+      {
+        "event": "commit",
+        "names": 2,
+        "bytes": 86
+      },
+      {
+        "event": "stale_ticket"
+      }
+    ],
+    "baseline_source_sha256": {
+      "session._execute_action": "46a29b084e4bfc8f7e542375987624a07e2b13661711fa2da429809d7ba315d9",
+      "agent._run_python_tool": "150317e382219ae99f5940ba95ef7b77557894008bdd09c69523a81992c223ef",
+      "agent._ensure_session": "2fecccb182707cdde42270cf236a688ae59ce8e279dea2a6e97c35f410b4ce3d",
+      "run_sandboxed_python": "8b038ac9556c1cd93cac36be30b8aef2b23afe9659091fdf814d4c94e60f6c21",
+      "sandbox_bootstrap_before": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after": "e9c1fcbe7bfcdfbef71d422a05e03d455304d3a2b2597816c930e6f66a41d9b8"
+    },
+    "note": "Python variables from a successful inspection-only snippet are automatically available in the next snippet on the same board; any executed action (including no-op or RESET), level change, or new observation clears them. Re-import modules as needed; eligible functions are still retained separately. Do not assume a variable survived an action—recompute after acting.",
+    "semantics": {
+      "commit": "Only successful snippets with zero action calls commit; whole namespace replaces prior set.",
+      "invalidation": "Any executed action (incl no-op/RESET), identity change, error/timeout clears; refused preserves prior but commits nothing.",
+      "binding": "session/attempt/action/level/frame_sha256/revision; child cannot choose identity.",
+      "bytes": "Bounded DAG codec bytes, not RSS; exact builtins only, no pickle/protocols."
+    }
+  },
+  "status": "passed"
+}

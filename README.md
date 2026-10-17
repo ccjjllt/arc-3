@@ -1,8 +1,10 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目研究：**2026-10-17，Asia/Shanghai**；最新已完成GPU实验为014（10/17）。
+目标：争取竞赛奖牌，优先冲击金牌与终局奖金。初始赛情快照：**2026-10-10**；最新项目研究：**2026-10-17 夜，Asia/Shanghai**；015/016 双轨 GPU 已并行 RUNNING，014 已完成。
 
-**009 v2正式评测已COMPLETE：31.16分；10/17公开榜第324名/4388队。** 当前队数估计金牌附近第18名38.20，前五参照48.92；最终看私榜、有效队数及资格。submission 57101330，原生Notebook和冻结源码未变。历史正式链路见[009进展](docs/progress/009-baseline-submission.md)，最新位置见[013赛情](research/013-competition-update.md)。
+**009 v2正式评测已COMPLETE：31.16分；10/17 夜公开榜第332名/4410队。** 当前队数估计金牌附近第18名38.20（+7.04），前五参照48.92（+17.76）；最终看私榜、有效队数及资格。submission 57101330，原生Notebook和冻结源码未变。历史正式链路见[009进展](docs/progress/009-baseline-submission.md)，最新决策见[015/016 综合决策](research/015-016-research-decision.md)。
+
+**015 完整集成已完成 CPU，GPU 采用筛选中；016 pace 全量对照并行中。** 015 原型 56 项+集成 28 项 CPU 通过，4 游戏×1000s jiyujia RUNNING（约 1h）；016 pace 单开关 25 游戏×7254s ccjjllt RUNNING（约 4.3h）。双账号剩 23.72h/26.42h，10/24 08:00 北京刷新。正式 009/31.16 不变，不提交未验证候选。见[015/016 决策](research/015-016-research-decision.md)、[015 计划](docs/plan/015-native-adoption.md)/[进展](docs/progress/015-native-adoption.md)、[016 计划](docs/plan/016-pace-allocation.md)/[进展](docs/progress/016-pace-allocation.md)。
 
 **013深度研究已完成，014首轮结果已回收。** 更新12份公开Notebook源码及前沿论文，审计60份选取日志的5445次Python调用；发现106次NameError及多条成功计算后跨snippet丢值链。当时确定先做全25游戏baseline→80k tail单开关对照，预计4.3h，通过门槛才倒序确认；原生同观察普通值交接先CPU合同、再≤1h自然采用筛选。014结果与当前决策见下方。详见[013综合决策](research/013-research-decision.md)、[计划](docs/plan/013-research-next.md)、[进展](docs/progress/013-research-next.md)。10/17研究启动时原账号GPU余额约29.37h、预留0，下次10/24 08:00北京刷新；下文旧余额均为历史快照。10/16工作人员已回复模型许可问题，但表示无法解释，奖金资格仍未明确。
 

@@ -1,0 +1,11 @@
+{
+  "code": "try:\n    offset\n    present=True\nexcept NameError:\n    present=False\nimport json\nprint('RESULT='+json.dumps(present,separators=(',',':')))",
+  "dispatch": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "RESULT=false\n"
+  },
+  "step_before": 1,
+  "step_after": 1,
+  "step_executed": false
+}

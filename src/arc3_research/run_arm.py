@@ -107,6 +107,18 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "1", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("tail_80k requires its explicit frozen environment.")
+        if args.arm == "pace_1x" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "1",
+        }:
+            raise ValueError("pace_1x requires its explicit frozen environment.")
+        if args.arm in ("native_values", "native") and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("native_values requires frozen baseline scheduler.")
+        if args.arm == "baseline" and overrides not in ({
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }, {}):
+            raise ValueError("baseline requires frozen scheduler or empty env.")
         os.environ.update(overrides)
         metadata["environment_overrides"] = overrides
         requested_ids = _game_ids(args.game_list)
@@ -175,6 +187,7 @@ def run_arm(args: argparse.Namespace) -> int:
         patch = install_goal_evidence(enabled=args.arm == "goal_evidence")
         transient_patch = install_transient_history(enabled=args.arm == "transient_history")
         program_patch = install_program_state(enabled=args.arm == "program_state")
+        native_patch = None
         if args.arm == "retrievable_animation":
             # The reference arm never imports or installs this intervention.
             from arc3_research.retrievable_animation import install_retrievable_animation
@@ -182,6 +195,9 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "current_data":
             from arc3_research.current_data import install_current_data
             current_data_patch = install_current_data()
+        if args.arm in ("native_values", "native"):
+            from arc3_research.native_values import install_native_values
+            native_patch = install_native_values()
         if getattr(args, "request_deadline", False):
             from arc3_research.request_deadline import install_request_deadline
             deadline_patch = install_request_deadline()
@@ -232,6 +248,10 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["current_data.py"] = _sha256(
                 Path(__file__).with_name("current_data.py"))
             metadata["current_data"] = current_data_patch.snapshot()
+        if native_patch is not None:
+            metadata["source_sha256"]["native_values.py"] = _sha256(
+                Path(__file__).with_name("native_values.py"))
+            metadata["native_values"] = native_patch.snapshot()
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -330,6 +350,14 @@ def run_arm(args: argparse.Namespace) -> int:
                 _write_json(job_dir / "current-data.json", data)
             except Exception as exc:
                 metadata["current_data_export_error"] = f"{type(exc).__name__}: {exc}"
+        if native_patch is not None:
+            try:
+                data = native_patch.snapshot()
+                data["snapshot_after_worker_join"] = True
+                data["lingering_worker_threads"] = live
+                _write_json(job_dir / "native-values.json", data)
+            except Exception as exc:
+                metadata["native_values_export_error"] = f"{type(exc).__name__}: {exc}"
         for name, installed in (("request-deadline", deadline_patch),
                                 ("scheduler-observer", scheduler_patch)):
             if installed is not None:
@@ -358,7 +386,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arm", required=True,
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
-                                 "retrievable_animation", "current_data", "tail_80k"))
+                                 "retrievable_animation", "current_data", "tail_80k",
+                                 "native_values", "native", "pace_1x"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")
