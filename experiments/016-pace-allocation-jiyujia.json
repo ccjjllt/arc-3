@@ -1,0 +1,77 @@
+{
+  "id": "016-pace-allocation-jiyujia",
+  "kernel_id": "jiyujia/arc3-016-pace-allocation",
+  "kernel_title": "ARC3 016 Pace Allocation",
+  "purpose": "Full25 one-factor comparison of existing pace scheduling; no competition submission",
+  "games": [
+    "ar25-0c556536",
+    "bp35-0a0ad940",
+    "cd82-fb555c5d",
+    "cn04-2fe56bfb",
+    "dc22-fdcac232",
+    "ft09-0d8bbf25",
+    "g50t-5849a774",
+    "ka59-38d34dbb",
+    "lf52-271a04aa",
+    "lp85-305b61c3",
+    "ls20-9607627b",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "re86-8af5384d",
+    "s5i5-18d95033",
+    "sb26-7fbdac44",
+    "sc25-635fd71a",
+    "sk48-d8078629",
+    "sp80-589a99af",
+    "su15-1944f8ab",
+    "tn36-ef4dde99",
+    "tr87-cd924810",
+    "tu93-0768757b",
+    "vc33-5430563c",
+    "wa30-ee6fef47"
+  ],
+  "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+  "game_count": 25,
+  "arm_order": [
+    "baseline",
+    "pace_1x"
+  ],
+  "requested_arm_seconds": 7254,
+  "budget_formula": "532 * 60 * game_count // 110",
+  "hard_limit_seconds": 18000,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 4.3,
+  "weekly_gpu_hours_limit": 30,
+  "selection_note": "All25 public games in the005 inventory order. Known development set; not holdout. No game-specific runtime logic.",
+  "comparison_note": "Baseline remaining/pace0 versus pace-only (remaining/pace1); 25 identical IDs/order, 7254s each, 10 streams, one pass, zero warmup, one shared model load, isolated CPU processes, cache flush. TAIL remaining both arms and003/006/007/010/012/015 off. Identical passive timing/scheduler observation and request-deadline correction. CPU preflight before serving, strict equal budgets, no automatic confirmation or competition submission.",
+  "reference_arm": "baseline",
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "pace_1x": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "1"
+    }
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}

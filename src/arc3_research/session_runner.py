@@ -282,7 +282,11 @@ def run_session(namespace: dict) -> dict:
                 entry["complete_pool"] = (
                     len(results) == len(config["games"])
                     and {game.get("game_id") for game in results} == set(config["games"])
-                    and all(game.get("state") in {"won", "cancelled"} for game in results)
+                    # Terminal states are won/cancelled/gave_up; crashes/not_started fail.
+                    # gave_up carries valid score/levels (016 baseline: 8 gave_up with
+                    # scores, not crashes) and must not waste a full session.
+                    and all(game.get("state") in {"won", "cancelled", "gave_up"} for game in results)
+                    and not any(game.get("state") in {"crashed", "not_started"} for game in results)
                 )
             tail = (out / "run.log").read_text(errors="replace")[-5000:]
             print(tail, flush=True)
