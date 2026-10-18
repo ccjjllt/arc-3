@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-10-18T10:43:02.162541+00:00",
+  "checks": [
+    {
+      "name": "client_in_memory_protocol",
+      "passed": true,
+      "detail": {
+        "passed": true,
+        "suite": {
+          "valid": true,
+          "suite_sha256": "10d844778bc17c086617bd8c6bce12c9d75bc8e9b4950acea821dafd7ab105f5",
+          "cases": 22,
+          "total_requests_per_phase": 34,
+          "public_request_count": 0
+        },
+        "checks": [
+          "offline_suite_hash",
+          "role_chunk_not_token",
+          "split_tool_arguments",
+          "separate_final_usage_and_sglext",
+          "reasoning_vs_visible_vs_tool_latency",
+          "strict_nonfinite_rejection",
+          "loopback_only"
+        ],
+        "network_used": false,
+        "models_or_logged_code_executed": false
+      }
+    },
+    {
+      "name": "frozen_public_suite",
+      "passed": true,
+      "detail": {
+        "valid": true,
+        "suite_sha256": "f42e6b9c309432735fd5ff5e08d1344758d09fae7c689c311bba5e3d518391c1",
+        "cases": 22,
+        "total_requests_per_phase": 34,
+        "public_request_count": 10
+      }
+    },
+    {
+      "name": "fp8_boundary_values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "019-fp8-ple-cpu:native_payload_and_config",
+      "passed": true,
+      "detail": {
+        "payload_cells_written": 10,
+        "total_cells": 17,
+        "notebook_sha256": "d4d77c4a91c3b41aa81faa88dda7b54d876dc94c81f566c8ce0e5dd595e29a9b"
+      }
+    },
+    {
+      "name": "019-fp8-ple:native_payload_and_config",
+      "passed": true,
+      "detail": {
+        "payload_cells_written": 10,
+        "total_cells": 17,
+        "notebook_sha256": "b4cade3648240408389929fef662d03bdb61e249f389209d4485c70687bec205"
+      }
+    },
+    {
+      "name": "serving_comparison_preserves_nonpath_controls",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "model_calls": 0,
+  "game_actions": 0,
+  "network_calls": 0,
+  "limits": [
+    "Only native writefile cells executed, redirected to temporary paths.",
+    "No real mounted model tensors, CUDA runtime or real server HTTP tested by this command.",
+    "The separate ple_weights synthetic corruption checks and remote CPU audit retain their own reports."
+  ]
+}

@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "experiment": "019",
+  "status": "frozen_cpu_contract_not_gpu_validation",
+  "created_at_utc": "2026-10-18T10:30:22Z",
+  "audit_limits": {
+    "max_seconds": 180,
+    "parent_process_timeout_seconds": 240,
+    "max_bytes_per_source": 134217728,
+    "max_metadata_file_bytes": 33554432,
+    "max_header_bytes": 33554432,
+    "network_allowed": false,
+    "complete_weight_tensor_reads_allowed": false
+  },
+  "expected_text_config": {
+    "ple_embed_dim": 2560,
+    "heads_per_ngram": 8,
+    "ngram_size": 3,
+    "ngram_vocab_size_base": 20000000,
+    "split_ngram_parts": 128,
+    "make_ngram_vocab_size_divisible_by": 128,
+    "ple_layer_ids": [
+      2
+    ],
+    "num_hidden_layers": 48
+  },
+  "identical_target_metadata": [
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "chat_template.jinja",
+    "generation_config.json"
+  ],
+  "expected_tokenizer_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+  "ple": {
+    "prefix": "model.language_model.layers.1.ple.ple_embedding.ngram_embedding.",
+    "shard_count": 128,
+    "shard_shape": [
+      2500012,
+      160
+    ],
+    "total_rows": 320001536,
+    "total_elements": 51200245760,
+    "bf16_dtype": "BF16",
+    "fp8_dtype": "F8_E4M3",
+    "pytorch_fp8_dtype": "float8_e4m3fn",
+    "scale_key": "model.language_model.layers.1.ple.ple_embedding.ngram_embedding.weight_scale",
+    "scale_shape": [
+      1
+    ],
+    "scale_dtype": "BF16",
+    "scale_raw_hex": "5139",
+    "scale_value": 0.00019931793212890625,
+    "scale_semantics": "One global positive direct multiplicative scale: BF16(FP8_value * BF16_scale). No inverse, per-row or per-block scale.",
+    "bf16_payload_bytes": 102400491520,
+    "fp8_payload_bytes_excluding_scale": 51200245760,
+    "resident_location": "Pinned host table via mmap/cudaHostRegister; scale on model device."
+  },
+  "sampling": {
+    "seed": "arc3-019-ple-weight-audit-v1",
+    "fixed_rows": [
+      "0",
+      "floor(rows/2)",
+      "rows-1"
+    ],
+    "random_rows_per_shard": 5,
+    "row_selection": "SHA256(seed|full_tensor_key|counter), first 8 bytes little-endian modulo rows; unique rows; stop at 8.",
+    "nonple_max_tensors": 96,
+    "draft_max_tensors": 16,
+    "tensor_span_bytes": 256,
+    "tensor_ranges": [
+      "first",
+      "center",
+      "last"
+    ],
+    "relative_error_bound": 0.07,
+    "absolute_error_scale_factor": 0.001953125,
+    "max_nrmse": 0.06,
+    "allowed_nonfinite_elements": 0,
+    "allowed_error_bound_violations": 0,
+    "engineering_gate_not_quality_proof": true,
+    "bound_rationale": "Conservative engineering smoke gate: 7%*abs(BF16_reference)+scale/512 allows E4M3 quantization and BF16 output rounding. Not a claim of original training-source identity or downstream quality. Stop and inspect violations rather than relax thresholds after seeing results.",
+    "ple_rows_per_arm": 1024,
+    "ple_elements_per_arm": 163840,
+    "ple_payload_bytes_both_arms": 491520,
+    "nonple_payload_max_bytes_both_arms": 147456,
+    "draft_payload_max_bytes": 12288,
+    "total_payload_max_bytes_excluding_scale": 651264
+  },
+  "stop_conditions": [
+    "Missing/ambiguous sources; config/tokenizer/template/key/header mismatch; malformed or overlapping safetensors.",
+    "FP8 dtype config absent; missing or wrong 128 shards, shape or dtype; missing, nonpositive, nonfinite or changed global scale.",
+    "Sampled non-PLE bytes differ.",
+    "Sampled PLE nonfinite, NRMSE above 0.06, or any 7%+scale/512 bound violation.",
+    "Read/time budget exceeded or audit incomplete.",
+    "Serving must stop if loader downcasts unexpectedly, retains default scale 1, or frozen runtime/config changes.",
+    "Do not start serving unless CPU report passed=true. This is not inference-quality validation."
+  ],
+  "expected_nonple_tensor_count": 222587,
+  "expected_nonple_keys_sha256": "63ca678db19cce48475aeb61c005bf804f1dc407bd94d5d4f6a8c849f2aecd62",
+  "inputs": {
+    "bf16": {
+      "kaggle_source": "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1",
+      "canonical_path": "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+      "native_model_version_id": 1007514,
+      "hf_repo": "Intel/Qwen3.8-Flash-Next-W4A16-AutoRound",
+      "hf_revision": "4c67bf686b7f7fd386bae6b07ab59e8ff1d5b897",
+      "kaggle_mirror_payload_verified": false,
+      "physical_index_warning": "Kaggle has 22 re-sharded PLE files; HF index points to model-00016-of-00017. Read each mounted index; never transplant the HF file map."
+    },
+    "fp8": {
+      "kaggle_source": "dfranzen/albucino-qwen3.8-flash-next-w4a16-fp8ple/Transformers/default/1",
+      "canonical_path": "/kaggle/input/models/dfranzen/albucino-qwen3.8-flash-next-w4a16-fp8ple/transformers/default/1",
+      "native_model_version_id": 1026228,
+      "hf_repo": "albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE",
+      "hf_revision": "c6af9fee7ad2cb8ef44b534a99b8c1b81fb0f6da",
+      "kaggle_mirror_payload_verified": false
+    },
+    "draft": {
+      "kaggle_source": "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "canonical_path": "/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1",
+      "quantization": "compressed-tensors symmetric INT4/group32",
+      "same_source_for_all_arms": true
+    }
+  },
+  "upstream_header_observation": {
+    "observed_at_utc": "2026-10-18T10:30:22Z",
+    "method": "Strict HTTP206 and exact Content-Range; 8-byte length then bounded JSON header, plus only two scale payload bytes. No complete weights downloaded.",
+    "fp8_headers": [
+      {
+        "file": "model-plefp8-00000.safetensors",
+        "header_size": 2231,
+        "header_sha256": "f7a9c23ef7801202a21a27504b5c7b1c2e41fdfd6b9de8b3ad5649e675ff4587",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00001.safetensors",
+        "header_size": 2234,
+        "header_sha256": "2ee6f589ff1f106293439aaa8505abb5c908400443b50b9b2f4ae02523050d5d",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00002.safetensors",
+        "header_size": 2230,
+        "header_sha256": "cb8625bb7050650bcf679a5bd8a8d3bdd1444d5dc3d32f318fb8f80a63754dac",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00003.safetensors",
+        "header_size": 2221,
+        "header_sha256": "840e83616e82ad05f4b82451f2c67c21e030ff02362f298b82711301f2268787",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00004.safetensors",
+        "header_size": 2222,
+        "header_sha256": "9fd53ae738f9d247e55e332eb3ce8700a780f76034b042897ac032197fdbc6f0",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00005.safetensors",
+        "header_size": 2222,
+        "header_sha256": "0e31233d36c6242b50879dc98732ae4f5ba8686d89399dfbaff214c2df3f9cef",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00006.safetensors",
+        "header_size": 2222,
+        "header_sha256": "d1d66c9d1dd3d8e6c0b4705d15699167a02539d0e85fbde209c6f9c9fce3fb5e",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00007.safetensors",
+        "header_size": 2222,
+        "header_sha256": "9afb413b2606c63ebd419e92fd36b40922397856ae437a9df63e6c1bfa545d9b",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00008.safetensors",
+        "header_size": 2222,
+        "header_sha256": "939d0f5043f1459b79b1d3774c15778d18f86ce0bcb42111df00f6c6dadc74ea",
+        "weight_tensor_count": 13
+      },
+      {
+        "file": "model-plefp8-00009.safetensors",
+        "header_size": 2033,
+        "header_sha256": "e0df50b7e0d82ccad1270d0bcb99a862f4b4591942ccea156054a8420ac001cc",
+        "weight_tensor_count": 11
+      }
+    ],
+    "bf16_header": {
+      "file": "model-00016-of-00017.safetensors",
+      "header_size": 20728,
+      "header_sha256": "2d42b89d8239a44849504e4ee02db22d999da6c7ea1f5a47e570d73f773332e0",
+      "weight_tensor_count": 128
+    },
+    "observed_all_128_shapes_dtypes": true,
+    "observed_scale_value": true,
+    "kaggle_mirror_verified": false
+  },
+  "upstream_nonple_lfs_metadata": {
+    "identical_shards": [
+      {
+        "fp8_file": "model-00001-of-00017.safetensors",
+        "bf16_file": "model-00001-of-00017.safetensors",
+        "sha256": "70734bddc4db7476d4ba03a86f808290e88488d39bf513c639ad3957768692de",
+        "size": 2899311784
+      },
+      {
+        "fp8_file": "model-00003-of-00017.safetensors",
+        "bf16_file": "model-00003-of-00017.safetensors",
+        "sha256": "0ecb3e52cad98e4c3c042432f3db2f12ca6c41ea6844a964f29e66f673fb5be5",
+        "size": 5370548192
+      },
+      {
+        "fp8_file": "model-00004-of-00017.safetensors",
+        "bf16_file": "model-00004-of-00017.safetensors",
+        "sha256": "2865e0756b9a3cc0e045eeec349d3e495d1630476cc5355ea0da6a272092d9b0",
+        "size": 5370910416
+      },
+      {
+        "fp8_file": "model-00005-of-00017.safetensors",
+        "bf16_file": "model-00005-of-00017.safetensors",
+        "sha256": "5f0b9642174a7bfbfa57c6fda7917effeb3afb23c2377cfc5f8f9e29222dd048",
+        "size": 5370140704
+      },
+      {
+        "fp8_file": "model-00006-of-00017.safetensors",
+        "bf16_file": "model-00006-of-00017.safetensors",
+        "sha256": "0d06de9de63a1cdabd39a6c11ea1b6431b24be17c4a51fe4db236ea77c33d0b9",
+        "size": 5370205184
+      },
+      {
+        "fp8_file": "model-00007-of-00017.safetensors",
+        "bf16_file": "model-00007-of-00017.safetensors",
+        "sha256": "a632e777190fac1ee19b8706925862af7b4f3ce44e58b40f01a79c0ab7697e96",
+        "size": 5370927288
+      },
+      {
+        "fp8_file": "model-00008-of-00017.safetensors",
+        "bf16_file": "model-00008-of-00017.safetensors",
+        "sha256": "cfc3279b2981d2b6c319b6be03d33091c0dea1b94d194705450b4cece4df6a7d",
+        "size": 5344445352
+      },
+      {
+        "fp8_file": "model-00009-of-00017.safetensors",
+        "bf16_file": "model-00009-of-00017.safetensors",
+        "sha256": "f3f8390dc32f3a2ea3980fa1a44cc37d02394c40388bd4688b16779431791327",
+        "size": 5370355648
+      },
+      {
+        "fp8_file": "model-00010-of-00017.safetensors",
+        "bf16_file": "model-00010-of-00017.safetensors",
+        "sha256": "48f9d03732bc89e177b946da67702e3eeec55d185a4c795dfebfecf380014d42",
+        "size": 5370927288
+      },
+      {
+        "fp8_file": "model-00011-of-00017.safetensors",
+        "bf16_file": "model-00011-of-00017.safetensors",
+        "sha256": "8592f8599a883e1a57f4010b3cfa7516e8f1c5777d21a62f9b0e20e06e56840c",
+        "size": 5324173744
+      },
+      {
+        "fp8_file": "model-00012-of-00017.safetensors",
+        "bf16_file": "model-00012-of-00017.safetensors",
+        "sha256": "6d58f6a6ac680e6cde7e061025a55cac650ec32f00a7ae1fb6aa95839971ba40",
+        "size": 5370438520
+      },
+      {
+        "fp8_file": "model-00013-of-00017.safetensors",
+        "bf16_file": "model-00013-of-00017.safetensors",
+        "sha256": "901b9e3f509df9a051d99ad5a9815339b68b4e78006805175e7c1f75423883c0",
+        "size": 5370927288
+      },
+      {
+        "fp8_file": "model-00014-of-00017.safetensors",
+        "bf16_file": "model-00014-of-00017.safetensors",
+        "sha256": "a77beb75499e376d0de54232d510f533eaf730149c4d9f69e5b327850b3da66b",
+        "size": 5342689856
+      },
+      {
+        "fp8_file": "model-00015-of-00017.safetensors",
+        "bf16_file": "model-00015-of-00017.safetensors",
+        "sha256": "f457d062094bda4c6bd486fe373ae56d04f2b205ef083e95cfdee9400da86d2c",
+        "size": 5050474736
+      },
+      {
+        "fp8_file": "model-00017-of-00017.safetensors",
+        "bf16_file": "model-00017-of-00017.safetensors",
+        "sha256": "fdbe0ca6b1bfab1dece276c48efadbc7d24ebb4c2619497c19db47b400f31782",
+        "size": 1284526608
+      }
+    ],
+    "total_identical_file_bytes": 73581002608,
+    "locally_full_file_hashed": false,
+    "not_a_kaggle_mirror_integrity_proof": true
+  },
+  "runtime": {
+    "repo": "https://github.com/jpezzulli/sglang-rtxpro6000",
+    "revision": "d00d88efc8d6281b12be4f4073126aec95038c55",
+    "wheelhouse_kaggle_source": "dfranzen/pennyroyal-v253",
+    "ple_offload_embedding": true,
+    "global_compute_dtype": "bfloat16",
+    "fusion_default": true,
+    "fusion_fast_path_guards": [
+      "SM120",
+      "TP1",
+      "FP8 pinned contiguous table",
+      "head width160",
+      "target verify context count4or16"
+    ],
+    "runtime_missing_scale_silently_defaults_to_one": true,
+    "runtime_does_not_check_positive_finite_scale": true,
+    "frozen_other_settings": "AutoRound target; independent INT4/group32 draft; KV/Mamba dtypes; context; concurrency; sampling; caches; schedule."
+  },
+  "sources_sha256": {
+    "009-effective-server-args.json": "7ebb68ae6e67bde2d369e6473a972e1e55b58802108ac28fbe2060425d1402f6",
+    "fetch_metadata.py": "f840c945f6f92d0b61d107c36ebcece2795f16d20ecf26753135790af5c701aa",
+    "comparison.json": "146039b7a5c1c6236cc0fd0f76ab1240f3f133ac9d624e2811db7366cb8c2dc6",
+    "intel-qwen3.8-flash-next-w4a16-autoround-kaggle-files.json": "4a70dd4d1b6ad562b9f1e1991a20f8064d7757594b931fcbfd77f4b521b707fd",
+    "analyze_fp8.py": "78f7b787ac2f0d679c8b8b9d58b2d62083774d0b667d1a279a06ce343873ad16",
+    "009-serving-cell.py": "4f20381acf0dba40e150b5ba99703d19098007724f9623a04c12518cb2721a7c",
+    "fetch_serving.py": "33554ef8df22494b74db330c3c566b07e1a9a517da76f16d5a121c2a8b343d89",
+    "albucino-qwen3.8-flash-next-w4a16-fp8ple-kaggle-files.json": "1031e6a103ed7e0558b2510aa13834f7ee952a149f2920be4002137b3af2bdce",
+    "Intel/model-api.json": "d32494cf287b0a7ef5551976773cd5023da3bbd18e68b8ede47c9a3b788ec214",
+    "Intel/config.json": "0fabfa21fab8bfe69f02234f7ae8df4ed91b785fca2e22011c1230f6a07e5329",
+    "Intel/README.md": "00798492330afbb7285fd9c0deee4fc7ac01bbc197eb49d1d5c868ceafe54293",
+    "Intel/quantization_config.json": "2371a9d0bed1ff619622ac57aa0e6e5b39688bb834b48d761e90d5834f4cab4b",
+    "Intel/model.safetensors.index.json": "35e503b758cf5441886042d315c48dfba70f947611816cbb90e02d4d5c5e58ff",
+    "pennyroyal/README.md": "af19a7ab6fe51d2d9f5f091d1a84ff81e7e9353bc11898013bd2bbc38f2fcb2d",
+    "pennyroyal/python/sglang/kernels/ops/qwen4_ple.py": "7f64e896c1f00f46ab6c4cd8c5c90cedc528555d1cc7401e9c7a5a3a31b87f16",
+    "pennyroyal/python/sglang/srt/environ.py": "84755bded97394a18537d8e329c3d05c15f7ec4aa8a801bd9971f34b4f11d7ed",
+    "pennyroyal/python/sglang/srt/models/qwen4_exp.py": "35a1785ce4c287821f00f1518b3880ab6838ef58d42fd51ece86d8098b2ed666",
+    "pennyroyal/python/sglang/srt/model_loader/loader.py": "1016b2c6c2d7eb50ef25e0a731e20096e4b79239bccb6fea26aa59d3f29bf8fe",
+    "albucino/model-api.json": "d8ae1760db67b760da8d67327a13a702e4b45e7b678c9ccbf15d7c03af911c50",
+    "albucino/config.json": "2925a0d0989384e0ef7973a14c97ba9c8dfc82c4ca3684d2e83cf4f57db6c172",
+    "albucino/README.md": "3c1ecf16c50cdca78d208dedc5a70cc974e154a83e2e5ea62f6df072cdd37497",
+    "albucino/model.safetensors.index.json": "eb08a649acf89aa2d0c5c1858704cba8e86cdf2b93dec8cf9a89024292a3cc5a",
+    "albucino/hybrid_sources.json": "1a4d1bd0f8c60d6735013d8eadc46262c0f7d7872724c22e8909085611afa565"
+  },
+  "primary_format_sources": [
+    {
+      "url": "https://huggingface.co/docs/safetensors/index",
+      "accessed_at_utc": "2026-10-18",
+      "scope": "safe_open.get_slice partial tensor access"
+    },
+    {
+      "url": "https://github.com/huggingface/safetensors/blob/main/README.md",
+      "accessed_at_utc": "2026-10-18",
+      "scope": "8-byte little-endian length; JSON descriptors; relative offsets. Dynamic documentation is not a runtime pin."
+    }
+  ],
+  "expected_normalized_config_sha256": "cd12e205b532c8558273dc61b3fbb59e75ca6949bdda41bc0eb6f85d3610231c",
+  "validation": {
+    "performed": "temporary synthetic safetensors, CPU only, no network or model code",
+    "valid_fixture": "passed",
+    "negative_cases_rejected": [
+      "scale differs",
+      "non-PLE sampled bytes differ",
+      "FP8 NaN",
+      "FP8 numerical bound exceeded",
+      "PLE shard missing",
+      "normalized frozen config hash mismatch",
+      "asymmetric draft"
+    ],
+    "cli": "python -m arc3_research.ple_weights succeeded on temporary valid fixture; exit0 and passed=true"
+  }
+}

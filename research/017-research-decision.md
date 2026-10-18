@@ -1,5 +1,7 @@
 # 017 — 下一步优先修正观察到程序状态的失真
 
+> 后续结果更新（10/18）：jiyujia的018私有RTX作业已COMPLETE。67.0106→63.7827、22→22关、全通2→1；存在真实纠错但也有转抄误用，停止本版扩跑。[018完整分析](018-results-analysis.md)。本文保留此前赛情/配额与选题依据，通用API超额返回不能直接判定RTX不可运行。
+
 日期：2026-10-18，Asia/Shanghai。目标继续是终局金牌和奖金。**下一项推理实验选 018：在精确图案/几何转成程序状态时，用既有局部 ASCII 核对编码的短提示；只做单因素，不新增记忆或观察 API。** 同时保留 FP8 PLE 为独立的吞吐/数值候选。014 tail、016 pace 和015原生值均未达到晋升条件，正式009/31.16保持不变。
 
 本结论来自四类新工作：最新赛情/数据与资源核对、19本公开Notebook源码审计、新版前沿论文与作者代码、015/016原始请求及100局全量baseline复算。详细证据分别在[比赛](017-competition-update.md)、[Notebook](017-notebook-update.md)、[前沿](017-frontier-update.md)、[本地机制](017-local-evidence.md)、[016结果](016-results-analysis.md)。018的代码/CPU状态见[进展](../docs/progress/018-observation-grounding.md)，与模型采用或提分结论分开。

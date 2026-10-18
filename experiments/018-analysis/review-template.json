@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "review_inputs": {
+    "experiment_id": "018-observation-grounding",
+    "manifest_sha256": "3649b5f4a289c513b5645d5a771ac2385c15318baf490b8aa9ebd36db658e0e8",
+    "request_log_sha256": {
+      "baseline/ft09-0d8bbf25": "306f4efe985d4ef0a6b05a204793cbb2985cdb05bf14ded502b6da4c72a0a084",
+      "baseline/tr87-cd924810": "e205f8831d26c1c2e834e1d976fe2d11280970c4c63de4fd78617078393f5f71",
+      "baseline/ar25-0c556536": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+      "baseline/sb26-7fbdac44": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+      "observation_grounding/ft09-0d8bbf25": "e68ca2a4783c9143acb029f7e58606ac4c8b99a5377bc92342a94764059f6b5c",
+      "observation_grounding/tr87-cd924810": "c1a6533dc2fbbede1b1efd5abf4d4476b0609a81b9f38fd6eb9cb9b33ff41f3b",
+      "observation_grounding/ar25-0c556536": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+      "observation_grounding/sb26-7fbdac44": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b"
+    }
+  },
+  "reviewer": "",
+  "reviewed_at_utc": "",
+  "entries": [],
+  "game_review_status": [
+    {
+      "arm": "baseline",
+      "game_id": "ft09-0d8bbf25",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "baseline",
+      "game_id": "tr87-cd924810",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "baseline",
+      "game_id": "sb26-7fbdac44",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "sb26-7fbdac44",
+      "status": "pending",
+      "opportunities": null,
+      "notes": ""
+    }
+  ],
+  "entry_example_do_not_count": {
+    "arm": "observation_grounding",
+    "game_id": "ft09-0d8bbf25",
+    "classification": "correct_confirmation",
+    "level": null,
+    "observation_call_ids": [],
+    "encoding_call_ids": [],
+    "consumption_call_ids": [],
+    "wrong_encoding_call_ids": [],
+    "correction_call_ids": [],
+    "frame_and_coordinate_evidence": "",
+    "pixel_or_cell_recomputation": "",
+    "actual_consumption_evidence": "",
+    "outcome_evidence": "",
+    "new_misuse_excluded": null,
+    "reviewer_conclusion": ""
+  },
+  "classifications": [
+    "correct_confirmation",
+    "error_corrected",
+    "error_intercepted",
+    "new_misuse",
+    "unused_or_insufficient"
+  ],
+  "instructions": [
+    "Fill a separate copy and pass --reviews; this generated template is always pending, never adoption evidence.",
+    "Read original source lines and untruncated code/results. IDs refer to the corresponding game/arm deduplicated trajectory.",
+    "Prove current-frame crop bounds/origin/row-col/characters, encoded state and downstream consumption; printing or uncalled function definitions do not qualify.",
+    "Correct first encoding is confirmation, not prevention. Correction requires an observed wrong prior encoding and changed state; action-before/after must be supported separately.",
+    "Record baseline chains too. Inspect stale frame/new-level coordinates, holes/components, color-mask versus physical-footprint distinctions and added read overhead.",
+    "At least two candidate games need verified extraction→encoding→consumption chains, with at least one concrete correction/interception and no observed new misuse; score is evaluated separately.",
+    "Machine checks validate reference existence, not semantic truth. Record whether the reviewer is a human or an AI agent; explicit semantic judgment remains necessary."
+  ]
+}

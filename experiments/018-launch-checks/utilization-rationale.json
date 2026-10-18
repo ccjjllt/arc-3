@@ -1,0 +1,794 @@
+{
+  "created_at_utc": "2026-10-18T06:58:53.684083+00:00",
+  "decision": "Retain the frozen four-game, baseline-then-observation_grounding, 1000 seconds per arm design.",
+  "core_games": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810",
+    "ar25-0c556536",
+    "sb26-7fbdac44"
+  ],
+  "scope": "Local read-only recomputation of saved sampling/manifest/metadata/benchmark evidence. No remote request, GPU/model execution, or formal submission.",
+  "method": {
+    "utilization_field": "First numeric field of saved nvidia-smi metrics, utilization.gpu percent; not achieved FLOPS or occupancy.",
+    "budget_window": "benchmark_started_utc through soft_end_local; naive timestamps in these saved Kaggle files are interpreted as UTC.",
+    "simple_sample_mean": "Arithmetic mean of samples whose timestamps fall inside the interval; each sample has equal weight.",
+    "time_weighted_mean": "Piecewise linear interpolation between consecutive valid samples, trapezoid integration clipped to the exact window, divided by covered seconds.",
+    "phase_statistics": "Simple means of all valid records carrying that phase label, including phase setup/drain; not the same boundary as strict solver budget.",
+    "whole_session": "Manifest started_at_epoch through started_at_epoch+elapsed_seconds, excluding samples after that endpoint.",
+    "tokens": "Analyzer totals parsed from exact solver_note tokens=N and summed across games. They are reported successful generation, not GPU billing or complete aborted-generation accounting.",
+    "exposure": "tokens/game is an arithmetic pool average, not a guarantee of equal per-game allocation.",
+    "implementation": {
+      "path": "scripts/analyze_010_efficiency.py",
+      "bytes": 19897,
+      "sha256": "2e7b4f3104df241a00cd2c8fbac7a7866d00f25005994234f23b1ca1a289fa77"
+    }
+  },
+  "experiments": {
+    "015-native-adoption": {
+      "sources": [
+        {
+          "path": "runs/015-native-adoption/experiment-manifest.json",
+          "bytes": 7066,
+          "sha256": "4ff330c348859518e1ba760608717ca242e56db0fa2ae993a7dc70087c76cee8"
+        },
+        {
+          "path": "runs/015-native-adoption/gpu-utilization.jsonl",
+          "bytes": 51082,
+          "sha256": "9ea4d80aa5d758e135bdfd82c26a1ea9387e71c05263ef628677cd168dc8726d"
+        }
+      ],
+      "invalid_sampler_records": 0,
+      "session_elapsed_seconds": 2556.2304956912994,
+      "session_elapsed_hours": 0.7100640265809165,
+      "model_ready_seconds": 531.3308653831482,
+      "model_ready_fraction_of_session": 0.2078571812200592,
+      "phase_sample_statistics": {
+        "startup": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "cpu_preflight": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "model_startup": {
+          "sample_count": 52,
+          "simple_sample_mean_percent": 0.5961538461538461,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 0.9807692307692307
+        },
+        "waiting_for_server": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline": {
+          "sample_count": 102,
+          "simple_sample_mean_percent": 93.33333333333333,
+          "sample_median_percent": 98.0,
+          "samples_ge90_fraction": 0.9411764705882353,
+          "samples_le10_fraction": 0.029411764705882353
+        },
+        "baseline_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "native_values_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "native_values": {
+          "sample_count": 102,
+          "simple_sample_mean_percent": 92.76470588235294,
+          "sample_median_percent": 98.0,
+          "samples_ge90_fraction": 0.9215686274509803,
+          "samples_le10_fraction": 0.029411764705882353
+        },
+        "native_values_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 97.0,
+          "sample_median_percent": 97.0,
+          "samples_ge90_fraction": 1.0,
+          "samples_le10_fraction": 0.0
+        },
+        "shutdown": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 97.0,
+          "sample_median_percent": 97.0,
+          "samples_ge90_fraction": 1.0,
+          "samples_le10_fraction": 0.0
+        },
+        "finished": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        }
+      },
+      "arms": {
+        "baseline": {
+          "game_count": 4,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 4,
+          "budget_seconds": 1000,
+          "window_start_utc": "2026-10-17T15:20:48.359528+00:00",
+          "window_end_utc": "2026-10-17T15:37:28.359523+00:00",
+          "window_sample_statistics": {
+            "sample_count": 100,
+            "simple_sample_mean_percent": 94.23,
+            "sample_median_percent": 98.0,
+            "samples_ge90_fraction": 0.95,
+            "samples_le10_fraction": 0.02
+          },
+          "time_weighted_util_percent": 94.01066256344039,
+          "covered_seconds": 999.9999949932098,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 380374,
+          "analyzer_tokens_per_budget_second": 380.374,
+          "mean_analyzer_tokens_per_game": 95093.5,
+          "sources": [
+            {
+              "path": "runs/015-native-adoption/baseline/arm-metadata.json",
+              "bytes": 13283,
+              "sha256": "591b73ca226e72b90b1a01b22241ba065862fba1bb7c215852d96b91faa660b5"
+            },
+            {
+              "path": "runs/015-native-adoption/baseline/benchmark.json",
+              "bytes": 132460,
+              "sha256": "5562452e00a5ae551e0a62b1af642bf1a1a365889ab5eacb7dcae2f6e1adf24e"
+            }
+          ]
+        },
+        "native_values": {
+          "game_count": 4,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 4,
+          "budget_seconds": 1000,
+          "window_start_utc": "2026-10-17T15:37:41.051309+00:00",
+          "window_end_utc": "2026-10-17T15:54:21.051305+00:00",
+          "window_sample_statistics": {
+            "sample_count": 100,
+            "simple_sample_mean_percent": 93.65,
+            "sample_median_percent": 98.0,
+            "samples_ge90_fraction": 0.93,
+            "samples_le10_fraction": 0.02
+          },
+          "time_weighted_util_percent": 93.48295619846934,
+          "covered_seconds": 999.9999959468842,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 377262,
+          "analyzer_tokens_per_budget_second": 377.262,
+          "mean_analyzer_tokens_per_game": 94315.5,
+          "sources": [
+            {
+              "path": "runs/015-native-adoption/native_values/arm-metadata.json",
+              "bytes": 15260,
+              "sha256": "ebc014d6590913397c2342b5645a602ed3e468ee5da6a5ec8fe9f2425350c5bb"
+            },
+            {
+              "path": "runs/015-native-adoption/native_values/benchmark.json",
+              "bytes": 141260,
+              "sha256": "250838bf2c35d7e601b0f335dba9460d96c2caf3451e81c811c1f0708eb26414"
+            }
+          ]
+        }
+      },
+      "whole_session": {
+        "sample_count": 268,
+        "simple_sample_mean_percent": 71.66791044776119,
+        "sample_median_percent": 98.0,
+        "samples_ge90_fraction": 0.7164179104477612,
+        "samples_le10_fraction": 0.25,
+        "time_weighted_util_percent": 74.11122683666906,
+        "covered_seconds": 2555.7780752182007,
+        "total_analyzer_tokens": 757636,
+        "gross_analyzer_tokens_per_session_second": 296.3879827257546
+      }
+    },
+    "010-retrievable-animation": {
+      "sources": [
+        {
+          "path": "runs/010-retrievable-animation/experiment-manifest.json",
+          "bytes": 5186,
+          "sha256": "f259bf80363c0be57678b191d105a7ce00dbad685e7ea01b86f5cff8d1e1d3cc"
+        },
+        {
+          "path": "runs/010-retrievable-animation/gpu-utilization.jsonl",
+          "bytes": 150368,
+          "sha256": "d398045cbc5be12b63511a7fbd45aab47f6afa6fa9dc6fc84e2ba9e4ca045540"
+        }
+      ],
+      "invalid_sampler_records": 0,
+      "session_elapsed_seconds": 7655.902597427368,
+      "session_elapsed_hours": 2.126639610396491,
+      "model_ready_seconds": 581.6635737419128,
+      "model_ready_fraction_of_session": 0.07597583254747398,
+      "phase_sample_statistics": {
+        "startup": {
+          "sample_count": 59,
+          "simple_sample_mean_percent": 1.8983050847457628,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.01694915254237288,
+          "samples_le10_fraction": 0.9661016949152542
+        },
+        "waiting_for_server": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline": {
+          "sample_count": 351,
+          "simple_sample_mean_percent": 90.12250712250712,
+          "sample_median_percent": 99.0,
+          "samples_ge90_fraction": 0.8774928774928775,
+          "samples_le10_fraction": 0.05413105413105413
+        },
+        "baseline_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "retrievable_animation_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "retrievable_animation": {
+          "sample_count": 357,
+          "simple_sample_mean_percent": 92.9327731092437,
+          "sample_median_percent": 99.0,
+          "samples_ge90_fraction": 0.9215686274509803,
+          "samples_le10_fraction": 0.03081232492997199
+        },
+        "retrievable_animation_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "shutdown": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "finished": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        }
+      },
+      "arms": {
+        "baseline": {
+          "game_count": 12,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 3482,
+          "window_start_utc": "2026-10-13T01:34:53.817073+00:00",
+          "window_end_utc": "2026-10-13T02:32:55.817065+00:00",
+          "window_sample_statistics": {
+            "sample_count": 348,
+            "simple_sample_mean_percent": 90.61781609195403,
+            "sample_median_percent": 99.0,
+            "samples_ge90_fraction": 0.882183908045977,
+            "samples_le10_fraction": 0.04885057471264368
+          },
+          "time_weighted_util_percent": 90.60254266332487,
+          "covered_seconds": 3481.9999918937683,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 2133883,
+          "analyzer_tokens_per_budget_second": 612.8325674899484,
+          "mean_analyzer_tokens_per_game": 177823.58333333334,
+          "sources": [
+            {
+              "path": "runs/010-retrievable-animation/baseline/arm-metadata.json",
+              "bytes": 7807,
+              "sha256": "54786c0dbc373757adc72c897d7a1dc7cc2da9ce4af2ead86b44d879e0830d9f"
+            },
+            {
+              "path": "runs/010-retrievable-animation/baseline/benchmark.json",
+              "bytes": 573049,
+              "sha256": "17ee07b4c8743e5daabcccf469c6b60926b85841b00e8ce13321712c6647f72c"
+            }
+          ]
+        },
+        "retrievable_animation": {
+          "game_count": 12,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 3482,
+          "window_start_utc": "2026-10-13T02:33:16.891130+00:00",
+          "window_end_utc": "2026-10-13T03:31:18.891123+00:00",
+          "window_sample_statistics": {
+            "sample_count": 348,
+            "simple_sample_mean_percent": 93.10632183908046,
+            "sample_median_percent": 99.0,
+            "samples_ge90_fraction": 0.9224137931034483,
+            "samples_le10_fraction": 0.028735632183908046
+          },
+          "time_weighted_util_percent": 93.08696875356237,
+          "covered_seconds": 3481.999993085861,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 2183455,
+          "analyzer_tokens_per_budget_second": 627.0692130959219,
+          "mean_analyzer_tokens_per_game": 181954.58333333334,
+          "sources": [
+            {
+              "path": "runs/010-retrievable-animation/retrievable_animation/arm-metadata.json",
+              "bytes": 11013,
+              "sha256": "8db0b9a8b6941ccc1bec930f7ef2ef5c8cc77255ac291c5377926054e0aab878"
+            },
+            {
+              "path": "runs/010-retrievable-animation/retrievable_animation/benchmark.json",
+              "bytes": 587892,
+              "sha256": "fce69f48164f8890a0d3c41a8cce716a591ec2a1a90d666e4ed2923df4c2660d"
+            }
+          ]
+        }
+      },
+      "whole_session": {
+        "sample_count": 776,
+        "simple_sample_mean_percent": 83.66237113402062,
+        "sample_median_percent": 98.0,
+        "samples_ge90_fraction": 0.8221649484536082,
+        "samples_le10_fraction": 0.12371134020618557,
+        "time_weighted_util_percent": 84.76533184282813,
+        "covered_seconds": 7655.659479141235,
+        "total_analyzer_tokens": 4317338,
+        "gross_analyzer_tokens_per_session_second": 563.9227961770002
+      }
+    },
+    "014-tail-allocation": {
+      "sources": [
+        {
+          "path": "runs/014-tail-allocation/experiment-manifest.json",
+          "bytes": 7440,
+          "sha256": "791d3bacdd86f8cb4ddc0217e3cb5fd939284503d20479d03812c74e2b05f8e5"
+        },
+        {
+          "path": "runs/014-tail-allocation/gpu-utilization.jsonl",
+          "bytes": 287061,
+          "sha256": "e4b9e11f3532f8a22d527fbada4edb6f90dcff8a98dd30339c83fd591e27a360"
+        }
+      ],
+      "invalid_sampler_records": 0,
+      "session_elapsed_seconds": 15132.37859249115,
+      "session_elapsed_hours": 4.203438497914208,
+      "model_ready_seconds": 533.742949962616,
+      "model_ready_fraction_of_session": 0.03527158316191382,
+      "phase_sample_statistics": {
+        "startup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "cpu_preflight": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "model_startup": {
+          "sample_count": 53,
+          "simple_sample_mean_percent": 0.9433962264150944,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 0.9811320754716981
+        },
+        "waiting_for_server": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline": {
+          "sample_count": 730,
+          "simple_sample_mean_percent": 92.7972602739726,
+          "sample_median_percent": 99.0,
+          "samples_ge90_fraction": 0.915068493150685,
+          "samples_le10_fraction": 0.031506849315068496
+        },
+        "baseline_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "tail_80k_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "tail_80k": {
+          "sample_count": 731,
+          "simple_sample_mean_percent": 92.91381668946649,
+          "sample_median_percent": 99.0,
+          "samples_ge90_fraction": 0.9110807113543091,
+          "samples_le10_fraction": 0.03146374829001368
+        },
+        "tail_80k_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "shutdown": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "finished": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        }
+      },
+      "arms": {
+        "baseline": {
+          "game_count": 25,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 7254,
+          "window_start_utc": "2026-10-17T09:37:25.405149+00:00",
+          "window_end_utc": "2026-10-17T11:38:19.405144+00:00",
+          "window_sample_statistics": {
+            "sample_count": 725,
+            "simple_sample_mean_percent": 93.03172413793104,
+            "sample_median_percent": 99.0,
+            "samples_ge90_fraction": 0.9172413793103448,
+            "samples_le10_fraction": 0.028965517241379312
+          },
+          "time_weighted_util_percent": 93.0440206959067,
+          "covered_seconds": 7253.99999499321,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 4572109,
+          "analyzer_tokens_per_budget_second": 630.2879790460436,
+          "mean_analyzer_tokens_per_game": 182884.36,
+          "sources": [
+            {
+              "path": "runs/014-tail-allocation/baseline/arm-metadata.json",
+              "bytes": 21063,
+              "sha256": "df3c258e477ffc0d30e381c3f689fb0a3ec16b6242a827592f4b802822a965e1"
+            },
+            {
+              "path": "runs/014-tail-allocation/baseline/benchmark.json",
+              "bytes": 1296876,
+              "sha256": "2f3f87ff605079eb0f3f658ad22a2f24099c9a90266c1925a8ee2a2a0265ea6b"
+            }
+          ]
+        },
+        "tail_80k": {
+          "game_count": 25,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 7254,
+          "window_start_utc": "2026-10-17T11:38:55.304316+00:00",
+          "window_end_utc": "2026-10-17T13:39:49.304310+00:00",
+          "window_sample_statistics": {
+            "sample_count": 725,
+            "simple_sample_mean_percent": 93.41103448275862,
+            "sample_median_percent": 99.0,
+            "samples_ge90_fraction": 0.9158620689655173,
+            "samples_le10_fraction": 0.02620689655172414
+          },
+          "time_weighted_util_percent": 93.3958280179074,
+          "covered_seconds": 7253.9999940395355,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 4432302,
+          "analyzer_tokens_per_budget_second": 611.014888337469,
+          "mean_analyzer_tokens_per_game": 177292.08,
+          "sources": [
+            {
+              "path": "runs/014-tail-allocation/tail_80k/arm-metadata.json",
+              "bytes": 20967,
+              "sha256": "77bd0e866e638dcb1804058c6140f6b6893f5e455fbb60576cb016711955b600"
+            },
+            {
+              "path": "runs/014-tail-allocation/tail_80k/benchmark.json",
+              "bytes": 1322697,
+              "sha256": "f0c739fcc306fdc4fe7f3b78eeb9a51c3ed8b99ab3ac701035062ef17f7bd787"
+            }
+          ]
+        }
+      },
+      "whole_session": {
+        "sample_count": 1526,
+        "simple_sample_mean_percent": 88.93315858453474,
+        "sample_median_percent": 99.0,
+        "samples_ge90_fraction": 0.8741808650065531,
+        "samples_le10_fraction": 0.07208387942332896,
+        "time_weighted_util_percent": 89.67595330585034,
+        "covered_seconds": 15131.973547458649,
+        "total_analyzer_tokens": 9004411,
+        "gross_analyzer_tokens_per_session_second": 595.0426725688774
+      }
+    },
+    "016-pace-allocation-jiyujia": {
+      "sources": [
+        {
+          "path": "runs/016-pace-allocation-jiyujia/experiment-manifest.json",
+          "bytes": 7551,
+          "sha256": "7e07a455c7b6f53a9aeafe0d3e681421049cbf53305705d2d1524a9d02d37b17"
+        },
+        {
+          "path": "runs/016-pace-allocation-jiyujia/gpu-utilization.jsonl",
+          "bytes": 286381,
+          "sha256": "4cf52775beb391560312471d6034270b6f6cc56c7124c2a82b3d9985fb25a49b"
+        }
+      ],
+      "invalid_sampler_records": 0,
+      "session_elapsed_seconds": 15139.409031629562,
+      "session_elapsed_hours": 4.2053913976748785,
+      "model_ready_seconds": 557.6352167129517,
+      "model_ready_fraction_of_session": 0.03683335429724693,
+      "phase_sample_statistics": {
+        "startup": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "cpu_preflight": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "model_startup": {
+          "sample_count": 55,
+          "simple_sample_mean_percent": 0.9636363636363636,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 0.9818181818181818
+        },
+        "waiting_for_server": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "baseline": {
+          "sample_count": 731,
+          "simple_sample_mean_percent": 92.60191518467852,
+          "sample_median_percent": 99.0,
+          "samples_ge90_fraction": 0.908344733242134,
+          "samples_le10_fraction": 0.028727770177838577
+        },
+        "baseline_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "pace_1x_cache_flush": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "pace_1x": {
+          "sample_count": 729,
+          "simple_sample_mean_percent": 92.11934156378601,
+          "sample_median_percent": 98.0,
+          "samples_ge90_fraction": 0.8998628257887518,
+          "samples_le10_fraction": 0.02606310013717421
+        },
+        "pace_1x_cleanup": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "shutdown": {
+          "sample_count": 1,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        },
+        "finished": {
+          "sample_count": 2,
+          "simple_sample_mean_percent": 0.0,
+          "sample_median_percent": 0.0,
+          "samples_ge90_fraction": 0.0,
+          "samples_le10_fraction": 1.0
+        }
+      },
+      "arms": {
+        "baseline": {
+          "game_count": 25,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 7254,
+          "window_start_utc": "2026-10-17T17:40:41.918258+00:00",
+          "window_end_utc": "2026-10-17T19:41:35.918253+00:00",
+          "window_sample_statistics": {
+            "sample_count": 726,
+            "simple_sample_mean_percent": 92.70523415977961,
+            "sample_median_percent": 99.0,
+            "samples_ge90_fraction": 0.9090909090909091,
+            "samples_le10_fraction": 0.027548209366391185
+          },
+          "time_weighted_util_percent": 92.76514548528573,
+          "covered_seconds": 7253.99999499321,
+          "sustained_low_sample_runs": [
+            {
+              "start_beijing": "2026-10-18T03:07:32.206190+08:00",
+              "end_beijing": "2026-10-18T03:07:52.206388+08:00",
+              "samples": 3,
+              "observed_span_seconds": 20.000197887420654,
+              "utilization": [
+                0.0,
+                43.0,
+                0.0
+              ]
+            }
+          ],
+          "analyzer_tokens": 4458146,
+          "analyzer_tokens_per_budget_second": 614.5776123518059,
+          "mean_analyzer_tokens_per_game": 178325.84,
+          "sources": [
+            {
+              "path": "runs/016-pace-allocation-jiyujia/baseline/arm-metadata.json",
+              "bytes": 20988,
+              "sha256": "643a7404015b0d118c5150c036de255c412e24993f9d78285d0e7981f1e31a69"
+            },
+            {
+              "path": "runs/016-pace-allocation-jiyujia/baseline/benchmark.json",
+              "bytes": 1305067,
+              "sha256": "f5753e62b7554ee18f202b455677d9dd6393a2d03590569f8c07ff6bba19b211"
+            }
+          ]
+        },
+        "pace_1x": {
+          "game_count": 25,
+          "configured_active_streams": 10,
+          "maximum_initial_game_streams": 10,
+          "budget_seconds": 7254,
+          "window_start_utc": "2026-10-17T19:42:17.539128+00:00",
+          "window_end_utc": "2026-10-17T21:43:11.539123+00:00",
+          "window_sample_statistics": {
+            "sample_count": 725,
+            "simple_sample_mean_percent": 92.36137931034483,
+            "sample_median_percent": 98.0,
+            "samples_ge90_fraction": 0.9020689655172414,
+            "samples_le10_fraction": 0.023448275862068966
+          },
+          "time_weighted_util_percent": 92.34465587234972,
+          "covered_seconds": 7253.99999499321,
+          "sustained_low_sample_runs": [],
+          "analyzer_tokens": 4513940,
+          "analyzer_tokens_per_budget_second": 622.2690929142542,
+          "mean_analyzer_tokens_per_game": 180557.6,
+          "sources": [
+            {
+              "path": "runs/016-pace-allocation-jiyujia/pace_1x/arm-metadata.json",
+              "bytes": 21048,
+              "sha256": "8926549a0913859f47533f8fbad2c4e65501709c150423f76fcfadd29834a01d"
+            },
+            {
+              "path": "runs/016-pace-allocation-jiyujia/pace_1x/benchmark.json",
+              "bytes": 1431910,
+              "sha256": "cb3559f1530c5e947f971310c96f981aa58ec40fe589e0b2a44e712598272299"
+            }
+          ]
+        }
+      },
+      "whole_session": {
+        "sample_count": 1526,
+        "simple_sample_mean_percent": 88.40104849279162,
+        "sample_median_percent": 98.0,
+        "samples_ge90_fraction": 0.8650065530799476,
+        "samples_le10_fraction": 0.06880733944954129,
+        "time_weighted_util_percent": 89.07788871438665,
+        "covered_seconds": 15138.960850715637,
+        "total_analyzer_tokens": 8972086,
+        "gross_analyzer_tokens_per_session_second": 592.6311906399606
+      }
+    }
+  },
+  "design_tradeoffs": {
+    "retained_four_by_1000": {
+      "shared_solver_seconds": 2000,
+      "prior_015_internal_session_seconds": 2556.2304956912994,
+      "meaning": "Existing four-game run already kept the device busy during solving, while maximizing exposure of each selected opportunity/control within the short screening budget."
+    },
+    "ten_by_1000_hypothetical": {
+      "assumed_aggregate_tokens_per_second": 615,
+      "rough_average_tokens_per_game": 61500.0,
+      "meaning": "Higher total token throughput can still reduce per-core-game exposure versus the prior approximately 95k tokens/game; risks missing later-level adoption windows."
+    },
+    "ten_by_1600_hypothetical": {
+      "assumed_aggregate_tokens_per_second": 615,
+      "rough_average_tokens_per_game": 98400.0,
+      "rough_session_seconds_with_prior015_nonbudget_overhead": 3756.2304956912994,
+      "meaning": "An alternative only if expanding meaningful research coverage is itself required. Not selected; would need a new frozen design, same pool/order/budget for both arms, and no comparison with old 015 scores as an A/B."
+    },
+    "twelve_by_1000_hypothetical": {
+      "assumed_aggregate_tokens_per_second": 615,
+      "rough_average_tokens_per_game": 51250.0,
+      "meaning": "Concurrency cap remains ten; additional initial queuing and reduced per-game exposure have no demonstrated benefit for this adoption screen."
+    }
+  },
+  "limits": [
+    "Historical run conditions differ in pool, prompts, trajectories and dates. This is descriptive resource evidence, not a controlled four-versus-ten concurrency benchmark.",
+    "GPU utilization measures the fraction of time kernels are active, not useful token throughput; 94% with four streams and approximately 620 tokens/s with ten streams can both be true.",
+    "018 includes sb26 and could finish a core game early, reducing concurrent streams; 015 had four budget-cancelled games. Neither 94% utilization nor 95k tokens per core is guaranteed for 018.",
+    "Longer runs amortize fixed loading but consume more quota. Do not lengthen a finished experiment or add irrelevant workloads merely to improve a utilization percentage.",
+    "Observed internal session time is not platform quota accounting; the current generic quota conflict and launch authorization are separate from this local rationale.",
+    "No supplemental 10/12-game run, idle loop, unrelated job, or probe launch is recommended or started by this analysis.",
+    "Changing pool and budget before freezing a new matched pair does not by itself introduce another treatment factor, but changes the experimental question and invalidates comparison against the original four-game screen as a matched result."
+  ]
+}

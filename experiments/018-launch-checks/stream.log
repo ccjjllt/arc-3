@@ -1,0 +1,593 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Writing /kaggle/research/src/arc3_research/__init__.py
+Writing /kaggle/research/src/arc3_research/current_data.py
+Writing /kaggle/research/src/arc3_research/experiment_config.py
+Writing /kaggle/research/src/arc3_research/goal_evidence.py
+Writing /kaggle/research/src/arc3_research/inference_timing.py
+Writing /kaggle/research/src/arc3_research/input_paths.py
+Writing /kaggle/research/src/arc3_research/native_values.py
+Writing /kaggle/research/src/arc3_research/observation_grounding.py
+Writing /kaggle/research/src/arc3_research/observation_representation.py
+Writing /kaggle/research/src/arc3_research/preflight.py
+Writing /kaggle/research/src/arc3_research/program_state.py
+Writing /kaggle/research/src/arc3_research/request_deadline.py
+Writing /kaggle/research/src/arc3_research/retrievable_animation.py
+Writing /kaggle/research/src/arc3_research/run_arm.py
+Writing /kaggle/research/src/arc3_research/scheduler_observer.py
+Writing /kaggle/research/src/arc3_research/session_runner.py
+Writing /kaggle/research/src/arc3_research/submission_inputs.py
+Writing /kaggle/research/src/arc3_research/transient_history.py
+Writing /kaggle/research/scripts/summarize_experiment.py
+Resolved research inputs: {"bundle": "/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy", "wheelhouse": "/kaggle/input/datasets/dfranzen/pennyroyal-v253", "model": "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1", "draft": "/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1", "competition": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3", "competition_wheels": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels", "environment_files": "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/environment_files"}
+Writing /kaggle/harness-changes.patch
+Checking patch ARC3-Inference/inference/agent/action_names.py...
+Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+Checking patch ARC3-Inference/inference/agent/prompts.py...
+Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+Checking patch ARC3-Inference/inference/agent/vision_context.py...
+Checking patch ARC3-Inference/inference/framework/run.py...
+Hunk #1 succeeded at 467 (offset 48 lines).
+Hunk #2 succeeded at 1271 (offset 48 lines).
+Checking patch ARC3-Inference/inference/framework/solver.py...
+Checking patch ARC3-Inference/inference/utils/animation.py...
+Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+Checking patch ARC3-Inference/inference/utils/segmentation.py...
+Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+harness patch applied successfully
+taaf.kaggle: TRUE_SUBMISSION=False
+Checking patch ARC3-Inference/inference/agent/action_names.py...
+Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+Checking patch ARC3-Inference/inference/agent/prompts.py...
+Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+Checking patch ARC3-Inference/inference/agent/vision_context.py...
+Checking patch ARC3-Inference/inference/framework/run.py...
+Hunk #1 succeeded at 467 (offset 48 lines).
+Hunk #2 succeeded at 1271 (offset 48 lines).
+Checking patch ARC3-Inference/inference/framework/solver.py...
+Checking patch ARC3-Inference/inference/utils/animation.py...
+Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+Checking patch ARC3-Inference/inference/utils/segmentation.py...
+Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+
+Checking patch ARC3-Inference/inference/agent/action_names.py...
+Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+Checking patch ARC3-Inference/inference/agent/prompts.py...
+Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+Checking patch ARC3-Inference/inference/agent/vision_context.py...
+Checking patch ARC3-Inference/inference/framework/run.py...
+Hunk #1 succeeded at 467 (offset 48 lines).
+Hunk #2 succeeded at 1271 (offset 48 lines).
+Checking patch ARC3-Inference/inference/framework/solver.py...
+Checking patch ARC3-Inference/inference/utils/animation.py...
+Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+Checking patch ARC3-Inference/inference/utils/segmentation.py...
+Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+Precaching: Started...
+Precaching: loaded 211 files (6.70 GB) in 9.57 seconds.
+
+taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (3 source roots)
+{"status": "passed", "elapsed_seconds": 1.5386078180000027, "network_calls": 0, "model_calls": 0, "game_actions": 0}
+{"status": "passed", "elapsed_seconds": 1.5386078180000027, "network_calls": 0, "model_calls": 0, "game_actions": 0}
+=== installing Pennyroyal (offline) ===
+$ /tmp/sgl-intel/bin/uv venv --python /usr/bin/python3 /tmp/sgl-intel/venv
+$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels -r /kaggle/input/datasets/dfranzen/pennyroyal-v253/requirements.lock
+$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels --reinstall --no-deps /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels/sglang-0.5.19+gd00d88efc8d6-cp312-cp312-linux_x86_64.whl
+$ /tmp/sgl-intel/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Wed_Aug_20_01:58:59_PM_PDT_2025
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+Host compiler: g++-11
+$ /tmp/sgl-intel/venv/bin/python -c 'import pathlib, sglang, torch
+print("sglang", sglang.__version__, "| torch", torch.__version__)
+assert torch.cuda.is_available(), "CUDA unavailable"
+print("GPU:", torch.cuda.get_device_name(0), "capability:", torch.cuda.get_device_capability(0))
+'
+sglang 0.5.19+gd00d88efc8d6 | torch 2.13.0+cu130
+GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)
+Target: /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 | shards: 38 | PLE dtype: checkpoint default (typically BF16)
+Draft source: /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1
+SGLang draft view: /tmp/sgl-intel/draft-view-746747f37bf36968 (2 linked weight shards)
+
+/tmp/sgl-intel/venv/bin/sglang serve --model-path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 --load-format safetensors --model-loader-extra-config '{"enable_multithread_load":false}' --served-model-name flashnext --host 127.0.0.1 --port 8001 --tensor-parallel-size 1 --dtype bfloat16 --quantization auto-round --kv-cache-dtype fp8_e4m3 --mem-fraction-static 0.96 --context-length 139264 --page-size 64 --max-running-requests 10 --chunked-prefill-size 8192 --max-prefill-tokens 16384 --cuda-graph-max-bs-decode 10 --cuda-graph-bs-decode 1 2 4 7 8 9 10 --mamba-ssm-dtype bfloat16 --max-mamba-cache-size 60 --mamba-radix-cache-strategy extra_buffer --mamba-track-interval 64 --mamba-backend flashinfer --linear-attn-decode-backend flashinfer --linear-attn-prefill-backend flashinfer --moe-runner-backend auto --ple-offload-embedding --trust-remote-code --mm-feature-transport cpu --image-processor-backend pil --reasoning-parser qwen3 --tool-call-parser qwen3_coder --default-chat-template-kwargs '{"preserve_thinking":true}' --watchdog-timeout 1800 --schedule-policy lpm --warmups structured_output --enable-cache-report --enable-metrics --enable-request-time-stats-logging --weight-loader-prefetch-checkpoints --weight-loader-drop-cache-after-load --chat-template /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1/chat_template.jinja --gdn-mtp-cache-mode none --speculative-algorithm NEXTN --speculative-num-steps 3 --speculative-eagle-topk 1 --speculative-num-draft-tokens 4 --speculative-draft-model-path /tmp/sgl-intel/draft-view-746747f37bf36968 --speculative-draft-model-quantization compressed-tensors --speculative-moe-runner-backend auto --speculative-draft-kv-cache-dtype fp8_e4m3 --speculative-accept-threshold-single 1.0 --speculative-accept-threshold-acc 1.0 --speculative-token-map /kaggle/input/datasets/dfranzen/pennyroyal-v253/hot_tokens_64k.pt
+
+pid 604 -> /kaggle/working/serve.log
+  0s ...
+  30s ...
+Precaching: Started...
+  60s ...
+  90s ...
+  120s ...
+  150s ...
+  180s ...
+  210s ...
+  240s ...
+  270s ...
+  300s ...
+Precaching: loaded 62 files (185.40 GB) in 269.63 seconds.
+
+  330s ...
+  360s ...
+  390s ...
+  420s ...
+  450s ...
+  480s ...
+
+READY after 511s -> http://127.0.0.1:8001/v1
+Starting baseline: 4 games, 1000s, shared GPU
+baseline: elapsed 0s; session 560s
+baseline: elapsed 60s; session 620s
+baseline: elapsed 120s; session 680s
+baseline: elapsed 180s; session 740s
+baseline: elapsed 240s; session 800s
+baseline: elapsed 300s; session 860s
+baseline: elapsed 360s; session 920s
+baseline: elapsed 420s; session 980s
+baseline: elapsed 480s; session 1040s
+baseline: elapsed 540s; session 1100s
+baseline: elapsed 600s; session 1160s
+baseline: elapsed 660s; session 1220s
+baseline: elapsed 720s; session 1280s
+baseline: elapsed 780s; session 1340s
+baseline: elapsed 840s; session 1400s
+baseline: elapsed 900s; session 1460s
+baseline: elapsed 960s; session 1520s
+[ARC3_RESEARCH] {"stage": "arm_initializing", "utc": "2026-10-18T07:07:09.728251+00:00", "arm": "baseline", "working_dir": "/kaggle/working/baseline", "budget_seconds": 1000}
+[ARC3_RESEARCH] {"stage": "arm_benchmark_started", "utc": "2026-10-18T07:07:12.232020+00:00", "arm": "baseline", "games": ["ft09-0d8bbf25", "tr87-cd924810", "ar25-0c556536", "sb26-7fbdac44"], "soft_end_local": "2026-10-18T07:23:52.231773"}
+priority gate active: 10 concurrent streams
+benchmark: regenerated diagnostics in /kaggle/working/baseline in 0.67s
+benchmark: research-baseline
+solver:    duck-harness
+games:     4
+passes:    1
+runs:      4 (won: 0)
+started:   2026-10-18 07:07:12
+ended:     in progress
+mean score:    39.41
+median score:  37.55
+total actions: 358
+total tokens:  211304
+generated tokens/sec: 351.62 (job wallclock)
+total wallclock: 2167.2s
+
+per-game (mean across passes):
+  ar25-0c556536: score=27.78, levels=4.0/8, actions=106, tokens=54026
+  ft09-0d8bbf25: score=47.32, levels=4.0/6, actions=59, tokens=58098
+  sb26-7fbdac44: score=77.78, levels=7.0/8, actions=126, tokens=50553
+  tr87-cd924810: score=4.76, levels=1.0/6, actions=67, tokens=48627
+
+[finished] sb26-7fbdac44 state=won level=8/8 score=100.00 actions=145 tokens=59728 per-level=15/18,25/28,15/18,15/19,17/31,19/23,20/58,19/18 note="tokens=59728"
+[finished] ft09-0d8bbf25 state=won level=6/6 score=100.00 actions=94 tokens=83157 per-level=4/43,7/12,29/23,19/28,21/65,14/37 note="tokens=83157"
+tail fade phase after 15.8 minutes: 0.9 minutes remaining; fading tail B to zero over the final 3.3 minutes, retaining hazard C
+analyzer request timed out at action 188; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=4.827413)
+[finished] ar25-0c556536 state=cancelled level=6/8 score=58.33 actions=187 tokens=75046 per-level=15/32,19/50,41/75,30/37,29/89,53/159,0/233,0/73 note="tokens=101983"
+[finished] tr87-cd924810 state=cancelled level=2/6 score=9.71 actions=124 tokens=73638 per-level=37/54,87/58,0/40,0/45,0/71,0/146 note="tokens=87417"
+benchmark: regenerated diagnostics in /kaggle/working/baseline in 1.30s
+benchmark: research-baseline
+solver:    duck-harness
+games:     4
+passes:    1
+runs:      4 (won: 2)
+started:   2026-10-18 07:07:12
+ended:     2026-10-18 07:23:54
+duration:  16m 42s
+mean score:    67.01
+median score:  79.17
+total actions: 550
+total tokens:  291569
+generated tokens/sec: 290.87 (job wallclock)
+total wallclock: 3451.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=58.33, levels=6.0/8, actions=187, tokens=75046
+  ft09-0d8bbf25: score=100.00, levels=6.0/6, actions=94, tokens=83157
+  sb26-7fbdac44: score=100.00, levels=8.0/8, actions=145, tokens=59728
+  tr87-cd924810: score=9.71, levels=2.0/6, actions=124, tokens=73638
+
+diagnostics: /kaggle/working/baseline/diagnostics.html
+[ARC3_RESEARCH] {"stage": "arm_finished", "utc": "2026-10-18T07:23:55.954040+00:00", "arm": "baseline", "status": "completed", "wall_seconds": 1006.220272655, "exit_code": 0, "game_state_counts": {"won": 2, "cancelled": 2}, "lingering_worker_threads": []}
+
+Starting observation_grounding: 4 games, 1000s, shared GPU
+observation_grounding: elapsed 0s; session 1568s
+observation_grounding: elapsed 60s; session 1628s
+observation_grounding: elapsed 120s; session 1688s
+observation_grounding: elapsed 180s; session 1748s
+observation_grounding: elapsed 240s; session 1808s
+observation_grounding: elapsed 300s; session 1868s
+observation_grounding: elapsed 360s; session 1928s
+observation_grounding: elapsed 420s; session 1988s
+observation_grounding: elapsed 480s; session 2048s
+observation_grounding: elapsed 540s; session 2108s
+observation_grounding: elapsed 600s; session 2168s
+observation_grounding: elapsed 660s; session 2228s
+observation_grounding: elapsed 720s; session 2288s
+observation_grounding: elapsed 780s; session 2348s
+observation_grounding: elapsed 840s; session 2408s
+observation_grounding: elapsed 900s; session 2468s
+observation_grounding: elapsed 960s; session 2528s
+[ARC3_RESEARCH] {"stage": "arm_initializing", "utc": "2026-10-18T07:23:57.740725+00:00", "arm": "observation_grounding", "working_dir": "/kaggle/working/observation_grounding", "budget_seconds": 1000}
+[ARC3_RESEARCH] {"stage": "arm_benchmark_started", "utc": "2026-10-18T07:23:58.477511+00:00", "arm": "observation_grounding", "games": ["ft09-0d8bbf25", "tr87-cd924810", "ar25-0c556536", "sb26-7fbdac44"], "soft_end_local": "2026-10-18T07:40:38.477234"}
+priority gate active: 10 concurrent streams
+benchmark: regenerated diagnostics in /kaggle/working/observation_grounding in 0.63s
+benchmark: research-observation_grounding
+solver:    duck-harness
+games:     4
+passes:    1
+runs:      4 (won: 0)
+started:   2026-10-18 07:23:58
+ended:     in progress
+mean score:    34.72
+median score:  28.17
+total actions: 330
+total tokens:  201573
+generated tokens/sec: 335.48 (job wallclock)
+total wallclock: 2057.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=27.78, levels=4.0/8, actions=110, tokens=45603
+  ft09-0d8bbf25: score=28.57, levels=3.0/6, actions=29, tokens=51437
+  sb26-7fbdac44: score=77.78, levels=7.0/8, actions=147, tokens=50369
+  tr87-cd924810: score=4.76, levels=1.0/6, actions=44, tokens=54164
+
+[finished] sb26-7fbdac44 state=won level=8/8 score=94.42 actions=160 tokens=57370 per-level=11/18,36/28,15/18,15/19,17/31,19/23,17/58,30/18 note="tokens=57370"
+tail fade phase after 16.6 minutes: 0.1 minutes remaining; fading tail B to zero over the final 3.3 minutes, retaining hazard C
+analyzer request timed out at action 188; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=4.731259)
+[finished] ar25-0c556536 state=cancelled level=5/8 score=41.67 actions=187 tokens=96221 per-level=15/32,18/50,41/75,36/37,30/89,47/159,0/233,0/73 note="tokens=96221"
+analyzer request timed out at action 158; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=36.73623)
+[finished] tr87-cd924810 state=cancelled level=4/6 score=47.62 actions=157 tokens=97721 per-level=37/54,37/58,39/40,29/45,15/71,0/146 note="tokens=97721"
+[finished] ft09-0d8bbf25 state=cancelled level=5/6 score=71.43 actions=93 tokens=95717 per-level=6/43,7/12,16/23,24/28,26/65,14/37 note="tokens=103075"
+benchmark: regenerated diagnostics in /kaggle/working/observation_grounding in 1.13s
+benchmark: research-observation_grounding
+solver:    duck-harness
+games:     4
+passes:    1
+runs:      4 (won: 1)
+started:   2026-10-18 07:23:58
+ended:     2026-10-18 07:40:49
+duration:  16m 50s
+mean score:    63.78
+median score:  59.52
+total actions: 597
+total tokens:  347029
+generated tokens/sec: 343.40 (job wallclock)
+total wallclock: 3641.0s
+
+per-game (mean across passes):
+  ar25-0c556536: score=41.67, levels=5.0/8, actions=187, tokens=96221
+  ft09-0d8bbf25: score=71.43, levels=5.0/6, actions=93, tokens=95717
+  sb26-7fbdac44: score=94.42, levels=8.0/8, actions=160, tokens=57370
+  tr87-cd924810: score=47.62, levels=4.0/6, actions=157, tokens=97721
+
+diagnostics: /kaggle/working/observation_grounding/diagnostics.html
+[ARC3_RESEARCH] {"stage": "arm_finished", "utc": "2026-10-18T07:40:50.208943+00:00", "arm": "observation_grounding", "status": "completed", "wall_seconds": 1012.4621446619999, "exit_code": 0, "game_state_counts": {"cancelled": 3, "won": 1}, "lingering_worker_threads": []}
+
+baseline: 4 games, 4 runs, score=67.01, ceiling=68.15, levels=22, recorded_tokens=291,569, analyzer_tokens=332285, unattached_tokens=40716
+observation_grounding: 4 games, 4 runs, score=63.78, ceiling=65.18, levels=22, recorded_tokens=347,029, analyzer_tokens=354387, unattached_tokens=7358
+JSON: /kaggle/working/summary/summary.json
+Markdown: /kaggle/working/summary/summary.md
+{
+  "experiment": {
+    "id": "018-observation-grounding",
+    "kernel_id": "jiyujia/arc3-018-observation-grounding",
+    "kernel_title": "ARC3 018 Observation Grounding",
+    "purpose": "Short single-factor prompt-only screen for faithful visual-to-program encoding; CPU preparation only, no competition submission",
+    "games": [
+      "ft09-0d8bbf25",
+      "tr87-cd924810",
+      "ar25-0c556536",
+      "sb26-7fbdac44"
+    ],
+    "game_source": "Exact public versions; ft09/tr87 geometry-encoding opportunities, ar25 transfer/control, sb26 stable solver control; known development set",
+    "game_count": 4,
+    "arm_order": [
+      "baseline",
+      "observation_grounding"
+    ],
+    "requested_arm_seconds": 1000,
+    "budget_formula": "Equal 1000-second short-screen windows, not normalized full-pool scoring",
+    "hard_limit_seconds": 5400,
+    "startup_limit_seconds": 1200,
+    "gpu_sample_interval_seconds": 10,
+    "active_streams": 10,
+    "n_passes_per_arm": 1,
+    "warmup_action_games": 0,
+    "expected_gpu_hours": 1.0,
+    "selection_note": "Adoption and overhead screen, not a holdout or hidden-score prediction. Ten-stream capacity with only four concurrent games. Current quota availability must be rechecked before any launch.",
+    "comparison_note": "Baseline versus one existing system-prompt prefix only. Same four IDs/order, 1000s per arm, one pass, zero warmup, 10-stream capacity, baseline remaining/pace0 scheduling, one model load and isolated CPU processes. No new API, observations, actions, memory, or forced verification. Paired deadline/timing/scheduler diagnostics and strict cache/cleanup contracts. CPU preparation only; no GPU run has been launched.",
+    "reference_arm": "baseline",
+    "arm_environment": {
+      "baseline": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "observation_grounding": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "inference_timing": true,
+    "scheduler_observer": true,
+    "request_deadline": true,
+    "strict_arm_budget": true,
+    "require_cache_flush": true,
+    "require_drained_workers": true,
+    "preflight_before_serving": true,
+    "native_payload_cells": true,
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "require_complete_pool": true,
+    "require_cache_flush_log": true
+  },
+  "started_at_epoch": 1792306669.7137,
+  "arms": [
+    {
+      "arm": "baseline",
+      "budget_seconds": 1000,
+      "started_at_epoch": 1792307229.5607176,
+      "cache_flush_http_status": 200,
+      "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+      "cache_flush_backend_confirmed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 1008.0866465568542,
+      "benchmark_exists": true,
+      "game_state_counts": {
+        "won": 2,
+        "cancelled": 2
+      },
+      "all_games_failed_to_run": false,
+      "lingering_worker_threads": [],
+      "environment_overrides": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "complete_pool": true
+    },
+    {
+      "arm": "observation_grounding",
+      "budget_seconds": 1000,
+      "started_at_epoch": 1792308237.6482527,
+      "cache_flush_http_status": 200,
+      "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+      "cache_flush_backend_confirmed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 1014.093820810318,
+      "benchmark_exists": true,
+      "game_state_counts": {
+        "cancelled": 3,
+        "won": 1
+      },
+      "all_games_failed_to_run": false,
+      "lingering_worker_threads": [],
+      "environment_overrides": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "complete_pool": true
+    }
+  ],
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "bd38b8d5cf39ce569436d0b7c5967c98cfcaa7ddce964e69430f61735350c173",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/current_data.py": "0d6f825d65cb091203e590cc6777d402f5cf1a6fa5cdd3b92f3d0c5f29f05c4c",
+    "src/arc3_research/experiment_config.py": "df2db63b55ce1f2ae261758f8725927f51050a0a867ff0c30d9a4094b152ca4a",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/native_values.py": "703cfc43f791c19e741bd2c80cbce099fde1d6eca690326ae0418c1498367361",
+    "src/arc3_research/observation_grounding.py": "ae385481dfa7179e9e1602e12e97e6a892238d23e7690b2177a21cbc7841c6fc",
+    "src/arc3_research/observation_representation.py": "e09470a1a41b49c9eadcdee0d88dd8804831f9de79ff862801959dd71c164883",
+    "src/arc3_research/preflight.py": "e9591396ffb283b09c1cfc75e2b8eb38a535b089699ec36c1fcf94bd8a8414a0",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/request_deadline.py": "204c7bcb86478ee4b60aa9fffbe5b251abf5b27e4bf1534f1e773b9461372112",
+    "src/arc3_research/retrievable_animation.py": "ea4bb1a77433e2ccefbb9d46abe9e82e6eac8ae5c058828662e4732a940ca875",
+    "src/arc3_research/run_arm.py": "fd3f322c3bb7285ce12f4261d5804e6438f26a6f10222d5096a8f8a79bc49adf",
+    "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+    "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/018-observation-grounding.json": "9be989a6dc87eae27c15d0f5a3e14c6bcb062da3d53315966ff3842b71ae9749"
+  },
+  "elapsed_seconds": 2587.8874790668488,
+  "model_ready_seconds": 559.8467245101929,
+  "equal_arm_budget_seconds": 1000,
+  "cleanup_reserve_seconds": 360,
+  "arm_count": 2,
+  "status": "completed",
+  "gpu_server_process_group_stopped": true,
+  "gpu_server_leader_exited": true,
+  "gpu_server_stopped": true,
+  "gpu_sampling": {
+    "path": "/kaggle/working/gpu-utilization.jsonl",
+    "interval_seconds": 10.0,
+    "sample_count": 271,
+    "error_count": 0,
+    "stopped": true
+  }
+}
+baseline: 4 games, 4 runs, score=67.01, ceiling=68.15, levels=22, recorded_tokens=291,569, analyzer_tokens=332285, unattached_tokens=40716
+observation_grounding: 4 games, 4 runs, score=63.78, ceiling=65.18, levels=22, recorded_tokens=347,029, analyzer_tokens=354387, unattached_tokens=7358
+JSON: /kaggle/working/summary/summary.json
+Markdown: /kaggle/working/summary/summary.md
+# ARC-AGI-3 experiment summary
+
+Generated: 2026-10-18T07:40:57.650387+00:00
+
+- Author-reference data is historical public evidence, not a new GPU run or our leaderboard result.
+- Scores use final_score when available. Recomputed scores use the bundled TAAF formula; means are unweighted descriptive means, not official leaderboard scores.
+- Completion ceiling = 100 Ã k(k+1) / n(n+1), for completed sequential levels k out of n. It holds completion fixed and represents the ceiling from action efficiency alone.
+- Recorded tokens / generated_tokens retain the original accounting: sum(history.generated_tokens) + final_generated_tokens. This may undercount generation after the last action. action_attached_generated_tokens is history only; it excludes final tokens.
+- analyzer_reported_generated_tokens comes from an explicit same-named field or, if absent, the exact solver_note format tokens=N. Missing reports remain null. Aggregate analyzer totals cover only analyzer_reported_run_count runs; do not interpret partial sums as complete totals.
+- unattached_generated_tokens = analyzer-reported minus recorded history+final tokens, only where analyzer reports exist. It measures the signed accounting residual, excludes already-recorded final tokens, and is not added to or substituted for the original generated_tokens field.
+- Generated and uncached-input counts are solver-reported, not billing records. Zero can mean untracked usage; this harness may report zero uncached-input tokens even when prefill occurs.
+- Action wallclock fields are cumulative; never sum them. Run duration is max(final_wallclock_seconds, last action timestamp). Concurrent run durations must not be added to estimate GPU quota.
+- Benchmark elapsed is end_time â start_time and excludes setup/model-loading outside the benchmark; actual Kaggle GPU quota requires session accounting. Run durations include queue/wait time, not just GPU compute.
+- Absent per-run stop reasons remain unknown. gave_up, cancelled, and crashed are lifecycle states. Sibling arm-metadata.json, when present, supplies shared deadline context without overwriting raw run states or inferring individual request failures.
+- A/B aligns exact game IDs and averages available repeats. Shared GPU budget, scheduling, order, unequal exposure, and game difficulty confound comparisons; no independence or statistical significance is claimed.
+
+## Benchmark overview
+
+| Source | Kind | Games/runs | Mean score | Completion ceiling | Levels | Wins | Recorded tokens | Analyzer tokens (runs reported) | Benchmark hours |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| baseline | local-experiment | 4/4 | 67.01 | 68.15 | 22/28 | 2 | 291,569 | 332285 (4/4) | 0.28 |
+| observation_grounding | local-experiment | 4/4 | 63.78 | 65.18 | 22/28 | 1 | 347,029 | 354387 (4/4) | 0.28 |
+
+## observation_grounding â baseline
+
+Descriptive comparison under a shared GPU budget; observations are not independent replications. Game IDs match exactly; occurrence indices do not establish paired random seeds.
+
+Common games: 4; mean game score delta: -3.23.
+
+| Game | Runs A/B | Score A | Score B | Î score | Î ceiling | Î completed levels | Recorded tokens/run A/B |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| ar25-0c556536 | 1/1 | 58.33 | 41.67 | -16.67 | -16.67 | -1.00 | 75,046/96,221 |
+| ft09-0d8bbf25 | 1/1 | 100.00 | 71.43 | -28.57 | -28.57 | -1.00 | 83,157/95,717 |
+| sb26-7fbdac44 | 1/1 | 100.00 | 94.42 | -5.58 | 0.00 | 0.00 | 59,728/57,370 |
+| tr87-cd924810 | 1/1 | 9.71 | 47.62 | 37.91 | 33.33 | 2.00 | 73,638/97,721 |
+
+## baseline
+
+Source: `/kaggle/working/baseline/benchmark.json`
+
+States: `{"cancelled": 2, "won": 2}`. Stop reasons: `{"unknown": 2, "won": 2}`.
+
+### By game
+
+| Game | Runs | Mean score | Ceiling | Levels total | Wins | Recorded tokens | Analyzer tokens | Unattached tokens | Mean run hours |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ar25-0c556536 | 1 | 58.33 | 58.33 | 6/8 | 0 | 75,046 | 101983 | 26937 | 0.28 |
+| ft09-0d8bbf25 | 1 | 100.00 | 100.00 | 6/6 | 1 | 83,157 | 83157 | 0 | 0.23 |
+| sb26-7fbdac44 | 1 | 100.00 | 100.00 | 8/8 | 1 | 59,728 | 59728 | 0 | 0.18 |
+| tr87-cd924810 | 1 | 9.71 | 14.29 | 2/6 | 0 | 73,638 | 87417 | 13779 | 0.28 |
+
+### By run
+
+Occurrence is the zero-based appearance of this game in the file, not a verified seed/pass identifier.
+
+| Game | Occurrence | Score | Ceiling | Levels | Actions | Recorded tokens | Analyzer tokens | Unattached tokens | Run hours | State | Stop reason |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| ft09-0d8bbf25 | 0 | 100.00 | 100.00 | 6/6 | 94 | 83,157 | 83157 | 0 | 0.23 | won | won |
+| tr87-cd924810 | 0 | 9.71 | 14.29 | 2/6 | 124 | 73,638 | 87417 | 13779 | 0.28 | cancelled | unknown |
+| ar25-0c556536 | 0 | 58.33 | 58.33 | 6/8 | 187 | 75,046 | 101983 | 26937 | 0.28 | cancelled | unknown |
+| sb26-7fbdac44 | 0 | 100.00 | 100.00 | 8/8 | 145 | 59,728 | 59728 | 0 | 0.18 | won | won |
+
+### Data notes
+
+- run 1: analyzer-reported minus history+final generated tokens = 13779; retain both accounting views
+- run 2: analyzer-reported minus history+final generated tokens = 26937; retain both accounting views
+- arm metadata records the shared budget deadline fired; 2 cancelled runs are observed in this budget context, not evidence of random crashes; exact per-run stop reasons remain unchanged
+
+## observation_grounding
+
+Source: `/kaggle/working/observation_grounding/benchmark.json`
+
+States: `{"cancelled": 3, "won": 1}`. Stop reasons: `{"unknown": 3, "won": 1}`.
+
+### By game
+
+| Game | Runs | Mean score | Ceiling | Levels total | Wins | Recorded tokens | Analyzer tokens | Unattached tokens | Mean run hours |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ar25-0c556536 | 1 | 41.67 | 41.67 | 5/8 | 0 | 96,221 | 96221 | 0 | 0.28 |
+| ft09-0d8bbf25 | 1 | 71.43 | 71.43 | 5/6 | 0 | 95,717 | 103075 | 7358 | 0.28 |
+| sb26-7fbdac44 | 1 | 94.42 | 100.00 | 8/8 | 1 | 57,370 | 57370 | 0 | 0.18 |
+| tr87-cd924810 | 1 | 47.62 | 47.62 | 4/6 | 0 | 97,721 | 97721 | 0 | 0.28 |
+
+### By run
+
+Occurrence is the zero-based appearance of this game in the file, not a verified seed/pass identifier.
+
+| Game | Occurrence | Score | Ceiling | Levels | Actions | Recorded tokens | Analyzer tokens | Unattached tokens | Run hours | State | Stop reason |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| ft09-0d8bbf25 | 0 | 71.43 | 71.43 | 5/6 | 93 | 95,717 | 103075 | 7358 | 0.28 | cancelled | unknown |
+| tr87-cd924810 | 0 | 47.62 | 47.62 | 4/6 | 157 | 97,721 | 97721 | 0 | 0.28 | cancelled | unknown |
+| ar25-0c556536 | 0 | 41.67 | 41.67 | 5/8 | 187 | 96,221 | 96221 | 0 | 0.28 | cancelled | unknown |
+| sb26-7fbdac44 | 0 | 94.42 | 100.00 | 8/8 | 160 | 57,370 | 57370 | 0 | 0.18 | won | won |
+
+### Data notes
+
+- run 0: analyzer-reported minus history+final generated tokens = 7358; retain both accounting views
+- arm metadata records the shared budget deadline fired; 3 cancelled runs are observed in this budget context, not evidence of random crashes; exact per-run stop reasons remain unchanged
+
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 1023146 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 3445335 bytes to __results__.html

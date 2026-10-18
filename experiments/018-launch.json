@@ -1,0 +1,85 @@
+{
+  "prepared_at_utc": "2026-10-18T06:56:59.900646+00:00",
+  "status": "completed",
+  "user_authorization": "那你来做吧，如果需要使用gpu你可以使用kaggle cli来使用，但请使用jiyujia这个账号的gpu资源，同时为了节省请尽可能拉满gpu的利用率。",
+  "username": "jiyujia",
+  "kernel_id": "jiyujia/arc3-018-observation-grounding",
+  "launch_directory": "notebooks/018-observation-grounding",
+  "notebook_sha256": "731fd4335c20bcec86ea93f3be9449be82175a28ea6835582090b3b3999aefc7",
+  "source_manifest": "experiments/018-source/source-hashes.json",
+  "is_private": true,
+  "enable_internet": false,
+  "accelerator": "NvidiaRtxPro6000",
+  "hard_limit_seconds": 5400,
+  "requested_arm_seconds": 1000,
+  "game_count": 4,
+  "arms": [
+    "baseline",
+    "observation_grounding"
+  ],
+  "expected_gpu_hours": 1.0,
+  "quota_before": "experiments/018-launch-checks/quota-jiyujia-before.json",
+  "quota_limitation": "Generic quota API reports total6h with used>total; no accelerator-specific read endpoint exposed. One real bounded research run will be requested under explicit current user authorization; platform acceptance is separate from source validation.",
+  "utilization_reason": "015 matched four-game short screen had solve GPU means94.23/93.65 percent and medians98; keep the frozen small adoption screen, reuse one model load and separateCPU arms.",
+  "uploaded": true,
+  "gpu_started": true,
+  "competition_submission_created": false,
+  "promotion": "not_promoted",
+  "push_requested_at_utc": "2026-10-18T06:57:36.520373+00:00",
+  "push_finished_at_utc": "2026-10-18T06:57:42.568547+00:00",
+  "push_exit_code": 0,
+  "push_response": "Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/jiyujia/arc3-018-observation-grounding",
+  "push_error": "",
+  "kernel_version": 1,
+  "url": "https://www.kaggle.com/code/jiyujia/arc3-018-observation-grounding",
+  "remote_source_verified": true,
+  "remote_check": "experiments/018-launch-checks/remote-check.json",
+  "last_status": {
+    "status": "COMPLETE"
+  },
+  "last_status_checked_at_utc": "2026-10-18T08:16:14.914624+00:00",
+  "session_running": false,
+  "remote_preflight": {
+    "status": "passed",
+    "elapsed_seconds": 1.538607818,
+    "network_calls": 0,
+    "model_calls": 0,
+    "game_actions": 0
+  },
+  "gpu_device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "quota_resolution": "Despite the inconsistent generic quota response, platform accepted v1 and status RUNNING; stream confirmed GPU SM120 and CPU preflight passed. Do not infer RTX launch prohibition from generic quota alone.",
+  "utilization_evidence": "experiments/018-launch-checks/utilization-rationale.json",
+  "completion_evidence": "experiments/018-launch-checks/completion-status-quota.json",
+  "output_directory": "runs/018-observation-grounding",
+  "session_elapsed_seconds": 2587.8874790668488,
+  "model_ready_seconds": 559.8467245101929,
+  "gpu_server_stopped": true,
+  "output_download_exit_code": 0,
+  "analysis_directory": "experiments/018-analysis",
+  "quota_after": "experiments/018-launch-checks/completion-status-quota.json",
+  "session_accounting_note": "Internal experiment wall time, not exact Kaggle accelerator billing or accountwide quota change.",
+  "analysis_outcome": {
+    "engineering_validation_passes": true,
+    "adoption_gate_passes": false,
+    "failed_adoption_gates": [
+      "no_reported_candidate_new_misuse"
+    ],
+    "mean_score_baseline": 67.01058201058201,
+    "mean_score_candidate": 63.782652361356064,
+    "mean_score_delta": -3.227929649225949,
+    "completed_levels": [
+      22,
+      22
+    ],
+    "wins": [
+      2,
+      1
+    ],
+    "decision": "stop_this_version_no_full_pool_or_reverse_order",
+    "report": "research/018-results-analysis.md"
+  }
+}

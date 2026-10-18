@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "screen-result",
+      "title": "018 是否支持扩大实验？",
+      "queries": [
+        {
+          "id": "four-game-results",
+          "source": {
+            "label": "018 冻结四游戏 A/B",
+            "files": [
+              {
+                "label": "baseline/benchmark.json"
+              },
+              {
+                "label": "observation_grounding/benchmark.json"
+              },
+              {
+                "label": "comparison.json"
+              }
+            ],
+            "metricDefinitions": [
+              {
+                "label": "开发集均分",
+                "definition": "开发集均分是四个完整游戏的 TAAF 分数算术平均；每臂共享 1000 秒求解预算。"
+              }
+            ],
+            "filters": [
+              "实验：018 v1",
+              "游戏：ft09、tr87、ar25、sb26",
+              "顺序：baseline → observation_grounding",
+              "重复次数：1"
+            ],
+            "caveats": [
+              "这四个游戏用于开发筛选，单次差值不能预测隐藏榜单分数或证明提示的因果效果。"
+            ],
+            "evidenceFlow": [
+              {
+                "kind": "validation",
+                "title": "逐关分数复算",
+                "detail": "已从动作数、基准动作数、关卡权重和封顶规则复算全部八局，与保存分数一致。"
+              }
+            ]
+          },
+          "reportingPeriod": "2026-10-18 单次受控运行",
+          "columns": [
+            {
+              "field": "game",
+              "label": "游戏"
+            },
+            {
+              "field": "baseline_score",
+              "label": "基线分数"
+            },
+            {
+              "field": "candidate_score",
+              "label": "候选分数"
+            },
+            {
+              "field": "baseline_levels",
+              "label": "基线已过关卡"
+            },
+            {
+              "field": "candidate_levels",
+              "label": "候选已过关卡"
+            }
+          ],
+          "rows": [
+            {
+              "game": "ft09",
+              "baseline_score": 100.0,
+              "candidate_score": 71.42857142857143,
+              "baseline_levels": 6,
+              "candidate_levels": 5
+            },
+            {
+              "game": "tr87",
+              "baseline_score": 9.708994708994709,
+              "candidate_score": 47.61904761904761,
+              "baseline_levels": 2,
+              "candidate_levels": 4
+            },
+            {
+              "game": "ar25",
+              "baseline_score": 58.333333333333336,
+              "candidate_score": 41.66666666666667,
+              "baseline_levels": 6,
+              "candidate_levels": 5
+            },
+            {
+              "game": "sb26",
+              "baseline_score": 100.0,
+              "candidate_score": 94.41632373113855,
+              "baseline_levels": 8,
+              "candidate_levels": 8
+            }
+          ],
+          "preview": {
+            "kind": "aggregate",
+            "note": "完整四游戏比较；每游戏每臂一个运行。",
+            "totalRows": 4
+          },
+          "methods": [
+            {
+              "language": "calculation",
+              "code": "均分：67.01058201 → 63.78265236\n差值：-3.22792965\n关卡：22/28 → 22/28；全通：2 → 1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gpu-use",
+      "title": "GPU 使用了多少、利用率如何？",
+      "queries": [
+        {
+          "id": "session-resources",
+          "source": {
+            "label": "018 会话与 GPU 采样",
+            "files": [
+              {
+                "label": "experiment-manifest.json"
+              },
+              {
+                "label": "gpu-utilization.jsonl"
+              },
+              {
+                "label": "gpu-phases.json"
+              }
+            ],
+            "metricDefinitions": [
+              {
+                "label": "GPU 求解利用率",
+                "definition": "GPU 求解利用率为各臂实际 1000 秒预算窗口内、每约 10 秒一次的采样算术平均；中位数两臂均为 98%。"
+              },
+              {
+                "label": "会话时长",
+                "definition": "会话内部总墙钟为 2587.887479 秒（43.13 分钟），含模型启动 559.846725 秒（9.33 分钟）。"
+              }
+            ],
+            "filters": [
+              "账号：jiyujia",
+              "设备：RTX PRO 6000",
+              "GPU 数量：1"
+            ],
+            "caveats": [
+              "会话内部墙钟不是 Kaggle 精确计费记录；账户配额增量不能全部归属于该作业。",
+              "高 GPU 利用率不等于更高解题效率或通关分数。"
+            ]
+          },
+          "columns": [
+            {
+              "field": "arm",
+              "label": "实验组"
+            },
+            {
+              "field": "mean_util",
+              "label": "采样平均利用率（%）"
+            },
+            {
+              "field": "median_util",
+              "label": "采样中位数（%）"
+            },
+            {
+              "field": "samples",
+              "label": "样本数"
+            }
+          ],
+          "rows": [
+            {
+              "arm": "baseline",
+              "mean_util": 91.75,
+              "median_util": 98.0,
+              "samples": 100
+            },
+            {
+              "arm": "observation_grounding",
+              "mean_util": 90.4,
+              "median_util": 98.0,
+              "samples": 100
+            }
+          ],
+          "methods": [
+            {
+              "language": "calculation",
+              "code": "2587.887479 / 3600 = 0.718858 会话小时\n559.846725 / 2587.887479 × 100 = 21.63% 启动占比"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "representation-error",
+      "title": "提示是否阻止了错误编码？",
+      "queries": [
+        {
+          "id": "ar25-cell-check",
+          "source": {
+            "label": "ar25 第六关静态轨迹核验",
+            "files": [
+              {
+                "label": "observation_grounding/ar25-0c556536_p0_requests.jsonl"
+              },
+              {
+                "label": "018-cell-proof.json"
+              },
+              {
+                "label": "018-adoption-review.json"
+              }
+            ],
+            "metricDefinitions": [
+              {
+                "label": "坐标转抄错误",
+                "definition": "当前帧和自动提取均给出块坐标 (8,18)，候选随后手写为 (8,17)，并实际用于放置搜索。"
+              },
+              {
+                "label": "具体纠错与完整采用门",
+                "definition": "ft09与tr87候选有具体错误修正和实际后续消费；完整采用门仍因ar25新误编码未通过。"
+              }
+            ],
+            "caveats": [
+              "该轨迹证明提示未阻止这次错误；不能证明提示造成错误，也不能证明只修正这一格就能通关。",
+              "逐轨迹语义审阅由Codex AI代理完成；baseline也存在自然纠错，不能将候选纠错本身当作前缀的因果增益。"
+            ],
+            "evidenceFlow": [
+              {
+                "kind": "validation",
+                "title": "独立单元复算",
+                "detail": "第 24–26 行、第 54–56 列是 BBB/BbB/BBB，共 8 个黑像素；第 51–53 列均为 b，共 0 个黑像素。两次硬编码仍使用 (8,17)。"
+              },
+              {
+                "kind": "result",
+                "title": "实际消费",
+                "detail": "两次搜索均消费错误 E 形状并返回 E placements=0；后续交互白点再次显示 (8,18)。"
+              }
+            ]
+          },
+          "summary": "只解析保存的字符和代码字面量，未执行模型生成代码或游戏引擎。"
+        }
+      ]
+    }
+  ]
+}

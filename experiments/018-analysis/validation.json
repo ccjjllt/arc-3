@@ -1,0 +1,93 @@
+{
+  "metadata_and_build_checks": {
+    "manifest_config_matches_frozen_build": true,
+    "manifest_sources_match_frozen_build": true,
+    "frozen_notebook_hash_matches": true,
+    "all_embedded_sources_match": true,
+    "ordered_baseline_then_grounding": true,
+    "both_game_orders_match": true,
+    "equal_requested_budgets": true,
+    "complete_clean_arms": true,
+    "cache_confirmed": true,
+    "workers_drained": true,
+    "server_stopped": true,
+    "common_runtime_sources_equal": true,
+    "only_candidate_grounding_source_added": true,
+    "baseline_prefix_empty": true,
+    "candidate_prefix_equals_frozen": true,
+    "only_environment_difference_prefix": true,
+    "no_post_deadline_actions_or_completed_levels": true,
+    "same_game_ids": true,
+    "same_requested_game_ids": true,
+    "same_game_order_sha256": true,
+    "same_operation_mode": true,
+    "same_budget_seconds": true,
+    "same_normalized_budget_seconds": true,
+    "same_active_streams": true,
+    "same_concurrency": true,
+    "same_n_passes": true,
+    "same_warmup_action_games": true,
+    "same_analyzer_timeout_seconds": true,
+    "runtime_sources_match_frozen_hashes": true
+  },
+  "metadata_and_build_checks_pass": true,
+  "environment_differences": {
+    "ARC3_SYSTEM_PROMPT_PREFIX": [
+      null,
+      "When converting visual geometry or patterns into program state, use segmentation to locate relevant regions, then read only the necessary small crops from current_frame.ascii. A node's boundary or bounding rectangle does not mean every enclosed cell has its color: preserve observed holes and disconnected parts in color masks. Physical or collision footprints may differ and require interaction evidence. Keep the crop's actual characters, origin, row/col mapping, and bounds explicit; check crop bounds against the current frame and key encoded cells against observed characters before searching or executing a derived plan. Pixel count alone is not proof. Do not substitute a box center for observed geometry. Re-read changed regions on a new level; reuse supported rules, not old coordinates. Apply this extra inspection only when exact geometry or patterns are needed."
+    ]
+  },
+  "runtime_hash_checks": {
+    "baseline": {
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "tool_agent.py": true,
+      "inference_timing.py": true,
+      "request_deadline.py": true,
+      "scheduler_observer.py": true
+    },
+    "observation_grounding": {
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "tool_agent.py": true,
+      "observation_grounding.py": true,
+      "inference_timing.py": true,
+      "request_deadline.py": true,
+      "scheduler_observer.py": true
+    }
+  },
+  "unmapped_runtime_hashes": {
+    "baseline": [
+      "benchmark_initial.pkl"
+    ],
+    "observation_grounding": [
+      "benchmark_initial.pkl"
+    ]
+  },
+  "note": "Unmapped bundle/pickle hashes are retained and compared across arms, not silently claimed verified against the build. Current working-tree hashes are not a substitute for frozen experiment provenance.",
+  "runtime_evidence_checks": {
+    "timing_reports_complete": true,
+    "complete_request_log_pool": true,
+    "all_log_counts_and_usage_reconcile": true,
+    "request_logs_parse_and_call_id_integrity": true,
+    "observed_tool_schema_sets_equal": true,
+    "candidate_stripped_systems_present_in_baseline": true,
+    "baseline_has_no_candidate_prefix": true,
+    "candidate_all_request_systems_have_prefix": true,
+    "baseline:timing_valid": true,
+    "baseline:deadline_valid": true,
+    "baseline:scheduler_valid": true,
+    "observation_grounding:timing_valid": true,
+    "observation_grounding:deadline_valid": true,
+    "observation_grounding:scheduler_valid": true,
+    "candidate_prefix_snapshot_matches_frozen": true,
+    "baseline_has_no_grounding_snapshot": true
+  },
+  "runtime_evidence_checks_pass": true,
+  "all_checks_pass": true,
+  "status": "passed"
+}

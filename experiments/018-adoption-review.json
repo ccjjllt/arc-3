@@ -1,0 +1,1242 @@
+{
+  "schema_version": 1,
+  "review_inputs": {
+    "experiment_id": "018-observation-grounding",
+    "manifest_sha256": "3649b5f4a289c513b5645d5a771ac2385c15318baf490b8aa9ebd36db658e0e8",
+    "request_log_sha256": {
+      "baseline/ft09-0d8bbf25": "306f4efe985d4ef0a6b05a204793cbb2985cdb05bf14ded502b6da4c72a0a084",
+      "baseline/tr87-cd924810": "e205f8831d26c1c2e834e1d976fe2d11280970c4c63de4fd78617078393f5f71",
+      "baseline/ar25-0c556536": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+      "baseline/sb26-7fbdac44": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+      "observation_grounding/ft09-0d8bbf25": "e68ca2a4783c9143acb029f7e58606ac4c8b99a5377bc92342a94764059f6b5c",
+      "observation_grounding/tr87-cd924810": "c1a6533dc2fbbede1b1efd5abf4d4476b0609a81b9f38fd6eb9cb9b33ff41f3b",
+      "observation_grounding/ar25-0c556536": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+      "observation_grounding/sb26-7fbdac44": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b"
+    }
+  },
+  "reviewer": "Codex AI static semantic review: /root/latest_evidence (ft09,tr87), /root/research_synthesis (ar25,sb26), /root independent ar25 cell recomputation and integration. No human review claimed.",
+  "reviewed_at_utc": "2026-10-18T08:26:01.354677+00:00",
+  "entries": [
+    {
+      "arm": "baseline",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "error_corrected",
+      "level": 3,
+      "observation_call_ids": [
+        "call_582c076b827c4528a4283a06",
+        "call_eba02250c7fc46b683d702c2"
+      ],
+      "encoding_call_ids": [
+        "call_79ecde2734934c648a2f0a5b",
+        "call_57d6454b82a34be3816bd851",
+        "call_eba02250c7fc46b683d702c2",
+        "call_8347fea63b454b89bddb062a"
+      ],
+      "consumption_call_ids": [
+        "call_8347fea63b454b89bddb062a"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_79ecde2734934c648a2f0a5b",
+        "call_57d6454b82a34be3816bd851"
+      ],
+      "correction_call_ids": [
+        "call_eba02250c7fc46b683d702c2",
+        "call_8347fea63b454b89bddb062a"
+      ],
+      "frame_and_coordinate_evidence": "原始23行打印key(3,1)位于rows28..33/cols20..25的精确crop；41/43行手写m31首行为ggW；45行从当前ASCII以row28+2*i、col20+2*j重新提取。期间仍level3。",
+      "pixel_or_cell_recomputation": "独立按6×6 crop每2格采样，正确gWg/gRW/WWg；硬编码ggW/gRW/WWg在(0,1),(0,2)两个subcell错误。修正后23个目标单元一致，14橙/9红。",
+      "actual_consumption_evidence": "47行用修正后的P构造target，与current_frame逐单元比较，再由同一代码生成10个实际点击，并非只打印或未调用函数。",
+      "outcome_evidence": "返回consistent=True/constrained23，10动作全部执行，level_completed=True且level=4。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "baseline自身已有完整的观察→纠错→消费链，证明018候选行为不是底座完全缺失的能力；不做候选因果归因。",
+      "source_call_refs": [
+        {
+          "call_id": "call_582c076b827c4528a4283a06",
+          "seq": 11,
+          "source_line": 23
+        },
+        {
+          "call_id": "call_79ecde2734934c648a2f0a5b",
+          "seq": 20,
+          "source_line": 41
+        },
+        {
+          "call_id": "call_57d6454b82a34be3816bd851",
+          "seq": 21,
+          "source_line": 43
+        },
+        {
+          "call_id": "call_eba02250c7fc46b683d702c2",
+          "seq": 22,
+          "source_line": 45
+        },
+        {
+          "call_id": "call_8347fea63b454b89bddb062a",
+          "seq": 23,
+          "source_line": 47
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "baseline",
+      "game_id": "tr87-cd924810",
+      "classification": "error_intercepted",
+      "level": 3,
+      "observation_call_ids": [
+        "call_e6d3da95e82748fe9c28ce66",
+        "call_951fe75494b34d1798331751"
+      ],
+      "encoding_call_ids": [
+        "call_700a3ae5b09042a99f8c3535",
+        "call_e9773defb0cd4e6e877ad106"
+      ],
+      "consumption_call_ids": [
+        "call_804062b7994d4fe9b10d1e96",
+        "call_e94a68d2efb44ea09871d4fc"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_700a3ae5b09042a99f8c3535"
+      ],
+      "correction_call_ids": [
+        "call_e9773defb0cd4e6e877ad106"
+      ],
+      "frame_and_coordinate_evidence": "原始101行segmentation定位第一tile top=(4,5)，105行精确7×14 crop显示空白边框；103行错误glyph从tile top直接取5×5，107行改为r0+1/c0+1的5×5墨迹窗口。这个修正窗口没有环境动作。",
+      "pixel_or_cell_recomputation": "独立从105行字面crop取[0:5,0:5]得7个B；取[1:6,1:6]得14个B，与103/107行输出相符。整条Ybar由8/6/...像素误读修正到14/13/15/13/9/10/11/11。",
+      "actual_consumption_evidence": "109行调用lvl3b，构造配对词典并实际运行chunking搜索；111行实际进行D4单glyph匹配。因此正确编码进入搜索/分类，而不只是显示。",
+      "outcome_evidence": "修正后chunking仍None，后续逐glyph匹配有结果；本轮截止前未完成第3关。不能把正确提取说成成功解决规则。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "baseline也会在动作前发现并修正边框偏移。仅证明错误状态未继续用于动作、且修正进入搜索；不证明动作节省或过关增益。",
+      "source_call_refs": [
+        {
+          "call_id": "call_e6d3da95e82748fe9c28ce66",
+          "seq": 50,
+          "source_line": 101
+        },
+        {
+          "call_id": "call_700a3ae5b09042a99f8c3535",
+          "seq": 51,
+          "source_line": 103
+        },
+        {
+          "call_id": "call_951fe75494b34d1798331751",
+          "seq": 52,
+          "source_line": 105
+        },
+        {
+          "call_id": "call_e9773defb0cd4e6e877ad106",
+          "seq": 53,
+          "source_line": 107
+        },
+        {
+          "call_id": "call_804062b7994d4fe9b10d1e96",
+          "seq": 54,
+          "source_line": 109
+        },
+        {
+          "call_id": "call_e94a68d2efb44ea09871d4fc",
+          "seq": 55,
+          "source_line": 111
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "error_corrected",
+      "level": 3,
+      "observation_call_ids": [
+        "call_acb9d391e76849198f773c94",
+        "call_8788757a93e54e88aebfefd2",
+        "call_e4e24f751557478cae14888d",
+        "call_f5b9f3dc134a4a558e292ec0"
+      ],
+      "encoding_call_ids": [
+        "call_9c1194f0a24f4f6cb4723251",
+        "call_e4e24f751557478cae14888d",
+        "call_9804ef1daf7d444a8d4dda26",
+        "call_f5b9f3dc134a4a558e292ec0"
+      ],
+      "consumption_call_ids": [
+        "call_e403dbc62089490da03b7c9a",
+        "call_d72782e01c724028ac8030f2"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_e4e24f751557478cae14888d",
+        "call_e403dbc62089490da03b7c9a",
+        "call_c73d902aed4a4b069330c116"
+      ],
+      "correction_call_ids": [
+        "call_f5b9f3dc134a4a558e292ec0",
+        "call_d72782e01c724028ac8030f2"
+      ],
+      "frame_and_coordinate_evidence": "29行四个精确6×6 key crop；rows=[4,12,20,28,36,44,52], cols=[12,20,28,36,44]。35行target_or是手写13坐标；53行从当前ASCII以2像素子格重建cons并与单元颜色比较。",
+      "pixel_or_cell_recomputation": "独立从29行4个crop按2×2采样重建23单元一致约束，14个橙目标；35行13点集合唯一遗漏(4,4)。该处keyRight[2][2]=g，中心R，故目标O。53行实际只报((4,4),R,O)。正确像素中心rows[4]+3=39,cols[4]+3=47；55行错点(47,47)后57行改正。",
+      "actual_consumption_evidence": "37行执行了错误的13点目标列表；53行实际重算并定位差异，57行执行修正后的(39,47)，不是只做一致性口头描述。",
+      "outcome_evidence": "55行(47,47)为NO-OP；57行(39,47)明确LEVEL COMPLETED，进入level4。纠错发生在错误行动之后，不能称成功拦截或防止了初始漏项。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "候选有可核实编码/坐标错误→重建→真实动作修复链，满足具体纠错而非首次正确确认；但其仍先遗漏目标并误点一次，不能断言提示防止了错误，更不能把整局分差归因于此。",
+      "source_call_refs": [
+        {
+          "call_id": "call_acb9d391e76849198f773c94",
+          "seq": 13,
+          "source_line": 27
+        },
+        {
+          "call_id": "call_8788757a93e54e88aebfefd2",
+          "seq": 14,
+          "source_line": 29
+        },
+        {
+          "call_id": "call_9c1194f0a24f4f6cb4723251",
+          "seq": 15,
+          "source_line": 33
+        },
+        {
+          "call_id": "call_e4e24f751557478cae14888d",
+          "seq": 16,
+          "source_line": 35
+        },
+        {
+          "call_id": "call_e403dbc62089490da03b7c9a",
+          "seq": 17,
+          "source_line": 37
+        },
+        {
+          "call_id": "call_9804ef1daf7d444a8d4dda26",
+          "seq": 19,
+          "source_line": 41
+        },
+        {
+          "call_id": "call_f5b9f3dc134a4a558e292ec0",
+          "seq": 25,
+          "source_line": 53
+        },
+        {
+          "call_id": "call_c73d902aed4a4b069330c116",
+          "seq": 26,
+          "source_line": 55
+        },
+        {
+          "call_id": "call_d72782e01c724028ac8030f2",
+          "seq": 27,
+          "source_line": 57
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "unused_or_insufficient",
+      "level": 6,
+      "observation_call_ids": [
+        "call_c761da05c37d4b01854d4827",
+        "call_682242b998574728a4ee4b5f",
+        "call_7b02bc0aa8bc4ae79a45a4fa",
+        "call_3f0638b7464a437f9204948d"
+      ],
+      "encoding_call_ids": [
+        "call_3f0638b7464a437f9204948d",
+        "call_338a02289b3a4fa7b0d15018"
+      ],
+      "consumption_call_ids": [
+        "call_338a02289b3a4fa7b0d15018",
+        "call_7cb72992f5914d1f88dd545c",
+        "call_c8102af2bf27404f854a610e"
+      ],
+      "wrong_encoding_call_ids": [],
+      "correction_call_ids": [],
+      "frame_and_coordinate_evidence": "97/99/101行重新定位level6 rows从6起、cols从4起，105行提取26 cells/4 keys/22 normal；109行按独立单元翻转假设执行13动作。",
+      "pixel_or_cell_recomputation": "105行covered22/normal22且bad=[]，这里只确认编码覆盖一致；111/113行实际转移显示一个点击会同时改变两处32px颜色区域，当前点击模型与真实耦合转移不符。没有完成新的耦合模型及消费链。",
+      "actual_consumption_evidence": "13动作真实执行但未过关；后续只打印最近transition/frame_diff，未见修正后的计划再次执行。",
+      "outcome_evidence": "本轮candidate ft09终局5/6，不能把第6关的读取/覆盖数计为额外纠错成功。",
+      "new_misuse_excluded": false,
+      "reviewer_conclusion": "不计采用门的纠错链；同一颜色mask正确不等于物理/交互模型正确。未据此标为提示造成的新误用，因没有该因果证据。",
+      "source_call_refs": [
+        {
+          "call_id": "call_c761da05c37d4b01854d4827",
+          "seq": 46,
+          "source_line": 97
+        },
+        {
+          "call_id": "call_682242b998574728a4ee4b5f",
+          "seq": 47,
+          "source_line": 99
+        },
+        {
+          "call_id": "call_7b02bc0aa8bc4ae79a45a4fa",
+          "seq": 48,
+          "source_line": 101
+        },
+        {
+          "call_id": "call_3f0638b7464a437f9204948d",
+          "seq": 50,
+          "source_line": 105
+        },
+        {
+          "call_id": "call_338a02289b3a4fa7b0d15018",
+          "seq": 52,
+          "source_line": 109
+        },
+        {
+          "call_id": "call_7cb72992f5914d1f88dd545c",
+          "seq": 53,
+          "source_line": 111
+        },
+        {
+          "call_id": "call_c8102af2bf27404f854a610e",
+          "seq": 54,
+          "source_line": 113
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "error_corrected",
+      "level": 2,
+      "observation_call_ids": [
+        "call_9c71d55f638443ad90fe0c8d",
+        "call_7de4c7f7d9294b1b9ef9b0a7",
+        "call_e679116e3fd4450e8ff08a25",
+        "call_708a7972cfbd4870a62a8b5c",
+        "call_d0eb3bffecfb4cfc8a27f428"
+      ],
+      "encoding_call_ids": [
+        "call_07ae1092ee00421caaa17987",
+        "call_fbc2a475ee9d48a9b34673bc",
+        "call_e679116e3fd4450e8ff08a25",
+        "call_507c40c5941c4863af877b1b",
+        "call_708a7972cfbd4870a62a8b5c",
+        "call_d0eb3bffecfb4cfc8a27f428"
+      ],
+      "consumption_call_ids": [
+        "call_c9bf5e7bc94a4e00bf916895"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_07ae1092ee00421caaa17987",
+        "call_fbc2a475ee9d48a9b34673bc",
+        "call_e679116e3fd4450e8ff08a25"
+      ],
+      "correction_call_ids": [
+        "call_507c40c5941c4863af877b1b",
+        "call_708a7972cfbd4870a62a8b5c",
+        "call_d0eb3bffecfb4cfc8a27f428"
+      ],
+      "frame_and_coordinate_evidence": "55行tile bbox与57行精确glyph列明确：第一黄色glyph rows5..9/cols16..20。61/63/67行tiles内c0已=16却再次+1，且同一表被错用为toppink来源；73行cipher2去掉重复+1，75行改固定5×5 win，77行独立给出真正TOPPINK坐标。",
+      "pixel_or_cell_recomputation": "独立数57行第一glyph原mask10111/00100/00100/00100/11101为11个1；67行错误mask0111/0100/0100/0100/1101为9个1，恰为原mask丢首列。75行恢复完整5×5并保留内部空白行（不能把全部空行都trim掉）。77行question四字形与正确topP匹配到a2774f/f4469c/f374da/c66a83。",
+      "actual_consumption_evidence": "79行targets_canon实际从修正后的win构造7目标，并在run2中逐slot比较当前精确mask的canon、UP/RIGHT直到匹配。函数本次确被调用。",
+      "outcome_evidence": "79行30动作内最后UP触发LEVEL COMPLETED，current_frame.level=3；随后match全False是新关卡已载入后的旧坐标诊断，不是这次执行失败。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "候选确有具体crop起点与维度修正→分类→动作消费链。此前在错误状态上做过搜索和拨轮，故仅计error_corrected，不计整体防止误操作；基线同样出现并修正相似错误。",
+      "source_call_refs": [
+        {
+          "call_id": "call_9c71d55f638443ad90fe0c8d",
+          "seq": 27,
+          "source_line": 55
+        },
+        {
+          "call_id": "call_7de4c7f7d9294b1b9ef9b0a7",
+          "seq": 28,
+          "source_line": 57
+        },
+        {
+          "call_id": "call_07ae1092ee00421caaa17987",
+          "seq": 30,
+          "source_line": 61
+        },
+        {
+          "call_id": "call_fbc2a475ee9d48a9b34673bc",
+          "seq": 31,
+          "source_line": 63
+        },
+        {
+          "call_id": "call_e679116e3fd4450e8ff08a25",
+          "seq": 33,
+          "source_line": 67
+        },
+        {
+          "call_id": "call_507c40c5941c4863af877b1b",
+          "seq": 36,
+          "source_line": 73
+        },
+        {
+          "call_id": "call_708a7972cfbd4870a62a8b5c",
+          "seq": 37,
+          "source_line": 75
+        },
+        {
+          "call_id": "call_d0eb3bffecfb4cfc8a27f428",
+          "seq": 38,
+          "source_line": 77
+        },
+        {
+          "call_id": "call_c9bf5e7bc94a4e00bf916895",
+          "seq": 39,
+          "source_line": 79
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "error_intercepted",
+      "level": 4,
+      "observation_call_ids": [
+        "call_ac573c62051743b29d1c0136",
+        "call_41cd83bb4f6f4571a0a89e88"
+      ],
+      "encoding_call_ids": [
+        "call_964b20df5a99420bb5313186",
+        "call_45a1343b7ad44e499e7b5be5",
+        "call_9cdd745641d74da7957edba1",
+        "call_ccc148d2304d49249a50261c"
+      ],
+      "consumption_call_ids": [
+        "call_634e9757336249e9994c1c30"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_964b20df5a99420bb5313186",
+        "call_45a1343b7ad44e499e7b5be5"
+      ],
+      "correction_call_ids": [
+        "call_9cdd745641d74da7957edba1",
+        "call_ccc148d2304d49249a50261c"
+      ],
+      "frame_and_coordinate_evidence": "91行level4 tile定位；93行helper g把tile top偏移+1，同时Q传入的列8已经是ink首列，实际采row41/col9，造成Q全部UNRESOLVED。99行打印current ASCII Q rows40..46 cols7..15；103/107行Q改直接win(frame,41,8+7*k)。该诊断修正区间无环境动作。",
+      "pixel_or_cell_recomputation": "独立从99行Q小crop取实际rows41..45、cols8..12得到11111/00100/11100/10000/11111=15个黑点；旧col9..13仅11个。97行旧Q首位pix11，107行修正后所有7个q均chain，经SP/PY词典得到7目标；这是实测误编码拦截，不是反事实首次正确。",
+      "actual_consumption_evidence": "109行targets4实际调用精确win与SP/PY链，再A4读取answer精确5×5，用冻结的T逐slot执行UP/RIGHT；错误Q没有进入环境动作。",
+      "outcome_evidence": "109行最后UP触发LEVEL COMPLETED进入level5。新关卡上的match=False不代表旧关验证失败；执行循环已在终态停下。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "候选的第二条独立具体表示纠错，且在本关动作前修复。只证明本轨迹拦截了已发生的错误编码，不证明提示相对baseline提升或能保证后续关正确。",
+      "source_call_refs": [
+        {
+          "call_id": "call_ac573c62051743b29d1c0136",
+          "seq": 45,
+          "source_line": 91
+        },
+        {
+          "call_id": "call_964b20df5a99420bb5313186",
+          "seq": 46,
+          "source_line": 93
+        },
+        {
+          "call_id": "call_45a1343b7ad44e499e7b5be5",
+          "seq": 48,
+          "source_line": 97
+        },
+        {
+          "call_id": "call_41cd83bb4f6f4571a0a89e88",
+          "seq": 49,
+          "source_line": 99
+        },
+        {
+          "call_id": "call_9cdd745641d74da7957edba1",
+          "seq": 51,
+          "source_line": 103
+        },
+        {
+          "call_id": "call_ccc148d2304d49249a50261c",
+          "seq": 53,
+          "source_line": 107
+        },
+        {
+          "call_id": "call_634e9757336249e9994c1c30",
+          "seq": 54,
+          "source_line": 109
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "unused_or_insufficient",
+      "level": 5,
+      "observation_call_ids": [
+        "call_127b4fe945214f0d9e6b2e9c",
+        "call_3610ddd6f4a84a26b9a3ddb9",
+        "call_1cac33f72e364354aeb0f76c"
+      ],
+      "encoding_call_ids": [
+        "call_3610ddd6f4a84a26b9a3ddb9",
+        "call_94002826f0674ccabf65346c"
+      ],
+      "consumption_call_ids": [
+        "call_8ef46113e8c04c739c624718",
+        "call_3c127bf5dc9a4b4fad6c4231"
+      ],
+      "wrong_encoding_call_ids": [],
+      "correction_call_ids": [],
+      "frame_and_coordinate_evidence": "111行重新读取level5各tile位置，117/119行分别读取当前与初始history[0-of-level5]的精确5×5，明确区分两帧；123行用其编码构造排列候选。",
+      "pixel_or_cell_recomputation": "只见排列matches计数与随后两处轮盘前后mask改变；未看到已识别错误编码、修正后的完整约束与最终消费结果。",
+      "actual_consumption_evidence": "125/127行分别实测P2/S3字词轮盘改变，尚在机制探索；不能把print编码和候选排列当纠错收益。",
+      "outcome_evidence": "candidate tr87终局4/6，未完成level5。",
+      "new_misuse_excluded": false,
+      "reviewer_conclusion": "记录为不足，不额外计采用或纠错；未发现本段把旧frame不加区分用于动作，但没有未来正确性的保证。",
+      "source_call_refs": [
+        {
+          "call_id": "call_127b4fe945214f0d9e6b2e9c",
+          "seq": 55,
+          "source_line": 111
+        },
+        {
+          "call_id": "call_3610ddd6f4a84a26b9a3ddb9",
+          "seq": 58,
+          "source_line": 117
+        },
+        {
+          "call_id": "call_1cac33f72e364354aeb0f76c",
+          "seq": 59,
+          "source_line": 119
+        },
+        {
+          "call_id": "call_94002826f0674ccabf65346c",
+          "seq": 61,
+          "source_line": 123
+        },
+        {
+          "call_id": "call_8ef46113e8c04c739c624718",
+          "seq": 62,
+          "source_line": 125
+        },
+        {
+          "call_id": "call_3c127bf5dc9a4b4fad6c4231",
+          "seq": 63,
+          "source_line": 127
+        }
+      ],
+      "raw_call_and_result_verified": true
+    },
+    {
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "classification": "error_corrected",
+      "level": 5,
+      "observation_call_ids": [
+        "call_dc54eedd77b643a2873213f2"
+      ],
+      "encoding_call_ids": [
+        "call_6a894ffa6de24692a042150d",
+        "call_40da9220ffb24b51ac31f8f4",
+        "call_3b84f1ea40984165a3658ff1",
+        "call_ed37e0a70dfd44158a3b8cb3"
+      ],
+      "consumption_call_ids": [
+        "call_40da9220ffb24b51ac31f8f4",
+        "call_ed37e0a70dfd44158a3b8cb3",
+        "call_cf8d82e6054a48f987ccc449",
+        "call_c854e48ba69c4f0fadbba462"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_6a894ffa6de24692a042150d"
+      ],
+      "correction_call_ids": [
+        "call_40da9220ffb24b51ac31f8f4"
+      ],
+      "source_refs": [
+        {
+          "call_id": "call_dc54eedd77b643a2873213f2",
+          "seq": 37,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 75,
+          "result_first_seen_line": 75,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_6a894ffa6de24692a042150d",
+          "seq": 38,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 77,
+          "result_first_seen_line": 77,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_40da9220ffb24b51ac31f8f4",
+          "seq": 39,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 79,
+          "result_first_seen_line": 79,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_3b84f1ea40984165a3658ff1",
+          "seq": 40,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 81,
+          "result_first_seen_line": 81,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_ed37e0a70dfd44158a3b8cb3",
+          "seq": 42,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 85,
+          "result_first_seen_line": 85,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_cf8d82e6054a48f987ccc449",
+          "seq": 45,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 91,
+          "result_first_seen_line": 91,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_c854e48ba69c4f0fadbba462",
+          "seq": 47,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 95,
+          "result_first_seen_line": 95,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "同一L5，seq37读当前rows36–50/cols42–56物件与rows15–41/cols12–38目标。seq38把B和b全部纳入S，得到225格；seq39仍从当前帧读取并剔除与裁剪边界连通的b，得到99格。期间到seq40没有动作，排除换帧解释。",
+      "pixel_or_cell_recomputation": "独立计数：15×15裁剪有88个B、137个b；126个b连到外边界、11个b封闭，故修正S=88+11=99而非225。比如(36,54)=b且外部，应删；(37,43)=b封闭控制点，保留为物理形状候选。见pixel_proofs.baseline_ar25_L5。",
+      "actual_consumption_evidence": "seq39实际用99格S进入四方向subset搜索，输出I=(15,12)、R=(27,24)。seq40/42计算合并覆盖及多镜像；seq45执行UP×7、LEFT×10到(15,12)，seq47移动横轴DOWN×4并返回LEVEL COMPLETED。",
+      "outcome_evidence": "L5完成；不是只打印或未调用函数。物理足迹含控制点孔的解释有先前移动/选择交互及本关覆盖后成功作支持，仍不可推广成任意游戏都能填孔。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "baseline已有从矩形误编码→当前字符修订→搜索→实际动作的完整链。该正例不能归为018提示的增量。"
+    },
+    {
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "classification": "error_corrected",
+      "level": 7,
+      "observation_call_ids": [
+        "call_a56d6199368245358542f084"
+      ],
+      "encoding_call_ids": [
+        "call_a56d6199368245358542f084",
+        "call_aba752800c31436ea6116e45",
+        "call_1a3a97077cfd47348adad669"
+      ],
+      "consumption_call_ids": [
+        "call_1a3a97077cfd47348adad669",
+        "call_0a174c2d14a6462fac39bad3",
+        "call_011613900d9d48e39b0461f0",
+        "call_6ee1fd80e4fa4402a708abe7",
+        "call_709709152a96418285443ce2",
+        "call_099aaf5f9a894ab1adfaa5ca",
+        "call_b2fc8b0f42f6442d8f3dfd47"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_aba752800c31436ea6116e45"
+      ],
+      "correction_call_ids": [
+        "call_1a3a97077cfd47348adad669"
+      ],
+      "source_refs": [
+        {
+          "call_id": "call_a56d6199368245358542f084",
+          "seq": 62,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 125,
+          "result_first_seen_line": 125,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_aba752800c31436ea6116e45",
+          "seq": 63,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 127,
+          "result_first_seen_line": 127,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_1a3a97077cfd47348adad669",
+          "seq": 64,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 129,
+          "result_first_seen_line": 129,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_0a174c2d14a6462fac39bad3",
+          "seq": 65,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 131,
+          "result_first_seen_line": 131,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_011613900d9d48e39b0461f0",
+          "seq": 66,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 133,
+          "result_first_seen_line": 133,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_6ee1fd80e4fa4402a708abe7",
+          "seq": 67,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 135,
+          "result_first_seen_line": 135,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_709709152a96418285443ce2",
+          "seq": 68,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 137,
+          "result_first_seen_line": 137,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_099aaf5f9a894ab1adfaa5ca",
+          "seq": 69,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 139,
+          "result_first_seen_line": 139,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_b2fc8b0f42f6442d8f3dfd47",
+          "seq": 70,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "0b7fa4fbed5ae139cc95c6a7087337b1b3a99018cb26562a64c8af42e4702ba9",
+          "first_seen_line": 141,
+          "result_first_seen_line": 141,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "seq62从current_frame.ascii生成42个目标块，打印block rows1–13/cols7–17；其后无动作。seq63手写grid_rows时错抄第2行，seq64修正同一行。",
+      "pixel_or_cell_recomputation": "打印row2为......###..，列原点7，故#在13/14/15；seq63 AST字面量却为10/11/12，seq64改回13/14/15。对应像素行6–8、正确列39–47，不是30–38。见pixel_proofs.baseline_ar25_L7。",
+      "actual_consumption_evidence": "修正后的T实际进入seq64 allpl搜索以及seq65–70覆盖/成本搜索；seq70输出missing=[]、extra40与动作计划，故有计算消费。",
+      "outcome_evidence": "直到截止没有执行该L7计划、未完成L7；本项只证明转录纠错后被搜索消费，不宣称减少动作或获得关卡。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "第二条baseline自发纠错；与候选L6转录错误应并列呈现，不能将“有检查”当候选独有。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "correct_confirmation",
+      "level": 6,
+      "observation_call_ids": [
+        "call_27905cba2f284bb38bf4f6ae",
+        "call_f97e4504df4e4aeca38b1b57",
+        "call_b23b34ce732c499692cf971d"
+      ],
+      "encoding_call_ids": [
+        "call_b23b34ce732c499692cf971d",
+        "call_9e9c91036a574049834f2985"
+      ],
+      "consumption_call_ids": [
+        "call_9e9c91036a574049834f2985",
+        "call_2a076ac7291d4587aca192fc",
+        "call_ba3b1284bb32483ca68df757",
+        "call_30ba38479f9c46119e504dbd"
+      ],
+      "wrong_encoding_call_ids": [],
+      "correction_call_ids": [],
+      "source_refs": [
+        {
+          "call_id": "call_27905cba2f284bb38bf4f6ae",
+          "seq": 51,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 103,
+          "result_first_seen_line": 103,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_f97e4504df4e4aeca38b1b57",
+          "seq": 52,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 105,
+          "result_first_seen_line": 105,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_b23b34ce732c499692cf971d",
+          "seq": 53,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 107,
+          "result_first_seen_line": 107,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_9e9c91036a574049834f2985",
+          "seq": 54,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 109,
+          "result_first_seen_line": 109,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_2a076ac7291d4587aca192fc",
+          "seq": 58,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 117,
+          "result_first_seen_line": 117,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_ba3b1284bb32483ca68df757",
+          "seq": 59,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 119,
+          "result_first_seen_line": 119,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_30ba38479f9c46119e504dbd",
+          "seq": 61,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 123,
+          "result_first_seen_line": 123,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "seq51打印当前L6 rows8–30/cols41–62；seq53从当前字符按全局3×3格扫描，得到13个黑部件块。seq54的P字面量逐项等于该输出；seq58/59只保留其中G的8块并由SPACE白点结果seq56确认同一对象。",
+      "pixel_or_cell_recomputation": "独立读取打印窗口得到13个块，每块8个B；与seq54的P完全一致。G块[(3,15),(3,16),(3,17),(4,14),(4,18),(5,14),(6,14),(7,15)]与交互白点一致，见pixel_proofs.candidate_ar25_L6。",
+      "actual_consumption_evidence": "seq54把真实P送入反射覆盖搜索；seq59对G做放置搜索，输出offset(15,7)和覆盖32/52；seq61实际执行DOWN×12、LEFT×7，日志末尾G bbox=(45,59,21,35)，等于该块坐标放置结果。",
+      "outcome_evidence": "只证明一部分首次编码正确并确实消费；未证明拦截错误。完整候选同关另有E的转录错误未修，L6未完成。",
+      "new_misuse_excluded": false,
+      "reviewer_conclusion": "存在可复核的正确确认链，但不得因本项计为“避免错误”，更不能覆盖同游戏下述new_misuse。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "new_misuse",
+      "level": 6,
+      "observation_call_ids": [
+        "call_27905cba2f284bb38bf4f6ae",
+        "call_b23b34ce732c499692cf971d",
+        "call_97b8e72abb6242198b46b19c"
+      ],
+      "encoding_call_ids": [
+        "call_b219939b05f64dc79a307427",
+        "call_2a076ac7291d4587aca192fc",
+        "call_ba3b1284bb32483ca68df757"
+      ],
+      "consumption_call_ids": [
+        "call_b219939b05f64dc79a307427",
+        "call_2a076ac7291d4587aca192fc"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_b219939b05f64dc79a307427",
+        "call_2a076ac7291d4587aca192fc",
+        "call_ba3b1284bb32483ca68df757"
+      ],
+      "correction_call_ids": [],
+      "source_refs": [
+        {
+          "call_id": "call_27905cba2f284bb38bf4f6ae",
+          "seq": 51,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 103,
+          "result_first_seen_line": 103,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_b23b34ce732c499692cf971d",
+          "seq": 53,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 107,
+          "result_first_seen_line": 107,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_b219939b05f64dc79a307427",
+          "seq": 55,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 111,
+          "result_first_seen_line": 111,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_97b8e72abb6242198b46b19c",
+          "seq": 56,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 113,
+          "result_first_seen_line": 113,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_2a076ac7291d4587aca192fc",
+          "seq": 58,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 117,
+          "result_first_seen_line": 117,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_ba3b1284bb32483ca68df757",
+          "seq": 59,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 119,
+          "result_first_seen_line": 119,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "seq51 current ASCII及seq53正确P均指向E顶端块(8,18)。seq55 pieces[E]改成(8,17)；seq56通过SPACE观察白点又得到(8,18)，但seq58/59硬编码仍错。中间SPACE仅切换白点，不移动E。",
+      "pixel_or_cell_recomputation": "(8,17)→rows24–26/cols51–53的三行均bbb，B=0；(8,18)→rows24–26/cols54–56为BBB/BbB/BBB，B=8。错项新增一个全背景块且漏掉真实块。顶端正确相对列1，错误Erel设成0。完整窗口与独立计数见pixel_proofs.candidate_ar25_L6。",
+      "actual_consumption_evidence": "seq55错误E实际进入placements，输出E 0；seq58错误E进入全局搜索，输出E placements on pattern 0/done None。并非无害注释或未执行定义。",
+      "outcome_evidence": "末尾改用bbox移动E、G，未回写修复E编码；没有L6通关。另有hline返回None与时间截止，不能把少一关或全部延时单因果归给这个错格。",
+      "new_misuse_excluded": false,
+      "reviewer_conclusion": "确认候选轨迹中新产生且被消费的误编码。new_misuse指这次轨迹内的新转录错误；没有证据证明是prefix造成。此项足以否定“提醒保证保真”。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "unused_or_insufficient",
+      "level": 3,
+      "observation_call_ids": [
+        "call_1e140668adc54a3eae7fe077",
+        "call_b56824f888fd4921b8abad8e",
+        "call_4699f787744742b685793399"
+      ],
+      "encoding_call_ids": [
+        "call_74457c733e984ce480e5654c",
+        "call_8b594719736e482da3d4a102"
+      ],
+      "consumption_call_ids": [
+        "call_74457c733e984ce480e5654c",
+        "call_8b594719736e482da3d4a102",
+        "call_884bf1e04aba42019e9b9581"
+      ],
+      "wrong_encoding_call_ids": [
+        "call_74457c733e984ce480e5654c"
+      ],
+      "correction_call_ids": [
+        "call_8b594719736e482da3d4a102"
+      ],
+      "source_refs": [
+        {
+          "call_id": "call_1e140668adc54a3eae7fe077",
+          "seq": 19,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 39,
+          "result_first_seen_line": 39,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_b56824f888fd4921b8abad8e",
+          "seq": 20,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 41,
+          "result_first_seen_line": 41,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_4699f787744742b685793399",
+          "seq": 26,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 53,
+          "result_first_seen_line": 53,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_74457c733e984ce480e5654c",
+          "seq": 27,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 55,
+          "result_first_seen_line": 55,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_8b594719736e482da3d4a102",
+          "seq": 28,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 57,
+          "result_first_seen_line": 57,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_884bf1e04aba42019e9b9581",
+          "seq": 30,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/ar25-0c556536_p0_requests.jsonl",
+          "source_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab",
+          "first_seen_line": 61,
+          "result_first_seen_line": 61,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "L3 ASCII分别显示T=48个B+6个控制点孔，L=56个B+7孔。seq27的Tpos用min_col>30识别对象，T向左移动后误取已固定在(42..53,33..44)的L，提前报STOP；seq28改为40<pixels<52。",
+      "pixel_or_cell_recomputation": "T窗口27–32/45–56，三行12宽横条与三行6宽柱：54占位格、6个b孔、48个B；L为63占位格、7孔、56个B。像素面积可区分当时二者，但单独面积不是跨场景对象证明。",
+      "actual_consumption_evidence": "seq28修复后的Tpos返回(30..35,24..35,48)等真实移动状态并执行余下LEFT×6、DOWN×4；seq30移动横轴后L3完成。",
+      "outcome_evidence": "这是有真实后续动作的对象追踪谓词修复，正面记录。但它不检查关键编码格，也没有建立独立像素掩码→状态保真的修订链，严格018采用门不计入具体像素编码纠错数。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "保留有用的程序修复证据，机制范围为对象身份追踪；不为凑采用门将其等同mask/坐标转录纠错。"
+    },
+    {
+      "arm": "baseline",
+      "game_id": "sb26-7fbdac44",
+      "classification": "unused_or_insufficient",
+      "level": 2,
+      "observation_call_ids": [
+        "call_44c92f4873fe44e9b32383bc",
+        "call_0ffcff8e44c5493e9fc6b738",
+        "call_8feec946af9a419f863241f2"
+      ],
+      "encoding_call_ids": [
+        "call_5a151f26a7a147f5a0b9c5be"
+      ],
+      "consumption_call_ids": [
+        "call_958649fd1c61436e9fd04519",
+        "call_6759c387cb384a83bb4707aa"
+      ],
+      "wrong_encoding_call_ids": [],
+      "correction_call_ids": [],
+      "source_refs": [
+        {
+          "call_id": "call_5a151f26a7a147f5a0b9c5be",
+          "seq": 12,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 25,
+          "result_first_seen_line": 25,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_44c92f4873fe44e9b32383bc",
+          "seq": 16,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 33,
+          "result_first_seen_line": 33,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_0ffcff8e44c5493e9fc6b738",
+          "seq": 17,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 35,
+          "result_first_seen_line": 35,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_8feec946af9a419f863241f2",
+          "seq": 19,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 39,
+          "result_first_seen_line": 39,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_958649fd1c61436e9fd04519",
+          "seq": 21,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 43,
+          "result_first_seen_line": 43,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_6759c387cb384a83bb4707aa",
+          "seq": 22,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/baseline/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "0366cf478308879a1da597b603e36997b5b1c82a32ae1f38d36825bc5b6b3a40",
+          "first_seen_line": 45,
+          "result_first_seen_line": 45,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "完整42个已落盘调用可审。主要为segmentation定位槽位、SPACE动画与交互验证。seq16/17/19读取的是last_animation_frames，不是current_frame的小区域状态编码。",
+      "pixel_or_cell_recomputation": "seq17动画frame37→38有48格变化，原始输出给top目标边框与下方slot；seq19展示target3 region与red box局部字符。seq5 crop函数忽略c0/c1而打印整行，属于范围控制缺陷，未见把它错误当成局部原点再编码。",
+      "actual_consumption_evidence": "在动画反馈后seq21把R4与G1互换，seq22继续三次交换并SPACE，返回L2完成。此链证明已有动画/流程规则修正；没有可审核的“当前小crop→逐格编码→检查”新机制链。",
+      "outcome_evidence": "8关全通，145动作，AE100。L2用25动作；不据此推断更少ASCII必然更好。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "严格018自然采用证据不足，非零ASCII使用不是采用。未发现本审阅范围内新增当前帧mask转录误用；仍有普通假设错误与代码异常。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "sb26-7fbdac44",
+      "classification": "unused_or_insufficient",
+      "level": 2,
+      "observation_call_ids": [
+        "call_409466817d764de99977f3c4",
+        "call_beaff2a218cd4c83bee0b1ad"
+      ],
+      "encoding_call_ids": [
+        "call_6df08bf183044c0c8a96d659"
+      ],
+      "consumption_call_ids": [
+        "call_308771d38ca84b81973dae77"
+      ],
+      "wrong_encoding_call_ids": [],
+      "correction_call_ids": [],
+      "source_refs": [
+        {
+          "call_id": "call_409466817d764de99977f3c4",
+          "seq": 20,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b",
+          "first_seen_line": 41,
+          "result_first_seen_line": 41,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_beaff2a218cd4c83bee0b1ad",
+          "seq": 21,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b",
+          "first_seen_line": 43,
+          "result_first_seen_line": 43,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_6df08bf183044c0c8a96d659",
+          "seq": 22,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b",
+          "first_seen_line": 45,
+          "result_first_seen_line": 45,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        },
+        {
+          "call_id": "call_308771d38ca84b81973dae77",
+          "seq": 23,
+          "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/018-observation-grounding/observation_grounding/sb26-7fbdac44_p0_requests.jsonl",
+          "source_sha256": "4eb8a5c0be20461da676d956a6d94e7a3d6ee9b26d8d11ab6c93a29225d0111b",
+          "first_seen_line": 47,
+          "result_first_seen_line": 47,
+          "note": "行号是历史快照首次保存位置，不冒充工具执行时刻。"
+        }
+      ],
+      "frame_and_coordinate_evidence": "完整41个已落盘调用可审。全部ascii读取位于seq20–22，均针对last_animation_frames；无current_frame.ascii小crop提取。seq21对相邻frame5→6逐格比较，分离真实W→R闪烁而非静态红色框。",
+      "pixel_or_cell_recomputation": "seq20静态R总数154混有原红框；seq21差分48格。按打印逐行计数，顶部rows0..7/cols7..14边框为8+6×2+8=28格，下方rows20..25/cols20..25为6+4×2+6=20格，合计48；seq22产生target=(0,7,7,14)、slot=(20,25,20,25)。",
+      "actual_consumption_evidence": "seq23每轮SPACE后调用flash_info→target_index/slot_index→当前segmentation的targets/board_pieces，执行五次swap，最终L2完成。是真实反馈消费；不是未调用函数。",
+      "outcome_evidence": "这是从动画差分确定检查顺序/槽位的规则恢复，不是纠正错误像素编码。L2 36动作对baseline25，L8还经历失败提交后12次交换；最终8关全通、160动作、AE94.4163237311。不能把额外动作归因prefix。",
+      "new_misuse_excluded": true,
+      "reviewer_conclusion": "强于关键词命中的有效视觉反馈链，但超出本版“当前小区域保真编码”的明确采用定义，故不计合格采用游戏。未证实新的mask转录误用；不把仍会试错写成零错误。"
+    }
+  ],
+  "game_review_status": [
+    {
+      "arm": "baseline",
+      "game_id": "ft09-0d8bbf25",
+      "status": "reviewed",
+      "opportunities": 1,
+      "notes": "Reviewed all available 43 deduplicated snippets for chronology, with 1 explicitly annotated windows. opportunities counts annotated windows, not an exhaustive population estimate. See entries for actual corrections and non-qualifying later-level observations."
+    },
+    {
+      "arm": "baseline",
+      "game_id": "tr87-cd924810",
+      "status": "reviewed",
+      "opportunities": 1,
+      "notes": "Reviewed all available 55 deduplicated snippets for chronology, with 1 explicitly annotated windows. opportunities counts annotated windows, not an exhaustive population estimate. See entries for actual corrections and non-qualifying later-level observations."
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "status": "reviewed",
+      "opportunities": 2,
+      "notes": "Reviewed all available 54 deduplicated snippets for chronology, with 2 explicitly annotated windows. opportunities counts annotated windows, not an exhaustive population estimate. See entries for actual corrections and non-qualifying later-level observations."
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "status": "reviewed",
+      "opportunities": 3,
+      "notes": "Reviewed all available 63 deduplicated snippets for chronology, with 3 explicitly annotated windows. opportunities counts annotated windows, not an exhaustive population estimate. See entries for actual corrections and non-qualifying later-level observations."
+    },
+    {
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "status": "reviewed",
+      "opportunities": null,
+      "notes": "70/70调用代码与结果已审；L5矩形填充纠正、L7块图错抄纠正；真实baseline已有机制。",
+      "reviewed_deduplicated_calls": 70,
+      "opportunity_definition": "未将关键词、函数定义或所有观察请求计为机会数；具体可验证事件见entries。"
+    },
+    {
+      "arm": "baseline",
+      "game_id": "sb26-7fbdac44",
+      "status": "reviewed",
+      "opportunities": null,
+      "notes": "42/42已落盘调用已审；主要segmentation与动画规则推断，未形成严格current-frame小crop采用链。末次未进入快照的调用仅用benchmark确认终局。",
+      "reviewed_deduplicated_calls": 42,
+      "opportunity_definition": "未将关键词、函数定义或所有观察请求计为机会数；具体可验证事件见entries。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "status": "reviewed",
+      "opportunities": null,
+      "notes": "64/64调用已审；P/G真实读取并消费，但L6 E(8,18)→(8,17)转录误用未修；另Tpos追踪修复不充作像素校核。",
+      "reviewed_deduplicated_calls": 64,
+      "opportunity_definition": "未将关键词、函数定义或所有观察请求计为机会数；具体可验证事件见entries。"
+    },
+    {
+      "arm": "observation_grounding",
+      "game_id": "sb26-7fbdac44",
+      "status": "reviewed",
+      "opportunities": null,
+      "notes": "41/41已落盘调用已审；ASCII都来自动画帧，flash_info被实际消费但不计本次限定采用；末次未进入快照的调用不凭空补code。",
+      "reviewed_deduplicated_calls": 41,
+      "opportunity_definition": "未将关键词、函数定义或所有观察请求计为机会数；具体可验证事件见entries。"
+    }
+  ],
+  "classifications": [
+    "correct_confirmation",
+    "error_corrected",
+    "error_intercepted",
+    "new_misuse",
+    "unused_or_insufficient"
+  ],
+  "instructions": [
+    "Fill a separate copy and pass --reviews; this generated template is always pending, never adoption evidence.",
+    "Read original source lines and untruncated code/results. IDs refer to the corresponding game/arm deduplicated trajectory.",
+    "Prove current-frame crop bounds/origin/row-col/characters, encoded state and downstream consumption; printing or uncalled function definitions do not qualify.",
+    "Correct first encoding is confirmation, not prevention. Correction requires an observed wrong prior encoding and changed state; action-before/after must be supported separately.",
+    "Record baseline chains too. Inspect stale frame/new-level coordinates, holes/components, color-mask versus physical-footprint distinctions and added read overhead.",
+    "At least two candidate games need verified extraction→encoding→consumption chains, with at least one concrete correction/interception and no observed new misuse; score is evaluated separately.",
+    "Machine checks validate reference existence, not semantic truth. Explicit reviewer judgment remains necessary."
+  ],
+  "review_sources": [
+    {
+      "path": "experiments/018-review-ft09-tr87.json",
+      "sha256": "e5f122aad1e2d57a1ed472c25005519669d4258c55657105a4de29a145306cd7",
+      "reviewer": "Codex independent static reviewer (latest_evidence); agent judgment, not a human pixel audit"
+    },
+    {
+      "path": "experiments/018-review-ar25-sb26.json",
+      "sha256": "aae60d1b8cc7c4bf179effbcad1d7a15050f69bd24026d3553996ef7fd27f6ee",
+      "reviewer": "research_synthesis：静态独立审阅"
+    }
+  ],
+  "scope": "All 432 recorded deduplicated call histories across eight game/arm logs reviewed; terminal calls absent from subsequent snapshots are not invented. Fallback response contexts match already-reviewed requests exactly and introduce no new snippets.",
+  "decision": "Do not promote or launch a full-pool/reverse-order run of this version: concrete correction in two games coexists with a candidate ar25 geometry transcription error; score and full wins regress. No claim that prefix caused the error or the score change."
+}

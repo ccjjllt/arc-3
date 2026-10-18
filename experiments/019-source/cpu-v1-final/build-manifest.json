@@ -1,0 +1,68 @@
+{
+  "config": {
+    "id": "019-fp8-ple",
+    "account": "jiyujia",
+    "mode": "weights_only",
+    "phase_order": [
+      "bf16_a",
+      "fp8",
+      "bf16_b"
+    ],
+    "server_seed": 190018,
+    "port": 8001,
+    "hard_limit_seconds": 4800,
+    "startup_limit_seconds": 900,
+    "phase_budget_seconds": 360,
+    "weight_audit_limit_seconds": 240,
+    "inputs": {
+      "bf16": "models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+      "fp8": "models/dfranzen/albucino-qwen3.8-flash-next-w4a16-fp8ple/transformers/default/1",
+      "draft": "models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1",
+      "wheelhouse": "datasets/dfranzen/pennyroyal-v253"
+    },
+    "runtime_source_sha256": {
+      "sglang/srt/models/qwen4_exp.py": "35a1785ce4c287821f00f1518b3880ab6838ef58d42fd51ece86d8098b2ed666",
+      "sglang/kernels/ops/qwen4_ple.py": "7f64e896c1f00f46ab6c4cd8c5c90cedc528555d1cc7401e9c7a5a3a31b87f16",
+      "sglang/srt/environ.py": "84755bded97394a18537d8e329c3d05c15f7ec4aa8a801bd9971f34b4f11d7ed",
+      "sglang/srt/model_loader/loader.py": "1016b2c6c2d7eb50ef25e0a731e20096e4b79239bccb6fea26aa59d3f29bf8fe"
+    },
+    "scope": "Frozen requests, not a game or leaderboard score. PLE precision changes model numerics. Second BF16 controls drift; startup includes cache/JIT order effects, not a clean cold-load estimate."
+  },
+  "payload": {
+    "sha256": {
+      "config.json": "6de321ea29c484f833c484036d9b362b4df169ae1b72dcaeda1a6a09e9a2e19c",
+      "weight-contract.json": "df08476ffd8b0c5f4bd85491b6dc0c6db34bc67ccf7652f0a0d751bd6a3d810b",
+      "suite.json": "a2cbdcc02cb48ae73c64016cc45b2af0c0e54315efeedac328d1b9d473f8792c",
+      "launch_server.py": "173d276739cda7cd65f53b4c13afac4e1ec51ee1f08ff5f086984c830b85d3bf",
+      "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "src/arc3_research/experiment_config.py": "df2db63b55ce1f2ae261758f8725927f51050a0a867ff0c30d9a4094b152ca4a",
+      "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
+      "src/arc3_research/ple_weights.py": "1034c18c4105b2ee497ac7e5b1ff519a6e46cba4135c5c89612d8943a6e87cb5",
+      "src/arc3_research/ple_microbench.py": "5a77861936f76bdfd9cc5fba5efed18ce7b8f2e9f76e837d9b5a89d9e30d15a3",
+      "src/arc3_research/ple_session.py": "88aa55d51c54c5cd994dd7db4f5527085d869e1c5d4fe65600786d15f63ecbfa"
+    },
+    "base_notebook_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "original_precache_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+    "original_serving_sha256": "c362ce556dc35ed0725c31b3f5c60b86bc83a2d94152fd1a109116813a4b5cf8",
+    "changes_to_serving": [
+      "same explicit server seed in all phases",
+      "installed source identity gate",
+      "owned process cleanup and readiness report",
+      "join checkpoint prefetch before requests"
+    ]
+  },
+  "source_sha256": {
+    "scripts/build_019_microbench.py": "a86e02e9f17a3c44aef5cb2085de73f53642f435f9455bfbebecf20b827d85e2",
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "experiments/019-weight-contract.json": "df08476ffd8b0c5f4bd85491b6dc0c6db34bc67ccf7652f0a0d751bd6a3d810b",
+    "experiments/019-suite.json": "a2cbdcc02cb48ae73c64016cc45b2af0c0e54315efeedac328d1b9d473f8792c",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/experiment_config.py": "df2db63b55ce1f2ae261758f8725927f51050a0a867ff0c30d9a4094b152ca4a",
+    "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
+    "src/arc3_research/ple_weights.py": "1034c18c4105b2ee497ac7e5b1ff519a6e46cba4135c5c89612d8943a6e87cb5",
+    "src/arc3_research/ple_microbench.py": "5a77861936f76bdfd9cc5fba5efed18ce7b8f2e9f76e837d9b5a89d9e30d15a3",
+    "src/arc3_research/ple_session.py": "88aa55d51c54c5cd994dd7db4f5527085d869e1c5d4fe65600786d15f63ecbfa"
+  },
+  "notebook_sha256": "d4d77c4a91c3b41aa81faa88dda7b54d876dc94c81f566c8ce0e5dd595e29a9b",
+  "kernel_metadata_sha256": "4382eb2fd3aa8f43e1c167b60c41e59b5130a2f940298dc077369076077cd754"
+}

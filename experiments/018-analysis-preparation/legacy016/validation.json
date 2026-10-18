@@ -1,0 +1,92 @@
+{
+  "metadata_and_build_checks": {
+    "manifest_config_matches_frozen_build": true,
+    "manifest_sources_match_frozen_build": true,
+    "frozen_notebook_hash_matches": true,
+    "all_embedded_sources_match": true,
+    "ordered_baseline_then_grounding": false,
+    "both_game_orders_match": true,
+    "equal_requested_budgets": true,
+    "complete_clean_arms": true,
+    "cache_confirmed": true,
+    "workers_drained": true,
+    "server_stopped": true,
+    "common_runtime_sources_equal": true,
+    "only_candidate_grounding_source_added": false,
+    "baseline_prefix_empty": true,
+    "candidate_prefix_equals_frozen": false,
+    "only_environment_difference_prefix": false,
+    "no_post_deadline_actions_or_completed_levels": true,
+    "same_game_ids": true,
+    "same_requested_game_ids": true,
+    "same_game_order_sha256": true,
+    "same_operation_mode": true,
+    "same_budget_seconds": true,
+    "same_normalized_budget_seconds": true,
+    "same_active_streams": true,
+    "same_concurrency": true,
+    "same_n_passes": true,
+    "same_warmup_action_games": true,
+    "same_analyzer_timeout_seconds": true,
+    "runtime_sources_match_frozen_hashes": true
+  },
+  "metadata_and_build_checks_pass": false,
+  "environment_differences": {
+    "ARC3_PRIORITY_PACE": [
+      "0",
+      "1"
+    ]
+  },
+  "runtime_hash_checks": {
+    "baseline": {
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "tool_agent.py": true,
+      "inference_timing.py": true,
+      "request_deadline.py": true,
+      "scheduler_observer.py": true
+    },
+    "pace_1x": {
+      "run_arm.py": true,
+      "goal_evidence.py": true,
+      "transient_history.py": true,
+      "program_state.py": true,
+      "tool_agent.py": true,
+      "inference_timing.py": true,
+      "request_deadline.py": true,
+      "scheduler_observer.py": true
+    }
+  },
+  "unmapped_runtime_hashes": {
+    "baseline": [
+      "benchmark_initial.pkl"
+    ],
+    "pace_1x": [
+      "benchmark_initial.pkl"
+    ]
+  },
+  "note": "Unmapped bundle/pickle hashes are retained and compared across arms, not silently claimed verified against the build. Current working-tree hashes are not a substitute for frozen experiment provenance.",
+  "runtime_evidence_checks": {
+    "timing_reports_complete": true,
+    "complete_request_log_pool": false,
+    "all_log_counts_and_usage_reconcile": false,
+    "request_logs_parse_and_call_id_integrity": true,
+    "observed_tool_schema_sets_equal": true,
+    "candidate_stripped_systems_present_in_baseline": false,
+    "baseline_has_no_candidate_prefix": false,
+    "candidate_all_request_systems_have_prefix": false,
+    "baseline:timing_valid": true,
+    "baseline:deadline_valid": true,
+    "baseline:scheduler_valid": true,
+    "pace_1x:timing_valid": true,
+    "pace_1x:deadline_valid": true,
+    "pace_1x:scheduler_valid": true,
+    "candidate_prefix_snapshot_matches_frozen": false,
+    "baseline_has_no_grounding_snapshot": true
+  },
+  "runtime_evidence_checks_pass": false,
+  "all_checks_pass": false,
+  "status": "incomplete_evidence"
+}

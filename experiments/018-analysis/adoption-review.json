@@ -1,0 +1,168 @@
+{
+  "status": "review_supplied",
+  "source": {
+    "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/018-adoption-review.json",
+    "sha256": "82ebae499da57b8250160877052e0b37c4d8a409c8b4b65a2b6fdf132caa67f6",
+    "bytes": 63087
+  },
+  "entries": [
+    {
+      "entry_index": 0,
+      "arm": "baseline",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "error_corrected",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 1,
+      "arm": "baseline",
+      "game_id": "tr87-cd924810",
+      "classification": "error_intercepted",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 2,
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "error_corrected",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 3,
+      "arm": "observation_grounding",
+      "game_id": "ft09-0d8bbf25",
+      "classification": "unused_or_insufficient",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": false
+    },
+    {
+      "entry_index": 4,
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "error_corrected",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 5,
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "error_intercepted",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 6,
+      "arm": "observation_grounding",
+      "game_id": "tr87-cd924810",
+      "classification": "unused_or_insufficient",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": false
+    },
+    {
+      "entry_index": 7,
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "classification": "error_corrected",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 8,
+      "arm": "baseline",
+      "game_id": "ar25-0c556536",
+      "classification": "error_corrected",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 9,
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "correct_confirmation",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": false
+    },
+    {
+      "entry_index": 10,
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "new_misuse",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": false
+    },
+    {
+      "entry_index": 11,
+      "arm": "observation_grounding",
+      "game_id": "ar25-0c556536",
+      "classification": "unused_or_insufficient",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 12,
+      "arm": "baseline",
+      "game_id": "sb26-7fbdac44",
+      "classification": "unused_or_insufficient",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    },
+    {
+      "entry_index": 13,
+      "arm": "observation_grounding",
+      "game_id": "sb26-7fbdac44",
+      "classification": "unused_or_insufficient",
+      "references_exist": true,
+      "referenced_results_missing": [],
+      "reviewer_asserted_complete_chain": true,
+      "new_misuse_excluded": true
+    }
+  ],
+  "issues": [],
+  "gates": {
+    "named_reviewer": true,
+    "all_games_reviewed": true,
+    "review_bound_to_this_manifest_and_logs": true,
+    "runtime_evidence_valid": true,
+    "all_game_logs_available_without_identity_conflicts": true,
+    "reference_integrity": true,
+    "two_candidate_games_with_reviewed_chain": true,
+    "at_least_one_concrete_correction_or_interception": true,
+    "no_reported_candidate_new_misuse": false
+  },
+  "passes": false,
+  "confirmed_games": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810"
+  ],
+  "note": "Passing here means supplied reviewer judgments satisfy the stated gate and call IDs exist. This script does not establish pixel correctness, causal benefit, exhaustive misuse absence or a counterfactual prevented error."
+}

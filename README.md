@@ -1,6 +1,6 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：终局金牌与奖金。最新研究核验：**2026-10-18，Asia/Shanghai**。研究入口是 [017综合决策](research/017-research-decision.md)，下一候选是 [018观察到程序状态保真](docs/plan/018-observation-grounding.md)。
+目标：终局金牌与奖金。最新研究核验：**2026-10-18，Asia/Shanghai**。最新结果见 [018完整分析](research/018-results-analysis.md)：观察状态保真短提示未过晋升门，停止本版扩跑。当前实现为 [019 FP8 PLE验证](docs/progress/019-fp8-ple.md)：CPU-only实权重预检后再决定GPU对照。外部研究入口保留 [017综合决策](research/017-research-decision.md)。
 
 **正式版本仍为009 v2 / submission 57101330 / public 31.16。** 10/18 API列本队jiyujia第339/4444，提交者ccjjllt。当前金牌边界参照第18名38.20（差7.04），前五48.92（差17.76）；最终看私榜、有效队数及资格。比赛截止北京时间11/3 07:59。公开开发池分数不能直接换算隐藏LB。[最新赛情、数据、奖金与配额](research/017-competition-update.md)。
 
@@ -14,13 +14,14 @@
 | 014 tail | 47.1991→48.6390；110→108关，覆盖下降 | 未过门，不倒序 |
 | 015原生值短筛 | 21.8289→33.2937；13→15关 | 新审计确认re86一次真复用，仍未达两游戏门，不进全池 |
 | 016 pace全25 | 47.1340→47.4634；105→111关，全通8→7 | 去最大正向r11l后其余24局−1.5205，未过非单游戏门 |
-| 018观察状态保真 | 单因素短提示，4游戏各1000s方案 | 20项CPU通过，Notebook已冻结；未启动GPU，无采用/提分结论 |
+| 018观察状态保真 | 67.0106→63.7827；22→22关，全通2→1 | 已COMPLETE；两游戏有具体纠错，但ar25仍转抄错误，不晋升/不扩跑 |
+| 019 FP8 PLE | 纯CPU权重合同+BF16/FP8/BF16固定请求实现 | 本地检查通过，远端CPU-only预检已提交；尚无GPU速度/质量结论 |
 
-[016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。下一候选使用已有局部ASCII核对程序输入，不新增记忆或观察API。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
+[016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；下一优先级回到独立FP8 PLE吞吐/数值可行性核验，不叠加018。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 
 **017深度研究完成：**刷新500队榜单、148文件清单及规则；审计19本公开Notebook；补读10/15 stop-and-report论文、OPINE-World v3消融及作者控制代码。现有底座已有自动续聊，选取016请求仅1次自然无工具stop，故不优先增加全局汇报；新验证API和整套Lexicon也缺足够采用证据。FP8 PLE有可核查权重/配置/loader路径，保留为独立吞吐与数值候选，不能把主机表减半当作释放显存或涨分。[Notebook审计](research/017-notebook-update.md)、[前沿研究](research/017-frontier-update.md)。
 
-**配额必须重新确认：**10/18两个账号API均报总额6h、已用超额、预留0，刷新10/24 08:00北京；与旧30h记录冲突、原因未明。当前可规划GPU余额按0，不沿用下文历史余额。018的CPU准备已完成，下一GPU默认jiyujia且先核实际可用额度。本轮没有新正式提交。
+**GPU执行更新：**018经jiyujia运行，已COMPLETE并取回全部输出；会话内部43.13分钟（0.71886h），启动9.33分钟，两臂1000秒求解GPU采样平均91.75%/90.40%、中位数均98%。已共享一次加载并关闭服务。通用配额API增量不能当作本作业计费或剩余RTX额度；实际会话与账户统计分开。没有新正式提交。
 
 较早研究：003有效反证提示0次；006暂态交付后整体回退；007保留旧函数但净分回退；008有69份保存区域CPU核对，未在线接入。基线继续使用dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next。历史计划、结果和运行原件保留，不能把旧的“下一步/运行中/余额”当当前状态。
 
@@ -45,7 +46,8 @@
 | [015 计划](docs/plan/015-native-adoption.md) / [015 进展](docs/progress/015-native-adoption.md) | 4游戏短筛已完成，涨分但仅一游戏确证复用，未过采用门 |
 | [016 计划](docs/plan/016-pace-allocation.md) / [016 进展](docs/progress/016-pace-allocation.md) | jiyujia完整重跑已完成，+0.3293但非单游戏门失败，不晋升 |
 | [017 计划](docs/plan/017-research-next.md) / [017 进展](docs/progress/017-research-next.md) | 最新赛情/数据、19本Notebook、前沿消融和1281调用审计；选择018 |
-| [018 计划](docs/plan/018-observation-grounding.md) / [018 进展](docs/progress/018-observation-grounding.md) | 观察到程序状态的短提示；CPU准备与真实模型结果分开 |
+| [018 计划](docs/plan/018-observation-grounding.md) / [018 进展](docs/progress/018-observation-grounding.md) | 已完成四游戏短筛，均分−3.2279；具体纠错与新误编码并存，不晋升 |
+| [019 计划](docs/plan/019-fp8-ple.md) / [019 进展](docs/progress/019-fp8-ple.md) | FP8 PLE独立系统候选，实际权重CPU预检与GPU微基准分开 |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |
 | [前沿研究](research/frontier-findings.md) | 一手论文/官方报告、可迁移机制、协议与资源限制 |

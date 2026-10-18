@@ -1,0 +1,113 @@
+{
+  "kind": "independent-static-cell-recomputation",
+  "source": "experiments/018-analysis/trajectories/observation_grounding-ar25-0c556536.json",
+  "source_sha256": "30529c6408ecef3df5e1b5af9720a53b93bfd1fba7d63ac2ae9cef90c5a67c5f",
+  "observed_frame_call_id": "call_27905cba2f284bb38bf4f6ae",
+  "frame_crop_origin": [
+    8,
+    41
+  ],
+  "cell_checks": [
+    {
+      "block_row_col": [
+        8,
+        17
+      ],
+      "frame_rows_inclusive": [
+        24,
+        26
+      ],
+      "frame_cols_inclusive": [
+        51,
+        53
+      ],
+      "observed_ascii": [
+        "bbb",
+        "bbb",
+        "bbb"
+      ],
+      "black_B_count": 0
+    },
+    {
+      "block_row_col": [
+        8,
+        18
+      ],
+      "frame_rows_inclusive": [
+        24,
+        26
+      ],
+      "frame_cols_inclusive": [
+        54,
+        56
+      ],
+      "observed_ascii": [
+        "BBB",
+        "BbB",
+        "BBB"
+      ],
+      "black_B_count": 8
+    }
+  ],
+  "encoded_E_by_call_seq": {
+    "55": [
+      [
+        8,
+        17
+      ],
+      [
+        9,
+        17
+      ],
+      [
+        9,
+        18
+      ],
+      [
+        9,
+        19
+      ],
+      [
+        9,
+        20
+      ]
+    ],
+    "58": [
+      [
+        8,
+        17
+      ],
+      [
+        9,
+        17
+      ],
+      [
+        9,
+        18
+      ],
+      [
+        9,
+        19
+      ],
+      [
+        9,
+        20
+      ]
+    ]
+  },
+  "encoding_call_ids": {
+    "55": "call_b219939b05f64dc79a307427",
+    "58": "call_2a076ac7291d4587aca192fc"
+  },
+  "interaction_reobservation": {
+    "seq": 56,
+    "call_id": "call_97b8e72abb6242198b46b19c",
+    "stdout": "[action] SPACE -> effect\n[action] SPACE -> effect\n[action] SPACE -> effect\n[action] SPACE -> effect\n[action] SPACE -> effect\n[action] SPACE -> effect\n(0, ('vline', 22), True)\n(1, ('piece', [(8, 18), (9, 17), (9, 18), (9, 19), (9, 20)]), True)\n(2, ('piece', [(3, 15), (3, 16), (3, 17), (4, 14), (4, 18), (5, 14), (6, 14), (7, 15)]), True)\n(3, ('hline', 1), True)\n(4, ('vline', 22), True)\n(5, ('piece', [(8, 18), (9, 17), (9, 18), (9, 19), (9, 20)]), True)\n"
+  },
+  "consumption": {
+    "55": "num orbits 13\nA 3\nB 1\nC 13\nD 13\nE 0\n",
+    "58": "G placements on pattern 1 E placements on pattern 0\ndone None\n"
+  },
+  "conclusion": "The correctly observed top block (8,18) was transcribed as (8,17), then used by placement search; the observed selected piece also has (8,18). No logged code or game source was executed. This does not establish that the prefix caused the error or that correcting only this cell would solve the level.",
+  "original_request_log_sha256": "e8b9023bdbc7c3238238e6e8827a8dd56ce8f98030703b12ce8d8e8d780c79ab"
+}
