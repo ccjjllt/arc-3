@@ -1,0 +1,18 @@
+## What we changed, and what we did not
+
+**Unchanged** (the source text is identical to Franzen's Version 1):
+- the 499 KB harness patch;
+- every environment setting and analyzer setting;
+- the precaching, the model-server launch and its settings;
+- the benchmark settings: 10 resident streams with priority scheduling, a 532-minute per-game cap in the rerun, and 25 minutes per game on the 10 demo games;
+- the system monitor and the diagnostics.
+
+**Changed or added**, each marked `V15` in the code:
+1. **Input paths.** Kaggle mounts inputs either at `/kaggle/input/<slug>` or at `/kaggle/input/datasets/<owner>/<slug>` (and likewise for competitions and models), and older notebooks such as this one get the first layout. The recipe's five hard-coded input paths now go through `v15_input(...)`, which accepts either layout and stops with a clear error if an input is missing.
+2. **Owned time watchdog.** The competition allows 9 hours. The benchmark now has a soft end 8 h 51 m after the notebook starts, in every mode; the recipe's offline soft end and per-game caps still apply where they are earlier.
+   - A background thread acts as a last resort at 8 h 55 m. It stops only the model-server process group that this notebook itself started, and only if that group's leader is still alive and is still its own session and group leader. It then interrupts the run, so the notebook ends before the limit instead of timing out.
+   - It never signals a process chosen by name.
+3. **Checked export (interactive runs only).** The placeholder `submission.parquet` is the same one-row file as in Kaggle's official sample notebook. It is now written to a staging file, read back, compared with that sample's columns, values and types, and only then moved into place in one atomic step.
+4. **Commit-run gate (interactive runs only).** If the demo games produced no actions, or every game crashed, the run raises an error, so a broken version cannot be submitted.
+
+The competition rerun's behaviour is otherwise untouched: the notebook writes no submission file there, because the gateway calculates it.

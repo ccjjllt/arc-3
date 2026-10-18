@@ -1,0 +1,1322 @@
+--- Franzen v3
++++ kagglebbgg/arc3-franzen-graft-v4
+@@ -10228,7 +10228,26 @@
+     'ARC3_STALE_STATE_BLOCK': '1',
+ 
+     ########## world model ##########
+-    'ARC3_MEMORY_SECTIONS': 'off',
++    'ARC3_MEMORY_SECTIONS': 'slim',
++    'ARC3_WM_WIPE_ON_LEVEL': '0',
++    'ARC3_WM_REVISE_NUDGES': '1',
++    'ARC3_TOLERANT_SECTION_HEADERS': '1',
++    'ARC3_LEVEL_INVENTORY': '1',
++    'ARC3_AUTO_FRAME_DIFF': '1',
++    'ARC3_AUTO_FRAME_DIFF_BUDGET': '300',
++    'ARC3_GAMEOVER_DIFF': '1',
++    'ARC3_ANIMATION_IMAGE': 'composite',
++    'ARC3_ANIMATION_DEATH_IMAGE': 'composite',
++    ######### v4: action economy / guards / perception ##########
++    'ARC3_DEATH_LEDGER': '1',
++    'ARC3_DEATH_REPEAT_GUARD': '1',
++    'ARC3_NOOP_REPEAT_GUARD': '1',
++    'ARC3_REPEAT_STATE_GUARD': '1',
++    'ARC3_DEATH_GUARD_LOOKAHEAD': '1',
++    'ARC3_OPENER_COMMIT_HINT': '1',
++    'ARC3_PREFER_TOOL_CALLS': '1',
++    'ARC3_STEP_VERIFICATION_HINT': '1',
++    'ARC3_BOARD_DUMP_GUARD': '1',
+ 
+     ########## persistent functions ##########
+     'ARC3_PERSISTENT_FUNCTIONS': '1',
+@@ -10386,6 +10405,919 @@
+ pth_path = Path(sysconfig.get_paths()["purelib"]) / "taaf_kaggle_sources.pth"
+ pth_path.write_text("".join(f"{entry}\n" for entry in source_entries))
+ print(f"taaf.kaggle: wrote {pth_path} ({len(source_entries)} source roots)")
++
++%%writefile phase_a_setup.py
++"""phase_a_setup.py — v22 Phase A 环境构造：网关等待 + 探索 arcade 工厂.
++
++安全设计（SSRF 防线）：
++- 网关探测用 http.client 显式建连，主机名必须命中白名单 {gateway, localhost, 127.0.0.1}
++  ——竞赛 rerun 的 ARC_BASE_URL 恒为 http://gateway:8001/，白名单外一律拒绝。
++- offline 交互跑不经过网关：直接用竞赛数据集自带 environment_files（可用
++  PRE_EXPLORATION_ENV_DIR 覆盖，供本地干跑注入小规模环境树）。
++
++此模块由 kernel notebook 以 %%writefile 落盘后导入；路径字面量仅为 Kaggle
++挂载点镜像（与 pristine notebook cell 15 同类，AGENTS.md §2）。
++"""
++from __future__ import annotations
++
++import http.client
++import os
++import time
++from pathlib import Path
++from urllib.parse import urlsplit
++
++_GATEWAY_HOST_ALLOWLIST = {"gateway", "localhost", "127.0.0.1"}
++
++
++def wait_for_gateway(base_url: str, timeout_s: float = 600.0) -> None:
++    """轮询网关 /api/games 直到非 5xx（竞赛网关异步启动）。"""
++    parts = urlsplit(base_url)
++    host = (parts.hostname or "").lower()
++    if host not in _GATEWAY_HOST_ALLOWLIST:
++        raise RuntimeError(f"v22: unexpected gateway host {host!r}")
++    port = parts.port or (443 if (parts.scheme or "http") == "https" else 80)
++    use_tls = (parts.scheme or "http") == "https"
++    prefix = (parts.path or "").rstrip("/")
++    deadline = time.monotonic() + timeout_s
++    last_error = ""
++    while time.monotonic() < deadline:
++        conn = None
++        try:
++            conn = (
++                http.client.HTTPSConnection(host, port, timeout=10)
++                if use_tls
++                else http.client.HTTPConnection(host, port, timeout=10)
++            )
++            conn.request("GET", f"{prefix}/api/games")
++            resp = conn.getresponse()
++            resp.read()
++            if resp.status < 500:
++                return
++            last_error = f"status {resp.status}"
++        except Exception as exc:  # noqa: BLE001 — 轮询语义：吞异常重试直到超时
++            last_error = repr(exc)
++        finally:
++            if conn is not None:
++                try:
++                    conn.close()
++                except Exception:
++                    pass
++        time.sleep(5)
++    raise RuntimeError(f"v22 gateway wait failed: {last_error}")
++
++
++def explore_arcade(true_submission: bool):
++    """构造探索专用 Arcade client（与 benchmark 的 client 相互独立）。"""
++    import arc_agi
++    import taaf.game_api
++
++    if true_submission:
++        base_url = os.environ["ARC_BASE_URL"]
++        wait_for_gateway(base_url)
++        return arc_agi.Arcade(
++            operation_mode=arc_agi.OperationMode.COMPETITION,
++            arc_base_url=base_url,
++            environments_dir="",
++        )
++    env_dir = os.getenv("PRE_EXPLORATION_ENV_DIR") or str(
++        Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels").parent
++        / "environment_files"
++    )
++    return arc_agi.Arcade(
++        operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir
++    )
++
++
++%%writefile pre_explorer.py
++"""pre_explorer.py — v22 Phase A：CPU 预探索 + 游戏说明书生成.
++
++证据链（§67.x 决策报告）：
++- v20 explore-graph：纯探索器无 LLM 也过关（ls01 两关 / ls21 一关）——动作语义
++  可被机械探针在分钟级发现，而 LLM 每局限花 ~10-30 回合做同一件事。
++- auto-sweep（v20 sweep-FN）失败的根因是 sweep 动作消耗了 LLM 的局内动作预算、
++  污染其世界模型；本设计在【独立 env 实例】上探索（arcade.make 不带 scorecard_id
++  → 独立默认 scorecard，见 arc_agi/base.py:611-615），benchmark 动作预算零消耗，
++  信息单向注入 system prompt——与失败设计的本质区别。
++
++三段探针（每段独立 try/except，失败降级，绝不拖垮整跑）：
++1) 箭头探针：初始棋盘逐动作 step+diff+RESET 回基线
++2) 点击探针：stride 采样网格逐点 step+diff+RESET
++3) 随机游走：上限步数记录逐动作有效率；过关序列 RESET 后在全新 env 重放验证才报告
++
++纯函数模块：不读环境变量、不含路径字面量（AGENTS.md §0/§4），开关由调用方决定。
++"""
++from __future__ import annotations
++
++import random
++import time
++from typing import Any, Callable, Iterable
++
++# 引擎帧 int -> ARC 色字符（与 LLM 所见 ascii/segmentation 一致）
++ARC_COLOR_CHARS = "WwgGcBMPRbSYOrNp"
++
++# 引擎动作名 -> LLM 所见动作名。必须与 inference/agent/action_names.py 的
++# ENGINE_TO_MODEL_ACTION 完全一致（v13 归因：说明书用 ACTION1-6 裸码，LLM 被迫
++# 自行猜测与 UP/DOWN/LEFT/RIGHT 的映射，ka59 实测猜错方向、全员浪费回合确认——
++# 说明书只应使用模型侧名称；ACTION7 无模型名，保持原样）。
++ENGINE_TO_MODEL_ACTION = {
++    "ACTION1": "UP",
++    "ACTION2": "DOWN",
++    "ACTION3": "LEFT",
++    "ACTION4": "RIGHT",
++    "ACTION5": "SPACE",
++    "ACTION6": "MOUSE",
++    "RESET": "RESET",
++}
++
++_ARROW_ACTIONS = ("ACTION1", "ACTION2", "ACTION3", "ACTION4", "ACTION5", "ACTION7")
++_CLICK_ACTION = "ACTION6"
++
++_WALK_MAX_STEPS = 60
++
++# 单局探索预算下限（秒）：防误配为 0 导致探针空转；测试可 monkeypatch 加速
++MIN_BUDGET_S = 30.0
++
++
++def _model_action(name: str) -> str:
++    """内部引擎名 -> LLM 所见名（仅用于说明书展示；探针/重放内部仍用引擎名）。"""
++    return ENGINE_TO_MODEL_ACTION.get(name, name)
++
++
++# ---------------------------------------------------------------- 帧与对象
++
++def to_grid(frame: Any) -> tuple[tuple[int, ...], ...] | None:
++    """FrameDataRaw.frame -> 不可变二维整数网格；不合法返回 None.
++
++    权威解释对齐 taaf（game.py: ``Frame(data=self.raw.frame[-1])``，"final
++    visible frame"）：frame 是 2D 网格的序列时取最后一层为可见棋盘 —— 双通道
++    游戏（如 bp35 返回 [ndarray(H,W), ndarray(H,W)]）由此得到与 LLM 所见一致的
++    棋盘。另兼容 ndarray(1,H,W) 带维形状与朴素的 list[list[int]]。
++    """
++    data = frame
++    if isinstance(data, (list, tuple)) and data:
++        last = data[-1]
++        if hasattr(last, "__len__") and not isinstance(last, (int, str, bytes)):
++            try:
++                first = last[0]
++            except Exception:
++                first = None
++            if first is not None and hasattr(first, "__len__"):
++                data = last
++    shape = getattr(data, "shape", None)
++    try:
++        if shape is not None and len(shape) == 3:
++            data = data[-1]
++    except TypeError:
++        pass
++    try:
++        rows = list(data)
++        if not rows:
++            return None
++        grid = []
++        for row in rows:
++            cells = []
++            for v in row:
++                iv = int(v)
++                if iv < 0:
++                    iv = 0
++                elif iv > 15:
++                    iv = 15
++                cells.append(iv)
++            grid.append(tuple(cells))
++        width = len(grid[0])
++        if any(len(r) != width for r in grid):
++            return None
++        return tuple(grid)
++    except (TypeError, ValueError):
++        return None
++
++
++def _color_char(v: int) -> str:
++    return ARC_COLOR_CHARS[max(0, min(15, v))]
++
++
++def _objects(grid: tuple[tuple[int, ...], ...]) -> list[tuple[int, frozenset[tuple[int, int]]]]:
++    """4 连通同色对象 -> [(color, cells)]，cells 为 (row, col) 集合。"""
++    height, width = len(grid), len(grid[0])
++    seen = [[False] * width for _ in range(height)]
++    objects: list[tuple[int, frozenset[tuple[int, int]]]] = []
++    for r0 in range(height):
++        for c0 in range(width):
++            if seen[r0][c0]:
++                continue
++            color = grid[r0][c0]
++            stack = [(r0, c0)]
++            seen[r0][c0] = True
++            cells = []
++            while stack:
++                r, c = stack.pop()
++                cells.append((r, c))
++                for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
++                    nr, nc = r + dr, c + dc
++                    if 0 <= nr < height and 0 <= nc < width and not seen[nr][nc] and grid[nr][nc] == color:
++                        seen[nr][nc] = True
++                        stack.append((nr, nc))
++            objects.append((color, frozenset(cells)))
++    return objects
++
++
++def _centroid(cells: frozenset[tuple[int, int]]) -> tuple[float, float]:
++    n = len(cells)
++    return (sum(r for r, _ in cells) / n, sum(c for _, c in cells) / n)
++
++
++def diff_summary(
++    before: tuple[tuple[int, ...], ...] | None,
++    after: tuple[tuple[int, ...], ...] | None,
++) -> str:
++    """机械对比两帧 -> 一行事实（实体计数/位移/出现/消失）。零解释、零猜测。
++
++    每帧最大的连通对象视为背景板并整体排除：任意实体移动都会撕裂/移动背景，
++    背景的对象级变化是纯噪声（TAAF 提示亦明确背景为大块白/灰色区域）。
++    """
++    if before is None or after is None:
++        return "frame unreadable"
++    if before == after:
++        return "no change"
++
++    def entities(grid):
++        objs = _objects(grid)
++        if len(objs) <= 1:
++            return objs
++        bg = max(objs, key=lambda o: len(o[1]))
++        return [o for o in objs if o is not bg]
++
++    ob = entities(before)
++    oa = entities(after)
++    parts: list[str] = [f"objects {len(ob)}->{len(oa)} (excl. background)"]
++
++    # 按 (color, 归一化形状) 分组配对，量位移
++    def key(color: int, cells: frozenset) -> tuple:
++        r0 = min(r for r, _ in cells)
++        c0 = min(c for _, c in cells)
++        norm = frozenset((r - r0, c - c0) for r, c in cells)
++        return (color, norm)
++
++    from collections import defaultdict
++
++    gb: dict[tuple, list[frozenset]] = defaultdict(list)
++    ga: dict[tuple, list[frozenset]] = defaultdict(list)
++    for color, cells in ob:
++        gb[key(color, cells)].append(cells)
++    for color, cells in oa:
++        ga[key(color, cells)].append(cells)
++
++    moved_notes: list[str] = []
++    appeared = 0
++    disappeared = 0
++    appear_colors: set[int] = set()
++    disappear_colors: set[int] = set()
++    for k in set(gb) | set(ga):
++        b_list = gb.get(k, [])
++        a_list = ga.get(k, [])
++        color = k[0]
++        if b_list and a_list:
++            n = min(len(b_list), len(a_list))
++            # 按质心排序后一一配对（同形状对象间稳定匹配）
++            b_sorted = sorted(b_list, key=_centroid)
++            a_sorted = sorted(a_list, key=_centroid)
++            shifts = set()
++            for i in range(n):
++                br, bc = _centroid(b_sorted[i])
++                ar, ac = _centroid(a_sorted[i])
++                shifts.add((round(ar - br), round(ac - bc)))
++            zero = {(0, 0)}
++            if shifts != zero:
++                if len(shifts) == 1:
++                    (dr, dc) = next(iter(shifts))
++                    moved_notes.append(f"{n} {_color_char(color)}-obj moved (dr={dr:+d},dc={dc:+d})")
++                else:
++                    moved_notes.append(f"{n} {_color_char(color)}-obj moved inconsistently")
++        if len(a_list) > len(b_list):
++            appeared += len(a_list) - len(b_list)
++            appear_colors.add(color)
++        elif len(b_list) > len(a_list):
++            disappeared += len(b_list) - len(a_list)
++            disappear_colors.add(color)
++
++    if appeared:
++        cs = ",".join(sorted(_color_char(c) for c in appear_colors))
++        parts.append(f"+{appeared} new obj (colors {cs})")
++    if disappeared:
++        cs = ",".join(sorted(_color_char(c) for c in disappear_colors))
++        parts.append(f"-{disappeared} gone obj (colors {cs})")
++    parts.extend(moved_notes[:4])
++    return "; ".join(parts)
++
++
++# ---------------------------------------------------------------- 单局探针
++
++class _GameFacts:
++    __slots__ = ("probes", "click_hits", "click_tries", "click_rows", "click_cols",
++                 "click_examples", "walk_stats", "walk_steps", "level_path", "notes")
++
++    def __init__(self) -> None:
++        self.probes: list[tuple[str, str]] = []          # (action, diff summary)
++        self.click_hits = 0
++        self.click_tries = 0
++        self.click_rows: list[int] = []
++        self.click_cols: list[int] = []
++        self.click_examples: list[tuple[int, int]] = []  # (row, col) 有效点击样例
++        self.walk_stats: dict[str, list[int]] = {}       # action -> [changed, tries]
++        self.walk_steps = 0
++        self.level_path: list[str] | None = None
++        self.notes: list[str] = []
++
++
++def _int_code_map(game_action: Any) -> dict[int, str]:
++    """动作枚举 -> {int 编码: 名称}。
++
++    arcengine 的 GameAction 是混合值枚举（value = (code, 动作类) 元组），
++    按值构造 GameAction(1) 会 ValueError；只能遍历 __members__ 建表。
++    """
++    members = getattr(game_action, "__members__", None)
++    if not members:
++        return {}
++    out: dict[int, str] = {}
++    for member_name, member in members.items():
++        val = getattr(member, "value", None)
++        code = val[0] if isinstance(val, tuple) and val else val
++        try:
++            out[int(code)] = member_name
++        except (TypeError, ValueError):
++            continue
++    return out
++
++
++def _available(raw: Any, game_action: Any = None) -> list[str]:
++    """规范化 available_actions：引擎可能给 'ACTION1' 字符串、枚举实例或整数编码 1-7。"""
++    acts = getattr(raw, "available_actions", None) or []
++    code_map = _int_code_map(game_action)
++    out: list[str] = []
++    for a in acts:
++        name: str | None = None
++        if isinstance(a, str):
++            name = a
++        else:
++            name = getattr(a, "name", None)
++            if name is None and code_map:
++                try:
++                    name = code_map.get(int(a))
++                except (TypeError, ValueError):
++                    name = None
++        if isinstance(name, str) and name not in out:
++            out.append(name)
++    return out
++
++
++def _rebase(env: Any, game_action: Any) -> tuple[Any, tuple[tuple[int, ...], ...] | None]:
++    """reset 并返回 (raw, grid)。reset 返回 None 时重试一次。"""
++    raw = env.reset()
++    if raw is None:
++        raw = env.reset()
++    if raw is None:
++        return None, None
++    return raw, to_grid(getattr(raw, "frame", None))
++
++
++def _reset_to_baseline(env: Any, game_action: Any, baseline_grid, attempts: int = 2) -> bool:
++    """RESET 后校验回到基线棋盘；失败重试，仍失败返回 False（调用方 rebase）。"""
++    for _ in range(attempts):
++        try:
++            raw = env.step(game_action.RESET)
++        except Exception:
++            raw = None
++        grid = to_grid(getattr(raw, "frame", None)) if raw is not None else None
++        if grid is not None and grid == baseline_grid:
++            return True
++    return False
++
++
++def _probe_arrows(
++    env: Any,
++    game_action: Any,
++    facts: _GameFacts,
++    deadline: float,
++    log,
++    make_env: Callable[[], Any] | None = None,
++    gid: str = "",
++) -> bool:
++    """返回 False 表示基线不可恢复（调用方放弃本段）。发现过关序列即停止本段。"""
++    raw, baseline = _rebase(env, game_action)
++    if raw is None or baseline is None:
++        facts.notes.append("env.reset() produced no frame")
++        return False
++    for name in [a for a in _available(raw, game_action) if a in _ARROW_ACTIONS]:
++        if time.monotonic() > deadline:
++            break
++        try:
++            raw1 = env.step(getattr(game_action, name))
++            grid1 = to_grid(getattr(raw1, "frame", None)) if raw1 is not None else None
++            levels = int(getattr(raw1, "levels_completed", 0) or 0) if raw1 is not None else -1
++        except Exception as exc:
++            facts.probes.append((name, f"engine rejected: {type(exc).__name__}"))
++            grid1, levels = None, -1
++        if grid1 is None:
++            if not facts.probes or facts.probes[-1][0] != name:
++                facts.probes.append((name, "no response"))
++        else:
++            facts.probes.append((name, diff_summary(baseline, grid1)))
++            if levels > 0 and facts.level_path is None:
++                # 探针从干净基线出发，序列 [name] 即候选过关路径；重放确认后才报告
++                verified = _verify_level_path(make_env, gid, game_action, [name], levels, log)
++                if verified:
++                    facts.level_path = verified
++                    return True  # 一步过关：本段再探无意义，后续段用全新 env
++                facts.notes.append("level advance observed but path not replayable")
++        if not _reset_to_baseline(env, game_action, baseline):
++            raw, baseline = _rebase(env, game_action)
++            if raw is None or baseline is None:
++                return False
++    return True
++
++
++def _probe_clicks(env: Any, game_action: Any, facts: _GameFacts, deadline: float, log) -> bool:
++    raw, baseline = _rebase(env, game_action)
++    if raw is None or baseline is None:
++        return False
++    if _CLICK_ACTION not in _available(raw, game_action):
++        return True
++    height, width = len(baseline), len(baseline[0])
++    stride = max(1, min(height, width) // 8)
++    for row in range(stride // 2 or 1, height, stride):
++        for col in range(stride // 2 or 1, width, stride):
++            if time.monotonic() > deadline:
++                return True
++            try:
++                raw1 = env.step(getattr(game_action, _CLICK_ACTION), {"x": int(col), "y": int(row)})
++                grid1 = to_grid(getattr(raw1, "frame", None)) if raw1 is not None else None
++            except Exception:
++                grid1 = None
++            facts.click_tries += 1
++            if grid1 is not None and grid1 != baseline:
++                facts.click_hits += 1
++                facts.click_rows.append(row)
++                facts.click_cols.append(col)
++                if len(facts.click_examples) < 8:
++                    facts.click_examples.append((row, col))
++            if not _reset_to_baseline(env, game_action, baseline):
++                raw, baseline = _rebase(env, game_action)
++                if raw is None or baseline is None:
++                    return False
++    return True
++
++
++def _probe_walk(
++    env: Any,
++    game_action: Any,
++    facts: _GameFacts,
++    deadline: float,
++    seed: int,
++    make_env: Callable[[], Any] | None,
++    gid: str,
++    log,
++) -> None:
++    raw, baseline = _rebase(env, game_action)
++    if raw is None or baseline is None:
++        return
++    rng = random.Random(seed)
++    path_since_level_start: list[str] = []
++    prev_levels = 0
++    for _ in range(_WALK_MAX_STEPS):
++        if time.monotonic() > deadline:
++            break
++        acts = [a for a in _available(raw, game_action) if a in _ARROW_ACTIONS]
++        if not acts:
++            break
++        name = rng.choice(acts)
++        try:
++            raw1 = env.step(getattr(game_action, name))
++        except Exception:
++            raw1 = None
++        if raw1 is None:
++            # 引擎拒绝：RESET 恢复后继续
++            if not _reset_to_baseline(env, game_action, baseline):
++                return
++            raw, baseline = _rebase(env, game_action)
++            if raw is None:
++                return
++            continue
++        grid1 = to_grid(getattr(raw1, "frame", None))
++        levels = int(getattr(raw1, "levels_completed", 0) or 0)
++        stat = facts.walk_stats.setdefault(name, [0, 0])
++        stat[1] += 1
++        if grid1 is not None and grid1 != baseline:
++            stat[0] += 1
++        facts.walk_steps += 1
++        path_since_level_start.append(name)
++        if levels > prev_levels and facts.level_path is None:
++            candidate = list(path_since_level_start)
++            facts.level_path = _verify_level_path(make_env, gid, game_action, candidate, levels, log)
++            if facts.level_path is None:
++                facts.notes.append(f"level advance observed but path too long or not replayable ({len(candidate)} steps)")
++        prev_levels = levels
++        baseline = grid1 if grid1 is not None else baseline
++        raw = raw1
++
++
++def _verify_level_path(
++    make_env: Callable[[], Any] | None,
++    gid: str,
++    game_action: Any,
++    path: list[str],
++    expected_levels: int,
++    log,
++) -> list[str] | None:
++    """在全新 env 上重放过关序列；重放确认才作为事实报告。"""
++    if make_env is None or not path or len(path) > 40:
++        return None
++    env2 = None
++    try:
++        env2 = make_env()
++        raw = env2.reset()
++        if raw is None:
++            return None
++        for name in path:
++            raw = env2.step(getattr(game_action, name))
++            if raw is None:
++                return None
++        if int(getattr(raw, "levels_completed", 0) or 0) >= expected_levels:
++            return list(path)
++        return None
++    except Exception as exc:
++        log(f"[{gid}] path replay failed: {type(exc).__name__}: {exc}")
++        return None
++    finally:
++        close = getattr(env2, "close", None)
++        if close is not None:
++            try:
++                close()
++            except Exception:
++                pass
++
++
++# ---------------------------------------------------------------- 说明书
++
++FULL_HEADER = (
++    "PRE-EXPLORATION REPORT for this game (a scripted explorer probed a separate instance "
++    "of this exact game with the same initial board you see at the start of level 1).\n"
++    "Treat these mechanical observations as ground truth for level-1 mechanics and use them "
++    "instead of re-discovering action semantics. Effects may differ on later levels - "
++    "re-verify there. Board coordinates are (row, col), row 0 is the top. Action names here "
++    "are the same names you pass to action().\n"
++)
++
++COMPACT_HEADER = (
++    "PRE-EXPLORATION REPORT (scripted probe of this exact game, level-1 initial board; "
++    "treat as ground truth, re-verify on later levels; action names match action()):\n"
++)
++
++
++def build_manual(gid: str, facts: _GameFacts, max_chars: int) -> str:
++    """事实 -> 说明书文本。无实质事实返回空串（调用方跳过该局注入）。
++
++    展示层把引擎动作码翻译成 LLM 所见的语义名（UP/DOWN/...，见
++    ENGINE_TO_MODEL_ACTION）；内部 facts 保留引擎名供重放使用。
++    """
++    has_facts = bool(facts.probes or facts.click_tries or facts.walk_steps or facts.level_path)
++    lines: list[str] = []
++    if facts.level_path:
++        seq = ", ".join(_model_action(a) for a in facts.level_path)
++        lines.append(f"Verified level path: [{seq}] advanced the level (replayed and confirmed).")
++    if facts.probes:
++        lines.append("Action probes from the initial board (1 step each, then reset):")
++        for name, summary in facts.probes:
++            lines.append(f"- {_model_action(name)}: {summary}")
++    if facts.click_tries:
++        lines.append(
++            f"Click probes ({_model_action(_CLICK_ACTION)}): {facts.click_hits}/{facts.click_tries} sampled points changed the board."
++        )
++        if facts.click_examples:
++            pts = ", ".join(f"({r},{c})" for r, c in facts.click_examples)
++            lines.append(f"  Effective points (row,col): {pts}.")
++        if facts.click_rows:
++            lines.append(
++                f"  Effective region rows {min(facts.click_rows)}-{max(facts.click_rows)}, "
++                f"cols {min(facts.click_cols)}-{max(facts.click_cols)}."
++            )
++    if facts.walk_steps:
++        parts = []
++        for name in sorted(facts.walk_stats):
++            changed, tries = facts.walk_stats[name]
++            parts.append(f"{_model_action(name)} {changed}/{tries}")
++        lines.append(f"Random walk ({facts.walk_steps} steps), board changed per action: " + ", ".join(parts) + ".")
++    for note in facts.notes:
++        lines.append(f"Note: {note}")
++
++    if not has_facts:
++        return ""
++
++    body = "\n".join(lines)
++    result = FULL_HEADER + body
++    if len(result) > max_chars:
++        # 先丢游走统计（保过关路径与探针），再换紧凑表头，最后硬截断
++        body = "\n".join(l for l in lines if not l.startswith("Random walk"))
++        result = FULL_HEADER + body
++        if len(result) > max_chars:
++            result = COMPACT_HEADER + body
++        if len(result) > max_chars:
++            result = result[: max(0, max_chars - 16)] + "\n... (truncated)"
++    return result
++
++
++# ---------------------------------------------------------------- 入口
++
++def _close_quietly(env: Any) -> None:
++    close = getattr(env, "close", None)
++    if close is not None:
++        try:
++            close()
++        except Exception:
++            pass
++
++
++def probe_game(
++    gid: str,
++    make_env: Callable[[], Any],
++    game_action: Any,
++    budget_s: float,
++    seed: int,
++    log: Callable[[str], None],
++) -> tuple[_GameFacts, dict]:
++    """单局完整探针。返回 (facts, meta)；任何异常都吞掉并记 notes，绝不向上抛。
++
++    三个探针段各自使用全新 env：一旦某段把游戏推进到后续关卡，基线棋盘即不可
++    通过 RESET 恢复（ONLY_RESET_LEVELS=true 下 RESET 保留关卡），新段换新 env
++    才能保证"从初始棋盘出发"这一前提。
++    """
++    facts = _GameFacts()
++    started = time.monotonic()
++    meta: dict[str, Any] = {"steps": 0}
++    deadline = started + max(MIN_BUDGET_S, float(budget_s))
++    try:
++        try:
++            env = make_env()
++            try:
++                if not _probe_arrows(env, game_action, facts, deadline, log, make_env, gid):
++                    facts.notes.append("baseline not recoverable; later probes skipped")
++                    return facts, meta
++            finally:
++                _close_quietly(env)
++            if time.monotonic() < deadline:
++                try:
++                    env = make_env()
++                    try:
++                        if not _probe_clicks(env, game_action, facts, deadline, log):
++                            facts.notes.append("click probe lost baseline; walk still runs on fresh env")
++                    finally:
++                        _close_quietly(env)
++                except Exception as exc:
++                    facts.notes.append(f"click probe aborted: {type(exc).__name__}")
++            if time.monotonic() < deadline:
++                try:
++                    env = make_env()
++                    try:
++                        _probe_walk(env, game_action, facts, deadline, seed, make_env, gid, log)
++                    finally:
++                        _close_quietly(env)
++                except Exception as exc:
++                    facts.notes.append(f"walk aborted: {type(exc).__name__}")
++        except Exception as exc:
++            facts.notes.append(f"fatal: {type(exc).__name__}: {exc}")
++    finally:
++        meta["elapsed_s"] = round(time.monotonic() - started, 1)
++    return facts, meta
++
++
++def run_pre_exploration(
++    game_ids: Iterable[str],
++    make_env_fn: Callable[[str], Any],
++    game_action: Any,
++    seconds_per_game: float,
++    seed: int,
++    max_chars: int,
++    log: Callable[[str], None] = print,
++    wall_clock_slack_s: float = 180.0,
++) -> dict[str, str]:
++    """并发探索全部游戏 -> {gid: manual_text}。单局失败 = 该局无说明书（降级）。
++
++    v20 探索器教训（§67.46/47）：env.step 单步可能永久阻塞，软超时在阻塞中无法
++    触发。因此这里【不用】ThreadPoolExecutor（pool.map 会永远等一个挂死的局），
++    改用 daemon 线程 + 墙钟 join 超时：挂死的局泄漏一个后台 daemon 线程（不阻塞
++    解释器退出），其余局的说明书照常产出，整跑绝不因单局挂死而报废。
++    """
++    import threading
++
++    ids = list(game_ids)
++    results: dict[str, str] = {}
++    meta_all: dict[str, dict] = {}
++    lock = threading.Lock()
++
++    def _one(gid: str) -> None:
++        def _make():
++            return make_env_fn(gid)
++
++        facts, meta = probe_game(gid, _make, game_action, seconds_per_game, seed, log)
++        try:
++            manual = build_manual(gid, facts, max_chars)
++        except Exception as exc:
++            log(f"[{gid}] manual build failed: {type(exc).__name__}: {exc}")
++            manual = None
++        with lock:
++            meta_all[gid] = meta
++            if manual:
++                results[gid] = manual
++        log(
++            f"[v22-phaseA] {gid}: "
++            + (f"manual {len(manual)} chars, {meta.get('elapsed_s', '?')}s"
++               if manual else f"NO manual ({meta.get('elapsed_s', '?')}s)")
++        )
++
++    threads = [
++        threading.Thread(target=_one, args=(gid,), daemon=True, name=f"v22-probe-{gid}")
++        for gid in ids
++    ]
++    for t in threads:
++        t.start()
++    wall_deadline = time.monotonic() + max(MIN_BUDGET_S, float(seconds_per_game)) + max(0.0, float(wall_clock_slack_s))
++    for t in threads:
++        t.join(max(0.0, wall_deadline - time.monotonic()))
++    hung = [t.name for t in threads if t.is_alive()]
++    if hung:
++        log(
++            f"[v22-phaseA] {len(hung)} probe threads hung past wall clock "
++            f"(daemon-leaked, run continues): {hung[:5]}"
++        )
++    log(f"[v22-phaseA] done: {len(results)}/{len(ids)} manuals")
++    return results
++
++
++%%writefile manual_injector.py
++"""manual_injector.py — v22 Phase B：把预探索说明书注入每局 analyzer system prompt.
++
++机制（逐条在源码验证过，2026-09-13）：
++- solver.py:1223  ``_play_one`` 每局构造独立 analyzer → 实例级追加无跨局泄漏
++- tool_agent.py:941 ``_system_prompt`` 仅在 __init__ 赋值一次 → play 入口追加即整局生效
++- tool_agent.py:1682 trim 永远保留 messages[0]（system）→ 说明书活过整局所有请求
++- 类级 patch 在 Benchmark.run 的 deepcopy 下存活（v12 budget_governor 同模式已上过 Kaggle）
++- 线程安全：manuals 注入后只读；每 session 只有自己的 worker 线程触碰自己的 analyzer
++
++开关（AGENTS.md §4）：ENABLE_MANUAL_INJECT=1
++降级：gid 无说明书 / analyzer 无 _system_prompt → 原样调 orig_play（= pristine 行为）。
++"""
++from __future__ import annotations
++
++import os
++from typing import Any, Callable, Mapping
++
++DEFAULT_HEADER = (
++    "\n\nPre-exploration report (generated before this session by a scripted explorer that "
++    "probed a separate instance of this exact game, same initial board):\n"
++    "Use these verified facts as your starting world model instead of spending early turns "
++    "re-discovering action semantics. They were measured on the level-0 initial board; later "
++    "levels may change mechanics, so re-verify effects there before relying on them.\n"
++)
++
++
++def _env_bool(name: str, default: bool) -> bool:
++    raw = os.getenv(name)
++    if raw is None:
++        return default
++    return raw.strip().lower() in {"1", "true", "yes"}
++
++
++def install(
++    manuals: Mapping[str, str],
++    *,
++    header: str = DEFAULT_HEADER,
++    enabled: bool | None = None,
++    log: Callable[[str], None] = print,
++) -> Callable[[], None] | None:
++    """Patch ``_HarnessGameSession.play``：play 入口把该局说明书追加进 system prompt。
++
++    返回 revert 函数；禁用 / 重复安装 / import 失败时返回 None（调用方继续 pristine 流程）。
++    """
++    if enabled is None:
++        enabled = _env_bool("ENABLE_MANUAL_INJECT", True)
++    if not enabled:
++        log("[v22-manual] disabled (ENABLE_MANUAL_INJECT=0)")
++        return None
++    manuals = {k: v for k, v in dict(manuals).items() if isinstance(v, str) and v}
++    if not manuals:
++        log("[v22-manual] no manuals; skipping install")
++        return None
++
++    try:
++        from inference.framework.solver import _HarnessGameSession as target_cls
++    except Exception as exc:
++        log(f"[v22-manual] install failed (import): {exc}")
++        return None
++
++    if getattr(target_cls, "_v22_manual_injector_installed", False):
++        log("[v22-manual] already installed")
++        return None
++
++    orig_play = target_cls.play
++
++    def patched_play(self: Any) -> Any:
++        try:
++            gid = getattr(getattr(self, "game", None), "env_name", None)
++            manual = manuals.get(gid)
++            analyzer = getattr(self, "analyzer", None)
++            if manual and analyzer is not None:
++                base = getattr(analyzer, "_system_prompt", None)
++                if isinstance(base, str) and not getattr(analyzer, "_v22_manual_injected", False):
++                    analyzer._system_prompt = base + header + manual
++                    analyzer._v22_manual_injected = True
++                    log(f"[v22-manual] injected {gid} (+{len(header) + len(manual)} chars)")
++        except Exception as exc:  # noqa: BLE001 — 注入失败绝不阻断对局
++            log(f"[v22-manual] inject failed: {type(exc).__name__}: {exc}")
++        return orig_play(self)
++
++    target_cls.play = patched_play
++    target_cls._v22_manual_injector_installed = True  # type: ignore[attr-defined]
++    log(f"[v22-manual] installed: {len(manuals)} manuals keyed by env_name")
++    revert_fn_installed = True
++
++    def revert() -> None:
++        if not revert_fn_installed:
++            return
++        target_cls.play = orig_play
++        target_cls._v22_manual_injector_installed = False  # type: ignore[attr-defined]
++
++    return revert
++
++
++# graft-v2 mount safety: resolve competition env dir for the pre-explorer
++import os as _pe_os
++_pe_comp = next((p for p in ("/kaggle/input/competitions/arc-prize-2026-arc-agi-3", "/kaggle/input/arc-prize-2026-arc-agi-3") if _pe_os.path.isdir(p)), None)
++if _pe_comp:
++    _pe_os.environ.setdefault("PRE_EXPLORATION_ENV_DIR", _pe_os.path.join(_pe_comp, "environment_files"))
++    print(f"V2_MOUNT {_pe_comp}", flush=True)
++# v22 Phase A/B: CPU 预探索 + 说明书注入（vLLM 启动前执行；任何失败都降级为纯净跑）。
++# 开关（AGENTS.md §4，全部独立）:
++#   ENABLE_PRE_EXPLORATION=1              Phase A 总开关
++#   PRE_EXPLORATION_SECONDS_PER_GAME=900  单局探索预算秒（25 局并发，墙钟≈此值）
++#   MANUAL_MAX_CHARS=3500                 单局说明书字符上限
++#   PRE_EXPLORATION_SEED=0                随机游走种子（确定性）
++#   ENABLE_MANUAL_INJECT=1                Phase B 注入开关
++import sys as _sys
++
++_sys.path.insert(0, os.getcwd())
++import manual_injector
++import phase_a_setup
++import pre_explorer
++
++_v22_manuals: dict = {}
++if os.getenv("ENABLE_PRE_EXPLORATION", "1") == "1":
++    try:
++        from arcengine import GameAction as _V22_GameAction
++
++        _v22_arcade = phase_a_setup.explore_arcade(TRUE_SUBMISSION)
++        _v22_ids = [info.game_id for info in _v22_arcade.available_environments]
++        if not _v22_ids:
++            raise RuntimeError("v22: explore arcade exposed zero environments")
++
++        def _v22_make(gid):
++            env = _v22_arcade.make(gid)
++            if env is None:
++                raise RuntimeError(f"v22: arcade.make({gid!r}) returned None")
++            return env
++
++        _v22_t0 = time.monotonic()
++        _v22_manuals = pre_explorer.run_pre_exploration(
++            _v22_ids,
++            _v22_make,
++            _V22_GameAction,
++            seconds_per_game=float(os.getenv("PRE_EXPLORATION_SECONDS_PER_GAME", "900")),
++            seed=int(os.getenv("PRE_EXPLORATION_SEED", "0")),
++            max_chars=int(os.getenv("MANUAL_MAX_CHARS", "3500")),
++        )
++        print(
++            f"[v22-phaseA] wall={time.monotonic() - _v22_t0:.0f}s "
++            f"manuals={len(_v22_manuals)}/{len(_v22_ids)}",
++            flush=True,
++        )
++        # 探索记分卡用完即关：网关上不留悬挂 scorecard，benchmark 之后开自己的卡。
++        try:
++            _v22_arcade.close_scorecard()
++        except Exception as exc:
++            print(f"[v22-phaseA] scorecard close failed (non-fatal): {exc}", flush=True)
++    except Exception as exc:
++        print(
++            f"[v22-phaseA] ABORTED, degrading to pristine: {type(exc).__name__}: {exc}",
++            flush=True,
++        )
++        _v22_manuals = {}
++    (WORKING_DIR / "manuals.json").write_text(
++        json.dumps(_v22_manuals, ensure_ascii=False, indent=1)
++    )
++else:
++    print("[v22-phaseA] disabled (ENABLE_PRE_EXPLORATION=0)", flush=True)
++
++if os.getenv("ENABLE_MANUAL_INJECT", "1") == "1" and _v22_manuals:
++    manual_injector.install(_v22_manuals)
++
+ 
+ ## 5. Start serving
+ 
+@@ -10772,6 +11704,7 @@
+ bm.solver.save_request_logs = True
+ bm.n_passes = 4
+ bm.game_weights = None
++# v4: D1 pair removed - v1 vs v2 shows it cost 15% of actions (58k drain / 10 streams restored)
+ 
+ demo_excluded_games = [] if TRUE_SUBMISSION else []
+ 
+@@ -10792,6 +11725,363 @@
+ 
+ # show config
+ print('benchmark.solver:', bm.solver)
++
++# ---- FR WIN-PATH REPLAY (max-over-runs; mechanics credit: mahuagui v18, CC0) ----
++# EnvironmentScoreList.score = max over runs. After the main LLM run ends, open a
++# second run on the same scorecard and deterministically replay per-level winning
++# segments programmatically (zero LLM calls, seconds of wall time). A clean replay
++# run has minimal per-level actions -> raises the game's max. A failed replay run
++# scores below the main run and cannot lower it.
++import threading as _fr_threading
++import inference.framework.solver as _fr_solver
++
++_V8_REC: dict = {}
++_V8_LOCK = _fr_threading.Lock()
++
++_fr_orig_exec = _fr_solver._HarnessGameSession._execute_action
++
++def _fr_rec_exec(self, action, **kw):
++    result = _fr_orig_exec(self, action, **kw)
++    try:
++        st = self.game.current_state
++        raw = getattr(st, "raw", st)
++        won = bool(getattr(st, "just_won_level", None) or getattr(raw, "just_won_level", False))
++        with _V8_LOCK:
++            _V8_REC.setdefault(self.game_index, []).append(
++                (action.id.name, dict(action.data or {}), int(st.levels_completed),
++                 getattr(raw, "state", None), won)
++            )
++    except Exception:
++        pass
++    return result
++
++_fr_solver._HarnessGameSession._execute_action = _fr_rec_exec
++
++def _fr_extract(rec, max_level):
++    """Winning segment per level: last contiguous no-death traversal ending in a win.
++    Win detection: just_won_level flag OR level transition (engine frames lack the flag)."""
++    segs = {}
++    cur = 1
++    buf = []
++    prev_lv = 0
++    state_name = lambda s: getattr(s, "name", str(s))
++    for (a, d, lv, st, won) in rec:
++        if state_name(st) == "GAME_OVER":
++            buf = []
++            prev_lv = lv
++            continue
++        if a == "RESET":
++            prev_lv = lv
++            continue
++        buf.append((a, d))
++        won_lvl = won or lv > prev_lv
++        prev_lv = lv
++        if won_lvl and lv >= cur:
++            segs[cur] = buf
++            buf = []
++            cur += 1
++            if cur > max_level:
++                break
++    return segs
++
++def _fr_replay(session):
++    g = session.game
++    max_level = int(g.current_state.levels_completed or 0)
++    with _V8_LOCK:
++        rec = list(_V8_REC.get(session.game_index) or [])
++    if max_level < 1 or not rec:
++        return
++    segs = _fr_extract(rec, max_level)
++    if not segs:
++        print(f"FR_REPLAY_SKIP game={session.game_index} no_segments", flush=True)
++        return
++    arcade = getattr(g, "_arcade", None)
++    comp = getattr(g, "_competition_scorecard", None)
++    if arcade is None:
++        return
++    try:
++        if comp is not None:
++            run2 = comp.open_run()
++        else:
++            run2 = g._scorecard_id
++        from arcengine import GameAction
++        env2 = arcade.make(g.env_name, scorecard_id=run2)
++        if env2 is None:
++            print(f"FR_REPLAY_SKIP game={session.game_index} make_none", flush=True)
++            return
++        frame = env2.reset()
++        ok = 0
++        try:
++            for lv in range(1, len(segs) + 1):
++                for (a, d) in segs[lv]:
++                    frame = env2.step(GameAction[a], data=d)
++                    ok += 1
++                    stn = getattr(getattr(frame, "state", None), "name", "")
++                    if frame is None or stn == "GAME_OVER":
++                        print(f"FR_REPLAY_ABORT game={session.game_index} level={lv} step={ok}", flush=True)
++                        return
++                if int(getattr(frame, "levels_completed", 0) or 0) < lv:
++                    print(f"FR_REPLAY_MISMATCH game={session.game_index} level={lv}", flush=True)
++                    return
++            print(f"FR_REPLAY_OK game={session.game_index} levels={len(segs)} steps={ok}", flush=True)
++        finally:
++            try:
++                env2.close()
++            except Exception:
++                pass
++            if comp is not None:
++                comp.finish_run()
++    except Exception as exc:
++        print(f"FR_REPLAY_ERROR game={session.game_index} {exc!r}", flush=True)
++
++_fr_orig_play = _fr_solver._HarnessGameSession.play
++
++def _fr_replay_play(self):
++    _fr_orig_play(self)
++    try:
++        _fr_replay(self)
++    except Exception as exc:
++        print(f"FR_REPLAY_WRAPPER_ERROR {exc!r}", flush=True)
++
++_fr_solver._HarnessGameSession.play = _fr_replay_play
++print("FR_REPLAY_GRAFT ok (record+replay installed)", flush=True)
++
++
++# ---- graft-v2: M85 SOLVED-LEVEL MEMORY (credit: sirikilohit/LohitSiriki, Apache-2.0) ----
++# ===== v16.8 = M85: SOLVED-LEVEL MEMORY (the rule that cleared a level is carried into every later level) =====
++"""WHY (v16.6 vs v16.7 local transcripts, 2026-09-25): in all 4 levels v16.7 lost (cd82 L2, dc22 L2, s5i5 L3, sb26 L4)
++it entered the level without the rule that solved the previous one and spent 60-100+ minutes re-deriving it
++(cd82 L2: 122 actions vs 8; sb26 L4: 189 without clearing vs 37), while v16.6 carried a verified rule and cleared near
++baseline. The harness has no working carrier: the world model is wiped at every level change by design, and the
++"Cross-level notes" field that survives the wipe was filled in 0 of 989 / 0 of 1,189 level>=2 prompts (the model writes
++that label in visible text 4 / 2 times per run; capture reads visible text only). M24's ledger at dc22's end held
++working fragments, not the L1 rule.
++
++HOW (per agent = per game; adds, never removes, history):
++  1. At the first prompt after a level transition, record FACTS the harness already has: the level number, how many
++     actions it took, its last M85_ACTIONS_KEPT actions (the winning tail), and the tail of the model's own reasoning
++     from the turn that cleared it (last assistant message(s) in the kept history).
++  2. The same prompt asks the model to write, in its reply, a line starting "Rule for level N:" with the goal, what
++     each control did and the plan that won (<= 5 lines). No extra request.
++  3. The rule is captured from the reply's visible text OR its reasoning on the next prompt(s) (asked on up to
++     M85_ASK_TURNS prompts, then left "not stated").
++  4. Everything is pinned as one block at the END of the agent's system prompt (after M77's block), replaced in place
++     on updates. The newest M85_FULL_LEVELS levels keep actions + reasoning; older ones keep the rule only.
++READ: m85_summary() -> levels_recorded, rules_captured, rules_missing, asks, block_chars_max, errors.
++"""
++import re as _re85
++import threading as _th85
++
++M85_ACTIONS_KEPT = 30
++M85_REASONING_CHARS = 900
++M85_RULE_CHARS = 600
++M85_FULL_LEVELS = 3
++M85_ASK_TURNS = 2
++M85_HEADER = "=== SOLVED LEVELS (facts from this game + your own conclusions; kept for the whole game) ==="
++M85_FOOTER = "=== END SOLVED LEVELS ==="
++_LK85 = _th85.Lock()
++_STAT85 = {"levels_recorded": 0, "rules_captured": 0, "rules_missing": 0, "asks": 0, "block_chars_max": 0,
++           "errors": 0, "last_error": ""}
++
++
++def _m85_text(msg):
++    parts = []
++    for k in ("content", "reasoning_content", "reasoning"):
++        v = msg.get(k) if isinstance(msg, dict) else None
++        if isinstance(v, str):
++            parts.append(v)
++        elif isinstance(v, list):
++            parts += [p.get("text", "") for p in v if isinstance(p, dict) and isinstance(p.get("text"), str)]
++    return "\n".join(p for p in parts if p)
++
++
++def m85_level_actions(history_entries, level):
++    """Actions taken while on `level`: history[i].frame is the frame AFTER history[i].action, so an action belongs to
++    the level of the frame before it. The seeded first entry has an empty action and is skipped."""
++    out, prev = [], None
++    for e in history_entries or []:
++        act = str(getattr(e, "action", "") or "").strip()
++        if act and prev == level:
++            out.append(act)
++        lv = getattr(getattr(e, "frame", None), "level", None)
++        if isinstance(lv, int):
++            prev = lv
++    return out
++
++
++def m85_find_rule(text, level):
++    """The model's 'Rule for level N:' statement. Its own line if that line carries >= 40 chars; otherwise up to 5
++    following non-empty lines (a bulleted rule), stopping at a blank line. Blank lines cannot be relied on as the end
++    marker (the stored reasoning in history can lose them), so the capture never runs past one line / five lines."""
++    m = _re85.search(r"Rule for level\s*%d\s*:[ \t]*" % int(level), text or "", _re85.I)
++    if not m:
++        return None
++    lines = (text[m.end():]).split("\n")
++    first = lines[0].strip()
++    if len(first) >= 40:
++        rule = first
++    else:
++        out = [first] if first else []
++        for ln in lines[1:6]:
++            if not ln.strip():
++                if out:
++                    break
++                continue
++            out.append(ln.strip())
++        rule = " ".join(out)
++    rule = " ".join(rule.split())[:M85_RULE_CHARS]
++    return rule if len(rule) >= 20 else None
++
++
++def m85_block(levels):
++    if not levels:
++        return ""
++    lines = [M85_HEADER]
++    full_from = max(0, len(levels) - M85_FULL_LEVELS)
++    for i, rec in enumerate(levels):
++        lines.append(f"Level {rec['level']} - cleared after {rec['n_actions']} actions.")
++        lines.append(f"  Your rule: {rec['rule'] if rec.get('rule') else 'not stated'}")
++        if i >= full_from:
++            tail = rec["actions"]
++            skipped = rec["n_actions"] - len(tail)
++            lines.append("  Last actions before it cleared" + (f" ({skipped} earlier omitted)" if skipped > 0 else "")
++                         + ": " + (", ".join(tail) if tail else "none recorded"))
++            if rec.get("reasoning"):
++                lines.append("  Your reasoning in the turn that cleared it: " + rec["reasoning"])
++    lines.append("Reuse these where the new level has the same controls; verify with one probe before relying on them.")
++    lines.append(M85_FOOTER)
++    return "\n".join(lines)
++
++
++def install85():
++    import inference.agent.tool_agent as _T85
++    _A85 = _T85.ToolAgent
++    _inner85 = _A85._build_user_prompt
++    if getattr(_inner85, "_m85_wrapped", False):
++        raise RuntimeError("M85 installed twice")
++
++    def _set_block(self):
++        block = m85_block(getattr(self, "_m85_levels", []))
++        sp = getattr(self, "_system_prompt", "") or ""
++        old = getattr(self, "_m85_block_text", "")
++        if old and old in sp:
++            sp = sp.replace(old, block)
++        elif block:
++            sp = sp.rstrip("\n") + "\n\n" + block
++        self._system_prompt = sp
++        self._m85_block_text = block
++        with _LK85:
++            _STAT85["block_chars_max"] = max(_STAT85["block_chars_max"], len(block))
++
++    def _capture_rules(self):
++        """Look for 'Rule for level N:' in assistant messages written since the ask (reply text or reasoning)."""
++        pending = [r for r in getattr(self, "_m85_levels", []) if not r.get("rule") and r.get("asks", 0) > r.get("checks", 0)]
++        if not pending:
++            return False
++        texts = [_m85_text(m) for m in (getattr(self, "_history_messages", []) or [])
++                 if isinstance(m, dict) and m.get("role") == "assistant"]
++        changed = False
++        for rec in pending:
++            rec["checks"] = rec.get("checks", 0) + 1
++            for t in reversed(texts):
++                rule = m85_find_rule(t, rec["level"])
++                if rule:
++                    rec["rule"] = rule
++                    changed = True
++                    with _LK85:
++                        _STAT85["rules_captured"] += 1
++                    break
++            if not rec.get("rule") and rec["checks"] >= M85_ASK_TURNS:
++                with _LK85:
++                    _STAT85["rules_missing"] += 1
++        return changed
++
++    def _build_user_prompt(self, action_num, *args, **kwargs):
++        out = _inner85(self, action_num, *args, **kwargs)
++        try:
++            if not hasattr(self, "_m85_levels"):
++                self._m85_levels = []
++                self._m85_block_text = ""
++            changed = _capture_rules(self)
++            summary = kwargs.get("previous_step_summary") or {}
++            level_now = getattr(kwargs.get("current_frame"), "level", None)
++            if summary.get("level_transition") and not summary.get("run_complete") and isinstance(level_now, int):
++                solved = level_now - 1
++                if solved >= 1 and all(r["level"] != solved for r in self._m85_levels):
++                    acts = m85_level_actions(kwargs.get("history_entries") or [], solved)
++                    reasoning = ""
++                    for m in reversed(getattr(self, "_history_messages", []) or []):
++                        if isinstance(m, dict) and m.get("role") == "assistant":
++                            t = " ".join(_m85_text(m).split())
++                            if t:
++                                reasoning = t[-M85_REASONING_CHARS:]
++                                break
++                    self._m85_levels.append(dict(level=solved, n_actions=len(acts), actions=acts[-M85_ACTIONS_KEPT:],
++                                                 reasoning=reasoning, rule=None, asks=0, checks=0))
++                    changed = True
++                    with _LK85:
++                        _STAT85["levels_recorded"] += 1
++            last = self._m85_levels[-1] if self._m85_levels else None
++            if last is not None and not last.get("rule") and last["asks"] < M85_ASK_TURNS:
++                last["asks"] += 1
++                with _LK85:
++                    _STAT85["asks"] += 1
++                out += ("\n\nLEVEL %d SOLVED. In your reply this turn, before acting, write one short paragraph that "
++                        "starts exactly with 'Rule for level %d:' -- the goal, what each control/action did, and the "
++                        "plan that won (at most 5 lines). It is pinned for every later level." % (last["level"], last["level"]))
++            if changed:
++                _set_block(self)
++        except Exception as exc:
++            with _LK85:
++                _STAT85["errors"] += 1
++                _STAT85["last_error"] = f"{type(exc).__name__}: {exc}"[:200]
++        return out
++
++    for _f in dir(_inner85):
++        if _f.endswith("_wrapped"):
++            setattr(_build_user_prompt, _f, getattr(_inner85, _f))
++    _build_user_prompt._m85_wrapped = True
++    _A85._build_user_prompt = _build_user_prompt
++    return True
++
++
++def m85_summary():
++    with _LK85:
++        return dict(_STAT85)
++
++install85()
++print('V1680_M85 installed', __import__('json').dumps(m85_summary()), flush=True)
++
++try:
++    install85()
++    print('M85_GRAFT ok', flush=True)
++except Exception as _e85:
++    print(f'M85_GRAFT skipped (non-fatal): {_e85!r}', flush=True)
++
++
++# ---- graft-v2: KNOWLEDGE ASSETS (credit: desihnurseha/kinetic, measured r342/29.68) ----
++_KP_TEXT = 'EXPERIENCE FROM MANY PLAYED GAMES (general habits; every game is new):\n\nOpening a new level\n1. Act within your first or second call. Look at the board once, name the 2-3 objects that could be "you", the goal or a counter, then test. Levels that were never cleared spent 76% of calls without an action; cleared levels 55%.\n2. Make the first test a cheap probe: one press of each available action type (or one click on each distinct object), printing frame_diff() after each. Do not assume an object\'s role from its look; look-alikes from other games mean nothing. Inside one game, objects that look the same behave the same.\n3. From level 2 on, start from the previous level\'s mechanics and your retained helpers. Probe only what is new on this board.\n\nReading results\n4. After every action check: did the interior board change, what moved, did a counter or edge bar change? If the final board looks unchanged, read the animation frames; the whole effect may be there.\n5. A bar at the board edge that shrinks with each action is an action budget. Count how many actions remain and plan within it.\n6. Write down a one-line rule after each test ("X moves the selected piece 3 cells", "clicking Y does nothing"). Trust measured rules over theories.\n\nWhen stuck\n7. Never send the same action to the same target again after it produced no change, unless something else changed first. Switch action type, target or order.\n8. If three calls in a row sent no action, your next call must act: run the most informative small test you can think of. Thinking longer without new evidence rarely helps; most very long replies sent nothing.\n9. If a Python error occurs, fix it with a minimal snippet and keep going; do not rewrite everything.\n10. Re-question the goal: compare the board with what changed when earlier levels were cleared (what overlapped, matched, filled or reached what).\n\nGame over\n11. Game over restarts only the current level; completed levels are kept. Inspect the frame before the fatal action: was the budget bar empty (be shorter) or did the action itself kill (avoid that move)?\n12. Never replay the sequence that just failed. Change the plan before the fatal point.\n13. If UNDO is available, use it to back out of a bad move instead of risking a restart.\n\nEfficiency (actions are scored, fewer is better)\n14. Once you know the mechanic and the goal, compute the whole route in Python and send it in one call as a checked loop: execute step by step, stop on no change, game over or level completed, and print the state at the stop.\n15. Do not spend actions on exploration you do not need. One probe per unknown mechanic; no idle moves, no "just to see" repeats.\n16. After a level completes, stop: the next board needs a new plan.\n\nCarrying knowledge to the next level\n17. Put helpers (object finder, mover, checked plan runner) in functions; functions survive between calls, plain variables do not. Pass board data as arguments.\n18. Reuse those helpers on the next level instead of rewriting them. Levels started with reused helpers cleared with about 20% fewer tokens.\n19. Keep a short running list of confirmed rules and update it when the new level contradicts one; new board elements usually introduce the mechanic you need.\n\nExemplary turn A (probe, then act)\nObserve: new board; one small object differs from everything else, a thin bar runs along the top edge. Test: press UP, LEFT and SPACE once each, printing frame_diff() after each. Read: UP and LEFT move the small object 2 cells; SPACE changes nothing in the interior; the bar lost one cell per press, so it is a step budget. Act: the small object must reach the framed cell 6 rows up and 4 columns left: send UP x3 and LEFT x2 in a checked loop, stopping on no change or completion. Result: level completed in 9 actions total.\n\nExemplary turn B (reuse and verify)\nObserve: level 3 has the same pieces as level 2 plus one new kind of tile. Test: reuse the retained piece-finder and plan-runner; click the new tile once and diff. Read: the new tile swaps the colour of the selected piece; nothing else moved. Act: extend the level-2 plan with one swap click, run it through the retained runner that checks each step against the expected position and stops on the first mismatch. Result: all steps matched, level completed on the final move.\n'
++_MC_TEXT = "MECHANICS SEEN IN OTHER GAMES (recognise by what actions DO, not by looks; always test first):\n\n1 Movement by keys\n- Fixed step: an arrow shifts ONE object k cells (k=2-6; re-measure each level and after a resize); a wall makes it a no-op that still costs. Test: each arrow once, frame_diff, measure shift; then BFS on the k-grid.\n- Push/carry/drag: moving into an object makes it slide until blocked, or (after SPACE) it follows you until dropped, or an arm extends on one key and retracts dragging what it hooked. Test: move into it once: moved 1 step, many, or follows?\n- A key may rotate the piece instead of moving it (SPACE may rotate the selected one), a step may jump far (portal), a clicked piece may jump a neighbour, removing it. Check shape, piece count, jump size.\n\n2 Select, then act\n- Arrows move only the selected object; SPACE or a click moves a small marker or highlight to another object (an axis can be selectable). Test: SPACE once, click each object once; tiny diff = marker moved.\n- Click empty cell = active piece goes there or steps toward it (refused if blocked); click a piece = it becomes active or swaps.\n\n3 Linked objects\n- Something you never move moves as a function of others: mirror across a movable axis (axis +k moves image 2k), an opposite twin, a centroid of handles, a clone replaying your earlier route after a reset. Test: move one thing, list EVERY changed object, fit mirror/midpoint/replay; solve for inputs.\n\n4 Controls\n- Cycle: repeated clicks/presses on one target step it through a fixed cycle (colour, glyph, on/off). Test: repeat until it wraps; presses = (target-current) mod n. If cells beyond the target change, model the neighbourhood.\n- Remote button (diff FAR from click): moves, extends or toggles a distant piece, arm or bridge by a fixed step, or shifts a cyclic track of cells (tracks may cross). Test: press each once, derive the mapping, search over presses.\n\n5 Goals that completed levels\n- Usually the ordinary move/click that makes the state right ends the level; no confirm.\n- Cover/reach: pieces (or images) exactly on outline/dot targets, all at once; reach an exit; fill sockets or a container.\n- Reproduce a reference: an example/legend panel defines what an editable region must become, often via a mapping (pairs, colour swap, palette pick then stamp). Compute the target in Python first.\n- Submit/run: a run key/button, or a keypad pattern then confirm, plays a program, pour or spell FAR away; a wrong run mostly just costs.\n\n6 Budget and hazards\n- Edge bar ticks per action (often every 2nd); UNDO (maybe ACTION7) and no-ops cost; a big jump = pickup refill; empty = game over. Measure drain early.\n- Movers patrol, dash along their facing, or chase; contact = game over, side entry may capture. Some are helpers working alone (SPACE may just wait). Log movers per action; simulate first.\n- Touching a colour source or modifier tile changes the piece's colour/shape (last touch wins); an exit may accept only a matching piece.\n- Walls may toggle every N actions; animations may show a retracting preview (path, flood): read them.\n\nUnknown mechanic: probe each action once (each key, SPACE, ACTION7, one click per object), frame_diff each.\nWrite effects(action) -> changed objects, displacement, near/far, bar change; keep it, rerun on every new element.\n"
++try:
++    from inference.framework.solver import _HarnessGameSession as _KG_CLS
++    if not getattr(_KG_CLS, "_kg_installed", False):
++        _kg_orig_play = _KG_CLS.play
++        def _kg_play(self):
++            try:
++                az = getattr(self, "analyzer", None)
++                sp = getattr(az, "_system_prompt", None)
++                if isinstance(sp, str):
++                    if "EXPERIENCE FROM MANY PLAYED GAMES" not in sp:
++                        az._system_prompt = sp + "\n\n" + _KP_TEXT + "\n\n" + _MC_TEXT
++            except Exception as _e:
++                print(f"KG inject failed (non-fatal): {_e!r}", flush=True)
++            return _kg_orig_play(self)
++        _KG_CLS.play = _kg_play
++        _KG_CLS._kg_installed = True
++        print("KG_GRAFT ok", flush=True)
++except Exception as _e:
++    print(f"KG_GRAFT skipped (non-fatal): {_e!r}", flush=True)
++
+ 
+ ## 8. Run the system monitor
+ 

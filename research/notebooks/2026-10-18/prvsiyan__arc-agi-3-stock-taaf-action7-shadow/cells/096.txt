@@ -1,0 +1,76 @@
+# Each bundled repo exposes its importable tree at <repo>/src or <repo>.
+def _source_path_entries(bundle_dir: Path) -> list:
+    entries = []
+    for repo in sorted((bundle_dir / "src").iterdir(), reverse=True):
+        for candidate in (repo / "src", repo):
+            if candidate.is_dir():
+                entries.append(candidate)
+    return entries
+
+
+# Environment handed to each setup command (paths + any keys it has persisted).
+def _command_env() -> dict:
+    env = os.environ.copy()
+    # "$PYTHON" in a command resolves to this notebook's interpreter.
+    env["PYTHON"] = sys.executable
+    # Absolute path to the mounted source bundle.
+    env["TAAF_KAGGLE_BUNDLE_DIR"] = str(BUNDLE_DIR)
+    # The writable /kaggle/working directory.
+    env["TAAF_KAGGLE_WORKING_DIR"] = str(WORKING_DIR)
+    # A command writes a JSON object here to persist env keys to later commands + the run.
+    env["TAAF_KAGGLE_SETUP_ENV"] = str(SETUP_ENV_PATH)
+    env.update({str(k): str(v) for k, v in json.loads(SETUP_ENV_PATH.read_text()).items()})
+    return env
+
+
+# Make the bundled repos importable here (sys.path) and in child processes (.pth).
+# thui-animfast: his tree minus the two solver repos (the June duck), plus the anim solver tree. The loop below
+# inserts each entry at sys.path[0], so the LAST entries win -- the anim ones; the .pth is written anim-first.
+_SOLVER_REPOS = {"ARC3-Inference", "tufa-arc-agi-framework"}
+_his_entries = [e for e in _source_path_entries(BUNDLE_DIR) if e.parent.name not in _SOLVER_REPOS and e.name not in _SOLVER_REPOS]
+_anim_entries = _source_path_entries(ANIM_BUNDLE_DIR)
+assert _anim_entries and all(str(e).startswith(str(ANIM_BUNDLE_DIR)) for e in _anim_entries), _anim_entries
+assert not any(("ARC3-Inference" in str(e) or "tufa-arc-agi-framework" in str(e)) for e in _his_entries), _his_entries
+source_entries = _his_entries + _anim_entries
+print(f"thui-animfast: source roots his={[str(e) for e in _his_entries]} anim={[str(e) for e in _anim_entries]}", flush=True)
+for entry in source_entries:
+    sys.path.insert(0, str(entry))
+pth_path = Path(sysconfig.get_paths()["purelib"]) / "taaf_kaggle_sources.pth"
+pth_path.write_text("".join(f"{entry}\n" for entry in (_anim_entries + _his_entries)))   # anim first for child processes
+print(f"taaf.kaggle: wrote {pth_path} ({len(source_entries)} source roots)")
+
+# Solver setup commands (wheels, vLLM server startup, ...) run before the benchmark loads.
+env = _command_env()
+for command in json.loads((BUNDLE_DIR / "setup_commands.json").read_text()):
+    print(f"taaf.kaggle: setup command: {command}", flush=True)
+    subprocess.run(command, shell=True, check=True, cwd=WORKING_DIR, env=env)
+    # Re-read in case the command persisted new env keys.
+    env = _command_env()
+    os.environ.update(env)
+
+# Honour any PYTHONPATH a setup command exported.
+for entry in reversed([e for e in os.environ.get("PYTHONPATH", "").split(os.pathsep) if e]):
+    if entry not in sys.path:
+        sys.path.insert(0, entry)
+# ---- thui-animfast: the thui-v3 knobs, set AFTER his serving_setup persisted the analyzer env and BEFORE any
+# `inference` import (tool_agent reads LOCAL_ANALYZER_SEED / YIELD_SECONDS at import time), then the graft teeth.
+_KNOBS = {"LOCAL_ANALYZER_SEED": "20260825", "LOCAL_ANALYZER_YIELD_SECONDS": "180"}
+_persisted = json.loads(SETUP_ENV_PATH.read_text())
+assert _persisted.get("LOCAL_ANALYZER_MODEL_ID") == "Qwen/Qwen3.8-Flash-Next-NVFP4", _persisted.get("LOCAL_ANALYZER_MODEL_ID")
+assert _persisted.get("LOCAL_ANALYZER_YIELD_SECONDS") == "60", "his serving_setup no longer persists yield 60 -- re-derive the override"
+assert _persisted.get("LOCAL_ANALYZER_TEMPERATURE") == "0.6" and _persisted.get("MULTIMODAL_UPSCALE") == "4", _persisted
+_persisted.update(_KNOBS)
+SETUP_ENV_PATH.write_text(json.dumps(_persisted, indent=2, sort_keys=True) + "\n")
+os.environ.update(_KNOBS)
+assert "inference" not in sys.modules and "taaf" not in sys.modules, "solver imported before the knob override"
+import inference.agent.tool_agent as _tool_agent
+import inference.utils.animation as _anim_mod
+import taaf as _taaf
+for _m in (_tool_agent, _anim_mod, _taaf):
+    assert str(Path(_m.__file__).resolve()).startswith(str(ANIM_BUNDLE_DIR.resolve())), (_m.__name__, _m.__file__)
+assert _tool_agent._LOCAL_ANALYZER_SEED == int("20260825"), _tool_agent._LOCAL_ANALYZER_SEED
+assert float(_tool_agent._LOCAL_ANALYZER_YIELD_SECONDS) == float("180"), _tool_agent._LOCAL_ANALYZER_YIELD_SECONDS
+assert os.environ["LOCAL_ANALYZER_MODEL_ID"] == "Qwen/Qwen3.8-Flash-Next-NVFP4"
+print(f"THUI_ANIMFAST_GRAFT ok solver={Path(_tool_agent.__file__).parent} seed={_tool_agent._LOCAL_ANALYZER_SEED} "
+      f"yield={_tool_agent._LOCAL_ANALYZER_YIELD_SECONDS} model={os.environ['LOCAL_ANALYZER_MODEL_ID']} "
+      f"temperature={os.environ['LOCAL_ANALYZER_TEMPERATURE']} upscale={os.environ['MULTIMODAL_UPSCALE']}", flush=True)

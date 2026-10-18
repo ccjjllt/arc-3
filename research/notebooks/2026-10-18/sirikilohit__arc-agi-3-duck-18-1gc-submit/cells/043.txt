@@ -1,0 +1,3 @@
+## Patch cell - v16.7 M72 (one-pool UCB scheduler)
+
+One shared time pool: every game gets a 300 s warm-up slice, then each free slot goes to the playable game with the highest UCB score (levels per generated token plus an exploration bonus, c = 0.0002). From v14.73 plus two fixes: a slice ends at the next request boundary (the agent yields with its history kept) and each request's timeout is re-capped to the time left. M43 is switched off.

@@ -1,0 +1,5 @@
+                emb.weight.data[local_start : local_start + n_rows].copy_(
+                    loaded_weight[src_start : src_start + n_rows].to(
+                        device=emb.weight.device, dtype=emb.weight.dtype
+                    )
+                )

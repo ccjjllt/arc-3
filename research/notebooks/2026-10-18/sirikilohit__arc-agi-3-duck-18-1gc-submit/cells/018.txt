@@ -1,0 +1,20 @@
+## Patch cell - v14.14 ACTION7 FIX
+
+**One-line bug fix on the raw 14-0 base. Nothing else changed.**
+
+VERIFIED AT FOUR LEVELS:
+1. The engine supports it — `arcengine/enums.py`: `ACTION7 = (7, SimpleAction)`
+2. The harness omits it — `action_names.py` `ENGINE_TO_MODEL_ACTION` lists ACTION1-6 + RESET
+3. `to_engine_action('ACTION7')` therefore returns **None** (ran it; every other action round-trips)
+4. `solver.py:627` rejects it before the engine ever sees it: *"Unknown action at index N"*
+
+MEASURED: ACTION7 executed **0 times in 25 games / 3,566 actions**, while advertised to the
+model in `valid_actions` in 6 games on every turn.
+
+Our archive's "ACTION7 confirmed working" was true only with module **M7** installed; the raw
+Flash-Next fork did not inherit the M-modules, so the bug returned.
+
+4 of the 6 games offering ACTION7 are perpetual-zero: **g50t, sk48, sp80, tn36**.
+
+**Honest limit:** this proves the action *cannot* work. It does not prove the model would
+choose it. Judge by `ACTION7 executed > 0` first, levels/game second.

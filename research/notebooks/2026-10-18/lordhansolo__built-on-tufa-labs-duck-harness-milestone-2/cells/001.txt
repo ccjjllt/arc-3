@@ -1,0 +1,39 @@
+import contextlib
+import dataclasses
+import json
+import os
+import pickle
+import subprocess
+import sys
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import TextIO
+from urllib.request import urlopen
+
+
+def _env_bool(name: str, default: bool = False) -> bool:
+    raw = os.getenv(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw in {"1", "true", "yes", "y", "on"}
+
+
+NOTEBOOK_START_EPOCH = time.time()
+RUN_AS_SUBMISSION = False
+RUN_AS_SUBMISSION = RUN_AS_SUBMISSION or _env_bool("KAGGLE_IS_COMPETITION_RERUN", False)
+ENABLE_GPU = True
+
+os.environ["TAAF_RUN_AS_SUBMISSION"] = "1" if RUN_AS_SUBMISSION else "0"
+os.environ.setdefault("MPLBACKEND", "Agg")
+
+if ENABLE_GPU:
+    cuda_library_path = "/usr/local/nvidia/lib64"
+    existing = [entry for entry in os.environ.get("LIBRARY_PATH", "").split(os.pathsep) if entry]
+    os.environ["LIBRARY_PATH"] = os.pathsep.join(
+        [cuda_library_path, *[entry for entry in existing if entry != cuda_library_path]]
+    )
+
+print(f"TAAF RUN_AS_SUBMISSION={RUN_AS_SUBMISSION}")
+if ENABLE_GPU:
+    print(f"taaf.kaggle: LIBRARY_PATH={os.environ['LIBRARY_PATH']}")

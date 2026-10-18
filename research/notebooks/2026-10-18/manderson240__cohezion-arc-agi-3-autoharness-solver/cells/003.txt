@@ -1,0 +1,20 @@
+# 4. Commit Validator Parquet Handler
+# During commit (not TRUE_SUBMISSION), generates initial valid parquet so Kaggle enables Submit.
+# During competition rerun (TRUE_SUBMISSION), Kaggle generates submission.parquet automatically from the scorecard.
+import os
+import pandas as pd
+from pathlib import Path
+
+target_dir = Path("/kaggle/working") if Path("/kaggle/working").exists() else Path(".")
+target_file = target_dir / "submission.parquet"
+
+if not TRUE_SUBMISSION:
+    print("Generating commit-time validator submission.parquet...")
+    commit_df = pd.DataFrame(
+        data=[["1_0", "1", True, 1]],
+        columns=["row_id", "game_id", "end_of_game", "score"]
+    )
+    commit_df.to_parquet(target_file, index=False)
+    print(f"✓ Commit validator submission.parquet written ({target_file.stat().st_size} bytes).")
+else:
+    print("TRUE_SUBMISSION rerun complete. Gateway recorded scorecard for evaluation.")

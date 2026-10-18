@@ -1,0 +1,177 @@
+{
+  "ft09": {
+    "source_key_crop_line": 29,
+    "source_hardcoded_L_line": 41,
+    "logged_ascii_crop": [
+      "ggWWgg",
+      "ggWWgg",
+      "WWOOgg",
+      "WWOOgg",
+      "WWWWWW",
+      "WWWWWW"
+    ],
+    "exact_3x3": [
+      [
+        "g",
+        "W",
+        "g"
+      ],
+      [
+        "W",
+        "O",
+        "g"
+      ],
+      [
+        "W",
+        "W",
+        "W"
+      ]
+    ],
+    "hardcoded_3x3": [
+      [
+        "g",
+        "W",
+        "g"
+      ],
+      [
+        "W",
+        "O",
+        "W"
+      ],
+      [
+        "W",
+        "W",
+        "W"
+      ]
+    ],
+    "mismatches": [
+      {
+        "row": 1,
+        "col": 2,
+        "remembered": "W",
+        "raw_ascii": "g"
+      }
+    ],
+    "count": 1,
+    "note": "CPU parsing of logged literals/crop only; no logged Python execution."
+  },
+  "tr87": {
+    "source_raw_rows_line": 85,
+    "source_mask_line": 97,
+    "logged_raw_pixels": [
+      "BBSBB",
+      "SBSBS",
+      "SBBBS",
+      "SBSBS",
+      "BBSBB"
+    ],
+    "expected_black_ink": [
+      "##.##",
+      ".#.#.",
+      ".###.",
+      ".#.#.",
+      "##.##"
+    ],
+    "logged_extracted_mask": [
+      ".....",
+      "##.##",
+      ".#.#.",
+      ".###.",
+      ".#.#."
+    ],
+    "matches_one_row_down_shift": true,
+    "expected_black_pixels": 15,
+    "observed_black_pixels": 11,
+    "coordinate_repair_still_off_by_one": {
+      "source_line": 101,
+      "dictionary_A_S": {
+        "actual_ink_rows": [
+          11,
+          15
+        ],
+        "SLOTS_argument": 11,
+        "bg2_adds": 1,
+        "effective_rows": [
+          12,
+          16
+        ]
+      },
+      "bottom_sky": {
+        "actual_ink_rows": [
+          44,
+          48
+        ],
+        "argument": 44,
+        "bg2_adds": 1,
+        "effective_rows": [
+          45,
+          49
+        ]
+      }
+    },
+    "note": "Coordinate ranges follow literal function parameters and separately printed pixel bounding boxes. No inferred game rules."
+  },
+  "ar25": {
+    "source_crop_line": 83,
+    "logged_black_crop": [
+      "bbbbbbbbbbbbbbbbb",
+      "bBBBBBBBBBBBBbbbb",
+      "bBbBBbBBbBBbBbbbb",
+      "bBBBBBBBBBBBBbbbb",
+      "bbbbbbbbbbBBBbbbb",
+      "bbbbbbbbbbBbBbbbb",
+      "bbbbbbbbbbBBBbbbb",
+      "bbbbbbbbbbBBBBBBb",
+      "bbbbbbbbbbBbBBbBb",
+      "bbbbbbbbbbBBBBBBb",
+      "bbbbbbbbbbbbbBBBb",
+      "bbbbbbbbbbbbbBbBb",
+      "bbbbbbbbbbbbbBBBb",
+      "bbbbbbbBBBBBBBBBb",
+      "bbbbbbbBbBBbBBbBb",
+      "bbbbbbbBBBBBBBBBb",
+      "bbbbbbbbbbbbbbbbb"
+    ],
+    "logged_yellow_crop": [
+      "Sbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "SYYYYYYYYYYYYSSSSSSSSSSSSYYYS",
+      "SYYYYYYYYYYYYSWSSWSSWSSWSYYYS",
+      "SYYYYYYYYYYYYSSSSSSSSSSSSYYYS",
+      "SbbbbbbbbbYYYbbbbbbbbbbbbbbbb",
+      "SbbbbbbbbbYYYbbbbbbbbbbbbbbbb",
+      "SbbbbbbbbbYYYbbbbbbbbbbbbbbbb",
+      "SbbbbbbbbbYYYYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbYYYYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbYYYYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbYYYYYYYYYYYYYYYbbbbbbb",
+      "SbbbbbbYYYYYYYYYYYYYYYbbbbbbb",
+      "SbbbbbbYYYYYYYYYYYYYYYbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYbbbbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYYYYbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYYYYbbbbbbbbbb",
+      "SbbbbbbbbbbbbYYYYYYbbbbbbbbbb",
+      "SbbbbbbbbbbbbbbbYYYbbbbbbbbbb",
+      "SbbbbbbbbbbbbbbbYYYbbbbbbbbbb",
+      "SbbbbbbbbbbbbbbbYYYbbbbbbbbbb",
+      "SYYYbbbbbbbbbbbbYYYYYYYYYYYYb",
+      "SYYYbbbbbbbbbbbbYYYYYYYYYYYYb",
+      "SYYYbbbbbbbbbbbbYYYYYYYYYYYYb",
+      "Sbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    ],
+    "counted_black_color_pixels": 88,
+    "counted_enclosed_background_pixels": 11,
+    "black_plus_enclosed_count": 99,
+    "counted_yellow_pixels": 207,
+    "four_connected_yellow_component_sizes": [
+      189,
+      9,
+      9
+    ],
+    "note": "Own 4-neighbor graph count over logged ASCII literals; never executes generated code. Filling interior background is a geometric measurement, not proof that every such cell is physical footprint in arbitrary games."
+  }
+}

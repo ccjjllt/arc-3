@@ -1,0 +1,35 @@
+{
+  "assembly": "hardlink",
+  "format": "qwen38-flash-next-intel-autoround-fp8-ple-v1",
+  "mtp": {
+    "included": false,
+    "runtime": "Supply a separate draft model with vLLM speculative_config"
+  },
+  "ple": {
+    "files": [
+      "model-plefp8-00000.safetensors",
+      "model-plefp8-00001.safetensors",
+      "model-plefp8-00002.safetensors",
+      "model-plefp8-00003.safetensors",
+      "model-plefp8-00004.safetensors",
+      "model-plefp8-00005.safetensors",
+      "model-plefp8-00006.safetensors",
+      "model-plefp8-00007.safetensors",
+      "model-plefp8-00008.safetensors",
+      "model-plefp8-00009.safetensors"
+    ],
+    "precision": "float8_e4m3fn with one global weight_scale",
+    "repo": "RadixArk/Qwen3.8-Flash-Next-NVFP4",
+    "revision": "7b719225242aacd3dbd3f9407468c2ee9a9d2594"
+  },
+  "target": {
+    "omitted_files": [
+      "model-00016-of-00017.safetensors",
+      "model_extra_tensors.safetensors"
+    ],
+    "packing": "native AutoRound GPTQ W4A16; unchanged",
+    "repo": "Intel/Qwen3.8-Flash-Next-W4A16-AutoRound",
+    "revision": "861536dda5bcb208376fc4cd879b2bf76bece9fe"
+  },
+  "tensor_payload_bytes": 124750778874
+}

@@ -1,0 +1,36 @@
+soft_end = None
+if not TRUE_SUBMISSION:
+    budget = float(getattr(target, "max_runtime_s", 0.0) or 0.0)
+    if budget > 0:
+        soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(seconds=budget - min(600.0, budget / 2))
+
+# Kaggle's public runner may stop the long benchmark at its soft deadline without
+# returning control to the statements after ``await bm.run``.  Materialize the
+# required output contract before entering the benchmark so a successful public
+# run always exposes the exact file that an official rerun expects.  Official
+# scoring still comes from the competition gateway, not these placeholder rows.
+import pandas as pd
+
+submission_path = WORKING_DIR / "submission.parquet"
+submission_columns = ["row_id", "game_id", "end_of_game", "score"]
+pd.DataFrame(
+    [["1_0", "1", True, 1.0]],
+    columns=submission_columns,
+).to_parquet(submission_path, index=False)
+submission_probe = pd.read_parquet(submission_path)
+if list(submission_probe.columns) != submission_columns or submission_probe.isna().any().any():
+    raise ValueError("submission.parquet failed its exact-column/null audit")
+print(
+    {
+        "submission_artifact": str(submission_path),
+        "rows": len(submission_probe),
+        "columns": submission_columns,
+        "competition_rerun": TRUE_SUBMISSION,
+    }
+)
+
+try:
+    await bm.run(soft_end_time=soft_end, runtime_environment=target, minimal_diagnostics=TRUE_SUBMISSION)
+finally:
+    for command in json.loads((BUNDLE_DIR / "teardown_commands.json").read_text()):
+        subprocess.run(command, shell=True, check=False, cwd=WORKING_DIR, env=command_env())

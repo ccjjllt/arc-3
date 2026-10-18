@@ -1,0 +1,662 @@
+%%writefile pre_explorer.py
+"""pre_explorer.py — v22 Phase A：CPU 预探索 + 游戏说明书生成.
+
+证据链（§67.x 决策报告）：
+- v20 explore-graph：纯探索器无 LLM 也过关（ls01 两关 / ls21 一关）——动作语义
+  可被机械探针在分钟级发现，而 LLM 每局限花 ~10-30 回合做同一件事。
+- auto-sweep（v20 sweep-FN）失败的根因是 sweep 动作消耗了 LLM 的局内动作预算、
+  污染其世界模型；本设计在【独立 env 实例】上探索（arcade.make 不带 scorecard_id
+  → 独立默认 scorecard，见 arc_agi/base.py:611-615），benchmark 动作预算零消耗，
+  信息单向注入 system prompt——与失败设计的本质区别。
+
+三段探针（每段独立 try/except，失败降级，绝不拖垮整跑）：
+1) 箭头探针：初始棋盘逐动作 step+diff+RESET 回基线
+2) 点击探针：stride 采样网格逐点 step+diff+RESET
+3) 随机游走：上限步数记录逐动作有效率；过关序列 RESET 后在全新 env 重放验证才报告
+
+纯函数模块：不读环境变量、不含路径字面量（AGENTS.md §0/§4），开关由调用方决定。
+"""
+from __future__ import annotations
+
+import random
+import time
+from typing import Any, Callable, Iterable
+
+# 引擎帧 int -> ARC 色字符（与 LLM 所见 ascii/segmentation 一致）
+ARC_COLOR_CHARS = "WwgGcBMPRbSYOrNp"
+
+# 引擎动作名 -> LLM 所见动作名。必须与 inference/agent/action_names.py 的
+# ENGINE_TO_MODEL_ACTION 完全一致（v13 归因：说明书用 ACTION1-6 裸码，LLM 被迫
+# 自行猜测与 UP/DOWN/LEFT/RIGHT 的映射，ka59 实测猜错方向、全员浪费回合确认——
+# 说明书只应使用模型侧名称；ACTION7 无模型名，保持原样）。
+ENGINE_TO_MODEL_ACTION = {
+    "ACTION1": "UP",
+    "ACTION2": "DOWN",
+    "ACTION3": "LEFT",
+    "ACTION4": "RIGHT",
+    "ACTION5": "SPACE",
+    "ACTION6": "MOUSE",
+    "RESET": "RESET",
+}
+
+_ARROW_ACTIONS = ("ACTION1", "ACTION2", "ACTION3", "ACTION4", "ACTION5", "ACTION7")
+_CLICK_ACTION = "ACTION6"
+
+_WALK_MAX_STEPS = 60
+
+# 单局探索预算下限（秒）：防误配为 0 导致探针空转；测试可 monkeypatch 加速
+MIN_BUDGET_S = 30.0
+
+
+def _model_action(name: str) -> str:
+    """内部引擎名 -> LLM 所见名（仅用于说明书展示；探针/重放内部仍用引擎名）。"""
+    return ENGINE_TO_MODEL_ACTION.get(name, name)
+
+
+# ---------------------------------------------------------------- 帧与对象
+
+def to_grid(frame: Any) -> tuple[tuple[int, ...], ...] | None:
+    """FrameDataRaw.frame -> 不可变二维整数网格；不合法返回 None.
+
+    权威解释对齐 taaf（game.py: ``Frame(data=self.raw.frame[-1])``，"final
+    visible frame"）：frame 是 2D 网格的序列时取最后一层为可见棋盘 —— 双通道
+    游戏（如 bp35 返回 [ndarray(H,W), ndarray(H,W)]）由此得到与 LLM 所见一致的
+    棋盘。另兼容 ndarray(1,H,W) 带维形状与朴素的 list[list[int]]。
+    """
+    data = frame
+    if isinstance(data, (list, tuple)) and data:
+        last = data[-1]
+        if hasattr(last, "__len__") and not isinstance(last, (int, str, bytes)):
+            try:
+                first = last[0]
+            except Exception:
+                first = None
+            if first is not None and hasattr(first, "__len__"):
+                data = last
+    shape = getattr(data, "shape", None)
+    try:
+        if shape is not None and len(shape) == 3:
+            data = data[-1]
+    except TypeError:
+        pass
+    try:
+        rows = list(data)
+        if not rows:
+            return None
+        grid = []
+        for row in rows:
+            cells = []
+            for v in row:
+                iv = int(v)
+                if iv < 0:
+                    iv = 0
+                elif iv > 15:
+                    iv = 15
+                cells.append(iv)
+            grid.append(tuple(cells))
+        width = len(grid[0])
+        if any(len(r) != width for r in grid):
+            return None
+        return tuple(grid)
+    except (TypeError, ValueError):
+        return None
+
+
+def _color_char(v: int) -> str:
+    return ARC_COLOR_CHARS[max(0, min(15, v))]
+
+
+def _objects(grid: tuple[tuple[int, ...], ...]) -> list[tuple[int, frozenset[tuple[int, int]]]]:
+    """4 连通同色对象 -> [(color, cells)]，cells 为 (row, col) 集合。"""
+    height, width = len(grid), len(grid[0])
+    seen = [[False] * width for _ in range(height)]
+    objects: list[tuple[int, frozenset[tuple[int, int]]]] = []
+    for r0 in range(height):
+        for c0 in range(width):
+            if seen[r0][c0]:
+                continue
+            color = grid[r0][c0]
+            stack = [(r0, c0)]
+            seen[r0][c0] = True
+            cells = []
+            while stack:
+                r, c = stack.pop()
+                cells.append((r, c))
+                for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < height and 0 <= nc < width and not seen[nr][nc] and grid[nr][nc] == color:
+                        seen[nr][nc] = True
+                        stack.append((nr, nc))
+            objects.append((color, frozenset(cells)))
+    return objects
+
+
+def _centroid(cells: frozenset[tuple[int, int]]) -> tuple[float, float]:
+    n = len(cells)
+    return (sum(r for r, _ in cells) / n, sum(c for _, c in cells) / n)
+
+
+def diff_summary(
+    before: tuple[tuple[int, ...], ...] | None,
+    after: tuple[tuple[int, ...], ...] | None,
+) -> str:
+    """机械对比两帧 -> 一行事实（实体计数/位移/出现/消失）。零解释、零猜测。
+
+    每帧最大的连通对象视为背景板并整体排除：任意实体移动都会撕裂/移动背景，
+    背景的对象级变化是纯噪声（TAAF 提示亦明确背景为大块白/灰色区域）。
+    """
+    if before is None or after is None:
+        return "frame unreadable"
+    if before == after:
+        return "no change"
+
+    def entities(grid):
+        objs = _objects(grid)
+        if len(objs) <= 1:
+            return objs
+        bg = max(objs, key=lambda o: len(o[1]))
+        return [o for o in objs if o is not bg]
+
+    ob = entities(before)
+    oa = entities(after)
+    parts: list[str] = [f"objects {len(ob)}->{len(oa)} (excl. background)"]
+
+    # 按 (color, 归一化形状) 分组配对，量位移
+    def key(color: int, cells: frozenset) -> tuple:
+        r0 = min(r for r, _ in cells)
+        c0 = min(c for _, c in cells)
+        norm = frozenset((r - r0, c - c0) for r, c in cells)
+        return (color, norm)
+
+    from collections import defaultdict
+
+    gb: dict[tuple, list[frozenset]] = defaultdict(list)
+    ga: dict[tuple, list[frozenset]] = defaultdict(list)
+    for color, cells in ob:
+        gb[key(color, cells)].append(cells)
+    for color, cells in oa:
+        ga[key(color, cells)].append(cells)
+
+    moved_notes: list[str] = []
+    appeared = 0
+    disappeared = 0
+    appear_colors: set[int] = set()
+    disappear_colors: set[int] = set()
+    for k in set(gb) | set(ga):
+        b_list = gb.get(k, [])
+        a_list = ga.get(k, [])
+        color = k[0]
+        if b_list and a_list:
+            n = min(len(b_list), len(a_list))
+            # 按质心排序后一一配对（同形状对象间稳定匹配）
+            b_sorted = sorted(b_list, key=_centroid)
+            a_sorted = sorted(a_list, key=_centroid)
+            shifts = set()
+            for i in range(n):
+                br, bc = _centroid(b_sorted[i])
+                ar, ac = _centroid(a_sorted[i])
+                shifts.add((round(ar - br), round(ac - bc)))
+            zero = {(0, 0)}
+            if shifts != zero:
+                if len(shifts) == 1:
+                    (dr, dc) = next(iter(shifts))
+                    moved_notes.append(f"{n} {_color_char(color)}-obj moved (dr={dr:+d},dc={dc:+d})")
+                else:
+                    moved_notes.append(f"{n} {_color_char(color)}-obj moved inconsistently")
+        if len(a_list) > len(b_list):
+            appeared += len(a_list) - len(b_list)
+            appear_colors.add(color)
+        elif len(b_list) > len(a_list):
+            disappeared += len(b_list) - len(a_list)
+            disappear_colors.add(color)
+
+    if appeared:
+        cs = ",".join(sorted(_color_char(c) for c in appear_colors))
+        parts.append(f"+{appeared} new obj (colors {cs})")
+    if disappeared:
+        cs = ",".join(sorted(_color_char(c) for c in disappear_colors))
+        parts.append(f"-{disappeared} gone obj (colors {cs})")
+    parts.extend(moved_notes[:4])
+    return "; ".join(parts)
+
+
+# ---------------------------------------------------------------- 单局探针
+
+class _GameFacts:
+    __slots__ = ("probes", "click_hits", "click_tries", "click_rows", "click_cols",
+                 "click_examples", "walk_stats", "walk_steps", "level_path", "notes")
+
+    def __init__(self) -> None:
+        self.probes: list[tuple[str, str]] = []          # (action, diff summary)
+        self.click_hits = 0
+        self.click_tries = 0
+        self.click_rows: list[int] = []
+        self.click_cols: list[int] = []
+        self.click_examples: list[tuple[int, int]] = []  # (row, col) 有效点击样例
+        self.walk_stats: dict[str, list[int]] = {}       # action -> [changed, tries]
+        self.walk_steps = 0
+        self.level_path: list[str] | None = None
+        self.notes: list[str] = []
+
+
+def _int_code_map(game_action: Any) -> dict[int, str]:
+    """动作枚举 -> {int 编码: 名称}。
+
+    arcengine 的 GameAction 是混合值枚举（value = (code, 动作类) 元组），
+    按值构造 GameAction(1) 会 ValueError；只能遍历 __members__ 建表。
+    """
+    members = getattr(game_action, "__members__", None)
+    if not members:
+        return {}
+    out: dict[int, str] = {}
+    for member_name, member in members.items():
+        val = getattr(member, "value", None)
+        code = val[0] if isinstance(val, tuple) and val else val
+        try:
+            out[int(code)] = member_name
+        except (TypeError, ValueError):
+            continue
+    return out
+
+
+def _available(raw: Any, game_action: Any = None) -> list[str]:
+    """规范化 available_actions：引擎可能给 'ACTION1' 字符串、枚举实例或整数编码 1-7。"""
+    acts = getattr(raw, "available_actions", None) or []
+    code_map = _int_code_map(game_action)
+    out: list[str] = []
+    for a in acts:
+        name: str | None = None
+        if isinstance(a, str):
+            name = a
+        else:
+            name = getattr(a, "name", None)
+            if name is None and code_map:
+                try:
+                    name = code_map.get(int(a))
+                except (TypeError, ValueError):
+                    name = None
+        if isinstance(name, str) and name not in out:
+            out.append(name)
+    return out
+
+
+def _rebase(env: Any, game_action: Any) -> tuple[Any, tuple[tuple[int, ...], ...] | None]:
+    """reset 并返回 (raw, grid)。reset 返回 None 时重试一次。"""
+    raw = env.reset()
+    if raw is None:
+        raw = env.reset()
+    if raw is None:
+        return None, None
+    return raw, to_grid(getattr(raw, "frame", None))
+
+
+def _reset_to_baseline(env: Any, game_action: Any, baseline_grid, attempts: int = 2) -> bool:
+    """RESET 后校验回到基线棋盘；失败重试，仍失败返回 False（调用方 rebase）。"""
+    for _ in range(attempts):
+        try:
+            raw = env.step(game_action.RESET)
+        except Exception:
+            raw = None
+        grid = to_grid(getattr(raw, "frame", None)) if raw is not None else None
+        if grid is not None and grid == baseline_grid:
+            return True
+    return False
+
+
+def _probe_arrows(
+    env: Any,
+    game_action: Any,
+    facts: _GameFacts,
+    deadline: float,
+    log,
+    make_env: Callable[[], Any] | None = None,
+    gid: str = "",
+) -> bool:
+    """返回 False 表示基线不可恢复（调用方放弃本段）。发现过关序列即停止本段。"""
+    raw, baseline = _rebase(env, game_action)
+    if raw is None or baseline is None:
+        facts.notes.append("env.reset() produced no frame")
+        return False
+    for name in [a for a in _available(raw, game_action) if a in _ARROW_ACTIONS]:
+        if time.monotonic() > deadline:
+            break
+        try:
+            raw1 = env.step(getattr(game_action, name))
+            grid1 = to_grid(getattr(raw1, "frame", None)) if raw1 is not None else None
+            levels = int(getattr(raw1, "levels_completed", 0) or 0) if raw1 is not None else -1
+        except Exception as exc:
+            facts.probes.append((name, f"engine rejected: {type(exc).__name__}"))
+            grid1, levels = None, -1
+        if grid1 is None:
+            if not facts.probes or facts.probes[-1][0] != name:
+                facts.probes.append((name, "no response"))
+        else:
+            facts.probes.append((name, diff_summary(baseline, grid1)))
+            if levels > 0 and facts.level_path is None:
+                # 探针从干净基线出发，序列 [name] 即候选过关路径；重放确认后才报告
+                verified = _verify_level_path(make_env, gid, game_action, [name], levels, log)
+                if verified:
+                    facts.level_path = verified
+                    return True  # 一步过关：本段再探无意义，后续段用全新 env
+                facts.notes.append("level advance observed but path not replayable")
+        if not _reset_to_baseline(env, game_action, baseline):
+            raw, baseline = _rebase(env, game_action)
+            if raw is None or baseline is None:
+                return False
+    return True
+
+
+def _probe_clicks(env: Any, game_action: Any, facts: _GameFacts, deadline: float, log) -> bool:
+    raw, baseline = _rebase(env, game_action)
+    if raw is None or baseline is None:
+        return False
+    if _CLICK_ACTION not in _available(raw, game_action):
+        return True
+    height, width = len(baseline), len(baseline[0])
+    stride = max(1, min(height, width) // 8)
+    for row in range(stride // 2 or 1, height, stride):
+        for col in range(stride // 2 or 1, width, stride):
+            if time.monotonic() > deadline:
+                return True
+            try:
+                raw1 = env.step(getattr(game_action, _CLICK_ACTION), {"x": int(col), "y": int(row)})
+                grid1 = to_grid(getattr(raw1, "frame", None)) if raw1 is not None else None
+            except Exception:
+                grid1 = None
+            facts.click_tries += 1
+            if grid1 is not None and grid1 != baseline:
+                facts.click_hits += 1
+                facts.click_rows.append(row)
+                facts.click_cols.append(col)
+                if len(facts.click_examples) < 8:
+                    facts.click_examples.append((row, col))
+            if not _reset_to_baseline(env, game_action, baseline):
+                raw, baseline = _rebase(env, game_action)
+                if raw is None or baseline is None:
+                    return False
+    return True
+
+
+def _probe_walk(
+    env: Any,
+    game_action: Any,
+    facts: _GameFacts,
+    deadline: float,
+    seed: int,
+    make_env: Callable[[], Any] | None,
+    gid: str,
+    log,
+) -> None:
+    raw, baseline = _rebase(env, game_action)
+    if raw is None or baseline is None:
+        return
+    rng = random.Random(seed)
+    path_since_level_start: list[str] = []
+    prev_levels = 0
+    for _ in range(_WALK_MAX_STEPS):
+        if time.monotonic() > deadline:
+            break
+        acts = [a for a in _available(raw, game_action) if a in _ARROW_ACTIONS]
+        if not acts:
+            break
+        name = rng.choice(acts)
+        try:
+            raw1 = env.step(getattr(game_action, name))
+        except Exception:
+            raw1 = None
+        if raw1 is None:
+            # 引擎拒绝：RESET 恢复后继续
+            if not _reset_to_baseline(env, game_action, baseline):
+                return
+            raw, baseline = _rebase(env, game_action)
+            if raw is None:
+                return
+            continue
+        grid1 = to_grid(getattr(raw1, "frame", None))
+        levels = int(getattr(raw1, "levels_completed", 0) or 0)
+        stat = facts.walk_stats.setdefault(name, [0, 0])
+        stat[1] += 1
+        if grid1 is not None and grid1 != baseline:
+            stat[0] += 1
+        facts.walk_steps += 1
+        path_since_level_start.append(name)
+        if levels > prev_levels and facts.level_path is None:
+            candidate = list(path_since_level_start)
+            facts.level_path = _verify_level_path(make_env, gid, game_action, candidate, levels, log)
+            if facts.level_path is None:
+                facts.notes.append(f"level advance observed but path too long or not replayable ({len(candidate)} steps)")
+        prev_levels = levels
+        baseline = grid1 if grid1 is not None else baseline
+        raw = raw1
+
+
+def _verify_level_path(
+    make_env: Callable[[], Any] | None,
+    gid: str,
+    game_action: Any,
+    path: list[str],
+    expected_levels: int,
+    log,
+) -> list[str] | None:
+    """在全新 env 上重放过关序列；重放确认才作为事实报告。"""
+    if make_env is None or not path or len(path) > 40:
+        return None
+    env2 = None
+    try:
+        env2 = make_env()
+        raw = env2.reset()
+        if raw is None:
+            return None
+        for name in path:
+            raw = env2.step(getattr(game_action, name))
+            if raw is None:
+                return None
+        if int(getattr(raw, "levels_completed", 0) or 0) >= expected_levels:
+            return list(path)
+        return None
+    except Exception as exc:
+        log(f"[{gid}] path replay failed: {type(exc).__name__}: {exc}")
+        return None
+    finally:
+        close = getattr(env2, "close", None)
+        if close is not None:
+            try:
+                close()
+            except Exception:
+                pass
+
+
+# ---------------------------------------------------------------- 说明书
+
+FULL_HEADER = (
+    "PRE-EXPLORATION REPORT for this game (a scripted explorer probed a separate instance "
+    "of this exact game with the same initial board you see at the start of level 1).\n"
+    "Treat these mechanical observations as ground truth for level-1 mechanics and use them "
+    "instead of re-discovering action semantics. Effects may differ on later levels - "
+    "re-verify there. Board coordinates are (row, col), row 0 is the top. Action names here "
+    "are the same names you pass to action().\n"
+)
+
+COMPACT_HEADER = (
+    "PRE-EXPLORATION REPORT (scripted probe of this exact game, level-1 initial board; "
+    "treat as ground truth, re-verify on later levels; action names match action()):\n"
+)
+
+
+def build_manual(gid: str, facts: _GameFacts, max_chars: int) -> str:
+    """事实 -> 说明书文本。无实质事实返回空串（调用方跳过该局注入）。
+
+    展示层把引擎动作码翻译成 LLM 所见的语义名（UP/DOWN/...，见
+    ENGINE_TO_MODEL_ACTION）；内部 facts 保留引擎名供重放使用。
+    """
+    has_facts = bool(facts.probes or facts.click_tries or facts.walk_steps or facts.level_path)
+    lines: list[str] = []
+    if facts.level_path:
+        seq = ", ".join(_model_action(a) for a in facts.level_path)
+        lines.append(f"Verified level path: [{seq}] advanced the level (replayed and confirmed).")
+    if facts.probes:
+        lines.append("Action probes from the initial board (1 step each, then reset):")
+        for name, summary in facts.probes:
+            lines.append(f"- {_model_action(name)}: {summary}")
+    if facts.click_tries:
+        lines.append(
+            f"Click probes ({_model_action(_CLICK_ACTION)}): {facts.click_hits}/{facts.click_tries} sampled points changed the board."
+        )
+        if facts.click_examples:
+            pts = ", ".join(f"({r},{c})" for r, c in facts.click_examples)
+            lines.append(f"  Effective points (row,col): {pts}.")
+        if facts.click_rows:
+            lines.append(
+                f"  Effective region rows {min(facts.click_rows)}-{max(facts.click_rows)}, "
+                f"cols {min(facts.click_cols)}-{max(facts.click_cols)}."
+            )
+    if facts.walk_steps:
+        parts = []
+        for name in sorted(facts.walk_stats):
+            changed, tries = facts.walk_stats[name]
+            parts.append(f"{_model_action(name)} {changed}/{tries}")
+        lines.append(f"Random walk ({facts.walk_steps} steps), board changed per action: " + ", ".join(parts) + ".")
+    for note in facts.notes:
+        lines.append(f"Note: {note}")
+
+    if not has_facts:
+        return ""
+
+    body = "\n".join(lines)
+    result = FULL_HEADER + body
+    if len(result) > max_chars:
+        # 先丢游走统计（保过关路径与探针），再换紧凑表头，最后硬截断
+        body = "\n".join(l for l in lines if not l.startswith("Random walk"))
+        result = FULL_HEADER + body
+        if len(result) > max_chars:
+            result = COMPACT_HEADER + body
+        if len(result) > max_chars:
+            result = result[: max(0, max_chars - 16)] + "\n... (truncated)"
+    return result
+
+
+# ---------------------------------------------------------------- 入口
+
+def _close_quietly(env: Any) -> None:
+    close = getattr(env, "close", None)
+    if close is not None:
+        try:
+            close()
+        except Exception:
+            pass
+
+
+def probe_game(
+    gid: str,
+    make_env: Callable[[], Any],
+    game_action: Any,
+    budget_s: float,
+    seed: int,
+    log: Callable[[str], None],
+) -> tuple[_GameFacts, dict]:
+    """单局完整探针。返回 (facts, meta)；任何异常都吞掉并记 notes，绝不向上抛。
+
+    三个探针段各自使用全新 env：一旦某段把游戏推进到后续关卡，基线棋盘即不可
+    通过 RESET 恢复（ONLY_RESET_LEVELS=true 下 RESET 保留关卡），新段换新 env
+    才能保证"从初始棋盘出发"这一前提。
+    """
+    facts = _GameFacts()
+    started = time.monotonic()
+    meta: dict[str, Any] = {"steps": 0}
+    deadline = started + max(MIN_BUDGET_S, float(budget_s))
+    try:
+        try:
+            env = make_env()
+            try:
+                if not _probe_arrows(env, game_action, facts, deadline, log, make_env, gid):
+                    facts.notes.append("baseline not recoverable; later probes skipped")
+                    return facts, meta
+            finally:
+                _close_quietly(env)
+            if time.monotonic() < deadline:
+                try:
+                    env = make_env()
+                    try:
+                        if not _probe_clicks(env, game_action, facts, deadline, log):
+                            facts.notes.append("click probe lost baseline; walk still runs on fresh env")
+                    finally:
+                        _close_quietly(env)
+                except Exception as exc:
+                    facts.notes.append(f"click probe aborted: {type(exc).__name__}")
+            if time.monotonic() < deadline:
+                try:
+                    env = make_env()
+                    try:
+                        _probe_walk(env, game_action, facts, deadline, seed, make_env, gid, log)
+                    finally:
+                        _close_quietly(env)
+                except Exception as exc:
+                    facts.notes.append(f"walk aborted: {type(exc).__name__}")
+        except Exception as exc:
+            facts.notes.append(f"fatal: {type(exc).__name__}: {exc}")
+    finally:
+        meta["elapsed_s"] = round(time.monotonic() - started, 1)
+    return facts, meta
+
+
+def run_pre_exploration(
+    game_ids: Iterable[str],
+    make_env_fn: Callable[[str], Any],
+    game_action: Any,
+    seconds_per_game: float,
+    seed: int,
+    max_chars: int,
+    log: Callable[[str], None] = print,
+    wall_clock_slack_s: float = 180.0,
+) -> dict[str, str]:
+    """并发探索全部游戏 -> {gid: manual_text}。单局失败 = 该局无说明书（降级）。
+
+    v20 探索器教训（§67.46/47）：env.step 单步可能永久阻塞，软超时在阻塞中无法
+    触发。因此这里【不用】ThreadPoolExecutor（pool.map 会永远等一个挂死的局），
+    改用 daemon 线程 + 墙钟 join 超时：挂死的局泄漏一个后台 daemon 线程（不阻塞
+    解释器退出），其余局的说明书照常产出，整跑绝不因单局挂死而报废。
+    """
+    import threading
+
+    ids = list(game_ids)
+    results: dict[str, str] = {}
+    meta_all: dict[str, dict] = {}
+    lock = threading.Lock()
+
+    def _one(gid: str) -> None:
+        def _make():
+            return make_env_fn(gid)
+
+        facts, meta = probe_game(gid, _make, game_action, seconds_per_game, seed, log)
+        try:
+            manual = build_manual(gid, facts, max_chars)
+        except Exception as exc:
+            log(f"[{gid}] manual build failed: {type(exc).__name__}: {exc}")
+            manual = None
+        with lock:
+            meta_all[gid] = meta
+            if manual:
+                results[gid] = manual
+        log(
+            f"[v22-phaseA] {gid}: "
+            + (f"manual {len(manual)} chars, {meta.get('elapsed_s', '?')}s"
+               if manual else f"NO manual ({meta.get('elapsed_s', '?')}s)")
+        )
+
+    threads = [
+        threading.Thread(target=_one, args=(gid,), daemon=True, name=f"v22-probe-{gid}")
+        for gid in ids
+    ]
+    for t in threads:
+        t.start()
+    wall_deadline = time.monotonic() + max(MIN_BUDGET_S, float(seconds_per_game)) + max(0.0, float(wall_clock_slack_s))
+    for t in threads:
+        t.join(max(0.0, wall_deadline - time.monotonic()))
+    hung = [t.name for t in threads if t.is_alive()]
+    if hung:
+        log(
+            f"[v22-phaseA] {len(hung)} probe threads hung past wall clock "
+            f"(daemon-leaked, run continues): {hung[:5]}"
+        )
+    log(f"[v22-phaseA] done: {len(results)}/{len(ids)} manuals")
+    return results

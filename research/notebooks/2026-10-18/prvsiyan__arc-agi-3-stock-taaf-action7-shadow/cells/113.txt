@@ -1,0 +1,5 @@
+### Restore the patch's final newline: locally verified setup repair
+
+V20/native359515163 stopped at the strict patch check after all 73 original bundle files were copied and verified. A CPU-only reproduction against the exact public V1 bundle found that the extracted patch lacked its final newline: Git rejected the original bytes as corrupt at line 10086. Appending exactly one LF preserves all original 498,779 bytes and passes the unchanged check and apply steps. The full local setup preserved every original source and both notebook copies, changed only the 16 declared Python patch targets, and passed AST/compile and owned-namespace import checks.
+
+This distinct canary preserves all earlier identity, artwork and history, keeps the scientific recipe unchanged, and restores only that patch-text delimiter. Historical launchers remain inert source. The 1,500-second supervised / 1,800-second native limits and real completion, clean model-linked action, and owned cleanup gates remain intact. Local setup success is not serving success or a score. V20 remains closed; full-run and publication approval remain separate.

@@ -1,0 +1,3 @@
+## Patch cell - v16.7 M84 (context watermarks + history retention)
+
+Prompts oscillate between 26,624 and 36,864 real tokens (rank-6 commit 64cda76) instead of trimming one turn per request at the budget. Installed before the context repair; lifts the 30-assistant-message retention cap.

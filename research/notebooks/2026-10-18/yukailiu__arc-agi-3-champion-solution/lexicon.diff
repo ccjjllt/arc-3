@@ -1,0 +1,191 @@
+--- habanwer v6
++++ yukailiu v34
+@@ -10164,16 +10164,54 @@
+ os.environ['ARC3_HTTP_RETRY_INITIAL_SECONDS'] = '900'
+ 
+ # model and dataset paths
+-WHEELHOUSE_DIR    = '/kaggle/input/datasets/dfranzen/pennyroyal-v253'
+-MODEL_DIR         = '/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1'
+-DRAFT_MODEL_DIR   = '/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1'
+-ORIG_BUNDLE_DIR   = '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy'
++def resolve_path(candidates):
++    for c in candidates:
++        if Path(c).exists():
++            return c
++    first_path = Path(candidates[0])
++    target_name = first_path.name
++    for p in Path('/kaggle/input').rglob(target_name):
++        if p.exists():
++            return str(p)
++    stem = first_path.stem
++    for p in Path('/kaggle/input').glob(f'**/*{stem}*'):
++        if p.exists():
++            return str(p)
++    return candidates[0]
++
++ORIG_BUNDLE_DIR = resolve_path([
++    '/kaggle/input/taaf-kaggle-source-bundle-copy',
++    '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy',
++    '/kaggle/input/dfranzen/taaf-kaggle-source-bundle-copy',
++])
++WHEELHOUSE_DIR = resolve_path([
++    '/kaggle/input/pennyroyal-v253',
++    '/kaggle/input/datasets/dfranzen/pennyroyal-v253',
++    '/kaggle/input/dfranzen/pennyroyal-v253',
++])
++MODEL_DIR = resolve_path([
++    '/kaggle/input/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1',
++    '/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1',
++    '/kaggle/input/intel-qwen3.8-flash-next-w4a16-autoround',
++    '/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround',
++])
++DRAFT_MODEL_DIR = resolve_path([
++    '/kaggle/input/albucino-qwen3-8-flash-next-drafter/transformers/default/1',
++    '/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1',
++    '/kaggle/input/albucino-qwen3-8-flash-next-drafter',
++    '/kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter',
++])
++ARC_WHEELS_DIR = resolve_path([
++    '/kaggle/input/arc-prize-2026-arc-agi-3/arc_agi_3_wheels',
++    '/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels',
++])
+ SERVED_MODEL_NAME = 'flashnext'
++print('Resolved paths:', {'ORIG_BUNDLE_DIR': ORIG_BUNDLE_DIR, 'WHEELHOUSE_DIR': WHEELHOUSE_DIR, 'MODEL_DIR': MODEL_DIR, 'DRAFT_MODEL_DIR': DRAFT_MODEL_DIR, 'ARC_WHEELS_DIR': ARC_WHEELS_DIR})
+ 
+ # Apply harness patch
+ BUNDLE_DIR = Path('/kaggle/taaf-kaggle-source-share')
+-!rm -Rf $BUNDLE_DIR
+-!cp -a $ORIG_BUNDLE_DIR $BUNDLE_DIR
++subprocess.run(['rm', '-Rf', str(BUNDLE_DIR)], check=False)
++subprocess.run(['cp', '-a', str(ORIG_BUNDLE_DIR), str(BUNDLE_DIR)], check=True)
+ subprocess.run(["git", "apply", "--include=ARC3-Inference/*", "-v", "/kaggle/harness-changes.patch"], cwd=f"{BUNDLE_DIR}/src", check=True)
+ print('harness patch applied successfully')
+ 
+@@ -10377,7 +10415,7 @@
+         "--no-warn-conflicts",
+         "--disable-pip-version-check",
+         "--find-links",
+-        "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels",
++        ARC_WHEELS_DIR,
+         "arc-agi",
+     ],
+     stdout=subprocess.DEVNULL,
+@@ -10627,18 +10665,34 @@
+     link = libdir / re.sub(r"\.so\..*$", ".so", so.name)
+     if not link.exists() and not link.is_symlink(): link.symlink_to(so.name)
+ assert (libdir / "libcudart.so").exists(), "libcudart.so missing: JIT linker cannot find CUDA runtime"
+-if not (libdir / "libcuda.so").exists():
+-    candidates = []
+-    for directory in ("/usr/local/nvidia/lib64", "/usr/local/nvidia/lib", "/usr/lib/x86_64-linux-gnu", "/usr/lib64"):
+-        candidates += sorted(p for p in Path(directory).glob("libcuda.so*") if p.is_file())
+-    if not candidates:
+-        code = 'import torch; torch.cuda.init(); print(open("/proc/self/maps").read())'
++clean_py_dir = Path(PREFIX) / "clean_python"
++clean_py_dir.mkdir(parents=True, exist_ok=True)
++(clean_py_dir / "sitecustomize.py").write_text("# Clean sitecustomize\n")
++for pdir in Path(VENV).glob("lib/python*/site-packages"):
++    (pdir / "sitecustomize.py").write_text("# Clean isolated venv sitecustomize\n")
++
++# Unconditionally replace stub libcuda in libdir and lib64 with the host NVIDIA driver
++candidates = []
++for directory in ("/usr/local/nvidia/lib64", "/usr/lib/x86_64-linux-gnu", "/usr/lib64", "/usr/local/nvidia/lib"):
++    candidates += [p for p in Path(directory).glob("libcuda.so*") if p.is_file() and "stub" not in str(p).lower()]
++if not candidates:
++    code = 'import torch; torch.cuda.init(); print(open("/proc/self/maps").read())'
++    try:
+         maps = run([PYTHON, "-c", code], env=install_env).stdout
+-        candidates = [Path(p) for p in re.findall(r"(/[^\s]*libcuda\.so[^\s]*)", maps)]
+-    if not candidates: raise RuntimeError("GPU driver libcuda.so not found")
+-    link = libdir / "libcuda.so"
+-    if link.is_symlink(): link.unlink()
+-    link.symlink_to(candidates[0].resolve())
++        candidates = [Path(p) for p in re.findall(r"(/[^\s]*libcuda\.so[^\s]*)", maps) if "stub" not in p.lower()]
++    except Exception:
++        pass
++if not candidates: raise RuntimeError("GPU driver libcuda.so not found")
++candidates = sorted(set(candidates), key=lambda p: (0 if ".so." in p.name else 1, -len(p.name)))
++target_driver = candidates[0].resolve()
++print(f"Host GPU driver libcuda: {target_driver} (from {len(candidates)} candidates: {[str(c) for c in candidates[:3]]})")
++for d in {libdir, lib64}:
++    if d.exists() and not d.is_symlink():
++        for link_name in ["libcuda.so", "libcuda.so.1"]:
++            link = d / link_name
++            if link.is_symlink() or link.exists(): link.unlink()
++            link.symlink_to(target_driver)
++            print(f"Symlinked {link} -> {target_driver}")
+ CXX = next((c for c in ("g++-15", "g++-14", "g++-13", "g++-12", "g++-11", "g++") if shutil.which(c)), None)
+ assert CXX, "Host C++ compiler not found"
+ CC = CXX.replace("g++", "gcc")
+@@ -10646,7 +10700,7 @@
+ 
+ # ---- runtime environment ----
+ env = dict(os.environ)
+-env.pop("PYTHONPATH", None)
++env["PYTHONPATH"] = str(clean_py_dir)
+ cache = f"{PREFIX}/cache"
+ for name in ("huggingface", "torch", "torchinductor", "triton", "flashinfer", "cuda", "sglang/jit"):
+     Path(cache, name).mkdir(parents=True, exist_ok=True)
+@@ -10656,7 +10710,7 @@
+     "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+     "CUDA_HOME": CUDA_HOME, "CUDACXX": f"{CUDA_HOME}/bin/nvcc",
+     "PATH": f"{CUDA_HOME}/bin:{VENV}/bin:" + env.get("PATH", ""),
+-    "LD_LIBRARY_PATH": f"{CUDA_HOME}/lib64:{CUDA_HOME}/lib:" + env.get("LD_LIBRARY_PATH", ""),
++    "LD_LIBRARY_PATH": f"{CUDA_HOME}/lib64:{CUDA_HOME}/lib:/usr/local/nvidia/lib64:/usr/lib/x86_64-linux-gnu:" + env.get("LD_LIBRARY_PATH", ""),
+     "CC": CC, "CXX": CXX, "CUDAHOSTCXX": CXX,
+     "TORCH_CUDA_ARCH_LIST": "12.0",
+     "HF_HOME": f"{cache}/huggingface", "XDG_CACHE_HOME": cache,
+@@ -10804,7 +10858,7 @@
+ bm.n_passes = 1
+ bm.game_weights = None
+ 
+-demo_excluded_games = [] if TRUE_SUBMISSION else ['bp35', 'cd82', 'cn04', 'dc22', 'g50t', 'ka59', 'lf52', 'ls20', 'm0r0', 's5i5', 'sk48', 'sp80', 'su15', 'tn36', 'wa30']
++demo_excluded_games = [] if TRUE_SUBMISSION else ['ar25', 'bp35', 'cd82', 'cn04', 'dc22', 'g50t', 'ka59', 'lf52', 'lp85', 'ls20', 'm0r0', 'r11l', 're86', 's5i5', 'sb26', 'sc25', 'sk48', 'sp80', 'su15', 'tn36', 'tr87', 'tu93', 'vc33', 'wa30']
+ 
+ if TRUE_SUBMISSION:  # overrides for contest run
+     bm.solver.save_request_logs = False
+@@ -10815,7 +10869,7 @@
+ else:
+     if USE_PRIORITY_SCHEDULING:
+         bm.solver.concurrency = (25 - len(demo_excluded_games)) * bm.n_passes
+-        bm.solver.max_runtime_s_per_game = 25*60 #532*60 * bm.solver.concurrency // 110
++        bm.solver.max_runtime_s_per_game = 5*60  # rehearsal only proves the run completes
+     if float(getattr(target, 'max_runtime_s', 0.0) or 0.0) != 32400.0:
+         raise RuntimeError(
+             f'Expected the 32400-second notebook budget, got {target.max_runtime_s!r}.'
+@@ -13026,6 +13080,20 @@
+       ARCAID3_REPORT, flush=True)
+ 
+ 
++# --- arc-agi-3-agent: replace the slot priority with the formula found in simulation ---
++# Source: arceval/duck/form_priority.py, embedded verbatim. Active in the real submission.
++# Keeps the scheduler's flow (unstarted games first, swaps only at context trims) and
++# replaces only priority_value (plus a pace tracker: mean tokens per cleared level).
++import sys as _fp_sys, types as _fp_types
++_FP_SOURCE = '"""dfranzen の配分の優先度を、模擬で見つけた式に差し替える（本番でも効かせる）。\n\n彼の配分の流れ（まだ始めていないゲームが先、動いているゲームは履歴を削るときだけ\n入れ替える）はそのまま使い、**優先度の値を出す関数だけ**を替える。\n\n    優先度 = e^{lp·(ℓ-1)}·norm(N) × 2^{-a/ec} × ペース × 2^{-(t/ts)²} × (1 + 伸びしろ/8)\n\n    ℓ  挑戦中のレベル（1始まり）      N  総レベル数（分からなければ10）。norm は 6〜10 に丸めて\n                                         55/(N(N+1)/2)（彼と同じ）\n    a  このレベルで打った手数          t  このレベルで生成したトークン\n    ペース = clip((ref / これまでの1レベルあたりの平均トークン)^pp, 0.25, 4)。\n             1レベルも越えていなければ 1\n    伸びしろ = 残りのレベル数で 3以上→b3, 2→b2, 1→b1, 0→0\n\narceval/sim/simulate.py の Form（level_form=2, eff_form=1, shape=0, c_action=0,\ncombine=2, fade=0）と同じ値を出す（テストで見張る）。\n\n## 取り付け\n\n    install(tool_agent_module)\n\n  - `tool_agent.priority_value` を差し替える（彼の `_snapshot_priority` はこの名前で呼ぶ）\n  - `tool_agent.ProgressPace` を差し替える。各ゲームの分析役は作られるときにこの名前で\n    ペースの入れ物を作り、レベルを越えるたびに `record_completion(そのレベルのトークン, 基準)`\n    を呼ぶ。我々の入れ物は「これまでの1レベルあたりの平均トークン」を返す\n  - `ARC3_PRIORITY_PACE=1` にする。そうしないと彼のコードはペースを記録せず、優先度の\n    材料（PrioritySnapshot.cost_multiplier）にも載せない\n\n* 本番の提出でも効かせる（そのための差し替え）。取り付けに失敗したら raise する ――\n  提出の前の Save & Run で必ず同じコードが走るので、そこで見つかる。\n"""\nfrom __future__ import annotations\n\nimport math\nimport os\nimport threading\nimport time\n\n# 模擬で選んだ式（data/datarun/forms-joint、2026-10-02）\nCHOSEN = {"level_pow": 0.2, "eff_const": 100.0, "pace_pow": 0.25, "pace_ref": 30_000.0,\n          "token_scale": 124_000.0, "b1": 2.5, "b2": 3.5, "b3": 4.0}\nSCALE = 1000.0   # 彼の優先度は整数。帯（100万）より十分小さく、順位が潰れない桁にする\n\n\nclass FormPace:\n    """これまでに越えたレベルの、1レベルあたりの平均生成トークン。\n\n    彼の ProgressPace と同じ呼ばれ方をする（`record_completion`, `cost_multiplier`）。\n    `cost_multiplier()` は倍率ではなく**平均トークンそのもの**を返す（0 なら、まだ無い）。\n    これを読むのは差し替えた `form_priority` だけ。\n    """\n\n    def __init__(self):\n        self.completed = 0\n        self.tokens = 0.0\n\n    def record_completion(self, tokens_used: float, reference_tokens: float = 0.0) -> None:\n        self.completed += 1\n        self.tokens += max(0.0, float(tokens_used))\n\n    def cost_multiplier(self) -> float:\n        return self.tokens / self.completed if self.completed else 0.0\n\n\ndef _levels(total) -> int | None:\n    try:\n        n = int(total)\n    except (TypeError, ValueError):\n        return None\n    return n if n > 0 else None\n\n\ndef form_value(level: int, actions: float, tokens: float, pace: float, total_levels,\n               params: dict = CHOSEN) -> float:\n    """優先度（小数）。pace はこれまでの1レベルあたりの平均トークン（0 ならまだ無い）。"""\n    level = max(1, int(level))\n    n = _levels(total_levels) or 10\n    n_clamped = min(10, max(6, n))\n    norm = 55 / (n_clamped * (n_clamped + 1) / 2)\n    a = max(0.0, float(actions))\n    t = max(0.0, float(tokens))\n    value = math.exp(params["level_pow"] * (level - 1)) * norm\n    value *= 2 ** (-(a / params["eff_const"]))\n    if pace > 0:\n        value *= min(4.0, max(0.25, (params["pace_ref"] / max(1.0, pace)) ** params["pace_pow"]))\n    value *= 2 ** (-((t / params["token_scale"]) ** 2))\n    remaining = max(0, n - level)\n    bonus = (0.0, params["b1"], params["b2"], params["b3"])[min(remaining, 3)]\n    return value * (1.0 + bonus / 8.0)\n\n\ndef form_priority(state, **_ignored) -> int:\n    """彼の `priority_value(state, ...)` と同じ呼ばれ方で、整数の優先度を返す。\n\n    state は PrioritySnapshot（level, actions, tokens, cost_multiplier, total_levels）。\n    彼の寄せ（tail_fraction）や係数の引数は使わない（この式は寄せを持たない）。\n    """\n    value = form_value(state.level, state.actions, state.tokens,\n                       float(getattr(state, "cost_multiplier", 0.0) or 0.0),\n                       getattr(state, "total_levels", None))\n    return max(1, int(value * SCALE))\n\n\n# ---- D′（2026-10-03、data/datarun/refine-fine。LB の v1 から模擬で +1.5 前後） ----\n#\n#     優先度 = A·M·C + B·φ\n#\n#     A = (1 + 0.5·(ℓ-1))·norm(N) × (300/(300+a))^2.5          深さ（線形）× 手数の効率\n#     M = clip((3万 / ペース)^0.4, 0.25, 4)（1レベルも越えていなければ 1）\n#     C = 0.1·max(0.1, 1 - a/115) + 0.9·max(0.1, 1 - t/T)        詰まりの減衰（線形、下限 0.1）\n#         T = 22.5万 × clip(ペース/3万, 0.5, 2)^0.5（遅いゲームほど我慢を長く。越えていなければ ×1）\n#     B = 残りのレベル数で 3以上→16, 2→14, 1→10, 0→0（伸びしろ。足し算）\n#     φ = 寄せ。走行の最後の4割で 1 → 0（彼の tail_fraction をそのまま使う）\n#\n#   加えて「全員まず1回」をやめる: まだ始めていないゲームも、この式の値（ℓ=1, a=t=0）で並べる。\n#\n# arceval/sim/simulate.py の Form（D_PRIME_FORM）と同じ値を出す（テストで見張る）。\n\nD_PRIME = {"level_pow": 0.5, "eff_const": 300.0, "eff_pow": 2.5, "pace_pow": 0.4,\n           "pace_ref": 30_000.0, "c_action": 0.1, "action_scale": 115.0, "c_token": 0.9,\n           "token_scale": 225_000.0, "lin_floor": 0.1, "rel_pow": 0.5,\n           "b1": 10.0, "b2": 14.0, "b3": 16.0, "fade": 0.4}\n# 模擬の Form の引数で書いた同じ式（テストで突き合わせる）\nD_PRIME_FORM = {"fade": 0.4, "level_form": 3, "level_pow": 0.5, "eff_form": 0, "eff_const": 300.0,\n                "eff_pow": 2.5, "shape": 3, "c_action": 0.1, "c_token": 0.9, "token_scale": 225000.0,\n                "combine": 1, "b1": 10.0, "b2": 14.0, "b3": 16.0, "pace_pow": 0.4, "form_fresh": 0,\n                "lin_floor": 0.1, "eff_floor": 0.2, "rel_pow": 0.5}\n\n\ndef d_parts(level: int, actions: float, tokens: float, pace: float, total_levels,\n            params: dict = D_PRIME) -> tuple:\n    """(A·M·C, B)。pace はこれまでの1レベルあたりの平均トークン（0 ならまだ無い）。"""\n    level = max(1, int(level))\n    n = _levels(total_levels) or 10\n    n_clamped = min(10, max(6, n))\n    norm = 55 / (n_clamped * (n_clamped + 1) / 2)\n    a = max(0.0, float(actions))\n    t = max(0.0, float(tokens))\n    A = (1.0 + params["level_pow"] * (level - 1)) * norm\n    A *= (params["eff_const"] / (params["eff_const"] + a)) ** params["eff_pow"]\n    if pace > 0:\n        A *= min(4.0, max(0.25, (params["pace_ref"] / max(1.0, pace)) ** params["pace_pow"]))\n    scale = params["token_scale"]\n    rel = pace if pace > 0 else params["pace_ref"]\n    scale *= min(2.0, max(0.5, rel / params["pace_ref"])) ** params["rel_pow"]\n    floor = params["lin_floor"]\n    C = (params["c_action"] * max(floor, 1.0 - a / params["action_scale"])\n         + params["c_token"] * max(floor, 1.0 - t / scale))\n    remaining = max(0, n - level)\n    B = (0.0, params["b1"], params["b2"], params["b3"])[min(remaining, 3)]\n    return A * C, B\n\n\ndef d_value(level, actions, tokens, pace, total_levels, phi: float = 1.0) -> float:\n    u, v = d_parts(level, actions, tokens, pace, total_levels)\n    return u + v * phi\n\n\ndef d_priority(state, *, tail_fraction=None, **_ignored) -> int:\n    """彼の `priority_value(state, tail_fraction=..., ...)` と同じ呼ばれ方。\n\n    寄せ φ は彼が渡す tail_fraction（残り時間 ÷ 寄せの窓。窓の外では 1 より大きい）を\n    0〜1 に切って使う。渡されなければ 1（寄せ無し）。\n    """\n    phi = 1.0 if tail_fraction is None else min(1.0, max(0.0, float(tail_fraction)))\n    value = d_value(state.level, state.actions, state.tokens,\n                    float(getattr(state, "cost_multiplier", 0.0) or 0.0),\n                    getattr(state, "total_levels", None), phi)\n    return max(1, int(value * SCALE))\n\n\nFRESH = {"replaced": 0}\n_TL = threading.local()\n\n\ndef install_d(tool_agent, solver) -> str:\n    """D′ を取り付ける。v1 の install と違い、「全員まず1回」も外す。\n\n    彼のコードで、まだ始めていないゲームは `gate.acquire(200万 − 待ち順)` で並ぶ（どの\n    優先度より上の帯）。これを、この式の値（ℓ=1, a=t=0、そのゲームの総レベル数）と、\n    寄せで値が変わるようにスナップショットつきで並べ直す。総レベル数は、その遊びを\n    走らせているスレッドで `_HarnessGameSession.play` が始まるときに覚えておく。\n    """\n    for name in ("priority_value", "ProgressPace", "_PriorityGate", "PrioritySnapshot",\n                 "_PRIORITY_UNTRIMMED_BASE", "_PRIORITY_BAND"):\n        if not hasattr(tool_agent, name):\n            raise RuntimeError(f"tool_agent に {name} が無い。彼の版が変わった。")\n    session_cls = getattr(solver, "_HarnessGameSession", None)\n    if session_cls is None or not callable(getattr(session_cls, "play", None)):\n        raise RuntimeError("solver に _HarnessGameSession.play が無い。彼の版が変わった。")\n    gate_cls = tool_agent._PriorityGate\n    for name in ("acquire", "_enqueue_and_wait", "_snapshot_priority"):\n        if not callable(getattr(gate_cls, name, None)):\n            raise RuntimeError(f"_PriorityGate に {name} が無い。彼の版が変わった。")\n\n    tool_agent.priority_value = d_priority\n    tool_agent.ProgressPace = FormPace\n    os.environ["ARC3_PRIORITY_PACE"] = "1"\n    os.environ["ARC3_PRIORITY_REFRESH_QUEUE"] = "1"\n    os.environ["ARC3_PRIORITY_TAIL_FADE"] = "1"\n    os.environ["ARC3_PRIORITY_TAIL_FADE_FRACTION"] = str(D_PRIME["fade"])\n\n    if not getattr(session_cls.play, "_ours_d", False):\n        orig_play = session_cls.play\n\n        def play(self, *args, **kwargs):\n            run = getattr(getattr(self, "game", None), "game_run", None)\n            _TL.n = getattr(run, "number_of_levels", None)\n            try:\n                return orig_play(self, *args, **kwargs)\n            finally:\n                _TL.n = None\n\n        play._ours_d = True\n        session_cls.play = play\n\n    if not getattr(gate_cls.acquire, "_ours_d", False):\n        orig_acquire = gate_cls.acquire\n        fresh_floor = tool_agent._PRIORITY_UNTRIMMED_BASE - tool_agent._PRIORITY_BAND\n        snapshot_cls = tool_agent.PrioritySnapshot\n\n        def acquire(self, priority):\n            if priority < fresh_floor:\n                return orig_acquire(self, priority)\n            # まだ始めていないゲーム: 帯で先頭に並べず、この式の値で並べる\n            snap = snapshot_cls(1, 0, 0.0, 0.0, getattr(_TL, "n", None))\n            value = self._snapshot_priority(snap, time.monotonic())\n            with self._cond:\n                self._enqueue_and_wait(value, snap)\n            FRESH["replaced"] += 1\n\n        acquire._ours_d = True\n        gate_cls.acquire = acquire\n\n    line = ("#OURS_FORM ok version=d_prime priority_value replaced; fresh-first removed; "\n            "tail fade " + str(D_PRIME["fade"]) + "; "\n            + " ".join(f"{k}={v:g}" for k, v in D_PRIME.items() if k != "fade"))\n    print(line, flush=True)\n    return line\n\n\ndef install(tool_agent) -> str:\n    for name in ("priority_value", "ProgressPace", "_PriorityGate"):\n        if not hasattr(tool_agent, name):\n            raise RuntimeError(f"tool_agent に {name} が無い。彼の版が変わった。")\n    tool_agent.priority_value = form_priority\n    tool_agent.ProgressPace = FormPace\n    os.environ["ARC3_PRIORITY_PACE"] = "1"\n    line = ("#OURS_FORM ok priority_value replaced; pace=mean tokens per cleared level; "\n            + " ".join(f"{k}={v:g}" for k, v in CHOSEN.items()))\n    print(line, flush=True)\n    return line\n'
++_fp_mod = _fp_types.ModuleType('ours_form_priority')
++_fp_sys.modules['ours_form_priority'] = _fp_mod
++exec(compile(_FP_SOURCE, 'ours_form_priority.py', 'exec'), _fp_mod.__dict__)
++import inference.agent.tool_agent as _fp_ta
++import inference.framework.solver as _fp_solver
++_fp_mod.install_d(_fp_ta, _fp_solver)
++
++
+ ## 9. Run the benchmark
+ 
+ In a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and
+@@ -13105,7 +13173,7 @@
+ else:
+     # Interactive run: play the bundled competition environments offline (no gateway).
+     # The competition's environment files ship alongside the wheelhouse in the competition dataset.
+-    competition_env_files = str(Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels").parent / "environment_files")
++    competition_env_files = str(Path(ARC_WHEELS_DIR).parent / "environment_files")
+     bm.games = _offline_games(competition_env_files)
+ 
+ # Outside a real submission, stop ~10 min before the wall-clock budget for a graceful exit.
+@@ -13149,3 +13217,6 @@
+ 
+ # ARCAID3 lexicon view: final counters (how often the model's Python read the new view)
+ print('ARCAID3_LEXICON_FINAL', globals().get('ARCAID3_STATS'), globals().get('ARCAID3_REPORT'), flush=True)
++
++
++print('#OURS_FRESH replaced=' + str(_fp_mod.FRESH['replaced']), flush=True)

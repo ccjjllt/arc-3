@@ -33,6 +33,10 @@ def main() -> None:
               "game_actions": 0, "arms": config["arm_order"], "checks": []}
     patches = []
     try:
+        if "observation_grounding" in config["arm_order"]:
+            if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
+                raise RuntimeError("018 requires an empty ambient ARC3_SYSTEM_PROMPT_PREFIX before serving.")
+            report["checks"].append("empty_ambient_system_prefix")
         import requests
 
         def no_network(*args, **kwargs):
@@ -81,6 +85,23 @@ def main() -> None:
             os.environ.clear()
             os.environ.update(original_environment)
         report["checks"].append("both_dynamic_scheduler_policies")
+        if "observation_grounding" in config["arm_order"]:
+            from arc3_research.observation_grounding import (
+                GROUNDING_PREFIX, install_observation_grounding,
+            )
+            original_prefix = os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX")
+            baseline_prompt = tool_agent._build_system_prompt(tool_output_tokens=3072)
+            prefix = install_observation_grounding()
+            try:
+                candidate_prompt = tool_agent._build_system_prompt(tool_output_tokens=3072)
+                if candidate_prompt != GROUNDING_PREFIX + "\n\n" + baseline_prompt:
+                    raise RuntimeError("The existing system-prefix hook did not preserve the baseline prompt.")
+                report["observation_grounding"] = prefix.snapshot()
+            finally:
+                prefix.uninstall()
+            if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX") != original_prefix:
+                raise RuntimeError("018 preflight did not restore the system-prefix environment.")
+            report["checks"].append("grounding_prefix_only_and_restored")
         if config.get("request_deadline"):
             from arc3_research.request_deadline import install_request_deadline
             patches.append(install_request_deadline())

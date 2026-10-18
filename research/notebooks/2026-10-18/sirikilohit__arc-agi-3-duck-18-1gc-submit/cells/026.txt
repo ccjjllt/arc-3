@@ -1,0 +1,7 @@
+## Patch cell - v14.74 M74 + M75 (prompt room + field hints)
+
+**M74 (club A3/E4):** the harness charged every board image by its base64 length (~622 tokens measured); the model is charged 66 (256x256 px at 32 px per visual token + 2 markers). Each turn's images therefore stole ~1-3k tokens of prompt room from history. Counting them correctly removes nothing from the prompt -- the trimmer simply stops evicting turns it never needed to evict.
+
+**M75 (club F3):** a segmentation node has id/color/hash/pixels/boundary/children; the model regularly asks for `bbox`, `area`, `centroid`, `width`. It used to get a bare `KeyError: 'bbox'` and lose a whole model call to the retry (v14.64: 198 code-error recoveries in 25 games). Now the error names the field that does exist.
+
+The two are independent: M74 touches only the token estimate, M75 only the sandbox's node objects. Separate counters.

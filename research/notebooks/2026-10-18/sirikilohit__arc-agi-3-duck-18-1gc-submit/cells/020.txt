@@ -1,0 +1,16 @@
+## Patch cell - v14.43 REASONING LEDGER + TWO-TIER PRIORITY SCHEDULER
+
+Built to the spec: **5 permits**, the rest queued; **park on reaching a level** and hand
+the GPU on; **level-1 games in a priority queue, level-0 in the normal queue**; fairness
+before priority so nothing starves; **park, never kill**; and a **20-action** admission
+threshold (measured median cost of clearing level 1, over 923 clears) instead of a token
+cap.
+
+Reverts M41's `(levels, -k)` rank, which compared lexicographically and let level COUNT
+dominate without bound -- vc33 sat at level 3, outranked every 2-level game however stuck,
+took 62 grants and returned 0.0084 pts/action against ft09's 0.6077 on ~8.
+
+Additions beyond the spec, flagged: the 60-action throttle (`_CLIFF`/`_Y`).
+Still not built: warm restart by replaying saved actions.
+
+Counters: `m43_grants>0`, `m43_peak_concurrent==5`, `m43_park_level>0`, `m43_errors==0`.

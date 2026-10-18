@@ -89,6 +89,8 @@ def run_arm(args: argparse.Namespace) -> int:
     program_patch = None
     animation_patch = None
     current_data_patch = None
+    native_patch = None
+    grounding_prefix = None
     timing_patch = None
     deadline_patch = None
     scheduler_patch = None
@@ -115,12 +117,21 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("native_values requires frozen baseline scheduler.")
+        if args.arm == "observation_grounding" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("observation_grounding requires frozen baseline scheduler.")
         if args.arm == "baseline" and overrides not in ({
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }, {}):
             raise ValueError("baseline requires frozen scheduler or empty env.")
         os.environ.update(overrides)
         metadata["environment_overrides"] = overrides
+        if args.arm == "observation_grounding":
+            # This child alone receives the prefix, before any ToolAgent is built.
+            from arc3_research.observation_grounding import install_observation_grounding
+            grounding_prefix = install_observation_grounding()
+            metadata["observation_grounding"] = grounding_prefix.snapshot()
         requested_ids = _game_ids(args.game_list)
         bundle_dir = args.bundle_dir.resolve()
         sys.path[:0] = _source_paths(bundle_dir)
@@ -187,7 +198,6 @@ def run_arm(args: argparse.Namespace) -> int:
         patch = install_goal_evidence(enabled=args.arm == "goal_evidence")
         transient_patch = install_transient_history(enabled=args.arm == "transient_history")
         program_patch = install_program_state(enabled=args.arm == "program_state")
-        native_patch = None
         if args.arm == "retrievable_animation":
             # The reference arm never imports or installs this intervention.
             from arc3_research.retrievable_animation import install_retrievable_animation
@@ -252,6 +262,9 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["native_values.py"] = _sha256(
                 Path(__file__).with_name("native_values.py"))
             metadata["native_values"] = native_patch.snapshot()
+        if grounding_prefix is not None:
+            metadata["source_sha256"]["observation_grounding.py"] = _sha256(
+                Path(__file__).with_name("observation_grounding.py"))
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -368,6 +381,10 @@ def run_arm(args: argparse.Namespace) -> int:
                     _write_json(job_dir / (name + ".json"), data)
                 except Exception as exc:
                     metadata[name + "_export_error"] = f"{type(exc).__name__}: {exc}"
+        if grounding_prefix is not None:
+            _write_json(job_dir / "observation-grounding.json", grounding_prefix.snapshot())
+            if not live:
+                grounding_prefix.uninstall()
         _write_json(metadata_path, metadata)
         _stage("arm_finished", arm=args.arm, status=metadata["status"],
                wall_seconds=metadata["wall_seconds"], exit_code=exit_code,
@@ -387,7 +404,7 @@ def main() -> int:
     parser.add_argument("--arm", required=True,
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
                                  "retrievable_animation", "current_data", "tail_80k",
-                                 "native_values", "native", "pace_1x"))
+                                 "native_values", "native", "pace_1x", "observation_grounding"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

@@ -1,0 +1,15 @@
+true_submission = _env_bool("KAGGLE_IS_COMPETITION_RERUN", False)
+run_as_submission = _env_bool("TAAF_RUN_AS_SUBMISSION", False) or true_submission
+os.environ["ONLY_RESET_LEVELS"] = "true"
+os.environ["TAAF_RUN_AS_SUBMISSION"] = "1" if run_as_submission else "0"
+os.environ["TAAF_MINIMAL_DIAGNOSTICS"] = "1" if run_as_submission else "0"
+
+with open(BUNDLE_DIR / "deploy_target.pkl", "rb") as file:
+    target = pickle.load(file)
+target.actual_run_as_submission = run_as_submission
+target.is_competition_rerun = true_submission
+soft_end = _soft_end_time(float(getattr(target, "max_runtime_s", 0.0) or 0.0), run_as_submission=run_as_submission)
+
+with open(BUNDLE_DIR / "benchmark_initial.pkl", "rb") as file:
+    bm = pickle.load(file)
+bm.job_dir = WORKING_DIR

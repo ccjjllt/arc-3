@@ -1,0 +1,47 @@
+COMPETITION_ROOT = Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3")
+WHEELHOUSE = COMPETITION_ROOT / "arc_agi_3_wheels"
+subprocess.check_call(
+    [
+        sys.executable, "-m", "pip", "install", "--quiet", "--no-index",
+        "--no-warn-conflicts", "--disable-pip-version-check", "--find-links",
+        str(WHEELHOUSE), "arc-agi",
+    ],
+    stdout=subprocess.DEVNULL,
+)
+
+DATASET_SOURCES = [
+    "jeroencottaar/taaf-kaggle-source-share",
+    "driessmit1/arc3-vllm-h100-wheelhouse-v3",
+    "driessmit1/vrfai-qwen3-6-27b-fp8-hf-snapshot",
+]
+MARKER = "taaf-kaggle-bundle.json"
+
+def input_candidates(ref: str):
+    owner, slug = ref.split("/", 1)
+    return [Path("/kaggle/input") / slug, Path("/kaggle/input/datasets") / owner / slug]
+
+def first_existing(paths):
+    return next((path for path in paths if path.exists()), None)
+
+def find_bundle():
+    for marker in Path("/kaggle/input").rglob(MARKER):
+        return marker.parent
+    raise FileNotFoundError(f"Could not find {MARKER}; attach the Tufa Labs source bundle.")
+
+BUNDLE_DIR = find_bundle()
+INPUT_PATHS = {DATASET_SOURCES[0]: str(BUNDLE_DIR)}
+for ref in DATASET_SOURCES[1:]:
+    resolved = first_existing(input_candidates(ref))
+    if resolved is None:
+        raise FileNotFoundError(f"Missing public Kaggle input: {ref}")
+    INPUT_PATHS[ref] = str(resolved)
+
+SETUP_ENV_PATH = WORKING_DIR / "taaf_setup_env.json"
+setup_env = {
+    "TAAF_KAGGLE_INPUT_PATHS": json.dumps(INPUT_PATHS, sort_keys=True),
+    "TAAF_KAGGLE_DATASET_SOURCES": json.dumps(DATASET_SOURCES),
+    "TAAF_KAGGLE_KERNEL_SOURCES": "[]",
+}
+os.environ.update(setup_env)
+SETUP_ENV_PATH.write_text(json.dumps(setup_env, indent=2, sort_keys=True) + "\n")
+print(json.dumps({"bundle": str(BUNDLE_DIR), "inputs": INPUT_PATHS}, indent=2))

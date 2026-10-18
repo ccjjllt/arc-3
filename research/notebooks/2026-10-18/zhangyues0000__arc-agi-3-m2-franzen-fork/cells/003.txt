@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------------------
+# M2F submission: dataset/model mount resolver (race-proof, same as pair arm).
+# ---------------------------------------------------------------------------
+import os as _os, time as _t
+
+def _m(slug: str) -> str:
+    last = slug.split('/')[-1]
+    cands = [
+        f'/kaggle/input/datasets/{slug}',
+        f'/kaggle/input/{slug}',
+        f'/kaggle/input/{last}',
+        f'/kaggle/input/models/{slug}',
+    ]
+    deadline = _t.monotonic() + 600.0
+    diag = 0
+    while True:
+        for cand in cands:
+            if _os.path.isdir(cand) and _os.listdir(cand):
+                return cand
+        if _t.monotonic() > deadline:
+            for _root, _dirs, _files in _os.walk('/kaggle/input'):
+                diag += 1
+                if diag < 60:
+                    print(f'MOUNT-DIAG dir={_root} subdirs={_dirs[:6]}', flush=True)
+                if _root.count('/') > 5:
+                    _dirs[:] = []
+            raise RuntimeError(f'mount never appeared for {slug}: tried {cands}')
+        _t.sleep(10)
+
+print('MOUNT resolver ready', flush=True)

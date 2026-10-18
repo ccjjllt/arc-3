@@ -1,0 +1,822 @@
+{
+  "sources": {
+    "runs/005-full-baseline/baseline/benchmark.json": "1b7f47e9a82aa2908be42cfd149fba66c7afaf4ad877310ed38d56136f389609",
+    "runs/014-tail-allocation/baseline/benchmark.json": "2f3f87ff605079eb0f3f658ad22a2f24099c9a90266c1925a8ee2a2a0265ea6b",
+    "runs/016-pace-allocation/baseline/benchmark.json": "92978366901eee41740ee32a962616c12ef85f25414a582d4c314e7e60c49673",
+    "runs/016-pace-allocation-jiyujia/baseline/benchmark.json": "f5753e62b7554ee18f202b455677d9dd6393a2d03590569f8c07ff6bba19b211"
+  },
+  "summaries": {
+    "005": {
+      "games": 25,
+      "mean_AE": 49.89969042103432,
+      "mean_completion_ceiling": 50.376046176046174,
+      "mean_efficiency_gap": 0.4763557550118578,
+      "wins": 9,
+      "state_counts": {
+        "won": 9,
+        "cancelled": 16
+      },
+      "levels_completed": 106,
+      "number_of_levels": 183,
+      "actions": 5711,
+      "reset_actions": 27,
+      "analyzer_tokens": 4481732,
+      "history_tokens": 4311602,
+      "final_tokens": 0,
+      "recorded_tokens": 4311602,
+      "unattached_tokens": 170130,
+      "uncached_input_tokens": 0
+    },
+    "014": {
+      "games": 25,
+      "mean_AE": 47.19914280679623,
+      "mean_completion_ceiling": 50.766522366522366,
+      "mean_efficiency_gap": 3.567379559726136,
+      "wins": 7,
+      "state_counts": {
+        "cancelled": 18,
+        "won": 7
+      },
+      "levels_completed": 110,
+      "number_of_levels": 183,
+      "actions": 5190,
+      "reset_actions": 18,
+      "analyzer_tokens": 4572109,
+      "history_tokens": 4482360,
+      "final_tokens": 0,
+      "recorded_tokens": 4482360,
+      "unattached_tokens": 89749,
+      "uncached_input_tokens": 0
+    },
+    "016-old": {
+      "games": 25,
+      "mean_AE": 50.42338793413215,
+      "mean_completion_ceiling": 51.1044733044733,
+      "mean_efficiency_gap": 0.681085370341154,
+      "wins": 8,
+      "state_counts": {
+        "won": 8,
+        "gave_up": 8,
+        "cancelled": 9
+      },
+      "levels_completed": 108,
+      "number_of_levels": 183,
+      "actions": 5309,
+      "reset_actions": 22,
+      "analyzer_tokens": 4569589,
+      "history_tokens": 4460750,
+      "final_tokens": 0,
+      "recorded_tokens": 4460750,
+      "unattached_tokens": 108839,
+      "uncached_input_tokens": 0
+    },
+    "016-jiyujia": {
+      "games": 25,
+      "mean_AE": 47.134038430516576,
+      "mean_completion_ceiling": 50.131601731601734,
+      "mean_efficiency_gap": 2.997563301085159,
+      "wins": 8,
+      "state_counts": {
+        "won": 8,
+        "cancelled": 17
+      },
+      "levels_completed": 105,
+      "number_of_levels": 183,
+      "actions": 5291,
+      "reset_actions": 19,
+      "analyzer_tokens": 4458146,
+      "history_tokens": 4392208,
+      "final_tokens": 0,
+      "recorded_tokens": 4392208,
+      "unattached_tokens": 65938,
+      "uncached_input_tokens": 0
+    }
+  },
+  "games": [
+    {
+      "game_id": "ar25-0c556536",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 8,
+        "014": 5,
+        "016-old": 8,
+        "016-jiyujia": 8
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 41.66666666666667,
+        "016-old": 100.0,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 5,
+      "max_levels": 8,
+      "mean_AE": 85.41666666666667,
+      "min_AE": 41.66666666666667,
+      "max_AE": 100.0,
+      "won_runs": 3,
+      "analyzer_tokens_by_run": {
+        "005": 120474,
+        "014": 201237,
+        "016-old": 139451,
+        "016-jiyujia": 169601
+      }
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "levels_available": 9,
+      "levels_by_run": {
+        "005": 1,
+        "014": 1,
+        "016-old": 1,
+        "016-jiyujia": 1
+      },
+      "scores_by_run": {
+        "005": 1.8525519848771264,
+        "014": 0.39199999999999996,
+        "016-old": 1.7013888888888888,
+        "016-jiyujia": 1.165279429250892
+      },
+      "min_levels": 1,
+      "max_levels": 1,
+      "mean_AE": 1.2778050757542267,
+      "min_AE": 0.39199999999999996,
+      "max_AE": 1.8525519848771264,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 199756,
+        "014": 109050,
+        "016-old": 201159,
+        "016-jiyujia": 186197
+      }
+    },
+    {
+      "game_id": "cd82-fb555c5d",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 6,
+        "014": 6,
+        "016-old": 6,
+        "016-jiyujia": 6
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 70.45309866042703,
+        "016-old": 100.0,
+        "016-jiyujia": 92.5912885877455
+      },
+      "min_levels": 6,
+      "max_levels": 6,
+      "mean_AE": 90.76109681204314,
+      "min_AE": 70.45309866042703,
+      "max_AE": 100.0,
+      "won_runs": 4,
+      "analyzer_tokens_by_run": {
+        "005": 94146,
+        "014": 184919,
+        "016-old": 88192,
+        "016-jiyujia": 170138
+      }
+    },
+    {
+      "game_id": "cn04-2fe56bfb",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 6,
+        "014": 1,
+        "016-old": 5,
+        "016-jiyujia": 4
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 4.761904761904762,
+        "016-old": 71.42857142857143,
+        "016-jiyujia": 47.61904761904761
+      },
+      "min_levels": 1,
+      "max_levels": 6,
+      "mean_AE": 55.95238095238095,
+      "min_AE": 4.761904761904762,
+      "max_AE": 100.0,
+      "won_runs": 1,
+      "analyzer_tokens_by_run": {
+        "005": 211837,
+        "014": 117238,
+        "016-old": 301113,
+        "016-jiyujia": 175311
+      }
+    },
+    {
+      "game_id": "dc22-fdcac232",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 4,
+        "014": 4,
+        "016-old": 4,
+        "016-jiyujia": 4
+      },
+      "scores_by_run": {
+        "005": 47.61904761904761,
+        "014": 47.61904761904761,
+        "016-old": 47.61904761904761,
+        "016-jiyujia": 28.56833892439746
+      },
+      "min_levels": 4,
+      "max_levels": 4,
+      "mean_AE": 42.856370445385075,
+      "min_AE": 28.56833892439746,
+      "max_AE": 47.61904761904761,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 285679,
+        "014": 298677,
+        "016-old": 285600,
+        "016-jiyujia": 312249
+      }
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 6,
+        "014": 6,
+        "016-old": 4,
+        "016-jiyujia": 6
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 100.0,
+        "016-old": 47.61904761904761,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 4,
+      "max_levels": 6,
+      "mean_AE": 86.9047619047619,
+      "min_AE": 47.61904761904761,
+      "max_AE": 100.0,
+      "won_runs": 3,
+      "analyzer_tokens_by_run": {
+        "005": 171254,
+        "014": 74904,
+        "016-old": 166425,
+        "016-jiyujia": 65172
+      }
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "levels_available": 7,
+      "levels_by_run": {
+        "005": 2,
+        "014": 2,
+        "016-old": 4,
+        "016-jiyujia": 0
+      },
+      "scores_by_run": {
+        "005": 10.714285714285714,
+        "014": 10.714285714285714,
+        "016-old": 35.714285714285715,
+        "016-jiyujia": 0.0
+      },
+      "min_levels": 0,
+      "max_levels": 4,
+      "mean_AE": 14.285714285714285,
+      "min_AE": 0.0,
+      "max_AE": 35.714285714285715,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 212938,
+        "014": 147840,
+        "016-old": 240352,
+        "016-jiyujia": 123960
+      }
+    },
+    {
+      "game_id": "ka59-38d34dbb",
+      "levels_available": 7,
+      "levels_by_run": {
+        "005": 5,
+        "014": 4,
+        "016-old": 3,
+        "016-jiyujia": 6
+      },
+      "scores_by_run": {
+        "005": 53.57142857142857,
+        "014": 29.03287874696192,
+        "016-old": 21.428571428571427,
+        "016-jiyujia": 68.60684217309735
+      },
+      "min_levels": 3,
+      "max_levels": 6,
+      "mean_AE": 43.159930230014815,
+      "min_AE": 21.428571428571427,
+      "max_AE": 68.60684217309735,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 248246,
+        "014": 255027,
+        "016-old": 197601,
+        "016-jiyujia": 273922
+      }
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "levels_available": 10,
+      "levels_by_run": {
+        "005": 3,
+        "014": 3,
+        "016-old": 1,
+        "016-jiyujia": 3
+      },
+      "scores_by_run": {
+        "005": 10.909090909090908,
+        "014": 10.909090909090908,
+        "016-old": 1.8181818181818181,
+        "016-jiyujia": 10.909090909090908
+      },
+      "min_levels": 1,
+      "max_levels": 3,
+      "mean_AE": 8.636363636363635,
+      "min_AE": 1.8181818181818181,
+      "max_AE": 10.909090909090908,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 247589,
+        "014": 228464,
+        "016-old": 117530,
+        "016-jiyujia": 210120
+      }
+    },
+    {
+      "game_id": "lp85-305b61c3",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 8,
+        "014": 8,
+        "016-old": 8,
+        "016-jiyujia": 8
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 100.0,
+        "016-old": 100.0,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 8,
+      "max_levels": 8,
+      "mean_AE": 100.0,
+      "min_AE": 100.0,
+      "max_AE": 100.0,
+      "won_runs": 4,
+      "analyzer_tokens_by_run": {
+        "005": 142388,
+        "014": 139467,
+        "016-old": 122351,
+        "016-jiyujia": 124991
+      }
+    },
+    {
+      "game_id": "ls20-9607627b",
+      "levels_available": 7,
+      "levels_by_run": {
+        "005": 4,
+        "014": 4,
+        "016-old": 3,
+        "016-jiyujia": 4
+      },
+      "scores_by_run": {
+        "005": 29.20960901121849,
+        "014": 24.129974761424876,
+        "016-old": 18.20904982363316,
+        "016-jiyujia": 21.88332113535539
+      },
+      "min_levels": 3,
+      "max_levels": 4,
+      "mean_AE": 23.35798868290798,
+      "min_AE": 18.20904982363316,
+      "max_AE": 29.20960901121849,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 240037,
+        "014": 253569,
+        "016-old": 195128,
+        "016-jiyujia": 274019
+      }
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 3,
+        "014": 5,
+        "016-old": 5,
+        "016-jiyujia": 6
+      },
+      "scores_by_run": {
+        "005": 28.364817001180636,
+        "014": 71.42857142857143,
+        "016-old": 71.42857142857143,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 3,
+      "max_levels": 6,
+      "mean_AE": 67.80548996458087,
+      "min_AE": 28.364817001180636,
+      "max_AE": 100.0,
+      "won_runs": 1,
+      "analyzer_tokens_by_run": {
+        "005": 198778,
+        "014": 275892,
+        "016-old": 243686,
+        "016-jiyujia": 192646
+      }
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 6,
+        "014": 6,
+        "016-old": 6,
+        "016-jiyujia": 4
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 100.0,
+        "016-old": 100.0,
+        "016-jiyujia": 47.61904761904761
+      },
+      "min_levels": 4,
+      "max_levels": 6,
+      "mean_AE": 86.9047619047619,
+      "min_AE": 47.61904761904761,
+      "max_AE": 100.0,
+      "won_runs": 3,
+      "analyzer_tokens_by_run": {
+        "005": 179655,
+        "014": 146914,
+        "016-old": 232585,
+        "016-jiyujia": 253717
+      }
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 6,
+        "014": 5,
+        "016-old": 5,
+        "016-jiyujia": 5
+      },
+      "scores_by_run": {
+        "005": 58.333333333333336,
+        "014": 41.66666666666667,
+        "016-old": 41.66666666666667,
+        "016-jiyujia": 41.66666666666667
+      },
+      "min_levels": 5,
+      "max_levels": 6,
+      "mean_AE": 45.833333333333336,
+      "min_AE": 41.66666666666667,
+      "max_AE": 58.333333333333336,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 256118,
+        "014": 181082,
+        "016-old": 128861,
+        "016-jiyujia": 149193
+      }
+    },
+    {
+      "game_id": "s5i5-18d95033",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 1,
+        "014": 6,
+        "016-old": 2,
+        "016-jiyujia": 2
+      },
+      "scores_by_run": {
+        "005": 1.9290123456790127,
+        "014": 58.333333333333336,
+        "016-old": 8.333333333333332,
+        "016-jiyujia": 8.333333333333332
+      },
+      "min_levels": 1,
+      "max_levels": 6,
+      "mean_AE": 19.232253086419753,
+      "min_AE": 1.9290123456790127,
+      "max_AE": 58.333333333333336,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 122799,
+        "014": 325524,
+        "016-old": 238779,
+        "016-jiyujia": 182078
+      }
+    },
+    {
+      "game_id": "sb26-7fbdac44",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 8,
+        "014": 8,
+        "016-old": 8,
+        "016-jiyujia": 8
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 100.0,
+        "016-old": 100.0,
+        "016-jiyujia": 94.61111111111111
+      },
+      "min_levels": 8,
+      "max_levels": 8,
+      "mean_AE": 98.65277777777777,
+      "min_AE": 94.61111111111111,
+      "max_AE": 100.0,
+      "won_runs": 4,
+      "analyzer_tokens_by_run": {
+        "005": 29749,
+        "014": 40462,
+        "016-old": 61099,
+        "016-jiyujia": 59894
+      }
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 0,
+        "014": 5,
+        "016-old": 5,
+        "016-jiyujia": 0
+      },
+      "scores_by_run": {
+        "005": 0.0,
+        "014": 71.42857142857143,
+        "016-old": 71.42857142857143,
+        "016-jiyujia": 0.0
+      },
+      "min_levels": 0,
+      "max_levels": 5,
+      "mean_AE": 35.714285714285715,
+      "min_AE": 0.0,
+      "max_AE": 71.42857142857143,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 90378,
+        "014": 178336,
+        "016-old": 264219,
+        "016-jiyujia": 91248
+      }
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "levels_available": 8,
+      "levels_by_run": {
+        "005": 2,
+        "014": 0,
+        "016-old": 0,
+        "016-jiyujia": 0
+      },
+      "scores_by_run": {
+        "005": 8.333333333333332,
+        "014": 0.0,
+        "016-old": 0.0,
+        "016-jiyujia": 0.0
+      },
+      "min_levels": 0,
+      "max_levels": 2,
+      "mean_AE": 2.083333333333333,
+      "min_AE": 0.0,
+      "max_AE": 8.333333333333332,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 200101,
+        "014": 96070,
+        "016-old": 120197,
+        "016-jiyujia": 117057
+      }
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 1,
+        "014": 3,
+        "016-old": 1,
+        "016-jiyujia": 3
+      },
+      "scores_by_run": {
+        "005": 4.761904761904762,
+        "014": 17.24029617969012,
+        "016-old": 4.761904761904762,
+        "016-jiyujia": 21.740035693039857
+      },
+      "min_levels": 1,
+      "max_levels": 3,
+      "mean_AE": 12.126035349134876,
+      "min_AE": 4.761904761904762,
+      "max_AE": 21.740035693039857,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 184496,
+        "014": 223322,
+        "016-old": 177137,
+        "016-jiyujia": 226507
+      }
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "levels_available": 9,
+      "levels_by_run": {
+        "005": 4,
+        "014": 3,
+        "016-old": 3,
+        "016-jiyujia": 1
+      },
+      "scores_by_run": {
+        "005": 18.243052289684798,
+        "014": 13.333333333333334,
+        "016-old": 13.333333333333334,
+        "016-jiyujia": 2.2222222222222223
+      },
+      "min_levels": 1,
+      "max_levels": 4,
+      "mean_AE": 11.782985294643423,
+      "min_AE": 2.2222222222222223,
+      "max_AE": 18.243052289684798,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 219822,
+        "014": 167306,
+        "016-old": 194069,
+        "016-jiyujia": 110832
+      }
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "levels_available": 7,
+      "levels_by_run": {
+        "005": 0,
+        "014": 7,
+        "016-old": 2,
+        "016-jiyujia": 1
+      },
+      "scores_by_run": {
+        "005": 0.0,
+        "014": 88.13474951389338,
+        "016-old": 7.919028447141733,
+        "016-jiyujia": 3.571428571428571
+      },
+      "min_levels": 0,
+      "max_levels": 7,
+      "mean_AE": 24.906301633115923,
+      "min_AE": 0.0,
+      "max_AE": 88.13474951389338,
+      "won_runs": 1,
+      "analyzer_tokens_by_run": {
+        "005": 126087,
+        "014": 255867,
+        "016-old": 150331,
+        "016-jiyujia": 131596
+      }
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "levels_available": 6,
+      "levels_by_run": {
+        "005": 5,
+        "014": 5,
+        "016-old": 6,
+        "016-jiyujia": 6
+      },
+      "scores_by_run": {
+        "005": 71.42857142857143,
+        "014": 71.42857142857143,
+        "016-old": 92.19242856417068,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 5,
+      "max_levels": 6,
+      "mean_AE": 83.76239285532839,
+      "min_AE": 71.42857142857143,
+      "max_AE": 100.0,
+      "won_runs": 2,
+      "analyzer_tokens_by_run": {
+        "005": 128778,
+        "014": 100397,
+        "016-old": 123797,
+        "016-jiyujia": 100566
+      }
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "levels_available": 9,
+      "levels_by_run": {
+        "005": 9,
+        "014": 9,
+        "016-old": 9,
+        "016-jiyujia": 8
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 84.11009250952864,
+        "016-old": 100.0,
+        "016-jiyujia": 70.70830864075081
+      },
+      "min_levels": 8,
+      "max_levels": 9,
+      "mean_AE": 88.70460028756986,
+      "min_AE": 70.70830864075081,
+      "max_AE": 100.0,
+      "won_runs": 3,
+      "analyzer_tokens_by_run": {
+        "005": 222117,
+        "014": 286349,
+        "016-old": 253422,
+        "016-jiyujia": 339952
+      }
+    },
+    {
+      "game_id": "vc33-5430563c",
+      "levels_available": 7,
+      "levels_by_run": {
+        "005": 7,
+        "014": 3,
+        "016-old": 7,
+        "016-jiyujia": 7
+      },
+      "scores_by_run": {
+        "005": 100.0,
+        "014": 20.973214285714285,
+        "016-old": 100.0,
+        "016-jiyujia": 100.0
+      },
+      "min_levels": 3,
+      "max_levels": 7,
+      "mean_AE": 80.24330357142857,
+      "min_AE": 20.973214285714285,
+      "max_AE": 100.0,
+      "won_runs": 3,
+      "analyzer_tokens_by_run": {
+        "005": 193439,
+        "014": 153156,
+        "016-old": 180001,
+        "016-jiyujia": 199341
+      }
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "levels_available": 9,
+      "levels_by_run": {
+        "005": 1,
+        "014": 1,
+        "016-old": 2,
+        "016-jiyujia": 4
+      },
+      "scores_by_run": {
+        "005": 2.2222222222222223,
+        "014": 2.2222222222222223,
+        "016-old": 3.9827160493827156,
+        "016-jiyujia": 16.535598127328992
+      },
+      "min_levels": 1,
+      "max_levels": 4,
+      "mean_AE": 6.240689655289038,
+      "min_AE": 2.2222222222222223,
+      "max_AE": 16.535598127328992,
+      "won_runs": 0,
+      "analyzer_tokens_by_run": {
+        "005": 155071,
+        "014": 131040,
+        "016-old": 146504,
+        "016-jiyujia": 217839
+      }
+    }
+  ],
+  "selection_free_low_coverage_definition": "Maximum completed fraction over these four recorded baselines <= 1/3. Descriptive post-hoc grouping, not an experimental inclusion rule.",
+  "low_coverage_in_all_four": [
+    "bp35-0a0ad940",
+    "lf52-271a04aa",
+    "sk48-d8078629"
+  ],
+  "won_at_least_once_not_always": [
+    "ar25-0c556536",
+    "cn04-2fe56bfb",
+    "ft09-0d8bbf25",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "tn36-ef4dde99",
+    "tr87-cd924810",
+    "tu93-0768757b",
+    "vc33-5430563c"
+  ],
+  "oracle_per_game_best_mean_AE": 65.39973737856542,
+  "oracle_per_game_worst_mean_AE": 28.85695832031603,
+  "limitations": [
+    "These are four existing runs, not newly controlled random-seed replications. 005 predates deadline/diagnostic fixes; 016-old stopped before its candidate arm.",
+    "Shared queues, trajectories, request budgets, and runtime versions affect outcomes; spread is not an estimate of pure sampling variance.",
+    "Per-game best/worst use hindsight and are not deployable policies, ensemble scores, hidden-LB predictions, or evidence that restarts help.",
+    "Every game remains in the analysis; the familiar public pool is not a holdout."
+  ]
+}

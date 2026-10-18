@@ -1,0 +1,5 @@
+## Patch cell - v16.0 M76 (mid-action frames)
+
+M66 counts animation frames; M76 SHOWS them. After each action the wrapper reads `all_frames`, keeps the boards that differ from the pre-action grid in strictly more cells than the final board does (i.e. only when the final frame lost the evidence), caps at 4, and attaches them to the next user message beside the current-grid image, labelled with action and frame index. Per-game: the frames are stashed on that session's own analyzer.
+
+KILL: `lossy_actions == 0` means either no animations or `all_frames` is not populated.

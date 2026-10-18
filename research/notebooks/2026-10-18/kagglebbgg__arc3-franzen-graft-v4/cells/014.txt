@@ -1,0 +1,69 @@
+# graft-v2 mount safety: resolve competition env dir for the pre-explorer
+import os as _pe_os
+_pe_comp = next((p for p in ("/kaggle/input/competitions/arc-prize-2026-arc-agi-3", "/kaggle/input/arc-prize-2026-arc-agi-3") if _pe_os.path.isdir(p)), None)
+if _pe_comp:
+    _pe_os.environ.setdefault("PRE_EXPLORATION_ENV_DIR", _pe_os.path.join(_pe_comp, "environment_files"))
+    print(f"V2_MOUNT {_pe_comp}", flush=True)
+# v22 Phase A/B: CPU 预探索 + 说明书注入（vLLM 启动前执行；任何失败都降级为纯净跑）。
+# 开关（AGENTS.md §4，全部独立）:
+#   ENABLE_PRE_EXPLORATION=1              Phase A 总开关
+#   PRE_EXPLORATION_SECONDS_PER_GAME=900  单局探索预算秒（25 局并发，墙钟≈此值）
+#   MANUAL_MAX_CHARS=3500                 单局说明书字符上限
+#   PRE_EXPLORATION_SEED=0                随机游走种子（确定性）
+#   ENABLE_MANUAL_INJECT=1                Phase B 注入开关
+import sys as _sys
+
+_sys.path.insert(0, os.getcwd())
+import manual_injector
+import phase_a_setup
+import pre_explorer
+
+_v22_manuals: dict = {}
+if os.getenv("ENABLE_PRE_EXPLORATION", "1") == "1":
+    try:
+        from arcengine import GameAction as _V22_GameAction
+
+        _v22_arcade = phase_a_setup.explore_arcade(TRUE_SUBMISSION)
+        _v22_ids = [info.game_id for info in _v22_arcade.available_environments]
+        if not _v22_ids:
+            raise RuntimeError("v22: explore arcade exposed zero environments")
+
+        def _v22_make(gid):
+            env = _v22_arcade.make(gid)
+            if env is None:
+                raise RuntimeError(f"v22: arcade.make({gid!r}) returned None")
+            return env
+
+        _v22_t0 = time.monotonic()
+        _v22_manuals = pre_explorer.run_pre_exploration(
+            _v22_ids,
+            _v22_make,
+            _V22_GameAction,
+            seconds_per_game=float(os.getenv("PRE_EXPLORATION_SECONDS_PER_GAME", "900")),
+            seed=int(os.getenv("PRE_EXPLORATION_SEED", "0")),
+            max_chars=int(os.getenv("MANUAL_MAX_CHARS", "3500")),
+        )
+        print(
+            f"[v22-phaseA] wall={time.monotonic() - _v22_t0:.0f}s "
+            f"manuals={len(_v22_manuals)}/{len(_v22_ids)}",
+            flush=True,
+        )
+        # 探索记分卡用完即关：网关上不留悬挂 scorecard，benchmark 之后开自己的卡。
+        try:
+            _v22_arcade.close_scorecard()
+        except Exception as exc:
+            print(f"[v22-phaseA] scorecard close failed (non-fatal): {exc}", flush=True)
+    except Exception as exc:
+        print(
+            f"[v22-phaseA] ABORTED, degrading to pristine: {type(exc).__name__}: {exc}",
+            flush=True,
+        )
+        _v22_manuals = {}
+    (WORKING_DIR / "manuals.json").write_text(
+        json.dumps(_v22_manuals, ensure_ascii=False, indent=1)
+    )
+else:
+    print("[v22-phaseA] disabled (ENABLE_PRE_EXPLORATION=0)", flush=True)
+
+if os.getenv("ENABLE_MANUAL_INJECT", "1") == "1" and _v22_manuals:
+    manual_injector.install(_v22_manuals)

@@ -1,9 +1,18 @@
 # 016 pace 对照进展
 
-日期：2026-10-17 夜。状态：**ccjjllt/arc3-016-pace-allocation v1 RUNNING，结果未回。** 对应[计划](../plan/016-pace-allocation.md)、[决策](../../research/015-016-research-decision.md)。
+更新：2026-10-18。状态：**jiyujia修复轮已COMPLETE，首轮门槛未通过，不晋升、不做同版倒序、不提交。** 对应[计划](../plan/016-pace-allocation.md)、[完整结果](../../research/016-results-analysis.md)、[当前决策](../../research/017-research-decision.md)。
 
-- 无新求解代码，仅 ARC3_PRIORITY_PACE 0→1；TAIL 保持 remaining。run_arm/preflight/config/build 已扩展 pace_1x，本地构建与配置校验通过；Kaggle preflight 随启动运行，失败即早停。
-- Notebook 冻结 sha 41ead1533620，35 cells，私有/断网/RTX PRO 6000。与 015 并行，分占两账号额度，墙钟约 4.3h。
-- 正式 009/31.16 不变；本任务 OFFLINE，不提交。首轮按均分/覆盖/总关/两游戏新增/非单游戏门判是否倒序。
+| 指标 | baseline | pace_1x |
+|---|---:|---:|
+| 25游戏平均分 | 47.1340 | 47.4634 |
+| 加权完成覆盖 | 50.1316 | 50.3452 |
+| 总关卡 | 105/183 | 111/183 |
+| 全通游戏 | 8 | 7 |
 
-证据：[启动](../../experiments/016-launch.json)、[配置](../../experiments/016-pace-allocation.json)。
+差值+0.3293；去除最大正向r11l后其余24游戏均差−1.5205，未通过非单游戏支撑门。两臂各7254秒、10流、单pass，唯一策略开关PACE 0→1，TAIL均remaining。50局复算一致，冻结源码、缓存、预算、worker排空有效，客户端账本无截止后新请求、动作或过关。GPU已停止，内部会话4.2054小时；不等于平台额度账单。
+
+原ccjjllt首轮因complete_pool仅接受won/cancelled，误拒8个正常gave_up而在baseline后停止，pace未启动；该baseline50.4234/108关不是本次配对基线。修复后队员Notebook SHA `42b0ce493418…`，两臂于北京时间10/18 01:40–05:43完成。旧[启动记录](../../experiments/016-launch.json)的RUNNING是历史状态。
+
+证据：[新manifest](../../runs/016-pace-allocation-jiyujia/experiment-manifest.json)、[复算与门槛](../../experiments/016-analysis/comparison.json)、[时序审计](../../experiments/016-analysis/timing.json)、[冻结构建](../../notebooks/016-pace-allocation-jiyujia/build-manifest.json)。
+
+选取的大进退游戏在首次handover前已有不同轨迹；tr87在更多slot/tokens下仍少过两关，原始轨迹另确认字形裁剪错位，不能量化其对最终分差的贡献，也不能把分数差全归调度。下一研究转为[018观察状态保真](../plan/018-observation-grounding.md)。正式009/31.16保持不变。

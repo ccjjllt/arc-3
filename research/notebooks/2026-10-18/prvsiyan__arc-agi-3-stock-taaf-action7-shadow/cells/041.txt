@@ -1,0 +1,27 @@
+import hashlib
+import json
+import os
+import pickle
+import subprocess
+import sys
+import sysconfig
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+from urllib.request import urlopen
+
+TRUE_SUBMISSION = os.environ.get("KAGGLE_IS_COMPETITION_RERUN", "").strip().lower() in {"1", "true"}
+NOTEBOOK_START_EPOCH = time.time()
+WORKING_DIR = Path("/kaggle/working")
+WORKING_DIR.mkdir(parents=True, exist_ok=True)
+
+os.environ["MPLBACKEND"] = "Agg"
+os.environ["TAAF_RUN_AS_SUBMISSION"] = "1" if TRUE_SUBMISSION else "0"
+os.environ["TAAF_MINIMAL_DIAGNOSTICS"] = "1" if TRUE_SUBMISSION else "0"
+os.environ["ONLY_RESET_LEVELS"] = "true"
+cuda_library_path = "/usr/local/nvidia/lib64"
+os.environ["LIBRARY_PATH"] = os.pathsep.join(
+    item for item in [cuda_library_path, *os.environ.get("LIBRARY_PATH", "").split(os.pathsep)] if item
+)
+
+print(json.dumps({"mode": "competition" if TRUE_SUBMISSION else "offline-public", "internet": "disabled"}, indent=2))

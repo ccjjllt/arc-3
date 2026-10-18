@@ -1,0 +1,3 @@
+## Patch cell - v16.3 M79 (context guard)
+
+v16.2 v2 froze lp85: the server rejected its 32,815-token prompt 374 times and the harness re-sent it each time. (A) the harness's own overflow recovery now recognises SGLang's wording (longer than the model's context length); (B) after the harness's chars/3 estimate, the trim also requires the REAL count (server /v1/tokenize, images at 66) to fit 32,768 - 4,096 (reply room) minus the caller's reserve. Prompts under that are trimmed exactly as before.

@@ -1,0 +1,9 @@
+# ARC-AGI-3 Milestone 2 Solution + World Model (DF-WM)
+
+This notebook contains Daniel Franzen's Milestone 2 winning solution for **ARC Prize 2026 вЂ” ARC-AGI-3**, enhanced with an integrated **World Model Simulator** (`DF-WM`).
+
+### Key components:
+- **Serving:** Qwen3.8-Flash-Next on SGLang Pennyroyal v2.5.3 (RTX PRO 6000 SM120) with Intel AutoRound W4A16 quantization and Albucino MTP draft model.
+- **World Model as Code:** `SimFrame`, `compare_grids`, `check_sim`, `search` (BFS state-space planner), and `act_checked` (guard verifying environment transitions against simulator predictions).
+- **Persistent Functions:** Function retention across turns and levels (`game` scope).
+- **Guards & Perception:** Action echo, middle truncation, board diffs, animation frames, and no-op / stale state guards.

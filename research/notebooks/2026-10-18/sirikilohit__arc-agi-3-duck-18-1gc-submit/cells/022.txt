@@ -1,0 +1,5 @@
+## Patch cell - v14.44b - multi-request turns + sticky sandbox on v14.43
+
+Measured across 10 Flash-Next runs (13,126 model calls): 49.1% of calls execute no action; 88% of those ran one investigative python call and were cut off by `LOCAL_ANALYZER_YIELD_SECONDS=60` (< 128-177 s per request). M44a: yield off, `TOOL_STEPS=4` -- a turn may hold up to 4 python calls before it acts or yields; M43 permits still gate every request. M44b: plain-data variables persist between python calls on the same level (fresh subprocess otherwise); 6.5% of no-action calls were NameErrors.
+
+Read the counters, not the score: no-action call share (49.1% baseline), stuck-episode time (40%), `history_messages`, M44 summary.

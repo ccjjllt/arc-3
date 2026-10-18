@@ -1,0 +1,20 @@
+                _dst = emb.weight.data[local_start : local_start + n_rows]
+                _src = loaded_weight[src_start : src_start + n_rows]
+                if (
+                    _dst.device.type == "cpu"
+                    and _src.device.type == "cpu"
+                    and _src.dtype == _dst.dtype
+                    and n_rows >= 65536
+                ):
+                    import concurrent.futures as _penny_cf
+                    import os as _penny_os
+                    _nt = max(1, int(_penny_os.environ.get("PENNY_PLE_COPY_THREADS", "16")))
+                    _step = (n_rows + _nt - 1) // _nt
+                    _spans = [(_i, min(n_rows, _i + _step)) for _i in range(0, n_rows, _step)]
+                    with _penny_cf.ThreadPoolExecutor(len(_spans)) as _ex:
+                        list(_ex.map(lambda _s: _dst[_s[0]:_s[1]].copy_(_src[_s[0]:_s[1]]), _spans))
+                    if not getattr(emb, "_penny_parallel_logged", False):
+                        emb._penny_parallel_logged = True
+                        print(f"PENNY_PLE_PARALLEL_COPY threads={_nt} rows={n_rows}", flush=True)
+                else:
+                    _dst.copy_(_src.to(device=emb.weight.device, dtype=emb.weight.dtype))

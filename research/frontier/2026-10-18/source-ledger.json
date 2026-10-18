@@ -1,0 +1,177 @@
+{
+  "access_date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "method": "Primary papers, author repositories, official ARC/NVIDIA reports; no third-party reviews used as conclusion evidence; no model/GPU calls or third-party code execution.",
+  "searches": [
+    "ARC-AGI-3 October 2026 executable world model agent restart",
+    "ARC-AGI-3 check_sim act_checked",
+    "site:arxiv.org ARC-AGI-3 restart",
+    "site:arxiv.org ARC-AGI-3 exploration October",
+    "site:arxiv.org ARC-AGI-3 verification simplification",
+    "site:github.com ARC-AGI-3 stagnation",
+    "ARC-AGI-3 restart ablation"
+  ],
+  "sources": [
+    {
+      "id": "envtraverse_paper",
+      "title": "Improving Environment-Agnostic Coding Agents: The Role of Scaffolding",
+      "url": "https://arxiv.org/html/2610.22289v1",
+      "metadata_url": "https://arxiv.org/abs/2610.22289",
+      "version": "v1",
+      "version_date": "2026-10-15",
+      "checked": "Sections 4,5.1,6,7,8,9; Table 1; Appendix C individual runs",
+      "evidence": "Public 25 games, 3 blocks/configuration; same-code prompt comparison; higher cost; no additional hard wall-clock/token cap",
+      "not_established": "Equal-compute improvement, Qwen transfer, fresh-context restart benefit; full raw runs not downloaded"
+    },
+    {
+      "id": "envtraverse_code",
+      "title": "EnvTraverse author source",
+      "url": "https://github.com/astroseger/envtraverse",
+      "version": "0d9203287a9a9651b6b3501b7907a0191786a4c9",
+      "checked": "Git tree blob comparison of 15 files per agent; selected agent/controller/runner/prompt source",
+      "evidence": "Only continuation_string.txt differs; ordinary continuation and post-action recovery resume same thread; watchdog 2h inactivity/max10 recoveries in accessed source",
+      "artifact": "envtraverse/source-manifest.json",
+      "not_established": "Exact source hashes of all historical paper runs; production behavior not executed"
+    },
+    {
+      "id": "rodionov_components",
+      "title": "Do Coding Agents Need Executable World Models, Simplification, and Verification to Solve ARC-AGI-3?",
+      "url": "https://arxiv.org/html/2607.15439v2",
+      "metadata_url": "https://arxiv.org/abs/2607.15439",
+      "version": "v2",
+      "version_date": "2026-08-27",
+      "checked": "Sections 3-8; Tables 2-4; plan_executor discussion; recovery semantics",
+      "evidence": "Nested matched-model/effort comparison; verification highest score and cost; not isolated online plan gating",
+      "not_established": "Equal inference cost; hidden set; verifier-only treatment"
+    },
+    {
+      "id": "opine_world",
+      "title": "OPINE-World",
+      "url": "https://arxiv.org/html/2607.01531v3",
+      "metadata_url": "https://arxiv.org/abs/2607.01531",
+      "version": "v3",
+      "version_date": "2026-09-26",
+      "checked": "Sections 3-5; Appendix C, E, F, G; compared with v1 ablation absence",
+      "evidence": "v3 adds paired 25-game exploration-layer ablation and g50t fixed-evidence/revision studies",
+      "not_established": "Light-prompt effect; full-25 equal-wall-clock comparison; hidden generalization"
+    },
+    {
+      "id": "tycho",
+      "title": "Tycho: Active Abstraction with Programmatic World Models for ARC-AGI-3",
+      "url": "https://arxiv.org/html/2607.28287v1",
+      "metadata_url": "https://arxiv.org/abs/2607.28287",
+      "version": "v1",
+      "version_date": "2026-07-30",
+      "checked": "Tables 2,6,7,8; policy budgets; pre-action diagnostics and lower-cost prefix limitation",
+      "evidence": "Trigger has higher accepted prediction match but lower score/completion and more builder calls than orchestrator",
+      "not_established": "Causal per-action verifier benefit; equal cost; low-budget rerun"
+    },
+    {
+      "id": "play_adequacy",
+      "title": "When a Verified World Model Still Loses",
+      "url": "https://arxiv.org/html/2607.14169v2",
+      "metadata_url": "https://arxiv.org/abs/2607.14169",
+      "version": "v2",
+      "version_date": "2026-07-19",
+      "checked": "Sections 3-5,8; experimental scope and engineered-rule limitations",
+      "evidence": "Non-ARC constructed-game counterexample: sampling accuracy may miss pivotal dynamics",
+      "not_established": "ARC effect size; universal inability to infer rules"
+    },
+    {
+      "id": "kepler",
+      "title": "Kepler: Auditable World Models for ARC-AGI-3",
+      "url": "https://arxiv.org/html/2610.00834v1",
+      "metadata_url": "https://arxiv.org/abs/2610.00834",
+      "version": "v1",
+      "version_date": "2026-09-30",
+      "checked": "Sections 2.2-2.3,4,6; project page discrepancy",
+      "evidence": "Conditional prediction interruption; exceptions/zero coverage continue; final replay is separate from first-exposure discovery",
+      "not_established": "Every action verified; independent plan-interruption effect; bounded learning score"
+    },
+    {
+      "id": "kepler_project",
+      "title": "Kepler project page",
+      "url": "https://kepler-harness.vercel.app/",
+      "checked": "Current headline, methods, score accounting",
+      "evidence": "Page retains stronger universal-verification language and outdated cutoff denial; report uses paper's explicit corrected limitations",
+      "not_established": "Do not use page slogans as API guarantees"
+    },
+    {
+      "id": "memento3",
+      "title": "Memento 3",
+      "url": "https://arxiv.org/html/2610.11794v1",
+      "metadata_url": "https://arxiv.org/abs/2610.11794",
+      "version": "v1",
+      "version_date": "2026-10-08",
+      "checked": "Version history, rulebook/replay method, public result and small ablations",
+      "not_established": "Author complete implementation or matching compute budget"
+    },
+    {
+      "id": "pro_long",
+      "title": "PRO-LONG",
+      "url": "https://arxiv.org/abs/2607.20064",
+      "version": "v3",
+      "version_date": "2026-10-12",
+      "checked": "Version history and abstract; detailed ARC analysis inherited from 013",
+      "not_established": "No newly confirmed revision since 013"
+    },
+    {
+      "id": "vista",
+      "title": "VISTA",
+      "url": "https://arxiv.org/abs/2610.02200",
+      "version": "v1",
+      "version_date": "2026-10-01",
+      "checked": "Version history and abstract; detailed budget analysis inherited from 013"
+    },
+    {
+      "id": "tracing",
+      "title": "Tracing the Thoughts of a Coding Agent Playing ARC-AGI-3",
+      "url": "https://arxiv.org/abs/2610.11450",
+      "version": "v1",
+      "version_date": "2026-10-08",
+      "checked": "Version history and abstract; written artifact transfer limitations"
+    },
+    {
+      "id": "twin",
+      "title": "Twin",
+      "url": "https://arxiv.org/abs/2608.14490",
+      "version": "v1",
+      "version_date": "2026-08-14",
+      "checked": "Version history and abstract; detailed budget mismatch inherited from 013"
+    },
+    {
+      "id": "prime_agent",
+      "title": "Prime Agent",
+      "url": "https://arxiv.org/abs/2608.23552",
+      "version": "v1",
+      "version_date": "2026-08-24",
+      "checked": "Metadata only; not promoted to mechanism recommendation because components not independently verified this round"
+    },
+    {
+      "id": "avo",
+      "title": "NVIDIA AVO official ARC-AGI-3 report",
+      "url": "https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/",
+      "checked": "Supervision description and ARC scope, separated from seven-day kernel study",
+      "not_established": "ARC restart-only ablation or comparable compute budget"
+    },
+    {
+      "id": "argon",
+      "title": "Gemini 4 Argon official ARC results",
+      "url": "https://arcprize.org/results/google-gemini-4-argon",
+      "checked": "Low 49.8/97.5 and incomplete standard 42/55; adapter continuity explanation",
+      "not_established": "Pure memory ablation; offline deployment"
+    },
+    {
+      "id": "franzen_writeup",
+      "title": "Franzen Milestone 2 author writeup",
+      "url": "https://github.com/da-fr/arc-agi-3-solution/blob/main/WRITEUP.md",
+      "checked": "Discovery search returned reset/feedback and structured-memory negative-result descriptions; detailed source handled by parallel notebook audit"
+    }
+  ],
+  "fetch_limitations": [
+    "GitHub web pages for individual controller paths returned cache misses; public source read succeeded with GitHub connector.",
+    "Shell public GitHub request failed DNS in sandbox; no escalation was needed or attempted after connector succeeded.",
+    "Full paper03 raw runs not downloaded; supporting-material README says Zenodo forthcoming and links Dropbox.",
+    "Latest branch source frozen by accessed commit; historical paper-run source hashes not independently recovered."
+  ]
+}

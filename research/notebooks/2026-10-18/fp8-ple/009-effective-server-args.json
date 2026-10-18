@@ -1,0 +1,21 @@
+{
+  "model_path": "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+  "dtype": "bfloat16",
+  "quantization": "auto-round",
+  "ple_offload_embedding": true,
+  "context_length": 139264,
+  "max_running_requests": 10,
+  "kv_cache_dtype": "fp8_e4m3",
+  "mamba_ssm_dtype": "bfloat16",
+  "mamba_radix_cache_strategy": "extra_buffer",
+  "gdn_mtp_cache_mode": "none",
+  "speculative_algorithm": "EAGLE",
+  "speculative_num_steps": 3,
+  "speculative_accept_threshold_single": 1.0,
+  "speculative_accept_threshold_acc": 1.0,
+  "weight_loader_prefetch_checkpoints": true,
+  "weight_loader_drop_cache_after_load": true,
+  "enable_hierarchical_cache": false,
+  "enable_cache_report": true,
+  "schedule_policy": "lpm"
+}

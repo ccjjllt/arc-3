@@ -1,0 +1,452 @@
+"""Progress-aware analyzer transport for the exact ARC3 stock-shadow sources.
+
+The audited TAAF ToolAgent buffers an entire OpenAI-compatible response, so a
+productive generation can appear silent to Requests until the full response is
+ready.  This adapter requests SSE chunks, reconstructs the same buffered
+message shape, keeps the configured timeout as an idle-between-chunks guard,
+and separately preserves the solver's per-game/global absolute deadline.
+
+The patch is deliberately source-hash-bound and changes no prompt, sampling
+parameter, action mapping, game API, or submission code.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import logging
+import math
+import threading
+import time
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable, Iterator
+
+import requests
+
+
+PATCH_VERSION = "arc3-v3-progress-stream-deadline-v2"
+EXPECTED_SOLVER_SHA256 = "65ddfcdbe8c24fdc31246ff018b51469827b21c38995243a36a818adbed33370"
+EXPECTED_TOOL_AGENT_SHA256 = "535ee88b81b262fa5aedb785466ade9f3183a6417656fb6733427242baac7c9d"
+ANALYZER_WARNING_TEMPLATE = "analyzer request failed at action %d: %s"
+
+_ABSOLUTE_BUDGET_ATTR = "_arc3_progress_stream_absolute_budget_s"
+_PATCH_MARKER_ATTR = "_arc3_progress_stream_patch_version"
+_LOG_RECORD_MARKER = "_arc3_analyzer_warning_already_emitted"
+
+
+class Arc3RunDeadlineExceeded(requests.RequestException):
+    """Expected request closure at the solver's absolute run deadline."""
+
+
+def _sha256(path: str | Path) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _positive_finite(value: Any) -> float | None:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if math.isfinite(parsed) and parsed > 0 else None
+
+
+def _text_fragment(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        parts: list[str] = []
+        for item in value:
+            if isinstance(item, dict) and item.get("type") == "text":
+                parts.append(str(item.get("text", "")))
+            elif isinstance(item, str):
+                parts.append(item)
+        return "".join(parts)
+    return str(value)
+
+
+def merge_sse_lines(
+    lines: Iterable[str | bytes],
+) -> tuple[dict[str, Any], str, dict[str, Any] | None, int]:
+    """Merge OpenAI-compatible SSE chunks into ToolAgent's buffered shape."""
+
+    role = "assistant"
+    content_parts: list[str] = []
+    reasoning_parts: list[str] = []
+    tool_fragments: dict[int, dict[str, Any]] = {}
+    finish_reason = ""
+    usage: dict[str, Any] | None = None
+    saw_choice = False
+    chunk_count = 0
+
+    for raw in lines:
+        line = raw.decode("utf-8") if isinstance(raw, bytes) else str(raw)
+        line = line.strip()
+        if not line or line.startswith(":") or not line.startswith("data:"):
+            continue
+        data = line[5:].strip()
+        if data == "[DONE]":
+            break
+        event = json.loads(data)
+        chunk_count += 1
+        if event.get("error"):
+            raise requests.RequestException(f"streaming server error: {event['error']}")
+        if isinstance(event.get("usage"), dict):
+            usage = event["usage"]
+        choices = event.get("choices") or []
+        if not choices:
+            continue
+        saw_choice = True
+        choice = choices[0]
+        if choice.get("finish_reason") not in (None, ""):
+            finish_reason = str(choice["finish_reason"])
+        delta = choice.get("delta") or {}
+        if delta.get("role"):
+            role = str(delta["role"])
+        content_parts.append(_text_fragment(delta.get("content")))
+        reasoning_parts.append(
+            _text_fragment(
+                delta.get("reasoning")
+                if delta.get("reasoning") not in (None, "")
+                else delta.get("reasoning_content")
+            )
+        )
+        for fragment in delta.get("tool_calls") or []:
+            index = int(fragment.get("index", len(tool_fragments)))
+            merged = tool_fragments.setdefault(
+                index,
+                {
+                    "id": "",
+                    "type": "function",
+                    "function": {"name": "", "arguments": ""},
+                },
+            )
+            if fragment.get("id"):
+                merged["id"] = str(fragment["id"])
+            if fragment.get("type"):
+                merged["type"] = str(fragment["type"])
+            function = fragment.get("function") or {}
+            if function.get("name") is not None:
+                merged["function"]["name"] += str(function["name"])
+            if function.get("arguments") is not None:
+                merged["function"]["arguments"] += str(function["arguments"])
+
+    if not saw_choice:
+        raise requests.RequestException("streaming server returned no choices")
+
+    message: dict[str, Any] = {
+        "role": role,
+        "content": "".join(content_parts) or None,
+    }
+    reasoning = "".join(reasoning_parts)
+    if reasoning:
+        message["reasoning"] = reasoning
+    if tool_fragments:
+        message["tool_calls"] = [
+            tool_fragments[index] for index in sorted(tool_fragments)
+        ]
+    return message, finish_reason, usage, chunk_count
+
+
+def _deadline_checked_lines(
+    lines: Iterable[str | bytes],
+    absolute_deadline: float | None,
+) -> Iterator[str | bytes]:
+    for line in lines:
+        if absolute_deadline is not None and time.monotonic() >= absolute_deadline:
+            raise Arc3RunDeadlineExceeded(
+                "analyzer stream reached the solver's absolute run deadline"
+            )
+        yield line
+
+
+class _OneAnalyzerWarningPerRecord(logging.Filter):
+    """Deduplicate a LogRecord and classify an expected deadline closure."""
+
+    def __init__(self, on_deadline_closure: Any) -> None:
+        super().__init__()
+        self._on_deadline_closure = on_deadline_closure
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        if getattr(record, _LOG_RECORD_MARKER, False):
+            return False
+        if record.msg != ANALYZER_WARNING_TEMPLATE:
+            return True
+        setattr(record, _LOG_RECORD_MARKER, True)
+        args = record.args if isinstance(record.args, tuple) else ()
+        if len(args) >= 2 and isinstance(args[1], Arc3RunDeadlineExceeded):
+            self._on_deadline_closure()
+            record.msg = "analyzer request closed at absolute run deadline at action %d"
+            record.args = (args[0],)
+            record.levelno = logging.INFO
+            record.levelname = "INFO"
+        return True
+
+
+@dataclass
+class ProgressStreamPatchHandle:
+    session_class: type[Any]
+    tool_agent_class: type[Any]
+    original_request_timeout_seconds: Any
+    original_should_stop: Any
+    original_chat_completion: Any
+    filtered_handlers: list[logging.Handler]
+    stream_filter: logging.Filter
+
+    def restore(self) -> None:
+        self.session_class.request_timeout_seconds = self.original_request_timeout_seconds
+        self.session_class.should_stop = self.original_should_stop
+        self.tool_agent_class._chat_completion = self.original_chat_completion
+        for handler in self.filtered_handlers:
+            handler.removeFilter(self.stream_filter)
+        if getattr(self.session_class, _PATCH_MARKER_ATTR, None) == PATCH_VERSION:
+            delattr(self.session_class, _PATCH_MARKER_ATTR)
+
+
+def install_progress_stream_deadline_patch(
+    solver_module: Any,
+    tool_agent_module: Any,
+    *,
+    metrics_path: str | Path | None = None,
+    expected_solver_sha256: str = EXPECTED_SOLVER_SHA256,
+    expected_tool_agent_sha256: str = EXPECTED_TOOL_AGENT_SHA256,
+) -> tuple[ProgressStreamPatchHandle, dict[str, Any]]:
+    """Install the adapter after binding to the exact audited MIT sources."""
+
+    solver_sha256 = _sha256(solver_module.__file__)
+    tool_agent_sha256 = _sha256(tool_agent_module.__file__)
+    if solver_sha256 != expected_solver_sha256:
+        raise RuntimeError(f"ARC3 solver source hash mismatch: {solver_sha256}")
+    if tool_agent_sha256 != expected_tool_agent_sha256:
+        raise RuntimeError(f"ARC3 ToolAgent source hash mismatch: {tool_agent_sha256}")
+
+    session_class = solver_module._HarnessGameSession
+    tool_agent_class = tool_agent_module.ToolAgent
+    if getattr(session_class, _PATCH_MARKER_ATTR, None) is not None:
+        raise RuntimeError("ARC3 progress-stream patch is already installed")
+
+    original_request_timeout = session_class.request_timeout_seconds
+    original_should_stop = session_class.should_stop
+    original_chat = tool_agent_class._chat_completion
+
+    metrics_file = Path(metrics_path) if metrics_path is not None else None
+    metrics_lock = threading.Lock()
+    metrics: dict[str, Any] = {
+        "schema_version": 1,
+        "patch_version": PATCH_VERSION,
+        "installed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "stream_responses_completed": 0,
+        "stream_chunks_received": 0,
+        "expected_absolute_deadline_closures": 0,
+        "true_transport_failures": 0,
+    }
+
+    def write_metrics() -> None:
+        if metrics_file is not None:
+            metrics_file.parent.mkdir(parents=True, exist_ok=True)
+            metrics_file.write_text(
+                json.dumps(metrics, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
+    def bump(key: str, amount: int = 1) -> None:
+        with metrics_lock:
+            metrics[key] = int(metrics.get(key, 0)) + int(amount)
+            write_metrics()
+
+    def absolute_budget_seconds(session: Any) -> float | None:
+        candidates: list[float] = []
+        try:
+            remaining = session.timing_payload().get("time_remaining_seconds")
+        except Exception:
+            remaining = None
+        parsed = _positive_finite(remaining)
+        if parsed is not None:
+            candidates.append(parsed)
+        try:
+            soft_remaining = session.solver.soft_time_remaining_seconds()
+        except Exception:
+            soft_remaining = None
+        parsed = _positive_finite(soft_remaining)
+        if parsed is not None:
+            candidates.append(parsed)
+        return min(candidates) if candidates else None
+
+    def bridged_request_timeout_seconds(self: Any) -> float | None:
+        value = original_request_timeout(self)
+        setattr(self.analyzer, _ABSOLUTE_BUDGET_ATTR, absolute_budget_seconds(self))
+        return value
+
+    def global_deadline_aware_should_stop(self: Any) -> bool:
+        if original_should_stop(self):
+            return True
+        try:
+            remaining = self.solver.soft_time_remaining_seconds()
+        except Exception:
+            remaining = None
+        if remaining is not None:
+            try:
+                return float(remaining) <= 0
+            except (TypeError, ValueError):
+                return False
+        return False
+
+    def streaming_chat_completion(
+        self: Any,
+        messages: list[dict[str, Any]],
+        *,
+        tools: list[dict[str, Any]] | None,
+        request_timeout_seconds: float | None = None,
+    ) -> Any:
+        payload = tool_agent_module.build_chat_payload(
+            provider=self._model.provider,
+            model=self._model.model_id,
+            messages=messages,
+            max_tokens=self._max_output_tokens,
+            temperature=tool_agent_module._LOCAL_ANALYZER_TEMPERATURE,
+            top_p=tool_agent_module._LOCAL_ANALYZER_TOP_P,
+            top_k=tool_agent_module._LOCAL_ANALYZER_TOP_K,
+            thinking=bool(tool_agent_module._LOCAL_ANALYZER_ENABLE_THINKING),
+            tools=tools,
+            tool_choice=tool_agent_module._request_tool_choice(tools),
+            seed=tool_agent_module._LOCAL_ANALYZER_SEED,
+        )
+        if payload.get("stream") is not False:
+            raise RuntimeError("expected the stock payload to request a buffered response")
+        payload["stream"] = True
+        payload["stream_options"] = {"include_usage": True}
+
+        absolute_budget = _positive_finite(
+            getattr(self, _ABSOLUTE_BUDGET_ATTR, None)
+        )
+        configured_idle = _positive_finite(getattr(self, "_timeout", None))
+        fallback_timeout = _positive_finite(request_timeout_seconds)
+        timeout_candidates = [
+            value
+            for value in (configured_idle, absolute_budget, fallback_timeout)
+            if value is not None
+        ]
+        socket_idle_timeout = min(timeout_candidates) if timeout_candidates else None
+        absolute_deadline = (
+            time.monotonic() + absolute_budget
+            if absolute_budget is not None
+            else None
+        )
+
+        headers = dict(self._headers())
+        headers["Accept"] = "text/event-stream"
+        response = None
+        try:
+            response = tool_agent_module.requests.post(
+                f"{self._model.base_url.rstrip('/')}/chat/completions",
+                headers=headers,
+                json=payload,
+                stream=True,
+                timeout=socket_idle_timeout,
+            )
+            response.raise_for_status()
+            message, finish_reason, usage, chunk_count = merge_sse_lines(
+                _deadline_checked_lines(
+                    response.iter_lines(decode_unicode=True),
+                    absolute_deadline,
+                )
+            )
+        except Arc3RunDeadlineExceeded:
+            raise
+        except tool_agent_module.requests.RequestException as exc:
+            if absolute_deadline is not None and time.monotonic() >= absolute_deadline:
+                raise Arc3RunDeadlineExceeded(
+                    "analyzer stream reached the solver's absolute run deadline"
+                ) from exc
+            bump("true_transport_failures")
+            raise
+        except Exception as exc:
+            bump("true_transport_failures")
+            raise tool_agent_module.requests.RequestException(str(exc)) from exc
+        finally:
+            if response is not None:
+                response.close()
+
+        bump("stream_responses_completed")
+        bump("stream_chunks_received", chunk_count)
+        self._arc3_stream_chunks_last_response = chunk_count
+        return tool_agent_module._ChatCompletionResult(
+            message=message,
+            finish_reason=finish_reason,
+            usage=usage,
+        )
+
+    session_class.request_timeout_seconds = bridged_request_timeout_seconds
+    session_class.should_stop = global_deadline_aware_should_stop
+    tool_agent_class._chat_completion = streaming_chat_completion
+    setattr(session_class, _PATCH_MARKER_ATTR, PATCH_VERSION)
+
+    stream_filter = _OneAnalyzerWarningPerRecord(
+        lambda: bump("expected_absolute_deadline_closures")
+    )
+    filtered_handlers: list[logging.Handler] = []
+    for handler in logging.getLogger().handlers:
+        if isinstance(handler, logging.StreamHandler) and not isinstance(
+            handler, logging.FileHandler
+        ):
+            handler.addFilter(stream_filter)
+            filtered_handlers.append(handler)
+
+    with metrics_lock:
+        write_metrics()
+
+    receipt = {
+        "patch_version": PATCH_VERSION,
+        "solver_source_sha256": solver_sha256,
+        "tool_agent_source_sha256": tool_agent_sha256,
+        "transport": "OpenAI-compatible SSE",
+        "semantic_payload_delta": {
+            "stream": [False, True],
+            "stream_options": {"include_usage": True},
+        },
+        "configured_timeout_semantics": "idle interval between SSE chunks",
+        "absolute_deadline_semantics": (
+            "minimum of remaining per-game runtime and remaining global soft runtime"
+        ),
+        "expected_deadline_log_classification": (
+            "INFO closure record; true transport failures remain warning failures"
+        ),
+        "prompt_changed": False,
+        "sampling_parameters_changed": False,
+        "action_mapping_changed": False,
+        "game_api_changed": False,
+        "submission_schema_changed": False,
+        "metrics_path": str(metrics_file) if metrics_file is not None else None,
+    }
+    return (
+        ProgressStreamPatchHandle(
+            session_class=session_class,
+            tool_agent_class=tool_agent_class,
+            original_request_timeout_seconds=original_request_timeout,
+            original_should_stop=original_should_stop,
+            original_chat_completion=original_chat,
+            filtered_handlers=filtered_handlers,
+            stream_filter=stream_filter,
+        ),
+        receipt,
+    )
+
+import inference.framework.solver as _arc3_solver_module
+import inference.agent.tool_agent as _arc3_tool_agent_module
+
+ARC3_PROGRESS_STREAM_PATCH_HANDLE, ARC3_PROGRESS_STREAM_CONTRACT = (
+    install_progress_stream_deadline_patch(
+        _arc3_solver_module,
+        _arc3_tool_agent_module,
+        metrics_path=WORKING_DIR / "arc3_progress_stream_metrics.json",
+    )
+)
+ARC3_PROGRESS_STREAM_CONTRACT_PATH = WORKING_DIR / "arc3_progress_stream_contract.json"
+ARC3_PROGRESS_STREAM_CONTRACT_PATH.write_text(
+    json.dumps(ARC3_PROGRESS_STREAM_CONTRACT, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+print(json.dumps(ARC3_PROGRESS_STREAM_CONTRACT, indent=2, sort_keys=True))

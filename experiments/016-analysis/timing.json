@@ -1,0 +1,5240 @@
+{
+  "baseline": {
+    "clock_origin_utc": "2026-10-17T17:40:41.914520+00:00",
+    "global_soft_end_t": 7254.003733,
+    "benchmark_started_utc": "2026-10-17T17:40:41.918258+00:00",
+    "arm_finished_utc": "2026-10-17T19:42:14.254832+00:00",
+    "benchmark_elapsed_s": 7288.704555,
+    "snapshot_after_soft_end_s": 38.33659307200105,
+    "observer_validity": {
+      "observer": "inference-timing-v1",
+      "provisional": false,
+      "sessions_seen": 25,
+      "sessions_recorded": 25,
+      "sessions_omitted_by_limit": 0,
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": []
+    },
+    "observer_module_sha256": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "hook_source_sha256": {
+      "session.play": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+      "agent._chat_completion": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+      "gate.acquire": "08c5a76d18ea8a99611ab56db0c836984ca1d8b73e0dafff3de70e85a3e215a0",
+      "gate.handover": "ca24c4d98796b06a7c62ced2f9ac46e71cce8c5e566c3a8c3c952c712ba9db26",
+      "gate.release": "307704ba29413344f0c2871972c13b98b300060b371b83e820059e3b832dce20",
+      "gate._enqueue_and_wait": "c0a49c82861823899e70cc7e431dce3a793d311a1a625629948fd3a04d5df75e",
+      "gate._pump": "d87719242b883365d9de724369c6d1ed49fbad9cf6d5e1ca1e6ccfa6ce6d74f5"
+    },
+    "counts": {
+      "play_begin": 25,
+      "gate_call_begin": 139,
+      "gate_enqueue_begin": 114,
+      "gate_admitted_return": 114,
+      "gate_call_return": 139,
+      "chat_begin": 2308,
+      "http_attempt_begin": 2308,
+      "http_attempt_return": 2301,
+      "chat_return": 2301,
+      "responses_with_known_tokens": 2301,
+      "observed_generated_tokens": 4458146,
+      "gate_release_credit": 114,
+      "play_return": 25,
+      "http_attempt_exception": 7,
+      "chat_exception": 7
+    },
+    "games": [
+      {
+        "game_id": "ar25-0c556536",
+        "game_index": 0,
+        "session_id": "s0002",
+        "session_started_t": 0.7742228790000354,
+        "first_gate_admission_delay_s": 0.0071325500000511965,
+        "first_http_delay_s": 0.08177116800004569,
+        "first_actual_action_game_elapsed_s": 30.99738270599994,
+        "first_action_minus_first_http_approx_s": 30.293449658999858,
+        "initial_gate_wait_s": 3.471000002264191e-05,
+        "handover_wait_s": 1345.5113494089992,
+        "total_gate_wait_s": 1345.511384118999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.781320719000064,
+            "end_t": 0.7813554290000866,
+            "wait_s": 3.471000002264191e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 774.224987859,
+            "end_t": 2119.735506428,
+            "wait_s": 1345.510518569
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2721.622902312,
+            "end_t": 2721.623211252,
+            "wait_s": 0.00030894000019543455
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3273.550075041,
+            "end_t": 3273.550342561,
+            "wait_s": 0.00026751999985208386
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3943.9642580080003,
+            "end_t": 3943.9645123879995,
+            "wait_s": 0.0002543799992054119
+          }
+        ],
+        "slot_held_s": 2805.3774500060013,
+        "slot_intervals": [
+          [
+            0.7813554290000866,
+            774.224987859
+          ],
+          [
+            2119.735506428,
+            2721.622902312
+          ],
+          [
+            2721.623211252,
+            3273.550075041
+          ],
+          [
+            3273.550342561,
+            3943.9642580080003
+          ],
+          [
+            3943.9645123879995,
+            4151.6701548440005
+          ]
+        ],
+        "chat_calls": 114,
+        "http_attempts": 114,
+        "chat_seconds_including_exceptions": 2556.444886638999,
+        "http_seconds_including_exceptions": 2556.300938,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 169601,
+        "analyzer_note_tokens": 169601,
+        "action_attached_tokens": 169601,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 3129.907613086999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -3102.3332952759993,
+        "events_observed": 485,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 8,
+        "actual_actions": 304
+      },
+      {
+        "game_id": "bp35-0a0ad940",
+        "game_index": 1,
+        "session_id": "s0001",
+        "session_started_t": 0.7739410190000626,
+        "first_gate_admission_delay_s": 0.0014777599999433733,
+        "first_http_delay_s": 0.08611131800000749,
+        "first_actual_action_game_elapsed_s": 55.139538646999995,
+        "first_action_minus_first_http_approx_s": 54.503910309999924,
+        "initial_gate_wait_s": 6.136000001788489e-05,
+        "handover_wait_s": 4420.162057513999,
+        "total_gate_wait_s": 4420.162118873999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7753574189999881,
+            "end_t": 0.775418779000006,
+            "wait_s": 6.136000001788489e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1097.1183485340002,
+            "end_t": 4451.357881199,
+            "wait_s": 3354.239532665
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4994.507152332,
+            "end_t": 4994.507386792,
+            "wait_s": 0.00023445999977411702
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5535.23295844,
+            "end_t": 5535.2332060300005,
+            "wait_s": 0.00024759000007179566
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6189.204109601001,
+            "end_t": 7255.1261524,
+            "wait_s": 1065.9220427989994
+          }
+        ],
+        "slot_held_s": 2834.439372173001,
+        "slot_intervals": [
+          [
+            0.775418779000006,
+            1097.1183485340002
+          ],
+          [
+            4451.357881199,
+            4994.507152332
+          ],
+          [
+            4994.507386792,
+            5535.23295844
+          ],
+          [
+            5535.2332060300005,
+            6189.204109601001
+          ],
+          [
+            7255.1261524,
+            7255.376848466
+          ]
+        ],
+        "chat_calls": 76,
+        "http_attempts": 76,
+        "chat_seconds_including_exceptions": 2783.7644603360013,
+        "http_seconds_including_exceptions": 2783.6131877490025,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 186197,
+        "analyzer_note_tokens": 186197,
+        "action_attached_tokens": 186197,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.122419400000581
+          }
+        ],
+        "last_http_start_before_soft_end_s": 1156.3365908389987,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.374438626000483,
+        "events_observed": 333,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 1.165279429250892,
+        "levels_completed": 1,
+        "actual_actions": 87
+      },
+      {
+        "game_id": "cd82-fb555c5d",
+        "game_index": 2,
+        "session_id": "s0003",
+        "session_started_t": 0.7744156990000874,
+        "first_gate_admission_delay_s": 0.0036119399999279267,
+        "first_http_delay_s": 0.08010648799995579,
+        "first_actual_action_game_elapsed_s": 27.18648990700001,
+        "first_action_minus_first_http_approx_s": 26.565925719999967,
+        "initial_gate_wait_s": 4.180999997061008e-05,
+        "handover_wait_s": 3577.5562548200005,
+        "total_gate_wait_s": 3577.5562966300004,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7779858290000448,
+            "end_t": 0.7780276390000154,
+            "wait_s": 4.180999997061008e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1089.2603656780002,
+            "end_t": 4666.815954328001,
+            "wait_s": 3577.5555886500006
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5204.413505571,
+            "end_t": 5204.413733721,
+            "wait_s": 0.000228150000111782
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5749.050024354,
+            "end_t": 5749.050246004001,
+            "wait_s": 0.00022165000063978368
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6283.471372141001,
+            "end_t": 6283.471588511,
+            "wait_s": 0.00021636999917973299
+          }
+        ],
+        "slot_held_s": 2820.749459884,
+        "slot_intervals": [
+          [
+            0.7780276390000154,
+            1089.2603656780002
+          ],
+          [
+            4666.815954328001,
+            5204.413505571
+          ],
+          [
+            5204.413733721,
+            5749.050024354
+          ],
+          [
+            5749.050246004001,
+            6283.471372141001
+          ],
+          [
+            6283.471588511,
+            6399.083742343
+          ]
+        ],
+        "chat_calls": 108,
+        "http_attempts": 108,
+        "chat_seconds_including_exceptions": 2646.269602014006,
+        "http_seconds_including_exceptions": 2645.545607808001,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 170138,
+        "analyzer_note_tokens": 170138,
+        "action_attached_tokens": 170138,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 866.4847500119995,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -854.9197457269993,
+        "events_observed": 461,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 92.5912885877455,
+        "levels_completed": 6,
+        "actual_actions": 173
+      },
+      {
+        "game_id": "cn04-2fe56bfb",
+        "game_index": 3,
+        "session_id": "s0004",
+        "session_started_t": 0.7746504589999859,
+        "first_gate_admission_delay_s": 0.0012498500000219792,
+        "first_http_delay_s": 0.08670225800005937,
+        "first_actual_action_game_elapsed_s": 28.935874596000076,
+        "first_action_minus_first_http_approx_s": 28.31862187900003,
+        "initial_gate_wait_s": 3.5159999924871954e-05,
+        "handover_wait_s": 4302.633652947,
+        "total_gate_wait_s": 4302.633688107,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.775865149000083,
+            "end_t": 0.7759003090000078,
+            "wait_s": 3.5159999924871954e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 877.628470748,
+            "end_t": 1971.0820806870001,
+            "wait_s": 1093.4536099390002
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2531.680929107,
+            "end_t": 2531.681230747,
+            "wait_s": 0.00030164000008880976
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3228.92602816,
+            "end_t": 4390.908962902,
+            "wait_s": 1161.982934742
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5002.96423526,
+            "end_t": 7050.161041886,
+            "wait_s": 2047.1968066259997
+          }
+        ],
+        "slot_held_s": 2952.086578627,
+        "slot_intervals": [
+          [
+            0.7759003090000078,
+            877.628470748
+          ],
+          [
+            1971.0820806870001,
+            2531.680929107
+          ],
+          [
+            2531.681230747,
+            3228.92602816
+          ],
+          [
+            4390.908962902,
+            5002.96423526
+          ],
+          [
+            7050.161041886,
+            7255.496131883
+          ]
+        ],
+        "chat_calls": 120,
+        "http_attempts": 120,
+        "chat_seconds_including_exceptions": 2722.8527595370006,
+        "http_seconds_including_exceptions": 2722.702921547998,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 175311,
+        "analyzer_note_tokens": 175311,
+        "action_attached_tokens": 165434,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 120,
+            "begin_t": 7251.18528831,
+            "tools_present": true,
+            "end_t": 7254.675332268001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.6715992680010459
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 2.818355189999238,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 1.4925223530008225,
+        "events_observed": 509,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.61904761904761,
+        "levels_completed": 4,
+        "actual_actions": 196
+      },
+      {
+        "game_id": "dc22-fdcac232",
+        "game_index": 4,
+        "session_id": "s0006",
+        "session_started_t": 0.7812382990000515,
+        "first_gate_admission_delay_s": 773.4439862999999,
+        "first_http_delay_s": 773.4566360790001,
+        "first_actual_action_game_elapsed_s": 799.776639778,
+        "first_action_minus_first_http_approx_s": 25.80561539999985,
+        "initial_gate_wait_s": 773.4314283099999,
+        "handover_wait_s": 982.7259102580006,
+        "total_gate_wait_s": 1756.1573385680003,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7937962890000563,
+            "end_t": 774.225224599,
+            "wait_s": 773.4314283099999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1613.8268120069997,
+            "end_t": 2448.933295987,
+            "wait_s": 835.1064839800001
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3035.8942971399997,
+            "end_t": 3035.89456936,
+            "wait_s": 0.0002722200001699093
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3646.8893858799997,
+            "end_t": 3794.507424578,
+            "wait_s": 147.61803869800042
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4339.549950512001,
+            "end_t": 4339.550203742,
+            "wait_s": 0.0002532299995436915
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5045.144004524001,
+            "end_t": 5045.144241854,
+            "wait_s": 0.00023732999943604227
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5740.646588656,
+            "end_t": 5740.646815896001,
+            "wait_s": 0.00022724000064044958
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6460.940017209,
+            "end_t": 6460.940213769,
+            "wait_s": 0.00019656000040413346
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7189.254930235001,
+            "end_t": 7189.255131235001,
+            "wait_s": 0.0002009999998335843
+          }
+        ],
+        "slot_held_s": 5498.430269568,
+        "slot_intervals": [
+          [
+            774.225224599,
+            1613.8268120069997
+          ],
+          [
+            2448.933295987,
+            3035.8942971399997
+          ],
+          [
+            3035.89456936,
+            3646.8893858799997
+          ],
+          [
+            3794.507424578,
+            4339.549950512001
+          ],
+          [
+            4339.550203742,
+            5045.144004524001
+          ],
+          [
+            5045.144241854,
+            5740.646588656
+          ],
+          [
+            5740.646815896001,
+            6460.940017209
+          ],
+          [
+            6460.940213769,
+            7189.254930235001
+          ],
+          [
+            7189.255131235001,
+            7255.381404425
+          ]
+        ],
+        "chat_calls": 176,
+        "http_attempts": 176,
+        "chat_seconds_including_exceptions": 4875.502370094003,
+        "http_seconds_including_exceptions": 4874.328749034001,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 312249,
+        "analyzer_note_tokens": 312249,
+        "action_attached_tokens": 312249,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 176,
+            "begin_t": 7189.482627891,
+            "tools_present": true,
+            "end_t": 7255.059812181001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 1.0560791810012233
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 64.52100436899946,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 1.3778089250008634,
+        "events_observed": 753,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 28.568338924397455,
+        "levels_completed": 4,
+        "actual_actions": 422
+      },
+      {
+        "game_id": "ft09-0d8bbf25",
+        "game_index": 5,
+        "session_id": "s0005",
+        "session_started_t": 0.7752770690000261,
+        "first_gate_admission_delay_s": 0.00657206000005317,
+        "first_http_delay_s": 0.08558655800004544,
+        "first_actual_action_game_elapsed_s": 59.541199122999956,
+        "first_action_minus_first_http_approx_s": 58.958844495999884,
+        "initial_gate_wait_s": 2.790000007735216e-05,
+        "handover_wait_s": 0,
+        "total_gate_wait_s": 2.790000007735216e-05,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.781821229000002,
+            "end_t": 0.7818491290000793,
+            "wait_s": 2.790000007735216e-05
+          }
+        ],
+        "slot_held_s": 966.1563653839999,
+        "slot_intervals": [
+          [
+            0.7818491290000793,
+            966.9382145129999
+          ]
+        ],
+        "chat_calls": 52,
+        "http_attempts": 52,
+        "chat_seconds_including_exceptions": 950.3940236649996,
+        "http_seconds_including_exceptions": 950.3827915369997,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 65172,
+        "analyzer_note_tokens": 65172,
+        "action_attached_tokens": 65172,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 6298.800796363999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -6287.065313646999,
+        "events_observed": 217,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 6,
+        "actual_actions": 83
+      },
+      {
+        "game_id": "g50t-5849a774",
+        "game_index": 6,
+        "session_id": "s0007",
+        "session_started_t": 0.7820750890000454,
+        "first_gate_admission_delay_s": 0.006307269999979326,
+        "first_http_delay_s": 0.07996170800004165,
+        "first_actual_action_game_elapsed_s": 50.39660401000003,
+        "first_action_minus_first_http_approx_s": 49.850188212999946,
+        "initial_gate_wait_s": 3.351999998812971e-05,
+        "handover_wait_s": 5377.980936977002,
+        "total_gate_wait_s": 5377.980970497002,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7883488390000366,
+            "end_t": 0.7883823590000247,
+            "wait_s": 3.351999998812971e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1122.599432435,
+            "end_t": 5983.112265297001,
+            "wait_s": 4860.512832862001
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6738.030550208,
+            "end_t": 7255.498654323001,
+            "wait_s": 517.4681041150006
+          }
+        ],
+        "slot_held_s": 1876.8681485149987,
+        "slot_intervals": [
+          [
+            0.7883823590000247,
+            1122.599432435
+          ],
+          [
+            5983.112265297001,
+            6738.030550208
+          ],
+          [
+            7255.498654323001,
+            7255.637467851
+          ]
+        ],
+        "chat_calls": 39,
+        "http_attempts": 39,
+        "chat_seconds_including_exceptions": 1835.7666430270008,
+        "http_seconds_including_exceptions": 1835.6872400360012,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 123960,
+        "analyzer_note_tokens": 123960,
+        "action_attached_tokens": 123960,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.4949213230011082
+          }
+        ],
+        "last_http_start_before_soft_end_s": 657.3533395709992,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.6343749810012014,
+        "events_observed": 175,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 0.0,
+        "levels_completed": 0,
+        "actual_actions": 87
+      },
+      {
+        "game_id": "ka59-38d34dbb",
+        "game_index": 7,
+        "session_id": "s0008",
+        "session_started_t": 0.7850809390000677,
+        "first_gate_admission_delay_s": 0.0024695600000086415,
+        "first_http_delay_s": 0.07182703799992396,
+        "first_actual_action_game_elapsed_s": 33.54990113600002,
+        "first_action_minus_first_http_approx_s": 33.050902159000024,
+        "initial_gate_wait_s": 3.255000001445296e-05,
+        "handover_wait_s": 2832.824258355,
+        "total_gate_wait_s": 2832.824290905,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7875179490000619,
+            "end_t": 0.7875504990000763,
+            "wait_s": 3.255000001445296e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1031.1494746980002,
+            "end_t": 3447.9903522170002,
+            "wait_s": 2416.840877519
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4026.284238848,
+            "end_t": 4026.284488668,
+            "wait_s": 0.0002498200001355144
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4657.187407261001,
+            "end_t": 4657.187644241,
+            "wait_s": 0.0002369799994994537
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5270.988888787,
+            "end_t": 5270.989137117001,
+            "wait_s": 0.0002483300004314515
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5983.111972557001,
+            "end_t": 6399.094416023,
+            "wait_s": 415.9824434659995
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7186.984820525,
+            "end_t": 7186.985022765,
+            "wait_s": 0.000202240000362508
+          }
+        ],
+        "slot_held_s": 4422.0440119469995,
+        "slot_intervals": [
+          [
+            0.7875504990000763,
+            1031.1494746980002
+          ],
+          [
+            3447.9903522170002,
+            4026.284238848
+          ],
+          [
+            4026.284488668,
+            4657.187407261001
+          ],
+          [
+            4657.187644241,
+            5270.988888787
+          ],
+          [
+            5270.989137117001,
+            5983.111972557001
+          ],
+          [
+            6399.094416023,
+            7186.984820525
+          ],
+          [
+            7186.985022765,
+            7255.655820801
+          ]
+        ],
+        "chat_calls": 126,
+        "http_attempts": 126,
+        "chat_seconds_including_exceptions": 4084.021466307,
+        "http_seconds_including_exceptions": 4083.8114244010007,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 273922,
+        "analyzer_note_tokens": 273922,
+        "action_attached_tokens": 273922,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 28.30338098899938,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.6521275410004819,
+        "events_observed": 543,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 68.60684217309735,
+        "levels_completed": 6,
+        "actual_actions": 343
+      },
+      {
+        "game_id": "lf52-271a04aa",
+        "game_index": 8,
+        "session_id": "s0009",
+        "session_started_t": 0.7873327290000134,
+        "first_gate_admission_delay_s": 0.0019092300000238538,
+        "first_http_delay_s": 0.07544385799997144,
+        "first_actual_action_game_elapsed_s": 32.75478503199997,
+        "first_action_minus_first_http_approx_s": 32.28277844499999,
+        "initial_gate_wait_s": 2.804999996897095e-05,
+        "handover_wait_s": 3654.2239563300004,
+        "total_gate_wait_s": 3654.2239843800003,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7892139090000683,
+            "end_t": 0.7892419590000372,
+            "wait_s": 2.804999996897095e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 906.493781327,
+            "end_t": 3515.5745636770002,
+            "wait_s": 2609.0807823500004
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4119.321559766,
+            "end_t": 5164.464074876,
+            "wait_s": 1045.1425151100002
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5660.158840849001,
+            "end_t": 5660.159075969001,
+            "wait_s": 0.0002351200000703102
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6246.000225861,
+            "end_t": 6246.000449921,
+            "wait_s": 0.00022405999970942503
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7009.851976698001,
+            "end_t": 7009.852176388001,
+            "wait_s": 0.00019969000004493864
+          }
+        ],
+        "slot_held_s": 3599.58737444,
+        "slot_intervals": [
+          [
+            0.7892419590000372,
+            906.493781327
+          ],
+          [
+            3515.5745636770002,
+            4119.321559766
+          ],
+          [
+            5164.464074876,
+            5660.158840849001
+          ],
+          [
+            5660.159075969001,
+            6246.000225861
+          ],
+          [
+            6246.000449921,
+            7009.851976698001
+          ],
+          [
+            7009.852176388001,
+            7254.600572729
+          ]
+        ],
+        "chat_calls": 131,
+        "http_attempts": 131,
+        "chat_seconds_including_exceptions": 3357.791481183,
+        "http_seconds_including_exceptions": 3357.430444041999,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 210120,
+        "analyzer_note_tokens": 210120,
+        "action_attached_tokens": 210120,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 131,
+            "begin_t": 7189.57269348,
+            "tools_present": true,
+            "end_t": 7254.189413667001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.18568066700117924
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 64.43096079999941,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.5970418090009844,
+        "events_observed": 558,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 10.909090909090908,
+        "levels_completed": 3,
+        "actual_actions": 186
+      },
+      {
+        "game_id": "lp85-305b61c3",
+        "game_index": 9,
+        "session_id": "s0011",
+        "session_started_t": 0.7898154090000844,
+        "first_gate_admission_delay_s": 0.0019475599999623228,
+        "first_http_delay_s": 0.0659522379999089,
+        "first_actual_action_game_elapsed_s": 31.556616953999992,
+        "first_action_minus_first_http_approx_s": 31.125596307,
+        "initial_gate_wait_s": 2.119999999194988e-05,
+        "handover_wait_s": 1209.1222416929995,
+        "total_gate_wait_s": 1209.1222628929995,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7917417690000548,
+            "end_t": 0.7917629690000467,
+            "wait_s": 2.119999999194988e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 936.1769341550001,
+            "end_t": 2145.298877008,
+            "wait_s": 1209.1219428529998
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2675.704095551,
+            "end_t": 2675.704394391,
+            "wait_s": 0.00029883999968660646
+          }
+        ],
+        "slot_held_s": 1783.4105864690005,
+        "slot_intervals": [
+          [
+            0.7917629690000467,
+            936.1769341550001
+          ],
+          [
+            2145.298877008,
+            2675.704095551
+          ],
+          [
+            2675.704394391,
+            2993.324591131
+          ]
+        ],
+        "chat_calls": 75,
+        "http_attempts": 75,
+        "chat_seconds_including_exceptions": 1735.8307886849984,
+        "http_seconds_including_exceptions": 1735.7158795750029,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 124991,
+        "analyzer_note_tokens": 124991,
+        "action_attached_tokens": 124991,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 4278.601777964999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -4260.678836289,
+        "events_observed": 319,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 8,
+        "actual_actions": 121
+      },
+      {
+        "game_id": "ls20-9607627b",
+        "game_index": 10,
+        "session_id": "s0010",
+        "session_started_t": 0.7879778290000559,
+        "first_gate_admission_delay_s": 0.0016633299999284645,
+        "first_http_delay_s": 0.06854628799999318,
+        "first_actual_action_game_elapsed_s": 44.95597706900003,
+        "first_action_minus_first_http_approx_s": 44.54862895199998,
+        "initial_gate_wait_s": 2.867999990030512e-05,
+        "handover_wait_s": 2622.035714864999,
+        "total_gate_wait_s": 2622.035743544999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.789612479000084,
+            "end_t": 0.7896411589999843,
+            "wait_s": 2.867999990030512e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1024.8664558149999,
+            "end_t": 3646.9012740499998,
+            "wait_s": 2622.034818235
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4421.934516006,
+            "end_t": 4421.934761286,
+            "wait_s": 0.00024527999994461425
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5061.942555973001,
+            "end_t": 5061.942789233,
+            "wait_s": 0.000233259999731672
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5789.72714248,
+            "end_t": 5789.72737234,
+            "wait_s": 0.0002298600002177409
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6591.655505307001,
+            "end_t": 6591.655693537,
+            "wait_s": 0.00018822999936674023
+          }
+        ],
+        "slot_held_s": 4640.266381925001,
+        "slot_intervals": [
+          [
+            0.7896411589999843,
+            1024.8664558149999
+          ],
+          [
+            3646.9012740499998,
+            4421.934516006
+          ],
+          [
+            4421.934761286,
+            5061.942555973001
+          ],
+          [
+            5061.942789233,
+            5789.72714248
+          ],
+          [
+            5789.72737234,
+            6591.655505307001
+          ],
+          [
+            6591.655693537,
+            7263.091737949
+          ]
+        ],
+        "chat_calls": 144,
+        "http_attempts": 144,
+        "chat_seconds_including_exceptions": 4132.128672826001,
+        "http_seconds_including_exceptions": 4131.485342258,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 274019,
+        "analyzer_note_tokens": 274019,
+        "action_attached_tokens": 263222,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 144,
+            "begin_t": 7234.371148407,
+            "tools_present": true,
+            "end_t": 7263.072181369001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 9.06844836900109
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 19.63252280299912,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 9.0880716390011,
+        "events_observed": 610,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 21.88332113535539,
+        "levels_completed": 4,
+        "actual_actions": 428
+      },
+      {
+        "game_id": "m0r0-492f87ba",
+        "game_index": 11,
+        "session_id": "s0012",
+        "session_started_t": 0.7933852790000628,
+        "first_gate_admission_delay_s": 876.835433299,
+        "first_http_delay_s": 876.847802088,
+        "first_actual_action_game_elapsed_s": 891.807189648,
+        "first_action_minus_first_http_approx_s": 14.624797280999928,
+        "initial_gate_wait_s": 876.828221719,
+        "handover_wait_s": 2362.50976814,
+        "total_gate_wait_s": 3239.3379898589997,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8005968590000521,
+            "end_t": 877.628818578,
+            "wait_s": 876.828221719
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1891.1578585749999,
+            "end_t": 3228.92640725,
+            "wait_s": 1337.7685486750001
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3858.789775992,
+            "end_t": 3858.790047252,
+            "wait_s": 0.0002712599998631049
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4459.004622822001,
+            "end_t": 4459.004867382,
+            "wait_s": 0.0002445599993734504
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5164.463700756,
+            "end_t": 6189.204404401001,
+            "wait_s": 1024.7407036450004
+          }
+        ],
+        "slot_held_s": 3199.1552796040005,
+        "slot_intervals": [
+          [
+            877.628818578,
+            1891.1578585749999
+          ],
+          [
+            3228.92640725,
+            3858.789775992
+          ],
+          [
+            3858.790047252,
+            4459.004622822001
+          ],
+          [
+            4459.004867382,
+            5164.463700756
+          ],
+          [
+            6189.204404401001,
+            6439.293866322
+          ]
+        ],
+        "chat_calls": 112,
+        "http_attempts": 112,
+        "chat_seconds_including_exceptions": 2904.1561039499998,
+        "http_seconds_including_exceptions": 2904.012157063002,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 192646,
+        "analyzer_note_tokens": 192646,
+        "action_attached_tokens": 192646,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 836.451126042999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -814.709640097999,
+        "events_observed": 477,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 6,
+        "actual_actions": 312
+      },
+      {
+        "game_id": "r11l-495a7899",
+        "game_index": 12,
+        "session_id": "s0014",
+        "session_started_t": 0.8054683579999846,
+        "first_gate_admission_delay_s": 905.6886706790001,
+        "first_http_delay_s": 905.7011871290001,
+        "first_actual_action_game_elapsed_s": 928.0574483800001,
+        "first_action_minus_first_http_approx_s": 22.040945892999957,
+        "initial_gate_wait_s": 905.683615009,
+        "handover_wait_s": 2354.810583490999,
+        "total_gate_wait_s": 3260.4941984999987,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8105240280000316,
+            "end_t": 906.4941390370001,
+            "wait_s": 905.683615009
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1971.0816293869998,
+            "end_t": 2838.4915902449998,
+            "wait_s": 867.409960858
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3515.564507257,
+            "end_t": 5002.96450689,
+            "wait_s": 1487.3999996329999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5810.037678518001,
+            "end_t": 5810.037903788,
+            "wait_s": 0.00022526999964611605
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6414.185206026001,
+            "end_t": 6414.185413016,
+            "wait_s": 0.00020698999924206873
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6956.629666790001,
+            "end_t": 6956.629857530001,
+            "wait_s": 0.0001907400001073256
+          }
+        ],
+        "slot_held_s": 4027.4034943180013,
+        "slot_intervals": [
+          [
+            906.4941390370001,
+            1971.0816293869998
+          ],
+          [
+            2838.4915902449998,
+            3515.564507257
+          ],
+          [
+            5002.96450689,
+            5810.037678518001
+          ],
+          [
+            5810.037903788,
+            6414.185206026001
+          ],
+          [
+            6414.185413016,
+            6956.629666790001
+          ],
+          [
+            6956.629857530001,
+            7288.708216846
+          ]
+        ],
+        "chat_calls": 126,
+        "http_attempts": 126,
+        "chat_seconds_including_exceptions": 3806.7363330590024,
+        "http_seconds_including_exceptions": 3806.296836104992,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 253717,
+        "analyzer_note_tokens": 253717,
+        "action_attached_tokens": 244401,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 126,
+            "begin_t": 7206.618524758001,
+            "tools_present": true,
+            "end_t": 7288.692153266001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 34.68842026600123
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 47.38515565199941,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 34.70452928600116,
+        "events_observed": 538,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.61904761904761,
+        "levels_completed": 4,
+        "actual_actions": 112
+      },
+      {
+        "game_id": "re86-8af5384d",
+        "game_index": 13,
+        "session_id": "s0013",
+        "session_started_t": 0.8051873180000939,
+        "first_gate_admission_delay_s": 935.3722256869999,
+        "first_http_delay_s": 935.383956187,
+        "first_actual_action_game_elapsed_s": 960.3891616559999,
+        "first_action_minus_first_http_approx_s": 24.730373150999867,
+        "initial_gate_wait_s": 935.3712376169999,
+        "handover_wait_s": 3732.853046068001,
+        "total_gate_wait_s": 4668.224283685001,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8061753880000424,
+            "end_t": 936.177413005,
+            "wait_s": 935.3712376169999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1891.1794643539997,
+            "end_t": 2163.230484413,
+            "wait_s": 272.05102005900017
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2946.918384431,
+            "end_t": 2946.918673951,
+            "wait_s": 0.00028952000002391287
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3794.506855608,
+            "end_t": 7255.308592097001,
+            "wait_s": 3460.8017364890006
+          }
+        ],
+        "slot_held_s": 2586.4798330299996,
+        "slot_intervals": [
+          [
+            936.177413005,
+            1891.1794643539997
+          ],
+          [
+            2163.230484413,
+            2946.918384431
+          ],
+          [
+            2946.918673951,
+            3794.506855608
+          ],
+          [
+            7255.308592097001,
+            7255.510292103
+          ]
+        ],
+        "chat_calls": 81,
+        "http_attempts": 81,
+        "chat_seconds_including_exceptions": 2253.8903028229997,
+        "http_seconds_including_exceptions": 2253.810688045,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 149193,
+        "analyzer_note_tokens": 149193,
+        "action_attached_tokens": 149193,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.3048590970010991
+          }
+        ],
+        "last_http_start_before_soft_end_s": 3477.5019240389997,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.510967193000397,
+        "events_observed": 348,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 41.66666666666667,
+        "levels_completed": 5,
+        "actual_actions": 444
+      },
+      {
+        "game_id": "s5i5-18d95033",
+        "game_index": 14,
+        "session_id": "s0017",
+        "session_started_t": 0.811934428000086,
+        "first_gate_admission_delay_s": 966.1283680549999,
+        "first_http_delay_s": 966.139805314,
+        "first_actual_action_game_elapsed_s": 994.092404975,
+        "first_action_minus_first_http_approx_s": 27.697327232999896,
+        "initial_gate_wait_s": 966.1183789749999,
+        "handover_wait_s": 3547.3686263640006,
+        "total_gate_wait_s": 4513.4870053390005,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8219235080000544,
+            "end_t": 966.940302483,
+            "wait_s": 966.1183789749999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2119.735149098,
+            "end_t": 3679.1540019689996,
+            "wait_s": 1559.4188528709997
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4451.357571689,
+            "end_t": 6439.3071545620005,
+            "wait_s": 1987.9495828730005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7213.527731596,
+            "end_t": 7213.527922216001,
+            "wait_s": 0.000190620000466879
+          }
+        ],
+        "slot_held_s": 2741.241622485,
+        "slot_intervals": [
+          [
+            966.940302483,
+            2119.735149098
+          ],
+          [
+            3679.1540019689996,
+            4451.357571689
+          ],
+          [
+            6439.3071545620005,
+            7213.527731596
+          ],
+          [
+            7213.527922216001,
+            7255.550551332
+          ]
+        ],
+        "chat_calls": 56,
+        "http_attempts": 56,
+        "chat_seconds_including_exceptions": 2685.1125371480016,
+        "http_seconds_including_exceptions": 2684.9601054500026,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 182078,
+        "analyzer_note_tokens": 182078,
+        "action_attached_tokens": 182078,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 56,
+            "begin_t": 7224.710889138,
+            "tools_present": true,
+            "end_t": 7255.423151185,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 1.4194181850007226
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 29.29278472199894,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 1.54685726200114,
+        "events_observed": 248,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 8.333333333333332,
+        "levels_completed": 2,
+        "actual_actions": 68
+      },
+      {
+        "game_id": "sb26-7fbdac44",
+        "game_index": 15,
+        "session_id": "s0015",
+        "session_started_t": 0.8067361380000193,
+        "first_gate_admission_delay_s": 1024.0600052170003,
+        "first_http_delay_s": 1024.071593277,
+        "first_actual_action_game_elapsed_s": 1033.7603311090002,
+        "first_action_minus_first_http_approx_s": 9.452987694000285,
+        "initial_gate_wait_s": 1024.051254727,
+        "handover_wait_s": 0,
+        "total_gate_wait_s": 1024.051254727,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8154866280000306,
+            "end_t": 1024.8667413550002,
+            "wait_s": 1024.051254727
+          }
+        ],
+        "slot_held_s": 942.4330248389997,
+        "slot_intervals": [
+          [
+            1024.8667413550002,
+            1967.2997661939999
+          ]
+        ],
+        "chat_calls": 43,
+        "http_attempts": 43,
+        "chat_seconds_including_exceptions": 902.8930634490016,
+        "http_seconds_including_exceptions": 902.8643896400008,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 59894,
+        "analyzer_note_tokens": 59894,
+        "action_attached_tokens": 59894,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 5452.823026259999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -5286.703666476,
+        "events_observed": 181,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 94.61111111111111,
+        "levels_completed": 8,
+        "actual_actions": 160
+      },
+      {
+        "game_id": "sc25-635fd71a",
+        "game_index": 16,
+        "session_id": "s0016",
+        "session_started_t": 0.8117006180000317,
+        "first_gate_admission_delay_s": 1030.33807558,
+        "first_http_delay_s": 1030.3507743999999,
+        "first_actual_action_game_elapsed_s": 1062.421820859,
+        "first_action_minus_first_http_approx_s": 31.904977841000118,
+        "initial_gate_wait_s": 1030.33768595,
+        "handover_wait_s": 4737.613590585,
+        "total_gate_wait_s": 5767.951276534999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8120902480000041,
+            "end_t": 1031.149776198,
+            "wait_s": 1030.33768595
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1847.249872676,
+            "end_t": 3720.372303978,
+            "wait_s": 1873.1224313020002
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4390.908561462001,
+            "end_t": 7255.399720745,
+            "wait_s": 2864.4911592829994
+          }
+        ],
+        "slot_held_s": 1486.7632611500012,
+        "slot_intervals": [
+          [
+            1031.149776198,
+            1847.249872676
+          ],
+          [
+            3720.372303978,
+            4390.908561462001
+          ],
+          [
+            7255.399720745,
+            7255.526627933001
+          ]
+        ],
+        "chat_calls": 52,
+        "http_attempts": 52,
+        "chat_seconds_including_exceptions": 1441.1626201060026,
+        "http_seconds_including_exceptions": 1441.0770757280002,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 91248,
+        "analyzer_note_tokens": 91248,
+        "action_attached_tokens": 91248,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.3959877450006388
+          }
+        ],
+        "last_http_start_before_soft_end_s": 2876.608200485999,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.5243474430008064,
+        "events_observed": 227,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 0.0,
+        "levels_completed": 0,
+        "actual_actions": 118
+      },
+      {
+        "game_id": "sk48-d8078629",
+        "game_index": 17,
+        "session_id": "s0018",
+        "session_started_t": 0.816002878000063,
+        "first_gate_admission_delay_s": 1088.4448930699998,
+        "first_http_delay_s": 1088.4561438899998,
+        "first_actual_action_game_elapsed_s": 1119.734103801,
+        "first_action_minus_first_http_approx_s": 31.118754033000187,
+        "initial_gate_wait_s": 1088.44234822,
+        "handover_wait_s": 4311.131145055001,
+        "total_gate_wait_s": 5399.573493275001,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8185477279999986,
+            "end_t": 1089.2608959479999,
+            "wait_s": 1088.44234822
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2145.298314218,
+            "end_t": 5567.177573704001,
+            "wait_s": 3421.8792594860006
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6366.283007604,
+            "end_t": 7255.5348931730005,
+            "wait_s": 889.2518855690005
+          }
+        ],
+        "slot_held_s": 1855.3603872059998,
+        "slot_intervals": [
+          [
+            1089.2608959479999,
+            2145.298314218
+          ],
+          [
+            5567.177573704001,
+            6366.283007604
+          ],
+          [
+            7255.5348931730005,
+            7255.752428209001
+          ]
+        ],
+        "chat_calls": 48,
+        "http_attempts": 48,
+        "chat_seconds_including_exceptions": 1802.0825180290008,
+        "http_seconds_including_exceptions": 1801.9317351720001,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 117057,
+        "analyzer_note_tokens": 117057,
+        "action_attached_tokens": 117057,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.5311601730008988
+          }
+        ],
+        "last_http_start_before_soft_end_s": 923.0654780669993,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.750023809000595,
+        "events_observed": 211,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 0.0,
+        "levels_completed": 0,
+        "actual_actions": 116
+      },
+      {
+        "game_id": "sp80-589a99af",
+        "game_index": 18,
+        "session_id": "s0019",
+        "session_started_t": 0.8166888880000442,
+        "first_gate_admission_delay_s": 1096.3019489459998,
+        "first_http_delay_s": 1096.3149637749998,
+        "first_actual_action_game_elapsed_s": 1112.704534991,
+        "first_action_minus_first_http_approx_s": 16.238841328000035,
+        "initial_gate_wait_s": 1096.2986546759998,
+        "handover_wait_s": 2774.9993613460006,
+        "total_gate_wait_s": 3871.2980160220004,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8199831580000136,
+            "end_t": 1097.1186378339999,
+            "wait_s": 1096.2986546759998
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2067.043993382,
+            "end_t": 2067.044302502,
+            "wait_s": 0.00030912000011085183
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2783.346263353,
+            "end_t": 2783.3465449729997,
+            "wait_s": 0.00028161999989606556
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3447.915662508,
+            "end_t": 4151.6912655940005,
+            "wait_s": 703.7756030860005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4666.815687448,
+            "end_t": 6738.038854968,
+            "wait_s": 2071.22316752
+          }
+        ],
+        "slot_held_s": 3382.9490967710003,
+        "slot_intervals": [
+          [
+            1097.1186378339999,
+            2067.043993382
+          ],
+          [
+            2067.044302502,
+            2783.346263353
+          ],
+          [
+            2783.3465449729997,
+            3447.915662508
+          ],
+          [
+            4151.6912655940005,
+            4666.815687448
+          ],
+          [
+            6738.038854968,
+            7255.067095951001
+          ]
+        ],
+        "chat_calls": 88,
+        "http_attempts": 88,
+        "chat_seconds_including_exceptions": 3346.462232827,
+        "http_seconds_including_exceptions": 3346.3534227570017,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 226507,
+        "analyzer_note_tokens": 226507,
+        "action_attached_tokens": 197290,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 88,
+            "begin_t": 7162.788885553,
+            "tools_present": true,
+            "end_t": 7254.126958008001,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.12322500800109992
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 91.21479607699894,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 1.0635412610008643,
+        "events_observed": 381,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 21.740035693039857,
+        "levels_completed": 3,
+        "actual_actions": 63
+      },
+      {
+        "game_id": "su15-1944f8ab",
+        "game_index": 19,
+        "session_id": "s0020",
+        "session_started_t": 0.8202000280000448,
+        "first_gate_admission_delay_s": 1121.7795397369998,
+        "first_http_delay_s": 1121.791289396,
+        "first_actual_action_game_elapsed_s": 1132.909778971,
+        "first_action_minus_first_http_approx_s": 10.979186546999927,
+        "initial_gate_wait_s": 1121.7778669169998,
+        "handover_wait_s": 4434.479643883,
+        "total_gate_wait_s": 5556.2575108,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8218728479999982,
+            "end_t": 1122.5997397649999,
+            "wait_s": 1121.7778669169998
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2163.229933653,
+            "end_t": 4119.336376095001,
+            "wait_s": 1956.1064424420006
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4776.238656108,
+            "end_t": 7254.611857549,
+            "wait_s": 2478.3732014409998
+          }
+        ],
+        "slot_held_s": 1698.2251550490005,
+        "slot_intervals": [
+          [
+            1122.5997397649999,
+            2163.229933653
+          ],
+          [
+            4119.336376095001,
+            4776.238656108
+          ],
+          [
+            7254.611857549,
+            7255.304538697001
+          ]
+        ],
+        "chat_calls": 49,
+        "http_attempts": 49,
+        "chat_seconds_including_exceptions": 1672.121856248003,
+        "http_seconds_including_exceptions": 1672.0650570880016,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 110832,
+        "analyzer_note_tokens": 110832,
+        "action_attached_tokens": 110832,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.6081245490004221
+          }
+        ],
+        "last_http_start_before_soft_end_s": 2490.0564166019994,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.3017443270009608,
+        "events_observed": 215,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 2.2222222222222223,
+        "levels_completed": 1,
+        "actual_actions": 54
+      },
+      {
+        "game_id": "tn36-ef4dde99",
+        "game_index": 20,
+        "session_id": "s0021",
+        "session_started_t": 0.8234836780000023,
+        "first_gate_admission_delay_s": 1613.013854089,
+        "first_http_delay_s": 1613.0552661579998,
+        "first_actual_action_game_elapsed_s": 1667.0151255490002,
+        "first_action_minus_first_http_approx_s": 53.85225071300056,
+        "initial_gate_wait_s": 1613.012947449,
+        "handover_wait_s": 3475.8517337969993,
+        "total_gate_wait_s": 5088.864681245999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8243903180000416,
+            "end_t": 1613.837337767,
+            "wait_s": 1613.012947449
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2448.932824097,
+            "end_t": 3581.1006772059995,
+            "wait_s": 1132.1678531089997
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4227.865052785,
+            "end_t": 6366.298486334001,
+            "wait_s": 2138.4334335490003
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7050.142292316001,
+            "end_t": 7255.392739455,
+            "wait_s": 205.25044713899933
+          }
+        ],
+        "slot_held_s": 2165.855143949001,
+        "slot_intervals": [
+          [
+            1613.837337767,
+            2448.932824097
+          ],
+          [
+            3581.1006772059995,
+            4227.865052785
+          ],
+          [
+            6366.298486334001,
+            7050.142292316001
+          ],
+          [
+            7255.392739455,
+            7255.544215513
+          ]
+        ],
+        "chat_calls": 74,
+        "http_attempts": 74,
+        "chat_seconds_including_exceptions": 2078.702569945999,
+        "http_seconds_including_exceptions": 2078.5852035770035,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 131596,
+        "analyzer_note_tokens": 131596,
+        "action_attached_tokens": 127393,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 1.3890064550005263
+          }
+        ],
+        "last_http_start_before_soft_end_s": 262.2812109809993,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.5414552030006234,
+        "events_observed": 320,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 3.571428571428571,
+        "levels_completed": 1,
+        "actual_actions": 119
+      },
+      {
+        "game_id": "tr87-cd924810",
+        "game_index": 21,
+        "session_id": "s0022",
+        "session_started_t": 0.8294007680000277,
+        "first_gate_admission_delay_s": 1846.4207825879998,
+        "first_http_delay_s": 1846.4329679369998,
+        "first_actual_action_game_elapsed_s": 1978.7049561070003,
+        "first_action_minus_first_http_approx_s": 132.17166340200038,
+        "initial_gate_wait_s": 1846.420348898,
+        "handover_wait_s": 0.00028936999979123357,
+        "total_gate_wait_s": 1846.4206382679997,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8298344580000503,
+            "end_t": 1847.250183356,
+            "wait_s": 1846.420348898
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2949.757297915,
+            "end_t": 2949.7575872849998,
+            "wait_s": 0.00028936999979123357
+          }
+        ],
+        "slot_held_s": 1733.8439718300006,
+        "slot_intervals": [
+          [
+            1847.250183356,
+            2949.757297915
+          ],
+          [
+            2949.7575872849998,
+            3581.0944445560003
+          ]
+        ],
+        "chat_calls": 64,
+        "http_attempts": 64,
+        "chat_seconds_including_exceptions": 1609.1443140620008,
+        "http_seconds_including_exceptions": 1609.0847367429988,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 100566,
+        "analyzer_note_tokens": 100566,
+        "action_attached_tokens": 100566,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 3723.099069083,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -3672.9090140839994,
+        "events_observed": 270,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 6,
+        "actual_actions": 282
+      },
+      {
+        "game_id": "tu93-0768757b",
+        "game_index": 22,
+        "session_id": "s0023",
+        "session_started_t": 0.8297799880000412,
+        "first_gate_admission_delay_s": 1890.328379737,
+        "first_http_delay_s": 1890.363709626,
+        "first_actual_action_game_elapsed_s": 1914.7408217499997,
+        "first_action_minus_first_http_approx_s": 24.293099135999455,
+        "initial_gate_wait_s": 1890.327733967,
+        "handover_wait_s": 0.0016814099985822395,
+        "total_gate_wait_s": 1890.3294153769987,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8304257580000467,
+            "end_t": 1891.1581597250001,
+            "wait_s": 1890.327733967
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3017.634176948,
+            "end_t": 3017.634469928,
+            "wait_s": 0.00029297999981281464
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3619.5567832479996,
+            "end_t": 3619.557063678,
+            "wait_s": 0.0002804300002026139
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4254.205221564001,
+            "end_t": 4254.205474204,
+            "wait_s": 0.000252639999416715
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4999.016157111,
+            "end_t": 4999.016402211,
+            "wait_s": 0.00024510000002919696
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5719.794058946,
+            "end_t": 5719.794284906,
+            "wait_s": 0.0002259599996250472
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6440.54147988,
+            "end_t": 6440.54167314,
+            "wait_s": 0.0001932599998326623
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7183.631401325,
+            "end_t": 7183.631592365,
+            "wait_s": 0.00019103999966318952
+          }
+        ],
+        "slot_held_s": 5364.744938091002,
+        "slot_intervals": [
+          [
+            1891.1581597250001,
+            3017.634176948
+          ],
+          [
+            3017.634469928,
+            3619.5567832479996
+          ],
+          [
+            3619.557063678,
+            4254.205221564001
+          ],
+          [
+            4254.205474204,
+            4999.016157111
+          ],
+          [
+            4999.016402211,
+            5719.794058946
+          ],
+          [
+            5719.794284906,
+            6440.54147988
+          ],
+          [
+            6440.54167314,
+            7183.631401325
+          ],
+          [
+            7183.631592365,
+            7255.904779226001
+          ]
+        ],
+        "chat_calls": 125,
+        "http_attempts": 125,
+        "chat_seconds_including_exceptions": 5069.293111737,
+        "http_seconds_including_exceptions": 5068.586063037003,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 339952,
+        "analyzer_note_tokens": 339952,
+        "action_attached_tokens": 339952,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 19.89608257799955,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 1.9010941360011202,
+        "events_observed": 544,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 70.70830864075081,
+        "levels_completed": 8,
+        "actual_actions": 258
+      },
+      {
+        "game_id": "vc33-5430563c",
+        "game_index": 23,
+        "session_id": "s0024",
+        "session_started_t": 0.83385599799999,
+        "first_gate_admission_delay_s": 1890.345899276,
+        "first_http_delay_s": 1890.361012016,
+        "first_actual_action_game_elapsed_s": 1925.9099168420003,
+        "first_action_minus_first_http_approx_s": 35.47452382800043,
+        "initial_gate_wait_s": 1890.345116906,
+        "handover_wait_s": 548.7124731360009,
+        "total_gate_wait_s": 2439.057590042001,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8346383680000145,
+            "end_t": 1891.179755274,
+            "wait_s": 1890.345116906
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2917.630727696,
+            "end_t": 2917.631024976,
+            "wait_s": 0.00029727999981332687
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3679.153683489,
+            "end_t": 4227.865357155,
+            "wait_s": 548.7116736660005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4823.8782899240005,
+            "end_t": 4823.878548924001,
+            "wait_s": 0.0002590000003692694
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5488.8552792,
+            "end_t": 5488.85552239,
+            "wait_s": 0.0002431900002193288
+          }
+        ],
+        "slot_held_s": 3127.2792206939994,
+        "slot_intervals": [
+          [
+            1891.179755274,
+            2917.630727696
+          ],
+          [
+            2917.631024976,
+            3679.153683489
+          ],
+          [
+            4227.865357155,
+            4823.8782899240005
+          ],
+          [
+            4823.878548924001,
+            5488.8552792
+          ],
+          [
+            5488.85552239,
+            5567.171449104
+          ]
+        ],
+        "chat_calls": 91,
+        "http_attempts": 91,
+        "chat_seconds_including_exceptions": 2996.3211575799974,
+        "http_seconds_including_exceptions": 2996.155009195999,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 199341,
+        "analyzer_note_tokens": 199341,
+        "action_attached_tokens": 199341,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 1706.8806858499993,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -1686.832014925999,
+        "events_observed": 393,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 7,
+        "actual_actions": 229
+      },
+      {
+        "game_id": "wa30-ee6fef47",
+        "game_index": 24,
+        "session_id": "s0025",
+        "session_started_t": 0.8370791680000593,
+        "first_gate_admission_delay_s": 1966.4674566459998,
+        "first_http_delay_s": 1966.4795403059998,
+        "first_actual_action_game_elapsed_s": 1982.9588480710001,
+        "first_action_minus_first_http_approx_s": 16.414825597000345,
+        "initial_gate_wait_s": 1966.4658420359997,
+        "handover_wait_s": 1210.7103009859993,
+        "total_gate_wait_s": 3177.176143021999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8386937779999926,
+            "end_t": 1967.3045358139998,
+            "wait_s": 1966.4658420359997
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2838.491168465,
+            "end_t": 2993.328419001,
+            "wait_s": 154.83725053599983
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3720.371769088,
+            "end_t": 4776.239060648,
+            "wait_s": 1055.8672915600005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5504.103107174001,
+            "end_t": 5504.103350274,
+            "wait_s": 0.00024309999935212545
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6122.729248569,
+            "end_t": 6122.729492129,
+            "wait_s": 0.00024355999994440936
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6746.129339654,
+            "end_t": 6746.134611884,
+            "wait_s": 0.005272229999718547
+          }
+        ],
+        "slot_held_s": 4093.8665351030013,
+        "slot_intervals": [
+          [
+            1967.3045358139998,
+            2838.491168465
+          ],
+          [
+            2993.328419001,
+            3720.371769088
+          ],
+          [
+            4776.239060648,
+            5504.103107174001
+          ],
+          [
+            5504.103350274,
+            6122.729248569
+          ],
+          [
+            6122.729492129,
+            6746.129339654
+          ],
+          [
+            6746.134611884,
+            7271.881371903
+          ]
+        ],
+        "chat_calls": 138,
+        "http_attempts": 138,
+        "chat_seconds_including_exceptions": 3426.890732771999,
+        "http_seconds_including_exceptions": 3426.542902180007,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 217839,
+        "analyzer_note_tokens": 217839,
+        "action_attached_tokens": 215311,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 10.955656065999392,
+        "completed_returns_after_soft_end": 1,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 17.87769666300119,
+        "events_observed": 586,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 16.535598127328992,
+        "levels_completed": 4,
+        "actual_actions": 526
+      }
+    ],
+    "initial_admission_order": [
+      "bp35-0a0ad940",
+      "cn04-2fe56bfb",
+      "cd82-fb555c5d",
+      "ar25-0c556536",
+      "ft09-0d8bbf25",
+      "ka59-38d34dbb",
+      "g50t-5849a774",
+      "lf52-271a04aa",
+      "ls20-9607627b",
+      "lp85-305b61c3",
+      "dc22-fdcac232",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "re86-8af5384d",
+      "s5i5-18d95033",
+      "sb26-7fbdac44",
+      "sc25-635fd71a",
+      "sk48-d8078629",
+      "sp80-589a99af",
+      "su15-1944f8ab",
+      "tn36-ef4dde99",
+      "tr87-cd924810",
+      "tu93-0768757b",
+      "vc33-5430563c",
+      "wa30-ee6fef47"
+    ],
+    "slot_occupancy": {
+      "max_concurrent": 10,
+      "final_open": 0,
+      "sum_interval_seconds": 72605.01696305702
+    },
+    "client_http_occupancy": {
+      "max_concurrent": 10,
+      "final_open": 0,
+      "sum_interval_seconds": 67669.32990776902
+    },
+    "new_calls_after_global_soft_end": 7,
+    "events_dropped": 0,
+    "observer_errors": 0,
+    "integrity_failures": [],
+    "deadline_audit": {
+      "active_sessions": 0,
+      "provisional": false,
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": [],
+      "counts": {
+        "session_begin": 25,
+        "check_passed": 6924,
+        "session_end": 25,
+        "request_blocked": 7,
+        "session_cancelled": 7
+      },
+      "boundary_counts": {
+        "check_passed:after_handover": 2308,
+        "check_passed:chat_entry": 2308,
+        "check_passed:http_entry": 2308,
+        "request_blocked:after_handover": 7
+      },
+      "retained_events": 256,
+      "events_dropped_by_bound": 6732,
+      "retained_block_events": [
+        {
+          "t": 7254.613104879,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "su15-1944f8ab",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.611897879,
+          "seconds_after_soft_end": 0.6081648790004692
+        },
+        {
+          "t": 7255.12741029,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "bp35-0a0ad940",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.1262032899995,
+          "seconds_after_soft_end": 1.1224702899999102
+        },
+        {
+          "t": 7255.309840617,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "re86-8af5384d",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.308633617,
+          "seconds_after_soft_end": 1.304900617000385
+        },
+        {
+          "t": 7255.393973535,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "tn36-ef4dde99",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.392766535,
+          "seconds_after_soft_end": 1.3890335350006353
+        },
+        {
+          "t": 7255.400953255,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "sc25-635fd71a",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.399746255,
+          "seconds_after_soft_end": 1.3960132550000708
+        },
+        {
+          "t": 7255.499889243,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "g50t-5849a774",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.498682243,
+          "seconds_after_soft_end": 1.4949492430005193
+        },
+        {
+          "t": 7255.536137813,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "sk48-d8078629",
+          "soft_remaining_seconds": null,
+          "timing_t": 7255.534930813,
+          "seconds_after_soft_end": 1.53119781300029
+        }
+      ],
+      "all_block_events_retained": true,
+      "new_client_chat_or_http_after_soft_end": [],
+      "client_http_after_observed_session_stop": [],
+      "last_client_http_start_before_soft_end_s": 2.818355189999238,
+      "action_records_after_soft_end": [],
+      "last_recorded_action_before_soft_end_s": 0.07026197899904219,
+      "action_time_method": "GameRun.started_at plus cumulative ActionRecord.wallclock_seconds; UTC alignment, not an instrumented action-start boundary.",
+      "evidence_boundary": "The 256-event deadline deque intentionally evicts old passed checks. Aggregate counts survive; full no-new-client-request evidence comes from lossless inference-timing. Client admission does not guarantee server arrival before deadline or abort in-flight work."
+    },
+    "scheduler_audit": {
+      "events_observed": 491,
+      "events_dropped": 0,
+      "observer_record_errors": 0,
+      "counts": {
+        "enqueue": 114,
+        "pump_begin": 139,
+        "reprice": 124,
+        "selection": 114
+      },
+      "gates": [
+        {
+          "gate_id": "g001",
+          "counts": {
+            "enqueue": 114,
+            "pump_begin": 139,
+            "reprice": 124,
+            "selection": 114
+          },
+          "max_waiting": 16,
+          "owner_mappings_omitted": 0,
+          "currently_waiting": 0
+        }
+      ],
+      "max_candidate_count": 16,
+      "candidate_rows_omitted": 0,
+      "candidate_owner_rows_missing": 0,
+      "selected_rows_with_snapshot": 89,
+      "integrity_failures": [],
+      "session_selection_count_mismatches": [],
+      "session_identity_mismatches": [],
+      "selection_to_admitted_return_seconds": {
+        "count": 114,
+        "min": 2.4900000425986946e-06,
+        "median": 6.565499984390044e-05,
+        "mean": 0.0032506724210538537,
+        "max": 0.07446380900000804,
+        "p95_nearest_rank": 0.018195829999967827
+      },
+      "selections_after_soft_end": 7,
+      "initial_selection_order": [
+        {
+          "game_id": "bp35-0a0ad940",
+          "timing_t": 0.7754139390000319
+        },
+        {
+          "game_id": "cn04-2fe56bfb",
+          "timing_t": 0.7758966190000365
+        },
+        {
+          "game_id": "cd82-fb555c5d",
+          "timing_t": 0.7780240289999938
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "timing_t": 0.7813519590000624
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "timing_t": 0.781845909000026
+        },
+        {
+          "game_id": "ka59-38d34dbb",
+          "timing_t": 0.7875472389999914
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "timing_t": 0.7883789290000323
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "timing_t": 0.789239129000066
+        },
+        {
+          "game_id": "ls20-9607627b",
+          "timing_t": 0.789637859000095
+        },
+        {
+          "game_id": "lp85-305b61c3",
+          "timing_t": 0.7917604790000041
+        },
+        {
+          "game_id": "dc22-fdcac232",
+          "timing_t": 774.225089399
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "timing_t": 877.6285725880001
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "timing_t": 906.4938916570001
+        },
+        {
+          "game_id": "re86-8af5384d",
+          "timing_t": 936.1770657349999
+        },
+        {
+          "game_id": "s5i5-18d95033",
+          "timing_t": 966.938342063
+        },
+        {
+          "game_id": "sb26-7fbdac44",
+          "timing_t": 1024.866592895
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "timing_t": 1031.1496220079998
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "timing_t": 1089.2605213880001
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "timing_t": 1097.1185085440002
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "timing_t": 1122.599606405
+        },
+        {
+          "game_id": "tn36-ef4dde99",
+          "timing_t": 1613.8270276469998
+        },
+        {
+          "game_id": "tr87-cd924810",
+          "timing_t": 1847.2500782859997
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "timing_t": 1891.1580794749998
+        },
+        {
+          "game_id": "vc33-5430563c",
+          "timing_t": 1891.179688094
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "timing_t": 1967.299985184
+        }
+      ],
+      "source_sha256": {
+        "_enqueue_and_wait": "2566cc1fbfe7ae3c1d9bd477f25c18c648b0b3abf275042994af350948d837c4",
+        "_pump": "ba31553ddbd59e4f6613e7e6789d54484bbfe353bad67274fa8c5bdf4232cadc"
+      },
+      "instrumented_source_sha256": {
+        "_enqueue_and_wait": "cd2c2b74ffb1ce3eafe8bf3ed20f9dc4322429c0249bf6391114cf7dc9518b95",
+        "_pump": "d7bd6dedbfcc410d3f553ba34441669fd5ee103b13d70a9a42dd0599b8f60f35"
+      },
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": [],
+      "scope": "Validates observed decisions and attribution; does not treat a changed ordering on a different trajectory as a causal score replay."
+    }
+  },
+  "pace_1x": {
+    "clock_origin_utc": "2026-10-17T19:42:17.535423+00:00",
+    "global_soft_end_t": 7254.0037,
+    "benchmark_started_utc": "2026-10-17T19:42:17.539128+00:00",
+    "arm_finished_utc": "2026-10-17T21:43:35.194565+00:00",
+    "benchmark_elapsed_s": 7272.258266,
+    "snapshot_after_soft_end_s": 23.655457024999123,
+    "observer_validity": {
+      "observer": "inference-timing-v1",
+      "provisional": false,
+      "sessions_seen": 25,
+      "sessions_recorded": 25,
+      "sessions_omitted_by_limit": 0,
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": []
+    },
+    "observer_module_sha256": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "hook_source_sha256": {
+      "session.play": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+      "agent._chat_completion": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+      "gate.acquire": "08c5a76d18ea8a99611ab56db0c836984ca1d8b73e0dafff3de70e85a3e215a0",
+      "gate.handover": "ca24c4d98796b06a7c62ced2f9ac46e71cce8c5e566c3a8c3c952c712ba9db26",
+      "gate.release": "307704ba29413344f0c2871972c13b98b300060b371b83e820059e3b832dce20",
+      "gate._enqueue_and_wait": "c0a49c82861823899e70cc7e431dce3a793d311a1a625629948fd3a04d5df75e",
+      "gate._pump": "d87719242b883365d9de724369c6d1ed49fbad9cf6d5e1ca1e6ccfa6ce6d74f5"
+    },
+    "counts": {
+      "play_begin": 25,
+      "gate_call_begin": 141,
+      "gate_enqueue_begin": 116,
+      "gate_admitted_return": 116,
+      "gate_call_return": 141,
+      "chat_begin": 2285,
+      "http_attempt_begin": 2285,
+      "http_attempt_return": 2278,
+      "chat_return": 2278,
+      "responses_with_known_tokens": 2278,
+      "observed_generated_tokens": 4513940,
+      "gate_release_credit": 116,
+      "play_return": 25,
+      "http_attempt_exception": 7,
+      "chat_exception": 7
+    },
+    "games": [
+      {
+        "game_id": "ar25-0c556536",
+        "game_index": 0,
+        "session_id": "s0004",
+        "session_started_t": 0.7766885169994566,
+        "first_gate_admission_delay_s": 0.005271990000437654,
+        "first_http_delay_s": 0.08738240799993946,
+        "first_actual_action_game_elapsed_s": 32.367524656999194,
+        "first_action_minus_first_http_approx_s": 31.6630947319998,
+        "initial_gate_wait_s": 3.120000019407598e-05,
+        "handover_wait_s": 2231.295706645,
+        "total_gate_wait_s": 2231.295737845,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7819293069997002,
+            "end_t": 0.7819605069998943,
+            "wait_s": 3.120000019407598e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 871.6690384549993,
+            "end_t": 2700.0361148599995,
+            "wait_s": 1828.3670764050003
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3410.8689440999997,
+            "end_t": 3813.7973261199995,
+            "wait_s": 402.92838201999984
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4439.690955736,
+            "end_t": 4439.691203956,
+            "wait_s": 0.00024821999977575615
+          }
+        ],
+        "slot_held_s": 2332.9072343029993,
+        "slot_intervals": [
+          [
+            0.7819605069998943,
+            871.6690384549993
+          ],
+          [
+            2700.0361148599995,
+            3410.8689440999997
+          ],
+          [
+            3813.7973261199995,
+            4439.690955736
+          ],
+          [
+            4439.691203956,
+            4564.984901454999
+          ]
+        ],
+        "chat_calls": 97,
+        "http_attempts": 97,
+        "chat_seconds_including_exceptions": 2181.867636632004,
+        "http_seconds_including_exceptions": 2181.7482536179914,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 144031,
+        "analyzer_note_tokens": 144031,
+        "action_attached_tokens": 144031,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 2707.6400028550015,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -2689.0185239050006,
+        "events_observed": 412,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 8,
+        "actual_actions": 284
+      },
+      {
+        "game_id": "bp35-0a0ad940",
+        "game_index": 1,
+        "session_id": "s0002",
+        "session_started_t": 0.7760635869999533,
+        "first_gate_admission_delay_s": 0.007824110000001383,
+        "first_http_delay_s": 0.086870727999667,
+        "first_actual_action_game_elapsed_s": 112.52476076999938,
+        "first_action_minus_first_http_approx_s": 111.85324845499976,
+        "initial_gate_wait_s": 2.199000027758302e-05,
+        "handover_wait_s": 4229.343908610001,
+        "total_gate_wait_s": 4229.343930600001,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7838657069996771,
+            "end_t": 0.7838876969999546,
+            "wait_s": 2.199000027758302e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 884.5666338479996,
+            "end_t": 3410.8694542799994,
+            "wait_s": 2526.302820432
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4157.323838482999,
+            "end_t": 4371.098376928999,
+            "wait_s": 213.7745384459995
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5047.555198039999,
+            "end_t": 6231.962660148,
+            "wait_s": 1184.4074621080017
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6949.3369545979995,
+            "end_t": 7254.196042221999,
+            "wait_s": 304.8590876239996
+          }
+        ],
+        "slot_held_s": 3024.1051887039985,
+        "slot_intervals": [
+          [
+            0.7838876969999546,
+            884.5666338479996
+          ],
+          [
+            3410.8694542799994,
+            4157.323838482999
+          ],
+          [
+            4371.098376928999,
+            5047.555198039999
+          ],
+          [
+            6231.962660148,
+            6949.3369545979995
+          ],
+          [
+            7254.196042221999,
+            7254.232985010999
+          ]
+        ],
+        "chat_calls": 69,
+        "http_attempts": 69,
+        "chat_seconds_including_exceptions": 2970.322109012004,
+        "http_seconds_including_exceptions": 2970.2558176839984,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 202286,
+        "analyzer_note_tokens": 202286,
+        "action_attached_tokens": 202286,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.19234222199884243
+          }
+        ],
+        "last_http_start_before_soft_end_s": 367.40675315299995,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.23049554099998204,
+        "events_observed": 305,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 2.2222222222222223,
+        "levels_completed": 1,
+        "actual_actions": 84
+      },
+      {
+        "game_id": "cd82-fb555c5d",
+        "game_index": 2,
+        "session_id": "s0001",
+        "session_started_t": 0.7758159869999872,
+        "first_gate_admission_delay_s": 0.0017915199996423326,
+        "first_http_delay_s": 0.08765038799992908,
+        "first_actual_action_game_elapsed_s": 15.383298187999571,
+        "first_action_minus_first_http_approx_s": 14.720769812999656,
+        "initial_gate_wait_s": 6.391999977495288e-05,
+        "handover_wait_s": 1837.1756347339997,
+        "total_gate_wait_s": 1837.1756986539995,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7775435869998546,
+            "end_t": 0.7776075069996295,
+            "wait_s": 6.391999977495288e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 992.6380639949994,
+            "end_t": 2829.8131518689997,
+            "wait_s": 1837.1750878740004
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3386.4045638769994,
+            "end_t": 3386.404838526999,
+            "wait_s": 0.00027464999948279
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3984.9356543940003,
+            "end_t": 3984.935926604,
+            "wait_s": 0.000272209999820916
+          }
+        ],
+        "slot_held_s": 2447.643021232,
+        "slot_intervals": [
+          [
+            0.7776075069996295,
+            992.6380639949994
+          ],
+          [
+            2829.8131518689997,
+            3386.4045638769994
+          ],
+          [
+            3386.404838526999,
+            3984.9356543940003
+          ],
+          [
+            3984.935926604,
+            4285.596263472999
+          ]
+        ],
+        "chat_calls": 76,
+        "http_attempts": 76,
+        "chat_seconds_including_exceptions": 2315.9351205770017,
+        "http_seconds_including_exceptions": 2315.791375509999,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 152808,
+        "analyzer_note_tokens": 152808,
+        "action_attached_tokens": 152808,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 2978.547466322001,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -2968.407157697,
+        "events_observed": 328,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 91.94552164911333,
+        "levels_completed": 6,
+        "actual_actions": 179
+      },
+      {
+        "game_id": "cn04-2fe56bfb",
+        "game_index": 3,
+        "session_id": "s0003",
+        "session_started_t": 0.7764601569997467,
+        "first_gate_admission_delay_s": 0.005250539999906323,
+        "first_http_delay_s": 0.08589985799972055,
+        "first_actual_action_game_elapsed_s": 22.22517853699992,
+        "first_action_minus_first_http_approx_s": 21.576447522000453,
+        "initial_gate_wait_s": 2.8890000066894572e-05,
+        "handover_wait_s": 4286.402170225996,
+        "total_gate_wait_s": 4286.402199115996,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7816818069995861,
+            "end_t": 0.781710696999653,
+            "wait_s": 2.8890000066894572e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1069.2101486170004,
+            "end_t": 4292.934481698999,
+            "wait_s": 3223.7243330819983
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5013.908701555,
+            "end_t": 6076.586094978999,
+            "wait_s": 1062.677393423999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6679.596124360999,
+            "end_t": 6679.596353750999,
+            "wait_s": 0.000229389999731211
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7246.885371358,
+            "end_t": 7246.885585687999,
+            "wait_s": 0.0002143299989256775
+          }
+        ],
+        "slot_held_s": 2966.9129990410047,
+        "slot_intervals": [
+          [
+            0.781710696999653,
+            1069.2101486170004
+          ],
+          [
+            4292.934481698999,
+            5013.908701555
+          ],
+          [
+            6076.586094978999,
+            6679.596124360999
+          ],
+          [
+            6679.596353750999,
+            7246.885371358
+          ],
+          [
+            7246.885585687999,
+            7254.096879964
+          ]
+        ],
+        "chat_calls": 103,
+        "http_attempts": 103,
+        "chat_seconds_including_exceptions": 2871.353209902997,
+        "http_seconds_including_exceptions": 2870.9697093180066,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 193992,
+        "analyzer_note_tokens": 193992,
+        "action_attached_tokens": 193992,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 103,
+            "begin_t": 7246.888227717999,
+            "tools_present": true,
+            "end_t": 7254.0810061639995,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.07730616399931023
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 7.115420062000339,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.0934441439985676,
+        "events_observed": 441,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 28.57142857142857,
+        "levels_completed": 3,
+        "actual_actions": 119
+      },
+      {
+        "game_id": "dc22-fdcac232",
+        "game_index": 4,
+        "session_id": "s0005",
+        "session_started_t": 0.7768533569997089,
+        "first_gate_admission_delay_s": 0.001351500000055239,
+        "first_http_delay_s": 0.08646787799989397,
+        "first_actual_action_game_elapsed_s": 38.818192554000234,
+        "first_action_minus_first_http_approx_s": 38.19404031900063,
+        "initial_gate_wait_s": 3.359000038472004e-05,
+        "handover_wait_s": 4328.870648387003,
+        "total_gate_wait_s": 4328.870681977003,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7781712669993794,
+            "end_t": 0.7782048569997642,
+            "wait_s": 3.359000038472004e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 952.162524241,
+            "end_t": 4207.194528891,
+            "wait_s": 3255.03200465
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4828.726894921999,
+            "end_t": 4828.727129731999,
+            "wait_s": 0.0002348100006202003
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5560.838524587999,
+            "end_t": 5560.838748898,
+            "wait_s": 0.00022431000070355367
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6180.332637094999,
+            "end_t": 7254.170821712,
+            "wait_s": 1073.8381846170014
+          }
+        ],
+        "slot_held_s": 2924.559765717997,
+        "slot_intervals": [
+          [
+            0.7782048569997642,
+            952.162524241
+          ],
+          [
+            4207.194528891,
+            4828.726894921999
+          ],
+          [
+            4828.727129731999,
+            5560.838524587999
+          ],
+          [
+            5560.838748898,
+            6180.332637094999
+          ],
+          [
+            7254.170821712,
+            7254.2086189619995
+          ]
+        ],
+        "chat_calls": 94,
+        "http_attempts": 94,
+        "chat_seconds_including_exceptions": 2720.8651119980022,
+        "http_seconds_including_exceptions": 2720.3921117669925,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 179674,
+        "analyzer_note_tokens": 179674,
+        "action_attached_tokens": 179674,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.1671217120001529
+          }
+        ],
+        "last_http_start_before_soft_end_s": 1079.2329934589998,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.20794426199972804,
+        "events_observed": 405,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 28.57142857142857,
+        "levels_completed": 3,
+        "actual_actions": 257
+      },
+      {
+        "game_id": "ft09-0d8bbf25",
+        "game_index": 5,
+        "session_id": "s0006",
+        "session_started_t": 0.7773422769996614,
+        "first_gate_admission_delay_s": 0.010591590000331053,
+        "first_http_delay_s": 0.0842698679998648,
+        "first_actual_action_game_elapsed_s": 69.48047001099985,
+        "first_action_minus_first_http_approx_s": 68.87094586600033,
+        "initial_gate_wait_s": 3.085000025748741e-05,
+        "handover_wait_s": 1180.3653399310006,
+        "total_gate_wait_s": 1180.3653707810008,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.787903016999735,
+            "end_t": 0.7879338669999925,
+            "wait_s": 3.085000025748741e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1024.388245396999,
+            "end_t": 2204.7535853279996,
+            "wait_s": 1180.3653399310006
+          }
+        ],
+        "slot_held_s": 1270.003335993999,
+        "slot_intervals": [
+          [
+            0.7879338669999925,
+            1024.388245396999
+          ],
+          [
+            2204.7535853279996,
+            2451.1566097919995
+          ]
+        ],
+        "chat_calls": 44,
+        "http_attempts": 44,
+        "chat_seconds_including_exceptions": 1242.1164076670038,
+        "http_seconds_including_exceptions": 1242.0806058070057,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 87743,
+        "analyzer_note_tokens": 87743,
+        "action_attached_tokens": 87743,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 4819.637180216001,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -4802.846759308,
+        "events_observed": 190,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 6,
+        "actual_actions": 96
+      },
+      {
+        "game_id": "g50t-5849a774",
+        "game_index": 6,
+        "session_id": "s0007",
+        "session_started_t": 0.7799470169993583,
+        "first_gate_admission_delay_s": 0.008416749999923923,
+        "first_http_delay_s": 0.0842560279997997,
+        "first_actual_action_game_elapsed_s": 85.08147226600067,
+        "first_action_minus_first_http_approx_s": 84.50841122100151,
+        "initial_gate_wait_s": 2.7919999411096796e-05,
+        "handover_wait_s": 4022.099160926,
+        "total_gate_wait_s": 4022.0991888459994,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.7883358469998711,
+            "end_t": 0.7883637669992822,
+            "wait_s": 2.7919999411096796e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 994.3649723619992,
+            "end_t": 3025.830997738999,
+            "wait_s": 2031.4660253769998
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3619.356586109,
+            "end_t": 3619.3569021489993,
+            "wait_s": 0.000316039999233908
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4371.098091969999,
+            "end_t": 5339.473657956,
+            "wait_s": 968.3755659860017
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6231.962388378,
+            "end_t": 7254.219641900999,
+            "wait_s": 1022.2572535229992
+          }
+        ],
+        "slot_held_s": 3231.3681526380005,
+        "slot_intervals": [
+          [
+            0.7883637669992822,
+            994.3649723619992
+          ],
+          [
+            3025.830997738999,
+            3619.356586109
+          ],
+          [
+            3619.3569021489993,
+            4371.098091969999
+          ],
+          [
+            5339.473657956,
+            6231.962388378
+          ],
+          [
+            7254.219641900999,
+            7254.255677331
+          ]
+        ],
+        "chat_calls": 80,
+        "http_attempts": 80,
+        "chat_seconds_including_exceptions": 3026.3441511739993,
+        "http_seconds_including_exceptions": 3026.260825985987,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 206806,
+        "analyzer_note_tokens": 206806,
+        "action_attached_tokens": 206806,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.2159419009985868
+          }
+        ],
+        "last_http_start_before_soft_end_s": 1190.053421677001,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.25499322099858546,
+        "events_observed": 349,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 10.714285714285714,
+        "levels_completed": 2,
+        "actual_actions": 269
+      },
+      {
+        "game_id": "ka59-38d34dbb",
+        "game_index": 7,
+        "session_id": "s0011",
+        "session_started_t": 0.7937477169998601,
+        "first_gate_admission_delay_s": 832.7578005789992,
+        "first_http_delay_s": 832.7692339590003,
+        "first_actual_action_game_elapsed_s": 852.0892106200008,
+        "first_action_minus_first_http_approx_s": 18.866463944000657,
+        "initial_gate_wait_s": 832.7509305599997,
+        "handover_wait_s": 2798.528088566998,
+        "total_gate_wait_s": 3631.279019126998,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8006177359993671,
+            "end_t": 833.551548295999,
+            "wait_s": 832.7509305599997
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1878.5996342019998,
+            "end_t": 2762.469823471999,
+            "wait_s": 883.8701892699992
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3370.248049318,
+            "end_t": 3370.248338368,
+            "wait_s": 0.0002890499999921303
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3960.5247136299995,
+            "end_t": 3960.524995499999,
+            "wait_s": 0.00028186999952595215
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4572.33960792,
+            "end_t": 4572.33983969,
+            "wait_s": 0.00023177000002760906
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5339.4733798259995,
+            "end_t": 7254.130476432999,
+            "wait_s": 1914.6570966069994
+          }
+        ],
+        "slot_held_s": 3622.078069510002,
+        "slot_intervals": [
+          [
+            833.551548295999,
+            1878.5996342019998
+          ],
+          [
+            2762.469823471999,
+            3370.248049318
+          ],
+          [
+            3370.248338368,
+            3960.5247136299995
+          ],
+          [
+            3960.524995499999,
+            4572.33960792
+          ],
+          [
+            4572.33983969,
+            5339.4733798259995
+          ],
+          [
+            7254.130476432999,
+            7254.157706372999
+          ]
+        ],
+        "chat_calls": 107,
+        "http_attempts": 107,
+        "chat_seconds_including_exceptions": 3406.046769207007,
+        "http_seconds_including_exceptions": 3405.679815244006,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 224624,
+        "analyzer_note_tokens": 224624,
+        "action_attached_tokens": 210218,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.1267764329986676
+          }
+        ],
+        "last_http_start_before_soft_end_s": 2027.945826614001,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.1575637629994162,
+        "events_observed": 462,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.95853558371549,
+        "levels_completed": 5,
+        "actual_actions": 319
+      },
+      {
+        "game_id": "lf52-271a04aa",
+        "game_index": 8,
+        "session_id": "s0008",
+        "session_started_t": 0.7900985269998273,
+        "first_gate_admission_delay_s": 0.004116389999580861,
+        "first_http_delay_s": 0.07299600799979089,
+        "first_actual_action_game_elapsed_s": 24.40339574799964,
+        "first_action_minus_first_http_approx_s": 23.91458321300002,
+        "initial_gate_wait_s": 2.511000002414221e-05,
+        "handover_wait_s": 4550.045745944999,
+        "total_gate_wait_s": 4550.045771054999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.794189806999384,
+            "end_t": 0.7942149169994082,
+            "wait_s": 2.511000002414221e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 833.5511498259993,
+            "end_t": 4157.324309492999,
+            "wait_s": 3323.773159667
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4742.42488387,
+            "end_t": 4742.425125051,
+            "wait_s": 0.00024118100009218324
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5395.529466677,
+            "end_t": 5395.529687396999,
+            "wait_s": 0.00022071999956096988
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6027.868964446,
+            "end_t": 7254.141088822999,
+            "wait_s": 1226.2721243769993
+          }
+        ],
+        "slot_held_s": 2703.350279700001,
+        "slot_intervals": [
+          [
+            0.7942149169994082,
+            833.5511498259993
+          ],
+          [
+            4157.324309492999,
+            4742.42488387
+          ],
+          [
+            4742.425125051,
+            5395.529466677
+          ],
+          [
+            5395.529687396999,
+            6027.868964446
+          ],
+          [
+            7254.141088822999,
+            7254.190240561999
+          ]
+        ],
+        "chat_calls": 103,
+        "http_attempts": 103,
+        "chat_seconds_including_exceptions": 2605.0574508800073,
+        "http_seconds_including_exceptions": 2604.932890143995,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 169340,
+        "analyzer_note_tokens": 169340,
+        "action_attached_tokens": 116092,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.13738882299912802
+          }
+        ],
+        "last_http_start_before_soft_end_s": 1275.6502092010014,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.18813202199999068,
+        "events_observed": 441,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 5.454545454545454,
+        "levels_completed": 2,
+        "actual_actions": 114
+      },
+      {
+        "game_id": "lp85-305b61c3",
+        "game_index": 9,
+        "session_id": "s0009",
+        "session_started_t": 0.7925897769991934,
+        "first_gate_admission_delay_s": 870.8769281080004,
+        "first_http_delay_s": 870.9413009769996,
+        "first_actual_action_game_elapsed_s": 899.462219432,
+        "first_action_minus_first_http_approx_s": 28.13337967800112,
+        "initial_gate_wait_s": 870.8669327589996,
+        "handover_wait_s": 437.7584054760009,
+        "total_gate_wait_s": 1308.6253382350005,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8025851259999399,
+            "end_t": 871.6695178849996,
+            "wait_s": 870.8669327589996
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1708.5675397269997,
+            "end_t": 2146.3256543929992,
+            "wait_s": 437.7581146659995
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2707.082555484999,
+            "end_t": 2707.0828462950003,
+            "wait_s": 0.0002908100013883086
+          }
+        ],
+        "slot_held_s": 1716.3919209889991,
+        "slot_intervals": [
+          [
+            871.6695178849996,
+            1708.5675397269997
+          ],
+          [
+            2146.3256543929992,
+            2707.082555484999
+          ],
+          [
+            2707.0828462950003,
+            3025.8198443499996
+          ]
+        ],
+        "chat_calls": 87,
+        "http_attempts": 87,
+        "chat_seconds_including_exceptions": 1559.5834708189996,
+        "http_seconds_including_exceptions": 1559.52525375,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 108074,
+        "analyzer_note_tokens": 108074,
+        "action_attached_tokens": 108074,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 4243.850184764,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -4228.183535280001,
+        "events_observed": 367,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 8,
+        "actual_actions": 160
+      },
+      {
+        "game_id": "ls20-9607627b",
+        "game_index": 10,
+        "session_id": "s0010",
+        "session_started_t": 0.7928998669995053,
+        "first_gate_admission_delay_s": 0.00036708900006487966,
+        "first_http_delay_s": 0.07091232800030411,
+        "first_actual_action_game_elapsed_s": 33.32496295100009,
+        "first_action_minus_first_http_approx_s": 32.89090475600028,
+        "initial_gate_wait_s": 3.265000032115495e-05,
+        "handover_wait_s": 3267.849502539004,
+        "total_gate_wait_s": 3267.849535189004,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.793234305999249,
+            "end_t": 0.7932669559995702,
+            "wait_s": 3.265000032115495e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1017.7529910539988,
+            "end_t": 4285.6015778129995,
+            "wait_s": 3267.8485867590007
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4908.665396829999,
+            "end_t": 4908.6656238900005,
+            "wait_s": 0.000227060001634527
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5588.376085663999,
+            "end_t": 5588.376327314,
+            "wait_s": 0.0002416500010440359
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6215.165629578,
+            "end_t": 6215.165852858,
+            "wait_s": 0.00022327999977278523
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6883.1502100709995,
+            "end_t": 6883.150433861,
+            "wait_s": 0.0002237900007457938
+          }
+        ],
+        "slot_held_s": 3990.8696632779966,
+        "slot_intervals": [
+          [
+            0.7932669559995702,
+            1017.7529910539988
+          ],
+          [
+            4285.6015778129995,
+            4908.665396829999
+          ],
+          [
+            4908.6656238900005,
+            5588.376085663999
+          ],
+          [
+            5588.376327314,
+            6215.165629578
+          ],
+          [
+            6215.165852858,
+            6883.1502100709995
+          ],
+          [
+            6883.150433861,
+            7259.512432773
+          ]
+        ],
+        "chat_calls": 138,
+        "http_attempts": 138,
+        "chat_seconds_including_exceptions": 3542.8939342820004,
+        "http_seconds_including_exceptions": 3542.6092562089952,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 239008,
+        "analyzer_note_tokens": 239008,
+        "action_attached_tokens": 232791,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 44.904906208001194,
+        "completed_returns_after_soft_end": 1,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 5.508781852999164,
+        "events_observed": 586,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 26.2283828035203,
+        "levels_completed": 4,
+        "actual_actions": 399
+      },
+      {
+        "game_id": "m0r0-492f87ba",
+        "game_index": 11,
+        "session_id": "s0012",
+        "session_started_t": 0.7940250369993009,
+        "first_gate_admission_delay_s": 883.7727938110011,
+        "first_http_delay_s": 883.7840490610006,
+        "first_actual_action_game_elapsed_s": 951.144894398999,
+        "first_action_minus_first_http_approx_s": 67.00665430099912,
+        "initial_gate_wait_s": 883.7613893220005,
+        "handover_wait_s": 3584.3509178540025,
+        "total_gate_wait_s": 4468.112307176003,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.805429525999898,
+            "end_t": 884.5668188480004,
+            "wait_s": 883.7613893220005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1856.3330327239992,
+            "end_t": 2451.1597369809997,
+            "wait_s": 594.8267042570005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3053.752409546999,
+            "end_t": 3053.752692126999,
+            "wait_s": 0.00028258000020287
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3598.5689171429995,
+            "end_t": 3598.569204163,
+            "wait_s": 0.00028702000054181553
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4264.573772306999,
+            "end_t": 7254.097416304,
+            "wait_s": 2989.5236439970013
+          }
+        ],
+        "slot_held_s": 2785.202654470997,
+        "slot_intervals": [
+          [
+            884.5668188480004,
+            1856.3330327239992
+          ],
+          [
+            2451.1597369809997,
+            3053.752409546999
+          ],
+          [
+            3053.752692126999,
+            3598.5689171429995
+          ],
+          [
+            3598.569204163,
+            4264.573772306999
+          ],
+          [
+            7254.097416304,
+            7254.120391173
+          ]
+        ],
+        "chat_calls": 111,
+        "http_attempts": 111,
+        "chat_seconds_including_exceptions": 2625.458896404003,
+        "http_seconds_including_exceptions": 2625.2820523169994,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 170238,
+        "analyzer_note_tokens": 170238,
+        "action_attached_tokens": 170238,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.09371630399982678
+          }
+        ],
+        "last_http_start_before_soft_end_s": 3084.4461333,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.11939562299994577,
+        "events_observed": 473,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.61904761904761,
+        "levels_completed": 4,
+        "actual_actions": 229
+      },
+      {
+        "game_id": "r11l-495a7899",
+        "game_index": 12,
+        "session_id": "s0013",
+        "session_started_t": 0.7951209569991988,
+        "first_gate_admission_delay_s": 0.004981689000487677,
+        "first_http_delay_s": 0.06760548800048127,
+        "first_actual_action_game_elapsed_s": 17.462025021000045,
+        "first_action_minus_first_http_approx_s": 17.074076576000365,
+        "initial_gate_wait_s": 3.020999974978622e-05,
+        "handover_wait_s": 3145.5397601959994,
+        "total_gate_wait_s": 3145.539790405999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8000724359999367,
+            "end_t": 0.8001026459996865,
+            "wait_s": 3.020999974978622e-05
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1095.9876675839996,
+            "end_t": 4241.52649048,
+            "wait_s": 3145.538822896
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4845.570137504,
+            "end_t": 4845.570381663999,
+            "wait_s": 0.00024415999905613717
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5477.1193196350005,
+            "end_t": 5477.119544484999,
+            "wait_s": 0.00022484999863081612
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6095.842054357999,
+            "end_t": 6095.842296558,
+            "wait_s": 0.00024220000159402844
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6719.894636480999,
+            "end_t": 6719.894862570999,
+            "wait_s": 0.00022609000006923452
+          }
+        ],
+        "slot_held_s": 3943.395509942,
+        "slot_intervals": [
+          [
+            0.8001026459996865,
+            1095.9876675839996
+          ],
+          [
+            4241.52649048,
+            4845.570137504
+          ],
+          [
+            4845.570381663999,
+            5477.1193196350005
+          ],
+          [
+            5477.119544484999,
+            6095.842054357999
+          ],
+          [
+            6095.842296558,
+            6719.894636480999
+          ],
+          [
+            6719.894862570999,
+            7089.735372783999
+          ]
+        ],
+        "chat_calls": 98,
+        "http_attempts": 98,
+        "chat_seconds_including_exceptions": 3785.054085243988,
+        "http_seconds_including_exceptions": 3784.7906350219882,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 270150,
+        "analyzer_note_tokens": 270150,
+        "action_attached_tokens": 270150,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 182.17311065300055,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -164.26808457600055,
+        "events_observed": 426,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 92.3451177020481,
+        "levels_completed": 6,
+        "actual_actions": 171
+      },
+      {
+        "game_id": "re86-8af5384d",
+        "game_index": 13,
+        "session_id": "s0014",
+        "session_started_t": 0.8058250459998817,
+        "first_gate_admission_delay_s": 951.3571930049993,
+        "first_http_delay_s": 951.3687388249991,
+        "first_actual_action_game_elapsed_s": 981.4100554299994,
+        "first_action_minus_first_http_approx_s": 29.753192559000354,
+        "initial_gate_wait_s": 951.3536401049996,
+        "handover_wait_s": 2984.498708842004,
+        "total_gate_wait_s": 3935.8523489470035,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8093779459995858,
+            "end_t": 952.1630180509992,
+            "wait_s": 951.3536401049996
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1801.9640431019989,
+            "end_t": 1997.149132903999,
+            "wait_s": 195.18508980200022
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2586.507253200999,
+            "end_t": 2586.507546451,
+            "wait_s": 0.0002932500010501826
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3391.019894144999,
+            "end_t": 6180.332976745,
+            "wait_s": 2789.3130826000015
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6820.731092372999,
+            "end_t": 6820.731335563,
+            "wait_s": 0.0002431900011288235
+          }
+        ],
+        "slot_held_s": 3335.584655832996,
+        "slot_intervals": [
+          [
+            952.1630180509992,
+            1801.9640431019989
+          ],
+          [
+            1997.149132903999,
+            2586.507253200999
+          ],
+          [
+            2586.507546451,
+            3391.019894144999
+          ],
+          [
+            6180.332976745,
+            6820.731092372999
+          ],
+          [
+            6820.731335563,
+            7272.246382725999
+          ]
+        ],
+        "chat_calls": 122,
+        "http_attempts": 122,
+        "chat_seconds_including_exceptions": 2870.9156555130085,
+        "http_seconds_including_exceptions": 2870.7681534350104,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 189678,
+        "analyzer_note_tokens": 189678,
+        "action_attached_tokens": 183980,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 7.790986609001266,
+        "completed_returns_after_soft_end": 1,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 18.242729985999176,
+        "events_observed": 517,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 58.333333333333336,
+        "levels_completed": 6,
+        "actual_actions": 604
+      },
+      {
+        "game_id": "s5i5-18d95033",
+        "game_index": 14,
+        "session_id": "s0016",
+        "session_started_t": 0.8176050759993814,
+        "first_gate_admission_delay_s": 991.8208681790011,
+        "first_http_delay_s": 991.8345643290004,
+        "first_actual_action_game_elapsed_s": 1027.5298538650004,
+        "first_action_minus_first_http_approx_s": 35.42374246000054,
+        "initial_gate_wait_s": 991.8197259890012,
+        "handover_wait_s": 3622.6784300709987,
+        "total_gate_wait_s": 4614.49815606,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8187472659992636,
+            "end_t": 992.6384732550005,
+            "wait_s": 991.8197259890012
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2192.370283088,
+            "end_t": 4564.996747134,
+            "wait_s": 2372.6264640459995
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5264.898021942,
+            "end_t": 6514.949781417,
+            "wait_s": 1250.051759475
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7173.777138629,
+            "end_t": 7173.777345178999,
+            "wait_s": 0.00020654999934777152
+          }
+        ],
+        "slot_held_s": 2654.6864073920005,
+        "slot_intervals": [
+          [
+            992.6384732550005,
+            2192.370283088
+          ],
+          [
+            4564.996747134,
+            5264.898021942
+          ],
+          [
+            6514.949781417,
+            7173.777138629
+          ],
+          [
+            7173.777345178999,
+            7270.003310718
+          ]
+        ],
+        "chat_calls": 79,
+        "http_attempts": 79,
+        "chat_seconds_including_exceptions": 2466.858815917998,
+        "http_seconds_including_exceptions": 2466.490242525,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 158078,
+        "analyzer_note_tokens": 158078,
+        "action_attached_tokens": 157383,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 79,
+            "begin_t": 7188.934148956999,
+            "tools_present": true,
+            "end_t": 7269.953917079,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 15.95021707900014
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 65.06949979300043,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 15.999649737999789,
+        "events_observed": 340,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 3.3336392267015658,
+        "levels_completed": 2,
+        "actual_actions": 202
+      },
+      {
+        "game_id": "sb26-7fbdac44",
+        "game_index": 15,
+        "session_id": "s0017",
+        "session_started_t": 0.8179367059992728,
+        "first_gate_admission_delay_s": 993.5474715359996,
+        "first_http_delay_s": 993.5592352660005,
+        "first_actual_action_game_elapsed_s": 1002.5103033739997,
+        "first_action_minus_first_http_approx_s": 8.694256401999837,
+        "initial_gate_wait_s": 993.5465378959998,
+        "handover_wait_s": 284.5792191269993,
+        "total_gate_wait_s": 1278.125757022999,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8188703459991302,
+            "end_t": 994.3654082419989,
+            "wait_s": 993.5465378959998
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1744.9309042369996,
+            "end_t": 2029.510123363999,
+            "wait_s": 284.5792191269993
+          }
+        ],
+        "slot_held_s": 867.3770012640016,
+        "slot_intervals": [
+          [
+            994.3654082419989,
+            1744.9309042369996
+          ],
+          [
+            2029.510123363999,
+            2146.321628633
+          ]
+        ],
+        "chat_calls": 47,
+        "http_attempts": 47,
+        "chat_seconds_including_exceptions": 837.5035324180026,
+        "http_seconds_including_exceptions": 837.4789178780029,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 55517,
+        "analyzer_note_tokens": 55517,
+        "action_attached_tokens": 55517,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 5110.802597624001,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -5107.681751247001,
+        "events_observed": 202,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 8,
+        "actual_actions": 151
+      },
+      {
+        "game_id": "sc25-635fd71a",
+        "game_index": 16,
+        "session_id": "s0015",
+        "session_started_t": 0.814983975999894,
+        "first_gate_admission_delay_s": 1016.9384525080004,
+        "first_http_delay_s": 1016.9553889079998,
+        "first_actual_action_game_elapsed_s": 1043.9749458400001,
+        "first_action_minus_first_http_approx_s": 26.843443956000556,
+        "initial_gate_wait_s": 1016.9360564880008,
+        "handover_wait_s": 2984.4004008210013,
+        "total_gate_wait_s": 4001.336457309002,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8173799959995449,
+            "end_t": 1017.7534364840003,
+            "wait_s": 1016.9360564880008
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2029.5094339139987,
+            "end_t": 5013.909147404999,
+            "wait_s": 2984.3997134910005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5504.254842489,
+            "end_t": 5504.255068509,
+            "wait_s": 0.00022601999990001787
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6136.804486132999,
+            "end_t": 6136.804711463,
+            "wait_s": 0.0002253300008305814
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6786.679717647,
+            "end_t": 6786.679953627,
+            "wait_s": 0.00023598000007041264
+          }
+        ],
+        "slot_held_s": 3252.713836703999,
+        "slot_intervals": [
+          [
+            1017.7534364840003,
+            2029.5094339139987
+          ],
+          [
+            5013.909147404999,
+            5504.254842489
+          ],
+          [
+            5504.255068509,
+            6136.804486132999
+          ],
+          [
+            6136.804711463,
+            6786.679717647
+          ],
+          [
+            6786.679953627,
+            7254.867674009
+          ]
+        ],
+        "chat_calls": 116,
+        "http_attempts": 116,
+        "chat_seconds_including_exceptions": 2935.62532509401,
+        "http_seconds_including_exceptions": 2935.4259037979937,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 187502,
+        "analyzer_note_tokens": 187502,
+        "action_attached_tokens": 187502,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 116,
+            "begin_t": 7246.347325427999,
+            "tools_present": true,
+            "end_t": 7254.8509948500005,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.8472948500002531
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 7.656276602001526,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.8640224789996864,
+        "events_observed": 493,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 28.581518698114547,
+        "levels_completed": 4,
+        "actual_actions": 319
+      },
+      {
+        "game_id": "sk48-d8078629",
+        "game_index": 17,
+        "session_id": "s0018",
+        "session_started_t": 0.8193461459995888,
+        "first_gate_admission_delay_s": 1023.5693066310005,
+        "first_http_delay_s": 1023.5818353910008,
+        "first_actual_action_game_elapsed_s": 1057.5230960199997,
+        "first_action_minus_first_http_approx_s": 33.773284482999316,
+        "initial_gate_wait_s": 1023.5668730610005,
+        "handover_wait_s": 3760.7767771360013,
+        "total_gate_wait_s": 4784.343650197002,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8217797159995825,
+            "end_t": 1024.388652777,
+            "wait_s": 1023.5668730610005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2267.0928139999987,
+            "end_t": 6027.869359436,
+            "wait_s": 3760.7765454360015
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6734.411770239999,
+            "end_t": 6734.412001939999,
+            "wait_s": 0.0002316999998583924
+          }
+        ],
+        "slot_held_s": 2468.9750551099987,
+        "slot_intervals": [
+          [
+            1024.388652777,
+            2267.0928139999987
+          ],
+          [
+            6027.869359436,
+            6734.411770239999
+          ],
+          [
+            6734.412001939999,
+            7254.140485023
+          ]
+        ],
+        "chat_calls": 73,
+        "http_attempts": 73,
+        "chat_seconds_including_exceptions": 2336.2122677919942,
+        "http_seconds_including_exceptions": 2336.040358742999,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 153235,
+        "analyzer_note_tokens": 153235,
+        "action_attached_tokens": 153235,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 73,
+            "begin_t": 7234.451828509999,
+            "tools_present": true,
+            "end_t": 7254.106783393999,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.10308339399853139
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 19.551812130001053,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.13695747299971117,
+        "events_observed": 311,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 16.666666666666664,
+        "levels_completed": 3,
+        "actual_actions": 190
+      },
+      {
+        "game_id": "sp80-589a99af",
+        "game_index": 18,
+        "session_id": "s0019",
+        "session_started_t": 0.8262013259991363,
+        "first_gate_admission_delay_s": 1068.3845284610006,
+        "first_http_delay_s": 1068.3971128910007,
+        "first_actual_action_game_elapsed_s": 1079.839200212,
+        "first_action_minus_first_http_approx_s": 11.277246995000041,
+        "initial_gate_wait_s": 1068.379940631,
+        "handover_wait_s": 850.1586175739976,
+        "total_gate_wait_s": 1918.5385582049976,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8307891559998097,
+            "end_t": 1069.2107297869998,
+            "wait_s": 1068.379940631
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2204.7532415079995,
+            "end_t": 2267.1036005389988,
+            "wait_s": 62.35035903099924
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3000.2758464360004,
+            "end_t": 3000.276140585999,
+            "wait_s": 0.00029414999880827963
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3681.3833531440005,
+            "end_t": 3681.3836120039987,
+            "wait_s": 0.0002588599982118467
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4292.934204529,
+            "end_t": 5047.55551087,
+            "wait_s": 754.6213063409996
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5606.918346617999,
+            "end_t": 5606.918567168,
+            "wait_s": 0.0002205500004492933
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6295.264271256999,
+            "end_t": 6295.264506397,
+            "wait_s": 0.0002351400016777916
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6916.1513880659995,
+            "end_t": 6949.337331567999,
+            "wait_s": 33.185943501999645
+          }
+        ],
+        "slot_held_s": 5343.502417769003,
+        "slot_intervals": [
+          [
+            1069.2107297869998,
+            2204.7532415079995
+          ],
+          [
+            2267.1036005389988,
+            3000.2758464360004
+          ],
+          [
+            3000.276140585999,
+            3681.3833531440005
+          ],
+          [
+            3681.3836120039987,
+            4292.934204529
+          ],
+          [
+            5047.55551087,
+            5606.918346617999
+          ],
+          [
+            5606.918567168,
+            6295.264271256999
+          ],
+          [
+            6295.264506397,
+            6916.1513880659995
+          ],
+          [
+            6949.337331567999,
+            7262.87176513
+          ]
+        ],
+        "chat_calls": 149,
+        "http_attempts": 149,
+        "chat_seconds_including_exceptions": 5221.1513092820005,
+        "http_seconds_including_exceptions": 5220.833095089993,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 339217,
+        "analyzer_note_tokens": 339217,
+        "action_attached_tokens": 300738,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 149,
+            "begin_t": 7171.554594320999,
+            "tools_present": true,
+            "end_t": 7262.847828481,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 8.844128480999643
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 82.44901670900072,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 8.868115739998757,
+        "events_observed": 640,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.61904761904761,
+        "levels_completed": 4,
+        "actual_actions": 122
+      },
+      {
+        "game_id": "su15-1944f8ab",
+        "game_index": 19,
+        "session_id": "s0020",
+        "session_started_t": 0.8267819059992689,
+        "first_gate_admission_delay_s": 1095.1614008279994,
+        "first_http_delay_s": 1095.1725795679995,
+        "first_actual_action_game_elapsed_s": 1108.687767166999,
+        "first_action_minus_first_http_approx_s": 13.366101693000246,
+        "initial_gate_wait_s": 1095.1604488079993,
+        "handover_wait_s": 2560.016075382,
+        "total_gate_wait_s": 3655.1765241899993,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8277339259993823,
+            "end_t": 1095.9881827339987,
+            "wait_s": 1095.1604488079993
+          },
+          {
+            "operation": "handover",
+            "begin_t": 1997.148640024,
+            "end_t": 2192.3708975170002,
+            "wait_s": 195.22225749300014
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2762.469345631999,
+            "end_t": 3391.020260754999,
+            "wait_s": 628.5509151229999
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4207.194017751,
+            "end_t": 5943.436477007,
+            "wait_s": 1736.242459256
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6530.654070344,
+            "end_t": 6530.654307443999,
+            "wait_s": 0.00023709999913990032
+          },
+          {
+            "operation": "handover",
+            "begin_t": 7222.688270378999,
+            "end_t": 7222.688476789,
+            "wait_s": 0.0002064100008283276
+          }
+        ],
+        "slot_held_s": 3614.1369542790017,
+        "slot_intervals": [
+          [
+            1095.9881827339987,
+            1997.148640024
+          ],
+          [
+            2192.3708975170002,
+            2762.469345631999
+          ],
+          [
+            3391.020260754999,
+            4207.194017751
+          ],
+          [
+            5943.436477007,
+            6530.654070344
+          ],
+          [
+            6530.654307443999,
+            7222.688270378999
+          ],
+          [
+            7222.688476789,
+            7270.141212395
+          ]
+        ],
+        "chat_calls": 101,
+        "http_attempts": 101,
+        "chat_seconds_including_exceptions": 3507.681914707986,
+        "http_seconds_including_exceptions": 3507.510565820012,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 234250,
+        "analyzer_note_tokens": 234250,
+        "action_attached_tokens": 231323,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 7.878999497999757,
+        "completed_returns_after_soft_end": 1,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 16.13755514500008,
+        "events_observed": 438,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 32.99357208448117,
+        "levels_completed": 5,
+        "actual_actions": 134
+      },
+      {
+        "game_id": "tn36-ef4dde99",
+        "game_index": 20,
+        "session_id": "s0021",
+        "session_started_t": 0.8286336159999337,
+        "first_gate_admission_delay_s": 1707.7391761909994,
+        "first_http_delay_s": 1707.750981750999,
+        "first_actual_action_game_elapsed_s": 1764.4408959919992,
+        "first_action_minus_first_http_approx_s": 56.576585625000234,
+        "initial_gate_wait_s": 1707.7369217509995,
+        "handover_wait_s": 3612.8810751150013,
+        "total_gate_wait_s": 5320.617996866001,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8308880559998215,
+            "end_t": 1708.5678098069993,
+            "wait_s": 1707.7369217509995
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2962.778770782,
+            "end_t": 5264.898384752,
+            "wait_s": 2302.1196139700005
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5943.436031516999,
+            "end_t": 7254.197492662,
+            "wait_s": 1310.7614611450008
+          }
+        ],
+        "slot_held_s": 1932.7903570189992,
+        "slot_intervals": [
+          [
+            1708.5678098069993,
+            2962.778770782
+          ],
+          [
+            5264.898384752,
+            5943.436031516999
+          ],
+          [
+            7254.197492662,
+            7254.239241941
+          ]
+        ],
+        "chat_calls": 39,
+        "http_attempts": 39,
+        "chat_seconds_including_exceptions": 1805.418026824993,
+        "http_seconds_including_exceptions": 1805.308322957002,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 115669,
+        "analyzer_note_tokens": 115669,
+        "action_attached_tokens": 115669,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.19379266199939593
+          }
+        ],
+        "last_http_start_before_soft_end_s": 1444.6199584160004,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.23779479099903256,
+        "events_observed": 175,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 0.0,
+        "levels_completed": 0,
+        "actual_actions": 226
+      },
+      {
+        "game_id": "tr87-cd924810",
+        "game_index": 21,
+        "session_id": "s0022",
+        "session_started_t": 0.8333662359991649,
+        "first_gate_admission_delay_s": 1744.0981093810005,
+        "first_http_delay_s": 1744.110705301,
+        "first_actual_action_game_elapsed_s": 1853.3938947349998,
+        "first_action_minus_first_http_approx_s": 109.1798151980006,
+        "initial_gate_wait_s": 1744.0965098810002,
+        "handover_wait_s": 3538.728896984998,
+        "total_gate_wait_s": 5282.825406865998,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8349657359995035,
+            "end_t": 1744.9314756169997,
+            "wait_s": 1744.0965098810002
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2700.03567828,
+            "end_t": 2962.8211160009987,
+            "wait_s": 262.78543772099874
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3813.79701304,
+            "end_t": 7089.740472303999,
+            "wait_s": 3275.943459263999
+          }
+        ],
+        "slot_held_s": 1971.1767939380024,
+        "slot_intervals": [
+          [
+            1744.9314756169997,
+            2700.03567828
+          ],
+          [
+            2962.8211160009987,
+            3813.79701304
+          ],
+          [
+            7089.740472303999,
+            7254.83716654
+          ]
+        ],
+        "chat_calls": 53,
+        "http_attempts": 53,
+        "chat_seconds_including_exceptions": 1850.4439754889936,
+        "http_seconds_including_exceptions": 1850.3856530720004,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 110362,
+        "analyzer_note_tokens": 110362,
+        "action_attached_tokens": 110362,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 53,
+            "begin_t": 7135.307164085999,
+            "tools_present": true,
+            "end_t": 7254.827875119999,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.8241751199984719
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 118.69645646400022,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.8335058499997103,
+        "events_observed": 231,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 47.61904761904761,
+        "levels_completed": 4,
+        "actual_actions": 220
+      },
+      {
+        "game_id": "tu93-0768757b",
+        "game_index": 22,
+        "session_id": "s0023",
+        "session_started_t": 0.8357474659997024,
+        "first_gate_admission_delay_s": 1801.1287896659996,
+        "first_http_delay_s": 1801.1406203860006,
+        "first_actual_action_game_elapsed_s": 1842.9251416409998,
+        "first_action_minus_first_http_approx_s": 41.69421878899948,
+        "initial_gate_wait_s": 1801.1280819059994,
+        "handover_wait_s": 839.9830828199993,
+        "total_gate_wait_s": 2641.1111647259986,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8364552259999982,
+            "end_t": 1801.9645371319994,
+            "wait_s": 1801.1280819059994
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2890.8344767139997,
+            "end_t": 2890.834759983999,
+            "wait_s": 0.00028326999927230645
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3465.909581683999,
+            "end_t": 3465.909861703999,
+            "wait_s": 0.00028001999999105465
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4195.220345688999,
+            "end_t": 4195.220620329,
+            "wait_s": 0.0002746400004980387
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4781.580957994999,
+            "end_t": 4781.5811960149995,
+            "wait_s": 0.00023802000032446813
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5467.317568009,
+            "end_t": 5467.317811398999,
+            "wait_s": 0.00024338999901374336
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6076.585777939,
+            "end_t": 6916.567541419,
+            "wait_s": 839.9817634800002
+          }
+        ],
+        "slot_held_s": 4612.242394570001,
+        "slot_intervals": [
+          [
+            1801.9645371319994,
+            2890.8344767139997
+          ],
+          [
+            2890.834759983999,
+            3465.909581683999
+          ],
+          [
+            3465.909861703999,
+            4195.220345688999
+          ],
+          [
+            4195.220620329,
+            4781.580957994999
+          ],
+          [
+            4781.5811960149995,
+            5467.317568009
+          ],
+          [
+            5467.317811398999,
+            6076.585777939
+          ],
+          [
+            6916.567541419,
+            7254.190014522
+          ]
+        ],
+        "chat_calls": 143,
+        "http_attempts": 143,
+        "chat_seconds_including_exceptions": 4411.750181478996,
+        "http_seconds_including_exceptions": 4411.424856748006,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 295126,
+        "analyzer_note_tokens": 295126,
+        "action_attached_tokens": 295126,
+        "successful_returns_without_usage": 0,
+        "exceptions": [
+          {
+            "request_id": 143,
+            "begin_t": 7249.970703221,
+            "tools_present": true,
+            "end_t": 7254.132295672999,
+            "status": "chat_exception",
+            "generated_tokens": null,
+            "exception_type": "ReadTimeout",
+            "end_after_soft_end_s": 0.1285956729989266
+          }
+        ],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 4.0329325390011945,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 1,
+        "play_exit_after_soft_end_s": 0.18648577199928695,
+        "events_observed": 611,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 64.04051288766377,
+        "levels_completed": 8,
+        "actual_actions": 255
+      },
+      {
+        "game_id": "vc33-5430563c",
+        "game_index": 23,
+        "session_id": "s0025",
+        "session_started_t": 0.8394190759991034,
+        "first_gate_admission_delay_s": 1855.4939430679997,
+        "first_http_delay_s": 1855.505860608001,
+        "first_actual_action_game_elapsed_s": 1874.997006175,
+        "first_action_minus_first_http_approx_s": 19.411911490999955,
+        "initial_gate_wait_s": 1855.4905132179993,
+        "handover_wait_s": 0.0008503699991706526,
+        "total_gate_wait_s": 1855.4913635879984,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8428489259995331,
+            "end_t": 1856.3333621439988,
+            "wait_s": 1855.4905132179993
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2894.2766644739995,
+            "end_t": 2894.276959603999,
+            "wait_s": 0.0002951299993583234
+          },
+          {
+            "operation": "handover",
+            "begin_t": 3494.9791735259996,
+            "end_t": 3494.9794506259996,
+            "wait_s": 0.00027709999994840473
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4136.174372373999,
+            "end_t": 4136.174650513999,
+            "wait_s": 0.00027813999986392446
+          }
+        ],
+        "slot_held_s": 2385.1855615060012,
+        "slot_intervals": [
+          [
+            1856.3333621439988,
+            2894.2766644739995
+          ],
+          [
+            2894.276959603999,
+            3494.9791735259996
+          ],
+          [
+            3494.9794506259996,
+            4136.174372373999
+          ],
+          [
+            4136.174650513999,
+            4241.519774019999
+          ]
+        ],
+        "chat_calls": 73,
+        "http_attempts": 73,
+        "chat_seconds_including_exceptions": 2283.4704196919956,
+        "http_seconds_including_exceptions": 2283.372803182987,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 151337,
+        "analyzer_note_tokens": 151337,
+        "action_attached_tokens": 151337,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [],
+        "last_http_start_before_soft_end_s": 3026.0070157520004,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": -3012.4836411200013,
+        "events_observed": 316,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 100.0,
+        "levels_completed": 7,
+        "actual_actions": 250
+      },
+      {
+        "game_id": "wa30-ee6fef47",
+        "game_index": 24,
+        "session_id": "s0024",
+        "session_started_t": 0.8385519159992327,
+        "first_gate_admission_delay_s": 1877.7617380659995,
+        "first_http_delay_s": 1877.7744842060001,
+        "first_actual_action_game_elapsed_s": 1889.1975039549989,
+        "first_action_minus_first_http_approx_s": 11.358905832999426,
+        "initial_gate_wait_s": 1877.7607794859987,
+        "handover_wait_s": 2174.075774312001,
+        "total_gate_wait_s": 4051.836553798,
+        "gate_intervals": [
+          {
+            "operation": "acquire",
+            "begin_t": 0.8395104960000026,
+            "end_t": 1878.6002899819987,
+            "wait_s": 1877.7607794859987
+          },
+          {
+            "operation": "handover",
+            "begin_t": 2829.8125146189986,
+            "end_t": 4264.594418677,
+            "wait_s": 1434.7819040580016
+          },
+          {
+            "operation": "handover",
+            "begin_t": 4969.800371631,
+            "end_t": 4969.800607120999,
+            "wait_s": 0.00023548999888589606
+          },
+          {
+            "operation": "handover",
+            "begin_t": 5683.353807134,
+            "end_t": 5683.354038463999,
+            "wait_s": 0.00023132999922381714
+          },
+          {
+            "operation": "handover",
+            "begin_t": 6514.944245906999,
+            "end_t": 7254.237649341,
+            "wait_s": 739.2934034340014
+          }
+        ],
+        "slot_held_s": 3201.597561327,
+        "slot_intervals": [
+          [
+            1878.6002899819987,
+            2829.8125146189986
+          ],
+          [
+            4264.594418677,
+            4969.800371631
+          ],
+          [
+            4969.800607120999,
+            5683.353807134
+          ],
+          [
+            5683.354038463999,
+            6514.944245906999
+          ],
+          [
+            7254.237649341,
+            7254.273625621
+          ]
+        ],
+        "chat_calls": 83,
+        "http_attempts": 83,
+        "chat_seconds_including_exceptions": 2771.389994079993,
+        "http_seconds_including_exceptions": 2771.1659313910022,
+        "chat_tools_absent_calls": 0,
+        "known_generated_tokens": 175195,
+        "analyzer_note_tokens": 175195,
+        "action_attached_tokens": 175195,
+        "successful_returns_without_usage": 0,
+        "exceptions": [],
+        "starts_after_global_soft_end": [
+          {
+            "kind": "gate_admitted_return",
+            "request_id": null,
+            "seconds_after_soft_end": 0.23394934099997045
+          }
+        ],
+        "last_http_start_before_soft_end_s": 790.8575304990009,
+        "completed_returns_after_soft_end": 0,
+        "deadline_spanning_chats": 0,
+        "play_exit_after_soft_end_s": 0.2736030199994275,
+        "events_observed": 361,
+        "events_dropped": 0,
+        "observer_errors": 0,
+        "integrity_failures": [],
+        "score": 5.766666666666667,
+        "levels_completed": 2,
+        "actual_actions": 391
+      }
+    ],
+    "initial_admission_order": [
+      "cd82-fb555c5d",
+      "dc22-fdcac232",
+      "cn04-2fe56bfb",
+      "ar25-0c556536",
+      "bp35-0a0ad940",
+      "ft09-0d8bbf25",
+      "g50t-5849a774",
+      "ls20-9607627b",
+      "lf52-271a04aa",
+      "r11l-495a7899",
+      "ka59-38d34dbb",
+      "lp85-305b61c3",
+      "m0r0-492f87ba",
+      "re86-8af5384d",
+      "s5i5-18d95033",
+      "sb26-7fbdac44",
+      "sc25-635fd71a",
+      "sk48-d8078629",
+      "sp80-589a99af",
+      "su15-1944f8ab",
+      "tn36-ef4dde99",
+      "tr87-cd924810",
+      "tu93-0768757b",
+      "vc33-5430563c",
+      "wa30-ee6fef47"
+    ],
+    "slot_occupancy": {
+      "max_concurrent": 10,
+      "final_open": 0,
+      "sum_interval_seconds": 72598.75679223106
+    },
+    "client_http_occupancy": {
+      "max_concurrent": 10,
+      "final_open": 0,
+      "sum_interval_seconds": 68146.52340701588
+    },
+    "new_calls_after_global_soft_end": 8,
+    "events_dropped": 0,
+    "observer_errors": 0,
+    "integrity_failures": [],
+    "deadline_audit": {
+      "active_sessions": 0,
+      "provisional": false,
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": [],
+      "counts": {
+        "session_begin": 25,
+        "check_passed": 6855,
+        "session_end": 25,
+        "request_blocked": 8,
+        "session_cancelled": 8
+      },
+      "boundary_counts": {
+        "check_passed:after_handover": 2285,
+        "check_passed:chat_entry": 2285,
+        "check_passed:http_entry": 2285,
+        "request_blocked:after_handover": 8
+      },
+      "retained_events": 256,
+      "events_dropped_by_bound": 6665,
+      "retained_block_events": [
+        {
+          "t": 7254.098678183,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "m0r0-492f87ba",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.097464183,
+          "seconds_after_soft_end": 0.09376418299962097
+        },
+        {
+          "t": 7254.131723662,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "ka59-38d34dbb",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.130509662,
+          "seconds_after_soft_end": 0.1268096619996868
+        },
+        {
+          "t": 7254.142350231999,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "lf52-271a04aa",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.141136232,
+          "seconds_after_soft_end": 0.13743623199934518
+        },
+        {
+          "t": 7254.172065651001,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "dc22-fdcac232",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.170851651001,
+          "seconds_after_soft_end": 0.1671516510004949
+        },
+        {
+          "t": 7254.197292231,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "bp35-0a0ad940",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.196078231,
+          "seconds_after_soft_end": 0.19237823099956586
+        },
+        {
+          "t": 7254.198743781,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "tn36-ef4dde99",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.197529781,
+          "seconds_after_soft_end": 0.1938297810002041
+        },
+        {
+          "t": 7254.220890070001,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "g50t-5849a774",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.219676070001,
+          "seconds_after_soft_end": 0.21597607000057906
+        },
+        {
+          "t": 7254.238894080001,
+          "kind": "request_blocked",
+          "boundary": "after_handover",
+          "reason": "session_stop",
+          "game_id": "wa30-ee6fef47",
+          "soft_remaining_seconds": null,
+          "timing_t": 7254.237680080001,
+          "seconds_after_soft_end": 0.23398008000094705
+        }
+      ],
+      "all_block_events_retained": true,
+      "new_client_chat_or_http_after_soft_end": [],
+      "client_http_after_observed_session_stop": [],
+      "last_client_http_start_before_soft_end_s": 4.0329325390011945,
+      "action_records_after_soft_end": [],
+      "last_recorded_action_before_soft_end_s": 4.688474054001745,
+      "action_time_method": "GameRun.started_at plus cumulative ActionRecord.wallclock_seconds; UTC alignment, not an instrumented action-start boundary.",
+      "evidence_boundary": "The 256-event deadline deque intentionally evicts old passed checks. Aggregate counts survive; full no-new-client-request evidence comes from lossless inference-timing. Client admission does not guarantee server arrival before deadline or abort in-flight work."
+    },
+    "scheduler_audit": {
+      "events_observed": 499,
+      "events_dropped": 0,
+      "observer_record_errors": 0,
+      "counts": {
+        "enqueue": 116,
+        "pump_begin": 141,
+        "reprice": 126,
+        "selection": 116
+      },
+      "gates": [
+        {
+          "gate_id": "g001",
+          "counts": {
+            "enqueue": 116,
+            "pump_begin": 141,
+            "reprice": 126,
+            "selection": 116
+          },
+          "max_waiting": 16,
+          "owner_mappings_omitted": 0,
+          "currently_waiting": 0
+        }
+      ],
+      "max_candidate_count": 16,
+      "candidate_rows_omitted": 0,
+      "candidate_owner_rows_missing": 0,
+      "selected_rows_with_snapshot": 91,
+      "integrity_failures": [],
+      "session_selection_count_mismatches": [],
+      "session_identity_mismatches": [],
+      "selection_to_admitted_return_seconds": {
+        "count": 116,
+        "min": 2.5600002118153498e-06,
+        "median": 7.706450014666189e-05,
+        "mean": 0.005204035646627368,
+        "max": 0.41596524300075544,
+        "p95_nearest_rank": 0.01093101900005422
+      },
+      "selections_after_soft_end": 8,
+      "initial_selection_order": [
+        {
+          "game_id": "cd82-fb555c5d",
+          "timing_t": 0.7776023369997347
+        },
+        {
+          "game_id": "dc22-fdcac232",
+          "timing_t": 0.7782012169991503
+        },
+        {
+          "game_id": "cn04-2fe56bfb",
+          "timing_t": 0.7817075969996949
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "timing_t": 0.7819571369991536
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "timing_t": 0.7838851369997428
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "timing_t": 0.7879305369997383
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "timing_t": 0.7883609169994088
+        },
+        {
+          "game_id": "ls20-9607627b",
+          "timing_t": 0.7932636159994217
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "timing_t": 0.7942119069994078
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "timing_t": 0.8000996359996861
+        },
+        {
+          "game_id": "ka59-38d34dbb",
+          "timing_t": 833.5512376659999
+        },
+        {
+          "game_id": "lp85-305b61c3",
+          "timing_t": 871.669156465
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "timing_t": 884.5667396679992
+        },
+        {
+          "game_id": "re86-8af5384d",
+          "timing_t": 952.162653000999
+        },
+        {
+          "game_id": "s5i5-18d95033",
+          "timing_t": 992.6382071449998
+        },
+        {
+          "game_id": "sb26-7fbdac44",
+          "timing_t": 994.3651377719989
+        },
+        {
+          "game_id": "sc25-635fd71a",
+          "timing_t": 1017.7531633539993
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "timing_t": 1024.3884155469996
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "timing_t": 1069.2103294269991
+        },
+        {
+          "game_id": "su15-1944f8ab",
+          "timing_t": 1095.9878588639995
+        },
+        {
+          "game_id": "tn36-ef4dde99",
+          "timing_t": 1708.5677328069987
+        },
+        {
+          "game_id": "tr87-cd924810",
+          "timing_t": 1744.9311419769992
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "timing_t": 1801.9642769020002
+        },
+        {
+          "game_id": "vc33-5430563c",
+          "timing_t": 1856.3332788139987
+        },
+        {
+          "game_id": "wa30-ee6fef47",
+          "timing_t": 1878.5998807120004
+        }
+      ],
+      "source_sha256": {
+        "_enqueue_and_wait": "2566cc1fbfe7ae3c1d9bd477f25c18c648b0b3abf275042994af350948d837c4",
+        "_pump": "ba31553ddbd59e4f6613e7e6789d54484bbfe353bad67274fa8c5bdf4232cadc"
+      },
+      "instrumented_source_sha256": {
+        "_enqueue_and_wait": "cd2c2b74ffb1ce3eafe8bf3ed20f9dc4322429c0249bf6391114cf7dc9518b95",
+        "_pump": "d7bd6dedbfcc410d3f553ba34441669fd5ee103b13d70a9a42dd0599b8f60f35"
+      },
+      "snapshot_after_worker_join": true,
+      "lingering_worker_threads": [],
+      "scope": "Validates observed decisions and attribution; does not treat a changed ordering on a different trajectory as a causal score replay."
+    }
+  }
+}

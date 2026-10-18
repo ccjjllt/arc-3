@@ -1,0 +1,3 @@
+## Patch cell - v16.9 M86 (game state without the per-action O(history) rewrite)
+
+The state file is serialized incrementally and written once per action batch; the analyzer and the sandbox payload reuse the in-memory copy instead of re-parsing the whole history on every python call and action.

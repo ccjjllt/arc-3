@@ -1,0 +1,18 @@
+## How to use this notebook
+
+1. Attach the listed competition, model, serving runtime, and animation source bundle.
+2. Select **GPU RTX Pro 6000** and keep internet **off**.
+3. Run once. The animation chassis is enabled through the pickled benchmark and the attached source bundle; no external network is needed.
+4. Inspect `/kaggle/working/score.json` only as diagnostic evidence.
+5. Promote a score only from the exact official `COMPLETE` submission row.
+
+### Why this arm is worth testing
+
+ARC3 actions can emit short animations whose final frame hides the meaningful event. This arm preserves the Duck harness while exposing a compact animation timeline, a transient-region reader, and an explicit guard against repeating known dead actions.
+
+### Provenance
+
+- Duck harness: [Tufa Labs](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner)
+- Serving stack: [Keith Tyser](https://www.kaggle.com/code/keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp)
+- Animation chassis: [Jakob Brüggen source bundle](https://www.kaggle.com/datasets/jakobbrggen/taaf-kaggle-source-anim-20260807-anim)
+- Upstream license: Apache 2.0

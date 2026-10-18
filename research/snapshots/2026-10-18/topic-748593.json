@@ -1,0 +1,56 @@
+{
+  "messages": [
+    {
+      "id": 3537489,
+      "postDate": "2026-10-12T17:05:59.933Z",
+      "content": "<p>Actually, I’ve been having trouble with SFT and RL on Qwen3.8-Flash-Next for the past week. Its MoE structure makes training unstable, and I don’t have experience training such models. On the other hand, training Qwen3.8-27B works well although scores grows slowly.</p>\n<p>I’d really appreciate it if anyone with more experience could share some advice or insights. Thanks in advance!</p>",
+      "rawMarkdown": "Actually, I’ve been having trouble with SFT and RL on Qwen3.8-Flash-Next for the past week. Its MoE structure makes training unstable, and I don’t have experience training such models. On the other hand, training Qwen3.8-27B works well although scores grows slowly.\n\nI’d really appreciate it if anyone with more experience could share some advice or insights. Thanks in advance!",
+      "votes": 6
+    },
+    {
+      "id": 3537740,
+      "postDate": "2026-10-13T01:59:48.540Z",
+      "content": "<p>You are able to fine tune at all? That is truly amazing!</p>",
+      "rawMarkdown": "You are able to fine tune at all? That is truly amazing!",
+      "votes": 1,
+      "replies": [
+        {
+          "id": 3537783,
+          "postDate": "2026-10-13T03:58:52.400Z",
+          "content": "<p>I can, but I did not gain any performance</p>",
+          "rawMarkdown": "I can, but I did not gain any performance"
+        },
+        {
+          "id": 3537857,
+          "postDate": "2026-10-13T07:07:20.627Z",
+          "content": "<p>I used QLoRA 4-bit + FSDP2 + PLE CPU Offload . It can help you finetune Qwen3.8-Flash-Next in 2*96G GPU.</p>",
+          "rawMarkdown": "I used QLoRA 4-bit + FSDP2 + PLE CPU Offload . It can help you finetune Qwen3.8-Flash-Next in 2*96G GPU.",
+          "votes": 2,
+          "replies": [
+            {
+              "id": 3538047,
+              "postDate": "2026-10-13T15:56:18.353Z",
+              "content": "<p>Wow, it is amazing that this works and leads to some improvement at all! But it does look like we need a little more than just the base resources.</p>",
+              "rawMarkdown": "Wow, it is amazing that this works and leads to some improvement at all! But it does look like we need a little more than just the base resources."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3538106,
+      "postDate": "2026-10-13T17:52:50.207Z",
+      "content": "<p>I got 2 RHAE points on the public data out of 3.8-27B with SFT/behavioral cloning but I so far haven't been able to get anything out of flash-next.</p>",
+      "rawMarkdown": "I got 2 RHAE points on the public data out of 3.8-27B with SFT/behavioral cloning but I so far haven't been able to get anything out of flash-next.",
+      "votes": 1,
+      "replies": [
+        {
+          "id": 3538140,
+          "postDate": "2026-10-13T18:33:06.867Z",
+          "content": "<p>I haven't been able to get anything out of flash-next too!  I  foucus on 3.8-27B.</p>",
+          "rawMarkdown": "I haven't been able to get anything out of flash-next too!  I  foucus on 3.8-27B."
+        }
+      ]
+    }
+  ]
+}

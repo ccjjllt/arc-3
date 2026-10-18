@@ -1,0 +1,7 @@
+import os
+from pathlib import Path
+TRUE_SUBMISSION=os.environ.get('KAGGLE_IS_COMPETITION_RERUN','').strip().lower() in {'1','true'}
+if not TRUE_SUBMISSION:
+    import pandas as pd
+    pd.DataFrame([['1_0','1',True,1]],columns=['row_id','game_id','end_of_game','score']).to_parquet('/kaggle/working/submission.parquet',index=False)
+    print('V4 packaging complete; full solver runs in competition mode.')

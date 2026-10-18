@@ -1,0 +1,20 @@
+wheelhouse = Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels")
+if wheelhouse.exists():
+    subprocess.check_call(
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "--no-index",
+            "--no-warn-conflicts",
+            "--disable-pip-version-check",
+            "--find-links",
+            str(wheelhouse),
+            "arc-agi",
+        ]
+    )
+elif os.getenv("TAAF_KAGGLE_BUNDLE_DIR"):
+    print(f"Competition wheelhouse not found at {wheelhouse}; assuming local debug dependencies are installed.")
+else:
+    raise RuntimeError(f"Competition wheelhouse not found at {wheelhouse}.")

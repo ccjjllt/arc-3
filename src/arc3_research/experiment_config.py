@@ -72,3 +72,19 @@ def validate_config(config: dict[str, Any]) -> None:
                 raise ValueError("native_values arms require frozen baseline scheduler.")
         if config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1:
             raise ValueError("Native comparison must retain 10 streams and one pass.")
+    if "observation_grounding" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("baseline", "observation_grounding")}
+        if arms != ["baseline", "observation_grounding"] or environments != expected:
+            raise ValueError("018 requires baseline then observation_grounding with unchanged scheduling.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "baseline"):
+            raise ValueError("018 requires 10 stream capacity, one pass, no warmup and baseline reference.")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "preflight_before_serving",
+            "native_payload_cells",
+        )):
+            raise ValueError("018 requires the shared strict budget, diagnostics and startup contracts.")

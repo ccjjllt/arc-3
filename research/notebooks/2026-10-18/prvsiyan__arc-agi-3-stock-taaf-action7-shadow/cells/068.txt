@@ -1,0 +1,18 @@
+## How to use this notebook
+
+1. Attach the listed datasets and model exactly as shown in **Input**.
+2. Select **GPU RTX Pro 6000** and keep internet **off**.
+3. Run once. Interactive Save & Run evaluates the 25 bundled public games; a competition rerun uses Kaggle's live gateway.
+4. Treat `/kaggle/working/score.json` as local diagnostic evidence only. Treat `submission.parquet` as valid only after checking terminal game coverage and schema.
+5. Submit only after the notebook is complete and the downloaded output passes an independent 25/110-game binding audit.
+
+### Why this is intentionally conservative
+
+The current public frontier suggests promising additions—animation-aware state summaries, verified transition memory, conditional recovery, and progress-weighted compute. They are not mixed into this candidate because that would break exact equivalence with the only public 4.33 receipt. Test each mechanism as a separate, preregistered A/B before promotion.
+
+### Provenance
+
+- Duck solver and harness: [Tufa Labs / Jeroen Cottaar](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner)
+- Qwen3.8 Flash-Next NVFP4 serving stack: [Keith Tyser](https://www.kaggle.com/code/keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp)
+- Exact 4.33-scoring source: [Wuliao Version 1](https://www.kaggle.com/code/wuliao0/duck-qwen3-8-anim-base?scriptVersionId=347132234)
+- Upstream license: Apache 2.0

@@ -1,0 +1,3 @@
+## Patch cell - v14.58 reasoning history
+
+The harness stores past thinking as `reasoning`; SGLang's request model only keeps `reasoning_content`, and the chat template only reads `reasoning_content`, so every past turn rendered an empty think block in v14.57. Copy it into `reasoning_content` on the outgoing payload (history objects untouched).

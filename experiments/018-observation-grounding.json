@@ -1,0 +1,55 @@
+{
+  "id": "018-observation-grounding",
+  "kernel_id": "jiyujia/arc3-018-observation-grounding",
+  "kernel_title": "ARC3 018 Observation Grounding",
+  "purpose": "Short single-factor prompt-only screen for faithful visual-to-program encoding; CPU preparation only, no competition submission",
+  "games": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810",
+    "ar25-0c556536",
+    "sb26-7fbdac44"
+  ],
+  "game_source": "Exact public versions; ft09/tr87 geometry-encoding opportunities, ar25 transfer/control, sb26 stable solver control; known development set",
+  "game_count": 4,
+  "arm_order": [
+    "baseline",
+    "observation_grounding"
+  ],
+  "requested_arm_seconds": 1000,
+  "budget_formula": "Equal 1000-second short-screen windows, not normalized full-pool scoring",
+  "hard_limit_seconds": 5400,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 1.0,
+  "selection_note": "Adoption and overhead screen, not a holdout or hidden-score prediction. Ten-stream capacity with only four concurrent games. Current quota availability must be rechecked before any launch.",
+  "comparison_note": "Baseline versus one existing system-prompt prefix only. Same four IDs/order, 1000s per arm, one pass, zero warmup, 10-stream capacity, baseline remaining/pace0 scheduling, one model load and isolated CPU processes. No new API, observations, actions, memory, or forced verification. Paired deadline/timing/scheduler diagnostics and strict cache/cleanup contracts. CPU preparation only; no GPU run has been launched.",
+  "reference_arm": "baseline",
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "observation_grounding": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}

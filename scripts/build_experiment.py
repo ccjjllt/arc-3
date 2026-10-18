@@ -51,6 +51,8 @@ def main() -> None:
         required.add("current_data.py")
     if any(a in ("native_values", "native") for a in arms):
         required.add("native_values.py")
+    if "observation_grounding" in arms:
+        required.add("observation_grounding.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):

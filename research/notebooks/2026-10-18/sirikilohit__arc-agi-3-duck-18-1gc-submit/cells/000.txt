@@ -1,0 +1,11 @@
+## v18.1gc (submit) = v18.1gs with FP8 KV, 16 games, trims 57,344 -> 45,056 (was 36,864 -> 26,624)
+
+## v18.1gs-submit = v18.1gs (stock) with a fast Save & Run (2 public games, 6 min) outside the competition rerun; the scored rerun is unchanged
+
+## v18.1gs = v18.1fs with two phrases deleted from the prompt (the edge bar is the action budget; do not tell the model to ignore it)
+
+## v18.1as = v18.1n (stock model) + M111 (animation frames in the sandbox: `transition.frames`, the in-between boards of the last 8 animated actions, up to 32 each, read only when the model asks; one clause + one line of prompt)
+
+## v18.1n = v18.1 + NVFP4 MTP draft loaded from a draft-only folder (M108) + M72 slices of 2,400 s; prompts and harness exactly v18.1
+
+## v14.64 v4 - v14.63 + KV reclaim, 15 running, prefill chunk 4096 (v1 OOM fix) + server-alive watchdog + GPU memory log

@@ -1,0 +1,30 @@
+def source_path_entries(bundle_dir: Path):
+    entries = []
+    for repo in sorted((bundle_dir / "src").iterdir(), reverse=True):
+        for candidate in (repo / "src", repo):
+            if candidate.is_dir():
+                entries.append(candidate)
+    return entries
+
+def command_env():
+    env = os.environ.copy()
+    env["PYTHON"] = sys.executable
+    env["TAAF_KAGGLE_BUNDLE_DIR"] = str(BUNDLE_DIR)
+    env["TAAF_KAGGLE_WORKING_DIR"] = str(WORKING_DIR)
+    env["TAAF_KAGGLE_SETUP_ENV"] = str(SETUP_ENV_PATH)
+    env.update({str(k): str(v) for k, v in json.loads(SETUP_ENV_PATH.read_text()).items()})
+    return env
+
+source_entries = source_path_entries(BUNDLE_DIR)
+for entry in source_entries:
+    sys.path.insert(0, str(entry))
+Path(sysconfig.get_paths()["purelib"], "taaf_kaggle_sources.pth").write_text("".join(f"{p}\n" for p in source_entries))
+
+for command in json.loads((BUNDLE_DIR / "setup_commands.json").read_text()):
+    print("setup:", command[:180], flush=True)
+    subprocess.run(command, shell=True, check=True, cwd=WORKING_DIR, env=command_env())
+    os.environ.update(command_env())
+
+for entry in reversed([p for p in os.environ.get("PYTHONPATH", "").split(os.pathsep) if p]):
+    if entry not in sys.path:
+        sys.path.insert(0, entry)

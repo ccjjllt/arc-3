@@ -1,0 +1,57 @@
+with open(BUNDLE_DIR / "deploy_target.pkl", "rb") as fh:
+    target = pickle.load(fh)
+target.actual_run_as_submission = TRUE_SUBMISSION
+target.is_competition_rerun = TRUE_SUBMISSION
+with open(BUNDLE_DIR / "benchmark_initial.pkl", "rb") as fh:
+    bm = pickle.load(fh)
+bm.job_dir = WORKING_DIR
+
+def competition_games():
+    import arc_agi
+    import taaf.game_api
+    spec = taaf.game_api.ArcadeSpec(operation_mode=arc_agi.OperationMode.COMPETITION, arc_base_url=os.environ["ARC_BASE_URL"], environments_dir="")
+    arcade = arc_agi.Arcade(operation_mode=arc_agi.OperationMode.COMPETITION, arc_base_url=spec.arc_base_url, environments_dir="")
+    ids = [item.game_id for item in arcade.available_environments]
+    if not ids:
+        raise RuntimeError("Competition gateway exposed zero environments.")
+    return [taaf.game_api.GameAPI(env_name=game_id, arcade_spec=spec) for game_id in ids]
+
+def offline_games(env_dir: str):
+    import arc_agi
+    import taaf.game_api
+    spec = taaf.game_api.ArcadeSpec(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
+    arcade = arc_agi.Arcade(operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir)
+    ids = [item.game_id for item in arcade.available_environments]
+    if not ids:
+        raise RuntimeError("Bundled public Arcade exposed zero environments.")
+    return [taaf.game_api.GameAPI(env_name=game_id, arcade_spec=spec) for game_id in ids]
+
+def wait_gateway(base_url: str, timeout_s: float = 600.0):
+    deadline, last_error = time.monotonic() + timeout_s, ""
+    while time.monotonic() < deadline:
+        try:
+            with urlopen(f"{base_url}api/games", timeout=10) as response:
+                if response.status < 500:
+                    return
+        except Exception as exc:
+            last_error = repr(exc)
+        time.sleep(5)
+    raise RuntimeError(f"Gateway did not become ready: {last_error}")
+
+os.environ.setdefault("RECORDINGS_DIR", str(WORKING_DIR / "server_recording"))
+if TRUE_SUBMISSION:
+    os.environ.setdefault("ARC_API_KEY", "test-key-123")
+    os.environ.setdefault("ARC_BASE_URL", "http://gateway:8001/")
+    # Keep the explicit URL and the legacy gateway variables aligned for bundled solver subprocesses.
+    os.environ.setdefault("SCHEME", "http")
+    os.environ.setdefault("HOST", "gateway")
+    os.environ.setdefault("PORT", "8001")
+    os.environ.setdefault("OPERATION_MODE", "competition")
+    os.environ.setdefault("ENVIRONMENTS_DIR", "")
+    wait_gateway(os.environ["ARC_BASE_URL"])
+    bm.games = competition_games()
+else:
+    bm.games = offline_games(str(COMPETITION_ROOT / "environment_files"))
+bm.n_passes = 1
+bm.game_weights = None
+print({"games": len(bm.games), "mode": "gateway" if TRUE_SUBMISSION else "public-offline"})

@@ -1,0 +1,11 @@
+# 1. Install arc-agi runtime from offline competition wheelhouse
+import os, sys, glob, subprocess
+
+print("Installing arc-agi runtime from offline wheelhouse...")
+wheel_dirs = glob.glob("/kaggle/input/**/arc_agi_3_wheels", recursive=True)
+if wheel_dirs:
+    wheel_dir = wheel_dirs[0]
+    print(f"Found wheels directory: {wheel_dir}")
+    subprocess.run([sys.executable, "-m", "pip", "install", "--no-index", "--find-links", wheel_dir, "arc-agi", "python-dotenv", "pillow"], check=False)
+else:
+    print("arc_agi_3_wheels not found in /kaggle/input; dependencies should be pre-installed.")

@@ -1,0 +1,10 @@
+            start_iterator_prefetch = (
+                configured_prefetch
+                and not startup_prefetch_started
+                and not globals().get("_PENNY_PREFETCH_DONE", False)
+            )
+            if start_iterator_prefetch:
+                globals()["_PENNY_PREFETCH_DONE"] = True
+                print(f"PENNY_PREFETCH_ONCE started for {source.model_or_path}", flush=True)
+            elif configured_prefetch and not startup_prefetch_started:
+                print(f"PENNY_PREFETCH_ONCE skipped repeat prefetch for {source.model_or_path}", flush=True)

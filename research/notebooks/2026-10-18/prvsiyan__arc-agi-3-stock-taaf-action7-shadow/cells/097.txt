@@ -1,0 +1,16 @@
+# Restore the deployment target and record the real submission state on it.
+with open(ANIM_BUNDLE_DIR / "deploy_target.pkl", "rb") as file:   # thui-animfast: the anim bundle's target (32400 s)
+    target = pickle.load(file)
+target.actual_run_as_submission = TRUE_SUBMISSION
+target.is_competition_rerun = TRUE_SUBMISSION
+
+# Restore the benchmark and point its outputs at the Kaggle working dir.
+with open(ANIM_BUNDLE_DIR / "benchmark_initial.pkl", "rb") as file:   # thui-animfast: the anim solver
+    bm = pickle.load(file)
+bm.job_dir = WORKING_DIR
+# thui-animfast: the unpickled solver must be the anim chassis, not the June duck.
+assert bm.label == "anim-20260807-anim", bm.label
+assert getattr(bm.solver, "animation_awareness", None) is True and getattr(bm.solver, "hard_noop_guard", None) is True, vars(bm.solver)
+assert type(bm.solver).__module__ == "inference.framework.solver"
+print(f"thui-animfast: bm.label={bm.label} solver={type(bm.solver).__name__} animation_awareness={bm.solver.animation_awareness} "
+      f"hard_noop_guard={bm.solver.hard_noop_guard} target.max_runtime_s={target.max_runtime_s}", flush=True)

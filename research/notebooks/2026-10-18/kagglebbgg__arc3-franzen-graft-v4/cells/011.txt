@@ -1,0 +1,80 @@
+%%writefile phase_a_setup.py
+"""phase_a_setup.py — v22 Phase A 环境构造：网关等待 + 探索 arcade 工厂.
+
+安全设计（SSRF 防线）：
+- 网关探测用 http.client 显式建连，主机名必须命中白名单 {gateway, localhost, 127.0.0.1}
+  ——竞赛 rerun 的 ARC_BASE_URL 恒为 http://gateway:8001/，白名单外一律拒绝。
+- offline 交互跑不经过网关：直接用竞赛数据集自带 environment_files（可用
+  PRE_EXPLORATION_ENV_DIR 覆盖，供本地干跑注入小规模环境树）。
+
+此模块由 kernel notebook 以 %%writefile 落盘后导入；路径字面量仅为 Kaggle
+挂载点镜像（与 pristine notebook cell 15 同类，AGENTS.md §2）。
+"""
+from __future__ import annotations
+
+import http.client
+import os
+import time
+from pathlib import Path
+from urllib.parse import urlsplit
+
+_GATEWAY_HOST_ALLOWLIST = {"gateway", "localhost", "127.0.0.1"}
+
+
+def wait_for_gateway(base_url: str, timeout_s: float = 600.0) -> None:
+    """轮询网关 /api/games 直到非 5xx（竞赛网关异步启动）。"""
+    parts = urlsplit(base_url)
+    host = (parts.hostname or "").lower()
+    if host not in _GATEWAY_HOST_ALLOWLIST:
+        raise RuntimeError(f"v22: unexpected gateway host {host!r}")
+    port = parts.port or (443 if (parts.scheme or "http") == "https" else 80)
+    use_tls = (parts.scheme or "http") == "https"
+    prefix = (parts.path or "").rstrip("/")
+    deadline = time.monotonic() + timeout_s
+    last_error = ""
+    while time.monotonic() < deadline:
+        conn = None
+        try:
+            conn = (
+                http.client.HTTPSConnection(host, port, timeout=10)
+                if use_tls
+                else http.client.HTTPConnection(host, port, timeout=10)
+            )
+            conn.request("GET", f"{prefix}/api/games")
+            resp = conn.getresponse()
+            resp.read()
+            if resp.status < 500:
+                return
+            last_error = f"status {resp.status}"
+        except Exception as exc:  # noqa: BLE001 — 轮询语义：吞异常重试直到超时
+            last_error = repr(exc)
+        finally:
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+        time.sleep(5)
+    raise RuntimeError(f"v22 gateway wait failed: {last_error}")
+
+
+def explore_arcade(true_submission: bool):
+    """构造探索专用 Arcade client（与 benchmark 的 client 相互独立）。"""
+    import arc_agi
+    import taaf.game_api
+
+    if true_submission:
+        base_url = os.environ["ARC_BASE_URL"]
+        wait_for_gateway(base_url)
+        return arc_agi.Arcade(
+            operation_mode=arc_agi.OperationMode.COMPETITION,
+            arc_base_url=base_url,
+            environments_dir="",
+        )
+    env_dir = os.getenv("PRE_EXPLORATION_ENV_DIR") or str(
+        Path("/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels").parent
+        / "environment_files"
+    )
+    return arc_agi.Arcade(
+        operation_mode=arc_agi.OperationMode.OFFLINE, environments_dir=env_dir
+    )
