@@ -188,9 +188,12 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
             analysis_html_relpath=analysis_relpath,
             stop_event=threading.Event(), viewer_data_path=viewer_path)
         # Replay to T through the real step path (history + runtime state).
+        # Fork inputs are compact {"a","d"}; benchmark histories are
+        # {"action":{"id","data"}}. Accept both shapes here.
         for item in actions[:cut]:
-            name = item["action"]["id"]
-            data = dict(item["action"].get("data") or {})
+            raw = item.get("action", item)
+            name = raw.get("id", raw.get("a"))
+            data = dict(raw.get("data", raw.get("d", {})) or {})
             member = getattr(arcengine.GameAction, name, None)
             if member is None:
                 member = arcengine.GameAction.from_name(name)

@@ -105,6 +105,21 @@ def main() -> None:
         compact[g] = [{"a": x["action"]["id"], "d": x["action"].get("data") or {}} for x in h[:FORKS[g]["cut"]]]
     blob = json.dumps({"forks": FORKS, "quoted": QUOTED_EVIDENCE, "actions": compact})
     check("fork inputs fit payload cap", len(blob) < 200_000, f"{len(blob)} bytes")
+    # fork-inputs payload parses through the consumer's normalization
+    import arcengine
+    payload = json.loads((ROOT / "experiments/026-fork-inputs.json").read_text())
+    for game_id, spec in FORKS.items():
+        items = payload["actions"][game_id]
+        check(f"{game_id} payload covers cut",
+              len(items) >= int(spec["cut"]), str(len(items)))
+        for item in items[:int(spec["cut"])]:
+            raw = item.get("action", item)
+            name = raw.get("id", raw.get("a"))
+            data = dict(raw.get("data", raw.get("d", {})) or {})
+            member = getattr(arcengine.GameAction, name, None) \
+                or arcengine.GameAction.from_name(name)
+            arcengine.ActionInput(id=member, data=data)
+    check("fork-inputs consumer parse", True)
     print(f"\n{len(failures)} failures")
     sys.exit(1 if failures else 0)
 
