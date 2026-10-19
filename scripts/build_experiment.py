@@ -61,6 +61,8 @@ def main() -> None:
         required.update({"checked_action.py", "checked_execution.py"})
     if config.get("community_development"):
         required.add("community.py")
+    if "stall_probe" in arms:
+        required.update({"stall_probe.py", "bounded_probe.py", "checked_execution.py"})
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -99,7 +101,7 @@ Apache-2.0. Model and third-party runtime licenses remain their own.
 
 {config.get('comparison_note', 'Scores are public-development observations, not hidden-leaderboard results.')}
 """
-    setup = '''import json, os, sys, time, threading, signal
+    setup = '''import json, os, subprocess, sys, time, threading, signal
 from pathlib import Path
 ARC3_SESSION_START = time.time()
 ARC3_CHILD_PROCESSES = []
@@ -141,11 +143,26 @@ ARC3_INPUT_PATHS = resolve_inputs(report_path="/kaggle/working/input-paths.json"
 os.environ["ARC3_RESEARCH_ENV_DIR"] = ARC3_INPUT_PATHS["environment_files"]
 _community_root = ARC3_EXPERIMENT.get("community_source_root")
 if _community_root:
-    sys.path.insert(0, _community_root)
-    os.environ["ARC3_RESEARCH_ENV_DIR"] = str(Path(_community_root) / "environment_files")
+    _community_path = Path(_community_root)
+    _nested = _community_path / "environment_files"
+    # Kaggle stored this dataset with game folders at the dataset root.
+    _env_dir = _nested if _nested.is_dir() else _community_path
+    if not _env_dir.is_dir():
+        raise FileNotFoundError("Community environment directory not found: " + str(_community_path))
+    sys.path.insert(0, str(_community_path))
+    os.environ["ARC3_RESEARCH_ENV_DIR"] = str(_env_dir)
+    os.environ["ARC3_COMMUNITY_DEVELOPMENT"] = "1"
     _allowed = set(ARC3_EXPERIMENT.get("community_allowlist") or [])
     if set(ARC3_EXPERIMENT["games"]) - _allowed:
         raise RuntimeError("Community games are outside the development allowlist")
+if ARC3_EXPERIMENT.get("require_rtx_pro6000"):
+    _gpu_probe = subprocess.run(
+        ["nvidia-smi", "--query-gpu=memory.total", "--format=csv,noheader,nounits"],
+        capture_output=True, text=True)
+    _gpu_totals = [int(line.strip()) for line in _gpu_probe.stdout.splitlines() if line.strip()]
+    print("GPU_MEMORY_TOTAL_MIB", _gpu_totals)
+    if _gpu_probe.returncode != 0 or len(_gpu_totals) != 1 or _gpu_totals[0] < 90000:
+        raise SystemExit("refusing non-RTX session: " + repr(_gpu_totals))
 '''
     parameters = ("CONFIG_JSON = " + repr(json.dumps(config)) + "\n"
                   + "HASHES_JSON = " + repr(json.dumps(hashes)) + "\n")

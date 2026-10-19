@@ -140,6 +140,19 @@ def validate_config(config: dict[str, Any]) -> None:
             "native_payload_cells",
         )):
             raise ValueError("022 retains the shared budget, diagnostics and startup contracts.")
+    if "stall_probe" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("baseline", "stall_probe")}
+        if arms != ["baseline", "stall_probe"] or environments != expected:
+            raise ValueError("023 requires baseline then stall_probe with unchanged scheduling.")
+        if len(config.get("games") or []) != 3 or config.get("requested_arm_seconds") != 600:
+            raise ValueError("023 is a 3-game, 600-second probe.")
+        if (config.get("hard_limit_seconds") != 3600 or config.get("active_streams") != 10
+                or config.get("n_passes_per_arm") != 1 or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "baseline"):
+            raise ValueError("023 keeps the scheduler contract and a 3600-second session cap.")
+        if not config.get("require_rtx_pro6000"):
+            raise ValueError("023 must refuse a non-RTX session before loading the model.")
     if config.get("community_development"):
         allow = config.get("community_allowlist")
         if arms != ["baseline"] or allow != config.get("games"):

@@ -1,0 +1,42 @@
+{
+  "id": "023-stall-probe",
+  "kernel_id": "jiyujia/arc3-023-stall-probe",
+  "kernel_title": "ARC3 023 Stall Probe",
+  "purpose": "After four no-progress batches, the host asks once for a rule-versus-goal probe of at most three actions",
+  "require_rtx_pro6000": true,
+  "games": ["m0r0-492f87ba", "r11l-495a7899", "sb26-7fbdac44"],
+  "game_source": "Three familiar development games. Not the community set and not the frozen 16.",
+  "game_count": 3,
+  "arm_order": ["baseline", "stall_probe"],
+  "requested_arm_seconds": 600,
+  "budget_formula": "Equal 600-second windows. A trigger probe, not a 12-game score trial.",
+  "hard_limit_seconds": 3600,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 0.6,
+  "reference_arm": "baseline",
+  "selection_note": "Count levels where stall_probe fired, whether the next actions changed, and the paired score. Zero triggers means the threshold was not reached. Do not add a longer standing prompt.",
+  "comparison_note": "Same 3 IDs, 600s, one pass, no warmup, baseline remaining/pace0. No checked-action API and no FP8. Engine scores are descriptive.",
+  "arm_environment": {
+    "baseline": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"},
+    "stall_probe": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}

@@ -45,6 +45,33 @@ def development_ids(path=None):
     return list(load_allowlist(path)["development"])
 
 
+def clear_unreliable_baselines(game_api_cls):
+    """Drop community baseline_actions before GameRun is created.
+
+    Those lists are not a human action budget. A length mismatch aborts the
+    arm, and a matching list would still be scored as official efficiency.
+    Levels, actions and tokens remain on the run.
+    """
+    original = game_api_cls._start_game
+    discarded: list[dict] = []
+
+    def _start_game(self, session):
+        state = original(self, session)
+        baselines = self.base_actions_per_level
+        if baselines is not None:
+            discarded.append({
+                "game_id": self.game_id,
+                "baseline_actions": list(baselines),
+                "number_of_levels": self.number_of_levels,
+                "length_matches_levels": len(baselines) == self.number_of_levels,
+            })
+            self.base_actions_per_level = None
+        return state
+
+    game_api_cls._start_game = _start_game
+    return discarded
+
+
 def public_observation(raw):
     if raw is None:
         raise RuntimeError("Normal API returned no observation")

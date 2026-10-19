@@ -138,6 +138,16 @@ def main() -> None:
             if tool_agent.run_sandboxed_python is not originals["python_runner"]:
                 raise RuntimeError("Checked execution unexpectedly replaced the Python runner")
             report["checks"].append("checked_execution_existing_action_entry_and_prefix")
+        if "stall_probe" in config["arm_order"]:
+            from arc3_research.stall_probe import install_stall_probe
+            if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
+                raise RuntimeError("Stall probe refuses to replace a system prefix")
+            patches.append(install_stall_probe(tool_agent))
+            if tool_agent.ToolAgent._run_python_tool is originals["python_tool"]:
+                raise RuntimeError("Stall probe did not wrap the Python tool")
+            if tool_agent.run_sandboxed_python is originals["python_runner"]:
+                raise RuntimeError("Stall probe did not wrap the sandbox runner")
+            report["checks"].append("stall_probe_host_trigger_without_prompt_prefix")
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")
         for patch in reversed(patches):
