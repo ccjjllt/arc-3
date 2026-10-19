@@ -318,6 +318,12 @@ def run_arm(args: argparse.Namespace) -> int:
             for name in ("failure_repair.py", "probe_budget.py"):
                 metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
             metadata["failure_repair"] = repair_patch.snapshot()
+            for conv in ("experiments/026-fork-inputs.json",
+                         "experiments/026-fork-conv.json.gz.b64"):
+                candidate = (Path("/kaggle/research") / conv if
+                             (Path("/kaggle/research") / conv).is_file() else
+                             Path(__file__).resolve().parents[2] / conv)
+                metadata["source_sha256"][conv] = _sha256(candidate)
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(

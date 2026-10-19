@@ -16,7 +16,11 @@ not as a gate.
 """
 from __future__ import annotations
 
+import base64
 import contextlib
+import copy
+import gzip
+import json
 import os
 import threading
 import time
@@ -133,6 +137,27 @@ RECHECK = {"legend_recheck": recheck_legend, "crop_recheck": recheck_crop,
            "sim_recheck": recheck_sim, "control": recheck_control}
 
 
+def load_fork_conversations() -> dict[str, list[dict[str, Any]]]:
+    """Packed text-only conversations (images stripped at build time; the
+    live opening turn re-renders current visuals from replayed state)."""
+    candidates = [
+        Path("/kaggle/research/experiments/026-fork-conv.json.gz.b64"),
+        Path(__file__).resolve().parents[2] / "experiments/026-fork-conv.json.gz.b64",
+    ]
+    path = next((p for p in candidates if p.is_file()), None)
+    if path is None:
+        raise FileNotFoundError("026 fork conversations not found in payload or repo.")
+    raw = base64.b64decode(path.read_text().split()[0])
+    data = json.loads(gzip.decompress(raw).decode())
+    for game_id, messages in data.items():
+        if not isinstance(messages, list) or not messages:
+            raise ValueError(f"Fork conversation for {game_id} is empty.")
+        for message in messages:
+            if message.get("role") not in ("user", "assistant", "tool"):
+                raise ValueError(f"Bad fork message shape for {game_id}.")
+    return data
+
+
 def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
                  budget_seconds: int, prefix_actions: dict[str, list[dict]]) -> dict[str, Any]:
     """Fork-continuation arm. Sequential, one game at a time (no scheduler
@@ -164,6 +189,7 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
         operation_mode=arc_agi.OperationMode.OFFLINE,
         environments_dir=str(Path(os.environ["ARC3_RESEARCH_ENV_DIR"]).resolve()))
     guard = ProbeBudget(0)
+    conversations = load_fork_conversations()
     for index, requested in enumerate(game_ids):
         spec_fork = FORKS[requested]
         cut = int(spec_fork["cut"])
@@ -205,13 +231,19 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
                 raise RuntimeError(f"Fork replay diverged at {requested}: {payload}")
         session.analysis_step = int(spec_fork["analysis_step"])
         analyzer._kept_functions = {}
+        # Warm restart: the recorded text-only conversation (historical images
+        # were stripped at build; the live opening re-renders current visuals).
+        # Exact kept-function sources were never persisted, so both arms start
+        # with none and redefine from their own history text when needed.
+        analyzer._history_messages = copy.deepcopy(conversations[requested])
         entry = {"game_id": resolved[requested], "cut": cut,
-                 "replay_actions": cut}
+                 "replay_actions": cut,
+                 "restored_messages": len(analyzer._history_messages)}
         if is_b:
             from inference.framework.solver import _grid_from_state
             grid = _grid_from_state(session.game.current_state)
             text = RECHECK[spec_fork["kind"]](grid)
-            analyzer._history_messages = [{"role": "user", "content": text}]
+            analyzer._history_messages.append({"role": "user", "content": text})
             entry["recheck_kind"] = spec_fork["kind"]
             entry["recheck_chars"] = len(text)
         # Bounded continuation sharing the arm budget. Mirror _play_one error

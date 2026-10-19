@@ -84,6 +84,8 @@ def main() -> None:
     if "repair_A" in arms or "repair_B" in arms:
         fork_inputs_path = ROOT / "experiments/026-fork-inputs.json"
         payload["experiments/026-fork-inputs.json"] = fork_inputs_path.read_text()
+        fork_conv_path = ROOT / "experiments/026-fork-conv.json.gz.b64"
+        payload["experiments/026-fork-conv.json.gz.b64"] = fork_conv_path.read_text()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in [source, Path(__file__), *payload_paths]}
     hashes[str(config_path.relative_to(ROOT))] = hashlib.sha256(config_path.read_bytes()).hexdigest()

@@ -120,6 +120,13 @@ def main() -> None:
                 or arcengine.GameAction.from_name(name)
             arcengine.ActionInput(id=member, data=data)
     check("fork-inputs consumer parse", True)
+    # packed conversation payload decodes through the driver's loader
+    from arc3_research.failure_repair import load_fork_conversations
+    convs = load_fork_conversations()
+    check("conversations cover forks", set(convs) == set(FORKS), str(set(convs)))
+    check("conversations non-empty",
+          all(len(v) > 5 for v in convs.values()),
+          str({g: len(v) for g, v in convs.items()}))
     print(f"\n{len(failures)} failures")
     sys.exit(1 if failures else 0)
 
