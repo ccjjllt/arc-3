@@ -33,7 +33,8 @@ def main() -> None:
               "game_actions": 0, "arms": config["arm_order"], "checks": []}
     patches = []
     try:
-        if any(arm in config["arm_order"] for arm in ("observation_grounding", "grounded_state")):
+        if any(arm in config["arm_order"] for arm in (
+                "observation_grounding", "grounded_state", "checked_execution")):
             if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
                 raise RuntimeError("The candidate requires an empty ambient ARC3_SYSTEM_PROMPT_PREFIX before serving.")
             report["checks"].append("empty_ambient_system_prefix")
@@ -128,6 +129,15 @@ def main() -> None:
             if tool_agent.run_sandboxed_python is not originals["python_runner"]:
                 raise RuntimeError("Grounded state unexpectedly replaced the Python runner")
             report["checks"].append("grounded_state_existing_FrameView_entry_and_prefix")
+        if "checked_execution" in config["arm_order"]:
+            from arc3_research.checked_action import CHECKED_EXECUTION_PREFIX, install_checked_execution
+            baseline_prompt = tool_agent._build_system_prompt(tool_output_tokens=3072)
+            patches.append(install_checked_execution())
+            if tool_agent._build_system_prompt(tool_output_tokens=3072) != CHECKED_EXECUTION_PREFIX + "\n\n" + baseline_prompt:
+                raise RuntimeError("Checked-execution prefix did not preserve the baseline prompt")
+            if tool_agent.run_sandboxed_python is not originals["python_runner"]:
+                raise RuntimeError("Checked execution unexpectedly replaced the Python runner")
+            report["checks"].append("checked_execution_existing_action_entry_and_prefix")
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")
         for patch in reversed(patches):
@@ -153,6 +163,11 @@ def main() -> None:
                     or os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX") != original_prefix
                     or hasattr(python_tool_sandbox, "_research_grounded_state_patch")):
                 raise RuntimeError("Grounded-state preflight did not restore the baseline")
+        if "checked_execution" in config["arm_order"]:
+            if (python_tool_sandbox._SANDBOX_BOOTSTRAP != original_bootstrap
+                    or os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX") != original_prefix
+                    or hasattr(python_tool_sandbox, "_research_checked_execution_patch")):
+                raise RuntimeError("Checked-execution preflight did not restore the baseline")
         report["checks"].append("reverse_uninstall_restores_originals")
         report["environment_before_overrides"] = {
             key: os.environ.get(key) for key in

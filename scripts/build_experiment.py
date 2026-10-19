@@ -57,6 +57,8 @@ def main() -> None:
         required.add("observation_grounding.py")
     if "grounded_state" in arms:
         required.update({"grounded_state.py", "observation_representation.py"})
+    if "checked_execution" in arms:
+        required.update({"checked_action.py", "checked_execution.py"})
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):

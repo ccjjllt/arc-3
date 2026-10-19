@@ -1,0 +1,429 @@
+{
+  "status": "passed",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "executable": "/Users/zhaohuaxiang/.local/bin/python3.12",
+  "network_attempts": 0,
+  "model_calls": 0,
+  "game_actions": 0,
+  "sandbox_calls": 19,
+  "scenarios": [
+    {
+      "name": "ordinary_batch",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          },
+          {
+            "action": "LEFT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [],
+      "action_result_count": 1
+    },
+    {
+      "name": "ordinary_string",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [],
+      "action_result_count": 1
+    },
+    {
+      "name": "matched_suffix",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 2,
+          "comparison": "match",
+          "diffs": [],
+          "error": null,
+          "observed_actions": 2,
+          "planned_actions": 2,
+          "reason": "all_executed_actions_match_selected_projection",
+          "status": "completed",
+          "unattempted_suffix": 0
+        }
+      ],
+      "action_result_count": 2
+    },
+    {
+      "name": "mismatch_then_repair",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "LEFT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 2,
+          "comparison": "mismatch",
+          "diffs": [
+            {
+              "actual": 0,
+              "expected": 4,
+              "field": "col"
+            }
+          ],
+          "error": null,
+          "observed_actions": 2,
+          "planned_actions": 3,
+          "reason": "declared_prediction_differs_stop_and_inspect",
+          "status": "mismatch",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 3
+    },
+    {
+      "name": "level_completed",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "diffs": null,
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 2,
+          "reason": "level_completed",
+          "status": "boundary",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "game_over",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "diffs": null,
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 2,
+          "reason": "game_over",
+          "status": "boundary",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "run_complete",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "diffs": null,
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 2,
+          "reason": "run_complete",
+          "status": "boundary",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "silent_level_change",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "diffs": null,
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 2,
+          "reason": "level_changed",
+          "status": "boundary",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "known_noop_not_swallowed",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nKnownNoOpActionError: known no-op action was not executed.",
+      "briefs": [],
+      "action_result_count": 1
+    },
+    {
+      "name": "undeclared_pixels_do_not_stop",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 2,
+          "comparison": "match",
+          "diffs": [],
+          "error": null,
+          "observed_actions": 2,
+          "planned_actions": 2,
+          "reason": "all_executed_actions_match_selected_projection",
+          "status": "completed",
+          "unattempted_suffix": 0
+        }
+      ],
+      "action_result_count": 2
+    },
+    {
+      "name": "border_field_is_compared",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "mismatch",
+          "diffs": [
+            {
+              "actual": "Q",
+              "expected": "B",
+              "field": "edge"
+            }
+          ],
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 2,
+          "reason": "declared_prediction_differs_stop_and_inspect",
+          "status": "mismatch",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "click_row_col_preserved",
+      "calls": [
+        [
+          {
+            "action": "MOUSE",
+            "row": 4,
+            "col": 7
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "match",
+          "diffs": [],
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 1,
+          "reason": "all_executed_actions_match_selected_projection",
+          "status": "completed",
+          "unattempted_suffix": 0
+        }
+      ],
+      "action_result_count": 1
+    },
+    {
+      "name": "legacy_mouse_xy_rejected",
+      "calls": [],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nValueError: Action 1 uses legacy MOUSE x/y fields; use row and col.",
+      "briefs": [],
+      "action_result_count": 0
+    },
+    {
+      "name": "missing_extract_no_fallback",
+      "calls": [],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nValueError: checked action requires callable pred and extract; refusing unchecked fallback",
+      "briefs": [],
+      "action_result_count": 0
+    },
+    {
+      "name": "extract_error_stops_before_action",
+      "calls": [],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 0,
+          "comparison": "not_executed",
+          "diffs": null,
+          "error": "RuntimeError: ambiguous marker",
+          "observed_actions": 0,
+          "planned_actions": 2,
+          "reason": "pre_action_prediction_or_extraction_failed",
+          "status": "unverifiable",
+          "unattempted_suffix": 2
+        }
+      ],
+      "action_result_count": 0
+    },
+    {
+      "name": "schema_change_before_action",
+      "calls": [],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 0,
+          "comparison": "not_executed",
+          "diffs": null,
+          "error": "ValueError: prediction changes declared projection schema",
+          "observed_actions": 0,
+          "planned_actions": 1,
+          "reason": "pre_action_prediction_or_extraction_failed",
+          "status": "unverifiable",
+          "unattempted_suffix": 1
+        }
+      ],
+      "action_result_count": 0
+    },
+    {
+      "name": "plan_over_32_not_executed",
+      "calls": [],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nValueError: provide a bounded list/tuple of full action mappings",
+      "briefs": [],
+      "action_result_count": 0
+    },
+    {
+      "name": "string_action_normalized",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "briefs": [
+        {
+          "attempted_actions": 1,
+          "comparison": "match",
+          "diffs": [],
+          "error": null,
+          "observed_actions": 1,
+          "planned_actions": 1,
+          "reason": "all_executed_actions_match_selected_projection",
+          "status": "completed",
+          "unattempted_suffix": 0
+        }
+      ],
+      "action_result_count": 1
+    }
+  ],
+  "limits": [
+    "Fake public frames, not an ARC game and not a score.",
+    "The repair step is scripted in the snippet. It shows a later action can run after a stopped suffix.",
+    "No claim that a model will call pred/extract or repair."
+  ],
+  "frozen_sandbox_sha256": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943",
+  "rejects_mixed_arms": true,
+  "rejects_scheduler_change": true,
+  "prompt_is_prefix_plus_baseline": true,
+  "tool_schema_unchanged": true,
+  "baseline_agent_prompt_unchanged": true,
+  "rejects_double_install": true,
+  "uninstalled": true,
+  "restored_ordinary_action": true,
+  "preflight": {
+    "status": "passed",
+    "network_calls": 0,
+    "model_calls": 0,
+    "game_actions": 0,
+    "checks": [
+      "empty_ambient_system_prefix",
+      "runtime_source_hashes",
+      "both_dynamic_scheduler_policies",
+      "checked_execution_existing_action_entry_and_prefix",
+      "all_hooks_install_and_snapshot",
+      "reverse_uninstall_restores_originals"
+    ]
+  },
+  "notebook": {
+    "cells": 32,
+    "kernel_id": "jiyujia/arc3-021-checked-execution",
+    "sha256": "2f7a3ce5965c7301f4683d94cb9cf2d3e3711189b6bbaa1f4d8c1885d0105b49"
+  }
+}

@@ -104,3 +104,19 @@ def validate_config(config: dict[str, Any]) -> None:
             "native_payload_cells",
         )):
             raise ValueError("020 retains the shared budget, diagnostics and startup contracts.")
+    if "checked_execution" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("baseline", "checked_execution")}
+        if arms != ["baseline", "checked_execution"] or environments != expected:
+            raise ValueError("021 requires baseline then checked_execution with unchanged scheduling.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "baseline"):
+            raise ValueError("021 requires 10 stream capacity, one pass, no warmup and baseline reference.")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "preflight_before_serving",
+            "native_payload_cells",
+        )):
+            raise ValueError("021 retains the shared budget, diagnostics and startup contracts.")

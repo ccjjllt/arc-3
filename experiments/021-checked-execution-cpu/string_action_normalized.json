@@ -1,0 +1,26 @@
+{
+  "name": "string_action_normalized",
+  "calls": [
+    [
+      {
+        "action": "RIGHT"
+      }
+    ]
+  ],
+  "error": "",
+  "briefs": [
+    {
+      "attempted_actions": 1,
+      "comparison": "match",
+      "diffs": [],
+      "error": null,
+      "observed_actions": 1,
+      "planned_actions": 1,
+      "reason": "all_executed_actions_match_selected_projection",
+      "status": "completed",
+      "unattempted_suffix": 0
+    }
+  ],
+  "action_result_count": 1,
+  "stdout": "[action] RIGHT\nchecked_execution {\"attempted_actions\": 1, \"comparison\": \"match\", \"diffs\": [], \"error\": null, \"observed_actions\": 1, \"planned_actions\": 1, \"reason\": \"all_executed_actions_match_selected_projection\", \"status\": \"completed\", \"unattempted_suffix\": 0}\n{'status': 'completed', 'reason': 'all_executed_actions_match_selected_projection', 'planned_actions': 1, 'attempted_actions': 1, 'observed_actions': 1, 'unattempted_suffix': 0, 'events': [{'index': 0, 'action': {'action': 'RIGHT'}, 'before': {'observation_id': 'public-action-event:0', 'level_id': 'public-level:1', 'episode_id': 'public-session', 'terminal': False, 'boundary': None}, 'scope': 'marker-col', 'field_count': 1, 'expected_sha256': '511099592bc334186dfda67abbddaabfd99c669d865d46d4309f3d9bf44d2365', 'prediction_sha256': 'f0a1692f569a438aa04edbe4c6c6cc4f2534aed56efed587f3910e33429a2685', 'after': {'observation_id': 'public-action-event:1', 'level_id': 'public-level:1', 'episode_id': 'public-session', 'terminal': False, 'boundary': None}, 'actual_sha256': '511099592bc334186dfda67abbddaabfd99c669d865d46d4309f3d9bf44d2365', 'comparison': 'match', 'diff_count': 0, 'diffs': []}], 'claim': 'agreement/disagreement of declared observable projection only'}\n"
+}

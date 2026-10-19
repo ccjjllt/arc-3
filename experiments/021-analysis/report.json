@@ -1,0 +1,54 @@
+{
+  "kind": "021-descriptive-results",
+  "checked_at_utc": "2026-10-19T04:37:07.641155+00:00",
+  "kernel": "jiyujia/arc3-021-checked-execution",
+  "kernel_version": 1,
+  "mean_score_baseline": 36.92698949619933,
+  "mean_score_candidate": 29.35601432920581,
+  "mean_score_delta": -7.570975166993524,
+  "levels_completed": [
+    41,
+    38
+  ],
+  "wins": [
+    3,
+    0
+  ],
+  "actions": [
+    1588,
+    1687
+  ],
+  "session_minutes": 70.11,
+  "startup_minutes": 9.06,
+  "equal_arm_budget_seconds": 1800,
+  "both_arms_exit_0": true,
+  "complete_pool": true,
+  "cache_flush_confirmed": true,
+  "workers_drained": true,
+  "gpu_server_stopped": true,
+  "config_and_source_hash_match": true,
+  "preflight_passed": true,
+  "gpu_strict_util_mean_median": {
+    "baseline": [
+      90.74,
+      98.0
+    ],
+    "checked_execution": [
+      95.51,
+      98.0
+    ]
+  },
+  "adoption": {
+    "candidate_request_records": 1438,
+    "assistant_action_calls_with_pred_keyword": 0,
+    "assistant_extract_keyword": 0,
+    "assistant_scope_keyword": 0,
+    "tool_results_with_checked_execution_summary": 0,
+    "r11l_pred_dict_then_ordinary_action": 9,
+    "note": "The nine r11l hits are `pred={...}` followed by action([{MOUSE...}]), not action(..., pred=, extract=, scope=)."
+  },
+  "largest_loss": "ft09-0d8bbf25 -55.4488, 6/6 to 4/6",
+  "only_level_gain": "ar25-0c556536 +36.1111, 5/8 to 7/8",
+  "decision": "Do not submit. The checked path was not called. The score drop is not evidence that mismatch-stopping failed in play.",
+  "competition_submission_created": false
+}
