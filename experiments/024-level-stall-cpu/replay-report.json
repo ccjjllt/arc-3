@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "stall_actions": 64,
+  "source": "/tmp/arc3-community-02152bc48068",
+  "trace": "runs/022-community-dev-v4/baseline/benchmark.json",
+  "games": {
+    "tt03-63be02fb": {
+      "actions": 450,
+      "model_turns": 32,
+      "interior_changed": 444,
+      "interior_unchanged": 6,
+      "replay_levels_completed": 0,
+      "benchmark_levels_completed": 1,
+      "benchmark_actions_per_level": [
+        29,
+        421,
+        0
+      ],
+      "old_no_change_batch_fired_at": null,
+      "new_trigger": {
+        "result_index": 63,
+        "actions_on_level": 64,
+        "level_id": "level:1"
+      },
+      "new_trigger_when_counted_by_model_turn": {
+        "result_index": 13,
+        "actions_on_level": 67,
+        "level_id": "level:1"
+      },
+      "game_over_at": [],
+      "target_min": 1,
+      "target_max": 6,
+      "targets_first_40": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "benchmark_split_trigger": {
+        "result_index": 92,
+        "actions_on_level": 64,
+        "level_id": "level:2"
+      },
+      "cause": "Every logged move changes the interior. New targets spawn every 10 moves, so the target count never reaches 0 in this replay (it rises while the original two are collected). The benchmark still records a level clear at action 29; counting that split separately still opens the window once, on the following unfinished level, and not on the 29-action level."
+    },
+    "ih01-v1": {
+      "actions": 593,
+      "model_turns": 61,
+      "interior_changed": 0,
+      "interior_unchanged": 593,
+      "replay_levels_completed": 0,
+      "benchmark_levels_completed": 0,
+      "benchmark_actions_per_level": [
+        593,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_no_change_batch_fired_at": 5,
+      "new_trigger": {
+        "result_index": 63,
+        "actions_on_level": 64,
+        "level_id": "level:1"
+      },
+      "new_trigger_when_counted_by_model_turn": {
+        "result_index": 9,
+        "actions_on_level": 70,
+        "level_id": "level:1"
+      },
+      "game_over_at": [
+        100,
+        172,
+        235,
+        336,
+        397,
+        458,
+        519,
+        580
+      ],
+      "pad_hits": 126,
+      "pad_misses": 342,
+      "pad_offscreen": 13,
+      "heat_max_during_replay": 6,
+      "heaters_on_max": 2,
+      "cause": "481 of 593 actions are clicks. 126 land on the two heater pads and both pads are on at some point; the hidden heat array reaches 6, above the win threshold of 4, but never across the whole grid. The pad sprite stays color 4 and the heat array is never drawn, so all 593 interiors match. Eight GAME_OVER results match eight RESET actions. The first life is 101 actions, so 64 is reached before the first death; several later lives are about 61. Death is not level progress, so it does not clear the count."
+    }
+  },
+  "limits": [
+    "Replay uses the logged action ids on this checkout. It does not call the model.",
+    "tt03's benchmark level split was not reproduced by the engine replay and is counted as a second case.",
+    "A triggered window is not evidence that the three probe actions will raise the score."
+  ]
+}

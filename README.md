@@ -1,6 +1,6 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：终局金牌与奖金。最新推进：**2026-10-19，Asia/Shanghai**。社区开发集现有基线：10/12 全通，55/64 关，见 [社区结果](research/022-community-dev-results.md)。023 卡关探索 v3 已跑完，触发 0 次，分数差不能归到该机制，见 [023结果](research/023-stall-probe-results.md)。停批接口和 FP8 不再扩跑。正式成绩仍是 009 v2 / public 31.16。
+目标：终局金牌与奖金。最新推进：**2026-10-19，Asia/Shanghai**。社区开发集现有基线：10/12 全通，55/64 关，见 [社区结果](research/022-community-dev-results.md)。024 卡关窗口打开了 3 次，ih01 仍是 0/7，tt03 两臂都是 2/3，没有可复现的关卡收益，见 [024结果](research/024-level-stall-results.md)。023 的旧触发没有开过窗，见 [023结果](research/023-stall-probe-results.md)。停批接口和 FP8 不再扩跑。正式成绩仍是 009 v2 / public 31.16。
 
 **正式版本仍为009 v2 / submission 57101330 / public 31.16。** 10/18 API列本队jiyujia第339/4444，提交者ccjjllt。当前金牌边界参照第18名38.20（差7.04），前五48.92（差17.76）；最终看私榜、有效队数及资格。比赛截止北京时间11/3 07:59。公开开发池分数不能直接换算隐藏LB。[最新赛情、数据、奖金与配额](research/017-competition-update.md)。
 

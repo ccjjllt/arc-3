@@ -144,28 +144,44 @@ def validate_config(config: dict[str, Any]) -> None:
         expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
                     for arm in ("baseline", "stall_probe")}
         if arms != ["baseline", "stall_probe"] or environments != expected:
-            raise ValueError("023 requires baseline then stall_probe with unchanged scheduling.")
-        if len(config.get("games") or []) != 3 or config.get("requested_arm_seconds") != 600:
-            raise ValueError("023 is a 3-game, 600-second probe.")
-        if (config.get("hard_limit_seconds") != 3600 or config.get("active_streams") != 10
-                or config.get("n_passes_per_arm") != 1 or config.get("warmup_action_games") != 0
-                or config.get("reference_arm") != "baseline"):
-            raise ValueError("023 keeps the scheduler contract and a 3600-second session cap.")
+            raise ValueError("Stall probe requires baseline then stall_probe with unchanged scheduling.")
+        games = list(config.get("games") or [])
+        historical = games == ["m0r0-492f87ba", "r11l-495a7899", "sb26-7fbdac44"]
+        failure_pair = games == ["tt03-63be02fb", "ih01-v1"] and config.get("community_development") is True
+        if historical:
+            if config.get("requested_arm_seconds") != 600 or config.get("hard_limit_seconds") != 3600:
+                raise ValueError("023 stays a 3-game, 600-second probe inside a 3600-second cap.")
+        elif failure_pair:
+            if config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 5400:
+                raise ValueError("024 is the two recorded failures at 1800 seconds, session cap 5400.")
+        else:
+            raise ValueError("Stall probe only runs the recorded 023 trio or the 024 failure pair.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0 or config.get("reference_arm") != "baseline"):
+            raise ValueError("Stall probe keeps one pass, no warmup, and the baseline reference.")
         if not config.get("require_rtx_pro6000"):
-            raise ValueError("023 must refuse a non-RTX session before loading the model.")
+            raise ValueError("Stall probe must refuse a non-RTX session before loading the model.")
     if config.get("community_development"):
         allow = config.get("community_allowlist")
-        if arms != ["baseline"] or allow != config.get("games"):
+        games = list(config.get("games") or [])
+        failure_pair = games == ["tt03-63be02fb", "ih01-v1"] and "stall_probe" in arms
+        if failure_pair:
+            if not isinstance(allow, list) or any(game_id not in allow for game_id in games):
+                raise ValueError("The failure pair must stay inside the embedded development allowlist.")
+        elif arms != ["baseline"] or allow != games:
             raise ValueError("Community development runs the existing agent on its embedded allowlist only.")
         # The Kaggle payload has no experiments/ tree. When the local split file
         # is present, it must agree with that embedded list.
         split = Path(__file__).resolve().parents[2] / "experiments/020-community/solver-allowlists.json"
         if split.is_file():
             data = json.loads(split.read_text())
-            if config.get("games") != data["development"]:
-                raise ValueError("Community development games must stay the frozen 12-id list.")
-            if set(config["games"]) & (set(data["frozen"]) | set(data["reserve"])):
+            if any(game_id not in data["development"] for game_id in games):
+                raise ValueError("Community games must come from the frozen development list.")
+            if set(games) & (set(data["frozen"]) | set(data["reserve"])):
                 raise ValueError("Community development run includes a reserve or frozen id.")
-        if (config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 3600
+            if not failure_pair and games != data["development"]:
+                raise ValueError("Community development games must stay the frozen 12-id list.")
+        if not failure_pair and (
+                config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 3600
                 or config.get("n_passes_per_arm") != 1 or config.get("warmup_action_games") != 0):
             raise ValueError("Community development uses one 1800-second pass inside a 3600-second cap.")

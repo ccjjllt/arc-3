@@ -1,9 +1,12 @@
-"""023: one automatic rule-or-goal probe after a level stops making progress.
+"""024: one automatic rule-or-goal probe after a level stays unfinished.
 
-The host counts executed action batches that do not change play. The fourth
-such batch on a level appends one instruction to that tool result. The next
-three executed actions are recorded and then the window closes. RESET does
-not open it again. This does not add an action API or a standing prompt.
+The host counts executed actions on the current level. Visible pixel changes
+do not reset that count: the community failures kept moving, or changed only
+state the frame does not draw. The 64th action on a level that has not been
+completed appends one instruction to that tool result. The next three executed
+actions are recorded and then the window closes. RESET and a lost life stay
+on the same level, so they count and do not open the window again. Completing
+the level clears the count. This does not add an action API or a standing prompt.
 """
 from __future__ import annotations
 
@@ -14,15 +17,30 @@ import threading
 from .bounded_probe import GoalProbeBudget
 
 
+STALL_ACTIONS = 64
+PROBE_ACTIONS = 3
 STALL_INSTRUCTION = (
-    "stall_probe: this level has had four action batches with no visible "
-    "progress. Before repeating that plan, use at most three real actions to "
-    "distinguish a different rule from a different target. Say which outcome "
-    "you saw, then continue with that one. This window does not open again "
-    "on this level, including after RESET."
+    "stall_probe: this level has used 64 actions without completing. "
+    "Before repeating that plan, use at most three real actions to distinguish "
+    "a different rule from a different target. Say which outcome you saw, then "
+    "continue with that one. This window does not open again on this level, "
+    "including after RESET."
 )
-_NO_PROGRESS_BATCHES = 4
-_PROBE_ACTIONS = 3
+
+
+def executed_action_count(item: dict) -> int:
+    """How many actions one host result actually ran.
+
+    A tool call can carry a whole batch. Counting the batch as one step is
+    what hid tt03's 421-action level inside 24 model turns.
+    """
+    names = item.get("executed_actions")
+    if isinstance(names, list) and names:
+        return len(names)
+    count = item.get("executed_count")
+    if type(count) is int and count > 0:
+        return count
+    return 1
 
 
 class StallTracker:
@@ -35,69 +53,69 @@ class StallTracker:
         self._lock = threading.Lock()
 
     def observe(self, game_id: str, action_results: list[dict]) -> dict | None:
-        executed = [item for item in action_results if isinstance(item, dict) and item.get("executed")]
-        if not executed:
-            return None
-        levels = [item.get("level") for item in executed]
-        if any(type(level) is not int for level in levels) or len(set(levels)) != 1:
-            return None
-        level_id = "level:" + str(levels[0])
-        key = (game_id, level_id)
-        boundary = any(
-            item.get("level_completed") or item.get("game_over")
-            or item.get("run_complete") or item.get("done")
-            for item in executed
-        )
-        progressed = boundary or any(item.get("gameplay_changed") for item in executed)
+        opened: dict | None = None
+        opened_now: set[tuple[str, str]] = set()
         with self._lock:
-            if key in self.following:
-                self.following[key] -= 1
-                self.log.append({
-                    "game_id": game_id, "level_id": level_id, "following_action": True,
-                    "progressed": progressed, "boundary": boundary,
-                    "actions_left_after_this": self.following[key],
-                })
-                if boundary or self.following[key] <= 0:
-                    self.budget.close(game_id, level_id, "boundary" if boundary else "one_window_completed")
-                    self.following.pop(key, None)
-                return None
-            if boundary:
-                self._close_game(game_id, "boundary")
-            if progressed:
-                self.streak[key] = 0
-                return None
-            self.streak[key] = self.streak.get(key, 0) + 1
-            if self.streak[key] < _NO_PROGRESS_BATCHES or key in self.triggered:
-                return None
-            self.triggered.add(key)
-            self.budget.open_window(
-                game_id=game_id, level_id=level_id, trigger="repeated_plan_no_progress",
-                evidence_refs=[f"no-progress-batch:{i}" for i in range(1, _NO_PROGRESS_BATCHES + 1)],
-                alternatives={
-                    "rule": "the visible failure comes from the wrong rule",
-                    "goal": "the visible failure comes from the wrong target",
-                },
-                max_probes=_PROBE_ACTIONS,
-            )
-            self.following[key] = _PROBE_ACTIONS
-            note = {
-                "triggered": True, "game_id": game_id, "level_id": level_id,
-                "no_progress_batches": self.streak[key], "max_probe_actions": _PROBE_ACTIONS,
-                "instruction": STALL_INSTRUCTION,
-            }
-            self.log.append(note)
-            return note
-
-    def _close_game(self, game_id: str, reason: str) -> None:
-        for key in list(self.following):
-            if key[0] == game_id:
-                self.budget.close(key[0], key[1], reason)
-                self.following.pop(key, None)
+            for item in action_results:
+                if not isinstance(item, dict) or not item.get("executed"):
+                    continue
+                level = item.get("level")
+                if type(level) is not int:
+                    continue
+                key = (game_id, "level:" + str(level))
+                count = executed_action_count(item)
+                completed = bool(
+                    item.get("level_completed") or item.get("run_complete") or item.get("done")
+                )
+                # Actions in the triggering call already ran before the model
+                # can read the note, so they are not part of the probe window.
+                if key in self.following and key not in opened_now:
+                    self.following[key] -= count
+                    self.log.append({
+                        "game_id": game_id, "level_id": key[1], "following_action": True,
+                        "actions": count, "level_completed": completed,
+                        "actions_left_after_this": self.following[key],
+                    })
+                    if completed or self.following[key] <= 0:
+                        self.budget.close(
+                            game_id, key[1], "boundary" if completed else "one_window_completed")
+                        self.following.pop(key, None)
+                    if completed:
+                        self.streak[key] = 0
+                    continue
+                if completed:
+                    self.streak[key] = 0
+                    continue
+                self.streak[key] = self.streak.get(key, 0) + count
+                if self.streak[key] < STALL_ACTIONS or key in self.triggered:
+                    continue
+                self.triggered.add(key)
+                self.budget.open_window(
+                    game_id=game_id, level_id=key[1], trigger="repeated_plan_no_progress",
+                    evidence_refs=[f"same-level-actions:{self.streak[key]}"],
+                    alternatives={
+                        "rule": "the visible failure comes from the wrong rule",
+                        "goal": "the visible failure comes from the wrong target",
+                    },
+                    max_probes=PROBE_ACTIONS,
+                )
+                self.following[key] = PROBE_ACTIONS
+                opened_now.add(key)
+                opened = {
+                    "triggered": True, "game_id": game_id, "level_id": key[1],
+                    "actions_on_level": self.streak[key], "max_probe_actions": PROBE_ACTIONS,
+                    "instruction": STALL_INSTRUCTION,
+                }
+                self.log.append(opened)
+            return opened
 
     def snapshot(self) -> dict:
         with self._lock:
-            return {"events": list(self.log), "triggered_levels": len(self.triggered),
-                    "open_windows": len(self.following)}
+            return {
+                "events": list(self.log), "triggered_levels": len(self.triggered),
+                "open_windows": len(self.following), "stall_actions": STALL_ACTIONS,
+                "count": "executed_actions_on_level",
+            }
 
 
 def game_id_from_state_path(state_path) -> str:
@@ -135,7 +153,10 @@ class StallProbePatch:
     def _tool_wrapper(self, agent, state_path, arguments):
         self._bucket.actions = []
         result = self._original_tool(agent, state_path, arguments)
-        note = self.tracker.observe(game_id_from_state_path(state_path), list(getattr(self._bucket, "actions", []) or []))
+        note = self.tracker.observe(
+            game_id_from_state_path(state_path),
+            list(getattr(self._bucket, "actions", []) or []),
+        )
         if not note:
             return result
         try:
@@ -174,9 +195,12 @@ class StallProbePatch:
         self.active = False
 
     def snapshot(self) -> dict:
-        return {"name": "stall_probe", "enabled": self.active,
-                "trigger": "four_executed_batches_without_visible_progress",
-                "standing_prompt": False, **self.tracker.snapshot()}
+        return {
+            "name": "stall_probe", "enabled": self.active,
+            "trigger": "same_level_without_completion",
+            "stall_actions": STALL_ACTIONS, "standing_prompt": False,
+            **self.tracker.snapshot(),
+        }
 
 
 def install_stall_probe(tool_agent_module=None, sandbox_module=None):

@@ -1,0 +1,61 @@
+{
+  "id": "024-level-stall",
+  "kernel_id": "jiyujia/arc3-024-level-stall",
+  "kernel_title": "ARC3 024 Level Stall",
+  "purpose": "On the two community failures, count actions on an unfinished level and ask once for a rule-versus-goal probe",
+  "community_development": true,
+  "require_rtx_pro6000": true,
+  "community_source_root": "/kaggle/input/datasets/jiyujia/arc3-community-dev-02152bc",
+  "community_allowlist": [
+    "tt03-63be02fb",
+    "wk01-63be02fb",
+    "tg01-63be02fb",
+    "ms04-v1",
+    "ll04-v1",
+    "ff03-63be02fb",
+    "sp01-63be02fb",
+    "sn01-63be02fb",
+    "cr01-63be02fb",
+    "pt01-63be02fb",
+    "hn01-v1",
+    "ih01-v1"
+  ],
+  "extra_dataset_sources": [
+    "jiyujia/arc3-community-dev-02152bc"
+  ],
+  "games": ["tt03-63be02fb", "ih01-v1"],
+  "game_source": "The two development games the 1800-second baseline did not finish. Frozen and reserve games are not mounted.",
+  "game_count": 2,
+  "arm_order": ["baseline", "stall_probe"],
+  "requested_arm_seconds": 1800,
+  "budget_formula": "Same 1800-second budget as the community baseline that recorded these two failures. Two arms, two games.",
+  "hard_limit_seconds": 5400,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 1.6,
+  "reference_arm": "baseline",
+  "selection_note": "A gain counts only if stall-probe.json shows the window opened, the following actions differ from the plan that was repeating, and the level or action outcome moves in the same direction on a repeat. Do not submit from this run.",
+  "comparison_note": "Same two games, 1800s, one pass, no warmup. No checked-action API and no FP8. Engine levels are not an official score. Score stays 0 because community baselines are dropped.",
+  "arm_environment": {
+    "baseline": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"},
+    "stall_probe": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}
