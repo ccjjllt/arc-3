@@ -24,14 +24,16 @@
   ],
   "hard_limit_seconds": 5400,
   "kernel_id": "jiyujia/arc3-026-failure-repair",
-  "kernel_version": 2,
-  "notebook_sha256": "e7019d97dd9e584d9ba166a457f56f5f5e1ffae7287aa1301f8b1cca78883433",
-  "notebook_size_bytes": 773879,
+  "kernel_version": 3,
+  "notebook_sha256": "c0126f5abca0079469657703d397181a8e8a676b13b2325c19c245b68a83f3ea",
+  "notebook_size_bytes": 939194,
   "prepared_at_utc": "2026-10-19",
   "requested_arm_seconds": 1800,
   "uploaded": true,
   "url": "https://www.kaggle.com/code/jiyujia/arc3-026-failure-repair",
   "username": "jiyujia",
   "v1_failure": "KeyError action in replay loop (compact fork-input schema); fixed consumer to accept both shapes, pinned in check_026_fork.py",
-  "v1_quota_used_h": 0.17
+  "v1_quota_used_h": 0.17,
+  "v2_result": "repair_A ok (4 forks, but 0-2 post-T actions: cold-start re-exploration exhausted 250s caps); repair_B never ran (inter-arm cache-flush flake)",
+  "v3_change": "warm restart: recorded text-only conversations restored (images stripped, 163KB packed); B appends host recheck; kept={} both arms (documented)"
 }
