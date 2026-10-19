@@ -18,5 +18,6 @@
 
 ## GPU
 
-* 待推送：`kaggle kernels push -p notebooks/026-failure-repair -t 7200`（ccjjllt 身份；本地已验证凭证即此身份，配额剩 16.59h）。
-* 回收后比对：B 是否改变后续动作并通关、r11l 对照是否零误伤；增量无效或频繁误伤即停。
+* v1 ERROR：回放键名不匹配（`KeyError: action`），已修消费侧双格式兼容。
+* v2 ERROR：repair_A 成功（4 forks 回放精确），但空历史冷启动下模型把 250s 花在重探索上（0–2 个后 T 动作，~35k tokens），repair_B 没跑到（臂间 cache-flush 偶发失败）。教训：原 run 首动作耗时 50–1853s，250s 上限对冷启动根本不够；且“同状态不同知识”的对比测的是探索速度而非修复。
+* v3（RUNNING）：warm restart——录制的纯文本会话恢复（图片剥离，163KB 打包），B 追加宿主重核；kept={} 双臂一致（源码未落盘，只能自包含重定义，已记录）。若 B 在同状态下更快恢复通关且 r11l 干净，则有效。
