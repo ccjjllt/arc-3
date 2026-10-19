@@ -1,0 +1,1853 @@
+{
+  "schema_version": 1,
+  "experiment": "020-grounded-state",
+  "generated_at_utc": "2026-10-19T02:44:09.631392+00:00",
+  "coverage": {
+    "expected_games": [
+      "ft09-0d8bbf25",
+      "tr87-cd924810",
+      "ar25-0c556536",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "sb26-7fbdac44",
+      "cd82-fb555c5d",
+      "ls20-9607627b",
+      "vc33-5430563c",
+      "bp35-0a0ad940",
+      "re86-8af5384d",
+      "wa30-ee6fef47"
+    ],
+    "confirmed_complete_and_read": [
+      "ft09-0d8bbf25",
+      "tr87-cd924810",
+      "ar25-0c556536",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "sb26-7fbdac44",
+      "cd82-fb555c5d",
+      "ls20-9607627b",
+      "vc33-5430563c",
+      "bp35-0a0ad940",
+      "re86-8af5384d",
+      "wa30-ee6fef47"
+    ],
+    "not_read_pending_or_missing": [],
+    "read_count": 12,
+    "expected_count": 12
+  },
+  "method": {
+    "extractor": "scripts/analyze_018_results.py:extract_log(prefix=None)",
+    "deduplication": "tool call ID across history snapshots; code hashes counted separately, not collapsed across distinct IDs",
+    "search_scope": "parsed tool-call code only; never system prompt/reasoning/result text",
+    "code_executed": false,
+    "adoption_classification": "not_assigned",
+    "limitations": [
+      "Only calls retained in later message-history snapshots are visible; final unrecorded calls cannot be reconstructed.",
+      "Dynamic aliases, exec strings, function scope, cross-call retention and actual consumption need manual review.",
+      "No adoption pass/fail or causal conclusion is generated."
+    ]
+  },
+  "games": {
+    "ft09-0d8bbf25": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "47aaed1020b9885a2ace6ef690f49223e4f823aec8bc349ece5f3746a983b94b",
+        "bytes": 15762337
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 36,
+      "response_records": 35,
+      "fallback_response_matches": [],
+      "unique_call_ids": 35,
+      "code_call_ids": 35,
+      "unique_code_hashes": 34,
+      "repeated_code_different_call_ids": {
+        "cd57b6b5598fc6b0599aa5be88f6abb699abb422543c92f11dd8f360e2b924c4": 2
+      },
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_a4150b08e39f4556b4892889",
+          "seq": 32,
+          "source_line": 65,
+          "code_sha256": "5fae27effe7f8a800223f46936234fe9ac457814fcfbc7556b2ecf3a8a746b9f",
+          "snapshot_appearances": 7,
+          "code": "init=None\nfor h in history:\n    if h.frame is not None and h.frame.level==5: init=h.frame; break\nb0=init.ascii.split('\\n'); b1=current_frame.ascii.split('\\n')\ndiff=[(r,c,b0[r][c],b1[r][c]) for r in range(63) for c in range(64) if b0[r][c]!=b1[r][c]]\n# group by region\nfrom collections import Counter\nreg=Counter()\nfor r,c,x,y in diff:\n    ri=min(range(7),key=lambda i: abs(r-(4+8*i)) if abs(r-(4+8*i))<8 else 9)\n    ci=min(range(7),key=lambda i: abs(c-(6+8*i)) if abs(c-(6+8*i))<8 else 9)\n    reg[(ri,ci)]+=1\nprint(len(diff))\nfor k,v in sorted(reg.items()): print(k,v)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected retrieved seq32: 'group by region' is a comment; reg is a Counter, not a GroundedRegion. No API invocation in this retrieved call."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "tr87-cd924810": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/tr87-cd924810_p0_requests.jsonl",
+        "sha256": "3087593b13d206ab02c638fd0ca1dbec9df8001f8da56dcee31c9e826905219f",
+        "bytes": 41999017
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 69,
+      "response_records": 69,
+      "fallback_response_matches": [],
+      "unique_call_ids": 68,
+      "code_call_ids": 68,
+      "unique_code_hashes": 68,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_4f7966263bb44e27939c5b12",
+          "seq": 2,
+          "source_line": 5,
+          "code_sha256": "7cf78d97125cf4af701c75320cfe60d64831980fdf5e12edfaba23177070e83f",
+          "snapshot_appearances": 98,
+          "code": "nodes = current_frame.segmentation['nodes']\ndef bbox(n):\n    # compute bbox from ascii region instead\n    return None\n# use ascii to crop glyphs\nrows = current_frame.ascii.split('\\n')\ndef crop(r0,c0,r1,c1):\n    return [rows[r][c0:c1+1] for r in range(r0,r1+1)]\ndef norm(pat):\n    # trim to black pixels\n    pr0=min(r for r,row in enumerate(pat) if 'B' in row)\n    pr1=max(r for r,row in enumerate(pat) if 'B' in row)\n    pc0=min(c for r in range(pr0,pr1+1) for c,ch in enumerate(pat[r]) if ch=='B')\n    pc1=max(c for r in range(pr0,pr1+1) for c,ch in enumerate(pat[r]) if ch=='B')\n    return '\\n'.join(pat[r][pc0:pc1+1] for r in range(pr0,pr1+1))\n\ntop_S = [(4,12),(13,12),(22,12),(4,35),(13,35),(22,35)]\ntop_P = [(4,22),(13,22),(22,22),(4,45),(13,45),(22,45)]\nfor (r,c) in top_S:\n    g = norm(crop(r,c,r+6,c+6))\n    print('S',r,c,repr(g))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected retrieved seq2: region is a comment about a handwritten ASCII crop; crop/norm are ordinary helper functions, not aliases of the new APIs."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "ar25-0c556536": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+        "sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+        "bytes": 62622750
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 95,
+      "response_records": 94,
+      "fallback_response_matches": [],
+      "unique_call_ids": 94,
+      "code_call_ids": 94,
+      "unique_code_hashes": 94,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "No API names or within-call API alias bindings found in the 94 visible code calls. No positive alias evidence; this is not a proof against dynamic string construction or absent final calls."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "m0r0-492f87ba": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/m0r0-492f87ba_p0_requests.jsonl",
+        "sha256": "3763e960897822b149d7b16e81dc847595f857a5de576c85f9c0ae75f849c44c",
+        "bytes": 45450733
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 80,
+      "response_records": 79,
+      "fallback_response_matches": [],
+      "unique_call_ids": 81,
+      "code_call_ids": 81,
+      "unique_code_hashes": 81,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "No API names/within-call API aliases in visible code; dynamic construction or absent final calls are not excluded."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "r11l-495a7899": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "aae8a6e631eb7e3382cf015b3a8691a9faabbae269033b01c7f4637eebc5b47c",
+        "bytes": 40728695
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 69,
+      "response_records": 69,
+      "fallback_response_matches": [],
+      "unique_call_ids": 68,
+      "code_call_ids": 68,
+      "unique_code_hashes": 68,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 8,
+      "calls_with_helper_invocation_syntax": 3,
+      "api_syntactic_expression_counts": {
+        "region": 8
+      },
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_dda0c8ce794d4f76a766387e",
+          "seq": 2,
+          "source_line": 5,
+          "code_sha256": "fbce927234e8fa03670481a1e66cfb3eed397871052f927f5f6a5ca9c542c53e",
+          "snapshot_appearances": 88,
+          "code": "before = current_frame\nres = action([{'action':'MOUSE','row':21,'col':39}])\nprint(res.get('stop'), res.get('reason') if isinstance(res,dict) else '')\nimport json\nprint({k:v for k,v in res.items() if k in ('executed','skipped','board_changed','gameplay_changed','level_completed','game_over','done','run_complete','animation')})\nd = frame_diff(before, current_frame)\nprint({k:(v if k=='changed_cell_count' else len(v)) for k,v in d.items()})\nfor k,v in d.items():\n    if k!='changed_cell_count':\n        for e in v[:6]: print(k, e)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_ae72ceeb2a6a492d986f0e02",
+          "seq": 4,
+          "source_line": 9,
+          "code_sha256": "e541aa0572f4d03d86b199c3a2abd2a0e6f00219ce17abe72006383d6631d442",
+          "snapshot_appearances": 84,
+          "code": "before=current_frame\nres=action([{'action':'MOUSE','row':30,'col':10}])\nprint(res['executed'], res['board_changed'], res['gameplay_changed'], res['level_completed'], res['game_over'])\nd=frame_diff(before,current_frame)\nprint('changed',d['changed_cell_count'])\nfor e in d['moved'][:8]: print('M',e['color'],e['pixels'],e['from'],e['to'])\nfor e in d['appeared'][:5]: print('A',e['color'],e['bbox'])\nfor e in d['disappeared'][:5]: print('D',e['color'],e['bbox'])\nseg=current_frame.segmentation\nfor n in seg['nodes']:\n    if n['color'] in ('W','G','M','p') and n['pixels']>=12: print('big',n['color'],n['pixels'],n['boundary'][:4])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_b7f12c1174bf4b1d9ab3fa90",
+          "seq": 5,
+          "source_line": 11,
+          "code_sha256": "02136d3bd028a75bd5dc0fdd2f6aa96728f65b945c5ed8a1f81022bba7e8a035",
+          "snapshot_appearances": 82,
+          "code": "before=current_frame\nres=action([{'action':'MOUSE','row':59,'col':27}])\nprint(res['executed'],res['gameplay_changed'],res['level_completed'],res['game_over'])\nd=frame_diff(before,current_frame)\nprint('changed',d['changed_cell_count'])\nfor e in d['moved'][:10]: print('M',e['color'],e['pixels'],e['from'],e['to'])\nfor e in d['appeared'][:4]: print('A',e['color'],e['bbox'])\nfor e in d['disappeared'][:4]: print('D',e['color'],e['bbox'])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_c5faacfb15ee434e91811635",
+          "seq": 6,
+          "source_line": 13,
+          "code_sha256": "732734eca505b68cd2d7c10e367a182407217480b7aac630c61cce63afe2b562",
+          "snapshot_appearances": 80,
+          "code": "before=current_frame\nres=action([{'action':'MOUSE','row':10,'col':50}])\nprint(res['executed'],res['gameplay_changed'],res['level_completed'])\nd=frame_diff(before,current_frame)\nprint('changed',d['changed_cell_count'])\nfor e in d['moved'][:8]: print('M',e['color'],e['pixels'],e['from'],e['to'])\nfor e in d['appeared'][:3]: print('A',e['color'],e['bbox'])\nfor e in d['disappeared'][:3]: print('D',e['color'],e['bbox'])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_fd155d3ad13d41d0a0dd3e86",
+          "seq": 12,
+          "source_line": 25,
+          "code_sha256": "cc76692b78ddce2432814e1770dea901e864c136637bc98dc4179d3fc5b41311",
+          "snapshot_appearances": 68,
+          "code": "reg=current_frame.region(45,10,62,35, foreground='B')\npos=list(reg.positions())\nprint('black count', len(pos), 'sample', pos[:5], pos[-5:])\ntarget=(57,25) if (57,25) in set(pos) else pos[len(pos)//2]\nprint('click target', target, 'origin', reg.origin)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nTypeError: FrameView.region() takes 2 positional arguments but 5 positional arguments (and 1 keyword-only argument) were given",
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 1,
+              "column": 4,
+              "expression": "current_frame.region(45, 10, 62, 35, foreground='B')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 2,
+              "object_alias": "reg",
+              "property": "positions",
+              "text": "reg.positions"
+            },
+            {
+              "line": 5,
+              "object_alias": "reg",
+              "property": "origin",
+              "text": "reg.origin"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 1,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_b2b51d39538e4470a012dc71",
+          "seq": 13,
+          "source_line": 27,
+          "code_sha256": "d0db0071345aa6fa6eab7b9e139fbe1bc996cef93100d01b7dc69ba2e35a33e4",
+          "snapshot_appearances": 66,
+          "code": "reg=current_frame.region((45,10,62,35), foreground='B')\npos=set(reg.positions())\nprint('black count', len(pos))\ncands=[p for p in pos if 50<=p[0]<=60 and 15<=p[1]<=30]\nprint('cands', sorted(cands)[:8])\nt=sorted(cands)[len(sorted(cands))//2]\nbefore=current_frame\nres=action([{'action':'MOUSE','row':t[0],'col':t[1]}])\nprint('click',t,res['executed'],res['gameplay_changed'],res['level_completed'],res['game_over'])\nd=frame_diff(before,current_frame)\nprint('changed',d['changed_cell_count'])\nfor e in d['moved'][:12]: print('M',e['color'],e['pixels'],e['from'],e['to'])\nfor e in d['appeared'][:3]: print('A',e['color'],e['bbox'])\nfor e in d['disappeared'][:3]: print('D',e['color'],e['bbox'])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 1,
+              "column": 4,
+              "expression": "current_frame.region((45, 10, 62, 35), foreground='B')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "before",
+              "line": 7,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 2,
+              "object_alias": "reg",
+              "property": "positions",
+              "text": "reg.positions"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 1,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_c64038f3de1947e0a11f1e73",
+          "seq": 16,
+          "source_line": 33,
+          "code_sha256": "d8252d37c252f6b2e4acb7be06fc8d81d4eef871fb9c464895df3074811b2df5",
+          "snapshot_appearances": 60,
+          "code": "mask=[[False]*64 for _ in range(64)]\nfor (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n    reg=current_frame.region((r0,c0,r0+31,c0+31), foreground='B')\n    for (r,c) in reg.positions(): mask[r][c]=True\nimport json\n# print row-run summary of non-black interior cells\nruns=[]\nfor r in range(64):\n    row=''.join('#' if mask[r][c] else '.' for c in range(64))\n    runs.append(row)\n# print only rows that contain '.' between col 1 and 62, compressed\nfor r in range(64):\n    s=runs[r][1:63]\n    if '.' in s: print(r, s)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 3,
+              "column": 8,
+              "expression": "current_frame.region((r0, c0, r0 + 31, c0 + 31), foreground='B')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 3,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 4,
+              "object_alias": "reg",
+              "property": "positions",
+              "text": "reg.positions"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 3,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_b4e0f689cc874900a1eb33c7",
+          "seq": 17,
+          "source_line": 35,
+          "code_sha256": "3174e4a4382b123d91418a53dcdc3590c1157c0e6052c8d526bd98da93653db0",
+          "snapshot_appearances": 58,
+          "code": "mask2=[[False]*64 for _ in range(64)]\nfor (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n    for fc in ('S','g','W'):\n        reg=current_frame.region((r0,c0,r0+31,c0+31), foreground=fc)\n        for (r,c) in reg.positions(): mask2[r][c]=True\nimport pickle\ndef blk(r,c): return mask2[r][c]\nprint('probe target (28,44) blocked?', blk(28,44))\nbefore=current_frame\nres=action([{'action':'MOUSE','row':28,'col':44}])\nprint('accepted?', res['gameplay_changed'], 'level_completed', res['level_completed'])\nseg=current_frame.segmentation\nobjs={}\nfor n in seg['nodes']:\n    if n['pixels']==12 and n['color'] in ('W','G'): objs[n['color']+'12']=objs.get(n['color']+'12',[])+[(n['boundary'][0][0]+4,n['boundary'][0][1]+4)]\n    if n['pixels']==20: objs.setdefault('knot',[]).append((n['color'],(n['boundary'][0][0]+2,n['boundary'][0][1]+2)))\nprint(objs)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nImportError: Module 'pickle' is not allowed in the sandbox.",
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 4,
+              "column": 12,
+              "expression": "current_frame.region((r0, c0, r0 + 31, c0 + 31), foreground=fc)",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 4,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "before",
+              "line": 9,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 5,
+              "object_alias": "reg",
+              "property": "positions",
+              "text": "reg.positions"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 4,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_75f9e001e5de41eaa6a290c6",
+          "seq": 18,
+          "source_line": 37,
+          "code_sha256": "661873b9bcd896a0f5c5596979738cb809ff7b183ec91875c33d1ca69dc7f890",
+          "snapshot_appearances": 56,
+          "code": "def blocked_mask(frame):\n    m=[[False]*64 for _ in range(64)]\n    for (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n        for fc in ('S','g'):\n            for (r,c) in frame.region((r0,c0,r0+31,c0+31), foreground=fc).positions():\n                m[r][c]=True\n    for r in range(64): m[r][0]=True\n    for c in range(64): m[0][c]=True\n    return m\nm=blocked_mask(current_frame)\nprint('blocked at (28,44)', m[28][44], 'count', sum(map(sum,m)))\nbefore=current_frame\nres=action([{'action':'MOUSE','row':28,'col':44}])\nprint('accepted?', res['gameplay_changed'], 'win', res['level_completed'])\nseg=current_frame.segmentation\nout=[]\nfor n in seg['nodes']:\n    if (n['pixels'] in (12,20) and n['color'] in ('W','G','O','p')):\n        b=n['boundary'][0]\n        out.append((n['color'],n['pixels'],(b[0]+ (4 if n['pixels']==12 else 2), b[1]+(4 if n['pixels']==12 else 2))))\nprint(out)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [
+            {
+              "name": "blocked_mask",
+              "definition_call_id": "call_75f9e001e5de41eaa6a290c6",
+              "definition_seq": 18,
+              "definition_source_line": 37
+            }
+          ],
+          "helper_invocations": [
+            {
+              "name": "blocked_mask",
+              "definition_call_id": "call_75f9e001e5de41eaa6a290c6",
+              "definition_seq": 18,
+              "definition_source_line": 37,
+              "code_line": 10,
+              "expression": "blocked_mask(current_frame)",
+              "enclosing_function_definitions": [],
+              "note": "Named-helper syntax only; retention, actual execution and inputs require returned-log review."
+            }
+          ],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 5,
+              "column": 25,
+              "expression": "frame.region((r0, c0, r0 + 31, c0 + 31), foreground=fc)",
+              "api": "region",
+              "receiver": "frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "before",
+              "line": 12,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [
+            {
+              "line": 5,
+              "text": "frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_7b556761f26443ffb20043cc",
+          "seq": 20,
+          "source_line": 41,
+          "code_sha256": "373fccd8835c6e24c6a0a3c0b640b602779cef99aee9c29dc0ec5a05d1f759e0",
+          "snapshot_appearances": 52,
+          "code": "mprev=blocked_mask(previous_frame)\nmcur=blocked_mask(current_frame)\n# current line pixels = w components\nseg=current_frame.segmentation\nline=[p for n in seg['nodes'] if n['color']=='w' for p in [n['boundary'][0]]] if False else None\n# reconstruct w pixels via ascii rows? use region foreground w\nwcells=set()\nfor (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n    for (r,c) in current_frame.region((r0,c0,r0+31,c0+31), foreground='w').positions(): wcells.add((r,c))\nprint('w pixels', len(wcells))\nonblue=[p for p in sorted(wcells) if mprev[r0 if False else p[0]][p[1]]]\nprint('line cells over previously-blue:', onblue)\n# also knot footprint over previously blue\nknot=[(r,c) for r in range(17,22) for c in range(31,36)]\nprint('knot over previously-blue:', [p for p in knot if mprev[p[0]][p[1]]])\n# white footprint over previously blue\nwh=[(r,c) for r in range(26,31) for c in range(42,47)]\nprint('white over previously-blue:', [p for p in wh if mprev[p[0]][p[1]]])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nGroundedStateError: not_live_current_frame: historical/animation frames have no live region getter",
+          "helper_definitions": [],
+          "helper_invocations": [
+            {
+              "name": "blocked_mask",
+              "definition_call_id": "call_75f9e001e5de41eaa6a290c6",
+              "definition_seq": 18,
+              "definition_source_line": 37,
+              "code_line": 1,
+              "expression": "blocked_mask(previous_frame)",
+              "enclosing_function_definitions": [],
+              "note": "Named-helper syntax only; retention, actual execution and inputs require returned-log review."
+            },
+            {
+              "name": "blocked_mask",
+              "definition_call_id": "call_75f9e001e5de41eaa6a290c6",
+              "definition_seq": 18,
+              "definition_source_line": 37,
+              "code_line": 2,
+              "expression": "blocked_mask(current_frame)",
+              "enclosing_function_definitions": [],
+              "note": "Named-helper syntax only; retention, actual execution and inputs require returned-log review."
+            }
+          ],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 9,
+              "column": 17,
+              "expression": "current_frame.region((r0, c0, r0 + 31, c0 + 31), foreground='w')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [
+            {
+              "line": 9,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_dae9e896b46e4aa799cc08f7",
+          "seq": 21,
+          "source_line": 43,
+          "code_sha256": "a49391073596a5554b6f48d2b4c0094de0ea45dae024965221becb146f683603",
+          "snapshot_appearances": 50,
+          "code": "wcells=set()\nfor (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n    for (r,c) in current_frame.region((r0,c0,r0+31,c0+31), foreground='w').positions(): wcells.add((r,c))\npa=previous_frame.ascii.split('\\n')\nprevblue=[p for p in sorted(wcells) if pa[p[0]][p[1]]=='S']\nprint('line cells now over previously-blue:', prevblue)\nknot=[(r,c) for r in range(17,22) for c in range(31,36) if (r,c) not in wcells]\nprint('knot cells over previously-blue:', [p for p in knot if pa[p[0]][p[1]]=='S'])\nwh=[(r,c) for r in range(26,31) for c in range(42,47)]\nprint('white cells over previously-blue:', [p for p in wh if pa[p[0]][p[1]]=='S'])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 3,
+              "column": 17,
+              "expression": "current_frame.region((r0, c0, r0 + 31, c0 + 31), foreground='w')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [
+            {
+              "line": 3,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_0b6fc1279f3a4f23b538ec83",
+          "seq": 22,
+          "source_line": 45,
+          "code_sha256": "cb01d0ea88b7a525324c0feaa6b6e4587cae3f30eddbf85e021bc27e1e8e51ce",
+          "snapshot_appearances": 48,
+          "code": "wcells=set()\nfor (r0,c0) in [(0,0),(0,32),(32,0),(32,32)]:\n    for (r,c) in current_frame.region((r0,c0,r0+31,c0+31), foreground='w').positions(): wcells.add((r,c))\ndef ideal(a,b):\n    import math\n    n=max(abs(a[0]-b[0]),abs(a[1]-b[1]))\n    return set((round(a[0]+(b[0]-a[0])*t/n), round(a[1]+(b[1]-a[1])*t/n)) for t in range(n+1))\nK=(19,33); pts={'W':(28,44),'G1':(21,8),'G2':(9,49)}\nallid=set()\nfor k,v in pts.items():\n    s=ideal(K,v)\n    print(k,'ideal',len(s),'present',len(s&wcells),'missing',sorted(s-wcells)[:12])\n    allid|=s\nprint('extra drawn cells (not on ideal lines):', sorted(wcells-allid))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 3,
+              "column": 17,
+              "expression": "current_frame.region((r0, c0, r0 + 31, c0 + 31), foreground='w')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [
+            {
+              "line": 3,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_e5f38d3dd0e54f3c805ff48b",
+          "seq": 36,
+          "source_line": 73,
+          "code_sha256": "bae8298f94243b8f304f91b6c99b17165c3b48d1c06699cf4843c682379da49f",
+          "snapshot_appearances": 62,
+          "code": "before=get_state(current_frame)\nres=action([{'action':'MOUSE','row':26,'col':40}])\nafter=get_state(current_frame)\nprint('accepted', res['gameplay_changed'], 'before',before,'after',after)\nO=floor_avg([after[0],after[1],after[2]]); P=floor_avg([after[3],after[4]])\nprint('knots', O, P, 'win', res['level_completed'])\nif res['gameplay_changed']:\n    m=blocked_mask(current_frame)\n    cells=[]\n    for a,b in [(O,after[0]),(O,after[1]),(O,after[2]),(P,after[3]),(P,after[4])]: cells+=list(seg(a,b))\n    print('segments over blue now:', [c for c in cells if m[c[0]][c[1]]])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [
+            {
+              "name": "blocked_mask",
+              "definition_call_id": "call_75f9e001e5de41eaa6a290c6",
+              "definition_seq": 18,
+              "definition_source_line": 37,
+              "code_line": 8,
+              "expression": "blocked_mask(current_frame)",
+              "enclosing_function_definitions": [],
+              "note": "Named-helper syntax only; retention, actual execution and inputs require returned-log review."
+            }
+          ],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [
+        {
+          "call_id": "call_dda0c8ce794d4f76a766387e",
+          "seq": 2,
+          "source_line": 5,
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_ae72ceeb2a6a492d986f0e02",
+          "seq": 4,
+          "source_line": 9,
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_b7f12c1174bf4b1d9ab3fa90",
+          "seq": 5,
+          "source_line": 11,
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_c5faacfb15ee434e91811635",
+          "seq": 6,
+          "source_line": 13,
+          "aliases": [
+            {
+              "name": "before",
+              "line": 1,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_fd155d3ad13d41d0a0dd3e86",
+          "seq": 12,
+          "source_line": 25,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        },
+        {
+          "call_id": "call_b2b51d39538e4470a012dc71",
+          "seq": 13,
+          "source_line": 27,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "before",
+              "line": 7,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_c64038f3de1947e0a11f1e73",
+          "seq": 16,
+          "source_line": 33,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 3,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        },
+        {
+          "call_id": "call_b4e0f689cc874900a1eb33c7",
+          "seq": 17,
+          "source_line": 35,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 4,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "before",
+              "line": 9,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_75f9e001e5de41eaa6a290c6",
+          "seq": 18,
+          "source_line": 37,
+          "aliases": [
+            {
+              "name": "before",
+              "line": 12,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        }
+      ],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected direct API calls and retained blocked_mask helper. seq13 positions -> candidates -> t -> MOUSE(54,30) actually executes but is NO-OP. seq18 defines/calls blocked_mask, records retention; seq36 calls it after an effect action and uses its cells in a segment check. seq12 has argument-format error; seq20 historical-frame call is rejected before later expressions. These are real uses plus interface-boundary errors, not proof of benefit or incorrect region extraction. See r11l-adoption-note.md."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "sb26-7fbdac44": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/sb26-7fbdac44_p0_requests.jsonl",
+        "sha256": "a26514d140eaeb9dff3bb456e56747ff72273ec04a248364a901ed4ad4b0a2a8",
+        "bytes": 48240966
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 74,
+      "response_records": 73,
+      "fallback_response_matches": [],
+      "unique_call_ids": 73,
+      "code_call_ids": 73,
+      "unique_code_hashes": 57,
+      "repeated_code_different_call_ids": {
+        "8e3c231e05a80479ebddf6a15a236cc3d9bd5a3a30df1be3e6a5465cd212ef1f": 15,
+        "15d50343b32c61a30d4e73e88a403dcc64c2817c848ecd47b827ad306154aa9c": 2,
+        "b51adadac968330c7c67b9af13a6ed48dcb6a4466dbfefc997a8d5ed49a1d954": 2
+      },
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "No API names/within-call API aliases in visible code; dynamic construction or absent final calls are not excluded."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "cd82-fb555c5d": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/cd82-fb555c5d_p0_requests.jsonl",
+        "sha256": "23abd955e1603087187c31277a1d18156bfe2b17cfcaf520422db0fc8d110197",
+        "bytes": 47105783
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 75,
+      "response_records": 75,
+      "fallback_response_matches": [
+        {
+          "source": {
+            "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/requests.jsonl",
+            "sha256": "48f9a3263b95ea95bcb1a7d454532bcac2beaef759356e339b6903e0580b268e",
+            "bytes": 427850
+          },
+          "source_line": 1,
+          "game_id": "cd82-fb555c5d",
+          "request_identity_sha256": "d822aac88edb9039ecdd02fda1d08b9de80fbcc420067b42d3518c5986f6d54d",
+          "matched_request": {
+            "game_id": "cd82-fb555c5d",
+            "source": {
+              "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/cd82-fb555c5d_p0_requests.jsonl",
+              "sha256": "23abd955e1603087187c31277a1d18156bfe2b17cfcaf520422db0fc8d110197",
+              "bytes": 47105783
+            },
+            "source_line": 149
+          }
+        }
+      ],
+      "unique_call_ids": 74,
+      "code_call_ids": 74,
+      "unique_code_hashes": 74,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 1,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {
+        "region": 1
+      },
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_a782478e23a142c7a7d529e0",
+          "seq": 74,
+          "source_line": 149,
+          "code_sha256": "f4ea2a3b164581131560e62ed3c041e5f4dcdaa173f280f122d4ac019744462b",
+          "snapshot_appearances": 1,
+          "code": "reg=current_frame.region((2,1,14,15), foreground=None)\nfor i,row in enumerate(reg.raw_rows): print(2+i, row)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 1,
+              "column": 4,
+              "expression": "current_frame.region((2, 1, 14, 15), foreground=None)",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 2,
+              "object_alias": "reg",
+              "property": "raw_rows",
+              "text": "reg.raw_rows"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 1,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [
+        {
+          "call_id": "call_a782478e23a142c7a7d529e0",
+          "seq": 74,
+          "source_line": 149,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        }
+      ],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected seq74 call_a782478e23a142c7a7d529e0: reg binds current_frame.region; reg.raw_rows is printed. This is retrieval/display evidence, not demonstrated solver/planner consumption."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "ls20-9607627b": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ls20-9607627b_p0_requests.jsonl",
+        "sha256": "f50eb4705ee5b5d5615ab4fc903e23a15226c7d4e4dc776ca014344960da0d33",
+        "bytes": 18359693
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 40,
+      "response_records": 40,
+      "fallback_response_matches": [],
+      "unique_call_ids": 39,
+      "code_call_ids": 39,
+      "unique_code_hashes": 39,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_5bb60335e80242949e96fef0",
+          "seq": 20,
+          "source_line": 41,
+          "code_sha256": "a5b60f61179af2f9a2051cdcf791110940023c601e476d6366251d7b1bc6d1bc",
+          "snapshot_appearances": 40,
+          "code": "a=current_frame.ascii.split('\\n')\ngrid=[list(a[r]) for r in range(64)]\n# walkable: not charcoal 'c', not the left HUD black column region. Restrict to rows 0..54, cols 4..63\ndef walk(r,c):\n    ch=grid[r][c]\n    if ch=='c': return False\n    if r<5 or c<5: return False\n    return True\n# icon cells (blue inside box) blocked\nicon=set()\nfor n in current_frame.segmentation['nodes']:\n    if n['color']=='b' and n['pixels'] in (5,1) and n['boundary'][0][0]<30+20:\n        pass\n# identify icon pixels explicitly: rows 41-43 cols 15-17 blue\nfor r in range(39,46):\n    for c in range(13,20):\n        if grid[r][c]=='b': icon.add((r,c))\nprint('icon',sorted(icon))\nstart=(40,29)\ndef ok(r0,c0):\n    for r in range(r0,r0+5):\n        for c in range(c0,c0+5):\n            if not walk(r,c): return False\n    return True\nfrom collections import deque\nq=deque([(40,29)]); prev={(40,29):None}\ntargets=[]\nwhile q:\n    s=q.popleft()\n    r0,c0=s\n    if all((r,c) in icon or grid[r][c]=='B' for (r,c) in [(rr,cc) for rr in range(r0,r0+5) for cc in range(c0,c0+5)]):\n        targets.append(s)\n    for dr,dc,nm in ((-5,0,'UP'),(5,0,'DOWN'),(0,-5,'LEFT'),(0,5,'RIGHT')):\n        ns=(r0+dr,c0+dc)\n        if ns in prev: continue\n        if ok(*ns):\n            prev[ns]=s; q.append(ns)\nprint('reachable count',len(prev),'targets',targets)\n# reconstruct path to first target\nif targets:\n    t=targets[0]; path=[]\n    while t: \n        p=prev[t]\n        if p: path.append({(-5,0):'UP',(5,0):'DOWN',(0,-5):'LEFT',(0,5):'RIGHT'}[(t[0]-p[0],t[1]-p[1])])\n        t=p\n    path.reverse(); print('path',path,len(path))\nprint('reachable positions sorted', sorted(prev))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected retrieved seq20: region occurs only in a comment; no region method or method alias found by this index."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "vc33-5430563c": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/vc33-5430563c_p0_requests.jsonl",
+        "sha256": "ccfa866852b5e4d78524a5bbfe832b35293bab6b34c12bfa1cf06302af0b2584",
+        "bytes": 23597098
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 48,
+      "response_records": 48,
+      "fallback_response_matches": [],
+      "unique_call_ids": 47,
+      "code_call_ids": 47,
+      "unique_code_hashes": 47,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_cff70ee5c2e24e449233e651",
+          "seq": 1,
+          "source_line": 3,
+          "code_sha256": "e6a2338fa0a6d47b42edd4644cf0311c243ad433ff3225bd609f0103213ee472",
+          "snapshot_appearances": 60,
+          "code": "\nimport json\nf = current_frame\nprint(f.level, f.step, f.shape)\nseg = f.segmentation\nfor n in seg['nodes']:\n    print(n['id'], n['color'], n['pixels'], n['boundary'][:8], 'children', n['children'], 'hash', n['hash'])\nprint('adj', seg['adjacency_list'])\nprint('valid', valid_actions)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "f",
+              "line": 3,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_3174fbc4c8114ea9bbbfe345",
+          "seq": 10,
+          "source_line": 21,
+          "code_sha256": "817ddf3f933db6681d029aac7bede853079ec2edcee240ebf76760f760628ce3",
+          "snapshot_appearances": 42,
+          "code": "\nf=current_frame\nprint(f.level, f.shape)\nfor n in f.segmentation['nodes']:\n    print(n['id'], n['color'], n['pixels'], n['boundary'][:6])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_938e8a681b734cc4b12aaab5",
+          "seq": 15,
+          "source_line": 31,
+          "code_sha256": "28bbe23c88bf2758cfc26c25173171b153e5ed06ab55eb70bbcab28709a3c3e6",
+          "snapshot_appearances": 32,
+          "code": "\nf=current_frame\nfor n in f.segmentation['nodes']:\n    print(n['id'], n['color'], n['pixels'], n['boundary'][:8])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_8b189fc87990446babaa3a5e",
+          "seq": 19,
+          "source_line": 39,
+          "code_sha256": "2b4b12fc5347fc5091cdaccce86710ed74d057c6e1c7b163b3c54c9d03372ff7",
+          "snapshot_appearances": 24,
+          "code": "\nf=current_frame\nprint(f.level, f.shape, 'P', f.segmentation['nodes'][0]['pixels'])\nfor n in f.segmentation['nodes']:\n    b=n['boundary']\n    print(n['id'], n['color'], n['pixels'], b[:6], '...' if len(b)>6 else '')\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_4928886fcdda4549bbd57b76",
+          "seq": 47,
+          "source_line": 95,
+          "code_sha256": "15755ae5b4b660e97b600f2fb0bc473fc1f651288325c4fc7b8e80c05d9d5b1d",
+          "snapshot_appearances": 2,
+          "code": "\nfr=current_frame\nrows=fr.ascii.split('\\n')\nfor n in fr.segmentation['nodes']:\n    b=n['boundary']\n    if n['pixels']>1500: continue\n    print(n['color'],n['pixels'],(min(p[0] for p in b),min(p[1] for p in b),max(p[0] for p in b),max(p[1] for p in b)))\nprint('--- levels by column probe')\nfor col,name in [(5,'W1'),(22,'W2'),(35,'W3'),(49,'W4'),(61,'W5')]:\n    t=[r for r in range(1,64) if rows[r][col]=='W']\n    print(name, 'topW', min(t) if t else -1)\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [],
+          "api_calls": [],
+          "aliases": [
+            {
+              "name": "fr",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [
+        {
+          "call_id": "call_cff70ee5c2e24e449233e651",
+          "seq": 1,
+          "source_line": 3,
+          "aliases": [
+            {
+              "name": "f",
+              "line": 3,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_3174fbc4c8114ea9bbbfe345",
+          "seq": 10,
+          "source_line": 21,
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_938e8a681b734cc4b12aaab5",
+          "seq": 15,
+          "source_line": 31,
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_8b189fc87990446babaa3a5e",
+          "seq": 19,
+          "source_line": 39,
+          "aliases": [
+            {
+              "name": "f",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        },
+        {
+          "call_id": "call_4928886fcdda4549bbd57b76",
+          "seq": 47,
+          "source_line": 95,
+          "aliases": [
+            {
+              "name": "fr",
+              "line": 2,
+              "kind": "frame_alias",
+              "receiver": "current_frame"
+            }
+          ]
+        }
+      ],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected retrieved seq1/10/15/19/47: f/fr alias current_frame, but accesses are segmentation/ascii/shape/level. No region method invocation in these alias calls."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "bp35-0a0ad940": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/bp35-0a0ad940_p0_requests.jsonl",
+        "sha256": "269099ce8234d7cd1505295f7ce272a126169940a8483c0f5ac63c6fe93f4439",
+        "bytes": 28458799
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 55,
+      "response_records": 55,
+      "fallback_response_matches": [],
+      "unique_call_ids": 54,
+      "code_call_ids": 54,
+      "unique_code_hashes": 54,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 3,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {
+        "region": 4
+      },
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_4399c28d9d0b4d24a455b393",
+          "seq": 19,
+          "source_line": 39,
+          "code_sha256": "98dea74cf6bdecd3f8eebfcb5f6d2eff5859e4b05851b677d1bf2d91ae4eea90",
+          "snapshot_appearances": 42,
+          "code": "reg = current_frame.region((36,28,48,54), foreground='S')\nfor i,row in enumerate(reg.cells):\n    print(36+i, ''.join(row))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 1,
+              "column": 6,
+              "expression": "current_frame.region((36, 28, 48, 54), foreground='S')",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 2,
+              "object_alias": "reg",
+              "property": "cells",
+              "text": "reg.cells"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 1,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_9e544ec6c3824f428d5f370f",
+          "seq": 20,
+          "source_line": 41,
+          "code_sha256": "b257c6846837dd7c7023d6771e94ea53d2e1851f7886931613c6ab323d986bd3",
+          "snapshot_appearances": 40,
+          "code": "reg = current_frame.region((36,40,44,56))\nfor i,row in enumerate(reg.cells):\n    print(36+i, ''.join(row))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 1,
+              "column": 6,
+              "expression": "current_frame.region((36, 40, 44, 56))",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 2,
+              "object_alias": "reg",
+              "property": "cells",
+              "text": "reg.cells"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 1,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_4190481a1fc544d08b7bf4e5",
+          "seq": 21,
+          "source_line": 43,
+          "code_sha256": "5339b569348639d5ff02944cf559d443fce832718ee1a99490b8d46df35e0b11",
+          "snapshot_appearances": 38,
+          "code": "f0=history[0].frame\nreg0=f0.region((36,17,43,26))\nprint('room1 start:')\nfor i,row in enumerate(reg0.cells): print(36+i,''.join(row))\nreg2=current_frame.region((36,41,43,50))\nprint('room2 now:')\nfor i,row in enumerate(reg2.cells): print(36+i,''.join(row))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nGroundedStateError: not_live_current_frame: historical/animation frames have no live region getter",
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [
+            {
+              "line": 2,
+              "column": 5,
+              "expression": "f0.region((36, 17, 43, 26))",
+              "api": "region",
+              "receiver": "f0",
+              "resolution": "attribute_name"
+            },
+            {
+              "line": 5,
+              "column": 5,
+              "expression": "current_frame.region((36, 41, 43, 50))",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "aliases": [
+            {
+              "name": "reg0",
+              "line": 2,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "f0",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "reg2",
+              "line": 5,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ],
+          "region_object_uses": [
+            {
+              "line": 4,
+              "object_alias": "reg0",
+              "property": "cells",
+              "text": "reg0.cells"
+            },
+            {
+              "line": 7,
+              "object_alias": "reg2",
+              "property": "cells",
+              "text": "reg2.cells"
+            }
+          ],
+          "attribute_references": [
+            {
+              "line": 2,
+              "text": "f0.region"
+            },
+            {
+              "line": 5,
+              "text": "current_frame.region"
+            }
+          ],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_227da3312c5843e2b143be92",
+          "seq": 42,
+          "source_line": 85,
+          "code_sha256": "5e51e4e0035267d2dbf0eba87a8878d03586f130cd9479d524f8e853fea9ac1e",
+          "snapshot_appearances": 22,
+          "code": "\ndef grid(f):\n    return f.ascii.split('\\n')\n\ndef best_shift(a, b, lo=-55, hi=55, skip=((36,42),(0,64))):\n    # find dy in [lo,hi] maximizing agreement of cells, ignoring player box rows/cols region in both frames\n    best=None\n    R=64; C=64\n    for dy in range(lo,hi+1):\n        score=0; tot=0\n        for r in range(R):\n            r2=r+dy\n            if r2<0 or r2>=R: continue\n            rowa=a[r]; rowb=b[r2]\n            for c in range(C):\n                if skip and skip[0][0]<=r<=skip[0][1] and skip[1][0]<=c<=skip[1][1]: continue\n                ca=rowa[c]\n                if ca in 'bp': continue   # player colors unreliable\n                cb=rowb[c]\n                tot+=1\n                if ca==cb: score+=1\n        if tot and (best is None or score/tot>best[1]): best=(dy,score/tot,tot)\n    return best\n\nprev=history[-2].frame if len(history)>1 else None\nprint('hist len',len(history))\nprint('shift prev->cur', best_shift(grid(previous_frame), grid(current_frame)))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [
+        {
+          "call_id": "call_4399c28d9d0b4d24a455b393",
+          "seq": 19,
+          "source_line": 39,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        },
+        {
+          "call_id": "call_9e544ec6c3824f428d5f370f",
+          "seq": 20,
+          "source_line": 41,
+          "aliases": [
+            {
+              "name": "reg",
+              "line": 1,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        },
+        {
+          "call_id": "call_4190481a1fc544d08b7bf4e5",
+          "seq": 21,
+          "source_line": 43,
+          "aliases": [
+            {
+              "name": "reg0",
+              "line": 2,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "f0",
+              "resolution": "attribute_name"
+            },
+            {
+              "name": "reg2",
+              "line": 5,
+              "kind": "region_result_binding",
+              "api": "region",
+              "receiver": "current_frame",
+              "resolution": "attribute_name"
+            }
+          ]
+        }
+      ],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected seq19/20/21 and comment-only seq42. reg/reg0/reg2 are region-result aliases, not callable-method aliases. seq21 f0=history[0].frame raises not_live_current_frame on its first region call; the later current_frame.region syntax in that same code is not evidence of execution. seq19/20 print reg.cells; no adoption verdict assigned."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "re86-8af5384d": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/re86-8af5384d_p0_requests.jsonl",
+        "sha256": "205b4e3e9b137b1573a0cccb0efb923b24eda0e189e9b45fde77801a184f0378",
+        "bytes": 21520386
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 48,
+      "response_records": 47,
+      "fallback_response_matches": [],
+      "unique_call_ids": 48,
+      "code_call_ids": 48,
+      "unique_code_hashes": 48,
+      "repeated_code_different_call_ids": {},
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [
+        {
+          "call_id": "call_cbe4bae4e7734d45966ffb66",
+          "seq": 26,
+          "source_line": 51,
+          "code_sha256": "356e73606f71772bb6621e11efb33f5aee2ac57b927535923a5783be84d08919",
+          "snapshot_appearances": 40,
+          "code": "def dots_now():\n    seg = current_frame.segmentation; byid={n['id']:n for n in seg['nodes']}\n    out=[]\n    for n in seg['nodes']:\n        if n['color']=='c' and n['pixels']==8:\n            for ch in n['children']:\n                d=byid[ch]; out.append((d['boundary'][0][0],d['boundary'][0][1],d['color']))\n    return sorted(out)\nprint('before', dots_now(), 'W', wp(current_frame.ascii.split('\\n')))\naction(press_dir(1,'UP'))\na=current_frame.ascii.split('\\n')\nprint('after up1 W', wp(a), 'dots', dots_now())\nprint('box18 region', a[17][12:19], a[18][12:19], a[19][12:19])\nprint('bar', a[63].count('p'))\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        },
+        {
+          "call_id": "call_c0846fd8518e4d67a457b619",
+          "seq": 46,
+          "source_line": 91,
+          "code_sha256": "c560158042565d261589537b48446dff5bd8368d4ecd4a9677afa1ced4018bfc",
+          "snapshot_appearances": 5,
+          "code": "before=current_frame.ascii.split('\\n')\nr=action(press_dir(6,'DOWN')+press_dir(2,'LEFT'))\nafter=current_frame.ascii.split('\\n')\nd=frame_diff()\nprint('W', wp(after), 'cc', d['changed_cell_count'], 'completed', r.get('level_completed'))\nfor k in ('appeared','disappeared','changed_color','resized','rotated'):\n    v=d.get(k)\n    if v:\n        for e in v[:8]: print(k, {kk:e[kk] for kk in e if kk in ('color','at_before','at_after','bbox','pixels','before_color','after_color')})\nprint('counts', {k:len(pix(after,k)) for k in ('b','Y','w','W','B','c')})\nprint('gray region', [after[rr][27:37] for rr in (28,31,34,35)])\n",
+          "has_tool_result": true,
+          "execution_evidence": "tool_result_recorded_in_later_history",
+          "observed_result_error": null,
+          "helper_definitions": [],
+          "helper_invocations": [],
+          "ast_error": null,
+          "code_mentions": [
+            "region"
+          ],
+          "api_calls": [],
+          "aliases": [],
+          "region_object_uses": [],
+          "attribute_references": [],
+          "alias_limit": "Static within-call lexical hints; function/branch scopes and inter-call persistence require semantic review."
+        }
+      ],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "Inspected seq26 and46: region is descriptive print text; r is an action result, not a region or callable-method alias."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    },
+    "wa30-ee6fef47": {
+      "source": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/wa30-ee6fef47_p0_requests.jsonl",
+        "sha256": "e94e6a15716851f76b3a2bb3632dc95e7c0e40b0939f182c1a0d78c4af7e2ba5",
+        "bytes": 19010447
+      },
+      "download_completion": "explicitly_confirmed_by_root",
+      "request_records": 40,
+      "response_records": 39,
+      "fallback_response_matches": [],
+      "unique_call_ids": 39,
+      "code_call_ids": 39,
+      "unique_code_hashes": 35,
+      "repeated_code_different_call_ids": {
+        "47749c265c0e9736b73223579e533b126957f4e7909d3a3cf24083fc348c25a2": 3,
+        "55b6ce9fd5f347ce4ac61c62d0d4969bed7e716fb1506fd4fe2d7955e1fc9ac8": 3
+      },
+      "calls_with_api_syntax": 0,
+      "calls_with_helper_invocation_syntax": 0,
+      "api_syntactic_expression_counts": {},
+      "ast_errors_in_retrieved_calls": 0,
+      "calls": [],
+      "alias_candidates": [],
+      "manual_alias_review": {
+        "status": "retrieved_calls_reviewed",
+        "reviewer": "Codex static review, not human annotation",
+        "scope": "Retrieved API/code references and within-call alias candidates only; no logged code execution.",
+        "note": "No API names/within-call API aliases in visible code; dynamic construction or absent final calls are not excluded."
+      },
+      "extractor_issues": [],
+      "orphan_result_ids": [],
+      "scope": "Retrieval only; property references or successful tool return do not prove planning/action consumption."
+    }
+  },
+  "fallback_response_evidence": {
+    "source": {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/requests.jsonl",
+      "sha256": "48f9a3263b95ea95bcb1a7d454532bcac2beaef759356e339b6903e0580b268e",
+      "bytes": 427850
+    },
+    "identity_fields": [
+      "messages",
+      "tools",
+      "action",
+      "analysis_step",
+      "request_index_within_turn",
+      "tool_choice",
+      "chat_template_kwargs"
+    ],
+    "matches": [
+      {
+        "source": {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/requests.jsonl",
+          "sha256": "48f9a3263b95ea95bcb1a7d454532bcac2beaef759356e339b6903e0580b268e",
+          "bytes": 427850
+        },
+        "source_line": 1,
+        "game_id": "cd82-fb555c5d",
+        "request_identity_sha256": "d822aac88edb9039ecdd02fda1d08b9de80fbcc420067b42d3518c5986f6d54d",
+        "matched_request": {
+          "game_id": "cd82-fb555c5d",
+          "source": {
+            "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/cd82-fb555c5d_p0_requests.jsonl",
+            "sha256": "23abd955e1603087187c31277a1d18156bfe2b17cfcaf520422db0fc8d110197",
+            "bytes": 47105783
+          },
+          "source_line": 149
+        }
+      }
+    ],
+    "issues": [],
+    "coverage_note": "Unmatched records remain unresolved while some per-game logs are pending; no ownership is guessed."
+  },
+  "source_hashes": {
+    "extractor": "5ff5476889439a15ca82dc29e848d17019da668e7729a2936922bc5e24ffc223",
+    "indexer": "6e9a9866507be41b4faf61858c1573528041915fdeb25b8d231f8242ed27f6ff"
+  },
+  "retrieval_totals": {
+    "unique_call_ids_summed_per_game": 720,
+    "unique_call_ids_global": 720,
+    "cross_game_call_id_duplicates": [],
+    "code_call_ids": 720,
+    "games_with_direct_api_syntax": [
+      "r11l-495a7899",
+      "cd82-fb555c5d",
+      "bp35-0a0ad940"
+    ],
+    "calls_with_direct_api_syntax": 12,
+    "syntactic_expression_counts_not_dynamic_execution_counts": {
+      "region": 13
+    },
+    "helper_only_additional_call_refs": [
+      {
+        "game_id": "r11l-495a7899",
+        "call_id": "call_e5f38d3dd0e54f3c805ff48b",
+        "seq": 36,
+        "source_line": 73
+      }
+    ],
+    "manual_evidence_note": "r11l has returned region data consumed in an executed click and retained-helper diagnostics. Other references, errors and absent API syntax do not support a blanket all-adopted/all-not-adopted conclusion.",
+    "adoption_pass_assigned": false
+  }
+}

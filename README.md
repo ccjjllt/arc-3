@@ -1,6 +1,6 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：终局金牌与奖金。最新推进：**2026-10-19，Asia/Shanghai**。当前总入口是 [020研究冲刺交接](docs/handoff/020-research-sprint.md)：主线改为精确状态直接进入求解程序、预测失配停批、有限替代假设探索，并扩大到按家族冻结的社区验证集。**020精确状态通道已经实现，12游戏配对实验已上传 jiyujia v1；正式新分数尚未产生。** 019 FP8 PLE保持独立限时支线。
+目标：终局金牌与奖金。最新推进：**2026-10-19，Asia/Shanghai**。当前总入口是 [021实施交接](docs/handoff/021-implementation-handoff.md)：按020实际结果交接代码、未完成接入与下一候选实施步骤。研究方向仍包括精确状态传递、预测失配停批、有限探索及按家族冻结的社区验证。**020 v1已完成：12游戏同预算41.2112→26.5081（−14.7031），44→36关，不提交原版。** 当前接续见[实施交接](docs/handoff/021-implementation-handoff.md)，正式新分数尚未产生。 019 FP8 PLE保持独立限时支线。
 
 **正式版本仍为009 v2 / submission 57101330 / public 31.16。** 10/18 API列本队jiyujia第339/4444，提交者ccjjllt。当前金牌边界参照第18名38.20（差7.04），前五48.92（差17.76）；最终看私榜、有效队数及资格。比赛截止北京时间11/3 07:59。公开开发池分数不能直接换算隐藏LB。[最新赛情、数据、奖金与配额](research/017-competition-update.md)。
 
@@ -16,15 +16,15 @@
 | 016 pace全25 | 47.1340→47.4634；105→111关，全通8→7 | 去最大正向r11l后其余24局−1.5205，未过非单游戏门 |
 | 018观察状态保真 | 67.0106→63.7827；22→22关，全通2→1 | 已COMPLETE；两游戏有具体纠错，但ar25仍转抄错误，不晋升/不扩跑 |
 | 019 FP8 PLE | CPU v1在运行库身份检查即退出，未采样权重、未启动GPU | 实际wheel两处差异已定位，修复后限时继续；无速度/质量结论 |
-| 020 精确状态通道 | 真实sandbox两例直接消费观察值；12游戏×两臂各1800秒，jiyujia v1已上传 | 等待在线采用与分数；不混入018、FP8或执行/探索改动 |
+| 020 精确状态通道 | jiyujia v1 COMPLETE；41.2112→26.5081，44→36关，全通3→1 | 同预算明显回退，不提交原版；按结果交接后续实现 |
 
 [016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；020改为复用008区域读取器直接交付程序输入；FP8作为支线，均不叠加018提示。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 
 **017深度研究完成：**刷新500队榜单、148文件清单及规则；审计19本公开Notebook；补读10/15 stop-and-report论文、OPINE-World v3消融及作者控制代码。现有底座已有自动续聊，选取016请求仅1次自然无工具stop，故不优先增加全局汇报；新验证API和整套Lexicon也缺足够采用证据。FP8 PLE有可核查权重/配置/loader路径，保留为独立吞吐与数值候选，不能把主机表减半当作释放显存或涨分。[Notebook审计](research/017-notebook-update.md)、[前沿研究](research/017-frontier-update.md)。
 
-**GPU执行更新：**020已向jiyujia上传私有断网RTX PRO 6000实验v1，最大90分钟，共享一次加载、10流容量；[实际启动记录](experiments/020-launch.json)。上传不等于已开始求解或已有结果。018经jiyujia运行，已COMPLETE并取回全部输出；会话内部43.13分钟（0.71886h），启动9.33分钟，两臂1000秒求解GPU采样平均91.75%/90.40%、中位数均98%。已共享一次加载并关闭服务。通用配额API增量不能当作本作业计费或剩余RTX额度；实际会话与账户统计分开。没有新正式提交。
+**GPU执行更新：**020 jiyujia v1已COMPLETE，两臂各1800秒、12游戏完整；会话70.40分钟，启动9.55分钟，GPU求解采样平均92.22%/90.81%、中位98.5%/98%。服务已关闭，[实际记录](experiments/020-launch.json)。018经jiyujia运行，已COMPLETE并取回全部输出；会话内部43.13分钟（0.71886h），启动9.33分钟，两臂1000秒求解GPU采样平均91.75%/90.40%、中位数均98%。已共享一次加载并关闭服务。通用配额API增量不能当作本作业计费或剩余RTX额度；实际会话与账户统计分开。没有新正式提交。
 
-较早研究：003有效反证提示0次；006暂态交付后整体回退；007保留旧函数但净分回退；008有69份保存区域CPU核对，020已完成接入并发起在线验证。基线继续使用dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next。历史计划、结果和运行原件保留，不能把旧的“下一步/运行中/余额”当当前状态。
+较早研究：003有效反证提示0次；006暂态交付后整体回退；007保留旧函数但净分回退；008有69份保存区域CPU核对，020已完成接入和一轮在线验证，整体回退。基线继续使用dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next。历史计划、结果和运行原件保留，不能把旧的“下一步/运行中/余额”当当前状态。
 
 ## 研究入口
 
@@ -49,7 +49,8 @@
 | [017 计划](docs/plan/017-research-next.md) / [017 进展](docs/progress/017-research-next.md) | 最新赛情/数据、19本Notebook、前沿消融和1281调用审计；选择018 |
 | [018 计划](docs/plan/018-observation-grounding.md) / [018 进展](docs/progress/018-observation-grounding.md) | 已完成四游戏短筛，均分−3.2279；具体纠错与新误编码并存，不晋升 |
 | [019 计划](docs/plan/019-fp8-ple.md) / [019 进展](docs/progress/019-fp8-ple.md) | FP8 PLE独立系统候选，实际权重CPU预检与GPU微基准分开 |
-| [020交接](docs/handoff/020-research-sprint.md) / [状态通道](research/020-state-channel.md) | 当前研究主线、正式提交节奏、真实sandbox消费与12游戏在线候选 |
+| [021实施交接](docs/handoff/021-implementation-handoff.md) / [020结果](research/020-results-analysis.md) | 用户接手入口；020完整结果、实际采用、可复用代码与未完成接入 |
+| [020原计划](docs/handoff/020-research-sprint.md) / [状态通道](research/020-state-channel.md) | 保留实验前优先级、正式提交节奏与真实sandbox消费证据 |
 | [020执行与探索](research/020-behavior-mechanisms.md) / [社区验证](research/020-community-validation.md) | 独立行为机制、40家族代表、12开发/12预留/16冻结；未接入部分单独说明 |
 | [数据研究](research/data-findings.md) | 25 游戏 / 183 关、SDK、真实动作接口与手动实验 |
 | [Notebook 研究](research/notebook-findings.md) | 版本、得分证据、源码差异、依赖及原始运行记录 |

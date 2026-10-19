@@ -1,0 +1,5350 @@
+{
+  "arms": {
+    "baseline": {
+      "games": 12,
+      "mean_AE": 41.21124734079125,
+      "mean_completion_ceiling": 41.507936507936506,
+      "mean_efficiency_gap": 0.2966891671452569,
+      "wins": 3,
+      "state_counts": {
+        "won": 3,
+        "cancelled": 9
+      },
+      "levels_completed": 44,
+      "number_of_levels": 86,
+      "actions": 1476,
+      "reset_actions": 1,
+      "analyzer_tokens": 1097359,
+      "history_tokens": 1064170,
+      "final_tokens": 0,
+      "recorded_tokens": 1064170,
+      "unattached_tokens": 33189,
+      "uncached_input_tokens": 0
+    },
+    "grounded_state": {
+      "games": 12,
+      "mean_AE": 26.50812272252543,
+      "mean_completion_ceiling": 28.181216931216934,
+      "mean_efficiency_gap": 1.6730942086915004,
+      "wins": 1,
+      "state_counts": {
+        "cancelled": 11,
+        "won": 1
+      },
+      "levels_completed": 36,
+      "number_of_levels": 86,
+      "actions": 1825,
+      "reset_actions": 5,
+      "analyzer_tokens": 1069298,
+      "history_tokens": 1004794,
+      "final_tokens": 0,
+      "recorded_tokens": 1004794,
+      "unattached_tokens": 64504,
+      "uncached_input_tokens": 0
+    }
+  },
+  "delta": {
+    "mean_AE": -14.703124618265822,
+    "mean_completion_ceiling": -13.326719576719572,
+    "mean_efficiency_gap": 1.3764050415462434,
+    "levels_completed": -8,
+    "wins": -2,
+    "actions": 349,
+    "analyzer_tokens": -28061,
+    "recorded_tokens": -59376,
+    "unattached_tokens": 31315,
+    "uncached_input_tokens": 0
+  },
+  "games": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "baseline": {
+        "game_id": "ft09-0d8bbf25",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 115.0,
+        "cap_adjustment": -15.0,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "state": "won",
+        "actions": 87,
+        "actions_per_level": [
+          4,
+          7,
+          14,
+          24,
+          23,
+          15
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 70639,
+        "history_tokens": 70639,
+        "final_tokens": 0,
+        "recorded_tokens": 70639,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 4,
+            "baseline_actions": 43,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 12,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 14,
+            "baseline_actions": 23,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 24,
+            "baseline_actions": 28,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 23,
+            "baseline_actions": 65,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 15,
+            "baseline_actions": 37,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 32.857142857142854
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "ft09-0d8bbf25",
+        "AE": 47.61904761904761,
+        "reported_AE": 47.61904761904761,
+        "uncapped_AE": 54.761904761904766,
+        "cap_adjustment": -7.142857142857153,
+        "completion_ceiling": 47.61904761904761,
+        "efficiency_gap": 0.0,
+        "levels_completed": 4,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 89,
+        "actions_per_level": [
+          6,
+          7,
+          14,
+          22,
+          40,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 73724,
+        "history_tokens": 65604,
+        "final_tokens": 0,
+        "recorded_tokens": 65604,
+        "unattached_tokens": 8120,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 6,
+            "baseline_actions": 43,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 12,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 14,
+            "baseline_actions": 23,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 22,
+            "baseline_actions": 28,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 40,
+            "baseline_actions": 65,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 37,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -52.38095238095239,
+      "levels_delta": -2,
+      "mean_score_contribution": -4.365079365079366,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -60.238095238095234,
+        "cap_adjustment_delta": 7.857142857142847
+      },
+      "leave_one_out_mean_delta": -11.27786754893068
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "baseline": {
+        "game_id": "tr87-cd924810",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 115.0,
+        "cap_adjustment": -15.0,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "state": "won",
+        "actions": 215,
+        "actions_per_level": [
+          28,
+          32,
+          28,
+          35,
+          44,
+          48
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 89009,
+        "history_tokens": 89009,
+        "final_tokens": 0,
+        "recorded_tokens": 89009,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 28,
+            "baseline_actions": 54,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 32,
+            "baseline_actions": 58,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 28,
+            "baseline_actions": 40,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 35,
+            "baseline_actions": 45,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 44,
+            "baseline_actions": 71,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 48,
+            "baseline_actions": 146,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 32.857142857142854
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "tr87-cd924810",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 106.97856880491983,
+        "cap_adjustment": -6.978568804919831,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "state": "won",
+        "actions": 338,
+        "actions_per_level": [
+          39,
+          86,
+          39,
+          29,
+          65,
+          80
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 93223,
+        "history_tokens": 93223,
+        "final_tokens": 0,
+        "recorded_tokens": 93223,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 39,
+            "baseline_actions": 54,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 86,
+            "baseline_actions": 58,
+            "level_AE": 45.48404542996214,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 4.331813850472584
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 39,
+            "baseline_actions": 40,
+            "level_AE": 105.19395134779748,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 15.027707335399642
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 29,
+            "baseline_actions": 45,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 65,
+            "baseline_actions": 71,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 80,
+            "baseline_actions": 146,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 32.857142857142854
+          }
+        ]
+      },
+      "score_delta": 0.0,
+      "levels_delta": 0,
+      "mean_score_contribution": 0.0,
+      "score_decomposition": {
+        "shared_completed_levels": -8.021431195080154,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 8.021431195080169
+      },
+      "leave_one_out_mean_delta": -16.039772310835442
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "baseline": {
+        "game_id": "ar25-0c556536",
+        "AE": 41.66666666666667,
+        "reported_AE": 41.66666666666667,
+        "uncapped_AE": 47.91666666666667,
+        "cap_adjustment": -6.25,
+        "completion_ceiling": 41.66666666666667,
+        "efficiency_gap": 0.0,
+        "levels_completed": 5,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 193,
+        "actions_per_level": [
+          19,
+          24,
+          54,
+          23,
+          30,
+          43,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 107655,
+        "history_tokens": 105315,
+        "final_tokens": 0,
+        "recorded_tokens": 105315,
+        "unattached_tokens": 2340,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 19,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 24,
+            "baseline_actions": 50,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 54,
+            "baseline_actions": 75,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "baseline_actions": 37,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 30,
+            "baseline_actions": 89,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 15.972222222222221
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 43,
+            "baseline_actions": 159,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 233,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 73,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "ar25-0c556536",
+        "AE": 58.333333333333336,
+        "reported_AE": 58.333333333333336,
+        "uncapped_AE": 67.08333333333334,
+        "cap_adjustment": -8.750000000000007,
+        "completion_ceiling": 58.333333333333336,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 214,
+        "actions_per_level": [
+          20,
+          23,
+          54,
+          23,
+          37,
+          57,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 100536,
+        "history_tokens": 87543,
+        "final_tokens": 0,
+        "recorded_tokens": 87543,
+        "unattached_tokens": 12993,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 32,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 23,
+            "baseline_actions": 50,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 54,
+            "baseline_actions": 75,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "baseline_actions": 37,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 37,
+            "baseline_actions": 89,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 15.972222222222221
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 57,
+            "baseline_actions": 159,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 19.166666666666668
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 233,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 73,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": 16.666666666666664,
+      "levels_delta": 1,
+      "mean_score_contribution": 1.3888888888888886,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 19.166666666666668,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -2.500000000000007
+      },
+      "leave_one_out_mean_delta": -17.554923825986954
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "baseline": {
+        "game_id": "m0r0-492f87ba",
+        "AE": 28.57142857142857,
+        "reported_AE": 28.57142857142857,
+        "uncapped_AE": 32.85714285714286,
+        "cap_adjustment": -4.285714285714292,
+        "completion_ceiling": 28.57142857142857,
+        "efficiency_gap": 0.0,
+        "levels_completed": 3,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 189,
+        "actions_per_level": [
+          27,
+          39,
+          123,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 110786,
+        "history_tokens": 106229,
+        "final_tokens": 0,
+        "recorded_tokens": 106229,
+        "unattached_tokens": 4557,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 27,
+            "baseline_actions": 30,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 39,
+            "baseline_actions": 111,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 123,
+            "baseline_actions": 203,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 500,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 237,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "m0r0-492f87ba",
+        "AE": 14.285714285714285,
+        "reported_AE": 14.285714285714285,
+        "uncapped_AE": 15.714285714285715,
+        "cap_adjustment": -1.4285714285714306,
+        "completion_ceiling": 14.285714285714285,
+        "efficiency_gap": 0.0,
+        "levels_completed": 2,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 95,
+        "actions_per_level": [
+          30,
+          35,
+          30,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 107334,
+        "history_tokens": 104271,
+        "final_tokens": 0,
+        "recorded_tokens": 104271,
+        "unattached_tokens": 3063,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 30,
+            "baseline_actions": 30,
+            "level_AE": 100.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 4.761904761904762
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 35,
+            "baseline_actions": 111,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 30,
+            "baseline_actions": 203,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 500,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 237,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -14.285714285714285,
+      "levels_delta": -1,
+      "mean_score_contribution": -1.1904761904761905,
+      "score_decomposition": {
+        "shared_completed_levels": -0.7142857142857144,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -16.428571428571427,
+        "cap_adjustment_delta": 2.857142857142861
+      },
+      "leave_one_out_mean_delta": -14.741071012134142
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "baseline": {
+        "game_id": "r11l-495a7899",
+        "AE": 28.57142857142857,
+        "reported_AE": 28.57142857142857,
+        "uncapped_AE": 32.85714285714286,
+        "cap_adjustment": -4.285714285714292,
+        "completion_ceiling": 28.57142857142857,
+        "efficiency_gap": 0.0,
+        "levels_completed": 3,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 33,
+        "actions_per_level": [
+          7,
+          13,
+          13,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 110096,
+        "history_tokens": 105764,
+        "final_tokens": 0,
+        "recorded_tokens": 105764,
+        "unattached_tokens": 4332,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 22,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 13,
+            "baseline_actions": 33,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 10.952380952380953
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 13,
+            "baseline_actions": 51,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 52,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 49,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "r11l-495a7899",
+        "AE": 4.761904761904762,
+        "reported_AE": 4.761904761904762,
+        "uncapped_AE": 5.476190476190476,
+        "cap_adjustment": -0.7142857142857144,
+        "completion_ceiling": 4.761904761904762,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 15,
+        "actions_per_level": [
+          7,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 115612,
+        "history_tokens": 112608,
+        "final_tokens": 0,
+        "recorded_tokens": 112608,
+        "unattached_tokens": 3004,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 7,
+            "baseline_actions": 22,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 8,
+            "baseline_actions": 33,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 51,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 26,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 52,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 49,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -23.809523809523807,
+      "levels_delta": -2,
+      "mean_score_contribution": -1.984126984126984,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -27.38095238095238,
+        "cap_adjustment_delta": 3.5714285714285774
+      },
+      "leave_one_out_mean_delta": -13.875270146333277
+    },
+    {
+      "game_id": "sb26-7fbdac44",
+      "baseline": {
+        "game_id": "sb26-7fbdac44",
+        "AE": 25.733560090702948,
+        "reported_AE": 25.733560090702944,
+        "uncapped_AE": 25.733560090702948,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 27.77777777777778,
+        "efficiency_gap": 2.0442176870748305,
+        "levels_completed": 4,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 117,
+        "actions_per_level": [
+          16,
+          20,
+          21,
+          20,
+          40,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 95614,
+        "history_tokens": 95614,
+        "final_tokens": 0,
+        "recorded_tokens": 95614,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 18,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 28,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 21,
+            "baseline_actions": 18,
+            "level_AE": 73.46938775510203,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 6.1224489795918355
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 19,
+            "level_AE": 90.25,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 10.027777777777779
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 40,
+            "baseline_actions": 31,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 23,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 58,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 18,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "sb26-7fbdac44",
+        "AE": 21.910953060420322,
+        "reported_AE": 21.910953060420322,
+        "uncapped_AE": 21.910953060420322,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 27.77777777777778,
+        "efficiency_gap": 5.866824717357456,
+        "levels_completed": 4,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 109,
+        "actions_per_level": [
+          11,
+          28,
+          22,
+          23,
+          25,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 72497,
+        "history_tokens": 66433,
+        "final_tokens": 0,
+        "recorded_tokens": 66433,
+        "unattached_tokens": 6064,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 11,
+            "baseline_actions": 18,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 28,
+            "baseline_actions": 28,
+            "level_AE": 100.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 5.555555555555555
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 22,
+            "baseline_actions": 18,
+            "level_AE": 66.94214876033058,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 5.578512396694215
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "baseline_actions": 19,
+            "level_AE": 68.24196597353497,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 7.582440663726108
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 25,
+            "baseline_actions": 31,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 23,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 58,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 18,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -3.822607030282626,
+      "levels_delta": 0,
+      "mean_score_contribution": -0.3185505858568855,
+      "score_decomposition": {
+        "shared_completed_levels": -3.822607030282625,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.0
+      },
+      "leave_one_out_mean_delta": -15.692262580809746
+    },
+    {
+      "game_id": "cd82-fb555c5d",
+      "baseline": {
+        "game_id": "cd82-fb555c5d",
+        "AE": 100.0,
+        "reported_AE": 100.0,
+        "uncapped_AE": 104.77237981994224,
+        "cap_adjustment": -4.772379819942245,
+        "completion_ceiling": 100.0,
+        "efficiency_gap": 0.0,
+        "levels_completed": 6,
+        "number_of_levels": 6,
+        "state": "won",
+        "actions": 152,
+        "actions_per_level": [
+          43,
+          29,
+          26,
+          16,
+          17,
+          21
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 86852,
+        "history_tokens": 86852,
+        "final_tokens": 0,
+        "recorded_tokens": 86852,
+        "unattached_tokens": 0,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 43,
+            "baseline_actions": 55,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 5.476190476190476
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 29,
+            "baseline_actions": 8,
+            "level_AE": 7.609988109393578,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.7247607723231979
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 26,
+            "baseline_actions": 41,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 21,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 21.904761904761905
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 17,
+            "baseline_actions": 23,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 27.38095238095238
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 21,
+            "baseline_actions": 23,
+            "level_AE": 115.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 32.857142857142854
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "cd82-fb555c5d",
+        "AE": 4.90298519144673,
+        "reported_AE": 4.90298519144673,
+        "uncapped_AE": 4.90298519144673,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 14.285714285714285,
+        "efficiency_gap": 9.382729094267555,
+        "levels_completed": 2,
+        "number_of_levels": 6,
+        "state": "cancelled",
+        "actions": 121,
+        "actions_per_level": [
+          60,
+          26,
+          35,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 106415,
+        "history_tokens": 101698,
+        "final_tokens": 0,
+        "recorded_tokens": 101698,
+        "unattached_tokens": 4717,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 60,
+            "baseline_actions": 55,
+            "level_AE": 84.02777777777777,
+            "weight": 1,
+            "weight_fraction": 0.047619047619047616,
+            "uncapped_game_contribution": 4.001322751322751
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 26,
+            "baseline_actions": 8,
+            "level_AE": 9.467455621301776,
+            "weight": 2,
+            "weight_fraction": 0.09523809523809523,
+            "uncapped_game_contribution": 0.9016624401239787
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 35,
+            "baseline_actions": 41,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 21,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.19047619047619047,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 23,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.23809523809523808,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 23,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.2857142857142857,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -95.09701480855327,
+      "levels_delta": -4,
+      "mean_score_contribution": -7.924751234046106,
+      "score_decomposition": {
+        "shared_completed_levels": -1.2979660570669447,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -98.57142857142856,
+        "cap_adjustment_delta": 4.772379819942245
+      },
+      "leave_one_out_mean_delta": -7.394589146421507
+    },
+    {
+      "game_id": "ls20-9607627b",
+      "baseline": {
+        "game_id": "ls20-9607627b",
+        "AE": 2.055376252760319,
+        "reported_AE": 2.055376252760319,
+        "uncapped_AE": 2.055376252760319,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 3.571428571428571,
+        "efficiency_gap": 1.516052318668252,
+        "levels_completed": 1,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 109,
+        "actions_per_level": [
+          29,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 84781,
+        "history_tokens": 77408,
+        "final_tokens": 0,
+        "recorded_tokens": 77408,
+        "unattached_tokens": 7373,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 29,
+            "baseline_actions": 22,
+            "level_AE": 57.550535077288934,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 2.055376252760319
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 80,
+            "baseline_actions": 123,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 73,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 84,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 192,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 186,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "ls20-9607627b",
+        "AE": 2.7657142857142856,
+        "reported_AE": 2.7657142857142856,
+        "uncapped_AE": 2.7657142857142856,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 3.571428571428571,
+        "efficiency_gap": 0.8057142857142856,
+        "levels_completed": 1,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 166,
+        "actions_per_level": [
+          25,
+          141,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 66587,
+        "history_tokens": 51178,
+        "final_tokens": 0,
+        "recorded_tokens": 51178,
+        "unattached_tokens": 15409,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 25,
+            "baseline_actions": 22,
+            "level_AE": 77.44,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 2.7657142857142856
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 141,
+            "baseline_actions": 123,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 73,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 84,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 96,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 192,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 186,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": 0.7103380329539664,
+      "levels_delta": 0,
+      "mean_score_contribution": 0.059194836079497194,
+      "score_decomposition": {
+        "shared_completed_levels": 0.7103380329539664,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.0
+      },
+      "leave_one_out_mean_delta": -16.104348495649436
+    },
+    {
+      "game_id": "vc33-5430563c",
+      "baseline": {
+        "game_id": "vc33-5430563c",
+        "AE": 35.714285714285715,
+        "reported_AE": 35.714285714285715,
+        "uncapped_AE": 37.99978867286559,
+        "cap_adjustment": -2.285502958579876,
+        "completion_ceiling": 35.714285714285715,
+        "efficiency_gap": 0.0,
+        "levels_completed": 4,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 96,
+        "actions_per_level": [
+          13,
+          10,
+          26,
+          46,
+          1,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 106910,
+        "history_tokens": 104702,
+        "final_tokens": 0,
+        "recorded_tokens": 104702,
+        "unattached_tokens": 2208,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 13,
+            "baseline_actions": 7,
+            "level_AE": 28.994082840236686,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 1.0355029585798816
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 10,
+            "baseline_actions": 18,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 8.214285714285714
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 26,
+            "baseline_actions": 44,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 12.321428571428571
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 46,
+            "baseline_actions": 61,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 16.428571428571427
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 1,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 34,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 152,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "vc33-5430563c",
+        "AE": 19.415786072912542,
+        "reported_AE": 19.415786072912542,
+        "uncapped_AE": 19.415786072912542,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 21.428571428571427,
+        "efficiency_gap": 2.0127853556588846,
+        "levels_completed": 3,
+        "number_of_levels": 7,
+        "state": "cancelled",
+        "actions": 126,
+        "actions_per_level": [
+          16,
+          19,
+          38,
+          53,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 111498,
+        "history_tokens": 109669,
+        "final_tokens": 0,
+        "recorded_tokens": 109669,
+        "unattached_tokens": 1829,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 16,
+            "baseline_actions": 7,
+            "level_AE": 19.140625,
+            "weight": 1,
+            "weight_fraction": 0.03571428571428571,
+            "uncapped_game_contribution": 0.68359375
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 19,
+            "baseline_actions": 18,
+            "level_AE": 89.75069252077562,
+            "weight": 2,
+            "weight_fraction": 0.07142857142857142,
+            "uncapped_game_contribution": 6.410763751483972
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 38,
+            "baseline_actions": 44,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.10714285714285714,
+            "uncapped_game_contribution": 12.321428571428571
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 53,
+            "baseline_actions": 61,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.14285714285714285,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.17857142857142858,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 34,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.21428571428571427,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 152,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.25,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -16.298499641373173,
+      "levels_delta": -1,
+      "mean_score_contribution": -1.3582083034477643,
+      "score_decomposition": {
+        "shared_completed_levels": -2.1554311713816228,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": -16.428571428571427,
+        "cap_adjustment_delta": 2.285502958579876
+      },
+      "leave_one_out_mean_delta": -14.55809052525606
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "baseline": {
+        "game_id": "bp35-0a0ad940",
+        "AE": 2.2222222222222223,
+        "reported_AE": 2.2222222222222223,
+        "uncapped_AE": 2.5555555555555554,
+        "cap_adjustment": -0.33333333333333304,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 45,
+        "actions_per_level": [
+          18,
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 109654,
+        "history_tokens": 106553,
+        "final_tokens": 0,
+        "recorded_tokens": 106553,
+        "unattached_tokens": 3101,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 18,
+            "baseline_actions": 21,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 27,
+            "baseline_actions": 48,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 44,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 38,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 33,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 87,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 86,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 163,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "bp35-0a0ad940",
+        "AE": 0.8477508650519032,
+        "reported_AE": 0.8477508650519032,
+        "uncapped_AE": 0.8477508650519032,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 1.374471357170319,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 56,
+        "actions_per_level": [
+          34,
+          22,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 1,
+        "analyzer_tokens": 105037,
+        "history_tokens": 100831,
+        "final_tokens": 0,
+        "recorded_tokens": 100831,
+        "unattached_tokens": 4206,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 34,
+            "baseline_actions": 21,
+            "level_AE": 38.148788927335644,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 0.8477508650519032
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 22,
+            "baseline_actions": 48,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 44,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 38,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 33,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 87,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 86,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 131,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 163,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -1.374471357170319,
+      "levels_delta": 0,
+      "mean_score_contribution": -0.11453927976419326,
+      "score_decomposition": {
+        "shared_completed_levels": -1.7078046905036521,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.33333333333333304
+      },
+      "leave_one_out_mean_delta": -15.914820369274503
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "baseline": {
+        "game_id": "re86-8af5384d",
+        "AE": 27.77777777777778,
+        "reported_AE": 27.77777777777778,
+        "uncapped_AE": 31.944444444444446,
+        "cap_adjustment": -4.166666666666668,
+        "completion_ceiling": 27.77777777777778,
+        "efficiency_gap": 0.0,
+        "levels_completed": 4,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 169,
+        "actions_per_level": [
+          21,
+          37,
+          48,
+          48,
+          15,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 65488,
+        "history_tokens": 62612,
+        "final_tokens": 0,
+        "recorded_tokens": 62612,
+        "unattached_tokens": 2876,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 21,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 37,
+            "baseline_actions": 42,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 48,
+            "baseline_actions": 86,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 48,
+            "baseline_actions": 108,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 15,
+            "baseline_actions": 189,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 139,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 424,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 241,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "re86-8af5384d",
+        "AE": 41.66666666666667,
+        "reported_AE": 41.66666666666667,
+        "uncapped_AE": 47.91666666666667,
+        "cap_adjustment": -6.25,
+        "completion_ceiling": 41.66666666666667,
+        "efficiency_gap": 0.0,
+        "levels_completed": 5,
+        "number_of_levels": 8,
+        "state": "cancelled",
+        "actions": 270,
+        "actions_per_level": [
+          20,
+          38,
+          47,
+          66,
+          88,
+          11,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 68294,
+        "history_tokens": 65324,
+        "final_tokens": 0,
+        "recorded_tokens": 65324,
+        "unattached_tokens": 2970,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 20,
+            "baseline_actions": 26,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.027777777777777776,
+            "uncapped_game_contribution": 3.1944444444444446
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 38,
+            "baseline_actions": 42,
+            "level_AE": 115.0,
+            "weight": 2,
+            "weight_fraction": 0.05555555555555555,
+            "uncapped_game_contribution": 6.388888888888889
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 47,
+            "baseline_actions": 86,
+            "level_AE": 115.0,
+            "weight": 3,
+            "weight_fraction": 0.08333333333333333,
+            "uncapped_game_contribution": 9.583333333333334
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 66,
+            "baseline_actions": 108,
+            "level_AE": 115.0,
+            "weight": 4,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 12.777777777777779
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 88,
+            "baseline_actions": 189,
+            "level_AE": 115.0,
+            "weight": 5,
+            "weight_fraction": 0.1388888888888889,
+            "uncapped_game_contribution": 15.972222222222221
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 11,
+            "baseline_actions": 139,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.16666666666666666,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 424,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.19444444444444445,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 241,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.2222222222222222,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": 13.888888888888893,
+      "levels_delta": 1,
+      "mean_score_contribution": 1.1574074074074077,
+      "score_decomposition": {
+        "shared_completed_levels": 0.0,
+        "new_completed_levels": 15.972222222222221,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": -2.083333333333332
+      },
+      "leave_one_out_mean_delta": -17.3023985734617
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "baseline": {
+        "game_id": "wa30-ee6fef47",
+        "AE": 2.2222222222222223,
+        "reported_AE": 2.2222222222222223,
+        "uncapped_AE": 2.5555555555555554,
+        "cap_adjustment": -0.33333333333333304,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 0.0,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 71,
+        "actions_per_level": [
+          41,
+          30,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 0,
+        "analyzer_tokens": 59875,
+        "history_tokens": 53473,
+        "final_tokens": 0,
+        "recorded_tokens": 53473,
+        "unattached_tokens": 6402,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 41,
+            "baseline_actions": 71,
+            "level_AE": 115.0,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 2.5555555555555554
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 30,
+            "baseline_actions": 119,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 183,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 98,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 368,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 68,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 79,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 442,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 415,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "grounded_state": {
+        "game_id": "wa30-ee6fef47",
+        "AE": 1.5876165280927186,
+        "reported_AE": 1.5876165280927186,
+        "uncapped_AE": 1.5876165280927186,
+        "cap_adjustment": 0.0,
+        "completion_ceiling": 2.2222222222222223,
+        "efficiency_gap": 0.6346056941295037,
+        "levels_completed": 1,
+        "number_of_levels": 9,
+        "state": "cancelled",
+        "actions": 226,
+        "actions_per_level": [
+          84,
+          142,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "reset_actions": 2,
+        "analyzer_tokens": 48541,
+        "history_tokens": 46412,
+        "final_tokens": 0,
+        "recorded_tokens": 46412,
+        "unattached_tokens": 2129,
+        "uncached_input_tokens": 0,
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 84,
+            "baseline_actions": 71,
+            "level_AE": 71.44274376417233,
+            "weight": 1,
+            "weight_fraction": 0.022222222222222223,
+            "uncapped_game_contribution": 1.5876165280927186
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 142,
+            "baseline_actions": 119,
+            "level_AE": 0.0,
+            "weight": 2,
+            "weight_fraction": 0.044444444444444446,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 183,
+            "level_AE": 0.0,
+            "weight": 3,
+            "weight_fraction": 0.06666666666666667,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 98,
+            "level_AE": 0.0,
+            "weight": 4,
+            "weight_fraction": 0.08888888888888889,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 368,
+            "level_AE": 0.0,
+            "weight": 5,
+            "weight_fraction": 0.1111111111111111,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 68,
+            "level_AE": 0.0,
+            "weight": 6,
+            "weight_fraction": 0.13333333333333333,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 79,
+            "level_AE": 0.0,
+            "weight": 7,
+            "weight_fraction": 0.15555555555555556,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 442,
+            "level_AE": 0.0,
+            "weight": 8,
+            "weight_fraction": 0.17777777777777778,
+            "uncapped_game_contribution": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "baseline_actions": 415,
+            "level_AE": 0.0,
+            "weight": 9,
+            "weight_fraction": 0.2,
+            "uncapped_game_contribution": 0.0
+          }
+        ]
+      },
+      "score_delta": -0.6346056941295037,
+      "levels_delta": 0,
+      "mean_score_contribution": -0.05288380784412531,
+      "score_decomposition": {
+        "shared_completed_levels": -0.9679390274628368,
+        "new_completed_levels": 0.0,
+        "lost_completed_levels": 0.0,
+        "cap_adjustment_delta": 0.33333333333333304
+      },
+      "leave_one_out_mean_delta": -15.982080884096394
+    }
+  ],
+  "timing": {
+    "baseline": {
+      "deadline_benchmark_second": 1799.999727,
+      "runs": {
+        "ft09-0d8bbf25": {
+          "start_benchmark_second": 0.105303,
+          "last_action_benchmark_second": 1100.832896403,
+          "finish_benchmark_second": 1101.021525181,
+          "last_action_to_finish_seconds": 0.18862877800006572,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 150.32283521900007
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 194.66340046499994
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 511.5500915960001
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 618.754739337
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 993.195042862
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 1100.832896403
+            }
+          ],
+          "actions_on_completed_levels": 87,
+          "actions_on_uncompleted_levels": 0
+        },
+        "tr87-cd924810": {
+          "start_benchmark_second": 0.118372,
+          "last_action_benchmark_second": 1518.8248180149997,
+          "finish_benchmark_second": 1519.387702324,
+          "last_action_to_finish_seconds": 0.5628843090003102,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 280.9003562480001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 358.98747876000004
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 426.513575371
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 541.5368547720001
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 735.256584443
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 1518.8248180149997
+            }
+          ],
+          "actions_on_completed_levels": 215,
+          "actions_on_uncompleted_levels": 0
+        },
+        "ar25-0c556536": {
+          "start_benchmark_second": 0.135582,
+          "last_action_benchmark_second": 1748.9827950410001,
+          "finish_benchmark_second": 1800.145442275,
+          "last_action_to_finish_seconds": 51.162647233999905,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 88.69819331100007
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 297.4336362790001
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 598.205290432
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 718.8942280699999
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 1161.6487279260002
+            }
+          ],
+          "actions_on_completed_levels": 150,
+          "actions_on_uncompleted_levels": 43
+        },
+        "m0r0-492f87ba": {
+          "start_benchmark_second": 0.144253,
+          "last_action_benchmark_second": 1743.0503249499998,
+          "finish_benchmark_second": 1810.437623277,
+          "last_action_to_finish_seconds": 67.38729832700028,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 346.8520401409999
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 704.0123851760001
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1743.0503249499998
+            }
+          ],
+          "actions_on_completed_levels": 189,
+          "actions_on_uncompleted_levels": 0
+        },
+        "r11l-495a7899": {
+          "start_benchmark_second": 0.179035,
+          "last_action_benchmark_second": 1652.112211431,
+          "finish_benchmark_second": 1800.14516494,
+          "last_action_to_finish_seconds": 148.03295350899998,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 287.99367895600005
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 930.7516075539999
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1652.112211431
+            }
+          ],
+          "actions_on_completed_levels": 33,
+          "actions_on_uncompleted_levels": 0
+        },
+        "sb26-7fbdac44": {
+          "start_benchmark_second": 0.192494,
+          "last_action_benchmark_second": 1732.710247909,
+          "finish_benchmark_second": 1800.492980994,
+          "last_action_to_finish_seconds": 67.78273308500002,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 124.9081925040001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 435.99881031000007
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 596.94274293
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 659.532591148
+            }
+          ],
+          "actions_on_completed_levels": 77,
+          "actions_on_uncompleted_levels": 40
+        },
+        "cd82-fb555c5d": {
+          "start_benchmark_second": 0.201743,
+          "last_action_benchmark_second": 1660.2121383959998,
+          "finish_benchmark_second": 1660.704856838,
+          "last_action_to_finish_seconds": 0.4927184420002959,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 552.3817358019999
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1113.2046167100002
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1334.19360521
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1416.380436814
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 1570.5280710819998
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 1660.2121383959998
+            }
+          ],
+          "actions_on_completed_levels": 152,
+          "actions_on_uncompleted_levels": 0
+        },
+        "ls20-9607627b": {
+          "start_benchmark_second": 0.224348,
+          "last_action_benchmark_second": 1690.493046915,
+          "finish_benchmark_second": 1805.1292599119997,
+          "last_action_to_finish_seconds": 114.6362129969998,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 653.5113117369999
+            }
+          ],
+          "actions_on_completed_levels": 29,
+          "actions_on_uncompleted_levels": 80
+        },
+        "vc33-5430563c": {
+          "start_benchmark_second": 0.238641,
+          "last_action_benchmark_second": 1768.8068571009999,
+          "finish_benchmark_second": 1800.2100443099998,
+          "last_action_to_finish_seconds": 31.403187208999952,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 201.48801571600004
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 314.523132426
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 627.0277650360001
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1598.605248594
+            }
+          ],
+          "actions_on_completed_levels": 95,
+          "actions_on_uncompleted_levels": 1
+        },
+        "bp35-0a0ad940": {
+          "start_benchmark_second": 0.266706,
+          "last_action_benchmark_second": 1726.036381429,
+          "finish_benchmark_second": 1800.1760747000003,
+          "last_action_to_finish_seconds": 74.1396932710004,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 705.428026722
+            }
+          ],
+          "actions_on_completed_levels": 18,
+          "actions_on_uncompleted_levels": 27
+        },
+        "re86-8af5384d": {
+          "start_benchmark_second": 0.307228,
+          "last_action_benchmark_second": 1714.0236544819998,
+          "finish_benchmark_second": 1800.2195748099996,
+          "last_action_to_finish_seconds": 86.19592032799983,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 814.3428662020001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 984.46000162
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 1160.1760459349996
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1361.2340086449997
+            }
+          ],
+          "actions_on_completed_levels": 154,
+          "actions_on_uncompleted_levels": 15
+        },
+        "wa30-ee6fef47": {
+          "start_benchmark_second": 0.319675,
+          "last_action_benchmark_second": 1696.3600876519997,
+          "finish_benchmark_second": 1800.1594888529996,
+          "last_action_to_finish_seconds": 103.79940120099991,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 1304.938680346
+            }
+          ],
+          "actions_on_completed_levels": 41,
+          "actions_on_uncompleted_levels": 30
+        }
+      }
+    },
+    "grounded_state": {
+      "deadline_benchmark_second": 1799.999695,
+      "runs": {
+        "ft09-0d8bbf25": {
+          "start_benchmark_second": 0.15479,
+          "last_action_benchmark_second": 1012.2677144459999,
+          "finish_benchmark_second": 1800.0616279399997,
+          "last_action_to_finish_seconds": 787.7939134939998,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 314.3523545419998
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 359.9413744359999
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 418.0849626169997
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 591.0098364139999
+            }
+          ],
+          "actions_on_completed_levels": 49,
+          "actions_on_uncompleted_levels": 40
+        },
+        "tr87-cd924810": {
+          "start_benchmark_second": 0.16784,
+          "last_action_benchmark_second": 1763.3308248079998,
+          "finish_benchmark_second": 1764.076043511,
+          "last_action_to_finish_seconds": 0.7452187030003188,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 353.59708674999996
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 573.4517352749998
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 651.3175408350002
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 713.3221538020001
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 1281.014599312
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 1763.3308248079998
+            }
+          ],
+          "actions_on_completed_levels": 338,
+          "actions_on_uncompleted_levels": 0
+        },
+        "ar25-0c556536": {
+          "start_benchmark_second": 0.183176,
+          "last_action_benchmark_second": 1554.6792138800006,
+          "finish_benchmark_second": 1800.232844435,
+          "last_action_to_finish_seconds": 245.55363055499947,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 71.28757206700038
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 330.43787911000027
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 659.0282017010004
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 757.2959990310001
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 1165.921488893
+            },
+            {
+              "level": 6,
+              "at_benchmark_second": 1554.6792138800006
+            }
+          ],
+          "actions_on_completed_levels": 214,
+          "actions_on_uncompleted_levels": 0
+        },
+        "m0r0-492f87ba": {
+          "start_benchmark_second": 0.193176,
+          "last_action_benchmark_second": 1712.8428933970001,
+          "finish_benchmark_second": 1818.327564003,
+          "last_action_to_finish_seconds": 105.48467060599978,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 542.3353434060002
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 781.2864877549998
+            }
+          ],
+          "actions_on_completed_levels": 65,
+          "actions_on_uncompleted_levels": 30
+        },
+        "r11l-495a7899": {
+          "start_benchmark_second": 0.237081,
+          "last_action_benchmark_second": 1756.3878041830005,
+          "finish_benchmark_second": 1804.7330985780002,
+          "last_action_to_finish_seconds": 48.345294394999655,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 165.94596228900014
+            }
+          ],
+          "actions_on_completed_levels": 7,
+          "actions_on_uncompleted_levels": 8
+        },
+        "sb26-7fbdac44": {
+          "start_benchmark_second": 0.251727,
+          "last_action_benchmark_second": 1540.9328326109996,
+          "finish_benchmark_second": 1800.154302021,
+          "last_action_to_finish_seconds": 259.2214694100003,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 54.4734476739997
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 393.9736077469999
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 494.1254357059999
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 971.4321745999997
+            }
+          ],
+          "actions_on_completed_levels": 84,
+          "actions_on_uncompleted_levels": 25
+        },
+        "cd82-fb555c5d": {
+          "start_benchmark_second": 0.260923,
+          "last_action_benchmark_second": 1755.9388044829996,
+          "finish_benchmark_second": 1820.03471294,
+          "last_action_to_finish_seconds": 64.0959084570004,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 613.2789527150001
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 1210.3673633820001
+            }
+          ],
+          "actions_on_completed_levels": 86,
+          "actions_on_uncompleted_levels": 35
+        },
+        "ls20-9607627b": {
+          "start_benchmark_second": 0.293064,
+          "last_action_benchmark_second": 820.5733284579997,
+          "finish_benchmark_second": 1800.0697078919998,
+          "last_action_to_finish_seconds": 979.4963794340001,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 276.3679493619998
+            }
+          ],
+          "actions_on_completed_levels": 25,
+          "actions_on_uncompleted_levels": 141
+        },
+        "vc33-5430563c": {
+          "start_benchmark_second": 0.307162,
+          "last_action_benchmark_second": 1779.0709816469998,
+          "finish_benchmark_second": 1806.49355293,
+          "last_action_to_finish_seconds": 27.422571283000252,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 131.32529125000013
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 200.824126809
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 417.0888828040001
+            }
+          ],
+          "actions_on_completed_levels": 73,
+          "actions_on_uncompleted_levels": 53
+        },
+        "bp35-0a0ad940": {
+          "start_benchmark_second": 0.338334,
+          "last_action_benchmark_second": 1739.9775741260005,
+          "finish_benchmark_second": 1816.1848646820004,
+          "last_action_to_finish_seconds": 76.20729055599986,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 730.9452297390003
+            }
+          ],
+          "actions_on_completed_levels": 34,
+          "actions_on_uncompleted_levels": 22
+        },
+        "re86-8af5384d": {
+          "start_benchmark_second": 0.379005,
+          "last_action_benchmark_second": 1690.3000043089999,
+          "finish_benchmark_second": 1800.639069088,
+          "last_action_to_finish_seconds": 110.33906477900018,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 663.080784216
+            },
+            {
+              "level": 2,
+              "at_benchmark_second": 727.596399325
+            },
+            {
+              "level": 3,
+              "at_benchmark_second": 834.3598855359999
+            },
+            {
+              "level": 4,
+              "at_benchmark_second": 1205.5089215690002
+            },
+            {
+              "level": 5,
+              "at_benchmark_second": 1554.4296660109997
+            }
+          ],
+          "actions_on_completed_levels": 259,
+          "actions_on_uncompleted_levels": 11
+        },
+        "wa30-ee6fef47": {
+          "start_benchmark_second": 0.393899,
+          "last_action_benchmark_second": 1667.3503806659999,
+          "finish_benchmark_second": 1800.1783030800004,
+          "last_action_to_finish_seconds": 132.82792241400057,
+          "post_deadline_action_count": 0,
+          "post_deadline_completed_levels": [],
+          "level_completion_times": [
+            {
+              "level": 1,
+              "at_benchmark_second": 1160.9491474150002
+            }
+          ],
+          "actions_on_completed_levels": 84,
+          "actions_on_uncompleted_levels": 142
+        }
+      }
+    }
+  },
+  "largest_positive_contributor": "ar25-0c556536",
+  "levels_costs": {
+    "baseline": {
+      "ft09-0d8bbf25": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 4,
+            "first_history_index": 0,
+            "last_history_index": 3,
+            "action_attached_tokens": 9849,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 150.21753221900008,
+            "elapsed_since_previous_level_last_action_seconds": 150.21753221900008
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "first_history_index": 4,
+            "last_history_index": 10,
+            "action_attached_tokens": 3034,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 194.55809746499995,
+            "elapsed_since_previous_level_last_action_seconds": 44.34056524599987
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 14,
+            "first_history_index": 11,
+            "last_history_index": 24,
+            "action_attached_tokens": 21845,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 511.4447885960001,
+            "elapsed_since_previous_level_last_action_seconds": 316.88669113100013
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 24,
+            "first_history_index": 25,
+            "last_history_index": 48,
+            "action_attached_tokens": 6701,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 618.649436337,
+            "elapsed_since_previous_level_last_action_seconds": 107.20464774099992
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 23,
+            "first_history_index": 49,
+            "last_history_index": 71,
+            "action_attached_tokens": 23129,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 993.089739862,
+            "elapsed_since_previous_level_last_action_seconds": 374.440303525
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 15,
+            "first_history_index": 72,
+            "last_history_index": 86,
+            "action_attached_tokens": 6081,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1100.727593403,
+            "elapsed_since_previous_level_last_action_seconds": 107.63785354099991
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "tr87-cd924810": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 28,
+            "first_history_index": 0,
+            "last_history_index": 27,
+            "action_attached_tokens": 18452,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 280.7819842480001,
+            "elapsed_since_previous_level_last_action_seconds": 280.7819842480001
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 32,
+            "first_history_index": 28,
+            "last_history_index": 59,
+            "action_attached_tokens": 5442,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 358.86910676,
+            "elapsed_since_previous_level_last_action_seconds": 78.08712251199995
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 28,
+            "first_history_index": 60,
+            "last_history_index": 87,
+            "action_attached_tokens": 4368,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 426.395203371,
+            "elapsed_since_previous_level_last_action_seconds": 67.52609661099996
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 35,
+            "first_history_index": 88,
+            "last_history_index": 122,
+            "action_attached_tokens": 6637,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 541.4184827720001,
+            "elapsed_since_previous_level_last_action_seconds": 115.02327940100008
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 44,
+            "first_history_index": 123,
+            "last_history_index": 166,
+            "action_attached_tokens": 10114,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 735.1382124429999,
+            "elapsed_since_previous_level_last_action_seconds": 193.71972967099987
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 48,
+            "first_history_index": 167,
+            "last_history_index": 214,
+            "action_attached_tokens": 43996,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1518.7064460149998,
+            "elapsed_since_previous_level_last_action_seconds": 783.5682335719998
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "ar25-0c556536": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 19,
+            "first_history_index": 0,
+            "last_history_index": 18,
+            "action_attached_tokens": 5151,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 88.56261131100007,
+            "elapsed_since_previous_level_last_action_seconds": 88.56261131100007
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 24,
+            "first_history_index": 19,
+            "last_history_index": 42,
+            "action_attached_tokens": 13844,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 297.2980542790001,
+            "elapsed_since_previous_level_last_action_seconds": 208.73544296800003
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 54,
+            "first_history_index": 43,
+            "last_history_index": 96,
+            "action_attached_tokens": 19234,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 598.069708432,
+            "elapsed_since_previous_level_last_action_seconds": 300.7716541529999
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "first_history_index": 97,
+            "last_history_index": 119,
+            "action_attached_tokens": 7048,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 718.7586460699999,
+            "elapsed_since_previous_level_last_action_seconds": 120.68893763799997
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 30,
+            "first_history_index": 120,
+            "last_history_index": 149,
+            "action_attached_tokens": 23729,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1161.513145926,
+            "elapsed_since_previous_level_last_action_seconds": 442.75449985600017
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 43,
+            "first_history_index": 150,
+            "last_history_index": 192,
+            "action_attached_tokens": 36309,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1748.847213041,
+            "elapsed_since_previous_level_last_action_seconds": 587.3340671149999
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 193,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 193,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "m0r0-492f87ba": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 27,
+            "first_history_index": 0,
+            "last_history_index": 26,
+            "action_attached_tokens": 22316,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 346.7077871409999,
+            "elapsed_since_previous_level_last_action_seconds": 346.7077871409999
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 39,
+            "first_history_index": 27,
+            "last_history_index": 65,
+            "action_attached_tokens": 21372,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 703.868132176,
+            "elapsed_since_previous_level_last_action_seconds": 357.1603450350001
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 123,
+            "first_history_index": 66,
+            "last_history_index": 188,
+            "action_attached_tokens": 62541,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1742.9060719499998,
+            "elapsed_since_previous_level_last_action_seconds": 1039.0379397739998
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 189,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 189,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 189,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "r11l-495a7899": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 7,
+            "first_history_index": 0,
+            "last_history_index": 6,
+            "action_attached_tokens": 18642,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 287.81464395600005,
+            "elapsed_since_previous_level_last_action_seconds": 287.81464395600005
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 13,
+            "first_history_index": 7,
+            "last_history_index": 19,
+            "action_attached_tokens": 40408,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 930.5725725539999,
+            "elapsed_since_previous_level_last_action_seconds": 642.7579285979998
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 13,
+            "first_history_index": 20,
+            "last_history_index": 32,
+            "action_attached_tokens": 46714,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1651.933176431,
+            "elapsed_since_previous_level_last_action_seconds": 721.3606038770001
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 33,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 33,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 33,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "sb26-7fbdac44": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 16,
+            "first_history_index": 0,
+            "last_history_index": 15,
+            "action_attached_tokens": 7635,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 124.7156985040001,
+            "elapsed_since_previous_level_last_action_seconds": 124.7156985040001
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 20,
+            "first_history_index": 16,
+            "last_history_index": 35,
+            "action_attached_tokens": 20987,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 435.80631631000006,
+            "elapsed_since_previous_level_last_action_seconds": 311.09061780599995
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 21,
+            "first_history_index": 36,
+            "last_history_index": 56,
+            "action_attached_tokens": 10110,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 596.75024893,
+            "elapsed_since_previous_level_last_action_seconds": 160.94393261999994
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 20,
+            "first_history_index": 57,
+            "last_history_index": 76,
+            "action_attached_tokens": 3675,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 659.340097148,
+            "elapsed_since_previous_level_last_action_seconds": 62.58984821800004
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 40,
+            "first_history_index": 77,
+            "last_history_index": 116,
+            "action_attached_tokens": 53207,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1732.517753909,
+            "elapsed_since_previous_level_last_action_seconds": 1073.177656761
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 117,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 117,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 117,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "cd82-fb555c5d": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 43,
+            "first_history_index": 0,
+            "last_history_index": 42,
+            "action_attached_tokens": 34528,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 552.1799928019999,
+            "elapsed_since_previous_level_last_action_seconds": 552.1799928019999
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 29,
+            "first_history_index": 43,
+            "last_history_index": 71,
+            "action_attached_tokens": 18738,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1113.0028737100001,
+            "elapsed_since_previous_level_last_action_seconds": 560.8228809080002
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 26,
+            "first_history_index": 72,
+            "last_history_index": 97,
+            "action_attached_tokens": 14240,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1333.99186221,
+            "elapsed_since_previous_level_last_action_seconds": 220.98898849999978
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 16,
+            "first_history_index": 98,
+            "last_history_index": 113,
+            "action_attached_tokens": 5301,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1416.1786938139999,
+            "elapsed_since_previous_level_last_action_seconds": 82.18683160399996
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 17,
+            "first_history_index": 114,
+            "last_history_index": 130,
+            "action_attached_tokens": 9031,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1570.3263280819997,
+            "elapsed_since_previous_level_last_action_seconds": 154.14763426799982
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 21,
+            "first_history_index": 131,
+            "last_history_index": 151,
+            "action_attached_tokens": 5014,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1660.0103953959997,
+            "elapsed_since_previous_level_last_action_seconds": 89.684067314
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "ls20-9607627b": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 29,
+            "first_history_index": 0,
+            "last_history_index": 28,
+            "action_attached_tokens": 42390,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 653.286963737,
+            "elapsed_since_previous_level_last_action_seconds": 653.286963737
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 80,
+            "first_history_index": 29,
+            "last_history_index": 108,
+            "action_attached_tokens": 35018,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1690.268698915,
+            "elapsed_since_previous_level_last_action_seconds": 1036.981735178
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "vc33-5430563c": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 13,
+            "first_history_index": 0,
+            "last_history_index": 12,
+            "action_attached_tokens": 12808,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 201.24937471600003,
+            "elapsed_since_previous_level_last_action_seconds": 201.24937471600003
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 10,
+            "first_history_index": 13,
+            "last_history_index": 22,
+            "action_attached_tokens": 7865,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 314.28449142600005,
+            "elapsed_since_previous_level_last_action_seconds": 113.03511671000001
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 26,
+            "first_history_index": 23,
+            "last_history_index": 48,
+            "action_attached_tokens": 20768,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 626.7891240360001,
+            "elapsed_since_previous_level_last_action_seconds": 312.50463261000004
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 46,
+            "first_history_index": 49,
+            "last_history_index": 94,
+            "action_attached_tokens": 53468,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1598.366607594,
+            "elapsed_since_previous_level_last_action_seconds": 971.5774835579999
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 1,
+            "first_history_index": 95,
+            "last_history_index": 95,
+            "action_attached_tokens": 9793,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1768.568216101,
+            "elapsed_since_previous_level_last_action_seconds": 170.20160850699995
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 96,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 96,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "bp35-0a0ad940": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 18,
+            "first_history_index": 0,
+            "last_history_index": 17,
+            "action_attached_tokens": 46228,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 705.161320722,
+            "elapsed_since_previous_level_last_action_seconds": 705.161320722
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 27,
+            "first_history_index": 18,
+            "last_history_index": 44,
+            "action_attached_tokens": 60325,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1725.7696754289998,
+            "elapsed_since_previous_level_last_action_seconds": 1020.6083547069998
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 45,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "re86-8af5384d": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 21,
+            "first_history_index": 0,
+            "last_history_index": 20,
+            "action_attached_tokens": 6589,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 814.0356382020001,
+            "elapsed_since_previous_level_last_action_seconds": 814.0356382020001
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 37,
+            "first_history_index": 21,
+            "last_history_index": 57,
+            "action_attached_tokens": 9369,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 984.15277362,
+            "elapsed_since_previous_level_last_action_seconds": 170.11713541799986
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 48,
+            "first_history_index": 58,
+            "last_history_index": 105,
+            "action_attached_tokens": 10718,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1159.8688179349997,
+            "elapsed_since_previous_level_last_action_seconds": 175.71604431499975
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 48,
+            "first_history_index": 106,
+            "last_history_index": 153,
+            "action_attached_tokens": 13293,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1360.9267806449998,
+            "elapsed_since_previous_level_last_action_seconds": 201.05796271000008
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 15,
+            "first_history_index": 154,
+            "last_history_index": 168,
+            "action_attached_tokens": 22643,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1713.7164264819999,
+            "elapsed_since_previous_level_last_action_seconds": 352.7896458370001
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 169,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 169,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 169,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "wa30-ee6fef47": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 41,
+            "first_history_index": 0,
+            "last_history_index": 40,
+            "action_attached_tokens": 29860,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1304.619005346,
+            "elapsed_since_previous_level_last_action_seconds": 1304.619005346
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 30,
+            "first_history_index": 41,
+            "last_history_index": 70,
+            "action_attached_tokens": 23613,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1696.0404126519998,
+            "elapsed_since_previous_level_last_action_seconds": 391.42140730599976
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 71,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      }
+    },
+    "grounded_state": {
+      "ft09-0d8bbf25": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 6,
+            "first_history_index": 0,
+            "last_history_index": 5,
+            "action_attached_tokens": 20454,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 314.1975645419998,
+            "elapsed_since_previous_level_last_action_seconds": 314.1975645419998
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 7,
+            "first_history_index": 6,
+            "last_history_index": 12,
+            "action_attached_tokens": 3314,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 359.7865844359999,
+            "elapsed_since_previous_level_last_action_seconds": 45.5890198940001
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 14,
+            "first_history_index": 13,
+            "last_history_index": 26,
+            "action_attached_tokens": 4412,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 417.9301726169997,
+            "elapsed_since_previous_level_last_action_seconds": 58.143588180999814
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 22,
+            "first_history_index": 27,
+            "last_history_index": 48,
+            "action_attached_tokens": 11137,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 590.8550464139998,
+            "elapsed_since_previous_level_last_action_seconds": 172.92487379700015
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 40,
+            "first_history_index": 49,
+            "last_history_index": 88,
+            "action_attached_tokens": 26287,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1012.1129244459999,
+            "elapsed_since_previous_level_last_action_seconds": 421.257878032
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 89,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "tr87-cd924810": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 39,
+            "first_history_index": 0,
+            "last_history_index": 38,
+            "action_attached_tokens": 23112,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 353.42924674999995,
+            "elapsed_since_previous_level_last_action_seconds": 353.42924674999995
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 86,
+            "first_history_index": 39,
+            "last_history_index": 124,
+            "action_attached_tokens": 12725,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 573.2838952749998,
+            "elapsed_since_previous_level_last_action_seconds": 219.8546485249999
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 39,
+            "first_history_index": 125,
+            "last_history_index": 163,
+            "action_attached_tokens": 4135,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 651.1497008350002,
+            "elapsed_since_previous_level_last_action_seconds": 77.86580556000035
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 29,
+            "first_history_index": 164,
+            "last_history_index": 192,
+            "action_attached_tokens": 2976,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 713.1543138020002,
+            "elapsed_since_previous_level_last_action_seconds": 62.00461296699996
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 65,
+            "first_history_index": 193,
+            "last_history_index": 257,
+            "action_attached_tokens": 23562,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1280.846759312,
+            "elapsed_since_previous_level_last_action_seconds": 567.6924455099997
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 80,
+            "first_history_index": 258,
+            "last_history_index": 337,
+            "action_attached_tokens": 26713,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1763.1629848079997,
+            "elapsed_since_previous_level_last_action_seconds": 482.3162254959998
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "ar25-0c556536": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 20,
+            "first_history_index": 0,
+            "last_history_index": 19,
+            "action_attached_tokens": 4395,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 71.10439606700038,
+            "elapsed_since_previous_level_last_action_seconds": 71.10439606700038
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 23,
+            "first_history_index": 20,
+            "last_history_index": 42,
+            "action_attached_tokens": 16838,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 330.25470311000026,
+            "elapsed_since_previous_level_last_action_seconds": 259.1503070429999
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 54,
+            "first_history_index": 43,
+            "last_history_index": 96,
+            "action_attached_tokens": 18964,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 658.8450257010004,
+            "elapsed_since_previous_level_last_action_seconds": 328.59032259100013
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "first_history_index": 97,
+            "last_history_index": 119,
+            "action_attached_tokens": 5766,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 757.1128230310001,
+            "elapsed_since_previous_level_last_action_seconds": 98.26779732999967
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 37,
+            "first_history_index": 120,
+            "last_history_index": 156,
+            "action_attached_tokens": 21342,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1165.738312893,
+            "elapsed_since_previous_level_last_action_seconds": 408.625489862
+          },
+          {
+            "level": 6,
+            "completed": true,
+            "actions": 57,
+            "first_history_index": 157,
+            "last_history_index": 213,
+            "action_attached_tokens": 20238,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1554.4960378800006,
+            "elapsed_since_previous_level_last_action_seconds": 388.75772498700053
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 214,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 214,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "m0r0-492f87ba": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 30,
+            "first_history_index": 0,
+            "last_history_index": 29,
+            "action_attached_tokens": 34741,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 542.1421674060002,
+            "elapsed_since_previous_level_last_action_seconds": 542.1421674060002
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 35,
+            "first_history_index": 30,
+            "last_history_index": 64,
+            "action_attached_tokens": 14397,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 781.0933117549998,
+            "elapsed_since_previous_level_last_action_seconds": 238.9511443489996
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 30,
+            "first_history_index": 65,
+            "last_history_index": 94,
+            "action_attached_tokens": 55133,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1712.6497173970001,
+            "elapsed_since_previous_level_last_action_seconds": 931.5564056420003
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 95,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 95,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 95,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "r11l-495a7899": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 7,
+            "first_history_index": 0,
+            "last_history_index": 6,
+            "action_attached_tokens": 10985,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 165.70888128900015,
+            "elapsed_since_previous_level_last_action_seconds": 165.70888128900015
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 8,
+            "first_history_index": 7,
+            "last_history_index": 14,
+            "action_attached_tokens": 101623,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1756.1507231830005,
+            "elapsed_since_previous_level_last_action_seconds": 1590.4418418940004
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 15,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 15,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 15,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 15,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "sb26-7fbdac44": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 11,
+            "first_history_index": 0,
+            "last_history_index": 10,
+            "action_attached_tokens": 3534,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 54.2217206739997,
+            "elapsed_since_previous_level_last_action_seconds": 54.2217206739997
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 28,
+            "first_history_index": 11,
+            "last_history_index": 38,
+            "action_attached_tokens": 21738,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 393.7218807469999,
+            "elapsed_since_previous_level_last_action_seconds": 339.5001600730002
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 22,
+            "first_history_index": 39,
+            "last_history_index": 60,
+            "action_attached_tokens": 4983,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 493.8737087059999,
+            "elapsed_since_previous_level_last_action_seconds": 100.151827959
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 23,
+            "first_history_index": 61,
+            "last_history_index": 83,
+            "action_attached_tokens": 3261,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 971.1804475999998,
+            "elapsed_since_previous_level_last_action_seconds": 477.30673889399986
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 25,
+            "first_history_index": 84,
+            "last_history_index": 108,
+            "action_attached_tokens": 32917,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1540.6811056109996,
+            "elapsed_since_previous_level_last_action_seconds": 569.5006580109998
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 109,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "cd82-fb555c5d": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 60,
+            "first_history_index": 0,
+            "last_history_index": 59,
+            "action_attached_tokens": 37778,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 613.018029715,
+            "elapsed_since_previous_level_last_action_seconds": 613.018029715
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 26,
+            "first_history_index": 60,
+            "last_history_index": 85,
+            "action_attached_tokens": 30702,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1210.106440382,
+            "elapsed_since_previous_level_last_action_seconds": 597.0884106670001
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 35,
+            "first_history_index": 86,
+            "last_history_index": 120,
+            "action_attached_tokens": 33218,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1755.6778814829995,
+            "elapsed_since_previous_level_last_action_seconds": 545.5714411009994
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 121,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 121,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 121,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "ls20-9607627b": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 25,
+            "first_history_index": 0,
+            "last_history_index": 24,
+            "action_attached_tokens": 19104,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 276.0748853619998,
+            "elapsed_since_previous_level_last_action_seconds": 276.0748853619998
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 141,
+            "first_history_index": 25,
+            "last_history_index": 165,
+            "action_attached_tokens": 32074,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 820.2802644579997,
+            "elapsed_since_previous_level_last_action_seconds": 544.2053790959999
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 166,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 166,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 166,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 166,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 166,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "vc33-5430563c": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 16,
+            "first_history_index": 0,
+            "last_history_index": 15,
+            "action_attached_tokens": 8507,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 131.01812925000013,
+            "elapsed_since_previous_level_last_action_seconds": 131.01812925000013
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 19,
+            "first_history_index": 16,
+            "last_history_index": 34,
+            "action_attached_tokens": 4965,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 200.516964809,
+            "elapsed_since_previous_level_last_action_seconds": 69.49883555899987
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 38,
+            "first_history_index": 35,
+            "last_history_index": 72,
+            "action_attached_tokens": 14865,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 416.7817208040001,
+            "elapsed_since_previous_level_last_action_seconds": 216.2647559950001
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 53,
+            "first_history_index": 73,
+            "last_history_index": 125,
+            "action_attached_tokens": 81332,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1778.7638196469998,
+            "elapsed_since_previous_level_last_action_seconds": 1361.9820988429997
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 126,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 126,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 126,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "bp35-0a0ad940": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 34,
+            "first_history_index": 0,
+            "last_history_index": 33,
+            "action_attached_tokens": 47665,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 730.6068957390003,
+            "elapsed_since_previous_level_last_action_seconds": 730.6068957390003
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 22,
+            "first_history_index": 34,
+            "last_history_index": 55,
+            "action_attached_tokens": 53166,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1739.6392401260005,
+            "elapsed_since_previous_level_last_action_seconds": 1009.0323443870002
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 56,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "re86-8af5384d": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 20,
+            "first_history_index": 0,
+            "last_history_index": 19,
+            "action_attached_tokens": 4883,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 662.701779216,
+            "elapsed_since_previous_level_last_action_seconds": 662.701779216
+          },
+          {
+            "level": 2,
+            "completed": true,
+            "actions": 38,
+            "first_history_index": 20,
+            "last_history_index": 57,
+            "action_attached_tokens": 4316,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 727.217394325,
+            "elapsed_since_previous_level_last_action_seconds": 64.51561510900001
+          },
+          {
+            "level": 3,
+            "completed": true,
+            "actions": 47,
+            "first_history_index": 58,
+            "last_history_index": 104,
+            "action_attached_tokens": 6700,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 833.9808805359999,
+            "elapsed_since_previous_level_last_action_seconds": 106.76348621099987
+          },
+          {
+            "level": 4,
+            "completed": true,
+            "actions": 66,
+            "first_history_index": 105,
+            "last_history_index": 170,
+            "action_attached_tokens": 21207,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1205.1299165690002,
+            "elapsed_since_previous_level_last_action_seconds": 371.14903603300036
+          },
+          {
+            "level": 5,
+            "completed": true,
+            "actions": 88,
+            "first_history_index": 171,
+            "last_history_index": 258,
+            "action_attached_tokens": 19728,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1554.0506610109996,
+            "elapsed_since_previous_level_last_action_seconds": 348.92074444199943
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 11,
+            "first_history_index": 259,
+            "last_history_index": 269,
+            "action_attached_tokens": 8490,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1689.9209993089999,
+            "elapsed_since_previous_level_last_action_seconds": 135.8703382980002
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 270,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 270,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      },
+      "wa30-ee6fef47": {
+        "levels": [
+          {
+            "level": 1,
+            "completed": true,
+            "actions": 84,
+            "first_history_index": 0,
+            "last_history_index": 83,
+            "action_attached_tokens": 17443,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1160.5552484150003,
+            "elapsed_since_previous_level_last_action_seconds": 1160.5552484150003
+          },
+          {
+            "level": 2,
+            "completed": false,
+            "actions": 142,
+            "first_history_index": 84,
+            "last_history_index": 225,
+            "action_attached_tokens": 28969,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": 1666.956481666,
+            "elapsed_since_previous_level_last_action_seconds": 506.40123325099967
+          },
+          {
+            "level": 3,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 4,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 5,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 6,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 7,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 8,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          },
+          {
+            "level": 9,
+            "completed": false,
+            "actions": 0,
+            "first_history_index": 226,
+            "last_history_index": null,
+            "action_attached_tokens": 0,
+            "action_attached_uncached_input_tokens": 0,
+            "last_action_game_seconds": null,
+            "elapsed_since_previous_level_last_action_seconds": 0.0
+          }
+        ],
+        "final_unattached_to_action_tokens": 0,
+        "note": "Action-attached token accounting only. A request may span a level boundary; final generation is not assigned to a level without evidence."
+      }
+    }
+  },
+  "scope": "Descriptive fixed-order public-development comparison. Neither score changes nor keyword/AST occurrences establish adoption or causal benefit.",
+  "score_is_adoption_gate": false,
+  "formula": "Level min(115,100*(base_actions/actions)^2), weighted by 1..N; final cap from completed positive-scoring weights. Uncapped level contributions are not additive final scores without the cap adjustment."
+}

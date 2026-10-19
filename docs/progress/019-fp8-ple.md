@@ -1,6 +1,6 @@
 # 019 — FP8 PLE 实现与验证进展
 
-2026-10-18。**实现与本地CPU检查已完成；jiyujia CPU-only实际权重预检已提交，GPU microbench尚未启动。** 当前运行状态以[CPU启动记录](../../experiments/019-preparation/cpu-launch.json)及后续远端状态为准。正式009保持原样，没有创建比赛提交。
+2026-10-19状态更新：**远端CPU v1为ERROR，退出于运行库身份检查，未采样权重、未启动GPU。实际wheel两处差异已审计并修复绑定；CPU/GPU Notebook已本地重建为18cells，但没有CPU v2上传记录。** 10/19 10:29查询仍ERROR。详见[实际wheel审计](../../experiments/019-actual-wheel-audit.json)与[当前实施交接](../handoff/021-implementation-handoff.md)。以下10/18检查与上传过程保留为历史。
 
 ## 已实现
 
@@ -34,8 +34,8 @@ PYTHONPATH=/private/tmp/arc3-018-check-deps \
 
 请求suite标识`f42e6b9c309432735fd5ff5e08d1344758d09fae7c689c311bba5e3d518391c1`。源与Notebook已存入[019-source](../../experiments/019-source/source-hashes.json)，CPU-v1-final和GPU-prepared-final分别保留；较早目录属于未被接受的上传尝试，不能冒充运行版本。
 
-- [CPU Notebook](../../notebooks/019-fp8-ple-cpu/experiment.ipynb)：17cells；仅权重及wheel核验，enable_gpu=false，Kaggle外层上限900秒。
-- [GPU Notebook](../../notebooks/019-fp8-ple/experiment.ipynb)：17cells；硬限4800秒，每服务启动≤900秒、每固定suite≤360秒，尚未执行。先CPU过门再决定启动，不把准备完成写成性能成功。
+- [CPU Notebook](../../notebooks/019-fp8-ple-cpu/experiment.ipynb)：18cells（10/19本地重建，未上传）；仅权重及wheel核验，enable_gpu=false，Kaggle外层上限900秒。
+- [GPU Notebook](../../notebooks/019-fp8-ple/experiment.ipynb)：18cells（10/19本地重建，未执行）；硬限4800秒，每服务启动≤900秒、每固定suite≤360秒，尚未执行。先CPU过门再决定启动，不把准备完成写成性能成功。
 
 10/18 18:33北京只读查询：jiyujia最近018和ARC2作业都COMPLETE，无reserved秒；通用GPU quota仍显示total6h且used超额。这不能证明RTX无法使用或承诺可用余额。资源统计原件见[账户状态](../../experiments/019-preparation/account-status-before.json)。
 

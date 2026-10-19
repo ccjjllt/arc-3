@@ -1,0 +1,139 @@
+{
+  "kind": "020-descriptive-results",
+  "experiment": "020-grounded-state",
+  "primary_result": {
+    "mean_AE": -14.703124618265822,
+    "mean_completion_ceiling": -13.326719576719572,
+    "mean_efficiency_gap": 1.3764050415462434,
+    "levels_completed": -8,
+    "wins": -2,
+    "actions": 349,
+    "analyzer_tokens": -28061,
+    "recorded_tokens": -59376,
+    "unattached_tokens": 31315,
+    "uncached_input_tokens": 0
+  },
+  "runtime_checks": {
+    "config_matches_frozen": true,
+    "source_manifest_matches_frozen": true,
+    "common_runtime_sources_equal": true,
+    "both_arms_clean_and_complete": true,
+    "same_order_and_requested_budget": true,
+    "cache_flush_confirmed": true,
+    "workers_drained": true,
+    "server_stopped": true,
+    "no_recorded_actions_or_levels_after_deadline": true
+  },
+  "runtime_checks_pass": true,
+  "session_minutes": 70.39879705905915,
+  "startup_minutes": 9.549494695663451,
+  "gpu_strict_windows": [
+    {
+      "phase": "baseline:strict_budget",
+      "device_index_in_csv": 0,
+      "samples": 180,
+      "util_percent": {
+        "count": 180,
+        "min": 0.0,
+        "mean": 92.21666666666667,
+        "median": 98.5,
+        "max": 99.0,
+        "p95_nearest_rank": 99.0
+      },
+      "at_least_90_percent_fraction": 0.9277777777777778,
+      "at_most_10_percent_fraction": 0.05,
+      "memory_peak_mib": 96107.0,
+      "power_watts": {
+        "count": 180,
+        "min": 85.79,
+        "mean": 355.5688888888889,
+        "median": 353.36,
+        "max": 548.03,
+        "p95_nearest_rank": 426.6
+      },
+      "sampling_gap_seconds": {
+        "count": 179,
+        "min": 9.990053176879883,
+        "mean": 10.000149179437306,
+        "median": 10.000131368637085,
+        "max": 10.010644674301147,
+        "p95_nearest_rank": 10.008357048034668
+      },
+      "first_source_line": 64,
+      "last_source_line": 243
+    },
+    {
+      "phase": "grounded_state:strict_budget",
+      "device_index_in_csv": 0,
+      "samples": 180,
+      "util_percent": {
+        "count": 180,
+        "min": 0.0,
+        "mean": 90.81111111111112,
+        "median": 98.0,
+        "max": 99.0,
+        "p95_nearest_rank": 99.0
+      },
+      "at_least_90_percent_fraction": 0.9,
+      "at_most_10_percent_fraction": 0.05,
+      "memory_peak_mib": 96035.0,
+      "power_watts": {
+        "count": 180,
+        "min": 201.19,
+        "mean": 357.865,
+        "median": 352.85,
+        "max": 545.79,
+        "p95_nearest_rank": 461.3
+      },
+      "sampling_gap_seconds": {
+        "count": 179,
+        "min": 9.990078687667847,
+        "mean": 10.000099804148327,
+        "median": 9.999951362609863,
+        "max": 10.013071775436401,
+        "p95_nearest_rank": 10.008395671844482
+      },
+      "first_source_line": 249,
+      "last_source_line": 428
+    }
+  ],
+  "trajectory_review": "See separately attributed adoption notes; this script does not infer adoption from API strings.",
+  "selection_policy": "docs/handoff/020-research-sprint.md; primary score and actual risk, no joint auxiliary-metric veto",
+  "limits": [
+    "Single fixed-order comparison on familiar public development games, not hidden score or causal proof.",
+    "No logged model code, game implementation, pickle, network or GPU is executed.",
+    "GPU arithmetic sample means are not exact billing or busy-time integrals."
+  ],
+  "sources": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-overview/experiment-manifest.json",
+      "sha256": "066818957ffc41d4bb514fb4dbac7204a025419b03ad9a7e5c689bc12da9c441",
+      "bytes": 7115
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/020-source/kernel/build-manifest.json",
+      "sha256": "282f5ed537234b9f43a7264f98006664af30d72af92dc68cc64a17502079ee08",
+      "bytes": 5291
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-overview/baseline/benchmark.json",
+      "sha256": "463f7d2e80cbd7f27a415ffa886c5c22c64faccda3b02856a8382e545d8c1e99",
+      "bytes": 366418
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-overview/baseline/arm-metadata.json",
+      "sha256": "156c622e877ebda9696067065abc1db31d344fe04df12f10f01ccbc89e0b9962",
+      "bytes": 16197
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-overview/grounded_state/benchmark.json",
+      "sha256": "d26be1edbfdc21e6b00ae00f89e4ce42ece002d90943cf3f1d5f7d2c696b15b6",
+      "bytes": 447083
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-overview/grounded_state/arm-metadata.json",
+      "sha256": "a7d90a268a7bfa03990b666874935a29896ab8dd2848962ac9a324f820249ead",
+      "bytes": 18577
+    }
+  ]
+}

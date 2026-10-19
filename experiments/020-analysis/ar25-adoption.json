@@ -1,0 +1,2064 @@
+{
+  "schema_version": 1,
+  "kind": "020-ar25-static-adoption-review",
+  "reviewed_at_utc": "2026-10-19T02:37:06.516174+00:00",
+  "game_id": "ar25-0c556536",
+  "arm": "grounded_state",
+  "source": {
+    "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+    "sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+    "bytes": 62622750
+  },
+  "extractor": {
+    "path": "scripts/analyze_018_results.py",
+    "sha256": "5ff5476889439a15ca82dc29e848d17019da668e7729a2936922bc5e24ffc223",
+    "function": "extract_log",
+    "logged_code_executed": false,
+    "candidate_module_imported": false
+  },
+  "frozen_prefix": {
+    "source": "experiments/020-source/src/arc3_research/grounded_state.py",
+    "sha256": "65c91f2be5b9e27c763be8c94fa1241cef819a625663f8238df9002f6b3dee05",
+    "prefix_sha256": "0454a90d8d9b478fe2ed35f5623d5c29f643a77aa154ebc0123002c367b24dde",
+    "read_method": "ast.parse + ast.literal_eval of GROUND_STATE_PREFIX assignment",
+    "present_on_all_request_systems": true
+  },
+  "extraction_summary": {
+    "request_records": 95,
+    "response_records": 94,
+    "unique_tool_call_ids": 94,
+    "calls_with_results": 94,
+    "finish_reasons": {
+      "tool_calls": 94
+    },
+    "response_usage_completion_tokens": 100536,
+    "response_usage_prompt_tokens": 6614989,
+    "responses_without_usage": 0
+  },
+  "parse_issues": [],
+  "orphan_result_ids": [],
+  "static_scan": {
+    "all_94_snippets_parse": true,
+    "attribute_counts": {
+      "segmentation": 43,
+      "shape": 1,
+      "level": 1,
+      "step": 1,
+      "split": 49,
+      "ascii": 49,
+      "join": 2,
+      "items": 12,
+      "get": 67,
+      "keys": 1,
+      "append": 34,
+      "__name__": 1,
+      "after_frame": 2,
+      "action": 2,
+      "add": 12,
+      "setdefault": 5,
+      "startswith": 1,
+      "sort": 8,
+      "union": 3,
+      "pop": 1,
+      "count": 3
+    },
+    "special_calls": [],
+    "note": "Navigation/absence evidence, not runtime invocation counts or automatic adoption classification."
+  },
+  "verdict": {
+    "new_region_api_adopted": false,
+    "region_to_solver_consumption_observed": false,
+    "existing_ascii_to_program_consumption_observed": true,
+    "region_specific_misuse_observed": false,
+    "geometry_or_coordinate_errors_observed": true,
+    "ar25_plus_one_level_attributable_to_region": false,
+    "causal_effect_of_prefix_or_other_run_variation": "not_identified",
+    "conclusion_zh": "ar25多过L6是单次运行结果；新region入口未采用。原有ASCII直接计算能够形成成功动作链，但裁剪遗漏与绝对/相对坐标混淆仍在。"
+  },
+  "pixel_proof": {
+    "method": "Only numbered ASCII rows printed by calls 66/67 were parsed; overlapping characters agree. No logged Python code or game code executed.",
+    "source_calls": [
+      66,
+      67
+    ],
+    "coordinate_order": "top,left,bottom,right; zero based inclusive",
+    "P1_full_visible_crop": {
+      "bbox": [
+        9,
+        42,
+        23,
+        56
+      ],
+      "rows": [
+        "bbbBBBBBBBBBbbb",
+        "bbbBbBBbBBbBbbb",
+        "bbbBBBBBBBBBbbb",
+        "BBBbbbbbbbbbBBB",
+        "BbBbbbbbbbbbBbB",
+        "BBBbbbbbbbbbBBB",
+        "BBBbbbbbbbbbbbb",
+        "BbBbbbbbbbbbbbb",
+        "BBBbbbbbbbbbbbb",
+        "BBBbbbbbbbbbbbb",
+        "BbBbbbbbbbbbbbb",
+        "BBBbbbbbbbbbbbb",
+        "bbbBBBbbbbbbbbb",
+        "bbbBbBbbbbbbbbb",
+        "bbbBBBbbbbbbbbb"
+      ],
+      "color_counts": {
+        "b": 161,
+        "B": 64
+      }
+    },
+    "P1_crop_used_in_calls_68_through_77": {
+      "bbox": [
+        9,
+        42,
+        23,
+        53
+      ],
+      "rows": [
+        "bbbBBBBBBBBB",
+        "bbbBbBBbBBbB",
+        "bbbBBBBBBBBB",
+        "BBBbbbbbbbbb",
+        "BbBbbbbbbbbb",
+        "BBBbbbbbbbbb",
+        "BBBbbbbbbbbb",
+        "BbBbbbbbbbbb",
+        "BBBbbbbbbbbb",
+        "BBBbbbbbbbbb",
+        "BbBbbbbbbbbb",
+        "BBBbbbbbbbbb",
+        "bbbBBBbbbbbb",
+        "bbbBbBbbbbbb",
+        "bbbBBBbbbbbb"
+      ],
+      "color_counts": {
+        "b": 124,
+        "B": 56
+      }
+    },
+    "P1_omitted_block": {
+      "bbox": [
+        12,
+        54,
+        14,
+        56
+      ],
+      "rows": [
+        "BBB",
+        "BbB",
+        "BBB"
+      ],
+      "B_count": 8,
+      "b_count": 1,
+      "semantic_note": "Eight observed B pixels are definitely omitted. Treating the center as physical footprint is an extra modeling assumption; with this trajectory own hole-fill rule, the omitted footprint would be nine cells."
+    },
+    "P2_expected_block_8_18": {
+      "bbox": [
+        24,
+        54,
+        26,
+        56
+      ],
+      "rows": [
+        "BBB",
+        "BbB",
+        "BBB"
+      ],
+      "B_count": 8
+    },
+    "P2_wrong_block_8_17": {
+      "bbox": [
+        24,
+        51,
+        26,
+        53
+      ],
+      "rows": [
+        "bbb",
+        "bbb",
+        "bbb"
+      ],
+      "B_count": 0
+    }
+  },
+  "entries": [
+    {
+      "id": "ar25-020-01",
+      "title": "候选prefix送达，但新增region接口没有采用",
+      "judgment": "not_adopted",
+      "evidence_calls": [
+        {
+          "seq": 2,
+          "call_id": "call_27a372ca4af2486bb5752574",
+          "first_seen": {
+            "source_line": 5,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 1,
+            "analysis_step_at_snapshot": 1,
+            "request_index_within_turn": 3
+          },
+          "code": "rows = current_frame.ascii.split('\\n')\ndef crop(r0,c0,r1,c1):\n    return '\\n'.join(rows[r0][c0:c1+1] for r0_ in range(0,0))\ndef show(r0,c0,r1,c1):\n    for r in range(r0,r1+1):\n        print(r, rows[r][c0:c1+1])\nprint('--- black shape w/ dots')\nshow(14,16,24,28)\nprint('--- charcoal shape')\nshow(14,34,24,46)\nprint('--- yellow shape')\nshow(44,49,54,61)",
+          "code_sha256": "374375bb8baeafdb99c347022eae9a9da3378626ef3d7598fc1cd884d523cc5b",
+          "result_first_seen": {
+            "source_line": 5,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 1,
+            "analysis_step_at_snapshot": 1,
+            "request_index_within_turn": 3
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Your function crop was not retained: unavailable dependencies: rows. Pass snippet-specific data as arguments or redefine it if needed.\nYour function show was not retained: unavailable dependencies: rows. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "--- black shape w/ dots\n14 bbbbbbbbbbbbb\n15 bbBBBBBBBBBbb\n16 bbBWBBWBBWBbb\n17 bbBBBBBBBBBbb\n18 bbbbbbbbBBBbb\n19 bbbbbbbbBWBbb\n20 bbbbbbbbBBBbb\n21 bbbbbbbbBBBbb\n22 bbbbbbbbBWBbb\n23 bbbbbbbbBBBbb\n24 bbbbbbbbbbbbb\n--- charcoal shape\n14 bbbbbbbbbbbbb\n15 bbcccccccccbb\n16 bbcccccccccbb\n17 bbcccccccccbb\n18 bbcccbbbbbbbb\n19 bbcccbbbbbbbb\n20 bbcccbbbbbbbb\n21 bbcccbbbbbbbb\n22 bbcccbbbbbbbb\n23 bbcccbbbbbbbb\n24 bbbbbbbbbbbbb\n--- yellow shape\n44 bbbbbbbbbbbbb\n45 bbYYYYYYYYYbb\n46 bbYYYYYYYYYbb\n47 bbYYYYYYYYYbb\n48 bbYYYbbbbbbbb\n49 bbYYYbbbbbbbb\n50 bbYYYbbbbbbbb\n51 bbYYYbbbbbbbb\n52 bbYYYbbbbbbbb\n53 bbYYYbbbbbbbb\n54 bbbbbbbbbbbbb\n"
+          }
+        },
+        {
+          "seq": 94,
+          "call_id": "call_9ffaacc94a7c4463aa08a482",
+          "first_seen": {
+            "source_line": 189,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "code": "import itertools\nrows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\nP1=piece_cells(g,48,59,15,29); P2=piece_cells(g,39,59,51,59)\nN1=norm(P1); N2=norm(P2)\ndef orbit_bits(N,h,w,a,b,r0,c0):\n    U=orb_at(N,r0,c0,a,b)\n    m=0\n    for (r,c) in U:\n        if 0<=r<63 and 0<=c<62: m|=1<<(r*62+c)\n    return m\nYbits=0\nfor (r,c) in Y: Ybits|=1<<(r*62+c)\ndef plan(N,h,w,start,a,b,block=None,maxit=30):\n    cur=start; got=orbit_bits(N,h,w,a,b,*cur); moves=[]\n    for it in range(maxit):\n        if got==Ybits: return moves,0\n        best=None\n        for r0 in range(0,64-h,1):\n            for c0 in range(0,62-w,1):\n                if (r0-start[0])%3 or (c0-start[1])%3: continue\n                if block and any(0<=r<63 and 0<=c<62 and ((r*62+c) in block) for r in range(r0,r0+h) for c in range(c0,c0+w)): pass\n                d=abs(r0-cur[0])//3+abs(c0-cur[1])//3\n                if d==0: continue\n                # coverage along L path (row first then col)\n                m=0; rr,cc=cur\n                for i in range(cur[0],r0,3 if r0>cur[0] else -3):\n                    m|=orbit_bits(N,h,w,a,b,i,cc)\n                for i in range(cc,c0,3 if c0>cc else -3):\n                    m|=orbit_bits(N,h,w,a,b,r0,i)\n                m|=orbit_bits(N,h,w,a,b,r0,c0)\n                new=bin(m&~got).count('1')\n                if new==0: continue\n                sc=new/(1+d)\n                if best is None or sc>best[0]: best=(sc,(r0,c0),new,d,m)\n        if best is None: return moves,bin(Ybits&~got).count('1')\n        sc,pos,new,d,m=best\n        # record moves\n        dr=pos[0]-cur[0]; dc=pos[1]-cur[1]\n        if dr: moves.append((('DOWN' if dr>0 else 'UP'),abs(dr)//3))\n        if dc: moves.append((('RIGHT' if dc>0 else 'LEFT'),abs(dc)//3))\n        got|=m; cur=pos\n    return moves,bin(Ybits&~got).count('1')\nfor (a,b) in [(16,10),(22,10),(16,37),(22,37)]:\n    mv,rem=plan(N1,12,15,(48,15),a,b)\n    tot=sum(n for _,n in mv)+abs(a-16)//3+abs(b-10)//3\n    print((a,b),'presses',tot,'remaining',rem,mv)",
+          "code_sha256": "308b40ca172abf15857a21874574b7d46b04993ae70ed5743c26d2c98a21b39b",
+          "result_first_seen": {
+            "source_line": 189,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function orbit_bits(N, h, w, a, b, r0, c0) for later Python calls in this game.\nYour function plan was not retained: unavailable dependencies: Ybits. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "(16, 10) presses 119 remaining 0 [('UP', 10), ('LEFT', 2), ('RIGHT', 12), ('DOWN', 11), ('LEFT', 5), ('UP', 8), ('LEFT', 8), ('DOWN', 8), ('RIGHT', 1), ('RIGHT', 2), ('UP', 13), ('RIGHT', 10), ('LEFT', 12), ('DOWN', 13), ('RIGHT', 4)]\n(22, 10) presses 110 remaining 0 [('UP', 8), ('LEFT', 2), ('RIGHT', 12), ('DOWN', 3), ('LEFT', 1), ('DOWN', 1), ('LEFT', 4), ('DOWN', 5), ('RIGHT', 5), ('UP', 2), ('UP', 3), ('LEFT', 13), ('DOWN', 5), ('RIGHT', 1), ('UP', 11), ('RIGHT', 12), ('DOWN', 11), ('LEFT', 9)]\n(16, 37) presses 92 remaining 0 [('UP', 10), ('RIGHT', 2), ('UP', 1), ('LEFT', 7), ('DOWN', 3), ('DOWN', 9), ('RIGHT', 8), ('UP', 8), ('UP', 4), ('UP', 1), ('LEFT', 8), ('DOWN', 13), ('RIGHT', 9)]\n(22, 37) presses 72 remaining 0 [('UP', 9), ('RIGHT', 3), ('DOWN', 5), ('DOWN', 5), ('LEFT', 1), ('LEFT', 7), ('UP', 10), ('UP', 1), ('RIGHT', 1), ('RIGHT', 7), ('DOWN', 11), ('RIGHT', 1)]\n"
+          }
+        }
+      ],
+      "notes": [
+        "全部94段代码AST有效；region/region_from_node/cells/mask/positions/raw_rows属性均0，getattr/eval/exec/__import__调用均0，逐段审读未发现接口别名或动态调用。",
+        "49处ascii属性访问、43处segmentation属性访问是静态导航计数，不是运行次数或采用收益。",
+        "没有region返回值，因而不存在region到求解函数的真实消费证据；也没有region特有报错。"
+      ]
+    },
+    {
+      "id": "ar25-020-02",
+      "title": "L5旧ASCII通道实际进入搜索，但先错误填满bbox，修正后又遇到值未保留",
+      "judgment": "existing_channel_consumed_with_errors",
+      "evidence_calls": [
+        {
+          "seq": 48,
+          "call_id": "call_458d379d54c54a3e853e2fc3",
+          "first_seen": {
+            "source_line": 97,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 3
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ndef show(r0,c0,r1,c1):\n    for r in range(r0,r1+1): print(r, rows[r][c0:c1+1])\nprint('== piece (36,42)-(50,56)'); show(36,42,50,56)\nprint('== yellow (15,12)-(41,38) part1'); show(15,12,30,40)",
+          "code_sha256": "9bfb33e2df5da680afe1141a10bde24ccabfed6a44d5087dc01915496408d3b7",
+          "result_first_seen": {
+            "source_line": 97,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 3
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Your function show was not retained: unavailable dependencies: rows. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "== piece (36,42)-(50,56)\n36 BBBBBBBBBBBBbbb\n37 BbBBbBBbBBbBbbb\n38 BBBBBBBBBBBBbbb\n39 bbbbbbbbbBBBbbb\n40 bbbbbbbbbBbBbbb\n41 bbbbbbbbbBBBbbb\n42 bbbbbbbbbBBBBBB\n43 bbbbbbbbbBbBBbB\n44 bbbbbbbbbBBBBBB\n45 bbbbbbbbbbbbBBB\n46 bbbbbbbbbbbbBbB\n47 bbbbbbbbbbbbBBB\n48 bbbbbbBBBBBBBBB\n49 bbbbbbBbBBbBBbB\n50 bbbbbbBBBBBBBBB\n== yellow (15,12)-(41,38) part1\n15 YYYYYYYYYYYYSSSSSSSSSSSSYYYSS\n16 YYYYYYYYYYYYSWSSWSSWSSWSYYYSW\n17 YYYYYYYYYYYYSSSSSSSSSSSSYYYSS\n18 bbbbbbbbbYYYbbbbbbbbbbbbbbbbb\n19 bbbbbbbbbYYYbbbbbbbbbbbbbbbbb\n20 bbbbbbbbbYYYbbbbbbbbbbbbbbbbb\n21 bbbbbbbbbYYYYYYbbbbbbbbbbbbbb\n22 bbbbbbbbbYYYYYYbbbbbbbbbbbbbb\n23 bbbbbbbbbYYYYYYbbbbbbbbbbbbbb\n24 bbbbbbbbbbbbYYYbbbbbbbbbbbbbb\n25 bbbbbbbbbbbbYYYbbbbbbbbbbbbbb\n26 bbbbbbbbbbbbYYYbbbbbbbbbbbbbb\n27 bbbbbbYYYYYYYYYYYYYYYbbbbbbbb\n28 bbbbbbYYYYYYYYYYYYYYYbbbbbbbb\n29 bbbbbbYYYYYYYYYYYYYYYbbbbbbbb\n30 bbbbbbbbbbbbYYYbbbbbbbbbbbbbb\n"
+          }
+        },
+        {
+          "seq": 50,
+          "call_id": "call_81bbd4ec603348d68cdd2379",
+          "first_seen": {
+            "source_line": 101,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 1
+          },
+          "code": "from itertools import product\nrows=current_frame.ascii.split('\\n')\ngrid=[list(r) for r in rows]\ndef comp(pred):\n    S=set()\n    for r in range(63):\n        for c in range(63):\n            if pred(grid[r][c]): S.add((r,c))\n    return S\n# piece cells: B plus its holes (holes are 'b' inside bbox). Use bbox fill of the piece component\nP=set()\nfor (r,c) in [(r,c) for r in range(36,51) for c in range(42,57)]:\n    ch=grid[r][c]\n    if ch in ('B','b'): P.add((r,c))\nY=comp(lambda ch: ch=='Y')\nY={(r,c) for (r,c) in Y if not (c==63)}\nprint('P cells',len(P),'Y cells',len(Y))\ndef orient(S,o):\n    out=set()\n    for (r,c) in S:\n        if o==0: out.add((r,c))\n        elif o==1: out.add((r,-c))       # flip vertical mirror (left-right)\n        elif o==2: out.add((-r,c))       # flip horizontal mirror (up-down)\n        else: out.add((-r,-c))\n    return out\ndef norm(S):\n    mr=min(r for r,c in S); mc=min(c for r,c in S)\n    return frozenset((r-mr,c-mc) for r,c in S)\nnP={o:norm(orient(P,o)) for o in range(4)}\nnY=norm(Y)\n# find placements of each orientation fully inside Y\ndef placements(shape,target):\n    res=[]\n    tr=max(r for r,c in target); tc=max(c for r,c in target)\n    for dr in range(-5,tr+6):\n        for dc in range(-5,tc+6):\n            sh=frozenset((r+dr,c+dc) for r,c in shape)\n            if sh<=target: res.append((dr,dc))\n    return res\nfor o in range(4):\n    pl=placements(nP[o],nY)\n    print('orient',o,'fits',len(pl),pl[:6])",
+          "code_sha256": "a812cbf2830c5d91337576b6f5f9877b4a45602900f74e1c0ea0eece84f07cae",
+          "result_first_seen": {
+            "source_line": 101,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function orient(S, o) for later Python calls in this game.\nRetained your function norm(S) for later Python calls in this game.\nRetained your function placements(shape, target) for later Python calls in this game.\nYour function comp was not retained: unavailable dependencies: grid. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P cells 225 Y cells 207\norient 0 fits 0 []\norient 1 fits 0 []\norient 2 fits 0 []\norient 3 fits 0 []\n"
+          }
+        },
+        {
+          "seq": 51,
+          "call_id": "call_0262aced97004202a01b2682",
+          "first_seen": {
+            "source_line": 103,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ngrid=[list(r) for r in rows]\ndef piece_cells(r0,r1,c0,c1):\n    S=set()\n    for r in range(r0,r1+1):\n        for c in range(c0,c1+1):\n            if grid[r][c]=='B': S.add((r,c))\n    for r in range(r0+1,r1):\n        for c in range(c0+1,c1):\n            if grid[r][c]=='b' and all(grid[r+dr][c+dc]=='B' for dr,dc in ((1,0),(-1,0),(0,1),(0,-1))): S.add((r,c))\n    return S\nP=piece_cells(36,50,42,56)\nY=set()\nfor r in range(0,63):\n    for c in range(0,62):\n        if grid[r][c]=='Y': Y.add((r,c))\nprint('P',len(P),'Y',len(Y))\nnP={o:norm(orient(P,o)) for o in range(4)}\nnY=norm(Y)\nfor o in range(4):\n    pl=placements(nP[o],nY)\n    print('orient',o,'size',len(nP[o]),'fits',len(pl),pl[:8])",
+          "code_sha256": "3cd3f481f4565e9bfb79e98ca19c6b0b29b4937472cd897354e34814a235bec2",
+          "result_first_seen": {
+            "source_line": 103,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Your function piece_cells was not retained: unavailable dependencies: grid. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P 99 Y 207\norient 0 size 99 fits 1 [(0, 0)]\norient 1 size 99 fits 0 []\norient 2 size 99 fits 0 []\norient 3 size 99 fits 1 [(12, 12)]\n"
+          }
+        },
+        {
+          "seq": 52,
+          "call_id": "call_bc4fc739e1534ac2854bafed",
+          "first_seen": {
+            "source_line": 105,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ngrid=[list(r) for r in rows]\ndef piece_cells(g,r0,r1,c0,c1):\n    S=set()\n    for r in range(r0,r1+1):\n        for c in range(c0,c1+1):\n            if g[r][c]=='B': S.add((r,c))\n    for r in range(r0+1,r1):\n        for c in range(c0+1,c1):\n            if g[r][c]=='b' and all(g[r+dr][c+dc]=='B' for dr,dc in ((1,0),(-1,0),(0,1),(0,-1))): S.add((r,c))\n    return S\nP=piece_cells(grid,36,50,42,56)\nY={(r,c) for r in range(63) for c in range(62) if grid[r][c]=='Y'}\nA=nP[0]+(-21,-30) if False else frozenset((r-36+15,c-42+12) for r,c in nP[0])\nB=frozenset((r-0+27,c-0+24) for r,c in nP[3])\nprint('A in Y',A<=Y,'B in Y',B<=Y,len(A),len(B),'overlap',len(A&B),'union',len(A|B),'Y leftover',len(Y-(A|B)))\nprint('A rows',min(r for r,c in A),max(r for r,c in A),'cols',min(c for r,c in A),max(c for r,c in A))\nprint('B rows',min(r for r,c in B),max(r for r,c in B),'cols',min(c for r,c in B),max(c for r,c in B))\n# find (a,b) with rot180 about (a,b) mapping A->B\ncands=[]\nfor a in range(0,64):\n    for b in range(0,64):\n        if frozenset((2*a-r,2*b-c) for r,c in A)==B: cands.append((a,b))\nprint('axes',cands)\nprint('leftover cells',sorted(Y-(A|B)))",
+          "code_sha256": "1be82ed3b912535c2b1cabea851fd83d6043140b8652eef46dbd085ef393f3ae",
+          "result_first_seen": {
+            "source_line": 105,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function piece_cells(g, r0, r1, c0, c1) for later Python calls in this game.",
+            "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 14, in <module>\nNameError: name 'nP' is not defined"
+          }
+        },
+        {
+          "seq": 53,
+          "call_id": "call_fa3de4d50ecc44f989a754d2",
+          "first_seen": {
+            "source_line": 107,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP=piece_cells(g,36,50,42,56)\nY={(r,c) for r in range(63) for c in range(62) if g[r][c]=='Y'}\ndef norm(S):\n    mr=min(r for r,c in S); mc=min(c for r,c in S)\n    return frozenset((r-mr,c-mc) for r,c in S)\ndef rot(S): return norm({(-r,-c) for r,c in S})\nn0=norm(P); n3=rot(P); nY=norm(Y)\ny0=min(r for r,c in Y); y1=min(c for r,c in Y)\nA=frozenset((r+y0,c+y1) for r,c in n0)\nbest=None\nfor dr in range(-5,60):\n    for dc in range(-5,60):\n        B=frozenset((r+dr,c+dc) for r,c in n3)\n        if B<=Y: Bpos=B\nprint('A rows',min(r for r,c in A),max(r for r,c in A),'cols',min(c for r,c in A),max(c for r,c in A))\nprint('B rows',min(r for r,c in Bpos),max(r for r,c in Bpos),'cols',min(c for r,c in Bpos),max(c for r,c in Bpos))\nprint('overlap',len(A&Bpos),'union',len(A|Bpos),'Y',len(Y),'leftover',sorted(Y-(A|Bpos)))\ncands=[(a,b) for a in range(64) for b in range(64) if frozenset((2*a-r,2*b-c) for r,c in A)==Bpos]\nprint('axes(a=row,b=col)',cands)",
+          "code_sha256": "1772cff1bedb3d88fbcdda38ce549db5b6b76ee7d23e859eca5ee96c76f2ca7e",
+          "result_first_seen": {
+            "source_line": 107,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 121,
+            "analysis_step_at_snapshot": 29,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function rot(S) for later Python calls in this game.",
+            "returncode": 0,
+            "stdout": "A rows 15 29 cols 12 26\nB rows 27 41 cols 24 38\noverlap 9 union 189 Y 207 leftover [(15, 36), (15, 37), (15, 38), (16, 36), (16, 37), (16, 38), (17, 36), (17, 37), (17, 38), (39, 12), (39, 13), (39, 14), (40, 12), (40, 13), (40, 14), (41, 12), (41, 13), (41, 14)]\naxes(a=row,b=col) [(28, 25)]\n"
+          }
+        },
+        {
+          "seq": 64,
+          "call_id": "call_d34797ca26ca471c8e314967",
+          "first_seen": {
+            "source_line": 129,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "code": "def piece_bb(fr):\n    for n in fr.segmentation['nodes']:\n        if n['color']=='B' and 40<n['pixels']<200:\n            b=n['boundary']\n            bb=(min(p[0] for p in b),min(p[1] for p in b),max(p[0] for p in b),max(p[1] for p in b))\n            if bb[0]<60: return bb\ndef selP(fr):\n    rows=fr.ascii.split('\\n'); g=[list(r) for r in rows]\n    bb=piece_bb(fr)\n    wp=sum(1 for r in range(bb[0],bb[2]+1) for c in range(bb[1],bb[3]+1) if g[r][c]=='W')\n    return bb,wp\nbb,wp=selP(current_frame); print('bb',bb,'white holes',wp,'budget',budget(current_frame))\nif wp==0:\n    for i in range(3):\n        try_action('SPACE')\n        bb,wp=selP(current_frame); print('space',i,wp)\nprint('LEFT x10 ->',press('LEFT',10))\nprint('bb',piece_bb(current_frame),'budget',budget(current_frame))",
+          "code_sha256": "2e54817e626bda14e99aea5d9b58908d8e4a291bca030618b9af575115db8f83",
+          "result_first_seen": {
+            "source_line": 129,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function piece_bb(fr) for later Python calls in this game.\nRetained your function selP(fr) for later Python calls in this game.",
+            "returncode": 0,
+            "stdout": "bb (15, 42, 29, 56) white holes 11 budget 37\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> LEVEL COMPLETED\n  END LEFT True False\nLEFT x10 -> 10\nbb None budget 64\n"
+          }
+        }
+      ],
+      "notes": [
+        "seq50将15×15区域内所有B和b视作piece，输出225且四个orientation均0 fit。",
+        "seq51重新读ASCII，选B加四邻B包围的b，得到99，直接进入norm/orient/placements，输出两个方向各1个fit。这是已存在的ASCII到程序通道，不是020 region采用。",
+        "seq52调用上一snippet变量nP导致NameError；seq53改为当前g重新提取和计算。seq64实际LEFT10后LEVEL COMPLETED。",
+        "99不是本审计给出的通用碰撞几何真值；它是该模型的孔洞建模假设及记录的搜索输入。"
+      ]
+    },
+    {
+      "id": "ar25-020-03",
+      "title": "L6 P2保住(8,18)，同时P1裁剪持续漏掉一个可见块",
+      "judgment": "partial_observation_fidelity",
+      "evidence_calls": [
+        {
+          "seq": 66,
+          "call_id": "call_7dd554955ed046a7b06bd82d",
+          "first_seen": {
+            "source_line": 133,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 3
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\nprint('== piece A rows 9-21 cols 41-56')\nfor r in range(9,22): print(r, rows[r][41:57])\nprint('== piece B rows 23-31 cols 50-63')\nfor r in range(23,32): print(r, rows[r][50:64])\nprint('== divider cols 20-25 rows 0-63 sample')\nfor r in (0,1,2,20,21,26,27,32,33): print(r, rows[r][20:26])",
+          "code_sha256": "302043fcd692336cad3f2db046fc6cf519fff60e3707779c5b4c3b15ba27e788",
+          "result_first_seen": {
+            "source_line": 133,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 3
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "== piece A rows 9-21 cols 41-56\n9 bbbbBBBBBBBBBbbb\n10 bbbbBbBBbBBbBbbb\n11 bbbbBBBBBBBBBbbb\n12 bBBBbbbbbbbbbBBB\n13 bBbBbbbbbbbbbBbB\n14 bBBBbbbbbbbbbBBB\n15 bBBBbbbbbbbbbbbb\n16 bBbBbbbbbbbbbbbb\n17 bBBBbbbbbbbbbbbb\n18 bBBBbbbbbbbbbbbb\n19 bBbBbbbbbbbbbbbb\n20 bBBBbbbbbbbbbbbb\n21 bbbbBBBbbbbbbbbb\n== piece B rows 23-31 cols 50-63\n23 bbbbbbbbbbbbbY\n24 bbbbBBBbbbbbbY\n25 bbbbBbBbbbbbbY\n26 bbbbBBBbbbbbbY\n27 bBBBBBBBBBBBBY\n28 bBbBBbBBbBBbBY\n29 bBBBBBBBBBBBBY\n30 bbbbbbbbbbbbbY\n31 bbbbbbbbbbbbbY\n== divider cols 20-25 rows 0-63 sample\n0 SSSSSS\n1 SSWSSW\n2 SSSSSS\n20 bYYYbb\n21 bSSSYY\n26 bSSSbb\n27 bYYYYY\n32 bSSSbb\n33 bSSSbb\n"
+          }
+        },
+        {
+          "seq": 67,
+          "call_id": "call_5b9e800a339f4917b2510305",
+          "first_seen": {
+            "source_line": 135,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\nfor r in range(20,28): print(r, rows[r][41:57])",
+          "code_sha256": "e3259483c5bbe276efb8ede6ba4ff4aaa293dba56aa71fdfe96b478cd8e32970",
+          "result_first_seen": {
+            "source_line": 135,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "20 bBBBbbbbbbbbbbbb\n21 bbbbBBBbbbbbbbbb\n22 bbbbBbBbbbbbbbbb\n23 bbbbBBBbbbbbbbbb\n24 bbbbbbbbbbbbbBBB\n25 bbbbbbbbbbbbbBbB\n26 bbbbbbbbbbbbbBBB\n27 bbbbbbbbbbBBBBBB\n"
+          }
+        },
+        {
+          "seq": 68,
+          "call_id": "call_9deb4e514cc94efbb43f036a",
+          "first_seen": {
+            "source_line": 137,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53)\nP2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\nprint('P1',len(P1),'P2',len(P2),'Y',len(Y))\ndef tr(S,dr,dc): return frozenset((r+dr,c+dc) for r,c in S)\ndef fh(S,a): return frozenset((2*a-r,c) for r,c in S)\ndef fv(S,b): return frozenset((r,2*b-c) for r,c in S)\ndef images(S,a,b):\n    I=S; H=fh(S,a); V=fv(S,b); HV=fv(fh(S,a),b)\n    return clip(I),clip(H),clip(V),clip(HV)\n# placements of P1 identity inside Y (reachable: dr%3,dc%3 fixed)\ndef fits(P):\n    res=[]\n    r0=min(r for r,c in P); c0=min(c for r,c in P)\n    for dr in range(-60,20):\n        for dc in range(-60,20):\n            S=tr(P,dr,dc)\n            if S<=Y: res.append((dr,dc))\n    return res\nf1=fits(P1); f2=fits(P2)\nprint('P1 fits',len(f1),f1[:6])\nprint('P2 fits',len(f2),f2[:6])",
+          "code_sha256": "5e90265bdbccb201729f7f06cc0b9c0b96a64ac9c4f2bd985c3a9b4598e46034",
+          "result_first_seen": {
+            "source_line": 137,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function tr(S, dr, dc) for later Python calls in this game.\nRetained your function fh(S, a) for later Python calls in this game.\nRetained your function fv(S, b) for later Python calls in this game.\nRetained your function images(S, a, b) for later Python calls in this game.\nYour function fits was not retained: unavailable dependencies: Y. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P1 63 P2 45 Y 468\nP1 fits 0 []\nP2 fits 1 [(12, -45)]\n"
+          }
+        },
+        {
+          "seq": 72,
+          "call_id": "call_0248176dcc2b4dcda8aefade",
+          "first_seen": {
+            "source_line": 145,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 3
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\ndef goods(P,mod,a,b):\n    out=[]\n    for dr in range(-25,63):\n        for dc in range(-120,62):\n            if (dr-mod[0])%3 or (dc-mod[1])%3: continue\n            U=orb(P,dr,dc,a,b)\n            if U and U<=Y: out.append(((dr,dc),frozenset(U)))\n    return out\nres={}\nfor (a,b) in [(34,19),(34,22),(31,19),(37,19),(34,25)]:\n    g1=goods(P1,(9,42),a,b); g2=goods(P2,(24,51),a,b)\n    tot=set()\n    for _,U in g1: tot|=U\n    for _,U in g2: tot|=U\n    res[(a,b)]=(g1,g2)\n    print('axes',(a,b),'good1',len(g1),'good2',len(g2),'coverable',len(tot),'of',len(Y))",
+          "code_sha256": "fe913c91c2d0ae4e33407051f1b2e96c47eaf18dc7cc8304208f8d4a1e4cd807",
+          "result_first_seen": {
+            "source_line": 145,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 3
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Your function goods was not retained: unavailable dependencies: Y. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "axes (34, 19) good1 1 good2 1 coverable 432 of 468\naxes (34, 22) good1 0 good2 0 coverable 0 of 468\naxes (31, 19) good1 0 good2 0 coverable 0 of 468\naxes (37, 19) good1 0 good2 0 coverable 0 of 468\naxes (34, 25) good1 0 good2 0 coverable 0 of 468\n"
+          }
+        },
+        {
+          "seq": 77,
+          "call_id": "call_35619e3c92964ed3a6b94787",
+          "first_seen": {
+            "source_line": 155,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\na,b=34,19\ndef seq(moves):\n    ps=[(0,0)]; r=c=0\n    for d,n in moves:\n        for i in range(n):\n            r+=d[0]; c+=d[1]; ps.append((r,c))\n    return ps\ndef cover(ps,P):\n    U=set()\n    for t in ps: U|=orb(P,t[0],t[1],a,b)\n    return U\np1=seq([((0,-3),3),((3,0),12),((0,-3),4)])\nopts={'L15D4':[((0,-3),15),((3,0),4)],'D4L15':[((3,0),4),((0,-3),15)]}\nU1=cover(p1,P1)\nprint('P1 path covers',len(U1&Y),'excess',len(U1-Y))\nfor k,mv in opts.items():\n    U2=cover(seq(mv),P2)\n    U=U1|U2\n    print(k,'P2 covers',len(U2&Y),'total',len(U&Y),'of',len(Y),'missing',len(Y-U))\n    if Y-U:\n        d={}\n        for r,c in Y-U: d.setdefault(r,[]).append(c)\n        print('  missing rows',{r:(min(v),max(v)) for r,v in sorted(d.items())})",
+          "code_sha256": "e4871fe8b68371d15058d11e2206df51d2f2bca017c10d32afe5bd4ad696d38b",
+          "result_first_seen": {
+            "source_line": 155,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function seq(moves) for later Python calls in this game.\nYour function cover was not retained: unavailable dependencies: a, b. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P1 path covers 288 excess 1350\nL15D4 P2 covers 180 total 468 of 468 missing 0\nD4L15 P2 covers 180 total 468 of 468 missing 0\n"
+          }
+        }
+      ],
+      "notes": [
+        "P2=piece_cells(g,24,29,51,62)直接使用当前ASCII，包含正确stem global(24..26,54..56)，未发现把它重写为(8,17)坐标表。",
+        "P1=piece_cells(g,9,23,42,53)从seq68一直保留到77，漏掉global(12..14,54..56)的BBB/BbB/BBB；seq66已经打印出这块。",
+        "完整可见P1裁剪有64个B，所用裁剪仅56个B；自身填孔提取输出63，而同一规则若完整读取会有72。此处不执行该函数，像素差由原始字符直接复算。",
+        "seq72只扩搜索dr/dc范围，并未修复P1裁剪。后续通关不能证明编码完整。"
+      ]
+    },
+    {
+      "id": "ar25-020-04",
+      "title": "L6增量来自可见的旧通道规划与坐标修订后执行，不能归因region",
+      "judgment": "planning_to_action_observed_without_new_api",
+      "evidence_calls": [
+        {
+          "seq": 74,
+          "call_id": "call_1a2c887d17424f91814ca7f5",
+          "first_seen": {
+            "source_line": 149,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\ndef goods2(P,mod,a,b,T):\n    out=[]\n    for dr in range(-25,63):\n        for dc in range(-120,62):\n            if (dr-mod[0])%3 or (dc-mod[1])%3: continue\n            U=orb(P,dr,dc,a,b)\n            if U and U<=T: out.append(((dr,dc),frozenset(U)))\n    return out\na,b=34,19\ng1=goods2(P1,(9,42),a,b,Y); g2=goods2(P2,(24,51),a,b,Y)\nprint('P1 good',g1[0][0],'size',len(g1[0][1]))\nprint('P2 good',g2[0][0],'size',len(g2[0][1]))\nU=set(g1[0][1])|set(g2[0][1])\nrem=sorted(Y-U)\nd={}\nfor r,c in rem: d.setdefault(r,[]).append(c)\nprint('uncovered',len(rem))\nfor r in sorted(d): print(' ',r,d[r])\nt1=g1[0][0]; t2=g2[0][0]\nprint('P1 presses d_row',(t1[0]-9)//3,'d_col',(t1[1]-42)//3)\nprint('P2 presses d_row',(t2[0]-24)//3,'d_col',(t2[1]-51)//3)",
+          "code_sha256": "70c476a07f8f897b8ee0334b74230b8515883876608146435ecadfc8ed32967c",
+          "result_first_seen": {
+            "source_line": 149,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function goods2(P, mod, a, b, T) for later Python calls in this game.",
+            "returncode": 0,
+            "stdout": "P1 good (36, -21) size 252\nP2 good (12, -45) size 180\nuncovered 36\n  18 [3, 4, 5, 33, 34, 35]\n  19 [3, 4, 5, 33, 34, 35]\n  20 [3, 4, 5, 33, 34, 35]\n  48 [3, 4, 5, 33, 34, 35]\n  49 [3, 4, 5, 33, 34, 35]\n  50 [3, 4, 5, 33, 34, 35]\nP1 presses d_row 9 d_col -21\nP2 presses d_row -4 d_col -32\n"
+          }
+        },
+        {
+          "seq": 75,
+          "call_id": "call_4e1097523d774764b2c7dba7",
+          "first_seen": {
+            "source_line": 151,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\na,b=34,19\ndef path(start,d1,n1,d2,n2):\n    ps=[start]\n    r,c=start\n    for i in range(n1): r+=d1[0]; c+=d1[1]; ps.append((r,c))\n    for i in range(n2): r+=d2[0]; c+=d2[1]; ps.append((r,c))\n    return ps\ndef cover(ps,P):\n    U=set()\n    for (dr,dc) in ps:\n        U|=orb(P,dr,dc,a,b)\n    return U\np2a=path((24,51),(0,-3),15,(-3,0),4)   # left then up\np2b=path((24,51),(-3,0),4,(0,-3),15)   # up then left\np1a=path((9,42),(0,-3),7,(3,0),9)      # left then down\np1b=path((9,42),(3,0),9,(0,-3),7)      # down then left\nfor n1,p1 in [('P1 left-down',p1a),('P1 down-left',p1b)]:\n    for n2,p2 in [('P2 left-up',p2a),('P2 up-left',p2b)]:\n        U=cover(p1,P1)|cover(p2,P2)\n        print(n1,'+',n2,'covered',len(U&Y),'of',len(Y),'excess',len(U-Y))",
+          "code_sha256": "e053c2923cb9065eeb88361dc1ebd1beeb8df23cd318d4d770f5dee325900453",
+          "result_first_seen": {
+            "source_line": 151,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function path(start, d1, n1, d2, n2) for later Python calls in this game.\nYour function cover was not retained: unavailable dependencies: a, b. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P1 left-down + P2 left-up covered 0 of 468 excess 162\nP1 left-down + P2 up-left covered 0 of 468 excess 42\nP1 down-left + P2 left-up covered 0 of 468 excess 162\nP1 down-left + P2 up-left covered 0 of 468 excess 42\n"
+          }
+        },
+        {
+          "seq": 76,
+          "call_id": "call_68fafc4b06c74a7aaf9a8329",
+          "first_seen": {
+            "source_line": 153,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\na,b=34,19\nblob={(r,c) for r in range(18,21) for c in range(3,6)}\ndef cands(P,mod):\n    out=[]\n    for dr in range(-30,45):\n        for dc in range(-120,25):\n            if (dr-mod[0])%3 or (dc-mod[1])%3: continue\n            U=orb(P,dr,dc,a,b)\n            if blob<=U: out.append((dr,dc))\n    return out\nc1=cands(P1,(0,0)); c2=cands(P2,(0,0))\ndef cost(s,t): return abs(t[0]-s[0])//3+abs(t[1]-s[1])//3\nbest=[]\nfor name,c,good in [('P1',c1,(36,-21)),('P2',c2,(12,-45))]:\n    for t in c:\n        best.append((cost((0,0),t)+cost(t,good),name,t))\nbest.sort()\nprint('cheapest transit options',best[:8])\nprint('direct P1 cost',cost((0,0),(36,-21)),'direct P2 cost',cost((0,0),(12,-45)))",
+          "code_sha256": "7d7a6bb93fb77e97b361d8e6aef8fda4355b4b0bab11db2b51e5766633a6a601",
+          "result_first_seen": {
+            "source_line": 153,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function cost(s, t) for later Python calls in this game.\nYour function cands was not retained: unavailable dependencies: a, b, blob. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "cheapest transit options [(19, 'P1', (0, -9)), (19, 'P1', (3, -9)), (19, 'P1', (6, -9)), (19, 'P1', (9, -18)), (19, 'P1', (9, -15)), (19, 'P1', (9, -12)), (19, 'P1', (27, -12)), (19, 'P1', (30, -9))]\ndirect P1 cost 19 direct P2 cost 19\n"
+          }
+        },
+        {
+          "seq": 77,
+          "call_id": "call_35619e3c92964ed3a6b94787",
+          "first_seen": {
+            "source_line": 155,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nP1=piece_cells(g,9,23,42,53); P2=piece_cells(g,24,29,51,62)\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\na,b=34,19\ndef seq(moves):\n    ps=[(0,0)]; r=c=0\n    for d,n in moves:\n        for i in range(n):\n            r+=d[0]; c+=d[1]; ps.append((r,c))\n    return ps\ndef cover(ps,P):\n    U=set()\n    for t in ps: U|=orb(P,t[0],t[1],a,b)\n    return U\np1=seq([((0,-3),3),((3,0),12),((0,-3),4)])\nopts={'L15D4':[((0,-3),15),((3,0),4)],'D4L15':[((3,0),4),((0,-3),15)]}\nU1=cover(p1,P1)\nprint('P1 path covers',len(U1&Y),'excess',len(U1-Y))\nfor k,mv in opts.items():\n    U2=cover(seq(mv),P2)\n    U=U1|U2\n    print(k,'P2 covers',len(U2&Y),'total',len(U&Y),'of',len(Y),'missing',len(Y-U))\n    if Y-U:\n        d={}\n        for r,c in Y-U: d.setdefault(r,[]).append(c)\n        print('  missing rows',{r:(min(v),max(v)) for r,v in sorted(d.items())})",
+          "code_sha256": "e4871fe8b68371d15058d11e2206df51d2f2bca017c10d32afe5bd4ad696d38b",
+          "result_first_seen": {
+            "source_line": 155,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 158,
+            "analysis_step_at_snapshot": 35,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function seq(moves) for later Python calls in this game.\nYour function cover was not retained: unavailable dependencies: a, b. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "P1 path covers 288 excess 1350\nL15D4 P2 covers 180 total 468 of 468 missing 0\nD4L15 P2 covers 180 total 468 of 468 missing 0\n"
+          }
+        },
+        {
+          "seq": 82,
+          "call_id": "call_9959aa19a8474f89bba56c88",
+          "first_seen": {
+            "source_line": 165,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 176,
+            "analysis_step_at_snapshot": 40,
+            "request_index_within_turn": 1
+          },
+          "code": "r,err=try_action({'action':'MOUSE','row':10,'col':47}); print('click',r,err)\nprint(selP2(current_frame),'budget',budget(current_frame))\nrows=current_frame.ascii.split('\\n')\nprint('holes row10', rows[10][42:56])",
+          "code_sha256": "0ff4219f7a4bd991ada00ba444de3bc42857e26d6fa776a01970439230be9063",
+          "result_first_seen": {
+            "source_line": 165,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 176,
+            "analysis_step_at_snapshot": 40,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=10, col=47) -> effect\nclick {'executed': True, 'action_num': 175, 'level': 6, 'score': 5, 'state': 'NOT_FINISHED', 'valid_actions': ['UP', 'DOWN', 'LEFT', 'RIGHT', 'SPACE', 'MOUSE', 'UNDO'], 'board_changed': True, 'done': False, 'level_completed': False, 'game_over': False, 'run_complete': False, 'action_display': 'MOUSE(row=10, col=47)', 'gameplay_changed': True, 'executed_actions': ['MOUSE(row=10, col=47)'], 'no_op': False, 'run_elapsed_seconds': 1498.7057898949997, 'time_remaining_seconds': 301.2942101050003} None\n[((9, 42, 29, 62), 8)] budget 47\nholes row10 bbbBWBBWBBWBbb\n"
+          }
+        },
+        {
+          "seq": 83,
+          "call_id": "call_be4f52d50b6c4c9dba844826",
+          "first_seen": {
+            "source_line": 167,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 195,
+            "analysis_step_at_snapshot": 41,
+            "request_index_within_turn": 1
+          },
+          "code": "print('L3',press('LEFT',3),'D12',press('DOWN',12),'L4',press('LEFT',4))\nprint(selP2(current_frame),'budget',budget(current_frame))",
+          "code_sha256": "e22b1303d765ba432078b2f00e7784ec7dffc1e97a6ea3d4dea4ed49ee35a86d",
+          "result_first_seen": {
+            "source_line": 167,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 195,
+            "analysis_step_at_snapshot": 41,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\nL3 3 D12 12 L4 4\n[((24, 51, 29, 62), 0), ((45, 21, 56, 32), 0)] budget 28\n"
+          }
+        },
+        {
+          "seq": 84,
+          "call_id": "call_52f9120051624d6085e21fa2",
+          "first_seen": {
+            "source_line": 169,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "code": "r,err=try_action({'action':'MOUSE','row':28,'col':55})\nrows=current_frame.ascii.split('\\n')\nprint('holes', rows[28][51:63],'budget',budget(current_frame))\nprint('L15',press('LEFT',15),'D4',press('DOWN',4))\nprint(selP2(current_frame),'budget',budget(current_frame))",
+          "code_sha256": "e591f1a24d0b618e6845fac16df030e33c529bd4f8ca199a1c63d16366b4ab9e",
+          "result_first_seen": {
+            "source_line": 169,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=28, col=55) -> effect\nholes BWBBWBBWBBWB budget 28\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] DOWN -> LEVEL COMPLETED\n  END DOWN True False\nL15 15 D4 4\n[((39, 51, 59, 59), 0), ((48, 15, 59, 29), 0)] budget 64\n"
+          }
+        }
+      ],
+      "notes": [
+        "seq74打印good delta(36,-21)/(12,-45)，但错误减去起始绝对坐标后把presses写成(9,-21)/(-4,-32)。seq75使用绝对起点作为delta路径，四个候选覆盖都为0。",
+        "seq76前推理明确发现delta/absolute混淆，代码改为(0,0)起点。seq77直接从ASCII重提P1/P2并计算路径覆盖468/468，missing0。",
+        "seq82 MOUSE实际选择P1，seq83执行LEFT3 DOWN12 LEFT4；seq84 MOUSE选P2后LEFT15 DOWN4，真实stdout最后LEVEL COMPLETED。",
+        "计算输出跨模型回合被改写为后续literal动作次数，未直接携带原生plan对象跨调用；最终动作与seq77验证过的路径一致。",
+        "这是单次轨迹中的计算→行动链，支持成功路径描述；没有candidate region采用，也没有本次baseline完整轨迹的同事件反事实。"
+      ]
+    },
+    {
+      "id": "ar25-020-05",
+      "title": "L7继续纯计算，计划未落地；ar25净增一关仅是描述结果",
+      "judgment": "descriptive_outcome_only",
+      "evidence_calls": [
+        {
+          "seq": 85,
+          "call_id": "call_b81209940f3f4d488f0604b5",
+          "first_seen": {
+            "source_line": 171,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 2
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nhrows=[r for r in range(63) if sum(1 for c in range(63) if g[r][c]=='S')>30]\nvcols=[c for c in range(63) if sum(1 for r in range(63) if g[r][c]=='S')>30]\nprint('hrows',hrows,'vcols',vcols)\nfor n in current_frame.segmentation['nodes']:\n    b=n['boundary']\n    bb=(min(p[0] for p in b),min(p[1] for p in b),max(p[0] for p in b),max(p[1] for p in b))\n    if n['pixels']>8 and n['pixels']<600: print(n['color'],n['pixels'],bb)\nprint('budget',budget(current_frame))",
+          "code_sha256": "bc19c461e5e16dca14bebcf3d8de96137a6109948c7533c40753b30362e61226",
+          "result_first_seen": {
+            "source_line": 171,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 2
+          },
+          "result": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "hrows [15, 16, 17] vcols [9, 10, 11]\nb 135 (0, 0, 14, 8)\nS 224 (0, 0, 62, 23)\nb 594 (0, 12, 14, 62)\nY 64 (0, 63, 63, 63)\nY 9 (3, 21, 5, 23)\nY 9 (3, 27, 5, 29)\nY 9 (3, 33, 5, 35)\nY 90 (3, 39, 14, 47)\nY 9 (3, 51, 5, 53)\nY 9 (9, 21, 11, 23)\nY 9 (9, 51, 11, 53)\nY 9 (12, 27, 14, 29)\nY 9 (12, 33, 14, 35)\nb 9 (12, 42, 14, 44)\nY 9 (15, 24, 17, 26)\nS 56 (15, 27, 17, 47)\nY 9 (15, 48, 17, 50)\nS 32 (15, 51, 17, 62)\nb 351 (18, 0, 62, 8)\nY 9 (21, 27, 23, 29)\nY 9 (21, 45, 23, 47)\nY 9 (27, 24, 29, 26)\nY 9 (27, 48, 29, 50)\nY 90 (30, 27, 41, 35)\nY 9 (30, 39, 32, 41)\nY 9 (30, 45, 32, 47)\nY 9 (33, 21, 35, 23)\nY 9 (33, 51, 35, 53)\nY 9 (39, 21, 41, 23)\nY 9 (39, 39, 41, 41)\nY 9 (39, 45, 41, 47)\nY 9 (39, 51, 41, 53)\nB 72 (39, 51, 59, 59)\nc 54 (48, 0, 59, 5)\nB 112 (48, 15, 59, 29)\nB 63 (63, 0, 63, 62)\nbudget 64\n"
+          }
+        },
+        {
+          "seq": 86,
+          "call_id": "call_0a9d0c3f788c40678d5b450e",
+          "first_seen": {
+            "source_line": 173,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 3
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\nprint('|Y|',len(Y))\n# symmetry check\ndef sym_h(a):\n    S=frozenset((2*a-r,c) for r,c in Y if 0<=2*a-r<63)\n    return sum(1 for p in S if p in Y), len(S)\ndef sym_v(b):\n    S=frozenset((r,2*b-c) for r,c in Y if 0<=2*b-c<62)\n    return sum(1 for p in S if p in Y), len(S)\nprint('H axes',[ (a,)+sym_h(a) for a in range(6,50) if sym_h(a)[1]>200 and sym_h(a)[0]>0.9*sym_h(a)[1]])\nprint('V axes',[ (b,)+sym_v(b) for b in range(6,50) if sym_v(b)[1]>200 and sym_v(b)[0]>0.9*sym_v(b)[1]])\nP1=piece_cells(g,48,59,15,29); P2=piece_cells(g,39,59,51,59)\nprint('P1(grid)',len(P1),'P2(zig)',len(P2))",
+          "code_sha256": "55900b7973823d6f6169ab45cfc4f8390548cf7f21d5f616fd6b1d6e326c637e",
+          "result_first_seen": {
+            "source_line": 173,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 3
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Your function sym_h was not retained: unavailable dependencies: Y. Pass snippet-specific data as arguments or redefine it if needed.\nYour function sym_v was not retained: unavailable dependencies: Y. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "|Y| 378\nH axes []\nV axes []\nP1(grid) 126 P2(zig) 81\n"
+          }
+        },
+        {
+          "seq": 93,
+          "call_id": "call_7ec3ef6e0fe64426a5364355",
+          "first_seen": {
+            "source_line": 187,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "code": "rows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\nP1=piece_cells(g,48,59,15,29); P2=piece_cells(g,39,59,51,59)\nN1=norm(P1); N2=norm(P2)\nh1,w1=12,15; h2,w2=21,9\nS1={} ; S2={}\nfor r0 in range(0,64-h1):\n    for c0 in range(0,62-w1): S1[(r0,c0)]=frozenset(orb_at(N1,r0,c0,16,10))\nfor r0 in range(0,64-h2):\n    for c0 in range(0,62-w2): S2[(r0,c0)]=frozenset(orb_at(N2,r0,c0,16,10))\ndef greedy(S1,S2,Y):\n    rem=set(Y); picks=[]\n    while rem:\n        best=(0,None,None)\n        for name,S in (('P1',S1),('P2',S2)):\n            for pos,U in S.items():\n                n=len(U&rem)\n                if n>best[0]: best=(n,name,pos)\n        if best[0]==0: break\n        n,name,pos=best\n        U=S1[pos] if name=='P1' else S2[pos]\n        rem-=U; picks.append((name,pos,n))\n    return picks,len(rem)\npk,mr=greedy(S1,S2,Y)\nprint('greedy (16,10) remaining',mr)\nfor p in pk: print(' ',p)",
+          "code_sha256": "144204a25003bd8e821613045f77b6bf434a7615f20b6eed2cfe7bb09b41f0b4",
+          "result_first_seen": {
+            "source_line": 187,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function greedy(S1, S2, Y) for later Python calls in this game.",
+            "returncode": 0,
+            "stdout": "greedy (16,10) remaining 0\n  ('P1', (0, 36), 99)\n  ('P1', (30, 24), 90)\n  ('P1', (0, 18), 45)\n  ('P1', (6, 39), 45)\n  ('P1', (3, 24), 27)\n  ('P1', (30, 42), 27)\n  ('P1', (30, 12), 18)\n  ('P1', (0, 39), 9)\n  ('P1', (5, 15), 9)\n  ('P1', (30, 30), 9)\n"
+          }
+        },
+        {
+          "seq": 94,
+          "call_id": "call_9ffaacc94a7c4463aa08a482",
+          "first_seen": {
+            "source_line": 189,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "code": "import itertools\nrows=current_frame.ascii.split('\\n')\ng=[list(r) for r in rows]\nY=frozenset((r,c) for r in range(63) for c in range(62) if g[r][c]=='Y')\nP1=piece_cells(g,48,59,15,29); P2=piece_cells(g,39,59,51,59)\nN1=norm(P1); N2=norm(P2)\ndef orbit_bits(N,h,w,a,b,r0,c0):\n    U=orb_at(N,r0,c0,a,b)\n    m=0\n    for (r,c) in U:\n        if 0<=r<63 and 0<=c<62: m|=1<<(r*62+c)\n    return m\nYbits=0\nfor (r,c) in Y: Ybits|=1<<(r*62+c)\ndef plan(N,h,w,start,a,b,block=None,maxit=30):\n    cur=start; got=orbit_bits(N,h,w,a,b,*cur); moves=[]\n    for it in range(maxit):\n        if got==Ybits: return moves,0\n        best=None\n        for r0 in range(0,64-h,1):\n            for c0 in range(0,62-w,1):\n                if (r0-start[0])%3 or (c0-start[1])%3: continue\n                if block and any(0<=r<63 and 0<=c<62 and ((r*62+c) in block) for r in range(r0,r0+h) for c in range(c0,c0+w)): pass\n                d=abs(r0-cur[0])//3+abs(c0-cur[1])//3\n                if d==0: continue\n                # coverage along L path (row first then col)\n                m=0; rr,cc=cur\n                for i in range(cur[0],r0,3 if r0>cur[0] else -3):\n                    m|=orbit_bits(N,h,w,a,b,i,cc)\n                for i in range(cc,c0,3 if c0>cc else -3):\n                    m|=orbit_bits(N,h,w,a,b,r0,i)\n                m|=orbit_bits(N,h,w,a,b,r0,c0)\n                new=bin(m&~got).count('1')\n                if new==0: continue\n                sc=new/(1+d)\n                if best is None or sc>best[0]: best=(sc,(r0,c0),new,d,m)\n        if best is None: return moves,bin(Ybits&~got).count('1')\n        sc,pos,new,d,m=best\n        # record moves\n        dr=pos[0]-cur[0]; dc=pos[1]-cur[1]\n        if dr: moves.append((('DOWN' if dr>0 else 'UP'),abs(dr)//3))\n        if dc: moves.append((('RIGHT' if dc>0 else 'LEFT'),abs(dc)//3))\n        got|=m; cur=pos\n    return moves,bin(Ybits&~got).count('1')\nfor (a,b) in [(16,10),(22,10),(16,37),(22,37)]:\n    mv,rem=plan(N1,12,15,(48,15),a,b)\n    tot=sum(n for _,n in mv)+abs(a-16)//3+abs(b-10)//3\n    print((a,b),'presses',tot,'remaining',rem,mv)",
+          "code_sha256": "308b40ca172abf15857a21874574b7d46b04993ae70ed5743c26d2c98a21b39b",
+          "result_first_seen": {
+            "source_line": 189,
+            "source_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/020-candidate-logs/grounded_state/ar25-0c556536_p0_requests.jsonl",
+            "source_sha256": "389443c7579072d8d43987ba8de3ff53800b4e55ec3c638885c1412b5ef172a4",
+            "event": "request",
+            "action_at_snapshot": 215,
+            "analysis_step_at_snapshot": 42,
+            "request_index_within_turn": 1
+          },
+          "result": {
+            "tool": "python",
+            "function_retention": "Retained your function orbit_bits(N, h, w, a, b, r0, c0) for later Python calls in this game.\nYour function plan was not retained: unavailable dependencies: Ybits. Pass snippet-specific data as arguments or redefine it if needed.",
+            "returncode": 0,
+            "stdout": "(16, 10) presses 119 remaining 0 [('UP', 10), ('LEFT', 2), ('RIGHT', 12), ('DOWN', 11), ('LEFT', 5), ('UP', 8), ('LEFT', 8), ('DOWN', 8), ('RIGHT', 1), ('RIGHT', 2), ('UP', 13), ('RIGHT', 10), ('LEFT', 12), ('DOWN', 13), ('RIGHT', 4)]\n(22, 10) presses 110 remaining 0 [('UP', 8), ('LEFT', 2), ('RIGHT', 12), ('DOWN', 3), ('LEFT', 1), ('DOWN', 1), ('LEFT', 4), ('DOWN', 5), ('RIGHT', 5), ('UP', 2), ('UP', 3), ('LEFT', 13), ('DOWN', 5), ('RIGHT', 1), ('UP', 11), ('RIGHT', 12), ('DOWN', 11), ('LEFT', 9)]\n(16, 37) presses 92 remaining 0 [('UP', 10), ('RIGHT', 2), ('UP', 1), ('LEFT', 7), ('DOWN', 3), ('DOWN', 9), ('RIGHT', 8), ('UP', 8), ('UP', 4), ('UP', 1), ('LEFT', 8), ('DOWN', 13), ('RIGHT', 9)]\n(22, 37) presses 72 remaining 0 [('UP', 9), ('RIGHT', 3), ('DOWN', 5), ('DOWN', 5), ('LEFT', 1), ('LEFT', 7), ('UP', 10), ('UP', 1), ('RIGHT', 1), ('RIGHT', 7), ('DOWN', 11), ('RIGHT', 1)]\n"
+          }
+        }
+      ],
+      "notes": [
+        "进入L7后95号request之前可见的seq85..94共10个Python调用只观察/搜索，没有动作；比较结果L7动作数0。",
+        "seq94按旧ASCII直接提取P1/P2并输出候选72/92/110/119次presses计划；其执行未出现在日志中，不能记为求解成功。",
+        "ar25 baseline5关→candidate6关，AE41.6667→58.3333，动作193→214，候选L6用57动作。新增关卡是L6；整体12局AE下降不因该单局正例改变。"
+      ]
+    }
+  ],
+  "call_index": [
+    {
+      "seq": 1,
+      "call_id": "call_34b090b6b80c44e19bf40ee4",
+      "source_line": 3,
+      "result_source_line": 3,
+      "code_sha256": "3284e10f555c576e5ca1657c146623b927d0203cfe1253a60494fa3ca54e278d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 2,
+      "call_id": "call_27a372ca4af2486bb5752574",
+      "source_line": 5,
+      "result_source_line": 5,
+      "code_sha256": "374375bb8baeafdb99c347022eae9a9da3378626ef3d7598fc1cd884d523cc5b",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 3,
+      "call_id": "call_1ebb6ba4526e4104bc8de6e9",
+      "source_line": 7,
+      "result_source_line": 7,
+      "code_sha256": "d3b331c7bf3cb4b73046080160def190025846e58c2e5b7630b335434c28521c",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 4,
+      "call_id": "call_9cbbcade672b444f9e649e9a",
+      "source_line": 9,
+      "result_source_line": 9,
+      "code_sha256": "48ba42f68fe7faef40e8795dc849d33d4f1c460d838987459e04ceadc84f0935",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 5,
+      "call_id": "call_432da40c77af4cc39781fd38",
+      "source_line": 11,
+      "result_source_line": 11,
+      "code_sha256": "135de4caf0b85a5c0704d1f6be894b69b47a429762785eb1c96306764d70d969",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 6,
+      "call_id": "call_2dcb0a090e544c01ac6e30c0",
+      "source_line": 13,
+      "result_source_line": 13,
+      "code_sha256": "6e15e4e863e7b381d3f362dc2b3aef73ee17da43335f4407fd32de60d215b737",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 7,
+      "call_id": "call_3499612f0348449c9d8edbaf",
+      "source_line": 15,
+      "result_source_line": 15,
+      "code_sha256": "ca6a0a80a173485b21361890a1aee1f9e9269ed675c12d4e3ebb00c25cedb10d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 8,
+      "call_id": "call_3143274fcc064bb0872fa71f",
+      "source_line": 17,
+      "result_source_line": 17,
+      "code_sha256": "3b7cdf115c343210b6b375c4c9317b548b6d0fb442b41a9ed3c80257cc88811b",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 9,
+      "call_id": "call_b4a0923d87da42b087e502e0",
+      "source_line": 19,
+      "result_source_line": 19,
+      "code_sha256": "21e69af3906327668751ed5b7b97a5b5d19b23b9771a74889a4cc7702f64d0e4",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 10,
+      "call_id": "call_4f6a22573ad34b8bad61b9e0",
+      "source_line": 21,
+      "result_source_line": 21,
+      "code_sha256": "9099589544eb6cc63b430310e4d0422fdfd0e95dbe8a54a6ef6bf65499c599b8",
+      "api_attributes_present": [],
+      "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nStaleStateActionError: UP was not executed. The action immediately before it, UP, was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)"
+    },
+    {
+      "seq": 11,
+      "call_id": "call_e09df2f7204a4246b39820db",
+      "source_line": 23,
+      "result_source_line": 23,
+      "code_sha256": "de6c3f570d481ee972eaf2253904efac6ad5b29aa4f0c8ba9e59bc2b791b1124",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 12,
+      "call_id": "call_7cafb51451dc4cd9b7bb2601",
+      "source_line": 25,
+      "result_source_line": 25,
+      "code_sha256": "b5a55acdca515af86f8e1fba63632dffbdbe8d501356f8fd0dbe504cd52d6557",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 13,
+      "call_id": "call_299c02a0ac6b402cba791e14",
+      "source_line": 27,
+      "result_source_line": 27,
+      "code_sha256": "1b0583e6b31af3ba82df80d35fc9e18de220b81a0a809c6107886cb704f5f26e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 14,
+      "call_id": "call_5a4bfdc6d99d4e8289364c72",
+      "source_line": 29,
+      "result_source_line": 29,
+      "code_sha256": "49332b3516b0e7fb48ff55dbca48b3b4b4f956a5ff79c8c8c339aa99a624408d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 15,
+      "call_id": "call_896b955a7b82430b9fca513e",
+      "source_line": 31,
+      "result_source_line": 31,
+      "code_sha256": "3ee98de908c2b95ed2939c4b9370f8840d4961e8ac54dbbcb58c2e5599b65bfd",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 16,
+      "call_id": "call_e780a2f259a24d9bbfd3abdd",
+      "source_line": 33,
+      "result_source_line": 33,
+      "code_sha256": "be82623172fa796f939cabd81ee128cc4911a52ea2d0ae28edb4140da7d43710",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 17,
+      "call_id": "call_cb7e10da961249588b6d7f7a",
+      "source_line": 35,
+      "result_source_line": 35,
+      "code_sha256": "1335100c5380aed8ca11eeb21915875a841c781e9c4afb63ee629424f16b3763",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 18,
+      "call_id": "call_3e4ad1599fbb44aea917709b",
+      "source_line": 37,
+      "result_source_line": 37,
+      "code_sha256": "8ea1f8e50d6a724c8213482b6ae247fad8ffe46020bb03c653eb66e96554cf17",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 19,
+      "call_id": "call_88fcfd56085f4b5eb451b43b",
+      "source_line": 39,
+      "result_source_line": 39,
+      "code_sha256": "20a89892681bc295f1a88b32221345a704fd859fb1ee7be8d575986b9af9f998",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 20,
+      "call_id": "call_e97bcda86d3f4af583efe7bf",
+      "source_line": 41,
+      "result_source_line": 41,
+      "code_sha256": "ce52cbfb50c72c372bb2302aadbaad8dc23fb1a4cbcd82738e06fb9fcd2d69bc",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 21,
+      "call_id": "call_43572bf511ea40dab200596c",
+      "source_line": 43,
+      "result_source_line": 43,
+      "code_sha256": "16061fb2f74b10ae65c6d4ef4000e6713d6097da5a85a3ec907878282cb77c31",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 22,
+      "call_id": "call_68490b5c45cb409ea9e91b6b",
+      "source_line": 45,
+      "result_source_line": 45,
+      "code_sha256": "19d52b7ab3369f9c53c6a672ee41c083b940fbad0a18139202cbeb1e70f0c748",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 23,
+      "call_id": "call_b7c72b5788734e45aae98f02",
+      "source_line": 47,
+      "result_source_line": 47,
+      "code_sha256": "79b0914fac9dd9fe28491bae17363c1e6d440a890db78867b153b7bf591b5e72",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 24,
+      "call_id": "call_798fc7a6628f423a859ef313",
+      "source_line": 49,
+      "result_source_line": 49,
+      "code_sha256": "548d33b83b185f57e6aa4c9d920098c3ab1d33c6b25594698df86f59b5281751",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 25,
+      "call_id": "call_07bf50489f304a16bdb17198",
+      "source_line": 51,
+      "result_source_line": 51,
+      "code_sha256": "4c0035b0419ea2b545c7bc8df6dd7835536ddacc086ec86c088d375f53365fe6",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 26,
+      "call_id": "call_9cab3ea8f02f47afbc584c9d",
+      "source_line": 53,
+      "result_source_line": 53,
+      "code_sha256": "0afa222eda389e299123494d10ee15b846ab4e73e15801ea5f8de24614612b56",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 27,
+      "call_id": "call_9f6a6b58f1124b018c198099",
+      "source_line": 55,
+      "result_source_line": 55,
+      "code_sha256": "34db6475da95770a39fbfdd4d3eaf0d087392ee354cd001b8964cfd3c1b89b61",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 28,
+      "call_id": "call_23de231fe161468ba362adab",
+      "source_line": 57,
+      "result_source_line": 57,
+      "code_sha256": "bc9701410137b66441db91ff5067048332e0fd32b39344fe5dec55d7e99f5ce0",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 29,
+      "call_id": "call_3a3681140b914edc871d1a54",
+      "source_line": 59,
+      "result_source_line": 59,
+      "code_sha256": "7ba1ea1d29662d947ee8b05ab3438db99675a7b7d665fb7d179238c6042574ee",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 30,
+      "call_id": "call_e64f219ba4e8440faf8f7218",
+      "source_line": 61,
+      "result_source_line": 61,
+      "code_sha256": "a5be1e621d15ab2023316922635214119b39e6e84cce9f3ffc24976801e2f741",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 31,
+      "call_id": "call_1f4d98dc9b38422a867ff178",
+      "source_line": 63,
+      "result_source_line": 63,
+      "code_sha256": "810c7eb58232d57f7f78990cc4fcfe2b4fd27e96691a8ab00ee2f87a97d318e6",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 32,
+      "call_id": "call_bd571c3cc2b943608d3a0b87",
+      "source_line": 65,
+      "result_source_line": 65,
+      "code_sha256": "ecef613cfb51c9b02343d7089ccb206a57b4833810408a51790f1084f386e4b6",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 33,
+      "call_id": "call_2b962dad108d4746983d0e03",
+      "source_line": 67,
+      "result_source_line": 67,
+      "code_sha256": "00f0aba0cca60221ce05d6f1bf70dac5636c46a08f29e26e02dd980b113c1f2d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 34,
+      "call_id": "call_f9d20b024a2e4017af245d4d",
+      "source_line": 69,
+      "result_source_line": 69,
+      "code_sha256": "68090f1a02370bbbab773b50af59eaf3cd16b60c168dd9a5df8c9c0b7f495880",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 35,
+      "call_id": "call_fccdced83484461faf2a9cfd",
+      "source_line": 71,
+      "result_source_line": 71,
+      "code_sha256": "a085dd536e228eba27618a7c768590de1fcc4e34de3d8cf04f8db8bcc3f98bae",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 36,
+      "call_id": "call_58498a3a3b2045978b01d993",
+      "source_line": 73,
+      "result_source_line": 73,
+      "code_sha256": "20587b9a28a6327ad5e33bb7fa18466a5e2e040ab8449e3afa4686b58aa48783",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 37,
+      "call_id": "call_d012f4eebff243eaa222a104",
+      "source_line": 75,
+      "result_source_line": 75,
+      "code_sha256": "c76f850f04c40faf0d0db5f116ba79ff4208d87a2d43f7e6a5b1b72d8e615a6a",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 38,
+      "call_id": "call_9a469eb0451b48c6882c3f59",
+      "source_line": 77,
+      "result_source_line": 77,
+      "code_sha256": "e0a8b8c57b536e7e437eccb01b329ca93ffd63b474f298dfd50c9b5554640031",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 39,
+      "call_id": "call_fdc8f9dc362149be8c0ab7cc",
+      "source_line": 79,
+      "result_source_line": 79,
+      "code_sha256": "eb5ad05727de96fb2055bf40cdb7b76a8c48dba744cd872d2caff094fffedb14",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 40,
+      "call_id": "call_97f193525b404859ab685653",
+      "source_line": 81,
+      "result_source_line": 81,
+      "code_sha256": "04e7a740732c42c59e7b6105c7131b103b1b66cb13abad57c04a37cf0c3a60e2",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 41,
+      "call_id": "call_a8334dd73a9d40789abdb164",
+      "source_line": 83,
+      "result_source_line": 83,
+      "code_sha256": "56bc9a5ef589bd28e0a0906c55b9335e856eaaf9a72884582266f48dc665e412",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 42,
+      "call_id": "call_7fec3154fd7346dfac3c30ab",
+      "source_line": 85,
+      "result_source_line": 85,
+      "code_sha256": "a52511a7600141bc43da200007beec1e42c869ac8511a51175869e6cac14e6d5",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 43,
+      "call_id": "call_b3024585f9e845b8b062769a",
+      "source_line": 87,
+      "result_source_line": 87,
+      "code_sha256": "5acb213515d90a1333d754d4b480ad371ed1ad535e667822459dd106c5e76dcf",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 44,
+      "call_id": "call_b11733feeb034237b20d87fb",
+      "source_line": 89,
+      "result_source_line": 89,
+      "code_sha256": "d2b449e75d57f9b98a149815c8f355f4c7868a959a961bbf782af56cfc882ecd",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 45,
+      "call_id": "call_48ee8edd0c784e9bacd718a9",
+      "source_line": 91,
+      "result_source_line": 91,
+      "code_sha256": "64a320e13c9c05c6e1afdaf661a794e5335f2c39ea49f6f1144d2fb8234b7c38",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 46,
+      "call_id": "call_7055e8d400fa4dcca47cab02",
+      "source_line": 93,
+      "result_source_line": 93,
+      "code_sha256": "5356fddd1e3712e160b849cd48642e22620b2f6c22cb13c9d4f2b9f74b5b50f5",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 47,
+      "call_id": "call_660d70f8c580457aa9071cc6",
+      "source_line": 95,
+      "result_source_line": 95,
+      "code_sha256": "c498172465c619d8ea4a420c5f587928c7e6e9b28f8015ece60305efbc56214e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 48,
+      "call_id": "call_458d379d54c54a3e853e2fc3",
+      "source_line": 97,
+      "result_source_line": 97,
+      "code_sha256": "9bfb33e2df5da680afe1141a10bde24ccabfed6a44d5087dc01915496408d3b7",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 49,
+      "call_id": "call_4a668654d22a4ce08821a260",
+      "source_line": 99,
+      "result_source_line": 99,
+      "code_sha256": "76b367dacd101bc2e20b1d80c5ae053975319f77fa190ae24c6a31851bd11ecf",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 50,
+      "call_id": "call_81bbd4ec603348d68cdd2379",
+      "source_line": 101,
+      "result_source_line": 101,
+      "code_sha256": "a812cbf2830c5d91337576b6f5f9877b4a45602900f74e1c0ea0eece84f07cae",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 51,
+      "call_id": "call_0262aced97004202a01b2682",
+      "source_line": 103,
+      "result_source_line": 103,
+      "code_sha256": "3cd3f481f4565e9bfb79e98ca19c6b0b29b4937472cd897354e34814a235bec2",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 52,
+      "call_id": "call_bc4fc739e1534ac2854bafed",
+      "source_line": 105,
+      "result_source_line": 105,
+      "code_sha256": "1be82ed3b912535c2b1cabea851fd83d6043140b8652eef46dbd085ef393f3ae",
+      "api_attributes_present": [],
+      "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 14, in <module>\nNameError: name 'nP' is not defined"
+    },
+    {
+      "seq": 53,
+      "call_id": "call_fa3de4d50ecc44f989a754d2",
+      "source_line": 107,
+      "result_source_line": 107,
+      "code_sha256": "1772cff1bedb3d88fbcdda38ce549db5b6b76ee7d23e859eca5ee96c76f2ca7e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 54,
+      "call_id": "call_a7da817427f3499690c6da74",
+      "source_line": 109,
+      "result_source_line": 109,
+      "code_sha256": "67977a21e547e2e95d82230c0f13a1f0c8c55930c1c67232c07aae7062b32ec5",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 55,
+      "call_id": "call_0828e80bcddd4606a43c4acb",
+      "source_line": 111,
+      "result_source_line": 111,
+      "code_sha256": "481246d4d2144375134bde68d2022afc1078342ee54bc4d4e4497faf9977e12b",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 56,
+      "call_id": "call_c4d3b53ec2c34dc18aea8384",
+      "source_line": 113,
+      "result_source_line": 113,
+      "code_sha256": "8a5c9c239bd56fad6d27bd6a98627841c003df05f31f0409cf34d9c90f075735",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 57,
+      "call_id": "call_02882177bd334d90821de573",
+      "source_line": 115,
+      "result_source_line": 115,
+      "code_sha256": "e1d238f25e51e0318c1ecbacb4ab62de9fafab3b52b209474b22b90f7a5e8671",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 58,
+      "call_id": "call_b71d643d4c5d401980c89dee",
+      "source_line": 117,
+      "result_source_line": 117,
+      "code_sha256": "9d97f5566c93f2a5c5c7eeb80cacbc6173b999c67262408767995427041a6e98",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 59,
+      "call_id": "call_bb49bc9539ba451d86c02e19",
+      "source_line": 119,
+      "result_source_line": 119,
+      "code_sha256": "cedfb1a2691ac8224122bd706c207ac372938f75f46297f5b934084ead749124",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 60,
+      "call_id": "call_4f31e63fe3f84c14b1e61521",
+      "source_line": 121,
+      "result_source_line": 121,
+      "code_sha256": "6aa749a6d469fa58f557abd1a23e0353227847177af3d20c65a3547e09c07226",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 61,
+      "call_id": "call_11b066f3fb324132994cab70",
+      "source_line": 123,
+      "result_source_line": 123,
+      "code_sha256": "678546b005b01e4aafd97731ed74bac69877534202093af2daf5091a1f8ef7f6",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 62,
+      "call_id": "call_90eae5e913c44e49b73587dd",
+      "source_line": 125,
+      "result_source_line": 125,
+      "code_sha256": "43aeabbbcc02da6d5ef1594d9efae28ca11a41143a42ae6b544a0b9a1518c1ec",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 63,
+      "call_id": "call_aba3e07410c0487ebfe70965",
+      "source_line": 127,
+      "result_source_line": 127,
+      "code_sha256": "9f4515fe1dbf51f7012d2b00ba3f4dbf3aaf0f5072b8016d7c813050fd590e87",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 64,
+      "call_id": "call_d34797ca26ca471c8e314967",
+      "source_line": 129,
+      "result_source_line": 129,
+      "code_sha256": "2e54817e626bda14e99aea5d9b58908d8e4a291bca030618b9af575115db8f83",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 65,
+      "call_id": "call_678827eb001347848ea5b928",
+      "source_line": 131,
+      "result_source_line": 131,
+      "code_sha256": "c185e6087542aebd84ad2f667bbba214334ebf7318dd2cd10a5eec899135832c",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 66,
+      "call_id": "call_7dd554955ed046a7b06bd82d",
+      "source_line": 133,
+      "result_source_line": 133,
+      "code_sha256": "302043fcd692336cad3f2db046fc6cf519fff60e3707779c5b4c3b15ba27e788",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 67,
+      "call_id": "call_5b9e800a339f4917b2510305",
+      "source_line": 135,
+      "result_source_line": 135,
+      "code_sha256": "e3259483c5bbe276efb8ede6ba4ff4aaa293dba56aa71fdfe96b478cd8e32970",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 68,
+      "call_id": "call_9deb4e514cc94efbb43f036a",
+      "source_line": 137,
+      "result_source_line": 137,
+      "code_sha256": "5e90265bdbccb201729f7f06cc0b9c0b96a64ac9c4f2bd985c3a9b4598e46034",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 69,
+      "call_id": "call_6e27b916d8014f14bd8abe0b",
+      "source_line": 139,
+      "result_source_line": 139,
+      "code_sha256": "303ebd77c3a0d4674b9b48e28c4d1459d6c8f898616c9393e98757f47626dabc",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 70,
+      "call_id": "call_c75c074157684254a6880633",
+      "source_line": 141,
+      "result_source_line": 141,
+      "code_sha256": "ef017773fa1562ad450fec8093f36dd1f9e4aa02965897d85e6b7abcbd17f28c",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 71,
+      "call_id": "call_f11cbd150bfa4a89b301a596",
+      "source_line": 143,
+      "result_source_line": 143,
+      "code_sha256": "69d55ee35502d874ce05f139ba4930089f7a549519cfa67ba1befa888bfbebcd",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 72,
+      "call_id": "call_0248176dcc2b4dcda8aefade",
+      "source_line": 145,
+      "result_source_line": 145,
+      "code_sha256": "fe913c91c2d0ae4e33407051f1b2e96c47eaf18dc7cc8304208f8d4a1e4cd807",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 73,
+      "call_id": "call_8ebdecf8dfcd4c45a589022a",
+      "source_line": 147,
+      "result_source_line": 147,
+      "code_sha256": "8d5d5e587b6bc5c3dccf5b56a38d5a8f13886fdd69b06f99c51cf93fdd61bd54",
+      "api_attributes_present": [],
+      "observed_result_error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nNameError: name 'goods' is not defined"
+    },
+    {
+      "seq": 74,
+      "call_id": "call_1a2c887d17424f91814ca7f5",
+      "source_line": 149,
+      "result_source_line": 149,
+      "code_sha256": "70c476a07f8f897b8ee0334b74230b8515883876608146435ecadfc8ed32967c",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 75,
+      "call_id": "call_4e1097523d774764b2c7dba7",
+      "source_line": 151,
+      "result_source_line": 151,
+      "code_sha256": "e053c2923cb9065eeb88361dc1ebd1beeb8df23cd318d4d770f5dee325900453",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 76,
+      "call_id": "call_68fafc4b06c74a7aaf9a8329",
+      "source_line": 153,
+      "result_source_line": 153,
+      "code_sha256": "7d7a6bb93fb77e97b361d8e6aef8fda4355b4b0bab11db2b51e5766633a6a601",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 77,
+      "call_id": "call_35619e3c92964ed3a6b94787",
+      "source_line": 155,
+      "result_source_line": 155,
+      "code_sha256": "e4871fe8b68371d15058d11e2206df51d2f2bca017c10d32afe5bd4ad696d38b",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 78,
+      "call_id": "call_7be705508dbc4add9532fc52",
+      "source_line": 157,
+      "result_source_line": 157,
+      "code_sha256": "e6e2f2521702432e7d073867f55811d4ca7950da5d74b6d98bbf2be85ac3aa67",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 79,
+      "call_id": "call_50bc4e48630346b4ade9572b",
+      "source_line": 159,
+      "result_source_line": 159,
+      "code_sha256": "79f67c6293969e828b77eb03970f1ef4d04ab16a517fb58ac7b0f4a6c5866f8e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 80,
+      "call_id": "call_2e7807e4054a4410b110d088",
+      "source_line": 161,
+      "result_source_line": 161,
+      "code_sha256": "d6835c23b9422a9ef286fc46e41028e2f2dbf6854d219570e1a9aae7b6b96037",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 81,
+      "call_id": "call_e3ae69a32c1c40c79966ef8f",
+      "source_line": 163,
+      "result_source_line": 163,
+      "code_sha256": "47c86eef350089b526f9d22727c53e57da748348e1baa24efdfd7ff36ee536c1",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 82,
+      "call_id": "call_9959aa19a8474f89bba56c88",
+      "source_line": 165,
+      "result_source_line": 165,
+      "code_sha256": "0ff4219f7a4bd991ada00ba444de3bc42857e26d6fa776a01970439230be9063",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 83,
+      "call_id": "call_be4f52d50b6c4c9dba844826",
+      "source_line": 167,
+      "result_source_line": 167,
+      "code_sha256": "e22b1303d765ba432078b2f00e7784ec7dffc1e97a6ea3d4dea4ed49ee35a86d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 84,
+      "call_id": "call_52f9120051624d6085e21fa2",
+      "source_line": 169,
+      "result_source_line": 169,
+      "code_sha256": "e591f1a24d0b618e6845fac16df030e33c529bd4f8ca199a1c63d16366b4ab9e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 85,
+      "call_id": "call_b81209940f3f4d488f0604b5",
+      "source_line": 171,
+      "result_source_line": 171,
+      "code_sha256": "bc19c461e5e16dca14bebcf3d8de96137a6109948c7533c40753b30362e61226",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 86,
+      "call_id": "call_0a9d0c3f788c40678d5b450e",
+      "source_line": 173,
+      "result_source_line": 173,
+      "code_sha256": "55900b7973823d6f6169ab45cfc4f8390548cf7f21d5f616fd6b1d6e326c637e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 87,
+      "call_id": "call_9d7c1adc56ac49f7a06a834d",
+      "source_line": 175,
+      "result_source_line": 175,
+      "code_sha256": "5eb228a3a51d21f6aca40574f6ff0328cf6d918564193467ca1fdae9f9d3f02d",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 88,
+      "call_id": "call_cb4c7e1417094170ba30bccf",
+      "source_line": 177,
+      "result_source_line": 177,
+      "code_sha256": "5f1afef65dec0da213c84867aaa997436d05816d7f18bd96a98b495364676372",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 89,
+      "call_id": "call_f300fbc65b514a22a8b73178",
+      "source_line": 179,
+      "result_source_line": 179,
+      "code_sha256": "7ef132173ec914bd28a57c2bf970085c1be744c5cd4793df950125227c9ec7ec",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 90,
+      "call_id": "call_8b552099387142abb9d1c8a1",
+      "source_line": 181,
+      "result_source_line": 181,
+      "code_sha256": "f6aa646237aaf9e5d3e962663f0dbfe48739d0075ef3105174bdbc76515fe095",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 91,
+      "call_id": "call_a56aa852efe2439695d435a0",
+      "source_line": 183,
+      "result_source_line": 183,
+      "code_sha256": "e7d8fb20527ef9fc248456e48f6732e8d64f2387fab6e3e59e0b8e469b46528e",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 92,
+      "call_id": "call_dd395cd4707a419e92ba4811",
+      "source_line": 185,
+      "result_source_line": 185,
+      "code_sha256": "0f8293aeae49a558965fb54cf30e0f7ab66d96b06a391d82ca0a1cc8d4b46693",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 93,
+      "call_id": "call_7ec3ef6e0fe64426a5364355",
+      "source_line": 187,
+      "result_source_line": 187,
+      "code_sha256": "144204a25003bd8e821613045f77b6bf434a7615f20b6eed2cfe7bb09b41f0b4",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    },
+    {
+      "seq": 94,
+      "call_id": "call_9ffaacc94a7c4463aa08a482",
+      "source_line": 189,
+      "result_source_line": 189,
+      "code_sha256": "308b40ca172abf15857a21874574b7d46b04993ae70ed5743c26d2c98a21b39b",
+      "api_attributes_present": [],
+      "observed_result_error": null
+    }
+  ],
+  "comparison_source": {
+    "path": "experiments/020-analysis/comparison.json",
+    "sha256": "3019d86f4d1d60b4dc8b719599f26fff2fb22c03ed0a0252c7f64224d5ebfaba"
+  },
+  "game_result": {
+    "game_id": "ar25-0c556536",
+    "baseline": {
+      "game_id": "ar25-0c556536",
+      "AE": 41.66666666666667,
+      "reported_AE": 41.66666666666667,
+      "uncapped_AE": 47.91666666666667,
+      "cap_adjustment": -6.25,
+      "completion_ceiling": 41.66666666666667,
+      "efficiency_gap": 0.0,
+      "levels_completed": 5,
+      "number_of_levels": 8,
+      "state": "cancelled",
+      "actions": 193,
+      "actions_per_level": [
+        19,
+        24,
+        54,
+        23,
+        30,
+        43,
+        0,
+        0
+      ],
+      "reset_actions": 0,
+      "analyzer_tokens": 107655,
+      "history_tokens": 105315,
+      "final_tokens": 0,
+      "recorded_tokens": 105315,
+      "unattached_tokens": 2340,
+      "uncached_input_tokens": 0,
+      "levels": [
+        {
+          "level": 1,
+          "completed": true,
+          "actions": 19,
+          "baseline_actions": 32,
+          "level_AE": 115.0,
+          "weight": 1,
+          "weight_fraction": 0.027777777777777776,
+          "uncapped_game_contribution": 3.1944444444444446
+        },
+        {
+          "level": 2,
+          "completed": true,
+          "actions": 24,
+          "baseline_actions": 50,
+          "level_AE": 115.0,
+          "weight": 2,
+          "weight_fraction": 0.05555555555555555,
+          "uncapped_game_contribution": 6.388888888888889
+        },
+        {
+          "level": 3,
+          "completed": true,
+          "actions": 54,
+          "baseline_actions": 75,
+          "level_AE": 115.0,
+          "weight": 3,
+          "weight_fraction": 0.08333333333333333,
+          "uncapped_game_contribution": 9.583333333333334
+        },
+        {
+          "level": 4,
+          "completed": true,
+          "actions": 23,
+          "baseline_actions": 37,
+          "level_AE": 115.0,
+          "weight": 4,
+          "weight_fraction": 0.1111111111111111,
+          "uncapped_game_contribution": 12.777777777777779
+        },
+        {
+          "level": 5,
+          "completed": true,
+          "actions": 30,
+          "baseline_actions": 89,
+          "level_AE": 115.0,
+          "weight": 5,
+          "weight_fraction": 0.1388888888888889,
+          "uncapped_game_contribution": 15.972222222222221
+        },
+        {
+          "level": 6,
+          "completed": false,
+          "actions": 43,
+          "baseline_actions": 159,
+          "level_AE": 0.0,
+          "weight": 6,
+          "weight_fraction": 0.16666666666666666,
+          "uncapped_game_contribution": 0.0
+        },
+        {
+          "level": 7,
+          "completed": false,
+          "actions": 0,
+          "baseline_actions": 233,
+          "level_AE": 0.0,
+          "weight": 7,
+          "weight_fraction": 0.19444444444444445,
+          "uncapped_game_contribution": 0.0
+        },
+        {
+          "level": 8,
+          "completed": false,
+          "actions": 0,
+          "baseline_actions": 73,
+          "level_AE": 0.0,
+          "weight": 8,
+          "weight_fraction": 0.2222222222222222,
+          "uncapped_game_contribution": 0.0
+        }
+      ]
+    },
+    "grounded_state": {
+      "game_id": "ar25-0c556536",
+      "AE": 58.333333333333336,
+      "reported_AE": 58.333333333333336,
+      "uncapped_AE": 67.08333333333334,
+      "cap_adjustment": -8.750000000000007,
+      "completion_ceiling": 58.333333333333336,
+      "efficiency_gap": 0.0,
+      "levels_completed": 6,
+      "number_of_levels": 8,
+      "state": "cancelled",
+      "actions": 214,
+      "actions_per_level": [
+        20,
+        23,
+        54,
+        23,
+        37,
+        57,
+        0,
+        0
+      ],
+      "reset_actions": 0,
+      "analyzer_tokens": 100536,
+      "history_tokens": 87543,
+      "final_tokens": 0,
+      "recorded_tokens": 87543,
+      "unattached_tokens": 12993,
+      "uncached_input_tokens": 0,
+      "levels": [
+        {
+          "level": 1,
+          "completed": true,
+          "actions": 20,
+          "baseline_actions": 32,
+          "level_AE": 115.0,
+          "weight": 1,
+          "weight_fraction": 0.027777777777777776,
+          "uncapped_game_contribution": 3.1944444444444446
+        },
+        {
+          "level": 2,
+          "completed": true,
+          "actions": 23,
+          "baseline_actions": 50,
+          "level_AE": 115.0,
+          "weight": 2,
+          "weight_fraction": 0.05555555555555555,
+          "uncapped_game_contribution": 6.388888888888889
+        },
+        {
+          "level": 3,
+          "completed": true,
+          "actions": 54,
+          "baseline_actions": 75,
+          "level_AE": 115.0,
+          "weight": 3,
+          "weight_fraction": 0.08333333333333333,
+          "uncapped_game_contribution": 9.583333333333334
+        },
+        {
+          "level": 4,
+          "completed": true,
+          "actions": 23,
+          "baseline_actions": 37,
+          "level_AE": 115.0,
+          "weight": 4,
+          "weight_fraction": 0.1111111111111111,
+          "uncapped_game_contribution": 12.777777777777779
+        },
+        {
+          "level": 5,
+          "completed": true,
+          "actions": 37,
+          "baseline_actions": 89,
+          "level_AE": 115.0,
+          "weight": 5,
+          "weight_fraction": 0.1388888888888889,
+          "uncapped_game_contribution": 15.972222222222221
+        },
+        {
+          "level": 6,
+          "completed": true,
+          "actions": 57,
+          "baseline_actions": 159,
+          "level_AE": 115.0,
+          "weight": 6,
+          "weight_fraction": 0.16666666666666666,
+          "uncapped_game_contribution": 19.166666666666668
+        },
+        {
+          "level": 7,
+          "completed": false,
+          "actions": 0,
+          "baseline_actions": 233,
+          "level_AE": 0.0,
+          "weight": 7,
+          "weight_fraction": 0.19444444444444445,
+          "uncapped_game_contribution": 0.0
+        },
+        {
+          "level": 8,
+          "completed": false,
+          "actions": 0,
+          "baseline_actions": 73,
+          "level_AE": 0.0,
+          "weight": 8,
+          "weight_fraction": 0.2222222222222222,
+          "uncapped_game_contribution": 0.0
+        }
+      ]
+    },
+    "score_delta": 16.666666666666664,
+    "levels_delta": 1,
+    "mean_score_contribution": 1.3888888888888886,
+    "score_decomposition": {
+      "shared_completed_levels": 0.0,
+      "new_completed_levels": 19.166666666666668,
+      "lost_completed_levels": 0.0,
+      "cap_adjustment_delta": -2.500000000000007
+    },
+    "leave_one_out_mean_delta": -17.554923825986954
+  },
+  "limitations": [
+    "Only candidate ar25 complete downloaded log was reviewed; baseline trajectories were not independently reviewed here.",
+    "95 request rows / 94 response rows in the per-game log; all 94 deduplicated visible tool calls have results. Arm-root fallback responses may supplement the final request, but that request is not counted as an extra executed tool.",
+    "First_seen source line is a later conversation snapshot, not dispatch time. No request token usage is assigned to an individual historical snippet.",
+    "Pixel recomputation parses recorded ASCII characters only; no model output or game implementation is executed.",
+    "No automatic adoption threshold or new test gate was added."
+  ],
+  "extraction_scope": "Complete per-game request log only; arm-root fallback responses are not included and will be reconciled by the root analysis."
+}

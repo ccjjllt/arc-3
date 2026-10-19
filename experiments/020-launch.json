@@ -1,6 +1,6 @@
 {
   "prepared_at_utc": "2026-10-19T01:14:38.333081+00:00",
-  "status": "running",
+  "status": "completed",
   "username": "jiyujia",
   "kernel_id": "jiyujia/arc3-020-grounded-state",
   "notebook_sha256": "f09fffce64c9ded819d32f534848078f139306c78563cb8cde308a30638bba2e",
@@ -16,7 +16,7 @@
     "grounded_state"
   ],
   "uploaded": true,
-  "gpu_started": null,
+  "gpu_started": true,
   "competition_submission_created": false,
   "quota_limitation": "Generic quota endpoint previously reported used>allowed even when the authorized RTX run succeeded; platform acceptance is authoritative for this bounded request. No exact remaining RTX hours inferred.",
   "selection_policy": "docs/handoff/020-research-sprint.md",
@@ -51,12 +51,43 @@
   "push_finished_at_utc": "2026-10-19T01:14:49.391686+00:00",
   "kernel_version": 1,
   "last_status": {
-    "status": "RUNNING"
+    "status": "COMPLETE"
   },
-  "last_status_checked_at_utc": "2026-10-19T01:15:24.296672+00:00",
+  "last_status_checked_at_utc": "2026-10-19T02:29:20.135215+00:00",
   "remote_source_verified": true,
   "remote_check": "experiments/020-launch-checks/remote-check.json",
   "url": "https://www.kaggle.com/code/jiyujia/arc3-020-grounded-state",
   "kernel_id_number": 139518619,
-  "gpu_started_note": "Kaggle reports RUNNING; device and model startup not yet observed in remote logs."
+  "gpu_started_note": "Completed manifest records GPU sampling, model ready, two full arms, and server shutdown.",
+  "session_running": false,
+  "completion_evidence": "experiments/020-launch-checks/completion-status-quota.json",
+  "output_directory": "runs/020-overview",
+  "overview_directory": "runs/020-overview",
+  "session_elapsed_seconds": 4223.927823543549,
+  "model_ready_seconds": 572.9696817398071,
+  "gpu_server_stopped": true,
+  "analysis_directory": "experiments/020-analysis",
+  "decision": "Do not submit this unmodified version: descriptive 12-game score regresses by 14.7031; hand over implementation work to user.",
+  "analysis_outcome": {
+    "mean_score_baseline": 41.21124734079125,
+    "mean_score_candidate": 26.50812272252543,
+    "mean_score_delta": -14.703124618265822,
+    "completed_levels": [
+      44,
+      36
+    ],
+    "wins": [
+      3,
+      1
+    ],
+    "competition_submission_created": false,
+    "candidate_visible_unique_code_calls": 720,
+    "candidate_games_with_explicit_region_syntax": 3,
+    "adoption_note": "Syntactic retrieval is not success; r11l has observed direct and indirect data consumption, ar25/ft09 no new API calls, cd82 last read only."
+  },
+  "additional_partial_output_directory": "runs/020-grounded-state",
+  "candidate_request_log_directory": "runs/020-candidate-logs",
+  "download_receipt": "experiments/020-launch-checks/download-receipt.json",
+  "results_report": "research/020-results-analysis.md",
+  "implementation_handoff": "docs/handoff/021-implementation-handoff.md"
 }
