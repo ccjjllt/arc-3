@@ -15,3 +15,10 @@
 ## 同预算对照
 
 v1 已经跑完。窗口打开 3 次，完成关数和配对基线相同。结论见 [024结果](024-level-stall-results.md)。不扩大，不提交。停批接口和 FP8 没有改。正式成绩仍是 009 v2 / public 31.16。
+
+## 2026-10-19 追加：ih01 单列，tt03 种子未固定（CPU，不扩跑 GPU）
+
+* **024 GPU 不扩跑。** v1 已是终点，不开新臂、不提交。
+* **ih01 从可解性评估中单列。** 7 关全部数学上无解：只有 ACTION5 推进热量，ACTION6 切换只耗步不 tick；加热格 +2/步，非加热格 −1/步＋每个正交相邻 ON 加热器 +1。现有 pads 无相邻，加热格邻居封顶 1，远格恒 0，而过关要 100 格全 ≥min_warm（4–7）。零切换成本上界仍只有加热格达标（L1 2/100 … L4 4/100 …）。证据 `experiments/024-level-stall-cpu/ih01-solvability-report.json`。ih01 的 0/7 是天花板，不是探针失败；不再把攻克 ih01 当提分目标，stall 成功标准也不再含 ih01。
+* **tt03 环境版本已钉死，但随机种子从未固定。** `tt03.py 01e0bf5…`、`metadata cdd83e5…`、`ih01.py 8be0360…` 两处 checkout 与 `jiyujia/arc3-community-dev-02152bc` 一致；`arc-agi 0.9.8` wheel 与本地 SDK 一致。`Tt03.__init__` 无 seed 参数，`Arcade.make(seed=200019)` 被静默丢弃；`_maybe_spawn_target` 用全局 `random.choice`。CPU 证实：同 py_seed＋不同 arcade_seed 全同；同条件重复全同；换 py_seed 即分叉（本轮盲走第 26 步，另一走位第 11 步起目标数分叉）。证据 `experiments/024-level-stall-cpu/tt03-seed-report.json`。此前 022 1/3 vs 024 2/3、回放 0 关 vs 基准 1 关、L2 的 47 vs 507 步，都含不受控的刷怪 RNG，不可比。
+* **下一步选关门（GPU 前必须先过 CPU）：** ①可解（机制上存在通关路径，ih01 类直接排除）；②确定性 RNG（`random.Random(710x)` 如 pt01 类，或先给 tt03 加显式 seed＋日志；全局 `random` 不算固定）；③单局固定动作预算下失败可复现（同一 seed＋同一盲走/录像动作两次全同，且多次基线都停在同一关）；④探针收益只认：窗口打开＋随后动作偏离重复计划＋同 seed 重跑同向增益。候选先在 CPU 把 seed＋版本＋录像钉死，再谈 GPU。
