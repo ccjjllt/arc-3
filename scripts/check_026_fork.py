@@ -95,9 +95,28 @@ def main() -> None:
     nodes = segment_layer([list(map(int, r)) for r in grid], ARC_COLOR_CHARS)["nodes"]
     s_nodes = [n for n in nodes if n["color"] == "S"]
     check("m0r0 S blocks visible to host", len(s_nodes) == 2, str(len(s_nodes)))
-    # ProbeBudget K=0: host path dispatches nothing
-    b = ProbeBudget(0)
-    check("K=0 forbids dispatch", b.request() is False)
+    # zero-env guard: refuses through the hook path, restores cleanly
+    from arc3_research.failure_repair import install_zero_env_guard
+
+    class _FakeAnalyzer:
+        def _action_guard_hook(self, grid, name, data, level=None,
+                               remaining=None):
+            return None
+
+    fake = _FakeAnalyzer()
+    undo = install_zero_env_guard(fake)
+    verdict = fake._action_guard_hook([[0]], "ACTION6", {"x": 1}, level=3,
+                                      remaining=[])
+    check("K=0 guard refuses env action",
+          isinstance(verdict, tuple) and verdict[0] == "probe_budget_reached",
+          str(verdict)[:100])
+    check("K=0 refusal names uncatchable stop",
+          "NOT executed" in verdict[1] and "not catchable" in verdict[1])
+    undo()
+    check("K=0 guard uninstall restores base hook",
+          getattr(fake._action_guard_hook, "__func__", None)
+          is _FakeAnalyzer._action_guard_hook)
+    check("probe budget K=0 forbids dispatch", ProbeBudget(0).request() is False)
     # Payload budget: fork inputs must fit the 1MB notebook cap with margin
     compact = {}
     for g, rel in BENCH.items():

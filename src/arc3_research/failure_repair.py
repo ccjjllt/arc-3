@@ -4,15 +4,12 @@ No new model-callable tool, no prompt prefix. For each recorded failure
 prefix the driver replays the exact benchmark actions to the cut point T in a
 fresh harness game, then continues with the model server under a tight extra
 budget. The B arm first receives a host-computed evidence recheck as one
-opening user message (stdout-shaped text, plus corrected data the model must
-re-derive itself); the A arm continues from the identical state without it.
-All probe env dispatches (none in the current K=0 prefixes) go through
-ProbeBudget pre-dispatch checks and stop gracefully with a stop_reason.
-
-Kaggle payload cap (1 MB) carries no request logs: both arms restart from the
-identical replayed state with empty conversation. A-vs-original fidelity is
-reported as a diagnostic (first post-T actions vs the logged post-T plan),
-not as a gate.
+opening user message; the A arm continues from the identical state without it.
+First version is K=0: the continuation may run Python recompute but no env
+action. Env-action refusal goes through the solver's guard-hook path
+(uncatchable snippet-ending refusal preserving stdout + retained functions),
+never a plain result dict. Cuts are legal tool-call boundaries only
+(previous tool already returned, next model request not yet issued).
 """
 from __future__ import annotations
 
@@ -62,9 +59,11 @@ class FailureRepairPatch:
     """No global hooks. The repair runs only inside the fork driver below."""
 
     def snapshot(self) -> dict[str, Any]:
-        return {"patch": "failure-repair-v1", "forks": list(FORKS),
+        return {"patch": "failure-repair-v2", "forks": list(FORKS),
                 "probe_quota": 0,
-                "rule": "host evidence only; no new tool API; no answer injection"}
+                "rule": "host evidence only; K=0 recompute-only via guard-hook "
+                        "refusal (uncatchable, keeps stdout+functions); no new "
+                        "tool API; no answer injection; tool-call boundaries only"}
 
 
 def install_failure_repair() -> FailureRepairPatch:
@@ -135,6 +134,39 @@ def recheck_control(grid) -> str:
 
 RECHECK = {"legend_recheck": recheck_legend, "crop_recheck": recheck_crop,
            "sim_recheck": recheck_sim, "control": recheck_control}
+
+
+def install_zero_env_guard(analyzer) -> Any:
+    """K=0: refuse every env action via the guard-hook path.
+
+    Wraps the analyzer instance's ``_action_guard_hook`` (instance attribute
+    shadows the method; each ``analyze()`` turn re-reads it, so no base patch
+    and no install-order coupling with timing/observer patches). The refusal
+    ``("probe_budget_reached", detail)`` makes the solver return a refusal
+    payload; the sandbox ends the snippet with an uncatchable error that keeps
+    prior stdout and retained functions. Pure-Python recompute calls never
+    reach this hook and stay allowed. Returns an uninstall closure.
+    """
+    original = analyzer._action_guard_hook
+
+    def guarded(grid, action_name, action_data, level=None, remaining=None):
+        try:
+            display = f"{action_name}({action_data})" if action_data else str(action_name)
+        except Exception:
+            display = str(action_name)
+        return ("probe_budget_reached",
+                f"Repair window is recompute-only (K=0): {display} was NOT "
+                "executed and no action was spent. Re-derive the evidence in "
+                "Python, print the corrected finding, and stop. This refusal "
+                "is not catchable and ended the snippet.")
+
+    analyzer._action_guard_hook = guarded
+
+    def uninstall() -> None:
+        if getattr(analyzer, "_action_guard_hook", None) is guarded:
+            analyzer._action_guard_hook = original
+
+    return uninstall
 
 
 def load_fork_conversations() -> dict[str, list[dict[str, Any]]]:
@@ -247,11 +279,13 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
             entry["recheck_kind"] = spec_fork["kind"]
             entry["recheck_chars"] = len(text)
         # Bounded continuation sharing the arm budget. Mirror _play_one error
-        # handling so one fork failure is recorded, not silent.
+        # handling so one fork failure is recorded, not silent. K=0: the
+        # zero-env guard is installed per fork and always uninstalled.
         prev_max_actions = bm.solver.max_actions_per_game
         prev_max_runtime = bm.solver.max_runtime_s_per_game
         bm.solver.max_actions_per_game = cut + int(spec_fork["max_extra_actions"])
         bm.solver.max_runtime_s_per_game = float(spec_fork["max_extra_seconds"])
+        uninstall_guard = install_zero_env_guard(analyzer)
         try:
             try:
                 session.play()
@@ -262,6 +296,7 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
                 with contextlib.suppress(Exception):
                     game.finish_game()
         finally:
+            uninstall_guard()
             bm.solver.max_actions_per_game = prev_max_actions
             bm.solver.max_runtime_s_per_game = prev_max_runtime
         # Full-trajectory (prefix + continuation) run record.

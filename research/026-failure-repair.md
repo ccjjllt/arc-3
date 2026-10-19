@@ -28,3 +28,7 @@
 ## 5. 待办（需 GPU，约 1h 预算）
 
 同一切入状态、共享剩余预算：A 臂原策略直跑；B 臂先跑 0 动作重算（仅确认失败时才申请至多 3 真实探测），再继续原循环（独立 Arcade 实例或 `/flush_cache` 隔离）。判据：B 是否真正改变随后动作并恢复通关；r11l 对照是否零误伤。若无增量恢复或频繁误伤，停掉该实现，不做在线触发器。
+
+## 2026-10-20 评审修正
+1. 停止路径：`ProbeBudget.stop_payload()` 普通 dict 不能终止模型 Python 循环；v1 的 guard 从未真正接线（构造了但没调用）。改为 K=0 重算：`install_zero_env_guard` 包 analyzer 实例 `_action_guard_hook`（每轮 analyze 重新抓取，无需底座补丁，与计时/观察器补丁无安装顺序耦合），拒绝走 solver 守卫路径（`solver.py:1047-1073` → 拒绝 payload `1136-1155` → 沙箱不可捕获异常，中断片段但保留 stdout 与已保留函数）。纯 Python 重算不经过该 hook，保持允许。`probe_budget.py` 与模块 docstring 中"永不抛异常/会丢输出"的旧说法已更正。
+2. 切点边界：ft09 cut（cum 11 / rec 14）经核对是合法工具边界——rec14=request、rec15=同会话response（21 条消息完全相同）、rec16 前 21 条与 rec14 一致并新起 assistant turn；第 7 个 tool（含 6 动作批）已返回，无在途 Python、无局部状态可泄漏。m0r0 批内切点暂缓（只恢复消息/函数恢复不了循环位置，且整段 tool 输出已含后 16 步）。

@@ -27,3 +27,14 @@
 ## 边界
 
 这是历史选择点的静态重算，不是反事实仿真：真实改序会改变后续入场/过关轨迹，实际吞吐与饿死风险（零动作游戏数）只能由在线对照回答。若进 GPU：只包装 `_PriorityGate.acquire`，不动 `_enqueue_and_wait`/`_pump` 源码，按固定顺序装/逆序卸，并在配置中注册新 arm 名；用官方 25 题、10 并发验证。
+
+## 2026-10-20 收敛重算（双 baseline only）
+按评审意见收缩范围：只取 014 baseline + 016 baseline（arm-metadata 确认两臂调度策略完全一致：remaining/PACE=0/normalize=1/FADE=1/0.2/refresh=1/10流/0热身）。tail_80k 与 pace_1x 排除。
+
+方法修正：
+- 保真门：argmax(priority, token小者胜) 与记录 `selected` 行在 230/230 selection 事件全部一致（两臂 candidate_omitted 全 0），heap 规则复现通过。
+- 初始优先级的旧 docstring 有误：底座为 `_PRIORITY_UNTRIMMED_BASE - dispatch_index`（`tool_agent.py:2150,3525`），非 100*idx；重算不受影响（null 直接替换）。
+- 解释力声明：单决策反事实。首次改选后真实时钟/关卡/队列即分叉，不能由旧日志推算新策略整场分数。
+
+结果：每臂 15 个混合决策，30/30 翻转，首次均在 seq 74（Late-run，前期是纯新游戏入场）。29 次是续跑游戏保住槽位（新游戏延后入场），1 次是新对新调换（014 seq74：m0r0 顶掉 lp85）。被保住的续跑多为深关卡低消耗态（如 ft09 L6 零消耗、cn04 L4）。
+结论：改选机会存在且方向一致——009 值系统性偏向续跑、延后新游戏入场。是否涨分只能由官方 25 题 10 并发 A/B 回答（看聚合 RHAE、新题是否被饿死、续跑深关收益）。

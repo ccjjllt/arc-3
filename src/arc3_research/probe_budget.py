@@ -1,11 +1,15 @@
-"""026 host-side probe budget: per-action pre-dispatch quota, graceful stop.
+"""026 host-side probe budget: per-action pre-dispatch quota.
 
-Defect fixed (see 025 handoff #2.1): post-hoc observe-after-return lets one
-Python snippet batch (e.g. a 12-move loop) blow past a K-action probe window.
-This guard is consulted BEFORE each single env dispatch and returns a normal
-result dict with a stop_reason when the quota is spent or a boundary is hit.
-It never raises: an uncaught exception would discard the snippet's prints
-and its defined helpers.
+Contract (corrected 2026-10-20): a plain result dict with a stop_reason
+does NOT stop model-written Python loops. The only terminating path is
+the solver's guard-hook refusal (``action_guard_hook -> (stop_reason,
+detail)``): the solver returns a refusal payload and the sandbox raises
+an uncatchable BaseException-derived error that ends the snippet while
+preserving prior stdout and retained functions
+(``python_tool_sandbox.py`` refusal classes + error handler; solver
+refusal payload ``solver.py:1136-1155``). So this guard is consulted
+BEFORE each single env dispatch through that hook path, and quota stops
+travel as hook refusals, never as normal results.
 """
 from __future__ import annotations
 
