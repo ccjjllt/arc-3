@@ -65,6 +65,8 @@ def main() -> None:
         required.update({"stall_probe.py", "bounded_probe.py", "checked_execution.py"})
     if "repair_A" in arms or "repair_B" in arms:
         required.update({"failure_repair.py", "probe_budget.py"})
+    if "admission_009" in arms:
+        required.add("admission_order.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):

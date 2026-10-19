@@ -161,6 +161,28 @@ def validate_config(config: dict[str, Any]) -> None:
             raise ValueError("Stall probe keeps one pass, no warmup, and the baseline reference.")
         if not config.get("require_rtx_pro6000"):
             raise ValueError("Stall probe must refuse a non-RTX session before loading the model.")
+    if "admission_009" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("baseline", "admission_009")}
+        if arms != ["baseline", "admission_009"] or environments != expected:
+            raise ValueError("025 requires baseline then admission_009 with unchanged scheduling.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "baseline"):
+            raise ValueError("025 keeps one pass, no warmup, and the baseline reference.")
+        if len(config.get("games") or []) != 25:
+            raise ValueError("025 is the official 25-game pool, not a subset.")
+        if config.get("requested_arm_seconds") != 7254 or config.get("hard_limit_seconds") != 18000:
+            raise ValueError("025 keeps the 014/016 arm budget (7254s) and session cap (18000s).")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "preflight_before_serving",
+            "native_payload_cells",
+        )):
+            raise ValueError("025 retains the shared budget, diagnostics and startup contracts.")
+        if not config.get("require_rtx_pro6000"):
+            raise ValueError("025 must refuse a non-RTX session before loading the model.")
     if "repair_A" in arms or "repair_B" in arms:
         expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
                     for arm in ("repair_A", "repair_B")}

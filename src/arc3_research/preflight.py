@@ -47,6 +47,7 @@ def main() -> None:
         requests.sessions.Session.request = no_network
         from inference.agent.tool_agent import ToolAgent
         from inference.framework.solver import _HarnessGameSession
+        pristine_queue_position = _HarnessGameSession._queue_position
         from inference.agent import tool_agent
         from inference.agent import python_tool_sandbox
         original_bootstrap = python_tool_sandbox._SANDBOX_BOOTSTRAP
@@ -108,6 +109,22 @@ def main() -> None:
             if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX") != original_prefix:
                 raise RuntimeError("018 preflight did not restore the system-prefix environment.")
             report["checks"].append("grounding_prefix_only_and_restored")
+        if "admission_009" in config["arm_order"]:
+            # Candidate installs before timing/observer (runtime order); the
+            # patch touches only _HarnessGameSession._queue_position.
+            from arc3_research.admission_order import install_admission_order
+            if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
+                raise RuntimeError("Admission order refuses to replace a system prefix")
+            admission_patch = install_admission_order()
+            snap = admission_patch.snapshot()
+            if snap.get("patch") != "admission-order-009-v1":
+                raise RuntimeError("Admission order patch identity changed")
+            if snap.get("fallbacks", 0):
+                raise RuntimeError("Admission order fell back during preflight")
+            admission_patch.uninstall()
+            if _HarnessGameSession._queue_position is not pristine_queue_position:
+                raise RuntimeError("Admission order did not restore the queue position")
+            report["checks"].append("admission_order_first_entry_only_and_restored")
         if config.get("request_deadline"):
             from arc3_research.request_deadline import install_request_deadline
             patches.append(install_request_deadline())

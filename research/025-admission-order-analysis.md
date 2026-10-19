@@ -33,7 +33,7 @@
 
 方法修正：
 - 保真门：argmax(priority, token小者胜) 与记录 `selected` 行在 230/230 selection 事件全部一致（两臂 candidate_omitted 全 0），heap 规则复现通过。
-- 初始优先级的旧 docstring 有误：底座为 `_PRIORITY_UNTRIMMED_BASE - dispatch_index`（`tool_agent.py:2150,3525`），非 100*idx；重算不受影响（null 直接替换）。
+- 初始优先级的旧 docstring 有误：底座为 `_PRIORITY_UNTRIMMED_BASE - (game_index*100 + pass_index)`（`tool_agent.py:2150`、`solver.py:598-601`），旧 docstring 的 `100*idx` 表述不完整；重算不受影响（null 直接替换）。
 - 解释力声明：单决策反事实。首次改选后真实时钟/关卡/队列即分叉，不能由旧日志推算新策略整场分数。
 
 结果：每臂 15 个混合决策，30/30 翻转，首次均在 seq 74（Late-run，前期是纯新游戏入场）。29 次是续跑游戏保住槽位（新游戏延后入场），1 次是新对新调换（014 seq74：m0r0 顶掉 lp85）。被保住的续跑多为深关卡低消耗态（如 ft09 L6 零消耗、cn04 L4）。

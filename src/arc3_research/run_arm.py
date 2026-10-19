@@ -95,6 +95,7 @@ def run_arm(args: argparse.Namespace) -> int:
     checked_patch = None
     stall_patch = None
     repair_patch = None
+    admission_patch = None
     community_baselines = None
     timing_patch = None
     deadline_patch = None
@@ -142,6 +143,10 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError(args.arm + " requires frozen baseline scheduler.")
+        if args.arm == "admission_009" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("admission_009 requires frozen baseline scheduler.")
         if args.arm == "baseline" and overrides not in ({
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }, {}):
@@ -241,6 +246,10 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm in ("repair_A", "repair_B"):
             from arc3_research.failure_repair import install_failure_repair
             repair_patch = install_failure_repair()
+        if args.arm == "admission_009":
+            # Candidate installs before timing/observer; uninstalls after them.
+            from arc3_research.admission_order import install_admission_order
+            admission_patch = install_admission_order()
         if os.environ.get("ARC3_COMMUNITY_DEVELOPMENT") == "1":
             from taaf.game_api import GameAPI
             from arc3_research.community import clear_unreliable_baselines
@@ -324,6 +333,10 @@ def run_arm(args: argparse.Namespace) -> int:
                              (Path("/kaggle/research") / conv).is_file() else
                              Path(__file__).resolve().parents[2] / conv)
                 metadata["source_sha256"][conv] = _sha256(candidate)
+        if admission_patch is not None:
+            metadata["source_sha256"]["admission_order.py"] = _sha256(
+                Path(__file__).with_name("admission_order.py"))
+            metadata["admission_order"] = admission_patch.snapshot()
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -478,6 +491,10 @@ def run_arm(args: argparse.Namespace) -> int:
                 stall_patch.uninstall()
         if repair_patch is not None:
             _write_json(job_dir / "failure-repair-summary.json", repair_patch.snapshot())
+        if admission_patch is not None:
+            _write_json(job_dir / "admission-order.json", admission_patch.snapshot())
+            if not live:
+                admission_patch.uninstall()
         if community_baselines is not None:
             _write_json(job_dir / "community-baselines.json", {
                 "dropped": community_baselines,
@@ -504,7 +521,7 @@ def main() -> int:
                                  "retrievable_animation", "current_data", "tail_80k",
                                  "native_values", "native", "pace_1x", "observation_grounding",
                                  "grounded_state", "checked_execution", "expect_check", "stall_probe",
-                                 "repair_A", "repair_B"))
+                                 "repair_A", "repair_B", "admission_009"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")
