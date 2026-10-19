@@ -148,6 +148,20 @@ def main() -> None:
             if tool_agent.run_sandboxed_python is originals["python_runner"]:
                 raise RuntimeError("Stall probe did not wrap the sandbox runner")
             report["checks"].append("stall_probe_host_trigger_without_prompt_prefix")
+        if "repair_A" in config["arm_order"] or "repair_B" in config["arm_order"]:
+            from arc3_research.failure_repair import install_failure_repair
+            from arc3_research.probe_budget import ProbeBudget
+            if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
+                raise RuntimeError("Failure repair refuses to replace a system prefix")
+            patch = install_failure_repair()
+            snap = patch.snapshot()
+            if set(snap.get("forks", [])) != {"ft09-0d8bbf25", "tr87-cd924810",
+                                             "m0r0-492f87ba", "r11l-495a7899"}:
+                raise RuntimeError("Failure repair fork set changed")
+            guard = ProbeBudget(0)
+            if guard.request() is not False:
+                raise RuntimeError("K=0 probe budget must forbid dispatch")
+            report["checks"].append("failure_repair_host_only_and_budget_guarded")
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")
         for patch in reversed(patches):

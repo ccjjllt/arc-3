@@ -94,6 +94,7 @@ def run_arm(args: argparse.Namespace) -> int:
     grounded_patch = None
     checked_patch = None
     stall_patch = None
+    repair_patch = None
     community_baselines = None
     timing_patch = None
     deadline_patch = None
@@ -134,6 +135,10 @@ def run_arm(args: argparse.Namespace) -> int:
         }:
             raise ValueError("stall_probe requires frozen baseline scheduler.")
         if args.arm in ("checked_execution", "expect_check") and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError(args.arm + " requires frozen baseline scheduler.")
+        if args.arm in ("repair_A", "repair_B") and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError(args.arm + " requires frozen baseline scheduler.")
@@ -233,6 +238,9 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "stall_probe":
             from arc3_research.stall_probe import install_stall_probe
             stall_patch = install_stall_probe()
+        if args.arm in ("repair_A", "repair_B"):
+            from arc3_research.failure_repair import install_failure_repair
+            repair_patch = install_failure_repair()
         if os.environ.get("ARC3_COMMUNITY_DEVELOPMENT") == "1":
             from taaf.game_api import GameAPI
             from arc3_research.community import clear_unreliable_baselines
@@ -306,6 +314,10 @@ def run_arm(args: argparse.Namespace) -> int:
             for name in ("stall_probe.py", "bounded_probe.py"):
                 metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
             metadata["stall_probe"] = stall_patch.tracker.snapshot()
+        if repair_patch is not None:
+            for name in ("failure_repair.py", "probe_budget.py"):
+                metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
+            metadata["failure_repair"] = repair_patch.snapshot()
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -341,7 +353,27 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        asyncio.run(play())
+        if args.arm in ("repair_A", "repair_B"):
+            from arc3_research.failure_repair import run_fork_arm
+            candidates = [
+                Path("/kaggle/research/experiments/026-fork-inputs.json"),
+                Path(__file__).resolve().parents[2] / "experiments/026-fork-inputs.json",
+            ]
+            inputs_path = next((p for p in candidates if p.is_file()), None)
+            if inputs_path is None:
+                raise FileNotFoundError("026 fork inputs not found in payload or repo.")
+            fork_inputs = json.loads(inputs_path.read_text(encoding="utf-8"))
+            bm.label = f"research-{args.arm}"
+            bm.start_time = datetime.now()
+            fork_summary = run_fork_arm(
+                bm=bm, job_dir=job_dir, arm=args.arm,
+                is_b=(args.arm == "repair_B"), budget_seconds=args.budget_seconds,
+                prefix_actions=fork_inputs["actions"])
+            bm.end_time = datetime.now()
+            _write_json(job_dir / "failure-repair.json", fork_summary)
+            _write_json(job_dir / "benchmark.json", bm.to_json_dict())
+        else:
+            asyncio.run(play())
         metadata["status"] = "completed"
     except asyncio.CancelledError:
         metadata["status"] = "stopped"
@@ -438,6 +470,8 @@ def run_arm(args: argparse.Namespace) -> int:
             _write_json(job_dir / "stall-probe.json", stall_patch.tracker.snapshot())
             if not live:
                 stall_patch.uninstall()
+        if repair_patch is not None:
+            _write_json(job_dir / "failure-repair-summary.json", repair_patch.snapshot())
         if community_baselines is not None:
             _write_json(job_dir / "community-baselines.json", {
                 "dropped": community_baselines,
@@ -463,7 +497,8 @@ def main() -> int:
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
                                  "retrievable_animation", "current_data", "tail_80k",
                                  "native_values", "native", "pace_1x", "observation_grounding",
-                                 "grounded_state", "checked_execution", "expect_check", "stall_probe"))
+                                 "grounded_state", "checked_execution", "expect_check", "stall_probe",
+                                 "repair_A", "repair_B"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

@@ -1,0 +1,56 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "repair_A": {
+      "ARC3_PRIORITY_PACE": "0",
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining"
+    },
+    "repair_B": {
+      "ARC3_PRIORITY_PACE": "0",
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining"
+    }
+  },
+  "arm_order": [
+    "repair_A",
+    "repair_B"
+  ],
+  "budget_formula": "Same 1800-second arm budget as prior paired diagnostics; each arm replays 4 recorded prefixes to T then continues at most 30 more actions / 250s per fork.",
+  "comparison_note": "Same four official games, same fork states, same extra budget. A continues fresh from T; B gets one host evidence recheck as an opening message. Full-trajectory (prefix + continuation) run records; no new tool API, no FP8. Public-development scores, not hidden leaderboard.",
+  "expected_gpu_hours": 1.6,
+  "game_count": 4,
+  "game_source": "The four recorded failure prefixes (017 local evidence); frozen and reserve games are not mounted.",
+  "games": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810",
+    "m0r0-492f87ba",
+    "r11l-495a7899"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 5400,
+  "id": "026-failure-repair",
+  "inference_timing": true,
+  "kernel_id": "ccjjllt/arc3-026-failure-repair",
+  "kernel_title": "ARC3 026 Failure Repair",
+  "n_passes_per_arm": 1,
+  "native_payload_cells": true,
+  "preflight_before_serving": true,
+  "purpose": "At identical recorded failure states, test whether a host evidence recheck helps the model recover clearance versus continuing fresh",
+  "reference_arm": "repair_A",
+  "request_deadline": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe"
+  },
+  "scheduler_observer": true,
+  "selection_note": "A gain counts only if B changes subsequent actions versus A from the same fork and completes the level or advances further within the shared extra budget, without false alarms on the r11l control. Do not submit from this run.",
+  "startup_limit_seconds": 1200,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 1800
+}

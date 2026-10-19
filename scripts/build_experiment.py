@@ -63,6 +63,8 @@ def main() -> None:
         required.add("community.py")
     if "stall_probe" in arms:
         required.update({"stall_probe.py", "bounded_probe.py", "checked_execution.py"})
+    if "repair_A" in arms or "repair_B" in arms:
+        required.update({"failure_repair.py", "probe_budget.py"})
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -79,6 +81,9 @@ def main() -> None:
         destination = ("scripts/" + path.name if path.parent.name == "scripts"
                        else "src/arc3_research/" + path.name)
         payload[destination] = path.read_text()
+    if "repair_A" in arms or "repair_B" in arms:
+        fork_inputs_path = ROOT / "experiments/026-fork-inputs.json"
+        payload["experiments/026-fork-inputs.json"] = fork_inputs_path.read_text()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in [source, Path(__file__), *payload_paths]}
     hashes[str(config_path.relative_to(ROOT))] = hashlib.sha256(config_path.read_bytes()).hexdigest()

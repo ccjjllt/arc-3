@@ -161,6 +161,29 @@ def validate_config(config: dict[str, Any]) -> None:
             raise ValueError("Stall probe keeps one pass, no warmup, and the baseline reference.")
         if not config.get("require_rtx_pro6000"):
             raise ValueError("Stall probe must refuse a non-RTX session before loading the model.")
+    if "repair_A" in arms or "repair_B" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("repair_A", "repair_B")}
+        if arms != ["repair_A", "repair_B"] or environments != expected:
+            raise ValueError("026 requires repair_A then repair_B with unchanged scheduling.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "repair_A"):
+            raise ValueError("026 keeps one pass, no warmup, and the repair_A reference.")
+        if (sorted(config.get("games") or []) != sorted(
+                ["ft09-0d8bbf25", "tr87-cd924810", "m0r0-492f87ba", "r11l-495a7899"])):
+            raise ValueError("026 runs the four recorded failure prefixes only.")
+        if config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 5400:
+            raise ValueError("026 is two 1800-second fork arms inside a 5400-second cap.")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "preflight_before_serving",
+            "native_payload_cells",
+        )):
+            raise ValueError("026 retains the shared budget, diagnostics and startup contracts.")
+        if not config.get("require_rtx_pro6000"):
+            raise ValueError("026 must refuse a non-RTX session before loading the model.")
     if config.get("community_development"):
         allow = config.get("community_allowlist")
         games = list(config.get("games") or [])
