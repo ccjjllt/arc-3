@@ -1,0 +1,40 @@
+{
+  "source_revision": "02152bc4806869ace6ef167468970ca84bac0c5a",
+  "split_sha256": "ad16158ca664daaf107e228837ec6861566ad047aabec36ea15fc280c56d6230",
+  "schema_version": 1,
+  "all_40_api_checks_passed": true,
+  "family_split_disjoint": true,
+  "whole_family_assignment_covers_all_245_eligible_packages": true,
+  "reset_observations": 40,
+  "step_observations": 118,
+  "post_step_resets": 40,
+  "games_with_changed_pixels": 35,
+  "same_reset_pixels": 29,
+  "all_initial_frame_shapes_64x64": true,
+  "timeouts": 0,
+  "model_calls": 0,
+  "gpu_started": false,
+  "full_games_solved_claimed": false,
+  "official_score_computed": false,
+  "opaque_all_regular_source_hashes_checked": true,
+  "actions_supplied_with_actual_API_legality": true,
+  "solver_payload_fields": [
+    "frames",
+    "available_actions",
+    "state",
+    "levels_completed"
+  ],
+  "source_sha256": {
+    "scripts/prepare_020_community.py": "06f6da8035b253420d2419784e3856576c289edaa68105a26f2d9299042769db",
+    "src/arc3_research/community.py": "8c55cfc8182824b01da7c50c14a567128819118d0e6e02fb18c4c2c005a8156d"
+  },
+  "runtime_dependencies": {
+    "arc-agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "numpy": "2.3.5",
+    "pydantic": "2.14.1"
+  },
+  "minimum_numpy_declared_by_community": "2.4.3",
+  "numpy_version_caveat": "Executed with reused local numpy2.3.5; this is a tested compatibility environment, not satisfaction of upstream pyproject requirements. Re-run smoke under eventual deployment dependency lock.",
+  "earlier_adapter_failure": "Preserved smoke-v0-adapter-enum; all40 initial reset succeeded but GameAction(int) construction failed before step. Fixed to named SDK enum members; no selected game/split changed."
+}

@@ -21,26 +21,55 @@ def assess(comparison, reports):
     gates = {key: comparison.get(key) is True for key in
              ("same_suite", "provenance_checks_pass", "all_phases_complete", "all_request_payloads_match")}
     quality = groups.get("quality10", {})
-    q = quality.get("phases", {})
-    scores = {p: q.get(p, {}).get("quality_exact_matches") for p in PHASE_ORDER}
+    q = quality.get("phases") or {}
+    scores = {p: (q.get(p) or {}).get("quality_exact_matches") for p in PHASE_ORDER}
     gates["baseline_quality_floor_8_of_10"] = all(isinstance(scores[p], int) and scores[p] >= 8 for p in ("bf16_a", "bf16_b"))
     gates["candidate_quality_not_lower"] = (all(isinstance(v, int) for v in scores.values())
         and scores["fp8"] >= min(scores["bf16_a"], scores["bf16_b"]))
-    failures = {}
+    failures = {phase: None for phase in PHASE_ORDER}
+    case_failures = {phase: {} for phase in PHASE_ORDER}
+    duplicate_cases = []
     for report in reports:
-        quality_rows = [r for r in report["requests"] if r["group"] == "quality10"]
-        def bad_format(row):
-            parsed = row["checks"]["parsed_tool_arguments"]
-            if len(parsed) != 1 or parsed[0]["name"] != "submit_observation":
-                return True
-            arg = parsed[0]["arguments"]
+        quality_rows = [r for r in report.get("requests", []) if r.get("group") == "quality10"]
+        def failure_types(row):
+            checks, message = row.get("checks") or {}, row.get("message") or {}
+            parsed = checks.get("parsed_tool_arguments") or []
+            errors = set()
+            valid_call = len(parsed) == 1 and parsed[0].get("name") == "submit_observation"
+            if not valid_call:
+                errors.add("tool_count_or_name")
+            arg = parsed[0].get("arguments") if valid_call else None
             valid = (isinstance(arg, dict) and set(arg) == {"cells", "count"}
                 and type(arg["count"]) is int and isinstance(arg["cells"], list)
                 and all(isinstance(c, list) and len(c) == 2 and all(type(x) is int for x in c) for c in arg["cells"]))
-            return (not valid or bool(row["checks"]["format_errors"])
-                or bool(row["message"]["content"].strip()) or row["checks"]["quality_truncated"] or bool(row["stream_errors"]))
-        failures[report["phase"]] = sum(bad_format(r) for r in quality_rows)
-    gates["no_added_quality_format_or_truncation_failures"] = failures["fp8"] <= min(failures["bf16_a"], failures["bf16_b"])
+            if not valid:
+                errors.add("argument_schema")
+            if checks.get("format_errors"):
+                errors.add("tool_argument_parse")
+            if str(message.get("content") or "").strip():
+                errors.add("extra_content")
+            if checks.get("quality_truncated"):
+                errors.add("truncation")
+            if row.get("stream_errors"):
+                errors.add("stream_error")
+            return sorted(errors)
+        for row in quality_rows:
+            case_id = row.get("case_id")
+            if case_id in case_failures[report["phase"]]:
+                duplicate_cases.append({"phase": report["phase"], "case_id": case_id})
+            case_failures[report["phase"]][case_id] = failure_types(row)
+        failures[report["phase"]] = sum(bool(failure_types(r)) for r in quality_rows)
+    quality_ids = [set(case_failures[phase]) for phase in PHASE_ORDER]
+    complete_quality_cases = (not duplicate_cases and len(quality_ids[0]) == 10
+                              and None not in quality_ids[0]
+                              and quality_ids[0] == quality_ids[1] == quality_ids[2])
+    added = []
+    for case_id, errors in case_failures["fp8"].items():
+        for baseline in ("bf16_a", "bf16_b"):
+            new_types = sorted(set(errors) - set(case_failures[baseline].get(case_id, [])))
+            if new_types:
+                added.append({"case_id": case_id, "relative_to": baseline, "new_failure_types": new_types})
+    gates["no_added_quality_format_or_truncation_failures"] = complete_quality_cases and not added
     for name in ("load10_cold", "load10_hot"):
         group = groups.get(name, {})
         gates[name + ":valid"] = group.get("compatible_complete_group") is True
@@ -51,6 +80,8 @@ def assess(comparison, reports):
         gates[name + ":control_drift_at_most_10_percent"] = isinstance(drift, (int, float)) and .90 <= drift <= 1.10
     return {"gates": gates, "all_automatic_gates_pass": all(gates.values()),
             "quality_exact_counts": scores, "quality_format_or_truncation_failures": failures,
+            "quality_failure_types_by_case": case_failures,
+            "added_quality_failure_types": added, "duplicate_quality_cases": duplicate_cases,
             "resource_review": "required_separately",
             "decision": "review_resources_before_designing_game_ab" if all(gates.values()) else "do_not_advance_this_result",
             "limits": ["Predeclared engineering/quality smoke gates, not a statistical proof or game quality result.",
@@ -77,7 +108,11 @@ def main():
         if path.exists():
             result["sources"].append(origin(path))
     if session["config"]["mode"] == "weights_only":
-        result["complete"] = session["status"] == "cpu_preflight_complete"
+        result["complete"] = (session["status"] == "cpu_preflight_complete"
+                              and result["weight-audit.json"] is True
+                              and result["wheel-source-check.json"] is True
+                              and session.get("weight_audit_passed") is True
+                              and session.get("gpu_started") is False)
         result["limits"] = ["CPU contract only; no inference speed, numerical logits or answer quality measured."]
     else:
         paths = [root / p / "phase-report.json" for p in PHASE_ORDER]

@@ -1,0 +1,417 @@
+{
+  "kind": "saved-public-frame-program-consumption",
+  "status": "completed",
+  "created_utc": "2026-10-19T01:12:13.699041+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "model_calls": 0,
+  "game_actions": 0,
+  "sandbox_calls": 2,
+  "demonstrations": [
+    {
+      "label": "ar25",
+      "source": {
+        "path": "runs/018-observation-grounding/observation_grounding/artifacts/ar25-0c556536_p0_events.jsonl",
+        "sha256": "325d208901aec078c90cb2aaff1f7f05f2e98ce299b48e78bcc5217337abb48a",
+        "line": 177,
+        "event_type": "action",
+        "action_num": 140,
+        "analysis_step": 34
+      },
+      "consumer": "ar25-consumer.py",
+      "result": {
+        "observed_blocks": [
+          [
+            3,
+            15
+          ],
+          [
+            3,
+            16
+          ],
+          [
+            3,
+            17
+          ],
+          [
+            4,
+            14
+          ],
+          [
+            4,
+            18
+          ],
+          [
+            5,
+            14
+          ],
+          [
+            6,
+            14
+          ],
+          [
+            7,
+            15
+          ],
+          [
+            8,
+            18
+          ],
+          [
+            9,
+            17
+          ],
+          [
+            9,
+            18
+          ],
+          [
+            9,
+            19
+          ],
+          [
+            9,
+            20
+          ]
+        ],
+        "source": {
+          "kind": "public_current_frame_ascii",
+          "frame": {
+            "step": 140,
+            "level": 6,
+            "shape": [
+              64,
+              64
+            ],
+            "ascii_sha256": "0d8af369f1ba286d055133a9dc0056a1922dbd9543941c8280b8a2088151fde5"
+          },
+          "bbox": [
+            9,
+            42,
+            29,
+            62
+          ],
+          "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+          "foreground": [
+            "B"
+          ]
+        },
+        "probe_source": {
+          "kind": "public_current_frame_ascii",
+          "frame": {
+            "step": 140,
+            "level": 6,
+            "shape": [
+              64,
+              64
+            ],
+            "ascii_sha256": "0d8af369f1ba286d055133a9dc0056a1922dbd9543941c8280b8a2088151fde5"
+          },
+          "bbox": [
+            24,
+            51,
+            26,
+            56
+          ],
+          "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+          "foreground": [
+            "B"
+          ]
+        },
+        "probe_rows": [
+          "bbbBBB",
+          "bbbBbB",
+          "bbbBBB"
+        ],
+        "probe_mask": [
+          [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true
+          ]
+        ],
+        "probe_positions": [
+          [
+            24,
+            54
+          ],
+          [
+            24,
+            55
+          ],
+          [
+            24,
+            56
+          ],
+          [
+            25,
+            54
+          ],
+          [
+            25,
+            56
+          ],
+          [
+            26,
+            54
+          ],
+          [
+            26,
+            55
+          ],
+          [
+            26,
+            56
+          ]
+        ],
+        "consumer_input": "region.cells and region.origin passed directly; no copied block table"
+      }
+    },
+    {
+      "label": "tr87",
+      "source": {
+        "path": "runs/007-program-state/program_state/artifacts/tr87-cd924810_p0_events.jsonl",
+        "sha256": "dfc92e50829348302e1375afa1b8a9d5d6f5857588802b1f7c86bfd9d131bcba",
+        "line": 34,
+        "event_type": "action",
+        "action_num": 24,
+        "analysis_step": 5
+      },
+      "consumer": "tr87-consumer.py",
+      "result": {
+        "equal": true,
+        "rows": [
+          "PPBBB",
+          "PPBPB",
+          "BBBBB",
+          "BPBPP",
+          "BBBPP"
+        ],
+        "mask": [
+          [
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            false
+          ],
+          [
+            true,
+            true,
+            true,
+            false,
+            false
+          ]
+        ],
+        "sources": [
+          {
+            "kind": "public_current_frame_ascii",
+            "frame": {
+              "step": 24,
+              "level": 2,
+              "shape": [
+                64,
+                64
+              ],
+              "ascii_sha256": "7a67d1c1609cff8d5ee692b1c63c8fcdc7192a22f5129405793828804834c64a"
+            },
+            "bbox": [
+              23,
+              6,
+              27,
+              10
+            ],
+            "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+            "foreground": [
+              "B"
+            ]
+          },
+          {
+            "kind": "public_current_frame_ascii",
+            "frame": {
+              "step": 24,
+              "level": 2,
+              "shape": [
+                64,
+                64
+              ],
+              "ascii_sha256": "7a67d1c1609cff8d5ee692b1c63c8fcdc7192a22f5129405793828804834c64a"
+            },
+            "bbox": [
+              41,
+              26,
+              45,
+              30
+            ],
+            "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+            "foreground": [
+              "B"
+            ]
+          }
+        ],
+        "node_source": {
+          "kind": "public_current_frame_ascii",
+          "frame": {
+            "step": 24,
+            "level": 2,
+            "shape": [
+              64,
+              64
+            ],
+            "ascii_sha256": "7a67d1c1609cff8d5ee692b1c63c8fcdc7192a22f5129405793828804834c64a"
+          },
+          "bbox": [
+            5,
+            6,
+            9,
+            10
+          ],
+          "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+          "foreground": [
+            "B"
+          ],
+          "selection": {
+            "kind": "current_segmentation_node_bbox",
+            "node_id": 5,
+            "node_color": "B",
+            "node_bbox": [
+              5,
+              6,
+              9,
+              10
+            ],
+            "inset": 0,
+            "uniform_node_color_perimeter": false
+          }
+        },
+        "node_observed_pixel_count": 14,
+        "consumer_input": "two current_frame mask tuples passed directly to comparison"
+      }
+    }
+  ],
+  "integration": {
+    "actual_toolagent_constructor": true,
+    "prefix_exact": true,
+    "tool_schema_unchanged": true,
+    "python_runner_identity_unchanged": true,
+    "python_tool_identity_unchanged": true
+  },
+  "patch": {
+    "name": "grounded_state",
+    "enabled": true,
+    "mechanism": "live_FrameView_exact_ASCII_region_methods",
+    "max_region_cells": 1024,
+    "sandbox_bootstrap_before_sha256": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+    "sandbox_bootstrap_after_sha256": "b667c19109fb09ffb5dd111698e666e11834928caaa706764be6f0d2e2da21ca",
+    "observation_representation_sha256": "e09470a1a41b49c9eadcdee0d88dd8804831f9de79ff862801959dd71c164883",
+    "prefix_sha256": "0454a90d8d9b478fe2ed35f5623d5c29f643a77aa154ebc0123002c367b24dde",
+    "adds_tools": false,
+    "adds_framework_model_calls": false,
+    "adds_framework_game_actions": false,
+    "adds_cross_call_memory": false,
+    "natural_requests_tokens_and_actions_may_change": true,
+    "runtime_adoption_counts": "not collected; inspect request code and tool results",
+    "freshness": "live frame object and ASCII reference on read/access; detached ordinary values remain historical data"
+  },
+  "manual_contract": {
+    "explicit_failures": [
+      {
+        "case": "stale_region",
+        "explicit_error": "stale_frame: re-read current_frame.region(...)"
+      },
+      {
+        "case": "stale_frame",
+        "explicit_error": "stale_frame: use the live current_frame"
+      },
+      {
+        "case": "unknown_symbol",
+        "explicit_error": "region_unavailable: unknown_foreground_symbol"
+      },
+      {
+        "case": "out_of_bounds",
+        "explicit_error": "region_unavailable: bbox_out_of_bounds_or_reversed"
+      }
+    ],
+    "detached_history_still_available": [
+      [
+        "B",
+        "b"
+      ],
+      [
+        "b",
+        "B"
+      ]
+    ],
+    "detached_history_source": {
+      "kind": "public_current_frame_ascii",
+      "frame": {
+        "step": 1,
+        "level": 1,
+        "shape": [
+          2,
+          2
+        ],
+        "ascii_sha256": "dc15de2e1744060a3daf6f1feaf5f0d1ed6b572b30bbb9c380c659371c62481b"
+      },
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "bbox_order": "top,left,bottom,right; zero_based; inclusive",
+      "foreground": [
+        "B"
+      ]
+    }
+  },
+  "baseline_restored": true,
+  "source_sha256": {
+    "src/arc3_research/grounded_state.py": "65c91f2be5b9e27c763be8c94fa1241cef819a625663f8238df9002f6b3dee05",
+    "src/arc3_research/observation_representation.py": "e09470a1a41b49c9eadcdee0d88dd8804831f9de79ff862801959dd71c164883",
+    "src/arc3_research/run_arm.py": "b27ea5699a82b09ad3f57ef59c6c1533f3a6d2cd393edbbfc2695c62a61fcc7c",
+    "src/arc3_research/experiment_config.py": "91af3f91a4460f28077ee6d81f57b1c017a08beff6f9e55ce805cf00e8e1ebdc",
+    "src/arc3_research/preflight.py": "0ba1d6001845be068052e1aeadfb2e1cca507b4b03cb819057071692fa97bbf0",
+    "experiments/020-state-channel/demo.py": "36451f1ccb3f8ce8fcb98eadc2de821902eba2b5fdbedb6067f47fa9761f704c"
+  }
+}

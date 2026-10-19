@@ -1,0 +1,63 @@
+{
+  "id": "020-grounded-state",
+  "kernel_id": "jiyujia/arc3-020-grounded-state",
+  "kernel_title": "ARC3 020 Grounded State",
+  "purpose": "Direct observed pixel data into solver inputs through current_frame.region; single-factor paired behavior screen",
+  "games": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810",
+    "ar25-0c556536",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "sb26-7fbdac44",
+    "cd82-fb555c5d",
+    "ls20-9607627b",
+    "vc33-5430563c",
+    "bp35-0a0ad940",
+    "re86-8af5384d",
+    "wa30-ee6fef47"
+  ],
+  "game_source": "12 previously used official public development games; broader encoding/planning coverage plus stable controls, never a holdout",
+  "game_count": 12,
+  "arm_order": [
+    "baseline",
+    "grounded_state"
+  ],
+  "requested_arm_seconds": 1800,
+  "budget_formula": "Equal 1800-second windows over 12 development games; not normalized full-pool scoring",
+  "hard_limit_seconds": 5400,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "expected_gpu_hours": 1.3,
+  "selection_note": "Primary selection uses paired official score and concrete runtime risk. Levels, wins, coverage and adoption explain outcomes; no universal joint-nondecrease, two-game-adoption or leave-best-out veto. Limited repeat if concentrated benefit warrants it; new protocol fixed before run.",
+  "comparison_note": "Same 12 IDs/order, 1800s each arm, one pass, no warmup, 10 streams, baseline remaining/pace0 scheduling, one model load and isolated harness processes. Candidate only adds current_frame exact region methods and a concise usage prefix. No FP8, 018 prompt, native variable persistence, checked execution or extra exploration. Known public development set, not hidden-score prediction.",
+  "reference_arm": "baseline",
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "grounded_state": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}

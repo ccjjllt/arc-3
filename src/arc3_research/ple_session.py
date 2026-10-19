@@ -46,6 +46,9 @@ def validate_config(config):
         raise ValueError("Unknown 019 execution mode")
     if set(config["inputs"]) != {"bf16", "fp8", "draft", "wheelhouse"}:
         raise ValueError("Expected exactly three model inputs and one wheelhouse")
+    digest = config.get("runtime_wheel_sha256", "")
+    if len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
+        raise ValueError("019 requires the audited whole-wheel SHA256")
 
 
 def resolve_inputs(specs, root="/kaggle/input"):
@@ -77,17 +80,23 @@ def normalized_args(args):
     return result
 
 
-def audit_wheel_sources(wheelhouse, expected):
+def audit_wheel_sources(wheelhouse, expected, *, expected_wheel_sha256=None):
     wheels = sorted((Path(wheelhouse) / "wheels").glob("sglang-*.whl"))
     if len(wheels) != 1:
         raise RuntimeError("Expected one pinned SGLang wheel")
     checks = {}
+    wheel_sha256 = sha(wheels[0])
+    wheel_hash_matches = (wheel_sha256 == expected_wheel_sha256
+                          if expected_wheel_sha256 is not None else None)
     with zipfile.ZipFile(wheels[0]) as archive:
         for relative, digest in expected.items():
             observed = hashlib.sha256(archive.read(relative)).hexdigest()
             checks[relative] = {"expected": digest, "observed": observed, "matches": observed == digest}
     return {"wheel": str(wheels[0]), "wheel_bytes": wheels[0].stat().st_size,
-            "checks": checks, "passed": all(row["matches"] for row in checks.values())}
+            "wheel_sha256": wheel_sha256, "expected_wheel_sha256": expected_wheel_sha256,
+            "wheel_hash_matches": wheel_hash_matches, "checks": checks,
+            "passed": bool(checks) and all(row["matches"] for row in checks.values())
+                      and (expected_wheel_sha256 is None or wheel_hash_matches is True)}
 
 
 def host_sample(groups):
@@ -180,7 +189,9 @@ def run(config_path, payload_root, output, input_root="/kaggle/input"):
     sampler.start()
     try:
         checkpoint()
-        runtime_audit = audit_wheel_sources(paths["wheelhouse"], config["runtime_source_sha256"])
+        runtime_audit = audit_wheel_sources(
+            paths["wheelhouse"], config["runtime_source_sha256"],
+            expected_wheel_sha256=config["runtime_wheel_sha256"])
         save(output / "wheel-source-check.json", runtime_audit)
         if not runtime_audit["passed"]:
             raise RuntimeError("Attached wheel source differs from the audited runtime; no serving")

@@ -1,0 +1,22 @@
+--- upstream/sglang/srt/environ.py
++++ actual-wheel/sglang/srt/environ.py
+@@ -303,6 +303,9 @@
+     # path is ported, so setting this fails loudly instead of degrading.
+     SGLANG_QWEN_DSA_USE_FP8_INDEXER = EnvBool(False)
+     SGLANG_PREFETCH_BLOCK_SIZE_MB = EnvInt(16)
++    # With checkpoint prefetch enabled, keep at most one shard ahead of the
++    # serial mmap loader instead of staging the entire checkpoint independently.
++    SGLANG_WEIGHT_LOADER_PREFETCH_LOOKAHEAD = EnvBool(True)
+     SGLANG_GEMMA_OUT_OF_PLACE_POSITION_MUTATION = EnvBool(False)
+     SGLANG_ENABLE_WEIGHT_LOADER_V2 = EnvBool(False)
+     # Copy rank-local MoE slices into independent CPU storage before H2D when
+@@ -1019,6 +1022,9 @@
+     # Enable the allowlisted low-M BF16 Split-K GEMM path on Blackwell. Shapes
+     # outside the measured allowlist continue to use CuTe DSL/cuBLAS.
+     SGLANG_ENABLE_BF16_SPLITK_GEMM = EnvBool(True)
++    # Gabriel Olympie's patch 0004: small BF16 GEMMs on exact SM120.
++    # Disabled under deterministic inference; does not quantize weights.
++    SGLANG_ENABLE_SM120_LOWM_BF16_GEMM = EnvBool(True)
+     # Opt-in Flash-Next-only conversion of eligible BF16 projections on exact
+     # SM120. Large linears use MXFP8; lm_head and HyperConnection mix weights
+     # use rowwise weight-only FP8. An explicit unsupported request fails boot.

@@ -33,9 +33,9 @@ def main() -> None:
               "game_actions": 0, "arms": config["arm_order"], "checks": []}
     patches = []
     try:
-        if "observation_grounding" in config["arm_order"]:
+        if any(arm in config["arm_order"] for arm in ("observation_grounding", "grounded_state")):
             if os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX", "").strip():
-                raise RuntimeError("018 requires an empty ambient ARC3_SYSTEM_PROMPT_PREFIX before serving.")
+                raise RuntimeError("The candidate requires an empty ambient ARC3_SYSTEM_PROMPT_PREFIX before serving.")
             report["checks"].append("empty_ambient_system_prefix")
         import requests
 
@@ -47,8 +47,13 @@ def main() -> None:
         from inference.agent.tool_agent import ToolAgent
         from inference.framework.solver import _HarnessGameSession
         from inference.agent import tool_agent
+        from inference.agent import python_tool_sandbox
+        original_bootstrap = python_tool_sandbox._SANDBOX_BOOTSTRAP
+        original_prefix = os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX")
         originals = {"play": _HarnessGameSession.play, "chat": ToolAgent._chat_completion,
                      "handover": ToolAgent._maybe_handover, "requests": tool_agent.requests,
+                     "python_runner": tool_agent.run_sandboxed_python,
+                     "python_tool": ToolAgent._run_python_tool,
                      "enqueue": tool_agent._PriorityGate._enqueue_and_wait,
                      "pump": tool_agent._PriorityGate._pump,
                      **{f"gate_{name}": getattr(tool_agent._PriorityGate, name)
@@ -114,6 +119,15 @@ def main() -> None:
         if any(a in ("native_values", "native") for a in config.get("arm_order", [])):
             from arc3_research.native_values import install_native_values
             patches.append(install_native_values())
+        if "grounded_state" in config["arm_order"]:
+            from arc3_research.grounded_state import GROUND_STATE_PREFIX, install_grounded_state
+            baseline_prompt = tool_agent._build_system_prompt(tool_output_tokens=3072)
+            patches.append(install_grounded_state())
+            if tool_agent._build_system_prompt(tool_output_tokens=3072) != GROUND_STATE_PREFIX + "\n\n" + baseline_prompt:
+                raise RuntimeError("Grounded-state prefix did not preserve the baseline prompt")
+            if tool_agent.run_sandboxed_python is not originals["python_runner"]:
+                raise RuntimeError("Grounded state unexpectedly replaced the Python runner")
+            report["checks"].append("grounded_state_existing_FrameView_entry_and_prefix")
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")
         for patch in reversed(patches):
@@ -121,6 +135,8 @@ def main() -> None:
         patches.clear()
         restored = {"play": _HarnessGameSession.play, "chat": ToolAgent._chat_completion,
                     "handover": ToolAgent._maybe_handover, "requests": tool_agent.requests,
+                    "python_runner": tool_agent.run_sandboxed_python,
+                    "python_tool": ToolAgent._run_python_tool,
                     "enqueue": tool_agent._PriorityGate._enqueue_and_wait,
                     "pump": tool_agent._PriorityGate._pump,
                     **{f"gate_{name}": getattr(tool_agent._PriorityGate, name)
@@ -132,6 +148,11 @@ def main() -> None:
                 raise RuntimeError(f"Preflight did not restore code: {key}")
         if any(hasattr(ToolAgent, name) for name in markers):
             raise RuntimeError("Preflight left an installed patch marker.")
+        if "grounded_state" in config["arm_order"]:
+            if (python_tool_sandbox._SANDBOX_BOOTSTRAP != original_bootstrap
+                    or os.environ.get("ARC3_SYSTEM_PROMPT_PREFIX") != original_prefix
+                    or hasattr(python_tool_sandbox, "_research_grounded_state_patch")):
+                raise RuntimeError("Grounded-state preflight did not restore the baseline")
         report["checks"].append("reverse_uninstall_restores_originals")
         report["environment_before_overrides"] = {
             key: os.environ.get(key) for key in

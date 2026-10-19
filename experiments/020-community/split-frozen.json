@@ -1,0 +1,890 @@
+{
+  "schema_version": 1,
+  "source_revision": "02152bc4806869ace6ef167468970ca84bac0c5a",
+  "selection_seed": "arc3-community-020-family-split-v1",
+  "frozen_before_smoke": true,
+  "selection_uses_gameplay_outcomes": false,
+  "selection_uses_implementation_or_solutions": false,
+  "selection_policy": "one hash-selected representative per conservative metadata family; category round-robin; 40 screened; 12 development, 12 reserve, 16 frozen",
+  "smoke_seed": 200019,
+  "smoke_max_actions": 3,
+  "failure_policy": "Retain failures and split; no favorable replacement. Usable subset requires explicit compatibility filtering with reasons.",
+  "heldout_policy": "All variants and cross-prefix aliases of a heldout family stay out of development. No tuning on heldout results.",
+  "selected": [
+    {
+      "game_id": "dv01-63be02fb",
+      "stem": "dv01",
+      "family": "family_dv",
+      "bucket": "movement_or_planning",
+      "split": "reserve",
+      "metadata_sha256": "db08f49812c992cb200c97593899b147e76132fc1771854c59196073f4eed77f",
+      "package_blob_sha1": {
+        "environment_files/dv01/63be02fb/dv01.py": "cfa0d5944ad97720ae4dcd59b883e1d3ed2ce454",
+        "environment_files/dv01/63be02fb/metadata.json": "592667c778cd4d495d273109b2f9999f7cdff30e"
+      }
+    },
+    {
+      "game_id": "sv02-63be02fb",
+      "stem": "sv02",
+      "family": "family_sv",
+      "bucket": "time_or_hazard",
+      "split": "frozen",
+      "metadata_sha256": "091c4282d6dc680dbfa4fcf4f660147f211c9c8524a55f53164cc84918490183",
+      "package_blob_sha1": {
+        "environment_files/sv02/63be02fb/metadata.json": "b07b248e47f62ac287e638b72606908911b2a938",
+        "environment_files/sv02/63be02fb/sv02.py": "a4dc552adaa3f6f59865eef181af64788263e197"
+      }
+    },
+    {
+      "game_id": "lk01-v1",
+      "stem": "lk01",
+      "family": "family_lk",
+      "bucket": "logic_or_field",
+      "split": "reserve",
+      "metadata_sha256": "647a3d8cf943b772c37dce89bae93451a07eb5ce60b47cf515d026d8d62cf484",
+      "package_blob_sha1": {
+        "environment_files/lk01/v1/lk01.py": "db249ac26b825dfc038f2322020802df64c069bd",
+        "environment_files/lk01/v1/metadata.json": "b5fab3548bb3a78c981b1c30e6c1ddefd28c0742"
+      }
+    },
+    {
+      "game_id": "tt03-63be02fb",
+      "stem": "tt03",
+      "family": "family_tt",
+      "bucket": "order_or_coordination",
+      "split": "development",
+      "metadata_sha256": "cdd83e524cbb3115c19955f2528d58731e1e054865449123145328e3e29316ca",
+      "package_blob_sha1": {
+        "environment_files/tt03/63be02fb/metadata.json": "e6fc6c9453157f74d85dea032fcb45c453f71c59",
+        "environment_files/tt03/63be02fb/tt03.py": "b9a2e10e965a3ac6f79afca1fda18606468a7aa1"
+      }
+    },
+    {
+      "game_id": "mm03-63be02fb",
+      "stem": "mm03",
+      "family": "family_mm_rc",
+      "bucket": "hidden_or_exploration",
+      "split": "frozen",
+      "metadata_sha256": "eb612b229dce75816f46ed7addfa753c8bc8218983c377c0c6c985b796674fc5",
+      "package_blob_sha1": {
+        "environment_files/mm03/63be02fb/metadata.json": "1d4e36d3d24a9bd2129e5675deefc8c72bcfb388",
+        "environment_files/mm03/63be02fb/mm03.py": "a411daff30d8547b4d943b527478e8527f93a34d"
+      }
+    },
+    {
+      "game_id": "ml02-63be02fb",
+      "stem": "ml02",
+      "family": "family_ml",
+      "bucket": "visual_or_spatial",
+      "split": "reserve",
+      "metadata_sha256": "b4c3338e518d10931421901394a79e6ae197963b5f24e055b7b532ae35f1dea6",
+      "package_blob_sha1": {
+        "environment_files/ml02/63be02fb/metadata.json": "1b5c8b27ed062b6364446b26f66b65a15a69726d",
+        "environment_files/ml02/63be02fb/ml02.py": "dd3319db80b90571f9263bf22e7aa12d441dc442"
+      }
+    },
+    {
+      "game_id": "av01-63be02fb",
+      "stem": "av01",
+      "family": "family_av_gr",
+      "bucket": "simulation",
+      "split": "frozen",
+      "metadata_sha256": "3f1f606b0b0466efd6ee6e0d550d234e2db9909cd599d3068527a70066a7f766",
+      "package_blob_sha1": {
+        "environment_files/av01/63be02fb/av01.py": "3043f74e0346ead99739b0323848536ea6fef41a",
+        "environment_files/av01/63be02fb/metadata.json": "ce353a14c2d4c350fd33e89495a5f227f6f53509"
+      }
+    },
+    {
+      "game_id": "wk01-63be02fb",
+      "stem": "wk01",
+      "family": "family_bd_cf_cq_ep_gl_hm_in_tr_va_vp_wk",
+      "bucket": "movement_or_planning",
+      "split": "development",
+      "metadata_sha256": "32020702629c64c1e40d4cbb3a1d40cf9d414a06c00fb00463aabf0865e3df51",
+      "package_blob_sha1": {
+        "environment_files/wk01/63be02fb/metadata.json": "e6bba23f71a7b8181925f0e7cbee1d0211ff6e5a",
+        "environment_files/wk01/63be02fb/wk01.py": "c1406939812e03eaf5ad80d10600cd848d6626f9"
+      }
+    },
+    {
+      "game_id": "tg01-63be02fb",
+      "stem": "tg01",
+      "family": "family_es_fc_hs_sc_st_tg",
+      "bucket": "time_or_hazard",
+      "split": "development",
+      "metadata_sha256": "8a0b8595a3d6e4f1ce217623c6b64d5d2815269e4f2a33b3b4030d88eae72de3",
+      "package_blob_sha1": {
+        "environment_files/tg01/63be02fb/metadata.json": "aa9a357ca1eb9950b6eecc1e1d97281e15610d1a",
+        "environment_files/tg01/63be02fb/tg01.py": "3919f4708a34dafe35302b2c34a4eb33d6779037"
+      }
+    },
+    {
+      "game_id": "rn01-v1",
+      "stem": "rn01",
+      "family": "family_rn",
+      "bucket": "logic_or_field",
+      "split": "reserve",
+      "metadata_sha256": "5f90beea163d11f4f48a50906c72ce94eaa88b4629867b3bfd5d0fdec6ee5453",
+      "package_blob_sha1": {
+        "environment_files/rn01/v1/metadata.json": "37d0c65793103766eecf7427624a7ed2b3f58521",
+        "environment_files/rn01/v1/rn01.py": "16b24c470c2243b373cc97772f01718c0c31ebc7"
+      }
+    },
+    {
+      "game_id": "as01-63be02fb",
+      "stem": "as01",
+      "family": "family_as_dd_nu_sq",
+      "bucket": "order_or_coordination",
+      "split": "frozen",
+      "metadata_sha256": "a0af996bcbdb0a69740f501444fc2803f6b73d6ec3241c19b2a7db022fb7020d",
+      "package_blob_sha1": {
+        "environment_files/as01/63be02fb/as01.py": "934cf6ef5a52876922a59b0e09a86ff559297b8a",
+        "environment_files/as01/63be02fb/metadata.json": "aad07ede6b0afe9994ebfbe44259ba09bcdc5183"
+      }
+    },
+    {
+      "game_id": "ms04-v1",
+      "stem": "ms04",
+      "family": "family_ms",
+      "bucket": "hidden_or_exploration",
+      "split": "development",
+      "metadata_sha256": "72001a95729fd1ad8124b0e24abe665b05b6c9795f85fdbc306ec6cadb12b3db",
+      "package_blob_sha1": {
+        "environment_files/ms04/v1/metadata.json": "a77b6f6d4a289a0a139d9d016d297c570e99b834",
+        "environment_files/ms04/v1/ms04.py": "82635228fea4252e977bd946f82d3ed75e77c988"
+      }
+    },
+    {
+      "game_id": "ng04-v1",
+      "stem": "ng04",
+      "family": "family_ng",
+      "bucket": "visual_or_spatial",
+      "split": "reserve",
+      "metadata_sha256": "e285da205563024a1ccddd871a17516b536bbd33cea43a6aee1e5f107acc6ce4",
+      "package_blob_sha1": {
+        "environment_files/ng04/v1/metadata.json": "145f0717d2638b3aa98931afc6340e877ccd061d",
+        "environment_files/ng04/v1/ng04.py": "5620c64d238c565e5fcde6d586707e92e0d77d56"
+      }
+    },
+    {
+      "game_id": "at01-v1",
+      "stem": "at01",
+      "family": "family_at",
+      "bucket": "simulation",
+      "split": "frozen",
+      "metadata_sha256": "8ffc65701442348b717a08cf2a374508571f976c9f5a58169499996d43b7f45a",
+      "package_blob_sha1": {
+        "environment_files/at01/v1/at01.py": "ee9cc138afc589ec68a348c2642a3b4b95d45356",
+        "environment_files/at01/v1/metadata.json": "19aed365e06dda6046b57d7850620eec072f3721"
+      }
+    },
+    {
+      "game_id": "lw01-63be02fb",
+      "stem": "lw01",
+      "family": "family_fl_lp_lw",
+      "bucket": "movement_or_planning",
+      "split": "reserve",
+      "metadata_sha256": "7a9ba4d3d9fa9a1cc878fea88d8ba10320b204047896df8fa254532dc7d43cda",
+      "package_blob_sha1": {
+        "environment_files/lw01/63be02fb/lw01.py": "1bb44eccff3d9c12097c29b534e72cbc2cf50dc8",
+        "environment_files/lw01/63be02fb/metadata.json": "4a4ba18d2582ac107438478d83a3c1a91bbfb17d"
+      }
+    },
+    {
+      "game_id": "wm01-63be02fb",
+      "stem": "wm01",
+      "family": "family_wm",
+      "bucket": "time_or_hazard",
+      "split": "frozen",
+      "metadata_sha256": "1e2bc9dcf1ac752adf4febeccaecd3231c4b411f3c6435f72c1e97a7daad5f83",
+      "package_blob_sha1": {
+        "environment_files/wm01/63be02fb/metadata.json": "002b08ebb8834b9cef6b2b647dadf8e1bfe50d07",
+        "environment_files/wm01/63be02fb/wm01.py": "2db3cd932481c225f72e92f740c0b33aad20449c"
+      }
+    },
+    {
+      "game_id": "rs04-v1",
+      "stem": "rs04",
+      "family": "family_rs",
+      "bucket": "logic_or_field",
+      "split": "reserve",
+      "metadata_sha256": "a06c03ea0ad5c23c13ce88d7c2ea3d39d56251271698513ba2d9dbd53c040204",
+      "package_blob_sha1": {
+        "environment_files/rs04/v1/metadata.json": "044b97e436e6ecbd618c2293606fb75a25c97a5d",
+        "environment_files/rs04/v1/rs04.py": "f3a27f4acd01813bf335e2e8aa8c82e93f68bcb1"
+      }
+    },
+    {
+      "game_id": "tw01-63be02fb",
+      "stem": "tw01",
+      "family": "family_co_dt_fs_kb_or_tw_ul_vt",
+      "bucket": "order_or_coordination",
+      "split": "reserve",
+      "metadata_sha256": "5191191aa0ed41067c4cdff708febb7ab3ca4c39f4e2a0c09a5e10cf692c619b",
+      "package_blob_sha1": {
+        "environment_files/tw01/63be02fb/metadata.json": "9094c1b28d1d9eb6dc9ac90d9cb3c0e2eb61dc1d",
+        "environment_files/tw01/63be02fb/tw01.py": "24a598aa982e8765ac0ddb4c7355fa2f6c58a755"
+      }
+    },
+    {
+      "game_id": "bn01-63be02fb",
+      "stem": "bn01",
+      "family": "family_bn_fg",
+      "bucket": "hidden_or_exploration",
+      "split": "frozen",
+      "metadata_sha256": "279de2938124a3208a3db6f79ceba38f3248f49c3795f49edb3f80eac1fd41ac",
+      "package_blob_sha1": {
+        "environment_files/bn01/63be02fb/bn01.py": "647129195f696562b8024aa5bdf608cf278f3847",
+        "environment_files/bn01/63be02fb/metadata.json": "ddca17cb8fbb6b861ac22c466aad4ffeaaa2a5b3"
+      }
+    },
+    {
+      "game_id": "gp03-63be02fb",
+      "stem": "gp03",
+      "family": "family_gp_sf_sy",
+      "bucket": "visual_or_spatial",
+      "split": "frozen",
+      "metadata_sha256": "6e91569912616cc1ee34cb197fb5654303e1bcea4f48baa089c2ab7ae5ebc4f4",
+      "package_blob_sha1": {
+        "environment_files/gp03/63be02fb/gp03.py": "2f14dde315209885a9029ce7698c6c4b82fdcadb",
+        "environment_files/gp03/63be02fb/metadata.json": "03313b0fdc54c9acd32f0603d37289a5d3c10219"
+      }
+    },
+    {
+      "game_id": "ll04-v1",
+      "stem": "ll04",
+      "family": "family_ll",
+      "bucket": "simulation",
+      "split": "development",
+      "metadata_sha256": "6280fca2bfbcdecd3c81d710e29c45037c753b147c32540be1b74f20524fdae4",
+      "package_blob_sha1": {
+        "environment_files/ll04/v1/ll04.py": "81cfa5ee1b5ed69dc612d10a46407cd094fd1732",
+        "environment_files/ll04/v1/metadata.json": "19fa6fd121732761831383fc447fdd0d1dd53252"
+      }
+    },
+    {
+      "game_id": "em01-63be02fb",
+      "stem": "em01",
+      "family": "family_dl_ec_em_mo_rr",
+      "bucket": "movement_or_planning",
+      "split": "reserve",
+      "metadata_sha256": "7c3e73621f504a215b178081b301e7477d0a168e2d475502db009ec6dfae146d",
+      "package_blob_sha1": {
+        "environment_files/em01/63be02fb/em01.py": "4ab412ab2d661fbddb533e04878541d05406f602",
+        "environment_files/em01/63be02fb/metadata.json": "4133f5e64a86bf278b2c5d36f314cad04125d499"
+      }
+    },
+    {
+      "game_id": "ph04-v1",
+      "stem": "ph04",
+      "family": "family_ph",
+      "bucket": "logic_or_field",
+      "split": "frozen",
+      "metadata_sha256": "ed57f5ff77dc5dc69d14c35698557501040e193af502517c36b41c4b82e06b45",
+      "package_blob_sha1": {
+        "environment_files/ph04/v1/metadata.json": "0d1aef0dae786460bf765c652d04213c2380a1c7",
+        "environment_files/ph04/v1/ph04.py": "2d1165784aa5d4a8bd369dbfce5181395f9468bc"
+      }
+    },
+    {
+      "game_id": "mc01-63be02fb",
+      "stem": "mc01",
+      "family": "family_dp_mc_ob_qt_sw",
+      "bucket": "order_or_coordination",
+      "split": "frozen",
+      "metadata_sha256": "8c0f0e32e75979f77959db85234ac11c699c65f62cf22853016f53c4b97667bc",
+      "package_blob_sha1": {
+        "environment_files/mc01/63be02fb/mc01.py": "e6aacfe4cee4e4a06d45aac99ac0cfa59792d890",
+        "environment_files/mc01/63be02fb/metadata.json": "1db2c510bfc0be9653cd923f3e68507b0d6b5c6b"
+      }
+    },
+    {
+      "game_id": "ff03-63be02fb",
+      "stem": "ff03",
+      "family": "family_ff_zm",
+      "bucket": "visual_or_spatial",
+      "split": "development",
+      "metadata_sha256": "a868c913b5ccc956b0ba41517e7be7826ec0cb86be64db1f7a27cb4ce6daac5f",
+      "package_blob_sha1": {
+        "environment_files/ff03/63be02fb/ff03.py": "131680368f3aab8f58b2b0f02671eb74cf6ade26",
+        "environment_files/ff03/63be02fb/metadata.json": "5e252c66a691d27235802379d558af0081b7f286"
+      }
+    },
+    {
+      "game_id": "sp01-63be02fb",
+      "stem": "sp01",
+      "family": "family_ab_sb_sp",
+      "bucket": "simulation",
+      "split": "development",
+      "metadata_sha256": "0938cf3809d8e9b4b97a5bb0cdf3b047596b2ffcb8a025caa0bed65f00878420",
+      "package_blob_sha1": {
+        "environment_files/sp01/63be02fb/metadata.json": "9a16e110c5fd796e5b4932de4cc62ba36ff5b56d",
+        "environment_files/sp01/63be02fb/sp01.py": "dfffeeba55fddb90b37c2600f2a159b0961971da"
+      }
+    },
+    {
+      "game_id": "wa01-63be02fb",
+      "stem": "wa01",
+      "family": "family_cy_dn_eb_nw_rv_tc_wa_wg_wr",
+      "bucket": "movement_or_planning",
+      "split": "frozen",
+      "metadata_sha256": "3332b60b221711379f92d4a8d1e3efe4fcedf44b6e96489bb35e71bbf4ebd303",
+      "package_blob_sha1": {
+        "environment_files/wa01/63be02fb/metadata.json": "3ff5dd5df29504c2c05dab57de908966ee9c6907",
+        "environment_files/wa01/63be02fb/wa01.py": "9da26ec1f93de119315301cc397c139ee90c75b5"
+      }
+    },
+    {
+      "game_id": "cx01-v1",
+      "stem": "cx01",
+      "family": "family_cx",
+      "bucket": "logic_or_field",
+      "split": "frozen",
+      "metadata_sha256": "a3142bd0bb64494ecdd60530484edca24b3779f27b84960acb1d42de6b309f1e",
+      "package_blob_sha1": {
+        "environment_files/cx01/v1/cx01.py": "6957a729b78757029f8e24959779858e080e35d2",
+        "environment_files/cx01/v1/metadata.json": "bb5f8a53cf223070cd65cd027b5938831f0303ac"
+      }
+    },
+    {
+      "game_id": "sn01-63be02fb",
+      "stem": "sn01",
+      "family": "family_sn",
+      "bucket": "order_or_coordination",
+      "split": "development",
+      "metadata_sha256": "7d38c50b424d6a625d62efdd167d578d91ddfe8ffbcc412cbbc83d2da36863ef",
+      "package_blob_sha1": {
+        "environment_files/sn01/63be02fb/metadata.json": "a982d2802ff944981f84cde0534928e06e5a35cc",
+        "environment_files/sn01/63be02fb/sn01.py": "923727b623e7c2e6695768b46eae6998143aed88"
+      }
+    },
+    {
+      "game_id": "eg01-v1",
+      "stem": "eg01",
+      "family": "family_cw_cz_eg_lo",
+      "bucket": "visual_or_spatial",
+      "split": "frozen",
+      "metadata_sha256": "e7825f124d64c47612b378877b090f9115adfbc58e6acfd70ddf1e40c0bbe38b",
+      "package_blob_sha1": {
+        "environment_files/eg01/v1/eg01.py": "7edf7b5d726ad054137744537f42b77ac9d20776",
+        "environment_files/eg01/v1/metadata.json": "0a7c7921efb6ae4033cb66fb93f0c23a39ba6ff0"
+      }
+    },
+    {
+      "game_id": "fe02-v1",
+      "stem": "fe02",
+      "family": "family_fe",
+      "bucket": "simulation",
+      "split": "frozen",
+      "metadata_sha256": "884217c8173be711e6fba4029e3ace5c4d8ad79e66fc8857f5dc2b395ad48032",
+      "package_blob_sha1": {
+        "environment_files/fe02/v1/fe02.py": "a66ff677518e029a09244d746c5cdfdc92fbdefa",
+        "environment_files/fe02/v1/metadata.json": "64be13003c73665a3cb167d718214b189e4feb41"
+      }
+    },
+    {
+      "game_id": "cr01-63be02fb",
+      "stem": "cr01",
+      "family": "family_cr_tb_wl",
+      "bucket": "movement_or_planning",
+      "split": "development",
+      "metadata_sha256": "4de58b95e755ffc607d31eb115b7f5f1b7004fa5869b29943aa4292ce2eba300",
+      "package_blob_sha1": {
+        "environment_files/cr01/63be02fb/cr01.py": "2813ec316e5583bffa7080aebf4860c65d0eafc5",
+        "environment_files/cr01/63be02fb/metadata.json": "40a7c205825c1027d5ec0d9b2072f4aa0a148022"
+      }
+    },
+    {
+      "game_id": "ck04-v1",
+      "stem": "ck04",
+      "family": "family_bp_ck_kv_pd_pu_rp",
+      "bucket": "logic_or_field",
+      "split": "reserve",
+      "metadata_sha256": "fbf530d3645bd7ae58fff5bfd791fa8836236df250ea341128d7adbc4a186e48",
+      "package_blob_sha1": {
+        "environment_files/ck04/v1/ck04.py": "809bbb819cef948f55913df890500dce90794ca0",
+        "environment_files/ck04/v1/metadata.json": "f36543e1e1e62805b83e77e26e09e287ea425013"
+      }
+    },
+    {
+      "game_id": "pt01-63be02fb",
+      "stem": "pt01",
+      "family": "family_jw_pt_qr_sl",
+      "bucket": "visual_or_spatial",
+      "split": "development",
+      "metadata_sha256": "69dc348daff32e88f6ddd8f2f4516582f916d923b881a336d0db3b6b0c4a59fc",
+      "package_blob_sha1": {
+        "environment_files/pt01/63be02fb/metadata.json": "2e1370511f3ec7e90c4b32501359f5ff160b0b61",
+        "environment_files/pt01/63be02fb/pt01.py": "11168499c9228327f1afae9193d64d79959b13dc"
+      }
+    },
+    {
+      "game_id": "ex01-63be02fb",
+      "stem": "ex01",
+      "family": "family_au_bt_ex_pj_rb_sg_tf_tm_wb",
+      "bucket": "movement_or_planning",
+      "split": "reserve",
+      "metadata_sha256": "d0e206e5c7bb7ab57e97d5e6a072ecf247c5111ddc286b142b7bb13d9fa6941b",
+      "package_blob_sha1": {
+        "environment_files/ex01/63be02fb/ex01.py": "fead17bf891abcd43772e0b9c8cf5a2320074940",
+        "environment_files/ex01/63be02fb/metadata.json": "647ab5016daf0af13d9e466091384d4d664314a5"
+      }
+    },
+    {
+      "game_id": "hn01-v1",
+      "stem": "hn01",
+      "family": "family_hn",
+      "bucket": "logic_or_field",
+      "split": "development",
+      "metadata_sha256": "fcea8930bfe7dcbff48d07156d68526b4f86e7cac4e062c79f2d6003bd6ab0a3",
+      "package_blob_sha1": {
+        "environment_files/hn01/v1/hn01.py": "3927608b8e05b90d97cfa001dfe870175a663637",
+        "environment_files/hn01/v1/metadata.json": "108aa21a08898317b29e7016ca39f1f46a83da0d"
+      }
+    },
+    {
+      "game_id": "pk01-v1",
+      "stem": "pk01",
+      "family": "family_dm_pk",
+      "bucket": "movement_or_planning",
+      "split": "frozen",
+      "metadata_sha256": "c0ed869a65ff342a208ae9027163321d79d64f50233d15a1d47685ae15f61fcd",
+      "package_blob_sha1": {
+        "environment_files/pk01/v1/metadata.json": "2e6013979ea6698f517d8235367a3f208ba7252d",
+        "environment_files/pk01/v1/pk01.py": "9c52205e1bf598029248ca2259c448906f7b7161"
+      }
+    },
+    {
+      "game_id": "ih01-v1",
+      "stem": "ih01",
+      "family": "family_ih",
+      "bucket": "logic_or_field",
+      "split": "development",
+      "metadata_sha256": "3c65e8583525322f2d50b02adc968e8f25bd7192960330e0275ff378f36a4437",
+      "package_blob_sha1": {
+        "environment_files/ih01/v1/ih01.py": "064cdfd6219216e64f41014b07060f81e5ea014e",
+        "environment_files/ih01/v1/metadata.json": "87cd3bfabe12f2313933b288b9bd4922c281e6b6"
+      }
+    },
+    {
+      "game_id": "rz01-63be02fb",
+      "stem": "rz01",
+      "family": "family_ci_mb_op_pb_pw_rz_sk_tk_wp",
+      "bucket": "movement_or_planning",
+      "split": "reserve",
+      "metadata_sha256": "1c1867570262b9c523d888e604103c6de98f5d998484f2c6c2dab5c5bf2c5245",
+      "package_blob_sha1": {
+        "environment_files/rz01/63be02fb/metadata.json": "65993cd25531b62349c7af089f1b43b3cf1cdacf",
+        "environment_files/rz01/63be02fb/rz01.py": "4523da0ca691fa127637cd0ac4ad00700f9d5298"
+      }
+    },
+    {
+      "game_id": "sr01-v1",
+      "stem": "sr01",
+      "family": "family_sr",
+      "bucket": "logic_or_field",
+      "split": "frozen",
+      "metadata_sha256": "4c7fc530fb4120a5066b836d5ba3079024fecd4348db1876419d091a6d8003cf",
+      "package_blob_sha1": {
+        "environment_files/sr01/v1/metadata.json": "59dfb2259094bcf8c4e443d8cb6506fcf0442c9b",
+        "environment_files/sr01/v1/sr01.py": "fdae5f999c48edaef85344c28dc006b64bc69bea"
+      }
+    }
+  ],
+  "family_members": {
+    "family_ab_sb_sp": [
+      "ab01-v1",
+      "sb01-63be02fb",
+      "sp01-63be02fb",
+      "sp04-v1"
+    ],
+    "family_as_dd_nu_sq": [
+      "as01-63be02fb",
+      "dd01-63be02fb",
+      "nu01-63be02fb",
+      "sq01-63be02fb",
+      "sq02-63be02fb",
+      "sq03-63be02fb",
+      "sq04-v1",
+      "sq05-v1"
+    ],
+    "family_at": [
+      "at01-v1"
+    ],
+    "family_au_bt_ex_pj_rb_sg_tf_tm_wb": [
+      "au01-v1",
+      "bt01-63be02fb",
+      "ex01-63be02fb",
+      "ex02-63be02fb",
+      "ex03-63be02fb",
+      "pj01-v1",
+      "pj04-v1",
+      "rb01-v1",
+      "sg01-63be02fb",
+      "sg04-v1",
+      "tf01-v1",
+      "tm01-63be02fb",
+      "wb01-v1"
+    ],
+    "family_av_gr": [
+      "av01-63be02fb",
+      "gr01-63be02fb"
+    ],
+    "family_bd_cf_cq_ep_gl_hm_in_tr_va_vp_wk": [
+      "bd01-63be02fb",
+      "cf01-v1",
+      "cq01-63be02fb",
+      "ep01-v1",
+      "gl01-63be02fb",
+      "hm01-63be02fb",
+      "in01-63be02fb",
+      "tr01-63be02fb",
+      "va01-63be02fb",
+      "va02-63be02fb",
+      "va03-63be02fb",
+      "vp01-63be02fb",
+      "wk01-63be02fb"
+    ],
+    "family_bi_ju_kn_pm_rk": [
+      "bi01-63be02fb",
+      "ju01-63be02fb",
+      "kn01-63be02fb",
+      "pm01-63be02fb",
+      "rk01-63be02fb"
+    ],
+    "family_bl_df_fb_fi_fw_gc_hd_hz_lf_ox_rh_vi_zq": [
+      "bl01-63be02fb",
+      "df01-v1",
+      "df04-v1",
+      "fb01-v1",
+      "fi01-63be02fb",
+      "fw01-63be02fb",
+      "gc01-v1",
+      "hd01-63be02fb",
+      "hz01-63be02fb",
+      "lf01-63be02fb",
+      "ox01-63be02fb",
+      "rh01-63be02fb",
+      "vi01-63be02fb",
+      "zq01-63be02fb",
+      "zq02-63be02fb",
+      "zq03-63be02fb"
+    ],
+    "family_bn_fg": [
+      "bn01-63be02fb",
+      "bn02-63be02fb",
+      "bn03-63be02fb",
+      "bn04-v1",
+      "fg01-63be02fb"
+    ],
+    "family_bp_ck_kv_pd_pu_rp": [
+      "bp01-63be02fb",
+      "ck02-63be02fb",
+      "ck03-63be02fb",
+      "ck04-v1",
+      "kv01-v1",
+      "kv04-v1",
+      "pd01-63be02fb",
+      "pd04-v1",
+      "pu01-63be02fb",
+      "pu04-v1",
+      "rp01-63be02fb",
+      "rp02-63be02fb",
+      "rp03-63be02fb",
+      "rp04-v1"
+    ],
+    "family_ci_mb_op_pb_pw_rz_sk_tk_wp": [
+      "ci01-v1",
+      "mb01-63be02fb",
+      "op01-63be02fb",
+      "pb01-63be02fb",
+      "pb02-63be02fb",
+      "pb03-63be02fb",
+      "pb04-v1",
+      "pw01-63be02fb",
+      "rz01-63be02fb",
+      "sk01-63be02fb",
+      "sk02-63be02fb",
+      "sk03-63be02fb",
+      "sk04-v1",
+      "tk01-v1",
+      "wp01-63be02fb"
+    ],
+    "family_co_dt_fs_kb_or_tw_ul_vt": [
+      "co01-641624b5",
+      "dt01-63be02fb",
+      "fs01-63be02fb",
+      "fs02-63be02fb",
+      "fs03-63be02fb",
+      "kb01-63be02fb",
+      "or01-63be02fb",
+      "tw01-63be02fb",
+      "ul01-63be02fb",
+      "ul02-63be02fb",
+      "ul03-63be02fb",
+      "vt01-v1"
+    ],
+    "family_cr_tb_wl": [
+      "cr01-63be02fb",
+      "tb01-63be02fb",
+      "tb02-63be02fb",
+      "tb03-63be02fb",
+      "wl01-63be02fb"
+    ],
+    "family_cs_ct_cu_cv": [
+      "cs01-v1",
+      "ct01-v1",
+      "cu01-v1",
+      "cv01-v1"
+    ],
+    "family_cw_cz_eg_lo": [
+      "cw01-v1",
+      "cz01-v1",
+      "eg01-v1",
+      "lo01-63be02fb",
+      "lo02-63be02fb",
+      "lo03-63be02fb",
+      "lo04-v1",
+      "lo05-v1"
+    ],
+    "family_cx": [
+      "cx01-v1"
+    ],
+    "family_cy_dn_eb_nw_rv_tc_wa_wg_wr": [
+      "cy01-63be02fb",
+      "dn01-v1",
+      "eb01-63be02fb",
+      "nw01-63be02fb",
+      "nw02-63be02fb",
+      "nw03-63be02fb",
+      "rv01-v1",
+      "tc01-63be02fb",
+      "tc04-v1",
+      "wa01-63be02fb",
+      "wg01-63be02fb",
+      "wr01-v1"
+    ],
+    "family_dg_dr_mx": [
+      "dg01-63be02fb",
+      "dr01-63be02fb",
+      "mx01-63be02fb"
+    ],
+    "family_dl_ec_em_mo_rr": [
+      "dl01-63be02fb",
+      "ec01-v1",
+      "em01-63be02fb",
+      "mo01-63be02fb",
+      "rr01-v1"
+    ],
+    "family_dm_pk": [
+      "dm01-63be02fb",
+      "dm04-v1",
+      "pk01-v1",
+      "pk02-v1"
+    ],
+    "family_dp_mc_ob_qt_sw": [
+      "dp01-v1",
+      "mc01-63be02fb",
+      "ob01-63be02fb",
+      "qt01-v1",
+      "sw01-63be02fb"
+    ],
+    "family_dv": [
+      "dv01-63be02fb"
+    ],
+    "family_es_fc_hs_sc_st_tg": [
+      "es01-63be02fb",
+      "fc01-v1",
+      "hs01-63be02fb",
+      "sc01-v1",
+      "st01-63be02fb",
+      "tg01-63be02fb"
+    ],
+    "family_fe": [
+      "fe02-v1"
+    ],
+    "family_ff_zm": [
+      "ff01-63be02fb",
+      "ff02-63be02fb",
+      "ff03-63be02fb",
+      "ff04-v1",
+      "zm01-63be02fb",
+      "zm04-v1"
+    ],
+    "family_fl_lp_lw": [
+      "fl01-63be02fb",
+      "fl04-v1",
+      "lp01-v1",
+      "lw01-63be02fb",
+      "lw02-63be02fb",
+      "lw03-63be02fb",
+      "lw04-v1"
+    ],
+    "family_gp_sf_sy": [
+      "gp01-63be02fb",
+      "gp02-63be02fb",
+      "gp03-63be02fb",
+      "gp04-v1",
+      "sf01-63be02fb",
+      "sf04-v1",
+      "sy01-63be02fb",
+      "sy02-63be02fb",
+      "sy03-63be02fb",
+      "sy04-v1"
+    ],
+    "family_hn": [
+      "hn01-v1",
+      "hn04-v1"
+    ],
+    "family_ic": [
+      "ic01-63be02fb",
+      "ic02-63be02fb",
+      "ic03-63be02fb"
+    ],
+    "family_ih": [
+      "ih01-v1"
+    ],
+    "family_jw_pt_qr_sl": [
+      "jw01-63be02fb",
+      "pt01-63be02fb",
+      "pt02-63be02fb",
+      "pt03-63be02fb",
+      "pt04-v1",
+      "pt05-v1",
+      "qr01-63be02fb",
+      "qr04-v1",
+      "sl01-v1"
+    ],
+    "family_lk": [
+      "lk01-v1"
+    ],
+    "family_ll": [
+      "ll01-63be02fb",
+      "ll04-v1"
+    ],
+    "family_ml": [
+      "ml01-63be02fb",
+      "ml02-63be02fb",
+      "ml03-63be02fb",
+      "ml04-v1"
+    ],
+    "family_mm_rc": [
+      "mm01-63be02fb",
+      "mm02-63be02fb",
+      "mm03-63be02fb",
+      "mm04-v1",
+      "mm05-v1",
+      "rc01-63be02fb"
+    ],
+    "family_ms": [
+      "ms01-63be02fb",
+      "ms02-63be02fb",
+      "ms03-63be02fb",
+      "ms04-v1"
+    ],
+    "family_ng": [
+      "ng01-63be02fb",
+      "ng04-v1"
+    ],
+    "family_ph": [
+      "ph01-63be02fb",
+      "ph02-63be02fb",
+      "ph03-63be02fb",
+      "ph04-v1"
+    ],
+    "family_rf": [
+      "rf01-63be02fb"
+    ],
+    "family_rn": [
+      "rn01-v1"
+    ],
+    "family_rs": [
+      "rs01-63be02fb",
+      "rs02-63be02fb",
+      "rs03-63be02fb",
+      "rs04-v1"
+    ],
+    "family_sn": [
+      "sn01-63be02fb"
+    ],
+    "family_sr": [
+      "sr01-v1"
+    ],
+    "family_sv": [
+      "sv01-63be02fb",
+      "sv02-63be02fb",
+      "sv03-63be02fb"
+    ],
+    "family_tp": [
+      "tp01-63be02fb",
+      "tp02-63be02fb",
+      "tp03-63be02fb"
+    ],
+    "family_tt": [
+      "tt01-63be02fb",
+      "tt02-63be02fb",
+      "tt03-63be02fb"
+    ],
+    "family_wm": [
+      "wm01-63be02fb",
+      "wm02-63be02fb",
+      "wm03-63be02fb",
+      "wm04-v1"
+    ]
+  },
+  "family_assignment": {
+    "family_ab_sb_sp": "development",
+    "family_as_dd_nu_sq": "frozen",
+    "family_at": "frozen",
+    "family_au_bt_ex_pj_rb_sg_tf_tm_wb": "reserve",
+    "family_av_gr": "frozen",
+    "family_bd_cf_cq_ep_gl_hm_in_tr_va_vp_wk": "development",
+    "family_bi_ju_kn_pm_rk": "unscreened_reserve",
+    "family_bl_df_fb_fi_fw_gc_hd_hz_lf_ox_rh_vi_zq": "unscreened_reserve",
+    "family_bn_fg": "frozen",
+    "family_bp_ck_kv_pd_pu_rp": "reserve",
+    "family_ci_mb_op_pb_pw_rz_sk_tk_wp": "reserve",
+    "family_co_dt_fs_kb_or_tw_ul_vt": "reserve",
+    "family_cr_tb_wl": "development",
+    "family_cs_ct_cu_cv": "unscreened_reserve",
+    "family_cw_cz_eg_lo": "frozen",
+    "family_cx": "frozen",
+    "family_cy_dn_eb_nw_rv_tc_wa_wg_wr": "frozen",
+    "family_dg_dr_mx": "unscreened_reserve",
+    "family_dl_ec_em_mo_rr": "reserve",
+    "family_dm_pk": "frozen",
+    "family_dp_mc_ob_qt_sw": "frozen",
+    "family_dv": "reserve",
+    "family_es_fc_hs_sc_st_tg": "development",
+    "family_fe": "frozen",
+    "family_ff_zm": "development",
+    "family_fl_lp_lw": "reserve",
+    "family_gp_sf_sy": "frozen",
+    "family_hn": "development",
+    "family_ic": "unscreened_reserve",
+    "family_ih": "development",
+    "family_jw_pt_qr_sl": "development",
+    "family_lk": "reserve",
+    "family_ll": "development",
+    "family_ml": "reserve",
+    "family_mm_rc": "frozen",
+    "family_ms": "development",
+    "family_ng": "reserve",
+    "family_ph": "frozen",
+    "family_rf": "unscreened_reserve",
+    "family_rn": "reserve",
+    "family_rs": "reserve",
+    "family_sn": "development",
+    "family_sr": "frozen",
+    "family_sv": "frozen",
+    "family_tp": "unscreened_reserve",
+    "family_tt": "development",
+    "family_wm": "frozen"
+  },
+  "limitations": [
+    "Metadata semantic families are conservative grouping, not proven implementation genealogy.",
+    "The human registry and author metadata are collector-only; never solver prompts.",
+    "Community metadata baseline_actions is not an available-actions schema or certified optimal policy."
+  ]
+}

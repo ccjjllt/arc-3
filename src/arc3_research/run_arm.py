@@ -91,6 +91,7 @@ def run_arm(args: argparse.Namespace) -> int:
     current_data_patch = None
     native_patch = None
     grounding_prefix = None
+    grounded_patch = None
     timing_patch = None
     deadline_patch = None
     scheduler_patch = None
@@ -121,6 +122,10 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("observation_grounding requires frozen baseline scheduler.")
+        if args.arm == "grounded_state" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("grounded_state requires frozen baseline scheduler.")
         if args.arm == "baseline" and overrides not in ({
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }, {}):
@@ -208,6 +213,9 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm in ("native_values", "native"):
             from arc3_research.native_values import install_native_values
             native_patch = install_native_values()
+        if args.arm == "grounded_state":
+            from arc3_research.grounded_state import install_grounded_state
+            grounded_patch = install_grounded_state()
         if getattr(args, "request_deadline", False):
             from arc3_research.request_deadline import install_request_deadline
             deadline_patch = install_request_deadline()
@@ -265,6 +273,10 @@ def run_arm(args: argparse.Namespace) -> int:
         if grounding_prefix is not None:
             metadata["source_sha256"]["observation_grounding.py"] = _sha256(
                 Path(__file__).with_name("observation_grounding.py"))
+        if grounded_patch is not None:
+            for name in ("grounded_state.py", "observation_representation.py"):
+                metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
+            metadata["grounded_state"] = grounded_patch.snapshot()
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -385,6 +397,10 @@ def run_arm(args: argparse.Namespace) -> int:
             _write_json(job_dir / "observation-grounding.json", grounding_prefix.snapshot())
             if not live:
                 grounding_prefix.uninstall()
+        if grounded_patch is not None:
+            _write_json(job_dir / "grounded-state.json", grounded_patch.snapshot())
+            if not live:
+                grounded_patch.uninstall()
         _write_json(metadata_path, metadata)
         _stage("arm_finished", arm=args.arm, status=metadata["status"],
                wall_seconds=metadata["wall_seconds"], exit_code=exit_code,
@@ -404,7 +420,8 @@ def main() -> int:
     parser.add_argument("--arm", required=True,
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
                                  "retrievable_animation", "current_data", "tail_80k",
-                                 "native_values", "native", "pace_1x", "observation_grounding"))
+                                 "native_values", "native", "pace_1x", "observation_grounding",
+                                 "grounded_state"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

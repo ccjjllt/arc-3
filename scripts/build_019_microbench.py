@@ -119,6 +119,10 @@ def main():
     original = nbformat.read(base, as_version=4)
     validate_suite(json.loads(args.suite.read_text()))
     contract = ROOT / "experiments/019-weight-contract.json"
+    runtime_audit_path = ROOT / "experiments/019-actual-wheel-audit.json"
+    runtime_audit = json.loads(runtime_audit_path.read_text())
+    if runtime_audit["status"] != "audited":
+        raise ValueError("019 actual-wheel static audit is incomplete")
     config = {"id": "019-fp8-ple", "account": "jiyujia", "mode": args.mode,
         "phase_order": ["bf16_a", "fp8", "bf16_b"], "server_seed": 190018, "port": 8001,
         "hard_limit_seconds": 4800, "startup_limit_seconds": 900,
@@ -128,18 +132,21 @@ def main():
             "fp8": "models/dfranzen/albucino-qwen3.8-flash-next-w4a16-fp8ple/transformers/default/1",
             "draft": "models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1",
             "wheelhouse": "datasets/dfranzen/pennyroyal-v253"},
-        "runtime_source_sha256": {},
+        "runtime_source_sha256": runtime_audit["runtime_source_sha256"],
+        "runtime_wheel_sha256": runtime_audit["wheel"]["sha256"],
         "scope": "Frozen requests, not a game or leaderboard score. PLE precision changes model numerics. Second BF16 controls drift; startup includes cache/JIT order effects, not a clean cold-load estimate."}
-    upstream = ROOT / "research/notebooks/2026-10-18/fp8-ple/pennyroyal/python"
-    for relative in ["sglang/srt/models/qwen4_exp.py", "sglang/kernels/ops/qwen4_ple.py",
-                     "sglang/srt/environ.py", "sglang/srt/model_loader/loader.py"]:
-        config["runtime_source_sha256"][relative] = sha((upstream / relative).read_bytes())
+    for relative, row in runtime_audit["files"].items():
+        if sha((ROOT / row["extracted_path"]).read_bytes()) != config["runtime_source_sha256"][relative]:
+            raise ValueError("Audited actual-wheel source changed: " + relative)
+        if sha((ROOT / row["upstream_source"]).read_bytes()) != row["upstream_sha256"]:
+            raise ValueError("Preserved upstream reference changed: " + relative)
     validate_config(config)
     root = Path("/kaggle/working/019-code")
     files = {"config.json": json.dumps(config, indent=2) + "\n",
+             "actual-wheel-audit.json": runtime_audit_path.read_text(),
              "weight-contract.json": contract.read_text(), "suite.json": args.suite.read_text(),
              "launch_server.py": server_driver(original)}
-    source_paths = [Path(__file__), base, contract, args.suite]
+    source_paths = [Path(__file__), base, contract, args.suite, runtime_audit_path]
     for name in ["__init__.py", "experiment_config.py", "session_runner.py", "ple_weights.py", "ple_microbench.py", "ple_session.py"]:
         path = ROOT / "src/arc3_research" / name
         files["src/arc3_research/" + name] = path.read_text()

@@ -1,0 +1,556 @@
+{
+  "kind": "synthetic-CPU-demonstration-NOT-game-evaluation",
+  "scope": "Local helper behavior only; no GPU/model/game/logged code, no adoption or score claim.",
+  "checked_execution": [
+    {
+      "name": "first_mismatch_stops_18_action_suffix",
+      "sent": [
+        {
+          "action": "RIGHT"
+        },
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "mismatch",
+      "reason": "declared_prediction_differs_stop_and_inspect",
+      "planned_actions": 18,
+      "attempted_actions": 2,
+      "observed_actions": 2,
+      "unattempted_suffix": 16,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "comparison": "match",
+          "diff_count": 0,
+          "diffs": []
+        },
+        {
+          "index": 1,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "61b8b92b02559a598e5af1b3ee53771c76ea2be86983a67b01e713ce42b37026",
+          "prediction_sha256": "a3979e04f43fe80b910a01872dacfe386a406a7404add2ffe4edfc925901354c",
+          "after": {
+            "observation_id": "event-2",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "113505829d1ae697bfc93a4724f9b5e3b2f2a29d8cbb62cec95526b39176352c",
+          "comparison": "mismatch",
+          "diff_count": 1,
+          "diffs": [
+            {
+              "field": "x",
+              "expected": 2,
+              "actual": -1
+            }
+          ]
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "terminal_precedes_changed_projection",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "boundary",
+      "reason": "terminal",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": true,
+            "boundary": null
+          },
+          "comparison": "skipped_boundary"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "level_change_precedes_extraction",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "boundary",
+      "reason": "level_changed",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "2",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "comparison": "skipped_boundary"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "reset_episode_stops_without_undo",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "boundary",
+      "reason": "episode_changed",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "b",
+            "terminal": false,
+            "boundary": null
+          },
+          "comparison": "skipped_boundary"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "explicit_stopped_early_boundary",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "boundary",
+      "reason": "stopped_early",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": "stopped_early"
+          },
+          "comparison": "skipped_boundary"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "hud_changes_outside_declared_projection",
+      "sent": [
+        {
+          "action": "RIGHT"
+        },
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "completed",
+      "reason": "all_executed_actions_match_selected_projection",
+      "planned_actions": 2,
+      "attempted_actions": 2,
+      "observed_actions": 2,
+      "unattempted_suffix": 0,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "comparison": "match",
+          "diff_count": 0,
+          "diffs": []
+        },
+        {
+          "index": 1,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "61b8b92b02559a598e5af1b3ee53771c76ea2be86983a67b01e713ce42b37026",
+          "prediction_sha256": "a3979e04f43fe80b910a01872dacfe386a406a7404add2ffe4edfc925901354c",
+          "after": {
+            "observation_id": "event-2",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "61b8b92b02559a598e5af1b3ee53771c76ea2be86983a67b01e713ce42b37026",
+          "comparison": "match",
+          "diff_count": 0,
+          "diffs": []
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "incomparable_projection_is_not_model_mismatch",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "unverifiable",
+      "reason": "projection_schema_changed",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "fb4014bb78c8ff837f742387beefe10eec2639434499e888a79d16fae28b86fd",
+          "comparison": "incomparable"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "missing_prediction_does_not_execute",
+      "sent": [],
+      "status": "unverifiable",
+      "reason": "predictor_and_extractor_required",
+      "planned_actions": 3,
+      "attempted_actions": 0,
+      "observed_actions": 0,
+      "unattempted_suffix": 3,
+      "events": [],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "extractor_failure_does_not_execute",
+      "sent": [],
+      "status": "unverifiable",
+      "reason": "pre_action_prediction_or_extraction_failed",
+      "planned_actions": 3,
+      "attempted_actions": 0,
+      "observed_actions": 0,
+      "unattempted_suffix": 3,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "comparison": "not_executed",
+          "error": "ValueError: no explicit comparable projection"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "uncertain_action_exception_never_retried",
+      "sent": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "status": "execution_error",
+      "reason": "action_outcome_unknown_no_retry",
+      "planned_actions": 3,
+      "attempted_actions": 1,
+      "observed_actions": 0,
+      "unattempted_suffix": 2,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "RIGHT"
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "bab3c6be4f95145f79f8ce353db4c47aa965676475368e01fba9b8a685c792be",
+          "prediction_sha256": "4c8154a9c9ce523c5f7d6ebb2a33e3d7aea1281f0f45a9931d98431b760937ec",
+          "comparison": "unavailable",
+          "error": "RuntimeError: synthetic transport failure"
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    },
+    {
+      "name": "mouse_payload_is_preserved",
+      "sent": [
+        {
+          "action": "MOUSE",
+          "col": 34,
+          "dx": 7,
+          "row": 12
+        }
+      ],
+      "status": "completed",
+      "reason": "all_executed_actions_match_selected_projection",
+      "planned_actions": 1,
+      "attempted_actions": 1,
+      "observed_actions": 1,
+      "unattempted_suffix": 0,
+      "events": [
+        {
+          "index": 0,
+          "action": {
+            "action": "MOUSE",
+            "col": 34,
+            "dx": 7,
+            "row": 12
+          },
+          "before": {
+            "observation_id": "event-0",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "scope": "player-x/v1",
+          "field_count": 1,
+          "expected_sha256": "fb2f44a620897c2fdef9dfe69c6fe033a832b2d77752185587b987a48313a8d5",
+          "prediction_sha256": "85558a8e2914d9d4d2a3c5f80ba1a370b98f7c2382029f96a6c6834355d6dca6",
+          "after": {
+            "observation_id": "event-1",
+            "level_id": "1",
+            "episode_id": "a",
+            "terminal": false,
+            "boundary": null
+          },
+          "actual_sha256": "fb2f44a620897c2fdef9dfe69c6fe033a832b2d77752185587b987a48313a8d5",
+          "comparison": "match",
+          "diff_count": 0,
+          "diffs": []
+        }
+      ],
+      "claim": "agreement/disagreement of declared observable projection only"
+    }
+  ],
+  "bounded_probe": {
+    "alternatives": {
+      "activate": "contact then activate",
+      "contact": "contact suffices"
+    },
+    "claim": "budget and caller-reported evidence only; no automatic hypothesis validation",
+    "closed_reason": "budget_exhausted",
+    "evidence_refs": [
+      "observed-goal-claim-but-no-level-completion"
+    ],
+    "game_id": "synthetic",
+    "level_id": "1",
+    "max_probes": 2,
+    "records": [
+      {
+        "action": {
+          "action": "SPACE"
+        },
+        "boundary": false,
+        "finding": "synthetic observation; no causal validity claimed",
+        "observation_id": "probe-1",
+        "predicted_outcomes": {
+          "activate": "observable activation",
+          "contact": "no change"
+        },
+        "probe_index": 1
+      },
+      {
+        "action": {
+          "action": "SPACE"
+        },
+        "boundary": false,
+        "finding": "synthetic observation; no causal validity claimed",
+        "observation_id": "probe-2",
+        "predicted_outcomes": {
+          "activate": "observable activation",
+          "contact": "no change"
+        },
+        "probe_index": 2
+      }
+    ],
+    "slots_left": 0,
+    "slots_spent": 2,
+    "trigger": "predicted_goal_without_completion"
+  },
+  "budget_denials": [
+    "probe window closed",
+    "this level already used its one probe window"
+  ],
+  "source_sha256": {
+    "src/arc3_research/checked_execution.py": "cb86c88d0f8397dfb33fbf0a57275eee90c3bf2b0c56580db8649acc0b40fa51",
+    "src/arc3_research/bounded_probe.py": "a75ad513310e59445fcad40b846f95bd3c3970f8bf8d3beba1b2a0886905ad14",
+    "scripts/demo_020_behavior_mechanisms.py": "f647b71a8e6c7af8bc030d07abd79fc303b22fd27126ffcffa5d6b6cd7ae51ac"
+  }
+}

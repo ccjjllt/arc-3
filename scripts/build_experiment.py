@@ -42,9 +42,11 @@ def main() -> None:
     for relative, expected in config.get("frozen_source_sha256", {}).items():
         if hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() != expected:
             raise ValueError(f"Frozen comparison source changed: {relative}")
-    payload_paths = [*sorted((ROOT / "src/arc3_research").glob("*.py")),
-                     ROOT / "scripts/summarize_experiment.py"]
-    required = {"run_arm.py", "goal_evidence.py", "session_runner.py"}
+    # Bundle this experiment's dependencies, not unrelated weight audits or
+    # community tooling. Kaggle's source upload is bounded to 1 MB.
+    required = {"__init__.py", "experiment_config.py", "input_paths.py",
+                "run_arm.py", "goal_evidence.py", "transient_history.py",
+                "program_state.py", "session_runner.py"}
     if "retrievable_animation" in arms:
         required.add("retrievable_animation.py")
     if "current_data" in arms:
@@ -53,6 +55,8 @@ def main() -> None:
         required.add("native_values.py")
     if "observation_grounding" in arms:
         required.add("observation_grounding.py")
+    if "grounded_state" in arms:
+        required.update({"grounded_state.py", "observation_representation.py"})
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -60,7 +64,9 @@ def main() -> None:
             required.add(key + ".py")
     if config.get("preflight_before_serving"):
         required.add("preflight.py")
-    if not required.issubset(p.name for p in payload_paths):
+    payload_paths = [*(ROOT / "src/arc3_research" / name for name in sorted(required)),
+                     ROOT / "scripts/summarize_experiment.py"]
+    if not all(p.is_file() for p in payload_paths):
         raise RuntimeError("Research modules are not ready")
     payload = {}
     for path in payload_paths:
