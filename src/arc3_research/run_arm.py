@@ -127,10 +127,10 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("grounded_state requires frozen baseline scheduler.")
-        if args.arm == "checked_execution" and overrides != {
+        if args.arm in ("checked_execution", "expect_check") and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
-            raise ValueError("checked_execution requires frozen baseline scheduler.")
+            raise ValueError(args.arm + " requires frozen baseline scheduler.")
         if args.arm == "baseline" and overrides not in ({
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }, {}):
@@ -221,7 +221,7 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "grounded_state":
             from arc3_research.grounded_state import install_grounded_state
             grounded_patch = install_grounded_state()
-        if args.arm == "checked_execution":
+        if args.arm in ("checked_execution", "expect_check"):
             from arc3_research.checked_action import install_checked_execution
             checked_patch = install_checked_execution()
         if getattr(args, "request_deadline", False):
@@ -437,7 +437,7 @@ def main() -> int:
                         choices=("baseline", "goal_evidence", "transient_history", "program_state",
                                  "retrievable_animation", "current_data", "tail_80k",
                                  "native_values", "native", "pace_1x", "observation_grounding",
-                                 "grounded_state", "checked_execution"))
+                                 "grounded_state", "checked_execution", "expect_check"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

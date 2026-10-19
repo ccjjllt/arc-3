@@ -1,0 +1,75 @@
+{
+  "id": "022-community-dev",
+  "kernel_id": "jiyujia/arc3-022-community-dev",
+  "kernel_title": "ARC3 022 Community Dev",
+  "purpose": "Run the existing baseline agent on the 12 frozen community development games",
+  "community_development": true,
+  "community_source_root": "/kaggle/input/datasets/jiyujia/arc3-community-dev-02152bc",
+  "community_allowlist": [
+    "tt03-63be02fb",
+    "wk01-63be02fb",
+    "tg01-63be02fb",
+    "ms04-v1",
+    "ll04-v1",
+    "ff03-63be02fb",
+    "sp01-63be02fb",
+    "sn01-63be02fb",
+    "cr01-63be02fb",
+    "pt01-63be02fb",
+    "hn01-v1",
+    "ih01-v1"
+  ],
+  "extra_dataset_sources": [
+    "jiyujia/arc3-community-dev-02152bc"
+  ],
+  "games": [
+    "tt03-63be02fb",
+    "wk01-63be02fb",
+    "tg01-63be02fb",
+    "ms04-v1",
+    "ll04-v1",
+    "ff03-63be02fb",
+    "sp01-63be02fb",
+    "sn01-63be02fb",
+    "cr01-63be02fb",
+    "pt01-63be02fb",
+    "hn01-v1",
+    "ih01-v1"
+  ],
+  "game_source": "Frozen community development split only. Reserve and frozen families are not mounted.",
+  "game_count": 12,
+  "arm_order": [
+    "baseline"
+  ],
+  "requested_arm_seconds": 1800,
+  "budget_formula": "One 1800-second pass of the existing agent over the 12 development games",
+  "hard_limit_seconds": 3600,
+  "startup_limit_seconds": 1200,
+  "gpu_sample_interval_seconds": 10,
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "reference_arm": "baseline",
+  "comparison_note": "Engine completion and action counts only. Do not read these as official leaderboard scores or as a reason to open the frozen 16.",
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "inference_timing": true,
+  "scheduler_observer": true,
+  "request_deadline": true,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_drained_workers": true,
+  "preflight_before_serving": true,
+  "native_payload_cells": true,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "require_complete_pool": true,
+  "require_cache_flush_log": true
+}

@@ -29,6 +29,22 @@ class PublicObservation:
         return asdict(self)
 
 
+def load_allowlist(path=None):
+    """Frozen 12/12/16 split. Development is the only set a model run may touch."""
+    path = Path(path) if path else Path(__file__).resolve().parents[2] / "experiments/020-community/solver-allowlists.json"
+    data = json.loads(path.read_text())
+    for key in ("development", "reserve", "frozen"):
+        if not isinstance(data.get(key), list) or len(data[key]) not in (12, 16):
+            raise ValueError("Community allowlist is missing a split")
+    if set(data["development"]) & set(data["frozen"]) or set(data["development"]) & set(data["reserve"]):
+        raise ValueError("Community allowlist splits overlap")
+    return data
+
+
+def development_ids(path=None):
+    return list(load_allowlist(path)["development"])
+
+
 def public_observation(raw):
     if raw is None:
         raise RuntimeError("Normal API returned no observation")

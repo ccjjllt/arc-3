@@ -1,0 +1,40 @@
+{
+  "name": "mismatch_stops",
+  "calls": [
+    [
+      {
+        "action": "RIGHT"
+      }
+    ],
+    [
+      {
+        "action": "RIGHT"
+      }
+    ]
+  ],
+  "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nPredictionMismatch: checked_trace {\"attempted_actions\": 2, \"comparison\": \"mismatch\", \"corrected_in_this_call\": false, \"diffs\": [{\"actual\": {\"col\": 0}, \"expected\": {\"col\": 4}, \"field\": \"value\"}], \"entered\": true, \"error\": null, \"status\": \"mismatch\", \"stopped\": true, \"unattempted_suffix\": 1} Revise the rule from this counterexample before acting again.",
+  "traces": [
+    {
+      "attempted_actions": 2,
+      "comparison": "mismatch",
+      "corrected_in_this_call": false,
+      "diffs": [
+        {
+          "actual": {
+            "col": 0
+          },
+          "expected": {
+            "col": 4
+          },
+          "field": "value"
+        }
+      ],
+      "entered": true,
+      "error": null,
+      "status": "mismatch",
+      "stopped": true,
+      "unattempted_suffix": 1
+    }
+  ],
+  "stdout": "checked_trace {\"attempted_actions\": 2, \"comparison\": \"mismatch\", \"corrected_in_this_call\": false, \"diffs\": [{\"actual\": {\"col\": 0}, \"expected\": {\"col\": 4}, \"field\": \"value\"}], \"entered\": true, \"error\": null, \"status\": \"mismatch\", \"stopped\": true, \"unattempted_suffix\": 1}\n"
+}

@@ -16,35 +16,56 @@ from pathlib import Path
 
 PREFIX_ENV = "ARC3_SYSTEM_PROMPT_PREFIX"
 CHECKED_EXECUTION_PREFIX = (
-    "When you already have a predictor and an extractor for the same visible "
-    "fields, execute that plan with action(plan, pred=pred, extract=extract, "
-    'scope="coordinates-and-fields"). extract(frame) and pred(values, action) '
-    "must return the same nonempty JSON object. action is the full action dict: "
-    'use action["action"], and for a click also action["row"] and action["col"]. '
-    "Only the fields you return are compared. Do not compare the whole frame, and "
-    "do not drop border cells unless your own extractor does. Each step sends one "
-    "action through the existing action entry. Public level_completed, game_over, "
-    "done, and run_complete stop the plan before comparison. The first field "
-    "mismatch stops the remaining suffix and reports status, attempted_actions, "
-    "unattempted_suffix, and diffs so the next code can repair the rule. If pred "
-    "or extract fails, the plan stops and is not run unchecked. Ordinary "
-    "action(actions) is unchanged. At most 32 actions per checked call."
+    "If you already computed the next visible value and have reader(frame) for "
+    "that same value, call action(step, expect=pred, read=reader) instead of "
+    "action(step). reader uses your existing coordinates. One real action is sent "
+    "at a time. level_completed, game_over, done, and run_complete are not "
+    "mismatches. The first mismatch stops the rest of this snippet and shows "
+    "expected versus actual so the next turn can repair the rule. A type or reader "
+    "failure stops as unverifiable, not as a physics miss, and does not fall back "
+    "to an unchecked batch. Ordinary action(...) is unchanged."
 )
 
 _ACTION_DEF = "    def action(actions):\n"
 _UNCHECKED_DEF = "    def _action_unchecked(actions):\n"
 _ACTION_BIND = '    runtime_globals["action"] = action\n'
-_WRAPPER = '''    def action(actions, *, pred=None, extract=None, scope=None):
-        if pred is None and extract is None and scope is None:
+_HANDLER = """    except (
+        KnownNoOpActionError,
+        RepeatedActionInStateError,
+        KnownDeathActionError,
+        TerminalStateActionError,
+        Exception,
+    ) as exc:
+"""
+_HANDLER_WITH_MISMATCH = """    except (
+        KnownNoOpActionError,
+        RepeatedActionInStateError,
+        KnownDeathActionError,
+        TerminalStateActionError,
+        PredictionMismatch,
+        Exception,
+    ) as exc:
+"""
+_WRAPPER = '''    def action(actions, *, expect=None, read=None):
+        if expect is None and read is None:
             return _action_unchecked(actions)
-        if not callable(pred) or not callable(extract):
-            raise ValueError("checked action requires callable pred and extract; refusing unchecked fallback")
-        if not isinstance(scope, str) or not scope.strip() or len(scope) > 512:
-            raise ValueError("checked action requires an explicit scope for the compared fields")
+        if expect is None or not callable(read):
+            raise ValueError("expect and read are both required; refusing unchecked fallback")
         frame = runtime_globals.get("current_frame")
         if frame is None or type(getattr(frame, "level", None)) is not int:
             raise ValueError("checked action requires the live public current_frame level")
         event_i = [0]
+        raw_results = []
+        normalized = _normalize_actions(actions)
+        # One action: expect is that action's predicted value, even when the
+        # value itself is a list. Several actions need one value each.
+        if len(normalized) == 1:
+            expects = [expect]
+        elif isinstance(expect, (list, tuple)) and len(expect) == len(normalized):
+            expects = list(expect)
+        else:
+            raise ValueError("one expect needs one action, or pass one expect per action")
+        expect_i = [0]
 
         def _boundary(action_result):
             if not isinstance(action_result, dict):
@@ -80,22 +101,21 @@ _WRAPPER = '''    def action(actions, *, pred=None, extract=None, scope=None):
                 boundary=boundary,
             )
 
-        def _project(value):
-            if isinstance(value, ComparableState):
-                return value
-            if not isinstance(value, dict) or not value:
-                raise ValueError("pred/extract must return a nonempty object of declared fields")
-            return ComparableState(scope, value)
+        def _state(value):
+            return ComparableState("caller-expect", {"value": value})
 
         def _extract(data):
-            return _project(extract(data))
+            return _state(read(data))
 
         def _pred(state, one):
-            return _project(pred(dict(state.values), one))
+            value = expects[expect_i[0]]
+            expect_i[0] += 1
+            return _state(value)
 
         def _one(payload):
             # Original signature is action(actions), including MOUSE row/col.
             outcome = _action_unchecked([payload])
+            raw_results.append(outcome)
             return _observe(outcome)
 
         initial = Observation(
@@ -107,26 +127,34 @@ _WRAPPER = '''    def action(actions, *, pred=None, extract=None, scope=None):
             boundary=None,
         )
         summary = execute_checked(
-            _normalize_actions(actions),
+            normalized,
             initial=initial,
             execute_one=_one,
             pred=_pred,
             extract=_extract,
         )
         last = summary["events"][-1] if summary.get("events") else {}
-        brief = {
+        stopped = summary.get("status") in ("mismatch", "unverifiable", "execution_error")
+        trace = {
+            "entered": True,
             "status": summary.get("status"),
-            "reason": summary.get("reason"),
-            "planned_actions": summary.get("planned_actions"),
-            "attempted_actions": summary.get("attempted_actions"),
-            "observed_actions": summary.get("observed_actions"),
-            "unattempted_suffix": summary.get("unattempted_suffix"),
             "comparison": last.get("comparison"),
+            "stopped": stopped or bool(summary.get("unattempted_suffix")),
+            "attempted_actions": summary.get("attempted_actions"),
+            "unattempted_suffix": summary.get("unattempted_suffix"),
             "diffs": last.get("diffs"),
             "error": last.get("error"),
+            "corrected_in_this_call": False,
         }
-        print("checked_execution " + json.dumps(brief, sort_keys=True, ensure_ascii=False))
-        return summary
+        print("checked_trace " + json.dumps(trace, sort_keys=True, ensure_ascii=False))
+        if stopped:
+            raise PredictionMismatch(
+                "checked_trace " + json.dumps(trace, sort_keys=True, ensure_ascii=False)
+                + " Revise the rule from this counterexample before acting again."
+            )
+        if not raw_results:
+            raise PredictionMismatch("checked action produced no public result")
+        return raw_results[-1]
 
 '''
 
@@ -143,9 +171,13 @@ def build_checked_bootstrap(bootstrap: str) -> str:
     source = _helper_source()
     # dataclasses looks up the class module in sys.modules while the class
     # statement runs. A bare exec dict has no module entry, so register one.
+    if bootstrap.count(_HANDLER) != 1:
+        raise RuntimeError("Unsupported sandbox exception handler")
     preamble = "\n".join([
         "import types as _checked_types",
         "import sys as _checked_sys",
+        "class PredictionMismatch(BaseException):",
+        "    pass",
         "_checked_mod = _checked_types.ModuleType('checked_execution')",
         "_checked_sys.modules['checked_execution'] = _checked_mod",
         "exec(" + repr(source) + ", _checked_mod.__dict__)",
@@ -156,8 +188,10 @@ def build_checked_bootstrap(bootstrap: str) -> str:
     ])
     modified = preamble + bootstrap.replace(_ACTION_DEF, _UNCHECKED_DEF, 1)
     modified = modified.replace(_ACTION_BIND, _WRAPPER + _ACTION_BIND, 1)
+    modified = modified.replace(_HANDLER, _HANDLER_WITH_MISMATCH, 1)
     if (modified.count(_UNCHECKED_DEF) != 1 or modified.count(_ACTION_DEF) != 0
-            or modified.count("def action(actions, *, pred=None, extract=None, scope=None):") != 1):
+            or modified.count("def action(actions, *, expect=None, read=None):") != 1
+            or modified.count("PredictionMismatch,") != 1):
         raise RuntimeError("Checked action wrapper did not land on the existing entry")
     compile(modified, "<checked_execution_sandbox>", "exec")
     return modified
@@ -176,7 +210,7 @@ class CheckedExecutionPatch:
         return {
             "name": "checked_execution",
             "enabled": self.active,
-            "mechanism": "optional_pred_extract_on_existing_action_entry",
+            "mechanism": "expect_and_reader_on_existing_action_entry",
             "ordinary_action_preserved": True,
             "one_action_per_checked_step": True,
             "sandbox_bootstrap_before_sha256": hashlib.sha256(self._before.encode()).hexdigest(),
@@ -191,7 +225,7 @@ class CheckedExecutionPatch:
             "projection": "caller scope and returned fields only; no full-frame compare and no border crop",
             "lifecycle": "public level_completed, game_over, done/run_complete, and stop_reason before compare",
             "episode_id": "stable public-session; game_over carries RESET because no public episode id is available",
-            "runtime_adoption_counts": "not collected; inspect request code and tool results",
+            "runtime_record": "checked_trace on entered calls only: comparison, stopped, unattempted_suffix; a later repair is the next model call",
         }
 
     def uninstall(self):

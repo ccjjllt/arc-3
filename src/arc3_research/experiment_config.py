@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any
 
 
@@ -120,3 +121,38 @@ def validate_config(config: dict[str, Any]) -> None:
             "native_payload_cells",
         )):
             raise ValueError("021 retains the shared budget, diagnostics and startup contracts.")
+    if "expect_check" in arms:
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in ("baseline", "expect_check")}
+        if arms != ["baseline", "expect_check"] or environments != expected:
+            raise ValueError("022 requires baseline then expect_check with unchanged scheduling.")
+        if len(config.get("games") or []) != 3 or config.get("requested_arm_seconds") != 600:
+            raise ValueError("022 is a 3-game, 600-second probe, not another full pool.")
+        if (config.get("active_streams") != 10 or config.get("n_passes_per_arm") != 1
+                or config.get("warmup_action_games") != 0
+                or config.get("reference_arm") != "baseline"
+                or config.get("hard_limit_seconds") != 3600):
+            raise ValueError("022 keeps the scheduler contract and a 3600-second session cap.")
+        if not all(config.get(key) is True for key in (
+            "inference_timing", "scheduler_observer", "request_deadline",
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "preflight_before_serving",
+            "native_payload_cells",
+        )):
+            raise ValueError("022 retains the shared budget, diagnostics and startup contracts.")
+    if config.get("community_development"):
+        allow = config.get("community_allowlist")
+        if arms != ["baseline"] or allow != config.get("games"):
+            raise ValueError("Community development runs the existing agent on its embedded allowlist only.")
+        # The Kaggle payload has no experiments/ tree. When the local split file
+        # is present, it must agree with that embedded list.
+        split = Path(__file__).resolve().parents[2] / "experiments/020-community/solver-allowlists.json"
+        if split.is_file():
+            data = json.loads(split.read_text())
+            if config.get("games") != data["development"]:
+                raise ValueError("Community development games must stay the frozen 12-id list.")
+            if set(config["games"]) & (set(data["frozen"]) | set(data["reserve"])):
+                raise ValueError("Community development run includes a reserve or frozen id.")
+        if (config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 3600
+                or config.get("n_passes_per_arm") != 1 or config.get("warmup_action_games") != 0):
+            raise ValueError("Community development uses one 1800-second pass inside a 3600-second cap.")

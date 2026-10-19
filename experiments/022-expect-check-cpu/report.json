@@ -1,0 +1,259 @@
+{
+  "status": "passed",
+  "scenarios": [
+    {
+      "name": "ordinary",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          },
+          {
+            "action": "LEFT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": []
+    },
+    {
+      "name": "match",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "match",
+          "corrected_in_this_call": false,
+          "diffs": [],
+          "entered": true,
+          "error": null,
+          "status": "completed",
+          "stopped": false,
+          "unattempted_suffix": 0
+        }
+      ]
+    },
+    {
+      "name": "mismatch_stops",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nPredictionMismatch: checked_trace {\"attempted_actions\": 2, \"comparison\": \"mismatch\", \"corrected_in_this_call\": false, \"diffs\": [{\"actual\": {\"col\": 0}, \"expected\": {\"col\": 4}, \"field\": \"value\"}], \"entered\": true, \"error\": null, \"status\": \"mismatch\", \"stopped\": true, \"unattempted_suffix\": 1} Revise the rule from this counterexample before acting again.",
+      "traces": [
+        {
+          "attempted_actions": 2,
+          "comparison": "mismatch",
+          "corrected_in_this_call": false,
+          "diffs": [
+            {
+              "actual": {
+                "col": 0
+              },
+              "expected": {
+                "col": 4
+              },
+              "field": "value"
+            }
+          ],
+          "entered": true,
+          "error": null,
+          "status": "mismatch",
+          "stopped": true,
+          "unattempted_suffix": 1
+        }
+      ]
+    },
+    {
+      "name": "repair_next_call",
+      "calls": [
+        [
+          {
+            "action": "LEFT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "match",
+          "corrected_in_this_call": false,
+          "diffs": [],
+          "entered": true,
+          "error": null,
+          "status": "completed",
+          "stopped": false,
+          "unattempted_suffix": 0
+        }
+      ]
+    },
+    {
+      "name": "level_not_mismatch",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "corrected_in_this_call": false,
+          "diffs": null,
+          "entered": true,
+          "error": null,
+          "status": "boundary",
+          "stopped": true,
+          "unattempted_suffix": 1
+        }
+      ]
+    },
+    {
+      "name": "game_over_not_mismatch",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "skipped_boundary",
+          "corrected_in_this_call": false,
+          "diffs": null,
+          "entered": true,
+          "error": null,
+          "status": "boundary",
+          "stopped": false,
+          "unattempted_suffix": 0
+        }
+      ]
+    },
+    {
+      "name": "click",
+      "calls": [
+        [
+          {
+            "action": "MOUSE",
+            "row": 4,
+            "col": 7
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "match",
+          "corrected_in_this_call": false,
+          "diffs": [],
+          "entered": true,
+          "error": null,
+          "status": "completed",
+          "stopped": false,
+          "unattempted_suffix": 0
+        }
+      ]
+    },
+    {
+      "name": "no_fallback",
+      "calls": [],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nValueError: expect and read are both required; refusing unchecked fallback",
+      "traces": []
+    },
+    {
+      "name": "noop",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nKnownNoOpActionError: known no-op action was not executed.",
+      "traces": []
+    },
+    {
+      "name": "undeclared_pixels",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ],
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "",
+      "traces": [
+        {
+          "attempted_actions": 2,
+          "comparison": "match",
+          "corrected_in_this_call": false,
+          "diffs": [],
+          "entered": true,
+          "error": null,
+          "status": "completed",
+          "stopped": false,
+          "unattempted_suffix": 0
+        }
+      ]
+    },
+    {
+      "name": "declared_edge",
+      "calls": [
+        [
+          {
+            "action": "RIGHT"
+          }
+        ]
+      ],
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nPredictionMismatch: checked_trace {\"attempted_actions\": 1, \"comparison\": \"mismatch\", \"corrected_in_this_call\": false, \"diffs\": [{\"actual\": \"Q\", \"expected\": \"B\", \"field\": \"value\"}], \"entered\": true, \"error\": null, \"status\": \"mismatch\", \"stopped\": true, \"unattempted_suffix\": 1} Revise the rule from this counterexample before acting again.",
+      "traces": [
+        {
+          "attempted_actions": 1,
+          "comparison": "mismatch",
+          "corrected_in_this_call": false,
+          "diffs": [
+            {
+              "actual": "Q",
+              "expected": "B",
+              "field": "value"
+            }
+          ],
+          "entered": true,
+          "error": null,
+          "status": "mismatch",
+          "stopped": true,
+          "unattempted_suffix": 1
+        }
+      ]
+    }
+  ],
+  "notebook_sha256": "69015579164c3c34afd2b78d4523f1f1b98c8332de1045197789bff56e16d353"
+}

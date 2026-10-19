@@ -1,6 +1,6 @@
 # 019 — FP8 PLE 实现与验证进展
 
-2026-10-19状态更新：**远端CPU v1为ERROR，退出于运行库身份检查，未采样权重、未启动GPU。实际wheel两处差异已审计并修复绑定；CPU/GPU Notebook已本地重建为18cells，但没有CPU v2上传记录。** 10/19 10:29查询仍ERROR。详见[实际wheel审计](../../experiments/019-actual-wheel-audit.json)与[当前实施交接](../handoff/021-implementation-handoff.md)。以下10/18检查与上传过程保留为历史。
+2026-10-19状态更新：**CPU v2 已通过权重合约。GPU v1 在 BF16 启动检查失败：把启动脚本缩进进 `try` 时，`python -c` 的第二行被多缩进，报 `IndentationError`，服务没有起来，`gpu_started=false`。** 日志在 `runs/019-fp8-ple-gpu-v1/019-results/bf16_a/launcher.log`。构建已改为不改动多行字符串内部。GPU v2 在 022 占用 RTX 时落到 T4×2，PLE 页锁定失败，`cudaHostRegister failed`，不作速度结论。GPU v3 在没有其他 GPU 会话时仍被排到非 RTX，用户已取消，状态 `CANCEL_ACKNOWLEDGED`。内核记录里的 `machineShape` 一直是 `NvidiaRtxPro6000`，但 019 没有挂比赛 `arc-prize-2026-arc-agi-3`；真正跑在 97887 MiB 上的 020/022 都挂了这场比赛。未挂比赛时平台不报错，会话落到 T4×2。速度和质量仍未测出，不能写成提分。v4 已 COMPLETE，确认是单卡 97887 MiB 的 RTX PRO 6000。三阶段都完整，权重和运行参数对照通过。10 路热吞吐 FP8 是两次 BF16 均值的 0.966 倍，没有超过两次 BF16。质量 smoke 为 5/10、5/10、3/10，低于进入游戏对照所需的 BF16 8/10。不进入游戏 A/B，不能写成提分。输出在 `runs/019-fp8-ple-gpu-v4/019-results/`。CPU 输出在 `runs/019-fp8-ple-cpu-v2/019-results/`。详见[实际wheel审计](../../experiments/019-actual-wheel-audit.json)。以下10/18检查与上传过程保留为历史。
 
 ## 已实现
 

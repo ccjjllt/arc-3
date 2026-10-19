@@ -1,0 +1,189 @@
+{
+  "status": "passed",
+  "network_calls": 0,
+  "model_calls": 0,
+  "game_actions": 0,
+  "arms": [
+    "baseline",
+    "expect_check"
+  ],
+  "checks": [
+    "empty_ambient_system_prefix",
+    "runtime_source_hashes",
+    "both_dynamic_scheduler_policies",
+    "checked_execution_existing_action_entry_and_prefix",
+    "all_hooks_install_and_snapshot",
+    "reverse_uninstall_restores_originals"
+  ],
+  "arm_policy_checks": {
+    "baseline": {
+      "normalize_score": true,
+      "tail_lookup": "remaining",
+      "tail_efficiency": 0.8
+    },
+    "expect_check": {
+      "normalize_score": true,
+      "tail_lookup": "remaining",
+      "tail_efficiency": 0.8
+    }
+  },
+  "patches": [
+    {
+      "patch": "request-deadline-v1",
+      "installed": true,
+      "active_sessions": 0,
+      "provisional": false,
+      "max_events": 256,
+      "events": [],
+      "counts": {},
+      "boundary_counts": {},
+      "events_dropped": 0,
+      "clock_origin_utc": "2026-10-19T06:00:35.705958+00:00",
+      "source": {
+        "session.play": {
+          "signature": "(self) -> 'None'",
+          "sha256": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+          "module": "inference.framework.solver",
+          "qualname": "_HarnessGameSession.play"
+        },
+        "session.should_stop": {
+          "signature": "(self) -> 'bool'",
+          "sha256": "30664bbe88af216dfdd2d65fb3d06af8fb767022629598fa8502a92ec9dc0303",
+          "module": "inference.framework.solver",
+          "qualname": "_HarnessGameSession.should_stop"
+        },
+        "agent._maybe_handover": {
+          "signature": "(self) -> 'None'",
+          "sha256": "d6d26ebc69131d50d1218963f648579ee550f58504f3376c71ff4e8f86087569",
+          "module": "inference.agent.tool_agent",
+          "qualname": "ToolAgent._maybe_handover"
+        },
+        "agent._chat_completion": {
+          "signature": "(self, messages: 'list[dict[str, Any]]', *, tools: 'list[dict[str, Any]] | None', request_timeout_seconds: 'float | None' = None, max_tokens: 'int | None' = None, enable_thinking: 'bool | None' = None) -> '_ChatCompletionResult'",
+          "sha256": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+          "module": "inference.agent.tool_agent",
+          "qualname": "ToolAgent._chat_completion"
+        },
+        "requests.post": {
+          "signature": "(url: '_t.UriType', data: '_t.DataType' = None, json: '_t.JsonType' = None, **kwargs: 'Unpack[_t.PostKwargs]') -> 'Response'",
+          "sha256": "ef0f6808dbf5956a5dd9511c136a1b2cf36567226901a51b51adafed1741fa5c",
+          "module": "requests.api",
+          "qualname": "post"
+        }
+      },
+      "semantics": {
+        "scope": "Original Session.play thread; other calls pass through.",
+        "boundaries": "After original handover return, chat entry, and each original transport entry including retries.",
+        "unchanged_before_stop": "Original payload, timeout, retry count/backoff, result identity, exceptions and priority gate operations.",
+        "cancellation": "Private BaseException escapes retry/analyze catches, original finally blocks clean up; outer play consumes only this patch's stop sentinel.",
+        "limitations": "Does not abort in-flight work or guarantee server entry before deadline. A race remains between final client check and actual network send."
+      }
+    },
+    {
+      "observer": "inference-timing-v1",
+      "limits": {
+        "max_sessions": 128,
+        "max_events_per_session": 4096
+      },
+      "clock_origin_monotonic": 510634.957370583,
+      "clock_origin_utc": "2026-10-19T06:00:35.706884+00:00",
+      "snapshot_t": 0.00661395798670128,
+      "provisional": false,
+      "sessions_seen": 0,
+      "sessions_recorded": 0,
+      "sessions_omitted_by_limit": 0,
+      "source_sha256": {
+        "session.play": "33cab6372c69a90f219994782e68cb06701956f327342aeda9139ec04e8264a2",
+        "agent._chat_completion": "4d82004734b8cc84ca304f783a9d37e9c4d68b8a468822511881204897990beb",
+        "gate.acquire": "08c5a76d18ea8a99611ab56db0c836984ca1d8b73e0dafff3de70e85a3e215a0",
+        "gate.handover": "ca24c4d98796b06a7c62ced2f9ac46e71cce8c5e566c3a8c3c952c712ba9db26",
+        "gate.release": "307704ba29413344f0c2871972c13b98b300060b371b83e820059e3b832dce20",
+        "gate._enqueue_and_wait": "c0a49c82861823899e70cc7e431dce3a793d311a1a625629948fd3a04d5df75e",
+        "gate._pump": "d87719242b883365d9de724369c6d1ed49fbad9cf6d5e1ca1e6ccfa6ce6d74f5"
+      },
+      "sessions": [],
+      "semantics": {
+        "clock": "All t values are seconds since observer install; original session.started_at is on the same monotonic clock.",
+        "chat": "_chat_completion entry to original return/exception: includes payload build, retries, stream consumption and parsing. Includes summary calls; tools_present only labels whether a tools argument is supplied, not the call's purpose.",
+        "http": "Entry to existing requests.post, then original return/exception. A streamed return may contain only headers; this does not measure server decode or full generation latency. No body/headers/payload is inspected.",
+        "gate_wait": "Original _enqueue_and_wait entry to normal return, under the existing Condition: includes enqueue/pump/wait/wakeup, not just Condition.wait sleep. Admission is caller-observed ownership, not the earlier pump selection instant.",
+        "release": "handover: enqueue entry immediately after original _free increment; final release: pump entry immediately after original _free increment. Neither hook performs release itself.",
+        "slot_held": "Sum of admitted-return to release-credit intervals; includes model calls, Python work and idle time while the game owns a slot. Open intervals are reported separately.",
+        "tokens": "Usage on successful original _chat_completion result only; null when absent. Partial/failed generation is unknown, not zero. No counters in the solver are changed.",
+        "boundedness": "At most max_sessions ledgers; newest max_events_per_session events each. First timestamps and all-event aggregate counters survive event eviction.",
+        "threading": "No added locks. Session ledgers have one play-thread writer; snapshot after drain for final consistency. Calls outside an observed play/chat scope pass through."
+      }
+    },
+    {
+      "observer": "scheduler-observer-v1",
+      "installed": true,
+      "limits": {
+        "max_gates": 4,
+        "max_events": 4096,
+        "max_candidates": 128
+      },
+      "clock_origin_monotonic": 510634.958079,
+      "clock_origin_utc": "2026-10-19T06:00:35.707593+00:00",
+      "timing_clock_origin_monotonic": 510634.957370583,
+      "timing_session_mapping_available": true,
+      "config_at_install": {
+        "ARC3_MAX_ACTIVE_STREAMS": "10",
+        "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+        "ARC3_PRIORITY_PACE": "0",
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_TAIL_FADE": "1",
+        "ARC3_PRIORITY_TAIL_FADE_FRACTION": "0.2",
+        "ARC3_PRIORITY_SCORE_NORMALIZATION": "1"
+      },
+      "source_sha256": {
+        "_enqueue_and_wait": "2566cc1fbfe7ae3c1d9bd477f25c18c648b0b3abf275042994af350948d837c4",
+        "_pump": "ba31553ddbd59e4f6613e7e6789d54484bbfe353bad67274fa8c5bdf4232cadc"
+      },
+      "instrumented_source_sha256": {
+        "_enqueue_and_wait": "cd2c2b74ffb1ce3eafe8bf3ed20f9dc4322429c0249bf6391114cf7dc9518b95",
+        "_pump": "d7bd6dedbfcc410d3f553ba34441669fd5ee103b13d70a9a42dd0599b8f60f35"
+      },
+      "events_observed": 0,
+      "events_dropped": 0,
+      "observer_record_errors": 0,
+      "counts": {},
+      "gates": [],
+      "events": [],
+      "semantics": {
+        "enqueue": "Immediately after the original heappush, before pump; session mapping comes from the existing timing play scope.",
+        "reprice": "Immediately after the original heapify; scored_at is the original common timestamp used for every refreshed snapshot.",
+        "selection": "Immediately after the original heappop, before snapshot deletion, admitted.add, free decrement or notify. The selected row plus remaining heap reconstructs candidate membership at that decision, not caller-return order.",
+        "priority": "Actual positive heap priority. Snapshot is the original immutable PrioritySnapshot, or null for initial admission without one. Candidate array is heap membership, not sorted rank.",
+        "identity": "Waiting token ownership is captured at enqueue; selection may be performed by a different release/handover thread. Missing mappings stay null.",
+        "limits": "Newest bounded events and bounded candidate prefix. Counts survive eviction; omissions are explicit. No added locks, file I/O, model requests, scoring calls or sorting.",
+        "snapshot": "Call after worker drain for a consistent final report. Live snapshots are best-effort and do not acquire the gate lock."
+      }
+    },
+    {
+      "name": "checked_execution",
+      "enabled": true,
+      "mechanism": "expect_and_reader_on_existing_action_entry",
+      "ordinary_action_preserved": true,
+      "one_action_per_checked_step": true,
+      "sandbox_bootstrap_before_sha256": "fc598e310e650f4dde4b60adbb16520fbad0e114627533e0319d60c439c2a8fb",
+      "sandbox_bootstrap_after_sha256": "da17ddd6045cb453523c4959e9ec5c6522f06bea2843911a39950c6f70a48736",
+      "checked_execution_sha256": "cb86c88d0f8397dfb33fbf0a57275eee90c3bf2b0c56580db8649acc0b40fa51",
+      "prefix_sha256": "2a8a2f25200b7f5d736b3f366cac0df7158fbc026afa1ff26c8b249d720d79fe",
+      "adds_tools": false,
+      "adds_framework_model_calls": false,
+      "adds_framework_game_actions": false,
+      "adds_undo_or_rollback": false,
+      "unchecked_fallback": false,
+      "projection": "caller scope and returned fields only; no full-frame compare and no border crop",
+      "lifecycle": "public level_completed, game_over, done/run_complete, and stop_reason before compare",
+      "episode_id": "stable public-session; game_over carries RESET because no public episode id is available",
+      "runtime_record": "checked_trace on entered calls only: comparison, stopped, unattempted_suffix; a later repair is the next model call"
+    }
+  ],
+  "environment_before_overrides": {
+    "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+    "ARC3_PRIORITY_PACE": "0",
+    "ARC3_MAX_ACTIVE_STREAMS": "10"
+  },
+  "elapsed_seconds": 0.7863773750141263
+}

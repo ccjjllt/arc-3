@@ -8,7 +8,8 @@ import hashlib
 import json
 from pathlib import Path
 import sys
-import textwrap
+import io
+import tokenize
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -101,9 +102,47 @@ finally:
     stopped = True if proc is None else stop_group(proc, grace=10)
     _write_state("stopped", server_stopped=stopped)
 '''
-    result = header + textwrap.indent(precache + "\n" + launch, "    ") + tail
+    result = header + _indent_code_preserving_strings(precache + "\n" + launch) + tail
     compile(result, "launch_server.py", "exec")
+    _compile_embedded_python_c(result)
     return result
+
+
+def _indent_code_preserving_strings(source: str, prefix: str = "    ") -> str:
+    """Indent a notebook cell into a try block without shifting multiline string bodies.
+
+    textwrap.indent would add spaces to the second line of a python -c script
+    and make that script an IndentationError. Interior lines of a multiline
+    string stay as written. The opening and closing lines are still indented.
+    """
+    interior = set()
+    readline = io.StringIO(source).readline
+    for token in tokenize.generate_tokens(readline):
+        if token.type == tokenize.STRING and token.start[0] < token.end[0]:
+            interior.update(range(token.start[0] + 1, token.end[0]))
+    lines = source.splitlines(keepends=True)
+    out = []
+    for number, line in enumerate(lines, 1):
+        if number in interior or not line.strip():
+            out.append(line)
+        else:
+            out.append(prefix + line)
+    return "".join(out)
+
+
+def _compile_embedded_python_c(source: str) -> None:
+    """The launcher is compiled as a file; also compile every python -c body."""
+    readline = io.StringIO(source).readline
+    for token in tokenize.generate_tokens(readline):
+        if token.type != tokenize.STRING or "import pathlib, sglang, torch" not in token.string:
+            continue
+        body = ast_literal_string(token.string)
+        compile(body, "<launch-python-c>", "exec")
+
+
+def ast_literal_string(token_text: str) -> str:
+    import ast
+    return ast.literal_eval(token_text)
 
 
 def main():
@@ -203,7 +242,15 @@ del suite_bytes_019
             continue
         cells.append(nbformat.v4.new_code_cell(f"%%writefile {root / name}\n" + content))
     cells += [nbformat.v4.new_markdown_cell("## Execute the frozen checks\n\nFailure stops this run; no automatic retry or promotion."),
-              nbformat.v4.new_code_cell("""environment_019 = os.environ.copy()
+              nbformat.v4.new_code_cell("""gpu_probe_019 = subprocess.run(
+    ['nvidia-smi', '--query-gpu=memory.total', '--format=csv,noheader,nounits'],
+    capture_output=True, text=True)
+gpu_totals_019 = [int(line.strip()) for line in gpu_probe_019.stdout.splitlines() if line.strip()]
+print('GPU_MEMORY_TOTAL_MIB', gpu_totals_019)
+# RTX PRO 6000 reports one 97887 MiB device. T4x2 reports two 15360 MiB devices.
+if gpu_probe_019.returncode != 0 or len(gpu_totals_019) != 1 or gpu_totals_019[0] < 90000:
+    raise SystemExit('refusing non-RTX session: ' + repr(gpu_totals_019))
+environment_019 = os.environ.copy()
 environment_019['PYTHONPATH'] = str(ROOT_019 / 'src')
 subprocess.run([sys.executable, '-m', 'arc3_research.ple_session',
     '--config', str(ROOT_019 / 'config.json'), '--payload-root', str(ROOT_019),
@@ -233,7 +280,9 @@ for item_019 in result_019.get('phases', []):
     meta = {k: v for k, v in base_meta.items() if k not in {"id_no", "model_sources", "dataset_sources", "competition_sources"}}
     meta.update(id="jiyujia/arc3-" + suffix, title="ARC3 019 FP8 PLE CPU" if args.mode == "weights_only" else "ARC3 019 FP8 PLE",
         code_file="experiment.ipynb", is_private=True, enable_gpu=args.mode == "microbench", enable_tpu=False, enable_internet=False,
-        dataset_sources=["dfranzen/pennyroyal-v253"], competition_sources=[], kernel_sources=[],
+        dataset_sources=["dfranzen/pennyroyal-v253"],
+        competition_sources=["arc-prize-2026-arc-agi-3"] if args.mode == "microbench" else [],
+        kernel_sources=[],
         model_sources=[config["inputs"][k].removeprefix("models/").replace("/transformers/", "/Transformers/") for k in ["bf16", "fp8", "draft"]])
     if args.mode == "microbench":
         meta.update(machine_shape="NvidiaRtxPro6000", docker_image_pinning_type="original")

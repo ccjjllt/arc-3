@@ -57,8 +57,10 @@ def main() -> None:
         required.add("observation_grounding.py")
     if "grounded_state" in arms:
         required.update({"grounded_state.py", "observation_representation.py"})
-    if "checked_execution" in arms:
+    if "checked_execution" in arms or "expect_check" in arms:
         required.update({"checked_action.py", "checked_execution.py"})
+    if config.get("community_development"):
+        required.add("community.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -137,6 +139,13 @@ ARC3_GPU_MONITOR = start_gpu_sampling(
 from arc3_research.input_paths import resolve_inputs
 ARC3_INPUT_PATHS = resolve_inputs(report_path="/kaggle/working/input-paths.json")
 os.environ["ARC3_RESEARCH_ENV_DIR"] = ARC3_INPUT_PATHS["environment_files"]
+_community_root = ARC3_EXPERIMENT.get("community_source_root")
+if _community_root:
+    sys.path.insert(0, _community_root)
+    os.environ["ARC3_RESEARCH_ENV_DIR"] = str(Path(_community_root) / "environment_files")
+    _allowed = set(ARC3_EXPERIMENT.get("community_allowlist") or [])
+    if set(ARC3_EXPERIMENT["games"]) - _allowed:
+        raise RuntimeError("Community games are outside the development allowlist")
 '''
     parameters = ("CONFIG_JSON = " + repr(json.dumps(config)) + "\n"
                   + "HASHES_JSON = " + repr(json.dumps(hashes)) + "\n")
@@ -244,6 +253,9 @@ finally:
                 code_file="experiment.ipynb", is_private=True, enable_gpu=True,
                 enable_internet=False, machine_shape="NvidiaRtxPro6000",
                 docker_image_pinning_type="original")
+    extra_datasets = config.get("extra_dataset_sources") or []
+    if extra_datasets:
+        meta["dataset_sources"] = list(dict.fromkeys([*meta.get("dataset_sources", []), *extra_datasets]))
     (destination / "kernel-metadata.json").write_text(json.dumps(meta, indent=2) + "\n")
     manifest = {"base_source_sha256": hashes[str(source.relative_to(ROOT))],
                 "source_hashes": hashes, "config": config,
