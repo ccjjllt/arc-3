@@ -59,5 +59,7 @@
   "strict_arm_budget": true,
   "warmup_action_games": 0,
   "weekly_gpu_hours_limit": 30,
-  "native_payload_cells": true
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": true,
+  "startup_io_note": "Skip only redundant whole-directory model precache; SGLang shard lookahead/drop-cache and wheel pre-cache retained. Both arms share same unchanged numerical serving."
 }

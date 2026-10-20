@@ -234,6 +234,15 @@ if ARC3_EXPERIMENT.get("require_rtx_pro6000"):
                         code = code.replace(quote + literal + quote,
                                             f'ARC3_INPUT_PATHS[{key!r}]')
                 item["source"] = code
+            if config.get("skip_blanket_model_precache") and code.startswith("# Paste this entire file into the launcher cell."):
+                # SGLang already prefetches its current/next weight shard.
+                # Keep that loader path; avoid a second whole-directory read
+                # competing with it. This changes startup I/O, not inference.
+                anchor = "precache_model_thread.start()"
+                if code.count(anchor) != 1:
+                    raise ValueError("Blanket model-precache launcher anchor changed")
+                item["source"] = code.replace(anchor,
+                    'print("Blanket model precache disabled; SGLang shard prefetch retained.")', 1)
     if config.get("preflight_before_serving"):
         preflight = '''# Fail on incompatible CPU hooks before loading GPU model weights.
 ARC3_GPU_MONITOR.set_phase("cpu_preflight")
