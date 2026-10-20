@@ -1,0 +1,1190 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-20T17:12:58.347159+00:00",
+  "scope": "Manual adoption audit of three candidate 030 public-game trajectories; no new model/GPU execution.",
+  "evidence_status": "manually_reviewed_selected_chains_only",
+  "line_numbering": "1-based source JSONL line where each actual tool output first appears; tool_call_id deduplicated.",
+  "sources": {
+    "cn04-2fe56bfb": {
+      "path": "runs/030-capability-comparison/persistent_python/cn04-2fe56bfb_p0_requests.jsonl",
+      "sha256": "c7f81450107f1c0ba63c0bf50423793690b6994fe7a852c6d75fdb599d3e3abe",
+      "costs": {
+        "completion_tokens": 190674,
+        "prompt_tokens": 12339277,
+        "total_tokens": 12529951,
+        "cached_prompt_tokens": 11806784,
+        "responses": 160
+      },
+      "malformed_lines": []
+    },
+    "r11l-495a7899": {
+      "path": "runs/030-capability-comparison/persistent_python/r11l-495a7899_p0_requests.jsonl",
+      "sha256": "a80d81b1bef8a1debb902c09c866689d99c450b544ff6928bd211be03ab327c9",
+      "costs": {
+        "completion_tokens": 165189,
+        "prompt_tokens": 6722640,
+        "total_tokens": 6887829,
+        "cached_prompt_tokens": 6330048,
+        "responses": 89
+      },
+      "malformed_lines": []
+    },
+    "tu93-0768757b": {
+      "path": "runs/030-capability-comparison/persistent_python/tu93-0768757b_p0_requests.jsonl",
+      "sha256": "fc9798351793fb9bc26a475a39cb99710ef54b296a93bbc5f909c17afe62e06f",
+      "costs": {
+        "completion_tokens": 239690,
+        "prompt_tokens": 10895230,
+        "total_tokens": 11134920,
+        "cached_prompt_tokens": 10261760,
+        "responses": 139
+      },
+      "malformed_lines": []
+    }
+  },
+  "benchmark_source": "runs/030-capability-comparison/persistent_python/benchmark.json",
+  "paired_benchmark_report": "experiments/030-analysis/report.json",
+  "paired_observed_results": {
+    "baseline": {
+      "summary": {
+        "run_count": 25,
+        "scored_run_count": 25,
+        "mean_score": 42.61336230982951,
+        "mean_completion_ceiling": 45.09119769119769,
+        "mean_efficiency_gap": 2.4778353813681857,
+        "levels_completed": 103,
+        "levels_available": 183,
+        "mean_levels_completed": 4.12,
+        "mean_completion_fraction": 0.5692698412698413,
+        "wins": 5,
+        "actions": 5377,
+        "generated_tokens": 4332548,
+        "action_attached_generated_tokens": 4332548,
+        "analyzer_reported_generated_tokens": 4461854,
+        "analyzer_reported_run_count": 25,
+        "unattached_generated_tokens": 129306,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "sum_run_elapsed_seconds": 163665.749570977,
+        "mean_run_elapsed_seconds": 6546.62998283908,
+        "state_counts": {
+          "cancelled": 20,
+          "won": 5
+        },
+        "stop_reason_counts": {
+          "unknown": 20,
+          "won": 5
+        },
+        "game_count": 25,
+        "mean_game_score": 42.61336230982951,
+        "benchmark_elapsed_seconds": 7273.709512,
+        "generated_tokens_per_benchmark_second": 595.6449034501943
+      },
+      "selected_games": [
+        {
+          "game_id": "cn04-2fe56bfb",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 47.61904761904761,
+          "mean_completion_ceiling": 47.61904761904762,
+          "mean_efficiency_gap": 7.105427357601002e-15,
+          "levels_completed": 4,
+          "levels_available": 6,
+          "mean_levels_completed": 4.0,
+          "mean_completion_fraction": 0.6666666666666666,
+          "wins": 0,
+          "actions": 207,
+          "generated_tokens": 255527,
+          "action_attached_generated_tokens": 255527,
+          "analyzer_reported_generated_tokens": 270823,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 15296,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 7254.5319063629995,
+          "mean_run_elapsed_seconds": 7254.5319063629995,
+          "state_counts": {
+            "cancelled": 1
+          },
+          "stop_reason_counts": {
+            "unknown": 1
+          },
+          "min_score": 47.61904761904761,
+          "max_score": 47.61904761904761
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 14.285714285714285,
+          "mean_completion_ceiling": 14.285714285714286,
+          "mean_efficiency_gap": 1.7763568394002505e-15,
+          "levels_completed": 2,
+          "levels_available": 6,
+          "mean_levels_completed": 2.0,
+          "mean_completion_fraction": 0.3333333333333333,
+          "wins": 0,
+          "actions": 58,
+          "generated_tokens": 215734,
+          "action_attached_generated_tokens": 215734,
+          "analyzer_reported_generated_tokens": 215734,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 0,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 7254.222970649002,
+          "mean_run_elapsed_seconds": 7254.222970649002,
+          "state_counts": {
+            "cancelled": 1
+          },
+          "stop_reason_counts": {
+            "unknown": 1
+          },
+          "min_score": 14.285714285714285,
+          "max_score": 14.285714285714285
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 68.89837998390188,
+          "mean_completion_ceiling": 80.0,
+          "mean_efficiency_gap": 11.101620016098124,
+          "levels_completed": 8,
+          "levels_available": 9,
+          "mean_levels_completed": 8.0,
+          "mean_completion_fraction": 0.8888888888888888,
+          "wins": 0,
+          "actions": 240,
+          "generated_tokens": 251116,
+          "action_attached_generated_tokens": 251116,
+          "analyzer_reported_generated_tokens": 256837,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 5721,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 7264.415683076,
+          "mean_run_elapsed_seconds": 7264.415683076,
+          "state_counts": {
+            "cancelled": 1
+          },
+          "stop_reason_counts": {
+            "unknown": 1
+          },
+          "min_score": 68.89837998390188,
+          "max_score": 68.89837998390188
+        }
+      ]
+    },
+    "persistent_python": {
+      "summary": {
+        "run_count": 25,
+        "scored_run_count": 25,
+        "mean_score": 47.16988007578886,
+        "mean_completion_ceiling": 48.374314574314575,
+        "mean_efficiency_gap": 1.2044344985257172,
+        "levels_completed": 102,
+        "levels_available": 183,
+        "mean_levels_completed": 4.08,
+        "mean_completion_fraction": 0.574,
+        "wins": 8,
+        "actions": 4643,
+        "generated_tokens": 4408842,
+        "action_attached_generated_tokens": 4408842,
+        "analyzer_reported_generated_tokens": 4532258,
+        "analyzer_reported_run_count": 25,
+        "unattached_generated_tokens": 123416,
+        "final_generated_tokens": 0,
+        "uncached_input_tokens": 0,
+        "sum_run_elapsed_seconds": 165006.927075021,
+        "mean_run_elapsed_seconds": 6600.27708300084,
+        "state_counts": {
+          "cancelled": 12,
+          "gave_up": 5,
+          "won": 8
+        },
+        "stop_reason_counts": {
+          "unknown": 17,
+          "won": 8
+        },
+        "game_count": 25,
+        "mean_game_score": 47.16988007578886,
+        "benchmark_elapsed_seconds": 7272.126928,
+        "generated_tokens_per_benchmark_second": 606.2658206672049
+      },
+      "selected_games": [
+        {
+          "game_id": "cn04-2fe56bfb",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 100.0,
+          "mean_completion_ceiling": 100.0,
+          "mean_efficiency_gap": 0.0,
+          "levels_completed": 6,
+          "levels_available": 6,
+          "mean_levels_completed": 6.0,
+          "mean_completion_fraction": 1.0,
+          "wins": 1,
+          "actions": 253,
+          "generated_tokens": 190674,
+          "action_attached_generated_tokens": 190674,
+          "analyzer_reported_generated_tokens": 190674,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 0,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 6160.986010418,
+          "mean_run_elapsed_seconds": 6160.986010418,
+          "state_counts": {
+            "won": 1
+          },
+          "stop_reason_counts": {
+            "won": 1
+          },
+          "min_score": 100.0,
+          "max_score": 100.0
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 92.3451177020481,
+          "mean_completion_ceiling": 100.0,
+          "mean_efficiency_gap": 7.6548822979519,
+          "levels_completed": 6,
+          "levels_available": 6,
+          "mean_levels_completed": 6.0,
+          "mean_completion_fraction": 1.0,
+          "wins": 1,
+          "actions": 151,
+          "generated_tokens": 165189,
+          "action_attached_generated_tokens": 165189,
+          "analyzer_reported_generated_tokens": 165189,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 0,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 4778.151519583999,
+          "mean_run_elapsed_seconds": 4778.151519583999,
+          "state_counts": {
+            "won": 1
+          },
+          "stop_reason_counts": {
+            "won": 1
+          },
+          "min_score": 92.3451177020481,
+          "max_score": 92.3451177020481
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "run_count": 1,
+          "scored_run_count": 1,
+          "mean_score": 100.0,
+          "mean_completion_ceiling": 100.0,
+          "mean_efficiency_gap": 0.0,
+          "levels_completed": 9,
+          "levels_available": 9,
+          "mean_levels_completed": 9.0,
+          "mean_completion_fraction": 1.0,
+          "wins": 1,
+          "actions": 264,
+          "generated_tokens": 239690,
+          "action_attached_generated_tokens": 239690,
+          "analyzer_reported_generated_tokens": 239690,
+          "analyzer_reported_run_count": 1,
+          "unattached_generated_tokens": 0,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 6426.820600276,
+          "mean_run_elapsed_seconds": 6426.820600276,
+          "state_counts": {
+            "won": 1
+          },
+          "stop_reason_counts": {
+            "won": 1
+          },
+          "min_score": 100.0,
+          "max_score": 100.0
+        }
+      ]
+    }
+  },
+  "runtime_summary": {
+    "patch": "persistent-python-v1",
+    "scope": "one isolated interpreter per agent and level",
+    "runtime_refresh": "original bootstrap refreshes frame/history/actions on each call and action",
+    "new_model_tools": false,
+    "memory_limit_bytes": 1073741824,
+    "stats": {
+      "tool_calls": 2259,
+      "state_losses": 10,
+      "action_calls": 3283
+    },
+    "active_workers": 0
+  },
+  "observed_log_stats": [
+    {
+      "path": "runs/030-capability-comparison/persistent_python/cn04-2fe56bfb_p0_requests.jsonl",
+      "stats": {
+        "python_calls": 158,
+        "calls_with_state_metadata": 158,
+        "state_loss_notifications": 2,
+        "name_count_positive_calls": 157,
+        "errors": 20,
+        "timeouts": 1,
+        "state_loss_error_messages": 1,
+        "ast_parse_errors": 0,
+        "successful_cross_call_read_candidate_calls": 61
+      },
+      "response_usage": {
+        "completion_tokens": 190674,
+        "prompt_tokens": 12339277,
+        "total_tokens": 12529951,
+        "cached_prompt_tokens": 11806784,
+        "responses": 160
+      }
+    },
+    {
+      "path": "runs/030-capability-comparison/persistent_python/r11l-495a7899_p0_requests.jsonl",
+      "stats": {
+        "python_calls": 88,
+        "calls_with_state_metadata": 88,
+        "state_loss_notifications": 0,
+        "name_count_positive_calls": 88,
+        "errors": 2,
+        "timeouts": 0,
+        "state_loss_error_messages": 0,
+        "ast_parse_errors": 0,
+        "successful_cross_call_read_candidate_calls": 32
+      },
+      "response_usage": {
+        "completion_tokens": 165189,
+        "prompt_tokens": 6722640,
+        "total_tokens": 6887829,
+        "cached_prompt_tokens": 6330048,
+        "responses": 89
+      }
+    },
+    {
+      "path": "runs/030-capability-comparison/persistent_python/tu93-0768757b_p0_requests.jsonl",
+      "stats": {
+        "python_calls": 136,
+        "calls_with_state_metadata": 136,
+        "state_loss_notifications": 0,
+        "name_count_positive_calls": 136,
+        "errors": 11,
+        "timeouts": 0,
+        "state_loss_error_messages": 0,
+        "ast_parse_errors": 0,
+        "successful_cross_call_read_candidate_calls": 75
+      },
+      "response_usage": {
+        "completion_tokens": 239690,
+        "prompt_tokens": 10895230,
+        "total_tokens": 11134920,
+        "cached_prompt_tokens": 10261760,
+        "responses": 139
+      }
+    }
+  ],
+  "verified_adoption_cases": [
+    {
+      "id": "tu93-L5-path",
+      "game_id": "tu93-0768757b",
+      "level": 5,
+      "evidence_status": "manually_reviewed_code_and_actual_stdout",
+      "ordinary_values": [
+        "path (list)"
+      ],
+      "classification": "direct_cross_call_plan_consumption_with_actual_level_completion",
+      "finding": "path is defined once at line 133; after an immediate ImportError at line 135 it is read without redefining at lines 137 and 139. Those calls execute 8 plus 18 real actions and clear L5.",
+      "checks": {
+        "definition_succeeded": true,
+        "later_read_actually_executed": true,
+        "same_level_at_call_entry": true,
+        "ordinary_data_not_just_function_definition": true,
+        "direct_actions_from_retained_list": true,
+        "real_actions": 26,
+        "preterminal_matches": 25,
+        "level_completed": true,
+        "state_survived_error_call": true
+      },
+      "limits": [
+        "Search output s is initially transcribed into literal path at line 133, so this does not establish direct consumption of s.",
+        "Final MISMATCH follows LEVEL COMPLETED and compares the next level frame to the old simulator.",
+        "Baseline also cleared L5; this is mechanism evidence, not attribution of candidate L9 completion or the full per-game score delta."
+      ],
+      "calls": [
+        {
+          "tool_call_id": "call_b06a4f0b4345426f805e2555",
+          "request_line_1based": 129,
+          "result_line_1based": 129,
+          "level": 5,
+          "analysis_step": 25,
+          "code": "def solve5cap3(G,start,t0,goal):\n    NR=len(G);NC=len(G[0]); P=140\n    def ok(r,c): return 0<=r<NR and 0<=c<NC and G[r][c]!='B'\n    NM={(-2,0):'UP',(2,0):'DOWN',(0,-2):'LEFT',(0,2):'RIGHT'}\n    s0=(start,t0%P,15); dq=deque([(s0,[])]); seen={s0}\n    while dq:\n        ((r,c),tm,al),path=dq.popleft()\n        if (r,c)==goal: return path\n        for (dr,dc),nm in NM.items():\n            nr,nc=r+dr,c+dc; ntm=(tm+1)%P\n            if not ok(r+dr//2,c+dc//2) or not ok(nr,nc): continue\n            cap=[i for i in range(4) if (al>>i&1) and W[i][1](tm)==(nr,nc)]\n            nal=al\n            for i in cap: nal &= ~(1<<i)\n            if (nr,nc) in occset(ntm,nal): continue\n            s2=((nr,nc),ntm,nal)\n            if s2 in seen: continue\n            seen.add(s2); dq.append((s2,path+[nm]+(['CAP%d'%i for i in cap] if cap else [])))\n    return None\ns=solve5cap3(g5,(0,8),3,(6,6))\nprint('cap3 len',len(s) if s else None, s)\n",
+          "stdout": "cap3 len 26 ['RIGHT', 'LEFT', 'LEFT', 'LEFT', 'LEFT', 'LEFT', 'DOWN', 'UP', 'DOWN', 'UP', 'DOWN', 'UP', 'DOWN', 'UP', 'DOWN', 'DOWN', 'DOWN', 'RIGHT', 'DOWN', 'DOWN', 'RIGHT', 'RIGHT', 'RIGHT', 'UP', 'UP', 'LEFT']\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 69,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_96cdcbc20053410a8bd948c1",
+          "request_line_1based": 133,
+          "result_line_1based": 133,
+          "level": 5,
+          "analysis_step": 25,
+          "code": "path=['RIGHT','LEFT','LEFT','LEFT','LEFT','LEFT','DOWN','UP','DOWN','UP','DOWN','UP','DOWN','UP','DOWN','DOWN','DOWN','RIGHT','DOWN','DOWN','RIGHT','RIGHT','RIGHT','UP','UP','LEFT']\npos=(0,8); tt=3; bad=[]\nfor k,mv in enumerate(path,1):\n    dd={'UP':(-2,0),'DOWN':(2,0),'LEFT':(0,-2),'RIGHT':(0,2)}[mv]\n    np_=(pos[0]+dd[0],pos[1]+dd[1]); tt+=1\n    if np_ in occ(tt): bad.append((k,mv,np_,'POSTMOVE-OCC'))\n    if np_ in occ(tt-1): bad.append((k,mv,np_,'LANDED-ON'))\n    if g5[(pos[0]+dd[0]//2)[0] if False else pos[0]+dd[0]//2][pos[1]+dd[1]//2]=='B': bad.append((k,mv,'mid-blocked'))\n    pos=np_\nprint('final',pos,'t',tt,'problems',bad)\n",
+          "stdout": "final (6, 6) t 29 problems []\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 74,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_90fb5a1b3cc34045a92aaa7d",
+          "request_line_1based": 135,
+          "result_line_1based": 135,
+          "level": 5,
+          "analysis_step": 25,
+          "code": "import time\nplan=path[:8]\nfor k,mv in enumerate(plan,1):\n    res,G,p,Os = step5(mv)\n    pred=sorted(occ(3+k))\n    okm = sorted(Os)==pred\n    print(3+k,mv,'p',p,'O',sorted(Os),'pred',pred,'MATCH' if okm else 'MISMATCH','over',res.get('game_over'),'won',res.get('level_completed'))\n    if res.get('game_over') or res.get('level_completed'): break\n",
+          "stdout": "",
+          "result": null,
+          "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nImportError: Module 'time' is not allowed in the sandbox.",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 74,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_f50f924d43764a4c9831b3d7",
+          "request_line_1based": 137,
+          "result_line_1based": 137,
+          "level": 5,
+          "analysis_step": 26,
+          "code": "plan=path[:8]\nfor k,mv in enumerate(plan,1):\n    res,G,p,Os = step5(mv)\n    pred=sorted(occ(3+k))\n    print(3+k,mv,'p',p,'O',sorted(Os),'pred',pred,'MATCH' if sorted(Os)==pred else 'MISMATCH','over',res.get('game_over'),'won',res.get('level_completed'))\n    if res.get('game_over') or res.get('level_completed'): break\n",
+          "stdout": "[action] RIGHT -> effect\n4 RIGHT p (0, 10) O [(0, 6), (6, 4), (6, 8), (8, 6)] pred [(0, 6), (6, 4), (6, 8), (8, 6)] MATCH over False won False\n[action] LEFT -> effect\n5 LEFT p (0, 8) O [(2, 6), (6, 6), (6, 10), (8, 4)] pred [(2, 6), (6, 6), (6, 10), (8, 4)] MATCH over False won False\n[action] LEFT -> effect\n6 LEFT p (0, 6) O [(4, 6), (6, 4), (6, 12)] pred [(4, 6), (6, 4), (6, 12)] MATCH over False won False\n[action] LEFT -> effect\n7 LEFT p (0, 4) O [(2, 6), (4, 4), (6, 6), (6, 14)] pred [(2, 6), (4, 4), (6, 6), (6, 14)] MATCH over False won False\n[action] LEFT -> effect\n8 LEFT p (0, 2) O [(0, 6), (6, 4), (6, 12), (8, 6)] pred [(0, 6), (6, 4), (6, 12), (8, 6)] MATCH over False won False\n[action] LEFT -> effect\n9 LEFT p (0, 0) O [(2, 6), (6, 10), (8, 4), (10, 6)] pred [(2, 6), (6, 10), (8, 4), (10, 6)] MATCH over False won False\n[action] DOWN -> effect\n10 DOWN p (2, 0) O [(4, 6), (6, 4), (6, 8), (8, 6)] pred [(4, 6), (6, 4), (6, 8), (8, 6)] MATCH over False won False\n[action] UP -> effect\n11 UP p (0, 0) O [(4, 4), (6, 6)] pred [(4, 4), (6, 6)] MATCH over False won False\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 76,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_72f5d09d4df9470ebab10a0d",
+          "request_line_1based": 139,
+          "result_line_1based": 139,
+          "level": 5,
+          "analysis_step": 27,
+          "code": "plan=path[8:]\nfor k,mv in enumerate(plan,12):\n    res,G,p,Os = step5(mv)\n    pred=sorted(occ(k))\n    bar=current_frame.ascii.split('\\n')[63].count('M')\n    print(k,mv,'p',p,'O',sorted(Os),'MATCH' if sorted(Os)==pred else 'MISMATCH pred '+str(pred),'bar',bar,'over',res.get('game_over'),'won',res.get('level_completed'))\n    if res.get('game_over') or res.get('level_completed'): break\n",
+          "stdout": "[action] DOWN -> effect\n12 DOWN p (2, 0) O [(4, 6), (6, 4), (8, 6)] MATCH bar 49 over False won False\n[action] UP -> effect\n13 UP p (0, 0) O [(2, 6), (6, 2), (8, 4), (10, 6)] MATCH bar 47 over False won False\n[action] DOWN -> effect\n14 DOWN p (2, 0) O [(0, 6), (6, 0), (6, 4), (8, 6)] MATCH bar 46 over False won False\n[action] UP -> effect\n15 UP p (0, 0) O [(2, 6), (4, 4), (6, 2), (6, 6)] MATCH bar 45 over False won False\n[action] DOWN -> effect\n16 DOWN p (2, 0) O [(4, 6), (6, 4)] MATCH bar 44 over False won False\n[action] UP -> effect\n17 UP p (0, 0) O [(2, 6), (6, 6), (8, 4)] MATCH bar 42 over False won False\n[action] DOWN -> effect\n18 DOWN p (2, 0) O [(0, 6), (6, 4), (6, 8), (8, 6)] MATCH bar 41 over False won False\n[action] DOWN -> effect\n19 DOWN p (4, 0) O [(2, 6), (4, 4), (6, 10), (10, 6)] MATCH bar 40 over False won False\n[action] DOWN -> effect\n20 DOWN p (6, 0) O [(4, 6), (6, 4), (6, 12), (8, 6)] MATCH bar 38 over False won False\n[action] RIGHT -> effect\n21 RIGHT p (6, 2) O [(6, 6), (6, 14), (8, 4)] MATCH bar 37 over False won False\n[action] DOWN -> effect\n22 DOWN p (8, 2) O [(4, 6), (6, 4), (6, 12), (8, 6)] MATCH bar 36 over False won False\n[action] DOWN -> effect\n23 DOWN p (10, 2) O [(2, 6), (4, 4), (6, 10), (10, 6)] MATCH bar 35 over False won False\n[action] RIGHT -> effect\n24 RIGHT p (10, 4) O [(0, 6), (6, 4), (6, 8), (8, 6)] MATCH bar 33 over False won False\n[action] RIGHT -> effect\n25 RIGHT p (10, 6) O [(2, 6), (6, 6), (8, 4)] MATCH bar 32 over False won False\n[action] RIGHT -> effect\n26 RIGHT p (10, 8) O [(4, 6), (6, 4)] MATCH bar 31 over False won False\n[action] UP -> effect\n27 UP p (8, 8) O [(2, 6), (4, 4), (6, 2), (6, 6)] MATCH bar 29 over False won False\n[action] UP -> effect\n28 UP p (6, 8) O [(0, 6), (6, 0), (6, 4), (8, 6)] MATCH bar 28 over False won False\n[action] LEFT -> LEVEL COMPLETED\n29 LEFT p (1, 13) O [(9, 13)] MISMATCH pred [(2, 6), (6, 2), (8, 4), (10, 6)] bar 64 over False won True\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 77,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_bc8cf361cb734b01b896082f",
+          "request_line_1based": 141,
+          "result_line_1based": 141,
+          "level": 6,
+          "analysis_step": 27,
+          "code": "bb=board_info(); print(bb)\nR0,C0,R1,C1=bb; nr=(R1-R0+1)//3; nc=(C1-C0+1)//3\ndef TG6(fr=None):\n    L=(fr or current_frame).ascii.split('\\n')\n    return [''.join(L[R0+3*i+1][C0+3*j+1] for j in range(nc)) for i in range(nr)]\ng6=TG6()\nfor i,r in enumerate(g6): print(i,r)\nprint('bar',current_frame.ascii.split('\\n')[63].count('M'))\n",
+          "stdout": "(12, 50, 12, 50)\nbar 64\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 29,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "r11l-L6-r1",
+      "game_id": "r11l-495a7899",
+      "level": 6,
+      "evidence_status": "manually_reviewed_code_and_actual_stdout",
+      "ordinary_values": [
+        "r1 (tuple containing search-result click lists)"
+      ],
+      "classification": "direct_cross_call_search_result_consumption_with_successful_real_action_chunk",
+      "finding": "line 173 computes r1, line 175 reads both click lists for simulation, and line 177 reads seqA=r1[1][0] and executes ten real MOUSE clicks; all effect, phaseA done True.",
+      "checks": {
+        "definition_succeeded": true,
+        "later_read_actually_executed": true,
+        "same_level_at_call_entry": true,
+        "ordinary_data_not_just_function_definition": true,
+        "direct_actions_from_retained_list": true,
+        "real_actions_with_code_and_stdout": 10,
+        "chunk_success": true,
+        "full_game_won_in_benchmark": true
+      },
+      "corroboration": {
+        "benchmark_last_ten_row_col": [
+          [
+            49,
+            10
+          ],
+          [
+            57,
+            50
+          ],
+          [
+            61,
+            41
+          ],
+          [
+            39,
+            54
+          ],
+          [
+            3,
+            34
+          ],
+          [
+            49,
+            10
+          ],
+          [
+            57,
+            56
+          ],
+          [
+            49,
+            2
+          ],
+          [
+            3,
+            34
+          ],
+          [
+            61,
+            20
+          ]
+        ],
+        "matches_computed_B_route": true,
+        "benchmark_final_state": "won",
+        "benchmark_levels_completed": 6,
+        "benchmark_actions_per_level": [
+          6,
+          15,
+          11,
+          13,
+          24,
+          82
+        ]
+      },
+      "limits": [
+        "Final B tool call/output is not present in the next-request log; its ten matching benchmark coordinates support route adoption but do not prove whether B code directly read r1 or copied coordinates.",
+        "The successful A chunk is fully observed; do not promote the missing B code into a verified direct-read chain."
+      ],
+      "calls": [
+        {
+          "tool_call_id": "call_1ef67ec5fe4e4a25b73e7473",
+          "request_line_1based": 173,
+          "result_line_1based": 173,
+          "level": 6,
+          "analysis_step": 31,
+          "code": "def reach3(ends,hi,target,fbE):\n    k=len(ends)\n    S=[(k*target[0]+d0,k*target[1]+d1) for d0 in range(k) for d1 in range(k)]\n    def okE(p,others):\n        if not EO[p[0]][p[1]]: return False\n        d=set(diamond(*p))\n        return not ((d & ALLBOX) or (d & fbE) or (d & others))\n    def okH(hh):\n        if not HO[hh[0]][hh[1]]: return False\n        if hh==target: return True\n        hc=set(hubcells(*hh))\n        return not ((hc & ALLBOX) or (hc & RINGCELLS))\n    tot=(sum(p[0] for p in ends),sum(p[1] for p in ends))\n    others0=set().union(*[set(diamond(*p)) for i,p in enumerate(ends) if i!=hi])\n    for (s0,s1) in S:\n        p=(s0-tot[0]+ends[hi][0], s1-tot[1]+ends[hi][1])\n        if 1<=p[0]<64 and 0<=p[1]<64:\n            if okE(p,others0):\n                e2=list(ends); e2[hi]=p\n                if okH(mean_of(e2)): return (1,[p],e2,hi)\n    for j in range(k):\n        if j==hi: continue\n        fixed=[i for i in range(k) if i not in (hi,j)]\n        for p in SAFE:\n            oth=set().union(*[set(diamond(*ends[i])) for i in fixed]) if fixed else set()\n            if not okE(p,oth): continue\n            e1=list(ends); e1[hi]=p\n            if not okH(mean_of(e1)): continue\n            t=(sum(x[0] for x in e1),sum(x[1] for x in e1))\n            oth2=set(diamond(*p))|set().union(*[set(diamond(*e1[i])) for i in fixed]) if fixed else set(diamond(*p))\n            for (s0,s1) in S:\n                q=(s0-t[0]+e1[j][0], s1-t[1]+e1[j][1])\n                if not(1<=q[0]<64 and 0<=q[1]<64): continue\n                if not okE(q,oth2): continue\n                e2=list(e1); e2[j]=q\n                if not okH(mean_of(e2)): continue\n                return (3,[p,ends[j],q],e2,j)\n    return None\ndef plan(ends,hi,stops,forbid_end_cells):\n    e=list(ends); h=hi; clicks=[]\n    for t in stops:\n        r_=reach3(e,h,t,forbid_end_cells)\n        if r_ is None: return None\n        clicks+=list(r_[1]); e=list(r_[2]); h=r_[3]\n    return (clicks,e,h)\ndef fullplan(stopsA,stopsB):\n    fbA=cells_beads(CHAIN_B)|set(hubcells(50,49))\n    pA=plan(CHAIN_A,0,stopsA,fbA)\n    if pA is None: return None\n    fbB=cells_beads(pA[1])|set(hubcells(*mean_of(pA[1])))\n    pB=plan(CHAIN_B,0,stopsB,fbB)\n    if pB is None: return None\n    return (1+len(pA[0])+1+len(pB[0]),pA,pB)\nr1=fullplan(A1,B1s); r2=fullplan(A2,B2s)\nprint('assign1',r1[0] if r1 else 'FAIL','assign2',r2[0] if r2 else 'FAIL')\nif r1: print(' A',len(r1[1][0]),r1[1][0]); print(' B',len(r1[2][0]),r1[2][0])\nif r2: print(' A2',len(r2[1][0]),r2[1][0]); print(' B2',len(r2[2][0]),r2[2][0])\n",
+          "stdout": "assign1 22 assign2 FAIL\n A 10 [(61, 8), (59, 22), (19, 4), (57, 4), (3, 52), (59, 22), (29, 28), (9, 56), (19, 22), (24, 45)]\n B 10 [(49, 10), (57, 50), (61, 41), (39, 54), (3, 34), (49, 10), (57, 56), (49, 2), (3, 34), (61, 20)]\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 165,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_86e740a2169243e69e55d53b",
+          "request_line_1based": 175,
+          "result_line_1based": 175,
+          "level": 6,
+          "analysis_step": 31,
+          "code": "def sim(ends,hi,clicks,label):\n    e=list(ends); h=hi; out=[]\n    for c_ in clicks:\n        if c_==e[h]: continue\n        if c_ in e: h=e.index(c_); out.append(('swap',None)); continue\n        e[h]=c_; out.append(('move',mean_of(e)))\n    print(label,'hubs:',[x[1] for x in out])\n    print(label,'ends',e,'hub',mean_of(e),'handle idx',h)\n    return e\nsim(CHAIN_A,0,r1[1][0],'A')\nsim(CHAIN_B,0,r1[2][0],'B')\n",
+          "stdout": "A hubs: [(33, 11), (32, 16), None, (45, 16), (27, 32), None, (17, 34), (10, 43), None, (12, 51)]\nA ends [(9, 56), (3, 52), (24, 45)] hub (12, 51) handle idx 2\nB hubs: [(53, 30), None, (55, 25), (44, 32), (26, 22), None, (30, 45), (26, 18), None, (55, 11)]\nB ends [(49, 2), (61, 20)] hub (55, 11) handle idx 1\n[(49, 2), (61, 20)]\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 166,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_ec917d66cf4f452aa82a407a",
+          "request_line_1based": 177,
+          "result_line_1based": 177,
+          "level": 6,
+          "analysis_step": 32,
+          "code": "seqA=r1[1][0]\nexpA=[(33,11),(32,16),None,(45,16),(27,32),None,(17,34),(10,43),None,(12,51)]\nok=True\nfor i,(rr,cc) in enumerate(seqA):\n    r=action([{'action':'MOUSE','row':rr,'col':cc}])\n    bad = r.get('no_op') or (not r['gameplay_changed'])\n    print(i,(rr,cc),'REJECT' if bad else 'ok','exp_hub',expA[i],'LVL',r['level_completed'],'over',r.get('game_over'))\n    if bad or r.get('game_over') or r['level_completed']: ok=False; break\nprint('phaseA done',ok)\n",
+          "stdout": "[action] MOUSE(row=61, col=8) -> effect\n0 (61, 8) ok exp_hub (33, 11) LVL False over False\n[action] MOUSE(row=59, col=22) -> effect\n1 (59, 22) ok exp_hub (32, 16) LVL False over False\n[action] MOUSE(row=19, col=4) -> effect\n2 (19, 4) ok exp_hub None LVL False over False\n[action] MOUSE(row=57, col=4) -> effect\n3 (57, 4) ok exp_hub (45, 16) LVL False over False\n[action] MOUSE(row=3, col=52) -> effect\n4 (3, 52) ok exp_hub (27, 32) LVL False over False\n[action] MOUSE(row=59, col=22) -> effect\n5 (59, 22) ok exp_hub None LVL False over False\n[action] MOUSE(row=29, col=28) -> effect\n6 (29, 28) ok exp_hub (17, 34) LVL False over False\n[action] MOUSE(row=9, col=56) -> effect\n7 (9, 56) ok exp_hub (10, 43) LVL False over False\n[action] MOUSE(row=19, col=22) -> effect\n8 (19, 22) ok exp_hub None LVL False over False\n[action] MOUSE(row=24, col=45) -> effect\n9 (24, 45) ok exp_hub (12, 51) LVL False over False\nphaseA done True\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 168,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "cn04-L2-sols",
+      "game_id": "cn04-2fe56bfb",
+      "level": 2,
+      "evidence_status": "manually_reviewed_code_and_actual_stdout",
+      "ordinary_values": [
+        "sols (list)",
+        "objs (dict)"
+      ],
+      "classification": "direct_cross_call_ordinary_data_read_with_successful_rendered_output",
+      "finding": "line 37 computes two sols entries; line 39 iterates retained sols and reads retained objs to print both complete placement diagrams.",
+      "checks": {
+        "definition_succeeded": true,
+        "later_read_actually_executed": true,
+        "same_level_at_call_entry": true,
+        "ordinary_data_not_just_function_definition": true,
+        "real_actions_in_this_pair": 0
+      },
+      "limits": [
+        "Successful data processing alone is not proof of a downstream score improvement."
+      ],
+      "calls": [
+        {
+          "tool_call_id": "call_f0b8d122690f485aa699c239",
+          "request_line_1based": 37,
+          "result_line_1based": 37,
+          "level": 2,
+          "analysis_step": 9,
+          "code": "\ndef rot(cells, k):\n    # k x 90 CW: (r,c) -> (c, -r)\n    out=set()\n    for (r,c) in cells:\n        rr,cc=r,c\n        for _ in range(k):\n            rr,cc = cc, -rr\n        out.add((rr,cc))\n    return out\nobjs={}\nfor name in ['p','N','Y','W']:\n    bs = info[name]['body']\n    rb = set()\n    for (r0,c0) in info[name]['reds']:\n        for dr in range(3):\n            for dc in range(3):\n                rb.add((r0+dr,c0+dc))\n    objs[name]={'body':bs,'red':rb}\n    print(name,'body',len(bs),'red',len(rb))\n\ndef norm(s):\n    mr=min(p[0] for p in s); mc=min(p[1] for p in s)\n    return frozenset((r-mr,c-mc) for r,c in s)\n\nsols=[]\nfor P in objs:\n    for S in objs:\n        if P==S: continue\n        for k in range(4):\n            rb = rot(objs[P]['red'],k); bb = rot(objs[P]['body'],k)\n            if len(rb)!=len(objs[P]['red']): pass\n            # try map rb onto subsets of S red of same size\n            Sr = objs[S]['red']; Sb=objs[S]['body']\n            rbl=sorted(rb)\n            if not rbl: continue\n            # candidate translations: align rbl[0] to each red cell of S\n            cands=set()\n            for (tr,tc) in Sr:\n                dr, dc = tr-rbl[0][0], tc-rbl[0][1]\n                cands.add((dr,dc))\n            for (dr,dc) in cands:\n                moved_red = {(r+dr,c+dc) for r,c in rb}\n                if not moved_red <= Sr: continue\n                moved_body = {(r+dr,c+dc) for r,c in bb}\n                if moved_body & Sb: continue\n                if moved_body & Sr: continue   # body shouldn't cover pins? allow check later\n                sols.append((P,S,k,dr,dc,len(moved_red)))\nfor s in sols: print(s)\nprint('num sols', len(sols))\n",
+          "stdout": "p body 90 red 18\nN body 90 red 36\nY body 162 red 36\nW body 45 red 18\n('p', 'Y', 0, 21, 0, 18)\n('W', 'N', 3, 78, 3, 18)\nnum sols 2\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 51,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_bdfff6117867406cbaa78df4",
+          "request_line_1based": 39,
+          "result_line_1based": 39,
+          "level": 2,
+          "analysis_step": 9,
+          "code": "\ndef render_placement(P,S,k,dr,dc):\n    bb = rot(objs[P]['body'],k); rb = rot(objs[P]['red'],k)\n    mb = {(r+dr,c+dc) for r,c in bb}; mr={(r+dr,c+dc) for r,c in rb}\n    Sb=objs[S]['body']; Sr=objs[S]['red']\n    rows = sorted({p[0] for p in mb|mr|Sb|Sr}); cols=sorted({p[1] for p in mb|mr|Sb|Sr})\n    r0,r1=min(rows),max(rows); c0,c1=min(cols),max(cols)\n    out=[]\n    for r_ in range(r0,r1+1):\n        line=''\n        for c_ in range(c0,c1+1):\n            ch='.'\n            if (r_,c_) in Sb: ch='S'\n            if (r_,c_) in Sr: ch='r'\n            if (r_,c_) in mb: ch='P'\n            if (r_,c_) in mr: ch='#'\n            line+=ch\n        out.append(f'{r_:2d} '+line)\n    print(f'--- {P} rot{k} -> {S} at ({dr},{dc})  bbox rows {r0}-{r1} cols {c0}-{c1}')\n    print('\\n'.join(out))\nfor s in sols:\n    render_placement(*s[:5])\n",
+          "stdout": "--- p rot0 -> Y at (21,0)  bbox rows 29-55 cols 11-34\n29 PPPPPPPPP...............\n30 PPPPPPPPP...............\n31 PPPPPPPPP...............\n32 PPP...PPP...............\n33 PPP...PPP...............\n34 PPP...PPP...............\n35 PPP...PPP...SSSSSSSSS...\n36 PPP...PPP...SSSSSSSSS...\n37 PPP...PPP...SSSSSSSSS...\n38 PPP...###...SSS...SSSrrr\n39 PPP...###...SSS...SSSrrr\n40 PPP...###...SSS...SSSrrr\n41 PPP...SSSSSSSSS...SSS...\n42 PPP...SSSSSSSSS...SSS...\n43 PPP...SSSSSSSSS...SSS...\n44 PPP###SSS.........SSS...\n45 PPP###SSS.........SSS...\n46 PPP###SSS.........SSS...\n47 ......SSSSSSSSS...SSS...\n48 ......SSSSSSSSS...SSS...\n49 ......SSSSSSSSS...SSS...\n50 ............SSSSSSSSS...\n51 ............SSSSSSSSS...\n52 ............SSSSSSSSS...\n53 ...............rrr......\n54 ...............rrr......\n55 ...............rrr......\n--- W rot3 -> N at (78,3)  bbox rows 14-34 cols 38-58\n14 ......rrrSSS.........\n15 ......rrrSSS.........\n16 ......rrrSSS.........\n17 .........SSS.........\n18 .........SSS.........\n19 .........SSS.........\n20 .........SSS###PPPPPP\n21 .........SSS###PPPPPP\n22 .........SSS###PPPPPP\n23 .........SSS......PPP\n24 .........SSS......PPP\n25 .........SSS......PPP\n26 .........SSS###PPPPPP\n27 .........SSS###PPPPPP\n28 .........SSS###PPPPPP\n29 rrr......SSS.........\n30 rrr......SSS.........\n31 rrr......SSS.........\n32 SSSSSSSSSSSS.........\n33 SSSSSSSSSSSS.........\n34 SSSSSSSSSSSS.........\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 52,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "cn04-L2-sols_found",
+      "game_id": "cn04-2fe56bfb",
+      "level": 2,
+      "evidence_status": "manually_reviewed_code_and_actual_stdout",
+      "ordinary_values": [
+        "sols_found (list)",
+        "SHAPE (dict)",
+        "NS (dict)"
+      ],
+      "classification": "retained_data_used_for_plan_validation_then_text_transcription_to_actions",
+      "finding": "line 93 reads sols_found[0] and SHAPE, validates all red pins paired, and prints targets; line 95 copies targets as literals; subsequent real moves reach LEVEL COMPLETED at line 109.",
+      "checks": {
+        "definition_succeeded": true,
+        "later_read_actually_executed": true,
+        "same_level_at_call_entry": true,
+        "ordinary_data_not_just_function_definition": true,
+        "level_completed": true,
+        "direct_unbroken_plan_object_execution": false
+      },
+      "limits": [
+        "sols_found at line 91 is itself a literal transcription; coordinates are copied again at line 95.",
+        "This is not a direct search-return-object-to-action chain."
+      ],
+      "calls": [
+        {
+          "tool_call_id": "call_37d25d34424144e089b94ea1",
+          "request_line_1based": 91,
+          "result_line_1based": 91,
+          "level": 2,
+          "analysis_step": 14,
+          "code": "\nsols_found=[(0,0,(-1,-3),0,(-3,-5),3,(2,5)),(1,1,(-3,2),1,(-5,4),0,(5,2)),(2,2,(2,2),2,(4,6),1,(2,-3)),(3,3,(2,-1),3,(6,-3),2,(-3,2))]\ncurpos={'N':(5,12),'Y':(12,6),'W':(11,4),'b':(7,18)}\ncurrot={'N':0,'Y':0,'W':0,'b':3}\nfor (kg,ky,ty,kw,tw,kb,tb) in sols_found:\n    rel={'N':(0,0),'Y':ty,'W':tw,'b':tb}\n    rot={'N':kg,'Y':ky,'W':kw,'b':kb}\n    # optimal shift per axis\n    import statistics\n    rs=[curpos[o][0]-rel[o][0] for o in rel]; cs=[curpos[o][1]-rel[o][1] for o in rel]\n    def med(vals):\n        v=sorted(vals); return v[len(v)//2-1], v[len(v)//2]\n    rlo,rhi = med(rs); clo,chi = med(cs)\n    best=None\n    for s in range(-6,28):\n        for t in range(-6,28):\n            # check on-board: all cells of all objects within blocks 1..20\n            ok=True; tot=0\n            for o in rel:\n                S=SHAPE[o][rot[o]]\n                tr=(s+rel[o][0], t+rel[o][1])\n                cells_abs={(r+tr[0],c+tr[1]) for r,c in (S['body']|S['red'])}\n                if min(p[0] for p in cells_abs)<1 or max(p[0] for p in cells_abs)>20: ok=False; break\n                if min(p[1] for p in cells_abs)<1 or max(p[1] for p in cells_abs)>20: ok=False; break\n                tot += abs(tr[0]-curpos[o][0])+abs(tr[1]-curpos[o][1])\n            if not ok: continue\n            rotcost = sum((rot[o]-currot[o])%4 for o in rel)\n            c = tot+rotcost\n            if best is None or c<best[0]: best=(c,s,t,tot,rotcost)\n    print('sol',kg,ky,kw,kb,'->',best)\n",
+          "stdout": "sol 0 0 0 3 -> (24, 5, 9, 24, 0)\nsol 1 1 1 0 -> (52, 6, 4, 48, 4)\nsol 2 2 2 1 -> (46, 5, 4, 38, 8)\nsol 3 3 3 2 -> (36, 5, 7, 24, 12)\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 179,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_c63b45ada5074a529b297cd3",
+          "request_line_1based": 93,
+          "result_line_1based": 93,
+          "level": 2,
+          "analysis_step": 14,
+          "code": "\nkg,ky,ty,kw,tw,kb,tb = sols_found[0]\nshift=(5,9)\nrot={'N':kg,'Y':ky,'W':kw,'b':kb}; rel={'N':(0,0),'Y':ty,'W':tw,'b':tb}\nplaced={}\nfor o in rel:\n    S=SHAPE[o][rot[o]]; tr=(shift[0]+rel[o][0], shift[1]+rel[o][1])\n    placed[o]={'body':{(r+tr[0],c+tr[1]) for r,c in S['body']},'red':{(r+tr[0],c+tr[1]) for r,c in S['red']},'tr':tr}\nallb=set().union(*[placed[o]['body'] for o in rel]); allr=set().union(*[placed[o]['red'] for o in rel])\nr0=min(p[0] for p in allb|allr); r1=max(p[0] for p in allb|allr); c0=min(p[1] for p in allb|allr); c1=max(p[1] for p in allb|allr)\nprint('target assembly blocks rows',r0,r1,'cols',c0,c1)\nfor r_ in range(r0,r1+1):\n    line=''\n    for c_ in range(c0,c1+1):\n        ch='.'\n        for o in rel:\n            if (r_,c_) in placed[o]['body']: ch={'N':'G','Y':'Y','W':'W','b':'U'}[o]\n        m=[o for o in rel if (r_,c_) in placed[o]['red']]\n        if len(m)>1: ch='#'\n        elif len(m)==1: ch={'N':'g','Y':'y','W':'w','b':'u'}[m[0]]\n        line+=ch\n    print(f'{r_:2d} '+line)\n# check pairing\nfor o in rel:\n    un=[p for p in placed[o]['red'] if not any(p in placed[q]['red'] for q in rel if q!=o)]\n    print(o,'unpaired red blocks:',sorted(un))\nprint('targets', {o:placed[o]['tr'] for o in rel})\n",
+          "stdout": "target assembly blocks rows 2 11 cols 4 15\n 2 WWW.........\n 3 W.W.........\n 4 W.W.YYY.....\n 5 W.#.Y.Y#G...\n 6 W.YYY.Y.G...\n 7 W#Y...Y.G#UU\n 8 ..YYY.Y.G..U\n 9 ....YYY.G#UU\n10 .....#..G...\n11 .....GGGG...\nN unpaired red blocks: []\nY unpaired red blocks: []\nW unpaired red blocks: []\nb unpaired red blocks: []\ntargets {'N': (5, 9), 'Y': (4, 6), 'W': (2, 4), 'b': (7, 14)}\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 185,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_752f4b5305394d548cc23b7b",
+          "request_line_1based": 95,
+          "result_line_1based": 95,
+          "level": 2,
+          "analysis_step": 14,
+          "code": "\ngc = grid(current_frame)\nsets={}\nfor col,nm in [('W','Nsel'),('p','Wp'),('b','Ub'),('Y','Y')]:\n    bs={q for q in cells(col,gc) if q[0]>2}\n    if bs: sets[nm]=blocks_from_abs(bs)\npos={k:(min(p[0] for p in v), min(p[1] for p in v)) for k,v in sets.items()}\nprint('current block topleft', pos)\ntargets={'Nsel':(5,9),'Y':(4,6),'Wp':(2,4),'Ub':(7,14)}\nplan=[]\ndef moves(cur,tgt):\n    out=[]\n    dr=tgt[0]-cur[0]; dc=tgt[1]-cur[1]\n    out += ['UP']*(-dr) + ['DOWN']*(dr) + ['LEFT']*(-dc) + ['RIGHT']*(dc)\n    return out\nfor nm in ['Nsel','Y','Wp','Ub']:\n    m=moves(pos[nm],targets[nm]); print(nm,'->',targets[nm],m)\n",
+          "stdout": "current block topleft {'Nsel': (5, 12), 'Wp': (11, 4), 'Ub': (7, 18), 'Y': (12, 6)}\nNsel -> (5, 9) ['LEFT', 'LEFT', 'LEFT']\nY -> (4, 6) ['UP', 'UP', 'UP', 'UP', 'UP', 'UP', 'UP', 'UP']\nWp -> (2, 4) ['UP', 'UP', 'UP', 'UP', 'UP', 'UP', 'UP', 'UP', 'UP']\nUb -> (7, 14) ['LEFT', 'LEFT', 'LEFT', 'LEFT']\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 189,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_341b7f532ec64f66a1733a2a",
+          "request_line_1based": 97,
+          "result_line_1based": 97,
+          "level": 2,
+          "analysis_step": 15,
+          "code": "\ndef posnow():\n    g2 = grid(current_frame)\n    out={}\n    for col,nm in [('W','Nsel'),('p','Wp'),('b','Ub'),('Y','Y')]:\n        bs={q for q in cells(col,g2) if q[0]>2}\n        if bs:\n            bl=blocks_from_abs(bs); out[nm]=(min(p[0] for p in bl), min(p[1] for p in bl))\n    return out\nlog=[]\ndef step(a):\n    r=action([a])\n    done = (current_frame.level!=2) or r.get('game_over') or r.get('done')\n    return r, done\nseq=[('LEFT',3)]\n# stage 1: green\nfor i in range(3):\n    r,d = step('LEFT')\n    if d: break\nlog.append(('after green', posnow(), current_frame.level))\nprint(log[-1])\n",
+          "stdout": "[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n('after green', {'Nsel': (5, 9), 'Wp': (11, 4), 'Ub': (7, 18), 'Y': (12, 6)}, 2)\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 193,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_7eb55cd6545a468c996e6def",
+          "request_line_1based": 99,
+          "result_line_1based": 99,
+          "level": 2,
+          "analysis_step": 16,
+          "code": "\ndef done_now(r): return (current_frame.level!=2) or r.get('game_over') or r.get('done')\nlog=[]\nr,_ = action([{'action':'MOUSE','row':36,'col':27}])\nlog.append(('click Y', posnow(), current_frame.level))\nfor i in range(8):\n    r,d = action([{'action':'UP'}])\n    if d: break\nlog.append(('Y up8', posnow(), current_frame.level))\nfor e in log: print(e)\n",
+          "stdout": "[action] MOUSE(row=36, col=27) -> effect\n",
+          "result": null,
+          "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nValueError: too many values to unpack (expected 2)",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 194,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_b7b46c1b6d074bb8b60c76a2",
+          "request_line_1based": 101,
+          "result_line_1based": 101,
+          "level": 2,
+          "analysis_step": 16,
+          "code": "\ndef obj_shapes_norm():\n    out={}\n    for o in SHAPE:\n        for k in range(4):\n            out.setdefault(frozenset(SHAPE[o][k]['body']), []).append((o,k))\n    return out\nNS = obj_shapes_norm()\ndef posnow2():\n    g2 = grid(current_frame)\n    cols={}\n    for (r,c),ch in g2.items():\n        if r<=2: continue\n        cols.setdefault(ch,set()).add((r,c))\n    res={}\n    for ch,cs in cols.items():\n        if len(cs)<9: continue\n        try: bl=blocks_from_abs(cs)\n        except Exception: continue\n        if len(bl)*9!=len(cs): continue\n        m=min(p[0] for p in bl); n=min(p[1] for p in bl)\n        nb=frozenset((r-m,c-n) for r,c in bl)\n        if nb in NS:\n            for (o,k) in NS[nb]:\n                res[o]=((o,k),(m,n))\n    return res\np2=posnow2()\nprint({k:v for k,v in p2.items()})\n",
+          "stdout": "",
+          "result": null,
+          "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 27, in <module>\n  File \"<python_tool>\", line 12, in posnow2\nAttributeError: 'list' object has no attribute 'items'",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 197,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_722029655a394c35a109bd66",
+          "request_line_1based": 103,
+          "result_line_1based": 103,
+          "level": 2,
+          "analysis_step": 16,
+          "code": "\ndef cmap(frame):\n    rows = frame.ascii.split('\\n')\n    m={}\n    for r,line in enumerate(rows):\n        for c,ch in enumerate(line):\n            m[(r,c)]=ch\n    return m\ndef posnow2():\n    g2 = cmap(current_frame)\n    cols={}\n    for (r,c),ch in g2.items():\n        if r<=2: continue\n        if ch in ' .': continue\n        cols.setdefault(ch,set()).add((r,c))\n    res={}\n    for ch,cs in cols.items():\n        if len(cs)<9: continue\n        bl=set()\n        bad=False\n        for (r,c) in cs: bl.add(((r+1)//3,(c+1)//3))\n        if len(bl)*9!=len(cs): continue\n        m=min(p[0] for p in bl); n=min(p[1] for p in bl)\n        nb=frozenset((r-m,c-n) for r,c in bl)\n        if nb in NS:\n            for (o,k) in NS[nb]:\n                res[o]=((o,k),(m,n),ch)\n    return res\nprint(posnow2())\n",
+          "stdout": "{'N': (('N', 0), (5, 9), 'N'), 'b': (('b', 3), (7, 18), 'b'), 'Y': (('Y', 0), (12, 6), 'W')}\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 198,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_d76e05e5ec30461b812d996f",
+          "request_line_1based": 105,
+          "result_line_1based": 105,
+          "level": 2,
+          "analysis_step": 17,
+          "code": "\nfor i in range(8):\n    r=action([{'action':'UP'}])\n    if current_frame.level!=2 or r.get('game_over'): break\nprint('after Y up8:', posnow2(), 'level', current_frame.level)\n",
+          "stdout": "[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\nafter Y up8: {'Y': (('Y', 0), (4, 6), 'W'), 'N': (('N', 0), (5, 9), 'N'), 'b': (('b', 3), (7, 18), 'b'), 'W': (('W', 0), (11, 4), 'p')} level 2\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 198,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_25507e98daba43f490a3d823",
+          "request_line_1based": 107,
+          "result_line_1based": 107,
+          "level": 2,
+          "analysis_step": 18,
+          "code": "\nr=action([{'action':'MOUSE','row':33,'col':12}])\nprint('click plug:', posnow2())\nfor i in range(9):\n    r=action([{'action':'UP'}])\n    if current_frame.level!=2 or r.get('game_over'): break\nprint('after plug up9:', posnow2(), 'level', current_frame.level)\n",
+          "stdout": "[action] MOUSE(row=33, col=12) -> effect\nclick plug: {'Y': (('Y', 0), (4, 6), 'Y'), 'N': (('N', 0), (5, 9), 'N'), 'b': (('b', 3), (7, 18), 'b'), 'W': (('W', 0), (11, 4), 'W')}\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\nafter plug up9: {'W': (('W', 0), (2, 4), 'W'), 'Y': (('Y', 0), (4, 6), 'Y'), 'N': (('N', 0), (5, 9), 'N'), 'b': (('b', 3), (7, 18), 'b')} level 2\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 198,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_89c87aa369364f179cc1d399",
+          "request_line_1based": 109,
+          "result_line_1based": 109,
+          "level": 2,
+          "analysis_step": 19,
+          "code": "\nr=action([{'action':'MOUSE','row':27,'col':55}])\nprint('click U:', posnow2())\nfor i in range(4):\n    r=action([{'action':'LEFT'}])\n    if current_frame.level!=2 or r.get('game_over'): break\nprint('after U left4:', posnow2(), 'level', current_frame.level, 'res', {k:v for k,v in (r or {}).items() if k in ('level_completed','game_over','done','run_complete')})\n",
+          "stdout": "[action] MOUSE(row=27, col=55) -> effect\nclick U: {'W': (('W', 0), (2, 4), 'p'), 'Y': (('Y', 0), (4, 6), 'Y'), 'N': (('N', 0), (5, 9), 'N'), 'b': (('b', 3), (7, 18), 'W')}\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> LEVEL COMPLETED\nafter U left4: {} level 3 res {'done': False, 'level_completed': True, 'game_over': False, 'run_complete': False}\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 198,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    }
+  ],
+  "counterexamples_and_costs": [
+    {
+      "id": "tu93-L3-wrong-sol",
+      "game_id": "tu93-0768757b",
+      "kind": "retained_plan_executes_incorrect_model",
+      "finding": "sol is really reused, but the fourth real action loses the attempt; persistent state does not establish rule correctness.",
+      "calls": [
+        {
+          "tool_call_id": "call_ec5017c5ccaa4e56aed7560d",
+          "request_line_1based": 63,
+          "result_line_1based": 63,
+          "level": 3,
+          "analysis_step": 15,
+          "code": "def solve(G, start, goal, guards):\n    NR=len(G); NC=len(G[0])\n    def ok(r,c): return 0<=r<NR and 0<=c<NC and G[r][c]!='B'\n    gset=frozenset(guards)\n    def danger(pos,gs):\n        r,c=pos\n        return any((gr==r and abs(gc-c)<=2) for (gr,gc) in gs)\n    start_state=(start,gset)\n    dq=deque([(start_state,[])]); seen={start_state}\n    while dq:\n        ((r,c),gs),path=dq.popleft()\n        if (r,c)==goal: return path\n        for dr,dc in ((-2,0),(2,0),(0,-2),(0,2)):\n            nr,nc=r+dr,c+dc\n            if not ok(r+dr//2,c+dc//2) or not ok(nr,nc): continue\n            ngs = gs - {(nr,nc)}   # capture if landing on a guard\n            if danger((nr,nc), ngs): continue\n            s2=((nr,nc),ngs)\n            if s2 in seen: continue\n            seen.add(s2); dq.append((s2,path+[('UDLR'[[ -2,0,2,0,0,-2,0,2][i*2:i*2+2]==(dr,dc)][0] if False else {(-2,0):'UP',(2,0):'DOWN',(0,-2):'LEFT',(0,2):'RIGHT'}[(dr,dc)])]))\n    return None\nsol=solve(G3,(8,10),(8,4),guards)\nprint(len(sol), sol)\n",
+          "stdout": "11 ['UP', 'UP', 'LEFT', 'LEFT', 'LEFT', 'LEFT', 'LEFT', 'DOWN', 'RIGHT', 'DOWN', 'RIGHT']\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 34,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_390872f6811149458f6aed04",
+          "request_line_1based": 65,
+          "result_line_1based": 65,
+          "level": 3,
+          "analysis_step": 16,
+          "code": "def stepL(mv):\n    res=action([mv]); G=TG()\n    return res,G,find(G,'b'),[ (i,j) for i,row in enumerate(G) for j,ch in enumerate(row) if ch=='R']\nfor mv in sol:\n    res,G,p,Rs = stepL(mv)\n    print(mv,'player',p,'guards',Rs,'over',res.get('game_over'),'won',res.get('level_completed'))\n    if res.get('game_over') or res.get('level_completed'): break\n",
+          "stdout": "[action] UP -> effect\nUP player (6, 10) guards [(2, 4), (2, 6), (6, 0)] over False won False\n[action] UP -> effect\nUP player (4, 10) guards [(2, 4), (2, 6), (6, 0)] over False won False\n[action] LEFT -> effect\nLEFT player (4, 8) guards [(2, 4), (2, 6), (6, 0)] over False won False\n[action] LEFT -> GAME OVER (attempt ended immediately after this action)\nLEFT player None guards [(2, 4), (4, 6), (6, 0)] over True won False\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 40,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "r11l-L6-old-model",
+      "game_id": "r11l-495a7899",
+      "kind": "wrong_model_and_same_level_reset_cost",
+      "finding": "An earlier retained plans dictionary is read successfully, then its route is partly transcribed. After the model judges chain A mispainted, it deliberately spends 1+20+28 actions to lose and reset, then rebuilds EO/HO in place from the fresh board. Same-level persistence requires refreshing board-derived data.",
+      "calls": [
+        {
+          "tool_call_id": "call_5bebcf3a173d437888d661a8",
+          "request_line_1based": 143,
+          "result_line_1based": 143,
+          "level": 6,
+          "analysis_step": 26,
+          "code": "COARSE=[(r,c) for r in range(1,64,3) for c in range(0,64,3) if EO[r][c]]\nprint('coarse',len(COARSE))\ndef cells_beads(ends): \n    s=set()\n    for p in ends: s|=set(diamond(*p))\n    return s\ndef plan_chain(ends,hi,stops,needblobs,forbid_extra):\n    \"\"\"stops: list of hub targets (blob centers then ring). Returns (clicks, ends, hi) or None.\"\"\"\n    e=list(ends); h=hi; clicks=[]\n    for i,t in enumerate(stops):\n        remaining=set(blobsC[k] for k in needblobs[i:])\n        fhub=(remaining-{t})|forbid_extra\n        fend=forbid_extra|set(blobsC[k] for k in blobsC if blobsC[k] not in (t,))\n        r_=reach(e,h,t,fhub,fend,coarse=COARSE)\n        if r_ is None: return None\n        clicks+=list(r_[1]); e=list(r_[2]); h=r_[3]\n    return (clicks,e,h)\nsetA=[(11,11),(19,4),(19,22)]; setB=[(43,49),(57,50)]\nplans={}\nimport itertools\nassigns=[('R1',['B7','B2','B5'],'R3',['B6','B4','B8']), ('R3',['B6','B4','B8'],'R1',['B7','B2','B5'])]\nfor (ringA,blA,ringB,blB) in assigns:\n    for oA in itertools.permutations(blA):\n        for oB in itertools.permutations(blB):\n            stopsA=[blobsC[x] for x in oA]+[rings[ringA]]\n            stopsB=[blobsC[x] for x in oB]+[rings[ringB]]\n            needA=list(oA); needB=list(oB)\n            forb_for_A = cells_beads(setB)|{rings[ringB]}\n            pA=plan_chain(setA,0,stopsA,needA,forb_for_A)\n            if pA is None: continue\n            # chain B: forbid chain A final beads+hub, ring A, remaining? all A blobs gone\n            forb_for_B = cells_beads(pA[1])|set(hubcells(*mean_of(pA[1])))|{rings[ringA]}\n            pB=plan_chain(setB,0,stopsB,needB,forb_for_B)\n            if pB is None: continue\n            total=1+len(pA[1])+1+len(pB[1])\n            key=(ringA,oA,ringB,oB)\n            if 'best' not in plans or total<plans['best'][0]:\n                plans['best']=(total,key,pA,pB)\nprint('BEST',plans['best'][0],plans['best'][1])\n",
+          "stdout": "coarse 356\nBEST 7 ('R1', ('B7', 'B5', 'B2'), 'R3', ('B6', 'B4', 'B8'))\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 97,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_5fa018f71dd9475baa9b1085",
+          "request_line_1based": 145,
+          "result_line_1based": 145,
+          "level": 6,
+          "analysis_step": 26,
+          "code": "tot,pA,pB=plans['best'][0],plans['best'][2],plans['best'][3]\nprint('chainA clicks',pA[0])\nprint('chainA final ends',pA[1],'handle idx',pA[2],'hub',mean_of(pA[1]))\nprint('chainB clicks',pB[0])\nprint('chainB final ends',pB[1],'handle idx',pB[2],'hub',mean_of(pB[1]))\nprint('lens',len(pA[0]),len(pB[0]))\n",
+          "stdout": "chainA clicks [(55, 3), (19, 4), (61, 23), (25, 8), (4, 36), (55, 3), (28, 44), (7, 57), (19, 22), (25, 60)]\nchainA final ends [(7, 57), (4, 36), (25, 60)] handle idx 2 hub (12, 51)\nchainB clicks [(31, 14), (3, 40), (49, 3), (57, 50), (61, 47), (61, 19)]\nchainB final ends [(49, 3), (61, 19)] handle idx 1 hub (55, 11)\nlens 10 6\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 98,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_3eed396e948c434f9abeddc5",
+          "request_line_1based": 147,
+          "result_line_1based": 147,
+          "level": 6,
+          "analysis_step": 27,
+          "code": "seqA=[(55,3),(19,4),(61,23),(25,8),(4,36),(55,3),(28,44),(7,57),(19,22),(25,60)]\nseqB=[(43,49),(31,14),(3,40),(49,3),(57,50),(61,47),(61,19)]\nclicks=seqA+seqB\n# simulate expected hubs\nEA=[(11,11),(19,4),(19,22)]; hA=0\nexp=[]\nfor c_ in clicks[:len(seqA)]:\n    if c_==EA[hA]: continue\n    if c_ in EA:\n        hA=EA.index(c_); continue\n    EA[hA]=c_; exp.append(mean_of(EA))\nprint('expected chainA hubs',exp)\nr=action([{'action':'MOUSE','row':rr,'col':cc} for rr,cc in clicks[:5]])\nprint('after 5:', r.get('no_op'), r['gameplay_changed'],'LVL',r['level_completed'])\n",
+          "stdout": "expected chainA hubs [(31, 9), (45, 16), (33, 11), (26, 20), (17, 34), (10, 38), (12, 51)]\n[action] batch of 5 actions, 5 executed: MOUSE(row=55, col=3), MOUSE(row=19, col=4), MOUSE(row=61, col=23), MOUSE(row=25, col=8), MOUSE(row=4, col=36)\nafter 5: False True LVL False\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 105,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_7f3e00eb49a746508bda4c5c",
+          "request_line_1based": 153,
+          "result_line_1based": 153,
+          "level": 6,
+          "analysis_step": 28,
+          "code": "seqA2=[(4,39),(55,3),(28,41),(7,54),(19,22),(25,60)]\nfor i,(rr,cc) in enumerate(seqA2):\n    r=action([{'action':'MOUSE','row':rr,'col':cc}])\n    bad=r.get('no_op') or not r['gameplay_changed']\n    print(i,(rr,cc),'REJECTED' if bad else 'ok','LVL',r['level_completed'])\n    if bad or r['level_completed']: break\nprint('--- state ---')\nfor n in current_frame.segmentation['nodes']:\n    b=n['boundary']; bb=(min(p[0] for p in b),min(p[1] for p in b),max(p[0] for p in b),max(p[1] for p in b))\n    if 8<=n['pixels']<=40: print(n['color'],n['pixels'],bb)\n",
+          "stdout": "[action] MOUSE(row=4, col=39) -> effect\n0 (4, 39) ok LVL False\n[action] MOUSE(row=55, col=3) -> effect\n1 (55, 3) ok LVL False\n[action] MOUSE(row=28, col=41) -> effect\n2 (28, 41) ok LVL False\n[action] MOUSE(row=7, col=54) -> effect\n3 (7, 54) ok LVL False\n[action] MOUSE(row=19, col=22) -> effect\n4 (19, 22) ok LVL False\n[action] MOUSE(row=25, col=60) -> effect\n5 (25, 60) ok LVL False\n--- state ---\nG 12 (2, 37, 6, 41)\nG 12 (5, 52, 9, 56)\nR 9 (10, 49, 12, 52)\nb 14 (13, 48, 15, 54)\nW 10 (21, 54, 25, 56)\nr 11 (21, 56, 25, 58)\nW 12 (23, 58, 27, 62)\nW 10 (28, 43, 32, 45)\nM 11 (28, 45, 32, 47)\ng 25 (29, 1, 46, 2)\nG 12 (41, 47, 45, 51)\nW 14 (42, 30, 46, 34)\nW 21 (48, 47, 52, 51)\nW 14 (53, 23, 57, 27)\nW 14 (55, 36, 59, 40)\nG 12 (55, 48, 59, 52)\ng 37 (57, 57, 63, 63)\ng 23 (58, 1, 63, 7)\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 124,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_586f51e3bd044a9eae321a36",
+          "request_line_1based": 155,
+          "result_line_1based": 155,
+          "level": 6,
+          "analysis_step": 28,
+          "code": "a7=current_frame.ascii.split('\\n')\nfor r_ in range(8,17): print(r_,'',a7[r_][45:58])\nprint('ring R1 was center (12,51); hub cells rows10-14 cols49-53')\nprint('bar col0 count', sum(1 for r_ in range(64) if a7[r_][0]=='W'))\n",
+          "stdout": "8  wBBBBBBBGGGBB\n9  BwwBBpBNwGBBB\n10  BBBwpRRRNBBBB\n11  BBBpRRRRNNBBB\n12  BBBBRRpNNBBBB\n13  BBBbbbbbbbBBB\n14  BBBBbbbbbBBBB\n15  BBBBBbBbwBBBB\n16  BBBBBBBBBwBBB\nring R1 was center (12,51); hub cells rows10-14 cols49-53\nbar col0 count 52\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 125,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_2fa82698c982468292163d25",
+          "request_line_1based": 157,
+          "result_line_1based": 157,
+          "level": 6,
+          "analysis_step": 29,
+          "code": "# Chain A hub is irreparably mis-painted (red stamp from B1 via bead contact). Level unwinnable -> exhaust budget to force reset.\na8=current_frame.ascii.split('\\n')\nprint('bar', sum(1 for r_ in range(64) if a8[r_][0]=='W'))\nprint('EO(23,58)',EO[23][58],'HO(11,50)',HO[11][50])\ntog=[(23,58),(25,60)]*10\nr=action([{'action':'MOUSE','row':x,'col':y} for x,y in tog])\na9=current_frame.ascii.split('\\n')\nprint('bar after', sum(1 for r_ in range(64) if a9[r_][0]=='W'), 'step',current_frame.step,'over',r.get('game_over'))\n",
+          "stdout": "bar 52\nEO(23,58) True HO(11,50) True\n[action] batch of 20 actions, 1 executed: MOUSE(row=23, col=58) | stop_reason: no_op_action\nbar after 51 step 81 over False\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 128,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_fb964d1b221d44519b7370d8",
+          "request_line_1based": 159,
+          "result_line_1based": 159,
+          "level": 6,
+          "analysis_step": 30,
+          "code": "tog=[(49,12),(61,27)]*10\nr=action([{'action':'MOUSE','row':x,'col':y} for x,y in tog])\nres=r.get('game_over')\na=current_frame.ascii.split('\\n')\nprint('executed',r.get('executed_count'),'bar',sum(1 for x in range(64) if a[x][0]=='W'),'over',res,'lvl',current_frame.level)\n",
+          "stdout": "[action] batch of 20 actions, 20 executed: MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27)\nexecuted 20 bar 30 over False lvl 6\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 129,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_303763ffddc248f89e9fd236",
+          "request_line_1based": 161,
+          "result_line_1based": 161,
+          "level": 6,
+          "analysis_step": 31,
+          "code": "tog=[(49,12),(61,27)]*15\nr=action([{'action':'MOUSE','row':x,'col':y} for x,y in tog])\na=current_frame.ascii.split('\\n')\nprint('executed',r.get('executed_count'),'bar',sum(1 for x in range(64) if a[x][0]=='W'),'over',r.get('game_over'),'lvl',current_frame.level,'step',current_frame.step)\n",
+          "stdout": "[action] batch of 30 actions, 28 executed: MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27), MOUSE(row=49, col=12), MOUSE(row=61, col=27) | stop_reason: game_over\nexecuted 28 bar 0 over True lvl 6 step 129\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 129,
+            "lost": false
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_afc496e0756a44ffad29986c",
+          "request_line_1based": 163,
+          "result_line_1based": 163,
+          "level": 6,
+          "analysis_step": 31,
+          "code": "# Fresh level-6 attempt. Rebuild terrain/validity from current (reset) frame.\na6=current_frame.ascii.split('\\n')\nT6=[[a6[r][c] for c in range(64)] for r in range(64)]\ndef obs6(r,c):\n    if r<1 or r>63 or c<0 or c>63: return True\n    return T6[r][c]=='g'\nfor r in range(64):\n    for c in range(64):\n        EO[r][c]=all(not obs6(x,y) for x,y in diamond(r,c))\n        HO[r][c]=all(not obs6(x,y) for x,y in hubcells(r,c))\nBLOBC={'B1':(6,39),'B2':(17,34),'B3':(23,56),'B4':(30,45),'B5':(33,11),'B6':(44,32),'B7':(45,16),'B8':(55,25),'B9':(57,38)}\nBOX={}\nfor k,(r_,c_) in BLOBC.items():\n    BOX[k]=set((x,y) for x in range(r_-2,r_+3) for y in range(c_-2,c_+3) if 0<=x<64 and 0<=y<64)\nALLBOX=set().union(*BOX.values())\nRING={'R1':(12,51),'R2':(31,29),'R3':(55,11)}\nRINGCELLS=set()\nfor k,(r_,c_) in RING.items():\n    for dr in range(-3,4):\n        for dc in range(-3,4):\n            if abs(dr)+abs(dc)==3 and abs(dr)>0 and abs(dc)>0:\n                RINGCELLS.add((r_+dr,c_+dc))\nprint('blob boxes union',len(ALLBOX),'ring cells',len(RINGCELLS))\nprint('ends ok',all(EO[r][c] for r,c in [(11,11),(19,4),(19,22),(43,49),(57,50)]))\nprint('initial hubA',mean3([(11,11),(19,4),(19,22)]),'hubB',(50,49))\n",
+          "stdout": "blob boxes union 225 ring cells 24\nends ok True\ninitial hubA (16, 12) hubB (50, 49)\n",
+          "result": null,
+          "error": null,
+          "python_state": {
+            "scope": "current level",
+            "name_count": 136,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "cn04-L6-timeout-loss",
+      "game_id": "cn04-2fe56bfb",
+      "kind": "one_timeout_and_incomplete_rebuild",
+      "finding": "line 283 times out at 30s and clears Python state; line 285 rebuild omits readblk and raises NameError. Two lost notifications refer to the timeout/restart sequence, not two independent losses.",
+      "calls": [
+        {
+          "tool_call_id": "call_6c1b5a95c6864b7f8f0b43bb",
+          "request_line_1based": 283,
+          "result_line_1based": 283,
+          "level": 6,
+          "analysis_step": 59,
+          "code": "\ndef solve6fix(SH,cur,P,limit=200000):\n    res=[]\n    def rec(pb, free, used, rel):\n        if len(rel)==5:\n            if not free: res.append(dict(rel))\n            return\n        rem=[o for o in names6 if o not in rel]\n        for X in rem:\n            for kX in range(4):\n                xb,xtp=P[(X,kX)]\n                seen=set()\n                for xt in xtp:\n                    for f in free:\n                        t=(f[0]-xt[0], f[1]-xt[1])\n                        if t in seen: continue\n                        seen.add(t)\n                        xbA={(p[0]+t[0],p[1]+t[1]) for p in xb}\n                        if xbA & (pb|used): continue\n                        xtpA={(p[0]+t[0],p[1]+t[1]) for p in xtp}\n                        if xtpA & pb: continue\n                        if xtpA & (used-free): continue\n                        rec(pb|xbA, (free-xtpA)|(xtpA-free), used|xtpA, dict(rel,**{X:(t,kX)}))\n    for kv in range(4):\n        gb,gtp=P[('G',kv)]\n        rec(set(gb), set(gtp), set(gtp), {'G':((0,0),kv)})\n    return res\nprint('current-state sols', len(solve6fix(SH,cur,P)))\n",
+          "stdout": "",
+          "result": null,
+          "error": "Tool timed out after 30s. Python variables for this level were cleared; rebuild needed state. Executed actions were kept and will not be replayed.",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 0,
+            "lost": true
+          },
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_63dd6b75fd3343bea7953096",
+          "request_line_1based": 285,
+          "result_line_1based": 285,
+          "level": 6,
+          "analysis_step": 59,
+          "code": "\nG_body={(2,2),(2,3),(2,4),(2,5),(2,6),(3,2),(3,6),(4,2),(5,2),(6,2),(6,3)}; G_tips={(4,6),(6,4),(7,2)}\nO_body={(2,16),(2,17),(2,18),(2,19),(3,16),(3,19),(4,19),(5,19)}; O_tips={(4,16),(5,18)}\nY_body={(7,13),(8,8),(8,9),(8,13),(9,8),(9,13),(10,8),(10,13),(11,8),(11,9),(11,10),(11,11),(11,12),(11,13)}\nY_tips={(7,9),(7,12),(8,14),(9,7),(12,8),(12,13)}\nS_body={(14,2),(15,2),(16,2),(17,2),(18,2)}; S_tips={(13,2),(18,3)}\nbl=readblk(current_frame)\nT_body=set(bl.get('p',set())); T_tips=set(bl.get('R',set()))-Y_tips\nprint('T_body n',len(T_body),sorted(T_body)); print('T_tips',sorted(T_tips))\nprint('other R',sorted(set(bl.get('R',set()))&Y_tips))\nSH6={'G':(G_body,G_tips),'O':(O_body,O_tips),'Y':(Y_body,Y_tips),'T':(T_body,T_tips),'S':(S_body,S_tips)}\nnames6=['G','O','Y','T','S']\nCUR={k:base_of(*v) for k,v in SH6.items()}\nP6={}\nfor k,(bd,tp) in SH6.items():\n    bb=CUR[k]\n    nb={(p[0]-bb[0],p[1]-bb[1]) for p in bd}; nt={(p[0]-bb[0],p[1]-bb[1]) for p in tp}\n    for kk in range(4): P6[(k,kk)]=pose4(nb,nt,kk)\n    print(k,'syms',[k2 for k2 in range(1,4) if P6[(k,0)]==P6[(k,k2)]])\nprint('CUR',CUR)\n",
+          "stdout": "",
+          "result": null,
+          "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 7, in <module>\nNameError: name 'readblk' is not defined",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 8,
+            "lost": true
+          },
+          "function_retention": null
+        }
+      ]
+    },
+    {
+      "id": "cn04-L3-level-boundary",
+      "game_id": "cn04-2fe56bfb",
+      "kind": "intentional_level_scope_rebuild_cost",
+      "finding": "After entering L3, line 117 executes a click then posnow2 is undefined. This is an earlier-level helper, not evidence that same-level persistence failed.",
+      "calls": [
+        {
+          "tool_call_id": "call_ed3d151581fc46dfbd9d0dbe",
+          "request_line_1based": 117,
+          "result_line_1based": 117,
+          "level": 3,
+          "analysis_step": 20,
+          "code": "\n# probe: select green, move right 4 so tips overlap charcoal cells\nr=action([{'action':'MOUSE','row':15,'col':15}])\np=posnow2(); print('after click', p)\nr=action([{'action':'RIGHT'},{'action':'RIGHT'},{'action':'RIGHT'},{'action':'RIGHT'}])\nprint('after right4', posnow2(), 'level', current_frame.level)\nm2=cmap(current_frame)\nfrom collections import Counter\nprint(Counter(v for k2,v in m2.items() if k2[0]>2))\n",
+          "stdout": "[action] MOUSE(row=15, col=15) -> effect\n",
+          "result": null,
+          "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nNameError: name 'posnow2' is not defined",
+          "python_state": {
+            "scope": "current level",
+            "name_count": 41,
+            "lost": false
+          },
+          "function_retention": null
+        }
+      ]
+    }
+  ],
+  "causal_limits": [
+    "Each arm is one full public-pool run; sampled candidate adoption chains do not isolate a causal score effect.",
+    "No baseline Python-request behavior was compared in this manual audit.",
+    "AST candidate counts are search aids and are not manually verified adoption rates.",
+    "Request logs carry tool outputs into later requests, so final tool results may be absent; observed deduplicated outputs are a lower bound on completed calls.",
+    "Aggregate token counters use distinct action-attached and analyzer-reported accounting; do not add the two."
+  ]
+}
