@@ -1,51 +1,32 @@
-# 026 失败前缀修复诊断：确定性回放与宿主修复分支（CPU 研究）
+# 026 失败前缀修复诊断：最终报告（保留为诊断，不进候选）
 
-日期：2026-10-19。无 GPU、无模型调用。脚本 `scripts/replay_026_prefix.py`、`scripts/build_026_fork.py`、`scripts/check_026_probe_budget.py`；派生 `experiments/026-repair-cpu/`。本轮只交付 CPU 研究半边（回放＋分叉输入＋配额守卫）；A/B 对照仍需 GPU，见末节待办。
+**问题**：在记录的失败状态给模型一条宿主重算的证据，能否让它自行纠正并恢复通关？
+**结论**：不能（有效零结果）。026 保留为诊断结果，不建在线触发器、不占正式候选名额。
 
-## 1. 切入点与证据（全部来自已落盘日志，无新采集）
+## 1. 有效实验 v6（2026-10-20，`jiyujia/arc3-026-failure-repair` v6）
 
-| 前缀 | 切入 T（累计已执行动作 / step / 关） | 故障证据 |
-|---|---|---|
-| ft09 L3（015 baseline） | 11 / 12 / L3（rec 14） | L3 起模型的 legend 转抄把 `gWg/WOg/WWW` 写成 `WOW`（rec 18 起 tool stdout 的 target legend grid，analysis_step 5–10 在 L3 耗 91 动作；正确路径约 14）。B 在 L3 入口先做 0 动作重算。 |
-| tr87 L5（016 pace_1x） | 132 / 133 / L5（rec 60） | 把 tile top 当 ink top，15 黑点裁成 11，轮盘搜索 `HITS []`（rec 104，analysis_step 17）。B 在 rec 60 状态先重跑裁剪＋搜索函数。 |
-| m0r0 L1（016 baseline） | 22 / 23 / L1（rec 36） | 随后 18 步循环第 2 步预测 `(44,44)` vs 实际 `(44,34)`（rec 36 tool stdout `(1,'RIGHT',False,...)`），仍继续 16 步。B 在 T 点先做一步预测-实际比对。自然修模对照：同局 rec 78/88（L2）。 |
-| r11l（016 baseline，正常对照） | 40 / 41 / L3（rec 110） | 第 111 行真实跨关。检验 B 不误伤正常通关。 |
+3 个合法工具边界切点（前一 tool 已返回、下一请求未发出）：ft09 L3（cum 11/rec 14，legend 误转抄）、tr87 L5（cum 132/rec 60，裁剪误识）、r11l L3（cum 40/rec 110，正常对照）。m0r0 暂缓：切点在 18 动作批调用内部，恢复不了循环位置且整段 tool 输出已含未来。双臂 exit 0（A 621s / B 483s），执行链完整：重算送达（B prompt 命中）、turn 正常（0 个 400）、恢复未被清空。
 
-## 2. 确定性回放（fidelity 门）
-
-`benchmark.json` 的逐动作历史在离线 Arcade 从头执行，四局检查点（每条“executed N … step S, level L”用户消息去重后）**100% 对齐**：ft09 13/13，tr87 16/16，m0r0 50/50，r11l 32/32。对齐规则：关号精确相等；`step = 回放步数 + 1（初始项）+ 死亡次数`——四局死亡均为 0，故 `step = 回放步数 + 1`。结果：`experiments/026-repair-cpu/replay-fidelity.json`。四局环境均确定（ft09/m0r0/r11l 无随机；tr87 用 `random.Random(level_seed)` 分关播种），与 024 的 tt03 全局 `random` 问题无关。
-
-## 3. 分叉输入（CPU 已建成）
-
-每前缀 `experiments/026-repair-cpu/fork-<game>/` 含：`tool_runtime_state.json`（Frame/HistoryEntry 回放写出，`load_runtime_state` 往返校验通过）、`conversation.json`（切入记录消息）、`kept-functions.json`（prompt 中解析出的保留函数名）。见 `fork-manifest.json`。**已知缺口**：请求日志不保存 `_kept_functions` 源码，B 分支修复必须自包含（带数据参数重定义 helper），输出经 stdout（→`_history_messages`）或顶层 `def`（→`_kept_functions`）交回主循环；不假设普通全局变量跨回合存活（009 底座每 `python` 调用是全新子进程）。
-
-## 4. 配额守卫（CPU 单元验证 14/14）
-
-`src/arc3_research/probe_budget.py` 的 `ProbeBudget`/`run_probe_batch`：每次真实下发前 `request()`，配额耗尽/过关/死亡返回带 `stop_reason`（`probe_budget_reached`/`boundary_*`）的正常字典并截断剩余批次，**不抛未捕获异常**（否则整段 stdout 与已定义函数被丢弃）。K=0 为纯重算。覆盖：12 步计划取 3、K=0 零下发、关卡/死亡边界优先、欠配额无截断、非法配额构造期拒绝、交接字段形状。修复了 024 `stall_probe.py` 的事后扣减缺陷（整批 `step3()` 一次下发绕过 3 步窗口）。
-
-在线接线（二选一，GPU 时定）：(b) 宿主把探测拆成单动作 `step_env` 调用、每次查守卫——记账精确，推荐；(a) 装 `action_guard_hook` 按位置否决——在拒绝/无效动作处记账有偏差。两种都不改求解器源码。
-
-## 5. 待办（需 GPU，约 1h 预算）
-
-同一切入状态、共享剩余预算：A 臂原策略直跑；B 臂先跑 0 动作重算（仅确认失败时才申请至多 3 真实探测），再继续原循环（独立 Arcade 实例或 `/flush_cache` 隔离）。判据：B 是否真正改变随后动作并恢复通关；r11l 对照是否零误伤。若无增量恢复或频繁误伤，停掉该实现，不做在线触发器。
-
-## 2026-10-20 评审修正
-1. 停止路径：`ProbeBudget.stop_payload()` 普通 dict 不能终止模型 Python 循环；v1 的 guard 从未真正接线（构造了但没调用）。改为 K=0 重算：`install_zero_env_guard` 包 analyzer 实例 `_action_guard_hook`（每轮 analyze 重新抓取，无需底座补丁，与计时/观察器补丁无安装顺序耦合），拒绝走 solver 守卫路径（`solver.py:1047-1073` → 拒绝 payload `1136-1155` → 沙箱不可捕获异常，中断片段但保留 stdout 与已保留函数）。纯 Python 重算不经过该 hook，保持允许。`probe_budget.py` 与模块 docstring 中"永不抛异常/会丢输出"的旧说法已更正。
-2. 切点边界：ft09 cut（cum 11 / rec 14）经核对是合法工具边界——rec14=request、rec15=同会话response（21 条消息完全相同）、rec16 前 21 条与 rec14 一致并新起 assistant turn；第 7 个 tool（含 6 动作批）已返回，无在途 Python、无局部状态可泄漏。m0r0 批内切点暂缓（只恢复消息/函数恢复不了循环位置，且整段 tool 输出已含后 16 步）。
-
-## v4 尸检（A/B void）+ v5
-v4 双臂 exit 0（A 666s / B 755s），但比较无效，两处实证：
-1. warm 恢复被静默清空：恢复写在 play() 之前，首个 analyze() 内 `_ensure_session`（`tool_agent.py:3605`）因目录不符清掉历史与函数。B prompt 日志 `HOST RECHECK` 命中 0、恢复的历史内容命中 0。A ft09 的 +2 关是冷启动轶事（n=1），不能归因。
-2. K=0 guard 未生效：延续段执行了 30/17/8/1 个后T动作。机制：沙箱只对封闭 stop_reason 集（reset_not_first/stale_state/known_death/repeated_action_in_state/known_noop）抛不可捕获中断（`python_tool_sandbox.py:513-533`），自定义 `probe_budget_reached` 直接穿透、循环继续。专用预算停止需底座支持（blocked）。
-v5：恢复移到显式 `_ensure_session(state_path)` 之后（真机 `_ensure_session` 双向验证：seed 后保留、seed 前恢复必清空）；撤掉延续段拒动——K=0 约束的是修复（宿主纯重算，本来就 0 env 动作），续跑自由动作才能观测恢复；guard 函数保留但不安装。
-
-## v5 尸检 + v6
-v5 双臂 exit 0 但 6/6 fork 零续跑：恢复的历史含 `<fork-stripped>` 图片占位，SGLang 以 400 拒绝（`run.log`：`loading IMAGE data ... Non-base64 digit found`），analyzer 连败 11 次直接 gave_up。重算送达了（B prompt 命中 1）但 turn 全死——再次 void。
-v6：build 期直接删除图片段（无 image-only 消息，无需占位；空则补文本句）。`check_026_fork` 新增 `no image parts` 门（正是 v5 缺的那道）。
-
-## v6 结论：有效零结果，026 保留为诊断
-双臂 exit 0（A 621s / B 483s）。执行链终于完整：重算送达（B prompt 命中）、turn 正常（0 个 400）、恢复未被清空。
-- ft09：A/B 首个后T动作完全相同（4 个同坐标 MOUSE），同 +1 关、同分 28.57。重算被送达但零利用——交付≠使用。
+- ft09：A/B 首个后 T 动作完全相同（4 个同坐标 MOUSE），同 +1 关、同分 28.57。重算被送达但零利用——交付≠使用。
 - tr87：首动作仅差一个方向键，双双 +0 关、同分。不同错误机制同样无恢复。
-- r11l 对照：B +12 vs A +1 动作，同关同分，无误伤动作（也没信号可误伤）。
-预注册标准（B 改变后续动作并恢复通关 + 对照干净）未达成。按既定规则：026 保留为诊断结果，不建在线触发器、不占正式候选名额。交付与使用之间的缺口此前多轮已见（017 证据），本次是又一次受控复现。
+- r11l 对照：B +12 vs A +1 动作，同关同分，无误伤。
+
+预注册标准（B 改变后续动作并恢复通关 + 对照干净）未达成。这是“交付与使用”缺口的又一次受控复现（017 行为证据同指向）。
+
+## 2. 切点与回放（CPU，`scripts/replay_026_prefix.py`）
+
+`benchmark.json` 逐动作历史离线重放，四局检查点 111/111 精确对齐（ft09 13、tr87 16、m0r0 50、r11l 32；`step = 回放步数 + 1 + 死亡数`，四局死亡为 0）。四局环境确定（tr87 用 `random.Random(level_seed)` 分关播种），与 024 tt03 全局 `random` 问题无关。产物 `experiments/026-repair-cpu/`（fork 态、会话、保真度）。
+
+## 3. 三次 void 的机制教训（均有实证，非推测）
+
+1. **v4：恢复被静默清空**。恢复写在 play() 之前，首个 analyze() 内 `_ensure_session`（`tool_agent.py:3605`）因目录不符清掉历史与函数——B prompt `HOST RECHECK` 0 命中。修复：显式 `_ensure_session(state_path)` 之后再恢复（真机双向验证：seed 后保留、seed 前恢复必清空；`scripts/check_026_fork.py` 钉住顺序断言）。
+2. **v4：K=0 guard 名存实亡**。沙箱只对封闭 stop_reason 集（reset_not_first/stale_state/known_death/repeated_action_in_state/known_noop）抛不可捕获中断（`python_tool_sandbox.py:513-533`），自定义 `probe_budget_reached` 直接穿透（30 个后 T 动作照常执行）。专用预算停止需底座支持（blocked）；且概念上 K=0 约束的是修复（宿主纯重算），续跑必须能自由动作才能观测恢复。
+3. **v5：图片占位 400**。恢复历史的 `<fork-stripped>` image_url 被原样发给 SGLang（`Non-base64 digit found`），analyzer 连败 11 次、6/6 fork 零续跑。修复：build 期直接删图片段（无 image-only 消息），`no image parts` 门进 CPU 检查。
+
+`ProbeBudget` 预下发记账保留（`src/arc3_research/probe_budget.py`，14/14 CPU 验证），但停止语义以第 2 条为准：普通返回 dict 不能终止模型循环。
+
+## 4. 边界
+
+- 单固定顺序 pair、熟悉前缀，非隐藏分、非因果证明；n=1/局，方差声明同 025。
+- 在线触发合同未建：若将来重启，需先解决专用预算停止的底座支持，并与诊断同执行路径；仍靠人工定点则永久保留为诊断。
+- 输入清单：`docs/handoff/025-026-input-manifest.md`；启动记录：`experiments/026-launch.json`。
