@@ -42,3 +42,10 @@ v5：恢复移到显式 `_ensure_session(state_path)` 之后（真机 `_ensure_s
 ## v5 尸检 + v6
 v5 双臂 exit 0 但 6/6 fork 零续跑：恢复的历史含 `<fork-stripped>` 图片占位，SGLang 以 400 拒绝（`run.log`：`loading IMAGE data ... Non-base64 digit found`），analyzer 连败 11 次直接 gave_up。重算送达了（B prompt 命中 1）但 turn 全死——再次 void。
 v6：build 期直接删除图片段（无 image-only 消息，无需占位；空则补文本句）。`check_026_fork` 新增 `no image parts` 门（正是 v5 缺的那道）。
+
+## v6 结论：有效零结果，026 保留为诊断
+双臂 exit 0（A 621s / B 483s）。执行链终于完整：重算送达（B prompt 命中）、turn 正常（0 个 400）、恢复未被清空。
+- ft09：A/B 首个后T动作完全相同（4 个同坐标 MOUSE），同 +1 关、同分 28.57。重算被送达但零利用——交付≠使用。
+- tr87：首动作仅差一个方向键，双双 +0 关、同分。不同错误机制同样无恢复。
+- r11l 对照：B +12 vs A +1 动作，同关同分，无误伤动作（也没信号可误伤）。
+预注册标准（B 改变后续动作并恢复通关 + 对照干净）未达成。按既定规则：026 保留为诊断结果，不建在线触发器、不占正式候选名额。交付与使用之间的缺口此前多轮已见（017 证据），本次是又一次受控复现。
