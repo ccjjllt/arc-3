@@ -24,8 +24,8 @@
   ],
   "hard_limit_seconds": 5400,
   "kernel_id": "jiyujia/arc3-026-failure-repair",
-  "kernel_version": 3,
-  "notebook_sha256": "c0126f5abca0079469657703d397181a8e8a676b13b2325c19c245b68a83f3ea",
+  "kernel_version": 4,
+  "notebook_sha256": "0758be3453e66db9b26bb902ba326296939f82b9932acf1436d891c60ab990b1",
   "notebook_size_bytes": 939194,
   "prepared_at_utc": "2026-10-19",
   "requested_arm_seconds": 1800,
@@ -35,5 +35,11 @@
   "v1_failure": "KeyError action in replay loop (compact fork-input schema); fixed consumer to accept both shapes, pinned in check_026_fork.py",
   "v1_quota_used_h": 0.17,
   "v2_result": "repair_A ok (4 forks, but 0-2 post-T actions: cold-start re-exploration exhausted 250s caps); repair_B never ran (inter-arm cache-flush flake)",
-  "v3_change": "warm restart: recorded text-only conversations restored (images stripped, 163KB packed); B appends host recheck; kept={} both arms (documented)"
+  "v3_change": "warm restart: recorded text-only conversations restored (images stripped, 163KB packed); B appends host recheck; kept={} both arms (documented)",
+  "v4_change": "3 forks (m0r0 deferred: batch-internal cut); K=0 guard-hook refusal installed per fork; warm restart kept",
+  "forks": [
+    "ft09-0d8bbf25",
+    "tr87-cd924810",
+    "r11l-495a7899"
+  ]
 }
