@@ -24,8 +24,8 @@
   ],
   "hard_limit_seconds": 5400,
   "kernel_id": "jiyujia/arc3-026-failure-repair",
-  "kernel_version": 4,
-  "notebook_sha256": "0758be3453e66db9b26bb902ba326296939f82b9932acf1436d891c60ab990b1",
+  "kernel_version": 5,
+  "notebook_sha256": "08007f74e0942b2a7b706a98755b83c0719e4572ecb076e590092a6437b17705",
   "notebook_size_bytes": 939194,
   "prepared_at_utc": "2026-10-19",
   "requested_arm_seconds": 1800,
@@ -41,5 +41,7 @@
     "ft09-0d8bbf25",
     "tr87-cd924810",
     "r11l-495a7899"
-  ]
+  ],
+  "v4_result": "VOID: warm history wiped by _ensure_session (0 recheck hits in B prompts); K=0 guard non-terminating (30 post-T actions executed); A ft09 +2 levels is cold-start anecdote",
+  "v5_change": "init-then-restore (verified both directions on real _ensure_session); no continuation refusal; K=0 binds repair only"
 }
