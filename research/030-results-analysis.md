@@ -1,6 +1,6 @@
 # 030 关内持久Python：全池正收益，推进真实提交
 
-2026-10-21，北京时间。执行版本 `zhuating/arc3-030-capability-comparison` v2；模型与服务沿用009，唯一能力变化是当前关内保留真实Python计算状态。**决定直接推进候选自身保存运行及真实提交，不追加一轮全池确认。** 新正式submission尚未创建。
+2026-10-21，北京时间。执行版本 `zhuating/arc3-030-capability-comparison` v2；模型与服务沿用009，唯一能力变化是当前关内保留真实Python计算状态。**已据本轮正收益完成保存流程并真正提交57447779，状态PENDING**，未追加全池确认。尚无新正式分数。
 
 ## 同预算结果
 
@@ -35,6 +35,6 @@
 
 ## 正式推进
 
-`zhuating/arc3-030-persistent-submission` **v1已推送，正在候选自身保存运行**。Notebook SHA256 `cf08d5876048343b86102917e171d77b2c27b8e65de431afc7fb22d76befb95a`，helper SHA256 `084c3d46e855a32b0482b49139f7135b2c5a8174c9d51eeeeb60c49d91a6428e`；嵌入helper与研究v2一致。保留009动态live gateway、31920秒solver、9小时限制、模型及服务；不装028或研究hooks。
+`zhuating/arc3-030-persistent-submission` **v1自身保存已COMPLETE／passed，已用于真实submission57447779**。Notebook SHA256 `cf08d5876048343b86102917e171d77b2c27b8e65de431afc7fb22d76befb95a`，helper SHA256 `084c3d46e855a32b0482b49139f7135b2c5a8174c9d51eeeeb60c49d91a6428e`；嵌入helper与研究v2一致。保留009动态live gateway、31920秒solver、9小时限制、模型及服务；不装028或研究hooks。
 
-该运行沿用既定两题300秒真实模型保存流程。保存结果不是正式分数；成功后使用同一准确版本真正competition submit，记录ID再跟进COMPLETE。不要再push此slug覆盖v1。原009 v2／57101330／public31.16保留。[当前保存／提交记录](../experiments/030-submission-launch.json)。031只是备用，当前不占GPU。
+该运行沿用既定两题300秒真实模型保存流程，实际sb26有114个非RESET动作、cd82有21个，health200和清理均通过；保存结果不是正式分数。下载后再次确认latestv1／cell源码一致，用同一准确版本真正competition submit。新ID57447779于北京时间01:31创建，状态PENDING／public为空；后续只跟进该ID，不再push或重复submit。原009 v2／57101330／public31.16保留。[正式记录](../experiments/030-formal-submission.json)、[保存报告](../experiments/030-submission-smoke/save-smoke-report.json)。031只是备用，当前不占GPU。

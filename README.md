@@ -1,6 +1,6 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：尽快确认提分候选并正式提交，争取奖牌；金牌与奖金作为进一步目标。执行更新：**2026-10-21 01:10，Asia/Shanghai**。030持久Python全25题同预算均分 **42.6134→47.1699（+4.5565）**，全通5→8、总关103→102；真实跨调用数据及动作采用已确认，直接推进正式评测。[完整结果](research/030-results-analysis.md)。候选自身保存Notebook `zhuating/arc3-030-persistent-submission` v1已推送，正在RTX PRO6000运行；目前尚无新正式submission。[保存／提交记录](experiments/030-submission-launch.json)。028修复无新增关卡，已关闭。zhuating CLI在01:05剩余24.08h是历史快照。赛情仍以10/20 19:44快照为准，原流程见[029交接](docs/handoff/029-score-and-submission-handoff.md)。
+目标：尽快确认提分候选并正式提交，争取奖牌；金牌与奖金作为进一步目标。执行更新：**2026-10-21 01:31，Asia/Shanghai**。030已真正提交，**submission 57447779／PENDING**，准确版本 `zhuating/arc3-030-persistent-submission` v1，尚无新正式分数。[正式记录](experiments/030-formal-submission.json)。030全25题同预算均分 **42.6134→47.1699（+4.5565）**，全通5→8、总关103→102；真实数据／动作复用和候选自身GPU保存均已完成。[研究结果](research/030-results-analysis.md)。原最佳009／57101330／31.16保留，自动跟进本轮新ID至COMPLETE。028关闭；CLI在01:32剩余23.74h是历史快照。赛情仍以10/20 19:44快照为准，原流程见[029交接](docs/handoff/029-score-and-submission-handoff.md)。
 
 **正式版本仍为009 v2 / submission 57101330 / public 31.16。** 10/20 API列本队ccjjllt第384/4536（teamId 17139255，历史队名jiyujia）。当前铜牌附近约30.83、银牌附近32.12、金牌附近37.98（估算第19名），最终看私榜、有效队数及资格。比赛截止北京时间11/3 07:59。公开开发池分数不能直接换算隐藏LB。[当前榜单与配额原件](research/snapshots/2026-10-20-handoff/)、[10/18历史赛情与数据研究](research/017-competition-update.md)。
 
@@ -20,7 +20,7 @@
 | 021 预测失配停批 | jiyujia v1 COMPLETE；36.9270→29.3560，41→38关，全通3→0 | 接口未被调用，不提交，不重复本前缀 |
 | 027 tail确认 | 50.4293→44.4542；112→101关，全通8→7 | 014收益未复现，关闭该线 |
 | 028 程序修复 | ft09真实代码执行且采用但关键像素仍错；tu93修复超时；三对均无新增关 | 关闭本版，不扩全池、不为导出故障重跑 |
-| 030 关内持久Python | v2全25题42.6134→47.1699（+4.5565）；全通5→8，总关103→102 | 已进入正式候选保存v1；[结果](research/030-results-analysis.md)，尚无新submission |
+| 030 关内持久Python | v2全25题42.6134→47.1699（+4.5565）；全通5→8，总关103→102 | 正式57447779已提交，PENDING；[正式记录](experiments/030-formal-submission.json) |
 
 [016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；020改为复用008区域读取器直接交付程序输入；FP8作为支线，均不叠加018提示。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 

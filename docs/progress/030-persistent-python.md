@@ -1,6 +1,6 @@
 # 030 关内持久Python执行进展
 
-最新阶段（2026-10-21 01:10北京时间）：030 v2全池+4.5565，真实跨调用数据／动作复用已确认；候选自己的保存v1已推送，真实RTX PRO6000已确认。优先监控 [保存／提交记录](../../experiments/030-submission-launch.json)，完成后提交同一准确版本。以下保留分阶段历史。
+最新阶段（2026-10-21 01:31北京时间）：**真实submission57447779已创建，状态PENDING**，使用通过真实GPU保存的准确v1；当前尚无新正式分数。优先跟踪 [正式记录](../../experiments/030-formal-submission.json)，不要重复push／submit。以下保留分阶段历史。
 
 2026-10-20 21:05，北京时间。用户已授权实际GPU研究、尽快确认提分并正式提交，并单独授权每15分钟自动续接，直到本轮submission评测完成。
 
@@ -29,3 +29,11 @@ baseline已在同一服务自动接续，每臂7254秒不变，没有再次加�
 **正式候选保存v1已经推送**：`zhuating/arc3-030-persistent-submission`，源hash `cf08d5876048343b86102917e171d77b2c27b8e65de431afc7fb22d76befb95a`，使用与研究v2相同的helper。下一步优先读 [030-submission-launch](../../experiments/030-submission-launch.json)，监控这个已有保存作业；不要重复push或再跑030／031。保存成功后提交该准确版本，之后跟进实际submission ID。
 
 当前还没有新正式submission；保存运行和placeholder不能算正式提交。自动化已经更新到保存／正式提交阶段，保留应用当前配置的30分钟检查节奏（早期文档15分钟是创建时意图），无变化保持安静。实际CLI余额24.08h是01:05快照。
+
+## 01:31真实提交
+
+候选保存v1已COMPLETE：health200、`save-smoke-report.status=passed`，sb26有114非RESET动作／30285记录token、cd82有21动作／33461token；两题状态cancelled均合法。保存整体内部1229.45秒，模型health ready915.28秒，拥有的模型进程组已清理。完整[保存报告](../../experiments/030-submission-smoke/save-smoke-report.json)及[输出hash](../../experiments/030-submission-smoke/output-manifest.json)保留；未把保存分数或placeholder当隐藏榜分数。
+
+下载前后latest均为v1，远端所有cell源码与冻结Notebook一致。查询当日额度为1后，已用 `-k zhuating/arc3-030-persistent-submission -v1 -f submission.parquet` 真正competition submit；CLI退出0、返回当天剩余0。随后API新增 **57447779**，日期 `2026-10-20T17:31:02.180UTC`，描述与030源码hash完全一致，状态PENDING、public为空。[正式记录](../../experiments/030-formal-submission.json)。
+
+自动续接已改为只跟踪57447779至COMPLETE，再报告实际分数并停用；不重复消耗每日机会，不启动031。原009 v2／57101330／31.16保留。保存后CLI余额23.74h仅为快照，不据此推导正式评测计费。
