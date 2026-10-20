@@ -1,0 +1,225 @@
+[
+  {
+    "request_log": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+    "unique_tools": 135,
+    "error_count": 15,
+    "animation_candidates": [],
+    "error_examples": [
+      {
+        "first_record_line_1based": 7,
+        "message_index": 7,
+        "tool_call_id": "call_e57b413cdbfd45dcb271e5f6",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 32, in <module>\nKeyError: (5, 5)"
+      },
+      {
+        "first_record_line_1based": 23,
+        "message_index": 27,
+        "tool_call_id": "call_d49ebc008fbe4398a032258f",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 12, in <module>\nStaleStateActionError: RIGHT was not executed. The action immediately before it, UP, was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)"
+      },
+      {
+        "first_record_line_1based": 29,
+        "message_index": 35,
+        "tool_call_id": "call_acc9595d342b49efb256b5ab",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 27, in <module>\nNameError: name 'j' is not defined"
+      },
+      {
+        "first_record_line_1based": 57,
+        "message_index": 74,
+        "tool_call_id": "call_22291e82792a48e9abd4d545",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 14, in <module>\n  File \"<python_tool>\", line 12, in facings\nIndexError: list index out of range"
+      },
+      {
+        "first_record_line_1based": 81,
+        "message_index": 51,
+        "tool_call_id": "call_b2f58fc970da4ea59dbafc13",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 7, in <module>\nValueError: too many values to unpack (expected 2)"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/027-tail-confirm/baseline/sc25-635fd71a_p0_requests.jsonl",
+    "unique_tools": 101,
+    "error_count": 10,
+    "animation_candidates": [
+      {
+        "first_record_line_1based": 9,
+        "message_index": 10,
+        "tool_call_id": "call_042f8afc21fa42d5b8162ec1",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nKeyError: 'action'"
+      },
+      {
+        "first_record_line_1based": 13,
+        "message_index": 15,
+        "tool_call_id": "call_8e4614d3c8a842da90e17fc7",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 16, in <module>\nKeyError: 'steps'"
+      }
+    ],
+    "error_examples": [
+      {
+        "first_record_line_1based": 9,
+        "message_index": 10,
+        "tool_call_id": "call_042f8afc21fa42d5b8162ec1",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nKeyError: 'action'"
+      },
+      {
+        "first_record_line_1based": 13,
+        "message_index": 15,
+        "tool_call_id": "call_8e4614d3c8a842da90e17fc7",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 16, in <module>\nKeyError: 'steps'"
+      },
+      {
+        "first_record_line_1based": 53,
+        "message_index": 70,
+        "tool_call_id": "call_07a97911366c49888f98d6a8",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nTerminalStateActionError: the previous action reported level_completed. A new level has been loaded, so the board you planned against is gone and this action was not executed. The next turn begins from the new state."
+      },
+      {
+        "first_record_line_1based": 59,
+        "message_index": 77,
+        "tool_call_id": "call_9d4dae450637458580eef498",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 20, in <module>\n  File \"<python_tool>\", line 19, in knob\n  File \"<python_tool>\", line 3, in comps\nIndexError: list index out of range"
+      },
+      {
+        "first_record_line_1based": 61,
+        "message_index": 80,
+        "tool_call_id": "call_48c81a47bf90448880e56182",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 19, in <module>\nImportError: Module '__main__' is not allowed in the sandbox."
+      }
+    ]
+  },
+  {
+    "request_log": "runs/027-tail-confirm/baseline/re86-8af5384d_p0_requests.jsonl",
+    "unique_tools": 119,
+    "error_count": 11,
+    "animation_candidates": [],
+    "error_examples": [
+      {
+        "first_record_line_1based": 55,
+        "message_index": 71,
+        "tool_call_id": "call_9762a030c69047da97d3f300",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 24, in <module>\n  File \"<python_tool>\", line 13, in move_to\nTypeError: 'NoneType' object is not subscriptable"
+      },
+      {
+        "first_record_line_1based": 101,
+        "message_index": 65,
+        "tool_call_id": "call_74c909b661bb4bdfac188de5",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 8, in <module>\nNameError: name 'objs5' is not defined"
+      },
+      {
+        "first_record_line_1based": 103,
+        "message_index": 67,
+        "tool_call_id": "call_c63f8ec07f4340209603f61a",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 33, in <module>\nTypeError: 'NoneType' object is not subscriptable"
+      },
+      {
+        "first_record_line_1based": 107,
+        "message_index": 72,
+        "tool_call_id": "call_bb5d579fd3bd4956b2e0843c",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 24, in <module>\nNameError: name 'positions' is not defined"
+      },
+      {
+        "first_record_line_1based": 117,
+        "message_index": 84,
+        "tool_call_id": "call_ae4ec39dbbff45a1be5fafa3",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nValueError: not enough values to unpack (expected 3, got 2)"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/015-native-adoption/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+    "unique_tools": 34,
+    "error_count": 2,
+    "animation_candidates": [],
+    "error_examples": [
+      {
+        "first_record_line_1based": 43,
+        "message_index": 56,
+        "tool_call_id": "call_f54dfd6f1808408fb5d577ec",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nNameError: name 'L' is not defined"
+      },
+      {
+        "first_record_line_1based": 53,
+        "message_index": 69,
+        "tool_call_id": "call_a5b75965efa4487195e74e42",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 15, in <module>\nKeyError: 0"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/016-pace-allocation-jiyujia/baseline/m0r0-492f87ba_p0_requests.jsonl",
+    "unique_tools": 111,
+    "error_count": 8,
+    "animation_candidates": [],
+    "error_examples": [
+      {
+        "first_record_line_1based": 35,
+        "message_index": 43,
+        "tool_call_id": "call_fc52068700fe4fe59b1fc60b",
+        "error": "python requires a non-empty `code` string."
+      },
+      {
+        "first_record_line_1based": 57,
+        "message_index": 72,
+        "tool_call_id": "call_d90f4bd94fd246a89d9521e2",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 3, in <module>\nTerminalStateActionError: the previous action reported level_completed. A new level has been loaded, so the board you planned against is gone and this action was not executed. The next turn begins from the new state."
+      },
+      {
+        "first_record_line_1based": 63,
+        "message_index": 79,
+        "tool_call_id": "call_477f82616c9b47f38d93b811",
+        "error": "python requires a non-empty `code` string."
+      },
+      {
+        "first_record_line_1based": 107,
+        "message_index": 53,
+        "tool_call_id": "call_f0b6660c53a04d4bbf531e4b",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 3, in <module>\nStaleStateActionError: UP was not executed. The action immediately before it, RIGHT, was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)"
+      },
+      {
+        "first_record_line_1based": 111,
+        "message_index": 59,
+        "tool_call_id": "call_d91a425f9d24434aa730d982",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 13, in <module>\nStaleStateActionError: UP was not executed. The action immediately before it, UP, was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl",
+    "unique_tools": 51,
+    "error_count": 7,
+    "animation_candidates": [],
+    "error_examples": [
+      {
+        "first_record_line_1based": 35,
+        "message_index": 42,
+        "tool_call_id": "call_ad4209f4d1f14ce4a32fc1fb",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nIndexError: list index out of range"
+      },
+      {
+        "first_record_line_1based": 39,
+        "message_index": 47,
+        "tool_call_id": "call_02e03c0e717e4777b242a757",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 16, in <module>\nNameError: name 'v' is not defined"
+      },
+      {
+        "first_record_line_1based": 45,
+        "message_index": 55,
+        "tool_call_id": "call_cb41a4418bd04bcf8e84d74b",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 28, in <module>\nImportError: Module 'builtins' is not allowed in the sandbox."
+      },
+      {
+        "first_record_line_1based": 59,
+        "message_index": 72,
+        "tool_call_id": "call_bbf0cd2a7b1d4c8b9801e3d6",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 24, in <module>\nAssertionError: ('#####', '#..#.', '...#.', '#..#.', '#####')"
+      },
+      {
+        "first_record_line_1based": 77,
+        "message_index": 96,
+        "tool_call_id": "call_070ea937d1be4f119561884e",
+        "error": "Python syntax error: invalid syntax (<python_tool>, line 24)"
+      }
+    ]
+  }
+]

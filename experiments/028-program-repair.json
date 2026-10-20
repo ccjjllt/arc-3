@@ -1,0 +1,51 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "repair_forks": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "repair_forks"
+  ],
+  "budget_formula": "Model loading once; six concurrent 250-second continuations, 600s runner allowance, 3600s outer cap.",
+  "comparison_note": "Each case A/B starts from original replayed state, 250 wall seconds and at most 30 continuation actions. B repair time and code execution included. ft09 and tu93 B each allow one repair call; r11l B is online false-trigger control. Six sessions share GPU; diagnostic only, not full-pool score.",
+  "expected_gpu_hours": 0.35,
+  "game_count": 3,
+  "game_source": "experiments/028-fork-package.json.gz.b64 exact recorded states",
+  "games": [
+    "ft09-0d8bbf25",
+    "tu93-0768757b",
+    "r11l-495a7899"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 3600,
+  "id": "028-program-repair",
+  "inference_timing": false,
+  "kernel_id": "zhuating/arc3-028-program-repair",
+  "kernel_title": "ARC3 028 Program Repair",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "Executable model-generated program repair and actual continuation from three recorded states; six concurrent A/B sessions on one loaded model.",
+  "reference_arm": "repair_forks",
+  "request_deadline": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": false,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 600,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": false,
+  "selection_note": "Inspect real changed code, executed output, use by subsequent actions and paired recovery. No repeated prompt search. Proceed promptly on concrete incremental recovery.",
+  "startup_limit_seconds": 1200,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true
+}

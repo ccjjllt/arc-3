@@ -1,0 +1,386 @@
+{
+  "scope": "Existing GPU 028 v1 evidence only; no model calls or rerun",
+  "arm_status": "failed",
+  "export_error": "ActionRecord.get failed only after six sessions finished",
+  "sessions": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "arm": "A",
+      "cut": 27,
+      "initial_levels_completed": 2,
+      "state": "gave_up",
+      "levels_completed": 2,
+      "levels_available": 6,
+      "score_display": 14.29,
+      "total_actions": 28,
+      "analyzer_reported_tokens": 12968,
+      "added_levels": 0,
+      "continuation_actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        }
+      ],
+      "continuation_action_count": 1,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/ft09-0d8bbf25_A.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 12968,
+      "reported_repair_completion_tokens": 0,
+      "token_accounting_residual": 0,
+      "repair": null,
+      "request_log": "runs/028-program-repair/repair_forks/ft09-0d8bbf25_A_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/ft09-0d8bbf25_A.txt",
+      "request_log_sha256": "d3933b25c4f1a359fcef777a5d89deea42f15810bbcab755a3e9f15d67635b3e"
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "arm": "B",
+      "cut": 27,
+      "initial_levels_completed": 2,
+      "state": "gave_up",
+      "levels_completed": 2,
+      "levels_available": 6,
+      "score_display": 14.29,
+      "total_actions": 28,
+      "analyzer_reported_tokens": 16297,
+      "added_levels": 0,
+      "continuation_actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        }
+      ],
+      "continuation_action_count": 1,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/ft09-0d8bbf25_B.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 15181,
+      "reported_repair_completion_tokens": 1116,
+      "token_accounting_residual": 0,
+      "repair": {
+        "kind": "program_repair",
+        "reason": "recorded_failure",
+        "calls": [
+          {
+            "index": 1,
+            "usage": {
+              "prompt_tokens": 58470,
+              "total_tokens": 59586,
+              "completion_tokens": 1116,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 200
+            },
+            "finish_reason": "tool_calls",
+            "code": "\ndef analyze(frame):\n    \"\"\"Self-contained: extract cell grid + pattern legends from a frame view.\"\"\"\n    ns = frame.segmentation['nodes']\n    pieces = {}\n    cells = {}\n    for n in ns:\n        b = n['boundary']; rs = [p[0] for p in b]; cs = [p[1] for p in b]\n        r0, r1, c0, c1 = min(rs), max(rs), min(cs), max(cs)\n        if n['pixels'] == 36 and r1 - r0 == 5 and c1 - c0 == 5:\n            cells[(r0, c0)] = n['color']\n        elif (r1 - r0) <= 5 and (c1 - c0) <= 5 and n['pixels'] < 36 and r0 >= 2:\n            for r in range(r0, r1 + 1):\n                for c in range(c0, c1 + 1):\n                    pieces[(r, c)] = n['color']\n    rows = sorted({r for r, c in cells})\n    cols = sorted({c for r, c in cells})\n    gidx = {r: i for i, r in enumerate(rows)}; gidy = {c: j for j, c in enumerate(cols)}\n    grid = {(gidx[r], gidy[c]): v for (r, c), v in cells.items()}\n    # pattern cells = 6x6 regions that are NOT single-color cells\n    pats = []\n    for r in rows:\n        for c in cols:\n            if (r, c) not in cells and any((r + i, c + j) in pieces for i in (0, 2, 4) for j in (0, 2, 4)):\n                pats.append((r, c))\n    legends = {}\n    for (pr, pc) in pats:\n        R, C = gidx[pr], gidy[pc]\n        leg = {}\n        for i in range(3):\n            for j in range(3):\n                leg[(R - 1 + i, C - 1 + j)] = pieces[(pr + 2 * i, pc + 2 * j)]\n        legends[(R, C)] = (pieces[(pr + 2, pc + 2)], leg)\n    return grid, legends\n\ndef satisfaction(grid, legends, mode):\n    \"\"\"mode: 'center' => W means pattern center colour; 'other' => W means the other colour;\n       ('global', hi, lo) => W means hi, g means lo for every pattern.\"\"\"\n    out = {}\n    for pcell, (center, leg) in legends.items():\n        ok = bad = 0\n        for key, sub in leg.items():\n            if key == pcell or key not in grid: continue\n            if isinstance(mode, tuple): hi, lo = mode[1], mode[2]\n            else: hi, lo = (center, None)\n            if mode == 'center': want = hi\n            elif mode == 'other': want = lo\n            else: want = hi\n            if mode == 'other': want = hi if sub == 'g' else lo\n            else: want = hi if sub == 'W' else lo\n            if grid[key] == want: ok += 1\n            else: bad += 1\n        out[pcell] = (ok, bad)\n    return out\n\ng, L = analyze(current_frame)\nprint('grid rows', ''.join(sorted({'R'})) if False else '')\nfor r in range(7): print(' ', ''.join(g.get((r, c), '.') for c in range(5)))\nprint('patterns', {k: v[0] for k, v in L.items()})\nfor m in ['center', ('global', 'O', 'R'), ('global', 'R', 'O')]:\n    print(m, satisfaction(g, L, m))\n",
+            "tool_output": "{\n  \"tool\": \"python\",\n  \"function_retention\": \"Retained your function analyze(frame) for later Python calls in this game.\\nRetained your function satisfaction(grid, legends, mode) for later Python calls in this game.\",\n  \"returncode\": 0,\n  \"stdout\": \"grid rows \\n  .ROO.\\n  .O.R.\\n  ORORR\\n  O.R.O\\n  RRORO\\n  .O.O.\\n  .OOO.\\npatterns {(1, 2): 'O', (3, 1): 'R', (3, 3): 'R', (5, 2): 'O'}\\ncenter {(1, 2): (4, 4), (3, 1): (4, 4), (3, 3): (4, 4), (5, 2): (6, 2)}\\n('global', 'O', 'R') {(1, 2): (7, 1), (3, 1): (0, 8), (3, 3): (0, 8), (5, 2): (8, 0)}\\n('global', 'R', 'O') {(1, 2): (1, 7), (3, 1): (8, 0), (3, 3): (8, 0), (5, 2): (0, 8)}\\n\"\n}",
+            "retained_functions": [
+              "analyze",
+              "satisfaction"
+            ]
+          }
+        ],
+        "env_actions_executed": 0,
+        "blocked_action_calls": 0,
+        "status": "executed",
+        "config": {
+          "max_events_per_game": 1,
+          "max_calls_per_event": 1,
+          "max_output_tokens": 4096,
+          "call_timeout_seconds": 60,
+          "event_timeout_seconds": 120,
+          "min_remaining_seconds": 180,
+          "zero_env_actions": true
+        },
+        "event_index": 1,
+        "remaining_seconds": 249.99999499999967,
+        "elapsed_seconds": 50.1901597709998,
+        "transferred_messages": 3,
+        "retained_functions_after": [
+          "analyze",
+          "satisfaction"
+        ]
+      },
+      "request_log": "runs/028-program-repair/repair_forks/ft09-0d8bbf25_B_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/ft09-0d8bbf25_B.txt",
+      "request_log_sha256": "687bce681b0b054917c2e553b991d0031b54d8e8d566a56a1110af60b72a38f9"
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "arm": "A",
+      "cut": 276,
+      "initial_levels_completed": 8,
+      "state": "gave_up",
+      "levels_completed": 8,
+      "levels_available": 9,
+      "score_display": 68.05,
+      "total_actions": 276,
+      "analyzer_reported_tokens": 19973,
+      "added_levels": 0,
+      "continuation_actions": [],
+      "continuation_action_count": 0,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/tu93-0768757b_A.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 18519,
+      "reported_repair_completion_tokens": 0,
+      "token_accounting_residual": 1454,
+      "repair": null,
+      "request_log": "runs/028-program-repair/repair_forks/tu93-0768757b_A_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/tu93-0768757b_A.txt",
+      "request_log_sha256": "27af5200e42663d14e358c3471bdf30b5e1b06a74692c062962f29214e8b7c13"
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "arm": "B",
+      "cut": 276,
+      "initial_levels_completed": 8,
+      "state": "gave_up",
+      "levels_completed": 8,
+      "levels_available": 9,
+      "score_display": 68.05,
+      "total_actions": 285,
+      "analyzer_reported_tokens": 15589,
+      "added_levels": 0,
+      "continuation_actions": [
+        {
+          "id": "ACTION2",
+          "data": {}
+        },
+        {
+          "id": "ACTION2",
+          "data": {}
+        },
+        {
+          "id": "ACTION4",
+          "data": {}
+        },
+        {
+          "id": "ACTION2",
+          "data": {}
+        },
+        {
+          "id": "ACTION3",
+          "data": {}
+        },
+        {
+          "id": "ACTION2",
+          "data": {}
+        },
+        {
+          "id": "ACTION3",
+          "data": {}
+        },
+        {
+          "id": "ACTION2",
+          "data": {}
+        },
+        {
+          "id": "ACTION2",
+          "data": {}
+        }
+      ],
+      "continuation_action_count": 9,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/tu93-0768757b_B.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 15589,
+      "reported_repair_completion_tokens": 0,
+      "token_accounting_residual": 0,
+      "repair": {
+        "kind": "program_repair",
+        "reason": "recorded_failure",
+        "calls": [
+          {
+            "index": 1,
+            "error": "ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=60.0)"
+          }
+        ],
+        "env_actions_executed": 0,
+        "blocked_action_calls": 0,
+        "status": "request_or_code_error",
+        "config": {
+          "max_events_per_game": 1,
+          "max_calls_per_event": 1,
+          "max_output_tokens": 4096,
+          "call_timeout_seconds": 60,
+          "event_timeout_seconds": 120,
+          "min_remaining_seconds": 180,
+          "zero_env_actions": true
+        },
+        "event_index": 1,
+        "remaining_seconds": 249.99999178000007,
+        "elapsed_seconds": 60.31585342900007,
+        "transferred_messages": 1,
+        "retained_functions_after": [
+          "ginfo",
+          "bpath",
+          "step1",
+          "grid2",
+          "pos",
+          "rgrid",
+          "adj",
+          "rstat",
+          "eye",
+          "dist",
+          "bar",
+          "facings",
+          "solve",
+          "solve2",
+          "oroom",
+          "loc",
+          "nbf",
+          "mag",
+          "eyes",
+          "allo",
+          "BC",
+          "bcol",
+          "guarded",
+          "guarded2",
+          "eyes2",
+          "posall",
+          "o1",
+          "o2",
+          "guarded6",
+          "guarded6b",
+          "O2",
+          "guarded6c",
+          "eyes3",
+          "rpos",
+          "bpos",
+          "rinfo",
+          "key",
+          "build8",
+          "snap",
+          "full"
+        ]
+      },
+      "request_log": "runs/028-program-repair/repair_forks/tu93-0768757b_B_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/tu93-0768757b_B.txt",
+      "request_log_sha256": "0e156f9cf865f1303595abe825a92a86469886208d21646ddfa95be282f79978"
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "arm": "A",
+      "cut": 40,
+      "initial_levels_completed": 2,
+      "state": "gave_up",
+      "levels_completed": 2,
+      "levels_available": 6,
+      "score_display": 14.29,
+      "total_actions": 40,
+      "analyzer_reported_tokens": 14688,
+      "added_levels": 0,
+      "continuation_actions": [],
+      "continuation_action_count": 0,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/r11l-495a7899_A.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 14688,
+      "reported_repair_completion_tokens": 0,
+      "token_accounting_residual": 0,
+      "repair": null,
+      "request_log": "runs/028-program-repair/repair_forks/r11l-495a7899_A_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/r11l-495a7899_A.txt",
+      "request_log_sha256": "0601fbe796b5c71f87e395ff8b1f65dbb8e5775ae0a5025dd50ad782c5cb3eda"
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "arm": "B",
+      "cut": 40,
+      "initial_levels_completed": 2,
+      "state": "gave_up",
+      "levels_completed": 2,
+      "levels_available": 6,
+      "score_display": 14.29,
+      "total_actions": 42,
+      "analyzer_reported_tokens": 17023,
+      "added_levels": 0,
+      "continuation_actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 43,
+            "y": 35
+          }
+        },
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 37
+          }
+        }
+      ],
+      "continuation_action_count": 2,
+      "action_source": "runs/028-program-repair/repair_forks/transcripts/r11l-495a7899_B.txt: actual [action] echoes",
+      "recorded_normal_completion_tokens": 17023,
+      "reported_repair_completion_tokens": 0,
+      "token_accounting_residual": 0,
+      "repair": null,
+      "request_log": "runs/028-program-repair/repair_forks/r11l-495a7899_B_requests.jsonl",
+      "transcript": "runs/028-program-repair/repair_forks/transcripts/r11l-495a7899_B.txt",
+      "request_log_sha256": "ce973e34e9326184654127aeb1a090469c01c38bef0308c8de37c0a70fd9a3b5"
+    }
+  ],
+  "comparisons": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 1,
+      "actions_B": 1,
+      "actions_id_and_data_equal": true,
+      "first_differing_paired_action_1based": null,
+      "sequence_length_differs": false,
+      "reported_total_tokens_A": 12968,
+      "reported_total_tokens_B": 16297
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 0,
+      "actions_B": 9,
+      "actions_id_and_data_equal": false,
+      "first_differing_paired_action_1based": null,
+      "sequence_length_differs": true,
+      "reported_total_tokens_A": 19973,
+      "reported_total_tokens_B": 15589
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 0,
+      "actions_B": 2,
+      "actions_id_and_data_equal": false,
+      "first_differing_paired_action_1based": null,
+      "sequence_length_differs": true,
+      "reported_total_tokens_A": 14688,
+      "reported_total_tokens_B": 17023
+    }
+  ],
+  "limitations": [
+    "Single concurrent six-session diagnostic; not an official score or full-pool comparison.",
+    "Request timeout may have generated unreported server tokens; no zero-cost assumption."
+  ],
+  "verdict": "No paired case gained a level. ft09 repair executed and was used but retained its key pixel error; tu93 repair timed out. Do not expand this implementation on these results.",
+  "mechanism_findings": {
+    "ft09": {
+      "repair_executed": true,
+      "retained_functions": [
+        "analyze",
+        "satisfaction"
+      ],
+      "used_by_main_model": "Main continuation derived and executed analyze2/analyze3/polar variants from the returned extractor, retaining the same bbox-fill logic.",
+      "pixel_audit": "experiments/028-analysis/ft09-repair-pixel-audit.json",
+      "key_error_persists": "pattern(5,2) middle row actual WOg was still extracted as WOW; frame coordinate row46,col32 is g but returned extractor gives W.",
+      "recovery": "No level gain; A and B each clicked ACTION6(x22,y30), an actual no-op."
+    },
+    "tu93": {
+      "repair_executed": false,
+      "failure": "HTTP ReadTimeout at 60s; no returned code or usage",
+      "continuation": "Main model continued and executed nine actions in B, but no level gain; this cannot be attributed to a repaired program."
+    }
+  }
+}

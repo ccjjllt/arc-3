@@ -1,0 +1,99 @@
+[
+  {
+    "request_log": "runs/005-full-baseline/baseline/sp80-589a99af_p0_requests.jsonl",
+    "instances": [
+      {
+        "record_line": 113,
+        "message_index": 71,
+        "tool_call_id": "call_4b3be0d068914ed1837796aa",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 3, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"tl=last_animation_timeline\\nprint(tl.get('action'),'frames',tl.get('frames'))\\nfor s in tl['steps']:\\n    print(s['step'],s.get('changed'),s.get('bbox'),(s.get('changes') or s.get('transitions')))\\n\"}"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/005-full-baseline/baseline/sc25-635fd71a_p0_requests.jsonl",
+    "instances": [
+      {
+        "record_line": 69,
+        "message_index": 93,
+        "tool_call_id": "call_d9cc5bf17c71465ab8d13c52",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 10, in <module>\nKeyError: 'action'",
+        "code": "{\"code\": \"res = action([{'action':'MOUSE','row':50,'col':25},\\n              {'action':'MOUSE','row':50,'col':35},\\n              {'action':'MOUSE','row':55,'col':30},\\n              {'action':'MOUSE','row':60,'col':25},\\n              {'action':'MOUSE','row':60,'col':35}])\\nprint('exec', len(res.get('executed_actions',[])), 'stop', res.get('stop_reason'), 'state', res.get('state'), 'lvl', res.get('level_completed'), 'over', res.get('game_over'))\\nprint('pat', grid(), 'bar', bar())\\ntl = last_animation_timeline\\nif tl:\\n    print('anim', tl['action'], tl['frames'])\\n    for s in tl['steps']: print(' ', s['step'], s['bbox'], s.get('changes', s.get('transitions')))\\n\"}"
+      },
+      {
+        "record_line": 87,
+        "message_index": 57,
+        "tool_call_id": "call_27be56951cbf4325af613da3",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 10, in <module>\nKeyError: 'frames'",
+        "code": "{\"code\": \"res = action([{'action':'MOUSE','row':50,'col':30},\\n              {'action':'MOUSE','row':55,'col':25},\\n              {'action':'MOUSE','row':55,'col':35},\\n              {'action':'MOUSE','row':60,'col':30}])\\nprint('exec', res.get('executed_actions'), 'stop', res.get('stop_reason'))\\nprint('state', res.get('state'), 'lvl', res.get('level_completed'), 'over', res.get('game_over'))\\nprint('pat', grid(), 'bar', bar())\\ntl = last_animation_timeline\\nif tl:\\n    print('anim', tl['frames'])\\n    for s in tl['steps']: print(' ', s['step'], s['bbox'], s.get('changes', s.get('transitions')))\\n\"}"
+      },
+      {
+        "record_line": 91,
+        "message_index": 63,
+        "tool_call_id": "call_96030b46b8b34423bb2470de",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"res = action([{'action':'MOUSE','row':54,'col':15}])\\nprint('state', res.get('state'), 'lvl', res.get('level_completed'), 'over', res.get('game_over'))\\nprint('pat', grid())\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print(' ', s['step'], s['bbox'], s.get('changes', s.get('transitions')))\\n\"}"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/014-tail-allocation/baseline/sc25-635fd71a_p0_requests.jsonl",
+    "instances": [
+      {
+        "record_line": 13,
+        "message_index": 14,
+        "tool_call_id": "call_fb6ed8911402496ba5d94a8b",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 7, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"\\nfor act in ['LEFT','DOWN','RIGHT']:\\n    r = action([act])\\n    print('===',act,'no_op',r.get('no_op'),'board_changed',r.get('board_changed'),'state',r.get('state'))\\n    tl = last_animation_timeline\\n    if tl:\\n        for s in tl['steps']:\\n            print('  ',s['step'], s['bbox'], (s.get('changes') or s.get('transitions')))\\n\"}"
+      }
+    ]
+  },
+  {
+    "request_log": "runs/016-pace-allocation-jiyujia/baseline/sc25-635fd71a_p0_requests.jsonl",
+    "instances": [
+      {
+        "record_line": 19,
+        "message_index": 22,
+        "tool_call_id": "call_15fb45a1b85447809b2f2a54",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 13, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"def snap():\\n    a = current_frame.ascii.split('\\\\n')\\n    return a\\ndef show(r0,r1,c0,c1):\\n    a = current_frame.ascii.split('\\\\n')\\n    for r in range(r0,r1+1): print(r, a[r][c0:c1+1])\\n\\nr = action([{'action':'MOUSE','row':50,'col':30}])\\nprint('click white top-center tile:', r.get('no_op'), r.get('board_changed'), r.get('animation',{}).get('transient_bbox') if r.get('animation') else None)\\nshow(47,63,22,38)\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print('  anim', s['step'], str(s.get('changes') or s.get('transitions'))[:200])\\n\"}"
+      },
+      {
+        "record_line": 21,
+        "message_index": 25,
+        "tool_call_id": "call_8f2d538d42a8466ca2eb4f4a",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"r = action([{'action':'MOUSE','row':55,'col':25}])\\nprint('click left white tile:', r.get('no_op'), r.get('board_changed'), r['state'], r.get('level_completed'), r.get('game_over'))\\nshow(49,61,22,38)\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print('  anim', s.get('step'), str(s.get('changes') or s.get('transitions'))[:200])\\n\"}"
+      },
+      {
+        "record_line": 29,
+        "message_index": 35,
+        "tool_call_id": "call_1e561e58bc824fdf96c45768",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 14, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"r = action(['UP'])\\nprint('UP', r.get('no_op'), r.get('board_changed'))\\nd = frame_diff()\\nprint(' ', {k:v for k,v in d.items() if k!='changed_cell_count' and v})\\nshow(17,23,36,44)\\nprint('=== probe left panel center ===')\\nr = action([{'action':'MOUSE','row':55,'col':15}])\\nprint(r.get('no_op'), r.get('board_changed'), r['state'], 'anim', r.get('animation',{}).get('transient_bbox') if r.get('animation') else None)\\nd = frame_diff()\\nprint(' ', {k:v for k,v in d.items() if k!='changed_cell_count' and v})\\nshow(50,59,11,20)\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print('  anim', s.get('step'), str(s.get('changes') or s.get('transitions'))[:200])\\n\"}"
+      },
+      {
+        "record_line": 33,
+        "message_index": 41,
+        "tool_call_id": "call_a42e151a36094db18ac9d3b2",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 11, in <module>\n  File \"<python_tool>\", line 9, in brief\nKeyError: 'steps'",
+        "code": "{\"code\": \"def brief(tag, r):\\n    print(tag, 'no_op', r.get('no_op'), 'chg', r.get('board_changed'), r['state'], 'anim', (r.get('animation') or {}).get('transient_bbox'))\\n    d = frame_diff()\\n    for k in ('moved','rotated','appeared','disappeared','changed_color','resized'):\\n        if d[k]:\\n            print('   ', k, str(d[k])[:400])\\n    tl = last_animation_timeline\\n    if tl:\\n        for s in tl['steps']: print('     anim', s.get('step'), str(s.get('changes') or s.get('transitions'))[:180])\\n\\nr = action([{'action':'MOUSE','row':50,'col':25}]); brief('gray corner (50,25)', r)\\nshow(49,61,22,38)\\n\"}"
+      },
+      {
+        "record_line": 43,
+        "message_index": 56,
+        "tool_call_id": "call_1ab9ae5fe99c4cfd83d0259f",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 8, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"r = action([{'action':'MOUSE','row':55,'col':15}])\\nprint('panel', r.get('no_op'), r['state'], 'anim', (r.get('animation') or {}).get('transient_bbox'))\\nd = frame_diff()\\nprint({k:v for k,v in d.items() if k!='changed_cell_count' and v})\\nshow(49,61,22,38)\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print(' anim', s.get('step'), str(s.get('changes') or s.get('transitions'))[:160])\\n\"}"
+      },
+      {
+        "record_line": 59,
+        "message_index": 78,
+        "tool_call_id": "call_a3ffa32818524cffbd24b599",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 7, in <module>\nKeyError: 'steps'",
+        "code": "{\"code\": \"r = action([{'action':'MOUSE','row':55,'col':30}])\\nprint('center click (no whites):', r.get('no_op'), r['state'], 'anim', (r.get('animation') or {}).get('transient_bbox'))\\nd = frame_diff()\\nprint({k:str(v)[:200] for k,v in d.items() if k!='changed_cell_count' and v})\\ntl = last_animation_timeline\\nif tl:\\n    for s in tl['steps']: print(' anim', s.get('step'), str(s.get('changes') or s.get('transitions'))[:160])\\nshow(49,61,22,38)\\nprint('bar', runs([current_frame.ascii.split('\\\\n')[r][62] for r in range(64)]))\\n\"}"
+      }
+    ]
+  }
+]

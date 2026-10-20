@@ -96,6 +96,9 @@ def run_arm(args: argparse.Namespace) -> int:
     stall_patch = None
     repair_patch = None
     admission_patch = None
+    executable_repair_patch = None
+    persistent_python_patch = None
+    segmentation_runs_patch = None
     community_baselines = None
     timing_patch = None
     deadline_patch = None
@@ -250,6 +253,15 @@ def run_arm(args: argparse.Namespace) -> int:
             # Candidate installs before timing/observer; uninstalls after them.
             from arc3_research.admission_order import install_admission_order
             admission_patch = install_admission_order()
+        if args.arm == "program_repair":
+            from arc3_research.program_repair import install_program_repair
+            executable_repair_patch = install_program_repair()
+        if args.arm == "persistent_python":
+            from arc3_research.persistent_python import install_persistent_python
+            persistent_python_patch = install_persistent_python()
+        if args.arm == "segmentation_runs":
+            from arc3_research.segmentation_runs import install_segmentation_runs
+            segmentation_runs_patch = install_segmentation_runs()
         if os.environ.get("ARC3_COMMUNITY_DEVELOPMENT") == "1":
             from taaf.game_api import GameAPI
             from arc3_research.community import clear_unreliable_baselines
@@ -372,7 +384,15 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        if args.arm in ("repair_A", "repair_B"):
+        if args.arm == "repair_forks":
+            from arc3_research.program_repair_forks import run_forks
+            bm.start_time = datetime.now()
+            fork_summary = run_forks(bm=bm, job_dir=job_dir,
+                                     budget_seconds=args.budget_seconds)
+            bm.end_time = datetime.now()
+            _write_json(job_dir / "program-repair-forks.json", fork_summary)
+            _write_json(job_dir / "benchmark.json", bm.to_json_dict())
+        elif args.arm in ("repair_A", "repair_B"):
             from arc3_research.failure_repair import run_fork_arm
             candidates = [
                 Path("/kaggle/research/experiments/026-fork-inputs.json"),
@@ -495,6 +515,18 @@ def run_arm(args: argparse.Namespace) -> int:
             _write_json(job_dir / "admission-order.json", admission_patch.snapshot())
             if not live:
                 admission_patch.uninstall()
+        if executable_repair_patch is not None:
+            _write_json(job_dir / "program-repair-summary.json", executable_repair_patch.snapshot())
+            if not live:
+                executable_repair_patch.uninstall()
+        if persistent_python_patch is not None:
+            _write_json(job_dir / "persistent-python-summary.json", persistent_python_patch.snapshot())
+            if not live:
+                persistent_python_patch.uninstall()
+        if segmentation_runs_patch is not None:
+            _write_json(job_dir / "segmentation-runs-summary.json", segmentation_runs_patch.snapshot())
+            if not live:
+                segmentation_runs_patch.uninstall()
         if community_baselines is not None:
             _write_json(job_dir / "community-baselines.json", {
                 "dropped": community_baselines,
@@ -521,7 +553,8 @@ def main() -> int:
                                  "retrievable_animation", "current_data", "tail_80k",
                                  "native_values", "native", "pace_1x", "observation_grounding",
                                  "grounded_state", "checked_execution", "expect_check", "stall_probe",
-                                 "repair_A", "repair_B", "admission_009"))
+                                 "repair_A", "repair_B", "admission_009", "repair_forks", "program_repair",
+                                 "persistent_python", "segmentation_runs"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

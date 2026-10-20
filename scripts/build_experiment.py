@@ -67,6 +67,14 @@ def main() -> None:
         required.update({"failure_repair.py", "probe_budget.py"})
     if "admission_009" in arms:
         required.add("admission_order.py")
+    if "repair_forks" in arms:
+        required.update({"program_repair.py", "program_repair_forks.py"})
+    if "program_repair" in arms:
+        required.add("program_repair.py")
+    if "persistent_python" in arms:
+        required.add("persistent_python.py")
+    if "segmentation_runs" in arms:
+        required.add("segmentation_runs.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -88,6 +96,9 @@ def main() -> None:
         payload["experiments/026-fork-inputs.json"] = fork_inputs_path.read_text()
         fork_conv_path = ROOT / "experiments/026-fork-conv.json.gz.b64"
         payload["experiments/026-fork-conv.json.gz.b64"] = fork_conv_path.read_text()
+    if "repair_forks" in arms:
+        fork_package = ROOT / "experiments/028-fork-package.json.gz.b64"
+        payload["experiments/028-fork-package.json.gz.b64"] = fork_package.read_text()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in [source, Path(__file__), *payload_paths]}
     hashes[str(config_path.relative_to(ROOT))] = hashlib.sha256(config_path.read_bytes()).hexdigest()

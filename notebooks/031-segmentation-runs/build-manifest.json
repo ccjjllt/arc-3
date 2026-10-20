@@ -1,0 +1,87 @@
+{
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "b0de826ea9e157eda7832988de2d2c895bdc38d13901fafa8910056f4b305396",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/experiment_config.py": "47a341a133100e087dcd0071c668f76608970538146e78b7fdbde491a23273e2",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/request_deadline.py": "204c7bcb86478ee4b60aa9fffbe5b251abf5b27e4bf1534f1e773b9461372112",
+    "src/arc3_research/run_arm.py": "d8e15f08a9370a141ef89f924089dc0d7254a2ac8bae269cbc1108e55ee98496",
+    "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+    "src/arc3_research/segmentation_runs.py": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b",
+    "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/031-segmentation-runs.json": "18d0d33363c88c1dc61c8f09b04da4326d3d53a851295627a68f90678a846ea2"
+  },
+  "config": {
+    "active_streams": 10,
+    "arm_environment": {
+      "segmentation_runs": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "baseline": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "arm_order": [
+      "segmentation_runs",
+      "baseline"
+    ],
+    "budget_formula": "Fixed900s per arm for mechanism study, not scaled full competition budget.",
+    "comparison_note": "Candidate first then baseline; ten identical public games,900s each,10 active streams; no persistent Python or program repair. Only nodes[*].runs and field guidance added.",
+    "expected_gpu_hours": 1.0,
+    "game_count": 10,
+    "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+    "games": [
+      "ar25-0c556536",
+      "cd82-fb555c5d",
+      "ft09-0d8bbf25",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "re86-8af5384d",
+      "sc25-635fd71a",
+      "sp80-589a99af",
+      "tr87-cd924810",
+      "tu93-0768757b"
+    ],
+    "gpu_sample_interval_seconds": 10,
+    "hard_limit_seconds": 5400,
+    "id": "031-segmentation-runs",
+    "inference_timing": true,
+    "kernel_id": "zhuating/arc3-031-segmentation-runs",
+    "kernel_title": "ARC3 031 Exact Segmentation Runs",
+    "n_passes_per_arm": 1,
+    "preflight_before_serving": false,
+    "purpose": "Supply exact occupied row-runs in existing segmentation nodes; one independent short natural comparison after030 if needed.",
+    "reference_arm": "baseline",
+    "request_deadline": true,
+    "require_cache_flush": true,
+    "require_cache_flush_log": true,
+    "require_complete_pool": true,
+    "require_drained_workers": true,
+    "require_rtx_pro6000": true,
+    "requested_arm_seconds": 900,
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "scheduler_observer": true,
+    "selection_note": "Read natural node.runs use, exact-footprint reconstruction, actual completion and official mean with actual output cost; no numerical promotion threshold.",
+    "startup_limit_seconds": 1800,
+    "strict_arm_budget": true,
+    "warmup_action_games": 0,
+    "weekly_gpu_hours_limit": 30,
+    "native_payload_cells": true
+  },
+  "build_config_path": "experiments/031-segmentation-runs.json",
+  "payload_write_mode": "native-writefile",
+  "notebook_sha256": "9a183b6644bababbf94c381a4a65de7f0779917399a9a0b133bb32a4991aedaa"
+}

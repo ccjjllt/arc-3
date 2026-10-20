@@ -1,0 +1,61 @@
+{
+  "id": "029-repair-submission",
+  "kernel_id": "zhuating/arc3-029-repair-submission",
+  "kernel_title": "ARC3 029 Repair Submission",
+  "purpose": "Bounded executable program repair; unchanged 009 v2 model, serving, live gateway and formal budget",
+  "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "hard_limit_seconds": 32400,
+  "machine_shape": "NvidiaRtxPro6000",
+  "enable_internet": false,
+  "input_resolution_timeout_seconds": 60,
+  "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+  "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+  "save_placeholder_is_scored": false,
+  "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+  "solver": {
+    "n_passes": 1,
+    "concurrency": 120,
+    "active_streams": 10,
+    "max_runtime_s_per_game": 31920,
+    "warmup_action_games": 1,
+    "save_request_logs": false,
+    "research_interventions": [
+      "program_repair"
+    ]
+  },
+  "official_save_protocol": {
+    "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+    "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+    "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "observed_date_local": "2026-10-12",
+    "relevant_lines": "2-10, 75-78, 114-133",
+    "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+  },
+  "revision": 2,
+  "save_smoke": {
+    "game_ids": [
+      "sb26-7fbdac44",
+      "cd82-fb555c5d"
+    ],
+    "budget_seconds": 300,
+    "n_passes": 1,
+    "concurrency": 2,
+    "startup_timeout_seconds": 1500,
+    "total_timeout_seconds": 2400,
+    "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+    "cleanup": "Only the process group of the model Popen started by this save"
+  },
+  "baseline_config": "experiments/009-baseline-submission.json",
+  "baseline_config_sha256": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076",
+  "preparation_status": "local builder preparation; not run, pushed or submitted",
+  "program_repair": {
+    "max_events_per_game": 1,
+    "max_calls_per_event": 2,
+    "max_output_tokens": 4096,
+    "call_timeout_seconds": 60,
+    "event_timeout_seconds": 120,
+    "min_remaining_seconds": 180,
+    "zero_env_actions": true
+  }
+}

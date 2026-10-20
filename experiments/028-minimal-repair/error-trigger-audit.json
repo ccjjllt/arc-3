@@ -1,0 +1,1487 @@
+{
+  "scope": "Unique completed python tool calls in saved requests; next tool returncode does not establish correct program or game recovery. No new GPU work.",
+  "runs": [
+    {
+      "path": "runs/015-native-adoption/baseline/ar25-0c556536_p0_requests.jsonl",
+      "python_tools": 45,
+      "all_errors": 2,
+      "eligible_errors": 0,
+      "guard_or_timeout_errors": 2,
+      "retention_rejection_tools": 2,
+      "error_types": {},
+      "next_outcomes": {},
+      "events": []
+    },
+    {
+      "path": "runs/015-native-adoption/baseline/bp35-0a0ad940_p0_requests.jsonl",
+      "python_tools": 56,
+      "all_errors": 1,
+      "eligible_errors": 1,
+      "guard_or_timeout_errors": 0,
+      "retention_rejection_tools": 1,
+      "error_types": {
+        "IndexError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 1
+      },
+      "events": [
+        {
+          "line_1based": 55,
+          "analysis_step": 13,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_83c3f295e70742b3b9696775",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2639,
+          "next_line": 57,
+          "next_analysis_step": 14,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "for (rr,cc) in [(33,15),(33,21),(33,27)]:\n    r = action([{'action':'MOUSE','row':rr,'col':cc}])\n    print('click',rr,cc,'noop' if r['no_op'] else 'ok', 'N=',sum(n['pixels'] for n in current_frame.segmentation['nodes'] if n['color']=='N'))\nlines = current_frame.ascii.split('\\n')\nfor rr in range(29, "
+        }
+      ]
+    },
+    {
+      "path": "runs/015-native-adoption/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+      "python_tools": 34,
+      "all_errors": 2,
+      "eligible_errors": 2,
+      "guard_or_timeout_errors": 0,
+      "retention_rejection_tools": 4,
+      "error_types": {
+        "NameError": 1,
+        "KeyError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 2
+      },
+      "events": [
+        {
+          "line_1based": 43,
+          "analysis_step": 10,
+          "error": "NameError: name 'L' is not defined",
+          "tool_call_id": "call_f54dfd6f1808408fb5d577ec",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 695,
+          "next_line": 45,
+          "next_analysis_step": 10,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nfrom itertools import product\na = current_frame.ascii.split('\\n')\ngrid_rows=[4,12,20,28,36,44,52]; grid_cols=[12,20,28,36,44]\ncells = [(0,1),(0,2),(0,3),(1,1),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,0),(3,2),(3,4),\n         (4,0),(4,1),(4,2),(4,3),(4,4),(5,1),(5,3),(6,1),(6,2),(6,3)]\npat_pos = [(1,2"
+        },
+        {
+          "line_1based": 53,
+          "analysis_step": 12,
+          "error": "KeyError: 0",
+          "tool_call_id": "call_a5b75965efa4487195e74e42",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 877,
+          "next_line": 55,
+          "next_analysis_step": 12,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nfrom itertools import product\na = current_frame.ascii.split('\\n')\ngrid_rows=[4,12,20,28,36,44,52]; grid_cols=[12,20,28,36,44]\ncells = [(0,1),(0,2),(0,3),(1,1),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,0),(3,2),(3,4),\n         (4,0),(4,1),(4,2),(4,3),(4,4),(5,1),(5,3),(6,1),(6,2),(6,3)]\npat_pos=[(1,2),"
+        }
+      ]
+    },
+    {
+      "path": "runs/015-native-adoption/baseline/re86-8af5384d_p0_requests.jsonl",
+      "python_tools": 58,
+      "all_errors": 4,
+      "eligible_errors": 4,
+      "guard_or_timeout_errors": 0,
+      "retention_rejection_tools": 16,
+      "error_types": {
+        "TypeError": 1,
+        "IndexError": 1,
+        "ImportError": 1,
+        "NameError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 4
+      },
+      "events": [
+        {
+          "line_1based": 29,
+          "analysis_step": 9,
+          "error": "TypeError: plus_cover() missing 1 required positional argument: 'r'",
+          "tool_call_id": "call_fe5e4250060e482588cebdca",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 278,
+          "next_line": 31,
+          "next_analysis_step": 9,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "dots = {'b':[(36,27),(48,15),(48,33),(60,27)], 'O':[(39,9),(42,24),(57,9)], 'r':[(3,21),(9,27),(12,12)]}\ncov = {'b':lambda c: plus_cover(c,0), 'O':lambda c: xcover(c,0), 'r':lambda c: diamond_cover(c,0)}\ndef cands(col, dset):\n    f = cov[col]\n    return [(x,y) for x in range(64) for y in range(64) i"
+        },
+        {
+          "line_1based": 49,
+          "analysis_step": 12,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_6c8b9dfd17d8442baf1c2ecd",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 494,
+          "next_line": 51,
+          "next_analysis_step": 12,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "a = current_frame.ascii.split('\\n')\nR = {(r,c) for r,row in enumerate(a) for c,ch in enumerate(row) if ch in 'RW'}\nrow45 = sorted(c for (r,c) in R if r==45)\ncol30 = sorted(r for (r,c) in R if c==30)\nprint('row45', row45[0], row45[-1], len(row45), 'col30', col30[0], col30[-1], len(col30))\ndia = {(r,c"
+        },
+        {
+          "line_1based": 57,
+          "analysis_step": 13,
+          "error": "ImportError: Module 'pickle' is not allowed in the sandbox.",
+          "tool_call_id": "call_4bcd3f45c31e428b918193ea",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1644,
+          "next_line": 59,
+          "next_analysis_step": 13,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import heapq\nDOTS = [(6,6),(6,45),(15,51),(21,21),(27,9),(30,48),(33,33),(39,21)]\nLAT = list(range(0,64,3))\ndef solve(shape_fp, start):\n    idx = {v:i for i,v in enumerate(LAT)}\n    cache = {}\n    def mask_at(p):\n        if p in cache: return cache[p]\n        fp = shape_fp(p); m=0\n        for i,d in"
+        },
+        {
+          "line_1based": 99,
+          "analysis_step": 22,
+          "error": "NameError: name 'open' is not defined",
+          "tool_call_id": "call_50b642504cb545039c921bff",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2071,
+          "next_line": 101,
+          "next_analysis_step": 22,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import heapq, json\nLAT = list(range(0,64,3))\nSQ = {'Y':(4,7,4,7),'S':(4,7,55,58),'N':(28,31,4,7),'b':(53,56,4,7),'R':(53,56,55,58)}\nSQC = {k:{(r,c) for r in range(v[0],v[1]+1) for c in range(v[2],v[3]+1)} for k,v in SQ.items()}\nBLUE = [(6,21),(6,39),(45,33),(51,24),(51,45),(60,33)]\nRED = [(27,51),(3"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/m0r0-492f87ba_p0_requests.jsonl",
+      "python_tools": 109,
+      "all_errors": 6,
+      "eligible_errors": 3,
+      "guard_or_timeout_errors": 3,
+      "retention_rejection_tools": 41,
+      "error_types": {
+        "NameError": 2,
+        "KeyError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 3
+      },
+      "events": [
+        {
+          "line_1based": 115,
+          "analysis_step": 17,
+          "error": "NameError: name 'gridof' is not defined",
+          "tool_call_id": "call_7e8ed7f82d29486cbcd18ae7",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 402,
+          "next_line": 117,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "def gridof(fr, N=13):\n    aa=fr.ascii.split('\\n'); g=[]\n    for i in range(N):\n        row=''\n        for j in range(N):\n            s=set(aa[6+4*i+x][6+4*j+y] for x in range(4) for y in range(4))\n            row += '#' if s=={'B'} else ('S' if 'S' in s else ('o' if 'b' in s else ('|' if ('p' in s a"
+        },
+        {
+          "line_1based": 181,
+          "analysis_step": 39,
+          "error": "NameError: name 'deque' is not defined",
+          "tool_call_id": "call_16045dd0cd09481e8582def2",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 814,
+          "next_line": 183,
+          "next_analysis_step": 39,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "from collections import deque\nm=cellmap(current_frame,off=2,cs=4,n=15)\nN=15\nWALL=set(); GATE={}; PLATE={}\nfor i in range(N):\n    for j in range(N):\n        c=m[i][j]\n        if c in 'MP': WALL.add((i,j))\n        elif c in 'NOp':\n            if i in (5,9): GATE[(i,j)]=c\n            else: PLATE[(i,j)]"
+        },
+        {
+          "line_1based": 195,
+          "analysis_step": 41,
+          "error": "KeyError: 8",
+          "tool_call_id": "call_bc71dcb1d2584d77a73c09d5",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1330,
+          "next_line": 197,
+          "next_analysis_step": 41,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "from collections import deque\nN=13\nROOMS=[(1,5,1,5),(1,5,7,11),(7,11,1,5),(7,11,7,11)]\nokcells=set()\nfor r0,r1,c0,c1 in ROOMS:\n    for i in range(r0,r1+1):\n        for j in range(c0,c1+1): okcells.add((i,j))\nokcells.add((9,6))\nGATE={(6,2):'N',(6,3):'N',(6,4):'N',(6,8):'O',(6,9):'O',(6,10):'O'}\nPLATE"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/r11l-495a7899_p0_requests.jsonl",
+      "python_tools": 124,
+      "all_errors": 17,
+      "eligible_errors": 15,
+      "guard_or_timeout_errors": 2,
+      "retention_rejection_tools": 26,
+      "error_types": {
+        "NameError": 6,
+        "TypeError": 5,
+        "ImportError": 3,
+        "ValueError": 1
+      },
+      "next_outcomes": {
+        "different_error_next_tool": 4,
+        "next_tool_without_error": 11
+      },
+      "events": [
+        {
+          "line_1based": 67,
+          "analysis_step": 18,
+          "error": "NameError: name 'S' is not defined",
+          "tool_call_id": "call_c484d682b83b410f828399f4",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 1062,
+          "next_line": 69,
+          "next_analysis_step": 18,
+          "next_error": "TypeError: can only concatenate tuple (not \"int\") to tuple",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "import collections\nODASH=((48,39),(48,41),(49,38),(49,42),(50,37),(50,43),(52,37),(52,43),(53,38),(53,42),(54,39),(54,41))\nPDASH=((15,56),(15,58),(16,55),(16,59),(17,54),(17,60),(19,54),(19,60),(20,55),(20,59),(21,56),(21,58))\ndef env(f):\n    a=f.ascii.split('\\n')\n    S=frozenset((r,c) for r in rang"
+        },
+        {
+          "line_1based": 69,
+          "analysis_step": 18,
+          "error": "TypeError: can only concatenate tuple (not \"int\") to tuple",
+          "tool_call_id": "call_bcde052b5a57458695f066e4",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1249,
+          "next_line": 71,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def dc2(p):\n    r=p[0]; c=p[1]\n    out=set()\n    for dr in range(-2,3):\n        for dk in range(-2,3):\n            if abs(dr)+abs(dk)<=2: out.add((r+dr,c+dk))\n    return frozenset(out)\ndef xc2(p):\n    r=p[0]; c=p[1]\n    out=set()\n    for dr in range(-2,3):\n        for dk in range(-2,3):\n            "
+        },
+        {
+          "line_1based": 73,
+          "analysis_step": 18,
+          "error": "TypeError: can only concatenate tuple (not \"int\") to tuple",
+          "tool_call_id": "call_bb02d0a92efb4728adf20eb0",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 847,
+          "next_line": 75,
+          "next_analysis_step": 18,
+          "next_error": "ImportError: Module 'traceback' is not allowed in the sandbox.",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "import traceback\nS=env(current_frame)\nstart=((14,27),(21,8),(9,49),(35,45),(48,54))\ntry:\n    for p in start:\n        s=dc2(p)\n        print(p, len(s), bool(s&S))\n    CH=((0,1,2),(3,4))\n    d=tuple((sum(start[i][0] for i in ch)//len(ch), sum(start[i][1] for i in ch)//len(ch)) for ch in CH)\n    print("
+        },
+        {
+          "line_1based": 75,
+          "analysis_step": 18,
+          "error": "ImportError: Module 'traceback' is not allowed in the sandbox.",
+          "tool_call_id": "call_7abdea87189a48e09b5f5cd8",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 200,
+          "next_line": 77,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "S=env(current_frame)\nstart=((14,27),(21,8),(9,49),(35,45),(48,54))\nprint('S', type(S), len(S))\nfor p in start:\n    s=dc2(p)\n    print('d', p, len(s), bool(s&S))\nCH=((0,1,2),(3,4))\nd=tuple((sum(start[i][0] for i in ch)//len(ch), sum(start[i][1] for i in ch)//len(ch)) for ch in CH)\nprint('dsc',d)\nfor "
+        },
+        {
+          "line_1based": 81,
+          "analysis_step": 18,
+          "error": "NameError: name 'start' is not defined",
+          "tool_call_id": "call_8af1e794f92147628e24123d",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 817,
+          "next_line": 83,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def minchain(f, start, p0, which, maxd=10, cap=400000):\n    import collections\n    S=env(f)\n    TGT=[frozenset([(48,39),(48,41),(49,38),(49,42),(50,37),(50,43),(52,37),(52,43),(53,38),(53,42),(54,39),(54,41)]),\n         frozenset([(15,56),(15,58),(16,55),(16,59),(17,54),(17,60),(19,54),(19,60),(20,5"
+        },
+        {
+          "line_1based": 101,
+          "analysis_step": 22,
+          "error": "TypeError: 'set' object does not support item assignment",
+          "tool_call_id": "call_b514eab9ff8b485584d47ab8",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 828,
+          "next_line": 103,
+          "next_analysis_step": 22,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def astarO2(f, start, p0, cap=200000):\n    import heapq\n    S=env(f)\n    OD=frozenset([(48,39),(48,41),(49,38),(49,42),(50,37),(50,43),(52,37),(52,43),(53,38),(53,42),(54,39),(54,41)])\n    RINGS=((51,40),(18,57))\n    PFIX=((35,45),(48,54))\n    def disc(pos): return (sum(p[0] for p in pos)//3, sum(p["
+        },
+        {
+          "line_1based": 127,
+          "analysis_step": 25,
+          "error": "NameError: name 'open' is not defined",
+          "tool_call_id": "call_aced22796f5c4006b5f468e3",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1447,
+          "next_line": 129,
+          "next_analysis_step": 25,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def beamG(f, n=4, start=None, p0=0, fixed=(), rings=((53,55),(57,34)), dash=None, beam=500, depth=26):\n    import collections\n    S,FD,FI=prep(f)\n    D=bfsdist(FD,[c for c in FD if xc2(c)&set(dash)])\n    def dsc(pos): return (sum(p[0] for p in pos)//n, sum(p[1] for p in pos)//n)\n    def inbb(cell,c)"
+        },
+        {
+          "line_1based": 141,
+          "analysis_step": 25,
+          "error": "NameError: name 'G0' is not defined",
+          "tool_call_id": "call_f0bea5c9358b42b2ab731855",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 659,
+          "next_line": 143,
+          "next_analysis_step": 25,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "G0=((9,34),(16,14),(16,39),(21,23),(34,37),(40,52))\ngsol=[('mov',0,(13,27)),('mov',0,(14,23)),('mov',2,(18,22)),('mov',2,(19,18)),('mov',0,(15,17)),('ring',3,(57,34)),('ring',1,(53,55)),('mov',3,(38,31)),('mov',0,(31,30)),('mov',3,(35,31)),('mov',3,(32,33)),('mov',2,(31,36)),('mov',0,(34,40)),('mov'"
+        },
+        {
+          "line_1based": 145,
+          "analysis_step": 25,
+          "error": "NameError: name 'PDASH' is not defined",
+          "tool_call_id": "call_65e0a83bff604babb8523b30",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 31,
+          "next_line": 149,
+          "next_analysis_step": 25,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "GDASH=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nPDASH=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\nGF=((47,51),(48,54),(44,53),(53,55))\nP0=((34,37),(40,52))\nsolA,costA=macsearch(current_frame"
+        },
+        {
+          "line_1based": 159,
+          "analysis_step": 25,
+          "error": "ImportError: Module 'inspect' is not allowed in the sandbox.",
+          "tool_call_id": "call_20d3406ccc3b470798f402c1",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 86,
+          "next_line": 161,
+          "next_analysis_step": 25,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "print('dia:',dia(current_frame))\ntry: print('live3:',live3(current_frame))\nexcept Exception as e: print('live3 err',e)\n"
+        },
+        {
+          "line_1based": 183,
+          "analysis_step": 27,
+          "error": "NameError: name 'ck' is not defined",
+          "tool_call_id": "call_8d0615318ba54b0ea091c8d5",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 543,
+          "next_line": 185,
+          "next_analysis_step": 28,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "rem=[('mov',0,(18,27)),('mov',1,(20,21)),('mov',2,(21,27)),('mov',0,(20,24)),('mov',0,(23,23)),('ring',1,(53,55)),('mov',0,(30,36)),('mov',2,(31,39)),('mov',3,(32,42)),('mov',0,(34,45)),('mov',2,(37,47)),('mov',3,(41,45)),('mov',3,(43,50)),('mov',2,(39,51)),('mov',0,(40,48)),('mov',0,(45,53)),('mov'"
+        },
+        {
+          "line_1based": 195,
+          "analysis_step": 29,
+          "error": "TypeError: 'int' object is not subscriptable",
+          "tool_call_id": "call_5d029168d36543829790b19f",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 410,
+          "next_line": 197,
+          "next_analysis_step": 29,
+          "next_error": "TypeError: '<=' not supported between instances of 'int' and 'list'",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "def cells_of(n):\n    b=n['boundary']\n    if len(b)==2 and isinstance(b[0],int): return [(b[0],b[1])]\n    return [tuple(p) for p in b]\ndef readL3(f):\n    D=[];N=[];W=[]\n    for n in f.segmentation['nodes']:\n        if n['color']=='M' and n['pixels']==1: D.append(cells_of(n)[0])\n        elif n['color'"
+        },
+        {
+          "line_1based": 197,
+          "analysis_step": 29,
+          "error": "TypeError: '<=' not supported between instances of 'int' and 'list'",
+          "tool_call_id": "call_cd3f47f477564f568f9adf51",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 259,
+          "next_line": 199,
+          "next_analysis_step": 29,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def readA(f):\n    a=f.ascii.split('\\n')\n    M=[];N=[];Wp=[]\n    for r in range(64):\n        for c in range(64):\n            ch=a[r][c]\n            if ch=='M': M.append((r,c))\n            elif ch=='N' and not (50<=r<=56 and 52<=c<=58): N.append((r,c))\n            elif ch=='W': Wp.append((r,c))\n    re"
+        },
+        {
+          "line_1based": 237,
+          "analysis_step": 31,
+          "error": "ValueError: min() iterable argument is empty",
+          "tool_call_id": "call_7cdd7087701748f3b5a142fb",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 1073,
+          "next_line": 239,
+          "next_analysis_step": 31,
+          "next_error": "Tool timed out after 30s",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "def search_to(start,p0,fixed,targets,rings,allowed,costcap=16,cap=200000,w=3.0):\n    import heapq\n    from collections import deque\n    CELLS=[(dr,dc) for dr in range(-2,3) for dc in range(-2,3)]\n    n=len(start)\n    def dcen(pos): return (sum(p[0] for p in pos)//n,sum(p[1] for p in pos)//n)\n    def"
+        },
+        {
+          "line_1based": 249,
+          "analysis_step": 33,
+          "error": "ImportError: Module 'time' is not allowed in the sandbox.",
+          "tool_call_id": "call_3f2c3d17bc4e44d38ef21e3b",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 191,
+          "next_line": 251,
+          "next_analysis_step": 33,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "RINGS5=[(9,48),(15,15),(18,57),(28,13),(28,53)]\nD5=[(15,15),(28,53)]; D6=[(47,41),(55,34),(55,52)]\ns1,c1=beam_to(tuple(D5),-1,tuple(D6),near((40,14)),RINGS5,allowed5,depth=8,beam=300,costcap=12)\nprint('D5->b stamp cost',c1)\nfor x in (s1 or []): print('  ',x)\n"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/sc25-635fd71a_p0_requests.jsonl",
+      "python_tools": 51,
+      "all_errors": 8,
+      "eligible_errors": 8,
+      "guard_or_timeout_errors": 0,
+      "retention_rejection_tools": 2,
+      "error_types": {
+        "TypeError": 1,
+        "KeyError": 6,
+        "IndexError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 7,
+        "same_error_next_tool": 1
+      },
+      "events": [
+        {
+          "line_1based": 9,
+          "analysis_step": 2,
+          "error": "TypeError: Object of type _LazyAnimation is not JSON serializable",
+          "tool_call_id": "call_809991e4f6fd4d6b8f99df44",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 115,
+          "next_line": 11,
+          "next_analysis_step": 2,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "tl = last_animation_timeline\nprint(tl['action'], tl['frames'])\nfor s in tl['steps']:\n    print('step', s['step'], 'changed', s.get('changed'), 'bbox', s.get('bbox'))\n    print('  ', str(s.get('changes') or s.get('transitions'))[:400])\n"
+        },
+        {
+          "line_1based": 19,
+          "analysis_step": 5,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_15fb45a1b85447809b2f2a54",
+          "next_outcome": "same_error_next_tool",
+          "natural_next_response_tokens": 728,
+          "next_line": 21,
+          "next_analysis_step": 6,
+          "next_error": "KeyError: 'steps'",
+          "next_has_action": true,
+          "error_calls_until_success": 2,
+          "next_code_head": "r = action([{'action':'MOUSE','row':55,'col':25}])\nprint('click left white tile:', r.get('no_op'), r.get('board_changed'), r['state'], r.get('level_completed'), r.get('game_over'))\nshow(49,61,22,38)\ntl = last_animation_timeline\nif tl:\n    for s in tl['steps']: print('  anim', s.get('step'), str(s.ge"
+        },
+        {
+          "line_1based": 21,
+          "analysis_step": 6,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_8f2d538d42a8466ca2eb4f4a",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 523,
+          "next_line": 23,
+          "next_analysis_step": 7,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "for pos in [(55,35),(60,30)]:\n    r = action([{'action':'MOUSE','row':pos[0],'col':pos[1]}])\n    print('click',pos, r.get('no_op'), r['state'], 'lvl_done', r.get('level_completed'), 'over', r.get('game_over'), 'anim', r.get('animation',{}).get('transient_bbox') if r.get('animation') else None)\n    s"
+        },
+        {
+          "line_1based": 29,
+          "analysis_step": 8,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_1e561e58bc824fdf96c45768",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2373,
+          "next_line": 31,
+          "next_analysis_step": 8,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "fr = last_animation_frames\nprint('frames', len(fr))\n# last executed was MOUSE(55,15) which had no animation? check\nprint('last action', last_action)\nfr2 = last_animation_frames\nprint('fr2 len', len(fr2))\n"
+        },
+        {
+          "line_1based": 33,
+          "analysis_step": 9,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_a42e151a36094db18ac9d3b2",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2236,
+          "next_line": 35,
+          "next_analysis_step": 9,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "show(49,61,22,38)\nprint('bar', runs([current_frame.ascii.split('\\n')[r][62] for r in range(64)]))\n"
+        },
+        {
+          "line_1based": 43,
+          "analysis_step": 13,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_1ab9ae5fe99c4cfd83d0259f",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 475,
+          "next_line": 45,
+          "next_analysis_step": 14,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "r = action([{'action':'MOUSE','row':50,'col':25}])\nprint('click green corner', r.get('no_op'), r['state'], 'anim', (r.get('animation') or {}).get('transient_bbox'))\nd = frame_diff()\nprint({k:str(v)[:300] for k,v in d.items() if k!='changed_cell_count' and v})\nshow(49,61,22,38)\n"
+        },
+        {
+          "line_1based": 59,
+          "analysis_step": 18,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_a3ffa32818524cffbd24b599",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 938,
+          "next_line": 61,
+          "next_analysis_step": 19,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "targets = [(50,30),(55,25),(55,35),(60,30),(50,25),(50,35),(60,25),(60,35)]\nfor pos in targets:\n    r = action([{'action':'MOUSE','row':pos[0],'col':pos[1]}])\n    ev = r.get('level_completed') or r.get('game_over') or r.get('done')\n    print('press',pos,'no_op',r.get('no_op'),'done',r.get('level_com"
+        },
+        {
+          "line_1based": 83,
+          "analysis_step": 29,
+          "error": "IndexError: string index out of range",
+          "tool_call_id": "call_8d59d1dabc514ea29e454f1b",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2071,
+          "next_line": 85,
+          "next_analysis_step": 30,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "def changed_tip():\n    d = frame_diff()\n    ch = set()\n    for key in ('moved','rotated','appeared','disappeared','changed_color','resized'):\n        for e in d.get(key, []) or []:\n            pass\n    a0 = previous_frame.ascii.split('\\n'); a1 = current_frame.ascii.split('\\n')\n    out = []\n    for r"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/su15-1944f8ab_p0_requests.jsonl",
+      "python_tools": 48,
+      "all_errors": 7,
+      "eligible_errors": 5,
+      "guard_or_timeout_errors": 2,
+      "retention_rejection_tools": 2,
+      "error_types": {
+        "IndexError": 4,
+        "TypeError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 4,
+        "different_error_next_tool": 1
+      },
+      "events": [
+        {
+          "line_1based": 49,
+          "analysis_step": 18,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_7e21375bd0894eeaadba5446",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1932,
+          "next_line": 51,
+          "next_analysis_step": 19,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "r = action([{'action':'MOUSE','row':29,'col':34}])\nd = frame_diff()\nprint('noop',r.get('no_op'),'lc',r.get('level_completed'),'cc',d['changed_cell_count'],[(x['color'],x['from'],x['to']) for x in d['moved']])\nfor n in current_frame.segmentation['nodes']:\n    if n['color']=='M' and n['pixels']==4: pr"
+        },
+        {
+          "line_1based": 67,
+          "analysis_step": 26,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_ea38a3c960a54f92a4481017",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 883,
+          "next_line": 69,
+          "next_analysis_step": 26,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "for s in last_animation_timeline['steps']: print(s['step'], s['bbox'], s.get('changes') or s.get('transitions'))\nprint('frames', last_action_call_result.get('animation',{}).get('frames'))\n"
+        },
+        {
+          "line_1based": 71,
+          "analysis_step": 27,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_2c32dc0c6d5441abaa907c22",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 2309,
+          "next_line": 73,
+          "next_analysis_step": 27,
+          "next_error": "TypeError: object of type 'int' has no len()",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "t = transitions[-2]\nprint(t.action)\nres = t.result\nprint({k:v for k,v in res.items() if k!='animation'})\nan = res.get('animation') or {}\nprint('frames', an.get('frames'), 'bbox', an.get('transient_bbox'), 'n', len(an.get('transient_pixels') or []))\n"
+        },
+        {
+          "line_1based": 73,
+          "analysis_step": 27,
+          "error": "TypeError: object of type 'int' has no len()",
+          "tool_call_id": "call_943c38501a0a4f178fa6aba5",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 5819,
+          "next_line": 75,
+          "next_analysis_step": 28,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "import re\ndef snap():\n    out=[]\n    for n in current_frame.segmentation['nodes']:\n        if 1<n['pixels']<200 and n['boundary'][0][0]>8: out.append((n['color'],n['pixels'],tuple(n['boundary'][0])))\n    return out, [n['pixels'] for n in current_frame.segmentation['nodes'] if n['color']=='W']\ndef cl"
+        },
+        {
+          "line_1based": 87,
+          "analysis_step": 31,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_b16e7d55514148ba9f032e76",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 253,
+          "next_line": 89,
+          "next_analysis_step": 31,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "seg = current_frame.segmentation\nfor n in seg['nodes']:\n    b = n['boundary']\n    if n['pixels']<200: print(n['color'], n['pixels'], b[0], b[-1] if len(b)>1 else '')\nd0 = history[-2].frame\nprint('deathbar', [x['pixels'] for x in d0.segmentation['nodes'] if x['color']=='W'])\nprint('curbar', [x['pixel"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/tr87-cd924810_p0_requests.jsonl",
+      "python_tools": 62,
+      "all_errors": 7,
+      "eligible_errors": 2,
+      "guard_or_timeout_errors": 5,
+      "retention_rejection_tools": 19,
+      "error_types": {
+        "NameError": 2
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 1,
+        "different_error_next_tool": 1
+      },
+      "events": [
+        {
+          "line_1based": 35,
+          "analysis_step": 4,
+          "error": "NameError: name 'tops' is not defined",
+          "tool_call_id": "call_4ca9af9a09d04eeb80197f33",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2032,
+          "next_line": 37,
+          "next_analysis_step": 5,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ntops = {\n0:\"#####|#...#|##.##|#...#|#...#\",\n1:\"####.|#..##|#...#|##..#|.####\",\n2:\"#...#|#####|..#..|#####|#...#\",\n3:\"####.|#..#.|#..##|#..#.|####.\",\n4:\"....#|..#.#|#####|..#.#|....#\",\n5:\"#####|#..#.|#..#.|####.|#....\",\n6:\"..#..|#####|#.#.#|#.#.#|..#..\",\n7:\"..###|..#.#|#####|#.#..|###..\",\n8:\"....#|."
+        },
+        {
+          "line_1based": 79,
+          "analysis_step": 8,
+          "error": "NameError: name 'targets' is not defined",
+          "tool_call_id": "call_10798a151d74475faea0c90f",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 447,
+          "next_line": 81,
+          "next_analysis_step": 9,
+          "next_error": "TerminalStateActionError: the previous action reported level_completed. A new level has been loaded, so the board you planned against is gone and this action was not executed. The next turn begins from the new state.",
+          "next_has_action": true,
+          "error_calls_until_success": 2,
+          "next_code_head": "\ndef l3targets(fr):\n    al=fr.ascii.split('\\n')\n    kc=[('A1',4,[5],[15]),('A2',4,[28,35],[45,52]),('B1',13,[5],[15,22]),('B2',13,[35,42],[52]),('C1',22,[5,12,19],[29]),('C2',22,[42],[52])]\n    SK={}\n    for n,r0,yc,sc in kc:\n        SK[n]=[cell7f(al,r0,c) for c in sc]\n    seq=['A1','C1','B1','C2','"
+        }
+      ]
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl",
+      "python_tools": 50,
+      "all_errors": 6,
+      "eligible_errors": 6,
+      "guard_or_timeout_errors": 0,
+      "retention_rejection_tools": 13,
+      "error_types": {
+        "IndexError": 1,
+        "NameError": 1,
+        "ImportError": 1,
+        "AssertionError": 1,
+        "TypeError": 2
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 5,
+        "same_error_next_tool": 1
+      },
+      "events": [
+        {
+          "line_1based": 35,
+          "analysis_step": 6,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_ad4209f4d1f14ce4a32fc1fb",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1301,
+          "next_line": 37,
+          "next_analysis_step": 6,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nimport itertools\ndef transforms(m):\n    def rot(g): return tuple(''.join(g[len(g)-1-j][i] for j in range(len(g))) for i in range(len(g[0])))\n    def mir(g): return tuple(row[::-1] for row in g)\n    out=[]; g=m\n    for _ in range(4):\n        out.append(g); out.append(mir(g)); g=rot(g)\n    return set"
+        },
+        {
+          "line_1based": 39,
+          "analysis_step": 6,
+          "error": "NameError: name 'v' is not defined",
+          "tool_call_id": "call_02e03c0e717e4777b242a757",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 489,
+          "next_line": 41,
+          "next_analysis_step": 6,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ntiles = [('A','P',5,11,5),('A','Y',15,21,5),('B','P',28,34,5),('B','Y',38,58,5),\n         ('C','P',5,11,14),('C','Y',15,28,14),('D','P',35,41,14),('D','Y',45,58,14),\n         ('E','P',5,11,23),('E','Y',15,35,23),('F','P',42,48,23),('F','Y',52,58,23)]\ntopY={}; topP={}\nfor name,side,c0,c1,r0 in tiles"
+        },
+        {
+          "line_1based": 45,
+          "analysis_step": 7,
+          "error": "ImportError: Module 'builtins' is not allowed in the sandbox.",
+          "tool_call_id": "call_cb41a4418bd04bcf8e84d74b",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1875,
+          "next_line": 47,
+          "next_analysis_step": 8,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ntiles = [('A','P',5,11,5),('A','Y',15,21,5),('B','P',28,34,5),('B','Y',38,58,5),\n         ('C','P',5,11,14),('C','Y',15,28,14),('D','P',35,41,14),('D','Y',45,58,14),\n         ('E','P',5,11,23),('E','Y',15,35,23),('F','P',42,48,23),('F','Y',52,58,23)]\ntopY={}\nfor name,side,c0,c1,r0 in tiles:\n    if "
+        },
+        {
+          "line_1based": 59,
+          "analysis_step": 9,
+          "error": "AssertionError: ('#####', '#..#.', '...#.', '#..#.', '#####')",
+          "tool_call_id": "call_bbf0cd2a7b1d4c8b9801e3d6",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 859,
+          "next_line": 61,
+          "next_analysis_step": 10,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nblocks = [ (4,12,18, 4,22,28), (4,35,41, 4,45,51),\n           (12,12,18, 12,22,28), (12,35,41, 12,45,51),\n           (20,12,18, 20,22,28), (20,35,41, 20,45,51),\n           (28,12,18, 28,22,28), (28,35,41, 28,45,51)]\na = current_frame.ascii.split('\\n')\nsp={}; py={}\nfor (r0,c0,c1,r1,d0,d1) in blocks:"
+        },
+        {
+          "line_1based": 93,
+          "analysis_step": 16,
+          "error": "TypeError: unhashable type: 'list'",
+          "tool_call_id": "call_2e8f31203e8343568c4f86b1",
+          "next_outcome": "same_error_next_tool",
+          "natural_next_response_tokens": 905,
+          "next_line": 95,
+          "next_analysis_step": 16,
+          "next_error": "TypeError: unhashable type: 'list'",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "\ndef C(rows):\n    m=[list(r) for r in rows]\n    c=canon(m)\n    return tuple(''.join(r) if not isinstance(r,str) else r for r in c)\norig = {\n 'A_S': [['.....','###..','..#..','.###.','..#..']],\n 'A_P': [['.....','#####','.#..#','.#..#','.####']],\n 'B_S': [['.....','....#','..#.#','#####','#.#..']],\n "
+        },
+        {
+          "line_1based": 95,
+          "analysis_step": 16,
+          "error": "TypeError: unhashable type: 'list'",
+          "tool_call_id": "call_4a6cc049c36943298243fa7b",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 347,
+          "next_line": 97,
+          "next_analysis_step": 16,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nms = band_glyphs(current_frame,43,14,48)\nm = ms[0][1]\nprint(type(m), type(m[0]) if hasattr(m,'__getitem__') else None)\nprint(repr(m)[:200])\nprint('canon type:', repr(canon(m))[:120])\n"
+        }
+      ]
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/sc25-635fd71a_p0_requests.jsonl",
+      "python_tools": 100,
+      "all_errors": 9,
+      "eligible_errors": 5,
+      "guard_or_timeout_errors": 4,
+      "retention_rejection_tools": 2,
+      "error_types": {
+        "KeyError": 2,
+        "IndexError": 1,
+        "ImportError": 1,
+        "AttributeError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 4,
+        "different_error_next_tool": 1
+      },
+      "events": [
+        {
+          "line_1based": 9,
+          "analysis_step": 3,
+          "error": "KeyError: 'action'",
+          "tool_call_id": "call_042f8afc21fa42d5b8162ec1",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 370,
+          "next_line": 11,
+          "next_analysis_step": 3,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "a = current_frame.ascii.split('\\n')\ndef crop(r0,r1,c0,c1):\n    return '\\n'.join(a[r][c0:c1+1] for r in range(r0,r1+1))\nprint('TIP now'); print(crop(17,23,34,44))\nb = previous_frame.ascii.split('\\n')\nprint('TIP prev'); print('\\n'.join(b[r][34:45] for r in range(17,24)))\nd = frame_diff()\nprint('count'"
+        },
+        {
+          "line_1based": 13,
+          "analysis_step": 4,
+          "error": "KeyError: 'steps'",
+          "tool_call_id": "call_8e4614d3c8a842da90e17fc7",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1584,
+          "next_line": 15,
+          "next_analysis_step": 5,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "def state(fr):\n    L = fr.ascii.split('\\n')\n    def cell(r,c): return L[r][c]\n    # head region rows 19-22, cols 39-42\n    head = ''.join(L[r][39:43] for r in range(19,23))\n    # bar: col 62 rows; find first non-W row from top in col 63\n    col63 = [L[r][63] for r in range(64)]\n    firstN = next((i "
+        },
+        {
+          "line_1based": 59,
+          "analysis_step": 18,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_9d4dae450637458580eef498",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 531,
+          "next_line": 61,
+          "next_analysis_step": 18,
+          "next_error": "ImportError: Module '__main__' is not allowed in the sandbox.",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "def comps(fr, chars, r0=0,r1=63,c0=0,c1=61):\n    L = fr.ascii.split('\\n')\n    grid = [[L[r][c] if L[r][c] in chars else '.' for c in range(c0,c1+1)] for r in range(r0,r1+1)]\n    seen = set(); out=[]\n    for i,row in enumerate(grid):\n        for j,ch in enumerate(row):\n            if ch=='.' or (i,j)"
+        },
+        {
+          "line_1based": 61,
+          "analysis_step": 18,
+          "error": "ImportError: Module '__main__' is not allowed in the sandbox.",
+          "tool_call_id": "call_48c81a47bf90448880e56182",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 157,
+          "next_line": 63,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "print(knob(current_frame))\nprint(comps(current_frame,'Mrc'))\n"
+        },
+        {
+          "line_1based": 113,
+          "analysis_step": 34,
+          "error": "AttributeError: 'HistoryEntryView' object has no attribute 'step'",
+          "tool_call_id": "call_6587dfab6608454ca7ecffde",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 85,
+          "next_line": 115,
+          "next_analysis_step": 34,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "for h in history[-10:]:\n    L = h.frame.ascii.split('\\n')\n    print(h.frame.step, h.action, sum(1 for r in range(64) if L[r][63]=='N'))\n"
+        }
+      ]
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/re86-8af5384d_p0_requests.jsonl",
+      "python_tools": 119,
+      "all_errors": 11,
+      "eligible_errors": 9,
+      "guard_or_timeout_errors": 2,
+      "retention_rejection_tools": 10,
+      "error_types": {
+        "TypeError": 2,
+        "NameError": 4,
+        "ValueError": 2,
+        "AttributeError": 1
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 7,
+        "different_error_next_tool": 2
+      },
+      "events": [
+        {
+          "line_1based": 55,
+          "analysis_step": 14,
+          "error": "TypeError: 'NoneType' object is not subscriptable",
+          "tool_call_id": "call_9762a030c69047da97d3f300",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 740,
+          "next_line": 57,
+          "next_analysis_step": 14,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\nprint('bar', barlen(current_frame))\nS=color_cells(current_frame,'R')\nprint('red cells', len(S))\ndef fit(shape, S, rng=range(0,64)):\n    best=[]\n    for r in rng:\n        for c in rng:\n            cells=shape((r,c))\n            miss=len(cells-S)\n            if miss==0: best.append((r,c,len(cells)))\n"
+        },
+        {
+          "line_1based": 101,
+          "analysis_step": 28,
+          "error": "NameError: name 'objs5' is not defined",
+          "tool_call_id": "call_74c909b661bb4bdfac188de5",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 623,
+          "next_line": 103,
+          "next_analysis_step": 28,
+          "next_error": "TypeError: 'NoneType' object is not subscriptable",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "\nobjs5={'dia':(dia_r,(18,30)),'X':(Xa,(42,24)),'plus':(pa,(33,54))}\nbdots=[(6,21),(6,39),(45,33),(51,24),(51,45),(60,33)]\nrdots=[(27,51),(36,42)]\npad_inner={'b':{(r,c) for r in range(53,57) for c in range(4,8)},'R':{(r,c) for r in range(53,57) for c in range(55,59)}}\npositions=[(r,c) for r in range("
+        },
+        {
+          "line_1based": 103,
+          "analysis_step": 28,
+          "error": "TypeError: 'NoneType' object is not subscriptable",
+          "tool_call_id": "call_c63f8ec07f4340209603f61a",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2280,
+          "next_line": 105,
+          "next_analysis_step": 28,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef dia9(c): return dia_r(c,9)\nobjs5={'dia':(dia9,(18,30)),'X':(Xa,(42,24)),'plus':(pa,(33,54))}\nbdots=[(6,21),(6,39),(45,33),(51,24),(51,45),(60,33)]\nrdots=[(27,51),(36,42)]\npad_inner={'b':{(r,c) for r in range(53,57) for c in range(4,8)},'R':{(r,c) for r in range(53,57) for c in range(55,59)}}\npo"
+        },
+        {
+          "line_1based": 107,
+          "analysis_step": 28,
+          "error": "NameError: name 'positions' is not defined",
+          "tool_call_id": "call_bb5d579fd3bd4956b2e0843c",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 705,
+          "next_line": 109,
+          "next_analysis_step": 28,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef POSN(): return [(r,c) for r in range(0,64,3) for c in range(0,64,3)]\ndef PADBOXES(): return {'Y':(4,7,4,7),'S':(4,7,55,58),'N':(28,31,4,7),'b':(53,56,4,7),'R':(53,56,55,58)}\ndef seg2(a,b,order):\n    out=[]; r,c=a\n    if order==0:\n        while r!=b[0]: r+= 1 if b[0]>r else -1; out.append((r,c))"
+        },
+        {
+          "line_1based": 117,
+          "analysis_step": 28,
+          "error": "ValueError: not enough values to unpack (expected 3, got 2)",
+          "tool_call_id": "call_ae4ec39dbbff45a1be5fafa3",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 306,
+          "next_line": 119,
+          "next_analysis_step": 28,
+          "next_error": "NameError: name 'rdots' is not defined",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "\npads=PADBOXES()\nplan=[('dia',dia9,(18,30),'R',(36,51)),('X',Xa,(42,24),'b',(15,30)),('plus',pa,(33,54),'b',(51,33))]\nfrom collections import Counter\nSEQS={}\nfor nm,f,st,col,tgt in plan:\n    q,lp=plan3(f,st,tgt,col,pads)\n    sq=seq_from(st,lp); SEQS[nm]=sq\n    r,c=st\n    for a in sq:\n        r+= 3 i"
+        },
+        {
+          "line_1based": 119,
+          "analysis_step": 28,
+          "error": "NameError: name 'rdots' is not defined",
+          "tool_call_id": "call_987b1c7c430049f28245ed16",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 403,
+          "next_line": 121,
+          "next_analysis_step": 28,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef L5():\n    bdots=[(6,21),(6,39),(45,33),(51,24),(51,45),(60,33)]\n    rdots=[(27,51),(36,42)]\n    plan=[('dia',dia9,(18,30),'R',(36,51),bdots),('X',Xa,(42,24),'b',(15,30),bdots),('plus',pa,(33,54),'b',(51,33),bdots)]\n    pads=PADBOXES(); out={}\n    for nm,f,st,col,tgt,dd in plan:\n        q,lp=pla"
+        },
+        {
+          "line_1based": 139,
+          "analysis_step": 29,
+          "error": "NameError: name 'Wpos' is not defined",
+          "tool_call_id": "call_bb1ca016bbc74a1796256bc9",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 211,
+          "next_line": 141,
+          "next_analysis_step": 30,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef Wpos(frame=current_frame):\n    for n in frame.segmentation['nodes']:\n        if n['color']=='W': return tuple(n['boundary'][0])\n    return None\ndef barlen(frame=current_frame):\n    for n in frame.segmentation['nodes']:\n        if n['color']=='p':\n            pts=n['boundary']; return max(p[1] f"
+        },
+        {
+          "line_1based": 167,
+          "analysis_step": 39,
+          "error": "AttributeError: 'str' object has no attribute 'ascii'",
+          "tool_call_id": "call_083e1ea23dac4726b06d68f7",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 300,
+          "next_line": 169,
+          "next_analysis_step": 39,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef ringstate(fr):\n    Y=cells2('Y',fr)\n    pts=[p for p in Y if p[0]<60 and p[1]<40]\n    if not pts: return None\n    rs=[p[0] for p in pts]; cs=[p[1] for p in pts]\n    t,b,l,r=min(rs),max(rs),min(cs),max(cs)\n    return (t,b,l,r,b-t+1,r-l+1)\ndef plusstate(fr):\n    B=cells2('b',fr)\n    B=[p for p in"
+        },
+        {
+          "line_1based": 181,
+          "analysis_step": 43,
+          "error": "ValueError: min() iterable argument is empty",
+          "tool_call_id": "call_947fa01aa1094398b85c7ae7",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 505,
+          "next_line": 183,
+          "next_analysis_step": 43,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "\ndef ring3(fr):\n    best=None\n    for n in fr.segmentation['nodes']:\n        if n['color']=='Y' and (best is None or n['pixels']>best['pixels']): best=n\n    b=best['boundary']\n    rs=[p[0] for p in b]; cs=[p[1] for p in b]\n    return (min(rs),max(rs),min(cs),max(cs),best['pixels'])\ns=ring3(current_f"
+        }
+      ]
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+      "python_tools": 135,
+      "all_errors": 15,
+      "eligible_errors": 13,
+      "guard_or_timeout_errors": 2,
+      "retention_rejection_tools": 42,
+      "error_types": {
+        "KeyError": 5,
+        "NameError": 1,
+        "IndexError": 2,
+        "ValueError": 3,
+        "TypeError": 2
+      },
+      "next_outcomes": {
+        "next_tool_without_error": 11,
+        "different_error_next_tool": 2
+      },
+      "events": [
+        {
+          "line_1based": 7,
+          "analysis_step": 1,
+          "error": "KeyError: (5, 5)",
+          "tool_call_id": "call_e57b413cdbfd45dcb271e5f6",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 487,
+          "next_line": 9,
+          "next_analysis_step": 1,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "a = current_frame.ascii.split('\\n')\ndef P(r,c): return a[r][c] != 'B'\nadj = {}\nfor i in range(6):\n    for j in range(6):\n        adj[(i,j)] = []\n        if j<5:\n            vals = [a[15+6*i][15+6*j+3], a[15+6*i+1][15+6*j+3], a[15+6*i+2][15+6*j+3]]\n            if all(v!='B' for v in vals): adj[(i,j)]"
+        },
+        {
+          "line_1based": 29,
+          "analysis_step": 4,
+          "error": "NameError: name 'j' is not defined",
+          "tool_call_id": "call_acc9595d342b49efb256b5ab",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 366,
+          "next_line": 31,
+          "next_analysis_step": 5,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "def rstat(fr):\n    rm,H,V,org = rgrid(fr)\n    P=E=G=None\n    for i in range(len(rm)):\n        for j in range(len(rm[0])):\n            c=rm[i][j]\n            if c=='b': P=(i,j)\n            elif c=='R': E=(i,j)\n            elif c=='N': G=(i,j)\n    return rm,H,V,P,E,G\ndef eye(fr):\n    a=fr.ascii.split("
+        },
+        {
+          "line_1based": 57,
+          "analysis_step": 11,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_22291e82792a48e9abd4d545",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 319,
+          "next_line": 59,
+          "next_analysis_step": 11,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "a=current_frame.ascii.split('\\n')\nrm,H,V,org=rgrid(current_frame)\nr0,c0=org\nprint('org',org,'rm',len(rm),len(rm[0]))\nps=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='p']\nRs=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='R']\nprint('p',ps)\nfor (i,j) in ps:\n    bi=(i-(r0+1))//3; "
+        },
+        {
+          "line_1based": 81,
+          "analysis_step": 16,
+          "error": "ValueError: too many values to unpack (expected 2)",
+          "tool_call_id": "call_b2f58fc970da4ea59dbafc13",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 610,
+          "next_line": 83,
+          "next_analysis_step": 17,
+          "next_error": "KeyError: (2, 0)",
+          "next_has_action": true,
+          "error_calls_until_success": 2,
+          "next_code_head": "log=[]\nfor m in ['LEFT','RIGHT','LEFT','RIGHT']:\n    r=action([m])\n    rm,H,V,P,E,G = rstat(current_frame)\n    Es=[(i,j,rm[i][j]) for i in range(len(rm)) for j in range(len(rm[0])) if rm[i][j] in 'RO']\n    f=facings(current_frame)\n    log.append((m,P,Es,f,r.get('game_over')))\n    if r.get('game_over"
+        },
+        {
+          "line_1based": 83,
+          "analysis_step": 17,
+          "error": "KeyError: (2, 0)",
+          "tool_call_id": "call_ad58089b5c5648d0b9619946",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 1248,
+          "next_line": 85,
+          "next_analysis_step": 18,
+          "next_error": "",
+          "next_has_action": true,
+          "error_calls_until_success": 1,
+          "next_code_head": "def oroom(fr):\n    rm,H,V,org = rgrid(fr)\n    r0,c0=org\n    a=fr.ascii.split('\\n')\n    Os=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='O']\n    ps=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='p']\n    res=[]\n    if Os:\n        i,j=Os[0]; bi=(i-(r0+1))//3; bj=(j-(c0+1))//3\n   "
+        },
+        {
+          "line_1based": 111,
+          "analysis_step": 21,
+          "error": "KeyError: (2, 0)",
+          "tool_call_id": "call_9d51931a43a54d998a83f6d1",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 550,
+          "next_line": 113,
+          "next_analysis_step": 21,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "rm,H,V,org = rgrid(current_frame); r0,c0=org\na=current_frame.ascii.split('\\n')\nps=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='p']\nOs=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='O']\nprint('org',org,'p',ps)\n# group O pixels into blocks\nseen=set(); blocks=[]\nfor (i,j) in Os:"
+        },
+        {
+          "line_1based": 115,
+          "analysis_step": 22,
+          "error": "KeyError: (2, 0)",
+          "tool_call_id": "call_3477b2628f7e41b8b23a110b",
+          "next_outcome": "different_error_next_tool",
+          "natural_next_response_tokens": 4229,
+          "next_line": 117,
+          "next_analysis_step": 22,
+          "next_error": "ValueError: too many values to unpack (expected 1)",
+          "next_has_action": false,
+          "error_calls_until_success": 2,
+          "next_code_head": "import collections\nrm,H,V,org = rgrid(current_frame)\nrooms=set((i,j) for i in range(len(rm)) for j in range(len(rm[0])) if rm[i][j]!='B')\ndef nbf(i,j,H,V):\n    out=[]\n    if (i,j) in H: out.append((i,j+1))\n    if j>0 and (i,j-1) in H: out.append((i,j-1))\n    if (i,j) in V: out.append((i+1,j))\n    if"
+        },
+        {
+          "line_1based": 117,
+          "analysis_step": 22,
+          "error": "ValueError: too many values to unpack (expected 1)",
+          "tool_call_id": "call_8d4d211363864e7c9b7aee77",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 537,
+          "next_line": 119,
+          "next_analysis_step": 22,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import collections\nrm,H,V,org = rgrid(current_frame)\nrooms=set((i,j) for i in range(len(rm)) for j in range(len(rm[0])) if rm[i][j]!='B')\nADJ={r:nbf(r[0],r[1],H,V) for r in rooms}\nAC=[2,3,4,5,4,3]; DC=[4,3,2,1,0,1,2,3]; CC=[3,4,3,2]\ndef bcol(t):\n    k=t%14\n    return k if k<=7 else 14-k\ndef pats(t):"
+        },
+        {
+          "line_1based": 155,
+          "analysis_step": 29,
+          "error": "TypeError: '<' not supported between instances of 'str' and 'tuple'",
+          "tool_call_id": "call_48e42e99b28645a9859e4da0",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 2026,
+          "next_line": 157,
+          "next_analysis_step": 29,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "def eyes3(fr):\n    rm,H,V,org = rgrid(fr); r0,c0=org\n    a=fr.ascii.split('\\n')\n    ps=[(i,j) for i in range(60) for j in range(64) if a[i][j]=='p']\n    blocks=[]\n    for col in 'ORr':\n        pts=[(i,j) for i in range(60) for j in range(64) if a[i][j]==col]\n        seen=set()\n        for (i,j) in p"
+        },
+        {
+          "line_1based": 197,
+          "analysis_step": 38,
+          "error": "TypeError: unsupported operand type(s) for +: 'int' and 'str'",
+          "tool_call_id": "call_404e063cd26b4fbb8aded7b8",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 695,
+          "next_line": 199,
+          "next_analysis_step": 38,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import collections\nADJ8,DIST8 = build8()\nGOAL8=(0,2); SIGHT8={(0,4),(1,4),(2,4),(3,4)}\ndef cm(c,p):\n    best=None\n    for v in sorted(ADJ8[c]):\n        dr=abs(v[0]-p[0])-abs(c[0]-p[0]); dc=abs(v[1]-p[1])-abs(c[1]-p[1])\n        if dr<0 or (dr==0 and dc<0):\n            if best is None or (dr,dc)<best["
+        },
+        {
+          "line_1based": 211,
+          "analysis_step": 40,
+          "error": "ValueError: too many values to unpack (expected 3)",
+          "tool_call_id": "call_26d750966082401fba64c030",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 95,
+          "next_line": 213,
+          "next_analysis_step": 40,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "out=rgrid(current_frame)\nprint(type(out), len(out))\nfor i,o in enumerate(out):\n    s=repr(o)\n    print(i, s[:300])\n"
+        },
+        {
+          "line_1based": 255,
+          "analysis_step": 45,
+          "error": "KeyError: (4, 7)",
+          "tool_call_id": "call_03a0851fcc4f40c487872cf9",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 4450,
+          "next_line": 257,
+          "next_analysis_step": 45,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j"
+        },
+        {
+          "line_1based": 259,
+          "analysis_step": 45,
+          "error": "IndexError: list index out of range",
+          "tool_call_id": "call_3d9cf001d0444a69abae0e4d",
+          "next_outcome": "next_tool_without_error",
+          "natural_next_response_tokens": 3816,
+          "next_line": 261,
+          "next_analysis_step": 45,
+          "next_error": "",
+          "next_has_action": false,
+          "error_calls_until_success": 1,
+          "next_code_head": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "runs": 13,
+    "python_tools": 991,
+    "eligible_errors": 73,
+    "all_errors": 95,
+    "next_outcomes": {
+      "next_tool_without_error": 60,
+      "different_error_next_tool": 11,
+      "same_error_next_tool": 2
+    },
+    "natural_next_response_tokens_median": 695,
+    "same_error_examples": [
+      {
+        "line_1based": 19,
+        "analysis_step": 5,
+        "error": "KeyError: 'steps'",
+        "tool_call_id": "call_15fb45a1b85447809b2f2a54",
+        "next_outcome": "same_error_next_tool",
+        "natural_next_response_tokens": 728,
+        "next_line": 21,
+        "next_analysis_step": 6,
+        "next_error": "KeyError: 'steps'",
+        "next_has_action": true,
+        "error_calls_until_success": 2,
+        "next_code_head": "r = action([{'action':'MOUSE','row':55,'col':25}])\nprint('click left white tile:', r.get('no_op'), r.get('board_changed'), r['state'], r.get('level_completed'), r.get('game_over'))\nshow(49,61,22,38)\ntl = last_animation_timeline\nif tl:\n    for s in tl['steps']: print('  anim', s.get('step'), str(s.ge",
+        "path": "runs/016-pace-allocation-jiyujia/baseline/sc25-635fd71a_p0_requests.jsonl"
+      },
+      {
+        "line_1based": 93,
+        "analysis_step": 16,
+        "error": "TypeError: unhashable type: 'list'",
+        "tool_call_id": "call_2e8f31203e8343568c4f86b1",
+        "next_outcome": "same_error_next_tool",
+        "natural_next_response_tokens": 905,
+        "next_line": 95,
+        "next_analysis_step": 16,
+        "next_error": "TypeError: unhashable type: 'list'",
+        "next_has_action": false,
+        "error_calls_until_success": 2,
+        "next_code_head": "\ndef C(rows):\n    m=[list(r) for r in rows]\n    c=canon(m)\n    return tuple(''.join(r) if not isinstance(r,str) else r for r in c)\norig = {\n 'A_S': [['.....','###..','..#..','.###.','..#..']],\n 'A_P': [['.....','#####','.#..#','.#..#','.####']],\n 'B_S': [['.....','....#','..#.#','#####','#.#..']],\n ",
+        "path": "runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl"
+      }
+    ],
+    "eligible_error_types": {
+      "IndexError": 11,
+      "NameError": 18,
+      "KeyError": 15,
+      "TypeError": 14,
+      "ImportError": 6,
+      "ValueError": 6,
+      "AssertionError": 1,
+      "AttributeError": 2
+    },
+    "runs_with_eligible_error": 12,
+    "first_eligible_next_outcomes": {
+      "next_tool_without_error": 11,
+      "different_error_next_tool": 1
+    },
+    "first_eligible_natural_next_response_tokens_median": 717.5
+  },
+  "error_clusters": [
+    {
+      "path": "runs/027-tail-confirm/baseline/re86-8af5384d_p0_requests.jsonl",
+      "analysis_step": 28,
+      "error_count": 5,
+      "lines_1based": [
+        101,
+        103,
+        107,
+        117,
+        119
+      ],
+      "signatures": [
+        "NameError: name 'objs5' is not defined",
+        "TypeError: 'NoneType' object is not subscriptable",
+        "NameError: name 'positions' is not defined",
+        "ValueError: not enough values to unpack (expected 3, got 2)",
+        "NameError: name 'rdots' is not defined"
+      ],
+      "natural_next_response_tokens_sum": 4317
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/r11l-495a7899_p0_requests.jsonl",
+      "analysis_step": 18,
+      "error_count": 5,
+      "lines_1based": [
+        67,
+        69,
+        73,
+        75,
+        81
+      ],
+      "signatures": [
+        "NameError: name 'S' is not defined",
+        "TypeError: can only concatenate tuple (not \"int\") to tuple",
+        "TypeError: can only concatenate tuple (not \"int\") to tuple",
+        "ImportError: Module 'traceback' is not allowed in the sandbox.",
+        "NameError: name 'start' is not defined"
+      ],
+      "natural_next_response_tokens_sum": 4175
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/r11l-495a7899_p0_requests.jsonl",
+      "analysis_step": 25,
+      "error_count": 4,
+      "lines_1based": [
+        127,
+        141,
+        145,
+        159
+      ],
+      "signatures": [
+        "NameError: name 'open' is not defined",
+        "NameError: name 'G0' is not defined",
+        "NameError: name 'PDASH' is not defined",
+        "ImportError: Module 'inspect' is not allowed in the sandbox."
+      ],
+      "natural_next_response_tokens_sum": 2223
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+      "analysis_step": 45,
+      "error_count": 2,
+      "lines_1based": [
+        255,
+        259
+      ],
+      "signatures": [
+        "KeyError: (4, 7)",
+        "IndexError: list index out of range"
+      ],
+      "natural_next_response_tokens_sum": 8266
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/su15-1944f8ab_p0_requests.jsonl",
+      "analysis_step": 27,
+      "error_count": 2,
+      "lines_1based": [
+        71,
+        73
+      ],
+      "signatures": [
+        "IndexError: list index out of range",
+        "TypeError: object of type 'int' has no len()"
+      ],
+      "natural_next_response_tokens_sum": 8128
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+      "analysis_step": 22,
+      "error_count": 2,
+      "lines_1based": [
+        115,
+        117
+      ],
+      "signatures": [
+        "KeyError: (2, 0)",
+        "ValueError: too many values to unpack (expected 1)"
+      ],
+      "natural_next_response_tokens_sum": 4766
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl",
+      "analysis_step": 6,
+      "error_count": 2,
+      "lines_1based": [
+        35,
+        39
+      ],
+      "signatures": [
+        "IndexError: list index out of range",
+        "NameError: name 'v' is not defined"
+      ],
+      "natural_next_response_tokens_sum": 1790
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl",
+      "analysis_step": 16,
+      "error_count": 2,
+      "lines_1based": [
+        93,
+        95
+      ],
+      "signatures": [
+        "TypeError: unhashable type: 'list'",
+        "TypeError: unhashable type: 'list'"
+      ],
+      "natural_next_response_tokens_sum": 1252
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/sc25-635fd71a_p0_requests.jsonl",
+      "analysis_step": 18,
+      "error_count": 2,
+      "lines_1based": [
+        59,
+        61
+      ],
+      "signatures": [
+        "IndexError: list index out of range",
+        "ImportError: Module '__main__' is not allowed in the sandbox."
+      ],
+      "natural_next_response_tokens_sum": 688
+    },
+    {
+      "path": "runs/016-pace-allocation-jiyujia/baseline/r11l-495a7899_p0_requests.jsonl",
+      "analysis_step": 29,
+      "error_count": 2,
+      "lines_1based": [
+        195,
+        197
+      ],
+      "signatures": [
+        "TypeError: 'int' object is not subscriptable",
+        "TypeError: '<=' not supported between instances of 'int' and 'list'"
+      ],
+      "natural_next_response_tokens_sum": 669
+    }
+  ],
+  "limitations": [
+    "Deduplication is by tool_call_id; source windows are selected saved trajectories, not an independent validation set.",
+    "Next tool without error means no exception in that Python result, not semantic correctness, helper reuse, or level recovery.",
+    "Natural next response token counts are completion_tokens on the first recorded response whose latest tool is that error, not latency or billing.",
+    "This scan does not infer an online prediction comparator from unstructured stdout."
+  ]
+}

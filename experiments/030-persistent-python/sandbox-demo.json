@@ -1,0 +1,136 @@
+{
+  "model_calls": 0,
+  "gpu_seconds": 0,
+  "scope": "single real sandbox demo, deterministic host callback instead of a game engine",
+  "calls": [
+    {
+      "label": "create",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 2,
+          "lost": false
+        },
+        "returncode": 0,
+        "stdout": "[11] 0 1\n"
+      },
+      "step_executed": false
+    },
+    {
+      "label": "reuse_and_action",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 2,
+          "lost": false
+        },
+        "returncode": 0,
+        "stdout": "[11, 22] 1 0 2\n"
+      },
+      "step_executed": true
+    },
+    {
+      "label": "refresh_and_new_callback",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 2,
+          "lost": false
+        },
+        "returncode": 0,
+        "stdout": "[11, 22] 2 3\n"
+      },
+      "step_executed": true
+    },
+    {
+      "label": "new_level_clears",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 1,
+          "lost": false
+        },
+        "returncode": 0,
+        "stdout": "old queue absent\n3\n"
+      },
+      "step_executed": false
+    },
+    {
+      "label": "timeout_clears",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 0,
+          "lost": true
+        },
+        "error": "Tool timed out after 1s. Python variables for this level were cleared; rebuild needed state. Executed actions were kept and will not be replayed."
+      },
+      "step_executed": false
+    },
+    {
+      "label": "after_timeout",
+      "payload": {
+        "tool": "python",
+        "python_state": {
+          "scope": "current level",
+          "name_count": 0,
+          "lost": true
+        },
+        "returncode": 0,
+        "stdout": "timed-out queue absent\n2 3\n"
+      },
+      "step_executed": false
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "first",
+      "actions": [
+        {
+          "action": "LEFT"
+        }
+      ]
+    },
+    {
+      "label": "second",
+      "actions": [
+        {
+          "action": "RIGHT"
+        }
+      ]
+    }
+  ],
+  "snapshot_before_uninstall": {
+    "patch": "persistent-python-v1",
+    "scope": "one isolated interpreter per agent and level",
+    "runtime_refresh": "original bootstrap refreshes frame/history/actions on each call and action",
+    "new_model_tools": false,
+    "memory_limit_bytes": 1073741824,
+    "stats": {
+      "tool_calls": 6,
+      "state_losses": 2,
+      "action_calls": 2
+    },
+    "active_workers": 1
+  },
+  "snapshot_after_uninstall": {
+    "patch": "persistent-python-v1",
+    "scope": "one isolated interpreter per agent and level",
+    "runtime_refresh": "original bootstrap refreshes frame/history/actions on each call and action",
+    "new_model_tools": false,
+    "memory_limit_bytes": 1073741824,
+    "stats": {
+      "tool_calls": 6,
+      "state_losses": 2,
+      "action_calls": 2
+    },
+    "active_workers": 0
+  },
+  "elapsed_seconds": 1.0972921659704298,
+  "result": "passed"
+}

@@ -1,0 +1,78 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "persistent_python": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "persistent_python",
+    "baseline"
+  ],
+  "budget_formula": "532 * 60 * game_count // 110",
+  "comparison_note": "Independent fresh CPU processes, persistent Python first then baseline; 25 identical games and7254s per arm,10 active streams. Same original model and serving. No program repair or scheduler changes. Passive instrumentation and deadline patch shared; formal candidate retains009 request behavior.",
+  "expected_gpu_hours": 4.5,
+  "game_count": 25,
+  "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+  "games": [
+    "ar25-0c556536",
+    "bp35-0a0ad940",
+    "cd82-fb555c5d",
+    "cn04-2fe56bfb",
+    "dc22-fdcac232",
+    "ft09-0d8bbf25",
+    "g50t-5849a774",
+    "ka59-38d34dbb",
+    "lf52-271a04aa",
+    "lp85-305b61c3",
+    "ls20-9607627b",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "re86-8af5384d",
+    "s5i5-18d95033",
+    "sb26-7fbdac44",
+    "sc25-635fd71a",
+    "sk48-d8078629",
+    "sp80-589a99af",
+    "su15-1944f8ab",
+    "tn36-ef4dde99",
+    "tr87-cd924810",
+    "tu93-0768757b",
+    "vc33-5430563c",
+    "wa30-ee6fef47"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 18000,
+  "id": "030-capability-comparison",
+  "inference_timing": true,
+  "kernel_id": "zhuating/arc3-030-capability-comparison",
+  "kernel_title": "ARC3 030 Capability Comparison",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "One full25 equal-budget comparison of level-persistent Python computation versus unchanged baseline; program repair closed after real no-gain diagnostic.",
+  "reference_arm": "baseline",
+  "request_deadline": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 7254,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": true,
+  "selection_note": "Select on official mean and concrete added completion/search-state reuse with costs. Positive interpretable aggregate gain and stable run advances immediately to candidate own save smoke then formal submission. No automatic one-point or repeat-run gate.",
+  "startup_limit_seconds": 1200,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true
+}

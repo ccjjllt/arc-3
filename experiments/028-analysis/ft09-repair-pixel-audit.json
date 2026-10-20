@@ -1,0 +1,88 @@
+{
+  "scope": "CPU re-evaluation of model-returned repair extractor against original recorded frame; no model call or solution supplied",
+  "patterns": [
+    {
+      "pattern": [
+        1,
+        2
+      ],
+      "raw_frame": [
+        "WWW",
+        "WOg",
+        "gWg"
+      ],
+      "repair_extracted": [
+        "WWW",
+        "WOg",
+        "gWg"
+      ]
+    },
+    {
+      "pattern": [
+        3,
+        1
+      ],
+      "raw_frame": [
+        "gWg",
+        "gRW",
+        "WWg"
+      ],
+      "repair_extracted": [
+        "gWg",
+        "gRW",
+        "WWg"
+      ]
+    },
+    {
+      "pattern": [
+        3,
+        3
+      ],
+      "raw_frame": [
+        "gWW",
+        "WRg",
+        "gWg"
+      ],
+      "repair_extracted": [
+        "gWW",
+        "WRg",
+        "gWg"
+      ]
+    },
+    {
+      "pattern": [
+        5,
+        2
+      ],
+      "raw_frame": [
+        "gWg",
+        "WOg",
+        "WWW"
+      ],
+      "repair_extracted": [
+        "gWg",
+        "WOW",
+        "WWW"
+      ]
+    }
+  ],
+  "mismatch_count": 1,
+  "mismatches": [
+    {
+      "pattern": [
+        5,
+        2
+      ],
+      "legend_cell": [
+        1,
+        2
+      ],
+      "frame_coordinate": [
+        46,
+        32
+      ],
+      "repair_output": "W",
+      "original_frame": "g"
+    }
+  ]
+}

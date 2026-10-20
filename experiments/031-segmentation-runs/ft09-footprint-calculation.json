@@ -1,0 +1,99 @@
+{
+  "source": "ft09 original recorded cum27 frame from existing 028 package",
+  "package_sha256": "a1280842c5747b133a730b9456f65bededd042f7e8d0583b130463d71fd6f66d",
+  "module_sha256": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b",
+  "model_calls": 0,
+  "gpu_seconds": 0,
+  "node_count": 52,
+  "run_count": 433,
+  "frame_cells": 4096,
+  "exact_coverage_and_original_fields": true,
+  "specific_error_pixel": {
+    "row": 46,
+    "col": 32,
+    "actual_symbol": "g",
+    "white_runs_include": false,
+    "white_bboxes_wrongly_include": [
+      {
+        "node_id": 45,
+        "bbox": [
+          46,
+          28,
+          49,
+          33
+        ],
+        "pixels": 16,
+        "runs": [
+          [
+            46,
+            28,
+            29
+          ],
+          [
+            47,
+            28,
+            29
+          ],
+          [
+            48,
+            28,
+            33
+          ],
+          [
+            49,
+            28,
+            33
+          ]
+        ]
+      }
+    ]
+  },
+  "payload": {
+    "baseline": {
+      "compact_json_bytes": 12264,
+      "default_json_bytes": 13891,
+      "python_repr_chars": 13891
+    },
+    "candidate": {
+      "compact_json_bytes": 17377,
+      "default_json_bytes": 20355,
+      "python_repr_chars": 20355
+    }
+  },
+  "field_guidance_chars": 243,
+  "field_guidance_words": 35,
+  "single_frame_wallclock_ms": {
+    "baseline": 39.169040974229574,
+    "candidate": 40.321166976355016,
+    "note": "One read each; diagnostic timing only, not a performance benchmark"
+  },
+  "original_model_read": {
+    "log": "runs/015-native-adoption/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+    "first_record_line_1based": 3,
+    "tool_call_id": "call_8bf25b5a733245fab539e595",
+    "code": "\nimport json\nseg = current_frame.segmentation\nnodes = seg['nodes']\nprint(\"level\", current_frame.level, \"step\", current_frame.step, \"shape\", current_frame.shape)\nprint(\"num nodes\", len(nodes))\nfor n in nodes:\n    print(n['id'], n['color'], n['pixels'], n['boundary'][:4], 'rot', n['rotation'], 'sym', n['rotational_symmetry'], 'children', n['children'])\n"
+  },
+  "original_model_read_payload": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "level 3 step 28 shape (64, 64)\nnum nodes 52\n0 c 3028 [[0, 0], [0, 59], [7, 59], [8, 60]] rot 90 sym 1 children [2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]\n1 R 16 [[0, 60], [0, 63], [3, 63], [3, 60]] rot None sym 4 children []\n2 R 36 [[4, 20], [4, 25], [9, 25], [9, 20]] rot None sym 4 children []\n3 O 36 [[4, 28], [4, 33], [9, 33], [9, 28]] rot None sym 4 children []\n4 O 36 [[4, 36], [4, 41], [9, 41], [9, 36]] rot None sym 4 children []\n5 O 16 [[4, 60], [4, 63], [7, 63], [7, 60]] rot None sym 4 children []\n6 O 36 [[12, 20], [12, 25], [17, 25], [17, 20]] rot None sym 4 children []\n7 W 16 [[12, 28], [12, 33], [13, 33], [13, 30]] rot 180 sym 1 children []\n8 R 36 [[12, 36], [12, 41], [17, 41], [17, 36]] rot None sym 4 children []\n9 O 4 [[14, 30], [14, 31], [15, 31], [15, 30]] rot None sym 4 children []\n10 g 8 [[14, 32], [14, 33], [17, 33], [17, 32]] rot 0 sym 2 children []\n11 g 4 [[16, 28], [16, 29], [17, 29], [17, 28]] rot None sym 4 children []\n12 W 4 [[16, 30], [16, 31], [17, 31], [17, 30]] rot None sym 4 children []\n13 O 36 [[20, 12], [20, 17], [25, 17], [25, 12]] rot None sym 4 children []\n14 R 36 [[20, 20], [20, 25], [25, 25], [25, 20]] rot None sym 4 children []\n15 O 36 [[20, 28], [20, 33], [25, 33], [25, 28]] rot None sym 4 children []\n16 R 36 [[20, 36], [20, 41], [25, 41], [25, 36]] rot None sym 4 children []\n17 R 36 [[20, 44], [20, 49], [25, 49], [25, 44]] rot None sym 4 children []\n18 O 36 [[28, 12], [28, 17], [33, 17], [33, 12]] rot None sym 4 children []\n19 g 8 [[28, 20], [28, 21], [31, 21], [31, 20]] rot 0 sym 2 children []\n20 W 4 [[28, 22], [28, 23], [29, 23], [29, 22]] rot None sym 4 children []\n21 g 4 [[28, 24], [28, 25], [29, 25], [29, 24]] rot None sym 4 children []\n22 R 36 [[28, 28], [28, 33], [33, 33], [33, 28]] rot None sym 4 children []\n23 g 4 [[28, 36], [28, 37], [29, 37], [29, 36]] rot None sym 4 children []\n24 W 8 [[28, 38], [28, 41], [29, 41], [29, 38]] rot 90 sym 2 children []\n25 O 36 [[28, 44], [28, 49], [33, 49], [33, 44]] rot None sym 4 children []\n26 R 4 [[30, 22], [30, 23], [31, 23], [31, 22]] rot None sym 4 children []\n27 W 4 [[30, 24], [30, 25], [31, 25], [31, 24]] rot None sym 4 children []\n28 W 4 [[30, 36], [30, 37], [31, 37], [31, 36]] rot None sym 4 children []\n29 R 4 [[30, 38], [30, 39], [31, 39], [31, 38]] rot None sym 4 children []\n30 g 8 [[30, 40], [30, 41], [33, 41], [33, 40]] rot 0 sym 2 children []\n31 W 8 [[32, 20], [32, 23], [33, 23], [33, 20]] rot 90 sym 2 children []\n32 g 4 [[32, 24], [32, 25], [33, 25], [33, 24]] rot None sym 4 children []\n33 g 4 [[32, 36], [32, 37], [33, 37], [33, 36]] rot None sym 4 children []\n34 W 4 [[32, 38], [32, 39], [33, 39], [33, 38]] rot None sym 4 children []\n35 R 36 [[36, 12], [36, 17], [41, 17], [41, 12]] rot None sym 4 children []\n36 R 36 [[36, 20], [36, 25], [41, 25], [41, 20]] rot None sym 4 children []\n37 O 36 [[36, 28], [36, 33], [41, 33], [41, 28]] rot None sym 4 children []\n38 R 36 [[36, 36], [36, 41], [41, 41], [41, 36]] rot None sym 4 children []\n39 O 36 [[36, 44], [36, 49], [41, 49], [41, 44]] rot None sym 4 children []\n40 O 36 [[44, 20], [44, 25], [49, 25], [49, 20]] rot None sym 4 children []\n41 g 4 [[44, 28], [44, 29], [45, 29], [45, 28]] rot None sym 4 children []\n42 W 4 [[44, 30], [44, 31], [45, 31], [45, 30]] rot None sym 4 children []\n43 g 8 [[44, 32], [44, 33], [47, 33], [47, 32]] rot 0 sym 2 children []\n44 O 36 [[44, 36], [44, 41], [49, 41], [49, 36]] rot None sym 4 children []\n45 W 16 [[46, 28], [46, 29], [47, 29], [48, 30]] rot 270 sym 1 children []\n46 O 4 [[46, 30], [46, 31], [47, 31], [47, 30]] rot None sym 4 children []\n47 O 36 [[52, 20], [52, 25], [57, 25], [57, 20]] rot None sym 4 children []\n48 O 36 [[52, 28], [52, 33], [57, 33], [57, 28]] rot None sym 4 children []\n49 O 36 [[52, 36], [52, 41], [57, 41], [57, 36]] rot None sym 4 children []\n50 O 53 [[63, 0], [63, 52]] rot 0 sym 2 children []\n51 Y 11 [[63, 53], [63, 63]] rot 0 sym 2 children []\n"
+  },
+  "explicit_runs_read_code": "nodes = current_frame.segmentation['nodes']\nwhite = {(r,c) for n in nodes if n['color']=='W' for r,c0,c1 in n['runs'] for c in range(c0,c1+1)}\nprint('white includes (46,32):', (46,32) in white)\nprint('white pixels:', len(white))",
+  "explicit_runs_read_payload": {
+    "tool": "python",
+    "returncode": 0,
+    "stdout": "white includes (46,32): False\nwhite pixels: 72\n"
+  },
+  "adoption_note": "The original model code reads segmentation but prints selected old fields, so it would not automatically print or consume runs; the explicit second read is this research calculation, not a natural model adoption claim.",
+  "snapshot": {
+    "patch": "segmentation-runs-v1",
+    "field": "nodes[*].runs",
+    "coordinates": "absolute row, inclusive column start/end",
+    "membership": "exact original 4-connected equal-color components",
+    "modified_original_fields": [],
+    "new_model_tools": false,
+    "new_model_requests": false,
+    "active": true
+  },
+  "uninstalled": true
+}
