@@ -13,3 +13,9 @@ Notebook SHA256 `265ed9a9b84f118190a4262b96f85c6204be031de613f64a6fd4ca755ab8a99
 结果分析入口：`python3.12 -B scripts/analyze_030_results.py --root runs/030-capability-comparison --output-dir experiments/030-analysis`。用真实官方均分、逐题/关卡、token成本和变量复用轨迹判断，不套新的多条件晋升门或新增测试套件。若030明确负面，再用已准备的独立031精确分割runs短研究；031尚未启动GPU。
 
 zhuating CLI在20:54读到剩余28.28h，属于历史快照，不据此推导本作业计费。实际生成利用率证据见 [GPU说明](../../research/030-gpu-utilization-notes.md)。下一次031已停用与SGLang分片预读重复的整目录model precache，保留分片预读、wheel预缓存及全部推理数值参数；当前030源码不因此改变，下一次效果未实测。
+
+## 23:05阶段结果
+
+v2候选臂在23:03:58完成：25题、102/183关、8全通；控制台均分47.17，4643动作、4,408,842生成token。运行状态为8 won／12 cancelled／5 gave_up，无crashed／not_started，无残留工作线程，arm退出码0，wall约7278.85秒。均分及逐题分数目前仅有控制台两位小数，完整benchmark尚未下载，不能据此代替后续精确重算。
+
+baseline已在同一服务自动接续，每臂7254秒不变，没有再次加载模型。截至该阶段没有同轮基线均分或配对增益，不能用027历史基线作本轮对照。冻结[候选控制台片段](../../experiments/030-analysis/candidate-console.txt)及[部分结果JSON](../../experiments/030-analysis/candidate-partial.json)，保存真实完成事件与片段hash。尚未产生新正式submission。
