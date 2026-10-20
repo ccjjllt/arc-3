@@ -35,7 +35,6 @@ def check(name: str, cond: bool, detail: str = "") -> None:
 BENCH = {
     "ft09-0d8bbf25": "runs/015-native-adoption/baseline/benchmark.json",
     "tr87-cd924810": "runs/016-pace-allocation-jiyujia/pace_1x/benchmark.json",
-    "m0r0-492f87ba": "runs/016-pace-allocation-jiyujia/baseline/benchmark.json",
     "r11l-495a7899": "runs/016-pace-allocation-jiyujia/baseline/benchmark.json",
 }
 
@@ -56,7 +55,7 @@ def replay_grid(game_id: str, actions: list, cut: int):
 
 
 def main() -> None:
-    check("four forks pinned", set(FORKS) == set(BENCH), str(set(FORKS)))
+    check("three forks pinned", set(FORKS) == set(BENCH), str(set(FORKS)))
     check("quoted evidence bundled", all(len(v) < 400 for v in QUOTED_EVIDENCE.values()))
     total_actions = 0
     for game_id, bench_rel in BENCH.items():
@@ -88,13 +87,8 @@ def main() -> None:
     ink = [(r, c) for r, row in enumerate(rows) for c, v in enumerate(row)
            if ARC_COLOR_CHARS[v] != "B"]
     check("tr87 ink recount exceeds cropped 11", len(ink) > 11, str(len(ink)))
-    # m0r0: S blocks present and countable at T
-    bench = json.loads((ROOT / BENCH["m0r0-492f87ba"]).read_text())
-    history = next(g["history"] for g in bench["game_runs"] if g["game_id"] == "m0r0-492f87ba")
-    grid = replay_grid("m0r0-492f87ba", history, int(FORKS["m0r0-492f87ba"]["cut"]))
-    nodes = segment_layer([list(map(int, r)) for r in grid], ARC_COLOR_CHARS)["nodes"]
-    s_nodes = [n for n in nodes if n["color"] == "S"]
-    check("m0r0 S blocks visible to host", len(s_nodes) == 2, str(len(s_nodes)))
+    # m0r0 deferred this round (batch-internal cut); its evidence text stays
+    # bundled but no fork boundary is asserted here.
     # zero-env guard: refuses through the hook path, restores cleanly
     from arc3_research.failure_repair import install_zero_env_guard
 
@@ -142,7 +136,7 @@ def main() -> None:
     # packed conversation payload decodes through the driver's loader
     from arc3_research.failure_repair import load_fork_conversations
     convs = load_fork_conversations()
-    check("conversations cover forks", set(convs) == set(FORKS), str(set(convs)))
+    check("conversations cover forks", set(FORKS) <= set(convs), str(set(convs)))
     check("conversations non-empty",
           all(len(v) > 5 for v in convs.values()),
           str({g: len(v) for g, v in convs.items()}))

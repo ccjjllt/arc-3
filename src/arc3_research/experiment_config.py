@@ -193,7 +193,7 @@ def validate_config(config: dict[str, Any]) -> None:
                 or config.get("reference_arm") != "repair_A"):
             raise ValueError("026 keeps one pass, no warmup, and the repair_A reference.")
         if (sorted(config.get("games") or []) != sorted(
-                ["ft09-0d8bbf25", "tr87-cd924810", "m0r0-492f87ba", "r11l-495a7899"])):
+                ["ft09-0d8bbf25", "tr87-cd924810", "r11l-495a7899"])):
             raise ValueError("026 runs the four recorded failure prefixes only.")
         if config.get("requested_arm_seconds") != 1800 or config.get("hard_limit_seconds") != 5400:
             raise ValueError("026 is two 1800-second fork arms inside a 5400-second cap.")

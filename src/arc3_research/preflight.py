@@ -173,14 +173,14 @@ def main() -> None:
             patch = install_failure_repair()
             snap = patch.snapshot()
             if set(snap.get("forks", [])) != {"ft09-0d8bbf25", "tr87-cd924810",
-                                             "m0r0-492f87ba", "r11l-495a7899"}:
+                                             "r11l-495a7899"}:
                 raise RuntimeError("Failure repair fork set changed")
             guard = ProbeBudget(0)
             if guard.request() is not False:
                 raise RuntimeError("K=0 probe budget must forbid dispatch")
             conversations = load_fork_conversations()
-            if set(conversations) != set(snap["forks"]):
-                raise RuntimeError("Fork conversation set does not match fork set")
+            if set(snap["forks"]) - set(conversations):
+                raise RuntimeError("Fork conversation missing for a live fork")
             report["checks"].append("failure_repair_host_only_and_budget_guarded")
         report["patches"] = [patch.snapshot() for patch in patches]
         report["checks"].append("all_hooks_install_and_snapshot")

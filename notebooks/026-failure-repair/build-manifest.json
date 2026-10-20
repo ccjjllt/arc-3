@@ -2,23 +2,23 @@
   "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
   "source_hashes": {
     "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
-    "scripts/build_experiment.py": "18c3d52201bf1f46fd4c774ccb45d4a2d69b88178c5f9cb23d5a77e4341ea385",
+    "scripts/build_experiment.py": "32c708adddb5ccb6eed8d1888fa3604135ee3a1e0ea152e2e393c7487e285134",
     "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
-    "src/arc3_research/experiment_config.py": "ede0c361d2c45876e861b9a0fda8d2ba84cbee611edc954cece4bfdca203c92c",
-    "src/arc3_research/failure_repair.py": "7b1d81c21d12f3e1f645b2d555dfa31a973205bccec3cd275f9f11927ec59eb2",
+    "src/arc3_research/experiment_config.py": "47a341a133100e087dcd0071c668f76608970538146e78b7fdbde491a23273e2",
+    "src/arc3_research/failure_repair.py": "d5f5a65dbf78c867285b627a99b2ed445bcab2724bf37907eff23ffa91b22bfc",
     "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
     "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
     "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
-    "src/arc3_research/preflight.py": "173a7a2b94be86be25f3f1476c5483c97dfb55fd16474e69239aa1940495f04c",
-    "src/arc3_research/probe_budget.py": "4876429a07253af9d8820822c68bcbaa8a8851f14682bf70d6e7ab8d754a9b65",
+    "src/arc3_research/preflight.py": "febeb03a8a77afac41087bb39c426dad986e6c22f238fb954185622e4b55088b",
+    "src/arc3_research/probe_budget.py": "dd2d6bb0d68a531c9f85e3b434b7ae1c13b2b13fdb3afff6de74c58e3571b128",
     "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
     "src/arc3_research/request_deadline.py": "204c7bcb86478ee4b60aa9fffbe5b251abf5b27e4bf1534f1e773b9461372112",
-    "src/arc3_research/run_arm.py": "75b277a94843c4dd16845dcb87eac3537d8717ca81eab49cba6366f11770fa34",
+    "src/arc3_research/run_arm.py": "16cf5dc23223eb71c5a4ecb3bfdc9d7fc1395743a80592a82ea7cfbc552a5106",
     "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
     "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
     "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
     "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
-    "experiments/026-failure-repair.json": "f4d6f9d9571c7731e9cd35972845315254eb7a7d43fb8d3e5e484952fccad0ab"
+    "experiments/026-failure-repair.json": "e1a6c878f5825a2bef7a254dbc1e8375494373bba09437bfd00a0f5affcf6c3d"
   },
   "config": {
     "active_streams": 10,
@@ -39,12 +39,11 @@
     "budget_formula": "Same 1800-second arm budget as prior paired diagnostics; each arm replays 4 recorded prefixes to T then continues at most 30 more actions / 250s per fork.",
     "comparison_note": "Same four official games, same fork states, same extra budget. A continues fresh from T; B gets one host evidence recheck as an opening message. Full-trajectory (prefix + continuation) run records; no new tool API, no FP8. Public-development scores, not hidden leaderboard.",
     "expected_gpu_hours": 1.6,
-    "game_count": 4,
+    "game_count": 3,
     "game_source": "The four recorded failure prefixes (017 local evidence); frozen and reserve games are not mounted.",
     "games": [
       "ft09-0d8bbf25",
       "tr87-cd924810",
-      "m0r0-492f87ba",
       "r11l-495a7899"
     ],
     "gpu_sample_interval_seconds": 10,
@@ -78,5 +77,5 @@
   },
   "build_config_path": "experiments/026-failure-repair.json",
   "payload_write_mode": "native-writefile",
-  "notebook_sha256": "c0126f5abca0079469657703d397181a8e8a676b13b2325c19c245b68a83f3ea"
+  "notebook_sha256": "0758be3453e66db9b26bb902ba326296939f82b9932acf1436d891c60ab990b1"
 }

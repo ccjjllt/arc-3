@@ -12,8 +12,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FORKS = {"ft09-0d8bbf25": 11, "tr87-cd924810": 132,
-         "m0r0-492f87ba": 22, "r11l-495a7899": 40}
+FORKS = {"ft09-0d8bbf25": 11, "tr87-cd924810": 132, "r11l-495a7899": 40}
 
 
 def read(path: Path):
@@ -85,9 +84,9 @@ def main() -> None:
 def _levels_at_cut(game_id: str) -> int:
     # Levels completed within the replayed prefix. Verified constants: cut
     # action counts reach L3/L5/L1/L3 respectively (see replay_026_prefix.py
-    # checkpoints: ft09 11->L3, tr87 132->L5, m0r0 22->L1, r11l 40->L3).
+    # checkpoints: ft09 11->L3, tr87 132->L5, r11l 40->L3).
     return {"ft09-0d8bbf25": 2, "tr87-cd924810": 4,
-            "m0r0-492f87ba": 0, "r11l-495a7899": 2}[game_id]
+            "r11l-495a7899": 2}[game_id]
 
 
 if __name__ == "__main__":

@@ -26,21 +26,21 @@ from typing import Any
 
 from arc3_research.probe_budget import ProbeBudget
 
-# game_id -> fork parameters. Cuts are cumulative executed env actions
-# (verified by scripts/replay_026_prefix.py: 111/111 checkpoints exact).
+# game_id -> fork parameters. Cuts are cumulative executed env actions and
+# legal tool-call boundaries only (previous tool already returned, next model
+# request not yet issued). m0r0 deferred: its cut sits inside an 18-action
+# batch call, unrestorable without leaking the future (see research note).
 FORKS = {
     "ft09-0d8bbf25": {"cut": 11, "analysis_step": 5, "kind": "legend_recheck",
                       "max_extra_actions": 30, "max_extra_seconds": 250},
     "tr87-cd924810": {"cut": 132, "analysis_step": 17, "kind": "crop_recheck",
                       "max_extra_actions": 30, "max_extra_seconds": 250},
-    "m0r0-492f87ba": {"cut": 22, "analysis_step": 6, "kind": "sim_recheck",
-                      "max_extra_actions": 30, "max_extra_seconds": 250},
     "r11l-495a7899": {"cut": 40, "analysis_step": 25, "kind": "control",
                       "max_extra_actions": 30, "max_extra_seconds": 250},
 }
 
-# Short recorded failure signatures (not solutions) bundled as data. The full
-# request logs exceed the notebook payload cap and stay local.
+# Short recorded failure signatures (not solutions) bundled as data. m0r0
+# signature retained for the record; its fork is deferred (batch-internal cut).
 QUOTED_EVIDENCE = {
     "ft09-0d8bbf25": ("prior run at L3: legend transcription claimed WOW where "
                       "the pattern has gWg/WOg/WWW; that claim cost 91 actions "
