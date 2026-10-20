@@ -1,0 +1,138 @@
+{
+  "created_at_utc": "2026-10-20T11:50:28.744236+00:00",
+  "scope": "Read-only audit of existing outputs; no GPU run and no solver code changes",
+  "remote": {
+    "kernel": "qingyu1232/arc3-027-tail-confirm",
+    "version": 2,
+    "latest_version_before_download": 2,
+    "latest_version_after_download": 2,
+    "files_list": "runs/027-tail-confirm/output-files-v2.json",
+    "file_count": 442,
+    "selected_download_count": 9,
+    "fixed_version_endpoint_note": "SDK GetKernel with version_label=2 returned HTTP 404. Latest metadata was verified as 2 both before and after download. CLI 2.2.4 kernels output ignores parsed /version in its request; do not rely on suffix alone."
+  },
+  "selected_candidate": {
+    "game_id": "tu93-0768757b",
+    "baseline_final_score": 68.04786348100441,
+    "baseline_levels_completed": 8,
+    "total_levels": 9,
+    "request_log": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+    "request_line_1based": 263,
+    "request_record_0based": 262,
+    "request_event": "request",
+    "next_record_event": "response",
+    "analysis_step": 46,
+    "request_index_within_turn": 1,
+    "message_count": 58,
+    "cut_executed_actions": 276,
+    "logged_state": "step 277, level 9",
+    "is_legal_tool_boundary_by_log": true,
+    "last_tool_message_index_0based": 56,
+    "last_tool_returncode": 0,
+    "last_batch_executed_actions": 16,
+    "evidence": [
+      {
+        "message_index_0based": 39,
+        "kind": "model simulation output",
+        "excerpt": "1 LEFT -> (4, 3) c (2, 3) -> (3, 3) O [(1, 2), (1, 5), (3, 6)] []"
+      },
+      {
+        "message_index_0based": 56,
+        "kind": "actual executed action output",
+        "excerpt": "1 LEFT p [(4, 3)] c [(2, 3)] eye [] O [(1, 2), (1, 5), (3, 6)] GO False"
+      },
+      {
+        "message_index_0based": 45,
+        "kind": "earlier failed simulator",
+        "excerpt": "KeyError: (4, 7) in chc"
+      }
+    ],
+    "finding": "The cut contains its own simulator output and real action output showing differing chaser positions after the first LEFT from the same recorded starting sequence. The simulator error and mismatch are present before the cut; no game answer or corrected rule is supplied. This establishes a concrete repair target, not a proven score improvement.",
+    "current_frame": {
+      "events_file": "runs/027-tail-confirm/baseline/artifacts/tu93-0768757b_p0_events.jsonl",
+      "line_1based": 363,
+      "action_num": 276,
+      "level": 9,
+      "board_sha256_json_default": "721435af77794819edf988b2cd3f3afeb65cf114b67b534fc523fd334827b0c2"
+    },
+    "wallclock": {
+      "last_action_seconds": 6873.543313377999,
+      "arm_budget_seconds": 7254,
+      "nominal_remaining_seconds": 380.45668662200114,
+      "suggested_equal_continuation_seconds": 250,
+      "note": "380.46s is an upper bound from the last action timestamp, not an exact request dispatch timestamp; CPU work until request may reduce it. 250s is a proposed capped diagnostic budget including repair, to freeze after aligning timing logs."
+    },
+    "required_before_gpu": [
+      "Replay exact 276 benchmark actions including RESET, compare replay board to saved original frame.",
+      "Recover retained top-level functions consistently with the 58-message cut; no ordinary globals assumed.",
+      "Export self-contained messages/actions/board without future records or audit answer annotations.",
+      "Confirm exact checkpoint dispatch timing if preserving historical remaining wallclock is required.",
+      "Count repair model calls and execution inside the same 250s A/B budget."
+    ],
+    "limitations": [
+      "This is the last recorded action prefix but not final request: later requests exist; no later action or additional level was recorded.",
+      "Replay fidelity and sandbox/retained-function restoration have not been run for this new candidate.",
+      "No repaired program, adoption, A/B gain or hidden score has been demonstrated.",
+      "Model self-correction is possible; if A recovers equally fast, stop this version."
+    ]
+  },
+  "other_cases": [
+    {
+      "game": "sc25-635fd71a",
+      "notes": "L5 requests include StaleStateActionError at line151, syntax error at line195 then immediate successful re-execution at197. Main difficulty is model/goal inference; no stronger bounded repair case selected in this audit."
+    },
+    {
+      "game": "re86-8af5384d",
+      "notes": "L7 has exceptions and retained-function issues in window, but many refer to earlier levels; no clean current-error cut selected within this audit."
+    }
+  ],
+  "downloaded_files": [
+    {
+      "path": "runs/027-tail-confirm/baseline/re86-8af5384d_p0_requests.jsonl",
+      "bytes": 80277567,
+      "sha256": "112d8a768b23a19c2f7aa0b367d0c156a82f31d045d93739e2553135d782bb25"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/sc25-635fd71a_p0_requests.jsonl",
+      "bytes": 67568339,
+      "sha256": "68b4b3063fd0fcdf9217d45ead0466eeeb33a6e4a9313d1b0b6171d1b922c128"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+      "bytes": 80865047,
+      "sha256": "53708c6d1c7a8d83d17d002fa6a1df80c47ff64551222c893721135a4eff01cb"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/re86-8af5384d_p0_events.jsonl",
+      "bytes": 11224882,
+      "sha256": "153232497e7221ee4db755898e3760b0854060715896cf35ba590fce2c351e5b"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/re86-8af5384d_p0_viewer_data.json",
+      "bytes": 866,
+      "sha256": "2994552d8ce4f690ce18dbcbbb83171abf54af9ccc73ec30b0095c6e2d743ca4"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/sc25-635fd71a_p0_events.jsonl",
+      "bytes": 5730415,
+      "sha256": "ff0e4f0e77a858a05e63a2375f8cdbf51cf482bcda4f49bc5d7c447c83127fda"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/sc25-635fd71a_p0_viewer_data.json",
+      "bytes": 842,
+      "sha256": "3c25da1ac62487e94c3433f08b0f3452f0cfbb2c1ed20ea136f9408d3f425ba1"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/tu93-0768757b_p0_events.jsonl",
+      "bytes": 8160412,
+      "sha256": "19cc31db189aebd760a397cf417dd2d6fd46541ee36ecfdc41506dc173978afa"
+    },
+    {
+      "path": "runs/027-tail-confirm/baseline/artifacts/tu93-0768757b_p0_viewer_data.json",
+      "bytes": 870,
+      "sha256": "4e57bfdf929ba9ff99d952b656ea12e0db847d20b7d29644b01e84e5d184d1f3"
+    }
+  ],
+  "gpu_seconds": 0,
+  "repair_calls": 0
+}
