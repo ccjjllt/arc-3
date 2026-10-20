@@ -156,10 +156,17 @@ def main() -> None:
                 or arcengine.GameAction.from_name(name)
             arcengine.ActionInput(id=member, data=data)
     check("fork-inputs consumer parse", True)
-    # packed conversation payload decodes through the driver's loader
+    # packed conversation payload decodes through the driver's loader;
+    # v5 lesson: image parts must be DROPPED at build, never placeholdered
+    # (SGLang 400-rejects fake image_urls -> 11 straight analyzer failures).
     from arc3_research.failure_repair import load_fork_conversations
     convs = load_fork_conversations()
     check("conversations cover forks", set(FORKS) <= set(convs), str(set(convs)))
+    n_img = sum(
+        1 for v in convs.values() for m in v
+        for x in (m.get("content") if isinstance(m.get("content"), list) else [])
+        if isinstance(x, dict) and x.get("type") == "image_url")
+    check("no image parts in restored history", n_img == 0, str(n_img))
     check("conversations non-empty",
           all(len(v) > 5 for v in convs.values()),
           str({g: len(v) for g, v in convs.items()}))

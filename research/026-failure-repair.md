@@ -38,3 +38,7 @@ v4 双臂 exit 0（A 666s / B 755s），但比较无效，两处实证：
 1. warm 恢复被静默清空：恢复写在 play() 之前，首个 analyze() 内 `_ensure_session`（`tool_agent.py:3605`）因目录不符清掉历史与函数。B prompt 日志 `HOST RECHECK` 命中 0、恢复的历史内容命中 0。A ft09 的 +2 关是冷启动轶事（n=1），不能归因。
 2. K=0 guard 未生效：延续段执行了 30/17/8/1 个后T动作。机制：沙箱只对封闭 stop_reason 集（reset_not_first/stale_state/known_death/repeated_action_in_state/known_noop）抛不可捕获中断（`python_tool_sandbox.py:513-533`），自定义 `probe_budget_reached` 直接穿透、循环继续。专用预算停止需底座支持（blocked）。
 v5：恢复移到显式 `_ensure_session(state_path)` 之后（真机 `_ensure_session` 双向验证：seed 后保留、seed 前恢复必清空）；撤掉延续段拒动——K=0 约束的是修复（宿主纯重算，本来就 0 env 动作），续跑自由动作才能观测恢复；guard 函数保留但不安装。
+
+## v5 尸检 + v6
+v5 双臂 exit 0 但 6/6 fork 零续跑：恢复的历史含 `<fork-stripped>` 图片占位，SGLang 以 400 拒绝（`run.log`：`loading IMAGE data ... Non-base64 digit found`），analyzer 连败 11 次直接 gave_up。重算送达了（B prompt 命中 1）但 turn 全死——再次 void。
+v6：build 期直接删除图片段（无 image-only 消息，无需占位；空则补文本句）。`check_026_fork` 新增 `no image parts` 门（正是 v5 缺的那道）。
