@@ -59,11 +59,11 @@ class FailureRepairPatch:
     """No global hooks. The repair runs only inside the fork driver below."""
 
     def snapshot(self) -> dict[str, Any]:
-        return {"patch": "failure-repair-v2", "forks": list(FORKS),
+        return {"patch": "failure-repair-v5", "forks": list(FORKS),
                 "probe_quota": 0,
-                "rule": "host evidence only; K=0 recompute-only via guard-hook "
-                        "refusal (uncatchable, keeps stdout+functions); no new "
-                        "tool API; no answer injection; tool-call boundaries only"}
+                "rule": "repair is pure host recompute (0 env actions); the "
+                        "continuation acts freely inside per-fork caps; "
+                        "restore happens after session init; no new tool API"}
 
 
 def install_failure_repair() -> FailureRepairPatch:
@@ -137,15 +137,13 @@ RECHECK = {"legend_recheck": recheck_legend, "crop_recheck": recheck_crop,
 
 
 def install_zero_env_guard(analyzer) -> Any:
-    """K=0: refuse every env action via the guard-hook path.
+    """K=0 hook wrapper (NOT installed in v5: blocked, see run_fork_arm).
 
-    Wraps the analyzer instance's ``_action_guard_hook`` (instance attribute
-    shadows the method; each ``analyze()`` turn re-reads it, so no base patch
-    and no install-order coupling with timing/observer patches). The refusal
-    ``("probe_budget_reached", detail)`` makes the solver return a refusal
-    payload; the sandbox ends the snippet with an uncatchable error that keeps
-    prior stdout and retained functions. Pure-Python recompute calls never
-    reach this hook and stay allowed. Returns an uninstall closure.
+    Kept + unit-tested for future probe work. A custom "probe_budget_reached"
+    refusal is silently non-terminating because the sandbox honors only its
+    closed stop_reason set. Installing this today would fake enforcement
+    while actions flow freely (v4 evidence). A dedicated budget stop needs
+    base sandbox support first.
     """
     original = analyzer._action_guard_hook
 
@@ -263,6 +261,12 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
                 raise RuntimeError(f"Fork replay diverged at {requested}: {payload}")
         session.analysis_step = int(spec_fork["analysis_step"])
         analyzer._kept_functions = {}
+        # Init-then-restore (v5 fix): the first analyze() inside play() runs
+        # _ensure_session, which WIPES history/functions when the runtime dir
+        # differs (fresh analyzer always differs). v4 restored before play and
+        # lost everything silently (prompt log had 0 HOST RECHECK hits).
+        # Seeding the session here makes play()'s own _ensure_session a no-op.
+        analyzer._ensure_session(state_path)
         # Warm restart: the recorded text-only conversation (historical images
         # were stripped at build; the live opening re-renders current visuals).
         # Exact kept-function sources were never persisted, so both arms start
@@ -279,13 +283,19 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
             entry["recheck_kind"] = spec_fork["kind"]
             entry["recheck_chars"] = len(text)
         # Bounded continuation sharing the arm budget. Mirror _play_one error
-        # handling so one fork failure is recorded, not silent. K=0: the
-        # zero-env guard is installed per fork and always uninstalled.
+        # handling so one fork failure is recorded, not silent. The model acts
+        # freely inside the per-fork caps: recovery is observable only through
+        # continued env actions (v5: the K=0 rule binds the REPAIR, which is
+        # pure host recompute, not the continuation). A per-position env guard
+        # is NOT installed: the sandbox honors only its closed stop_reason set
+        # (reset_not_first/stale_state/known_death/repeated_action_in_state/
+        # known_noop), so a custom "probe_budget_reached" refusal is silently
+        # non-terminating (v4 evidence: 30 post-T actions executed under K=0).
+        # A dedicated budget stop needs base sandbox support (blocked).
         prev_max_actions = bm.solver.max_actions_per_game
         prev_max_runtime = bm.solver.max_runtime_s_per_game
         bm.solver.max_actions_per_game = cut + int(spec_fork["max_extra_actions"])
         bm.solver.max_runtime_s_per_game = float(spec_fork["max_extra_seconds"])
-        uninstall_guard = install_zero_env_guard(analyzer)
         try:
             try:
                 session.play()
@@ -296,7 +306,6 @@ def run_fork_arm(*, bm, job_dir: Path, arm: str, is_b: bool,
                 with contextlib.suppress(Exception):
                     game.finish_game()
         finally:
-            uninstall_guard()
             bm.solver.max_actions_per_game = prev_max_actions
             bm.solver.max_runtime_s_per_game = prev_max_runtime
         # Full-trajectory (prefix + continuation) run record.

@@ -32,3 +32,9 @@
 ## 2026-10-20 评审修正
 1. 停止路径：`ProbeBudget.stop_payload()` 普通 dict 不能终止模型 Python 循环；v1 的 guard 从未真正接线（构造了但没调用）。改为 K=0 重算：`install_zero_env_guard` 包 analyzer 实例 `_action_guard_hook`（每轮 analyze 重新抓取，无需底座补丁，与计时/观察器补丁无安装顺序耦合），拒绝走 solver 守卫路径（`solver.py:1047-1073` → 拒绝 payload `1136-1155` → 沙箱不可捕获异常，中断片段但保留 stdout 与已保留函数）。纯 Python 重算不经过该 hook，保持允许。`probe_budget.py` 与模块 docstring 中"永不抛异常/会丢输出"的旧说法已更正。
 2. 切点边界：ft09 cut（cum 11 / rec 14）经核对是合法工具边界——rec14=request、rec15=同会话response（21 条消息完全相同）、rec16 前 21 条与 rec14 一致并新起 assistant turn；第 7 个 tool（含 6 动作批）已返回，无在途 Python、无局部状态可泄漏。m0r0 批内切点暂缓（只恢复消息/函数恢复不了循环位置，且整段 tool 输出已含后 16 步）。
+
+## v4 尸检（A/B void）+ v5
+v4 双臂 exit 0（A 666s / B 755s），但比较无效，两处实证：
+1. warm 恢复被静默清空：恢复写在 play() 之前，首个 analyze() 内 `_ensure_session`（`tool_agent.py:3605`）因目录不符清掉历史与函数。B prompt 日志 `HOST RECHECK` 命中 0、恢复的历史内容命中 0。A ft09 的 +2 关是冷启动轶事（n=1），不能归因。
+2. K=0 guard 未生效：延续段执行了 30/17/8/1 个后T动作。机制：沙箱只对封闭 stop_reason 集（reset_not_first/stale_state/known_death/repeated_action_in_state/known_noop）抛不可捕获中断（`python_tool_sandbox.py:513-533`），自定义 `probe_budget_reached` 直接穿透、循环继续。专用预算停止需底座支持（blocked）。
+v5：恢复移到显式 `_ensure_session(state_path)` 之后（真机 `_ensure_session` 双向验证：seed 后保留、seed 前恢复必清空）；撤掉延续段拒动——K=0 约束的是修复（宿主纯重算，本来就 0 env 动作），续跑自由动作才能观测恢复；guard 函数保留但不安装。

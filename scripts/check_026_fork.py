@@ -107,6 +107,29 @@ def main() -> None:
     check("K=0 refusal names uncatchable stop",
           "NOT executed" in verdict[1] and "not catchable" in verdict[1])
     undo()
+    # init-then-restore against the REAL _ensure_session (v4 voided its own
+    # A/B by restoring before play; first analyze() wiped history + recheck:
+    # B prompt log had 0 HOST RECHECK hits, 0 restored-history hits).
+    from inference.agent.tool_agent import ToolAgent as _RealToolAgent
+    seeded = _RealToolAgent.__new__(_RealToolAgent)
+    seeded._session_runtime_dir = None
+    _sp = ROOT / "x"  # only the parent dir matters for the comparison
+    seeded._ensure_session(_sp)
+    seeded._history_messages = [{"role": "user", "content": "HELLO"}]
+    seeded._ensure_session(_sp)
+    check("init-then-restore survives _ensure_session",
+          seeded._history_messages == [{"role": "user", "content": "HELLO"}])
+    # run_fork_arm must seed before restoring (order assertion on source)
+    import re as _re
+    src = (ROOT / "src/arc3_research/failure_repair.py").read_text()
+    check("driver seeds session before restore",
+          _re.search(r"analyzer\._ensure_session\(state_path\)[\s\S]*?analyzer\._history_messages = copy\.deepcopy",
+                     src) is not None)
+    # v5: no continuation action refusal (sandbox ignores unknown reasons;
+    # v4 executed 30 post-T actions under K=0). The repair stays 0-env-action
+    # by construction (RECHECK is pure recompute on the replayed grid).
+    check("no guard installed on continuation",
+          "uninstall_guard = install_zero_env_guard" not in src)
     check("K=0 guard uninstall restores base hook",
           getattr(fake._action_guard_hook, "__func__", None)
           is _FakeAnalyzer._action_guard_hook)
