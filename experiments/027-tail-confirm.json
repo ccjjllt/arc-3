@@ -1,1 +1,77 @@
-{"active_streams": 10, "arm_environment": {"baseline": {"ARC3_PRIORITY_PACE": "0", "ARC3_PRIORITY_TAIL_LOOKUP": "remaining"}, "tail_80k_confirm": {"ARC3_PRIORITY_PACE": "0", "ARC3_PRIORITY_TAIL_LOOKUP": "1"}}, "arm_order": ["tail_80k_confirm", "baseline"], "budget_formula": "532 * 60 * game_count // 110", "comparison_note": "Single-factor 014 confirmation, reversed order (candidate first) to reduce fixed-order effect. 25 identical IDs/order, 7254s each, 10 streams, one pass, zero warmup, one shared model load, isolated CPU processes, cache flush. PACE0 and 003/006/007/010/012/025 interventions off. Identical passive timing/scheduler observation and request-deadline correction. CPU preflight before serving, strict equal budgets. One confirmation only; no third-round parameter search.", "expected_gpu_hours": 4.8, "game_count": 25, "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs", "games": ["ar25-0c556536", "bp35-0a0ad940", "cd82-fb555c5d", "cn04-2fe56bfb", "dc22-fdcac232", "ft09-0d8bbf25", "g50t-5849a774", "ka59-38d34dbb", "lf52-271a04aa", "lp85-305b61c3", "ls20-9607627b", "m0r0-492f87ba", "r11l-495a7899", "re86-8af5384d", "s5i5-18d95033", "sb26-7fbdac44", "sc25-635fd71a", "sk48-d8078629", "sp80-589a99af", "su15-1944f8ab", "tn36-ef4dde99", "tr87-cd924810", "tu93-0768757b", "vc33-5430563c", "wa30-ee6fef47"], "gpu_sample_interval_seconds": 10, "hard_limit_seconds": 18000, "id": "027-tail-confirm", "inference_timing": true, "kernel_id": "jiyujia/arc3-027-tail-confirm", "kernel_title": "ARC3 027 Tail Confirm", "n_passes_per_arm": 1, "preflight_before_serving": true, "purpose": "One-shot 014 tail_80k confirmation on official 25; candidate-first order; submission packaging in parallel; no submission on non-replicated gain", "reference_arm": "baseline", "request_deadline": true, "require_cache_flush": true, "require_cache_flush_log": true, "require_complete_pool": true, "require_drained_workers": true, "require_rtx_pro6000": true, "requested_arm_seconds": 7254, "runtime_source_sha256": {"src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe", "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82", "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"}, "scheduler_observer": true, "selection_note": "Preregistered: primary = official-scoring mean (RHAE/AE); report key win/loss games, completion, and run risk. No aux-all-up requirement, no post-hoc standard switch. Advance to submission builder only on replicated aggregate gain; vc33-sensitivity disclosed (014 history: +3.16 single-game contribution, -1.79 ex-vc33).", "startup_limit_seconds": 1200, "strict_arm_budget": true, "warmup_action_games": 0, "weekly_gpu_hours_limit": 30}
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "tail_80k": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "1",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "tail_80k",
+    "baseline"
+  ],
+  "budget_formula": "532 * 60 * game_count // 110",
+  "comparison_note": "Single-factor 014 confirmation, reversed order (candidate first) to reduce fixed-order effect. 25 identical IDs/order, 7254s each, 10 streams, one pass, zero warmup, one shared model load, isolated CPU processes, cache flush. PACE0 and 003/006/007/010/012/025 interventions off. Identical passive timing/scheduler observation and request-deadline correction. CPU preflight before serving, strict equal budgets. One confirmation only; no third-round parameter search.",
+  "expected_gpu_hours": 4.8,
+  "game_count": 25,
+  "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+  "games": [
+    "ar25-0c556536",
+    "bp35-0a0ad940",
+    "cd82-fb555c5d",
+    "cn04-2fe56bfb",
+    "dc22-fdcac232",
+    "ft09-0d8bbf25",
+    "g50t-5849a774",
+    "ka59-38d34dbb",
+    "lf52-271a04aa",
+    "lp85-305b61c3",
+    "ls20-9607627b",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "re86-8af5384d",
+    "s5i5-18d95033",
+    "sb26-7fbdac44",
+    "sc25-635fd71a",
+    "sk48-d8078629",
+    "sp80-589a99af",
+    "su15-1944f8ab",
+    "tn36-ef4dde99",
+    "tr87-cd924810",
+    "tu93-0768757b",
+    "vc33-5430563c",
+    "wa30-ee6fef47"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 18000,
+  "id": "027-tail-confirm",
+  "inference_timing": true,
+  "kernel_id": "jiyujia/arc3-027-tail-confirm",
+  "kernel_title": "ARC3 027 Tail Confirm",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": true,
+  "purpose": "One-shot 014 tail_80k confirmation on official 25; candidate-first order; submission packaging in parallel; no submission on non-replicated gain",
+  "reference_arm": "baseline",
+  "request_deadline": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 7254,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": true,
+  "selection_note": "Preregistered: primary = official-scoring mean (RHAE/AE); report key win/loss games, completion, and run risk. No aux-all-up requirement, no post-hoc standard switch. Advance to submission builder only on replicated aggregate gain; vc33-sensitivity disclosed (014 history: +3.16 single-game contribution, -1.79 ex-vc33). Arm name reverted to tail_80k to match frozen preflight allowlist (v1 tail_80k_confirm failed preflight).",
+  "startup_limit_seconds": 1200,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30
+}

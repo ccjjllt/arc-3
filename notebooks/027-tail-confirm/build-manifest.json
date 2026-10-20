@@ -16,22 +16,22 @@
     "src/arc3_research/session_runner.py": "e2bf61508b17d57a8eb4dc5e557908854fe6091d511d6440674120ef2e1da3bb",
     "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
     "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
-    "experiments/027-tail-confirm.json": "c189337d93566e7031244d9b429d7e32a13b7e7c4cc6aa7e4e63aa07c647a445"
+    "experiments/027-tail-confirm.json": "7076224b1abcb22108c863864ebbba0934165c8e761dfda77d1665e471620db6"
   },
   "config": {
     "active_streams": 10,
     "arm_environment": {
       "baseline": {
-        "ARC3_PRIORITY_PACE": "0",
-        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining"
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
       },
-      "tail_80k_confirm": {
-        "ARC3_PRIORITY_PACE": "0",
-        "ARC3_PRIORITY_TAIL_LOOKUP": "1"
+      "tail_80k": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "1",
+        "ARC3_PRIORITY_PACE": "0"
       }
     },
     "arm_order": [
-      "tail_80k_confirm",
+      "tail_80k",
       "baseline"
     ],
     "budget_formula": "532 * 60 * game_count // 110",
@@ -89,7 +89,7 @@
       "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
     },
     "scheduler_observer": true,
-    "selection_note": "Preregistered: primary = official-scoring mean (RHAE/AE); report key win/loss games, completion, and run risk. No aux-all-up requirement, no post-hoc standard switch. Advance to submission builder only on replicated aggregate gain; vc33-sensitivity disclosed (014 history: +3.16 single-game contribution, -1.79 ex-vc33).",
+    "selection_note": "Preregistered: primary = official-scoring mean (RHAE/AE); report key win/loss games, completion, and run risk. No aux-all-up requirement, no post-hoc standard switch. Advance to submission builder only on replicated aggregate gain; vc33-sensitivity disclosed (014 history: +3.16 single-game contribution, -1.79 ex-vc33). Arm name reverted to tail_80k to match frozen preflight allowlist (v1 tail_80k_confirm failed preflight).",
     "startup_limit_seconds": 1200,
     "strict_arm_budget": true,
     "warmup_action_games": 0,
@@ -97,5 +97,5 @@
   },
   "build_config_path": "experiments/027-tail-confirm.json",
   "payload_write_mode": "json-source-files",
-  "notebook_sha256": "55b47c456605f248798676e17a57bac574d4ea712322702cb10e23203170c8a7"
+  "notebook_sha256": "094ad2b4ca649e5351fdeae309f2b6c664cf53ac9e93fa6655537d35c069b62f"
 }

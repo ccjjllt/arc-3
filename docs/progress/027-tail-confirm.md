@@ -1,11 +1,9 @@
-# 027 进展 — 已推送 RUNNING（teammateb额度）
+# 027 进展 — COMPLETE，未复现，关闭
 
-日期：2026-10-20。状态：**已推送，RUNNING**。
+日期：2026-10-20。状态：**v2 COMPLETE，-5.98，未过预注册门，关闭014线**。
 
-- 配置：`experiments/027-tail-confirm.json`，候选→基线顺序，单tail参数。`validate_config` PASS。
-- 构建：`notebooks/027-tail-confirm/experiment.ipynb`（16 cells，778700 bytes）。推送ID `qingyu1232/arc3-027-tail-confirm v1`（配置原写jiyujia，实际用teammateb推送，见下）。
-- 推送：teammateb（qingyu1232）`kaggle quota`剩12.34h/30h；ccjjllt剩8.18h；jiyujia加速器统计剩1.85h不够5h硬限，故改用teammateb（与025先例一致）。`kaggle kernels push -t 18000`成功v1，状态RUNNING。启动记录`experiments/027-launch.json`。
-- 配额口径说明：加速器统计（6h池）显示BLOCKED，但`kaggle quota`（30h池）显示teammateb/ccjjllt均够4.8h；以后推前以`kaggle quota`为准并双口径记录。
-- 提交底座：009 v2离线构建通过；候选定制构建器未建（待复现收益）；未创建competition submission。
-- 结果按预注册标准判定一次（主指标官方平均分 + vc33敏感性披露），不扩搜。
-- 正式成绩仍为009 v2 / submission 57101330 / public 31.16。
+- 推送：`qingyu1232/arc3-027-tail-confirm v2`（teammateb），候选→基线，7254s/臂。
+- v1曾因臂名`tail_80k_confirm`未进冻结白名单在preflight 43秒失败；v2改回`tail_80k`后跑满。
+- 结果：baseline 50.43（112关8胜） vs tail_80k 44.45（101关7胜）；vc33 -32.14，历史驱动未复现。详见`research/027-tail-confirm-results.md`，分析`experiments/027-analysis/summary.{json,md}`。
+- 不建候选提交构建器，不提交。正式仍为009 v2 / 57101330 / public 31.16。
+- 剩余探索预算只做028单案例（≤1h、≤2次调用），不阻塞。
