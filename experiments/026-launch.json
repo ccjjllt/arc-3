@@ -24,8 +24,8 @@
   ],
   "hard_limit_seconds": 5400,
   "kernel_id": "jiyujia/arc3-026-failure-repair",
-  "kernel_version": 5,
-  "notebook_sha256": "08007f74e0942b2a7b706a98755b83c0719e4572ecb076e590092a6437b17705",
+  "kernel_version": 6,
+  "notebook_sha256": "cc80917e8c5f4899c3e99b391e8faa389eff7ba2d64b593b3aa963815e991510",
   "notebook_size_bytes": 939194,
   "prepared_at_utc": "2026-10-19",
   "requested_arm_seconds": 1800,
@@ -43,5 +43,7 @@
     "r11l-495a7899"
   ],
   "v4_result": "VOID: warm history wiped by _ensure_session (0 recheck hits in B prompts); K=0 guard non-terminating (30 post-T actions executed); A ft09 +2 levels is cold-start anecdote",
-  "v5_change": "init-then-restore (verified both directions on real _ensure_session); no continuation refusal; K=0 binds repair only"
+  "v5_change": "init-then-restore (verified both directions on real _ensure_session); no continuation refusal; K=0 binds repair only",
+  "v5_result": "VOID: <fork-stripped> image placeholder 400-rejected by SGLang; 6/6 forks 0 post-T actions (11 straight analyzer failures)",
+  "v6_change": "image parts dropped at build (no image-only msgs); image-part gate in CPU check"
 }
