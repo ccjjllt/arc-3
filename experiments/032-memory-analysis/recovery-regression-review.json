@@ -1,0 +1,454 @@
+{
+  "reviewed_at_utc": "2026-10-21T15:20:36.003770+00:00",
+  "scope": "Independent su15/sc25 regression review from frozen032 recovery, no model/environment execution or new GPU run",
+  "comparison_limit": "Different model-server sessions, same25games/7254solver budget. Score differences are descriptive; one trajectory percondition cannot isolate memory causality.",
+  "games": {
+    "su15": {
+      "game_id": "su15-1944f8ab",
+      "baseline": {
+        "state": "cancelled",
+        "levels_completed": 7,
+        "final_score": 61.057690961282646,
+        "actions_per_level": [
+          15,
+          23,
+          69,
+          16,
+          40,
+          13,
+          7,
+          23,
+          0
+        ],
+        "solver_note": "tokens=325002"
+      },
+      "candidate": {
+        "state": "cancelled",
+        "levels_completed": 4,
+        "final_score": 22.22222222222222,
+        "actions_per_level": [
+          14,
+          17,
+          21,
+          34,
+          103,
+          0,
+          0,
+          0,
+          0
+        ],
+        "solver_note": "tokens=190861"
+      },
+      "score_delta": -38.835468739060424,
+      "sources": [
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/su15-1944f8ab_p0_requests.jsonl",
+          "sha256": "a92a08356b29b803d6c48a1ef28ed6c71826d7ba04e1f8ff79d63264465fd0c6"
+        },
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/solver_analysis/su15-1944f8ab_p0.html",
+          "sha256": "cf998026540ba9aea60ab5afc41a80d0f60e6a7933556e2842bd83caa01ed815"
+        },
+        {
+          "path": "runs/032-memory-full/baseline/transcripts/su15-1944f8ab_p0.txt",
+          "sha256": "80a9632704ef6d3839dcd837d394a5eecafbba63f31cef77545151b93182d1a4"
+        },
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/solved-level-memory-summary.json",
+          "sha256": "baf6368daf0ebb890b617314859da425a92d4ce2e457b18106a0442c0b863025"
+        }
+      ],
+      "request_integrity": {
+        "malformed_lines": [],
+        "counts": {
+          "requests": 122,
+          "responses_with_usage": 122,
+          "latest_user_contains_rule_instruction": 8,
+          "requests_with_memory_header": 80,
+          "system_memory_characters_in_requests": 492500
+        },
+        "completed_python_calls_with_real_stdout": 117
+      },
+      "first_pin": {
+        "request_line": 85,
+        "message_count": 52,
+        "step": 63,
+        "level": 4,
+        "reasons": [
+          "first_memory_header",
+          "history_message_count_decreased_with_memory",
+          "history_head_changed_with_memory"
+        ],
+        "memory_block_sha256": "3aefb2add88da44dbf7c0e5513933c73b1cdfe2f3ed56906bae3be4f36ccdaa6"
+      },
+      "memory_windows": [
+        {
+          "request_line": 85,
+          "message_count": 52,
+          "step": 63,
+          "level": 4,
+          "reasons": [
+            "first_memory_header",
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "3aefb2add88da44dbf7c0e5513933c73b1cdfe2f3ed56906bae3be4f36ccdaa6"
+        },
+        {
+          "request_line": 125,
+          "message_count": 51,
+          "step": 94,
+          "level": 5,
+          "reasons": [
+            "new_memory_block",
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "edc11c37dd6d4e103afebf40041cd74dd6dcbf05c6bfb2ce09a8e48011436bd3"
+        },
+        {
+          "request_line": 149,
+          "message_count": 31,
+          "step": 132,
+          "level": 5,
+          "reasons": [
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "edc11c37dd6d4e103afebf40041cd74dd6dcbf05c6bfb2ce09a8e48011436bd3"
+        },
+        {
+          "request_line": 193,
+          "message_count": 53,
+          "step": 156,
+          "level": 5,
+          "reasons": [
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "edc11c37dd6d4e103afebf40041cd74dd6dcbf05c6bfb2ce09a8e48011436bd3"
+        },
+        {
+          "request_line": 243,
+          "message_count": 55,
+          "step": 190,
+          "level": 5,
+          "reasons": [
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "edc11c37dd6d4e103afebf40041cd74dd6dcbf05c6bfb2ce09a8e48011436bd3"
+        }
+      ],
+      "successful_memory_responses": 80,
+      "recorded_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rules_are_model_hypotheses": true,
+      "finding": "Candidate solved L1-L3 in14/17/21 actions versus15/23/69 baseline, then stalled on L5(two invaders), spending103actions there. It repeatedly planned greedy kiting/assembly with inaccurate invader forecasts. The observed loss is not evidence of forgetting the earlier basics.",
+      "specific_program_error": {
+        "definition_request_line": 221,
+        "step": 172,
+        "description": "guarded() only raises on no p/Y and a fixed tag whitelist. Subsequent actual calls use labelsD1/W1/W3/etc outside that whitelist. It therefore printsok after material destruction; even wholesale p-to-M conversion can pass. Its computed total is never used to enforce an invariant.",
+        "actual_failure_request_lines": [
+          229,
+          237
+        ],
+        "later_undo_request_line": 239,
+        "limitation": "Observed source and stdout establish a guard failure, not that correcting the guard alone would win."
+      },
+      "baseline_contrast": {
+        "level5_total_actions": 40,
+        "method": "Inferred and checked gmove3; beam search produced a7click plan, then actualaction execution completed L5.",
+        "actual_final7clicks": [
+          [
+            23,
+            46
+          ],
+          [
+            22,
+            14
+          ],
+          [
+            16,
+            20
+          ],
+          [
+            13,
+            27
+          ],
+          [
+            13,
+            35
+          ],
+          [
+            16,
+            43
+          ],
+          [
+            15,
+            34
+          ]
+        ],
+        "completion_evidence": "baseline transcript contains final MOUSE(row=15,col=34)->LEVEL COMPLETED and LEVEL DONE at7."
+      },
+      "wrong_memory_causality": "Not established. The L4 rule describes nearest-piece chase/UNDO/fastdelivery, which is not a full model of L5 double-invader dynamics; candidate revises speed/dash assumptions from new observations rather than simply copying a stored failed action tail.",
+      "actual_call_evidence": [
+        {
+          "request_line_1based": 221,
+          "analysis_step": 83,
+          "step_before_call": 172,
+          "level": 5,
+          "tool_call_id": "call_7fdcfd70734549478ada5248",
+          "code": "World = \"Tier ladder: dot-pair click (both dots within 8) -> M 2x2 at click; same-color pair click (both within 8) merges -> next tier AT the click (teleport!). Click moves nearest piece <=~8 (clicked cell=center, tl=click-size//2). Invaders chase NEAREST piece; step 4-6, occasional dash 12-19; kill on contact; death->refund (M->lone dot, p->maybe M). Ball=goal; HUD Y icon means build 4x4 Y and center it on ball center. Bar (white bottom strip) shrinks 1/action; bar empty -> game over -> level RESETS fresh (bar 64). UNDO rewinds one action but NOT the bar. Moves landing too close to invaders get REJECTED (blink anim, board reverts, bar still -1). p 3x3 HUD icon = third slot. Level5 layout: ball(15,34); M at (26.5,7.5),(29.5,15.5),(27.5,42.5),(27.5,54.5); invaders start (39,7),(39,48); dot pairs L (54,14)&(60,3), R (53,44)&(59,58).\"\nGoal = \"Build Y 4x4, center on ball (15,34).\"\nRecent = \"Attempt 2 died: bar depleted (8 left mid-plan, needed 13). p_L died once to double-chase; UNDO saved once. Lesson: kiters lose; must do FAST 10-action assembly using pair merges as teleports.\"\nPlan = \"Fresh run: 1)click(28,11) merge A+B->p_L. 2)click(28,48) merge C+D->p_R. 3-8) walk p_L (24,17),(21,23),(18,29) & p_R (24,42),(21,36),(18,31). 9)click(18,30)->Y. 10)click(15,34)->WIN. Guard: after each click verify counts; on death UNDO+sidestep retry.\"\nimport math\ndef expect_p(n): \n    c=counts(); return c\nplan = [ (28,11,'mergeL', {'p':1,'M':2}), (28,48,'mergeR', {'p':2,'M':0}),\n         (24,17,'pL1',None),(24,42,'pR1',None),(21,23,'pL2',None),(21,36,'pR2',None),\n         (21,29,'pL3',None),(21,35,'pR3',None),(21,32,'mergeY',{'Y':1}),(15,34,'deliver',None) ]\ndef pieces():\n    out={}\n    for n in current_frame.segmentation['nodes']:\n        if n['color'] in 'MpY' and n['boundary'][0][0]>=10:\n            r0,c0=n['boundary'][0]; s=n['pixels']**0.5\n            out.setdefault(n['color'],[]).append((r0+(s-1)/2,c0+(s-1)/2))\n    return out\n# step 1 with guard\ndef guarded(rr,cc,tag):\n    noop,c,d = click(rr,cc)\n    pl = pieces()\n    if 'p' not in pl and 'Y' not in pl and tag in ('mergeL','mergeR','pL1','pR1','pL2','pR2','pL3','pR3','mergeY'):\n        # something died or merged wrong; check total tier\n        tot = sum(len(v)*({'M':1,'p':2,'Y':4}[k]) for k,v in pl.items())\n        print(tag,'LOST pieces; undoing'); action(['UNDO']); return False\n    print(tag,'ok',{k:[(round(r,1),round(c,1)) for r,c in v] for k,v in pl.items()},'inv',[(round(a,1),round(b,1)) for a,b in clusters(current_frame)])\n    return True\nok = guarded(28,11,'mergeL')\nprint('after mergeL', pieces())\n",
+          "payload": {
+            "tool": "python",
+            "function_retention": "Retained your function expect_p(n) for later Python calls in this game.\nRetained your function pieces() for later Python calls in this game.\nRetained your function guarded(rr, cc, tag) for later Python calls in this game.",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=28, col=11) -> effect\nmergeL ok {'M': [(26.5, 42.5), (26.5, 53.5)], 'p': [(28.0, 11.0)]} inv [(34.5, 9.8), (34.5, 43.8)]\nafter mergeL {'M': [(26.5, 42.5), (26.5, 53.5)], 'p': [(28.0, 11.0)]}\n"
+          }
+        },
+        {
+          "request_line_1based": 229,
+          "analysis_step": 87,
+          "step_before_call": 178,
+          "level": 5,
+          "tool_call_id": "call_ab12eb52a38b481b953d8ab4",
+          "code": "guarded(11,20,'D1')\nguarded(56,51,'W1 spawn')\nprint(pieces())\nprint('inv',[(round(a,1),round(b,1)) for a,b in clusters(current_frame)])\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=11, col=20) -> effect\nD1 ok {'p': [(11.0, 20.0)]} inv [(18.5, 18.8), (26.5, 50.8)]\n[action] MOUSE(row=56, col=51) -> effect\nW1 spawn ok {'p': [(11.0, 20.0)], 'M': [(55.5, 50.5)]} inv [(14.5, 19.8), (25.5, 54.8)]\n{'p': [(11.0, 20.0)], 'M': [(55.5, 50.5)]}\ninv [(14.5, 19.8), (25.5, 54.8)]\n"
+          }
+        },
+        {
+          "request_line_1based": 237,
+          "analysis_step": 91,
+          "step_before_call": 183,
+          "level": 5,
+          "tool_call_id": "call_f91201ef4b3a40be856369f7",
+          "code": "guarded(22,29,'D4')\nguarded(49,45,'W3 M5 up-left')\nprint('inv',[(round(a,1),round(b,1)) for a,b in clusters(current_frame)])\nprint(pieces())\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=22, col=29) -> effect\nD4 ok {'p': [(22.0, 29.0)], 'M': [(55.5, 50.5), (56.5, 8.5)]} inv [(17.5, 52.8), (21.5, 21.8)]\n[action] MOUSE(row=49, col=45) -> effect\nW3 M5 up-left ok {'M': [(21.5, 38.5), (48.5, 44.5), (56.5, 8.5)]} inv [(15.5, 48.8), (21.5, 25.8)]\ninv [(15.5, 48.8), (21.5, 25.8)]\n{'M': [(21.5, 38.5), (48.5, 44.5), (56.5, 8.5)]}\n"
+          }
+        },
+        {
+          "request_line_1based": 239,
+          "analysis_step": 92,
+          "step_before_call": 185,
+          "level": 5,
+          "tool_call_id": "call_f8522690b27a48a592716cc7",
+          "code": "r=action(['UNDO'])\nprint(counts())\nprint(pieces())\nprint('inv',[(round(a,1),round(b,1)) for a,b in clusters(current_frame)])\nprint('bar',[n['pixels'] for n in current_frame.segmentation['nodes'] if n['color']=='W'])\nimport re\nhud = [n['color'] for n in current_frame.segmentation['nodes'] if n['boundary'][0][0]<=9 and n['pixels']>=4]\nprint('hud icons',hud)\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] UNDO -> effect\n{'p': 1, 'M': 2}\n{'p': [(22.0, 29.0)], 'M': [(55.5, 50.5), (56.5, 8.5)]}\ninv [(17.5, 52.8), (21.5, 21.8)]\nbar [40]\nhud icons ['B', 'c', 'S', 'M', 'p', 'Y', 'Y']\n"
+          }
+        }
+      ]
+    },
+    "sc25": {
+      "game_id": "sc25-635fd71a",
+      "baseline": {
+        "state": "cancelled",
+        "levels_completed": 5,
+        "final_score": 71.42857142857143,
+        "actions_per_level": [
+          36,
+          5,
+          35,
+          33,
+          55,
+          96
+        ],
+        "solver_note": "tokens=164071"
+      },
+      "candidate": {
+        "state": "gave_up",
+        "levels_completed": 4,
+        "final_score": 41.53871072238419,
+        "actions_per_level": [
+          126,
+          5,
+          42,
+          60,
+          41,
+          0
+        ],
+        "solver_note": "tokens=154188"
+      },
+      "score_delta": -29.889860706187243,
+      "sources": [
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/sc25-635fd71a_p0_requests.jsonl",
+          "sha256": "8d4d5720db253ec8f7233186c673b6960a28bec9918e25cfb4fc964c224821b1"
+        },
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/solver_analysis/sc25-635fd71a_p0.html",
+          "sha256": "4e73708f8180774f8f8c6587048236c0f621bef55768aab72c0b2f8286ff76be"
+        },
+        {
+          "path": "runs/032-memory-full/baseline/transcripts/sc25-635fd71a_p0.txt",
+          "sha256": "284e5c9460950d8dee2f0112c3d0ee84d7bdb35402f466b15d827c7cd87d1591"
+        },
+        {
+          "path": "runs/032-memory-recovery/solved_level_memory/solved-level-memory-summary.json",
+          "sha256": "baf6368daf0ebb890b617314859da425a92d4ce2e457b18106a0442c0b863025"
+        }
+      ],
+      "request_integrity": {
+        "malformed_lines": [],
+        "counts": {
+          "requests": 94,
+          "responses_with_usage": 93,
+          "latest_user_contains_rule_instruction": 8,
+          "requests_with_memory_header": 40,
+          "system_memory_characters_in_requests": 179243
+        },
+        "completed_python_calls_with_real_stdout": 93
+      },
+      "first_pin": {
+        "request_line": 109,
+        "message_count": 48,
+        "step": 148,
+        "level": 3,
+        "reasons": [
+          "first_memory_header",
+          "history_message_count_decreased_with_memory",
+          "history_head_changed_with_memory"
+        ],
+        "memory_block_sha256": "4cf5a3c9be768ce2a42159ddf8fc617d9201adcd7e31e8736e01773397fc4de5"
+      },
+      "memory_windows": [
+        {
+          "request_line": 109,
+          "message_count": 48,
+          "step": 148,
+          "level": 3,
+          "reasons": [
+            "first_memory_header",
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "4cf5a3c9be768ce2a42159ddf8fc617d9201adcd7e31e8736e01773397fc4de5"
+        },
+        {
+          "request_line": 149,
+          "message_count": 44,
+          "step": 211,
+          "level": 4,
+          "reasons": [
+            "new_memory_block",
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "59553aa25a46fdb979bce4317dde2439a4452562b56b14b1481b28dd1805fd33"
+        },
+        {
+          "request_line": 183,
+          "message_count": 39,
+          "step": 271,
+          "level": 5,
+          "reasons": [
+            "new_memory_block",
+            "history_message_count_decreased_with_memory",
+            "history_head_changed_with_memory"
+          ],
+          "memory_block_sha256": "bdce71c0431c66f71e2fc6b0f912d5870cbadeeb5b2a9f479dfad43871c60526"
+        }
+      ],
+      "successful_memory_responses": 39,
+      "recorded_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rules_are_model_hypotheses": true,
+      "finding": "Candidate L1 used126totalactions versus36baseline before any completed-level memory could exist. The first completion record stores only24actions since the lastRESET/entry, not all126actions. Do not mistake that last-attempt memory record for the total benchmark cost.",
+      "pre_memory_action_difference": 90,
+      "level5_contrast": {
+        "candidate_level5_actions": 41,
+        "baseline_level5_actions": 55,
+        "candidate_last_state": "Continued probing transport/collapse/marker behavior and O/rblockers; no L5completion before cutoff.",
+        "baseline_last_state": "Connected collapse/transport/flow mechanics, then launched into the righttube and executedUPx6→LEVEL COMPLETED.",
+        "limitation": "Candidate executed fewer L5actions while needing more deliberation/discovery, not necessarily a deliberate early abandonment; gave_up is a valid exported terminal state."
+      },
+      "wrong_memory_causality": "Not established. Prior rules are present, but L5 requires new relationships among teleport targets, marker phases, shells and blockers. Candidate visibly revises failed hypotheses. The old flowrule alone does not encode this new level; no trace proves a stored erroneous rule caused the regression.",
+      "actual_call_evidence": [
+        {
+          "request_line_1based": 179,
+          "analysis_step": 61,
+          "step_before_call": 266,
+          "level": 5,
+          "tool_call_id": "call_a86cb6e3bfcc4abc84283938",
+          "code": "\nr=action(['LEFT']); print('LEFT',r.get('no_op'),[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary'])) for n in current_frame.segmentation['nodes'] if n['color'] in ('b','S') and min(p[0] for p in n['boundary'])>15],'bar',bar2(current_frame))\nr=action(['LEFT']); print('LEFT',r.get('no_op'),[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary'])) for n in current_frame.segmentation['nodes'] if n['color'] in ('b','S') and min(p[0] for p in n['boundary'])>15],'bar',bar2(current_frame))\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] LEFT -> effect\nLEFT False [('b', 39, 27), ('S', 39, 28)] bar 52\n[action] LEFT -> effect\nLEFT False [('b', 39, 25), ('S', 39, 26)] bar 52\n"
+          }
+        },
+        {
+          "request_line_1based": 181,
+          "analysis_step": 61,
+          "step_before_call": 268,
+          "level": 5,
+          "tool_call_id": "call_64db80691ff24d5cbddf9041",
+          "code": "\nrows=current_frame.ascii.split('\\n')\nprint('p-socket region rows36-43 cols25-33:')\nfor rr in range(36,44): print(rr,rows[rr][25:33])\nprint('right tube rows33-39 cols49-56:')\nfor rr in range(33,40): print(rr,rows[rr][49:56])\nprint('p blocks:',[(min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary']),n['pixels']) for n in current_frame.segmentation['nodes'] if n['color']=='p' and n['pixels']>1])\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "p-socket region rows36-43 cols25-33:\n36 BBBBBBBB\n37 BBpBBBBp\n38 BBBYBBYB\n39 bSggppBB\n40 bSggppBB\n41 BBBYBBYB\n42 BBpBBBBp\n43 BBBBBBBB\nright tube rows33-39 cols49-56:\n33 BBggggB\n34 BBggggB\n35 BBYggYB\n36 BBggggB\n37 BBggggB\n38 BBYggYB\n39 BBBBBBB\np blocks: [(1, 4, 4), (4, 1, 4), (4, 7, 4), (7, 4, 4), (39, 29, 4)]\n"
+          }
+        },
+        {
+          "request_line_1based": 183,
+          "analysis_step": 62,
+          "step_before_call": 268,
+          "level": 5,
+          "tool_call_id": "call_d4a103649d604be983f95e4e",
+          "code": "\nCODE=[(50,25),(50,30),(55,30)]\nfor (rr,cc) in CODE:\n    r=action([{'action':'MOUSE','row':rr,'col':cc}])\n    if kcells(current_frame)=='ggggggggg': break\nrows=current_frame.ascii.split('\\n')\nprint('p-socket rows38-41 cols25-33:')\nfor rr in range(38,42): print(rr,rows[rr][25:33])\nprint('tube rows33-39 cols50-56:')\nfor rr in range(33,40): print(rr,rows[rr][50:56])\nprint('bar',bar2(current_frame))\nprint('b/S:',[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary']),n['pixels']) for n in current_frame.segmentation['nodes'] if n['color'] in ('b','S')])\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=50, col=25) -> effect\n[action] MOUSE(row=50, col=30) -> effect\n[action] MOUSE(row=55, col=30) -> effect\np-socket rows38-41 cols25-33:\n38 BBBYBBYB\n39 ggggbSBB\n40 ggggbSBB\n41 BBBYBBYB\ntube rows33-39 cols50-56:\n33 BggggB\n34 BggggB\n35 BYggYB\n36 BggggB\n37 BggggB\n38 BYggYB\n39 BBBBBB\nbar 44\nb/S: [('b', 10, 50, 14), ('S', 11, 51, 16), ('b', 39, 29, 2), ('S', 39, 30, 2)]\n"
+          }
+        },
+        {
+          "request_line_1based": 185,
+          "analysis_step": 62,
+          "step_before_call": 271,
+          "level": 5,
+          "tool_call_id": "call_7adba419c72445bfb1f97429",
+          "code": "\nmarks=[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary'])) for n in current_frame.segmentation['nodes'] if n['color'] in ('Y','p') and n['pixels']==1]\nprint('1px marks:',marks)\n# also check for any marks adjacent to head\nprint('head',[(n['color'],n['pixels']) for n in current_frame.segmentation['nodes'] if n['color'] in ('b','S') and n['pixels']>4])\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "1px marks: [('Y', 35, 51), ('Y', 35, 54), ('p', 37, 27), ('p', 37, 32), ('Y', 38, 28), ('Y', 38, 31), ('Y', 38, 51), ('Y', 38, 54), ('Y', 41, 28), ('Y', 41, 31), ('p', 42, 27), ('p', 42, 32)]\nhead [('b', 14), ('S', 16)]\n"
+          }
+        },
+        {
+          "request_line_1based": 187,
+          "analysis_step": 63,
+          "step_before_call": 271,
+          "level": 5,
+          "tool_call_id": "call_249812f3b0394d6098f2e36e",
+          "code": "\nDIAM=[(50,30),(55,25),(55,35),(60,30)]\nfor (rr,cc) in DIAM:\n    r=action([{'action':'MOUSE','row':rr,'col':cc}])\n    if kcells(current_frame)=='ggggggggg': break\nmarks=[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary'])) for n in current_frame.segmentation['nodes'] if n['color'] in ('Y','p') and n['pixels']==1]\nprint('marks after D3:',marks)\nprint('bar',bar2(current_frame))\nprint('b/S:',[(n['color'],min(p[0] for p in n['boundary']),min(p[1] for p in n['boundary']),n['pixels']) for n in current_frame.segmentation['nodes'] if n['color'] in ('b','S')])\ntl=last_animation_timeline\nif (r.get('animation') or {}).get('frames'):\n    for s in tl['steps'][-3:]:\n        c=s.get('changes') or s.get('transitions')\n        print(' anim',s['step'],s['bbox'], c if isinstance(c,str) and len(c)<120 else c)\n",
+          "payload": {
+            "tool": "python",
+            "returncode": 0,
+            "stdout": "[action] MOUSE(row=50, col=30) -> effect\n[action] MOUSE(row=55, col=25) -> effect\n[action] MOUSE(row=55, col=35) -> effect\n[action] MOUSE(row=60, col=30) -> effect\nmarks after D3: [('Y', 35, 51), ('Y', 35, 54), ('p', 37, 27), ('p', 37, 32), ('Y', 38, 28), ('Y', 38, 31), ('Y', 38, 51), ('Y', 38, 54), ('Y', 41, 28), ('Y', 41, 31), ('p', 42, 27), ('p', 42, 32)]\nbar 32\nb/S: [('b', 10, 50, 14), ('S', 11, 51, 16), ('b', 39, 29, 2), ('S', 39, 30, 2)]\n anim 9 rows 39-40, cols 29-30 ['b>c @ (39,29) (40,29)', 'S>c @ (39,30) (40,30)']\n anim 10 rows 39-40, cols 29-30 ['c>b @ (39,29) (40,29)', 'c>S @ (39,30) (40,30)']\n anim 11 rows 46-47, cols 62-63 ['N>W @ (46,62) (46,63) (47,62) (47,63)']\n"
+          }
+        }
+      ]
+    }
+  },
+  "overall_conclusion": "Both regressions are real observed outcomes, but no specific wrong-memory-rule-to-bad-action causal chain was established. sc25 has substantial first-level loss before any solvedmemory exists. su15 reaches L5 quickly, then fails to build/execute a correct model of the two-invader problem and has a concrete ineffective execution guard. Do not erase these losses or attribute all of them to memory.",
+  "next_research_implication": "Preserve frozen032 and await actual formal score. Current-level world-model/search and verification of generated code remain a specific research opportunity; this audit does not demonstrate that any proposed fix improves score and does not justify reopening030 unchanged."
+}

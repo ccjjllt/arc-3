@@ -1,0 +1,876 @@
+{
+  "status": "final_review_complete_with_request_snapshots_and_completed_transcripts",
+  "reviewed_at_utc": "2026-10-21T15:21:57.903855+00:00",
+  "scope": "Independent032candidate-onlyrecovery integrity and selected mechanism review. No model/environment/GPU/submission execution.",
+  "sources": {
+    "runs/032-memory-recovery/experiment-manifest.json": {
+      "sha256": "078a0bf6e5b7522821b8fbde58747a41818684422210cf0605bfd9051429c5b5",
+      "bytes": 8610
+    },
+    "runs/032-memory-recovery/solved_level_memory/arm-metadata.json": {
+      "sha256": "35d7e6c95ee247704ad871c6bc0fad6afdb335522b8e90127182975136d726f7",
+      "bytes": 18409
+    },
+    "runs/032-memory-recovery/solved_level_memory/benchmark.json": {
+      "sha256": "b004fbf1c4fd65da8cbf1d5bf39271b1d40893aca1b05664d6d20b7ebcf8cdd4",
+      "bytes": 1412628
+    },
+    "runs/032-memory-recovery/solved_level_memory/solved-level-memory-summary.json": {
+      "sha256": "baf6368daf0ebb890b617314859da425a92d4ce2e457b18106a0442c0b863025",
+      "bytes": 218311
+    }
+  },
+  "integrity": {
+    "manifest_status": "completed",
+    "arm_status": "completed",
+    "arm": "solved_level_memory",
+    "helper_sha256": "afa448837b7ef1016b2a318e461c646e9036de1f7b1bf9379e1a9fef08572456",
+    "frozen_helper_match": true,
+    "budget_seconds": 7254,
+    "active_streams": 10,
+    "warmup_action_games": 1,
+    "request_deadline_enabled": false,
+    "complete_pool": true,
+    "state_counts": {
+      "won": 7,
+      "cancelled": 11,
+      "gave_up": 7
+    },
+    "exact_game_ids_match": true,
+    "unique_runs": true,
+    "all_terminal_without_crash": true,
+    "exit_code": 0,
+    "cpu_process_group_stopped": true,
+    "cpu_process_leader_exited": true,
+    "lingering_worker_threads": [],
+    "forced_cpu_process_exit": false,
+    "cache_flush_http_status": 200,
+    "cache_flush_backend_confirmed": true,
+    "gpu_server_process_group_stopped": true,
+    "gpu_server_leader_exited": true,
+    "gpu_sampling_stopped": true,
+    "model_ready_seconds": 1110.8840029239655,
+    "session_elapsed_seconds": 8458.227776288986,
+    "arm_elapsed_seconds": 7341.334653139114,
+    "maximum_action_global_elapsed_seconds": 7254.312918672999,
+    "maximum_action_global_game": "tr87-cd924810",
+    "budget_boundary_note": "Latest observed action about0.313s beyond nominal7254s when game start offsets are included; boundary scheduling/measurement, not an extra solve arm. CPU87s tail is cleanup. No exclusion gate applied."
+  },
+  "selected_games": {
+    "r11l-495a7899": {
+      "candidate_score": 100.0,
+      "candidate_completed_levels": 6,
+      "requests_source": "runs/032-memory-recovery/solved_level_memory/r11l-495a7899_p0_requests.jsonl",
+      "transcript_source": "runs/032-memory-recovery/solved_level_memory/transcripts/r11l-495a7899_p0.txt",
+      "requests_sha256": "4ba0cc65bcc07822b094dbae7df1a852127655f2b2947de9beeb24de2657efdf",
+      "transcript_sha256": "0591c2759a2e052dc8fcdc6604512144c2a5d43cf34ee0be21f762c692080544",
+      "request_count": 82,
+      "successful_response_count": 82,
+      "malformed_lines": [],
+      "request_usage": {
+        "prompt_tokens": 6270370,
+        "completion_tokens": 168612,
+        "total_tokens": 6438982
+      },
+      "successful_memory_responses": 52,
+      "successful_memory_responses_match_summary": true,
+      "successful_block_hash_set_matches_summary": true,
+      "first_pin": {
+        "request_line": 61,
+        "snapshot_action": 12,
+        "level": 2,
+        "message_count": 40,
+        "memory_block_sha256": "4c7b8c0a5f3f2cd7a76baa1abfe3c4d1c956073895724dea237d515643bf9ed4"
+      },
+      "memory_windows": [
+        {
+          "request_line": 61,
+          "snapshot_action": 12,
+          "current_level": 2,
+          "levels_in_block": [
+            "1"
+          ],
+          "memory_block_sha256": "4c7b8c0a5f3f2cd7a76baa1abfe3c4d1c956073895724dea237d515643bf9ed4"
+        },
+        {
+          "request_line": 119,
+          "snapshot_action": 42,
+          "current_level": 4,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3"
+          ],
+          "memory_block_sha256": "4c4771e00b0f3c000555d692ea00ce380880c0bd31f50199bee9c76b019ecf66"
+        },
+        {
+          "request_line": 153,
+          "snapshot_action": 81,
+          "current_level": 6,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "memory_block_sha256": "393be5c3158c1dc560bf2a0073690f1af9a2811ba7b9d5b8356997bd9c412962"
+        }
+      ],
+      "captured_rule_crosscheck": [
+        {
+          "level": 1,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 2,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 3,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 4,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 5,
+          "matches_actual_assistant_rule": true
+        }
+      ],
+      "selected_calls": [
+        {
+          "request_line_1based": 119,
+          "tool_call_id": "call_3fb41e07b97e416c9cb4e5cd",
+          "level": 4,
+          "step_before_call": 42,
+          "returncode": 0,
+          "code_sha256": "a00ab0175e39af9436f145f9f03ac96b7e0e7c75bafc892fa6edbc8b423b7a13",
+          "stdout_sha256": "0ce944e28c3633ffe8bd64505b1260c58978fa22e2fca627d12a627ab2858d09",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [],
+          "finding": "L4 reuses mean, square footprint, water/decor and endpoint-distance constraints in beamsearch."
+        },
+        {
+          "request_line_1based": 121,
+          "tool_call_id": "call_a9e68aed8d8048109d383ed1",
+          "level": 4,
+          "step_before_call": 42,
+          "returncode": 0,
+          "code_sha256": "569d291228e23e695c3329473d72def29349adf20776c0650976cdd323b10642",
+          "stdout_sha256": "689757a95b82ab1755076bf3c9b3f0070db356a71b12f4df9ff8acab12a7950c",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "batch of 16 actions, 16 executed: MOUSE(row=6, col=39), MOUSE(row=60, col=23), MOUSE(row=20, col=23), MOUSE(row=38, col=49), MOUSE(row=52, col=27), MOUSE(row=2, col=42), MOUSE(row=47, col=10), MOUSE(row=6, col=58), MOUSE(row=36, col=17), MOUSE(row=22, col=52), MOUSE(row=6, col=58), MOUSE(row=12, col=56), MOUSE(row=36, col=46), MOUSE(row=54, col=3), MOUSE(row=52, col=46), MOUSE(row=54, col=31) | stop_reason: level_completed"
+          ],
+          "finding": "The searched L4 sequence executes all16 clicks and level_completed."
+        },
+        {
+          "request_line_1based": 149,
+          "tool_call_id": "call_b04cdd26b2444298a35a9a8f",
+          "level": 5,
+          "step_before_call": 66,
+          "returncode": 0,
+          "code_sha256": "c784432af092b99de00fe0fe067889aa1590e6b37470770be6390efe37747bd2",
+          "stdout_sha256": "4cf630d8f1db119a3287b1aca88a0a12034f277e42bb1da0439248b067702774",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=47, col=41) -> effect",
+            "MOUSE(row=55, col=52) -> effect",
+            "MOUSE(row=57, col=5) -> effect",
+            "MOUSE(row=55, col=34) -> effect",
+            "MOUSE(row=55, col=14) -> effect",
+            "MOUSE(row=57, col=5) -> effect",
+            "MOUSE(row=27, col=59) -> effect",
+            "MOUSE(row=55, col=14) -> effect",
+            "MOUSE(row=55, col=59) -> effect",
+            "MOUSE(row=47, col=41) -> effect",
+            "MOUSE(row=47, col=50) -> effect",
+            "MOUSE(row=55, col=59) -> effect",
+            "MOUSE(row=2, col=43) -> effect",
+            "MOUSE(row=47, col=50) -> effect",
+            "MOUSE(row=3, col=47) -> LEVEL COMPLETED"
+          ],
+          "finding": "L5 paint-well plan executes15 clicks to level_completed, extending the older constellation mechanism."
+        },
+        {
+          "request_line_1based": 155,
+          "tool_call_id": "call_4d362730539f4e659fa99fb4",
+          "level": 6,
+          "step_before_call": 81,
+          "returncode": 0,
+          "code_sha256": "d707519a860e9420bfe51629b72971d1fc7eea1079db593d2ddddacedc504224",
+          "stdout_sha256": "0d6f951a25105641773157f7cdb400ac1fd18c74ff2b6e71c0d84b8b79611177",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [],
+          "finding": "L6 defines floor-mean, candidate masks and constrained replacement planner for new wells."
+        },
+        {
+          "request_line_1based": 157,
+          "tool_call_id": "call_73f52996410b4768957672ba",
+          "level": 6,
+          "step_before_call": 81,
+          "returncode": 0,
+          "code_sha256": "2207ac1cca72018d454f3b2489aa87b511e412802053f42188061d3465d9ab14",
+          "stdout_sha256": "b3cb3be648548a7ca0ce71fd827426e875ae352b9e5539e35bdd928e68e246cb",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=55, col=2) -> effect",
+            "MOUSE(row=19, col=4) -> effect",
+            "MOUSE(row=61, col=24) -> effect",
+            "MOUSE(row=55, col=2) -> effect",
+            "MOUSE(row=2, col=34) -> effect",
+            "MOUSE(row=61, col=24) -> effect",
+            "MOUSE(row=30, col=46) -> effect"
+          ],
+          "finding": "L6 actually executes purple then green-well phases (3+4clicks) with observed effects."
+        },
+        {
+          "request_line_1based": 161,
+          "tool_call_id": "call_ca02ec22c22e474799a3fab1",
+          "level": 6,
+          "step_before_call": 88,
+          "returncode": 0,
+          "code_sha256": "1da83d12a9a6165989a6545117e2615fb63bd1ea1f425ccf036c5c3951cdd047",
+          "stdout_sha256": "3a0ce417f0b891ea879affe250f5d028c2cde6383ba735e6bb6602a60f5306aa",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=19, col=22) -> effect",
+            "MOUSE(row=10, col=59) -> effect",
+            "MOUSE(row=30, col=46) -> effect",
+            "MOUSE(row=24, col=60) -> effect"
+          ],
+          "finding": "L6 paints blue, routes chain A to its ring and starts chain B, checking current output."
+        },
+        {
+          "request_line_1based": 163,
+          "tool_call_id": "call_7d575f83bb474e0ca9a31941",
+          "level": 6,
+          "step_before_call": 92,
+          "returncode": 0,
+          "code_sha256": "01f76d9b8845ea31fea1198bb350ffa3eca58abb27cae232c04fcfc8e03fddd0",
+          "stdout_sha256": "bdeeac4a320e42363aef331e8b16cafcecd0cc0e7f9bcd3d40886fb35307b620",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=43, col=49) -> effect",
+            "MOUSE(row=31, col=14) -> effect",
+            "MOUSE(row=3, col=40) -> effect"
+          ],
+          "finding": "L6 executes yellow/magenta phases; finalsky/ring call not in nextrequests but terminaltranscript shows RUN COMPLETE."
+        }
+      ],
+      "transcript_run_complete": true,
+      "final_transcript_tail": ")\n[action] MOUSE(row=61, col=20) -> RUN COMPLETE\nB->R3 [('replace', (61, 48), (61, 20))] [(61, 20, 'ok')] mean (55, 11) bar 45\n\n[ANALYZER STATUS]\nmodel: flashnext\nbase_url: http://127.0.0.1:8001/v1\nmax_output_tokens: 12288\nreply_reserve_tokens: 12288\ncontext_budget_tokens: 118272\nrequest_safety_margin_tokens: 512\ntool_output_tokens: 3072\nyield_seconds: disabled\nyield_tokens: 2048\navailable_tools: python\npython_timeout_seconds: 30\nhistory_messages: 47\nstep_executed: True\nmessage: Step executed.\n\n",
+      "semantic_verdict": {
+        "finding": "Real learned-mechanic transfer and executed model programs, beyond a memoryheader. L4 explicitly recalls L2/L3 constraints, searches replacement endpoints and clears with16clicks; L6 explicitly imports L5 paint-well mechanism, builds current masks/newtargets and clears the game.",
+        "causal_limit": "L1first discovery precedes all memory, and rule-recapping, ordinaryfunctions/history and postevictionpin are not ablated. Do not credit everypoint of14.29->100 to pinnedtext.",
+        "revisions_and_errors": "Rulehypotheses include uncertain water/spoke/footprint constraints and oldcoordinates; newcode tests/rebuilds them rather than replaying oldtails. L6 uses observed new wells/targets and revises its absorption interpretation."
+      }
+    },
+    "vc33-5430563c": {
+      "candidate_score": 100.0,
+      "candidate_completed_levels": 7,
+      "requests_source": "runs/032-memory-recovery/solved_level_memory/vc33-5430563c_p0_requests.jsonl",
+      "transcript_source": "runs/032-memory-recovery/solved_level_memory/transcripts/vc33-5430563c_p0.txt",
+      "requests_sha256": "b9935f3178fb94d79f6d6d2b740c70d7f6ebd7f29a53a8741aa21c836d85fb82",
+      "transcript_sha256": "f4b6457dcaf9fd01a566fbc881d92836cc454126c62c2c62905f7158429f6d01",
+      "request_count": 89,
+      "successful_response_count": 89,
+      "malformed_lines": [],
+      "request_usage": {
+        "prompt_tokens": 6499219,
+        "completion_tokens": 204986,
+        "total_tokens": 6704205
+      },
+      "successful_memory_responses": 57,
+      "successful_memory_responses_match_summary": true,
+      "successful_block_hash_set_matches_summary": true,
+      "first_pin": {
+        "request_line": 65,
+        "snapshot_action": 75,
+        "level": 4,
+        "message_count": 34,
+        "memory_block_sha256": "af66044de0a2d70e268d6a9b6d18b85409b052ae0ac65f9b37de8bf896efed5f"
+      },
+      "memory_windows": [
+        {
+          "request_line": 65,
+          "snapshot_action": 75,
+          "current_level": 4,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3"
+          ],
+          "memory_block_sha256": "af66044de0a2d70e268d6a9b6d18b85409b052ae0ac65f9b37de8bf896efed5f"
+        },
+        {
+          "request_line": 89,
+          "snapshot_action": 85,
+          "current_level": 4,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3"
+          ],
+          "memory_block_sha256": "af66044de0a2d70e268d6a9b6d18b85409b052ae0ac65f9b37de8bf896efed5f"
+        },
+        {
+          "request_line": 121,
+          "snapshot_action": 130,
+          "current_level": 5,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "memory_block_sha256": "980974d73c049fbfb17eeb509b7c057cb6642965553ea94e17639ad8ddfc5aea"
+        },
+        {
+          "request_line": 157,
+          "snapshot_action": 202,
+          "current_level": 7,
+          "levels_in_block": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "memory_block_sha256": "660ae84abdefcbe828eb659bcf66c82ba03e3d2e7fedc7c6c940496281f07c38"
+        }
+      ],
+      "captured_rule_crosscheck": [
+        {
+          "level": 1,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 2,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 3,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 4,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 5,
+          "matches_actual_assistant_rule": true
+        },
+        {
+          "level": 6,
+          "matches_actual_assistant_rule": true
+        }
+      ],
+      "selected_calls": [
+        {
+          "request_line_1based": 129,
+          "tool_call_id": "call_88e8881e834b4719bcc4c95a",
+          "level": 5,
+          "step_before_call": 130,
+          "returncode": 0,
+          "code_sha256": "ae8d8a813a3de12c21aeae677a20e902e70c66af1def212773732720954c39f1",
+          "stdout_sha256": "c11b20c8945efcabdddb73a7ff6d81e5404f582b201e3345eb9b9a5359f4a2b8",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=15, col=33) -> effect"
+          ],
+          "finding": "L5 maps rotated L4 conserved-water/gate mechanics to a real11button+gate sequence and verifies teleport T->U."
+        },
+        {
+          "request_line_1based": 133,
+          "tool_call_id": "call_80f1ba3b13e34029a188fda6",
+          "level": 5,
+          "step_before_call": 141,
+          "returncode": null,
+          "code_sha256": "40d9eee922f00905282ce39616ad92b98a284ab639f26b1fdb087fe10dbeb6a1",
+          "stdout_sha256": "bc9039149ca7bb3bf40cd4fd7f1f113d71aa8c968cc6d5296a9e55f4a7c9bb3e",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect"
+          ],
+          "finding": "L5 executes8buttons then token parser bug (gate:B split) interrupts; no controller repair."
+        },
+        {
+          "request_line_1based": 135,
+          "tool_call_id": "call_089086465ef441c0a493e531",
+          "level": 5,
+          "step_before_call": 149,
+          "returncode": 0,
+          "code_sha256": "4c9bb8e7989d471561357cd1802823fd7047626b7ac3bcf06b66f5fe5100b35a",
+          "stdout_sha256": "9972c3369001e4101c4930aae02ece7a269fa1970f70337553fee09e5f1659dc",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=33, col=45) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=47, col=62) -> effect",
+            "MOUSE(row=47, col=62) -> effect",
+            "MOUSE(row=50, col=30) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=33, col=45) -> effect",
+            "MOUSE(row=18, col=62) -> effect",
+            "MOUSE(row=30, col=62) -> effect",
+            "MOUSE(row=30, col=62) -> effect",
+            "MOUSE(row=30, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> effect",
+            "MOUSE(row=15, col=33) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=12, col=62) -> effect",
+            "MOUSE(row=36, col=62) -> effect",
+            "MOUSE(row=53, col=62) -> LEVEL COMPLETED"
+          ],
+          "finding": "Model fixes token parsing and executesremaining30actions to level_completed."
+        },
+        {
+          "request_line_1based": 143,
+          "tool_call_id": "call_cb9c41af402b4789952481bd",
+          "level": 6,
+          "step_before_call": 181,
+          "returncode": 0,
+          "code_sha256": "7c2ae506044b6bd1133e0b72ae363a138f71c122737e2e38b9ffdf112e725b13",
+          "stdout_sha256": "40b6140aa366067b30108d1bdd7ec6fe11ed6b04f1edd7606d0fff95f4af8356",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=1) -> effect",
+            "MOUSE(row=31, col=11) -> effect"
+          ],
+          "finding": "L6 tests flush-to-gate hypothesis with water-transfer controls and real orange-gate teleport."
+        },
+        {
+          "request_line_1based": 147,
+          "tool_call_id": "call_86a71f7eb3fc4d9da48e9ff1",
+          "level": 6,
+          "step_before_call": 186,
+          "returncode": 0,
+          "code_sha256": "d7e60555856ec43972062e879052b83735621076229ed32b02bdde93153d5329",
+          "stdout_sha256": "7e2510a2e7e73e2cef6181a85ed696e01afeeefed13b5d06916ab437b420a03b",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=25) -> effect",
+            "MOUSE(row=34, col=1) -> effect",
+            "MOUSE(row=34, col=1) -> effect",
+            "MOUSE(row=31, col=35) -> effect"
+          ],
+          "finding": "L6 excludes newly appearing white pillar strips that polluted water-edge reader; real next9actions and gate transfer."
+        },
+        {
+          "request_line_1based": 149,
+          "tool_call_id": "call_ff1ee9a6572c4fcbb048f5b9",
+          "level": 6,
+          "step_before_call": 195,
+          "returncode": 0,
+          "code_sha256": "fdcbf97969572525be7df80132716bff20e76a51d8831440b3946c4cf98c045e",
+          "stdout_sha256": "a25831936534b35282b2349a54cabf6ea6635ce00678335418589290e86d9af6",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> effect",
+            "MOUSE(row=28, col=25) -> LEVEL COMPLETED"
+          ],
+          "finding": "L6 executes6finalbuttons, level_completed."
+        },
+        {
+          "request_line_1based": 161,
+          "tool_call_id": "call_a10c659de50d4a6483c61ecc",
+          "level": 7,
+          "step_before_call": 202,
+          "returncode": 0,
+          "code_sha256": "bf3cc06ef9c14b8a1a070b24f22f37ddfa909a8ebe90e30d526175e642628ab1",
+          "stdout_sha256": "c14a18bb69e567b12bd633404e017ef59d05099198348f1ab24df50ea2c0688a",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [],
+          "finding": "L7 searches state of five water levels plus arrow chamber positions using old conserved transfer/gate mechanism."
+        },
+        {
+          "request_line_1based": 165,
+          "tool_call_id": "call_e0b78ea7f12549b0baa6c25e",
+          "level": 7,
+          "step_before_call": 202,
+          "returncode": 0,
+          "code_sha256": "068987aaec2ed96eb137192a17f0a9cfad1a227201047336d3885aa0fbd5751b",
+          "stdout_sha256": "11431f0b6447d9a78c07ac793cc02679a9b877e48f20d7661f6cb354bae689bf",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=8, col=24) -> effect"
+          ],
+          "finding": "L7 executor halts when observed level reader disagrees with prediction afterfirstbutton."
+        },
+        {
+          "request_line_1based": 169,
+          "tool_call_id": "call_ec03857ac5f04aab9ace782a",
+          "level": 7,
+          "step_before_call": 203,
+          "returncode": 0,
+          "code_sha256": "b160bb8baa18ef324867585cfb664a9c76ce1d3407c8abda415e34db9254709d",
+          "stdout_sha256": "416025fdecf6f6e73c3f412e6d78c2cd79173a0731faaac6483be74bc48a1cb0",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=20, col=40) -> effect"
+          ],
+          "finding": "L7 fixes same pillar-pollution bug in reader and verifies orange gate transferspinkarrowRU->MID."
+        },
+        {
+          "request_line_1based": 171,
+          "tool_call_id": "call_861be91bda824b1c85ae1f1c",
+          "level": 7,
+          "step_before_call": 204,
+          "returncode": 0,
+          "code_sha256": "276d4cc374c20578fa37f8c997c198f854bee0e8c9a08c7610c126f5262ba02e",
+          "stdout_sha256": "8db4a3e36f3af7337d4f7cd43a123d37a23e25c651b510e146ec748003920d58",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=8, col=24) -> effect",
+            "MOUSE(row=32, col=24) -> effect",
+            "MOUSE(row=8, col=38) -> effect",
+            "MOUSE(row=41, col=22) -> effect"
+          ],
+          "finding": "L7 executes12actions with perstep state/gate verification."
+        },
+        {
+          "request_line_1based": 173,
+          "tool_call_id": "call_b5cd69cbf38848f4bfd8da2f",
+          "level": 7,
+          "step_before_call": 216,
+          "returncode": 0,
+          "code_sha256": "fd8a5077f311197dcd0d07fd4af66b0a7fb5e01ad55bd3999f3e19cabfbef788",
+          "stdout_sha256": "72d96d754ece2e7da2c72ccb062c25fe97c7f18c7ab1d302df5ed877b8405737",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=8, col=20) -> effect",
+            "MOUSE(row=32, col=20) -> effect",
+            "MOUSE(row=8, col=42) -> effect",
+            "MOUSE(row=20, col=40) -> effect"
+          ],
+          "finding": "L7 executesnext12actions, movingyellowMID->RU."
+        },
+        {
+          "request_line_1based": 177,
+          "tool_call_id": "call_8f1eb82e33914dcba084366d",
+          "level": 7,
+          "step_before_call": 239,
+          "returncode": 0,
+          "code_sha256": "ba6313ee4b6b26d38831f6ec8886f2f93fde35e5de9fe34ed1c89866446f18a1",
+          "stdout_sha256": "7da2e492559fbf127777f1a763f9015e9711b4f1631e65d2a27a25753cf717f5",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=41, col=40) -> effect"
+          ],
+          "finding": "L7 applies remaining gate transfer, leaves10buttonfinish; finalcomplete verified in transcript."
+        }
+      ],
+      "transcript_run_complete": true,
+      "final_transcript_tail": "(7, 49, 17, 25, 37)\nfinal (7, 49, 17, 25, 37) {'N': ('MID', 18, 31), 'Y': ('RU', 26, 48), 'p': ('LL', 50, 14)}\npink 48 level 7\n\n[ANALYZER STATUS]\nmodel: flashnext\nbase_url: http://127.0.0.1:8001/v1\nmax_output_tokens: 12288\nreply_reserve_tokens: 12288\ncontext_budget_tokens: 118272\nrequest_safety_margin_tokens: 512\ntool_output_tokens: 3072\nyield_seconds: disabled\nyield_tokens: 2048\navailable_tools: python\npython_timeout_seconds: 30\nhistory_messages: 71\nstep_executed: True\nmessage: Step executed.\n\n",
+      "semantic_verdict": {
+        "finding": "New long-horizon positive outside the short10 pool. L5 explicitly calls itself rotatedL4 mechanics, uses conservedwatervolumes, clamping and exact orange-gate conditions, then routes arrows with BFS and actualclicks. L6/L7 extend the same gate model to newanchors/layouts and reach RUN COMPLETE.",
+        "actual_program_correction": "At L6, orange-gate whitepillarstrips contaminate a maxcol waterreader; the model detects and excludes the strip. L7 repeats that failure, halts on observed/predicted mismatch, identifies the same pillar pollution, narrows reading to unaffectedinterior columns, then executes the remaining plan in checked chunks and finishes with10water-transferbuttonclicks. These corrections are model-generated and actuallyexecuted.",
+        "causal_limit": "Postpin use of previouslylearnedmechanics is real; pin necessity versus recap/currenthistory/functions cannot be isolated. No direct comparison of earlierbaselineL4 code was undertaken in thisselectedreview."
+      }
+    },
+    "s5i5-18d95033": {
+      "candidate_score": 2.7777777777777777,
+      "candidate_completed_levels": 1,
+      "requests_source": "runs/032-memory-recovery/solved_level_memory/s5i5-18d95033_p0_requests.jsonl",
+      "transcript_source": "runs/032-memory-recovery/solved_level_memory/transcripts/s5i5-18d95033_p0.txt",
+      "requests_sha256": "3f2d6f9db987503ca266375e8cd7bdecb21f6cc78c38c8d287ab383f365923c7",
+      "transcript_sha256": "892b53389124d66e504189180578878042fe6147ffa9c10da0112e455a5f2a4b",
+      "request_count": 49,
+      "successful_response_count": 48,
+      "malformed_lines": [],
+      "request_usage": {
+        "prompt_tokens": 2684106,
+        "completion_tokens": 134915,
+        "total_tokens": 2819021
+      },
+      "successful_memory_responses": 16,
+      "successful_memory_responses_match_summary": true,
+      "successful_block_hash_set_matches_summary": true,
+      "first_pin": {
+        "request_line": 65,
+        "snapshot_action": 47,
+        "level": 2,
+        "message_count": 21,
+        "memory_block_sha256": "a1dc3726d5a1926e9ad9559908fd6354f19fed9f36e1fe209db23e0dd30b720a"
+      },
+      "memory_windows": [
+        {
+          "request_line": 65,
+          "snapshot_action": 47,
+          "current_level": 2,
+          "levels_in_block": [
+            "1"
+          ],
+          "memory_block_sha256": "a1dc3726d5a1926e9ad9559908fd6354f19fed9f36e1fe209db23e0dd30b720a"
+        },
+        {
+          "request_line": 87,
+          "snapshot_action": 50,
+          "current_level": 2,
+          "levels_in_block": [
+            "1"
+          ],
+          "memory_block_sha256": "a1dc3726d5a1926e9ad9559908fd6354f19fed9f36e1fe209db23e0dd30b720a"
+        }
+      ],
+      "captured_rule_crosscheck": [
+        {
+          "level": 1,
+          "matches_actual_assistant_rule": true
+        }
+      ],
+      "selected_calls": [
+        {
+          "request_line_1based": 53,
+          "tool_call_id": "call_1a89b055851541308a97c463",
+          "level": 2,
+          "step_before_call": 37,
+          "returncode": 0,
+          "code_sha256": "2372e5fe95402ac5b92fd289cfea66cea5e728f5d03271017fe3932517a280c4",
+          "stdout_sha256": "0cbe8b00b01e4c4413c3929be3c21b8d9e4ea1346578c23228120faa5ef33199",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> effect",
+            "MOUSE(row=57, col=57) -> NO-OP (executed, no change inside the board area)"
+          ],
+          "finding": "Before firstpin, seven repeated greenextensions pushredendpoint down to53 and lose the reddot; probing remainsunresolved."
+        },
+        {
+          "request_line_1based": 73,
+          "tool_call_id": "call_e032e55e32c449dd82ccb0d2",
+          "level": 2,
+          "step_before_call": 48,
+          "returncode": 0,
+          "code_sha256": "2776724ce66f7f72e0f364568f752c21611bba8a32fc9b9585ed7a484356ab55",
+          "stdout_sha256": "816b69014eaafedaa5b81a08fd666e5d86709186dc18862bab9c2922596a945f",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=20) -> effect"
+          ],
+          "finding": "Afterpin, model observes Y/S shrink coupling with realshapechanges but has no complete chainedkinematicsearch."
+        },
+        {
+          "request_line_1based": 89,
+          "tool_call_id": "call_69275af7b3cf40c98a20a47d",
+          "level": 2,
+          "step_before_call": 50,
+          "returncode": null,
+          "code_sha256": "00b31fbc4d13bc5197a6ab2f07fe4bafe54282a37d9fa9712d48f95f78e7cfd5",
+          "stdout_sha256": "66429e692c3021b8ac2a646d589a8973c0d9b73fd9bf36a5c4afee4c72d9ae74",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=35) -> effect",
+            "MOUSE(row=57, col=35) -> effect"
+          ],
+          "finding": "Six yellowshrinks execute; intended laterphase aborted by snippeterror, not a solvedplan."
+        },
+        {
+          "request_line_1based": 91,
+          "tool_call_id": "call_1e151f1537eb413690801035",
+          "level": 2,
+          "step_before_call": 56,
+          "returncode": 0,
+          "code_sha256": "662ccbc44e861dceecc12127ce24976820ff15fc589efc7537b77911b48d01e0",
+          "stdout_sha256": "6657dd315b70dbf1361b7b7341aec421bf579d951873c659c80838510c0ba27d",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect",
+            "MOUSE(row=57, col=26) -> effect"
+          ],
+          "finding": "Ten Scontrolclicks move the yellow/green assembly to top(row0), still no L2clear."
+        },
+        {
+          "request_line_1based": 95,
+          "tool_call_id": "call_55e8b023238e40db9347340f",
+          "level": 2,
+          "step_before_call": 75,
+          "returncode": 0,
+          "code_sha256": "60b0f085af8b955e8e666ee377dc2f501059187f0d717f4ef0cecef70aca638b",
+          "stdout_sha256": "982ac9c6365f5c464026f781bfcd61511eeeba22b0bfa80459d043ab4a8436a0",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=41) -> NO-OP (executed, no change inside the board area)"
+          ],
+          "finding": "Trying yellowgrow reportsno_op atfirstiteration; no levelcompletion."
+        },
+        {
+          "request_line_1based": 97,
+          "tool_call_id": "call_d3d0aecf925c48cba306291a",
+          "level": 2,
+          "step_before_call": 76,
+          "returncode": null,
+          "code_sha256": "58ec64a31a0b156a863882d94055f13142de51359182a958ee1d8c4af07c1131",
+          "stdout_sha256": "7c1fb3e0bfee07d4a1fc4796946d41c7a871f4477664fe386434a4d764469b4e",
+          "code_exactly_in_transcript": true,
+          "stdout_exactly_in_transcript": true,
+          "action_echoes": [
+            "MOUSE(row=57, col=41) -> NO-OP (executed, no change inside the board area)"
+          ],
+          "finding": "Finalmodeltoolcall again no_op, then finalrequesttimeout atglobaldeadline."
+        }
+      ],
+      "transcript_run_complete": false,
+      "final_transcript_tail": "call directly. Their presence does not mean they are correct; revise them if new evidence contradicts their assumptions.\n\nCurrent grid image:\n\n[image attached]\n\nDiff image (step 75 -> 76): cells that changed since your previous analyzer turn in their new true color; unchanged cells dimmed to dark navy (an off-palette color).\n\n[image attached]\n\n[ANALYZER STATUS]\nrequest_timeout (yielding, history preserved): HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=3.72565)\n\n",
+      "semantic_verdict": {
+        "finding": "Real large negative outcome despite memorydelivery. OnlyL1 is captured; L2 is unsolved after56actions. Rule that bars grow/shrink is supported but insufficient for the seriallycoupled four-arm L2 state.",
+        "timeline_limit": "L2 reddot disappears atstep43 after repeatedgreenextension. Firstpin is onlyrequest65 atstep46(currentnextaction47), after much of that exploration. Therefore the pin cannot be blamed for initial L2failure. Active postL1recap is earlier, but its causal effect is unseparated.",
+        "postpin_behavior": "The model actually rereadsL1frames and rederives tipdot geometry, observes real barcoupling, then shrinksY/pushesS ten times to move the assembly to top(row0) and attempts furtherYgrowth. It fails to construct/execute a complete newboard plan. This is a worldmodel/planning failure with retainedexperience, not proven simpleforgetting or a provenwrongmemoryrule.",
+        "termination": "Finaltranscript is request_timeout(readtimeout3.72565s) atglobaldeadline; metadata gave_up does not establish intentional modelsurrender.",
+        "baseline_context": "Savedbaseline reached6levels with345667 analyzer tokens, candidate1level with134915. Baseline/candidate differ in trajectory/allocation; that count is context, not controlled pergamecompute. SavedbaselineactualL2clear exists, but thisreview did not fully audit its wholeplan."
+      }
+    }
+  },
+  "limitations": [
+    "Fresh model server versus savedbaseline; descriptive cross-sessioncomparison, not shared-session A/B.",
+    "Memory/reflection and sampling interactions are not isolated.",
+    "Counters and outgoingheader show delivery, not correct adoption or causal score gain.",
+    "Whole requestusage and concurrently summed latencies are not marginalmemorycosts or GPUwalltime.",
+    "Headeridentityactive=false is a wrapperdiagnostic affected by timinginstallation; requestevidence takes precedence.",
+    "Only3selectedgames received semanticdeepreading; this is explanatory research, not an additional promotion gate."
+  ],
+  "memory_summary": {
+    "metrics": {
+      "preparation_seconds": 11.815836178961945,
+      "request_attempts": 2234,
+      "observed_request_seconds": 67809.8665836871,
+      "all_request_prompt_tokens": 162013898,
+      "all_request_completion_tokens": 4461711,
+      "all_request_total_tokens": 166475609,
+      "observed_completions_recorded": 101,
+      "requests_with_rule_instruction": 252,
+      "rule_instructions_successfully_sent": 116,
+      "rules_captured": 94,
+      "memory_refreshes": 54,
+      "memory_characters_written": 248351,
+      "requests_with_memory": 1294,
+      "system_memory_characters_attempted": 5893841,
+      "successful_responses_with_memory": 1286,
+      "request_failures": 8
+    },
+    "active_identity_flag": false,
+    "interpretation": "active is an all-wrapper identity equality check, and inference_timing installs a wrapping _chat_completion after memory. active=false therefore does not show inactive memory. Real outgoingblocks, responses and captured rules are independently checked below.",
+    "runtime_install_order": "run_arm.py installs solvedmemory at268-270 then inference_timing at278-280; no helper change/new gate warranted."
+  },
+  "crosscheck_summary": {
+    "selected_games": 3,
+    "selected_tool_calls_checked": 25,
+    "code_exact_matches_transcript": 25,
+    "stdout_exact_matches_transcript": 25,
+    "captured_rules_checked": 12,
+    "captured_rules_all_match_actual_assistant_messages": true,
+    "successful_memory_responses": {
+      "r11l": 52,
+      "vc33": 57,
+      "s5i5": 16
+    },
+    "successful_memory_counts_and_hash_sets_all_match_summary": true,
+    "malformed_selected_request_lines": 0,
+    "final_winning_calls": "r11lL6/vc33L7 lastcall outputs appear in completedtranscripts but have no nextrequestsnapshot. Benchmarkwon+RUN COMPLETE jointlyconfirm finalclear; omitted from capturedcompletedlevelrecords is expected."
+  },
+  "summary_verdict": "Recovery is a completed25gamecandidate run with unchangedhelper/serving, clean cleanup and real memorydelivery. r11l/vc33 demonstrate subsequentmodelprograms using and revising earliermechanics. s5i5 provides a genuine regression with memorypresent, but no direct evidence that pinning a wrongoldrule caused it. Preserve both gains/losses and cross-session provenance; no further gate, rerun or repair launch is implied."
+}

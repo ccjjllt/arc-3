@@ -1,12 +1,12 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-**032短对照大幅正向，已进入全25题：**qingyu1232两臂各2700秒，45.006→70.661（+25.655），40→53关、3→4全通，5题涨/5题平；冻结记忆helper已在zhuating/arc3-032-memory-full v1开始一次全池同预算比较，每臂7254秒，正式候选同步平台保存。该公开开发池增益不是榜单分数，尚无新正式提交。033经真实模型补跑完成，准确像素交付却未正确更新任务目标，26动作、新增0关，本版不提交。[032结果](research/032-results-analysis.md) · [全池记录](experiments/032-full-launch.json) · [033结果](research/033-results-analysis.md) · [执行进展](docs/progress/032-033-memory-and-controller.md)。
+**032候选全25题补跑已COMPLETE，正式57481712待出分：**候选49.21798分／108关／7全通；与已保存基线38.07781／96关／4全通比较，描述性+11.14017、13题涨/8题跌/4题平。两个模型服务会话不同，不能称同会话A/B或稳定提分；49.22仍未超过005历史基线49.90。原full会话在baseline结束后被旧退出快照检查误停，该检查已修正，仅补缺失候选，未重跑baseline。032正式冻结v1于10月21日20:29提交，23:20北京时间API仍未返回publicScore；009/31.16继续保留。033本版新增0关，不扩跑、不提交。[正式提交](experiments/032-formal-submission.json) · [补跑完整比较](experiments/032-memory-analysis/recovery-comparison.md) · [032研究结果](research/032-results-analysis.md) · [候选补跑原件](experiments/032-recovery-launch.json) · [033结果](research/033-results-analysis.md) · [执行进展](docs/progress/032-033-memory-and-controller.md)。
 
-031自然对照已COMPLETE：22.5092→23.2819（+0.7726），27→26关。r11l已有精确像素→搜索→执行→多过一关的完整正链；最大涨题ft09的收益尚不能归因于runs。保留冻结v2作为一次全池候选，先收032/033结果。[分析](experiments/031-natural-analysis/summary.md) · [独立深读](experiments/031-natural-analysis/decision-review.json)。尚无新正式submission。
+031自然对照已COMPLETE：22.5092→23.2819（+0.7726），27→26关。r11l已有精确像素→搜索→执行→多过一关的完整正链；最大涨题ft09的收益尚不能归因于runs。冻结v2作为备选，当前优先032。[分析](experiments/031-natural-analysis/summary.md) · [独立深读](experiments/031-natural-analysis/decision-review.json)。
 
 **正式最佳仍为009 v2 / submission 57101330 / public 31.16。** 030 submission 57447779已COMPLETE，public24.40，回退6.76；停止原样重提和扩大030。开发池单轮42.6134→47.1699未迁移为正式收益，同轮基线偏弱且增益集中；不能把采用或一次全池正收益等同于稳定提分。[回退分析](research/030-results-analysis.md)。隐藏逐题及运行日志不可得，直接根因尚不能确认。
 
-10月21日11:58北京时间API快照：4566队，本队ccjjllt第393（teamId17139255），铜牌附近30.85、银牌附近32.22、金牌附近37.98；均为公开位置估算，最终看私榜及资格。正式提交还可1次，zhuating CLI GPU账号共享余额23.74h；SDK通用配额口径存在冲突，不能当独立RTX余额。[本次在线原件](research/snapshots/2026-10-21-handoff/)。截止北京时间11月3日07:59。
+10月21日11:58北京时间API历史快照：4566队，本队ccjjllt第393（teamId17139255），铜牌附近30.85、银牌附近32.22、金牌附近37.98；均为当时公开位置估算，最终看私榜及资格。20:29已使用今天一次正式提交，032尚无新分数；余额另看最新账户查询，SDK通用配额口径存在冲突，不能当独立RTX余额。[榜单历史原件](research/snapshots/2026-10-21-handoff/) · [新提交接收原件](experiments/032-after-formal-submit.json)。截止北京时间11月3日07:59。
 
 **历史结论：016已完成，015/016均未通过当轮预设标准。** 从020起主要按同预算官方分数与实际风险选择正式候选；关数、全通数和采用轨迹用于解释，不再套用“两游戏采用／去最大正向／所有指标同时不降”的通用否决条件。 016原ccjjllt会话因旧完成池误拒gave_up而中止；jiyujia修复轮完整完成。两者必须分开。
 
@@ -30,7 +30,7 @@
 
 **017深度研究完成：**刷新500队榜单、148文件清单及规则；审计19本公开Notebook；补读10/15 stop-and-report论文、OPINE-World v3消融及作者控制代码。现有底座已有自动续聊，选取016请求仅1次自然无工具stop，故不优先增加全局汇报；新验证API和整套Lexicon也缺足够采用证据。FP8 PLE有可核查权重/配置/loader路径，保留为独立吞吐与数值候选，不能把主机表减半当作释放显存或涨分。[Notebook审计](research/017-notebook-update.md)、[前沿研究](research/017-frontier-update.md)。
 
-**GPU执行更新：**021 jiyujia v1已COMPLETE，两臂各1800秒、12游戏完整；会话70.11分钟，启动9.06分钟，GPU求解采样平均90.74%/95.51%、中位均98%。服务已关闭，[实际记录](experiments/021-launch.json)，[结果](research/021-results-analysis.md)。020 jiyujia v1同样COMPLETE，会话70.40分钟，启动9.55分钟，求解采样平均92.22%/90.81%、中位98.5%/98%，[记录](experiments/020-launch.json)。018会话内部43.13分钟。通用配额API增量不能当作本作业计费或剩余RTX额度。没有新正式提交。
+**GPU执行更新：**021 jiyujia v1已COMPLETE，两臂各1800秒、12游戏完整；会话70.11分钟，启动9.06分钟，GPU求解采样平均90.74%/95.51%、中位均98%。服务已关闭，[实际记录](experiments/021-launch.json)，[结果](research/021-results-analysis.md)。020 jiyujia v1同样COMPLETE，会话70.40分钟，启动9.55分钟，求解采样平均92.22%/90.81%、中位98.5%/98%，[记录](experiments/020-launch.json)。018会话内部43.13分钟。通用配额API增量不能当作本作业计费或剩余RTX额度。此段保留021等较早运行记录；最新正式提交见文首。
 
 较早研究：003有效反证提示0次；006暂态交付后整体回退；007保留旧函数但净分回退；008有69份保存区域CPU核对，020已完成接入和一轮在线验证，整体回退。基线继续使用dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next。历史计划、结果和运行原件保留，不能把旧的“下一步/运行中/余额”当当前状态。
 

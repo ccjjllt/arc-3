@@ -1,0 +1,452 @@
+{
+  "reviewed_at_utc": "2026-10-21T12:28:04.400348+00:00",
+  "scope": "Independent read-only assessment of baseline-only full run and whether it supplies negative032memory evidence",
+  "sources": [
+    {
+      "path": "runs/032-memory-full/baseline/benchmark.json",
+      "sha256": "f02d7740786c331ed1d7e450e65bcbcc5483956a0b3509b26c1c8385c82cbe67"
+    },
+    {
+      "path": "runs/032-memory-full/baseline/arm-metadata.json",
+      "sha256": "9780f32b5046e121573759037d7d53963b29eda3d284c24ebf9d741b59321fe6"
+    },
+    {
+      "path": "runs/032-memory-full/experiment-manifest.json",
+      "sha256": "0892f2b0b966b8c39850e8bea0f72d5558d5b94dca77caa04b60d814dfa5395f"
+    },
+    {
+      "path": "runs/032-memory-submission/save-smoke-report.json",
+      "sha256": "90e5d1aa67ac4a3621539640eb65145581c829f89fa3e6a3857008bff124409b"
+    },
+    {
+      "path": "experiments/032-before-formal-submit.json",
+      "sha256": "379ba88e6bdca5c57c1bdf9b4eb0ccf77cf27295124e3d6785102838d2d06d19"
+    }
+  ],
+  "full_baseline": {
+    "run_count": 25,
+    "scored_run_count": 25,
+    "mean_score": 38.077806263914496,
+    "mean_completion_ceiling": 39.801443001443005,
+    "mean_efficiency_gap": 1.7236367375285042,
+    "levels_completed": 96,
+    "levels_available": 183,
+    "mean_levels_completed": 3.84,
+    "mean_completion_fraction": 0.5302539682539682,
+    "wins": 4,
+    "actions": 4747,
+    "generated_tokens": 4540800,
+    "action_attached_generated_tokens": 4540800,
+    "analyzer_reported_generated_tokens": 4213744,
+    "analyzer_reported_run_count": 22,
+    "unattached_generated_tokens": 65922,
+    "final_generated_tokens": 0,
+    "uncached_input_tokens": 0,
+    "sum_run_elapsed_seconds": 173893.478224227,
+    "mean_run_elapsed_seconds": 6955.73912896908,
+    "state_counts": {
+      "cancelled": 21,
+      "won": 4
+    },
+    "stop_reason_counts": {
+      "unknown": 21,
+      "won": 4
+    },
+    "game_count": 25,
+    "mean_game_score": 38.077806263914496,
+    "benchmark_elapsed_seconds": 7374.014132,
+    "generated_tokens_per_benchmark_second": 615.7840110849411
+  },
+  "per_game": [
+    {
+      "game_id": "ar25-0c556536",
+      "score": 100.0,
+      "recomputed_score": 100.0,
+      "levels_completed": 8,
+      "number_of_levels": 8,
+      "actions": 308,
+      "state": "won",
+      "analyzer_reported_generated_tokens": 147461,
+      "short_context": {
+        "baseline_score": 100.0,
+        "baseline_levels": 8,
+        "memory_score": 100.0,
+        "memory_levels": 8,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "bp35-0a0ad940",
+      "score": 0.4631379962192816,
+      "recomputed_score": 0.4631379962192816,
+      "levels_completed": 1,
+      "number_of_levels": 9,
+      "actions": 90,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": null
+    },
+    {
+      "game_id": "cd82-fb555c5d",
+      "score": 36.375236776697335,
+      "recomputed_score": 36.375236776697335,
+      "levels_completed": 4,
+      "number_of_levels": 6,
+      "actions": 201,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 180437,
+      "short_context": {
+        "baseline_score": 1.5591671040278874,
+        "baseline_levels": 2,
+        "memory_score": 99.60865847975298,
+        "memory_levels": 6,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "cn04-2fe56bfb",
+      "score": 14.285714285714285,
+      "recomputed_score": 14.285714285714285,
+      "levels_completed": 2,
+      "number_of_levels": 6,
+      "actions": 83,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 167901
+    },
+    {
+      "game_id": "dc22-fdcac232",
+      "score": 47.61904761904761,
+      "recomputed_score": 47.61904761904761,
+      "levels_completed": 4,
+      "number_of_levels": 6,
+      "actions": 295,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 259857
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "score": 100.0,
+      "recomputed_score": 100.0,
+      "levels_completed": 6,
+      "number_of_levels": 6,
+      "actions": 153,
+      "state": "won",
+      "analyzer_reported_generated_tokens": 161566,
+      "short_context": {
+        "baseline_score": 100.0,
+        "baseline_levels": 6,
+        "memory_score": 100.0,
+        "memory_levels": 6,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "g50t-5849a774",
+      "score": 3.571428571428571,
+      "recomputed_score": 3.571428571428571,
+      "levels_completed": 1,
+      "number_of_levels": 7,
+      "actions": 58,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 134437
+    },
+    {
+      "game_id": "ka59-38d34dbb",
+      "score": 17.275714285714287,
+      "recomputed_score": 17.275714285714287,
+      "levels_completed": 3,
+      "number_of_levels": 7,
+      "actions": 262,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 203000
+    },
+    {
+      "game_id": "lf52-271a04aa",
+      "score": 10.909090909090908,
+      "recomputed_score": 10.909090909090908,
+      "levels_completed": 3,
+      "number_of_levels": 10,
+      "actions": 186,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 222629
+    },
+    {
+      "game_id": "lp85-305b61c3",
+      "score": 100.0,
+      "recomputed_score": 100.0,
+      "levels_completed": 8,
+      "number_of_levels": 8,
+      "actions": 185,
+      "state": "won",
+      "analyzer_reported_generated_tokens": 156068
+    },
+    {
+      "game_id": "ls20-9607627b",
+      "score": 3.571428571428571,
+      "recomputed_score": 3.571428571428571,
+      "levels_completed": 1,
+      "number_of_levels": 7,
+      "actions": 98,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 115242
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "score": 71.42857142857143,
+      "recomputed_score": 71.42857142857143,
+      "levels_completed": 5,
+      "number_of_levels": 6,
+      "actions": 273,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 256003,
+      "short_context": {
+        "baseline_score": 0.0,
+        "baseline_levels": 0,
+        "memory_score": 71.42857142857143,
+        "memory_levels": 5,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "score": 14.285714285714285,
+      "recomputed_score": 14.285714285714285,
+      "levels_completed": 2,
+      "number_of_levels": 6,
+      "actions": 54,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 259284,
+      "short_context": {
+        "baseline_score": 21.119537576424335,
+        "baseline_levels": 3,
+        "memory_score": 71.42857142857143,
+        "memory_levels": 5,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "score": 27.77777777777778,
+      "recomputed_score": 27.77777777777778,
+      "levels_completed": 4,
+      "number_of_levels": 8,
+      "actions": 255,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 137339,
+      "short_context": {
+        "baseline_score": 41.66666666666667,
+        "baseline_levels": 5,
+        "memory_score": 41.66666666666667,
+        "memory_levels": 5,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "s5i5-18d95033",
+      "score": 58.333333333333336,
+      "recomputed_score": 58.333333333333336,
+      "levels_completed": 6,
+      "number_of_levels": 8,
+      "actions": 211,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 345667
+    },
+    {
+      "game_id": "sb26-7fbdac44",
+      "score": 83.94096882008404,
+      "recomputed_score": 83.94096882008404,
+      "levels_completed": 8,
+      "number_of_levels": 8,
+      "actions": 181,
+      "state": "won",
+      "analyzer_reported_generated_tokens": 72702
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "score": 71.42857142857143,
+      "recomputed_score": 71.42857142857143,
+      "levels_completed": 5,
+      "number_of_levels": 6,
+      "actions": 260,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 164071,
+      "short_context": {
+        "baseline_score": 47.61904761904761,
+        "baseline_levels": 4,
+        "memory_score": 71.05048195633093,
+        "memory_levels": 5,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "score": 0.0,
+      "recomputed_score": 0.0,
+      "levels_completed": 0,
+      "number_of_levels": 8,
+      "actions": 71,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": null
+    },
+    {
+      "game_id": "sp80-589a99af",
+      "score": 44.51655454425538,
+      "recomputed_score": 44.51655454425538,
+      "levels_completed": 4,
+      "number_of_levels": 6,
+      "actions": 156,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 260947,
+      "short_context": {
+        "baseline_score": 4.761904761904762,
+        "baseline_levels": 1,
+        "memory_score": 4.761904761904762,
+        "memory_levels": 1,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "score": 61.057690961282646,
+      "recomputed_score": 61.057690961282646,
+      "levels_completed": 7,
+      "number_of_levels": 9,
+      "actions": 206,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 325002
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "score": 3.571428571428571,
+      "recomputed_score": 3.571428571428571,
+      "levels_completed": 1,
+      "number_of_levels": 7,
+      "actions": 69,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 103630
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "score": 4.761904761904762,
+      "recomputed_score": 4.761904761904762,
+      "levels_completed": 1,
+      "number_of_levels": 6,
+      "actions": 217,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 111437,
+      "short_context": {
+        "baseline_score": 100.0,
+        "baseline_levels": 6,
+        "memory_score": 100.0,
+        "memory_levels": 6,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "score": 32.344896122860725,
+      "recomputed_score": 32.344896122860725,
+      "levels_completed": 5,
+      "number_of_levels": 9,
+      "actions": 173,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 200973,
+      "short_context": {
+        "baseline_score": 33.33333333333333,
+        "baseline_levels": 5,
+        "memory_score": 46.666666666666664,
+        "memory_levels": 6,
+        "comparison_status": "Different pool/concurrency distribution and budget; context only, not a new matchedA/B"
+      }
+    },
+    {
+      "game_id": "vc33-5430563c",
+      "score": 31.09361221340388,
+      "recomputed_score": 31.09361221340388,
+      "levels_completed": 4,
+      "number_of_levels": 7,
+      "actions": 192,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": null
+    },
+    {
+      "game_id": "wa30-ee6fef47",
+      "score": 13.333333333333334,
+      "recomputed_score": 13.333333333333334,
+      "levels_completed": 3,
+      "number_of_levels": 9,
+      "actions": 510,
+      "state": "cancelled",
+      "analyzer_reported_generated_tokens": 228091
+    }
+  ],
+  "integrity": {
+    "25_games_scored": true,
+    "25_scores_recompute_match": true,
+    "all_games_have_actual_actions": true,
+    "observed_arms": [
+      "baseline"
+    ],
+    "candidate_executed": false,
+    "no_memory_result": true,
+    "arm_status": "completed",
+    "baseline_exit_code": 0,
+    "lingering_worker_threads": [
+      "harness-game_1",
+      "harness-game_17"
+    ],
+    "forced_cpu_process_exit": true,
+    "notebook_error": "RuntimeError('Arm baseline has undrained workers; stopping before another arm.')",
+    "gpu_server_process_group_stopped": true,
+    "caveat": "Baseline has exported score/coverage evidence, but shutdown/drain did not complete cleanly before runner gate. Do not label the full experiment a completedA/B."
+  },
+  "short_context": {
+    "baseline_mean": 45.00596570614046,
+    "candidate_mean": 70.66115213884649,
+    "matched_short_delta": 25.65518643270603,
+    "baseline_levels": 40,
+    "candidate_levels": 53,
+    "signs": {
+      "positive": 5,
+      "negative": 0,
+      "zero": 5
+    },
+    "top_two_contribution_to_ten_game_mean": 16.947806280429653,
+    "remaining_eight_mean_delta_sensitivity": 10.884225190345468,
+    "full_baseline_mean_on_same_ten_games": 50.29192271263531,
+    "interpretation": "Full baseline demonstrates existing-capability/trajectory variance: m0r0 andsc25 reach5 levels withoutmemory in this separate run; tr87 goes100short→4.76full, r11l21.12short→14.29full. Neither substitute comparison estimates memorytreatment effect. Short gain remains distributed across5games with no observedshort regressions, unlike030single-positive sensitivity."
+  },
+  "negative_memory_evidence": {
+    "present_from_full_run": false,
+    "reason": "The memory arm never launched. Baseline drain failure and baseline scores are not effects of the uninstalled candidate."
+  },
+  "save_readiness": {
+    "kernel": "zhuating/arc3-032-memory-submission",
+    "version": 1,
+    "local_recorded_status": "COMPLETE",
+    "own_save_smoke": "passed",
+    "non_reset_actions": {
+      "sb26": 66,
+      "cd82": 22
+    },
+    "helper_sha256": "afa448837b7ef1016b2a318e461c646e9036de1f7b1bf9379e1a9fef08572456",
+    "notebook_sha256": "d8829b5a07f07eba7dd52ade18724556bcf23a288d2271f2b2aaa6f5c6691028",
+    "remote_cells_match_in_saved_record": true,
+    "saved_submit_allowance": 1,
+    "note": "Local latest check is a snapshot, not a claim to have made a new remote query in this audit."
+  },
+  "recommendation": {
+    "decision": "Use todays authorized formal submission for the already-saved032v1 now; preserve009. Continue research separately rather than adding fullA/Bcompletion as a hard prerequisite.",
+    "basis": [
+      "Strong existing10game matched gain+25.6552 and13extra levels,5positive0negative5unchanged.",
+      "Five-game mechanism reviews distinguish actuallatercode/actions from headerpresence; independent three-gamepayload crosscheck completed.",
+      "Candidate itself passedGPU save and exactversion/source matching.",
+      "Missing fullcandidate is an experiment orchestration failure, not counterevidence against the intervention. A real hidden evaluation is now the most decision-relevant next datum."
+    ],
+    "limits": [
+      "This is an evidence-based exploratory formal submission, not a guarantee of improvement or medal.",
+      "Full25coverage of candidate, long-run resource behavior and hidden transfer remain unmeasured.",
+      "Do not describe032as havingpassedfull25A/B or declare+25.655a hidden-score prediction."
+    ],
+    "research_recovery": "Fix the runner-specific drain/continuation handling without changing the frozen solver. Run the missing candidate on the fixed25game/7254s setting to obtain its actual outcomes; if it starts in a fresh session, label comparison against this baseline as cross-session descriptive evidence. Do not hold the formal submission hostage to another fullbaseline rerun."
+  }
+}

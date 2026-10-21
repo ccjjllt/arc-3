@@ -194,7 +194,7 @@ def run_session(namespace: dict) -> dict:
             monitor.set_phase(arm + "_cache_flush")
             serve_log = root / "serve.log"
             flush_offset = serve_log.stat().st_size if serve_log.is_file() else None
-            # Flush prompt caches only, retaining weights and compiled kernels.
+            # Flush request caches, retaining weights and compiled kernels.
             # If unsupported, report the limitation rather than reload the GPU.
             try:
                 request = Request(server_url + "/flush_cache", data=b"", method="POST")
@@ -207,8 +207,8 @@ def run_session(namespace: dict) -> dict:
             if config.get("require_cache_flush") and entry.get("cache_flush_http_status") != 200:
                 raise RuntimeError(f"Cache flush failed before {arm}; refusing unmatched cache state.")
             if config.get("require_cache_flush_log"):
-                # This SGLang version returns HTTP200 even when active requests
-                # prevent flushing. Require its new backend success log too.
+                # SGLang 0.5.19 returns HTTP200 on scheduler flush success.
+                # Retain the existing confirmation from its new backend log.
                 confirmed = False
                 if flush_offset is not None:
                     until = time.monotonic() + 30.0
@@ -266,7 +266,8 @@ def run_session(namespace: dict) -> dict:
                         time.sleep(3)
                 finally:
                     monitor.set_phase(arm + "_cleanup")
-                    stop_group(child)
+                    entry["cpu_process_group_stopped"] = stop_group(child)
+                    entry["cpu_process_leader_exited"] = child.poll() is not None
                 entry["exit_code"] = child.returncode
             entry["elapsed_seconds"] = time.time() - entry["started_at_epoch"]
             entry["benchmark_exists"] = (out / "benchmark.json").exists()
@@ -279,6 +280,7 @@ def run_session(namespace: dict) -> dict:
                     game.get("state") in {"crashed", "not_started"} for game in results
                 )
                 entry["lingering_worker_threads"] = arm_meta.get("lingering_worker_threads", [])
+                entry["forced_cpu_process_exit"] = arm_meta.get("forced_cpu_process_exit", False)
                 entry["environment_overrides"] = arm_meta.get("environment_overrides", {})
                 entry["complete_pool"] = (
                     len(results) == len(config["games"])
@@ -298,8 +300,12 @@ def run_session(namespace: dict) -> dict:
                 raise RuntimeError(f"Arm {arm} exited {entry['exit_code']}; see {arm}/run.log")
             if entry.get("all_games_failed_to_run") or not entry["benchmark_exists"]:
                 raise RuntimeError(f"Arm {arm} produced no usable game runs; see {arm}/run.log")
-            if config.get("require_drained_workers") and entry.get("lingering_worker_threads"):
-                raise RuntimeError(f"Arm {arm} has undrained workers; stopping before another arm.")
+            # Worker names are recorded before the CPU runner's os._exit().
+            # Once its process/group has stopped, that snapshot is diagnostic;
+            # the next arm still performs the existing server cache flush.
+            if config.get("require_drained_workers") and not (
+                    entry["cpu_process_leader_exited"] and entry["cpu_process_group_stopped"]):
+                raise RuntimeError(f"Arm {arm} CPU process group did not stop; see {arm}/run.log")
             if config.get("require_complete_pool") and not entry.get("complete_pool"):
                 raise RuntimeError(f"Arm {arm} has incomplete/crashed game coverage; stopping before another arm.")
         report["status"] = "completed"
