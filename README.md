@@ -1,6 +1,8 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-目标：尽快确认提分候选并正式提交，争取奖牌；金牌与奖金作为进一步目标。**031 v2自然对照执行中：**[交接方案](docs/handoff/031-score-and-submission-handoff.md)已写好；v1同状态诊断真实完成但三切点两臂均0新增，ft09仍误填同一像素、未读取runs，[负结果](research/031-forks-results.md)已保留。v2仅补齐系统节点字段合同，已启动 `zhuating/arc3-031-natural-aligned` Notebook v1（helper v2），10题各900秒。[启动记录](experiments/031-natural-launch.json) · [进展](docs/progress/031-exact-pixels.md)。正式候选已同步重构，尚无新正式submission或v2提分结论。
+下一轮交接见[031收尾、成功经验记忆与受验证的程序纠错](docs/handoff/032-033-memory-and-controller-handoff.md)：区分候选试验资格与高分归属，明确032/033尚待实现。本次仅更新交接文档，031状态仍按最后归档观察引用。
+
+目标：尽快确认提分候选并正式提交，争取奖牌；金牌与奖金作为进一步目标。**031 v2最近归档：自然对照已启动，结果待核验。**[交接方案](docs/handoff/031-score-and-submission-handoff.md)已写好；v1同状态诊断真实完成但三切点两臂均0新增，ft09仍误填同一像素、未读取runs，[负结果](research/031-forks-results.md)已保留。v2仅补齐系统节点字段合同，已启动 `zhuating/arc3-031-natural-aligned` Notebook v1（helper v2），10题各900秒。[启动记录](experiments/031-natural-launch.json) · [进展](docs/progress/031-exact-pixels.md)。正式候选已同步重构，尚无新正式submission或v2提分结论。
 
 **正式最佳仍为009 v2 / submission 57101330 / public 31.16。** 030 submission 57447779已COMPLETE，public24.40，回退6.76；停止原样重提和扩大030。开发池单轮42.6134→47.1699未迁移为正式收益，同轮基线偏弱且增益集中；不能把采用或一次全池正收益等同于稳定提分。[回退分析](research/030-results-analysis.md)。隐藏逐题及运行日志不可得，直接根因尚不能确认。
 
