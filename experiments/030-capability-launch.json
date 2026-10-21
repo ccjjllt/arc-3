@@ -35,10 +35,11 @@
     "automation_id": "arc3",
     "kind": "thread heartbeat",
     "interval_minutes": 30,
-    "status": "ACTIVE",
+    "status": "NOT_FOUND",
     "explicit_user_authorization": "授权自动续接直到本轮提交评测完成",
     "stop_condition": "New formal submission has completed evaluation and result has been reported",
-    "schedule_observed_at_utc": "2026-10-20T17:13:42.539530+00:00"
+    "schedule_observed_at_utc": "2026-10-20T17:13:42.539530+00:00",
+    "stop_reason": "App update reported automationarc3 no longer exists; no active monitor found and none recreated."
   },
   "gpu_quota_snapshot": "research/snapshots/2026-10-20-candidates/zhuating-quota-after-research-start.json",
   "candidate_partial": "experiments/030-analysis/candidate-partial.json",
@@ -58,9 +59,12 @@
   "decision": "Advance frozen030 to own save and formal submission; net official score+4.5565, wins+3, levels-1; actual cross-call paths/plans used; no additional fullpool.",
   "formal_candidate_notebook_sha256": "cf08d5876048343b86102917e171d77b2c27b8e65de431afc7fb22d76befb95a",
   "formal_save_launch_record": "experiments/030-submission-launch.json",
-  "next_action": "Track submission57447779 untilCOMPLETE; no re-push, no repeat submit, no031; then report real score and disable arc3 automation.",
+  "next_action": "Formal public score regressed; keep009. Close current submission monitor.",
   "adoption_review": "experiments/030-analysis/adoption-review.json",
   "platform_complete_verified_at_utc": "2026-10-20T17:15:21.333725+00:00",
   "formal_submission_id": 57447779,
-  "formal_submission_record": "experiments/030-formal-submission.json"
+  "formal_submission_record": "experiments/030-formal-submission.json",
+  "formal_submission_status": "COMPLETE",
+  "formal_public_score": 24.4,
+  "formal_public_delta_vs_009": -6.76
 }

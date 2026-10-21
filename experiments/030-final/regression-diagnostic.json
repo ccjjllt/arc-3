@@ -1,0 +1,53 @@
+{
+  "scope": "Public evidence diagnostics of failed hidden-score transfer; not a causal decomposition of formal score",
+  "formal": {
+    "baseline_public_score": 31.16,
+    "candidate_public_score": 24.4,
+    "delta": -6.76,
+    "relative_percent": -21.69448
+  },
+  "observed_public_baselines": {
+    "005": 49.8997,
+    "027": 50.4293,
+    "030": 42.61336230982951
+  },
+  "observed_public_baseline_range": 7.815937690170486,
+  "single_round_candidate_mean": 47.16988007578886,
+  "single_round_delta": 4.556517765959351,
+  "top_two_score_delta_sum": 146.60627868810224,
+  "top_two_contribution_to25game_mean": 5.864251147524089,
+  "remaining23mean_delta": -1.421449327787759,
+  "game_delta_signs": {
+    "positive": 12,
+    "negative": 10,
+    "unchanged": 3
+  },
+  "levels": {
+    "baseline": 103,
+    "candidate": 102,
+    "gain_levels": 22,
+    "lost_levels": 23
+  },
+  "limitations": [
+    "Historical baseline runs differ in execution conditions and cannot replace the same-round baseline or estimate a formal sampling distribution.",
+    "Removing topgames is sensitivity analysis, not an alternative official score.",
+    "Hidden episode list unavailable; cannot establish pergame formal failures, runtime completeness,OOM, or memory-persistence causation."
+  ],
+  "source_files": [
+    "experiments/030-analysis/report.json",
+    "experiments/030-analysis/adoption-review.json",
+    "experiments/030-final/submissions-snapshot.json",
+    "experiments/030-final/read-manifest.json"
+  ],
+  "code_audit": {
+    "frozen_helper_identical": true,
+    "deterministic_hidden_failure_found": false,
+    "unconfirmed_risks": [
+      "Same-level RESET or death does not change worker scope; ordinary cached data may survive environment restart.",
+      "Sleeping workers remain until game/session end, so110-game scale may retain more process memory than25-game research.",
+      "New1GiB perworker address-space ceiling can terminate large searches."
+    ],
+    "not_unique_to_candidate": "Pure computation after a level-changing action is allowed in original ephemeral snippet too; terminal guard blocks further actions and next call/prompt clears worker on level mismatch.",
+    "causal_status": "No formal logs to establish these risks caused the24.40 result; not treated as confirmed causes."
+  }
+}

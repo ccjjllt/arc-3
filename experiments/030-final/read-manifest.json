@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-10-21T03:18:07.738002+00:00",
+  "submission_id": 57447779,
+  "scope": "Actual competition submission APIs; not Notebook save output",
+  "read_only": true,
+  "results": {
+    "episodes": {
+      "status": "saved",
+      "keys": [],
+      "normalized_episode_count": 0,
+      "normalized_response": {
+        "episodes": []
+      }
+    },
+    "submission": {
+      "status": "saved",
+      "keys": [
+        "ref",
+        "totalBytes",
+        "date",
+        "description",
+        "fileName",
+        "publicScore",
+        "status",
+        "submittedBy",
+        "submittedByRef",
+        "teamName",
+        "url"
+      ]
+    },
+    "download_submission": {
+      "status": "error",
+      "type": "HTTPError",
+      "message": "403 Client Error: Forbidden for url: https://api.kaggle.com/v1/competitions.CompetitionApiService/DownloadSubmission"
+    }
+  },
+  "available_evidence": {
+    "formal_status": "COMPLETE",
+    "formal_public_score": 24.4,
+    "error_description_returned": false,
+    "formal_submission_bytes": 3819
+  },
+  "unavailable_from_attempted_public_sdk": [
+    "Formal rerun startup/model load log",
+    "Formal rerun duration and per-hidden-game traces",
+    "Formal rerun process cleanup evidence",
+    "Formal generated parquet (DownloadSubmission returned403)"
+  ],
+  "interface_limits": [
+    "GetSubmission returns status/aggregate score/submitted artifact metadata only, not rerun logs or completion timestamp.",
+    "ListSubmissionEpisodes returned an empty list; episode log/replay endpoints require returned episode IDs, so no follow-up IDs were guessed.",
+    "DownloadSubmission for exact authorized submission ID returned403; no alternate hidden/internal endpoints were attempted.",
+    "kernels output for zhuating/arc3-030-persistent-submission is the saved notebook run and must not be labeled formal rerun evidence."
+  ]
+}
