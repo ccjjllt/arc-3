@@ -1,0 +1,1475 @@
+{
+  "status": "final_review_complete_with_request_snapshots_and_completed_transcripts",
+  "reviewed_at_utc": "2026-10-21T08:46:43.448820+00:00",
+  "scope": "Independent local review of cd82 and m0r0; no helper change, model call, remote access, GPU or new test. Full25 already launched independently of this review.",
+  "sources": {
+    "runs/032-memory-short/solved_level_memory/solved-level-memory-summary.json": {
+      "sha256": "90ddf07a7c6beef93676b321cf6ca8cb5d68ca35339b6addef00ed65cc7989fa",
+      "bytes": 103879
+    },
+    "runs/032-memory-short/baseline/benchmark.json": {
+      "sha256": "fc920b9aa63e27e7df78eb55df9accf8267f30bafd8e737b5736ca09fe0ac64b",
+      "bytes": 532021
+    },
+    "runs/032-memory-short/baseline/arm-metadata.json": {
+      "sha256": "d49c2ba301ac165b01d4321bb118255cc268a5ba5f5d70234256b7ed2d6d0261",
+      "bytes": 12774
+    },
+    "runs/032-memory-short/solved_level_memory/benchmark.json": {
+      "sha256": "74c5e614418e1822179ef51a04382ed71cd11a996b985bf42d7909463eda4d4e",
+      "bytes": 547689
+    },
+    "runs/032-memory-short/solved_level_memory/arm-metadata.json": {
+      "sha256": "0679709371fc04a24d700161b1b36b23424f1d51bab5cecbd82d25dfabe55a07",
+      "bytes": 12804
+    },
+    "runs/032-memory-priority/solved_level_memory/transcripts/cd82-fb555c5d_p0.txt": {
+      "sha256": "a4d2021cb1a7a7ad9a1c119a0bd3ac839c670eba670fa3887792233f18ce0374",
+      "bytes": 1864008,
+      "lines": 16278,
+      "completeness": "parent-confirmed completed priority download"
+    },
+    "runs/032-memory-priority/solved_level_memory/transcripts/m0r0-492f87ba_p0.txt": {
+      "sha256": "0b45ad5bc43478ed2323aefea4787a2d90f7dd0b56193e590110ab4e3f8de0e0",
+      "bytes": 2501408,
+      "lines": 22508,
+      "completeness": "parent-confirmed completed priority download"
+    },
+    "runs/032-memory-short/solved_level_memory/cd82-fb555c5d_p0_requests.jsonl": {
+      "sha256": "472909c6393b4086548324a1b8fc34814d05e99b4aaff719214631b4c8524263",
+      "bytes": 44243729,
+      "completeness": "parent-confirmed completed all-output CLI download; analyzer reports no malformed lines"
+    },
+    "runs/032-memory-short/solved_level_memory/transcripts/cd82-fb555c5d_p0.txt": {
+      "sha256": "a4d2021cb1a7a7ad9a1c119a0bd3ac839c670eba670fa3887792233f18ce0374",
+      "bytes": 1864008,
+      "matches_previously_reviewed_priority_transcript": true
+    },
+    "runs/032-memory-short/solved_level_memory/m0r0-492f87ba_p0_requests.jsonl": {
+      "sha256": "ec247ba77385fe8e15b3db9c1adfaa339d660b8c5eaa26554815021ed10f56d5",
+      "bytes": 75876940,
+      "completeness": "parent-confirmed completed all-output CLI download; analyzer reports no malformed lines"
+    },
+    "runs/032-memory-short/solved_level_memory/transcripts/m0r0-492f87ba_p0.txt": {
+      "sha256": "0b45ad5bc43478ed2323aefea4787a2d90f7dd0b56193e590110ab4e3f8de0e0",
+      "bytes": 2501408,
+      "matches_previously_reviewed_priority_transcript": true
+    }
+  },
+  "games": {
+    "cd82-fb555c5d": {
+      "arms": {
+        "baseline": {
+          "state": "cancelled",
+          "levels_completed": 2,
+          "final_score": 1.5591671040278874,
+          "actions_per_level": [
+            107,
+            45,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=169281",
+          "final_wallclock_seconds": 2708.1719059809993,
+          "recorded_RESET_actions": 1,
+          "total_actions": 152,
+          "per_level_action_boundaries": [
+            {
+              "level": 1,
+              "reported_actions": 107,
+              "cumulative_actions": 107,
+              "last_action": {
+                "id": "ACTION5",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 1986.3875338160005,
+              "completed": true
+            },
+            {
+              "level": 2,
+              "reported_actions": 45,
+              "cumulative_actions": 152,
+              "last_action": {
+                "id": "ACTION5",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 2667.894283453,
+              "completed": true
+            }
+          ]
+        },
+        "solved_level_memory": {
+          "state": "won",
+          "levels_completed": 6,
+          "final_score": 99.60865847975298,
+          "actions_per_level": [
+            82,
+            14,
+            26,
+            21,
+            22,
+            16
+          ],
+          "solver_note": "tokens=157894",
+          "final_wallclock_seconds": 2527.8506512620006,
+          "recorded_RESET_actions": 0,
+          "total_actions": 181,
+          "per_level_action_boundaries": [
+            {
+              "level": 1,
+              "reported_actions": 82,
+              "cumulative_actions": 82,
+              "last_action": {
+                "id": "ACTION5",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 1872.6785355680004,
+              "completed": true
+            },
+            {
+              "level": 2,
+              "reported_actions": 14,
+              "cumulative_actions": 96,
+              "last_action": {
+                "id": "ACTION5",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 1977.302809881001,
+              "completed": true
+            },
+            {
+              "level": 3,
+              "reported_actions": 26,
+              "cumulative_actions": 122,
+              "last_action": {
+                "id": "ACTION6",
+                "data": {
+                  "x": 31,
+                  "y": 21
+                }
+              },
+              "last_action_elapsed_seconds": 2310.2738473610007,
+              "completed": true
+            },
+            {
+              "level": 4,
+              "reported_actions": 21,
+              "cumulative_actions": 143,
+              "last_action": {
+                "id": "ACTION6",
+                "data": {
+                  "x": 14,
+                  "y": 38
+                }
+              },
+              "last_action_elapsed_seconds": 2401.0892843280017,
+              "completed": true
+            },
+            {
+              "level": 5,
+              "reported_actions": 22,
+              "cumulative_actions": 165,
+              "last_action": {
+                "id": "ACTION6",
+                "data": {
+                  "x": 31,
+                  "y": 21
+                }
+              },
+              "last_action_elapsed_seconds": 2463.5168223050005,
+              "completed": true
+            },
+            {
+              "level": 6,
+              "reported_actions": 16,
+              "cumulative_actions": 181,
+              "last_action": {
+                "id": "ACTION6",
+                "data": {
+                  "x": 14,
+                  "y": 38
+                }
+              },
+              "last_action_elapsed_seconds": 2524.7604855030004,
+              "completed": true
+            }
+          ]
+        }
+      },
+      "reset_audit_status": "candidate_no_explicit_reset_observed_no_post_L1_soft_reset_identified",
+      "adoption_status": "real_rule_reflection_and_later_programmatic_transfer_observed_but_pin_specific_causality_not_isolated",
+      "memory_summary": {
+        "scope": "/kaggle/working/solved_level_memory/artifacts/cd82-fb555c5d_p0_tool_runtime_state.json",
+        "records": [
+          {
+            "level": 1,
+            "n_actions": 82,
+            "completion_history_index": 82,
+            "completion_step": 82,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Goal = make the 10x10 block's pattern match the tray preview (top-left). Controls: LEFT/RIGHT orbit the stamp ±45° around the block (N±45); UP/DOWN continue orbiting (N→NE→E→SE, N→NW→W→SW); SPACE presses (paints the swept band = 7 units from the ink's face); MOUSE on the toolbar ink boxes selects the ink color. Paint shapes: N=rows 0-4, S=n/a, E=cols 5-9, W=cols 0-4, NE={c>=r}, NW={r+c<=9}, SE={r+c>=9}, SW={c<=r}. Winning plan: purple press at W, purple at E, then white at N.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 2,
+            "n_actions": 14,
+            "completion_history_index": 96,
+            "completion_step": 96,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Same goal (match block to tray). Same orbit/press mechanics. Target = purple {r+c≤8, r≤4}, white {r≥5, r+c≤8}, orange {r+c≥9}. Winning plan: NW+purple, W+white, N+purple, SE+orange (4 presses, 3 color clicks).",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 3,
+            "n_actions": 26,
+            "completion_history_index": 122,
+            "completion_step": 122,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Same match-the-tray goal. Added mechanic: a small cartridge sits above the stamp (only visible at pose N); MOUSE-clicking it presses a SMALL stamp that paints the 3×4 rect local rows0-2/cols3-6. Big-stamp shapes unchanged. Winning plan: SW+red, E+green, NW+purple, small-N+orange.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 4,
+            "n_actions": 21,
+            "completion_history_index": 143,
+            "completion_step": 143,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Same match-the-tray goal. Small cartridge travels with the stamp at cardinal poses (N, W confirmed) and clicking it paints a 3×4 rect (N: rows0-2/cols3-6; W: rows3-6/cols0-2). Orbit chain SW-W-NW-N-NE-E-SE; LEFT/RIGHT pivot through N, UP/DOWN walk the arms. Winning plan: E+orange, SE+purple, W+blue, smallW+yellow.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 5,
+            "n_actions": 22,
+            "completion_history_index": 165,
+            "completion_step": 165,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Same match-the-tray goal; same mechanics (big stamp orbit + small cartridge click at N). Winning plan: NE+blue, SW+green, SE+orange, smallN+red (4 presses).",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          }
+        ],
+        "block_characters": 2957,
+        "successful_memory_requests": 12,
+        "delivered_block_hashes": [
+          "1f213e82149bfd1adc9e06a7e34d030d0dc22f1b3f38695fde08263ab5a406a2"
+        ]
+      },
+      "observed_score_delta": 98.04949137572508,
+      "recorded_action_counts_match_benchmark_per_level": true,
+      "transcript": "runs/032-memory-priority/solved_level_memory/transcripts/cd82-fb555c5d_p0.txt",
+      "pinned_blocks": [
+        {
+          "first_transcript_line": 13818,
+          "end_line": 13828,
+          "turn": "--- analysis_step=40 | action=107 | 08:09:29 | tool-agent ---",
+          "sha256": "1f213e82149bfd1adc9e06a7e34d030d0dc22f1b3f38695fde08263ab5a406a2",
+          "chars": 2957,
+          "records_in_block": [
+            {
+              "level": 1,
+              "n_actions": 82
+            },
+            {
+              "level": 2,
+              "n_actions": 14
+            }
+          ],
+          "matches_successfully_delivered_hash_in_helper_summary": true,
+          "preceding_history_message_counts": [
+            {
+              "line": 13043,
+              "message_count": 75
+            },
+            {
+              "line": 13359,
+              "message_count": 80
+            },
+            {
+              "line": 13695,
+              "message_count": 45
+            }
+          ]
+        }
+      ],
+      "actual_RESET_action_echoes": 0,
+      "actual_GAME_OVER_action_echoes": 0,
+      "preliminary_findings_superseded_by_deep_review": [
+        "Candidate clears six levels versus baseline two; score 99.60865847975298 versus 1.5591671040278874.",
+        "Candidate L1 is cleared in 82 actions at 1872.678535568 seconds, before any solved-level memory for this game exists. The initial discovery and that pre-memory trajectory advantage cannot be attributed to success memory.",
+        "The summary contains five captured level rules but only one successful delivered block hash. It is not established that all five rules were present in that delivered block.",
+        "Rules describe the big stamp and later small cartridge mechanics and include concrete winning plans. Their capture, correctness, visibility after eviction and subsequent use require actual trajectory review."
+      ],
+      "deep_review": {
+        "outcome": "L1 through L6 completed; L6 RUN COMPLETE appears at transcript line16249 (within the final execution section 16195–16262).",
+        "first_level_attribution": "L1 clears at 1872.6785 seconds, 82 actions (transcript10948). No solved-level fact for this game could have existed before that first success. Do not attribute initial discovery to this memory candidate.",
+        "reflection_before_pinning": {
+          "instruction_line": 11119,
+          "captured_rule_line": 11151,
+          "assistant_restatement_line": 11347,
+          "next_level_read_and_plan_lines": [
+            11249,
+            11349,
+            11567
+          ],
+          "actual_L2_completion_line": 11644,
+          "L2_actions": 14,
+          "finding": "After the real L1 summary instruction, the model explicitly identifies the new target orange region as the SE paint shape from L1, derives a fresh NW-purple/W-white/N-purple/SE-orange sequence, checks the new toolbar positions, executes with per-press observations and completes L2. This is real semantic transfer occurring before the first pin; it is compatible with the reflection component, not evidence that memory had no effect. The incremental effect of the instruction versus ordinary recalled experience is not isolated."
+        },
+        "first_pin": {
+          "line": 13818,
+          "levels_in_block": [
+            1,
+            2
+          ],
+          "history_message_count_change": [
+            80,
+            45
+          ],
+          "finding": "The only pinned block contains L1 and L2, both with real rules. Its hash exactly matches the sole successfully delivered hash. L3–5 captured rules were never added to the pinned block during this run."
+        },
+        "post_pin_behavior": [
+          {
+            "level": 3,
+            "code_start": 13887,
+            "completed_line": 13941,
+            "finding": "After the pin, the model resumes a current L3 plan already computed before the trim, fixes a print-statement KeyError, executes the remaining16 actions and completes L3. The small-cartridge discovery and plan preceded pinning, so the block cannot be credited with discovering that new mechanic."
+          },
+          {
+            "level": 4,
+            "reflection_instruction_line": 14124,
+            "captured_rule_line": 14162,
+            "code_and_completion_lines": [
+              14558,
+              14875,
+              14931
+            ],
+            "finding": "The L3 rule summarizes the small cartridge at N. L4 reads the new scene, extends the cartridge location to W, rebuilds paint-region predictions and executes a new plan to completion. This uses the learned mechanism, not an old coordinate action sequence."
+          },
+          {
+            "level": 5,
+            "reflection_instruction_line": 15114,
+            "captured_rule_line": 15150,
+            "verification_code_lines": [
+              15307,
+              15336
+            ],
+            "execution_lines": [
+              15537,
+              15603
+            ],
+            "finding": "The model constructs big-stamp masks plus sN, reads the new tray target from ASCII, simulates NE-blue/SW-green/SE-orange/sN-red and obtains match=True, then executes22 actual actions and completes L5."
+          },
+          {
+            "level": 6,
+            "reflection_instruction_line": 15786,
+            "captured_rule_line": 15822,
+            "verification_code_lines": [
+              15953,
+              15983
+            ],
+            "execution_lines": [
+              16195,
+              16262
+            ],
+            "finding": "The model adds sW to its masks, verifies the new target in code, then simplifies to16 actual actions ending RUN COMPLETE. These masks implement prior mechanics with current target/colors, rather than merely mentioning old rules."
+          }
+        ],
+        "rule_correctness": "Core stamp masks and color selection are corroborated by later simulation checks and actual clears. The L3 phrase that the small cartridge is only visible at N is a provisional overgeneralization; L4 explicitly expands the mechanic to W. All rules remain model hypotheses, separate from true level-completion facts.",
+        "reset_audit": "No explicit RESET/GAME_OVER action echoes or benchmark RESET actions in the candidate. No soft restart was identified in the reviewed post-L1 trajectory. L1 explorations and no-ops are legitimately present in the level action record; it is not a minimal winning plan.",
+        "failure_tail_reuse": "No literal replay of an old action tail as the new solution was observed. The model reads current colors, toolbar coordinates and target and simulates the new pattern. Pin-specific contribution cannot be isolated, especially because the first post-pin L3 plan had already been formed."
+      },
+      "snapshot_crosscheck": {
+        "path": "runs/032-memory-short/solved_level_memory/cd82-fb555c5d_p0_requests.jsonl",
+        "rule_instruction_request_lines": {
+          "1": [
+            107,
+            109
+          ],
+          "2": [
+            113,
+            115
+          ],
+          "3": [
+            135,
+            137
+          ],
+          "4": [
+            145,
+            147
+          ],
+          "5": [
+            151,
+            153
+          ]
+        },
+        "captured_rule_response_snapshots": {
+          "1": {
+            "first_seen_request_line": 109,
+            "message_sha256": "d1c5fee593515eede6da273c37251985faa0ac6eb1da3dc94078865d4ad24a9b",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Goal = make the 10x10 block's pattern match the tray preview (top-left). Controls: LEFT/RIGHT orbit the stamp ±45° around the block (N±45); UP/DOWN continue orbiting (N→NE→E→SE, N→NW→W→SW); SPACE presses (paints the swept band = 7 units from the ink's face); MOUSE on the toolbar ink boxes selects the ink color. Paint shapes: N=rows 0-4, S=n/a, E=cols 5-9, W=cols 0-4, NE={c>=r}, NW={r+c<=9}, SE={r+c>=9}, SW={c<=r}. Winning plan: purple press at W, purple at E, then white at N.",
+            "preceding_response_line_if_adjacent": 108
+          },
+          "2": {
+            "first_seen_request_line": 115,
+            "message_sha256": "1ed0ea150b746be74a3999bb5f9bea67a74b7a70f629b41c8c67481c00be4cb0",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Same goal (match block to tray). Same orbit/press mechanics. Target = purple {r+c≤8, r≤4}, white {r≥5, r+c≤8}, orange {r+c≥9}. Winning plan: NW+purple, W+white, N+purple, SE+orange (4 presses, 3 color clicks).",
+            "preceding_response_line_if_adjacent": 114
+          },
+          "3": {
+            "first_seen_request_line": 137,
+            "message_sha256": "9b90acf297118519eceb664ac8c03a99462716d96b0853803c1148c7f745b1ff",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Same match-the-tray goal. Added mechanic: a small cartridge sits above the stamp (only visible at pose N); MOUSE-clicking it presses a SMALL stamp that paints the 3×4 rect local rows0-2/cols3-6. Big-stamp shapes unchanged. Winning plan: SW+red, E+green, NW+purple, small-N+orange.",
+            "preceding_response_line_if_adjacent": 136
+          },
+          "4": {
+            "first_seen_request_line": 147,
+            "message_sha256": "9a2733fd9d0da363c71b2fe1617aa586dbdd547edd2fff74f2ce65f3703cabad",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Same match-the-tray goal. Small cartridge travels with the stamp at cardinal poses (N, W confirmed) and clicking it paints a 3×4 rect (N: rows0-2/cols3-6; W: rows3-6/cols0-2). Orbit chain SW-W-NW-N-NE-E-SE; LEFT/RIGHT pivot through N, UP/DOWN walk the arms. Winning plan: E+orange, SE+purple, W+blue, smallW+yellow.",
+            "preceding_response_line_if_adjacent": 146
+          },
+          "5": {
+            "first_seen_request_line": 153,
+            "message_sha256": "9fbdf5d85a070cff9fd4ea502a607a5ee8c4dc5ca9b07ba6f7b3abcf05cea1b0",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Same match-the-tray goal; same mechanics (big stamp orbit + small cartridge click at N). Winning plan: NE+blue, SW+green, SE+orange, smallN+red (4 presses).",
+            "preceding_response_line_if_adjacent": 152
+          }
+        },
+        "key_calls": {
+          "L2_transfer_execute": {
+            "call_id": "call_a4763d9ce79b4eb194c888de",
+            "first_source_snapshot_line": 113,
+            "tool_result_snapshot_line": 113,
+            "code_sha256_strip": "18e75730e53a16cd8bae1ee0963550a12c80fe098ce19a5608c1ba1fb7e4c82b",
+            "matches_reviewed_transcript_code_at_line": 11567,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "LEFT -> effect",
+              "SPACE -> effect",
+              "DOWN -> effect",
+              "MOUSE(row=4, col=34) -> effect",
+              "SPACE -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "MOUSE(row=4, col=40) -> effect",
+              "SPACE -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "MOUSE(row=4, col=46) -> effect",
+              "SPACE -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] SPACE -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "D \n[action] MOUSE(row=4, col=40) -> effect\nclick(40) CH95 NOT_FINISHED \n[action] SPACE -> effect\nSPACE CH36 NOT_FINISHED \n   pppppppppp\n   pppppppppp\n   pppppppppp\n   pppppppppp\n   pppppppppp\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n[action] RIGHT -> effect\nRIGHT CH200 NOT_FINISHED \n[action] DOWN -> effect\nDOWN CH201 NOT_FINISHED \n[action] DOWN -> effect\nDOWN CH201 NOT_FINISHED \n[action] MOUSE(row=4, col=46) -> effect\nclick(46) CH95 NOT_FINISHED \n[action] SPACE -> LEVEL COMPLETED\nSPACE CH581 NOT_FINISHED done\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\nBAR 64 g30 r24-32 c25-38 | p84 r25-31 c26-37 | W100 r34-43 c27-36\n"
+          },
+          "L3_after_first_pin_execute": {
+            "call_id": "call_5eff8476c8cf4228ad854fbc",
+            "first_source_snapshot_line": 135,
+            "tool_result_snapshot_line": 135,
+            "code_sha256_strip": "8256c88d4bd2d8eaea59dfa8a157ba38ddd7cad3005d670d69781699f05fbd71",
+            "matches_reviewed_transcript_code_at_line": 13887,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "SPACE -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "MOUSE(row=4, col=47) -> effect",
+              "SPACE -> effect",
+              "UP -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "MOUSE(row=4, col=29) -> effect",
+              "SPACE -> effect",
+              "RIGHT -> effect",
+              "MOUSE(row=4, col=35) -> effect",
+              "MOUSE(row=21, col=31) -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] MOUSE(row=21, col=31) -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "4, col=47) -> effect\n6 click(4,47) CH107 NOT_FINISHED \n[action] SPACE -> effect\n7 SPACE CH26 NOT_FINISHED \n[action] UP -> effect\n8 UP CH228 NOT_FINISHED \n[action] LEFT -> effect\n9 LEFT CH229 NOT_FINISHED \n[action] LEFT -> effect\n10 LEFT CH228 NOT_FINISHED \n[action] MOUSE(row=4, col=29) -> effect\n11 click(4,29) CH96 NOT_FINISHED \n[action] SPACE -> effect\n12 SPACE CH56 NOT_FINISHED \n[action] RIGHT -> effect\n13 RIGHT CH228 NOT_FINISHED \n[action] MOUSE(row=4, col=35) -> effect\n14 click(4,35) CH107 NOT_FINISHED \n[action] MOUSE(row=21, col=31) -> LEVEL COMPLETED\n15 click(21,31) CH311 NOT_FINISHED DONE\nBAR 64\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n"
+          },
+          "L5_current_target_verification": {
+            "call_id": "call_3b70babb80564014acf75f8f",
+            "first_source_snapshot_line": 149,
+            "tool_result_snapshot_line": 149,
+            "code_sha256_strip": "522e5253dc69cd1bdef32e9cca02edc92aa3205d85ac2f4e6cea1a0c3871094a",
+            "matches_reviewed_transcript_code_at_line": 15307,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [],
+            "key_tool_output": [
+              "match: True"
+            ],
+            "tool_stdout_tail": "match: True\n"
+          },
+          "L5_execute": {
+            "call_id": "call_a476120d8b1049c3bc39c8e5",
+            "first_source_snapshot_line": 151,
+            "tool_result_snapshot_line": 151,
+            "code_sha256_strip": "0e89d0a6395f893c647d74908150f82dc1e0539e3d80197367aa622c7dc898de",
+            "matches_reviewed_transcript_code_at_line": 15537,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "RIGHT -> effect",
+              "MOUSE(row=4, col=59) -> effect",
+              "SPACE -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "MOUSE(row=4, col=47) -> effect",
+              "SPACE -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "MOUSE(row=4, col=35) -> effect",
+              "SPACE -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "LEFT -> effect",
+              "MOUSE(row=4, col=53) -> effect",
+              "MOUSE(row=21, col=31) -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] MOUSE(row=21, col=31) -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "HED \n[action] RIGHT -> effect\n12 RIGHT CH228 NOT_FINISHED \n[action] DOWN -> effect\n13 DOWN CH229 NOT_FINISHED \n[action] DOWN -> effect\n14 DOWN CH229 NOT_FINISHED \n[action] MOUSE(row=4, col=35) -> effect\n15 click(4,35) CH95 NOT_FINISHED \n[action] SPACE -> effect\n16 SPACE CH56 NOT_FINISHED \n[action] UP -> effect\n17 UP CH229 NOT_FINISHED \n[action] UP -> effect\n18 UP CH228 NOT_FINISHED \n[action] LEFT -> effect\n19 LEFT CH229 NOT_FINISHED \n[action] MOUSE(row=4, col=53) -> effect\n20 click(4,53) CH106 NOT_FINISHED \n[action] MOUSE(row=21, col=31) -> LEVEL COMPLETED\n21 click(21,31) CH319 NOT_FINISHED DONE\nBAR 64\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n   WWWWWWWWWW\n"
+          },
+          "L6_current_target_verification": {
+            "call_id": "call_e74f3db60149402ab695fdf7",
+            "first_source_snapshot_line": 155,
+            "tool_result_snapshot_line": 155,
+            "code_sha256_strip": "5dcd146de3435ec4664d54b457efa8ea0fcee4d151a62503214247a9a7feb189",
+            "matches_reviewed_transcript_code_at_line": 15953,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [],
+            "key_tool_output": [
+              "match: True"
+            ],
+            "tool_stdout_tail": "match: True\n"
+          }
+        },
+        "memory_request_windows": [
+          {
+            "request_line": 133,
+            "previous_request_line": 131,
+            "previous_message_count": 84,
+            "message_count": 47,
+            "level": 3,
+            "step": 107,
+            "memory_sha256": "1f213e82149bfd1adc9e06a7e34d030d0dc22f1b3f38695fde08263ab5a406a2",
+            "matches_analyzer_index": true,
+            "matches_successful_delivery_summary": true,
+            "contains_levels": [
+              1,
+              2
+            ]
+          }
+        ],
+        "response_usage_after_memory_windows": {
+          "133": {
+            "response_line": 134,
+            "usage": {
+              "prompt_tokens": 60963,
+              "total_tokens": 61403,
+              "completion_tokens": 440,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "image_tokens": 8000
+              },
+              "reasoning_tokens": 129
+            },
+            "finish_reason": "tool_calls"
+          }
+        },
+        "limitations": [
+          "Tool-call source and tool result first appearing in a request snapshot are historical output already executed before that request, not actions caused by the request itself."
+        ],
+        "key_calls_not_in_request_snapshots": [
+          "L6_final_execute"
+        ],
+        "source_sha256": "472909c6393b4086548324a1b8fc34814d05e99b4aaff719214631b4c8524263",
+        "counts": {
+          "requests": 78,
+          "responses_with_usage": 78,
+          "latest_user_contains_rule_instruction": 10,
+          "requests_with_memory_header": 12,
+          "system_memory_characters_in_requests": 35484
+        },
+        "final_action_snapshot_limit": "L6 final execution is absent from a later request snapshot because the game ends immediately after it. Its code/result and RUN COMPLETE are present in the completed transcript at16195–16262 (RUN COMPLETE line16249), corroborated by the won benchmark. It is not counted as missing execution or invented from the prior verification.",
+        "delivery_counts_interpretation": "12 actual requests contain the memory header and the helper reports12 successful responses with memory; all use the sole L1/L2 block hash. This confirms delivery, not its isolated causal effect."
+      },
+      "all_captured_rules_matched_actual_response_message": true,
+      "all_delivered_hashes_match_actual_request_windows": true
+    },
+    "m0r0-492f87ba": {
+      "arms": {
+        "baseline": {
+          "state": "cancelled",
+          "levels_completed": 0,
+          "final_score": 0.0,
+          "actions_per_level": [
+            211,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=174753",
+          "final_wallclock_seconds": 2700.205884252,
+          "recorded_RESET_actions": 1,
+          "total_actions": 211,
+          "per_level_action_boundaries": [
+            {
+              "level": 1,
+              "reported_actions": 211,
+              "cumulative_actions": 211,
+              "last_action": {
+                "id": "ACTION1",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 2682.157954022001,
+              "completed": false
+            }
+          ]
+        },
+        "solved_level_memory": {
+          "state": "cancelled",
+          "levels_completed": 5,
+          "final_score": 71.42857142857143,
+          "actions_per_level": [
+            27,
+            36,
+            67,
+            24,
+            73,
+            0
+          ],
+          "solver_note": "tokens=171742",
+          "final_wallclock_seconds": 2700.250544353001,
+          "recorded_RESET_actions": 0,
+          "total_actions": 227,
+          "per_level_action_boundaries": [
+            {
+              "level": 1,
+              "reported_actions": 27,
+              "cumulative_actions": 27,
+              "last_action": {
+                "id": "ACTION3",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 695.5575666050008,
+              "completed": true
+            },
+            {
+              "level": 2,
+              "reported_actions": 36,
+              "cumulative_actions": 63,
+              "last_action": {
+                "id": "ACTION4",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 1242.2217884790007,
+              "completed": true
+            },
+            {
+              "level": 3,
+              "reported_actions": 67,
+              "cumulative_actions": 130,
+              "last_action": {
+                "id": "ACTION4",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 1827.6755549629997,
+              "completed": true
+            },
+            {
+              "level": 4,
+              "reported_actions": 24,
+              "cumulative_actions": 154,
+              "last_action": {
+                "id": "ACTION4",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 2111.3266884309996,
+              "completed": true
+            },
+            {
+              "level": 5,
+              "reported_actions": 73,
+              "cumulative_actions": 227,
+              "last_action": {
+                "id": "ACTION3",
+                "data": {}
+              },
+              "last_action_elapsed_seconds": 2647.881379218001,
+              "completed": true
+            }
+          ]
+        }
+      },
+      "reset_audit_status": "two_real_same_level_soft_resets_confirmed_in_tool_results_and_delivered_action_tails",
+      "adoption_status": "real_rule_reflection_and_later_programmatic_transfer_observed_but_pin_specific_causality_not_isolated",
+      "memory_summary": {
+        "scope": "/kaggle/working/solved_level_memory/artifacts/m0r0-492f87ba_p0_tool_runtime_state.json",
+        "records": [
+          {
+            "level": 1,
+            "n_actions": 27,
+            "completion_history_index": 27,
+            "completion_step": 27,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Two 5×5 balls in a black maze; each press moves each ball 1 cell (right ball's LEFT/RIGHT mirrored, vertical normal). Adjacent balls visually merge. Goal (hypothesis, best fit): each ball must reach the opposite color's half — the swap happened on the final LEFT and won.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 2
+          },
+          {
+            "level": 2,
+            "n_actions": 36,
+            "completion_history_index": 63,
+            "completion_step": 63,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Goal = make the two 4×4 balls collide (head-on). Controls: left ball normal, right ball horizontally mirrored; walls block, red checkered cells are lethal (stepping on one resets both balls to start). Won by driving both down their sides through the spike-band gaps into the open bottom room, then pressing RIGHT when adjacent (A left of B) → head-on collision → LEVEL COMPLETED.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 3,
+            "n_actions": 67,
+            "completion_history_index": 130,
+            "completion_step": 130,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Goal = collide the two balls (left ball normal, right ball mirrored). Dark-blue tokens blocked corridors; MOUSE a token → it turns yellow and moves with normal arrows while balls freeze gray; MOUSE a ball → resume control. Parked all 3 tokens in dead-end cells, then drove the balls head-on (25 presses). Won on a RIGHT press when adjacent.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 4,
+            "n_actions": 24,
+            "completion_history_index": 154,
+            "completion_step": 154,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Goal = collide the two balls (left ball normal, right ball horizontally mirrored). Red-checker cells are LETHAL: stepping on one resets the entire level (balls AND the parked token), so hazards must be routed around, never treated as walls. MOUSE a token → it turns yellow and moves with normal arrows while balls freeze gray; MOUSE a ball → resume. Won by parking the token at (3,6), then DOWN,RIGHT,RIGHT,LEFT,UP,UP,RIGHT,RIGHT,RIGHT → head-on collision.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          },
+          {
+            "level": 5,
+            "n_actions": 73,
+            "completion_history_index": 227,
+            "completion_step": 227,
+            "evidence": "observed_frame_level_transition",
+            "rule": "Goal = collide the two balls (left ball horizontally mirrored, right ball normal). Colored 4×4 blocks are BUTTONS: while a ball stands on a button cell, ALL blocks/bars of that color vanish; leaving restores them. Gates (3-cell bars) are passable only while their color's button is held. Won by: right ball holds green button → left ball passes green gate into top room → left ball holds purple button → right ball passes purple gate → head-on LEFT collision.",
+            "rule_status": "model_hypothesis_unverified",
+            "asks_sent": 1
+          }
+        ],
+        "block_characters": 4929,
+        "successful_memory_requests": 80,
+        "delivered_block_hashes": [
+          "b30dea0356d0c4d5fd3ed06d338a721fd1b9d6cac3980984b5e0cb25b1e9f62f",
+          "b6d058ab383b4e6b61b2f8ce46c3b6f00afd10923ab1033b8ca6f92a15bacf25",
+          "fa0fa7245c631bce951304a5f317ea18ef4e84c37ca56157febcf6f9417ea51e"
+        ]
+      },
+      "observed_score_delta": 71.42857142857143,
+      "recorded_action_counts_match_benchmark_per_level": true,
+      "transcript": "runs/032-memory-priority/solved_level_memory/transcripts/m0r0-492f87ba_p0.txt",
+      "pinned_blocks": [
+        {
+          "first_transcript_line": 7580,
+          "end_line": 7586,
+          "turn": "--- analysis_step=12 | action=40 | 07:49:54 | tool-agent ---",
+          "sha256": "b30dea0356d0c4d5fd3ed06d338a721fd1b9d6cac3980984b5e0cb25b1e9f62f",
+          "chars": 1856,
+          "records_in_block": [
+            {
+              "level": 1,
+              "n_actions": 27
+            }
+          ],
+          "matches_successfully_delivered_hash_in_helper_summary": true,
+          "preceding_history_message_counts": [
+            {
+              "line": 6779,
+              "message_count": 92
+            },
+            {
+              "line": 7129,
+              "message_count": 97
+            },
+            {
+              "line": 7457,
+              "message_count": 38
+            }
+          ]
+        },
+        {
+          "first_transcript_line": 12469,
+          "end_line": 12479,
+          "turn": "--- analysis_step=20 | action=78 | 08:00:33 | tool-agent ---",
+          "sha256": "b6d058ab383b4e6b61b2f8ce46c3b6f00afd10923ab1033b8ca6f92a15bacf25",
+          "chars": 3539,
+          "records_in_block": [
+            {
+              "level": 1,
+              "n_actions": 27
+            },
+            {
+              "level": 2,
+              "n_actions": 36
+            }
+          ],
+          "matches_successfully_delivered_hash_in_helper_summary": true,
+          "preceding_history_message_counts": [
+            {
+              "line": 11693,
+              "message_count": 96
+            },
+            {
+              "line": 12060,
+              "message_count": 101
+            },
+            {
+              "line": 12346,
+              "message_count": 46
+            }
+          ]
+        },
+        {
+          "first_transcript_line": 18600,
+          "end_line": 18616,
+          "turn": "--- analysis_step=35 | action=162 | 08:09:20 | tool-agent ---",
+          "sha256": "fa0fa7245c631bce951304a5f317ea18ef4e84c37ca56157febcf6f9417ea51e",
+          "chars": 4929,
+          "records_in_block": [
+            {
+              "level": 1,
+              "n_actions": 27
+            },
+            {
+              "level": 2,
+              "n_actions": 36
+            },
+            {
+              "level": 3,
+              "n_actions": 67
+            },
+            {
+              "level": 4,
+              "n_actions": 24
+            }
+          ],
+          "matches_successfully_delivered_hash_in_helper_summary": true,
+          "preceding_history_message_counts": [
+            {
+              "line": 17998,
+              "message_count": 130
+            },
+            {
+              "line": 18243,
+              "message_count": 133
+            },
+            {
+              "line": 18477,
+              "message_count": 67
+            }
+          ]
+        }
+      ],
+      "actual_RESET_action_echoes": 0,
+      "actual_GAME_OVER_action_echoes": 0,
+      "preliminary_findings_superseded_by_deep_review": [
+        "Candidate clears L1 in 27 actions at 695.557566605 seconds before any solved-level memory for this game can exist; baseline never clears L1. The 0-to-5-level difference must not be attributed wholly to memory.",
+        "L1 memory explicitly records a tentative swapped-sides goal, while L2 updates the goal to head-on collision. This is a real hypothesis revision in the stored text, not proof of correct later use.",
+        "L5 describes the left ball as horizontally mirrored and the right as normal, unlike earlier summaries. Reuse must be checked against current ball identity and observations.",
+        "No explicit RESET appears in candidate benchmark history. L4 rule describes lethal hazards resetting balls and token, but rule text alone does not establish a real reset. Internal same-level resets remain a concrete question for event and program review."
+      ],
+      "deep_review": {
+        "first_level_attribution": "L1 clears on LEFT at transcript5162, 27 actions and695.5576seconds. The first summary instruction is later at5322; the first pinned block is later still at7580. The baseline-to-candidate first discovery difference is not caused by prior solved-level memory.",
+        "rule_capture_and_revision": [
+          {
+            "level": 1,
+            "instruction_lines": [
+              5322,
+              5615
+            ],
+            "captured_rule_line": 5679,
+            "assessment": "The requested summary explicitly marks swapped-sides as a hypothesis; it is not a verified goal. The completion reasoning tail likewise still discusses a discriminating test. Do not present this memory as a known correct L1 solution explanation."
+          },
+          {
+            "level": 2,
+            "captured_rule_line": 8526,
+            "assessment": "A fresh collision model, lethal-hazard handling and actual24-step execution end in a verified collision clear. The later L2 rule correctly reports head-on collision and hazardous-cell reset rather than the old swap hypothesis."
+          },
+          {
+            "level": 3,
+            "captured_rule_line": 13615,
+            "assessment": "Token selection/parking and collision mechanics are supported by actual verified token movements and the25-step collision execution. The earlier reasoning line13604 says53 actions, but the captured rule avoids presenting that as total level cost; the fact record correctly reports67 total actions."
+          },
+          {
+            "level": 4,
+            "captured_rule_line": 16885,
+            "assessment": "After the actual soft reset and corrected search, the rule explicitly says lethal hazards must not be treated as walls. This is supported by the corrected14-action final run, though the attached action tail includes the earlier failed10-action segment."
+          },
+          {
+            "level": 5,
+            "captured_rule_line": 22135,
+            "assessment": "New current-level evidence updates ball identity and pressure-held gates. The captured rule matches the corrected held-button planner and28-step final execution, but it is not pinned into any later block in this run; L6 has inspections only and no actions before timeout."
+          }
+        ],
+        "pin_windows": {
+          "L1_only": {
+            "first_line": 7580,
+            "history_message_count_change": [
+              97,
+              38
+            ],
+            "note": "The24-step collision path was already computed at7370–7444 before this pin. Delivery is real, but it cannot explain the prior correction from swap hypothesis to collision plan."
+          },
+          "L1_L2": {
+            "first_line": 12469,
+            "history_message_count_change": [
+              101,
+              46
+            ],
+            "note": "Token parking and ball collision plans were computed before this eviction; execution resumes afterwards. L2 rule and contaminated action tail are both present."
+          },
+          "L1_through_L4": {
+            "first_line": 18600,
+            "history_message_count_change": [
+              133,
+              67
+            ],
+            "note": "L1 has compact fact/rule only, L2–4 retain details. L2 and L4 contaminated action tails are demonstrably delivered. Later L5 planning adapts to pressure-held gates and current identity."
+          }
+        },
+        "real_programmatic_transfer": [
+          {
+            "level": 2,
+            "code_lines": [
+              7043,
+              7370,
+              8231
+            ],
+            "clear_line": 8316,
+            "finding": "The model revises lethal motion semantics, searches a collision target and executes a24-step path with predicted-versus-observed position checks. New discovery/revision happens before or across the first pin; no clean pin-specific causal claim."
+          },
+          {
+            "level": 3,
+            "code_lines": [
+              12270,
+              12611,
+              12868,
+              13104,
+              13337
+            ],
+            "clear_line": 13400,
+            "finding": "Fresh token parking is combined with the prior mirrored-ball collision transition; token phases are observed, then25 predicted collision steps execute and clear. This is actual executable reuse rather than a header counter."
+          },
+          {
+            "level": 4,
+            "code_lines": [
+              14338,
+              15970,
+              16241,
+              16353,
+              16615
+            ],
+            "clear_line": 16669,
+            "finding": "The model explicitly recalls L2 lethal hazards but initially implements hazards as blockers again; the new soft reset exposes the regression. It then separates WALL and HAZ and prunes actions entering HAZ, parks the token and clears with14 final actions."
+          },
+          {
+            "level": 5,
+            "code_lines": [
+              21492,
+              21742,
+              21841
+            ],
+            "clear_line": 21911,
+            "finding": "After new gate probes and a failed permanent-unlock assumption, a current-state openG function derives gate availability from occupied buttons, BFS plans while maintaining button occupancy, and28 verified steps clear. Prior collision semantics are used, with ball mirror identity revised from current observations."
+          }
+        ],
+        "soft_reset_accounting": [
+          {
+            "level": 2,
+            "observed_failure_code_start": 6701,
+            "observed_failure_result_lines": [
+              6753,
+              6765
+            ],
+            "description": "On the11th action of the first planned batch (DOWN), observed balls jump from the advanced maze positions back to((1,4),(1,8)); level_completed/game_over/done are allFalse and state isNOT_FINISHED. Together with the initial1-action probe,12 level actions precede the soft reset.",
+            "rule_reasoning_confirmation_lines": [
+              7017,
+              7028
+            ],
+            "recorded_total_actions": 36,
+            "actions_before_or_including_soft_reset": 12,
+            "final_successful_segment_actions": 24,
+            "memory_action_tail_length": 30,
+            "failed_segment_actions_in_delivered_tail": 6,
+            "delivered_in_block_first_lines": [
+              12469,
+              18600
+            ]
+          },
+          {
+            "level": 4,
+            "observed_failure_code_start": 15970,
+            "observed_failure_result_line": 16019,
+            "description": "UP returns both balls to initial positions((3,7),(5,1)) and parked token to(4,4), without game_over. The model confirms the whole-level soft reset at16219–16234.",
+            "recorded_total_actions": 24,
+            "actions_before_or_including_soft_reset": 10,
+            "final_successful_segment_actions": 14,
+            "final_successful_segment_breakdown": "5 actions to select/park token/resume ball control, then9 collision presses.",
+            "memory_action_tail_length": 24,
+            "failed_segment_actions_in_delivered_tail": 10,
+            "delivered_in_block_first_lines": [
+              18600
+            ]
+          }
+        ],
+        "failure_tail_reuse_assessment": "Failed action segments are actually delivered, but no evidence shows the model literally replayed them as successful new-level plans. There is a real L4 recurrence of the prior hazard-as-wall modeling error despite a correct L2 rule in memory. This is a failure to implement a recalled rule; the trace does not establish that contaminated action tails caused it. The model corrects the transition and clears. Do not label this causal negative transfer from the helper.",
+        "stale_hypothesis_limit": "The tentative L1 swap hypothesis remains in later pinned blocks alongside corrected L2 collision knowledge. Later actual planners target collision, so the old hypothesis is not blindly followed. Keeping it labeled as an unverified level-specific hypothesis is material."
+      },
+      "snapshot_crosscheck": {
+        "path": "runs/032-memory-short/solved_level_memory/m0r0-492f87ba_p0_requests.jsonl",
+        "rule_instruction_request_lines": {
+          "1": [
+            55,
+            57
+          ],
+          "2": [
+            85,
+            87,
+            89,
+            91
+          ],
+          "3": [
+            137,
+            139,
+            141,
+            143
+          ],
+          "4": [
+            175,
+            177,
+            179,
+            181
+          ],
+          "5": [
+            231,
+            233,
+            235
+          ]
+        },
+        "captured_rule_response_snapshots": {
+          "1": {
+            "first_seen_request_line": 59,
+            "message_sha256": "2772b1c5a4e11066585df6bea3b8cf68883646a708ac9ee99c26b30b41bf127d",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Two 5×5 balls in a black maze; each press moves each ball 1 cell (right ball's LEFT/RIGHT mirrored, vertical normal). Adjacent balls visually merge. Goal (hypothesis, best fit): each ball must reach the opposite color's half — the swap happened on the final LEFT and won.",
+            "preceding_response_line_if_adjacent": 58
+          },
+          "2": {
+            "first_seen_request_line": 87,
+            "message_sha256": "c23eb0ea140f986b141ea8b1c8dc3462e26e79c25004d96a5ebfa8068f8d7027",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Goal = make the two 4×4 balls collide (head-on). Controls: left ball normal, right ball horizontally mirrored; walls block, red checkered cells are lethal (stepping on one resets both balls to start). Won by driving both down their sides through the spike-band gaps into the open bottom room, then pressing RIGHT when adjacent (A left of B) → head-on collision → LEVEL COMPLETED.",
+            "preceding_response_line_if_adjacent": 86
+          },
+          "3": {
+            "first_seen_request_line": 139,
+            "message_sha256": "4f837b5b01d9f5ee45a2d63cb5fa2adbf4782279c0fa9116ffce6e33df6aba6b",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Goal = collide the two balls (left ball normal, right ball mirrored). Dark-blue tokens blocked corridors; MOUSE a token → it turns yellow and moves with normal arrows while balls freeze gray; MOUSE a ball → resume control. Parked all 3 tokens in dead-end cells, then drove the balls head-on (25 presses). Won on a RIGHT press when adjacent.",
+            "preceding_response_line_if_adjacent": 138
+          },
+          "4": {
+            "first_seen_request_line": 177,
+            "message_sha256": "1a68798ea2a7628124ef9bfb127f23210450e48b7d93148bff66e58e7c647356",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Goal = collide the two balls (left ball normal, right ball horizontally mirrored). Red-checker cells are LETHAL: stepping on one resets the entire level (balls AND the parked token), so hazards must be routed around, never treated as walls. MOUSE a token → it turns yellow and moves with normal arrows while balls freeze gray; MOUSE a ball → resume. Won by parking the token at (3,6), then DOWN,RIGHT,RIGHT,LEFT,UP,UP,RIGHT,RIGHT,RIGHT → head-on collision.",
+            "preceding_response_line_if_adjacent": 176
+          },
+          "5": {
+            "first_seen_request_line": 233,
+            "message_sha256": "8c93248b5877986b7deacd784f1e4f5dcea752504fff13b570ee8525e018b2d9",
+            "exact_helper_parser_matches_captured_rule": true,
+            "rule": "Goal = collide the two balls (left ball horizontally mirrored, right ball normal). Colored 4×4 blocks are BUTTONS: while a ball stands on a button cell, ALL blocks/bars of that color vanish; leaving restores them. Gates (3-cell bars) are passable only while their color's button is held. Won by: right ball holds green button → left ball passes green gate into top room → left ball holds purple button → right ball passes purple gate → head-on LEFT collision.",
+            "preceding_response_line_if_adjacent": 232
+          }
+        },
+        "key_calls": {
+          "L2_soft_reset": {
+            "call_id": "call_2d7adb26894844e99190a7e2",
+            "first_source_snapshot_line": 71,
+            "tool_result_snapshot_line": 71,
+            "code_sha256_strip": "cdaa30cec0ea90e073215ca775ec002532552abcd55ff6384217b5310c1202b6",
+            "matches_reviewed_transcript_code_at_line": 6701,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "DOWN -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect"
+            ],
+            "key_tool_output": [
+              "(11, 'DOWN', ((1, 4), (1, 8)), False, False, False, False)"
+            ],
+            "tool_stdout_tail": "t\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] DOWN -> effect\n(1, 'DOWN', ((2, 3), (2, 9)), True, False, False, False)\n(2, 'LEFT', ((2, 2), (2, 10)), True, False, False, False)\n(3, 'LEFT', ((2, 1), (2, 11)), True, False, False, False)\n(4, 'DOWN', ((3, 1), (3, 11)), True, False, False, False)\n(5, 'DOWN', ((4, 1), (4, 11)), True, False, False, False)\n(6, 'DOWN', ((5, 1), (5, 11)), True, False, False, False)\n(7, 'DOWN', ((6, 1), (6, 11)), True, False, False, False)\n(8, 'DOWN', ((7, 1), (7, 11)), True, False, False, False)\n(9, 'RIGHT', ((7, 2), (7, 10)), True, False, False, False)\n(10, 'RIGHT', ((7, 3), (7, 9)), True, False, False, False)\n(11, 'DOWN', ((1, 4), (1, 8)), False, False, False, False)\nnow ((1, 4), (1, 8)) NOT_FINISHED\n"
+          },
+          "L2_corrected_collision_execute": {
+            "call_id": "call_51f30dbb08654d358fdd84cc",
+            "first_source_snapshot_line": 85,
+            "tool_result_snapshot_line": 85,
+            "code_sha256_strip": "e7c42f7d3b4127d691c5e1049639ce677e019add4378eba8a8599dbc38a5f32c",
+            "matches_reviewed_transcript_code_at_line": 8231,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "DOWN -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "LEFT -> effect",
+              "UP -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] RIGHT -> LEVEL COMPLETED",
+              "STOP (23, 'RIGHT') state NOT_FINISHED"
+            ],
+            "tool_stdout_tail": "T -> effect\n18 RIGHT pred ((7, 3), (7, 7)) act ((7, 3), (7, 7)) ok True lc False go False\n[action] DOWN -> effect\n19 DOWN pred ((8, 3), (8, 7)) act ((8, 3), (8, 7)) ok True lc False go False\n[action] DOWN -> effect\n20 DOWN pred ((9, 3), (9, 7)) act ((9, 3), (9, 7)) ok True lc False go False\n[action] RIGHT -> effect\n21 RIGHT pred ((9, 4), (9, 7)) act ((9, 4), (9, 7)) ok True lc False go False\n[action] DOWN -> effect\n22 DOWN pred ((10, 4), (10, 7)) act ((10, 4), (10, 7)) ok True lc False go False\n[action] RIGHT -> effect\n23 RIGHT pred ((10, 5), (10, 6)) act ((10, 5), (10, 6)) ok True lc False go False\n[action] RIGHT -> LEVEL COMPLETED\n24 RIGHT pred COLLIDE act ((10, 4), (10, 8)) ok False lc True go False\nSTOP (23, 'RIGHT') state NOT_FINISHED\n"
+          },
+          "L3_collision_execute": {
+            "call_id": "call_ec8ea6bcced64bb39054feac",
+            "first_source_snapshot_line": 137,
+            "tool_result_snapshot_line": 137,
+            "code_sha256_strip": "a94217ea500869ca5e88686bc4c0a55c83696b1698968d0d483085d742158fc3",
+            "matches_reviewed_transcript_code_at_line": 13337,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "DOWN -> effect",
+              "RIGHT -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] RIGHT -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] DOWN -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] DOWN -> effect\n[action] DOWN -> effect\n[action] RIGHT -> effect\n[action] DOWN -> effect\n[action] RIGHT -> LEVEL COMPLETED\nWIN at step 25 RIGHT NOT_FINISHED\n"
+          },
+          "L4_soft_reset": {
+            "call_id": "call_b97917df1a0f47f695e90339",
+            "first_source_snapshot_line": 169,
+            "tool_result_snapshot_line": 169,
+            "code_sha256_strip": "13e6f14eda2738227c757ee42bdedcf7eb262d5c5902d8ac88d1ed51eb34b729",
+            "matches_reviewed_transcript_code_at_line": 15970,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "UP -> effect"
+            ],
+            "key_tool_output": [
+              "MISMATCH 4 UP pred ((5, 2), (4, 5)) act [(3, 7), (5, 1)] w [] b [(4, 4)] Y []"
+            ],
+            "tool_stdout_tail": "[action] DOWN -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] UP -> effect\nMISMATCH 4 UP pred ((5, 2), (4, 5)) act [(3, 7), (5, 1)] w [] b [(4, 4)] Y []\n"
+          },
+          "L4_death_pruned_search": {
+            "call_id": "call_82e019c340b04d22af656819",
+            "first_source_snapshot_line": 171,
+            "tool_result_snapshot_line": 171,
+            "code_sha256_strip": "c4bb5b5b0d057d1167fddcb888969b77a98102083f0c07cda203dc68094e14a4",
+            "matches_reviewed_transcript_code_at_line": 16241,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [],
+            "key_tool_output": [
+              "feasible 38"
+            ],
+            "tool_stdout_tail": "12 (3, 6) ('RIGHT', 'RIGHT', 'UP') ('DOWN', 'RIGHT', 'RIGHT', 'LEFT', 'UP', 'UP', 'RIGHT', 'RIGHT', 'RIGHT')\n12 (5, 2) ('LEFT', 'LEFT', 'DOWN') ('UP', 'RIGHT', 'RIGHT', 'LEFT', 'DOWN', 'DOWN', 'RIGHT', 'RIGHT', 'RIGHT')\n14 (3, 1) ('LEFT', 'LEFT', 'UP', 'LEFT') ('DOWN', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'UP', 'UP', 'LEFT')\n14 (3, 2) ('LEFT', 'LEFT', 'UP') ('DOWN', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'LEFT', 'UP', 'UP', 'RIGHT')\n14 (4, 1) ('LEFT', 'LEFT', 'LEFT') ('DOWN', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'DOWN', 'RIGHT', 'UP', 'UP', 'LEFT')\n14 (4, 7) ('RIGHT', 'RIGHT', 'RIGHT') ('UP', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'UP', 'RIGHT', 'DOWN', 'DOWN', 'LEFT')\nfeasible 38\n"
+          },
+          "L4_corrected_collision_execute": {
+            "call_id": "call_05cec4e605e04c49bd2a6d3f",
+            "first_source_snapshot_line": 175,
+            "tool_result_snapshot_line": 175,
+            "code_sha256_strip": "b84dddf87d64de18b316d60582ee18d080c5d92c864dfdf1252c667addf77bd8",
+            "matches_reviewed_transcript_code_at_line": 16615,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "LEFT -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] RIGHT -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "[action] DOWN -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] LEFT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> LEVEL COMPLETED\nWIN 9 RIGHT NOT_FINISHED\n"
+          },
+          "L5_held_gate_collision_execute": {
+            "call_id": "call_117dc1275d004525b7009384",
+            "first_source_snapshot_line": 231,
+            "tool_result_snapshot_line": 231,
+            "code_sha256_strip": "6b6a224bc9b02b8c5ed5043393b0d432d472f63756ddac33371f985e108db652",
+            "matches_reviewed_transcript_code_at_line": 21841,
+            "tool_returncode": 0,
+            "tool_error": null,
+            "action_echoes": [
+              "DOWN -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "UP -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "RIGHT -> effect",
+              "RIGHT -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "UP -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> effect",
+              "LEFT -> LEVEL COMPLETED"
+            ],
+            "key_tool_output": [
+              "[action] LEFT -> LEVEL COMPLETED"
+            ],
+            "tool_stdout_tail": "start obs [(5, 5), (5, 12)]\n[action] DOWN -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] UP -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] RIGHT -> effect\n[action] RIGHT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> LEVEL COMPLETED\nWIN 28 LEFT NOT_FINISHED\n"
+          }
+        },
+        "memory_request_windows": [
+          {
+            "request_line": 77,
+            "previous_request_line": 75,
+            "previous_message_count": 99,
+            "message_count": 40,
+            "level": 2,
+            "step": 40,
+            "memory_sha256": "b30dea0356d0c4d5fd3ed06d338a721fd1b9d6cac3980984b5e0cb25b1e9f62f",
+            "matches_analyzer_index": true,
+            "matches_successful_delivery_summary": true,
+            "contains_levels": [
+              1
+            ]
+          },
+          {
+            "request_line": 127,
+            "previous_request_line": 125,
+            "previous_message_count": 103,
+            "message_count": 48,
+            "level": 3,
+            "step": 78,
+            "memory_sha256": "b6d058ab383b4e6b61b2f8ce46c3b6f00afd10923ab1033b8ca6f92a15bacf25",
+            "matches_analyzer_index": true,
+            "matches_successful_delivery_summary": true,
+            "contains_levels": [
+              1,
+              2
+            ]
+          },
+          {
+            "request_line": 197,
+            "previous_request_line": 195,
+            "previous_message_count": 135,
+            "message_count": 69,
+            "level": 5,
+            "step": 162,
+            "memory_sha256": "fa0fa7245c631bce951304a5f317ea18ef4e84c37ca56157febcf6f9417ea51e",
+            "matches_analyzer_index": true,
+            "matches_successful_delivery_summary": true,
+            "contains_levels": [
+              1,
+              2,
+              3,
+              4
+            ]
+          }
+        ],
+        "response_usage_after_memory_windows": {
+          "77": {
+            "response_line": 78,
+            "usage": {
+              "prompt_tokens": 54943,
+              "total_tokens": 57381,
+              "completion_tokens": 2438,
+              "prompt_tokens_details": {
+                "cached_tokens": 4672,
+                "image_tokens": 5600
+              },
+              "reasoning_tokens": 1835
+            },
+            "finish_reason": "tool_calls"
+          },
+          "127": {
+            "response_line": 128,
+            "usage": {
+              "prompt_tokens": 51438,
+              "total_tokens": 52600,
+              "completion_tokens": 1162,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "image_tokens": 8000
+              },
+              "reasoning_tokens": 636
+            },
+            "finish_reason": "tool_calls"
+          },
+          "197": {
+            "response_line": 198,
+            "usage": {
+              "prompt_tokens": 59083,
+              "total_tokens": 59668,
+              "completion_tokens": 585,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "image_tokens": 9600
+              },
+              "reasoning_tokens": 450
+            },
+            "finish_reason": "tool_calls"
+          }
+        },
+        "limitations": [
+          "Tool-call source and tool result first appearing in a request snapshot are historical output already executed before that request, not actions caused by the request itself."
+        ],
+        "key_calls_not_in_request_snapshots": [],
+        "source_sha256": "ec247ba77385fe8e15b3db9c1adfaa339d660b8c5eaa26554815021ed10f56d5",
+        "counts": {
+          "requests": 119,
+          "responses_with_usage": 118,
+          "latest_user_contains_rule_instruction": 17,
+          "requests_with_memory_header": 81,
+          "system_memory_characters_in_requests": 273774
+        },
+        "delivery_counts_interpretation": "81 actual requests contain the memory header; the helper reports80 successful responses with memory. An attempted request is not silently counted as a successful delivery, and an unreturned request is not assumed to have zero cost."
+      },
+      "all_captured_rules_matched_actual_response_message": true,
+      "all_delivered_hashes_match_actual_request_windows": true
+    }
+  },
+  "overall_limit": "The paired benchmark outcome is observed. Memory delivery counters and recorded rules do not establish correct reuse or a causal contribution to the score difference.",
+  "pending_checks": [],
+  "component_attribution": {
+    "candidate_components": [
+      "Post-completion instruction to state a Rule for level summary in the ordinary response, without a separate new model request.",
+      "Pin observed facts, action/reasoning tails and captured rules into system context when normal history is evicted."
+    ],
+    "finding": "Both mechanisms occurred in the real trajectory. Improvements before the first pin are still temporally compatible with the reflection instruction once an earlier level has completed. They must not be dismissed merely because the system block had not yet appeared. Conversely, L1 discovery precedes both successful-experience mechanisms in that game.",
+    "causal_limit": "This natural-start paired experiment tests the combined candidate. It does not isolate reflection from pinning, retained functions, ordinary history or model trajectory variation."
+  },
+  "accurate_action_label": {
+    "current_semantics": "Actions recorded for that level since entry or the last explicit RESET represented in runtime history; may include probes, failed plans, and unflagged internal soft resets.",
+    "not_guaranteed": [
+      "Pure final successful attempt",
+      "Minimal winning plan",
+      "All actions caused progress"
+    ],
+    "unchanged_facts": "The true level-completion facts and model rule hypotheses remain distinct. The accounting label issue does not change benchmark actions, completed levels or score.",
+    "future_label_only_suggestion": "If a later version is intentionally created, label the text as recorded level action history rather than latest successful attempt. No untested change is applied to this frozen helper, and no v2 efficacy is credited here."
+  },
+  "review_conclusion": "Both selected games show real post-completion reflection, actual memory delivery after history shrink, and subsequent executable transfer to current-level planning/actions. cd82 provides especially clear region-model reuse with checks and successive clears. m0r0 provides collision/token/gate transfer but also a concrete hazard-model regression and contaminated action tails after unflagged soft resets. These observations support that the combined candidate exercises real mechanisms; they do not isolate how much of the measured score gain comes from reflection or pinning. L1 discovery gains must remain outside memory attribution. This review does not add a gate or stop the already launched full comparison.",
+  "snapshot_crosscheck_method": "Read only the two completed candidate request logs, matched actual system memory blocks to successful helper hashes, located exact captured rules using the frozen helper parser, and matched selected previously reviewed transcript tool code to request snapshots by code hash. No model/tool code replay, test, GPU or helper modification.",
+  "final_snapshot_findings": [
+    "cd82 actual first pin is request133 atL3 step107, history messages84→47; exact successful hash contains onlyL1/L2. Its next newly generated call appears with tool result in request135 and completesL3.",
+    "cd82 rule instructions and exact captured replies are both present forL1–5. L2 execution completes in request113 before the first pin request133, preserving the reflection-versus-pinning distinction.",
+    "cd82 current-target mask checks return match=True in request149(L5) and155(L6); request151 contains the actualL5 completion. FinalL6 execution is in the terminal transcript because no subsequent request exists.",
+    "m0r0 first/new blocks appear at requests77(L1),127(L1/L2),197(L1–4), all exact successful hashes, with message counts99→40,103→48,135→69.",
+    "m0r0 soft-reset outputs are captured in request71(L2) and169(L4). Corrected executions complete in request85(L2),137(L3),175(L4),231(L5). The observations and their semantic limits agree with the earlier completed-transcript review.",
+    "No new causal attribution is introduced by these snapshot crosschecks: first-level discoveries predate memory; later rule reflection and actual executable transfer are observed; pin-specific incremental score contribution and failure-tail-caused negative transfer remain unisolated."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "status": "reviewed_no_task_repair_or_added_clear",
+  "full_frame_pixels_correct": true,
+  "P4_or_pieces_corrected": "Full-frame extraction is correct. rebuild does not identify trueP4 at(44,28). Later main call at request line17 independently prints correct P4=[gWg,WOg,WWW], but no subsequent recomputation of the earlier hardcoded target is observed.",
+  "verified_extraction_consumed_by_later_computation": false,
+  "returned_rebuild_errors": {
+    "row_axis_count": 17,
+    "col_axis_count": 14,
+    "plain_cell_count": 2,
+    "pattern_count": 59,
+    "palette": [
+      "O",
+      "R",
+      "W",
+      "c",
+      "g"
+    ],
+    "mismatchA": [],
+    "mismatchB": [],
+    "trueP4_at44_28_missing": true,
+    "cause": "Greedy sliding6x6 windows accept background fragments, overlap-block real cells and invent grid axes. Full-frame correctness does not validate task geometry."
+  },
+  "main_trace": {
+    "new_python_calls": 16,
+    "new_calls_invoking_extract_or_rebuild": [],
+    "hardcoded_targets_line": 13,
+    "correct_P4_print_line": 17,
+    "P4_mismatch_target_recalculation_after_print_observed": false,
+    "actual_continuation_actions": 26,
+    "controller_action": null,
+    "added_levels": 0
+  },
+  "action_improvement": "No added completion. Some real cell toggles occurred, including22-action batch, alongside no-ops and one stale-state block; this single arm does not estimate paired performance.",
+  "decision": "Close frozen033v1 as a diagnostic with no gameplay benefit; do not expand or submit it. Any later repair direction must repair and consume the task representation/target computation, not merely validate an identity copy of the full frame. No new033prompt version is launched now.",
+  "source_transcript": "runs/033-controller-retry/controller_repair_B/transcripts/ft09-0d8bbf25_B.txt",
+  "mental_reference_to_delivered_runs": true,
+  "P4_correctly_transcribed_in_reasoning_before_target_error": true,
+  "specific_target_error": "Request snapshot5 reasoning correctly transcribes P4 gWg/WOg/WWW, then still maps grid(5,3) toO instead ofR under its ownA rule. Later executable target dictionary retains thatO.",
+  "subsequent_semantic_computation_limit": "Real later history/dihedral computations exist, but no recalculated currentL3 target; history10 is incorrectly treated as a winningL2 frame before its completing action.",
+  "independent_review": "experiments/033-controller-analysis/independent-review.json"
+}

@@ -1,0 +1,45 @@
+{
+  "kind": "researcher_cpu_mechanism_result_not_model_efficacy",
+  "source": "experiments/033-controller-analysis/counterfactual-ft09.json",
+  "script": "scripts/research_033_counterfactual.py",
+  "result": "At the frozen ft09 cut27, replacing bbox-filled pieces with actual visible pixels while keeping the original 031 B target_for algorithm and mode A unchanged is sufficient to clear L3 in two derived clicks. The original bbox input does not clear L3 under either existing mode. Correct pixels with mode B also do not clear L3.",
+  "conditions": [
+    {"input": "bbox_fill", "mode": "A", "actions": 1, "added_levels": 0},
+    {"input": "bbox_fill", "mode": "B", "actions": 22, "added_levels": 0},
+    {"input": "visible_pixels", "mode": "A", "actions": 2, "added_levels": 1},
+    {"input": "visible_pixels", "mode": "B", "actions": 21, "added_levels": 0}
+  ],
+  "fidelity": {
+    "all_four_independent_restores_match_frozen_visible_grid": true,
+    "all_four_verbatim_original_snippet_stdout_match_recorded_031_tool": true,
+    "shared_starting_grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+    "shared_initial_levels_completed": 2,
+    "rule_or_algorithm_repairs": 0,
+    "game_internal_answer_reads": 0,
+    "model_calls": 0,
+    "gpu_seconds": 0
+  },
+  "mechanism": {
+    "only_changed_pattern_sample": {"row": 46, "col": 32, "bbox": "W", "visible": "g"},
+    "mode_A_target_change": {"tile": [5, 3], "bbox": "O", "visible": "R"},
+    "mode_A_correct_input_mismatches": [
+      {"tile": [0, 1], "current": "R", "want": "O"},
+      {"tile": [5, 3], "current": "O", "want": "R"}
+    ],
+    "mode_A_program_derived_actions": [
+      {"id": "ACTION6", "data": {"x": 22, "y": 6}},
+      {"id": "ACTION6", "data": {"x": 38, "y": 46}}
+    ],
+    "first_action": "Returns to the same visible board reached by bbox A; no level advance.",
+    "second_action": "Public response levels_completed advances from 2 to 3. Execution immediately stops before applying any old target to L4.",
+    "post_advance_pixel_limit": "The second action's clicked_pixel_after is b because the public response already displays L4. It is not the final color of the old L3 cell; level advancement, not that post-transition pixel color, establishes the success."
+  },
+  "research_implication": "The known task-input error is causally actionable at this checkpoint when corrected pixels actually enter the existing target computation. This is stronger than a static target difference, but does not establish that a model can generate, adopt or generalize that correction. The failed 033 run remains failed: it copied pixels correctly yet did not repair and consume the task representation.",
+  "limits": [
+    "Researcher-selected frozen visible-state intervention; no estimate of public score, hidden score, full-pool improvement or medal probability.",
+    "The original observed layout and two rule hypotheses are retained; this is not a generic automatic object detector or general controller.",
+    "A and B each begin from independent exact restores. No successful branch state is reused to help another branch.",
+    "No correct action is handpicked in the research script; its action plan is derived from the unchanged target_for mismatch list and existing grid geometry.",
+    "No coordinates, corrected target or result are injected into online model prompts or frozen helpers."
+  ]
+}

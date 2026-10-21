@@ -75,6 +75,10 @@ def main() -> None:
         required.add("persistent_python.py")
     if "segmentation_runs" in arms:
         required.add("segmentation_runs.py")
+    if "solved_level_memory" in arms:
+        required.add("solved_level_memory.py")
+    if any(arm in ("controller_repair_A", "controller_repair_B") for arm in arms):
+        required.update({"controller_repair.py", "controller_repair_forks.py", "program_repair.py"})
     if any(arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
         required.update({"segmentation_runs.py", "segmentation_forks.py"})
     if config.get("inference_timing", False):
@@ -99,7 +103,8 @@ def main() -> None:
         fork_conv_path = ROOT / "experiments/026-fork-conv.json.gz.b64"
         payload["experiments/026-fork-conv.json.gz.b64"] = fork_conv_path.read_text()
     if "repair_forks" in arms or any(
-            arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
+            arm in ("segmentation_forks_A", "segmentation_forks_B",
+                    "controller_repair_A", "controller_repair_B") for arm in arms):
         fork_package = ROOT / "experiments/028-fork-package.json.gz.b64"
         payload["experiments/028-fork-package.json.gz.b64"] = fork_package.read_text()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()

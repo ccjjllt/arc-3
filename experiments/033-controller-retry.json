@@ -1,0 +1,65 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "controller_repair_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "controller_repair_B"
+  ],
+  "budget_formula": "Same450s actual candidate continuation including<=120s repair,600s runner allowance;5400s outer cap allows cold weight loading. No solver budget changed.",
+  "comparison_note": "Candidate-only mechanism diagnosis from frozen ft09 failure. No fresh A arm in this small remaining quota; no paired score gain is claimed. Existing031/028 controls remain contextual only.",
+  "expected_gpu_hours": 1.5,
+  "game_count": 1,
+  "game_source": "Frozen028 package ft09 only; original27-action checkpoint. No hand-authored wrong/correct pixel values.",
+  "games": [
+    "ft09-0d8bbf25"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 5400,
+  "id": "033-controller-retry",
+  "inference_timing": false,
+  "kernel_id": "zhuating/arc3-033-controller-retry",
+  "kernel_title": "ARC3 033 Controller Retry",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "Forced recorded-state extraction repair with independent current-pixel validation and deterministic result delivery; no online trigger claim.",
+  "reference_arm": "controller_repair_B",
+  "request_deadline": false,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 600,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": false,
+  "selection_note": "Full-frame pixel contract success is not task-specific repair success: inspect rebuilt pieces/patterns/targets and actual later actions. Forced checkpoint diagnostic, no online trigger.",
+  "startup_limit_seconds": 4200,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Restore original009 blanket model precache alongside inherited SGLang shard prefetch. Jiyujia attempt loaded only13/38shards before1750s cap; no numerical serving or repair code change.",
+  "frozen_source_sha256": {
+    "src/arc3_research/controller_repair.py": "a7753e29fb10e33f1ef090b9bb0bb848ad5318d570cf8b744ea3d2e231419831",
+    "src/arc3_research/controller_repair_forks.py": "5961aea3c54272208701fcd7ab706e097bbfb70af1cf8550473a0e7c430fb0d2",
+    "src/arc3_research/program_repair.py": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061"
+  },
+  "resource_note": "ccjjllt exhausted; jiyujia has0.25h after failed cold start, insufficient to load model; qingyu1232 is already executing032 with nearly all usable balance. Retry uses verified zhuating22.19h balance.",
+  "prior_attempt": {
+    "kernel": "jiyujia/arc3-033-controller-candidate",
+    "version": 1,
+    "status": "ERROR",
+    "arms_executed": 0,
+    "evidence": "runs/033-controller-candidate/experiment-manifest.json",
+    "cause": "Model weight loading did not finish by1750s startup cap; no repair-model or gameplay outcome."
+  }
+}

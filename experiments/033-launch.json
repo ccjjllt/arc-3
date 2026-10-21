@@ -1,0 +1,42 @@
+{
+  "status": "ERROR",
+  "kernel_id": "jiyujia/arc3-033-controller-candidate",
+  "kernel_numeric_id": 139966604,
+  "version": 1,
+  "observed_at_utc": "2026-10-21T06:32:58.024582+00:00",
+  "notebook_sha256": "286add0b65618300c1b8cf746292a47ea5f1cf858ee8f7c6068dafc7c803110e",
+  "helper_sha256": "a7753e29fb10e33f1ef090b9bb0bb848ad5318d570cf8b744ea3d2e231419831",
+  "push_cli_exit_code": 1,
+  "push_cli_response": "Expecting value: line1column1; remote save accepted, confirmed version/cells. Do not retry.",
+  "remote_source_verification": "experiments/033-source-check-before.json",
+  "diagnostic": "candidate_only_ft09_checkpoint",
+  "fresh_A_B_comparison": false,
+  "actual_continuation_seconds": 450,
+  "repair_limit_seconds": 120,
+  "runner_allowance_seconds": 600,
+  "hard_limit_seconds": 2580,
+  "account_remaining_before_hours": 0.74,
+  "formal_submission_created": false,
+  "next_action": "Read actual returned repair, independent pixel validation, rebuild semantics and subsequent actions; no score-gain claim from a single branch.",
+  "last_read_only_observation": {
+    "observed_at_utc": "2026-10-21T06:43:54.061392+00:00",
+    "status": "RUNNING",
+    "phase": "waiting_for_model_health_after_launcher_return",
+    "log_path": "runs/033-controller-candidate/live-v1-resumed-20261021T064303Z.log",
+    "snapshot_report": "experiments/033-runtime-check-20261021T064303Z.json",
+    "available_small_artifacts": 0,
+    "interpretation": "Launcher 720-second return observed; session_runner still waits for model health. No failure is established from SSE disconnection or this launcher deadline message."
+  },
+  "phase": "startup_failed_before_any_arm",
+  "ended_observed_at_utc": "2026-10-21T06:59:00+00:00",
+  "model_ready": false,
+  "arms_executed": 0,
+  "mechanism_effect_evidence": false,
+  "startup_failure": {
+    "manifest": "runs/033-controller-candidate/experiment-manifest.json",
+    "elapsed_seconds": 1757.8137180805206,
+    "observed_loader_shards": "13/38 after24m50s; one13th-shard stall8m40s",
+    "interpretation": "Cold weight I/O did not finish before the small account startup allocation. No model repair request, action, or comparison was run; this is not a negative mechanism result.",
+    "server_stopped": true
+  }
+}

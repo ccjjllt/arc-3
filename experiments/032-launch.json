@@ -1,0 +1,57 @@
+{
+  "status": "COMPLETE",
+  "kernel_id": "qingyu1232/arc3-032-memory-short",
+  "version": 1,
+  "kernel_id_numeric": 139965614,
+  "observed_at_utc": "2026-10-21T06:30:14.589204+00:00",
+  "notebook_sha256": "363fec03d7f454f41bc5fa2a0f3270b0303156a5314d3476f903ef1d68c12c4d",
+  "helper_sha256": "afa448837b7ef1016b2a318e461c646e9036de1f7b1bf9379e1a9fef08572456",
+  "push_cli_exit_code": 1,
+  "push_cli_response": "Expecting value: line1column1; actual save accepted, recovered by exact remote source/version query. Do not retry push.",
+  "remote_source_verification": "experiments/032-resource-snapshot/qingyu-032-unknown-push-check.json",
+  "arm_order": [
+    "baseline",
+    "solved_level_memory"
+  ],
+  "games": 10,
+  "seconds_per_arm": 2700,
+  "hard_limit_seconds": 7800,
+  "gpu_account_priority": "User authorized consuming ccjjllt/jiyujia/qingyu1232 first. ccjjllt exhausted; this study uses qingyu1232.",
+  "created_competition_submission": false,
+  "next_action": "Full25 running at zhuating/arc3-032-memory-full v1; download complete short trajectories and inspect real reuse.",
+  "last_read_only_observation": {
+    "observed_at_utc": "2026-10-21T06:43:53.511008+00:00",
+    "status": "RUNNING",
+    "phase": "waiting_for_model_health_after_launcher_return",
+    "log_path": "runs/032-memory-short/live-v1-resumed-20261021T064303Z.log",
+    "snapshot_report": "experiments/032-runtime-check-20261021T064303Z.json",
+    "available_small_artifacts": 0,
+    "interpretation": "Launcher 720-second return observed; session_runner still waits for model health. No failure is established from SSE disconnection or this launcher deadline message."
+  },
+  "last_log_observation": {
+    "observed_at_utc": "2026-10-21T06:47:02.616170+00:00",
+    "phase": "baseline",
+    "model_ready_confirmed_by_arm_start": true,
+    "first_arm_start_session_seconds": 1398,
+    "line": "Starting baseline: 10 games, 2700s, shared GPU",
+    "log_path": "runs/032-memory-short/live-v1-follow-recovered.log",
+    "remote_status_polled": false
+  },
+  "phase": "completed",
+  "last_observed_at_utc": "2026-10-21T08:22:04+00:00",
+  "final_result": {
+    "baseline_mean_score": 45.00596570614046,
+    "memory_mean_score": 70.66115213884649,
+    "delta": 25.655186432706024,
+    "baseline_levels": 40,
+    "memory_levels": 53,
+    "baseline_wins": 3,
+    "memory_wins": 4,
+    "games_up": 5,
+    "games_tied": 5,
+    "games_down": 0
+  },
+  "session_elapsed_seconds": 6845.833410978317,
+  "gpu_server_stopped": true,
+  "decision": "Promoted frozen helper to one25-game equal-budget comparison immediately. Mechanism review runs in parallel; no extra short screen. This public gain is not a leaderboard result."
+}

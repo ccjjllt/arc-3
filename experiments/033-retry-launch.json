@@ -1,0 +1,40 @@
+{
+  "status": "COMPLETE",
+  "kernel_id": "zhuating/arc3-033-controller-retry",
+  "version": 1,
+  "observed_at_utc": "2026-10-21T07:04:17.644164+00:00",
+  "notebook_sha256": "303aa8e1472c9c764e7b88906983cb384d8547173e540a9a31e5308c6db4b4f9",
+  "remote_source_verification": "experiments/033-retry-source-check.json",
+  "prior_attempt": "experiments/033-launch.json",
+  "reason": "Prior jiyujia save failed during cold weight loading before any repair request or gameplay;0.25h residual cannot load model. zhuating has22.19h.",
+  "same_frozen_repair_helpers": true,
+  "actual_continuation_seconds": 450,
+  "repair_limit_seconds": 120,
+  "runner_allowance_seconds": 600,
+  "hard_limit_seconds": 5400,
+  "startup_limit_seconds": 4200,
+  "original_blanket_model_precache_restored": true,
+  "fresh_AB_comparison": false,
+  "formal_submission_created": false,
+  "live_log": "runs/033-controller-retry-live-v1.log",
+  "next_action": "Read actual extraction repair, task semantics and subsequent actions. Do not infer a paired score gain.",
+  "phase": "finished",
+  "model_ready": true,
+  "launcher_ready_after_seconds": 466,
+  "first_arm_start_session_seconds": 514,
+  "last_log_evidence": {
+    "line": "Starting controller_repair_B: 1 games, 600s, shared GPU",
+    "path": "runs/033-controller-retry-live-v1.log"
+  },
+  "final_result": {
+    "added_levels": 0,
+    "continuation_actions": 26,
+    "repair_seconds": 28.70655129700026,
+    "continuation_seconds": 450.04435483999987,
+    "full_frame_contract_passed_twice": true,
+    "task_semantic_repair": false,
+    "analysis": "experiments/033-controller-analysis/semantic-review.json"
+  },
+  "session_elapsed_seconds": 975.036687374115,
+  "gpu_server_stopped": true
+}

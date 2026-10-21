@@ -1,0 +1,83 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "baseline": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "solved_level_memory": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "baseline",
+    "solved_level_memory"
+  ],
+  "budget_formula": "2700s per arm, 10 public games and 10 streams; one model load; 7800s outer cap fits observed qingyu1232 2.28h quota.",
+  "comparison_note": "Baseline first, solved-level memory second; identical 2700s budgets and 10 games, formal009 warmup=1/request behavior. Longer short study is deliberate to cover completed levels then history trim/reuse, not selected after seeing outcomes.",
+  "expected_gpu_hours": 2.1,
+  "game_count": 10,
+  "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+  "games": [
+    "ar25-0c556536",
+    "cd82-fb555c5d",
+    "ft09-0d8bbf25",
+    "m0r0-492f87ba",
+    "r11l-495a7899",
+    "re86-8af5384d",
+    "sc25-635fd71a",
+    "sp80-589a99af",
+    "tr87-cd924810",
+    "tu93-0768757b"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 7800,
+  "id": "032-memory-short",
+  "inference_timing": true,
+  "kernel_id": "qingyu1232/arc3-032-memory-short",
+  "kernel_title": "ARC3 032 Memory Short",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "Observe completed-level text memory acquisition, post-trim delivery and reuse under unchanged 009 Python lifecycle.",
+  "reference_arm": "baseline",
+  "request_deadline": false,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 2700,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": true,
+  "selection_note": "Inspect real level-completion evidence, rule requests and post-trim memory delivery, natural reuse, levels/actions/official score and total cost. No opportunity means inconclusive, not adoption.",
+  "startup_limit_seconds": 1800,
+  "strict_arm_budget": true,
+  "warmup_action_games": 1,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": true,
+  "startup_io_note": "Skip only redundant whole-directory model precache; SGLang shard lookahead/drop-cache and wheel pre-cache retained. Both arms share same unchanged numerical serving.",
+  "frozen_source_sha256": {
+    "src/arc3_research/solved_level_memory.py": "afa448837b7ef1016b2a318e461c646e9036de1f7b1bf9379e1a9fef08572456"
+  },
+  "formal_alignment": {
+    "request_deadline": false,
+    "warmup_action_games": 1,
+    "additional_solver_intervention": "solved_level_memory candidate only",
+    "remaining_differences": [
+      "OFFLINE 10 public games",
+      "2700 second budget",
+      "request logging and passive diagnostics",
+      "research cache flush and bounded process drain",
+      "research global soft_end deadline versus formal soft_end=None",
+      "redundant blanket model precache skipped; SGLang model serving unchanged"
+    ]
+  },
+  "mechanism_revision": "solved-level-memory-v1: observed completion facts plus model hypotheses, delivered at original history eviction",
+  "resource_note": "User explicitly prioritized ccjjllt, jiyujia, qingyu1232. Snapshot: ccjjllt exhausted, qingyu1232 remaining2.28h; no new zhuating GPU for this run."
+}

@@ -1,0 +1,61 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "controller_repair_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "controller_repair_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "controller_repair_A",
+    "controller_repair_B"
+  ],
+  "budget_formula": "600s runner allowance per arm; exactly450s continuation per arm, including at most120s repair for candidate. Up to30 actual continuation actions.",
+  "comparison_note": "Baseline first then controller repair; isolated CPU processes, same original checkpoint and450s continuation. No031 patch. Candidate exact extraction validation/retention/delivery, optional at-most-one independently predicted action.",
+  "expected_gpu_hours": 0.8,
+  "game_count": 1,
+  "game_source": "Frozen028 package ft09 only; original27-action checkpoint. No hand-authored wrong/correct pixel values.",
+  "games": [
+    "ft09-0d8bbf25"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 4200,
+  "id": "033-controller-repair",
+  "inference_timing": false,
+  "kernel_id": "zhuating/arc3-033-controller-repair",
+  "kernel_title": "ARC3 033 Controller Extraction Repair",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "Forced recorded-state extraction repair with independent current-pixel validation and deterministic result delivery; no online trigger claim.",
+  "reference_arm": "controller_repair_A",
+  "request_deadline": false,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 600,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": false,
+  "selection_note": "Full-frame pixel contract success is not task-specific repair success: inspect rebuilt pieces/patterns/targets and actual later actions. Forced checkpoint diagnostic, no online trigger.",
+  "startup_limit_seconds": 1800,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": true,
+  "startup_io_note": "Skip only redundant whole-directory model precache; SGLang shard lookahead/drop-cache and wheel pre-cache retained. Both arms share same unchanged numerical serving.",
+  "frozen_source_sha256": {
+    "src/arc3_research/controller_repair.py": "a7753e29fb10e33f1ef090b9bb0bb848ad5318d570cf8b744ea3d2e231419831",
+    "src/arc3_research/controller_repair_forks.py": "5961aea3c54272208701fcd7ab706e097bbfb70af1cf8550473a0e7c430fb0d2",
+    "src/arc3_research/program_repair.py": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061"
+  }
+}

@@ -1,0 +1,3228 @@
+{
+  "reviewed_at_utc": "2026-10-21T08:48:53.995153+00:00",
+  "status": "final_candidate_mechanism_and_payload_review_complete",
+  "scope": "Independent r11l/sc25/tu93 review; no remote calls, GPU work or code edits. Summary/rules alone do not prove behavioral adoption or causal score gain.",
+  "sources": {
+    "memory_summary": {
+      "path": "runs/032-memory-short/solved_level_memory/solved-level-memory-summary.json",
+      "sha256": "90ddf07a7c6beef93676b321cf6ca8cb5d68ca35339b6addef00ed65cc7989fa",
+      "bytes": 103879
+    },
+    "benchmarks": {
+      "baseline": {
+        "path": "runs/032-memory-short/baseline/benchmark.json",
+        "sha256": "fc920b9aa63e27e7df78eb55df9accf8267f30bafd8e737b5736ca09fe0ac64b",
+        "bytes": 532021
+      },
+      "solved_level_memory": {
+        "path": "runs/032-memory-short/solved_level_memory/benchmark.json",
+        "sha256": "74c5e614418e1822179ef51a04382ed71cd11a996b985bf42d7909463eda4d4e",
+        "bytes": 547689
+      }
+    },
+    "metadata": {
+      "baseline": {
+        "path": "runs/032-memory-short/baseline/arm-metadata.json",
+        "sha256": "d49c2ba301ac165b01d4321bb118255cc268a5ba5f5d70234256b7ed2d6d0261",
+        "bytes": 12774
+      },
+      "solved_level_memory": {
+        "path": "runs/032-memory-short/solved_level_memory/arm-metadata.json",
+        "sha256": "0679709371fc04a24d700161b1b36b23424f1d51bab5cecbd82d25dfabe55a07",
+        "bytes": 12804
+      }
+    }
+  },
+  "runtime": {
+    "baseline": {
+      "budget_seconds": 2700,
+      "status": "completed",
+      "benchmark_wall_seconds": 2725.165260987,
+      "wall_seconds": 2728.3142457330005,
+      "game_state_counts": {
+        "won": 3,
+        "cancelled": 7
+      },
+      "lingering_worker_threads": [],
+      "warmup_action_games": 1,
+      "request_deadline_enabled": false
+    },
+    "solved_level_memory": {
+      "budget_seconds": 2700,
+      "status": "completed",
+      "benchmark_wall_seconds": 2709.925596229001,
+      "wall_seconds": 2711.5867541240004,
+      "game_state_counts": {
+        "won": 4,
+        "cancelled": 6
+      },
+      "lingering_worker_threads": [],
+      "warmup_action_games": 1,
+      "request_deadline_enabled": false
+    }
+  },
+  "memory_limits": {
+    "action_tail": 30,
+    "reasoning_characters": 900,
+    "rule_characters": 600,
+    "full_levels": 3,
+    "successful_ask_turns": 2,
+    "block_characters": 12000
+  },
+  "global_memory_metrics": {
+    "preparation_seconds": 4.547736931986947,
+    "request_attempts": 837,
+    "observed_request_seconds": 22724.41500773799,
+    "all_request_prompt_tokens": 59069680,
+    "all_request_completion_tokens": 1549942,
+    "all_request_total_tokens": 60619622,
+    "observed_completions_recorded": 49,
+    "requests_with_rule_instruction": 133,
+    "rule_instructions_successfully_sent": 62,
+    "rules_captured": 40,
+    "memory_refreshes": 25,
+    "memory_characters_written": 116423,
+    "requests_with_memory": 420,
+    "system_memory_characters_attempted": 1764984,
+    "successful_responses_with_memory": 415,
+    "request_failures": 5
+  },
+  "games": [
+    {
+      "game_id": "r11l-495a7899",
+      "benchmark": {
+        "baseline": {
+          "game_id": "r11l-495a7899",
+          "state": "cancelled",
+          "levels_completed": 3,
+          "number_of_levels": 6,
+          "final_score": 21.119537576424335,
+          "actions_per_level": [
+            8,
+            24,
+            89,
+            10,
+            0,
+            0
+          ],
+          "solver_note": "tokens=180310",
+          "total_actions": 131,
+          "reset_history_indices_1based": [
+            93
+          ]
+        },
+        "solved_level_memory": {
+          "game_id": "r11l-495a7899",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "number_of_levels": 6,
+          "final_score": 71.42857142857143,
+          "actions_per_level": [
+            8,
+            13,
+            15,
+            15,
+            20,
+            0
+          ],
+          "solver_note": "tokens=185798",
+          "total_actions": 71,
+          "reset_history_indices_1based": []
+        }
+      },
+      "official_score_delta": 50.309033852147095,
+      "completed_level_delta": 2,
+      "summary_records": [
+        {
+          "level": 1,
+          "n_actions": 8,
+          "actions": [
+            "MOUSE(row=21, col=39)",
+            "MOUSE(row=59, col=31)",
+            "MOUSE(row=59, col=27)",
+            "MOUSE(row=10, col=10)",
+            "MOUSE(row=59, col=31)",
+            "MOUSE(row=34, col=53)",
+            "MOUSE(row=10, col=10)",
+            "MOUSE(row=8, col=25)"
+          ],
+          "reasoning": "Current: W=(59,31), G=(10,10), bead=(34,20). Ring at (21,39). Plan: 1. click (34,53) → W=(34,53), G=(10,10), bead=(22,31) 2. click (10,10) → swap → W=(10,10), G=(34,53) 3. click (8,25) → W=(8,25), G=(34,53), bead=(21,39) = ring ✓ Both (8,25) and (34,53) are black cells. Let's execute and check after each step. I'll batch all 3 and inspect the result, checking level_completed.",
+          "rule": "- Goal: land the purple bead (midpoint marker) exactly on the purple ring's center. - Control: MOUSE teleports the white diamond to the clicked cell; bead = midpoint(white, gray anchor); trail connects them. - If the click lands on the gray anchor, white and gray swap (this is how you reposition the gray: click new spot, then click gray's cell). - Win: bead centered on ring → level completed.",
+          "asks_sent": 1,
+          "completion_history_index": 8,
+          "completion_step": 8,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 0,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 8
+        },
+        {
+          "level": 2,
+          "n_actions": 13,
+          "actions": [
+            "MOUSE(row=28, col=45)",
+            "MOUSE(row=35, col=45)",
+            "MOUSE(row=26, col=58)",
+            "MOUSE(row=30, col=60)",
+            "MOUSE(row=12, col=44)",
+            "MOUSE(row=48, col=54)",
+            "MOUSE(row=24, col=56)",
+            "MOUSE(row=12, col=44)",
+            "MOUSE(row=12, col=58)",
+            "MOUSE(row=21, col=8)",
+            "MOUSE(row=59, col=26)",
+            "MOUSE(row=9, col=49)",
+            "MOUSE(row=57, col=49)"
+          ],
+          "reasoning": " = grays (12,58) [the gray that came from chain A] and (24,56) → bead = midpoint = (18,57) ✓ stays. Everything checks out. Total: 6 clicks. Let me execute them one at a time with validation. Note: click 0 = (21,8) is a swap (clicking a gray's cell). One risk: my model of \"swap by clicking the gray's cell\" — verified earlier in level 1 and in this level (clicks 2 and 4 in the chain-B plan were swaps and worked ✓). Another risk: a click on a gray of the OTHER chain (chain A gray while the white is in chain B) — that's click 0. In level 1 I did swap between chains? Level 1 had... hmm, level 1 had 2 chains? The experience mentions clicking the gray to swap. Here, clicking a chain-A gray while the white is in chain B should move the white into chain A and send a gray to chain B. Let's see if it works — if it's a no-op, I'll learn. Let me execute step by step, printing the snapshot after each.",
+          "rule": "Goal — put each chain's bead on the ring of matching color. Controls — MOUSE on empty cell teleports the white diamond into its chain (bead = centroid of that chain's endpoints: midpoint for 2, mean of 3); MOUSE on a gray diamond swaps white with it (white joins that chain, gray returns to white's old cell, so the other chain's bead is unchanged). Moves whose resulting bead/endpoints/trail touch water 'S' (or gray border 'g') are rejected with a blink animation and no change. Plan that won: park the 2-endpoint chain's bead on its ring, then swap into the 3-endpoint chain and relocate grays (2 ",
+          "asks_sent": 1,
+          "completion_history_index": 21,
+          "completion_step": 21,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 8,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 13
+        },
+        {
+          "level": 3,
+          "n_actions": 15,
+          "actions": [
+            "MOUSE(row=47, col=50)",
+            "MOUSE(row=46, col=60)",
+            "MOUSE(row=9, col=34)",
+            "MOUSE(row=61, col=58)",
+            "MOUSE(row=16, col=39)",
+            "MOUSE(row=60, col=59)",
+            "MOUSE(row=21, col=23)",
+            "MOUSE(row=51, col=46)",
+            "MOUSE(row=57, col=59)",
+            "MOUSE(row=16, col=39)",
+            "MOUSE(row=51, col=43)",
+            "MOUSE(row=34, col=37)",
+            "MOUSE(row=60, col=44)",
+            "MOUSE(row=40, col=52)",
+            "MOUSE(row=54, col=24)"
+          ],
+          "reasoning": "Full plan (7 clicks): 1. M(57,59) → bead (45,54) 2. S(16,39) → swap 3. M(51,43) → green bead (53,55) ✓ on the green ring 4. M(34,37) → swap into the purple chain (the white goes to (34,37), a gray to (51,43)); the purple bead stays (37,44) 5. M(60,44) → the white to (60,44); the purple bead = midpoint((60,44),(40,52)) = (50,48) ✓ valid 6. S(40,52) → swap → W=(40,52), gray=(60,44); bead (50,48) 7. M(54,24) → W=(54,24); the purple bead = midpoint((54,24),(60,44)) = (57,34) ✓ = the purple ring → WIN I'll use the option (swap_at (34,37), D (60,44), W2 (54,24)). Let me execute these one at a time with verification, stopping on a no-op.",
+          "rule": "Goal — put each chain's bead on its matching-color ring. Controls — MOUSE on an empty cell teleports the white diamond (bead = floor(centroid of that chain's k endpoints; k stays fixed per chain); MOUSE on a gray swaps it with the white, so the other chain's bead is unchanged). Rejections (blink at the offending element) happen when the bead footprint or an endpoint footprint touches water/border/out-of-bounds, or when two endpoint footprints overlap; trails may freely cross water. Winning plan: 3 clicks to put the 4-endpoint centroid on the green ring, then 1 swap into the 2-endpoint chain + ",
+          "asks_sent": 1,
+          "completion_history_index": 36,
+          "completion_step": 36,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 21,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 15
+        },
+        {
+          "level": 4,
+          "n_actions": 15,
+          "actions": [
+            "MOUSE(row=58, col=45)",
+            "MOUSE(row=6, col=39)",
+            "MOUSE(row=41, col=27)",
+            "MOUSE(row=36, col=17)",
+            "MOUSE(row=26, col=59)",
+            "MOUSE(row=47, col=10)",
+            "MOUSE(row=2, col=52)",
+            "MOUSE(row=26, col=59)",
+            "MOUSE(row=5, col=56)",
+            "MOUSE(row=52, col=27)",
+            "MOUSE(row=29, col=44)",
+            "MOUSE(row=36, col=46)",
+            "MOUSE(row=54, col=3)",
+            "MOUSE(row=52, col=46)",
+            "MOUSE(row=54, col=31)"
+          ],
+          "reasoning": ", bead B center (45,18) = 'M' ✓, bead C center (44,46) = 'M' ✓. And the white diamond's center is 'p' (chain color), the gray diamonds' centers are their chain colors (N for chain B, b for chain C, P/M for chain A?). So: bead centers = 'M' pixels. There are 3 'M' beads... but chain A's gray diamond center looked like 'M' too (from the accidental dump: 'M' pixels at the diamond at rows 4-8 cols 37-41). Hmm, the grayA diamond center appeared to be 'M' (magenta) with 'P' pixels — so chain A's color is 'M'/'P'? That complicates using 'M' to find bead centers. Let me instead detect beads as the 5x5 filled blobs: for each 'M' pixel, check if it has ≥15 non-background neighbors within ±2. Simpler: for each of the 3 known bead colors... Simplest robust approach: bead centers = 'M' pixels whose 5x5 neighborhood contains ≥18 non-'B' cells. Let me write that as the status function and run the plan.",
+          "rule": "Goal — put each chain's bead on the ring whose arc-colors match the bead's colors (bead colors = its chain's identity; rings are decoys). Controls — same as level 3: MOUSE on empty cell teleports the white diamond in its chain (bead = floor(centroid of that chain's k endpoints); MOUSE on a gray swaps it with the white, leaving the other chains' beads fixed); invalid if a bead/endpoint footprint touches water/border/OOB or two endpoint footprints overlap. Won with: solve chain A (2 clicks to move its gray + 1 placement), swap into chain B (3-endpoint) and relocate its 2 grays + place, swap into",
+          "asks_sent": 1,
+          "completion_history_index": 51,
+          "completion_step": 51,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 36,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 15
+        },
+        {
+          "level": 5,
+          "n_actions": 20,
+          "actions": [
+            "MOUSE(row=4, col=23)",
+            "MOUSE(row=30, col=23)",
+            "MOUSE(row=21, col=8)",
+            "MOUSE(row=34, col=43)",
+            "MOUSE(row=59, col=18)",
+            "MOUSE(row=35, col=18)",
+            "MOUSE(row=47, col=41)",
+            "MOUSE(row=50, col=6)",
+            "MOUSE(row=55, col=34)",
+            "MOUSE(row=54, col=8)",
+            "MOUSE(row=55, col=52)",
+            "MOUSE(row=55, col=43)",
+            "MOUSE(row=59, col=55)",
+            "MOUSE(row=50, col=6)",
+            "MOUSE(row=18, col=52)",
+            "MOUSE(row=54, col=8)",
+            "MOUSE(row=52, col=61)",
+            "MOUSE(row=10, col=54)",
+            "MOUSE(row=59, col=55)",
+            "MOUSE(row=11, col=35)"
+          ],
+          "reasoning": "The bead is now at (43,56) with green+yellow halves ✓ (both paints absorbed: N and Y). The Y paint blob is consumed (Y total 17 = the {N,Y} ring's 6 + the bead's 11 ✓). Now stage 3: move the bead to the {N,Y} ring at (9,48). Current config: W(52,61), grays (59,55),(18,52) ✓ exactly as modeled. Stage 3 clicks: (10,54), (59,55), (11,35), (18,52), (6,55). Let me execute with verification.",
+          "rule": "Goal — drive each white bead over the half-color \"paint\" blobs to absorb those colors (the blob disappears, the bead becomes part-colored), then have the bead OVERLAP the ring whose color set matches the bead's colors (exact centering not required — level ended with a partial overlap). Controls — MOUSE on empty cell teleports the white diamond in its chain (bead = floor(centroid of its k endpoints)); MOUSE on a gray swaps; invalid if any footprint touches the gray border/HUD column 0/out-of-bounds or two endpoint footprints overlap. Won: chain X = relocate gray + place on blue paint + place on",
+          "asks_sent": 1,
+          "completion_history_index": 71,
+          "completion_step": 71,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 51,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 20
+        }
+      ],
+      "final_block_characters": 7118,
+      "successful_memory_requests": 64,
+      "delivered_block_hashes": [
+        "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+        "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+        "86ef3931915d83cdc82889001499ab8218f10d059473a29a2b3a5906c496c17e"
+      ],
+      "initial_findings": {
+        "mechanisms_in_rule": [
+          "bead midpoint/centroid and floor",
+          "white/gray swapping to relocate chain endpoints",
+          "footprint constraints",
+          "later paint absorption and color-set ring matching"
+        ],
+        "conflict": "L2 says trails touching water/border are rejected; L3 says trails may freely cross water. Both are model hypotheses, not jointly confirmed physical facts.",
+        "causal_boundary": "L4/L5 rules are captured only after those levels complete. They cannot explain their own completion; inspect earlier L1-L3 memory delivered before solving L4/L5.",
+        "next_trace_focus": "First trimmed request carrying L2/L3 memory, then later centroid/footprint code and actual seven-click/three-chain actions, matching observations and level transitions."
+      },
+      "actual_post_trim_delivery": {
+        "unique_transcript_blocks": [
+          {
+            "line": 6945,
+            "sha256": "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+            "first_visible_current_step": 18,
+            "first_visible_current_level": 2,
+            "recorded_levels": [
+              1
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 1494
+          },
+          {
+            "line": 10958,
+            "sha256": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+            "first_visible_current_step": 30,
+            "first_visible_current_level": 3,
+            "recorded_levels": [
+              1,
+              2
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 3509
+          },
+          {
+            "line": 15667,
+            "sha256": "86ef3931915d83cdc82889001499ab8218f10d059473a29a2b3a5906c496c17e",
+            "first_visible_current_step": 54,
+            "first_visible_current_level": 5,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 6731
+          },
+          {
+            "line": 20332,
+            "sha256": "b487fe25b2792795b5f0ff1f3311c3f58b38464bda83c3811e14fd730ce2e6ce",
+            "first_visible_current_step": 72,
+            "first_visible_current_level": 6,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "hash_in_successful_delivery_summary": false,
+            "block_characters": 7118
+          }
+        ],
+        "all_successful_summary_hashes_found": true,
+        "boundary": "Confirmed in serialized request payload: exact successful block hashes, request-line message-count reductions, subsequent code/tool returns and returned usage. Transcript and payload render times can differ within a tool turn; actual first request lines are authoritative."
+      },
+      "specific_later_code_action_adoption": [
+        {
+          "transcript_line": 13823,
+          "call_id": "call_4b68f07985c94afd90d85a2b",
+          "current_step": 37,
+          "current_level": 4,
+          "code": "import heapq\nL=current_frame.ascii.split('\\n')\nOBS=set((r,c) for r in range(64) for c in range(64) if L[r][c] in ('S','g')) | set((r,0) for r in range(64))\nDIA=[(-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(-1,0),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0),(0,0)]\nBEAD=[(-2,-1),(-2,0),(-2,1),(-1,-2),(-1,-1),(-1,0),(-1,1),(-1,2),(0,-2),(0,-1),(0,0),(0,1),(0,2),(1,-2),(1,-1),(1,0),(1,1),(1,2),(2,-1),(2,0),(2,1)]\ndef mk(shape,allow_ring):\n    out={}\n    for r in range(64):\n        for c in range(64):\n            f=[];ok=True\n            for dr,dc in shape:\n                p=(r+dr,c+dc)\n                if not(0<=p[0]<64 and 0<=p[1]<64): ok=False;break\n                f.append(p)\n            if not ok: continue\n            fs=frozenset(f)\n            if any(x in OBS for x in fs): continue\n            out[(r,c)]=fs\n    return out\nDF=mk(DIA,False); BF=mk(BEAD,False)\nEOK=set(DF); BOK=set(BF)\ndef beadk(ends):\n    n=len(ends); return (sum(e[0] for e in ends)//n, sum(e[1] for e in ends)//n)\ndef valid(ends, bead, static_ends, static_beads):\n    allE=ends+static_ends\n    if any(e not in EOK for e in allE): return False\n    if bead not in BOK: return False\n    for i,e in enumerate(allE):\n        for o in allE[i+1:]:\n            if DF[e]&DF[o]: return False\n        for b in list(static_beads)+[bead]:\n            if DF[e]&BF[b]: return False\n    for i,b in enumerate(list(static_beads)+[bead]):\n        for o in list(static_beads)+[bead][i+1:]:\n            if b!=o and BF[b]&BF[o]: return False\n    return True\ndef plan(white, grays, target, static_ends, static_beads, cap=400):\n    k=len(grays)+1\n    pq=[(0,0,white,tuple(sorted(grays)),[])]; seen={(white,tuple(sorted(grays)))}; pops=0\n    while pq and pops<cap:\n        f,c,w,g,path=heapq.heappop(pq)\n        ends=[w]+list(g); b=beadk(ends)\n        if b==target: return path,pops\n        pops+=1\n        sr=sum(e[0] for e in ends); sc=sum(e[1] for e in ends)\n        for P in sorted(EOK):\n            if P==w or P in g: continue\n            nb=((sr-w[0]+P[0])//k,(sc-w[1]+P[1])//k)\n            key=(P,tuple(sorted(g)))\n            if key in seen or nb not in BOK: continue\n            if not valid([P]+list(g),nb,static_ends,static_beads): continue\n            seen.add(key)\n            heapq.heappush(pq,(c+1+abs(nb[0]-target[0])+abs(nb[1]-target[1]),c+1,P,tuple(sorted(g)),path+[('M',P)]))\n        for i in range(len(g)):\n            gi=g[i]; ng=tuple(sorted([w]+[g[j] for j in range(len(g)) if j!=i]))\n            key=(gi,ng)\n            if key in seen: continue\n            seen.add(key); nb=beadk([gi]+list(ng))\n            heapq.heappush(pq,(c+1+abs(nb[0]-target[0])+abs(nb[1]-target[1]),c+1,gi,ng,path+[('S',gi)]))\n    return None,pops\nA_W=(20,23); A_G=[(6,39)]; B_E=[(36,17),(47,10),(52,27)]; C_E=[(36,46),(52,46)]\npa,pops=plan(A_W,A_G,(49,36),B_E+C_E,[(45,18),(44,46)])\nprint('chainA', None if pa is None else len(pa), 'pops',pops); print(pa)",
+          "actual_tool_output": "chainA 3 pops 6\n[('M', (58, 45)), ('S', (6, 39)), ('M', (41, 27))]\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "9d16988a7ed162723b5fe0179841c52b3c6c7a4541ecc14820fc2acb8da7c27d"
+        },
+        {
+          "transcript_line": 14217,
+          "call_id": "call_15bd7e11b55b4e7aa0a56e28",
+          "current_step": 37,
+          "current_level": 4,
+          "code": "import heapq\nL=current_frame.ascii.split('\\n')\nprint('HUD col0 W count', sum(1 for r in range(64) if L[r][0]=='W'), 'first', min([r for r in range(64) if L[r][0]=='W']))\nOBS=set((r,c) for r in range(64) for c in range(64) if L[r][c] in ('S','g')) | set((r,0) for r in range(64))\nDIA=[(-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(-1,0),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0),(0,0)]\nBEAD=[(-2,-1),(-2,0),(-2,1),(-1,-2),(-1,-1),(-1,0),(-1,1),(-1,2),(0,-2),(0,-1),(0,0),(0,1),(0,2),(1,-2),(1,-1),(1,0),(1,1),(1,2),(2,-1),(2,0),(2,1)]\ndef mk(shape):\n    out={}\n    for r in range(64):\n        for c in range(64):\n            f=[];ok=True\n            for dr,dc in shape:\n                p=(r+dr,c+dc)\n                if not(0<=p[0]<64 and 0<=p[1]<64): ok=False;break\n                f.append(p)\n            if not ok: continue\n            fs=frozenset(f)\n            if any(x in OBS for x in fs): continue\n            out[(r,c)]=fs\n    return out\nDF=mk(DIA); BF=mk(BEAD); EOK=set(DF); BOK=set(BF)\ndef valid(ends,bead,static_ends,static_beads):\n    allE=ends+static_ends; allB=list(static_beads)+[bead]\n    if any(e not in EOK for e in allE) or bead not in BOK: return False\n    for i,e in enumerate(allE):\n        for o in allE[i+1:]:\n            if DF[e]&DF[o]: return False\n        for b in allB:\n            if DF[e]&BF[b]: return False\n    for i,b in enumerate(allB):\n        for o in allB[i+1:]:\n            if b!=o and BF[b]&BF[o]: return False\n    return True\ndef plan(white,grays,target,static_ends,static_beads,cap=400):\n    k=len(grays)+1\n    pq=[(0,0,white,tuple(sorted(grays)),[])]; seen={(white,tuple(sorted(grays)))}; pops=0\n    while pq and pops<cap:\n        f,c,w,g,path=heapq.heappop(pq)\n        ends=[w]+list(g); b=beadk(ends)\n        if b==target: return path,pops\n        pops+=1\n        sr=sum(e[0] for e in ends); sc=sum(e[1] for e in ends)\n        for P in sorted(EOK):\n            if P==w or P in g: continue\n            nb=((sr-w[0]+P[0])//k,(sc-w[1]+P[1])//k)\n            key=(P,tuple(sorted(g)))\n            if key in seen or nb not in BOK: continue\n            if not valid([P]+list(g),nb,static_ends,static_beads): continue\n            seen.add(key)\n            heapq.heappush(pq,(c+1+abs(nb[0]-target[0])+abs(nb[1]-target[1]),c+1,P,tuple(sorted(g)),path+[('M',P)]))\n        for i in range(len(g)):\n            gi=g[i]; ng=tuple(sorted([w]+[g[j] for j in range(len(g)) if j!=i]))\n            key=(gi,ng)\n            if key in seen: continue\n            seen.add(key); nb=beadk([gi]+list(ng))\n            heapq.heappush(pq,(c+1+abs(nb[0]-target[0])+abs(nb[1]-target[1]),c+1,gi,ng,path+[('S',gi)]))\n    return None,pops\nAfin=[(41,27),(58,45)]; Bfin=[(29,44),(5,56),(2,52)]\nfor entry in [(36,46),(52,46)]:\n    other=[e for e in [(36,46),(52,46)] if e!=entry]\n    pc,pops=plan(entry,other,(54,17),Afin+Bfin,[(49,36),(12,50)])\n    print('C via',entry,None if pc is None else len(pc),'pops',pops, pc)",
+          "actual_tool_output": "HUD col0 W count 64 first 0\nC via (36, 46) 3 pops 17 [('M', (54, 3)), ('S', (52, 46)), ('M', (54, 31))]\nC via (52, 46) 3 pops 7 [('M', (60, 5)), ('S', (36, 46)), ('M', (48, 29))]\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "ac5bc1aa83c663cddb3364d3dc5755124b9a5bd72678c5616362a054d1f1c2d1"
+        },
+        {
+          "transcript_line": 14504,
+          "call_id": "call_655073a1af5b4241b9e6b34a",
+          "current_step": 37,
+          "current_level": 4,
+          "code": "def beads(fr):\n    L=fr.ascii.split('\\n')\n    out=[]\n    for r in range(2,62):\n        for c in range(2,62):\n            if L[r][c]=='M':\n                n=sum(1 for dr in range(-2,3) for dc in range(-2,3) if L[r+dr][c+dc]!='B')\n                if n>=18: out.append((r,c))\n    return out\ndef whites(fr):\n    L=fr.ascii.split('\\n')\n    px=set((r,c) for r in range(64) for c in range(64) if L[r][c]=='W')\n    return sorted(((min(x[0] for x in c)+max(x[0] for x in c))//2,(min(x[1] for x in c)+max(x[1] for x in c))//2) for c in comps_fn(px) if len(c)==12)\nseq=[(58,45),(6,39),(41,27),(36,17),(26,59),(47,10),(2,52),(26,59),(5,56),(52,27),(29,44),(36,46),(54,3),(52,46),(54,31)]\nfor (r_,c_) in seq:\n    try:\n        res=action([{'action':'MOUSE','row':r_,'col':c_}])\n        print((r_,c_), 'DONE' if res['level_completed'] else res['state'], 'NOOP' if res.get('no_op') else 'ok', 'W',whites(current_frame),'beads',beads(current_frame))\n        if res['level_completed'] or res.get('game_over'): break\n    except Exception as e:\n        print((r_,c_),'ERR',type(e).__name__,str(e)[:80]); break",
+          "actual_tool_output": "[action] MOUSE(row=58, col=45) -> effect\n(58, 45) NOT_FINISHED ok W [(58, 45)] beads [(32, 42), (44, 46), (45, 18)]\n[action] MOUSE(row=6, col=39) -> effect\n(6, 39) NOT_FINISHED ok W [(6, 39)] beads [(32, 42), (44, 46), (45, 18)]\n[action] MOUSE(row=41, col=27) -> effect\n(41, 27) NOT_FINISHED ok W [(41, 27)] beads [(44, 46), (45, 18), (49, 36)]\n[action] MOUSE(row=36, col=17) -> effect\n(36, 17) NOT_FINISHED ok W [(36, 17)] beads [(44, 46), (45, 18), (49, 36)]\n[action] MOUSE(row=26, col=59) -> effect\n(26, 59) NOT_FINISHED ok W [(26, 59)] beads [(41, 32), (44, 46), (49, 36)]\n[action] MOUSE(row=47, col=10) -> effect\n(47, 10) NOT_FINISHED ok W [(47, 10)] beads [(41, 32), (44, 46), (49, 36)]\n[action] MOUSE(row=2, col=52) -> effect\n(2, 52) NOT_FINISHED ok W [(2, 52)] beads [(26, 46), (44, 46), (49, 36)]\n[action] MOUSE(row=26, col=59) -> effect\n(26, 59) NOT_FINISHED ok W [(26, 59)] beads [(26, 46), (44, 46), (49, 36)]\n[action] MOUSE(row=5, col=56) -> effect\n(5, 56) NOT_FINISHED ok W [(5, 56)] beads [(19, 45), (44, 46), (49, 36)]\n[action] MOUSE(row=52, col=27) -> effect\n(52, 27) NOT_FINISHED ok W [(52, 27)] beads [(19, 45), (44, 46), (49, 36)]\n[action] MOUSE(row=29, col=44) -> effect\n(29, 44) NOT_FINISHED ok W [(29, 44)] beads [(12, 50), (44, 46), (49, 36)]\n[action] MOUSE(row=36, col=46) -> effect\n(36, 46) NOT_FINISHED ok W [(36, 46)] beads [(12, 50), (44, 46), (49, 36)]\n[action] MOUSE(row=54, col=3) -> effect\n(54, 3) NOT_FINISHED ok W [] beads [(12, 50), (49, 36), (53, 24)]\n[action] MOUSE(row=52, col=46) -> effect\n(52, 46) NOT_FINISHED ok W [(52, 46)] beads [(12, 50), (49, 36), (53, 24)]\n[action] MOUSE(row=54, col=31) -> LEVEL COMPLETED\n(54, 31) DONE ok W [(35, 25)] beads []\n",
+          "actual_action_echoes": [
+            "MOUSE(row=58, col=45) -> effect",
+            "MOUSE(row=6, col=39) -> effect",
+            "MOUSE(row=41, col=27) -> effect",
+            "MOUSE(row=36, col=17) -> effect",
+            "MOUSE(row=26, col=59) -> effect",
+            "MOUSE(row=47, col=10) -> effect",
+            "MOUSE(row=2, col=52) -> effect",
+            "MOUSE(row=26, col=59) -> effect",
+            "MOUSE(row=5, col=56) -> effect",
+            "MOUSE(row=52, col=27) -> effect",
+            "MOUSE(row=29, col=44) -> effect",
+            "MOUSE(row=36, col=46) -> effect",
+            "MOUSE(row=54, col=3) -> effect",
+            "MOUSE(row=52, col=46) -> effect",
+            "MOUSE(row=54, col=31) -> LEVEL COMPLETED"
+          ],
+          "level_completed_in_output": true,
+          "code_sha256": "5e6265ad1cbf88be0a4cd9de0e7ba9b9b12ce46916e3b51300ade4b1b2043497"
+        },
+        {
+          "transcript_line": 15807,
+          "call_id": "call_69b0c0fd05234862b8afcddd",
+          "current_step": 54,
+          "current_level": 5,
+          "code": "import heapq\nL=current_frame.ascii.split('\\n')\nOBS=set((r,c) for r in range(64) for c in range(64) if L[r][c] in ('S','g'))\nPAINT={ (40,13):'b',(43,56):'Y',(53,19):'N' }\nDIA=[(-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(-1,0),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0),(0,0)]\nBEAD=[(-2,-1),(-2,0),(-2,1),(-1,-2),(-1,-1),(-1,0),(-1,1),(-1,2),(0,-2),(0,-1),(0,0),(0,1),(0,2),(1,-2),(1,-1),(1,0),(1,1),(1,2),(2,-1),(2,0),(2,1)]\ndef mk(shape,extra):\n    out={}\n    for r in range(64):\n        for c in range(64):\n            f=[];ok=True\n            for dr,dc in shape:\n                p=(r+dr,c+dc)\n                if not(0<=p[0]<64 and 0<=p[1]<64): ok=False;break\n                f.append(p)\n            if not ok: continue\n            fs=frozenset(f)\n            if any(x in OBS or x in extra for x in fs): continue\n            out[(r,c)]=fs\n    return out\nPCELLS=set(PAINT)\nDF=mk(DIA,PCELLS); BF=mk(BEAD,PCELLS)\nEOK=set(DF); BOK=set(BF)\ndef valid(ends,bead,static_ends,static_beads):\n    allE=ends+static_ends; allB=list(static_beads)+[bead]\n    if any(e not in EOK for e in allE) or bead not in BOK: return False\n    for i,e in enumerate(allE):\n        for o in allE[i+1:]:\n            if DF[e]&DF[o]: return False\n        for b in allB:\n            if DF[e]&BF[b]: return False\n    for i,b in enumerate(allB):\n        for o in allB[i+1:]:\n            if b!=o and BF[b]&BF[o]: return False\n    return True\ndef plan_wp(white,grays,waypoints,static_ends,static_beads,cap=3000):\n    k=len(grays)+1\n    st=(white,tuple(sorted(grays)),0)\n    pq=[(0,0,white,tuple(sorted(grays)),0,[])]; seen={st}; pops=0\n    while pq and pops<cap:\n        f,c,w,g,wi,path=heapq.heappop(pq)\n        if wi==len(waypoints): return path,pops\n        pops+=1\n        ends=[w]+list(g); sr=sum(e[0] for e in ends); sc=sum(e[1] for e in ends)\n        for P in sorted(EOK):\n            if P==w or P in g: continue\n            nb=((sr-w[0]+P[0])//k,(sc-w[1]+P[1])//k)\n            nwi=wi\n            if wi<len(waypoints) and nb==waypoints[wi]: nwi=wi+1\n            elif any(nb==wp for wp in waypoints[wi:]): continue\n            key=(P,tuple(sorted(g)),nwi)\n            if key in seen: continue\n            if nb not in BOK: continue\n            if not valid([P]+list(g),nb,static_ends,static_beads): continue\n            seen.add(key)\n            h=sum(abs(nb[0]-waypoints[min(nwi,len(waypoints)-1)][0])+abs(nb[1]-waypoints[min(nwi,len(waypoints)-1)][1]) for nwi2 in range(nwi,len(waypoints)))\n            heapq.heappush(pq,(c+1+h,c+1,P,tuple(sorted(g)),nwi,path+[('M',P)]))\n        for i in range(len(g)):\n            gi=g[i]; ng=tuple(sorted([w]+[g[j] for j in range(len(g)) if j!=i]))\n            nb=beadk([gi]+list(ng))\n            key=(gi,ng,wi)\n            if key in seen: continue\n            seen.add(key)\n            wp=waypoints[wi]\n            heapq.heappush(pq,(c+1+abs(nb[0]-wp[0])+abs(nb[1]-wp[1]),c+1,gi,ng,wi,path+[('S',gi)]))\n    return None,pops\nW=(30,23); GX=[(34,43)]; YE=[(47,41),(55,34),(55,52)]\npx,pops=plan_wp(W,GX,[(40,13),(28,13)],YE,[(52,42)])\nprint('chainX',None if px is None else len(px),'pops',pops); print(px)",
+          "actual_tool_output": "chainX None pops 3000\nNone\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "50679b4b47884e6318fdd29f41fea89b431328e076990745ae8ae1b83e20eb9b"
+        },
+        {
+          "transcript_line": 17258,
+          "call_id": "call_330d72208c6b4373a3fbcd48",
+          "current_step": 54,
+          "current_level": 5,
+          "code": "L=current_frame.ascii.split('\\n')\nOBS=set((r,c) for r in range(64) for c in range(64) if L[r][c] in ('S','g')) | {(r,0) for r in range(64)}\nPAINT={(40,13),(43,56),(53,19)}\nDIA=[(-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(-1,0),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0),(0,0)]\nBEAD=[(-2,-1),(-2,0),(-2,1),(-1,-2),(-1,-1),(-1,0),(-1,1),(-1,2),(0,-2),(0,-1),(0,0),(0,1),(0,2),(1,-2),(1,-1),(1,0),(1,1),(1,2),(2,-1),(2,0),(2,1)]\ndef mk5(shape,extra):\n    res={}\n    for r in range(64):\n        for c in range(64):\n            cells=[]; ok=True\n            for dr,dc in shape:\n                rr,cc=r+dr,c+dc\n                if rr<0 or rr>63 or cc<0 or cc>63 or (rr,cc) in OBS or (rr,cc) in extra: ok=False; break\n                cells.append((rr,cc))\n            if ok: res[(r,c)]=frozenset(cells)\n    return res\nDF=mk5(DIA,PAINT); BF=mk5(BEAD,set())\nEOK=set(DF); BOK=set(BF)\nSTAT=[(47,41),(55,34),(55,52)]; STATB=[(52,42)]\ndef eok2(p,ends,beads):\n    if p not in EOK: return False\n    for o in ends:\n        if o!=p and DF[p]&DF[o]: return False\n    for b in beads:\n        if DF[p]&BF[b]: return False\n    return True\ndef bok2(b,ends,beads):\n    if b not in BOK: return False\n    for e in ends:\n        if DF[e]&BF[b]: return False\n    for o in beads:\n        if o!=b and BF[b]&BF[o]: return False\n    return True\nG0=(34,43); T1=(40,13); T2=(28,13)\nsols=[]\nfor G in sorted(EOK):\n    if G==G0 or G in STAT: continue\n    if not eok2(G,[G0]+STAT,STATB): continue\n    m1=((G[0]+G0[0])//2,(G[1]+G0[1])//2)\n    if not bok2(m1,[G,G0]+STAT,STATB): continue\n    P1=(2*T1[0]-G[0],2*T1[1]-G[1]); P2=(2*T2[0]-G[0],2*T2[1]-G[1])\n    if P1 not in EOK or P2 not in EOK: continue\n    if P1 in STAT or P2 in STAT or P1 in (G,G0) or P2 in (G,G0): continue\n    if not eok2(P1,[G]+STAT,STATB+[T1]): continue\n    if not bok2(T1,[G,P1]+STAT,STATB): continue\n    if not eok2(P2,[G]+STAT,STATB+[T2]): continue\n    if not bok2(T2,[G,P2]+STAT,STATB): continue\n    sols.append((G,P1,P2,m1))\nprint('solutions',len(sols))\nfor s in sols[:8]: print(s)",
+          "actual_tool_output": "solutions 454\n((19, 3), (61, 23), (37, 23), (26, 23))\n((19, 4), (61, 22), (37, 22), (26, 23))\n((19, 5), (61, 21), (37, 21), (26, 24))\n((19, 6), (61, 20), (37, 20), (26, 24))\n((19, 7), (61, 19), (37, 19), (26, 25))\n((19, 8), (61, 18), (37, 18), (26, 25))\n((19, 9), (61, 17), (37, 17), (26, 26))\n((19, 10), (61, 16), (37, 16), (26, 26))\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "39b6599a69cd2c92497dd448c4bb32399223922fee2558e1fc93fef77e2e2c72"
+        },
+        {
+          "transcript_line": 18378,
+          "call_id": "call_73d1bb854ae340e6a65b79b4",
+          "current_step": 58,
+          "current_level": 5,
+          "code": "seq=[(47,41),(50,6),(55,34),(54,8),(55,52),(55,43)]\nfor (r_,c_) in seq:\n    res=action([{'action':'MOUSE','row':r_,'col':c_}])\n    st='DONE' if res['level_completed'] else res['state']\n    print((r_,c_),st,'NOOP' if res.get('no_op') else 'effect')\n    if res.get('no_op') or res['level_completed'] or res.get('game_over'): break\nL=current_frame.ascii.split('\\n')\nprint('N total',sum(r.count('N') for r in L),'Y total',sum(r.count('Y') for r in L))\nprint('bead region rows50-57 cols16-23'); [print(L[r][16:24]) for r in range(50,58)]",
+          "actual_tool_output": "[action] MOUSE(row=47, col=41) -> effect\n(47, 41) NOT_FINISHED effect\n[action] MOUSE(row=50, col=6) -> effect\n(50, 6) NOT_FINISHED effect\n[action] MOUSE(row=55, col=34) -> effect\n(55, 34) NOT_FINISHED effect\n[action] MOUSE(row=54, col=8) -> effect\n(54, 8) NOT_FINISHED effect\n[action] MOUSE(row=55, col=52) -> effect\n(55, 52) NOT_FINISHED effect\n[action] MOUSE(row=55, col=43) -> effect\n(55, 43) NOT_FINISHED effect\nN total 28 Y total 17\nbead region rows50-57 cols16-23\nBBBBBBBB\nBBNWWBBB\nwNNWWWBB\nwNNWWWww\nBNNNWWBB\nBBNNWBBB\nBBBBBBBB\nBBBBBBBB\n[None, None, None, None, None, None, None, None]\n",
+          "actual_action_echoes": [
+            "MOUSE(row=47, col=41) -> effect",
+            "MOUSE(row=50, col=6) -> effect",
+            "MOUSE(row=55, col=34) -> effect",
+            "MOUSE(row=54, col=8) -> effect",
+            "MOUSE(row=55, col=52) -> effect",
+            "MOUSE(row=55, col=43) -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "7ff58d38369fe45180d5650cf298b2986b9430f05d5eab4366988a4636edf3b9"
+        },
+        {
+          "transcript_line": 19466,
+          "call_id": "call_2cb4df1842954ec6a06cf3be",
+          "current_step": 69,
+          "current_level": 5,
+          "code": "seq3=[(10,54),(59,55),(11,35),(18,52),(6,55)]\nfor (r_,c_) in seq3:\n    res=action([{'action':'MOUSE','row':r_,'col':c_}])\n    print((r_,'DONE' if res['level_completed'] else res['state'],'NOOP' if res.get('no_op') else 'effect'))\n    if res.get('no_op') or res['level_completed'] or res.get('game_over'): break\nL=current_frame.ascii.split('\\n')\nprint('bead region rows6-12 cols45-52'); [print(L[r][45:53]) for r in range(6,13)]",
+          "actual_tool_output": "[action] MOUSE(row=10, col=54) -> effect\n(10, 'NOT_FINISHED', 'effect')\n[action] MOUSE(row=59, col=55) -> effect\n(59, 'NOT_FINISHED', 'effect')\n[action] MOUSE(row=11, col=35) -> LEVEL COMPLETED\n(11, 'DONE', 'effect')\nbead region rows6-12 cols45-52\nBBBBBBBB\nBBBBBBBB\nBBBBBBBB\nBBBBBpBN\nBBBBpBBB\nBBBpBBBB\nBBBBBBBB\n[None, None, None, None, None, None, None]\n",
+          "actual_action_echoes": [
+            "MOUSE(row=10, col=54) -> effect",
+            "MOUSE(row=59, col=55) -> effect",
+            "MOUSE(row=11, col=35) -> LEVEL COMPLETED"
+          ],
+          "level_completed_in_output": true,
+          "code_sha256": "a0296dd253865d7dccd4c152206c2afe1642ee55435feb27271c80ecf191b7c9"
+        }
+      ],
+      "causal_assessment": "Concrete transfer of previous-level mechanics into later executed planner/actions, with both active recap and pinned memory present; combined intervention supported, separate causal contributions not identified.",
+      "transcript_source": {
+        "path": "runs/032-memory-priority/solved_level_memory/transcripts/r11l-495a7899_p0.txt",
+        "sha256": "9ec4e19fb612dc8e9457f80bbf448965ac5a752db366e295734e5445083a2bc6",
+        "bytes": 2350746,
+        "completeness": "Parent confirmed independent priority download CLI exited0 before this review"
+      },
+      "completion_echoes": [
+        {
+          "line": 2552,
+          "actual_action": "[action] MOUSE(row=8, col=25) -> LEVEL COMPLETED"
+        },
+        {
+          "line": 8064,
+          "actual_action": "[action] MOUSE(row=57, col=49) -> LEVEL COMPLETED"
+        },
+        {
+          "line": 12880,
+          "actual_action": "[action] MOUSE(row=54, col=24) -> LEVEL COMPLETED"
+        },
+        {
+          "line": 14562,
+          "actual_action": "[action] MOUSE(row=54, col=31) -> LEVEL COMPLETED"
+        },
+        {
+          "line": 19486,
+          "actual_action": "[action] MOUSE(row=11, col=35) -> LEVEL COMPLETED"
+        }
+      ],
+      "interpretation": {
+        "assessment": "Concrete transfer of previous-level mechanics into later executed planner/actions, with both active recap and pinned memory present; combined intervention supported, separate causal contributions not identified.",
+        "active_recap_chain": "At transcript13082 the model responds to the post-L3 rule request, corrects the earlier trail-water hypothesis, and at13429 explicitly says the L4 validity model is the same as L3. Calls13823/14217 implement floor centroid and endpoint/bead footprints, with no trail-water collision check; call14504 executes15 actual clicks and finishes L4.",
+        "pin_chain": "Serialized request153 already carries the successfulL1-L4 block atstate53/L5 (the next rendered transcript block isline15667/state54). Later code15807 tries a paint-waypoint planner (initially finds no solution),17258 repairs footprint/paint treatment and produces454 candidates,18378 executes a6-click paint sequence, and19466 executes3 of a planned5 final clicks before LEVEL COMPLETED. This is fresh-layout computation, not blind replay of old coordinates.",
+        "limits": "The L4 clear occurred before L3/L4 entered the pinned block, but active recap plus ordinary recent context/retained functions already existed. This does not negate reflection benefit, and it prevents assigning all benefit specifically to pinning. L5 required fresh paint interpretation and multiple failed searches; no universally correct physics claim."
+      },
+      "observed_costs": {
+        "baseline_analyzer_tokens": 180310,
+        "candidate_analyzer_tokens": 185798,
+        "delta_analyzer_tokens": 5488,
+        "delta_percent": 3.0436470522988186,
+        "baseline_actions": 131,
+        "candidate_actions": 71,
+        "delta_actions": -60,
+        "note": "Analyzer token count is a returned/reporting view, not marginal memory tokens or billable GPU usage; no separate prompt-token isolation from transcripts.",
+        "baseline_prompt_tokens": 7919253,
+        "candidate_prompt_tokens": 7707595,
+        "prompt_token_delta": -211658
+      },
+      "request_payload_crosscheck": {
+        "candidate": {
+          "path": "runs/032-memory-short/solved_level_memory/r11l-495a7899_p0_requests.jsonl",
+          "sha256": "c91046fb322d4e9aec07c47404089725dc2f7edf12786004327dce550bf21cb7",
+          "bytes": 61965578,
+          "line_count": 197,
+          "request_count": 99,
+          "response_count": 98,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 7707595,
+            "completion_tokens": 185798,
+            "total_tokens": 7893393
+          },
+          "memory_blocks": {
+            "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96": {
+              "first_request_line": 69,
+              "first_request": {
+                "request_line": 69,
+                "memory_hash": "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+                "analysis_step": 11,
+                "snapshot_action": 18,
+                "current_step": 18,
+                "current_level": 2,
+                "message_count": 47
+              },
+              "request_lines": [
+                69,
+                71,
+                73,
+                75,
+                77,
+                79,
+                81,
+                83,
+                85,
+                87,
+                89,
+                91,
+                93,
+                95,
+                97,
+                99,
+                101,
+                103,
+                105,
+                107,
+                109,
+                111
+              ],
+              "successful_response_lines": [
+                70,
+                72,
+                74,
+                76,
+                78,
+                80,
+                82,
+                84,
+                86,
+                88,
+                90,
+                92,
+                94,
+                96,
+                98,
+                100,
+                102,
+                104,
+                106,
+                108,
+                110,
+                112
+              ],
+              "previous_request_line": 67,
+              "previous_message_count": 91,
+              "levels_in_block": [
+                1
+              ]
+            },
+            "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a": {
+              "first_request_line": 113,
+              "first_request": {
+                "request_line": 113,
+                "memory_hash": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+                "analysis_step": 14,
+                "snapshot_action": 30,
+                "current_step": 30,
+                "current_level": 3,
+                "message_count": 43
+              },
+              "request_lines": [
+                113,
+                115,
+                117,
+                119,
+                121,
+                123,
+                125,
+                127,
+                129,
+                131,
+                133,
+                135,
+                137,
+                139,
+                141,
+                143,
+                145,
+                147,
+                149,
+                151
+              ],
+              "successful_response_lines": [
+                114,
+                116,
+                118,
+                120,
+                122,
+                124,
+                126,
+                128,
+                130,
+                132,
+                134,
+                136,
+                138,
+                140,
+                142,
+                144,
+                146,
+                148,
+                150,
+                152
+              ],
+              "previous_request_line": 111,
+              "previous_message_count": 100,
+              "levels_in_block": [
+                1,
+                2
+              ]
+            },
+            "86ef3931915d83cdc82889001499ab8218f10d059473a29a2b3a5906c496c17e": {
+              "first_request_line": 153,
+              "first_request": {
+                "request_line": 153,
+                "memory_hash": "86ef3931915d83cdc82889001499ab8218f10d059473a29a2b3a5906c496c17e",
+                "analysis_step": 17,
+                "snapshot_action": 53,
+                "current_step": 53,
+                "current_level": 5,
+                "message_count": 47
+              },
+              "request_lines": [
+                153,
+                155,
+                157,
+                159,
+                161,
+                163,
+                165,
+                167,
+                169,
+                171,
+                173,
+                175,
+                177,
+                179,
+                181,
+                183,
+                185,
+                187,
+                189,
+                191,
+                193,
+                195
+              ],
+              "successful_response_lines": [
+                154,
+                156,
+                158,
+                160,
+                162,
+                164,
+                166,
+                168,
+                170,
+                172,
+                174,
+                176,
+                178,
+                180,
+                182,
+                184,
+                186,
+                188,
+                190,
+                192,
+                194,
+                196
+              ],
+              "previous_request_line": 151,
+              "previous_message_count": 94,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "b487fe25b2792795b5f0ff1f3311c3f58b38464bda83c3811e14fd730ce2e6ce": {
+              "first_request_line": 197,
+              "first_request": {
+                "request_line": 197,
+                "memory_hash": "b487fe25b2792795b5f0ff1f3311c3f58b38464bda83c3811e14fd730ce2e6ce",
+                "analysis_step": 22,
+                "snapshot_action": 72,
+                "current_step": 72,
+                "current_level": 6,
+                "message_count": 48
+              },
+              "request_lines": [
+                197
+              ],
+              "successful_response_lines": [],
+              "previous_request_line": 195,
+              "previous_message_count": 103,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          },
+          "rule_instruction_requests": [
+            {
+              "request_line": 25,
+              "memory_hash": null,
+              "analysis_step": 6,
+              "snapshot_action": 9,
+              "current_step": 9,
+              "current_level": 2,
+              "message_count": 35,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 27,
+              "memory_hash": null,
+              "analysis_step": 6,
+              "snapshot_action": 9,
+              "current_step": 9,
+              "current_level": 2,
+              "message_count": 37,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 83,
+              "memory_hash": "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+              "analysis_step": 12,
+              "snapshot_action": 22,
+              "current_step": 22,
+              "current_level": 3,
+              "message_count": 65,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 85,
+              "memory_hash": "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+              "analysis_step": 12,
+              "snapshot_action": 22,
+              "current_step": 22,
+              "current_level": 3,
+              "message_count": 67,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 87,
+              "memory_hash": "194f94d7661dba5fbed51df593c155a24d95c87b762679d32d2a7b6aa032ba96",
+              "analysis_step": 12,
+              "snapshot_action": 22,
+              "current_step": 22,
+              "current_level": 3,
+              "message_count": 69,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 131,
+              "memory_hash": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+              "analysis_step": 15,
+              "snapshot_action": 37,
+              "current_step": 37,
+              "current_level": 4,
+              "message_count": 68,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 133,
+              "memory_hash": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+              "analysis_step": 15,
+              "snapshot_action": 37,
+              "current_step": 37,
+              "current_level": 4,
+              "message_count": 70,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 147,
+              "memory_hash": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+              "analysis_step": 16,
+              "snapshot_action": 52,
+              "current_step": 52,
+              "current_level": 5,
+              "message_count": 89,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 149,
+              "memory_hash": "5e4e8deaa915cc80d3ff8d68ee53fff66ae77c80e33899662ad1bd91cc0ef86a",
+              "analysis_step": 16,
+              "snapshot_action": 52,
+              "current_step": 52,
+              "current_level": 5,
+              "message_count": 91,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 191,
+              "memory_hash": "86ef3931915d83cdc82889001499ab8218f10d059473a29a2b3a5906c496c17e",
+              "analysis_step": 22,
+              "snapshot_action": 72,
+              "current_step": 72,
+              "current_level": 6,
+              "message_count": 98,
+              "asks_rule_for_completed_level": 5
+            }
+          ],
+          "selected_calls": {
+            "call_4b68f07985c94afd90d85a2b": {
+              "first_seen_snapshot_line": 141,
+              "event": "request",
+              "prior_response": {
+                "response_line": 140,
+                "paired_request_line": 139,
+                "usage": {
+                  "prompt_tokens": 96242,
+                  "total_tokens": 98397,
+                  "completion_tokens": 2155,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 95232,
+                    "image_tokens": 8400
+                  },
+                  "reasoning_tokens": 1003
+                }
+              },
+              "result_snapshot_line": 141,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function beadk(ends) for later Python calls in this game.\nYour function mk was not retained: unavailable dependencies: OBS. Pass snippet-specific data as arguments or redefine it if needed.\nYour function valid was not retained: unavailable dependencies: BF, BOK, DF, EOK. Pass snippet-specific data as arguments or redefine it if needed.\nYour function plan was not retained: unavailable dependencies: BOK, EOK. Pass snippet-specific data as arguments or redefine it if needed.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "c76d5c77821787bb80ec2206f7be84a9adc73a64aa6463032e46a6b218a9485b",
+              "actual_action_echoes": []
+            },
+            "call_15bd7e11b55b4e7aa0a56e28": {
+              "first_seen_snapshot_line": 145,
+              "event": "request",
+              "prior_response": {
+                "response_line": 144,
+                "paired_request_line": 143,
+                "usage": {
+                  "prompt_tokens": 101749,
+                  "total_tokens": 103876,
+                  "completion_tokens": 2127,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 101504,
+                    "image_tokens": 8800
+                  },
+                  "reasoning_tokens": 960
+                }
+              },
+              "result_snapshot_line": 145,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Your function mk was not retained: unavailable dependencies: OBS. Pass snippet-specific data as arguments or redefine it if needed.\nYour function valid was not retained: unavailable dependencies: BF, BOK, DF, EOK. Pass snippet-specific data as arguments or redefine it if needed.\nYour function plan was not retained: unavailable dependencies: BOK, EOK. Pass snippet-specific data as arguments or redefine it if needed.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "ff25eae3105fea61110c2c671677980004e24029c29d56a27b85d69c6b7b9514",
+              "actual_action_echoes": []
+            },
+            "call_655073a1af5b4241b9e6b34a": {
+              "first_seen_snapshot_line": 147,
+              "event": "request",
+              "prior_response": {
+                "response_line": 146,
+                "paired_request_line": 145,
+                "usage": {
+                  "prompt_tokens": 105287,
+                  "total_tokens": 106762,
+                  "completion_tokens": 1475,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 101696,
+                    "image_tokens": 9200
+                  },
+                  "reasoning_tokens": 1005
+                }
+              },
+              "result_snapshot_line": 147,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function beads(fr) for later Python calls in this game.\nRetained your function whites(fr) for later Python calls in this game.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "6ed7e55517701fe89aec809623016226dc052a7cf8e05e44bba53ac5cddaaad5",
+              "actual_action_echoes": [
+                "MOUSE(row=58, col=45) -> effect",
+                "MOUSE(row=6, col=39) -> effect",
+                "MOUSE(row=41, col=27) -> effect",
+                "MOUSE(row=36, col=17) -> effect",
+                "MOUSE(row=26, col=59) -> effect",
+                "MOUSE(row=47, col=10) -> effect",
+                "MOUSE(row=2, col=52) -> effect",
+                "MOUSE(row=26, col=59) -> effect",
+                "MOUSE(row=5, col=56) -> effect",
+                "MOUSE(row=52, col=27) -> effect",
+                "MOUSE(row=29, col=44) -> effect",
+                "MOUSE(row=36, col=46) -> effect",
+                "MOUSE(row=54, col=3) -> effect",
+                "MOUSE(row=52, col=46) -> effect",
+                "MOUSE(row=54, col=31) -> LEVEL COMPLETED"
+              ]
+            },
+            "call_69b0c0fd05234862b8afcddd": {
+              "first_seen_snapshot_line": 159,
+              "event": "request",
+              "prior_response": {
+                "response_line": 158,
+                "paired_request_line": 157,
+                "usage": {
+                  "prompt_tokens": 60843,
+                  "total_tokens": 65662,
+                  "completion_tokens": 4819,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 59008,
+                    "image_tokens": 6000
+                  },
+                  "reasoning_tokens": 3593
+                }
+              },
+              "result_snapshot_line": 159,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Your function mk was not retained: unavailable dependencies: OBS. Pass snippet-specific data as arguments or redefine it if needed.\nYour function valid was not retained: unavailable dependencies: BF, BOK, DF, EOK. Pass snippet-specific data as arguments or redefine it if needed.\nYour function plan_wp was not retained: unavailable dependencies: BOK, EOK. Pass snippet-specific data as arguments or redefine it if needed.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "266a14abc73b69f7572ecd0e4dd00de2813d88fb2d54c4bd413ac71a673906ec",
+              "actual_action_echoes": []
+            },
+            "call_330d72208c6b4373a3fbcd48": {
+              "first_seen_snapshot_line": 173,
+              "event": "request",
+              "prior_response": {
+                "response_line": 172,
+                "paired_request_line": 171,
+                "usage": {
+                  "prompt_tokens": 81917,
+                  "total_tokens": 82854,
+                  "completion_tokens": 937,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 80896,
+                    "image_tokens": 7600
+                  },
+                  "reasoning_tokens": 17
+                }
+              },
+              "result_snapshot_line": 173,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Your function mk5 was not retained: unavailable dependencies: OBS. Pass snippet-specific data as arguments or redefine it if needed.\nYour function eok2 was not retained: unavailable dependencies: BF, DF, EOK. Pass snippet-specific data as arguments or redefine it if needed.\nYour function bok2 was not retained: unavailable dependencies: BF, BOK, DF. Pass snippet-specific data as arguments or redefine it if needed.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "2362a4b8141ed1559bcb3190be4c9de912f020953afbad8ae733883715102718",
+              "actual_action_echoes": []
+            },
+            "call_73d1bb854ae340e6a65b79b4": {
+              "first_seen_snapshot_line": 183,
+              "event": "request",
+              "prior_response": {
+                "response_line": 182,
+                "paired_request_line": 181,
+                "usage": {
+                  "prompt_tokens": 98140,
+                  "total_tokens": 99065,
+                  "completion_tokens": 925,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 97728,
+                    "image_tokens": 9200
+                  },
+                  "reasoning_tokens": 684
+                }
+              },
+              "result_snapshot_line": 183,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "07ec2c08544eb197f294d620133664227fea02671080c8589ee86fea8fe173b3",
+              "actual_action_echoes": [
+                "MOUSE(row=47, col=41) -> effect",
+                "MOUSE(row=50, col=6) -> effect",
+                "MOUSE(row=55, col=34) -> effect",
+                "MOUSE(row=54, col=8) -> effect",
+                "MOUSE(row=55, col=52) -> effect",
+                "MOUSE(row=55, col=43) -> effect"
+              ]
+            },
+            "call_2cb4df1842954ec6a06cf3be": {
+              "first_seen_snapshot_line": 191,
+              "event": "request",
+              "prior_response": {
+                "response_line": 190,
+                "paired_request_line": 189,
+                "usage": {
+                  "prompt_tokens": 110571,
+                  "total_tokens": 110931,
+                  "completion_tokens": 360,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 108928,
+                    "image_tokens": 11600
+                  },
+                  "reasoning_tokens": 162
+                }
+              },
+              "result_snapshot_line": 191,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "650f7cac8cb8c6e8c9f91cfcc68a1a778d3067b618b12ff57ed08663825b8cea",
+              "actual_action_echoes": [
+                "MOUSE(row=10, col=54) -> effect",
+                "MOUSE(row=59, col=55) -> effect",
+                "MOUSE(row=11, col=35) -> LEVEL COMPLETED"
+              ]
+            }
+          },
+          "successful_hashes_match_memory_summary": true,
+          "successful_memory_response_count": 64,
+          "successful_memory_count_matches_summary": true,
+          "all_selected_calls_found": true
+        },
+        "baseline": {
+          "path": "runs/032-memory-short/baseline/r11l-495a7899_p0_requests.jsonl",
+          "sha256": "e4a08068916ca62b629349859668eb5b5539dda520c85814eefd70fc3061ddd4",
+          "bytes": 70258799,
+          "line_count": 209,
+          "request_count": 105,
+          "response_count": 104,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 7919253,
+            "completion_tokens": 180310,
+            "total_tokens": 8099563
+          }
+        },
+        "candidate_usage_completion_equals_analyzer_tokens": true,
+        "baseline_usage_completion_equals_analyzer_tokens": true,
+        "note": "Snapshots directly show memory blocks in outgoing request messages, completed-level rule instructions, and exact later tool code/output. Prior-response usage identifies the preceding generated response; it is not an isolated cost of the memory block."
+      }
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "benchmark": {
+        "baseline": {
+          "game_id": "sc25-635fd71a",
+          "state": "cancelled",
+          "levels_completed": 4,
+          "number_of_levels": 6,
+          "final_score": 47.61904761904761,
+          "actions_per_level": [
+            29,
+            5,
+            38,
+            77,
+            249,
+            0
+          ],
+          "solver_note": "tokens=163232",
+          "total_actions": 398,
+          "reset_history_indices_1based": [
+            1,
+            114,
+            206,
+            271,
+            333,
+            398
+          ]
+        },
+        "solved_level_memory": {
+          "game_id": "sc25-635fd71a",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "number_of_levels": 6,
+          "final_score": 71.05048195633093,
+          "actions_per_level": [
+            68,
+            7,
+            33,
+            40,
+            106,
+            32
+          ],
+          "solver_note": "tokens=169360",
+          "total_actions": 286,
+          "reset_history_indices_1based": [
+            49,
+            206
+          ]
+        }
+      },
+      "official_score_delta": 23.431434337283314,
+      "completed_level_delta": 1,
+      "summary_records": [
+        {
+          "level": 1,
+          "n_actions": 19,
+          "actions": [
+            "LEFT",
+            "DOWN",
+            "LEFT",
+            "DOWN",
+            "LEFT",
+            "DOWN",
+            "LEFT",
+            "DOWN",
+            "LEFT",
+            "UP",
+            "MOUSE(row=49, col=30)",
+            "MOUSE(row=55, col=24)",
+            "MOUSE(row=55, col=35)",
+            "MOUSE(row=60, col=30)",
+            "MOUSE(row=19, col=14)",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "LEFT"
+          ],
+          "reasoning": " at ~cols 17-18. So the tip continued moving left, now at cols 17-18 (or it's absorbed). So LEFT moves the tip left by 2 columns per press when it's a 2-wide nub! Interesting: the nub state (2 wide) moves 2 per LEFT, and the full state (4 wide) moves 4 per LEFT... wait no. Let me recompute: the nub was at cols 23-24 (2 wide, rows 19-20). After LEFT: b at col 21, S at col 22 (rows 19-20) → cols 21-22 = moved left 2. After LEFT: b col 19, S col 20 → moved left 2. After LEFT: gone from filter → probably cols 17-18. Hmm, so in the nub state, LEFT works repeatedly and moves 2 columns each time. And it doesn't need alternating rotations! So the tip is now at ~17-18, adjacent to the head (12-16). Let me look at the current board and continue LEFT to see if the tip merges into the head or disappears (which might be the win: fully retract the key!). Let me print the key region and try more LEFTs.",
+          "rule": "Push the plunger tip fully into the head (left) via LEFT (with DOWN rotations to alternate); keypad code entry advanced it 1 col per 4 clicks (mostly a distractor). Budget ≈ 48 actions.",
+          "asks_sent": 1,
+          "completion_history_index": 68,
+          "completion_step": 68,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 0,
+          "resets_since_previous_completion": [
+            49
+          ],
+          "total_actions_this_completed_level": 68
+        },
+        {
+          "level": 2,
+          "n_actions": 7,
+          "actions": [
+            "UP",
+            "UP",
+            "MOUSE(row=50, col=25)",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "UP",
+            "UP"
+          ],
+          "reasoning": "1-22 (after the entry). That's 10 rows. Hmm, maybe the entry advanced it a lot because... hmm. Actually, maybe the entry didn't advance it 10 rows; maybe the entry made the tip \"jump\" through the notches (the c blockers) — the notches are still visible at rows 27-30 in the image. Let me look at the image: the c notches are still there at rows ~27-31. And the tip is now at rows 17-20 (just below the head). Hmm, wait. Let me re-read: after the 3 clicks, keybits showed S at rows 21-22 (8 px, cols 31-34) and no b. Then after UP, no b/S below row 20. So the tip is now up near the head. So the code entry advanced the tip by ~10 rows? Or maybe the entry \"unlocked\" the notches and the tip snapped up? Anyway, the tip is close to the head now. Let me press UP again to finish (in level 1, the final push merged the tip into the head and completed the level). Let me press UP and check for completion.",
+          "rule": null,
+          "asks_sent": 2,
+          "completion_history_index": 75,
+          "completion_step": 75,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "not_stated",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 68,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 7
+        },
+        {
+          "level": 3,
+          "n_actions": 33,
+          "actions": [
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "DOWN",
+            "UP",
+            "RIGHT",
+            "DOWN",
+            "LEFT",
+            "DOWN",
+            "UP",
+            "UP",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "LEFT"
+          ],
+          "reasoning": "The marker has moved into the bulb area: it's now at rows ~38-41, cols 27-30 (to the right of the bulb, overlapping the bulb's gray connector). The image shows the marker's S/b at rows 38-41 cols 27-30 and the bulb at cols 22-26. Hmm, the marker moved down and is now beside the bulb (the bulb is to the LEFT of the marker). The neck was at cols 27-30 and the bulb is at cols 21-26 rows 37-42. So the marker came down the neck and is now at the bulb's right side, at the same rows. So the marker needs to move LEFT into the bulb! Let me press LEFT. Let me check the exact positions first, then press LEFT.",
+          "rule": null,
+          "asks_sent": 2,
+          "completion_history_index": 108,
+          "completion_step": 108,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "not_stated",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 75,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 33
+        },
+        {
+          "level": 4,
+          "n_actions": 40,
+          "actions": [
+            "MOUSE(row=55, col=25)",
+            "MOUSE(row=55, col=35)",
+            "MOUSE(row=60, col=30)",
+            "RIGHT",
+            "UP",
+            "UP",
+            "UP",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "UP",
+            "UP",
+            "UP",
+            "LEFT",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT"
+          ],
+          "reasoning": "o S at 43-44 because the slice was taken when the nub was at rows 29-30 (before the DOWN moves). So at that time: g at cols 40-48, S at 49-52, b at 53. Hmm, but the segmentation now says the bulb's S is at cols 51-54. So the bulb shifted RIGHT by 2 between then and now? That seems odd. Hmm, maybe the bulb \"grew\"/shifted as the nub approached? Or my earlier ascii read was of the frame right after the dissolve when the bulb was at 49-52, and now it's at 51-54? Wait, in the current image, the nub is at cols ~49-50 (just left of the bulb) and the bulb is at cols 51-55. The image shows the nub touching the bulb's left edge. Hmm, so the bulb moved right by 2 at some point? Perhaps when the nub pushed... no. Whatever. The nub is at rows 35-36, cols 49-50, and the bulb's S fill is at rows 35-38 cols 51-54. One more RIGHT → the nub at cols 51-52 = inside the bulb → completion? Let me press RIGHT.",
+          "rule": null,
+          "asks_sent": 2,
+          "completion_history_index": 148,
+          "completion_step": 148,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "not_stated",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 108,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 40
+        },
+        {
+          "level": 5,
+          "n_actions": 48,
+          "actions": [
+            "LEFT",
+            "UP",
+            "UP",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "DOWN",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "LEFT",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "MOUSE(row=60, col=30)",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=25)",
+            "MOUSE(row=55, col=35)",
+            "MOUSE(row=60, col=30)",
+            "MOUSE(row=50, col=25)",
+            "MOUSE(row=50, col=30)",
+            "MOUSE(row=55, col=30)",
+            "UP",
+            "UP",
+            "UP",
+            "UP",
+            "UP",
+            "UP"
+          ],
+          "reasoning": "The 4x4 marker is now in the tube's socket at rows 35-38 (b cols 51-52 left, S cols 53-54 right). Bar = 26. Now push UP 6 times: rows 31-34, 27-30, 23-26, 19-22, 15-18, then 11-14 (merge with the bulb → complete). Note: the marker's split is vertical (b left) — for a vertical move, it becomes horizontal with b leading up. Fine. Let me run UP×6.",
+          "rule": "Push plunger into blue bulb. Code L (yellow, 3 clicks) teleports plunger to the yellow-X socket matching its size (4x4↔2x2 nub, displacing any core). Code D (diamond, 4 clicks) pumps 4x4↔top-left 2x2 nub. Code V (vertical, 3 clicks) fires a straight pulse along the b-half direction; reaching an M/r handle dissolves all M+r, reaching M/O handle dissolves M+O. Budget = right-edge green bar, 1 cell/action (~64).",
+          "asks_sent": 2,
+          "completion_history_index": 254,
+          "completion_step": 254,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 148,
+          "resets_since_previous_completion": [
+            206
+          ],
+          "total_actions_this_completed_level": 106
+        }
+      ],
+      "final_block_characters": 4830,
+      "successful_memory_requests": 67,
+      "delivered_block_hashes": [
+        "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+        "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+        "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+        "ff7e9737302593a80fe012ebe94af0d4f2b02164b02cbb5e5ae4473366fa5bd5"
+      ],
+      "initial_findings": {
+        "mechanisms_in_rule": [
+          "L1 plunger into bulb and repeated directional push",
+          "L5 teleport code, size toggle, directional pulse and handle dissolution"
+        ],
+        "conflict": "OnlyL1/L5 rules are captured in summary, but raw transcript hasL2-L4 active recaps and concrete Rule4 code; null parser capture is not evidence of absent reflection. L1 keypad-distractor hypothesis is refined by later observedcode effects.",
+        "causal_boundary": "L5 detailed keypad mechanisms were captured after winning L5 and cannot be credited as the cause of this newly completed level. Possible prior evidence is L1 hypothesis plus later solved-action/reasoning tails.",
+        "next_trace_focus": "Whether prior goal/push/rotation or successful code-action tails survive trimming and enter actual L5 code/actions, rather than counting its post-win recap."
+      },
+      "actual_post_trim_delivery": {
+        "unique_transcript_blocks": [
+          {
+            "line": 8240,
+            "sha256": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+            "first_visible_current_step": 77,
+            "first_visible_current_level": 3,
+            "recorded_levels": [
+              1,
+              2
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 3033
+          },
+          {
+            "line": 12996,
+            "sha256": "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+            "first_visible_current_step": 142,
+            "first_visible_current_level": 4,
+            "recorded_levels": [
+              1,
+              2,
+              3
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 4147
+          },
+          {
+            "line": 17521,
+            "sha256": "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+            "first_visible_current_step": 199,
+            "first_visible_current_level": 5,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 4479
+          },
+          {
+            "line": 21419,
+            "sha256": "ff7e9737302593a80fe012ebe94af0d4f2b02164b02cbb5e5ae4473366fa5bd5",
+            "first_visible_current_step": 263,
+            "first_visible_current_level": 6,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 4830
+          }
+        ],
+        "all_successful_summary_hashes_found": true,
+        "boundary": "Confirmed in serialized request payload: exact successful block hashes, request-line message-count reductions, subsequent code/tool returns and returned usage. Transcript and payload render times can differ within a tool turn; actual first request lines are authoritative."
+      },
+      "specific_later_code_action_adoption": [
+        {
+          "transcript_line": 14015,
+          "call_id": "call_bd0161133c0c4562bbcc614b",
+          "current_step": 151,
+          "current_level": 5,
+          "code": "Rule4 = \"L4: slide plunger marker into blue bulb; vertical-line code sends pulse along b-half direction, dissolving M/r when it reaches the M handle; diamond code pumps marker (4x4->nub, 2-cell moves)\"\nfor (rr,cc) in [(50,30),(55,30),(60,30)]:\n    try:\n        r = action([{'action':'MOUSE','row':rr,'col':cc}])\n        print(rr,cc,'noop',r.get('no_op'),'completed',r.get('level_completed'),'over',r.get('game_over'))\n        if r.get('level_completed') or r.get('game_over'): break\n    except Exception as e: print(rr,cc,'ERR',type(e).__name__); break\nprint(tl_summary())\nprint('marker', mk4(current_frame))",
+          "actual_tool_output": "[action] MOUSE(row=50, col=30) -> effect\n50 30 noop False completed False over False\n[action] MOUSE(row=55, col=30) -> effect\n55 30 noop False completed False over False\n[action] MOUSE(row=60, col=30) -> effect\n60 30 noop False completed False over False\n[(1, 'rows 2-61, cols 29-63', {'N>W': 4, 'N>M': 18, 'g>M': 9}), (2, 'rows 11-14, cols 35-36', ['b>M @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)']), (3, 'rows 11-14, cols 35-36', ['M>b @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)']), (4, 'rows 11-14, cols 35-36', ['b>M @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)']), (5, 'rows 11-14, cols 35-36', ['M>b @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)']), (6, 'rows 11-14, cols 35-38', ['b>M @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)', 'S>M @ (11,37) (11,38) (12,37) (12,38) (13,37) (13,38) (14,37) (14,38)']), (7, 'rows 11-14, cols 33-38', ['B>P @ (11,33) (11,34) (12,33) (12,34) (13,33) (13,34) (14,33) (14,34)', 'M>P @ (11,35) (11,36) (12,35) (12,36) (13,35) (13,36) (14,35) (14,36)', 'M>S @ (11,37) (11,38) (12,37) (12,38) (13,37) (13,38) (14,37) (14,38)']), (8, 'rows 11-14, cols 33-36', ['P>M @ (11,33) (12,33)', 'P>B @ (11,34) (12,34)', 'P>b @ (11,35) (11,36) (12,35) (12,36)', '... 8 further changed cells omitted']), (9, 'rows 11-61, cols 29-33', {'M>B': 4, 'M>g': 27})]\nmarker [('b', 14, 10, 14, 50, 55), ('b', 8, 11, 14, 35, 36), ('S', 8, 11, 14, 37, 38), ('S', 16, 11, 14, 51, 54)]\n",
+          "actual_action_echoes": [
+            "MOUSE(row=50, col=30) -> effect",
+            "MOUSE(row=55, col=30) -> effect",
+            "MOUSE(row=60, col=30) -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "a076b6416b0f2e47cccdf6441bd5038ab38d3dcb290d43f4fe3a0c1c68eed408"
+        },
+        {
+          "transcript_line": 16570,
+          "call_id": "call_57317036c05844dfad335d41",
+          "current_step": 180,
+          "current_level": 5,
+          "code": "for act in ['UP','UP','UP']:\n    try:\n        r = action([act])\n        print(act,'noop',r.get('no_op'),'completed',r.get('level_completed'), mk5(current_frame))\n        if r.get('level_completed') or r.get('no_op'): break\n    except Exception as e: print(act,'ERR',type(e).__name__); break\nfor (rr,cc) in [(50,30),(55,25),(55,35),(60,30)]:\n    try:\n        r = action([{'action':'MOUSE','row':rr,'col':cc}])\n        print(rr,cc,'noop',r.get('no_op'),'completed',r.get('level_completed'),'over',r.get('game_over'))\n        if r.get('level_completed') or r.get('game_over'): break\n    except Exception as e: print(rr,cc,'ERR',type(e).__name__); break\ntl = tl_summary()\nfor e in tl[-3:]: print(e)\nprint(mk5(current_frame))\nfor n in current_frame.segmentation['nodes']:\n    if n['color'] in 'rO' and n['pixels']<=16:\n        b=n['boundary']; print(n['color'],n['pixels'],(min(p[0] for p in b),max(p[0] for p in b),min(p[1] for p in b),max(p[1] for p in b)))",
+          "actual_tool_output": "[action] UP -> effect\nUP noop False completed False [('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 8, 31, 32, 51, 54), ('S', 8, 33, 34, 51, 54)]\n[action] UP -> effect\nUP noop False completed False [('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 8, 27, 28, 51, 54), ('S', 8, 29, 30, 51, 54)]\n[action] UP -> effect\nUP noop False completed False [('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 8, 23, 24, 51, 54), ('S', 8, 25, 26, 51, 54)]\n[action] MOUSE(row=50, col=30) -> effect\n50 30 noop False completed False over False\n[action] MOUSE(row=55, col=25) -> effect\n55 25 noop False completed False over False\n[action] MOUSE(row=55, col=35) -> effect\n55 35 noop False completed False over False\n[action] MOUSE(row=60, col=30) -> effect\n60 30 noop False completed False over False\n(8, 'rows 23-26, cols 51-54', ['g>b @ (23,53) (23,54) (24,53) (24,54)', 'S>b @ (24,51) (24,52)', 'g>S @ (25,51) (25,52) (25,53) (25,54) (26,51) (26,52) (26,53) (26,54)'])\n(9, 'rows 23-26, cols 51-54', ['b>g @ (23,53) (23,54) (24,53) (24,54)', 'b>S @ (24,51) (24,52)', 'S>g @ (25,51) (25,52) (25,53) (25,54) (26,51) (26,52) (26,53) (26,54)'])\n(10, 'rows 34-43, cols 27-63', ['Y>B @ (34,50) (34,55) (39,50) (39,55)', 'B>p @ (37,27) (37,32)', '... 6 further changed cells omitted'])\n[('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 2, 23, 23, 51, 52), ('S', 2, 24, 24, 51, 52)]\nr 4 (12, 13, 16, 17)\nr 12 (16, 18, 51, 54)\nO 12 (20, 22, 51, 54)\nO 4 (44, 45, 4, 5)\n",
+          "actual_action_echoes": [
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "MOUSE(row=50, col=30) -> effect",
+            "MOUSE(row=55, col=25) -> effect",
+            "MOUSE(row=55, col=35) -> effect",
+            "MOUSE(row=60, col=30) -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "915daa520d50b31d3df8fd0ea4cf335edf91107641586ae5a2f31d3c643dcbab"
+        },
+        {
+          "transcript_line": 18785,
+          "call_id": "call_bb91bf761fe148eca474ea60",
+          "current_step": 207,
+          "current_level": 5,
+          "code": "def run(seq, label=''):\n    out=[]\n    for a in seq:\n        try:\n            r = action([a])\n        except Exception as e:\n            out.append('ERR:%s'%type(e).__name__); break\n        nm = a if isinstance(a,str) else 'C%d,%d'%(a['row'],a['col'])\n        out.append(nm+('' if not r.get('no_op') else '*noop'))\n        if r.get('level_completed'): out.append('COMPLETE'); break\n        if r.get('game_over'): out.append('DEAD'); break\n        if r.get('no_op'): break\n    print(label, ' '.join(out))\n    print('   ', mk5(current_frame), 'bar', bar(current_frame))\n    return r\nCODE_L=[{'action':'MOUSE','row':50,'col':25},{'action':'MOUSE','row':50,'col':30},{'action':'MOUSE','row':55,'col':30}]\nCODE_V=[{'action':'MOUSE','row':50,'col':30},{'action':'MOUSE','row':55,'col':30},{'action':'MOUSE','row':60,'col':30}]\nCODE_D=[{'action':'MOUSE','row':50,'col':30},{'action':'MOUSE','row':55,'col':25},{'action':'MOUSE','row':55,'col':35},{'action':'MOUSE','row':60,'col':30}]\nr = run([{'action':'MOUSE','row':50,'col':25},{'action':'MOUSE','row':50,'col':30},{'action':'MOUSE','row':55,'col':30},'UP','UP','UP'], 'P1a')",
+          "actual_tool_output": "[action] MOUSE(row=50, col=25) -> effect\n[action] MOUSE(row=50, col=30) -> effect\n[action] MOUSE(row=55, col=30) -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\nP1a C50,25 C50,30 C55,30 UP UP UP\n    [('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 8, 23, 24, 51, 54), ('S', 8, 25, 26, 51, 54)] bar (6, 63, 58)\n",
+          "actual_action_echoes": [
+            "MOUSE(row=50, col=25) -> effect",
+            "MOUSE(row=50, col=30) -> effect",
+            "MOUSE(row=55, col=30) -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "22b1887478d8489c3ee5505cc589f1ec19e819a752e3f35b8a5366550018b14b"
+        },
+        {
+          "transcript_line": 19256,
+          "call_id": "call_7fb1a2169a7c4ec5a7caf878",
+          "current_step": 220,
+          "current_level": 5,
+          "code": "CODE_V=[{'action':'MOUSE','row':50,'col':30},{'action':'MOUSE','row':55,'col':30},{'action':'MOUSE','row':60,'col':30}]\nrun(['LEFT']*6+['UP','UP']+CODE_V, 'P2a')\nfor n in current_frame.segmentation['nodes']:\n    if n['color'] in 'rOM' and n['pixels']<=16:\n        b=n['boundary']; print(n['color'],n['pixels'],(min(p[0] for p in b),max(p[0] for p in b),min(p[1] for p in b),max(p[1] for p in b)))",
+          "actual_tool_output": "[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] MOUSE(row=50, col=30) -> effect\n[action] MOUSE(row=55, col=30) -> effect\n[action] MOUSE(row=60, col=30) -> effect\nP2a LEFT LEFT LEFT LEFT LEFT LEFT UP UP C50,30 C55,30 C60,30\n    [('b', 14, 10, 14, 50, 55), ('S', 16, 11, 14, 51, 54), ('b', 2, 35, 35, 17, 18), ('S', 2, 36, 36, 17, 18)] bar (26, 63, 38)\nO 12 (20, 22, 51, 54)\nM 4 (23, 24, 4, 5)\nM 4 (26, 27, 4, 5)\nM 4 (29, 30, 4, 5)\nM 12 (43, 46, 3, 6)\nO 4 (44, 45, 4, 5)\n",
+          "actual_action_echoes": [
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "MOUSE(row=50, col=30) -> effect",
+            "MOUSE(row=55, col=30) -> effect",
+            "MOUSE(row=60, col=30) -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "0910f31d6f3f968823f62033d13e2bdfc92ad691ee28f212929337c00bb98737"
+        },
+        {
+          "transcript_line": 20219,
+          "call_id": "call_d6867d139bdb4d918572f140",
+          "current_step": 249,
+          "current_level": 5,
+          "code": "run(['UP']*6, 'P3b')",
+          "actual_tool_output": "[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> effect\n[action] UP -> LEVEL COMPLETED\nP3b UP UP UP UP UP UP COMPLETE\n    [('b', 14, 8, 12, 32, 37), ('S', 16, 9, 12, 33, 36), ('b', 8, 21, 22, 41, 44), ('S', 8, 23, 24, 41, 44)] bar (0, 63, 64)\n{'executed': True, 'action_num': 254, 'level': 6, 'score': 5, 'state': 'NOT_FINISHED', 'valid_actions': ['UP', 'DOWN', 'LEFT', 'RIGHT', 'MOUSE'], 'board_changed': True, 'done': False, 'level_completed': True, 'game_over': False, 'run_complete': False, 'action_display': 'UP', 'gameplay_changed': True, 'executed_actions': ['UP'], 'no_op': False, 'animation': {'frames': 3, 'transient_pixels': 12, 'transient_bbox': [15, 51, 18, 54]}, 'stop_reason': 'level_completed', 'run_elapsed_seconds': 2027.900411093, 'time_remaining_seconds': 672.099588907}\n",
+          "actual_action_echoes": [
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> LEVEL COMPLETED"
+          ],
+          "level_completed_in_output": true,
+          "code_sha256": "461d8b5c16c0600530464fc6327fa0b6a2e8aee508ff87bac2c70f89f650295d"
+        }
+      ],
+      "causal_assessment": "Prior-level goal/push/code experience visibly informs fresh L5 actions and later recovery; pinning and recap are both exercised, but L5-specific code discoveries are learned within that level.",
+      "transcript_source": {
+        "path": "runs/032-memory-priority/solved_level_memory/transcripts/sc25-635fd71a_p0.txt",
+        "sha256": "4080c3abc20dbf45e1a324f9429180a0ca5583a68a403f4547f61bacbaf0fd52",
+        "bytes": 2788588,
+        "completeness": "Parent confirmed independent priority download CLI exited0 before this review"
+      },
+      "completion_echoes": [
+        {
+          "line": 6828,
+          "actual_action": "[action] LEFT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 7788,
+          "actual_action": "[action] UP -> LEVEL COMPLETED"
+        },
+        {
+          "line": 10894,
+          "actual_action": "[action] LEFT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 13373,
+          "actual_action": "[action] RIGHT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 20234,
+          "actual_action": "[action] UP -> LEVEL COMPLETED"
+        }
+      ],
+      "interpretation": {
+        "assessment": "Prior-level goal/push/code experience visibly informs fresh L5 actions and later recovery; pinning and recap are both exercised, but L5-specific code discoveries are learned within that level.",
+        "active_recap_chain": "L4 recap prompt is followed by a Rule4 string embedded in actual code at14015: vertical-line pulse follows b-half and dissolves handle; code immediately performs3 keypad clicks and reads animation/mapping. At16540 thinking explicitly reconsiders L1 experience about diamond pumping, then16570 performs3UP+4 diamond clicks and measures4x4→2x2 shrink.",
+        "pin_chain": "Serialized request183 carries the successfulL1-L4 block atstate199/L5 (transcriptline17521), before the later RESET at action206. After reset call18785 rebuilds CODE_L/V/D sequences with a real per-action runner;19256 executes11 actions and sees disappearance of r blocks;20219 executesUP×6 and completesL5. Clear goal and repeated control patterns survive the reset/trim period, while plan coordinates are recomputed from current state.",
+        "limits": "The summary captured explicit rule only forL1/L5, but raw transcript contains active L2-L4 recaps, including actionable Rule4 code. Do not infer absent reflection from null captured rule. Rich L5 rule is post-win and cannot cause its own win. L5 required106 actions including failed first attempt/reset; successful final attempt48, so there is real recovery cost."
+      },
+      "observed_costs": {
+        "baseline_analyzer_tokens": 163232,
+        "candidate_analyzer_tokens": 169360,
+        "delta_analyzer_tokens": 6128,
+        "delta_percent": 3.754165849833366,
+        "baseline_actions": 398,
+        "candidate_actions": 286,
+        "delta_actions": -112,
+        "note": "Analyzer token count is a returned/reporting view, not marginal memory tokens or billable GPU usage; no separate prompt-token isolation from transcripts.",
+        "baseline_prompt_tokens": 8170007,
+        "candidate_prompt_tokens": 8013679,
+        "prompt_token_delta": -156328
+      },
+      "request_payload_crosscheck": {
+        "candidate": {
+          "path": "runs/032-memory-short/solved_level_memory/sc25-635fd71a_p0_requests.jsonl",
+          "sha256": "469e834253efed719cbc567ae5cb249aa76ebc0dbd6efcc4170367cf39740f7d",
+          "bytes": 73880280,
+          "line_count": 230,
+          "request_count": 115,
+          "response_count": 115,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 8013679,
+            "completion_tokens": 169360,
+            "total_tokens": 8183039
+          },
+          "memory_blocks": {
+            "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963": {
+              "first_request_line": 97,
+              "first_request": {
+                "request_line": 97,
+                "memory_hash": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+                "analysis_step": 26,
+                "snapshot_action": 77,
+                "current_step": 77,
+                "current_level": 3,
+                "message_count": 47
+              },
+              "request_lines": [
+                97,
+                99,
+                101,
+                103,
+                105,
+                107,
+                109,
+                111,
+                113,
+                115,
+                117,
+                119,
+                121,
+                123,
+                125,
+                127,
+                129,
+                131,
+                133,
+                135,
+                137,
+                139
+              ],
+              "successful_response_lines": [
+                98,
+                100,
+                102,
+                104,
+                106,
+                108,
+                110,
+                112,
+                114,
+                116,
+                118,
+                120,
+                122,
+                124,
+                126,
+                128,
+                130,
+                132,
+                134,
+                136,
+                138,
+                140
+              ],
+              "previous_request_line": 95,
+              "previous_message_count": 124,
+              "levels_in_block": [
+                1,
+                2
+              ]
+            },
+            "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71": {
+              "first_request_line": 141,
+              "first_request": {
+                "request_line": 141,
+                "memory_hash": "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+                "analysis_step": 43,
+                "snapshot_action": 135,
+                "current_step": 135,
+                "current_level": 4,
+                "message_count": 54
+              },
+              "request_lines": [
+                141,
+                143,
+                145,
+                147,
+                149,
+                151,
+                153,
+                155,
+                157,
+                159,
+                161,
+                163,
+                165,
+                167,
+                169,
+                171,
+                173,
+                175,
+                177,
+                179,
+                181
+              ],
+              "successful_response_lines": [
+                142,
+                144,
+                146,
+                148,
+                150,
+                152,
+                154,
+                156,
+                158,
+                160,
+                162,
+                164,
+                166,
+                168,
+                170,
+                172,
+                174,
+                176,
+                178,
+                180,
+                182
+              ],
+              "previous_request_line": 139,
+              "previous_message_count": 105,
+              "levels_in_block": [
+                1,
+                2,
+                3
+              ]
+            },
+            "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5": {
+              "first_request_line": 183,
+              "first_request": {
+                "request_line": 183,
+                "memory_hash": "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+                "analysis_step": 60,
+                "snapshot_action": 199,
+                "current_step": 199,
+                "current_level": 5,
+                "message_count": 51
+              },
+              "request_lines": [
+                183,
+                185,
+                187,
+                189,
+                191,
+                193,
+                195,
+                197,
+                199,
+                201,
+                203,
+                205,
+                207,
+                209,
+                211
+              ],
+              "successful_response_lines": [
+                184,
+                186,
+                188,
+                190,
+                192,
+                194,
+                196,
+                198,
+                200,
+                202,
+                204,
+                206,
+                208,
+                210,
+                212
+              ],
+              "previous_request_line": 181,
+              "previous_message_count": 111,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "ff7e9737302593a80fe012ebe94af0d4f2b02164b02cbb5e5ae4473366fa5bd5": {
+              "first_request_line": 213,
+              "first_request": {
+                "request_line": 213,
+                "memory_hash": "ff7e9737302593a80fe012ebe94af0d4f2b02164b02cbb5e5ae4473366fa5bd5",
+                "analysis_step": 70,
+                "snapshot_action": 263,
+                "current_step": 263,
+                "current_level": 6,
+                "message_count": 37
+              },
+              "request_lines": [
+                213,
+                215,
+                217,
+                219,
+                221,
+                223,
+                225,
+                227,
+                229
+              ],
+              "successful_response_lines": [
+                214,
+                216,
+                218,
+                220,
+                222,
+                224,
+                226,
+                228,
+                230
+              ],
+              "previous_request_line": 211,
+              "previous_message_count": 92,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          },
+          "rule_instruction_requests": [
+            {
+              "request_line": 83,
+              "memory_hash": null,
+              "analysis_step": 21,
+              "snapshot_action": 69,
+              "current_step": 69,
+              "current_level": 2,
+              "message_count": 108,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 85,
+              "memory_hash": null,
+              "analysis_step": 21,
+              "snapshot_action": 69,
+              "current_step": 69,
+              "current_level": 2,
+              "message_count": 110,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 93,
+              "memory_hash": null,
+              "analysis_step": 25,
+              "snapshot_action": 76,
+              "current_step": 76,
+              "current_level": 3,
+              "message_count": 122,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 95,
+              "memory_hash": null,
+              "analysis_step": 25,
+              "snapshot_action": 76,
+              "current_step": 76,
+              "current_level": 3,
+              "message_count": 124,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 97,
+              "memory_hash": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+              "analysis_step": 26,
+              "snapshot_action": 77,
+              "current_step": 77,
+              "current_level": 3,
+              "message_count": 47,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 125,
+              "memory_hash": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+              "analysis_step": 37,
+              "snapshot_action": 109,
+              "current_step": 109,
+              "current_level": 4,
+              "message_count": 86,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 127,
+              "memory_hash": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+              "analysis_step": 37,
+              "snapshot_action": 109,
+              "current_step": 109,
+              "current_level": 4,
+              "message_count": 88,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 129,
+              "memory_hash": "7cc7b39c3fee2b8464e004375e589152aacbb6b1aeaebe596ad4e5b8ccdc3963",
+              "analysis_step": 38,
+              "snapshot_action": 115,
+              "current_step": 115,
+              "current_level": 4,
+              "message_count": 91,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 149,
+              "memory_hash": "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+              "analysis_step": 46,
+              "snapshot_action": 149,
+              "current_step": 149,
+              "current_level": 5,
+              "message_count": 65,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 151,
+              "memory_hash": "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+              "analysis_step": 46,
+              "snapshot_action": 149,
+              "current_step": 149,
+              "current_level": 5,
+              "message_count": 67,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 153,
+              "memory_hash": "8b37585701d8055fbe6f2eca9b6b8afe1dfc417ac3dac872b3a8fe52b49cde71",
+              "analysis_step": 47,
+              "snapshot_action": 151,
+              "current_step": 151,
+              "current_level": 5,
+              "message_count": 70,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 205,
+              "memory_hash": "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+              "analysis_step": 69,
+              "snapshot_action": 255,
+              "current_step": 255,
+              "current_level": 6,
+              "message_count": 84,
+              "asks_rule_for_completed_level": 5
+            },
+            {
+              "request_line": 207,
+              "memory_hash": "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+              "analysis_step": 69,
+              "snapshot_action": 255,
+              "current_step": 255,
+              "current_level": 6,
+              "message_count": 86,
+              "asks_rule_for_completed_level": 5
+            },
+            {
+              "request_line": 209,
+              "memory_hash": "a410b00875ebf7c2e98e8dc8b98bf992e7ea979eb2d9619e91339e4188a809e5",
+              "analysis_step": 69,
+              "snapshot_action": 255,
+              "current_step": 255,
+              "current_level": 6,
+              "message_count": 89,
+              "asks_rule_for_completed_level": 5
+            }
+          ],
+          "selected_calls": {
+            "call_bd0161133c0c4562bbcc614b": {
+              "first_seen_snapshot_line": 155,
+              "event": "request",
+              "prior_response": {
+                "response_line": 154,
+                "paired_request_line": 153,
+                "usage": {
+                  "prompt_tokens": 74683,
+                  "total_tokens": 77055,
+                  "completion_tokens": 2372,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 72960,
+                    "image_tokens": 14400
+                  },
+                  "reasoning_tokens": 2156
+                }
+              },
+              "result_snapshot_line": 155,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "da56b84f19e99f435c9dfc6616fb7b2ffb28302cb87bee29b25a10f95f6990cd",
+              "actual_action_echoes": [
+                "MOUSE(row=50, col=30) -> effect",
+                "MOUSE(row=55, col=30) -> effect",
+                "MOUSE(row=60, col=30) -> effect"
+              ]
+            },
+            "call_57317036c05844dfad335d41": {
+              "first_seen_snapshot_line": 177,
+              "event": "request",
+              "prior_response": {
+                "response_line": 176,
+                "paired_request_line": 175,
+                "usage": {
+                  "prompt_tokens": 105730,
+                  "total_tokens": 107475,
+                  "completion_tokens": 1745,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 103808,
+                    "image_tokens": 22000
+                  },
+                  "reasoning_tokens": 1394
+                }
+              },
+              "result_snapshot_line": 177,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "18483af99d05b89ea9785c37014ebd83523eb3ae4cd1e5fd843aea3a5f3c08d4",
+              "actual_action_echoes": [
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "MOUSE(row=50, col=30) -> effect",
+                "MOUSE(row=55, col=25) -> effect",
+                "MOUSE(row=55, col=35) -> effect",
+                "MOUSE(row=60, col=30) -> effect"
+              ]
+            },
+            "call_bb91bf761fe148eca474ea60": {
+              "first_seen_snapshot_line": 193,
+              "event": "request",
+              "prior_response": {
+                "response_line": 192,
+                "paired_request_line": 191,
+                "usage": {
+                  "prompt_tokens": 80499,
+                  "total_tokens": 82541,
+                  "completion_tokens": 2042,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 72064,
+                    "image_tokens": 14800
+                  },
+                  "reasoning_tokens": 1609
+                }
+              },
+              "result_snapshot_line": 193,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function run(seq, label='') for later Python calls in this game.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "916c2411eb39f4bf3f3c37bf729d5e7971ce4472bb18a0d559a18f1f3b0cd727",
+              "actual_action_echoes": [
+                "MOUSE(row=50, col=25) -> effect",
+                "MOUSE(row=50, col=30) -> effect",
+                "MOUSE(row=55, col=30) -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect"
+              ]
+            },
+            "call_7fb1a2169a7c4ec5a7caf878": {
+              "first_seen_snapshot_line": 197,
+              "event": "request",
+              "prior_response": {
+                "response_line": 196,
+                "paired_request_line": 195,
+                "usage": {
+                  "prompt_tokens": 86497,
+                  "total_tokens": 86746,
+                  "completion_tokens": 249,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 84416,
+                    "image_tokens": 16400
+                  },
+                  "reasoning_tokens": 63
+                }
+              },
+              "result_snapshot_line": 197,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "7ab946b057445312071c7c65b396b5e20cdc6edf0ab1693717b1c96fd464031d",
+              "actual_action_echoes": [
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "MOUSE(row=50, col=30) -> effect",
+                "MOUSE(row=55, col=30) -> effect",
+                "MOUSE(row=60, col=30) -> effect"
+              ]
+            },
+            "call_d6867d139bdb4d918572f140": {
+              "first_seen_snapshot_line": 205,
+              "event": "request",
+              "prior_response": {
+                "response_line": 204,
+                "paired_request_line": 203,
+                "usage": {
+                  "prompt_tokens": 96313,
+                  "total_tokens": 96496,
+                  "completion_tokens": 183,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 93632,
+                    "image_tokens": 19600
+                  },
+                  "reasoning_tokens": 146
+                }
+              },
+              "result_snapshot_line": 205,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "b3fdb7035e5b79b2173d6dd2ca1e838c400d3f314774cc8b77908cd95dc2bcb3",
+              "actual_action_echoes": [
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> LEVEL COMPLETED"
+              ]
+            }
+          },
+          "successful_hashes_match_memory_summary": true,
+          "successful_memory_response_count": 67,
+          "successful_memory_count_matches_summary": true,
+          "all_selected_calls_found": true
+        },
+        "baseline": {
+          "path": "runs/032-memory-short/baseline/sc25-635fd71a_p0_requests.jsonl",
+          "sha256": "09e6bd9724a6f50aa1d30d9780313f22035b906a060675813efff17a14df8ad9",
+          "bytes": 76693334,
+          "line_count": 231,
+          "request_count": 116,
+          "response_count": 115,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 8170007,
+            "completion_tokens": 163232,
+            "total_tokens": 8333239
+          }
+        },
+        "candidate_usage_completion_equals_analyzer_tokens": true,
+        "baseline_usage_completion_equals_analyzer_tokens": true,
+        "note": "Snapshots directly show memory blocks in outgoing request messages, completed-level rule instructions, and exact later tool code/output. Prior-response usage identifies the preceding generated response; it is not an isolated cost of the memory block."
+      }
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "benchmark": {
+        "baseline": {
+          "game_id": "tu93-0768757b",
+          "state": "cancelled",
+          "levels_completed": 5,
+          "number_of_levels": 9,
+          "final_score": 33.33333333333333,
+          "actions_per_level": [
+            18,
+            23,
+            24,
+            42,
+            48,
+            65,
+            0,
+            0,
+            0
+          ],
+          "solver_note": "tokens=176772",
+          "total_actions": 220,
+          "reset_history_indices_1based": [
+            24,
+            46,
+            69,
+            90,
+            112,
+            177
+          ]
+        },
+        "solved_level_memory": {
+          "game_id": "tu93-0768757b",
+          "state": "cancelled",
+          "levels_completed": 6,
+          "number_of_levels": 9,
+          "final_score": 46.666666666666664,
+          "actions_per_level": [
+            18,
+            15,
+            24,
+            28,
+            29,
+            31,
+            4,
+            0,
+            0
+          ],
+          "solver_note": "tokens=180417",
+          "total_actions": 149,
+          "reset_history_indices_1based": [
+            23,
+            38,
+            68
+          ]
+        }
+      },
+      "official_score_delta": 13.333333333333336,
+      "completed_level_delta": 1,
+      "summary_records": [
+        {
+          "level": 1,
+          "n_actions": 18,
+          "actions": [
+            "RIGHT",
+            "DOWN",
+            "DOWN",
+            "RIGHT",
+            "UP",
+            "RIGHT",
+            "DOWN",
+            "DOWN",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "RIGHT",
+            "RIGHT",
+            "DOWN",
+            "RIGHT",
+            "UP",
+            "RIGHT",
+            "DOWN"
+          ],
+          "reasoning": "The action names must be full: 'UP','DOWN','LEFT','RIGHT'. My run_moves used single letters. Fix: map letters to names inside run_moves. Also note: step is 2 (not incremented since the action was refused). Good — refused actions don't consume steps. Let me redefine run_moves with mapping.",
+          "rule": "Goal — move the blue arrow token onto the green tile in a 3x3-tile maze. Controls slide the token through gray floor tiles, stopping at (and swapping with) the first white tile; black = wall. Bottom magenta bar = step/timer HUD (refused actions cost nothing). Won with BFS over white tiles (18 moves).",
+          "asks_sent": 2,
+          "completion_history_index": 18,
+          "completion_step": 18,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 0,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 18
+        },
+        {
+          "level": 2,
+          "n_actions": 10,
+          "actions": [
+            "UP",
+            "RIGHT",
+            "RIGHT",
+            "DOWN",
+            "RIGHT",
+            "RIGHT",
+            "UP",
+            "RIGHT",
+            "RIGHT",
+            "UP"
+          ],
+          "reasoning": "write a generic grid builder. But the key info: nodes with colors in 'RpbcNYO' → only N (goal at 21,48), b (27,36), c (27,37). The red is GONE. So blue moving UP into the red's cell destroyed/consumed the red (or the red moved out of the board?). The animation had 24 transient cells in rows 25-34, cols 34-40 — consistent with the red sliding down and... hmm. Whatever happened, blue now occupies (2,8) and the red is gone. Now: RIGHT → (2,10), RIGHT → (2,12), UP → goal (0,12). Wait, from (2,12) UP: (1,12)=g, (0,12)=N → land on N = win. Actually from (2,10): RIGHT passes g(2,11) → lands (2,12) W. Then UP → N. Hmm, could blue go directly from (2,8) to the goal? No, it must land on whites: (2,10), (2,12), then UP to N. Let me also double check the red isn't just hidden below blue (a node fully enclosed would still appear in segmentation). It's gone. Let's execute RIGHT, RIGHT, UP with checks.",
+          "rule": "Goal unchanged (blue → green). Same slide-to-white mechanic. New: red guard token. (1) Moving toward it along its own row (≤3 tiles gap) makes it lunge the same distance into my landing tile = death. (2) Moving into its cell from a perpendicular approach (from below) removed the guard and let me take its tile — that's how I got through, then RIGHT,RIGHT,UP to the goal.",
+          "asks_sent": 1,
+          "completion_history_index": 33,
+          "completion_step": 33,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 18,
+          "resets_since_previous_completion": [
+            23
+          ],
+          "total_actions_this_completed_level": 15
+        },
+        {
+          "level": 3,
+          "n_actions": 19,
+          "actions": [
+            "UP",
+            "UP",
+            "RIGHT",
+            "UP",
+            "LEFT",
+            "LEFT",
+            "UP",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "RIGHT",
+            "DOWN",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "RIGHT",
+            "DOWN",
+            "RIGHT"
+          ],
+          "reasoning": "n any mismatch or death. If a capture behaves unexpectedly (e.g., death), I'll stop and re-plan. Actually, one important safety consideration: my model says landing ON a guard captures it. In level 2 that was true. I'm fairly confident. Let me also double check the first moves: the plan starts U U R U L L U L L D R D L L L D R D R. Positions: (8,10) U→(6,10) U→(4,10) R→(4,12) U→(2,12) L→(2,10) L→(2,8) U→(0,8) L→(0,6) L→(0,4) D→(2,4)cap R→(2,6)cap D→(4,6) L→(4,4) L→(4,2) L→(4,0) D→(6,0)cap R→(6,2) D→(8,2) R→(8,4)goal. Let me write a runner with verification using sim3, executing step by step, comparing blue's cell and the remaining guards to the prediction. Stop on mismatch. One caution: the plan passes through (2,8) etc. Let me also handle the possibility that the guard capture doesn't remove the guard (then my subsequent ray checks would be off) — verification catches it. Let me run it.",
+          "rule": "Goal = reach green. Guards are directional traps: if my landing tile lies in a guard's facing ray within my move length k, it lunges k and kills me; landing exactly ON a guard captures/destroys it. Won by capturing all 3 guards (19 moves, all predictions matched).",
+          "asks_sent": 1,
+          "completion_history_index": 57,
+          "completion_step": 57,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 33,
+          "resets_since_previous_completion": [
+            38
+          ],
+          "total_actions_this_completed_level": 24
+        },
+        {
+          "level": 4,
+          "n_actions": 17,
+          "actions": [
+            "RIGHT",
+            "RIGHT",
+            "LEFT",
+            "RIGHT",
+            "LEFT",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "UP",
+            "UP",
+            "LEFT",
+            "UP",
+            "UP",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "LEFT"
+          ],
+          "reasoning": " (L,R,L,R) at the start are the timing adjustment. Let me execute with per-step verification, comparing blue's position and the orange's position to the prediction. Stop on mismatch. One risk: the orange's phase at reset. The level restarted; the orange should be back at (2,6) with dir=+1 (as observed at the start of the level and after the reset — the current image shows the orange at (2,6) ✓ same as the level start). Let me also double check the death I caused: I moved UP from (8,6)→(6,6) at a turn when the orange moved (4,6)→(6,6). In the plan, move 8 is R (to (8,8)) at the turn when the orange bounces at (0,6)→(2,6)... fine. Note the plan's move 7: R → (8,6) at the turn the orange goes (2,6)→(0,6) [path (1,6),(0,6)] ✓ no conflict. Move 8: R → (8,8) while the orange goes (0,6)→(2,6) ✓. Let me execute with verification. I'll batch all 17 with per-step checks, stopping on any deviation.",
+          "rule": "Goal = reach green. Same slide mechanic. New: an orange token that autonomously patrols its column 2 cells/turn, bouncing at the ends, and is LETHAL on contact (no capture). Red guard still a static ray-trap, captured by landing on it. Won with a 17-move timing plan (wait 4 beats, climb via the right loop, capture red at (0,2)).",
+          "asks_sent": 1,
+          "completion_history_index": 85,
+          "completion_step": 85,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 57,
+          "resets_since_previous_completion": [
+            68
+          ],
+          "total_actions_this_completed_level": 28
+        },
+        {
+          "level": 5,
+          "n_actions": 29,
+          "actions": [
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "RIGHT",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "LEFT",
+            "DOWN",
+            "UP",
+            "DOWN",
+            "UP",
+            "DOWN",
+            "UP",
+            "DOWN",
+            "UP",
+            "DOWN",
+            "DOWN",
+            "DOWN",
+            "RIGHT",
+            "DOWN",
+            "DOWN",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "UP",
+            "UP",
+            "LEFT"
+          ],
+          "reasoning": "rong (I compared to `now` of the step, which is the pre-move state). So I'm at (0,8), t=5, everything on track. Let me now execute the remaining plan with the correct verification (compare against the post-move positions = L5CORE(t+1) state). Remaining plan from step 6 onward: the plan was 'LLLLLDUDUDUDUDDDRDDRRRUUL' and I've done 1 move (the first L at t=4→5). Remaining: 'LLLL DUDUDUDUDDDRDDRRRUUL' — let me recompute from L5SIM's steps list: steps had t=5..29, and step 5 (the first, L) is done. So remaining = steps[6..29] = plan[1:] = 'LLLLDUDUDUDUDDDRDDRRRUUL' (24 moves). Let me build the expected positions from L5SIM(plan,(0,10),4) and execute the remaining ones with verification against the post-move state. Also note: the goal N is None now because an orange is sitting on (6,6) — consistent. Let me execute the rest in one call with verification, stopping on mismatch/death/completion.",
+          "rule": "Goal = reach green. Same slide mechanic. New: four orange patrollers, each moving 2 cells/turn along its own row/column, reversing when blocked, passing through each other; lethal on contact. Won with a 29-move timing plan (stall top-left, drop down left side, loop the bottom pocket, enter goal from the right).",
+          "asks_sent": 1,
+          "completion_history_index": 114,
+          "completion_step": 114,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 85,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 29
+        },
+        {
+          "level": 6,
+          "n_actions": 31,
+          "actions": [
+            "LEFT",
+            "RIGHT",
+            "LEFT",
+            "RIGHT",
+            "LEFT",
+            "UP",
+            "DOWN",
+            "DOWN",
+            "LEFT",
+            "LEFT",
+            "RIGHT",
+            "RIGHT",
+            "RIGHT",
+            "DOWN",
+            "DOWN",
+            "LEFT",
+            "DOWN",
+            "LEFT",
+            "UP",
+            "RIGHT",
+            "DOWN",
+            "LEFT",
+            "LEFT",
+            "UP",
+            "UP",
+            "LEFT",
+            "UP",
+            "UP",
+            "UP",
+            "LEFT"
+          ],
+          "reasoning": "check: my planned U from (12,4) → (10,4) captures the (10,4) guard. But wait, is (10,4) covered by the (12,4) guard? Yes, but I'll capture (12,4) first ✓. Also, from (10,6) the R move: (10,7)g,(10,8)W ✓. But careful — O2 is at (10,2) at t=19 and moving RIGHT. At t=20 O2 → col 4; my landing (10,8) ✓ safe. t=21: D → (12,8); O2 col 6 ✓. t=22: L → (12,6) [if stopper] or cap(12,4); O2 col 8 ✓. t=23: L → cap(12,4); O2 col 10 ✓. t=24: U → cap(10,4); O2 col 12 ✓. t=25: U → (8,4); O2 col 10 ✓. t=26: L → (8,2); O2 col 8 ✓. t=27-29: U,U,U; O2 col 6,4,2 ✓. t=30: L → goal ✓. Let me run phase B adaptively: press L while at row 12 until reaching (12,4). I'll implement: me = current pos (10,6) 1. R → expect (10,8) 2. D → expect (12,8) 3. while me != (12,4): L (max 3 tries) 4. U → expect (10,4) [capture] 5. U → expect (8,4) 6. L → expect (8,2) 7. U,U,U → expect (2,2) 8. L → goal Stop on death/completion.",
+          "rule": "Goal = reach green. Same slide mechanic. New: 6 static red guards (lunge k cells along their facing when I land within k of them in that ray = death; landing ON one captures it) + 2 orange patrollers (2 cells/turn, lethal on shared landing; they pass through guards). Won by capturing all 6 guards in dependency order (open (8,10) → drop to row 10/12 → clear bottom guards → enter the col-2 pocket via (8,4)) then sliding to the goal, 24 moves.",
+          "asks_sent": 1,
+          "completion_history_index": 145,
+          "completion_step": 145,
+          "evidence": "observed_frame_level_transition",
+          "rule_status": "model_hypothesis_unverified",
+          "last_attempt_action_count_reconciles": true,
+          "previous_completion_history_index": 114,
+          "resets_since_previous_completion": [],
+          "total_actions_this_completed_level": 31
+        }
+      ],
+      "final_block_characters": 5914,
+      "successful_memory_requests": 46,
+      "delivered_block_hashes": [
+        "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46",
+        "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5",
+        "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1"
+      ],
+      "initial_findings": {
+        "mechanisms_in_rule": [
+          "slide through gray to first white and swap",
+          "guard facing/ray lunge and capture by landing",
+          "orange patroller two-cell timing and lethal collision"
+        ],
+        "conflict": "Initial24-versus31 concern resolved: final executed plan4+9+11=24 actions plus7 priorL6 probes gives31 totalattempt actions. These are different scopes, not an established arithmetic error.",
+        "causal_boundary": "L6 rule is post-completion. Need L3-L5 memory delivery before L6 then actual simulator/capture/timing computation and executed actions.",
+        "next_trace_focus": "After trimming, inspect if model uses earlier guard and patroller mechanisms in concrete sim/search at L6, compares actual state and completes the sixth level."
+      },
+      "actual_post_trim_delivery": {
+        "unique_transcript_blocks": [
+          {
+            "line": 7160,
+            "sha256": "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46",
+            "first_visible_current_step": 65,
+            "first_visible_current_level": 4,
+            "recorded_levels": [
+              1,
+              2,
+              3
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 4281
+          },
+          {
+            "line": 11328,
+            "sha256": "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5",
+            "first_visible_current_step": 90,
+            "first_visible_current_level": 5,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 5353
+          },
+          {
+            "line": 14454,
+            "sha256": "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1",
+            "first_visible_current_step": 122,
+            "first_visible_current_level": 6,
+            "recorded_levels": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "hash_in_successful_delivery_summary": true,
+            "block_characters": 5914
+          }
+        ],
+        "all_successful_summary_hashes_found": true,
+        "boundary": "Confirmed in serialized request payload: exact successful block hashes, request-line message-count reductions, subsequent code/tool returns and returned usage. Transcript and payload render times can differ within a tool turn; actual first request lines are authoritative."
+      },
+      "specific_later_code_action_adoption": [
+        {
+          "transcript_line": 13608,
+          "call_id": "call_871eb05318a14290a427ac0e",
+          "current_step": 117,
+          "current_level": 6,
+          "code": "lv=[h for h in history if h.frame.level==3]\ndef g7(frame):\n    grid,r0,c0=maze_of(frame)\n    o={}\n    for n in frame.segmentation['nodes']:\n        if n['color'] in 'RbN' and n['pixels']<20:\n            b=n['boundary']; o.setdefault(n['color'],[]).append(((min(p[0] for p in b)-r0)//3,(min(p[1] for p in b)-c0)//3))\n    for k in o: o[k]=sorted(o[k])\n    return o,grid\nseq=[]\nfor h in lv:\n    o,_=g7(h.frame); seq.append((h.action,o.get('b'),o.get('R')))\nfor s in seq[:6]: print(s)\nprint('...')\nfor s in seq[-4:]: print(s)",
+          "actual_tool_output": "('UP', [(8, 10)], [(2, 4), (2, 6), (6, 0)])\n('UP', [(6, 10)], [(2, 4), (2, 6), (6, 0)])\n('UP', [(4, 10)], [(2, 4), (2, 6), (6, 0)])\n('LEFT', [(4, 8)], [(2, 4), (2, 6), (6, 0)])\n('LEFT', None, [(2, 4), (4, 6), (6, 0)])\n('RESET', [(8, 10)], [(2, 4), (2, 6), (6, 0)])\n...\n('LEFT', [(4, 0)], [(6, 0)])\n('DOWN', [(6, 0)], None)\n('RIGHT', [(6, 2)], None)\n('DOWN', [(8, 2)], None)\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "06eaccb1f54f236e4395f29fefd78b27ce3d62cf58c257ecf0334ac92ee7274c"
+        },
+        {
+          "transcript_line": 15139,
+          "call_id": "call_dcc8e5ab14de4f579b9c282e",
+          "current_step": 122,
+          "current_level": 6,
+          "code": "h=history[67]; hb=history[66].frame; ha=h.frame\nob,_=g7(hb); oa,_=g7(ha)\nprint('before',ob)\nprint('after ',oa)\nprint('grid before:'); \ng,r0,c0=maze_of(hb)\nfor i,row in enumerate(g): print(i,row)",
+          "actual_tool_output": "before {'R': [(0, 2)], 'N': [(2, 0)], 'b': [(8, 6)]}\nafter  {'R': [(0, 2)], 'N': [(2, 0)]}\ngrid before:\n0 ..RgWgW..\n1 ..gBgBg..\n2 NgWgWgW..\n3 ......g..\n4 ......OgW\n5 ......gBg\n6 ......WBW\n7 ......gBg\n8 WgWgWgbgW\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "0d2c29370fb95b0c2d2036be73800adbde1ba4d10ed14bf075f60e2bb0d6d235"
+        },
+        {
+          "transcript_line": 15838,
+          "call_id": "call_9aa549c2875e4adb9e2ecbf2",
+          "current_step": 122,
+          "current_level": 6,
+          "code": "def L6b():\n    IN=G6()\n    def trav(r,c): return 0<=r<13 and 0<=c<13 and at2(IN,r,c) not in '.B'\n    STOP='WNORb'\n    lands=[(r,c) for r in range(13) for c in range(13) if at2(IN,r,c) in STOP]\n    E={}\n    for (r,c) in lands:\n        E[(r,c)]={}\n        for mv,(dr,dc) in DIRS().items():\n            rr,cc=r,c; k=0\n            while True:\n                rr,cc=rr+dr,cc+dc; k+=1\n                if not trav(rr,cc): break\n                if at2(IN,rr,cc) in STOP: E[(r,c)][mv]=((rr,cc),k); break\n                if at2(IN,rr,cc)!='g': break\n    return E\nE6=L6b()\nprint('cells',len(E6),'from (6,6):',E6[(6,6)])\ndef L6SIM2(plan, start=(2,8), t0=6, E=None):\n    E=E or E6\n    G={'D':(1,0),'U':(-1,0),'L':(0,-1),'R':(0,1)}\n    guards={(6,4):'D',(6,10):'D',(10,4):'U',(10,6):'L',(12,4):'U',(12,6):'U'}\n    def o1(t): return (4,6) if t%4==0 else ((0,6) if t%4==2 else (2,6))\n    def o2(t):\n        ph=(t-6)%12\n        return (10, 2*ph if ph<=6 else 2*(12-ph))\n    pos=start; t=t0; alive=set(guards); out=[]\n    def path(a,b):\n        if a==b: return [a]\n        dr=(b[0]-a[0])//2 if b[0]!=a[0] else 0; dc=(b[1]-a[1])//2 if b[1]!=a[1] else 0\n        return [a,(a[0]+dr,a[1]+dc),b]\n    for mv in plan:\n        t+=1\n        if mv not in E.get(pos,{}): out.append((t,mv,'INVALID',pos)); return out\n        (nxt,k)=E[pos][mv]\n        pa=path(o1(t-1),o1(t)); pb=path(o2(t-1),o2(t))\n        death=[]\n        if nxt in (o1(t),o2(t)): death.append('Oland')\n        if nxt in pa[1:] or nxt in pb[1:]: death.append('Opath')\n        for g in list(alive):\n            (gr,gc)=g; (dr,dc)=G[guards[g]]\n            for d in range(1,k+1):\n                if (gr+dr*d,gc+dc*d)==nxt: death.append('G'+str(g)); break\n        cap=None\n        if nxt in alive: death=[]; cap=nxt; alive.discard(nxt)\n        out.append((t,mv,pos,'->',nxt,'k'+str(k),'cap',cap,'death',death,'O',(o1(t),o2(t))))\n        if death: return out\n        pos=nxt\n    return out\nplan='DDLLRRRDDLDLLUULLUUL'\nfor row in L6SIM2(plan): print(row)",
+          "actual_tool_output": "cells 31 from (6,6): {'L': ((6, 4), 2), 'R': ((6, 8), 2)}\n(7, 'D', (2, 8), '->', (4, 8), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 2)))\n(8, 'D', (4, 8), '->', (6, 8), 'k2', 'cap', None, 'death', [], 'O', ((4, 6), (10, 4)))\n(9, 'L', (6, 8), '->', (6, 6), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 6)))\n(10, 'L', (6, 6), '->', (6, 4), 'k2', 'cap', (6, 4), 'death', [], 'O', ((0, 6), (10, 8)))\n(11, 'R', (6, 4), '->', (6, 6), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 10)))\n(12, 'R', (6, 6), '->', (6, 8), 'k2', 'cap', None, 'death', [], 'O', ((4, 6), (10, 12)))\n(13, 'R', (6, 8), '->', (6, 10), 'k2', 'cap', (6, 10), 'death', [], 'O', ((2, 6), (10, 10)))\n(14, 'D', (6, 10), '->', (8, 10), 'k2', 'cap', None, 'death', [], 'O', ((0, 6), (10, 8)))\n(15, 'D', (8, 10), '->', (10, 10), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 6)))\n(16, 'L', (10, 10), '->', (10, 8), 'k2', 'cap', None, 'death', [], 'O', ((4, 6), (10, 4)))\n(17, 'D', (10, 8), '->', (12, 8), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 2)))\n(18, 'L', (12, 8), '->', (12, 6), 'k2', 'cap', (12, 6), 'death', [], 'O', ((0, 6), (10, 0)))\n(19, 'L', (12, 6), '->', (12, 4), 'k2', 'cap', (12, 4), 'death', [], 'O', ((2, 6), (10, 2)))\n(20, 'U', (12, 4), '->', (10, 4), 'k2', 'cap', (10, 4), 'death', [], 'O', ((4, 6), (10, 4)))\n(21, 'U', (10, 4), '->', (8, 4), 'k2', 'cap', None, 'death', [], 'O', ((2, 6), (10, 6)))\n(22, 'L', (8, 4), '->', (8, 2), 'k2', 'cap', None, 'death', [], 'O', ((0, 6), (10, 8)))\n(23, 'L', 'INVALID', (8, 2))\n",
+          "actual_action_echoes": [],
+          "level_completed_in_output": false,
+          "code_sha256": "92040c4f96951b3109b04bfd950d9d2faf4c76147bbb217caecdbdade1a051c3"
+        },
+        {
+          "transcript_line": 16471,
+          "call_id": "call_d96508658927493f9e471847",
+          "current_step": 122,
+          "current_level": 6,
+          "code": "def L6RUN(plan, start=(2,8), t0=6, stopcap=None):\n    E=L6b()\n    G={'D':(1,0),'U':(-1,0),'L':(0,-1),'R':(0,1)}\n    guards={(6,4):'D',(6,10):'D',(10,4):'U',(10,6):'L',(12,4):'U',(12,6):'U'}\n    def o1(t): return (4,6) if t%4==0 else ((0,6) if t%4==2 else (2,6))\n    def o2(t):\n        ph=(t-6)%12\n        return (10, 2*ph if ph<=6 else 2*(12-ph))\n    pos=start; t=t0; alive=set(guards); res=[]\n    for mv in plan:\n        t+=1\n        if mv not in E.get(pos,{}): return ('INVALID',t,pos,res)\n        (nxt,k)=E[pos][mv]\n        r=action([NAMES()[mv]]); tk=tok7(current_frame)\n        me=(tk.get('b') or [None])[0]; R=tk.get('R') or []; OO=tk.get('O') or []\n        res.append((t,mv,me,nxt,sorted(R),sorted(OO),barlen(current_frame),r.get('state')))\n        bad = me!=nxt or r.get('game_over')\n        if r.get('level_completed') or r.get('run_complete') or r.get('done'): return ('DONE',t,me,res)\n        if bad: return ('BAD',t,me,res)\n        pos=nxt\n        if stopcap and nxt==stopcap: return ('CAP',t,me,res)\n    return ('END',t,pos,res)\nst,tm,me,res=L6RUN('DDLL',stopcap=(6,4))\nfor x in res: print(x)\nprint(st,tm,me)\na=current_frame.ascii.split('\\n')\nprint('tile(6,4):'); \nfor rr in range(30,33): print(a[rr][24:27])",
+          "actual_tool_output": "[action] DOWN -> effect\n[action] DOWN -> effect\n[action] LEFT -> effect\n[action] LEFT -> effect\n(7, 'D', (4, 8), (4, 8), [(6, 4), (6, 10), (10, 4), (10, 6), (12, 4), (12, 6)], [(2, 6), (10, 2)], 55, 'NOT_FINISHED')\n(8, 'D', (6, 8), (6, 8), [(6, 4), (6, 10), (10, 6), (12, 4), (12, 6)], [(4, 6), (10, 4)], 54, 'NOT_FINISHED')\n(9, 'L', (6, 6), (6, 6), [(6, 4), (6, 10), (10, 4), (10, 6), (12, 4), (12, 6)], [(2, 6)], 53, 'NOT_FINISHED')\n(10, 'L', (6, 4), (6, 4), [(6, 10), (10, 4), (10, 6), (12, 4), (12, 6)], [(0, 6), (10, 8)], 52, 'NOT_FINISHED')\nCAP 10 (6, 4)\ntile(6,4):\nbbb\ncbb\nbbb\n",
+          "actual_action_echoes": [
+            "DOWN -> effect",
+            "DOWN -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "bea2cc0e59f816d31ef294d153bd5706fb1b942ffe7fe8242a351fe2e0598f1f"
+        },
+        {
+          "transcript_line": 16773,
+          "call_id": "call_c66800629a864b2b81baa437",
+          "current_step": 126,
+          "current_level": 6,
+          "code": "def step(mv, expect):\n    r=action([NAMES()[mv]]); tk=tok7(current_frame)\n    me=(tk.get('b') or [None])[0]; R=tk.get('R') or []\n    st=r.get('state')\n    print(mv,'->',me,'R',len(R),barlen(current_frame),st,'' if me==expect else 'EXP '+str(expect))\n    return me,R,r\n# Phase A\nplanA=[('R',(6,6)),('R',(6,8)),('R',(6,10)),('D',(8,10)),('D',(10,10)),('L',(10,8)),('D',(12,8)),('L',(12,6)),('U',(10,6))]\nbad=False\nfor mv,exp in planA:\n    me,R,r=step(mv,exp)\n    if me!=exp or r.get('game_over'): bad=True; break\nprint('phaseA bad' if bad else 'phaseA OK')",
+          "actual_tool_output": "[action] RIGHT -> effect\nR -> (6, 6) R 5 51 NOT_FINISHED \n[action] RIGHT -> effect\nR -> (6, 8) R 5 50 NOT_FINISHED \n[action] RIGHT -> effect\nR -> (6, 10) R 4 49 NOT_FINISHED \n[action] DOWN -> effect\nD -> (8, 10) R 4 48 NOT_FINISHED \n[action] DOWN -> effect\nD -> (10, 10) R 4 47 NOT_FINISHED \n[action] LEFT -> effect\nL -> (10, 8) R 3 46 NOT_FINISHED \n[action] DOWN -> effect\nD -> (12, 8) R 4 45 NOT_FINISHED \n[action] LEFT -> effect\nL -> (12, 6) R 3 44 NOT_FINISHED \n[action] UP -> effect\nU -> (10, 6) R 2 43 NOT_FINISHED \nphaseA OK\n",
+          "actual_action_echoes": [
+            "RIGHT -> effect",
+            "RIGHT -> effect",
+            "RIGHT -> effect",
+            "DOWN -> effect",
+            "DOWN -> effect",
+            "LEFT -> effect",
+            "DOWN -> effect",
+            "LEFT -> effect",
+            "UP -> effect"
+          ],
+          "level_completed_in_output": false,
+          "code_sha256": "6d2def132a97fdfee7a1ba06d6de8fe9ff697c9144c5d01020bf4c3103519c8c"
+        },
+        {
+          "transcript_line": 17041,
+          "call_id": "call_6ddf31ca3e4b4838bab6c4fd",
+          "current_step": 135,
+          "current_level": 6,
+          "code": "seq=[('R',(10,8)),('D',(12,8))]\nfor mv,exp in seq:\n    me,R,r=step(mv,exp)\n    if me!=exp or r.get('game_over'): raise SystemExit('bad')\n# LEFT until (12,4)\nfor _ in range(3):\n    me,R,r=step('L',None)\n    if r.get('game_over'): raise SystemExit('dead')\n    if me==(12,4): break\nfor mv,exp in [('U',(10,4)),('U',(8,4)),('L',(8,2)),('U',(6,2)),('U',(4,2)),('U',(2,2)),('L',(2,0))]:\n    me,R,r=step(mv,exp)\n    if r.get('game_over'): raise SystemExit('dead')\n    if r.get('level_completed') or r.get('run_complete') or r.get('done'): print('FINISHED at',me); break\n    if me!=exp: print('MISMATCH exp',exp); break",
+          "actual_tool_output": "[action] RIGHT -> effect\nR -> (10, 8) R 1 42 NOT_FINISHED \n[action] DOWN -> effect\nD -> (12, 8) R 2 41 NOT_FINISHED \n[action] LEFT -> effect\nL -> (12, 6) R 2 39 NOT_FINISHED EXP None\n[action] LEFT -> effect\nL -> (12, 4) R 1 38 NOT_FINISHED EXP None\n[action] UP -> effect\nU -> (10, 4) R 0 37 NOT_FINISHED \n[action] UP -> effect\nU -> (8, 4) R 0 36 NOT_FINISHED \n[action] LEFT -> effect\nL -> (8, 2) R 0 35 NOT_FINISHED \n[action] UP -> effect\nU -> (6, 2) R 0 34 NOT_FINISHED \n[action] UP -> effect\nU -> (4, 2) R 0 33 NOT_FINISHED \n[action] UP -> effect\nU -> (2, 2) R 0 32 NOT_FINISHED \n[action] LEFT -> LEVEL COMPLETED\nL -> (6, 0) R 1 64 NOT_FINISHED EXP (2, 0)\nFINISHED at (6, 0)\n",
+          "actual_action_echoes": [
+            "RIGHT -> effect",
+            "DOWN -> effect",
+            "LEFT -> effect",
+            "LEFT -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "LEFT -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "UP -> effect",
+            "LEFT -> LEVEL COMPLETED"
+          ],
+          "level_completed_in_output": true,
+          "code_sha256": "b9218ffca9f91f08ead60f856c5c77c0c16b7c5928cb64f7fd3a07406770bb91"
+        }
+      ],
+      "causal_assessment": "Strong concrete reuse and revision of guard/patroller mechanisms in later simulation and actual adaptive execution, with independent revisiting of old observed transitions rather than unconditional trust in memory.",
+      "transcript_source": {
+        "path": "runs/032-memory-priority/solved_level_memory/transcripts/tu93-0768757b_p0.txt",
+        "sha256": "5bea5edc5ea1c31e96ceb28ca3471c3a48bebb507123b9bb70e9849d91ebf25e",
+        "bytes": 2087203,
+        "completeness": "Parent confirmed independent priority download CLI exited0 before this review"
+      },
+      "completion_echoes": [
+        {
+          "line": 1819,
+          "actual_action": "[action] DOWN -> LEVEL COMPLETED"
+        },
+        {
+          "line": 3446,
+          "actual_action": "[action] UP -> LEVEL COMPLETED"
+        },
+        {
+          "line": 5921,
+          "actual_action": "[action] RIGHT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 9042,
+          "actual_action": "[action] LEFT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 12328,
+          "actual_action": "[action] LEFT -> LEVEL COMPLETED"
+        },
+        {
+          "line": 17084,
+          "actual_action": "[action] LEFT -> LEVEL COMPLETED"
+        }
+      ],
+      "interpretation": {
+        "assessment": "Strong concrete reuse and revision of guard/patroller mechanisms in later simulation and actual adaptive execution, with independent revisiting of old observed transitions rather than unconditional trust in memory.",
+        "active_recap_chain": "L5 recap at12536 feedsL6 reasoning12622/12869, explicitly referring to the L3 guard-ray rule and L4/5 patroller timing. At13608 code reconstructs L3 historical positions including death/reset;15139 inspects exact L4 before/after death frames. This shows the model checks the hypothesis against real old observations.",
+        "pin_chain": "Serialized request149 carries the successfulL1-L5 block atstate122/L6 (transcriptline14454). Call15838 buildsL6SIM2 combining capture/ray and patroller time; it reports an invalid suffix, so the model does not blindly execute it. L6RUN16471 performs4 checked moves/capture;16773 executes9 adaptive moves;17041 executes11 moves and finishesL6. The total finalplan24 follows7 earlier probes, matching31 totallevel actions.",
+        "limits": "Guard counts fluctuate under patroller occlusion, and model revisions/errors persist; selected successful position checks do not prove full simulator correctness. The completion return reports a new-level position (6,0) after expected(2,0); this is a level boundary, not evidence of a final-step prediction failure."
+      },
+      "observed_costs": {
+        "baseline_analyzer_tokens": 176772,
+        "candidate_analyzer_tokens": 180417,
+        "delta_analyzer_tokens": 3645,
+        "delta_percent": 2.0619781413346003,
+        "baseline_actions": 220,
+        "candidate_actions": 149,
+        "delta_actions": -71,
+        "note": "Analyzer token count is a returned/reporting view, not marginal memory tokens or billable GPU usage; no separate prompt-token isolation from transcripts.",
+        "baseline_prompt_tokens": 6381326,
+        "candidate_prompt_tokens": 6003777,
+        "prompt_token_delta": -377549
+      },
+      "winning_plan_action_accounting": {
+        "initial_level6_probes": 7,
+        "final_plan_batches": [
+          4,
+          9,
+          11
+        ],
+        "final_plan_total": 24,
+        "complete_level_actions": 31
+      },
+      "request_payload_crosscheck": {
+        "candidate": {
+          "path": "runs/032-memory-short/solved_level_memory/tu93-0768757b_p0_requests.jsonl",
+          "sha256": "c49d902a4098dc3eaca53300e5db28bae898613adff2a651f092e9e961e7251d",
+          "bytes": 46163201,
+          "line_count": 175,
+          "request_count": 88,
+          "response_count": 87,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 6003777,
+            "completion_tokens": 180417,
+            "total_tokens": 6184194
+          },
+          "memory_blocks": {
+            "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46": {
+              "first_request_line": 83,
+              "first_request": {
+                "request_line": 83,
+                "memory_hash": "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46",
+                "analysis_step": 15,
+                "snapshot_action": 65,
+                "current_step": 65,
+                "current_level": 4,
+                "message_count": 39
+              },
+              "request_lines": [
+                83,
+                85,
+                87,
+                89,
+                91,
+                93,
+                95,
+                97,
+                99,
+                101,
+                103,
+                105,
+                107,
+                109,
+                111,
+                113
+              ],
+              "successful_response_lines": [
+                84,
+                86,
+                88,
+                90,
+                92,
+                94,
+                96,
+                98,
+                100,
+                102,
+                104,
+                106,
+                108,
+                110,
+                112,
+                114
+              ],
+              "previous_request_line": 81,
+              "previous_message_count": 103,
+              "levels_in_block": [
+                1,
+                2,
+                3
+              ]
+            },
+            "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5": {
+              "first_request_line": 115,
+              "first_request": {
+                "request_line": 115,
+                "memory_hash": "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5",
+                "analysis_step": 19,
+                "snapshot_action": 89,
+                "current_step": 89,
+                "current_level": 5,
+                "message_count": 41
+              },
+              "request_lines": [
+                115,
+                117,
+                119,
+                121,
+                123,
+                125,
+                127,
+                129,
+                131,
+                133,
+                135,
+                137,
+                139,
+                141,
+                143,
+                145,
+                147
+              ],
+              "successful_response_lines": [
+                116,
+                118,
+                120,
+                122,
+                124,
+                126,
+                128,
+                130,
+                132,
+                134,
+                136,
+                138,
+                140,
+                142,
+                144,
+                146,
+                148
+              ],
+              "previous_request_line": 113,
+              "previous_message_count": 81,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1": {
+              "first_request_line": 149,
+              "first_request": {
+                "request_line": 149,
+                "memory_hash": "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1",
+                "analysis_step": 25,
+                "snapshot_action": 122,
+                "current_step": 122,
+                "current_level": 6,
+                "message_count": 28
+              },
+              "request_lines": [
+                149,
+                151,
+                153,
+                155,
+                157,
+                159,
+                161,
+                163,
+                165,
+                167,
+                169,
+                171,
+                173,
+                175
+              ],
+              "successful_response_lines": [
+                150,
+                152,
+                154,
+                156,
+                158,
+                160,
+                162,
+                164,
+                166,
+                168,
+                170,
+                172,
+                174
+              ],
+              "previous_request_line": 147,
+              "previous_message_count": 81,
+              "levels_in_block": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          },
+          "rule_instruction_requests": [
+            {
+              "request_line": 31,
+              "memory_hash": null,
+              "analysis_step": 4,
+              "snapshot_action": 19,
+              "current_step": 19,
+              "current_level": 2,
+              "message_count": 37,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 33,
+              "memory_hash": null,
+              "analysis_step": 4,
+              "snapshot_action": 19,
+              "current_step": 19,
+              "current_level": 2,
+              "message_count": 39,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 35,
+              "memory_hash": null,
+              "analysis_step": 5,
+              "snapshot_action": 20,
+              "current_step": 20,
+              "current_level": 2,
+              "message_count": 42,
+              "asks_rule_for_completed_level": 1
+            },
+            {
+              "request_line": 47,
+              "memory_hash": null,
+              "analysis_step": 10,
+              "snapshot_action": 34,
+              "current_step": 34,
+              "current_level": 3,
+              "message_count": 59,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 49,
+              "memory_hash": null,
+              "analysis_step": 10,
+              "snapshot_action": 34,
+              "current_step": 34,
+              "current_level": 3,
+              "message_count": 61,
+              "asks_rule_for_completed_level": 2
+            },
+            {
+              "request_line": 73,
+              "memory_hash": null,
+              "analysis_step": 12,
+              "snapshot_action": 58,
+              "current_step": 58,
+              "current_level": 4,
+              "message_count": 92,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 75,
+              "memory_hash": null,
+              "analysis_step": 12,
+              "snapshot_action": 58,
+              "current_step": 58,
+              "current_level": 4,
+              "message_count": 94,
+              "asks_rule_for_completed_level": 3
+            },
+            {
+              "request_line": 97,
+              "memory_hash": "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46",
+              "analysis_step": 18,
+              "snapshot_action": 86,
+              "current_step": 86,
+              "current_level": 5,
+              "message_count": 60,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 99,
+              "memory_hash": "0e83c467efd55c7c6892c0e507ae79b24991163dccca6afc84217ef690815d46",
+              "analysis_step": 18,
+              "snapshot_action": 86,
+              "current_step": 86,
+              "current_level": 5,
+              "message_count": 62,
+              "asks_rule_for_completed_level": 4
+            },
+            {
+              "request_line": 133,
+              "memory_hash": "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5",
+              "analysis_step": 22,
+              "snapshot_action": 115,
+              "current_step": 115,
+              "current_level": 6,
+              "message_count": 63,
+              "asks_rule_for_completed_level": 5
+            },
+            {
+              "request_line": 135,
+              "memory_hash": "5296c28cd0f5f5d266d508bad0a1eba09b1e296f818870517d6ace743d8edfa5",
+              "analysis_step": 22,
+              "snapshot_action": 115,
+              "current_step": 115,
+              "current_level": 6,
+              "message_count": 65,
+              "asks_rule_for_completed_level": 5
+            },
+            {
+              "request_line": 171,
+              "memory_hash": "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1",
+              "analysis_step": 28,
+              "snapshot_action": 146,
+              "current_step": 146,
+              "current_level": 7,
+              "message_count": 58,
+              "asks_rule_for_completed_level": 6
+            },
+            {
+              "request_line": 173,
+              "memory_hash": "9e12d27de325140f4188b33f385ac1ebc7137cdf27e8612e0b5e597b6ca0abc1",
+              "analysis_step": 28,
+              "snapshot_action": 146,
+              "current_step": 146,
+              "current_level": 7,
+              "message_count": 60,
+              "asks_rule_for_completed_level": 6
+            }
+          ],
+          "selected_calls": {
+            "call_871eb05318a14290a427ac0e": {
+              "first_seen_snapshot_line": 143,
+              "event": "request",
+              "prior_response": {
+                "response_line": 142,
+                "paired_request_line": 141,
+                "usage": {
+                  "prompt_tokens": 104096,
+                  "total_tokens": 104589,
+                  "completion_tokens": 493,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 93952,
+                    "image_tokens": 10400
+                  },
+                  "reasoning_tokens": 269
+                }
+              },
+              "result_snapshot_line": 143,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function g7(frame) for later Python calls in this game.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "b41519200ab6822f168fc20f02406ef3f2d93f77cd7469ca886494c32cffa763",
+              "actual_action_echoes": []
+            },
+            "call_dcc8e5ab14de4f579b9c282e": {
+              "first_seen_snapshot_line": 155,
+              "event": "request",
+              "prior_response": {
+                "response_line": 154,
+                "paired_request_line": 153,
+                "usage": {
+                  "prompt_tokens": 69495,
+                  "total_tokens": 69671,
+                  "completion_tokens": 176,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 68032,
+                    "image_tokens": 5600
+                  },
+                  "reasoning_tokens": 69
+                }
+              },
+              "result_snapshot_line": 155,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "479d641596fe9f8dbb46175eb9f9723778e15fbfc0d3e50ed6ccc139db7cd9a4",
+              "actual_action_echoes": []
+            },
+            "call_9aa549c2875e4adb9e2ecbf2": {
+              "first_seen_snapshot_line": 163,
+              "event": "request",
+              "prior_response": {
+                "response_line": 162,
+                "paired_request_line": 161,
+                "usage": {
+                  "prompt_tokens": 85768,
+                  "total_tokens": 86637,
+                  "completion_tokens": 869,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 85568,
+                    "image_tokens": 6000
+                  },
+                  "reasoning_tokens": 12
+                }
+              },
+              "result_snapshot_line": 163,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function L6b() for later Python calls in this game.\nYour function L6SIM2 was not retained: unavailable dependencies: E6. Pass snippet-specific data as arguments or redefine it if needed.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "adf06d983ae65ddd2e8e8914396117b18b89083333b43c1a75665911cc6f85e2",
+              "actual_action_echoes": []
+            },
+            "call_d96508658927493f9e471847": {
+              "first_seen_snapshot_line": 167,
+              "event": "request",
+              "prior_response": {
+                "response_line": 166,
+                "paired_request_line": 165,
+                "usage": {
+                  "prompt_tokens": 96017,
+                  "total_tokens": 96619,
+                  "completion_tokens": 602,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 89024,
+                    "image_tokens": 6800
+                  },
+                  "reasoning_tokens": 45
+                }
+              },
+              "result_snapshot_line": 167,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function L6RUN(plan, start=(2, 8), t0=6, stopcap=None) for later Python calls in this game.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "1c870187d857f89d90a6ff56b27bf0c7e256f776e3840f0cb93fd3a28911781d",
+              "actual_action_echoes": [
+                "DOWN -> effect",
+                "DOWN -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect"
+              ]
+            },
+            "call_c66800629a864b2b81baa437": {
+              "first_seen_snapshot_line": 169,
+              "event": "request",
+              "prior_response": {
+                "response_line": 168,
+                "paired_request_line": 167,
+                "usage": {
+                  "prompt_tokens": 98967,
+                  "total_tokens": 101909,
+                  "completion_tokens": 2942,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 96576,
+                    "image_tokens": 7600
+                  },
+                  "reasoning_tokens": 2650
+                }
+              },
+              "result_snapshot_line": 169,
+              "error": null,
+              "returncode": 0,
+              "function_retention": "Retained your function step(mv, expect) for later Python calls in this game.",
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "06dff17ae5c3a7485cf487c7d42a568b6efab0e358b98f6242336507487f0acb",
+              "actual_action_echoes": [
+                "RIGHT -> effect",
+                "RIGHT -> effect",
+                "RIGHT -> effect",
+                "DOWN -> effect",
+                "DOWN -> effect",
+                "LEFT -> effect",
+                "DOWN -> effect",
+                "LEFT -> effect",
+                "UP -> effect"
+              ]
+            },
+            "call_6ddf31ca3e4b4838bab6c4fd": {
+              "first_seen_snapshot_line": 171,
+              "event": "request",
+              "prior_response": {
+                "response_line": 170,
+                "paired_request_line": 169,
+                "usage": {
+                  "prompt_tokens": 104133,
+                  "total_tokens": 105088,
+                  "completion_tokens": 955,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 98944,
+                    "image_tokens": 8400
+                  },
+                  "reasoning_tokens": 662
+                }
+              },
+              "result_snapshot_line": 171,
+              "error": null,
+              "returncode": 0,
+              "function_retention": null,
+              "code_matches_reviewed_transcript": true,
+              "stdout_matches_reviewed_transcript": true,
+              "stdout_sha256": "3b08b5a16b4ee5aa941a564be83eb05a6481ad1f289ceb6bab91d2ea9d776902",
+              "actual_action_echoes": [
+                "RIGHT -> effect",
+                "DOWN -> effect",
+                "LEFT -> effect",
+                "LEFT -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "LEFT -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "UP -> effect",
+                "LEFT -> LEVEL COMPLETED"
+              ]
+            }
+          },
+          "successful_hashes_match_memory_summary": true,
+          "successful_memory_response_count": 46,
+          "successful_memory_count_matches_summary": true,
+          "all_selected_calls_found": true
+        },
+        "baseline": {
+          "path": "runs/032-memory-short/baseline/tu93-0768757b_p0_requests.jsonl",
+          "sha256": "99d9fc964fe90afcfa3c5d937425333c3728404f45a5524037cc80d39712ac14",
+          "bytes": 50172425,
+          "line_count": 185,
+          "request_count": 93,
+          "response_count": 92,
+          "malformed_lines": [],
+          "recorded_usage": {
+            "prompt_tokens": 6381326,
+            "completion_tokens": 176772,
+            "total_tokens": 6558098
+          }
+        },
+        "candidate_usage_completion_equals_analyzer_tokens": true,
+        "baseline_usage_completion_equals_analyzer_tokens": true,
+        "note": "Snapshots directly show memory blocks in outgoing request messages, completed-level rule instructions, and exact later tool code/output. Prior-response usage identifies the preceding generated response; it is not an isolated cost of the memory block."
+      }
+    }
+  ],
+  "limitations": [
+    "The helper records observed level transitions separately from unverified model hypotheses.",
+    "Final memory summary and delivered-block hashes do not identify which rule was available at which earlier level; actual request timelines are required.",
+    "Recaps written after a level completion cannot be used as the cause of that same completion.",
+    "Successful-attempt action counts reset on observed RESET; benchmark actions_per_level includes earlier failed attempts and resets.",
+    "Total request seconds aggregate concurrent requests and are not GPU elapsed time.",
+    "The recorded memory text length is not a tokenizer-measured incremental token cost.",
+    "Source hypotheses are actively revised, not all statements in memory are true. Null captured rule does not necessarily mean the model failed to reflect in raw reasoning/code.",
+    "All3 candidate payloads and corresponding baseline usage were crosschecked; baseline code/action counterfactuals were not fully reread because this final pass was intentionally lightweight.",
+    "Prompt-token differences include changed histories and behavior, not an isolated marginal memory-token estimate. Cache/billing effects are not inferred."
+  ],
+  "interpretation_of_two_interventions": {
+    "active_rule_recapping": "The post-completion instruction itself changes reasoning on an already scheduled model request; later behavior before a pin refresh can still be consistent with this intervention. It is not excluded for lack of a post-trim header.",
+    "post_trim_system_memory": "The helper also reintroduces accumulated facts/hypotheses after history eviction. Transcript blocks match all successful delivery hashes for the three games; concrete later computations/actions are documented.",
+    "separation_limit": "No ablation separates recap-only, pin-only, ordinary retained functions, recent history and sampling variation. Evidence supports actual use of earlier mechanics under the combined032 intervention, not causal attribution of every score point to pinned text."
+  },
+  "summary_verdict": "All three games show concrete later code/action chains using and revising earlier mechanics, beyond header presence or recitation. Observed improvements are compatible with032 combined recap+memory benefit; exact causal share and hidden-score transfer remain unproven. This is an explanatory review, not an additional adoption gate.",
+  "download_finality_note": "Parent confirmed full CLI completed; direct scans here read nonempty current files. Earlier aggregate analysis had stale empty-tu93 snapshot; this final review uses current tu93 bytes/hash and175lines.",
+  "final_crosscheck_summary": {
+    "selected_tool_calls_checked": 18,
+    "code_matches_transcript": 18,
+    "stdout_matches_transcript": 18,
+    "successful_memory_responses_by_game": {
+      "r11l": 64,
+      "sc25": 67,
+      "tu93": 46
+    },
+    "successful_memory_hash_sets_all_match": true,
+    "candidate_and_baseline_completion_usage_matches_analyzer_totals": true,
+    "rule_instruction_request_counts": {
+      "r11l": 10,
+      "sc25": 14,
+      "tu93": 13
+    },
+    "r11l_final_L5_memory_request197_has_no_response": "Recorded as attempted delivery only, not successful consumption"
+  }
+}

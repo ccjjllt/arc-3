@@ -1,0 +1,135 @@
+{
+  "created_at_utc": "2026-10-21T06:28:13.286266+00:00",
+  "scope": "Read-only triage of existing natural trajectories. These are observable completion/history-shrink/reuse opportunities, not proof that 032 helps or a new fork package.",
+  "priorities": [
+    {
+      "priority": 1,
+      "path": "runs/027-tail-confirm/baseline/tu93-0768757b_p0_requests.jsonl",
+      "before": 151,
+      "cut": 153,
+      "end": 159,
+      "purpose": "正常迁移对照：L6完成后进入L7并裁剪；基线已能复用部分函数、修正eyes提取器并完成下一关，记忆收益不能仅以出现旧函数名声称。",
+      "facts": "request 151→153消息93→41，进入L7；155旧eyes2 TypeError；157新eyes3返回真实位置；159执行14步并LEVEL COMPLETED进入L8。",
+      "source_sha256": "53708c6d1c7a8d83d17d002fa6a1df80c47ff64551222c893721135a4eff01cb",
+      "nearby_call_index": [
+        {
+          "tool_call_id": "call_48e42e99b28645a9859e4da0",
+          "request_line_1based": 155,
+          "result_line_1based": 155,
+          "level": 7,
+          "analysis_step": 29
+        },
+        {
+          "tool_call_id": "call_52abf1e532fb4c89a4368218",
+          "request_line_1based": 157,
+          "result_line_1based": 157,
+          "level": 7,
+          "analysis_step": 29
+        },
+        {
+          "tool_call_id": "call_318253023fec4b34b90147b8",
+          "request_line_1based": 159,
+          "result_line_1based": 159,
+          "level": 7,
+          "analysis_step": 30
+        }
+      ],
+      "preceding_completion_call": {
+        "tool_call_id": "call_32f8f6fb3c414996807f0ef3",
+        "request_line_1based": 153,
+        "result_line_1based": 153,
+        "level": 6
+      }
+    },
+    {
+      "priority": 2,
+      "path": "runs/027-tail-confirm/baseline/re86-8af5384d_p0_requests.jsonl",
+      "before": 147,
+      "cut": 149,
+      "end": 157,
+      "purpose": "跨关布局重新绑定：L5完成进入L6，剪裁后读新形状/洞并使用既有控制helper；适合核对rule是否讲机制而非旧坐标。",
+      "facts": "request 147→149消息125→65，当前L6/action313；151重新枚举当前像素；153实测UP将W位置48,15变为45,15；155多步后检查frame_diff与目标色块。",
+      "source_sha256": "112d8a768b23a19c2f7aa0b367d0c156a82f31d045d93739e2553135d782bb25",
+      "nearby_call_index": [
+        {
+          "tool_call_id": "call_e24c33ec2dd14f93a069e62d",
+          "request_line_1based": 151,
+          "result_line_1based": 151,
+          "level": 6,
+          "analysis_step": 33
+        },
+        {
+          "tool_call_id": "call_1e03ae035eca45e49dc09807",
+          "request_line_1based": 153,
+          "result_line_1based": 153,
+          "level": 6,
+          "analysis_step": 34
+        },
+        {
+          "tool_call_id": "call_0108afbc1884484fbbaf32b2",
+          "request_line_1based": 155,
+          "result_line_1based": 155,
+          "level": 6,
+          "analysis_step": 35
+        },
+        {
+          "tool_call_id": "call_a48315efc4e34ea5bb4f19a2",
+          "request_line_1based": 157,
+          "result_line_1based": 157,
+          "level": 6,
+          "analysis_step": 35
+        }
+      ],
+      "preceding_completion_call": {
+        "tool_call_id": "call_dac450d2e062405aab9a8f07",
+        "request_line_1based": 147,
+        "result_line_1based": 147,
+        "level": 5
+      }
+    },
+    {
+      "priority": 3,
+      "path": "runs/030-capability-comparison/persistent_python/cn04-2fe56bfb_p0_requests.jsonl",
+      "before": 245,
+      "cut": 247,
+      "end": 253,
+      "purpose": "负迁移/重新提取风险窗口：L5完成进入L6后裁剪；实际新布局、手写形状集合与旧搜索函数复用混在一起。该030轨迹含持久解释器，只用于定位机会，不作为032因果对照。",
+      "facts": "request 245→247消息123→54，当前L6/action202；249真实点击新物体并读brief；251手写SH6形状并调用base_of/pose4；253运行search6得到strict solutions 0。",
+      "source_sha256": "c7f81450107f1c0ba63c0bf50423793690b6994fe7a852c6d75fdb599d3e3abe",
+      "nearby_call_index": [
+        {
+          "tool_call_id": "call_ec6715cf9bd443ea939f6755",
+          "request_line_1based": 249,
+          "result_line_1based": 249,
+          "level": 6,
+          "analysis_step": 52
+        },
+        {
+          "tool_call_id": "call_c17c4741c1fa4ac28f362e0c",
+          "request_line_1based": 251,
+          "result_line_1based": 251,
+          "level": 6,
+          "analysis_step": 52
+        },
+        {
+          "tool_call_id": "call_f9eac2954dcc4cf58e4ebe36",
+          "request_line_1based": 253,
+          "result_line_1based": 253,
+          "level": 6,
+          "analysis_step": 52
+        }
+      ],
+      "preceding_completion_call": {
+        "tool_call_id": "call_89c87aa369364f179cc1d399",
+        "request_line_1based": 109,
+        "result_line_1based": 109,
+        "level": 2
+      }
+    }
+  ],
+  "notes": [
+    "All referenced line numbers are 1-based JSONL lines.",
+    "History shrink is observed in actual request snapshots; infer exact cause only after transcript review.",
+    "Do not write these analyst judgments or future trajectories into model inputs."
+  ]
+}

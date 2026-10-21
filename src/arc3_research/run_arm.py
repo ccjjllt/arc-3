@@ -99,6 +99,7 @@ def run_arm(args: argparse.Namespace) -> int:
     executable_repair_patch = None
     persistent_python_patch = None
     segmentation_runs_patch = None
+    solved_memory_patch = None
     community_baselines = None
     timing_patch = None
     deadline_patch = None
@@ -264,6 +265,9 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "segmentation_runs":
             from arc3_research.segmentation_runs import install_segmentation_runs
             segmentation_runs_patch = install_segmentation_runs()
+        if args.arm == "solved_level_memory":
+            from arc3_research.solved_level_memory import install_solved_level_memory
+            solved_memory_patch = install_solved_level_memory()
         if os.environ.get("ARC3_COMMUNITY_DEVELOPMENT") == "1":
             from taaf.game_api import GameAPI
             from arc3_research.community import clear_unreliable_baselines
@@ -386,7 +390,16 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        if args.arm in ("segmentation_forks_A", "segmentation_forks_B"):
+        if args.arm in ("controller_repair_A", "controller_repair_B"):
+            from arc3_research.controller_repair_forks import run_forks
+            bm.start_time = datetime.now()
+            fork_summary = run_forks(
+                bm=bm, job_dir=job_dir, budget_seconds=args.budget_seconds,
+                use_repair=args.arm == "controller_repair_B")
+            bm.end_time = datetime.now()
+            _write_json(job_dir / "controller-repair-forks.json", fork_summary)
+            _write_json(job_dir / "benchmark.json", bm.to_json_dict())
+        elif args.arm in ("segmentation_forks_A", "segmentation_forks_B"):
             from arc3_research.segmentation_forks import run_forks
             bm.start_time = datetime.now()
             fork_summary = run_forks(
@@ -538,6 +551,10 @@ def run_arm(args: argparse.Namespace) -> int:
             _write_json(job_dir / "segmentation-runs-summary.json", segmentation_runs_patch.snapshot())
             if not live:
                 segmentation_runs_patch.uninstall()
+        if solved_memory_patch is not None:
+            _write_json(job_dir / "solved-level-memory-summary.json", solved_memory_patch.snapshot())
+            if not live:
+                solved_memory_patch.uninstall()
         if community_baselines is not None:
             _write_json(job_dir / "community-baselines.json", {
                 "dropped": community_baselines,
@@ -566,7 +583,8 @@ def main() -> int:
                                  "grounded_state", "checked_execution", "expect_check", "stall_probe",
                                  "repair_A", "repair_B", "admission_009", "repair_forks", "program_repair",
                                  "persistent_python", "segmentation_runs",
-                                 "segmentation_forks_A", "segmentation_forks_B"))
+                                 "segmentation_forks_A", "segmentation_forks_B",
+                                 "solved_level_memory", "controller_repair_A", "controller_repair_B"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

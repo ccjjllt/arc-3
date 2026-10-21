@@ -1,0 +1,101 @@
+{
+  "review_date": "2026-10-21",
+  "scope": "Independent read-only audit of the downloaded 033 controller retry trajectory. No generated tool code was executed, no model or remote job was run, and no existing result summary was changed.",
+  "verdict": "The decision to stop expanding or submitting frozen 033 remains supported. The main loop did not programmatically invoke the repaired extract/rebuild functions or recompute the current L3 target from their output. However, the model explicitly referenced the delivered verified pixel runs in its reasoning and correctly transcribed P4 before making a wrong target inference. Therefore absence of programmatic consumption must not be described as absence of all semantic attention or all later computation.",
+  "verified_execution_facts": {
+    "initial_and_retained_extract_validation": {
+      "covered_pixels_each": 4096,
+      "wrong_pixels_each": 0,
+      "limit": "This establishes full-frame pixel fidelity only, not puzzle geometry or target correctness.",
+      "source": "experiments/033-controller-analysis/review.md",
+      "line_start": 173,
+      "line_end": 197
+    },
+    "rebuild_output": {
+      "row_axis_count": 17,
+      "column_axis_count": 14,
+      "plain_cells": 2,
+      "patterns": 59,
+      "palette": ["O", "R", "W", "c", "g"],
+      "mismatchA": [],
+      "mismatchB": [],
+      "pattern_at_44_28_present": false,
+      "controller_action": null,
+      "source": "runs/033-controller-retry/controller_repair_B/ft09-0d8bbf25-B.json",
+      "json_path": "controller_repair.task_rebuild_output",
+      "interpretation": "Malformed geometry and background fragments invalidate the empty mismatch lists as evidence of solved constraints. The real P4 is absent as a recognized pattern."
+    },
+    "new_main_python_calls": 16,
+    "new_main_calls_invoking_extract_or_rebuild": [],
+    "actual_continuation_actions": 26,
+    "action_breakdown": {
+      "cell_toggles_in_batch": 22,
+      "additional_cell_toggle": 1,
+      "executed_no_ops": 3,
+      "further_action_blocked_after_no_op": 1
+    },
+    "initial_levels_completed": 2,
+    "final_levels_completed": 2,
+    "added_levels": 0,
+    "comparison_limit": "This is a frozen-state candidate-only diagnostic. No paired score effect or general controller capability conclusion follows from it."
+  },
+  "substantive_correction_to_a_broad_non_adoption_claim": {
+    "request_snapshot_line_1based": 5,
+    "source": "runs/033-controller-retry/controller_repair_B/transcripts/ft09-0d8bbf25_B.txt",
+    "explicit_reference_line": 482,
+    "explicit_reference_excerpt": "using the exact pixel runs provided in the controller message (which are verified exact)",
+    "correct_P4_transcription_lines": [516, 517, 518, 519],
+    "correct_P4_transcription": ["gWg", "WOg", "WWW"],
+    "wrong_target_inference_line": 520,
+    "wrong_target_inference_excerpt": "Under A: (4,1)=R,(4,2)=O,(4,3)=R; (5,1)=O,(5,3)=O; (6,1)=O,(6,2)=O,(6,3)=O.",
+    "specific_error": "Under the model's own A rule (W maps to the pattern-center color O and g to the other color R), P4's middle-right g requires grid cell (5,3)=R. The reasoning correctly transcribed that g but still asserted (5,3)=O. Thus this is a failed pixel-to-target inference or stale-target reuse, not evidence that the model again read the g character as W.",
+    "program_evidence": {
+      "source": "experiments/033-controller-analysis/review.md",
+      "line_start": 2520,
+      "line_end": 2525,
+      "request_snapshot_line_1based": 13,
+      "finding": "The later executable A dictionary still hardcodes (5,3)='O'; B is its complement. Its mismatch check validates the current board against that same stale target rather than deriving the target from corrected P4."
+    },
+    "limit": "The text proves explicit reference and correct transcription in reasoning. It does not establish faithful computation from the delivered runs, causally improved behavior, or executable use of the repaired functions."
+  },
+  "later_P4_and_semantic_work": {
+    "current_P4_independent_ascii_read": {
+      "source": "experiments/033-controller-analysis/review.md",
+      "line_start": 2571,
+      "line_end": 2596,
+      "request_snapshot_line_1based": 17,
+      "tool_call_id": "call_88419dfd5cbc4ffd8dc28d71",
+      "finding": "The code directly samples the four current ASCII crops and returns correct P4 gWg/WOg/WWW. No later Python call recalculates current L3 targets or target mismatches from it."
+    },
+    "real_computation_after_this_read": {
+      "request_snapshot_lines_1based": [21, 23, 25, 27, 29, 31, 33, 35],
+      "finding": "The model inspects history, defines gridstate/legends, reads historical L2 patterns, enumerates eight dihedral transforms and two polarities, and inspects L1 geometry. These are genuine semantic computations; they use fresh segmentation/ASCII and historical frames, not the repaired extract/rebuild output. They do not produce an updated current L3 action plan.",
+      "concrete_program_source": "experiments/033-controller-analysis/review.md",
+      "concrete_program_line_start": 2738,
+      "concrete_program_line_end": 2786,
+      "concrete_program_result": "consistent transforms (mode,pol): []"
+    },
+    "historical_state_interpretation_error": {
+      "finding": "The later transform check labels history[10]'s L2 frame as the winning board. Its own history-boundary output says the L2-completing action MOUSE(row=48,col=30) belongs to history[11], already displaying L3. history[10] is the pre-completion L2 frame, so its apparent missing orange at (4,1) is not evidence that the successful L2 solution violated the legend. The ensuing historical-rule exploration is real, but its premise is wrong.",
+      "history_boundary_source": "experiments/033-controller-analysis/review.md",
+      "history_boundary_section_line": 2631,
+      "wrong_winning_board_assignment_line": 2745,
+      "limit": "This observation explains an additional local reasoning failure. It does not imply an untested corrected controller would clear the level."
+    }
+  },
+  "tail_completeness_audit": {
+    "requests_source": "runs/033-controller-retry/controller_repair_B/requests.jsonl",
+    "jsonl_lines": 35,
+    "last_request_line_1based": 35,
+    "last_recorded_new_tool_call_id": "call_21ae49531f514561814be67d",
+    "last_recorded_new_tool_call_result_present": true,
+    "last_tool_call_source": "experiments/033-controller-analysis/review.md",
+    "last_tool_call_section_line": 2880,
+    "last_call_behavior": "Reads the historical L1 panel-D crop and lists historical cell nodes; no action or current L3 target update.",
+    "terminal_status_source": "runs/033-controller-retry/controller_repair_B/transcripts/ft09-0d8bbf25_B.txt",
+    "terminal_status_line": 3790,
+    "terminal_status": "request_timeout (yielding, history preserved): read timeout=6.573726652999994",
+    "finding": "The final request has no recorded successful response and the transcript ends with the matching request timeout. No additional client-executed tail code or actions were found outside the request snapshots."
+  },
+  "recommended_wording": "准确像素已实际执行、验证并交付；模型在心理推理中明确引用这些行段，也正确转写了 P4，但像素到目标的推导仍沿用错误的 (5,3)=O。主循环未编程调用修订后的 extract/rebuild，后续正确 ASCII 重读也未触发当前 L3 目标重算。之后有历史规则检验，但没有形成新的当前关计划；最终 26 动作、0 新增关。本版停止扩跑和提交。"
+}

@@ -1,0 +1,1493 @@
+{
+  "reviewed_at_utc": "2026-10-21T06:43:52.982969+00:00",
+  "scope": "Independent read-only review of completed 031 v2 local logs; no network, model requests, replayed actions, or running-source edits. Supplements rather than replaces adoption-review.json.",
+  "decision": {
+    "recommendation": "Keep frozen 031 v2 as a legitimate candidate for one 25-game matched comparison; do not close it as an unconsumed passive field and do not submit from +0.7726 alone. Finish already running 032/033 screening, then spend the next full-pool budget on the strongest supported candidate; if neither provides stronger direct benefit, 031 merits that one full comparison.",
+    "why": "r11l contains a full runs-to-pixels-to-search-to-executed-level-completion chain, beyond initial delivery counters. Overall short-run score is positive with valid paired coverage. ft09 dominates the mean but its extra clear cannot be attributed specifically to precise footprint repair; this limits confidence rather than serving as a veto.",
+    "do_not_do": [
+      "No 031 v3/v4 wording search or extra pre-full-pool gate is proposed.",
+      "Do not require leave-largest-game-out positivity.",
+      "Do not claim exact footprints alone caused all three positive game deltas, stable hidden transfer, or a medal."
+    ]
+  },
+  "aggregate_evidence": {
+    "baseline_mean": 22.50921956920033,
+    "candidate_mean": 23.281860142873608,
+    "delta": 0.7726405736732808,
+    "baseline_levels": 27,
+    "candidate_levels": 26,
+    "positive_games": 3,
+    "negative_games": 4,
+    "unchanged_games": 3,
+    "source": "experiments/031-natural-analysis/summary.json"
+  },
+  "r11l": {
+    "finding": "Genuine computational and action consumption with one extra completed level in this short run.",
+    "chain": [
+      {
+        "line": 39,
+        "fact": "FREE expands node.runs and returns 2950 pixels; sanity checks print both initial groups valid."
+      },
+      {
+        "line": 49,
+        "fact": "B-first search using FREE and ok returns 225 solutions, first ((8,53),(28,61))."
+      },
+      {
+        "line": 53,
+        "fact": "Select/move purple endpoints with four real mouse actions (48,54),(8,53),(35,45),(28,61); all produce effects."
+      },
+      {
+        "line": 51,
+        "fact": "Earlier orange search using FREE returns five solutions; first trip ((31,46),(61,30),(61,44)) with permutation (1,0,2)."
+      },
+      {
+        "line": 63,
+        "fact": "Six real selection/move clicks execute that orange trip; MOUSE(row61,col44) returns level_completed=True. Events file line34/action18 confirms L2 completed; benchmark records two completed levels versus one."
+      }
+    ],
+    "baseline_difference": "Baseline already extracts blocked S/g pixels directly from ASCII. It pursues geometric line/ring proximity and one-handle moves, executes four L2 mouse actions and does not clear L2 within 900s. Candidate instead solves centroid configurations with footprint and segment predicates; this is a broader change in generated reasoning/program, not an isolated same-program footprint ablation.",
+    "limits": [
+      "Candidate geometric validator later rejects two intermediate orange states at request lines59/61, but the model still executes the original plan and succeeds. Its full world model is not independently verified.",
+      "Line37 and57 tools time out after30s; line47 loses local free and raises NameError. Costs remain included.",
+      "Original009 historical full-budget r11l often solves further; a 900s depth difference is not guaranteed to survive full-budget completion ceilings."
+    ],
+    "pixel_reconstruction_audit": {
+      "source": {
+        "path": "runs/031-natural-aligned/segmentation_runs/artifacts/r11l-495a7899_p0_events.jsonl",
+        "sha256": "ff7103842c2376f779bb9fea182e673cadde96fd0563a0fab50eb837d1a8b118"
+      },
+      "event_line": 15,
+      "action_num": 8,
+      "method": "Independent 4-neighbor equal-color flood fill on recorded board_ascii, then apply the observed <=30 pixel component heuristic. No generated code or environment was executed.",
+      "FREE_pixels": 2950,
+      "ascii_not_S_or_g_pixels": 2983,
+      "FREE_added_pixels_against_ascii_not_Sg": 29,
+      "added_pixel_detail": "Two small gray components at rows0-1 (22 pixels) and row0 (7 pixels).",
+      "FREE_excluded_pixels_against_ascii_not_Sg": 62,
+      "excluded_pixel_detail": "W boundary/HUD at column0, rows2-63.",
+      "interpretation": "runs gives exact component membership, but choosing all components <=30 as free is model semantics. FREE is not proven to be the engine collision map."
+    },
+    "candidate_evidence": {
+      "source": {
+        "path": "runs/031-natural-aligned/segmentation_runs/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "8b5eebaec20670f559e45936c61e8a67c564100378967eebb7282ccf71c5b46a"
+      },
+      "calls": [
+        {
+          "tool_call_id": "call_a59813a6e9f145bf81f4bb27",
+          "request_line_1based": 39,
+          "result_line_1based": 39,
+          "level": 2,
+          "analysis_step": 7,
+          "code": "def FREE(frame):\n    a = frame.ascii.split('\\n')\n    free = set()\n    for r in range(64):\n        row = a[r]\n        for c in range(64):\n            if row[c] == 'B': free.add((r,c))\n    for n in frame.segmentation['nodes']:\n        if n['pixels'] <= 30:\n            for rr,c0,c1 in n['runs']:\n                for c in range(c0,c1+1): free.add((rr,c))\n    return free\n\ndef discset(p):\n    return set((p[0]+dr,p[1]+dc) for dr in (-2,-1,0,1,2) for dc in (-2,-1,0,1,2) if not (abs(dr)==2 and abs(dc)==2))\n\ndef bres(p,q):\n    r0,c0=p; r1,c1=q; out=[(r0,c0)]\n    dr=abs(r1-r0); dc=-abs(c1-c0); sr=1 if r0<r1 else -1; sc=1 if c0<c1 else -1; err=dr+dc\n    for _ in range(200):\n        if r0==r1 and c0==c1: break\n        e2=2*err\n        if e2>=dc: err+=dc; r0+=sr\n        if e2<=dr: err+=dr; c0+=sc\n        out.append((r0,c0))\n    return out\n\ndef blobof(ps): return (sum(p[0] for p in ps)//len(ps), sum(p[1] for p in ps)//len(ps))\n\ndef ok(crosses, free):\n    b = blobof(crosses)\n    cells=set()\n    for p in crosses+[b]:\n        d=discset(p)\n        if not d <= free: return False\n        if d & cells: return False\n        cells |= d\n    for p in crosses:\n        for cell in bres(b,p):\n            if cell in cells: continue\n            if cell not in free: return False\n    return True\n\nfree = FREE(current_frame)\nprint(len(free))\nO=[(6,17),(21,8),(9,49)]; P=[(35,45),(48,54)]\nprint('init O', ok(O,free), 'init P', ok(P,free), 'blobO', blobof(O), 'blobP', blobof(P))\n",
+          "stdout": "2950\ninit O True init P True blobO (12, 24) blobP (41, 49)\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function FREE(frame) for later Python calls in this game.\nRetained your function discset(p) for later Python calls in this game.\nRetained your function bres(p, q) for later Python calls in this game.\nRetained your function blobof(ps) for later Python calls in this game.\nRetained your function ok(crosses, free) for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_173768f871a840238eaf4261",
+          "request_line_1based": 49,
+          "result_line_1based": 49,
+          "level": 2,
+          "analysis_step": 7,
+          "code": "free = FREE(current_frame)\nA0=(35,45)\nsols=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        Bp=(r,c)\n        if Bp==A0: continue\n        if not ok([A0,Bp], free): continue\n        for sr in (36,37):\n            for sc in (114,115):\n                Ap=(sr-r, sc-c)\n                if not (0<=Ap[0]<64 and 0<=Ap[1]<64) or Ap==Bp: continue\n                if ok([Ap,Bp], free): sols.append((Bp,Ap))\nprint('B-first sols', len(sols), sols[:12])\n",
+          "stdout": "B-first sols 225 [((8, 53), (28, 61)), ((8, 54), (28, 61)), ((9, 53), (27, 61)), ((9, 53), (28, 61)), ((9, 54), (27, 60)), ((9, 54), (27, 61)), ((9, 54), (28, 61)), ((9, 55), (27, 60)), ((9, 61), (27, 53)), ((10, 53), (26, 61)), ((10, 53), (27, 61)), ((10, 54), (26, 60))]\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_1e8bf62cf8af4a8aa6f05b9c",
+          "request_line_1based": 51,
+          "result_line_1based": 51,
+          "level": 2,
+          "analysis_step": 7,
+          "code": "free = FREE(current_frame)\nT=(51,40)\n# cells visible from blob center T\nR=[]\ndT=discset(T)\nfor r in range(2,62):\n    for c in range(2,62):\n        p=(r,c)\n        d=discset(p)\n        if not d<=free: continue\n        if d & dT: continue\n        good=True\n        for cell in bres(T,p):\n            if cell in dT or cell in d: continue\n            if cell not in free: good=False; break\n        if good: R.append(p)\nprint('R', len(R))\nfrom collections import defaultdict\nh=defaultdict(list)\nfor i,p in enumerate(R): h[(p[0],p[1])].append(i)\ncands=[]\nfor i in range(len(R)):\n    for j in range(i+1,len(R)):\n        p1,p2=R[i],R[j]\n        for sr in (153,154,155):\n            for sc in (120,121,122):\n                q=(sr-p1[0]-p2[0], sc-p1[1]-p2[1])\n                if q not in h: continue\n                p3=q\n                if p3<=p2: continue\n                cands.append((p1,p2,p3))\nprint('cands', len(cands))\ninit=[(6,17),(21,8),(9,49)]\nimport itertools\nsols=[]\nfor trip in cands[:400]:\n    for perm in itertools.permutations(range(3)):\n        # perm[k] = index of initial cross moved to trip[k]\n        p=[None,None,None]\n        used=set()\n        for k,idx in enumerate(perm):\n            p[idx]=trip[k]\n        # order: move cross perm[0] first? simulate sequence of moves in order k=0,1,2 -> cross perm[k] goes to trip[k]\n        cur=list(init)\n        states=[]\n        valid=True\n        for k in range(3):\n            cur[perm[k]]=trip[k]\n            states.append(tuple(cur))\n            if not ok(list(cur), free): valid=False; break\n        if valid:\n            sols.append((trip,perm,states))\n            if len(sols)>=5: break\n    if len(sols)>=5: break\nprint('orange sols', len(sols))\nfor s in sols[:3]: print(s)\n",
+          "stdout": "R 1328\ncands 238444\norange sols 5\n(((31, 46), (61, 30), (61, 44)), (1, 0, 2), [((6, 17), (31, 46), (9, 49)), ((61, 30), (31, 46), (9, 49)), ((61, 30), (31, 46), (61, 44))])\n(((31, 47), (61, 29), (61, 44)), (1, 0, 2), [((6, 17), (31, 47), (9, 49)), ((61, 29), (31, 47), (9, 49)), ((61, 29), (31, 47), (61, 44))])\n(((31, 47), (61, 30), (61, 43)), (1, 0, 2), [((6, 17), (31, 47), (9, 49)), ((61, 30), (31, 47), (9, 49)), ((61, 30), (31, 47), (61, 43))])\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_0ca4c665fc454f928ca49549",
+          "request_line_1based": 53,
+          "result_line_1based": 53,
+          "level": 2,
+          "analysis_step": 8,
+          "code": "plan = [(48,54),(8,53),(35,45),(28,61)]\nfor i,(r,c) in enumerate(plan):\n    res = action([{'action':'MOUSE','row':r,'col':c}])\n    print(i, (r,c), res['state'], 'lvl_done', res['level_completed'], 'gameover', res['game_over'], 'gp_chg', res.get('gameplay_changed'))\n    if res['level_completed'] or res['game_over'] or not res.get('gameplay_changed', True):\n        break\n",
+          "stdout": "[action] MOUSE(row=48, col=54) -> effect\n0 (48, 54) NOT_FINISHED lvl_done False gameover False gp_chg True\n[action] MOUSE(row=8, col=53) -> effect\n1 (8, 53) NOT_FINISHED lvl_done False gameover False gp_chg True\n[action] MOUSE(row=35, col=45) -> effect\n2 (35, 45) NOT_FINISHED lvl_done False gameover False gp_chg True\n[action] MOUSE(row=28, col=61) -> effect\n3 (28, 61) NOT_FINISHED lvl_done False gameover False gp_chg True\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_bdbbba6fd7b14c91b2f2a691",
+          "request_line_1based": 59,
+          "result_line_1based": 59,
+          "level": 2,
+          "analysis_step": 8,
+          "code": "def FREE(frame):\n    a = frame.ascii.split('\\n'); free=set()\n    for r in range(64):\n        row=a[r]\n        for c in range(64):\n            if row[c]=='B': free.add((r,c))\n    for n in frame.segmentation['nodes']:\n        if n['pixels']<=30:\n            for rr,c0,c1 in n['runs']:\n                for c in range(c0,c1+1): free.add((rr,c))\n    return free\ndef discset(p): return set((p[0]+dr,p[1]+dc) for dr in (-2,-1,0,1,2) for dc in (-2,-1,0,1,2) if not(abs(dr)==2 and abs(dc)==2))\ndef bres(p,q):\n    r0,c0=p; r1,c1=q; out=[(r0,c0)]\n    dr=abs(r1-r0); dc=-abs(c1-c0); sr=1 if r0<r1 else -1; sc=1 if c0<c1 else -1; err=dr+dc\n    for _ in range(200):\n        if r0==r1 and c0==c1: break\n        e2=2*err\n        if e2>=dc: err+=dc; r0+=sr\n        if e2<=dr: err+=dr; c0+=sc\n        out.append((r0,c0))\n    return out\ndef blobof(ps): return (sum(p[0] for p in ps)//len(ps), sum(p[1] for p in ps)//len(ps))\ndef ok(crosses, free):\n    b=blobof(crosses); cells=set()\n    for p in crosses+[b]:\n        d=discset(p)\n        if not d<=free: return False\n        if d & cells: return False\n        cells|=d\n    for p in crosses:\n        for cell in bres(b,p):\n            if cell in cells: continue\n            if cell not in free: return False\n    return True\nfree = FREE(current_frame)\na = current_frame.ascii.split('\\n')\nocc=set()\nfor ctr in [(8,53),(28,61),(18,57)]: occ |= discset(ctr)\nfor r in range(0,35):\n    for c in range(40,64):\n        if a[r][c] in 'wWpM': occ.add((r,c))\nfree2 = free - occ\ntrip=((31,46),(61,30),(61,44)); perm=(1,0,2); init=[(6,17),(21,8),(9,49)]\ncur=list(init); res=[]\nfor k in range(3):\n    cur[perm[k]]=trip[k]\n    res.append((tuple(cur), blobof(cur), ok(list(cur), free2)))\nfor x in res: print(x)\n",
+          "stdout": "(((6, 17), (31, 46), (9, 49)), (15, 37), False)\n(((61, 30), (31, 46), (9, 49)), (33, 41), False)\n(((61, 30), (31, 46), (61, 44)), (51, 40), True)\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function FREE(frame) for later Python calls in this game.\nRetained your function discset(p) for later Python calls in this game.\nRetained your function bres(p, q) for later Python calls in this game.\nRetained your function blobof(ps) for later Python calls in this game.\nRetained your function ok(crosses, free) for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_869abaa28569473ca3bcf0fa",
+          "request_line_1based": 61,
+          "result_line_1based": 61,
+          "level": 2,
+          "analysis_step": 8,
+          "code": "free = FREE(current_frame)\nocc = set()\nfor ctr in [(8,53),(28,61),(18,57)]: occ |= discset(ctr)\nfor cell in bres((18,57),(8,53)) + bres((18,57),(28,61)): occ.add(cell)\na = current_frame.ascii.split('\\n')\nfor r in range(13,24):\n    for c in range(51,63):\n        if a[r][c]=='W': occ.add((r,c))\nfree2 = free - occ\ntrip=((31,46),(61,30),(61,44)); perm=(1,0,2); init=[(6,17),(21,8),(9,49)]\ncur=list(init)\nfor k in range(3):\n    cur[perm[k]]=trip[k]\n    print(tuple(cur), blobof(cur), ok(list(cur), free2))\n# diagnose failures: which cells not free\ndef why(crosses, free):\n    b=blobof(crosses); cells=set(); bad=[]\n    for p in crosses+[b]:\n        d=discset(p)\n        bad += [('disc',p,c) for c in sorted(d-free)]\n        cells|=d\n    for p in crosses:\n        for cell in bres(b,p):\n            if cell in cells: continue\n            if cell not in free: bad.append(('trail',p,cell))\n    return bad[:8]\nprint(why([(6,17),(31,46),(9,49)], free2))\nprint(why([(61,30),(31,46),(9,49)], free2))\n",
+          "stdout": "((6, 17), (31, 46), (9, 49)) (15, 37) False\n((61, 30), (31, 46), (9, 49)) (33, 41) False\n((61, 30), (31, 46), (61, 44)) (51, 40) True\n[('disc', (9, 49), (8, 51)), ('disc', (9, 49), (9, 51))]\n[('disc', (9, 49), (8, 51)), ('disc', (9, 49), (9, 51))]\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function why(crosses, free) for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_2e13859d177e42a7884d9d10",
+          "request_line_1based": 63,
+          "result_line_1based": 63,
+          "level": 2,
+          "analysis_step": 9,
+          "code": "free = FREE(current_frame)\nplan = [(21,8),(31,46),(6,17),(61,30),(9,49),(61,44)]\nfor i,(r,c) in enumerate(plan):\n    res = action([{'action':'MOUSE','row':r,'col':c}])\n    print(i,(r,c),res['state'],'done',res['level_completed'],'go',res['game_over'],'gp',res.get('gameplay_changed'))\n    if res['level_completed'] or res['game_over'] or not res.get('gameplay_changed',True): break\n",
+          "stdout": "[action] MOUSE(row=21, col=8) -> effect\n0 (21, 8) NOT_FINISHED done False go False gp True\n[action] MOUSE(row=31, col=46) -> effect\n1 (31, 46) NOT_FINISHED done False go False gp True\n[action] MOUSE(row=6, col=17) -> effect\n2 (6, 17) NOT_FINISHED done False go False gp True\n[action] MOUSE(row=61, col=30) -> effect\n3 (61, 30) NOT_FINISHED done False go False gp True\n[action] MOUSE(row=9, col=49) -> effect\n4 (9, 49) NOT_FINISHED done False go False gp True\n[action] MOUSE(row=61, col=44) -> LEVEL COMPLETED\n5 (61, 44) NOT_FINISHED done True go False gp True\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        }
+      ]
+    },
+    "baseline_evidence": {
+      "source": {
+        "path": "runs/031-natural-aligned/baseline/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "65cb610913fe1294833bc137eccf27dbe6de38334480aac8945c2a71490aaed2"
+      },
+      "calls": [
+        {
+          "tool_call_id": "call_1b9882108234467f964a9388",
+          "request_line_1based": 35,
+          "result_line_1based": 35,
+          "level": 2,
+          "analysis_step": 6,
+          "code": "import math\na = current_frame.ascii.split('\\n')\ngrid = [list(r) for r in a]\nblocked = set((r,c) for r in range(64) for c in range(64) if grid[r][c] in ('S','g'))\ndef diamond_cells(r,c):\n    out=[]\n    for dr in range(-2,3):\n        w=2-abs(dr)\n        for dc in range(-w,w+1): out.append((r+dr,c+dc))\n    return out\ndef fits(r,c):\n    return all(0<=x<64 and 0<=y<64 and (x,y) not in blocked for x,y in diamond_cells(r,c))\nA=(9,49); B=(21,8)\nrings={'p':(18,57),'O':(51,40)}\ndef seg_near(p,q,ctr,maxd=1.6):\n    # min distance from ctr to segment pq\n    px,py=p; qx,qy=q; cx,cy=ctr\n    dx,dy=qx-px,qy-py\n    L=dx*dx+dy*dy\n    if L==0: return math.hypot(px-cx,py-cy)\n    t=((cx-px)*dx+(cy-py)*dy)/L\n    t=max(0.0,min(1.0,t))\n    return math.hypot(px+t*dx-cx, py+t*dy-cy), t\ndef outside(p,ctr,r=3.3):\n    return math.hypot(p[0]-ctr[0],p[1]-ctr[1])>r\ncands=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        if not fits(r,c): continue\n        H=(r,c)\n        C=( (H[0]+A[0]+B[0])//3, (H[1]+A[1]+B[1])//3 )\n        arms=[(H,C),(A,C),(B,C)]\n        for rn,rc in rings.items():\n            for (p,q) in arms:\n                res=seg_near(p,q,rc)\n                if isinstance(res,tuple):\n                    d,t=res\n                    if d<1.6 and 0.05<t<0.95 and outside(p,rc) and outside(q,rc):\n                        cands.append((rn,p,q,round(d,2),H,C))\nprint(len(cands))\nfor x in cands[:25]: print(x)\n",
+          "stdout": "33\n('p', (17, 61), (15, 39), 1.36, (17, 61), (15, 39))\n('p', (18, 61), (16, 39), 0.36, (18, 61), (16, 39))\n('p', (19, 61), (16, 39), 0.45, (19, 61), (16, 39))\n('p', (20, 60), (16, 39), 1.4, (20, 60), (16, 39))\n('p', (20, 61), (16, 39), 1.25, (20, 61), (16, 39))\n('O', (54, 42), (28, 33), 0.91, (54, 42), (28, 33))\n('O', (55, 40), (28, 32), 1.14, (55, 40), (28, 32))\n('O', (55, 41), (28, 32), 0.32, (55, 41), (28, 32))\n('O', (55, 42), (28, 33), 0.63, (55, 42), (28, 33))\n('O', (55, 43), (28, 33), 1.42, (55, 43), (28, 33))\n('O', (56, 40), (28, 32), 1.37, (56, 40), (28, 32))\n('O', (56, 41), (28, 32), 0.58, (56, 41), (28, 32))\n('O', (56, 42), (28, 33), 0.37, (56, 42), (28, 33))\n('O', (56, 43), (28, 33), 1.14, (56, 43), (28, 33))\n('O', (57, 41), (29, 32), 0.88, (57, 41), (29, 32))\n('O', (57, 42), (29, 33), 0.07, (57, 42), (29, 33))\n('O', (57, 43), (29, 33), 0.81, (57, 43), (29, 33))\n('O', (57, 44), (29, 33), 1.53, (57, 44), (29, 33))\n('O', (58, 41), (29, 32), 1.12, (58, 41), (29, 32))\n('O', (58, 42), (29, 33), 0.16, (58, 42), (29, 33))\n('O', (58, 43), (29, 33), 0.55, (58, 43), (29, 33))\n('O', (58, 44), (29, 33), 1.26, (58, 44), (29, 33))\n('O', (59, 41), (29, 32), 1.34, (59, 41), (29, 32))\n('O', (59, 42), (29, 33), 0.38, (59, 42), (29, 33))\n('O', (59, 43), (29, 33), 0.32, (59, 43), (29, 33))\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function diamond_cells(r, c) for later Python calls in this game.\nRetained your function seg_near(p, q, ctr, maxd=1.6) for later Python calls in this game.\nRetained your function outside(p, ctr, r=3.3) for later Python calls in this game.\nYour function fits was not retained: unavailable dependencies: blocked. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_e52a141f3f6a4e0f910c2b7e",
+          "request_line_1based": 37,
+          "result_line_1based": 37,
+          "level": 2,
+          "analysis_step": 6,
+          "code": "a = current_frame.ascii.split('\\n')\ngrid=[list(r) for r in a]\nblocked=set((r,c) for r in range(64) for c in range(64) if grid[r][c] in ('S','g'))\ndef line_cells(p,q):\n    (r0,c0),(r1,c1)=p,q\n    n=max(abs(r1-r0),abs(c1-c0))\n    out=[]\n    for i in range(n+1):\n        r=round(r0+(r1-r0)*i/n); c=round(c0+(c1-c0)*i/n)\n        out.append((r,c))\n    return out\nfor H,C in [((18,61),(16,39)),((57,42),(29,33)),((56,42),(28,33))]:\n    A=(9,49);B=(21,8)\n    bad=set()\n    for (p,q) in [(H,C),(A,C),(B,C)]:\n        bad |= set(x for x in line_cells(p,q) if x in blocked)\n    print(H,C,'blocked-cross:',sorted(bad)[:8], len(bad))\n",
+          "stdout": "(18, 61) (16, 39) blocked-cross: [] 0\n(57, 42) (29, 33) blocked-cross: [(24, 37), (25, 19), (25, 20), (25, 21), (25, 22), (25, 36), (26, 23), (26, 24)] 15\n(56, 42) (28, 33) blocked-cross: [(23, 37), (24, 36), (25, 21), (25, 22), (25, 23), (25, 24), (25, 36), (26, 25)] 14\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function line_cells(p, q) for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_2b696d8b42014274afd3f8be",
+          "request_line_1based": 43,
+          "result_line_1based": 43,
+          "level": 2,
+          "analysis_step": 8,
+          "code": "a = current_frame.ascii.split('\\n')\ngrid=[list(r) for r in a]\nblocked=set((r,c) for r in range(64) for c in range(64) if grid[r][c] in ('S','g'))\ndef fits(r,c): return all(0<=x<64 and 0<=y<64 and (x,y) not in blocked for x,y in diamond_cells(r,c))\ncands=[(r,c) for r in range(6,58) for c in range(6,58) if fits(r,c)]\n# prefer far from head(35,45) and from beads, arms clear\ndef arms_clear(H, bead, nodes):\n    for p in [H]+list(nodes):\n        if any(x in blocked for x in line_cells(p,bead)): return False\n    return True\ngood=[(r,c) for (r,c) in cands if abs(r-35)+abs(c-45)>=25 and arms_clear((r,c),(41,49),[(18,61),(48,54)])]\nprint(len(good), good[:20])\n",
+          "stdout": "0 []\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Your function fits was not retained: unavailable dependencies: blocked. Pass snippet-specific data as arguments or redefine it if needed.\nYour function arms_clear was not retained: unavailable dependencies: blocked. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_a2064a4f3d8843ba8d115028",
+          "request_line_1based": 49,
+          "result_line_1based": 49,
+          "level": 2,
+          "analysis_step": 9,
+          "code": "r = action([{'action':'MOUSE','row':11,'col':57}])\nprint(r['state'],'lc',r['level_completed'],'noop',r.get('no_op'))\nd = frame_diff()\nprint('moved:',[(m['color'],m['from'],m['to'],m['pixels']) for m in d['moved']])\nfor n in current_frame.segmentation['nodes']:\n    if n['color'] in ('W','G','M') or n['pixels']==20: print('now:',n['color'],n['pixels'],n['boundary'][0])\n",
+          "stdout": "[action] MOUSE(row=11, col=57) -> NO-OP (executed, no change inside the board area)\nNOT_FINISHED lc False noop True\nmoved: []\nnow: W 60 [4, 0]\nnow: G 12 [7, 49]\nnow: O 20 [14, 38]\nnow: M 1 [16, 39]\nnow: G 12 [16, 61]\nnow: G 12 [19, 8]\nnow: W 12 [33, 45]\nnow: p 20 [39, 48]\nnow: M 1 [41, 49]\nnow: G 12 [46, 54]\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        }
+      ]
+    }
+  },
+  "ft09": {
+    "finding": "Both arms correctly extract and clear L3/L4 through ASCII; no later explicit runs access supports a claim that the new field repaired the old P4 pixel mistake. Largest score increment is the candidate clearing L5, not baseline failing L3/L4 extraction.",
+    "L3": {
+      "baseline": "Line19 reads key(5,2)=gWg/WOg/WWW directly from ASCII, correctly preserving the background g. Line25 executes13 clicks after one probe and clears L3.",
+      "candidate": "Line37 reads 3x3 mini samples directly from ASCII, finds23 constraints without conflicts; line39 executes the same13 logical target cells with different within-cell click offsets and clears L3. Both use14 L3 actions.",
+      "meaning": "Known old row46,col32 g->W failure is absent in both arms here. Candidate L1 runs[:2] printing is not proof of a later footprint correction."
+    },
+    "L4": {
+      "baseline": "After two crop/join TypeErrors and a corrected key anchor, line35 reads correct key grids. Line39 maps gray to R, chooses a sufficient target coloring and clears with24 total L4 actions.",
+      "candidate": "Line45 parses the same mini grids from ASCII and treats gray as not-the-center-color, constructing allowed sets. Line47 leaves some already-allowed cells unchanged and clears in19 L4 actions.",
+      "meaning": "Candidate has a more precise constraint interpretation and saves5 actions, but does not read runs at this level. It nevertheless finishes L4 later in wall time (431.43s versus351.20s)."
+    },
+    "L5_score_source": "Candidate completes L5 at833.31s with23 actions, while baseline spends45 actions until894.09s and remains onL5. Candidate had less remaining time afterL4, so the difference is not just arriving earlier. The L5 extraction, rule/search handling and actions differ; direct effect of runs cannot be isolated.",
+    "candidate_evidence": {
+      "source": {
+        "path": "runs/031-natural-aligned/segmentation_runs/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "2c1f93e554a0fa75379c7203c411c0aabf86a4ce4505d0396724f78a43a26be5"
+      },
+      "calls": [
+        {
+          "tool_call_id": "call_fee983fcbf534bae8f8351ba",
+          "request_line_1based": 37,
+          "result_line_1based": 37,
+          "level": 3,
+          "analysis_step": 8,
+          "code": "A = current_frame.ascii.split('\\n')\ndef mini(rr,cc):\n    return [[A[rr+2*i][cc+2*j] for j in range(3)] for i in range(3)]\nreads = {(1,2):'O',(3,1):'R',(3,3):'R',(5,2):'O'}\nshape = {0:(1,4),1:(1,4),2:(0,5),3:(0,5),4:(0,5),5:(1,4),6:(1,4)}\ncells = {(i,j) for i,(a,b) in shape.items() for j in range(a,b)}\ncons = {}\nconflict=[]\nfor (ci,cj),mark in reads.items():\n    m = mini(4+8*ci, 12+8*cj)\n    for i in range(3):\n        for j in range(3):\n            if (i,j)==(1,1): continue\n            gi,gj = ci-1+i, cj-1+j\n            if (gi,gj) not in cells: continue\n            v = m[i][j]\n            want = mark if v=='W' else ('R' if mark=='O' else 'O')\n            if v not in ('W','g'): conflict.append(('oddchar',(gi,gj),v)); continue\n            prev = cons.get((gi,gj))\n            if prev is not None and prev!=want: conflict.append(((gi,gj),prev,want))\n            cons[(gi,gj)] = want\nprint('conflicts', conflict)\nprint('constrained', len(cons), 'cells', len(cells))\nuncon = sorted(cells - set(cons))\nprint('unconstrained', uncon)\ncur = snap3(current_frame)\nneedO = sorted(k for k,v in cons.items() if v=='O' and cur[k]!='O')\nprint('needO', needO)\n",
+          "stdout": "conflicts []\nconstrained 23 cells 27\nunconstrained [(1, 2), (3, 1), (3, 3), (5, 2)]\nneedO [(0, 2), (0, 3), (1, 1), (2, 0), (2, 2), (3, 0), (3, 4), (4, 2), (4, 4), (5, 1), (6, 1), (6, 2), (6, 3)]\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Your function mini was not retained: unavailable dependencies: A. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_6fc6c78abd594824bbb9e44b",
+          "request_line_1based": 39,
+          "result_line_1based": 39,
+          "level": 3,
+          "analysis_step": 9,
+          "code": "needO = [(0, 2), (0, 3), (1, 1), (2, 0), (2, 2), (3, 0), (3, 4), (4, 2), (4, 4), (5, 1), (6, 1), (6, 2), (6, 3)]\nacts = [{'action':'MOUSE','row':4+8*i+3,'col':12+8*j+3} for (i,j) in needO]\nres = action(acts)\nprint({k:res.get(k) for k in ('executed','no_op','level_completed','game_over','run_complete','done','stop_reason')})\ncur = snap3(current_frame)\ntarget = {(0,1):'O',(0,2):'O',(0,3):'O',(1,1):'O',(1,3):'R',(2,0):'O',(2,1):'R',(2,2):'O',(2,3):'R',(2,4):'R',(3,0):'O',(3,2):'R',(3,4):'O',(4,0):'R',(4,1):'R',(4,2):'O',(4,3):'R',(4,4):'O',(5,1):'O',(5,3):'R',(6,1):'O',(6,2):'O',(6,3):'O'}\nmismatch = {k:(cur.get(k),target[k]) for k in target if cur.get(k)!=target[k]}\nprint('mismatch', mismatch)\nprint('level now', current_frame.level, 'step', current_frame.step)\n",
+          "stdout": "[action] batch of 13 actions, 13 executed: MOUSE(row=7, col=31), MOUSE(row=7, col=39), MOUSE(row=15, col=23), MOUSE(row=23, col=15), MOUSE(row=23, col=31), MOUSE(row=31, col=15), MOUSE(row=31, col=47), MOUSE(row=39, col=31), MOUSE(row=39, col=47), MOUSE(row=47, col=23), MOUSE(row=55, col=23), MOUSE(row=55, col=31), MOUSE(row=55, col=39) | stop_reason: level_completed\n{'executed': True, 'no_op': False, 'level_completed': True, 'game_over': False, 'run_complete': False, 'done': False, 'stop_reason': 'level_completed'}\nmismatch {(0, 1): ('c', 'O'), (0, 2): ('c', 'O'), (0, 3): ('c', 'O'), (1, 1): ('b', 'O'), (1, 3): ('b', 'R'), (2, 0): ('b', 'O'), (2, 1): ('W', 'R'), (2, 2): ('b', 'O'), (2, 3): ('W', 'R'), (2, 4): ('b', 'R'), (3, 0): ('b', 'O'), (3, 2): ('b', 'R'), (3, 4): ('b', 'O'), (4, 0): ('c', 'R'), (4, 1): ('b', 'R'), (4, 2): ('g', 'O'), (4, 3): ('b', 'R'), (4, 4): ('c', 'O'), (5, 1): ('b', 'O'), (5, 3): ('b', 'R'), (6, 1): ('c', 'O'), (6, 2): ('c', 'O'), (6, 3): ('c', 'O')}\nlevel now 4 step 28\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_2cadc705670e40329044a732",
+          "request_line_1based": 45,
+          "result_line_1based": 45,
+          "level": 4,
+          "analysis_step": 10,
+          "code": "def parse(fr, r0, c0, nrows, ncols, shape):\n    A = fr.ascii.split('\\n')\n    cells, reads = {}, {}\n    for i,(a,b) in shape.items():\n        for j in range(a,b):\n            blk = [A[r0+8*i+rr][c0+8*j:c0+8*j+6] for rr in range(6)]\n            flat = ''.join(blk)\n            if 'W' in flat or 'g' in flat:\n                mark = blk[2][2]  # center 2x2 color\n                m = [[blk[2*ii][2*jj] for jj in range(3)] for ii in range(3)]\n                reads[(i,j)] = (mark, m)\n            else:\n                cells[(i,j)] = flat[3*6+3]\n    return cells, reads, (r0,c0)\n\nshape4 = {0:(0,5),1:(0,5),2:(0,5),3:(1,4),4:(1,4)}\ncells, reads, _ = parse(current_frame, 14, 12, 5, 5, shape4)\nprint('cells', cells)\nprint('reads', reads)\ncons, conflicts = {}, []\nfor (ci,cj),(mark,m) in reads.items():\n    for i in range(3):\n        for j in range(3):\n            if (i,j)==(1,1): continue\n            key = (ci-1+i, cj-1+j)\n            if key not in cells: continue\n            v = m[i][j]\n            if v=='W': cons.setdefault(key,set()).add(mark)\n            elif v=='g': cons.setdefault(key,set()).add('not-'+mark)\n            else: conflicts.append(('sym',key,v))\nfor k,v in sorted(cons.items()):\n    pos = {x for x in v if not x.startswith('not-')}\n    neg = {x[4:] for x in v if x.startswith('not-')}\n    allowed = [c for c in 'bRO' if (c in pos or not pos) and c not in neg] if True else None\n    # resolve: if pos nonempty -> must be single pos and not in neg\n    if pos:\n        resolved = (pos - neg)\n        if len(resolved)!=1: conflicts.append((k,pos,neg))\n        allowed = resolved\n    else:\n        allowed = set('bRO') - neg\n    cons[k] = (pos, neg, allowed)\nprint('resolved:')\nfor k,v in sorted(cons.items()): print(k, v, 'cur', cells.get(k))\nprint('conflicts', conflicts)\nprint('uncovered', sorted(set(cells)-set(cons)))\n",
+          "stdout": "cells {(0, 0): 'O', (0, 1): 'b', (0, 2): 'b', (0, 3): 'b', (0, 4): 'b', (1, 0): 'b', (1, 2): 'b', (1, 4): 'b', (2, 0): 'b', (2, 1): 'b', (2, 2): 'b', (2, 3): 'b', (2, 4): 'b', (3, 1): 'b', (3, 3): 'b', (4, 1): 'b', (4, 2): 'b', (4, 3): 'b'}\nreads {(1, 1): ('O', [['g', 'W', 'g'], ['g', 'O', 'g'], ['g', 'W', 'g']]), (1, 3): ('b', [['g', 'W', 'g'], ['g', 'b', 'g'], ['g', 'g', 'W']]), (3, 2): ('O', [['W', 'g', 'g'], ['g', 'O', 'g'], ['W', 'W', 'W']])}\nresolved:\n(0, 0) (set(), {'O'}, {'R', 'b'}) cur O\n(0, 1) ({'O'}, set(), {'O'}) cur b\n(0, 2) (set(), {'O', 'b'}, {'R'}) cur b\n(0, 3) ({'b'}, set(), {'b'}) cur b\n(0, 4) (set(), {'b'}, {'R', 'O'}) cur b\n(1, 0) (set(), {'O'}, {'R', 'b'}) cur b\n(1, 2) (set(), {'O', 'b'}, {'R'}) cur b\n(1, 4) (set(), {'b'}, {'R', 'O'}) cur b\n(2, 0) (set(), {'O'}, {'R', 'b'}) cur b\n(2, 1) ({'O'}, set(), {'O'}) cur b\n(2, 2) (set(), {'O', 'b'}, {'R'}) cur b\n(2, 3) (set(), {'O', 'b'}, {'R'}) cur b\n(2, 4) ({'b'}, set(), {'b'}) cur b\n(3, 1) (set(), {'O'}, {'R', 'b'}) cur b\n(3, 3) (set(), {'O'}, {'R', 'b'}) cur b\n(4, 1) ({'O'}, set(), {'O'}) cur b\n(4, 2) ({'O'}, set(), {'O'}) cur b\n(4, 3) ({'O'}, set(), {'O'}) cur b\nconflicts []\nuncovered []\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function parse(fr, r0, c0, nrows, ncols, shape) for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_a3a27014e51143c2826f1ebf",
+          "request_line_1based": 47,
+          "result_line_1based": 47,
+          "level": 4,
+          "analysis_step": 11,
+          "code": "CY = 'bRO'\nplan = [((0,0),'b'),((0,1),'O'),((0,2),'R'),((1,2),'R'),((2,1),'O'),((2,2),'R'),((2,3),'R'),((4,1),'O'),((4,2),'O'),((4,3),'O'),((0,4),'R'),((1,4),'R')]\nr0,c0 = 14,12\ndef cellpos(i,j): return (r0+8*i+3, c0+8*j+3)\nlog=[]\ndone=False\nfor (i,j),tgt in plan:\n    cur = snap4(current_frame)\n    need = (CY.index(tgt) - CY.index(cur[(i,j)])) % 3\n    for k in range(need):\n        before = snap4(current_frame)\n        res = action([{'action':'MOUSE','row':cellpos(i,j)[0],'col':cellpos(i,j)[1]}])\n        after = snap4(current_frame)\n        d = {kk:(before[kk],after[kk]) for kk in before if before[kk]!=after[kk]}\n        if res.get('level_completed') or res.get('run_complete') or res.get('game_over'):\n            log.append(('END',i,j,k,res.get('level_completed'),res.get('game_over'),res.get('run_complete')))\n            done=True; break\n        if set(d)!={(i,j)}:\n            log.append(('SURPRISE',i,j,k,d)); \n    if done: break\nprint('log',log)\nprint('done',done,'level',current_frame.level,'step',current_frame.step)\n",
+          "stdout": "[action] MOUSE(row=17, col=15) -> effect\n[action] MOUSE(row=17, col=23) -> effect\n[action] MOUSE(row=17, col=23) -> effect\n[action] MOUSE(row=17, col=31) -> effect\n[action] MOUSE(row=25, col=31) -> effect\n[action] MOUSE(row=33, col=23) -> effect\n[action] MOUSE(row=33, col=23) -> effect\n[action] MOUSE(row=33, col=31) -> effect\n[action] MOUSE(row=33, col=39) -> effect\n[action] MOUSE(row=49, col=23) -> effect\n[action] MOUSE(row=49, col=23) -> effect\n[action] MOUSE(row=49, col=31) -> effect\n[action] MOUSE(row=49, col=31) -> effect\n[action] MOUSE(row=49, col=39) -> effect\n[action] MOUSE(row=49, col=39) -> effect\n[action] MOUSE(row=17, col=47) -> effect\n[action] MOUSE(row=25, col=47) -> LEVEL COMPLETED\nlog [('END', 1, 4, 0, True, False, False)]\ndone True level 5 step 47\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Your function cellpos was not retained: unavailable dependencies: c0, r0. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_1c8bbd0cee214106a7604c66",
+          "request_line_1based": 65,
+          "result_line_1based": 65,
+          "level": 5,
+          "analysis_step": 15,
+          "code": "def target5():\n    return {(0,2):'N',(0,3):'p',(1,1):'N',(1,2):'p',(1,3):'N',(2,0):'N',(2,1):'p',(2,3):'p',(2,4):'N',(2,5):'p',(2,6):'N',(3,1):'N',(3,2):'p',(3,3):'N',(3,5):'N',(4,0):'N',(4,1):'p',(4,3):'p',(4,4):'N',(4,5):'p',(4,6):'N',(5,1):'N',(5,3):'N',(5,4):'p',(5,5):'N',(6,1):'p',(6,2):'N',(6,3):'p',(6,4):'N'}\nT = target5()\nshape, mini, kind, state = lv5(current_frame)\nlog=[]\nfor k in [b for b in kind if kind[b]=='brush']:\n    if state[k]!=T.get(k):\n        r = click(k)\n        shape, mini, kind, state = lv5(current_frame)\n        log.append(('brush',k,state[k],bool(r.get('level_completed'))))\n        if r.get('level_completed') or r.get('game_over'): break\nprint('brush log', log)\nprint('brush states', {k:state[k] for k in kind if kind[k]=='brush'})\nprint('plain mismatches', {k:(state.get(k),T[k]) for k in T if kind.get(k)=='plain' and state.get(k)!=T[k]})\n",
+          "stdout": "[action] MOUSE(row=15, col=25) -> effect\n[action] MOUSE(row=31, col=25) -> effect\n[action] MOUSE(row=47, col=41) -> effect\nbrush log [('brush', (1, 2), 'p', False), ('brush', (3, 2), 'p', False), ('brush', (5, 4), 'p', False)]\nbrush states {(1, 2): 'p', (3, 2): 'p', (5, 4): 'p'}\nplain mismatches {(0, 3): ('N', 'p'), (1, 1): ('p', 'N'), (1, 3): ('p', 'N'), (2, 1): ('N', 'p'), (2, 5): ('N', 'p'), (3, 1): ('p', 'N'), (3, 3): ('p', 'N'), (4, 1): ('N', 'p'), (4, 3): ('N', 'p'), (4, 4): ('p', 'N'), (4, 5): ('N', 'p'), (5, 3): ('p', 'N'), (5, 5): ('p', 'N'), (6, 1): ('N', 'p'), (6, 3): ('N', 'p'), (6, 4): ('p', 'N')}\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Retained your function target5() for later Python calls in this game."
+        },
+        {
+          "tool_call_id": "call_3d8efc5efa2c468f91901412",
+          "request_line_1based": 67,
+          "result_line_1based": 67,
+          "level": 5,
+          "analysis_step": 16,
+          "code": "T = target5()\ndone=False\nlog=[]\nfor rnd in range(4):\n    shape, mini, kind, state = lv5(current_frame)\n    bad = [k for k in T if kind.get(k)=='plain' and state.get(k)!=T[k]]\n    if not bad: break\n    for k in bad:\n        before = state[k]\n        r = click(k)\n        shape, mini, kind, state = lv5(current_frame)\n        log.append((k, before, state[k]))\n        if r.get('level_completed') or r.get('game_over') or r.get('run_complete'):\n            done=True; log.append(('END', r.get('level_completed'), r.get('game_over'), r.get('run_complete'))); break\n    if done: break\nprint('log', log)\nprint('done', done, 'level', current_frame.level, 'step', current_frame.step)\nshape, mini, kind, state = lv5(current_frame)\nprint('remaining mismatches', {k:(state.get(k),T[k]) for k in T if state.get(k)!=T[k]})\n",
+          "stdout": "[action] MOUSE(row=7, col=33) -> effect\n[action] MOUSE(row=15, col=17) -> effect\n[action] MOUSE(row=15, col=33) -> effect\n[action] MOUSE(row=23, col=17) -> effect\n[action] MOUSE(row=23, col=49) -> effect\n[action] MOUSE(row=31, col=17) -> effect\n[action] MOUSE(row=31, col=33) -> effect\n[action] MOUSE(row=39, col=17) -> effect\n[action] MOUSE(row=39, col=33) -> effect\n[action] MOUSE(row=39, col=41) -> effect\n[action] MOUSE(row=39, col=49) -> effect\n[action] MOUSE(row=47, col=33) -> effect\n[action] MOUSE(row=47, col=49) -> effect\n[action] MOUSE(row=55, col=17) -> effect\n[action] MOUSE(row=55, col=33) -> effect\n[action] MOUSE(row=55, col=41) -> LEVEL COMPLETED\nlog [((0, 3), 'N', 'p'), ((1, 1), 'p', 'N'), ((1, 3), 'p', 'N'), ((2, 1), 'N', 'p'), ((2, 5), 'N', 'p'), ((3, 1), 'p', 'N'), ((3, 3), 'p', 'N'), ((4, 1), 'N', 'p'), ((4, 3), 'N', 'p'), ((4, 4), 'p', 'N'), ((4, 5), 'N', 'p'), ((5, 3), 'p', 'N'), ((5, 5), 'p', 'N'), ((6, 1), 'N', 'p'), ((6, 3), 'N', 'p'), ((6, 4), 'p', 'c'), ('END', True, False, False)]\ndone True level 6 step 70\nremaining mismatches {(0, 2): ('c', 'N'), (0, 3): ('c', 'p'), (1, 1): ('Y', 'N'), (1, 2): ('Y', 'p'), (1, 3): ('Y', 'N'), (2, 0): ('c', 'N'), (2, 1): ('Y', 'p'), (2, 3): ('Y', 'p'), (2, 4): (None, 'N'), (2, 5): ('Y', 'p'), (2, 6): ('c', 'N'), (3, 1): ('Y', 'N'), (3, 2): (None, 'p'), (3, 3): ('Y', 'N'), (3, 5): ('Y', 'N'), (4, 0): ('c', 'N'), (4, 1): ('Y', 'p'), (4, 3): ('Y', 'p'), (4, 4): ('Y', 'N'), (4, 5): ('Y', 'p'), (4, 6): ('Y', 'N'), (5, 1): ('c', 'N'), (5, 3): ('c', 'N'), (5, 4): ('c', 'p'), (5, 5): (None, 'N'), (6, 1): ('c', 'p'), (6, 2): ('c', 'N'), (6, 3): ('c', 'p'), (6, 4): ('c', 'N')}\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        }
+      ]
+    },
+    "baseline_evidence": {
+      "source": {
+        "path": "runs/031-natural-aligned/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "466c6e176e22226ee2a3dd6da533f523495de045a947b70ea7e76f9c9241b0bc"
+      },
+      "calls": [
+        {
+          "tool_call_id": "call_59f5b3ae6f9d4ecaae45a8c8",
+          "request_line_1based": 19,
+          "result_line_1based": 19,
+          "level": 3,
+          "analysis_step": 5,
+          "code": "g=[list(r) for r in current_frame.ascii.split('\\n')]\ndef key(r0,c0): return ''.join(''.join(g[r0+dr][c0+dc] for dc in (0,2,4))+'/' for dr in (0,2,4))\nkeys={(1,2):(12,28),(3,1):(28,20),(3,3):(28,36),(5,2):(44,28)}\nfor k,(r,c) in keys.items(): print(k, key(r,c))\n",
+          "stdout": "(1, 2) WWW/WOg/gWg/\n(3, 1) gWg/gRW/WWg/\n(3, 3) gWW/WRg/gWg/\n(5, 2) gWg/WOg/WWW/\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Your function key was not retained: unavailable dependencies: g. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_ad9175c9ac384ee798f68b64",
+          "request_line_1based": 25,
+          "result_line_1based": 25,
+          "level": 3,
+          "analysis_step": 7,
+          "code": "target={(0,1):'O',(0,2):'O',(0,3):'O',\n        (1,1):'O',(1,3):'R',\n        (2,0):'O',(2,1):'R',(2,2):'O',(2,3):'R',(2,4):'R',\n        (3,0):'O',(3,2):'R',(3,4):'O',\n        (4,0):'R',(4,1):'R',(4,2):'O',(4,3):'R',(4,4):'O',\n        (5,1):'O',(5,3):'R',\n        (6,1):'O',(6,2):'O',(6,3):'O'}\ng=[list(x) for x in current_frame.ascii.split('\\n')]\nacts=[]\nfor (i,j),want in sorted(target.items()):\n    r,c=4+8*i,12+8*j\n    cur=g[r][c]\n    if cur!=want: acts.append({'action':'MOUSE','row':r+2,'col':c+2})\nprint('clicks',len(acts),acts)\nres=action(acts)\nprint({k:res.get(k) for k in ('state','level_completed','game_over','run_complete','done','stop_reason')})\nprint('executed',res.get('executed_actions'))\n",
+          "stdout": "clicks 13 [{'action': 'MOUSE', 'row': 6, 'col': 30}, {'action': 'MOUSE', 'row': 6, 'col': 38}, {'action': 'MOUSE', 'row': 14, 'col': 22}, {'action': 'MOUSE', 'row': 22, 'col': 14}, {'action': 'MOUSE', 'row': 22, 'col': 30}, {'action': 'MOUSE', 'row': 30, 'col': 14}, {'action': 'MOUSE', 'row': 30, 'col': 46}, {'action': 'MOUSE', 'row': 38, 'col': 30}, {'action': 'MOUSE', 'row': 38, 'col': 46}, {'action': 'MOUSE', 'row': 46, 'col': 22}, {'action': 'MOUSE', 'row': 54, 'col': 22}, {'action': 'MOUSE', 'row': 54, 'col': 30}, {'action': 'MOUSE', 'row': 54, 'col': 38}]\n[action] batch of 13 actions, 13 executed: MOUSE(row=6, col=30), MOUSE(row=6, col=38), MOUSE(row=14, col=22), MOUSE(row=22, col=14), MOUSE(row=22, col=30), MOUSE(row=30, col=14), MOUSE(row=30, col=46), MOUSE(row=38, col=30), MOUSE(row=38, col=46), MOUSE(row=46, col=22), MOUSE(row=54, col=22), MOUSE(row=54, col=30), MOUSE(row=54, col=38) | stop_reason: level_completed\n{'state': 'NOT_FINISHED', 'level_completed': True, 'game_over': False, 'run_complete': False, 'done': False, 'stop_reason': 'level_completed'}\nexecuted ['MOUSE(row=6, col=30)', 'MOUSE(row=6, col=38)', 'MOUSE(row=14, col=22)', 'MOUSE(row=22, col=14)', 'MOUSE(row=22, col=30)', 'MOUSE(row=30, col=14)', 'MOUSE(row=30, col=46)', 'MOUSE(row=38, col=30)', 'MOUSE(row=38, col=46)', 'MOUSE(row=46, col=22)', 'MOUSE(row=54, col=22)', 'MOUSE(row=54, col=30)', 'MOUSE(row=54, col=38)']\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_04b2e8ee75184738aee9b114",
+          "request_line_1based": 35,
+          "result_line_1based": 35,
+          "level": 4,
+          "analysis_step": 7,
+          "code": "g=[list(r) for r in current_frame.ascii.split('\\n')]\nfor name,(r0,c0) in [('K(1,1)',(22,20)),('K(1,3)',(22,36)),('K(3,2)',(38,28))]:\n    print(name)\n    for dr in (0,2,4): print('   ',' '.join(''.join(g[r0+dr][c0+dc:c0+dc+2]) for dc in (0,2,4)))\n",
+          "stdout": "K(1,1)\n    gg WW gg\n    gg OO gg\n    gg WW gg\nK(1,3)\n    gg WW gg\n    gg bb gg\n    gg gg WW\nK(3,2)\n    WW gg gg\n    gg OO gg\n    WW WW WW\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_b964f08b4209439080fe3f26",
+          "request_line_1based": 39,
+          "result_line_1based": 39,
+          "level": 4,
+          "analysis_step": 9,
+          "code": "g=[list(r) for r in current_frame.ascii.split('\\n')]\nkeys={(1,1):(22,20),(1,3):(22,36),(3,2):(38,28)}\ndef tile(r0,c0,i,j): return g[r0+2*i][c0+2*j]\npresent={}\nfor i in range(5):\n    for j in range(5):\n        r,c=14+8*i,12+8*j\n        if g[r][c] in ('b','R','O'): present[(i,j)]=g[r][c]\n        elif g[r][c]=='W' or g[r][c]=='g': present[(i,j)]='KEY'\ntarget={}\nfor (ki,kj),(r0,c0) in keys.items():\n    C=tile(r0,c0,1,1)\n    for i in range(3):\n        for j in range(3):\n            gi,gj=ki-1+i,kj-1+j\n            if (gi,gj) not in present or present[(gi,gj)]=='KEY': continue\n            t=tile(r0,c0,i,j)\n            col=C if t=='W' else ('R' if t=='g' else t)\n            if (gi,gj) in target and target[(gi,gj)]!=col: print('CONFLICT',gi,gj,target[(gi,gj)],col)\n            target[(gi,gj)]=col\nuncovered=[k for k in present if present[k]!='KEY' and k not in target]\nprint('uncovered',uncovered)\nidx={'b':0,'R':1,'O':2}\nacts=[]\nfor (i,j),cur in sorted(present.items()):\n    if cur=='KEY' or (i,j) not in target: continue\n    want=target[(i,j)]\n    n=(idx[want]-idx[cur])%3\n    r,c=14+8*i+2,12+8*j+2\n    acts += [{'action':'MOUSE','row':r,'col':c}]*n\nprint('target',sorted(target.items()))\nprint('clicks',len(acts))\nres=action(acts)\nprint({k:res.get(k) for k in ('state','level_completed','game_over','run_complete','done','stop_reason')})\n",
+          "stdout": "uncovered []\ntarget [((0, 0), 'R'), ((0, 1), 'O'), ((0, 2), 'R'), ((0, 3), 'b'), ((0, 4), 'R'), ((1, 0), 'R'), ((1, 2), 'R'), ((1, 4), 'R'), ((2, 0), 'R'), ((2, 1), 'O'), ((2, 2), 'R'), ((2, 3), 'R'), ((2, 4), 'b'), ((3, 1), 'R'), ((3, 3), 'R'), ((4, 1), 'O'), ((4, 2), 'O'), ((4, 3), 'O')]\nclicks 22\n[action] batch of 22 actions, 22 executed: MOUSE(row=16, col=14), MOUSE(row=16, col=14), MOUSE(row=16, col=22), MOUSE(row=16, col=22), MOUSE(row=16, col=30), MOUSE(row=16, col=46), MOUSE(row=24, col=14), MOUSE(row=24, col=30), MOUSE(row=24, col=46), MOUSE(row=32, col=14), MOUSE(row=32, col=22), MOUSE(row=32, col=22), MOUSE(row=32, col=30), MOUSE(row=32, col=38), MOUSE(row=40, col=22), MOUSE(row=40, col=38), MOUSE(row=48, col=22), MOUSE(row=48, col=22), MOUSE(row=48, col=30), MOUSE(row=48, col=30), MOUSE(row=48, col=38), MOUSE(row=48, col=38) | stop_reason: level_completed\n{'state': 'NOT_FINISHED', 'level_completed': True, 'game_over': False, 'run_complete': False, 'done': False, 'stop_reason': 'level_completed'}\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": "Your function tile was not retained: unavailable dependencies: g. Pass snippet-specific data as arguments or redefine it if needed."
+        },
+        {
+          "tool_call_id": "call_81312910d3eb4031978634d3",
+          "request_line_1based": 75,
+          "result_line_1based": 75,
+          "level": 5,
+          "analysis_step": 13,
+          "code": "todo=[(0,3),(2,1),(2,3),(2,5),(4,1),(4,3),(4,5),(6,1),(6,3),(2,2)]\nacts=[{'action':'MOUSE','row':7+8*i,'col':9+8*j} for i,j in todo]\nres=action(acts)\nprint({k:res.get(k) for k in ('state','level_completed','game_over','run_complete','done','stop_reason')})\nprint('n executed',len(res.get('executed_actions',[])))\n",
+          "stdout": "[action] batch of 10 actions, 10 executed: MOUSE(row=7, col=33), MOUSE(row=23, col=17), MOUSE(row=23, col=33), MOUSE(row=23, col=49), MOUSE(row=39, col=17), MOUSE(row=39, col=33), MOUSE(row=39, col=49), MOUSE(row=55, col=17), MOUSE(row=55, col=33), MOUSE(row=23, col=25)\n{'state': 'NOT_FINISHED', 'level_completed': False, 'game_over': False, 'run_complete': False, 'done': False, 'stop_reason': None}\nn executed 10\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        },
+        {
+          "tool_call_id": "call_3267f748ffea47b79c3d4193",
+          "request_line_1based": 85,
+          "result_line_1based": 85,
+          "level": 5,
+          "analysis_step": 14,
+          "code": "cells={'(0,2)':'W01M12','(0,3)':'N12W14','(1,1)':'W01M12','(1,3)':'M12g14','(2,0)':'g30','(2,1)':'N12W30N32',\n'(2,2)':'M12M32','(2,3)':'N12W14N32g34','(2,4)':'g14W34','(2,5)':'W14g34g36','(2,6)':'W36','(3,1)':'g30M32W42',\n'(3,3)':'M32W34W42','(3,5)':'W34W36','(4,0)':'g30','(4,1)':'W30N32g42g52','(4,3)':'N32g34g42g52N54',\n'(4,4)':'W34M54','(4,5)':'g34g36N54','(4,6)':'W36','(5,1)':'W42W52','(5,3)':'W42W52M54','(5,5)':'M54W65',\n'(6,1)':'g52','(6,2)':'W52','(6,3)':'g52N54','(6,4)':'M54W65'}\nA={'01':0,'12':1,'14':1,'30':1,'32':1,'34':0,'36':0,'42':0,'52':0,'54':1,'65':0}\nmp={}\nfor k,b in A.items():\n    if k in ('12','32','54'): mp[(k,'N')]='N' if b else 'p'; mp[(k,'M')]='p' if b else 'N'\n    else: mp[(k,'W')]='N' if b else 'p'; mp[(k,'g')]='p' if b else 'N'\ntarget={}\nfor c,s in cells.items():\n    i=0;vals=set()\n    while i<len(s): vals.add(mp[(s[i+1:i+3],s[i])]); i+=3\n    target[(int(c[1]),int(c[3]))]=vals.pop()\ng=[list(r) for r in current_frame.ascii.split('\\n')]\nys=[4,12,20,28,36,44,52]; xs=[6,14,22,30,38,46,54]\nacts=[{'action':'MOUSE','row':ys[i]+3,'col':xs[j]+3} for (i,j),w in sorted(target.items()) if g[ys[i]+3][xs[j]+3]!=w]\nprint('clicks needed',len(acts))\nres=action(acts) if acts else {}\nprint({k:res.get(k) for k in ('state','level_completed','game_over','run_complete','done','stop_reason')})\nprint('n executed',len(res.get('executed_actions',[]) or []))\n",
+          "stdout": "clicks needed 27\n[action] batch of 27 actions, 27 executed: MOUSE(row=7, col=25), MOUSE(row=7, col=33), MOUSE(row=15, col=17), MOUSE(row=15, col=33), MOUSE(row=23, col=9), MOUSE(row=23, col=17), MOUSE(row=23, col=25), MOUSE(row=23, col=33), MOUSE(row=23, col=41), MOUSE(row=23, col=49), MOUSE(row=23, col=57), MOUSE(row=31, col=17), MOUSE(row=31, col=33), MOUSE(row=31, col=49), MOUSE(row=39, col=9), MOUSE(row=39, col=17), MOUSE(row=39, col=33), MOUSE(row=39, col=41), MOUSE(row=39, col=49), MOUSE(row=39, col=57), MOUSE(row=47, col=17), MOUSE(row=47, col=33), MOUSE(row=47, col=49), MOUSE(row=55, col=17), MOUSE(row=55, col=25), MOUSE(row=55, col=33), MOUSE(row=55, col=41)\n{'state': 'NOT_FINISHED', 'level_completed': False, 'game_over': False, 'run_complete': False, 'done': False, 'stop_reason': None}\nn executed 27\n",
+          "result": null,
+          "error": null,
+          "python_state": null,
+          "function_retention": null
+        }
+      ]
+    }
+  },
+  "per_level_costs": {
+    "baseline/ft09-0d8bbf25": {
+      "completed_levels": 4,
+      "score": 47.61904761904761,
+      "per_level": [
+        {
+          "level": 1,
+          "actions": 4,
+          "first_action_elapsed_seconds": 74.74193732700041,
+          "last_action_elapsed_seconds": 83.20258627500016,
+          "action_attached_generated_tokens": 5387
+        },
+        {
+          "level": 2,
+          "actions": 7,
+          "first_action_elapsed_seconds": 110.0797391760002,
+          "last_action_elapsed_seconds": 116.49587266200024,
+          "action_attached_generated_tokens": 2435
+        },
+        {
+          "level": 3,
+          "actions": 14,
+          "first_action_elapsed_seconds": 230.35188140400032,
+          "last_action_elapsed_seconds": 235.8503797350004,
+          "action_attached_generated_tokens": 8947
+        },
+        {
+          "level": 4,
+          "actions": 24,
+          "first_action_elapsed_seconds": 337.82283769700007,
+          "last_action_elapsed_seconds": 351.20277525400024,
+          "action_attached_generated_tokens": 7648
+        },
+        {
+          "level": 5,
+          "actions": 45,
+          "first_action_elapsed_seconds": 502.9048215740004,
+          "last_action_elapsed_seconds": 894.0915651159999,
+          "action_attached_generated_tokens": 34542
+        }
+      ]
+    },
+    "baseline/r11l-495a7899": {
+      "completed_levels": 1,
+      "score": 4.761904761904762,
+      "per_level": [
+        {
+          "level": 1,
+          "actions": 4,
+          "first_action_elapsed_seconds": 22.749901127000157,
+          "last_action_elapsed_seconds": 224.93665154400014,
+          "action_attached_generated_tokens": 14630
+        },
+        {
+          "level": 2,
+          "actions": 4,
+          "first_action_elapsed_seconds": 365.8995630600002,
+          "last_action_elapsed_seconds": 705.9868886130002,
+          "action_attached_generated_tokens": 32955
+        }
+      ]
+    },
+    "segmentation_runs/ft09-0d8bbf25": {
+      "completed_levels": 5,
+      "score": 71.42857142857143,
+      "per_level": [
+        {
+          "level": 1,
+          "actions": 7,
+          "first_action_elapsed_seconds": 0.17367904299953807,
+          "last_action_elapsed_seconds": 156.0624914680002,
+          "action_attached_generated_tokens": 10332
+        },
+        {
+          "level": 2,
+          "actions": 7,
+          "first_action_elapsed_seconds": 182.545282434,
+          "last_action_elapsed_seconds": 203.08045551800024,
+          "action_attached_generated_tokens": 3714
+        },
+        {
+          "level": 3,
+          "actions": 14,
+          "first_action_elapsed_seconds": 257.52979972399953,
+          "last_action_elapsed_seconds": 271.6822888689994,
+          "action_attached_generated_tokens": 5634
+        },
+        {
+          "level": 4,
+          "actions": 19,
+          "first_action_elapsed_seconds": 360.91872773900013,
+          "last_action_elapsed_seconds": 431.4319399169999,
+          "action_attached_generated_tokens": 11638
+        },
+        {
+          "level": 5,
+          "actions": 23,
+          "first_action_elapsed_seconds": 618.5559835920003,
+          "last_action_elapsed_seconds": 833.3119585909999,
+          "action_attached_generated_tokens": 27088
+        },
+        {
+          "level": 6,
+          "actions": 1,
+          "first_action_elapsed_seconds": 878.2107035150002,
+          "last_action_elapsed_seconds": 878.2107035150002,
+          "action_attached_generated_tokens": 2986
+        }
+      ]
+    },
+    "segmentation_runs/r11l-495a7899": {
+      "completed_levels": 2,
+      "score": 14.285714285714285,
+      "per_level": [
+        {
+          "level": 1,
+          "actions": 6,
+          "first_action_elapsed_seconds": 17.927918147999662,
+          "last_action_elapsed_seconds": 171.93013162199986,
+          "action_attached_generated_tokens": 11433
+        },
+        {
+          "level": 2,
+          "actions": 12,
+          "first_action_elapsed_seconds": 255.29587929799982,
+          "last_action_elapsed_seconds": 760.1473904559998,
+          "action_attached_generated_tokens": 36739
+        }
+      ]
+    }
+  },
+  "memory_032_opportunity_readout": {
+    "scope": "031 900-second natural histories are used only to assess whether completion+eviction windows occur; no change to frozen032 helper or active runs.",
+    "finding": "Completion occurs in17/20 game-arms, but only3/20 show observed message-history shrink after completion within900s. All20 retain one unchanged system prompt hash. The matching scheduler re-enqueues corroborate real post-initial handover in sc25 baseline, sc25 candidate, ar25 candidate.",
+    "windows": [
+      {
+        "arm": "baseline",
+        "game": "sc25-635fd71a",
+        "shrinks": [
+          {
+            "before_line": 89,
+            "after_line": 91,
+            "before_messages": 122,
+            "after_messages": 59,
+            "level": 4,
+            "action": 79,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "handover": [
+          {
+            "observer_sequence": 41,
+            "elapsed_seconds_from_observer_origin": 790.3176803000001,
+            "snapshot": {
+              "level": 4,
+              "actions": 0,
+              "tokens": 4132,
+              "cost_multiplier": 1.0,
+              "total_levels": 6
+            }
+          }
+        ]
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "ar25-0c556536",
+        "shrinks": [
+          {
+            "before_line": 79,
+            "after_line": 81,
+            "before_messages": 108,
+            "after_messages": 44,
+            "level": 4,
+            "action": 90,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "handover": [
+          {
+            "observer_sequence": 41,
+            "elapsed_seconds_from_observer_origin": 789.3251437810004,
+            "snapshot": {
+              "level": 4,
+              "actions": 6,
+              "tokens": 8583,
+              "cost_multiplier": 1.0,
+              "total_levels": 8
+            }
+          }
+        ]
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "sc25-635fd71a",
+        "shrinks": [
+          {
+            "before_line": 83,
+            "after_line": 85,
+            "before_messages": 112,
+            "after_messages": 58,
+            "level": 4,
+            "action": 89,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "handover": [
+          {
+            "observer_sequence": 45,
+            "elapsed_seconds_from_observer_origin": 836.1152505160007,
+            "snapshot": {
+              "level": 4,
+              "actions": 9,
+              "tokens": 2145,
+              "cost_multiplier": 1.0,
+              "total_levels": 6
+            }
+          }
+        ]
+      }
+    ],
+    "interpretation": "900s would poorly cover the post-eviction mechanism. The already-frozen2700s032 budget is materially more informative; do not infer absence of reuse from early completion counters before any eviction. ar25/sc25 are first delivery-review priorities, then ft09/re86/tu93 if their longer run actually evicts history.",
+    "all_game_details": [
+      {
+        "arm": "baseline",
+        "game": "ar25-0c556536",
+        "path": "runs/031-natural-aligned/baseline/ar25-0c556536_p0_requests.jsonl",
+        "sha256": "d941727b993c3deb60eeadee98ece7a15b3b7827a1a79fc4dae6bf89bc3750b1",
+        "counts": {
+          "requests": 37,
+          "requests_on_level_2_plus": 31,
+          "requests_after_observed_completion": 31
+        },
+        "level_entries": [
+          {
+            "line": 13,
+            "level": 2,
+            "action": 17,
+            "analysis_step": 5,
+            "messages": 18,
+            "history_head_sha256": "37ad61a086676213f75201968d0254c9a6a82a916e8bb62ac18ae7e04091913a"
+          },
+          {
+            "line": 27,
+            "level": 3,
+            "action": 35,
+            "analysis_step": 9,
+            "messages": 37,
+            "history_head_sha256": "37ad61a086676213f75201968d0254c9a6a82a916e8bb62ac18ae7e04091913a"
+          },
+          {
+            "line": 47,
+            "level": 4,
+            "action": 78,
+            "analysis_step": 16,
+            "messages": 64,
+            "history_head_sha256": "37ad61a086676213f75201968d0254c9a6a82a916e8bb62ac18ae7e04091913a"
+          },
+          {
+            "line": 55,
+            "level": 5,
+            "action": 109,
+            "analysis_step": 18,
+            "messages": 74,
+            "history_head_sha256": "37ad61a086676213f75201968d0254c9a6a82a916e8bb62ac18ae7e04091913a"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "cd82-fb555c5d",
+        "path": "runs/031-natural-aligned/baseline/cd82-fb555c5d_p0_requests.jsonl",
+        "sha256": "c5ff50ee12b2e31ce6c6d99b9ceae18d787eab86c1adff27b3a607362a18dfc0",
+        "counts": {
+          "requests": 35,
+          "requests_on_level_2_plus": 12,
+          "requests_after_observed_completion": 12
+        },
+        "level_entries": [
+          {
+            "line": 47,
+            "level": 2,
+            "action": 19,
+            "analysis_step": 12,
+            "messages": 61,
+            "history_head_sha256": "db6674711ec2b8a58d005fbf663c916670f76ab2f6011476276431bd7a1a03c2"
+          },
+          {
+            "line": 55,
+            "level": 3,
+            "action": 25,
+            "analysis_step": 15,
+            "messages": 72,
+            "history_head_sha256": "db6674711ec2b8a58d005fbf663c916670f76ab2f6011476276431bd7a1a03c2"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "ft09-0d8bbf25",
+        "path": "runs/031-natural-aligned/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "466c6e176e22226ee2a3dd6da533f523495de045a947b70ea7e76f9c9241b0bc",
+        "counts": {
+          "requests": 43,
+          "requests_on_level_2_plus": 39,
+          "requests_after_observed_completion": 39
+        },
+        "level_entries": [
+          {
+            "line": 9,
+            "level": 2,
+            "action": 5,
+            "analysis_step": 3,
+            "messages": 13,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          },
+          {
+            "line": 15,
+            "level": 3,
+            "action": 12,
+            "analysis_step": 5,
+            "messages": 21,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          },
+          {
+            "line": 25,
+            "level": 4,
+            "action": 26,
+            "analysis_step": 7,
+            "messages": 34,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          },
+          {
+            "line": 39,
+            "level": 5,
+            "action": 50,
+            "analysis_step": 9,
+            "messages": 51,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "m0r0-492f87ba",
+        "path": "runs/031-natural-aligned/baseline/m0r0-492f87ba_p0_requests.jsonl",
+        "sha256": "224434f410e166dcac166bba009760d3ad1051d01c5c4bbf255d923ac70d6617",
+        "counts": {
+          "requests": 34,
+          "requests_on_level_2_plus": 0,
+          "requests_after_observed_completion": 0
+        },
+        "level_entries": [],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "r11l-495a7899",
+        "path": "runs/031-natural-aligned/baseline/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "65cb610913fe1294833bc137eccf27dbe6de38334480aac8945c2a71490aaed2",
+        "counts": {
+          "requests": 26,
+          "requests_on_level_2_plus": 18,
+          "requests_after_observed_completion": 18
+        },
+        "level_entries": [
+          {
+            "line": 17,
+            "level": 2,
+            "action": 5,
+            "analysis_step": 5,
+            "messages": 24,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "re86-8af5384d",
+        "path": "runs/031-natural-aligned/baseline/re86-8af5384d_p0_requests.jsonl",
+        "sha256": "0981cd7c585e0d2e32e574ad61d52141c50d8d9fb02c105e09f8ca3a9cfcb18b",
+        "counts": {
+          "requests": 49,
+          "requests_on_level_2_plus": 40,
+          "requests_after_observed_completion": 40
+        },
+        "level_entries": [
+          {
+            "line": 19,
+            "level": 2,
+            "action": 31,
+            "analysis_step": 6,
+            "messages": 26,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          },
+          {
+            "line": 33,
+            "level": 3,
+            "action": 70,
+            "analysis_step": 9,
+            "messages": 44,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          },
+          {
+            "line": 51,
+            "level": 4,
+            "action": 117,
+            "analysis_step": 10,
+            "messages": 65,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          },
+          {
+            "line": 77,
+            "level": 5,
+            "action": 227,
+            "analysis_step": 18,
+            "messages": 100,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "sc25-635fd71a",
+        "path": "runs/031-natural-aligned/baseline/sc25-635fd71a_p0_requests.jsonl",
+        "sha256": "a4931efc261d2a38c8332109e7b87e4980581a80d0fa93af3a2232d674bcc789",
+        "counts": {
+          "requests": 52,
+          "requests_on_level_2_plus": 26,
+          "requests_after_observed_completion": 26
+        },
+        "level_entries": [
+          {
+            "line": 53,
+            "level": 2,
+            "action": 41,
+            "analysis_step": 19,
+            "messages": 74,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          },
+          {
+            "line": 61,
+            "level": 3,
+            "action": 46,
+            "analysis_step": 22,
+            "messages": 85,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          },
+          {
+            "line": 87,
+            "level": 4,
+            "action": 79,
+            "analysis_step": 31,
+            "messages": 120,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [
+          {
+            "before_line": 89,
+            "after_line": 91,
+            "before_messages": 122,
+            "after_messages": 59,
+            "level": 4,
+            "action": 79,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [
+          {
+            "observer_sequence": 41,
+            "elapsed_seconds_from_observer_origin": 790.3176803000001,
+            "snapshot": {
+              "level": 4,
+              "actions": 0,
+              "tokens": 4132,
+              "cost_multiplier": 1.0,
+              "total_levels": 6
+            }
+          }
+        ],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "sp80-589a99af",
+        "path": "runs/031-natural-aligned/baseline/sp80-589a99af_p0_requests.jsonl",
+        "sha256": "50fd3698b8393c492ea158697165a0d4b29887c080639f778c33dff74b068148",
+        "counts": {
+          "requests": 26,
+          "requests_on_level_2_plus": 16,
+          "requests_after_observed_completion": 16
+        },
+        "level_entries": [
+          {
+            "line": 21,
+            "level": 2,
+            "action": 10,
+            "analysis_step": 6,
+            "messages": 28,
+            "history_head_sha256": "db6674711ec2b8a58d005fbf663c916670f76ab2f6011476276431bd7a1a03c2"
+          },
+          {
+            "line": 37,
+            "level": 3,
+            "action": 31,
+            "analysis_step": 12,
+            "messages": 51,
+            "history_head_sha256": "db6674711ec2b8a58d005fbf663c916670f76ab2f6011476276431bd7a1a03c2"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "tr87-cd924810",
+        "path": "runs/031-natural-aligned/baseline/tr87-cd924810_p0_requests.jsonl",
+        "sha256": "fd8b8d04091e590a4bc6c08bd28461e621c3aba81db2e89041cf449afeac06b4",
+        "counts": {
+          "requests": 54,
+          "requests_on_level_2_plus": 41,
+          "requests_after_observed_completion": 41
+        },
+        "level_entries": [
+          {
+            "line": 27,
+            "level": 2,
+            "action": 26,
+            "analysis_step": 6,
+            "messages": 27,
+            "history_head_sha256": "1fc9c9be8bf8c82a2d13b1097872a844fc439f587e9ac9ded050155e25af9b45"
+          },
+          {
+            "line": 65,
+            "level": 3,
+            "action": 65,
+            "analysis_step": 10,
+            "messages": 75,
+            "history_head_sha256": "1fc9c9be8bf8c82a2d13b1097872a844fc439f587e9ac9ded050155e25af9b45"
+          },
+          {
+            "line": 81,
+            "level": 4,
+            "action": 93,
+            "analysis_step": 12,
+            "messages": 95,
+            "history_head_sha256": "1fc9c9be8bf8c82a2d13b1097872a844fc439f587e9ac9ded050155e25af9b45"
+          },
+          {
+            "line": 99,
+            "level": 5,
+            "action": 128,
+            "analysis_step": 15,
+            "messages": 118,
+            "history_head_sha256": "1fc9c9be8bf8c82a2d13b1097872a844fc439f587e9ac9ded050155e25af9b45"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "baseline",
+        "game": "tu93-0768757b",
+        "path": "runs/031-natural-aligned/baseline/tu93-0768757b_p0_requests.jsonl",
+        "sha256": "209e69976ea7e971aeec7cd4dfe4fda4cfac549505e21506ba3a5f1fc0dd0a91",
+        "counts": {
+          "requests": 38,
+          "requests_on_level_2_plus": 27,
+          "requests_after_observed_completion": 27
+        },
+        "level_entries": [
+          {
+            "line": 23,
+            "level": 2,
+            "action": 19,
+            "analysis_step": 4,
+            "messages": 29,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 45,
+            "level": 3,
+            "action": 40,
+            "analysis_step": 11,
+            "messages": 58,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 63,
+            "level": 4,
+            "action": 66,
+            "analysis_step": 14,
+            "messages": 82,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "ar25-0c556536",
+        "path": "runs/031-natural-aligned/segmentation_runs/ar25-0c556536_p0_requests.jsonl",
+        "sha256": "4614bd6a06ac5ad0e1f3c41923b31fd4b883632780649c661021296e17382be3",
+        "counts": {
+          "requests": 48,
+          "requests_on_level_2_plus": 41,
+          "requests_after_observed_completion": 41
+        },
+        "level_entries": [
+          {
+            "line": 15,
+            "level": 2,
+            "action": 21,
+            "analysis_step": 5,
+            "messages": 20,
+            "history_head_sha256": "cbdb9be433c854bb5ba0890e9f064adafb8c66f6eccac540b74de95960945c8f"
+          },
+          {
+            "line": 43,
+            "level": 3,
+            "action": 38,
+            "analysis_step": 14,
+            "messages": 58,
+            "history_head_sha256": "cbdb9be433c854bb5ba0890e9f064adafb8c66f6eccac540b74de95960945c8f"
+          },
+          {
+            "line": 75,
+            "level": 4,
+            "action": 84,
+            "analysis_step": 27,
+            "messages": 104,
+            "history_head_sha256": "cbdb9be433c854bb5ba0890e9f064adafb8c66f6eccac540b74de95960945c8f"
+          },
+          {
+            "line": 89,
+            "level": 5,
+            "action": 106,
+            "analysis_step": 32,
+            "messages": 56,
+            "history_head_sha256": "3d3bdd0b9917e08d3b14d90e3b46491f84d1eaec305feeeaa903a6311632756d"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [
+          {
+            "before_line": 79,
+            "after_line": 81,
+            "before_messages": 108,
+            "after_messages": 44,
+            "level": 4,
+            "action": 90,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [
+          {
+            "observer_sequence": 41,
+            "elapsed_seconds_from_observer_origin": 789.3251437810004,
+            "snapshot": {
+              "level": 4,
+              "actions": 6,
+              "tokens": 8583,
+              "cost_multiplier": 1.0,
+              "total_levels": 8
+            }
+          }
+        ],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "cd82-fb555c5d",
+        "path": "runs/031-natural-aligned/segmentation_runs/cd82-fb555c5d_p0_requests.jsonl",
+        "sha256": "c1d740c88ecc9a53864abe7d56b12f2f4e522913d85d2593e0147b2afa723b54",
+        "counts": {
+          "requests": 25,
+          "requests_on_level_2_plus": 0,
+          "requests_after_observed_completion": 0
+        },
+        "level_entries": [],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "ft09-0d8bbf25",
+        "path": "runs/031-natural-aligned/segmentation_runs/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "2c1f93e554a0fa75379c7203c411c0aabf86a4ce4505d0396724f78a43a26be5",
+        "counts": {
+          "requests": 36,
+          "requests_on_level_2_plus": 24,
+          "requests_after_observed_completion": 24
+        },
+        "level_entries": [
+          {
+            "line": 25,
+            "level": 2,
+            "action": 8,
+            "analysis_step": 5,
+            "messages": 31,
+            "history_head_sha256": "486df43b3a58ad7311d15e2011ed96efbbe2976daad3fe00b2da14ef6a8774cf"
+          },
+          {
+            "line": 31,
+            "level": 3,
+            "action": 15,
+            "analysis_step": 7,
+            "messages": 39,
+            "history_head_sha256": "486df43b3a58ad7311d15e2011ed96efbbe2976daad3fe00b2da14ef6a8774cf"
+          },
+          {
+            "line": 39,
+            "level": 4,
+            "action": 29,
+            "analysis_step": 9,
+            "messages": 49,
+            "history_head_sha256": "486df43b3a58ad7311d15e2011ed96efbbe2976daad3fe00b2da14ef6a8774cf"
+          },
+          {
+            "line": 47,
+            "level": 5,
+            "action": 48,
+            "analysis_step": 11,
+            "messages": 60,
+            "history_head_sha256": "486df43b3a58ad7311d15e2011ed96efbbe2976daad3fe00b2da14ef6a8774cf"
+          },
+          {
+            "line": 67,
+            "level": 6,
+            "action": 71,
+            "analysis_step": 16,
+            "messages": 88,
+            "history_head_sha256": "486df43b3a58ad7311d15e2011ed96efbbe2976daad3fe00b2da14ef6a8774cf"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "m0r0-492f87ba",
+        "path": "runs/031-natural-aligned/segmentation_runs/m0r0-492f87ba_p0_requests.jsonl",
+        "sha256": "32fb029878a904bd8d6b824b284a9bdbf990ca0a8b6b8931c03ca8a47079db60",
+        "counts": {
+          "requests": 32,
+          "requests_on_level_2_plus": 0,
+          "requests_after_observed_completion": 0
+        },
+        "level_entries": [],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "r11l-495a7899",
+        "path": "runs/031-natural-aligned/segmentation_runs/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "8b5eebaec20670f559e45936c61e8a67c564100378967eebb7282ccf71c5b46a",
+        "counts": {
+          "requests": 37,
+          "requests_on_level_2_plus": 28,
+          "requests_after_observed_completion": 28
+        },
+        "level_entries": [
+          {
+            "line": 19,
+            "level": 2,
+            "action": 7,
+            "analysis_step": 5,
+            "messages": 25,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          },
+          {
+            "line": 63,
+            "level": 3,
+            "action": 19,
+            "analysis_step": 9,
+            "messages": 80,
+            "history_head_sha256": "77b0d7d7c0cb285a14d3369ece60cf74be9613a85493dc94f9702e3d758b70f3"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "re86-8af5384d",
+        "path": "runs/031-natural-aligned/segmentation_runs/re86-8af5384d_p0_requests.jsonl",
+        "sha256": "e3ccfbb757204e3739c06b34af37b79bda0486aa404214bf65a3dd69b4981278",
+        "counts": {
+          "requests": 34,
+          "requests_on_level_2_plus": 25,
+          "requests_after_observed_completion": 25
+        },
+        "level_entries": [
+          {
+            "line": 19,
+            "level": 2,
+            "action": 31,
+            "analysis_step": 7,
+            "messages": 27,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          },
+          {
+            "line": 33,
+            "level": 3,
+            "action": 71,
+            "analysis_step": 11,
+            "messages": 46,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          },
+          {
+            "line": 53,
+            "level": 4,
+            "action": 119,
+            "analysis_step": 14,
+            "messages": 71,
+            "history_head_sha256": "58ba5bc23fed09d0372e27ea4745fca4e1e812b1f92575f562c38901e96142d0"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "sc25-635fd71a",
+        "path": "runs/031-natural-aligned/segmentation_runs/sc25-635fd71a_p0_requests.jsonl",
+        "sha256": "b0934d050a372365050d77d90cb6942cb50fb44d0bebb5d390411e24fd8487fa",
+        "counts": {
+          "requests": 43,
+          "requests_on_level_2_plus": 20,
+          "requests_after_observed_completion": 20
+        },
+        "level_entries": [
+          {
+            "line": 47,
+            "level": 2,
+            "action": 42,
+            "analysis_step": 16,
+            "messages": 64,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          },
+          {
+            "line": 53,
+            "level": 3,
+            "action": 47,
+            "analysis_step": 18,
+            "messages": 72,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          },
+          {
+            "line": 77,
+            "level": 4,
+            "action": 80,
+            "analysis_step": 26,
+            "messages": 104,
+            "history_head_sha256": "db90341b11739886150598f1a8aad4aa96d953b1f5e01f026e31867bd272a7bd"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [
+          {
+            "before_line": 83,
+            "after_line": 85,
+            "before_messages": 112,
+            "after_messages": 58,
+            "level": 4,
+            "action": 89,
+            "history_head_changed": true,
+            "system_hash_changed": false
+          }
+        ],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [
+          {
+            "observer_sequence": 45,
+            "elapsed_seconds_from_observer_origin": 836.1152505160007,
+            "snapshot": {
+              "level": 4,
+              "actions": 9,
+              "tokens": 2145,
+              "cost_multiplier": 1.0,
+              "total_levels": 6
+            }
+          }
+        ],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "sp80-589a99af",
+        "path": "runs/031-natural-aligned/segmentation_runs/sp80-589a99af_p0_requests.jsonl",
+        "sha256": "3b3826984e43dda52b29c625b8f387eb4d06c49f286aa275c9a373519434ed09",
+        "counts": {
+          "requests": 23,
+          "requests_on_level_2_plus": 12,
+          "requests_after_observed_completion": 12
+        },
+        "level_entries": [
+          {
+            "line": 23,
+            "level": 2,
+            "action": 8,
+            "analysis_step": 6,
+            "messages": 30,
+            "history_head_sha256": "db6674711ec2b8a58d005fbf663c916670f76ab2f6011476276431bd7a1a03c2"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "tr87-cd924810",
+        "path": "runs/031-natural-aligned/segmentation_runs/tr87-cd924810_p0_requests.jsonl",
+        "sha256": "0eab78aff596adb245771bdde33c84b0964aff4c19d5de4f66068b0b1199f1c1",
+        "counts": {
+          "requests": 48,
+          "requests_on_level_2_plus": 35,
+          "requests_after_observed_completion": 35
+        },
+        "level_entries": [
+          {
+            "line": 27,
+            "level": 2,
+            "action": 32,
+            "analysis_step": 7,
+            "messages": 37,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 51,
+            "level": 3,
+            "action": 69,
+            "analysis_step": 11,
+            "messages": 69,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 67,
+            "level": 4,
+            "action": 97,
+            "analysis_step": 14,
+            "messages": 89,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 87,
+            "level": 5,
+            "action": 133,
+            "analysis_step": 17,
+            "messages": 114,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      },
+      {
+        "arm": "segmentation_runs",
+        "game": "tu93-0768757b",
+        "path": "runs/031-natural-aligned/segmentation_runs/tu93-0768757b_p0_requests.jsonl",
+        "sha256": "a4ee501925a72d4c2335a6d77c26dfbbdcef9ea83a1010f499c87f3b7c6a02ad",
+        "counts": {
+          "requests": 36,
+          "requests_on_level_2_plus": 29,
+          "requests_after_observed_completion": 29
+        },
+        "level_entries": [
+          {
+            "line": 15,
+            "level": 2,
+            "action": 19,
+            "analysis_step": 4,
+            "messages": 19,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 39,
+            "level": 3,
+            "action": 37,
+            "analysis_step": 10,
+            "messages": 50,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 55,
+            "level": 4,
+            "action": 61,
+            "analysis_step": 16,
+            "messages": 73,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          },
+          {
+            "line": 69,
+            "level": 5,
+            "action": 94,
+            "analysis_step": 20,
+            "messages": 93,
+            "history_head_sha256": "295c3057652cbae1cd1cd3a281189416b55e5ab85db724c8c51711bb05d6abdf"
+          }
+        ],
+        "history_shrinks_after_observed_completion": [],
+        "distinct_system_prompt_hashes": 1,
+        "status": "opportunity index only; event/transcript needed to confirm precise history-eviction cause",
+        "post_initial_scheduler_handover_evidence": [],
+        "system_prompt_observation": "One identical system-prompt hash throughout this game; request history changed independently. Existing 031 installs no solved-level memory."
+      }
+    ]
+  }
+}
