@@ -1,0 +1,84 @@
+{
+  "ref": "greenalgeria/up-arc-3",
+  "version": 4,
+  "source_sha256": "166e4798b8107883c37b9ff7acf7520befe6a78d1ca2de1e29c571bf506e1354",
+  "cell_count": 21,
+  "cells_with_outputs": 0,
+  "metadata": {
+    "id": 137066141,
+    "ref": "greenalgeria/up-arc-3",
+    "title": "UP ARC 3",
+    "author": "green algeria",
+    "slug": "up-arc-3",
+    "lastRunTime": "2026-10-18T04:37:50.049Z",
+    "language": "python",
+    "kernelType": "notebook",
+    "isPrivate": false,
+    "enableGpu": true,
+    "enableInternet": false,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "competitionDataSources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "totalVotes": 7,
+    "modelDataSources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ],
+    "enableTpu": false,
+    "currentVersionNumber": 4,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c",
+    "machineShape": "NvidiaRtxPro6000"
+  },
+  "raw_metadata_keys": [
+    "metadata"
+  ],
+  "markdown": [
+    {
+      "cell": 1,
+      "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+    },
+    {
+      "cell": 3,
+      "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+    },
+    {
+      "cell": 5,
+      "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+    },
+    {
+      "cell": 7,
+      "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+    },
+    {
+      "cell": 9,
+      "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+    },
+    {
+      "cell": 11,
+      "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+    },
+    {
+      "cell": 13,
+      "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+    },
+    {
+      "cell": 15,
+      "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+    },
+    {
+      "cell": 17,
+      "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+    },
+    {
+      "cell": 19,
+      "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+    }
+  ]
+}

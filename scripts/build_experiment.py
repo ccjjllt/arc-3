@@ -75,6 +75,8 @@ def main() -> None:
         required.add("persistent_python.py")
     if "segmentation_runs" in arms:
         required.add("segmentation_runs.py")
+    if any(arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
+        required.update({"segmentation_runs.py", "segmentation_forks.py"})
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -96,7 +98,8 @@ def main() -> None:
         payload["experiments/026-fork-inputs.json"] = fork_inputs_path.read_text()
         fork_conv_path = ROOT / "experiments/026-fork-conv.json.gz.b64"
         payload["experiments/026-fork-conv.json.gz.b64"] = fork_conv_path.read_text()
-    if "repair_forks" in arms:
+    if "repair_forks" in arms or any(
+            arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
         fork_package = ROOT / "experiments/028-fork-package.json.gz.b64"
         payload["experiments/028-fork-package.json.gz.b64"] = fork_package.read_text()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()

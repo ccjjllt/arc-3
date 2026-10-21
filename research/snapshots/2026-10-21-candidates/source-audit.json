@@ -1,0 +1,609 @@
+{
+  "dfranzen/arc-agi-3-milestone-2-solution": {
+    "ref": "dfranzen/arc-agi-3-milestone-2-solution",
+    "version": 3,
+    "notebook_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "source_bytes": 569095,
+    "cell_count": 23,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "### About this notebook\n\n**Update (v3):** This version reruns the open-sourced submission (v1) with **4 passes on all 25 demo games**, using a runtime budget scaled to match the time available per game in the competition. I couldn’t complete this run before publishing, as I had run out of Kaggle compute. The notebook is otherwise identical.\n\n**For details on the solution, see my [write-up](https://www.kaggle.com/writeups/dfranzen/arc-agi-3-milestone-2).**\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 1,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 3,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 5,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 7,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 9,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 11,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 13,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 15,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 17,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 19,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 21,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "jingshuifu/arc3-m2-solution": {
+    "ref": "jingshuifu/arc3-m2-solution",
+    "version": 1,
+    "notebook_sha256": "87d279b3d6c75b6fac2a4feaea8183444ae36838cbdbeaca920cb7d330df109f",
+    "source_bytes": 569175,
+    "cell_count": 23,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "### About this notebook\n\n**Update (v3):** This version reruns the open-sourced submission (v1) with **4 passes on all 25 demo games**, using a runtime budget scaled to match the time available per game in the competition. I couldn’t complete this run before publishing, as I had run out of Kaggle compute. The notebook is otherwise identical.\n\n**For details on the solution, see my [write-up](https://www.kaggle.com/writeups/dfranzen/arc-agi-3-milestone-2).**\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 1,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 3,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 5,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 7,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 9,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 11,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 13,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 15,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 17,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 19,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 21,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "jingshuifu/arc3-m2-solution-v3": {
+    "ref": "jingshuifu/arc3-m2-solution-v3",
+    "version": 1,
+    "notebook_sha256": "b338d78e3b8ea27a9c092120d1d89fc95a38b8611df48d283577bca5cc517bfe",
+    "source_bytes": 569213,
+    "cell_count": 23,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "### About this notebook\n\n**Update (v3):** This version reruns the open-sourced submission (v1) with **4 passes on all 25 demo games**, using a runtime budget scaled to match the time available per game in the competition. I couldn’t complete this run before publishing, as I had run out of Kaggle compute. The notebook is otherwise identical.\n\n**For details on the solution, see my [write-up](https://www.kaggle.com/writeups/dfranzen/arc-agi-3-milestone-2).**\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 1,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 3,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 5,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 7,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 9,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 11,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 13,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 15,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 17,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 19,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 21,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "heliosli/try-merging-it-you-might-get-lucky-and-win-gold": {
+    "ref": "heliosli/try-merging-it-you-might-get-lucky-and-win-gold",
+    "version": 6,
+    "notebook_sha256": "210f3f4dd1d50d5aa3da5cd597b0f74891f449c26b67b56dacff106e81f456e5",
+    "source_bytes": 582621,
+    "cell_count": 12,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "# V6: persistent Python computation within each level\n\nThe Python interpreter retains variables, imports, functions, search queues and plans between tool calls on the same level. Ordinary state is cleared on level changes, game changes and tool timeouts. Runtime observations are refreshed after real actions; cached user data must still be checked against the current board. The original safe function cache can carry self-contained helpers across levels. Action guards, reasoning history, model weights, sampling, 3-step speculative decoding and 9-hour competition budget are unchanged from V5. The empty-animation compatibility repair is retained. No manually written scratch memory or added rule-checking tools are used. Engineering execution checks are separate from model score validation; no hidden-score gain is claimed.\n\n# About this notebook\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      }
+    ]
+  },
+  "dennis6886/arc3-d-prime-public-base": {
+    "ref": "dennis6886/arc3-d-prime-public-base",
+    "version": 2,
+    "notebook_sha256": "f06ad2d28bcfb80e6644dbcf0d1787ef0b4e56af9c8c86cbc62acdbbe26cdb4c",
+    "source_bytes": 587637,
+    "cell_count": 26,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "# ARC-AGI-3 Milestone 2 Solution with a new slot priority (D')\n\nThis notebook is [Daniel Franzen's Milestone 2 solution](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution) with one change: **the priority his scheduler uses to decide which game gets an LLM slot.** The harness patch, model, inference engine and prompts are his, unchanged. All credit for them goes to him and to the people he credits below.\n\n**Where this comes from.** D' grew out of the scheduler in our earlier public notebook, [Duck plus ours](https://www.kaggle.com/code/shiiin9/affectify-arc-duck-plus-ours). The idea is the same: rather than give every game an equal share of the thinking time, give it to the games where it is most likely to earn points. That notebook did this with a lottery on top of the Duck harness. Here it is a priority formula on top of Daniel Franzen's scheduler.\n\n| Notebook | Public scores of the same code |\n|---|---|\n| Daniel Franzen's original | 27.89 (his leaderboard score), 31.47 (best score shown on his notebook page), 27.62 (our unchanged resubmission) |\n| This notebook (D') | 31.54 (one submission) |\n\nThe same code scores quite differently from run to run: 27.62 to 31.47 for his notebook. One submission of D' is not enough to say by how much it is better. Note that the score at the top of a notebook page is the best of all submissions made from that notebook version, so it shows the luckiest run.\n\n## What changed\n\n1. **A new priority formula.** His scheduler runs 10 games at a time. A running game keeps its slot until its context is trimmed. At each trim it hands the slot back, and the waiting game with the highest priority takes it. We replace that priority (below).\n2. **Unstarted games no longer jump the queue.** They are priced by the same formula, so a fresh game competes with games already in progress.\n\nThe change lives in the cell just before `await bm.run(...)`. It embeds our module as a string (its comments are in Japanese) and patches his scheduler. It prints `#OURS_FORM ok version=d_prime ...` once the patch is in place, and raises an error if his scheduler's names have changed. The cell right after the run prints how many unstarted games were queued by the formula.\n\n## D': slot priority\n\n**priority = A · M · C + B · φ**\n\n- **A**, depth and action efficiency: (1 + 0.5 (ℓ − 1)) · norm(N) · (300 / (300 + a))^2.5, where norm(N) = 55 / (N (N + 1) / 2) with N clamped to 6..10, as in his code\n- **M**, pace: clip((30,000 / p)^0.4, 0.25, 4), where p is the mean tokens per level cleared so far in this game (M = 1 before the first clear)\n- **C**, patience: 0.1 · max(0.1, 1 − a / 115) + 0.9 · max(0.1, 1 − t / T), where T = 225,000 · clip(p / 30,000, 0.5, 2)^0.5, so games that needed more tokens per level get more patience\n- **B**, room to grow: 16, 14, 10 or 0 when 3 or more, 2, 1 or 0 levels remain\n- **φ**, his tail fade: 1 → 0 over the last 40% of the run, so the room-to-grow bonus B fades out near the end\n\nℓ is the current level (from 1), N the game's level count, and a and t the actions and generated tokens spent on the current level.\n\nHow we arrived at this formula and its coefficients is something we are keeping to ourselves for now.\n\n## Save run\n\nTo save GPU quota, the save run plays one demo game (ft09) for 5 minutes. It only proves that the notebook runs end to end. The competition rerun (`TRUE_SUBMISSION`) uses his settings unchanged. To run his 10-game demo instead, copy the `demo_excluded_games` line and the second `max_runtime_s_per_game` line of the config cell back from his notebook.\n\nBelow is Daniel Franzen's original description.\n"
+      },
+      {
+        "cell": 1,
+        "text": "# About this notebook\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 2,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 4,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 6,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 8,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 10,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 12,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 14,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 16,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 18,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 20,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 24,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "habanwer/arcaid3-lexicon-dprime-dfranzen-m2": {
+    "ref": "habanwer/arcaid3-lexicon-dprime-dfranzen-m2",
+    "version": 1,
+    "notebook_sha256": "97ab46b02a4ec85091d489cc209ab5eb3cec0d72e0be7bc5cb736d1ab04714bb",
+    "source_bytes": 715576,
+    "cell_count": 31,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "# ARCAID3 lexicon view on Daniel Franzen's Milestone 2 solution\n\n**This is the D' variant (not yet scored).** Same notebook as `arcaid3-lexicon-view-dfranzen-m2`, plus two cells before *Run the benchmark*: an animation-schema fix and shiiin9's D' slot priority (see the note above those cells). It exists to be compared with the plain notebook; one submission each cannot settle the difference.\n\n**What this is.** [Daniel Franzen's Milestone 2 notebook](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution), version 1 (public LB 27.89), built on [Tufa Labs' Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Every original cell is kept, unchanged and in order: model, SGLang serving, 128K context, scheduler, harness patch and competition settings are his.\n\n**The one change.** One cell before *Run the benchmark* adds an optional way for the model to read the board in the Python sandbox:\n\n| New in the sandbox | What it gives the model |\n|---|---|\n| `current_frame.code` | The board as objects: the true cell size, a legend of symbols (small multi-colour pictures with stable names), and where each symbol sits |\n| `current_frame.changes_since(previous_frame)` | Which objects moved, appeared, disappeared or turned into another symbol |\n| `current_frame.objects` | The same objects as data, with a screen row/col to click |\n| `current_frame.native` | The board at its true resolution |\n| `current_frame.rules` (version 3) | Rules learned from this level's recent steps, `when <action> [if/unless <relation>] then <change>`, each with how often it was right and wrong, and the last step's changes that no rule explains |\n\nThe cell also lists these members in the three prompt lines that say a frame exposes \"only\" five fields, adds a \"when to look\" line next to the \"most recent change\" line, and adds a first-turn / new-level cue to the user message. Each edit applies only if its exact anchor is found; the `ARCAID3_LEXICON_READY` line reports which applied. Before the run the cell tests itself through the real sandbox and rolls back to the stock sandbox if anything fails.\n\n**Why port it here.** On the old sheetu base (16K context, prefix caching off) the view was used in 22% of tool calls but cannot be judged there: that stack scores about 3 to 6, against about 26 for this one. On a 128K context its output no longer crowds out the model's own history.\n\n**Save run.** Franzen's own v1 demo settings: 10 public games, 25 minutes each, 10 streams, 1 pass. That matches the saved outputs of his v1 run, so the two compare directly (levels, tokens, cache reuse, view usage). Like every single run, it cannot settle a score difference.\n\n**Version 2: per-level scale lock.** The lexicon used to detect the grid size afresh on every frame, so a sparse frame could flip to a coarser grid and rename every object. Now every frame of a level is read at one block size, agreed across that level's frames in `history`; a block size that fails on any frame of the level stays rejected. On 4,662 replayed steps of 45 recorded plays (official engine), it halves scale flips (0.26% → 0.13%) and changes only vc33, which improves on every measure; no game gets worse. It is per level because the camera scale changes between levels in 4 of the 25 public games.\n\n**Version 3: `current_frame.rules`.** In the sandbox, a rule grammar learns rules from the level's recent steps in `history`: one rule shape, `when <action> [if/unless <relation>] then <verb>(<who>, <how>)`. Objects are picked by relation (the clicked one, whatever touches X, a colour, or a picture). Conditions are contact, something in the way, or what the click targeted. The verbs are the engine's sprite operations (move, recolor, turn, resize, reshape, vanish, appear). It has no game-specific code and no hand-named rule kinds. Offline, against the version-2 prototype's nine rule kinds, it predicted the next screen better on 55 recorded public plays (changes fully predicted: 9.3% → 16.5%) and on 20 generated games with mechanics the kinds were not built from (18.3% → 33.6%). Whether it helps the model score is what this run starts to test; one run cannot settle it.\n\n**Version 4: `.rules` cue & object permanence.** Adds a cue for `current_frame.rules` when it has something to say (after actions that changed nothing inside the board, or at 6/15/30/60/120 actions on a level), cuts merged objects back apart using earlier frames (object permanence), and rejects coarse grids that a finer grid reads cleanly.\n\n**Version 5: 4-hex-digit picture names & `.rules` time budget.** Expands stable picture names from 3 hex digits to 4 (`0xFFFF:04x`, eliminating collisions seen on 34 of 161 public levels) with a content-derived fallback suffix, and skips older steps rather than the newest step when `.rules` hits its time budget so `LAST STEP` always describes the action just taken.\n\n**Version 6: multi-step contact permanence, read-only cue fix, death-reset filter & long-horizon scale lock.** (1) `.code`, `.objects`, and `.changes_since(...)` now chain distinct predecessor grids across the level (and cache per `FrameView`), so objects that stay in contact across multiple steps (bumping or sliding along a wall) remain separated and `previous_frame` matches `current_frame` instead of reporting false `became` mutations; (2) `ARCAID3_RULES_CUE_STILL` requires `executed_count > 0` so read-only inspection turns (`stale=True`) no longer trigger false no-op cues; (3) `.rules` filters out mid-level death/auto-reset snaps back to the initial board so they do not poison learned rules; (4) `scale_lock` deduplicates consecutive identical grids and retains the level's initial distinct frames beyond 256 steps; (5) adds a `TRUE_SUBMISSION` contest config guard.\n\n**Kill switches:** `ARCAID3_LEXICON=0` (whole view), `ARCAID3_SCALE_LOCK=0` (lock only), `ARCAID3_RULES=0` (rules only). **Log lines:** `ARCAID3_LEXICON_READY`, `ARCAID3_LEXICON_STATS` every 200 tool calls, `ARCAID3_LEXICON_FINAL` at the end.\n\nCredits: Daniel Franzen (Milestone 2 solution, Apache-2.0 per his notebook), Tufa Labs (Duck), and the model, serving and checkpoint authors he credits below. Third-party code and weights keep their licences.\n"
+      },
+      {
+        "cell": 1,
+        "text": "# About this notebook\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 2,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 4,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 6,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 8,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 10,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 12,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 14,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 16,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 18,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 20,
+        "text": "## ARCAID3 lexicon view (the one added code cell)\n\nThe next cell adds `current_frame.code`, `.objects`, `.native`, `.rules` and `.changes_since(...)` to the Python sandbox, lists them in the harness's prompt lines, adds \"when to look\" lines and a first-turn / new-level / `.rules` cue. It tests itself through the real sandbox and rolls back if anything fails. Version 2 adds a per-level scale lock; Version 3 adds rules learned from the level's steps; Version 4 adds the `.rules` cue and object permanence; Version 5 fixes 4-hex picture names and `.rules` timeout ordering; Version 6 adds multi-step contact permanence in `.code`/`.objects`/`.changes_since`, suppresses false `still` cues on read-only turns, filters mid-level death resets in `.rules`, and retains early scale-lock frames across >256 steps.\n"
+      },
+      {
+        "cell": 22,
+        "text": "## ARCAID3 variant: D' slot priority + animation-schema fix\n\nTwo additions on top of the lexicon view, for an A/B against the same notebook without them:\n\n1. **Animation-schema fix** (next cell). After an action that returned a single frame, the harness's `last_animation_timeline` was `{\"error\": ...}` only, while its prompt documents `action`, `frames` and `steps`, so model code reading `[\"steps\"]` raised `KeyError`. The cell wraps `build_animation_view` so that result also carries `frames=0, steps=[]`. Kill switch: `ARCAID3_ANIMATION_FIX=0`.\n2. **D' slot priority** (the cell after it, verbatim from [amatlas/dfranzen-fork-d-prime](https://www.kaggle.com/code/amatlas/dfranzen-fork-d-prime), ported from [shiiin9's notebook](https://www.kaggle.com/code/shiiin9/affectify-arc-31-54-in-a-single-sub)). It replaces the priority Franzen's scheduler uses to give the 10 LLM slots to games: `priority = A·M·C + B·φ` (depth and action efficiency, pace, patience, room to grow, tail fade 0.4), and prices unstarted games by the same formula. Its authors report one submission (31.54) and a simulated gain of about +1.5; neither is a measured gain on this notebook.\n\nBoth run before `bm.run`. The lexicon cell, D' and the fix were installed together against Franzen's patched harness offline, in both orders (variants/dprime/README.md)."
+      },
+      {
+        "cell": 25,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 27,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "sujanmajhisuzan/arc-agi-3-m2-top-submission": {
+    "ref": "sujanmajhisuzan/arc-agi-3-m2-top-submission",
+    "version": 29,
+    "notebook_sha256": "c1f976bc419b5cd2be336f8aa2666d0e842c4a1b1251db9e7e23d6a741d012f1",
+    "source_bytes": 836683,
+    "cell_count": 23,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "# ARC-AGI-3 Milestone 2: Apex Transcendent Agent v29\n### Targeting 1st Rank on ARC Prize 2026 Leaderboard\n- **Engine**: Qwen3.8-Flash-Next W4A16 AutoRound + Albucino MTP Draft Model (Pennyroyal SGLang v2.5.3)\n- **Hardware**: Nvidia RTX Pro 6000 (Blackwell SM120, 96GB VRAM, MEMFRAC 0.96, FP8 KV cache)\n- **World Model Simulator**: DF-WM (`SimFrame`, `compare_grids`, `check_sim`, BFS `search`, `act_checked`)\n- **Scheduler**: Apex Deep-Level Persistence Priority (Monotonic Depth Scaling + Victory Lap Bonus + Stall Decay)\n- **Resilience**: Hyper-Resilient retry session (180s read timeout floor, zero timeout yield, 64-conn pool)\n- **Action Guards**: Board dump suppression, noop repeat guard, death loop lookahead, auto frame diff\n- **Submission Contract**: Pre-materialized submission contract preventing zero-byte evaluation errors\n"
+      },
+      {
+        "cell": 1,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 5,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 7,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 9,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 11,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 13,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 15,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts вЂ” the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 17,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 19,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise вЂ” an interactive \"Save & Run\" вЂ” play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 21,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  },
+  "yukailiu/arc-agi-3-champion-solution": {
+    "ref": "yukailiu/arc-agi-3-champion-solution",
+    "version": 36,
+    "notebook_sha256": "0043195d43a26d3d7afed610f94bb54aaba0d3882f75706039f55900788c01fe",
+    "source_bytes": 590872,
+    "cell_count": 23,
+    "cells_with_outputs": 0,
+    "metadata_keys": [
+      "id",
+      "ref",
+      "title",
+      "author",
+      "slug",
+      "lastRunTime",
+      "language",
+      "kernelType",
+      "isPrivate",
+      "enableGpu",
+      "enableInternet",
+      "categoryIds",
+      "datasetDataSources",
+      "competitionDataSources",
+      "totalVotes",
+      "modelDataSources",
+      "enableTpu",
+      "currentVersionNumber",
+      "dockerImage",
+      "machineShape"
+    ],
+    "markdown": [
+      {
+        "cell": 0,
+        "text": "# About this notebook\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+      },
+      {
+        "cell": 1,
+        "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+      },
+      {
+        "cell": 3,
+        "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+      },
+      {
+        "cell": 5,
+        "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+      },
+      {
+        "cell": 7,
+        "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+      },
+      {
+        "cell": 9,
+        "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+      },
+      {
+        "cell": 11,
+        "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+      },
+      {
+        "cell": 13,
+        "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+      },
+      {
+        "cell": 15,
+        "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+      },
+      {
+        "cell": 17,
+        "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+      },
+      {
+        "cell": 19,
+        "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+      },
+      {
+        "cell": 21,
+        "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+      }
+    ]
+  }
+}

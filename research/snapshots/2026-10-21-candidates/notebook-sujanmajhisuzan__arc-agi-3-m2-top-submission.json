@@ -1,0 +1,76 @@
+{
+  "ref": "sujanmajhisuzan/arc-agi-3-m2-top-submission",
+  "version": 29,
+  "notebook_sha256": "c1f976bc419b5cd2be336f8aa2666d0e842c4a1b1251db9e7e23d6a741d012f1",
+  "source_bytes": 836683,
+  "cell_count": 23,
+  "cells_with_outputs": 0,
+  "metadata_keys": [
+    "id",
+    "ref",
+    "title",
+    "author",
+    "slug",
+    "lastRunTime",
+    "language",
+    "kernelType",
+    "isPrivate",
+    "enableGpu",
+    "enableInternet",
+    "categoryIds",
+    "datasetDataSources",
+    "competitionDataSources",
+    "totalVotes",
+    "modelDataSources",
+    "enableTpu",
+    "currentVersionNumber",
+    "dockerImage",
+    "machineShape"
+  ],
+  "markdown": [
+    {
+      "cell": 0,
+      "text": "# ARC-AGI-3 Milestone 2: Apex Transcendent Agent v29\n### Targeting 1st Rank on ARC Prize 2026 Leaderboard\n- **Engine**: Qwen3.8-Flash-Next W4A16 AutoRound + Albucino MTP Draft Model (Pennyroyal SGLang v2.5.3)\n- **Hardware**: Nvidia RTX Pro 6000 (Blackwell SM120, 96GB VRAM, MEMFRAC 0.96, FP8 KV cache)\n- **World Model Simulator**: DF-WM (`SimFrame`, `compare_grids`, `check_sim`, BFS `search`, `act_checked`)\n- **Scheduler**: Apex Deep-Level Persistence Priority (Monotonic Depth Scaling + Victory Lap Bonus + Stall Decay)\n- **Resilience**: Hyper-Resilient retry session (180s read timeout floor, zero timeout yield, 64-conn pool)\n- **Action Guards**: Board dump suppression, noop repeat guard, death loop lookahead, auto frame diff\n- **Submission Contract**: Pre-materialized submission contract preventing zero-byte evaluation errors\n"
+    },
+    {
+      "cell": 1,
+      "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+    },
+    {
+      "cell": 5,
+      "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+    },
+    {
+      "cell": 7,
+      "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+    },
+    {
+      "cell": 9,
+      "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+    },
+    {
+      "cell": 11,
+      "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+    },
+    {
+      "cell": 13,
+      "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+    },
+    {
+      "cell": 15,
+      "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts вЂ” the safe place\nfor one-off experiments once the deployed bundle has loaded."
+    },
+    {
+      "cell": 17,
+      "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+    },
+    {
+      "cell": 19,
+      "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise вЂ” an interactive \"Save & Run\" вЂ” play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+    },
+    {
+      "cell": 21,
+      "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "experiment": {
+    "active_streams": 10,
+    "arm_environment": {
+      "segmentation_forks_A": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "segmentation_forks_B": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "arm_order": [
+      "segmentation_forks_A",
+      "segmentation_forks_B"
+    ],
+    "budget_formula": "Three concurrent continuations per arm; 250 seconds and 30 actions per case; 600 second arm allowance includes replay/drain, 3600 second session cap.",
+    "comparison_note": "Baseline first, candidate second, fresh CPU process and flushed model cache. Identical recorded frame/messages/functions; candidate only adds exact runs and field guidance. Diagnostic replay is not a natural full-pool score.",
+    "expected_gpu_hours": 0.6,
+    "game_count": 3,
+    "game_source": "Frozen experiments/028-fork-package.json.gz.b64; ft09,tu93,r11l only.",
+    "games": [
+      "ft09-0d8bbf25",
+      "tu93-0768757b",
+      "r11l-495a7899"
+    ],
+    "gpu_sample_interval_seconds": 10,
+    "hard_limit_seconds": 3600,
+    "id": "031-segmentation-forks",
+    "inference_timing": false,
+    "kernel_id": "zhuating/arc3-031-segmentation-forks",
+    "kernel_title": "ARC3 031 Recorded State Exact Pixels",
+    "n_passes_per_arm": 1,
+    "preflight_before_serving": false,
+    "purpose": "Isolated-process same-state comparison of 009 Python lifecycle versus exact segmentation runs; no program repair.",
+    "reference_arm": "segmentation_forks_A",
+    "request_deadline": false,
+    "require_cache_flush": true,
+    "require_cache_flush_log": true,
+    "require_complete_pool": true,
+    "require_drained_workers": true,
+    "require_rtx_pro6000": true,
+    "requested_arm_seconds": 600,
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "scheduler_observer": false,
+    "selection_note": "Inspect actual executed runs reads, corrected pixel construction, subsequent action/level recovery and additional output. No improvement claim from restored historical prefix scores.",
+    "startup_limit_seconds": 1800,
+    "strict_arm_budget": true,
+    "warmup_action_games": 0,
+    "weekly_gpu_hours_limit": 30,
+    "native_payload_cells": true,
+    "skip_blanket_model_precache": true,
+    "startup_io_note": "Skip only redundant whole-directory model precache; SGLang shard lookahead/drop-cache and wheel pre-cache retained. Both arms share same unchanged numerical serving.",
+    "frozen_source_sha256": {
+      "src/arc3_research/segmentation_runs.py": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b"
+    }
+  },
+  "started_at_epoch": 1792555288.3617444,
+  "arms": [
+    {
+      "arm": "segmentation_forks_A",
+      "budget_seconds": 600,
+      "started_at_epoch": 1792556982.1390896,
+      "cache_flush_http_status": 200,
+      "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+      "cache_flush_backend_confirmed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 291.0661919116974,
+      "benchmark_exists": true,
+      "game_state_counts": {
+        "gave_up": 3
+      },
+      "all_games_failed_to_run": false,
+      "lingering_worker_threads": [],
+      "environment_overrides": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "complete_pool": true
+    },
+    {
+      "arm": "segmentation_forks_B",
+      "budget_seconds": 600,
+      "started_at_epoch": 1792557273.2061334,
+      "cache_flush_http_status": 200,
+      "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+      "cache_flush_backend_confirmed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 288.0693373680115,
+      "benchmark_exists": true,
+      "game_state_counts": {
+        "gave_up": 3
+      },
+      "all_games_failed_to_run": false,
+      "lingering_worker_threads": [],
+      "environment_overrides": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "complete_pool": true
+    }
+  ],
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "dc16d5ffda7343772a09e50d7fd4db402547d7679d9a3cce7032e70c299f191f",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/experiment_config.py": "47a341a133100e087dcd0071c668f76608970538146e78b7fdbde491a23273e2",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "6eb7d9e64f1c0096e1f049b8b2f7c34d741fb25e861a252ac738cc921fa4742d",
+    "src/arc3_research/segmentation_forks.py": "e9dfd00d6c3613f8e67ec4b44462f226183da78a0fc11d749ebdb5c86e50f3f0",
+    "src/arc3_research/segmentation_runs.py": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b",
+    "src/arc3_research/session_runner.py": "193b5282483bf07034e9c5221eed96dcee4391d9b5d552bab57740590687bd07",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/031-segmentation-forks.json": "3683f436a20ab47397c3427fa6ced2aa836b79f3eb57792b9bb805ef5c32e901"
+  },
+  "elapsed_seconds": 2278.669322013855,
+  "model_ready_seconds": 1693.7770702838898,
+  "equal_arm_budget_seconds": 600,
+  "cleanup_reserve_seconds": 360,
+  "arm_count": 2,
+  "status": "completed",
+  "gpu_server_process_group_stopped": true,
+  "gpu_server_leader_exited": true,
+  "gpu_server_stopped": true,
+  "gpu_sampling": {
+    "path": "/kaggle/working/gpu-utilization.jsonl",
+    "interval_seconds": 10.0,
+    "sample_count": 238,
+    "error_count": 0,
+    "stopped": true
+  }
+}

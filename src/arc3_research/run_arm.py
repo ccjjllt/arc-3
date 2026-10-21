@@ -80,7 +80,7 @@ def run_arm(args: argparse.Namespace) -> int:
         "soft_deadline_grace_seconds": 0,
         "cancel_drain_timeout_seconds": 120,
         "active_streams": 10,
-        "warmup_action_games": 0,
+        "warmup_action_games": int(getattr(args, "warmup_action_games", 0)),
         "model_server_owned_by_runner": False,
     }
     metadata_path = job_dir / "arm-metadata.json"
@@ -168,10 +168,12 @@ def run_arm(args: argparse.Namespace) -> int:
         os.environ["TAAF_RUN_AS_SUBMISSION"] = "0"
         os.environ["TAAF_MINIMAL_DIAGNOSTICS"] = "0"
         os.environ["ARC3_MAX_ACTIVE_STREAMS"] = "10"
-        # This runner is OFFLINE-only and its parent waits for server readiness.
-        # The competition first-action warmup would add a nondeterministic RESET
-        # to whichever game first claims a slot, so omit it in future research.
-        os.environ["ARC3_WARMUP_ACTION_GAMES"] = "0"
+        # Historical research omitted warmup. New comparisons may explicitly
+        # retain the formal 009 behavior; never silently change old configs.
+        warmup_games = int(getattr(args, "warmup_action_games", 0))
+        if warmup_games not in (0, 1):
+            raise ValueError("warmup-action-games must be 0 or 1")
+        os.environ["ARC3_WARMUP_ACTION_GAMES"] = str(warmup_games)
         os.environ["RECORDINGS_DIR"] = str(job_dir / "server_recording")
         os.environ["ONLY_RESET_LEVELS"] = "true"
 
@@ -384,7 +386,16 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        if args.arm == "repair_forks":
+        if args.arm in ("segmentation_forks_A", "segmentation_forks_B"):
+            from arc3_research.segmentation_forks import run_forks
+            bm.start_time = datetime.now()
+            fork_summary = run_forks(
+                bm=bm, job_dir=job_dir, budget_seconds=args.budget_seconds,
+                use_runs=args.arm == "segmentation_forks_B")
+            bm.end_time = datetime.now()
+            _write_json(job_dir / "segmentation-forks.json", fork_summary)
+            _write_json(job_dir / "benchmark.json", bm.to_json_dict())
+        elif args.arm == "repair_forks":
             from arc3_research.program_repair_forks import run_forks
             bm.start_time = datetime.now()
             fork_summary = run_forks(bm=bm, job_dir=job_dir,
@@ -554,13 +565,16 @@ def main() -> int:
                                  "native_values", "native", "pace_1x", "observation_grounding",
                                  "grounded_state", "checked_execution", "expect_check", "stall_probe",
                                  "repair_A", "repair_B", "admission_009", "repair_forks", "program_repair",
-                                 "persistent_python", "segmentation_runs"))
+                                 "persistent_python", "segmentation_runs",
+                                 "segmentation_forks_A", "segmentation_forks_B"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")
     parser.add_argument("--game-list", required=True,
                         help="Comma-separated prefixes, or JSON file with an array/game_ids.")
     parser.add_argument("--budget-seconds", required=True, type=int)
+    parser.add_argument("--warmup-action-games", type=int, choices=(0, 1), default=0,
+                        help="Explicitly match formal 009 warmup when set to 1.")
     parser.add_argument("--inference-timing", action="store_true",
                         help="Record passive request/gate timing in both confirmation arms.")
     parser.add_argument("--environment-json", default="{}",

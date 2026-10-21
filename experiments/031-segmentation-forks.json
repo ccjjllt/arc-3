@@ -1,0 +1,61 @@
+{
+  "active_streams": 10,
+  "arm_environment": {
+    "segmentation_forks_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "segmentation_forks_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "arm_order": [
+    "segmentation_forks_A",
+    "segmentation_forks_B"
+  ],
+  "budget_formula": "Three concurrent continuations per arm; 250 seconds and 30 actions per case; 600 second arm allowance includes replay/drain, 3600 second session cap.",
+  "comparison_note": "Baseline first, candidate second, fresh CPU process and flushed model cache. Identical recorded frame/messages/functions; candidate only adds exact runs and field guidance. Diagnostic replay is not a natural full-pool score.",
+  "expected_gpu_hours": 0.6,
+  "game_count": 3,
+  "game_source": "Frozen experiments/028-fork-package.json.gz.b64; ft09,tu93,r11l only.",
+  "games": [
+    "ft09-0d8bbf25",
+    "tu93-0768757b",
+    "r11l-495a7899"
+  ],
+  "gpu_sample_interval_seconds": 10,
+  "hard_limit_seconds": 3600,
+  "id": "031-segmentation-forks",
+  "inference_timing": false,
+  "kernel_id": "zhuating/arc3-031-segmentation-forks",
+  "kernel_title": "ARC3 031 Recorded State Exact Pixels",
+  "n_passes_per_arm": 1,
+  "preflight_before_serving": false,
+  "purpose": "Isolated-process same-state comparison of 009 Python lifecycle versus exact segmentation runs; no program repair.",
+  "reference_arm": "segmentation_forks_A",
+  "request_deadline": false,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "requested_arm_seconds": 600,
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "scheduler_observer": false,
+  "selection_note": "Inspect actual executed runs reads, corrected pixel construction, subsequent action/level recovery and additional output. No improvement claim from restored historical prefix scores.",
+  "startup_limit_seconds": 1800,
+  "strict_arm_budget": true,
+  "warmup_action_games": 0,
+  "weekly_gpu_hours_limit": 30,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": true,
+  "startup_io_note": "Skip only redundant whole-directory model precache; SGLang shard lookahead/drop-cache and wheel pre-cache retained. Both arms share same unchanged numerical serving.",
+  "frozen_source_sha256": {
+    "src/arc3_research/segmentation_runs.py": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b"
+  }
+}

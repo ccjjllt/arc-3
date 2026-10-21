@@ -1,0 +1,1830 @@
+{
+  "created_at_utc": "2026-10-21T04:47:24.566950+00:00",
+  "scope": "Single recorded-state public diagnostic, not full-pool or formal leaderboard score",
+  "review_status": "static_candidates_unreviewed",
+  "arms": {
+    "A": {
+      "exists": true,
+      "path": "runs/031-segmentation-forks/segmentation_forks_A/segmentation-forks.json",
+      "sha256": "27b346a8f9eae1c8032e7bc70831750e4f9186a2cb9d24720a009f9827d88b11",
+      "input_sha256": "034081b4e14c18f67f574fd6248a99027eb71c627b0bee3a01577c66f3bf1f49",
+      "dry_run": false,
+      "elapsed_seconds": 284.890055156,
+      "use_runs": false,
+      "fork_count": 3,
+      "patch_uninstalled": true
+    },
+    "B": {
+      "exists": true,
+      "path": "runs/031-segmentation-forks/segmentation_forks_B/segmentation-forks.json",
+      "sha256": "0952df5d10cca5f15400f1258d971635bfad4864255900ec386cee2e365eaa38",
+      "input_sha256": "034081b4e14c18f67f574fd6248a99027eb71c627b0bee3a01577c66f3bf1f49",
+      "dry_run": false,
+      "elapsed_seconds": 284.11225422999996,
+      "use_runs": true,
+      "fork_count": 3,
+      "patch_uninstalled": true
+    }
+  },
+  "sessions": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "arm": "A",
+      "state": "gave_up",
+      "error": null,
+      "cut": 27,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "final_score": 14.285714285714285,
+      "actions_per_level": [
+        4,
+        7,
+        18,
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 250.04688674200042,
+      "budget_seconds": 250,
+      "continuation_action_count": 2,
+      "continuation_actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 61,
+            "y": 1
+          }
+        }
+      ],
+      "continuation_history": [
+        {
+          "action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 22,
+              "y": 30
+            }
+          },
+          "generated_tokens": 956,
+          "uncached_input_tokens": 0,
+          "wallclock_seconds": 66.69902303099934
+        },
+        {
+          "action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 61,
+              "y": 1
+            }
+          },
+          "generated_tokens": 12994,
+          "uncached_input_tokens": 0,
+          "wallclock_seconds": 195.14511070999924
+        }
+      ],
+      "solver_note": "tokens=22014",
+      "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+      "messages_sha256": "b39f3022a73af7d78fc83b789bb191447c17c10703eb9b1a4e35393cc65febb9",
+      "kept_functions_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "restored_functions": [],
+      "source": "runs/031-segmentation-forks/segmentation_forks_A/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_A/ft09-0d8bbf25_A_requests.jsonl",
+        "exists": true,
+        "sha256": "d12ad219745f1a244b161c424c3b2cf03db0de27df84f5f69e46591c776e4f77",
+        "bytes": 2651840,
+        "records": {
+          "request": 6,
+          "response": 5
+        },
+        "recorded_usage": {
+          "prompt_tokens": 353851,
+          "completion_tokens": 22014,
+          "total_tokens": 375865
+        },
+        "responses_with_usage": 5,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 15,
+        "new_python_call_count": 5,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_18d9a4d0628c43c4bd561f5b",
+            "first_snapshot_line": 3,
+            "analysis_step": 8,
+            "snapshot_action": 29,
+            "code": "\nr = action([{'action':'MOUSE','row':30,'col':22}])\nprint('res', r.get('executed'), r.get('gameplay_changed'), r.get('level_completed'), r.get('state'))\na = current_frame.ascii.split('\\n')\nfor pr,pc in [(12,28),(28,20),(28,36),(44,28)]:\n    print(pr,pc, [a[rr][pc:pc+6] for rr in range(pr,pr+6)])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "290d1bcc7802cd200d4dc29babbf28d9449db6044a0cec3e181229292f59eda4",
+              "content_chars": 449,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "[action] MOUSE(row=30, col=22) -> NO-OP (executed, no change inside the board area)\nres True False False NOT_FINISHED\n12 28 ['WWWWWW', 'WWWWWW', 'WWOOgg', 'WWOOgg', 'ggWWgg', 'ggWWgg']\n28 20 ['ggWWgg', 'ggWWgg', 'ggRRWW', 'ggRRWW', 'WWWWgg', 'WWWWgg']\n28 36 ['ggWWWW', 'ggWWWW', 'WWRRgg', 'WWRRgg', 'ggWWgg', 'ggWWgg']\n44 28 ['ggWWgg', 'ggWWgg', 'WWOOgg', 'WWOOgg', 'WWWWWW', 'WWWWWW']\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_a3f1e660346143fa879d9604",
+            "first_snapshot_line": 5,
+            "analysis_step": 8,
+            "snapshot_action": 29,
+            "code": "\nrows=[]\nfor h in history:\n    res = h.result or {}\n    rows.append((res.get('action_num'), res.get('level'), res.get('score'), (h.action or '')))\nfor r in rows[-24:]: print(r)\nprint('last call score', (last_action_call_result or {}).get('score'))\n# bar state now\nfor n in current_frame.segmentation['nodes']:\n    if n['boundary'][0][0]>=62:\n        b=n['boundary']; cs=[p[1] for p in b]\n        print('bar', n['color'], n['pixels'], min(cs), max(cs))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 11,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "If",
+                    "For"
+                  ]
+                },
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 10,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "If",
+                    "For"
+                  ]
+                }
+              ],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": true,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "0dc6da84929479fa150b1df019df316863927739b20e873ce8737e7409609497",
+              "content_chars": 986,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "(5, 2, 1, 'MOUSE(row=16, col=22)')\n(6, 2, 1, 'MOUSE(row=24, col=22)')\n(7, 2, 1, 'MOUSE(row=24, col=38)')\n(8, 2, 1, 'MOUSE(row=32, col=22)')\n(9, 2, 1, 'MOUSE(row=32, col=38)')\n(10, 2, 1, 'MOUSE(row=48, col=22)')\n(11, 3, 2, 'MOUSE(row=48, col=30)')\n(12, 3, 2, 'MOUSE(row=6, col=22)')\n(13, 3, 2, 'MOUSE(row=6, col=30)')\n(14, 3, 2, 'MOUSE(row=6, col=38)')\n(15, 3, 2, 'MOUSE(row=14, col=22)')\n(16, 3, 2, 'MOUSE(row=22, col=14)')\n(17, 3, 2, 'MOUSE(row=22, col=30)')\n(18, 3, 2, 'MOUSE(row=30, col=14)')\n(19, 3, 2, 'MOUSE(row=30, col=46)')\n(20, 3, 2, 'MOUSE(row=38, col=30)')\n(21, 3, 2, 'MOUSE(row=38, col=46)')\n(22, 3, 2, 'MOUSE(row=46, col=22)')\n(23, 3, 2, 'MOUSE(row=46, col=38)')\n(24, 3, 2, 'MOUSE(row=54, col=22)')\n(25, 3, 2, 'MOUSE(row=54, col=30)')\n(26, 3, 2, 'MOUSE(row=54, col=38)')\n(27, 3, 2, 'MOUSE(row=6, col=22)')\n(28, 3, 2, 'MOUSE(row=30, col=22)')\nlast call score 2\nbar O 53 0 52\nbar Y 11 53 63\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_1381ca1c77944b9093802a94",
+            "first_snapshot_line": 7,
+            "analysis_step": 9,
+            "snapshot_action": 30,
+            "code": "\nr1 = action([{'action':'MOUSE','row':1,'col':61}])\nd1 = frame_diff()\nprint('click red legend:', r1.get('no_op'), d1['changed_cell_count'], [ (k,d1[k]) for k in ('appeared','disappeared','changed_color','resized') if d1.get(k)][:3])\nr2 = action([{'action':'MOUSE','row':5,'col':61}])\nd2 = frame_diff()\nprint('click orange legend:', r2.get('no_op'), d2['changed_cell_count'], [ (k,d2[k]) for k in ('appeared','disappeared','changed_color','resized') if d2.get(k)][:3])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "11ffdc1636adbc3430d4a584010af42cd8b08f78d04a139b72a96b112092509d",
+              "content_chars": 732,
+              "payload": {
+                "tool": "python",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nStaleStateActionError: MOUSE(row=5, col=61) was not executed. The action immediately before it, MOUSE(row=1, col=61), was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)",
+                "stdout": "[action] MOUSE(row=1, col=61) -> NO-OP (executed, no change inside the board area)\nclick red legend: True 0 []\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_d518fc6fc5b34f3db908024a",
+            "first_snapshot_line": 9,
+            "analysis_step": 9,
+            "snapshot_action": 30,
+            "code": "\nimport itertools\n# legends as 3x3 symbol grids ('W','g','C' for center)\nleg = {\n 'P1': [['W','W','W'],['W','C','g'],['g','W','g']],\n 'P2': [['g','W','g'],['g','C','W'],['W','W','g']],\n 'P3': [['g','W','W'],['W','C','g'],['g','W','g']],\n 'P4': [['g','W','g'],['W','C','W'],['W','W','W']],\n}\npos = {'P1':(1,2),'P2':(3,1),'P3':(3,3),'P4':(5,2)}  # grid (row,col) of pattern\ncells = [(0,1),(0,2),(0,3),(1,1),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,0),(3,2),(3,4),\n         (4,0),(4,1),(4,2),(4,3),(4,4),(5,1),(5,3),(6,1),(6,2),(6,3)]\ncellset=set(cells)\ndef transform(M,t):\n    n=3\n    R=[[M[i][j] for j in range(n)] for i in range(n)]\n    if t&1: R=[row[::-1] for row in R]          # mirror h\n    if t&2: R=[list(r) for r in zip(*R)]        # transpose\n    if t&4: R=R[::-1]\n    return R\ndef neighbors(p):\n    R,C=pos[p]; out=[]\n    for i in range(3):\n        for j in range(3):\n            if (i,j)==(1,1): continue\n            out.append((R-1+i, C-1+j))\n    return out\nresults=[]\nfor t in range(8):\n    for pol in (0,1):   # pol0: W->O ; pol1: W->R\n        assign={}\n        ok=True\n        for p in ('P1','P2','P3','P4'):\n            M=transform(leg[p],t)\n            for (i,j),(gr,gc) in zip([(i,j) for i in range(3) for j in range(3) if (i,j)!=(1,1)], neighbors(p)):\n                sym=M[i][j]\n                col = ('O' if sym=='W' else 'R') if pol==0 else ('R' if sym=='W' else 'O')\n                key=(gr,gc)\n                if key in assign and assign[key]!=col: ok=False; break\n                assign[key]=col\n            if not ok: break\n        if ok:\n            results.append((t,pol,{k:assign[k] for k in cells if k in assign}))\nprint('consistent single-transform solutions:', len(results))\nfor t,pol,a in results:\n    print('t',t,'pol',pol,'ncells',len(a))\n    for r in range(7): print('   ',''.join(a.get((r,c),'.') for c in range(5)))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 9,
+              "content_sha256": "3f51d061409a33bf8ae41876be69c986743fbaf0cc8acfaa4e77e134b6b95015",
+              "content_chars": 342,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function transform(M, t) for later Python calls in this game.\nYour function neighbors was not retained: unavailable dependencies: pos. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "consistent single-transform solutions: 0\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_0f0c2430b8b0438e8047aba8",
+            "first_snapshot_line": 11,
+            "analysis_step": 9,
+            "snapshot_action": 30,
+            "code": "\n# current board state\nseg = current_frame.segmentation\ngrid_rows=[4,12,20,28,36,44,52]; grid_cols=[12,20,28,36,44]\ncur={}\nfor n in seg['nodes']:\n    b=n['boundary']; rs=[p[0] for p in b]; cs=[p[1] for p in b]\n    r0,r1,c0,c1=min(rs),max(rs),min(cs),max(cs)\n    if n['pixels']==36 and r1-r0==5 and c1-c0==5:\n        cur[(grid_rows.index(r0),grid_cols.index(c0))]=(n['color'],r0,c0)\nA = {}\nlegA = {0:'.OOO.',1:'.ORR.',2:'ORORR',3:'OOROO',4:'RRORO',5:'.ORO.',6:'.OOO.'}\nfor r in range(7):\n    for c in range(5):\n        if legA[r][c]!='.': A[(r,c)]=legA[r][c]\nB = {k:('R' if v=='O' else 'O') for k,v in A.items()}\nclicks=[]\nfor k,(col,r0,c0) in sorted(cur.items()):\n    if k in B and col!=B[k]:\n        clicks.append((r0+2,c0+2))\nprint('cells', len(cur), 'clicks for B', len(clicks))\nprint(clicks)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 7,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "For"
+                  ]
+                }
+              ],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": true,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 11,
+              "content_sha256": "d9858482615e597e6795473f01b7bb3ac17c9c9cfcfdffad7a587724c5404af2",
+              "content_chars": 303,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "cells 23 clicks for B 22\n[(6, 30), (6, 38), (14, 22), (14, 38), (22, 14), (22, 22), (22, 30), (22, 38), (22, 46), (30, 14), (30, 30), (30, 46), (38, 14), (38, 22), (38, 30), (38, 38), (38, 46), (46, 22), (46, 38), (54, 22), (54, 30), (54, 38)]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [
+        "call_a3f1e660346143fa879d9604",
+        "call_0f0c2430b8b0438e8047aba8"
+      ],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 353851,
+        "completion_tokens": 22014,
+        "total_tokens": 375865
+      }
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "arm": "A",
+      "state": "gave_up",
+      "error": null,
+      "cut": 276,
+      "initial_levels_completed": 8,
+      "levels_completed": 8,
+      "added_levels": 0,
+      "final_score": 68.04786348100441,
+      "actions_per_level": [
+        18,
+        22,
+        24,
+        42,
+        34,
+        42,
+        14,
+        56,
+        24
+      ],
+      "elapsed_seconds": 250.17275864299972,
+      "budget_seconds": 250,
+      "continuation_action_count": 0,
+      "continuation_actions": [],
+      "continuation_history": [],
+      "solver_note": "tokens=21873",
+      "grid_sha256": "721435af77794819edf988b2cd3f3afeb65cf114b67b534fc523fd334827b0c2",
+      "messages_sha256": "8b62bdd06d337868c3561f80d80612460e6efaf00118e56bd03ada91d72cc5f3",
+      "kept_functions_sha256": "9f921a9348b718495a178c46e3f33c5b87a4cd96af425acf25880c68a55fc961",
+      "restored_functions": [
+        "BC",
+        "O2",
+        "adj",
+        "allo",
+        "bar",
+        "bcol",
+        "bpath",
+        "bpos",
+        "build8",
+        "dist",
+        "eye",
+        "eyes",
+        "eyes2",
+        "eyes3",
+        "facings",
+        "full",
+        "ginfo",
+        "grid2",
+        "guarded",
+        "guarded2",
+        "guarded6",
+        "guarded6b",
+        "guarded6c",
+        "key",
+        "loc",
+        "mag",
+        "nbf",
+        "o1",
+        "o2",
+        "oroom",
+        "pos",
+        "posall",
+        "rgrid",
+        "rinfo",
+        "rpos",
+        "rstat",
+        "snap",
+        "solve",
+        "solve2",
+        "step1"
+      ],
+      "source": "runs/031-segmentation-forks/segmentation_forks_A/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_A/tu93-0768757b_A_requests.jsonl",
+        "exists": true,
+        "sha256": "27367705373a020e4df230ee9af045428d7236965f3a91c84fe5705a83573e50",
+        "bytes": 5012151,
+        "records": {
+          "request": 8,
+          "response": 7
+        },
+        "recorded_usage": {
+          "prompt_tokens": 756540,
+          "completion_tokens": 21873,
+          "total_tokens": 778413
+        },
+        "responses_with_usage": 7,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 20,
+        "new_python_call_count": 7,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_aa1dc17338b04e1c9d8e891e",
+            "first_snapshot_line": 3,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\nREDFR={(5,3):(5,4),(6,3):(5,3)}\ndef chc(c,p):\n    cand=[v for v in ADJ[c] if D[p][v]<D[p][c]]\n    if not cand: return c\n    return sorted(cand,key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nGOAL=(5,4)\ndef search(p0,c0,t0,ar0,maxt=45):\n    start=(p0,c0,t0,0,0,ar0); seen={start}; par={}; q=collections.deque([start]); found=None\n    while q and not found:\n        p,c,t,om,rd,ar=q.popleft()\n        if t>=maxt: continue\n        cm = chc(c,p) if ar else c\n        if cm==p: continue\n        for mv,d in Dm.items():\n            n=(p[0]+d[0],p[1]+d[1])\n            if n not in ADJ[p] or n==cm: continue\n            ok=True; rdm=rd; om_=om\n            for idx,rr in enumerate([(5,3),(6,3)]):\n                if not (rdm>>idx)&1 and n==REDFR[rr]: ok=False\n            if not ok: continue\n            for idx,rr in enumerate([(5,3),(6,3)]):\n                if not (rdm>>idx)&1 and n==rr:\n                    if p==REDFR[rr]: ok=False\n                    else: rdm |= (1<<idx)\n            if not ok: continue\n            for k in range(3):\n                if (om>>k)&1: continue\n                if n==oph(k,t):\n                    if p==oph(k,t+1): ok=False; break\n                    om_ |= (1<<k); continue\n                if oph(k,t+1)==n: ok=False; break\n            if not ok: continue\n            if n==GOAL:\n                found=(n,cm,t+1,om_,rdm,ar); par[found]=(p,c,t,om,rd,ar,mv); break\n            ar2 = ar or (n[1]==3 and n[0]>2)\n            ns=(n,cm,t+1,om_,rdm,ar2)\n            if ns not in seen: seen.add(ns); par[ns]=(p,c,t,om,rd,ar,mv); q.append(ns)\n    if not found: return None\n    seq=[]; s=found\n    while s!=start:\n        prevk=par[s]; seq.append(prevk[6]); s=prevk[:6]\n    seq.reverse(); return (seq,'om',bin(found[3]),'rd',bin(found[4]),'t',found[2],'states',len(seen))\nres=search((4,4),(2,3),0,False)\nprint(res)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "d905e8f5efc8255e3951f229ff1a4246361d01c3593038dd53c662b58381800b",
+              "content_chars": 653,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chc was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.\nYour function search was not retained: unavailable dependencies: ADJ, Dm, GOAL, REDFR. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "None\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_04d1b7a5895c4c6eae6f3fe1",
+            "first_snapshot_line": 5,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\nREDFR={(5,3):(5,4),(6,3):(5,3)}\ndef chc(c,p):\n    cand=[v for v in ADJ[c] if D[p][v]<D[p][c]]\n    if not cand: return c\n    return sorted(cand,key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nGOAL=(5,4); DG=D[GOAL]\nstart=((0,6),(0,4),16,0,0,True); seen={start}; q=collections.deque([start]); best={}\nwhile q:\n    p,c,t,om,rd,ar=q.popleft()\n    k=(p,om,rd)\n    if k not in best or t<best[k][0]: best[k]=(t,c)\n    if t>=45: continue\n    cm=chc(c,p)\n    if cm==p: continue\n    for mv,d in Dm.items():\n        n=(p[0]+d[0],p[1]+d[1])\n        if n not in ADJ[p] or n==cm: continue\n        ok=True; rdm=rd; om_=om\n        for idx,rr in enumerate([(5,3),(6,3)]):\n            if not (rdm>>idx)&1 and n==REDFR[rr]: ok=False\n        if not ok: continue\n        for idx,rr in enumerate([(5,3),(6,3)]):\n            if not (rdm>>idx)&1 and n==rr:\n                if p==REDFR[rr]: ok=False\n                else: rdm |= (1<<idx)\n        if not ok: continue\n        for k2 in range(3):\n            if (om>>k2)&1: continue\n            if n==oph(k2,t):\n                if p==oph(k2,t+1): ok=False; break\n                om_ |= (1<<k2); continue\n            if oph(k2,t+1)==n: ok=False; break\n        if not ok: continue\n        ns=(n,cm,t+1,om_,rdm,ar)\n        if ns not in seen: seen.add(ns); q.append(ns)\nprint('states',len(seen))\nfor (p,om,rd),(t,c) in sorted(best.items(), key=lambda kv: DG[kv[0][0]])[:12]:\n    print(p,'DG',DG[p],'t',t,'chaser',c,'om',bin(om),'rd',bin(rd))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "53c32431c3524ca2aeb0ad6d0502e77c7ca3047822d6c9a2eaf8470e1ac814c3",
+              "content_chars": 1066,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chc was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "states 31\n(2, 6) DG 5 t 18 chaser (0, 6) om 0b10 rd 0b0\n(3, 7) DG 5 t 20 chaser (2, 6) om 0b10 rd 0b0\n(1, 6) DG 6 t 17 chaser (0, 5) om 0b10 rd 0b0\n(2, 5) DG 6 t 19 chaser (1, 6) om 0b10 rd 0b0\n(2, 7) DG 6 t 19 chaser (1, 6) om 0b10 rd 0b0\n(0, 6) DG 7 t 16 chaser (0, 4) om 0b0 rd 0b0\n(1, 5) DG 7 t 18 chaser (0, 6) om 0b10 rd 0b0\n(1, 7) DG 7 t 18 chaser (0, 6) om 0b10 rd 0b0\n(0, 6) DG 7 t 26 chaser (2, 6) om 0b10 rd 0b0\n(0, 7) DG 8 t 17 chaser (0, 5) om 0b0 rd 0b0\n(0, 5) DG 8 t 27 chaser (1, 6) om 0b10 rd 0b0\n(0, 7) DG 8 t 27 chaser (1, 6) om 0b10 rd 0b0\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_99278b644a194fd193befb26",
+            "first_snapshot_line": 7,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\ndef chc(c,p):\n    cand=[v for v in ADJ[c] if D[p][v]<D[p][c]]\n    if not cand: return c\n    return sorted(cand,key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\n# state at t=20: player (3,7), chaser (2,6), om=0b10 (B dead), rd=0\np,c,t,om=(3,7),(2,6),20,0b10\ncm=chc(c,p); print('chaser step ->',cm)\nfor mv,d in Dm.items():\n    n=(p[0]+d[0],p[1]+d[1])\n    if n not in ADJ[p]: print(mv,n,'wall'); continue\n    if n==cm: print(mv,n,'chaser'); continue\n    msgs=[]\n    for k in range(3):\n        if (om>>k)&1: continue\n        if n==oph(k,t): msgs.append(f'O{k} here front={p==oph(k,t+1)}')\n        elif oph(k,t+1)==n: msgs.append(f'O{k} follows in')\n    print(mv,n,msgs)\nprint('C track t19-22', [(t_,oph(2,t_)) for t_ in range(19,23)])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "496b11fb795a8abdefbad27d05c599d769996461fa40af386ff8d8bf454e7a67",
+              "content_chars": 660,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chc was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "chaser step -> (3, 6)\nUP (2, 7) []\nDOWN (4, 7) wall\nLEFT (3, 6) chaser\nRIGHT (3, 8) wall\nC track t19-22 [(19, (3, 6)), (20, (2, 6)), (21, (1, 6)), (22, (0, 6))]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_a6ee9ac994484b69b5b5e922",
+            "first_snapshot_line": 9,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\ndef rooms(fr):\n    rm,H,V,_=rgrid(fr); R=len(rm);C=len(rm[0])\n    ADJ=collections.defaultdict(set)\n    for i in range(R):\n        for j in range(C):\n            if rm[i][j]=='B': continue\n            if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n            if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\n    return {k:set(v) for k,v in ADJ.items()}\ndef one(fr,col):\n    for n in fr.segmentation['nodes']:\n        if n['color']==col:\n            b=n['boundary']; return (min(p[0] for p in b), min(p[1] for p in b)) if len(n['pixels'])<4 else None\n    return None\ndef cellof(fr,col):\n    for n in fr.segmentation['nodes']:\n        if n['color']==col and n['pixels']<=2:\n            b=n['boundary'][0]; return (b[0],b[1])\n    return None\nrows=[]\nfor tr in transitions:\n    if tr.level not in (8,9): continue\n    bf=tr.before_frame; af=tr.after_frame\n    if bf is None or af is None: continue\n    p0=cellof(bf,'b'); p1=cellof(af,'b'); c0=cellof(bf,'r'); c1=cellof(af,'r')\n    if p0 is None or p1 is None: continue\n    rows.append((tr.level,tr.action,p0,p1,c0,c1))\nprint(len(rows))\nfor r_ in rows[-40:]: print(r_)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 14,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "If",
+                    "For",
+                    "FunctionDef"
+                  ]
+                },
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 19,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "If",
+                    "For",
+                    "FunctionDef"
+                  ]
+                }
+              ],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": true,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 9,
+              "content_sha256": "664d0c817d19e7bb801b4a979e04ca1ae25fc18bde453fbd4ff13a7c71fb34b1",
+              "content_chars": 433,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function rooms(fr) for later Python calls in this game.\nRetained your function one(fr, col) for later Python calls in this game.\nRetained your function cellof(fr, col) for later Python calls in this game.",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 23, in <module>\nAttributeError: 'TransitionView' object has no attribute 'level'"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_9814ded3923548afbc4ad627",
+            "first_snapshot_line": 11,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "data=[]\nfor tr in transitions:\n    bf=tr.before_frame; af=tr.after_frame\n    if bf is None or af is None: continue\n    p0=cellof(bf,'b'); p1=cellof(af,'b'); c0=cellof(bf,'r'); c1=cellof(af,'r')\n    if None in (p0,p1,c0,c1): continue\n    data.append((bf,af,tr.action,p0,p1,c0,c1))\nprint('samples',len(data))\nres=[]\nfor bf,af,act,p0,p1,c0,c1 in data:\n    ADJ=rooms(bf)\n    if c0 not in ADJ or p0 not in ADJ or c1 not in ADJ: continue\n    def bfsd(src,ADJ=ADJ):\n        d={src:0}; q=collections.deque([src])\n        while q:\n            u=q.popleft()\n            for v in ADJ[u]:\n                if v not in d: d[v]=d[u]+1; q.append(v)\n        return d\n    d=bfsd(p1)\n    if c0 not in d: continue\n    red=[v for v in ADJ[c0] if d[v]<d[c0]]\n    res.append((bf.step,act,p0,p1,c0,c1,tuple(sorted(red))))\nfor r_ in res: print(r_)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 11,
+              "content_sha256": "26a733085c950dd3af32c6a34424f10d9c6335cf6eb6d795d8a7d396451984f3",
+              "content_chars": 68,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "samples 0\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_62b67fed98874a3abe300a89",
+            "first_snapshot_line": 13,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "sg=current_frame.segmentation\nfor n in sg['nodes']:\n    if n['color'] in 'brNR':\n        print(n['color'], n['pixels'], n['boundary'][:6])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 4,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "If",
+                    "For"
+                  ]
+                }
+              ],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": true,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 13,
+              "content_sha256": "6641833dfdd5635917fa512272e158e98b9f8700d2d0d2b49a184b6b8cc32f9e",
+              "content_chars": 327,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "r 8 [[10, 33], [10, 35], [11, 34], [12, 35], [12, 33]]\nb 8 [[10, 45], [10, 47], [11, 46], [12, 47], [12, 45]]\nR 8 [[40, 27], [40, 29], [41, 28], [42, 29], [42, 27]]\nN 9 [[40, 33], [40, 35], [42, 35], [42, 33]]\nR 8 [[46, 27], [47, 28], [46, 29], [48, 29], [48, 27]]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_80bd21927b0d4710a14262ca",
+            "first_snapshot_line": 15,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "a=current_frame.ascii.split('\\n')\nprint('shape',current_frame.shape)\nfor i in range(8,15): print(i, a[i][24:52])\nprint()\nprint('row40', a[40][24:40]); print('row46', a[46][24:40])\nprint('roomgrid'); rm,H,V,_=rgrid(current_frame)\nfor i,r_ in enumerate(rm): print(i,r_)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 15,
+              "content_sha256": "67b2ba6857b90c6434fe32cc39c09ceae658c02781bce7af747aa7cddb60d883",
+              "content_chars": 670,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "shape (64, 64)\n8 BBBBBBBBBBBBBBBBBBBBBBBBBBBB\n9 BBBBBBBBBBBBBBBBBBBBBBBBBBBB\n10 BBBWWWgggrrrgggWWWgggbbbgggW\n11 BBBWWWgggrrYgggWWWgggbbcgggW\n12 BBBWWWgggrrrgggWWWgggbbbgggW\n13 BBBgggBBBBBBBBBBBBBBBgggBBBB\n14 BBBgggBBBBBBBBBBBBBBBgggBBBB\n\nrow40 BBBRRRgggNNNgggW\nrow46 BBBRpRgggWWWgggW\nroomgrid\n0 ['B', 'B', 'B', 'W', 'r', 'W', 'b', 'W']\n1 ['W', 'W', 'W', 'O', 'W', 'W', 'O', 'W']\n2 ['B', 'B', 'W', 'W', 'B', 'W', 'O', 'W']\n3 ['B', 'B', 'W', 'W', 'B', 'B', 'W', 'W']\n4 ['B', 'B', 'W', 'W', 'W', 'W', 'W', 'B']\n5 ['B', 'B', 'B', 'R', 'N', 'W', 'B', 'B']\n6 ['B', 'B', 'B', 'R', 'W', 'W', 'B', 'B']\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [
+        "call_a6ee9ac994484b69b5b5e922",
+        "call_62b67fed98874a3abe300a89"
+      ],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 756540,
+        "completion_tokens": 21873,
+        "total_tokens": 778413
+      }
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "arm": "A",
+      "state": "gave_up",
+      "error": null,
+      "cut": 40,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "final_score": 14.285714285714285,
+      "actions_per_level": [
+        13,
+        27,
+        0,
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 251.48629198800063,
+      "budget_seconds": 250,
+      "continuation_action_count": 0,
+      "continuation_actions": [],
+      "continuation_history": [],
+      "solver_note": "tokens=23637",
+      "grid_sha256": "65cb1a68c3dac59c60c6956550dd5e0427aa016f1afb399e77e3c96076124292",
+      "messages_sha256": "43fab0bd737db2fd1e0fac9af8b289d20359a3b8e756bb68e506dfdd82e163ff",
+      "kept_functions_sha256": "f1f0adb042ae4830c5b12436c22dda6fc524acf87bc798101c7e6d689d6490ee",
+      "restored_functions": [
+        "astarO",
+        "astarO2",
+        "brief",
+        "center",
+        "centers",
+        "centers2",
+        "dc",
+        "dc2",
+        "dpos2",
+        "env",
+        "find",
+        "get_S",
+        "get_dashes",
+        "live3",
+        "minchain",
+        "objs",
+        "osearch",
+        "run2",
+        "run3",
+        "run4",
+        "solve2",
+        "solve3",
+        "state",
+        "wpos",
+        "xc",
+        "xc2"
+      ],
+      "source": "runs/031-segmentation-forks/segmentation_forks_A/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_A/r11l-495a7899_A_requests.jsonl",
+        "exists": true,
+        "sha256": "7529eb63aae5fd5a0c9e0c62670ff99ec5f506d22a03a2f8d7580deace61d7ed",
+        "bytes": 3041964,
+        "records": {
+          "request": 7,
+          "response": 6
+        },
+        "recorded_usage": {
+          "prompt_tokens": 406400,
+          "completion_tokens": 16826,
+          "total_tokens": 423226
+        },
+        "responses_with_usage": 6,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 21,
+        "new_python_call_count": 6,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_88ab9c74d507435798128af6",
+            "first_snapshot_line": 3,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nfrom collections import Counter\ncnt=Counter(ch for row in a for ch in row)\nprint(dict(cnt))\ndef pix(col): return [(i,j) for i in range(64) for j in range(64) if a[i][j]==col]\nfor c in ('M','N','p','W','P','Y','R'):\n    if cnt.get(c): print(c, len(pix(c)), pix(c)[:12])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "02d1d902e5bde22d6251855b78e8d1612153ef5a696cea461e04645f61717ff1",
+              "content_chars": 685,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function pix was not retained: unavailable dependencies: a. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "{'W': 76, 'g': 553, 'S': 868, 'B': 2439, 'G': 60, 'N': 36, 'w': 28, 'M': 2, 'p': 34}\nM 2 [(15, 27), (37, 44)]\nN 36 [(9, 34), (13, 26), (13, 27), (13, 28), (14, 25), (14, 26), (14, 27), (14, 28), (14, 29), (15, 25), (15, 26), (15, 28)]\np 34 [(34, 37), (35, 43), (35, 44), (35, 45), (36, 42), (36, 43), (36, 44), (36, 45), (36, 46), (37, 42), (37, 43), (37, 45)]\nW 76 [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0)]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_8fe86a74363d4557afe5670e",
+            "first_snapshot_line": 5,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nARMS=((-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(0,-1),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0))\ndia=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        ch=a[r][c]\n        if ch in ('N','p'):\n            ar=[a[r+dr][c+dk] for dr,dk in ARMS]\n            ws=sum(1 for x in ar if x in ('W','G'))\n            if ws>=4: dia.append(((r,c),ch,'W' if 'W' in ar else 'G'))\nprint('diamonds',dia)\n# ring dashes: N or p pixels not part of a diamond/disc\ndc=set()\nfor (r,c),ch,_ in dia:\n    for dr in range(-2,3):\n        for dk in range(-2,3):\n            if abs(dr)+abs(dk)<=2: dc.add((r+dr,c+dk))\nfor (r,c) in [(15,27),(37,44)]:\n    for dr in range(-2,3):\n        for dk in range(-2,3):\n            if abs(dr)+abs(dk)<=4: dc.add((r+dr,c+dk))\nfor col in ('N','p'):\n    pts=[(i,j) for i in range(64) for j in range(64) if a[i][j]==col and (i,j) not in dc]\n    print(col,len(pts),pts)\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "9bf8e5a51546e1ac9080431251c350e0345242794a1327deccd546942f7d94dd",
+              "content_chars": 666,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function dc was not retained: definition did not execute, was removed/replaced, or conflicts with a provided name. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "diamonds [((9, 34), 'N', 'G'), ((16, 14), 'N', 'W'), ((16, 39), 'N', 'G'), ((21, 23), 'N', 'G'), ((34, 37), 'p', 'G'), ((40, 52), 'p', 'G')]\nN 12 [(50, 54), (50, 56), (51, 53), (51, 57), (52, 52), (52, 58), (54, 52), (54, 58), (55, 53), (55, 57), (56, 54), (56, 56)]\np 12 [(54, 33), (54, 35), (55, 32), (55, 36), (56, 31), (56, 37), (58, 31), (58, 37), (59, 32), (59, 36), (60, 33), (60, 35)]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_8db8315939f943539fc50dca",
+            "first_snapshot_line": 7,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nprint('purple crop rows 28-44 cols 34-54:')\nfor r in range(28,45): print(r, a[r][34:55])\nprint('W pixels:', [(i,j) for i in range(64) for j in range(64) if a[i][j]=='W'][:80])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "7467f51efb27fa1e9de3311fc78c0c15b413189d6b021c4e8aad992fb779aeb5",
+              "content_chars": 1233,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "purple crop rows 28-44 cols 34-54:\n28 BBBBBBBSSSSSSSSSSSSSS\n29 BBBBBBBBBBBSSSSSSSSSS\n30 BBBBBBBBBBBBBSSSSSSSS\n31 BBBBBBBBBBBBBBBSSSSSS\n32 BBBGBBBBBBBBBBBBSSSSS\n33 BBGGGBBBBBBBBBBBBBSSS\n34 BGGpGGBBBBBBBBBBBBBSS\n35 BBGGGwwBBpppBBBBBBBBS\n36 BBBGBBBwpppppBBBBBBBB\n37 BBBBBBBBppMppBBBBBBBB\n38 BBBBBBBBpppppwBBBBGBB\n39 BBBBBSBBBpppBBwwwGGGB\n40 BBSSSSSBBBBBBBBBGGpGG\n41 SSSSSSSSBBBBBBBBBGGGB\n42 SSSSSSSSSSBBBBBBBBGBB\n43 SSSSSSSSSSSBBBBBBBBBB\n44 SSSSSSSSSSSSSSSBBBBBB\nW pixels: [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (12, 0), (13, 0), (14, 0), (14, 14), (15, 0), (15, 13), (15, 14), (15, 15), (16, 0), (16, 12), (16, 13), (16, 15), (16, 16), (17, 0), (17, 13), (17, 14), (17, 15), (18, 0), (18, 14), (19, 0), (20, 0), (21, 0), (22, 0), (23, 0), (24, 0), (25, 0), (26, 0), (27, 0), (28, 0), (29, 0), (30, 0), (31, 0), (32, 0), (33, 0), (34, 0), (35, 0), (36, 0), (37, 0), (38, 0), (39, 0), (40, 0), (41, 0), (42, 0), (43, 0), (44, 0), (45, 0), (46, 0), (47, 0), (48, 0), (49, 0), (50, 0), (51, 0), (52, 0), (53, 0), (54, 0), (55, 0), (56, 0), (57, 0), (58, 0), (59, 0), (60, 0), (61, 0), (62, 0), (63, 0)]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_f4d7a3eb511746519536df6c",
+            "first_snapshot_line": 9,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nS=set((i,j) for i in range(64) for j in range(64) if a[i][j]=='S')\nGR=set((i,j) for i in range(64) for j in range(64) if a[i][j]=='g')\ndef bb(s):\n    rs=[p[0] for p in s]; cs=[p[1] for p in s]; return (min(rs),max(rs),min(cs),max(cs))\n# coarse occupancy map: 8x8 blocks, '.'=free, 'S'=water, 'g'=gray\nprint('    '+''.join(str((c//8)%10) for c in range(0,64,1)))\nrows=[]\nfor r in range(0,64,2):\n    line=''\n    for c in range(0,64,2):\n        blk=[a[r+dr][c+dk] for dr in range(2) for dk in range(2) if r+dr<64 and c+dk<64]\n        s=sum(1 for x in blk if x=='S'); g=sum(1 for x in blk if x=='g')\n        line+= 'S' if s>=2 else ('g' if g>=2 else ('s' if s else ('G' if g else '.')))\n    rows.append('%2d '%r+line)\nprint('\\n'.join(rows))\nprint('ring centers free?', a[53][55], a[57][34])\nprint('green ring dashes rows/cols', bb([(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]))\nprint('purple ring bb', bb([(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]))\nprint('S count',len(S),'g count',len(GR))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 9,
+              "content_sha256": "5b2088f41c43efa75e1dfec5d21f2fa8a9dadd24dcd2825cc4d6a7c8d6ac60bb",
+              "content_chars": 1532,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function bb(s) for later Python calls in this game.",
+                "returncode": 0,
+                "stdout": "    0000000011111111222222223333333344444444555555556666666677777777\n 0 ggggSSgggggggggggggggggggggggggg\n 2 ggggSSggggg....gggggg..ggggggggg\n 4 ggggSSggggg......Gggg....ggggggg\n 6 ggggSSS....................Ggggg\n 8 ggggSSS......................ggg\n10 ggSSSs..........................\n12 gSSSS...........................\n14 gSSSS...........................\n16 gSSSs...........................\n18 SSSS..........................SS\n20 SSS..........................sSS\n22 SSS.....................SSSSSSSS\n24 SSS..........SS.........SSSSSSSS\n26 SSS........sSSSSSSSSSSSSSSSSSSSS\n28 SSS........SSSSs....sSSSSSSSSSSS\n30 SSS........SSs.........sSSSSSSSS\n32 SSS......................SSSSSSS\n34 SSS.......................sSSSSS\n36 SSSs........................SSSS\n38 SSSSs..............s.........SSS\n40 SSSSS..........sSSSSS.........SS\n42 SSSSSSSSSSSSSSSSSSSSSSs.......SS\n44 SSSSSSSSSSSSSSSSSSSSSSSSs......S\n46 SSSSSSSSSSSSSSSSSSSSSSSS........\n48 ggSSSSSSSSSS.......sSSSs........\n50 gggs....SSSS....................\n52 ggg.............................\n54 gggg.Gggg.......................\n56 gggg.gggg.......................\n58 ggggggggg.......................\n60 gggggggggggg....................\n62 gggggggggggg....................\nring centers free? B B\ngreen ring dashes rows/cols (50, 56, 52, 58)\npurple ring bb (54, 60, 31, 37)\nS count 868 g count 553\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_7ce4c47316dd46899099db56",
+            "first_snapshot_line": 11,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "def astar_chain(f, pos, p0, ringc, dashes, blockers, maxd=24, cap=250000, wgt=2):\n    import heapq\n    a=f.ascii.split('\\n')\n    OBS=set((i,j) for i in range(64) for j in range(64) if a[i][j] in ('S','g'))\n    D=set(dashes); R=ringc\n    n=len(pos)\n    def disc(p): return (sum(q[0] for q in p)//n, sum(q[1] for q in p)//n)\n    def inbb(cell,c): return abs(cell[0]-c[0])<=2 and abs(cell[1]-c[1])<=2\n    def ok(pos,x):\n        for p in pos:\n            if dc2(p)&OBS: return False\n        return not (xc2(x)&OBS)\n    def goal(pos): return bool(xc2(disc(pos))&D)\n    def nbrs(st):\n        pos,pl=st; x=disc(pos); out=[]\n        for i in range(n):\n            if i!=pl: out.append((pos,i))\n        allb=list(pos)+list(blockers)\n        for dr in range(-2,3):\n            for dk in range(-2,3):\n                cell=(x[0]+dr,x[1]+dk)\n                if any(inbb(cell,c) for c in allb): continue\n                np_=list(pos); np_[pl]=cell; np_=tuple(np_)\n                if ok(np_,disc(np_)): out.append((np_,pl))\n        if not any(inbb(R,c) for c in allb):\n            np_=list(pos); np_[pl]=R; np_=tuple(np_)\n            if ok(np_,disc(np_)): out.append((np_,pl))\n        return out\n    def h(st):\n        x=disc(st[0]); return max(abs(x[0]-R[0]),abs(x[1]-R[1]))//wgt+ (0 if not goal(st) else -5)\n    st=(tuple(pos),p0)\n    if goal(st): return []\n    pq=[(h(st),0,st)]; best={st:0}; par={}; exp=0\n    while pq:\n        _,g,s=heapq.heappop(pq)\n        if best.get(s,99)<g: continue\n        exp+=1\n        if exp>cap: return None\n        for ns in nbrs(s):\n            if best.get(ns,999)<=g+1: continue\n            best[ns]=g+1; par[ns]=s\n            if goal(ns):\n                path=[]; cur=ns\n                while cur in par: path.append(cur); cur=par[cur]\n                return path\n            heapq.heappush(pq,(g+1+h(ns),g+1,ns))\n    return None\nG=[(9,34),(16,14),(16,39),(21,23)]\nGD=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nP=[(34,37),(40,52)]\nPD=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\npg=astar_chain(current_frame,G,1,(53,55),GD,P,maxd=22,cap=120000)\nprint('green path len', None if pg is None else len(pg))\nif pg:\n    for pos,pl in pg[-6:]: print(pos,pl,(sum(p[0] for p in pos)//4,sum(p[1] for p in pos)//4))\npp=astar_chain(current_frame,P,0,(57,34),PD,G,maxd=16,cap=120000)\nprint('purple path len', None if pp is None else len(pp))\nif pp:\n    for pos,pl in pp: print(pos,pl,(sum(p[0] for p in pos)//2,sum(p[1] for p in pos)//2))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 11,
+              "content_sha256": "00ff42d717a348475d36df124402c7cc8a60b3c0ccbd72a4dd801ebcfbfe1985",
+              "content_chars": 486,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function astar_chain(f, pos, p0, ringc, dashes, blockers, maxd=24, cap=250000, wgt=2) for later Python calls in this game.",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 52, in <module>\n  File \"<python_tool>\", line 32, in astar_chain\n  File \"<python_tool>\", line 13, in goal\n  File \"<python_tool>\", line 7, in disc\nTypeError: unsupported operand type(s) for +: 'int' and 'tuple'"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_f9a8e1e28dee446692ad6482",
+            "first_snapshot_line": 13,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "def ach(f, pos, p0, ringc, dashes, blockers, maxd=24, cap=200000, wgt=2):\n    import heapq\n    a=f.ascii.split('\\n')\n    OBS=set((i,j) for i in range(64) for j in range(64) if a[i][j] in ('S','g'))\n    D=set(dashes); R=ringc; n=len(pos)\n    def dsc(p): return (sum(q[0] for q in p)//n, sum(q[1] for q in p)//n)\n    def inbb(cell,c): return abs(cell[0]-c[0])<=2 and abs(cell[1]-c[1])<=2\n    def ok(np_,x):\n        for p in np_:\n            if dc2(p)&OBS: return False\n        return not (xc2(x)&OBS)\n    def goalp(np_): return bool(xc2(dsc(np_))&D)\n    def nbrs(st):\n        np_,pl=st; x=dsc(np_); out=[]\n        for i in range(n):\n            if i!=pl: out.append((np_,i))\n        allb=list(np_)+list(blockers)\n        for dr in range(-2,3):\n            for dk in range(-2,3):\n                cell=(x[0]+dr,x[1]+dk)\n                if any(inbb(cell,c) for c in allb): continue\n                nn=list(np_); nn[pl]=cell; nn=tuple(nn)\n                if ok(nn,dsc(nn)): out.append((nn,pl))\n        if not any(inbb(R,c) for c in allb):\n            nn=list(np_); nn[pl]=R; nn=tuple(nn)\n            if ok(nn,dsc(nn)): out.append((nn,pl))\n        return out\n    def hst(st):\n        x=dsc(st[0]); d=max(abs(x[0]-R[0]),abs(x[1]-R[1]))\n        return 0 if goalp(st[0]) else max(1,d//wgt)\n    st=(tuple(pos),p0)\n    if goalp(st[0]): return []\n    pq=[(hst(st),0,st)]; best={st:0}; par={}; exp=0\n    while pq:\n        _,g,s=heapq.heappop(pq)\n        if best.get(s,99)<g: continue\n        if g>=maxd: continue\n        exp+=1\n        if exp>cap: return ('cap',exp)\n        for ns in nbrs(s):\n            if best.get(ns,999)<=g+1: continue\n            best[ns]=g+1; par[ns]=s\n            if goalp(ns[0]):\n                path=[]; cur=ns\n                while cur in par: path.append(cur); cur=par[cur]\n                return ('ok',path,exp)\n            heapq.heappush(pq,(g+1+hst(ns),g+1,ns))\n    return ('none',exp)\nG=[(9,34),(16,14),(16,39),(21,23)]\nGD=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nP=[(34,37),(40,52)]\nPD=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\nrG=ach(current_frame,G,1,(53,55),GD,P,maxd=22,cap=90000)\nprint('green:',rG[0], None if rG[0]!='ok' else len(rG[1]), rG[-1])\nrP=ach(current_frame,P,0,(57,34),PD,G,maxd=14,cap=90000)\nprint('purple:',rP[0], None if rP[0]!='ok' else len(rP[1]), rP[-1])\nif rP[0]=='ok':\n    for np_,pl in rP[1]: print('P',np_,pl,(sum(p[0] for p in np_)//2,sum(p[1] for p in np_)//2))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 13,
+              "content_sha256": "c3605c6c8350ec63ec495966613c0d4651ed72b2400b0fc800653c25290ab830",
+              "content_chars": 260,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function ach(f, pos, p0, ringc, dashes, blockers, maxd=24, cap=200000, wgt=2) for later Python calls in this game.",
+                "returncode": 0,
+                "stdout": "green: cap None 90001\npurple: none None 7359\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 406400,
+        "completion_tokens": 16826,
+        "total_tokens": 423226
+      }
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "arm": "B",
+      "state": "gave_up",
+      "error": null,
+      "cut": 27,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "final_score": 14.285714285714285,
+      "actions_per_level": [
+        4,
+        7,
+        18,
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 250.10403949299962,
+      "budget_seconds": 250,
+      "continuation_action_count": 2,
+      "continuation_actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 20,
+            "y": 28
+          }
+        }
+      ],
+      "continuation_history": [
+        {
+          "action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 22,
+              "y": 30
+            }
+          },
+          "generated_tokens": 1614,
+          "uncached_input_tokens": 0,
+          "wallclock_seconds": 65.78708964599991
+        },
+        {
+          "action": {
+            "id": "ACTION6",
+            "data": {
+              "x": 20,
+              "y": 28
+            }
+          },
+          "generated_tokens": 10572,
+          "uncached_input_tokens": 0,
+          "wallclock_seconds": 167.2466640949997
+        }
+      ],
+      "solver_note": "tokens=16390",
+      "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+      "messages_sha256": "b39f3022a73af7d78fc83b789bb191447c17c10703eb9b1a4e35393cc65febb9",
+      "kept_functions_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "restored_functions": [],
+      "source": "runs/031-segmentation-forks/segmentation_forks_B/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_B/ft09-0d8bbf25_B_requests.jsonl",
+        "exists": true,
+        "sha256": "b40d01956acfa4706f0b1f270f38d872e22f4e799ec1b5bf7879f2d3838e1e00",
+        "bytes": 1540130,
+        "records": {
+          "request": 4,
+          "response": 3
+        },
+        "recorded_usage": {
+          "prompt_tokens": 194638,
+          "completion_tokens": 16390,
+          "total_tokens": 211028
+        },
+        "responses_with_usage": 3,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 15,
+        "new_python_call_count": 3,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_2dabb94fc6b741dcb7598c1e",
+            "first_snapshot_line": 3,
+            "analysis_step": 8,
+            "snapshot_action": 29,
+            "code": "\nbefore = current_frame.ascii.split('\\n')\ndef crop(lines,r0,c0,h=6,w=6): return [lines[r][c0:c0+w] for r in range(r0,r0+h)]\nprint('P2 before:', crop(before,28,20))\nr = action([{'action':'MOUSE','row':30,'col':22}])\nprint('result', r.get('executed'), r.get('gameplay_changed'), r.get('level_completed'), r.get('level'))\nafter = current_frame.ascii.split('\\n')\nprint('P2 after: ', crop(after,28,20))\nd = frame_diff()\nprint('changed', d['changed_cell_count'])\nfor k in ('appeared','disappeared','changed_color','resized'):\n    if d.get(k): print(k, [(e.get('at'),e.get('before_color'),e.get('after_color'),e.get('bbox')) for e in d[k]][:8])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "1c4a9f86f03fd8a1c651f2de784be4f0218487616b4bc15995a91d733747e059",
+              "content_chars": 443,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function crop(lines, r0, c0, h=6, w=6) for later Python calls in this game.",
+                "returncode": 0,
+                "stdout": "P2 before: ['ggWWgg', 'ggWWgg', 'ggRRWW', 'ggRRWW', 'WWWWgg', 'WWWWgg']\n[action] MOUSE(row=30, col=22) -> NO-OP (executed, no change inside the board area)\nresult True False False 3\nP2 after:  ['ggWWgg', 'ggWWgg', 'ggRRWW', 'ggRRWW', 'WWWWgg', 'WWWWgg']\nchanged 0\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_a290415d03fd465d96b03651",
+            "first_snapshot_line": 5,
+            "analysis_step": 9,
+            "snapshot_action": 30,
+            "code": "\na0 = current_frame.ascii.split('\\n')\nprint('P2 before:', crop(a0,28,20))\nr = action([{'action':'MOUSE','row':28,'col':20}])\nprint('click P2 topleft sub-block:', r.get('gameplay_changed'), r.get('level_completed'))\na1 = current_frame.ascii.split('\\n')\nprint('P2 after:', crop(a1,28,20))\nr2 = action([{'action':'MOUSE','row':29,'col':23}])\nprint('click P2 top-mid sub-block:', r2.get('gameplay_changed'), r2.get('level_completed'))\na2 = current_frame.ascii.split('\\n')\nprint('P2 after2:', crop(a2,28,20))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "41c80d55cf2060e19a23f726f965d32c52201b40c1a588b33f0c0be0468750ae",
+              "content_chars": 892,
+              "payload": {
+                "tool": "python",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 8, in <module>\nStaleStateActionError: MOUSE(row=29, col=23) was not executed. The action immediately before it, MOUSE(row=28, col=20), was a no-op - it produced no change inside the board area - so positions and paths computed since then may be wrong, which is why execution has been halted here. Re-read current_frame and last_action_call_result, work out why nothing moved, then act on what you find. (StaleStateActionError can be caught if a snippet has good reason to keep acting through no-ops.)",
+                "stdout": "P2 before: ['ggWWgg', 'ggWWgg', 'ggRRWW', 'ggRRWW', 'WWWWgg', 'WWWWgg']\n[action] MOUSE(row=28, col=20) -> NO-OP (executed, no change inside the board area)\nclick P2 topleft sub-block: False False\nP2 after: ['ggWWgg', 'ggWWgg', 'ggRRWW', 'ggRRWW', 'WWWWgg', 'WWWWgg']\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_def70a557dd242cf8e0e94c0",
+            "first_snapshot_line": 7,
+            "analysis_step": 9,
+            "snapshot_action": 30,
+            "code": "\nseg = current_frame.segmentation\nns = seg['nodes']\ngrid_rows=[4,12,20,28,36,44,52]; grid_cols=[12,20,28,36,44]\ncur={}\npieces={}\nfor n in ns:\n    b=n['boundary']; rs=[p[0] for p in b]; cs=[p[1] for p in b]\n    r0,r1,c0,c1=min(rs),max(rs),min(cs),max(cs)\n    if n['pixels']==36 and r1-r0==5 and c1-c0==5:\n        cur[(grid_rows.index(r0),grid_cols.index(c0))]=n['color']\n    elif r1-r0<=5 and c1-c0<=5 and (r1-r0)>=1:\n        for r in range(r0,r1+1):\n            for c in range(c0,c1+1): pieces[(r,c)]=n['color']\npats=[(12,28),(28,20),(28,36),(44,28)]\nother={'O':'R','R':'O'}\ndef target_for(mode):\n    t={}\n    for (pr,pc) in pats:\n        center=pieces[(pr+2,pc+2)]\n        R=grid_rows.index(pr); C=grid_cols.index(pc)\n        for i in range(3):\n            for j in range(3):\n                if i==1 and j==1: continue\n                sub=pieces[(pr+2*i,pc+2*j)]\n                if mode=='A': col = center if sub=='W' else other[center]\n                else: col = other[center] if sub=='W' else center\n                t[(R-1+i,C-1+j)]=col\n    return t\nfor mode in ('A','B'):\n    t=target_for(mode)\n    mism=[(k,cur.get(k),t[k]) for k in sorted(t) if cur.get(k)!=t[k]]\n    print(mode,'mismatches:',mism)\nprint('cur:')\nfor r in range(7): print('  ',''.join(cur.get((r,c),'.') for c in range(5)))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [
+                {
+                  "field": "boundary",
+                  "kind": "subscript_load",
+                  "code_line": 8,
+                  "expression": "n['boundary']",
+                  "enclosing_scopes": [
+                    "For"
+                  ]
+                }
+              ],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": true,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "7859c4aef1e7c0a6a063a05e90949e041539c6030f1cd35b327348fa71bf4af8",
+              "content_chars": 830,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function target_for was not retained: unavailable dependencies: grid_cols, grid_rows, other, pats, pieces. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "A mismatches: [((0, 1), 'R', 'O')]\nB mismatches: [((0, 2), 'O', 'R'), ((0, 3), 'O', 'R'), ((1, 1), 'O', 'R'), ((1, 3), 'R', 'O'), ((2, 0), 'O', 'R'), ((2, 1), 'R', 'O'), ((2, 2), 'O', 'R'), ((2, 3), 'R', 'O'), ((2, 4), 'R', 'O'), ((3, 0), 'O', 'R'), ((3, 2), 'R', 'O'), ((3, 4), 'O', 'R'), ((4, 0), 'R', 'O'), ((4, 1), 'R', 'O'), ((4, 2), 'O', 'R'), ((4, 3), 'R', 'O'), ((4, 4), 'O', 'R'), ((5, 1), 'O', 'R'), ((5, 3), 'O', 'R'), ((6, 1), 'O', 'R'), ((6, 2), 'O', 'R'), ((6, 3), 'O', 'R')]\ncur:\n   .ROO.\n   .O.R.\n   ORORR\n   O.R.O\n   RRORO\n   .O.O.\n   .OOO.\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [
+        "call_def70a557dd242cf8e0e94c0"
+      ],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 194638,
+        "completion_tokens": 16390,
+        "total_tokens": 211028
+      }
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "arm": "B",
+      "state": "gave_up",
+      "error": null,
+      "cut": 276,
+      "initial_levels_completed": 8,
+      "levels_completed": 8,
+      "added_levels": 0,
+      "final_score": 68.04786348100441,
+      "actions_per_level": [
+        18,
+        22,
+        24,
+        42,
+        34,
+        42,
+        14,
+        56,
+        24
+      ],
+      "elapsed_seconds": 250.11720352200064,
+      "budget_seconds": 250,
+      "continuation_action_count": 0,
+      "continuation_actions": [],
+      "continuation_history": [],
+      "solver_note": "tokens=24885",
+      "grid_sha256": "721435af77794819edf988b2cd3f3afeb65cf114b67b534fc523fd334827b0c2",
+      "messages_sha256": "8b62bdd06d337868c3561f80d80612460e6efaf00118e56bd03ada91d72cc5f3",
+      "kept_functions_sha256": "9f921a9348b718495a178c46e3f33c5b87a4cd96af425acf25880c68a55fc961",
+      "restored_functions": [
+        "BC",
+        "O2",
+        "adj",
+        "allo",
+        "bar",
+        "bcol",
+        "bpath",
+        "bpos",
+        "build8",
+        "dist",
+        "eye",
+        "eyes",
+        "eyes2",
+        "eyes3",
+        "facings",
+        "full",
+        "ginfo",
+        "grid2",
+        "guarded",
+        "guarded2",
+        "guarded6",
+        "guarded6b",
+        "guarded6c",
+        "key",
+        "loc",
+        "mag",
+        "nbf",
+        "o1",
+        "o2",
+        "oroom",
+        "pos",
+        "posall",
+        "rgrid",
+        "rinfo",
+        "rpos",
+        "rstat",
+        "snap",
+        "solve",
+        "solve2",
+        "step1"
+      ],
+      "source": "runs/031-segmentation-forks/segmentation_forks_B/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_B/tu93-0768757b_B_requests.jsonl",
+        "exists": true,
+        "sha256": "d59c415e76e948470fd6446512990b18f3bbc211c7bccbd77915e9621876a970",
+        "bytes": 4182084,
+        "records": {
+          "request": 7,
+          "response": 6
+        },
+        "recorded_usage": {
+          "prompt_tokens": 628136,
+          "completion_tokens": 24885,
+          "total_tokens": 653021
+        },
+        "responses_with_usage": 6,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 20,
+        "new_python_call_count": 6,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_657d553001974a8ca3ac7d1f",
+            "first_snapshot_line": 3,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\ndef chc(c,p):\n    dd=D[p]; cand=[v for v in ADJ[c] if dd[v]<dd[c]]\n    if not cand: return c,0\n    best=min(dd[v] for v in cand)\n    tied=[v for v in cand if dd[v]==best]\n    return sorted(tied,key=lambda v:(-v[0],v[1]))[0], len(tied)-1\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nREDFR={(5,3):(5,4),(6,3):(5,3)}\n# verify model vs observed chaser path for moves 1..16\nobs=[(2,3),(3,3),(4,3),(4,2),(3,2),(2,2),(2,3),(3,3),(4,3),(4,2),(3,2),(2,2),(2,3),(0,3),(0,4)]\nmoves=['LEFT','LEFT','UP','UP','RIGHT','DOWN','DOWN','LEFT','UP','UP','RIGHT','UP','UP','RIGHT','RIGHT','RIGHT']\np=(4,4); c=(2,3); t=0\nmism=[]\nfor mv in moves:\n    d=Dm[mv]; n=(p[0]+d[0],p[1]+d[1])\n    c1,tie=chc(c,n)\n    if t>=1:  # chaser starts moving on move 2 (observed t1 no move)\n        if c1!=obs[t]: mism.append((t+1,mv,'pred',c1,'obs',obs[t]))\n    p,c,t=n,c1,t+1\nprint('chaser mismatches:',mism)\nprint('orange check t16:',[oph(k,16) for k in range(3)],'obs O=[(1,3),(1,6),(2,6)]')\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "2ec9b59e93ff2cb8768e8054b3b16d7e1eaabd872c6f219e3582658767c5a27c",
+              "content_chars": 592,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chc was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 40, in <module>\nIndexError: list index out of range"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_e05c330cdaeb454fbabbb9ba",
+            "first_snapshot_line": 5,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\ndef chc(c,p):\n    dd=D[p]; cand=[v for v in ADJ[c] if dd[v]<dd[c]]\n    if not cand: return c,0\n    best=min(dd[v] for v in cand); tied=[v for v in cand if dd[v]==best]\n    return sorted(tied,key=lambda v:(-v[0],v[1]))[0], len(tied)-1\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nobs={1:(2,3),2:(3,3),3:(4,3),4:(4,2),5:(3,2),6:(2,2),7:(2,3),8:(3,3),9:(4,3),10:(4,2),11:(3,2),12:(2,2),13:(2,3),15:(0,3),16:(0,4)}\nmoves=['LEFT','LEFT','UP','UP','RIGHT','DOWN','DOWN','LEFT','UP','UP','RIGHT','UP','UP','RIGHT','RIGHT','RIGHT']\np=(4,4); c=(2,3); mism=[]; ties=[]\nfor i,mv in enumerate(moves):\n    t=i+1; d=Dm[mv]; n=(p[0]+d[0],p[1]+d[1]); c1,tie=chc(c,n)\n    if t in obs and c1!=obs[t]: mism.append((t,mv,'pred',c1,'obs',obs[t]))\n    if tie: ties.append((t,mv,c1,tie))\n    p,c=n,c1\nprint('mismatches:',mism)\nprint('tie steps:',ties)\nprint('oranges t16 model',[oph(k,16) for k in range(3)],'obs [(1,3),(1,6),(2,6)]')\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "fd5cb1d97a5cb45cb5d4c3e55f3fe2cc4caf55334e789698fdc9f1208581ef01",
+              "content_chars": 1248,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chc was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "mismatches: [(1, 'LEFT', 'pred', (3, 3), 'obs', (2, 3)), (2, 'LEFT', 'pred', (4, 3), 'obs', (3, 3)), (3, 'UP', 'pred', (4, 2), 'obs', (4, 3)), (4, 'UP', 'pred', (3, 2), 'obs', (4, 2)), (5, 'RIGHT', 'pred', (2, 2), 'obs', (3, 2)), (6, 'DOWN', 'pred', (2, 3), 'obs', (2, 2)), (7, 'DOWN', 'pred', (3, 3), 'obs', (2, 3)), (8, 'LEFT', 'pred', (4, 3), 'obs', (3, 3)), (9, 'UP', 'pred', (4, 2), 'obs', (4, 3)), (10, 'UP', 'pred', (3, 2), 'obs', (4, 2)), (11, 'RIGHT', 'pred', (2, 2), 'obs', (3, 2)), (12, 'UP', 'pred', (2, 3), 'obs', (2, 2)), (13, 'UP', 'pred', (1, 3), 'obs', (2, 3)), (15, 'RIGHT', 'pred', (0, 4), 'obs', (0, 3)), (16, 'RIGHT', 'pred', (0, 5), 'obs', (0, 4))]\ntie steps: []\noranges t16 model [(1, 3), (1, 6), (2, 6)] obs [(1,3),(1,6),(2,6)]\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_6badf652117a47fa89c9ed86",
+            "first_snapshot_line": 7,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\ndef chase(c,p):\n    dd=D[p]; cand=[v for v in ADJ[c] if dd[v]<dd[c]]\n    if not cand: return c\n    b=min(dd[v] for v in cand); return sorted([v for v in cand if dd[v]==b],key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nREDS=[(5,3),(6,3)]; REDFR={(5,3):(5,4),(6,3):(5,3)}; GOAL=(5,4)\ndef search(p,c,t,maxt=40):\n    start=(p,c,t,3); seen={start}; par={}; q=collections.deque([start]); found=None\n    while q and not found:\n        st=q.popleft(); pp,cc,tt,mask=st\n        if tt>=maxt: continue\n        c1=chase(cc,pp)\n        if c1==pp: continue\n        for mv,d in Dm.items():\n            n=(pp[0]+d[0],pp[1]+d[1])\n            if n not in ADJ[pp] or n==c1: continue\n            if any(n==oph(k,tt+1) for k in range(3)): continue\n            ok=True; m2=mask\n            for idx,rr in enumerate(REDS):\n                bit=1<<idx\n                if not (mask & bit): continue\n                if n==REDFR[rr]: ok=False; break\n            if not ok: continue\n            for idx,rr in enumerate(REDS):\n                bit=1<<idx\n                if (mask & bit) and n==rr:\n                    if pp==REDFR[rr]: ok=False\n                    else: m2 &= ~bit\n            if not ok: continue\n            ns=(n,c1,tt+1,m2)\n            if n==GOAL:\n                found=ns; par[ns]=(st,mv); break\n            if ns not in seen: seen.add(ns); par[ns]=(st,mv); q.append(ns)\n    if not found: return None\n    seq=[]; s=found\n    while s!=start: s,mv=par[s]; seq.append(mv)\n    seq.reverse(); return (seq,'mask',found[3],'t',found[2],'states',len(seen))\nres=search((0,6),(0,4),16)\nprint('from current:',res)\nprint('from start:',search((4,4),(2,3),0))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "abf422c966bab958b163da457816657e9b8bd1c1d36c375dff61b30d88017e93",
+              "content_chars": 693,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chase was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.\nYour function search was not retained: unavailable dependencies: ADJ, Dm, GOAL, REDFR, REDS. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "from current: None\nfrom start: None\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_32d8e3449bfd4a498cc372b5",
+            "first_snapshot_line": 9,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\nDIR={(-1,0):'UP',(1,0):'DOWN',(0,-1):'LEFT',(0,1):'RIGHT'}\ndef chase_mom(c,p,prev):\n    dd=D[p]; cand=[v for v in ADJ[c] if dd[v]<dd[c]]\n    if not cand: return c\n    b=min(dd[v] for v in cand); tied=[v for v in cand if dd[v]==b]\n    if len(tied)>1 and prev:\n        mom=[v for v in tied if (v[0]-c[0],v[1]-c[1])==prev]\n        if mom: return mom[0]\n    return sorted(tied,key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nREDS=[(5,3),(6,3)]; REDFR={(5,3):(5,4),(6,3):(5,3)}; GOAL=(5,4)\ndef search(order,maxt=55):\n    start=((4,4),(2,3),0,3,None); seen={start}; par={}; q=collections.deque([start]); found=None\n    while q and not found:\n        st=q.popleft(); pp,cc,tt,mask,prev=st\n        if tt>=maxt: continue\n        if order=='B':\n            c1=chase_mom(cc,pp,prev)\n            if c1==pp: continue\n            if any(oph(k,tt+1)==pp for k in range(3)): continue\n        for mv,d in Dm.items():\n            n=(pp[0]+d[0],pp[1]+d[1])\n            if n not in ADJ[pp]: continue\n            if order=='A':\n                c1=chase_mom(cc,n,prev)\n                if c1==n or c1==pp and False: continue\n                if n==cc: continue\n            if n==c1: continue\n            if any(n==oph(k,tt+1) for k in range(3)): continue\n            if order=='A' and any(n==oph(k,tt) for k in range(3)): continue\n            ok=True; m2=mask\n            for idx,rr in enumerate(REDS):\n                if not (mask>>idx)&1: continue\n                if n==REDFR[rr]: ok=False; break\n            if not ok: continue\n            for idx,rr in enumerate(REDS):\n                if (mask>>idx)&1 and n==rr:\n                    if pp==REDFR[rr]: ok=False\n                    else: m2 &= ~(1<<idx)\n            if not ok: continue\n            if order=='A' and n==c1: continue\n            ns=(n,c1,tt+1,m2,d)\n            if n==GOAL: found=ns; par[ns]=(st,mv); break\n            if ns not in seen: seen.add(ns); par[ns]=(st,mv); q.append(ns)\n    if not found: return ('none',len(seen))\n    seq=[]; s=found\n    while s!=start: s,mv=par[s]; seq.append(mv)\n    seq.reverse(); return (seq,'mask',found[3],'t',found[2])\nprint('A:',search('A'))\nprint('B:',search('B'))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 9,
+              "content_sha256": "5cd463b8a2eec6f37d222e27358f44a834bfbf23767c2e00e903a117bd9455a3",
+              "content_chars": 692,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chase_mom was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.\nYour function search was not retained: unavailable dependencies: ADJ, Dm, GOAL, REDFR, REDS. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "A: ('none', 91)\nB: ('none', 2)\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_54ea13107aa246b496b60ef4",
+            "first_snapshot_line": 11,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame); R=len(rm);C=len(rm[0])\nADJ=collections.defaultdict(set)\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\ndef bfsd(src):\n    d={src:0}; q=collections.deque([src])\n    while q:\n        u=q.popleft()\n        for v in ADJ[u]:\n            if v not in d: d[v]=d[u]+1; q.append(v)\n    return d\nD={r_:bfsd(r_) for r_ in ADJ}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\ndef chase(c,p,prev):\n    dd=D[p]; cand=[v for v in ADJ[c] if dd[v]<dd[c]]\n    if not cand: return c\n    b=min(dd[v] for v in cand); tied=[v for v in cand if dd[v]==b]\n    if len(tied)>1 and prev:\n        mom=[v for v in tied if (v[0]-c[0],v[1]-c[1])==prev]\n        if mom: return mom[0]\n    return sorted(tied,key=lambda v:(-v[0],v[1]))[0]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nFRONTS={(5,4),(5,3)}   # red1 front (5,4), red2 front (5,3)\nREDROOMS={(5,3),(6,3)}\nGOAL=(5,4)\ndef search(order,p0,c0,t0,maxt=55):\n    start=(p0,c0,t0,None); seen={start}; par={}; q=collections.deque([start]); found=None\n    while q and not found:\n        st=q.popleft(); pp,cc,tt,prev=st\n        if tt>=maxt: continue\n        if order=='B':\n            c1=chase(cc,pp,prev)\n            if c1==pp: continue\n            if any(oph(k,tt+1)==pp for k in range(3)): continue\n        for mv,d in Dm.items():\n            n=(pp[0]+d[0],pp[1]+d[1])\n            if n not in ADJ[pp]: continue\n            if n in REDROOMS: continue\n            if n in FRONTS and n!=GOAL: continue\n            if order=='A':\n                if n==cc: continue\n                c1=chase(cc,n,prev)\n            else: c1=chase(cc,pp,prev)\n            if n==c1: continue\n            if any(n==oph(k,tt+1) for k in range(3)): continue\n            if order=='A' and any(n==oph(k,tt) for k in range(3)): continue\n            ns=(n,c1,tt+1,d)\n            if n==GOAL: found=ns; par[ns]=(st,mv); break\n            if ns not in seen: seen.add(ns); par[ns]=(st,mv); q.append(ns)\n    if not found: return ('none',len(seen))\n    seq=[]; s=found\n    while s!=start: s,mv=par[s]; seq.append(mv)\n    seq.reverse(); return (seq,'t',found[2])\nprint('A from start:',search('A',(4,4),(2,3),0))\nprint('B from start:',search('B',(4,4),(2,3),0))\nprint('A from now:',search('A',(0,6),(0,4),16))\nprint('B from now:',search('B',(0,6),(0,4),16))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 11,
+              "content_sha256": "f3652f9639ae0f259efc4953d3fcf6b764157c6fa4d8391717abc87ac1c1c991",
+              "content_chars": 765,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function bfsd was not retained: unavailable dependencies: ADJ. Pass snippet-specific data as arguments or redefine it if needed.\nYour function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function chase was not retained: unavailable dependencies: ADJ, D. Pass snippet-specific data as arguments or redefine it if needed.\nYour function search was not retained: unavailable dependencies: ADJ, Dm, FRONTS, GOAL, REDROOMS. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "A from start: ('none', 91)\nB from start: ('none', 2)\nA from now: ('none', 2)\nB from now: ('none', 3)\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_50465985c76c40978fa91e4c",
+            "first_snapshot_line": 13,
+            "analysis_step": 46,
+            "snapshot_action": 277,
+            "code": "import collections\nrm,H,V,_=rgrid(current_frame)\nADJ=collections.defaultdict(set)\nR=len(rm);C=len(rm[0])\nfor i in range(R):\n    for j in range(C):\n        if rm[i][j]=='B': continue\n        if (i,j) in H and j+1<C and rm[i][j+1]!='B': ADJ[(i,j)].add((i,j+1)); ADJ[(i,j+1)].add((i,j))\n        if (i,j) in V and i+1<R and rm[i+1][j]!='B': ADJ[(i,j)].add((i+1,j)); ADJ[(i+1,j)].add((i,j))\nADJ={k:set(v) for k,v in ADJ.items()}\nSEG=[[(1,0),(1,1),(1,2),(1,3),(1,4)],[(1,5),(1,6),(1,7)],[(0,6),(1,6),(2,6),(3,6),(4,6)]]\nPH=[(3,-1),(1,-1),(2,1)]\ndef oph(k,t):\n    seg=SEG[k]; i0,d0=PH[k]; per=2*(len(seg)-1); s=(i0+d0*t)%per\n    return seg[s if s<len(seg) else per-s]\nDm={'UP':(-1,0),'DOWN':(1,0),'LEFT':(0,-1),'RIGHT':(0,1)}\nREDS=[(5,3),(6,3)]; REDFR={(5,3):(5,4),(6,3):(5,3)}; GOAL=(5,4)\ndef search(p2,p1,p0,t0,maxt=40,allowKill=True,needRedKill=True):\n    start=(p2,p1,p0,t0,3,0); seen={start}; par={}; q=collections.deque([start]); found=None\n    while q and not found:\n        st=q.popleft(); a,b,pp,t,mask,om=st\n        if t>=maxt: continue\n        for mv,d in Dm.items():\n            n=(pp[0]+d[0],pp[1]+d[1])\n            if n not in ADJ[pp]: continue\n            if n==b or n==a: continue\n            ok=True; m2=mask; o2=om\n            for idx,rr in enumerate(REDS):\n                if not (mask>>idx)&1: continue\n                if n==REDFR[rr]: ok=False; break\n            if not ok: continue\n            for idx,rr in enumerate(REDS):\n                if (mask>>idx)&1 and n==rr:\n                    if pp==REDFR[rr]: ok=False\n                    else: m2 &= ~(1<<idx)\n            if not ok: continue\n            for k in range(3):\n                if (om>>k)&1: continue\n                if n==oph(k,t):\n                    if not allowKill: ok=False; break\n                    if pp==oph(k,t+1): ok=False; break\n                    o2 |= (1<<k); continue\n                if oph(k,t+1)==n: ok=False; break\n            if not ok: continue\n            if n==GOAL and (not needRedKill or m2==0):\n                found=(b,pp,n,t+1,m2,o2); par[found]=(st,mv); break\n            if n==GOAL: continue\n            ns=(b,pp,n,t+1,m2,o2)\n            if ns not in seen: seen.add(ns); par[ns]=(st,mv); q.append(ns)\n    if not found: return ('none',len(seen))\n    seq=[]; s=found\n    while s!=start: s,mv=par[s]; seq.append(mv)\n    seq.reverse(); return (seq,'t',found[3],'mask',bin(found[4]),'om',bin(found[5]))\nprint('kill+needRed:',search((0,4),(0,5),(0,6),16))\nprint('kill, no needRed:',search((0,4),(0,5),(0,6),16,needRedKill=False))\nprint('nokill,no needRed:',search((0,4),(0,5),(0,6),16,allowKill=False,needRedKill=False))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 13,
+              "content_sha256": "898df94da133329f0b7e4dc40b774f5991e486bda84958b2c1091598c30ac2a3",
+              "content_chars": 737,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Your function oph was not retained: unavailable dependencies: PH, SEG. Pass snippet-specific data as arguments or redefine it if needed.\nYour function search was not retained: unavailable dependencies: ADJ, Dm, GOAL, REDFR, REDS. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "kill+needRed: (['DOWN', 'DOWN', 'RIGHT', 'DOWN', 'LEFT', 'DOWN', 'LEFT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT'], 't', 29, 'mask', '0b0', 'om', '0b10')\nkill, no needRed: (['DOWN', 'DOWN', 'RIGHT', 'DOWN', 'LEFT', 'DOWN', 'LEFT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT'], 't', 29, 'mask', '0b0', 'om', '0b10')\nnokill,no needRed: ('none', 2)\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 628136,
+        "completion_tokens": 24885,
+        "total_tokens": 653021
+      }
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "arm": "B",
+      "state": "gave_up",
+      "error": null,
+      "cut": 40,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "final_score": 14.285714285714285,
+      "actions_per_level": [
+        13,
+        27,
+        0,
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 251.00412345200039,
+      "budget_seconds": 250,
+      "continuation_action_count": 0,
+      "continuation_actions": [],
+      "continuation_history": [],
+      "solver_note": "tokens=22564",
+      "grid_sha256": "65cb1a68c3dac59c60c6956550dd5e0427aa016f1afb399e77e3c96076124292",
+      "messages_sha256": "43fab0bd737db2fd1e0fac9af8b289d20359a3b8e756bb68e506dfdd82e163ff",
+      "kept_functions_sha256": "f1f0adb042ae4830c5b12436c22dda6fc524acf87bc798101c7e6d689d6490ee",
+      "restored_functions": [
+        "astarO",
+        "astarO2",
+        "brief",
+        "center",
+        "centers",
+        "centers2",
+        "dc",
+        "dc2",
+        "dpos2",
+        "env",
+        "find",
+        "get_S",
+        "get_dashes",
+        "live3",
+        "minchain",
+        "objs",
+        "osearch",
+        "run2",
+        "run3",
+        "run4",
+        "solve2",
+        "solve3",
+        "state",
+        "wpos",
+        "xc",
+        "xc2"
+      ],
+      "source": "runs/031-segmentation-forks/segmentation_forks_B/segmentation-forks.json",
+      "requests": {
+        "path": "runs/031-segmentation-forks/segmentation_forks_B/r11l-495a7899_B_requests.jsonl",
+        "exists": true,
+        "sha256": "739a119b4916813c709aa43353296e014ec7c5155ecea92167a89c8987b339f1",
+        "bytes": 4837883,
+        "records": {
+          "request": 10,
+          "response": 10
+        },
+        "recorded_usage": {
+          "prompt_tokens": 714283,
+          "completion_tokens": 22564,
+          "total_tokens": 736847
+        },
+        "responses_with_usage": 10,
+        "malformed_lines": [],
+        "historical_call_ids_excluded": 21,
+        "new_python_call_count": 9,
+        "call_id_conflicts": [],
+        "new_python_calls": [
+          {
+            "call_id": "call_eb4a355f287e49138e9cbc08",
+            "first_snapshot_line": 3,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\n# border bar check\nfor r in (0,1,62,63):\n    row=a[r]\n    from collections import Counter\n    print('row',r,Counter(row).most_common(4))\nfor c in (0,1,62,63):\n    from collections import Counter\n    print('col',c,Counter(a[r][c] for r in range(64)).most_common(4))\n# diamond centers\ndia=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        ch=a[r][c]\n        if ch in ('N','p','O','M'):\n            ar=[a[r+dr][c+dk] for dr,dk in ((-2,0),(-1,-1),(-1,0),(-1,1),(0,-2),(0,-1),(0,1),(0,2),(1,-1),(1,0),(1,1),(2,0))]\n            ws=sum(1 for x in ar if x in ('W','G'))\n            if ws>=4: dia.append(((r,c),ch,'W' if any(x=='W' for x in ar) else 'G',''.join(ar)))\nfor d in dia: print(d)\nM=[(i,j) for i in range(64) for j in range(64) if a[i][j]=='M']\nprint('M',M)\nprint('N pixels', sum(row.count('N') for row in a), 'p pixels', sum(row.count('p') for row in a))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 3,
+              "content_sha256": "50bec5774f614e1025f3fe2407158d914a4f21ee911e2451ad2279e8d740dcf7",
+              "content_chars": 636,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "row 0 [('g', 61), ('S', 2), ('W', 1)]\nrow 1 [('g', 56), ('B', 5), ('S', 2), ('W', 1)]\nrow 62 [('B', 41), ('g', 22), ('W', 1)]\nrow 63 [('B', 41), ('g', 22), ('W', 1)]\ncol 0 [('W', 64)]\ncol 1 [('g', 34), ('S', 30)]\ncol 62 [('B', 27), ('S', 27), ('g', 10)]\ncol 63 [('S', 28), ('B', 26), ('g', 10)]\n((9, 34), 'N', 'G', 'GGGGGGGGGGGG')\n((16, 14), 'N', 'W', 'WWWWWWWWWWWW')\n((16, 39), 'N', 'G', 'GGGGGGGGGGGG')\n((21, 23), 'N', 'G', 'GGGGGGGGGGGG')\n((34, 37), 'p', 'G', 'GGGGGGGGGGGG')\n((40, 52), 'p', 'G', 'GGGGGGGGGGGG')\nM [(15, 27), (37, 44)]\nN pixels 36 p pixels 34\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_ab546945895a4cf1b969638b",
+            "first_snapshot_line": 5,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nprint('rows 4-26 cols 10-45 (N area):')\nfor r in range(4,26): print(r, a[r][10:46])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 5,
+              "content_sha256": "8ca9ac6a06a31216eb7deda2ab8f9220050c7ddc7e78a9f5f956aa2ab471deec",
+              "content_chars": 985,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "rows 4-26 cols 10-45 (N area):\n4 SgggggggggggBBBBBBBBBBBBBgggggggBBBB\n5 SgggggggggggBBBBBBBBBBBBBBBBBBBBBBBB\n6 SSSBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n7 SSSBBBBBBBBBBBBBBBBBBBBBGBBBBBBBBBBB\n8 SSSBBBBBBBBBBBBBBBBBBBBGGGBBBBBBBBBB\n9 SSSBBBBBBBBBBBBBBBBBBBGGNGGBBBBBBBBB\n10 SBBBBBBBBBBBBBBBBBBBBBBGGGBBBBBBBBBB\n11 BBBBBBBBBBBBBBBBBBBBBBwBGBBBBBBBBBBB\n12 BBBBBBBBBBBBBBBBBBBBwwBBBBBBBBBBBBBB\n13 BBBBBBBBBBBBBBBBNNNwBBBBBBBBBBBBBBBB\n14 BBBBWBBBBBBBBBBNNNNNBBBBBBBBBGBBBBBB\n15 BBBWWWBBBBBwwwwNNMNNwwwBBBBBGGGBBBBB\n16 BBWWNWWwwwwBBBBNNNNNBBBwwwwGGNGGBBBB\n17 BBBWWWBBBBBBBBBBNNNBBBBBBBBBGGGBBBBB\n18 BBBBWBBBBBBBBBBwBBBBBBBBBBBBBGBBBBBB\n19 BBBBBBBBBBBBBGwBBBBBBBBBBBBBBBBBBBBB\n20 BBBBBBBBBBBBGGGBBBBBBBBBBBBBBBBBBBBB\n21 BBBBBBBBBBBGGNGGBBBBBBBBBBBBBBBBBBBB\n22 BBBBBBBBBBBBGGGBBBBBBBBBBBBBBBBBBBBB\n23 BBBBBBBBBBBBBGBBBBBBBBBBBBBBBBBBBBBB\n24 BBBBBBBBBBBBBBBBBBSBBBBBBBBBBBBBBBBB\n25 BBBBBBBBBBBBBBBBSSSSBBBBBBBBBBBBBBBB\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_77a75f55e4804c4492b3c726",
+            "first_snapshot_line": 7,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "a=current_frame.ascii.split('\\n')\nprint('rows 27-45 cols 30-56:')\nfor r in range(27,45): print(r, a[r][30:57])\nprint()\nprint('rings: N ring area rows 44-56 cols 46-60; p ring rows 48-60 cols 24-38')\nfor r in range(44,58): print(r, a[r][44:60])\nprint()\nfor r in range(48,60): print(r, a[r][24:40])\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 7,
+              "content_sha256": "926d9e0d9fd51dfbcd397c05e90495a65e7fd014b8de65db8b7797bd067bbc10",
+              "content_chars": 1279,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "rows 27-45 cols 30-56:\n27 SSSSSSSSSSSSSSSSSSSSSSSSSSS\n28 SBBBBBBBBBBSSSSSSSSSSSSSSSS\n29 BBBBBBBBBBBBBBBSSSSSSSSSSSS\n30 BBBBBBBBBBBBBBBBBSSSSSSSSSS\n31 BBBBBBBBBBBBBBBBBBBSSSSSSSS\n32 BBBBBBBGBBBBBBBBBBBBSSSSSSS\n33 BBBBBBGGGBBBBBBBBBBBBBSSSSS\n34 BBBBBGGpGGBBBBBBBBBBBBBSSSS\n35 BBBBBBGGGwwBBpppBBBBBBBBSSS\n36 BBBBBBBGBBBwpppppBBBBBBBBBS\n37 BBBBBBBBBBBBppMppBBBBBBBBBB\n38 BBBBBBBBBBBBpppppwBBBBGBBBB\n39 BBBBBBBBBSBBBpppBBwwwGGGBBB\n40 BBBBBBSSSSSBBBBBBBBBGGpGGBB\n41 BSSSSSSSSSSSBBBBBBBBBGGGBBB\n42 SSSSSSSSSSSSSSBBBBBBBBGBBBB\n43 SSSSSSSSSSSSSSSBBBBBBBBBBBB\n44 SSSSSSSSSSSSSSSSSSSBBBBBBBB\n\nrings: N ring area rows 44-56 cols 46-60; p ring rows 48-60 cols 24-38\n44 SSSSSBBBBBBBBBBB\n45 SSSSBBBBBBBBBBBB\n46 SSSSBBBBBBBBBBBB\n47 SSSBBBBBBBBBBBBB\n48 SSSBBBBBBBBBBBBB\n49 BBBBBBBBBBBBBBBB\n50 BBBBBBBBBBNBNBBB\n51 BBBBBBBBBNBBBNBB\n52 BBBBBBBBNBBBBBNB\n53 BBBBBBBBBBBBBBBB\n54 BBBBBBBBNBBBBBNB\n55 BBBBBBBBBNBBBNBB\n56 BBBBBBBBBBNBNBBB\n57 BBBBBBBBBBBBBBBB\n\n48 BBBBBBBBBBBBBBBS\n49 BBBBBBBBBBBBBBBB\n50 BBBBBBBBBBBBBBBB\n51 BBBBBBBBBBBBBBBB\n52 BBBBBBBBBBBBBBBB\n53 BBBBBBBBBBBBBBBB\n54 BBBBBBBBBpBpBBBB\n55 BBBBBBBBpBBBpBBB\n56 BBBBBBBpBBBBBpBB\n57 BBBBBBBBBBBBBBBB\n58 BBBBBBBpBBBBBpBB\n59 BBBBBBBBpBBBpBBB\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_c459e2b786ff40d7948786d1",
+            "first_snapshot_line": 9,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "import inspect\nprint(inspect.getsource(env))\nS=env(current_frame)\na=current_frame.ascii.split('\\n')\nSc=set((r,c) for r in range(64) for c in range(64) if a[r][c]=='S')\nprint('env size',len(S),'S size',len(Sc),'equal',S==Sc)\nfrom collections import Counter\nprint(Counter(a[r][c] for r in range(64) for c in range(64)).most_common())\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 9,
+              "content_sha256": "8f0d0d9d9ebebf7c99c0790cda7cf1a4015ff213e732e61ba8f4c8eb6bb6f907",
+              "content_chars": 180,
+              "payload": {
+                "tool": "python",
+                "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nImportError: Module 'inspect' is not allowed in the sandbox."
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": false,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_399bdd9849d8475fbe27de18",
+            "first_snapshot_line": 11,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "S=env(current_frame)\na=current_frame.ascii.split('\\n')\nSc=set((r,c) for r in range(64) for c in range(64) if a[r][c]=='S')\nGc=set((r,c) for r in range(64) for c in range(64) if a[r][c] in 'gG')\nprint('env',len(S),'S',len(Sc),'equal',S==Sc,'S subset of env',Sc<=S)\nprint('env - S sample', sorted(S-Sc)[:10], len(S-Sc))\n# ring dash extraction\ndef dashes(col):\n    return sorted((r,c) for r in range(64) for c in range(64) if a[r][c]==col and not any(a[r2][c2]==col for r2,c2 in ((r-1,c),(r+1,c),(r,c-1),(r,c+1))))\nNd=dashes('N'); Pd=dashes('p')\nprint('N dashes',Nd)\nprint('P dashes',Pd)\ndef center(d):\n    rs=[p[0] for p in d]; cs=[p[1] for p in d]\n    return (sum(rs)//len(rs), sum(cs)//len(cs))\nprint('N ring center',center(Nd),'p ring center',center(Pd))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 11,
+              "content_sha256": "dc522ead128aa1ec4487feba72d3be885d13c7e3160def1b8f5df900c642bd64",
+              "content_chars": 725,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function center(d) for later Python calls in this game.\nYour function dashes was not retained: unavailable dependencies: a. Pass snippet-specific data as arguments or redefine it if needed.",
+                "returncode": 0,
+                "stdout": "env 868 S 868 equal True S subset of env True\nenv - S sample [] 0\nN dashes [(9, 34), (16, 14), (16, 39), (21, 23), (50, 54), (50, 56), (51, 53), (51, 57), (52, 52), (52, 58), (54, 52), (54, 58), (55, 53), (55, 57), (56, 54), (56, 56)]\nP dashes [(34, 37), (40, 52), (54, 33), (54, 35), (55, 32), (55, 36), (56, 31), (56, 37), (58, 31), (58, 37), (59, 32), (59, 36), (60, 33), (60, 35)]\nN ring center (43, 48) p ring center (54, 35)\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_7dc58dfbbd924389838f649c",
+            "first_snapshot_line": 13,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "print('hist len',len(history),'trans',len(transitions))\na=current_frame.ascii.split('\\n')\nprint('rows0-3 cols0-12:'); \nfor r in range(0,4): print(r,a[r][0:13])\nprint('rows60-63 cols0-13:')\nfor r in range(60,64): print(r,a[r][0:14])\nprint('rows0-12 col0-3:')\nfor r in range(0,13): print(r,a[r][0:4])\n# level2 initial frame border, if history goes back\nif len(history)>3:\n    b=history[0].frame.ascii.split('\\n')\n    print('L2 init row0 W count', b[0].count('W'), 'col0 W count', sum(1 for r in range(64) if b[r][0]=='W'))\nprint('now row0 W', a[0].count('W'), 'col0 W', sum(1 for r in range(64) if a[r][0]=='W'), 'row63 W', a[63].count('W'))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 13,
+              "content_sha256": "82ffc2d8b540eb66a45acaa18ad99fcc22e94f3d001d80848d57327f840f3587",
+              "content_chars": 462,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "hist len 41 trans 40\nrows0-3 cols0-12:\n0 WggggggggSSgg\n1 WggggggggSSgg\n2 WggggggggSSgg\n3 WggggggggSSgg\nrows60-63 cols0-13:\n60 Wggggggggggggg\n61 Wggggggggggggg\n62 Wggggggggggggg\n63 Wggggggggggggg\nrows0-12 col0-3:\n0 Wggg\n1 Wggg\n2 Wggg\n3 Wggg\n4 Wggg\n5 Wggg\n6 Wggg\n7 Wggg\n8 Wggg\n9 Wggg\n10 Wggg\n11 WggS\n12 WggS\nL2 init row0 W count 1 col0 W count 64\nnow row0 W 1 col0 W 64 row63 W 1\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_74c5085dae4a467f91baafc8",
+            "first_snapshot_line": 15,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "def solve_chain(f, pos, other, p0, dashes, rings, maxd=30, cap=400000, wdiv=2):\n    import heapq\n    S=env(f)\n    dash=set(dashes)\n    n=len(pos)\n    def disc(p): return (sum(q[0] for q in p)//n, sum(q[1] for q in p)//n)\n    def valid(p,x):\n        for q in p:\n            if not(3<=q[0]<=60 and 3<=q[1]<=60): return False\n            if dc2(q)&S: return False\n        return not (xc2(x)&S)\n    def nbrs(st):\n        p,pl=st; x=disc(p); out=[]\n        for i in range(n):\n            if i!=pl: out.append((p,i))\n        allb=list(p)+list(other)\n        cells=[(x[0]+dr,x[1]+dk) for dr in (-2,0,2) for dk in (-2,0,2)]\n        for cell in cells:\n            if any(abs(cell[0]-q[0])<=2 and abs(cell[1]-q[1])<=2 for q in allb): continue\n            np_=list(p); np_[pl]=cell; np_=tuple(np_)\n            if valid(np_,disc(np_)): out.append((np_,pl))\n        for rc in rings:\n            if any(abs(rc[0]-q[0])<=2 and abs(rc[1]-q[1])<=2 for q in allb): continue\n            np_=list(p); np_[pl]=rc; np_=tuple(np_)\n            if valid(np_,disc(np_)): out.append((np_,pl))\n        return out\n    def h(st):\n        x=disc(st[0])\n        return min(max(abs(x[0]-d[0]),abs(x[1]-d[1])) for d in dash)//wdiv\n    st=(pos,p0)\n    if xc2(disc(pos))&dash: return []\n    pq=[(h(st),0,st)]; best={st:0}; par={}; exp=0\n    while pq:\n        _,g,s=heapq.heappop(pq)\n        if best.get(s,99)<g: continue\n        exp+=1\n        if exp>cap: return None\n        for ns in nbrs(s):\n            if best.get(ns,999)<=g+1: continue\n            best[ns]=g+1; par[ns]=s\n            if xc2(disc(ns[0]))&dash:\n                path=[]; cur=ns\n                while cur in par: path.append(cur); cur=par[cur]\n                return path\n            heapq.heappush(pq,(g+1+h(ns),g+1,ns))\n    return None\nNP=((34,37),(40,52))\nPD=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\nRINGS=((53,55),(57,34))\npp=solve_chain(current_frame,NP,((9,34),(16,14),(16,39),(21,23)),0,PD,RINGS,30,200000,2)\nprint('p chain len', None if pp is None else len(pp))\nif pp:\n    for p,pl in reversed(pp): print(p,pl,(sum(q[0] for q in p)//2,sum(q[1] for q in p)//2))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 15,
+              "content_sha256": "3d38e4ea75382422c3504ad1f409108258816f6641d40d36e3d57a851684bcc5",
+              "content_chars": 399,
+              "payload": {
+                "tool": "python",
+                "function_retention": "Retained your function solve_chain(f, pos, other, p0, dashes, rings, maxd=30, cap=400000, wdiv=2) for later Python calls in this game.",
+                "returncode": 0,
+                "stdout": "p chain len 5\n((53, 55), (40, 52)) 0 (46, 53)\n((53, 55), (40, 52)) 1 (46, 53)\n((53, 55), (57, 34)) 1 (55, 44)\n((53, 55), (57, 34)) 0 (55, 44)\n((53, 42), (57, 34)) 0 (55, 38)\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_2dae321f02934ca49a80e3e4",
+            "first_snapshot_line": 17,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "NPOS=((9,34),(16,14),(16,39),(21,23))\nND=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nRINGS=((53,55),(57,34))\nnp_=solve_chain(current_frame,NPOS,((34,37),(40,52)),1,ND,RINGS,30,400000,2)\nprint('N chain len', None if np_ is None else len(np_))\nif np_:\n    for p,pl in reversed(np_): print(p,pl,(sum(q[0] for q in p)//4,sum(q[1] for q in p)//4))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 17,
+              "content_sha256": "4f4e222b4c86ca7a45fd5f0e0f9382969513fb358658fdc0e58221c4b08a15f3",
+              "content_chars": 75,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "N chain len None\n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          },
+          {
+            "call_id": "call_f4b2f0a08c524ea7acfd588c",
+            "first_snapshot_line": 19,
+            "analysis_step": 25,
+            "snapshot_action": 41,
+            "code": "S=env(current_frame)\nfor r in range(18,63):\n    cs=[c for c in range(64) if (r,c) in S]\n    rng=[]\n    for c in cs:\n        if rng and rng[-1][1]+1==c: rng[-1][1]=c\n        else: rng.append([c,c])\n    print(r, ' '.join(f'{a}-{b}' for a,b in rng))\n",
+            "static_field_candidates": {
+              "parse_error": null,
+              "references": [],
+              "note": "Static syntax only; a successful surrounding tool result does not prove this expression ran"
+            },
+            "segmentation_text_present": false,
+            "tool_result_present": true,
+            "tool_result": {
+              "first_snapshot_line": 19,
+              "content_sha256": "dd82f49b38ad412920560bb7caa83ffd6ae27b10b38b2e164ae013b30099bbc1",
+              "content_chars": 646,
+              "payload": {
+                "tool": "python",
+                "returncode": 0,
+                "stdout": "18 1-7 61-63\n19 1-6 61-63\n20 1-5 60-63\n21 1-5 59-63\n22 1-5 58-63\n23 1-4 48-63\n24 1-4 28-28 48-63\n25 1-4 26-29 48-63\n26 1-4 24-63\n27 1-4 23-63\n28 1-4 22-30 41-63\n29 1-4 22-28 45-63\n30 1-4 23-26 47-63\n31 1-4 23-25 49-63\n32 1-4 50-63\n33 1-4 52-63\n34 1-5 53-63\n35 1-5 54-63\n36 1-5 56-63\n37 1-6 57-63\n38 1-7 58-63\n39 1-8 39-39 60-63\n40 1-8 36-40 60-63\n41 1-9 31-41 60-63\n42 1-10 28-43 60-63\n43 1-44 60-63\n44 1-48 62-63\n45 1-47 63-63\n46 1-47\n47 1-22 35-46\n48 5-22 39-46\n49 5-22 42-42\n50 5-6 16-22\n51 16-22\n52 \n53 \n54 \n55 \n56 \n57 \n58 \n59 \n60 \n61 \n62 \n"
+              },
+              "text_if_unparsed": null
+            },
+            "successful_tool_result": true,
+            "adoption_status": "unreviewed; no adoption or pixel-correction inference"
+          }
+        ],
+        "limitations": [
+          "New means call ID absent from the frozen input messages, not merely first seen in a snapshot.",
+          "Deduplicated by call ID; generated last calls/results absent from subsequent snapshots require transcript review.",
+          "Usage sums returned response records only; timed-out requests may have unreported cost."
+        ]
+      },
+      "field_candidate_call_ids": [],
+      "artifact_recorded_usage": {
+        "prompt_tokens": 714283,
+        "completion_tokens": 22564,
+        "total_tokens": 736847
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "complete_pair": true,
+      "input_equality": {
+        "grid_sha256": true,
+        "messages_sha256": true,
+        "kept_functions_sha256": true,
+        "initial_levels_completed": true,
+        "budget_seconds": true
+      },
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 2,
+      "actions_B": 2,
+      "actions_id_and_data_equal": false,
+      "elapsed_A": 250.04688674200042,
+      "elapsed_B": 250.10403949299962,
+      "recorded_usage_A": {
+        "prompt_tokens": 353851,
+        "completion_tokens": 22014,
+        "total_tokens": 375865
+      },
+      "recorded_usage_B": {
+        "prompt_tokens": 194638,
+        "completion_tokens": 16390,
+        "total_tokens": 211028
+      },
+      "new_python_calls_A": 5,
+      "new_python_calls_B": 3
+    },
+    {
+      "game_id": "tu93-0768757b",
+      "complete_pair": true,
+      "input_equality": {
+        "grid_sha256": true,
+        "messages_sha256": true,
+        "kept_functions_sha256": true,
+        "initial_levels_completed": true,
+        "budget_seconds": true
+      },
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 0,
+      "actions_B": 0,
+      "actions_id_and_data_equal": true,
+      "elapsed_A": 250.17275864299972,
+      "elapsed_B": 250.11720352200064,
+      "recorded_usage_A": {
+        "prompt_tokens": 756540,
+        "completion_tokens": 21873,
+        "total_tokens": 778413
+      },
+      "recorded_usage_B": {
+        "prompt_tokens": 628136,
+        "completion_tokens": 24885,
+        "total_tokens": 653021
+      },
+      "new_python_calls_A": 7,
+      "new_python_calls_B": 6
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "complete_pair": true,
+      "input_equality": {
+        "grid_sha256": true,
+        "messages_sha256": true,
+        "kept_functions_sha256": true,
+        "initial_levels_completed": true,
+        "budget_seconds": true
+      },
+      "added_levels_A": 0,
+      "added_levels_B": 0,
+      "delta_added_levels": 0,
+      "actions_A": 0,
+      "actions_B": 0,
+      "actions_id_and_data_equal": true,
+      "elapsed_A": 251.48629198800063,
+      "elapsed_B": 251.00412345200039,
+      "recorded_usage_A": {
+        "prompt_tokens": 406400,
+        "completion_tokens": 16826,
+        "total_tokens": 423226
+      },
+      "recorded_usage_B": {
+        "prompt_tokens": 714283,
+        "completion_tokens": 22564,
+        "total_tokens": 736847
+      },
+      "new_python_calls_A": 6,
+      "new_python_calls_B": 9
+    }
+  ],
+  "limitations": [
+    "One observation per arm and checkpoint; order and serving variation remain.",
+    "Static fields and successful tool return are not proof of executed exact-pixel consumption.",
+    "Correction of ft09 row46/col32 must be established from actual code and output, not this scanner."
+  ],
+  "aggregates": {
+    "A": {
+      "completed_session_exports": 3,
+      "all_three_exported": true,
+      "added_levels": 0,
+      "continuation_actions": 2,
+      "recorded_usage": {
+        "prompt_tokens": 1516791,
+        "completion_tokens": 60713,
+        "total_tokens": 1577504
+      },
+      "arm_elapsed_seconds": 284.890055156,
+      "elapsed_note": "Concurrent per-session elapsed values must not be summed into GPU wall time"
+    },
+    "B": {
+      "completed_session_exports": 3,
+      "all_three_exported": true,
+      "added_levels": 0,
+      "continuation_actions": 2,
+      "recorded_usage": {
+        "prompt_tokens": 1537057,
+        "completion_tokens": 63839,
+        "total_tokens": 1600896
+      },
+      "arm_elapsed_seconds": 284.11225422999996,
+      "elapsed_note": "Concurrent per-session elapsed values must not be summed into GPU wall time"
+    }
+  }
+}

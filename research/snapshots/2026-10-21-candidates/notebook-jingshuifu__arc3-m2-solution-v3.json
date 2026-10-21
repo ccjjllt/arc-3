@@ -1,0 +1,80 @@
+{
+  "ref": "jingshuifu/arc3-m2-solution-v3",
+  "version": 1,
+  "notebook_sha256": "b338d78e3b8ea27a9c092120d1d89fc95a38b8611df48d283577bca5cc517bfe",
+  "source_bytes": 569213,
+  "cell_count": 23,
+  "cells_with_outputs": 0,
+  "metadata_keys": [
+    "id",
+    "ref",
+    "title",
+    "author",
+    "slug",
+    "lastRunTime",
+    "language",
+    "kernelType",
+    "isPrivate",
+    "enableGpu",
+    "enableInternet",
+    "categoryIds",
+    "datasetDataSources",
+    "competitionDataSources",
+    "totalVotes",
+    "modelDataSources",
+    "enableTpu",
+    "currentVersionNumber",
+    "dockerImage",
+    "machineShape"
+  ],
+  "markdown": [
+    {
+      "cell": 0,
+      "text": "### About this notebook\n\n**Update (v3):** This version reruns the open-sourced submission (v1) with **4 passes on all 25 demo games**, using a runtime budget scaled to match the time available per game in the competition. I couldn’t complete this run before publishing, as I had run out of Kaggle compute. The notebook is otherwise identical.\n\n**For details on the solution, see my [write-up](https://www.kaggle.com/writeups/dfranzen/arc-agi-3-milestone-2).**\n\nThis notebook contains my solution for **ARC Prize 2026 — ARC-AGI-3, Milestone 2**, built on [Tufa Labs’ Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Full credit goes to Jeroen Cottaar and Tufa Labs for the original Duck solver, harness, and notebook.\n\nThe attached source bundle is an unchanged copy of Tufa Labs’ original bundle. **All my modifications to the harness are included in the patch at the beginning of this notebook**, which is applied automatically during setup. The patch is based on the original [Duck harness](https://github.com/Tufalabs/duck-harness) at commit `7652836`.\n\nI also switched to [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next), using [Intel’s AutoRound quantization](https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound) and a separate quantized [MTP draft checkpoint](https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE) provided by Albucino for speculative decoding. Inference runs through [Pennyroyal, John Pezzulli’s SGLang fork](https://github.com/jpezzulli/sglang-rtxpro6000), v2.5.3, based on commit [`d00d88e`](https://github.com/jpezzulli/sglang-rtxpro6000/commit/d00d88efc8d6281b12be4f4073126aec95038c55), with contributions and patches from [Mamy Ratsimbazafy](https://github.com/mratsim/sglang-qwen38fn-sm120-turbo) and [Gabriel Olympie](https://github.com/gabrielolympie/sglang-flashnext-sm120), plus my own additional patches.\n\nThird-party code and model weights remain subject to their respective licenses.\n\n**Running your own copy:** After copying this notebook, manually select the **RTX PRO 6000** GPU before running it. Keep all attached source, wheelhouse, and model inputs enabled.\n\nFor more information, see my [GitHub repository](https://github.com/da-fr/arc-agi-3-solution)."
+    },
+    {
+      "cell": 1,
+      "text": "## 0. Harness patch\n\nPatch to add our modifications to the original tufa harness."
+    },
+    {
+      "cell": 3,
+      "text": "## 1. Environment and submission mode\n\nDetect whether this is a real competition rerun (which minimises diagnostics), set the\nframework's environment flags, and put the CUDA libraries on the linker path."
+    },
+    {
+      "cell": 5,
+      "text": "## 2. Precaching\n\nPrecache wheelhouse for faster startup."
+    },
+    {
+      "cell": 7,
+      "text": "## 3. Install the ARC runtime\n\nInstall `arc-agi` from the offline competition wheelhouse (the Kaggle submission environment\nhas no internet)."
+    },
+    {
+      "cell": 9,
+      "text": "## 4. Import the bundled source\n\nPut the snapshotted repositories on the path (this process and any child processes)."
+    },
+    {
+      "cell": 11,
+      "text": "## 5. Start serving\n\nInstall and startup sglang to serve the model."
+    },
+    {
+      "cell": 13,
+      "text": "## 6. Load the benchmark\n\nUnpickle the deployment target and the benchmark, stamping the real submission state onto the\ntarget and pointing the benchmark's outputs at the Kaggle working directory."
+    },
+    {
+      "cell": 15,
+      "text": "## 7. Customization hook\n\nOptional: tweak `bm`, `bm.games`, or `bm.solver` here before the run starts — the safe place\nfor one-off experiments once the deployed bundle has loaded."
+    },
+    {
+      "cell": 17,
+      "text": "## 8. Run the system monitor\n\nPeriodically show free main memory, VRAM and disk space."
+    },
+    {
+      "cell": 19,
+      "text": "## 9. Run the benchmark\n\nIn a real competition rerun (`KAGGLE_IS_COMPETITION_RERUN`), wait for the Kaggle gateway and\nplay the **live competition Arcade**. Otherwise — an interactive \"Save & Run\" — play the\ncompetition's **bundled environment files offline**, with no gateway required, so the notebook\nruns end-to-end without a submission. Teardown commands run afterward even if the run raises."
+    },
+    {
+      "cell": 21,
+      "text": "## 10. Show the diagnostics\n\nA non-submission run writes `diagnostics.html` to `/kaggle/working`; it is rendered inline below\n(and downloadable from the working directory). You should be able to click around through the links."
+    }
+  ]
+}

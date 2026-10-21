@@ -1,0 +1,47 @@
+{
+  "state": "cpu_contract_and_original_pixels_only",
+  "patch": "segmentation-runs-v2",
+  "checks": {
+    "v1_archive_matches_executed_hash": true,
+    "actual_system_prompt_changes_only_field_contract": true,
+    "both_prompt_bindings_patched": true,
+    "existing_tool_field_guidance_unchanged": true,
+    "install_idempotent": true,
+    "host_original_fields_and_all_pixels_preserved": true,
+    "host_original_error_pixel_not_white": true,
+    "real_sandbox_exact_nodes_match_host": true,
+    "real_sandbox_original_error_pixel_not_white": true,
+    "snapshot_v2_and_system_contract_active": true,
+    "uninstall_restores_every_binding": true,
+    "uninstall_restores_actual_system_prompt": true,
+    "no_model_or_http_calls": true
+  },
+  "all_passed": true,
+  "helper_sha256": "b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450deee",
+  "v1_helper_sha256": "d571cf4687b060ce9819d531d905103a82f18726633df93a4d02bc73d89b3e6b",
+  "system_contract": "`pixels` (cell count), `runs` (exact occupied pixel row ranges as `[row, col_start, col_end_inclusive]` in absolute frame coordinates; both column endpoints are inclusive), `boundary`",
+  "system_prompt_char_delta": 150,
+  "snapshot": {
+    "patch": "segmentation-runs-v2",
+    "field": "nodes[*].runs",
+    "coordinates": "absolute row, inclusive column start/end",
+    "membership": "exact original 4-connected equal-color components",
+    "modified_original_fields": [],
+    "new_model_tools": false,
+    "new_model_requests": false,
+    "system_field_contract_updated": true,
+    "active": true
+  },
+  "sandbox": {
+    "nodes": 52,
+    "cells": 4096,
+    "wrong_pixel_white": false,
+    "exact_nodes_equal": true
+  },
+  "original_frame_nodes": 52,
+  "original_frame_pixels": 4096,
+  "model_calls": 0,
+  "gpu_seconds": 0,
+  "v1_effect_evidence_applies_to_v2": false,
+  "scope_note": "One existing ft09 frame, real host and isolated Python tool; no replay, game actions, HTTP or model requests. This verifies documentation binding and pixel preservation, not natural model adoption or score gain."
+}

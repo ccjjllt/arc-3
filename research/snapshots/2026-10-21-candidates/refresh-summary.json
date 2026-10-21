@@ -1,0 +1,168 @@
+{
+  "checked_at_utc": "2026-10-21T04:43:42.048834+00:00",
+  "read_only": true,
+  "decision": "No newly verified reproducible public notebook version bound to a real submission above 31.16 was established. Do not replace 009 based on this refresh.",
+  "scope": {
+    "score_descending_rows": 40,
+    "date_run_rows": 40,
+    "unique_notebook_sources_inspected": 10,
+    "large_weights_downloaded": false,
+    "source_executed": false,
+    "gpu_launched": false,
+    "submissions_created": false,
+    "query_scope": "Targeted existing leading public notebooks plus two newly appearing high-position search entries; bounded read-only refresh, not exhaustive all-public-notebook search."
+  },
+  "baseline": {
+    "ref": "dfranzen/arc-agi-3-milestone-2-solution",
+    "latest_version": 3,
+    "all_cell_sources_equal_local_baseline": true,
+    "newer_public_version_found": false
+  },
+  "unchanged_since_2026_10_20": [
+    {
+      "ref": "heliosli/try-merging-it-you-might-get-lucky-and-win-gold",
+      "version": 6,
+      "raw_source_sha256_equal": true
+    },
+    {
+      "ref": "dennis6886/arc3-d-prime-public-base",
+      "version": 2,
+      "raw_source_sha256_equal": true
+    },
+    {
+      "ref": "habanwer/arcaid3-lexicon-dprime-dfranzen-m2",
+      "version": 1,
+      "raw_source_sha256_equal": true
+    },
+    {
+      "ref": "yukailiu/arc-agi-3-champion-solution",
+      "version": 36,
+      "raw_source_sha256_equal": true
+    }
+  ],
+  "newly_inspected": [
+    {
+      "ref": "greenalgeria/up-arc-3",
+      "version": 4,
+      "cells_with_outputs": 0,
+      "implementation": "Same baseline code cells apart from serving MEMFRAC 0.96->0.99 and SPEC_STEPS 3->4; markdown cells removed.",
+      "formal_score_bound_to_this_version": null,
+      "support": "greenalgeria-serving-vs-dfranzen.diff"
+    },
+    {
+      "ref": "lalalia9/arc3-franzen-v19",
+      "version": 2,
+      "cells_with_outputs": 0,
+      "implementation": "Solved-level memory appended at end of system prompt and refreshed at existing history trim; added rules harvested from following model messages.",
+      "author_claimed_score": 31.46,
+      "claim_status": "Author statement in notebook markdown; not independently bound to a concrete submission ID/version.",
+      "formal_score_bound_to_this_version": null
+    }
+  ],
+  "public_team_submission_evidence": {
+    "dfranzen": {
+      "team_id": 16384837,
+      "submissions": [
+        {
+          "id": 57329167,
+          "dateSubmitted": "2026-10-17T23:38:22.047000",
+          "publicScore": "38.85"
+        }
+      ],
+      "detail_access": {
+        "status": "error",
+        "type": "HTTPError",
+        "message": "403 Client Error: Forbidden for url: https://api.kaggle.com/v1/competitions.CompetitionApiService/GetSubmission"
+      },
+      "notebook_binding_established": false
+    },
+    "lalalia9": {
+      "team_id": 16898435,
+      "submissions": [
+        {
+          "id": 56775015,
+          "dateSubmitted": "2026-10-02T13:43:08.550000",
+          "publicScore": "35.79"
+        }
+      ],
+      "detail_access": {
+        "status": "error",
+        "type": "HTTPError",
+        "message": "403 Client Error: Forbidden for url: https://api.kaggle.com/v1/competitions.CompetitionApiService/GetSubmission"
+      },
+      "notebook_binding_established": false
+    },
+    "jingshuifu": {
+      "team_id": 17060073,
+      "submissions": [
+        {
+          "id": 57078720,
+          "dateSubmitted": "2026-10-11T15:42:26.507000",
+          "publicScore": "33.22"
+        }
+      ],
+      "detail_access": null,
+      "notebook_binding_established": false
+    },
+    "heliosli": {
+      "team_id": 17017008,
+      "submissions": [
+        {
+          "id": 56835496,
+          "dateSubmitted": "2026-10-04T23:19:54.577000",
+          "publicScore": "32.60"
+        }
+      ],
+      "detail_access": null,
+      "notebook_binding_established": false
+    },
+    "dennis6886": {
+      "team_id": 17088839,
+      "submissions": [
+        {
+          "id": 57396830,
+          "dateSubmitted": "2026-10-19T12:52:04.587000",
+          "publicScore": "32.59"
+        }
+      ],
+      "detail_access": null,
+      "notebook_binding_established": false
+    },
+    "greenalgeria": {
+      "team_id": 16713919,
+      "submissions": [
+        {
+          "id": 56849595,
+          "dateSubmitted": "2026-10-05T10:25:34.033000",
+          "publicScore": "32.38"
+        }
+      ],
+      "detail_access": {
+        "status": "error",
+        "type": "HTTPError",
+        "message": "403 Client Error: Forbidden for url: https://api.kaggle.com/v1/competitions.CompetitionApiService/GetSubmission"
+      },
+      "notebook_binding_established": false
+    }
+  },
+  "binding_limits": [
+    "Notebook SDK and raw response metadata expose currentVersionNumber and source but no submission ID/score field.",
+    "Public-safe team submissions expose ID/date/publicScore but no notebook ref or version. Team-name matching is candidate discovery only, not notebook-score binding.",
+    "GetSubmission for three new target IDs returned HTTP403; no attempt to bypass access controls.",
+    "No sampled notebook contains embedded cell outputs; author prose and scoreDescending order are not proof of exact-version formal score.",
+    "ListTeamPublicSubmissions direct SDK calls failed TLS; ordinary CLI team-submissions retried successfully and those outputs are preserved separately."
+  ],
+  "references": {
+    "source_audit": "source-audit.json",
+    "public_submission_details": "public-bind-cli-manifest.json",
+    "queries": "manifest.json",
+    "second_query_stage": "binding-manifest.json"
+  },
+  "031_verification": {
+    "version": 1,
+    "cell_count": 28,
+    "all_cells_type_source_equal": true,
+    "evidence": "031-remote-source-cell-comparison.json",
+    "timestamp_note": "GetKernel lastRunTime is inconsistent with actual launch; not used as execution-time evidence."
+  }
+}

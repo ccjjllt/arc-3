@@ -230,7 +230,8 @@ def run_session(namespace: dict) -> dict:
             command = [sys.executable, "-u", "-m", "arc3_research.run_arm",
                        "--arm", arm, "--bundle-dir", str(namespace["BUNDLE_DIR"]),
                        "--working-dir", str(out), "--game-list", ",".join(config["games"]),
-                       "--budget-seconds", str(arm_budget)]
+                       "--budget-seconds", str(arm_budget),
+                       "--warmup-action-games", str(config.get("warmup_action_games", 0))]
             if config.get("inference_timing", False):
                 command.append("--inference-timing")
             if config.get("request_deadline", False):

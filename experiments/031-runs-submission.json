@@ -1,0 +1,84 @@
+{
+  "id": "031-runs-submission",
+  "kernel_id": "zhuating/arc3-031-runs-submission",
+  "kernel_title": "ARC3 031 Runs Submission",
+  "purpose": "Only exact occupied pixel row-runs in original segmentation nodes; unchanged 009 v2 model, serving, live gateway and formal budget",
+  "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "hard_limit_seconds": 32400,
+  "machine_shape": "NvidiaRtxPro6000",
+  "enable_internet": false,
+  "input_resolution_timeout_seconds": 60,
+  "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+  "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+  "save_placeholder_is_scored": false,
+  "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+  "solver": {
+    "n_passes": 1,
+    "concurrency": 120,
+    "active_streams": 10,
+    "max_runtime_s_per_game": 31920,
+    "warmup_action_games": 1,
+    "save_request_logs": false,
+    "research_interventions": [
+      "segmentation_runs"
+    ]
+  },
+  "official_save_protocol": {
+    "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+    "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+    "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "observed_date_local": "2026-10-12",
+    "relevant_lines": "2-10, 75-78, 114-133",
+    "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+  },
+  "revision": 2,
+  "save_smoke": {
+    "game_ids": [
+      "sb26-7fbdac44",
+      "cd82-fb555c5d"
+    ],
+    "budget_seconds": 300,
+    "n_passes": 1,
+    "concurrency": 2,
+    "startup_timeout_seconds": 1500,
+    "total_timeout_seconds": 2400,
+    "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+    "cleanup": "Only the process group of the model Popen started by this save"
+  },
+  "baseline_config": "experiments/009-baseline-submission.json",
+  "baseline_config_sha256": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076",
+  "preparation_status": "prepared locally, not run, pushed or submitted",
+  "kernel_owner_provenance": {
+    "owner": "zhuating",
+    "basis": "Follow the actual 030 formal submission owner; 009 baseline configuration still names ccjjllt",
+    "evidence": "experiments/030-formal-submission.json",
+    "prior_formal_submission_id": 57447779,
+    "prior_formal_kernel": "zhuating/arc3-030-persistent-submission",
+    "must_verify_authenticated_account_and_team_before_push": true
+  },
+  "segmentation_runs": {
+    "implementation": "src/arc3_research/segmentation_runs.py",
+    "implementation_sha256": "b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450deee",
+    "field": "nodes[*].runs",
+    "coordinates": "absolute row, inclusive column start/end",
+    "scope": "Exact original 4-connected equal-color component membership in host and isolated Python sandbox",
+    "original_fields_unchanged": true,
+    "tool_description_change": "Unchanged existing FIELD_GUIDANCE; v2 also adds the same runs data contract to the system node-field enumeration",
+    "new_model_tools": false,
+    "new_model_requests": false,
+    "original_python_lifecycle_unchanged": true,
+    "patch_version": "segmentation-runs-v2",
+    "system_field_contract_change": "Only the runs field beside pixels/boundary; absolute row coordinates and inclusive column endpoints, no additional strategy or example"
+  },
+  "research_transfer_risks": [
+    "Legacy configuration experiments/031-segmentation-runs.json uses candidate-first ordering, request_deadline=true and warmup_action_games=0. These legacy settings describe that file only, not the new aligned comparisons.",
+    "Aligned configurations experiments/031-natural-aligned.json and experiments/031-full-aligned.json use warmup_action_games=1 and request_deadline=false in both arms, matching these 009 formal settings; only the candidate installs segmentation_runs.",
+    "Aligned research still uses OFFLINE public environments: 10 fixed games at 900 seconds per arm or 25 fixed games at a scaled 7254 seconds. This formal candidate enumerates live gateway games with the original 31920-second solver budget.",
+    "Aligned research passes a global soft_end=now+arm_budget to bm.run; the 009 formal branch retains soft_end=None. Disabling the request_deadline patch does not remove this remaining global-cutoff difference.",
+    "Aligned research enables request logs and timing/scheduler diagnostics, flushes caches between arm processes, bounds worker drain, and skips blanket model precache. This candidate retains the original 009 formal logging, startup and solver behavior and installs none of those research helpers.",
+    "A single public A/B run, whether baseline-first or candidate-first, is mechanism evidence rather than a reliable hidden leaderboard gain estimate. Validate transfer with repeated or reversed-order comparisons and report remaining research/formal differences.",
+    "Exact row-runs enlarge tool output and may be truncated or ignored; successful installation, checkpoint continuation or GPU save smoke alone does not establish score gain.",
+    "The already executed 031 checkpoint fork used segmentation-runs-v1, archived at experiments/031-forks-source-v1/src/arc3_research/segmentation_runs.py. Its negative result does not measure v2 natural adoption or scoring; v2 only adds the missing system node-field contract."
+  ]
+}

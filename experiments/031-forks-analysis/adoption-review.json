@@ -1,0 +1,202 @@
+{
+  "reviewed_at_utc": "2026-10-21T04:46:40.274181+00:00",
+  "scope": "Read-only ft09 A/B review of actual 031 v1 recorded-state continuation; offline saved-code pixel audit; no new model or environment actions",
+  "verdict": "031 v1 did not redirect the observed ft09 extraction to runs. Candidate freshly reconstructed filled bounding boxes and reproduced the exact P4 error. Neither arm gained a level.",
+  "arms": {
+    "A": {
+      "request_log": "runs/031-segmentation-forks/segmentation_forks_A/ft09-0d8bbf25_A_requests.jsonl",
+      "request_log_sha256": "d12ad219745f1a244b161c424c3b2cf03db0de27df84f5f69e46591c776e4f77",
+      "result_json": "runs/031-segmentation-forks/segmentation_forks_A/ft09-0d8bbf25-A.json",
+      "result_json_sha256": "cea464078c04e395b45c4df048c99c78c87a5afb9ffe0fd0bacfca0ce63885be",
+      "new_python_calls": 5,
+      "runs_reference_call_ids": [],
+      "boundary_reference_call_ids": [
+        "call_a3f1e660346143fa879d9604",
+        "call_0f0c2430b8b0438e8047aba8"
+      ],
+      "field_guidance_in_first_python_tool_description": false,
+      "system_prompt_lists_runs_field": false,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 61,
+            "y": 1
+          }
+        }
+      ],
+      "elapsed_seconds": 250.04688674200042,
+      "recorded_usage": {
+        "prompt_tokens": 353851,
+        "completion_tokens": 22014,
+        "total_tokens": 375865
+      },
+      "requests": {
+        "request": 6,
+        "response": 5
+      },
+      "last_request_has_response": false
+    },
+    "B": {
+      "request_log": "runs/031-segmentation-forks/segmentation_forks_B/ft09-0d8bbf25_B_requests.jsonl",
+      "request_log_sha256": "b40d01956acfa4706f0b1f270f38d872e22f4e799ec1b5bf7879f2d3838e1e00",
+      "result_json": "runs/031-segmentation-forks/segmentation_forks_B/ft09-0d8bbf25-B.json",
+      "result_json_sha256": "2dd6cfac0d9f5f20445f24208f7777345757ae19921cb57acc58e1cc51870e75",
+      "new_python_calls": 3,
+      "runs_reference_call_ids": [],
+      "boundary_reference_call_ids": [
+        "call_def70a557dd242cf8e0e94c0"
+      ],
+      "field_guidance_in_first_python_tool_description": true,
+      "system_prompt_lists_runs_field": false,
+      "initial_levels_completed": 2,
+      "levels_completed": 2,
+      "added_levels": 0,
+      "actions": [
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "id": "ACTION6",
+          "data": {
+            "x": 20,
+            "y": 28
+          }
+        }
+      ],
+      "elapsed_seconds": 250.10403949299962,
+      "recorded_usage": {
+        "prompt_tokens": 194638,
+        "completion_tokens": 16390,
+        "total_tokens": 211028
+      },
+      "requests": {
+        "request": 4,
+        "response": 3
+      },
+      "last_request_has_response": false
+    }
+  },
+  "confirmed_pixel_failure": {
+    "frame_coordinate": {
+      "row": 46,
+      "col": 32
+    },
+    "actual_color": "g",
+    "candidate_extracted_color": "W",
+    "actual_P4_3x3": [
+      "gWg",
+      "WOg",
+      "WWW"
+    ],
+    "candidate_P4_3x3": [
+      "gWg",
+      "WOW",
+      "WWW"
+    ],
+    "baseline_handwritten_P4": [
+      [
+        "g",
+        "W",
+        "g"
+      ],
+      [
+        "W",
+        "C",
+        "W"
+      ],
+      [
+        "W",
+        "W",
+        "W"
+      ]
+    ],
+    "white_node_id": 45,
+    "white_node_exact_runs": [
+      [
+        46,
+        28,
+        29
+      ],
+      [
+        47,
+        28,
+        29
+      ],
+      [
+        48,
+        28,
+        33
+      ],
+      [
+        49,
+        28,
+        33
+      ]
+    ],
+    "white_runs_include_error_pixel": false,
+    "candidate_code_call_id": "call_def70a557dd242cf8e0e94c0",
+    "candidate_first_snapshot_line": 7,
+    "candidate_code": "\nseg = current_frame.segmentation\nns = seg['nodes']\ngrid_rows=[4,12,20,28,36,44,52]; grid_cols=[12,20,28,36,44]\ncur={}\npieces={}\nfor n in ns:\n    b=n['boundary']; rs=[p[0] for p in b]; cs=[p[1] for p in b]\n    r0,r1,c0,c1=min(rs),max(rs),min(cs),max(cs)\n    if n['pixels']==36 and r1-r0==5 and c1-c0==5:\n        cur[(grid_rows.index(r0),grid_cols.index(c0))]=n['color']\n    elif r1-r0<=5 and c1-c0<=5 and (r1-r0)>=1:\n        for r in range(r0,r1+1):\n            for c in range(c0,c1+1): pieces[(r,c)]=n['color']\npats=[(12,28),(28,20),(28,36),(44,28)]\nother={'O':'R','R':'O'}\ndef target_for(mode):\n    t={}\n    for (pr,pc) in pats:\n        center=pieces[(pr+2,pc+2)]\n        R=grid_rows.index(pr); C=grid_cols.index(pc)\n        for i in range(3):\n            for j in range(3):\n                if i==1 and j==1: continue\n                sub=pieces[(pr+2*i,pc+2*j)]\n                if mode=='A': col = center if sub=='W' else other[center]\n                else: col = other[center] if sub=='W' else center\n                t[(R-1+i,C-1+j)]=col\n    return t\nfor mode in ('A','B'):\n    t=target_for(mode)\n    mism=[(k,cur.get(k),t[k]) for k in sorted(t) if cur.get(k)!=t[k]]\n    print(mode,'mismatches:',mism)\nprint('cur:')\nfor r in range(7): print('  ',''.join(cur.get((r,c),'.') for c in range(5)))\n",
+    "candidate_actual_tool_stdout": "A mismatches: [((0, 1), 'R', 'O')]\nB mismatches: [((0, 2), 'O', 'R'), ((0, 3), 'O', 'R'), ((1, 1), 'O', 'R'), ((1, 3), 'R', 'O'), ((2, 0), 'O', 'R'), ((2, 1), 'R', 'O'), ((2, 2), 'O', 'R'), ((2, 3), 'R', 'O'), ((2, 4), 'R', 'O'), ((3, 0), 'O', 'R'), ((3, 2), 'R', 'O'), ((3, 4), 'O', 'R'), ((4, 0), 'R', 'O'), ((4, 1), 'R', 'O'), ((4, 2), 'O', 'R'), ((4, 3), 'R', 'O'), ((4, 4), 'O', 'R'), ((5, 1), 'O', 'R'), ((5, 3), 'O', 'R'), ((6, 1), 'O', 'R'), ((6, 2), 'O', 'R'), ((6, 3), 'O', 'R')]\ncur:\n   .ROO.\n   .O.R.\n   ORORR\n   O.R.O\n   RRORO\n   .O.O.\n   .OOO.\n",
+    "offline_reexecution_stdout_matches_actual_tool": true,
+    "baseline_code_call_id": "call_d518fc6fc5b34f3db908024a",
+    "baseline_first_snapshot_line": 9,
+    "baseline_code": "\nimport itertools\n# legends as 3x3 symbol grids ('W','g','C' for center)\nleg = {\n 'P1': [['W','W','W'],['W','C','g'],['g','W','g']],\n 'P2': [['g','W','g'],['g','C','W'],['W','W','g']],\n 'P3': [['g','W','W'],['W','C','g'],['g','W','g']],\n 'P4': [['g','W','g'],['W','C','W'],['W','W','W']],\n}\npos = {'P1':(1,2),'P2':(3,1),'P3':(3,3),'P4':(5,2)}  # grid (row,col) of pattern\ncells = [(0,1),(0,2),(0,3),(1,1),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,0),(3,2),(3,4),\n         (4,0),(4,1),(4,2),(4,3),(4,4),(5,1),(5,3),(6,1),(6,2),(6,3)]\ncellset=set(cells)\ndef transform(M,t):\n    n=3\n    R=[[M[i][j] for j in range(n)] for i in range(n)]\n    if t&1: R=[row[::-1] for row in R]          # mirror h\n    if t&2: R=[list(r) for r in zip(*R)]        # transpose\n    if t&4: R=R[::-1]\n    return R\ndef neighbors(p):\n    R,C=pos[p]; out=[]\n    for i in range(3):\n        for j in range(3):\n            if (i,j)==(1,1): continue\n            out.append((R-1+i, C-1+j))\n    return out\nresults=[]\nfor t in range(8):\n    for pol in (0,1):   # pol0: W->O ; pol1: W->R\n        assign={}\n        ok=True\n        for p in ('P1','P2','P3','P4'):\n            M=transform(leg[p],t)\n            for (i,j),(gr,gc) in zip([(i,j) for i in range(3) for j in range(3) if (i,j)!=(1,1)], neighbors(p)):\n                sym=M[i][j]\n                col = ('O' if sym=='W' else 'R') if pol==0 else ('R' if sym=='W' else 'O')\n                key=(gr,gc)\n                if key in assign and assign[key]!=col: ok=False; break\n                assign[key]=col\n            if not ok: break\n        if ok:\n            results.append((t,pol,{k:assign[k] for k in cells if k in assign}))\nprint('consistent single-transform solutions:', len(results))\nfor t,pol,a in results:\n    print('t',t,'pol',pol,'ncells',len(a))\n    for r in range(7): print('   ',''.join(a.get((r,c),'.') for c in range(5)))\n",
+    "baseline_actual_tool_stdout": "consistent single-transform solutions: 0\n",
+    "baseline_offline_stdout_matches_actual_tool": true,
+    "method_note": "Used frozen original frame and returned inspection-only snippets. Candidate segmentation included exact runs, but the returned code ignored them. These computations were never sent back to the running model."
+  },
+  "observed_non_progress": [
+    "Both branches probed pattern/palette positions whose actual tool outputs reported no-op. A and B each executed two actions and stayed at 2/6 completed levels.",
+    "B first inspected P2 via ASCII, then attempted another P2 sub-block click; no-op guard refused its subsequent click. This did not inspect P4.",
+    "B then recomputed pieces from boundary bounding rectangles and used the erroneous pieces in target_for, producing A/B mismatch lists; this is newly generated and executed code, not just a stale historical quotation.",
+    "B final request timed out after about 75.2 seconds; 3 responses across 4 requests returned. A also has one unreturned final request. Returned usage is incomplete cost evidence.",
+    "The wrong P4 persists and was consumed by the mismatch computation, but this run does not isolate how much of the failure came from that error versus rule interpretation, repeated no-op probes, request latency or limited continuation time."
+  ],
+  "delivery_gap": {
+    "candidate_tool_schema_guidance_present": true,
+    "candidate_system_node_field_inventory_omits_runs": true,
+    "meaning": "Field delivery was not wholly missing; however the dominant system field inventory still describes the old interface. This is an actionable discovery/consistency gap, not proof of causal explanation."
+  },
+  "interpretation": {
+    "confirmed": "Negative adoption and negative advancement in this fixed historical state. The mechanism did not replace the known faulty extraction even in new code.",
+    "not_confirmed": "Does not establish that exact pixel input is useless in natural-start games, or that old-history anchoring alone caused non-adoption.",
+    "history_constraint": "41 restored non-system messages carried pre-existing pattern interpretations. Retained functions were empty for ft09; lack of adoption cannot be blamed on reused retained executable functions.",
+    "natural_short_run": "Do not promote directly to full25 or submit this evidence. At most the already budgeted 10-game/900s natural-start comparison can answer whether fields are discovered before old hypotheses form. Freeze source and order first; inspect first segmentation-to-set code and actual returns. If relevant later failure never occurs, label the window inconclusive. If runs remains unused, stop this version rather than treating idle field presence as a capability gain.",
+    "optional_contract_fix": "If changing delivery before that natural run, update the system node-field inventory to describe the same runs contract already in the tool description; freeze this as a new helper version and synchronize formal payload. Do not credit v1 fork evidence to that untested version, inject P4 coordinates/answers, or begin another general prompt search."
+  },
+  "limitations": [
+    "Only ft09 trajectories reviewed here; no claim about tu93/r11l runs adoption.",
+    "Single short continuation per branch, baseline then candidate; not a repeatability or hidden-score estimate.",
+    "Static scan saw 0 runs reads; inspection of all captured new snippets and transcript independently confirms observed code never accessed the runs field. Unreturned final generations are unavailable.",
+    "The restored original pixel frame matches the runtime checkpoint; no-op actions preserve the interior P4 image. HUD border changes are outside the audited P4 crop.",
+    "All source files were read locally after download; this review did not mutate runs or contact remote services."
+  ],
+  "targeted_v2_review": {
+    "reasonable": true,
+    "scope": "Only make STRUCTURED_RUNTIME_STATE_ADDENDUM list the same nodes[*].runs field and coordinate contract already exposed in the tool description. No extra repair call, task-specific hint, retry budget or general strategy prompt.",
+    "reason": "Observed B read current_frame.segmentation in newly generated code but reconstructed rectangles; first tool description advertised runs while the system interface inventory omitted it. Aligning those two existing interface descriptions directly addresses an observed delivery inconsistency.",
+    "evidence_status": "Reasonable implementation repair, not a proven efficacy improvement or guaranteed explanation for v1 failure.",
+    "required_separation": [
+      "Keep v1 source/hash/results and this negative review immutable as v1 evidence.",
+      "Freeze v2 helper and synchronize its research and formal payload hashes; baseline remains original009.",
+      "Install the addendum change before agents construct their system prompts; restore it on uninstall and isolate baseline/runs processes.",
+      "Evaluate v2 only through its own single natural-start short comparison; if no direct consumption or advancement evidence appears, do not automatically escalate to full25."
+    ]
+  }
+}
