@@ -152,7 +152,8 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("admission_009 requires frozen baseline scheduler.")
-        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B") and overrides != {
+        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B",
+                        "bounded_executable_plan", "bounded_executable_plan_A", "bounded_executable_plan_B") and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError(args.arm + " requires frozen baseline scheduler.")
@@ -276,6 +277,10 @@ def run_arm(args: argparse.Namespace) -> int:
         if args.arm == "executable_plan":
             from arc3_research.executable_plan import install_executable_plan
             executable_plan_patch = install_executable_plan(min_remaining_seconds=180)
+        if args.arm == "bounded_executable_plan":
+            from arc3_research.bounded_executable_plan import install_bounded_executable_plan
+            # One shared DEFAULT_CONFIG also supplies the formal/save installer.
+            executable_plan_patch = install_bounded_executable_plan()
         if os.environ.get("ARC3_COMMUNITY_DEVELOPMENT") == "1":
             from taaf.game_api import GameAPI
             from arc3_research.community import clear_unreliable_baselines
@@ -363,15 +368,20 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["admission_order.py"] = _sha256(
                 Path(__file__).with_name("admission_order.py"))
             metadata["admission_order"] = admission_patch.snapshot()
-        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B"):
+        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B",
+                        "bounded_executable_plan", "bounded_executable_plan_A", "bounded_executable_plan_B"):
             for name in ("executable_plan.py", "executable_plan_contract.py", "program_repair.py"):
                 metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
+            if args.arm.startswith("bounded_executable_plan"):
+                metadata["source_sha256"]["bounded_executable_plan.py"] = _sha256(
+                    Path(__file__).with_name("bounded_executable_plan.py"))
             if executable_plan_patch is not None:
                 metadata["executable_plan"] = executable_plan_patch.snapshot()
             else:
                 metadata["source_sha256"]["executable_plan_forks.py"] = _sha256(
                     Path(__file__).with_name("executable_plan_forks.py"))
-                metadata["diagnostic_forced_trigger"] = args.arm == "executable_plan_B"
+                metadata["diagnostic_forced_trigger"] = args.arm in (
+                    "executable_plan_B", "bounded_executable_plan_B")
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -407,12 +417,14 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        if args.arm in ("executable_plan_A", "executable_plan_B"):
+        if args.arm in ("executable_plan_A", "executable_plan_B",
+                        "bounded_executable_plan_A", "bounded_executable_plan_B"):
             from arc3_research.executable_plan_forks import run_forks
             bm.start_time = datetime.now()
             fork_summary = run_forks(
                 bm=bm, job_dir=job_dir, budget_seconds=args.budget_seconds,
-                use_plan=args.arm == "executable_plan_B")
+                use_plan=args.arm in ("executable_plan_B", "bounded_executable_plan_B"),
+                plan_variant="bounded" if args.arm.startswith("bounded_") else "original")
             bm.end_time = datetime.now()
             _write_json(job_dir / "executable-plan-forks.json", fork_summary)
             _write_json(job_dir / "benchmark.json", bm.to_json_dict())
@@ -615,7 +627,9 @@ def main() -> int:
                                  "persistent_python", "segmentation_runs",
                                  "segmentation_forks_A", "segmentation_forks_B",
                                  "solved_level_memory", "controller_repair_A", "controller_repair_B",
-                                 "executable_plan", "executable_plan_A", "executable_plan_B"))
+                                 "executable_plan", "executable_plan_A", "executable_plan_B",
+                                 "bounded_executable_plan", "bounded_executable_plan_A",
+                                 "bounded_executable_plan_B"))
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

@@ -83,9 +83,13 @@ def main() -> None:
         required.update({"controller_repair.py", "controller_repair_forks.py", "program_repair.py"})
     if any(arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
         required.update({"segmentation_runs.py", "segmentation_forks.py"})
-    if any(arm in ("executable_plan", "executable_plan_A", "executable_plan_B") for arm in arms):
+    if any(arm in ("executable_plan", "executable_plan_A", "executable_plan_B",
+                   "bounded_executable_plan", "bounded_executable_plan_A", "bounded_executable_plan_B") for arm in arms):
         required.update({"executable_plan.py", "executable_plan_contract.py", "program_repair.py"})
-    plan_forks = any(arm in ("executable_plan_A", "executable_plan_B") for arm in arms)
+    if any(arm.startswith("bounded_executable_plan") for arm in arms):
+        required.add("bounded_executable_plan.py")
+    plan_forks = any(arm in ("executable_plan_A", "executable_plan_B",
+                            "bounded_executable_plan_A", "bounded_executable_plan_B") for arm in arms)
     if plan_forks:
         required.add("executable_plan_forks.py")
     if config.get("inference_timing", False):

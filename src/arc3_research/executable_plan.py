@@ -117,7 +117,9 @@ class _State:
 
 class ExecutablePlanPatch:
     def __init__(self, *, min_remaining_seconds=180, max_check_seconds=5,
-                 request_seconds=60, extra_seconds=120, completion=None):
+                 request_seconds=60, extra_seconds=120, completion=None,
+                 request_builder=None, completion_options=None, max_output_tokens=4096,
+                 patch_name="034-executable-plan-v1", request_config=None):
         from inference.agent import tool_agent, python_tool_sandbox
         from inference.utils.grid_utils import ARC_COLOR_CHARS
         if getattr(tool_agent.ToolAgent, "_executable_plan_installed", False):
@@ -140,6 +142,13 @@ class ExecutablePlanPatch:
         self.request_seconds = float(request_seconds)
         self.extra_limit = float(extra_seconds)
         self.completion = completion or _completion
+        # The 034 path has no builder/options and retains its original request.
+        # 036 opts in without installing anything in the actor's normal loop.
+        self.request_builder = request_builder
+        self.completion_options = copy.deepcopy(completion_options or {})
+        self.max_output_tokens = int(max_output_tokens)
+        self.patch_name = patch_name
+        self.request_config = copy.deepcopy(request_config)
 
         def analyze(agent, state_path, *args, **kwargs):
             agent._ensure_session(state_path)
@@ -367,7 +376,8 @@ class ExecutablePlanPatch:
                 {k: v for k, v in a.items() if k != "action"}) for a in normalized[index:]]
             self.event(state, {"kind": "prediction_frozen", "action": action,
                                "before": {"step": before.step, "grid_sha256": _hash(before.grid)},
-                               "expected": frozen, "evidence": "prediction before real action, unproven dynamics"})
+                               "expected": frozen, "coverage": valid["coverage"],
+                               "evidence": "prediction before real action, unproven dynamics"})
             reply = execute([action], stale_after=stale_after if index == 0 else None)
             context["reply_state"] = copy.deepcopy(reply.get("state", context["reply_state"]))
             replies.append(reply)
@@ -394,6 +404,7 @@ class ExecutablePlanPatch:
             comparison = compare_prediction(frozen, after.grid, self.chars)
             self.event(state, {"kind": "checked_action", "action": action,
                                "expected": frozen, "observed": comparison,
+                               "prediction_coverage": valid["coverage"],
                                "status": comparison["status"], "actual_actions": count})
             if comparison["status"] != "match":
                 self.invalidate(state, {"kind": "counterexample", "status": comparison["status"],
@@ -456,80 +467,129 @@ class ExecutablePlanPatch:
         state.in_branch = True
         event = {"kind": "program_recomputed", "trigger": trigger, "actual_actions": 0,
                  "request_budget_seconds": min(self.request_seconds, self.extra_limit - state.extra_seconds),
+                 "request_settings": {"max_tokens": self.max_output_tokens, **self.completion_options},
+                 "request_attempted": False,
                  "semantic_claim": "current pixels and selected prediction only; goal/rules are hypotheses"}
+        failure_stage = "request_preparation"
+        request_started = None
         try:
             current, history_entries = self.current(state)
             source = trigger.get("source_code", state.source_code)
             bindings = _bindings(source, old_functions)
-            public_now = {"level": current.level, "step": current.step,
-                          "shape": current.shape, "ascii": current.ascii,
-                          "recent_real_actions": [{"action": h.action, "step": h.frame.step,
-                                                   "level": h.frame.level, "result": h.result}
-                                                  for h in history_entries[-2:]],
-                          "last_actual_result": agent._last_action_call_result}
-            public_trigger = {k: v for k, v in trigger.items() if k not in ("source_code", "previous_program")}
-            text = (PROMPT + "\nLive program bindings: " + repr(bindings)
-                    + "\nPaused code:\n" + source[-12000:]
-                    + "\nActive program being corrected (if present):\n" + str(trigger.get("previous_program") or "")[-16000:]
-                    + "\nPublic trigger:\n" + json.dumps(public_trigger, ensure_ascii=False)
-                    + "\nCURRENT public observation AFTER any already executed action (not the old request image):\n"
-                    + json.dumps(public_now, ensure_ascii=False))
-            history = state.latest_messages or [{"role": "system", "content": agent._system_prompt}, *old_history]
-            messages = _plain_messages(history)
-            # A pending tool call is rendered as text so there are no orphan
-            # tool IDs in the additional bounded request.
-            for message in messages:
-                if message.get("tool_calls"):
-                    message["content"] = str(message.get("content") or "") + "\n" + json.dumps(message.pop("tool_calls"))
-                if message.get("role") == "tool":
-                    message["role"] = "user"
-                    message.pop("tool_call_id", None)
-            messages.append({"role": "user", "content": text})
-            tools = agent._tools(state.path)
-            messages = agent._trim_messages_for_context(messages, tools=tools)
+            if self.request_builder is None:
+                public_now = {"level": current.level, "step": current.step,
+                              "shape": current.shape, "ascii": current.ascii,
+                              "recent_real_actions": [{"action": h.action, "step": h.frame.step,
+                                                       "level": h.frame.level, "result": h.result}
+                                                      for h in history_entries[-2:]],
+                              "last_actual_result": agent._last_action_call_result}
+                public_trigger = {k: v for k, v in trigger.items() if k not in ("source_code", "previous_program")}
+                text = (PROMPT + "\nLive program bindings: " + repr(bindings)
+                        + "\nPaused code:\n" + source[-12000:]
+                        + "\nActive program being corrected (if present):\n" + str(trigger.get("previous_program") or "")[-16000:]
+                        + "\nPublic trigger:\n" + json.dumps(public_trigger, ensure_ascii=False)
+                        + "\nCURRENT public observation AFTER any already executed action (not the old request image):\n"
+                        + json.dumps(public_now, ensure_ascii=False))
+                history = state.latest_messages or [{"role": "system", "content": agent._system_prompt}, *old_history]
+                messages = _plain_messages(history)
+                # A pending tool call is rendered as text so there are no orphan
+                # tool IDs in the additional bounded request.
+                for message in messages:
+                    if message.get("tool_calls"):
+                        message["content"] = str(message.get("content") or "") + "\n" + json.dumps(message.pop("tool_calls"))
+                    if message.get("role") == "tool":
+                        message["role"] = "user"
+                        message.pop("tool_call_id", None)
+                messages.append({"role": "user", "content": text})
+                tools = agent._tools(state.path)
+                messages = agent._trim_messages_for_context(messages, tools=tools)
+            else:
+                prepared = self.request_builder(
+                    agent, state, trigger, current, history_entries, old_functions,
+                    valid_actions=self.module._normalize_valid_actions(agent._current_valid_actions))
+                messages, tools = prepared["messages"], prepared["tools"]
+                event["request_context"] = prepared["metadata"]
+                # The bounded builder keeps whole code/frames or declines. Do
+                # not run the actor's history trimmer over this two-message task.
             timeout = min(self.request_seconds, branch_deadline - time.monotonic(),
                           self.remaining(agent, state))
             if timeout < 1 or self.stopped(state):
+                failure_stage = "deadline_before_request"
                 raise TimeoutError("extra-branch deadline exhausted before request")
-            response = self.completion(agent, messages, tools, timeout=timeout, max_tokens=4096)
+            event["request_settings"]["timeout_seconds"] = timeout
+            failure_stage = "request_error"
+            request_started = time.monotonic()
+            event["request_attempted"] = True
+            response = self.completion(agent, messages, tools, timeout=timeout,
+                                       max_tokens=self.max_output_tokens, **self.completion_options)
+            event["request_elapsed_seconds"] = time.monotonic() - request_started
             agent._accumulate_usage_tokens(response.usage)
-            event.update(usage=response.usage, response=response.message)
+            event.update(usage=response.usage, response=response.message,
+                         finish_reason=getattr(response, "finish_reason", ""))
+            message = response.message or {}
+            calls = message.get("tool_calls") if isinstance(message, dict) else None
+            event["response_summary"] = {
+                "tool_call_count": len(calls) if isinstance(calls, list) else 0,
+                "content_chars": len(str(message.get("content") or "")) if isinstance(message, dict) else 0,
+                "reasoning_chars": len(str(message.get("reasoning_content") or message.get("reasoning") or ""))
+                    if isinstance(message, dict) else 0,
+            }
+            failure_stage = ("no_tool_call" if not calls else
+                             "incomplete_tool_call" if event["finish_reason"] == "length" else
+                             "definitions_rejected")
             definitions = extract_definitions(response.message)
             code = definitions["code"]
+            failure_stage = "plan_evaluation_failed"
             result = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)", deadline=branch_deadline)
+            failure_stage = "plan_contract_rejected"
             validation = validate_plan(result, current.grid, self.chars,
                                        self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
             event.update(program_code=code, validation=validation)
             if not validation["passed"]:
                 raise ValueError("plan rejected: " + str(validation.get("errors")))
+            failure_stage = "prediction_evaluation_failed"
             first_prediction = self.evaluate(agent, state, code + "\nresult = predict(current_frame, "
                 + repr(validation["plan"]["actions"][0]) + ")", deadline=branch_deadline)
+            failure_stage = "prediction_contract_rejected"
             first_validation = validate_prediction(first_prediction, current.grid, self.chars)
+            event["first_prediction_validation"] = first_validation
             if not first_validation["passed"]:
                 raise ValueError("first prediction rejected: " + str(first_validation.get("errors")))
-            event["first_prediction_validation"] = first_validation
             # Re-evaluate the returned source to check determinism and commit
             # its functions. Host action consumption below establishes use;
             # this is not a separate cross-call retention certificate.
+            failure_stage = "recomputation_failed"
             result2 = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)", commit=True, deadline=branch_deadline)
             if _hash(result) != _hash(result2):
                 raise ValueError("plan_program is nondeterministic on unchanged observation")
             if time.monotonic() - started > self.extra_limit - state.extra_seconds or self.stopped(state):
+                failure_stage = "deadline_before_actions"
                 raise TimeoutError("shared extra-branch deadline exhausted before actions")
             state.program = code
             state.program_hash = definitions["code_sha256"]
             state.prediction_support = 0
-            event.update(status="plan_recomputed_and_bound", program_hash=state.program_hash,
+            event.update(status="plan_recomputed_and_bound", failure_stage=None,
+                         elapsed_seconds=time.monotonic() - started, program_hash=state.program_hash,
                          goal=result["goal"], plan_hash=_hash(validation["plan"]),
                          proposed_actions=validation["plan"]["actions"])
             self.event(state, event)
         except Exception as exc:
             agent._kept_functions = old_functions
             state.program = None
-            event.update(status="rejected", error=f"{type(exc).__name__}: {exc}")
+            failure_stage = getattr(exc, "failure_stage", failure_stage)
+            if getattr(exc, "metadata", None) is not None:
+                event["request_context"] = exc.metadata
+            if request_started is not None and "request_elapsed_seconds" not in event:
+                event["request_elapsed_seconds"] = time.monotonic() - request_started
+            event.update(status="rejected", failure_stage=failure_stage,
+                         elapsed_seconds=time.monotonic() - started,
+                         error=f"{type(exc).__name__}: {exc}")
             self.event(state, event)
-            return {"status": "rejected", "error": event["error"], "actual_actions": 0,
-                    "next": "Continue ordinary exploration from current_frame; previous suffix did not run."}
+            rejection = {"status": "rejected", "error": event["error"], "actual_actions": 0,
+                         "next": "Continue ordinary exploration from current_frame; previous suffix did not run."}
+            if self.request_builder is not None:
+                rejection.update(failure_stage=failure_stage, finish_reason=event.get("finish_reason", ""))
+            return rejection
         finally:
             state.extra_seconds += time.monotonic() - started
             state.in_branch = False
@@ -560,13 +620,22 @@ class ExecutablePlanPatch:
 
     def snapshot(self):
         with self.lock:
-            return {"patch": "034-executable-plan-v1", "games": len(self.states),
+            result = {"patch": self.patch_name, "games": len(self.states),
                     "bootstrap_calls": sum(s.bootstrap_used for s in self.states),
                     "repair_calls": sum(s.repair_used for s in self.states),
                     "extra_seconds": sum(s.extra_seconds for s in self.states),
                     "events": [{"path": str(s.path), "event_count": len(s.events),
                                 "statuses": [e.get("status") for e in s.events if e.get("status")]}
                                for s in self.states]}
+            if self.request_config is not None:
+                result["request_config"] = copy.deepcopy(self.request_config)
+                result["trigger_semantics"] = (
+                    "Inherited 034: first eligible batch or second action call, "
+                    "not error-only; one bootstrap and at most one counterexample repair per game.")
+                result["prediction_semantics"] = (
+                    "Selected pixel projections only; a match does not certify a goal, "
+                    "complete dynamics, or action relevance. Inspect coverage and changed-pixel counts.")
+            return result
 
     def uninstall(self):
         for name, installed, original in (

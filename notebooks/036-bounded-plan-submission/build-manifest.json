@@ -1,0 +1,346 @@
+{
+  "id": "036-bounded-plan-submission",
+  "revision": 2,
+  "config": {
+    "id": "036-bounded-plan-submission",
+    "kernel_id": "ccjjllt/arc3-036-bounded-plan-submission",
+    "kernel_title": "ARC3 036 Bounded Plan Submission",
+    "purpose": "Bounded executable program delivery through the shared036module; live gateway and real GPU save with explicit total runtime protection",
+    "base_notebook": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+    "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "hard_limit_seconds": 32400,
+    "machine_shape": "NvidiaRtxPro6000",
+    "enable_internet": false,
+    "input_resolution_timeout_seconds": 60,
+    "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+    "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+    "save_placeholder_is_scored": false,
+    "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+    "solver": {
+      "n_passes": 1,
+      "concurrency": 120,
+      "active_streams": 10,
+      "max_runtime_s_per_game": 31920,
+      "warmup_action_games": 1,
+      "save_request_logs": false,
+      "research_interventions": [
+        "bounded_executable_plan"
+      ]
+    },
+    "official_save_protocol": {
+      "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+      "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+      "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+      "observed_date_local": "2026-10-12",
+      "relevant_lines": "2-10, 75-78, 114-133",
+      "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+    },
+    "revision": 2,
+    "save_smoke": {
+      "game_ids": [
+        "sb26-7fbdac44",
+        "cd82-fb555c5d"
+      ],
+      "budget_seconds": 300,
+      "n_passes": 1,
+      "concurrency": 2,
+      "startup_timeout_seconds": 4200,
+      "total_timeout_seconds": 5400,
+      "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+      "cleanup": "Only the process group of the model Popen started by this save"
+    },
+    "baseline_config": "experiments/009-baseline-submission.json",
+    "baseline_config_sha256": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076",
+    "preparation_status": "source_frozen_locally_not_run_not_uploaded_not_submitted",
+    "kernel_owner_provenance": {
+      "owner": "ccjjllt",
+      "basis": "Repository owner and recorded competition team; target identity is a configuration pending a live account check",
+      "must_verify_authenticated_account_and_team_before_push": true,
+      "live_account_verified": false,
+      "quota_note": "No historical balance is treated as current quota; query live quota and existing jobs before any launch"
+    },
+    "formal_runtime_budget": {
+      "clock_origin": "first_notebook_cell_monotonic",
+      "hard_limit_seconds": 32400,
+      "cleanup_reserve_seconds": 300,
+      "cancel_drain_timeout_seconds": 120,
+      "runtime_change": "Replace009 formal soft_end=None with one total deadline including input setup, cold loading and gateway waiting; clamp the per-game limit to the actual remaining time",
+      "limit": "The first-cell clock cannot measure platform work before execution; the cleanup reserve remains conservative headroom"
+    },
+    "bounded_executable_plan": {
+      "implementation": "src/arc3_research/bounded_executable_plan.py",
+      "installer": "arc3_research.bounded_executable_plan.install_bounded_executable_plan",
+      "configuration_source": "arc3_research.bounded_executable_plan.DEFAULT_CONFIG",
+      "patch_version": "036-bounded-executable-plan-v1",
+      "source_sha256": {
+        "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "src/arc3_research/program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+        "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+        "src/arc3_research/executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+        "src/arc3_research/bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa"
+      },
+      "scope": "Only local program-delivery branches; the ordinary actor retains its original model, thinking, prompts and tools",
+      "fork_inputs_bundled": false
+    },
+    "research_transfer_risks": [
+      "A same-prefix diagnostic is not evidence of natural trigger coverage, full-pool improvement or hidden-score gain.",
+      "Full25 research uses a shorter public OFFLINE allocation; formal runtime enumerates the actual live gateway and counts cold loading in one nine-hour cap.",
+      "The explicit formal total deadline,300s cleanup reserve and120s cancel-drain bound are runtime changes from009, not alleged observed performance improvements.",
+      "Nonthinking branch delivery and reduced context may lose useful task hypotheses; complete code and pixel acceptance do not certify the inferred rule.",
+      "Save health and real-game actions validate execution, not leaderboard quality. Only a real competition submission ID and its official result establish a scored attempt.",
+      "Research may retain in-flight server work after a cancelled CPU arm; bounded cache waiting is used between arms. It is not a claim that all server requests are always cancelled immediately."
+    ]
+  },
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "research/notebooks/cli-baseline/kernel-metadata.json": "b773051660141dacf75172d576791739c6bf8bb151841d0d03b7e30555d0d4a2",
+    "scripts/build_submission.py": "17c22285d2c2ac95f197484eaf28c3165eff3a83373570fac5eb2f0a50ed8562",
+    "experiments/009-baseline-submission.json": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "experiments/009-source/support/official-starter-build_notebook.py": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "scripts/build_036_submission.py": "88b7d22452dddf88e42077f0185bcb8e18133375fe5bb1a024d1a5090511bc4d",
+    "experiments/036-bounded-plan-submission.json": "3d73b698a686acc19f2f7f78ba4093891660f66d76852d8a10cdda26de60a575",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+    "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+    "src/arc3_research/executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+    "src/arc3_research/bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa"
+  },
+  "baseline_builder_reused": "scripts/build_submission.py (unchanged local builder, temporary output)",
+  "baseline_009_notebook_sha256": "203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5",
+  "notebook_sha256": "61c753152623f96a185e7dd87f2727725c8ff68ca61d34ab3f52e1ded6c67db0",
+  "metadata_sha256": "f29b2238158a0ec97dce7abdf43782ee2de44cc76d4754e6b4ef981aff11631f",
+  "cell_count": 32,
+  "base_009_cell_count": 25,
+  "cells": [
+    {
+      "baseline_009_index": 0,
+      "generated_index": 0,
+      "baseline_source_sha256": "900146ad48e2e358fe1ebd300b6fcc1d5ff24cba2a7b2036def4e9ad8861b258",
+      "generated_source_sha256": "02fed3f9e4eccf2fdb2975035f2ef2f485471e2bfe0eecb791a7afd77915db59",
+      "changed": true
+    },
+    {
+      "baseline_009_index": 1,
+      "generated_index": 1,
+      "baseline_source_sha256": "cb096a7a9c385abd3a8e0c5f1ff7b34a84ecdccc0fc6c72c09196a8b1c1c3bbb",
+      "generated_source_sha256": "cb096a7a9c385abd3a8e0c5f1ff7b34a84ecdccc0fc6c72c09196a8b1c1c3bbb",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 2,
+      "generated_index": 2,
+      "baseline_source_sha256": "5ca4abcc0d2d4ee61390fa843e45a085f02065c3fbcb991484fb47e6fbdb46ff",
+      "generated_source_sha256": "d302b0d1fd54a7c1dc92c8d439471470deb07df20aa6d8122c6a125054a952cf",
+      "changed": true
+    },
+    {
+      "baseline_009_index": 3,
+      "generated_index": 3,
+      "baseline_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "generated_source_sha256": "169be8c9c24dcccc2c6250a89fa76f08a3d643b04a5af496373679a39c341160",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 4,
+      "generated_index": 4,
+      "baseline_source_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+      "generated_source_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 5,
+      "generated_index": 5,
+      "baseline_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "generated_source_sha256": "fbfb0ea44fbfcd82ed9096b81a8e2fef4307951c5f1768d02d6a7d438a9519bb",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 6,
+      "generated_index": 6,
+      "baseline_source_sha256": "17930e3cfc63369359451e573bf103045b03ed935d1b39f9eaf65ad119b308d8",
+      "generated_source_sha256": "17930e3cfc63369359451e573bf103045b03ed935d1b39f9eaf65ad119b308d8",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 7,
+      "generated_index": 7,
+      "baseline_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "generated_source_sha256": "1dca3bc6097eb7a3635006f77ab8540fd09c41884eaf452fb1ef6ef49166aa6f",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 8,
+      "generated_index": 8,
+      "baseline_source_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "generated_source_sha256": "7ef53c4c2f0a6c2e636be00056ac7ce2a6813c8d6d2ced8e65937e1d6465641a",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 9,
+      "generated_index": 9,
+      "baseline_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "generated_source_sha256": "19ce8a29df261ac700964b81a477d5aba97956efd908f369ff337c5e52ba3545",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 10,
+      "generated_index": 10,
+      "baseline_source_sha256": "09dc3d3282a62d509f9c0f34655f6dff2f3f44643af5933fe6aad046ecc2cc28",
+      "generated_source_sha256": "09dc3d3282a62d509f9c0f34655f6dff2f3f44643af5933fe6aad046ecc2cc28",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 11,
+      "generated_index": 11,
+      "baseline_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "generated_source_sha256": "8c16a184c0f83c761216b244646523dd8d1a376779d2a5da4d65c06d3e310948",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 12,
+      "generated_index": 12,
+      "baseline_source_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "generated_source_sha256": "e90a3a7aafca6e8f3a041b70a4dbbec721adb62b58a19e1f89ac4f019d0ae976",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 13,
+      "generated_index": 20,
+      "baseline_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "generated_source_sha256": "d0ace6204e232ecb13ef892cbb3c7f121d826c4e28a41f0e7f16b281a686dd07",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 14,
+      "generated_index": 21,
+      "baseline_source_sha256": "4f20381acf0dba40e150b5ba99703d19098007724f9623a04c12518cb2721a7c",
+      "generated_source_sha256": "4f20381acf0dba40e150b5ba99703d19098007724f9623a04c12518cb2721a7c",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 15,
+      "generated_index": 22,
+      "baseline_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "generated_source_sha256": "225a9c44015867332512f5f96fc1436c4c094d23fcf1ed29e76778c4e2b5da89",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 16,
+      "generated_index": 23,
+      "baseline_source_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "generated_source_sha256": "63d378a0f4ca15b2b46e69e8198b731b703e4ca91b3a889951127846b42cdd5d",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 17,
+      "generated_index": 24,
+      "baseline_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "generated_source_sha256": "a18104ebab0211f1958cc1c5bd451b403ead004d03d6fe979728003bf15b506b",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 18,
+      "generated_index": 25,
+      "baseline_source_sha256": "2b0fa3c2367b5056b0827ec815d55db193064cec08a4624a26e779253c4756c9",
+      "generated_source_sha256": "2b0fa3c2367b5056b0827ec815d55db193064cec08a4624a26e779253c4756c9",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 19,
+      "generated_index": 26,
+      "baseline_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "generated_source_sha256": "371ff5381197ce6d842189a0b3abebcd2cb9b2b7dedd8e587a634f95ebace0de",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 20,
+      "generated_index": 27,
+      "baseline_source_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "generated_source_sha256": "ba1a098185cfdde69293193cebdf108567a446667086c4cb771660a1696459ac",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 21,
+      "generated_index": 28,
+      "baseline_source_sha256": "2de145e1fb95a4b66a91925f403dccf37e4f456066dc82baeeaec095735d2ac1",
+      "generated_source_sha256": "280c3daa55edf3022b192973a7f5ed93cb17ff179aea50ec935d44f1265b4ac7",
+      "changed": true
+    },
+    {
+      "baseline_009_index": 22,
+      "generated_index": 29,
+      "baseline_source_sha256": "8fe59e95a11e2c8d0730a33bff86a5c4328e490860901d83383d8661c6e4ba5f",
+      "generated_source_sha256": "e3db77cd55774c893775cab18f4cdcb46824111dde527ec07e96b22ac711de8f",
+      "changed": true
+    },
+    {
+      "baseline_009_index": 23,
+      "generated_index": 30,
+      "baseline_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "generated_source_sha256": "21d7ace04df6fe0737e9ac88c2aa857f6b7c0fa8bd513310fc45d2d40fe4e4fe",
+      "changed": false
+    },
+    {
+      "baseline_009_index": 24,
+      "generated_index": 31,
+      "baseline_source_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "generated_source_sha256": "b417422de021be6ab02751c570276f7639c3b8d52a755701472bbd05c79361d0",
+      "changed": false
+    }
+  ],
+  "inserted_cell_indices": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "helper_files": [
+    "src/arc3_research/__init__.py",
+    "src/arc3_research/program_repair.py",
+    "src/arc3_research/executable_plan_contract.py",
+    "src/arc3_research/executable_plan.py",
+    "src/arc3_research/bounded_executable_plan.py"
+  ],
+  "formal_game_selection": "unchanged _competition_games() enumerates live gateway available_environments",
+  "formal_and_save_solver_interventions": [
+    "bounded_executable_plan; shared module DEFAULT_CONFIG"
+  ],
+  "runtime_changes_from_009": [
+    "Formal soft_end now uses first-cell total time, including cold loading, with 300s cleanup reserve",
+    "Formal per-game runtime is clamped to total remaining time; cancellation drain is bounded to120s",
+    "Save startup cap4200s and total cap5400s; same two public games and300s real-play validation"
+  ],
+  "formal_runtime_budget": {
+    "clock_origin": "first_notebook_cell_monotonic",
+    "hard_limit_seconds": 32400,
+    "cleanup_reserve_seconds": 300,
+    "cancel_drain_timeout_seconds": 120,
+    "runtime_change": "Replace009 formal soft_end=None with one total deadline including input setup, cold loading and gateway waiting; clamp the per-game limit to the actual remaining time",
+    "limit": "The first-cell clock cannot measure platform work before execution; the cleanup reserve remains conservative headroom"
+  },
+  "fork_inputs_bundled": false,
+  "native_helper_writefile_cells": true,
+  "cell_exec_compile_eval_wrappers": false,
+  "kernel_owner_provenance": {
+    "owner": "ccjjllt",
+    "basis": "Repository owner and recorded competition team; target identity is a configuration pending a live account check",
+    "must_verify_authenticated_account_and_team_before_push": true,
+    "live_account_verified": false,
+    "quota_note": "No historical balance is treated as current quota; query live quota and existing jobs before any launch"
+  },
+  "research_transfer_risks": [
+    "A same-prefix diagnostic is not evidence of natural trigger coverage, full-pool improvement or hidden-score gain.",
+    "Full25 research uses a shorter public OFFLINE allocation; formal runtime enumerates the actual live gateway and counts cold loading in one nine-hour cap.",
+    "The explicit formal total deadline,300s cleanup reserve and120s cancel-drain bound are runtime changes from009, not alleged observed performance improvements.",
+    "Nonthinking branch delivery and reduced context may lose useful task hypotheses; complete code and pixel acceptance do not certify the inferred rule.",
+    "Save health and real-game actions validate execution, not leaderboard quality. Only a real competition submission ID and its official result establish a scored attempt.",
+    "Research may retain in-flight server work after a cancelled CPU arm; bounded cache waiting is used between arms. It is not a claim that all server requests are always cancelled immediately."
+  ],
+  "state": "built_locally_not_run_not_pushed_not_submitted",
+  "push_timeout_seconds": 32400,
+  "submission_command_template": "kaggle competitions submit arc-prize-2026-arc-agi-3 -k ccjjllt/arc3-036-bounded-plan-submission -v <actual-successful-gpu-smoke-version> -f submission.parquet -m <frozen-source-description>"
+}

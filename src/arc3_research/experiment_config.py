@@ -38,6 +38,44 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError("arm_environment must name only configured arms.")
     for value in environments.values():
         arm_environment(value)
+    bounded_arms = {"bounded_executable_plan", "bounded_executable_plan_A", "bounded_executable_plan_B"}
+    if bounded_arms.intersection(arms):
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in arms}
+        if environments != expected or config.get("n_passes_per_arm") != 1:
+            raise ValueError("036 requires explicit unchanged scheduling and one pass.")
+        if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
+            raise ValueError("036 keeps the 10-stream RTX PRO 6000 serving contract.")
+        if (config.get("request_deadline") is not False
+                or config.get("skip_blanket_model_precache") is not False
+                or config.get("startup_limit_seconds") != 4200
+                or config.get("cache_flush_wait_seconds") != 120):
+            raise ValueError("036 requires its explicit startup, deadline and cache budgets.")
+        if not all(config.get(key) is True for key in (
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "native_payload_cells",
+        )):
+            raise ValueError("036 retains isolated, complete and drained arm contracts.")
+        if "bounded_executable_plan_A" in arms or "bounded_executable_plan_B" in arms:
+            if (arms != ["bounded_executable_plan_A", "bounded_executable_plan_B"]
+                    or config.get("reference_arm") != "bounded_executable_plan_A"
+                    or config.get("games") != ["ft09-0d8bbf25", "su15-1944f8ab"]
+                    or config.get("game_count") != 2
+                    or config.get("requested_arm_seconds") != 600
+                    or config.get("continuation_seconds") != 450
+                    or config.get("max_continuation_actions") != 60
+                    or config.get("hard_limit_seconds") != 7200
+                    or config.get("warmup_action_games") != 0):
+                raise ValueError("036 diagnostic retains the two frozen prefixes and equal continuation budget.")
+        elif (arms != ["baseline", "bounded_executable_plan"]
+              or config.get("reference_arm") != "baseline"
+              or config.get("game_count") != 25
+              or len(config.get("games", [])) != 25
+              or len(set(config.get("games", []))) != 25
+              or config.get("requested_arm_seconds") != 7254
+              or config.get("hard_limit_seconds") != 21600
+              or config.get("warmup_action_games") != 1):
+            raise ValueError("036 natural comparison requires the full25 matched baseline/candidate design.")
     if any(a in ("executable_plan", "executable_plan_A", "executable_plan_B") for a in arms):
         expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
                     for arm in arms}

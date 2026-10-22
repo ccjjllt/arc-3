@@ -175,7 +175,9 @@ def _write_event(state_path: Path, event: dict[str, Any]) -> None:
 
 
 def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[str, Any]],
-                *, timeout: float, max_tokens: int) -> Any:
+                *, timeout: float, max_tokens: int, enable_thinking: bool | None = None,
+                tool_choice: str | None = None, parallel_tool_calls: bool | None = None,
+                preserve_thinking: bool | None = None) -> Any:
     """Same model payload and sampling; one bounded request without retries.
 
     Non-streaming HTTP makes the read timeout bound the whole generation wait;
@@ -187,15 +189,25 @@ def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[
         messages=messages, max_tokens=max_tokens,
         temperature=module._LOCAL_ANALYZER_TEMPERATURE,
         top_p=module._LOCAL_ANALYZER_TOP_P, top_k=module._LOCAL_ANALYZER_TOP_K,
-        thinking=bool(module._LOCAL_ANALYZER_ENABLE_THINKING), tools=tools,
-        tool_choice=module._request_tool_choice(tools), seed=module._LOCAL_ANALYZER_SEED)
+        thinking=(bool(module._LOCAL_ANALYZER_ENABLE_THINKING)
+                  if enable_thinking is None else enable_thinking), tools=tools,
+        tool_choice=(module._request_tool_choice(tools) if tool_choice is None else tool_choice),
+        seed=module._LOCAL_ANALYZER_SEED)
     preferences = module._openrouter_provider_prefs(analyzer._model.provider)
     if preferences:
         payload["provider"] = preferences
     template = {**(payload.get("chat_template_kwargs") or {}),
                 **analyzer._harness_template_kwargs()}
+    # Request-local control, after the merge, as in the frozen actor's own
+    # _chat_completion. Never change its global thinking or tool-choice defaults.
+    if enable_thinking is not None:
+        template["enable_thinking"] = bool(enable_thinking)
+    if preserve_thinking is not None:
+        template["preserve_thinking"] = bool(preserve_thinking)
     if template:
         payload["chat_template_kwargs"] = template
+    if parallel_tool_calls is not None:
+        payload["parallel_tool_calls"] = bool(parallel_tool_calls)
     payload["messages"] = module._strip_control_keys(module._apply_summary_visibility(
         payload.get("messages") or [], evicted=getattr(analyzer, "_has_evicted", False)))
     payload["stream"] = False

@@ -1,0 +1,301 @@
+{
+  "record_type": "manual_local_build_verification_results_not_a_test_script",
+  "observed_at_utc": "2026-10-22T07:50:29.144547+00:00",
+  "source_base_commit": "55d4d54f890afc12ed0603f682a8f6b734492fd1",
+  "status": "local_build_checks_passed_runtime_gpu_unverified",
+  "method": "One-off Python command compiled actual generated native/helper Python, checked notebook structure, compared manifest/source/helper bytes and formal gateway/runtime structure. Two unchanged shell-magic lines were excluded from Python-only compilation, not executed. No notebook cells ran against a model or game.",
+  "full_nbformat_schema_validation_run": false,
+  "notebook_schema_limitation": "The nbformat package was unavailable in both available Python runtimes. Full nbformat schema validation and IPython transformation were not run; basic notebook structure and Python syntax were checked directly without installing packages.",
+  "notebooks": [
+    {
+      "kind": "diagnostic",
+      "path": "notebooks/036-bounded-plan-diagnostic/experiment.ipynb",
+      "sha256": "3bf2f1df199f55e99f44b66ba3cafce47068a4cb146e1fc120c580c1eacd75cc",
+      "bytes": 983200,
+      "cell_count": 32,
+      "basic_notebook_structure_valid": true,
+      "under_1000000_bytes": true,
+      "compiled_native_python_cells": [
+        1,
+        18,
+        22,
+        24,
+        26,
+        28,
+        30,
+        31
+      ],
+      "compiled_embedded_python_cells": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "non_python_writefile_data_cells": [
+        16,
+        17,
+        20
+      ],
+      "inherited_shell_magic_lines_not_executed": [
+        {
+          "cell": 22,
+          "line": "!rm -Rf $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        },
+        {
+          "cell": 22,
+          "line": "!cp -a $ORIG_BUNDLE_DIR $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        }
+      ],
+      "source_hashes_verified": 19,
+      "helper_sources_byte_equal": {
+        "__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa",
+        "executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+        "executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+        "executable_plan_forks.py": "ed1c7fcb610c887016a4b5c8997e8ea32c2869cd627ee02a9c093d20c7b36808",
+        "experiment_config.py": "b6d662efad3f1d75b2b4423c54c0231e2f7c1d0aee76f45508ca5026485c68b6",
+        "goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+        "program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "run_arm.py": "8759a1cbec7bdceeb5f42eb18ff2fe2f58a86b6aaa6f08272d245106a6792016",
+        "session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c"
+      },
+      "metadata_identity": "ccjjllt/arc3-036-bounded-plan-diagnostic",
+      "metadata_private_gpu_offline": true,
+      "identity_pending_live_verification": true
+    },
+    {
+      "kind": "full",
+      "path": "notebooks/036-bounded-plan-full/experiment.ipynb",
+      "sha256": "40c69e60cac4f407c916e70dd42e32f27bf1e9cf31e3aa0fc0a7d77877a8b7ea",
+      "bytes": 847423,
+      "cell_count": 31,
+      "basic_notebook_structure_valid": true,
+      "under_1000000_bytes": true,
+      "compiled_native_python_cells": [
+        1,
+        17,
+        21,
+        23,
+        25,
+        27,
+        29,
+        30
+      ],
+      "compiled_embedded_python_cells": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "non_python_writefile_data_cells": [
+        19
+      ],
+      "inherited_shell_magic_lines_not_executed": [
+        {
+          "cell": 21,
+          "line": "!rm -Rf $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        },
+        {
+          "cell": 21,
+          "line": "!cp -a $ORIG_BUNDLE_DIR $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        }
+      ],
+      "source_hashes_verified": 18,
+      "helper_sources_byte_equal": {
+        "__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa",
+        "executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+        "executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+        "experiment_config.py": "b6d662efad3f1d75b2b4423c54c0231e2f7c1d0aee76f45508ca5026485c68b6",
+        "goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+        "input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+        "program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "run_arm.py": "8759a1cbec7bdceeb5f42eb18ff2fe2f58a86b6aaa6f08272d245106a6792016",
+        "scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+        "session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c"
+      },
+      "metadata_identity": "ccjjllt/arc3-036-bounded-plan-full",
+      "metadata_private_gpu_offline": true,
+      "identity_pending_live_verification": true
+    },
+    {
+      "kind": "submission",
+      "path": "notebooks/036-bounded-plan-submission/submission.ipynb",
+      "sha256": "61c753152623f96a185e7dd87f2727725c8ff68ca61d34ab3f52e1ded6c67db0",
+      "bytes": 800288,
+      "cell_count": 32,
+      "basic_notebook_structure_valid": true,
+      "under_1000000_bytes": true,
+      "compiled_native_python_cells": [
+        0,
+        1,
+        6,
+        8,
+        10,
+        12,
+        13,
+        19,
+        21,
+        23,
+        25,
+        27,
+        29,
+        31
+      ],
+      "compiled_embedded_python_cells": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "non_python_writefile_data_cells": [
+        4
+      ],
+      "inherited_shell_magic_lines_not_executed": [
+        {
+          "cell": 6,
+          "line": "!rm -Rf $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        },
+        {
+          "cell": 6,
+          "line": "!cp -a $ORIG_BUNDLE_DIR $BUNDLE_DIR",
+          "scope": "unchanged inherited shell magic; not executed"
+        }
+      ],
+      "source_hashes_verified": 13,
+      "helper_sources_byte_equal": {
+        "__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+        "executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+        "executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+        "bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa"
+      },
+      "metadata_identity": "ccjjllt/arc3-036-bounded-plan-submission",
+      "metadata_private_gpu_offline": true,
+      "identity_pending_live_verification": true,
+      "inherited_009_cells": 25,
+      "unchanged_009_cells": 21,
+      "changed_009_indices": [
+        0,
+        2,
+        21,
+        22
+      ],
+      "inserted_helper_cells": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "no_fork_inputs_or_fork_runner": true,
+      "no_fixed_research_pool_in_formal_config": true,
+      "dynamic_gateway_function_ast_identical": true,
+      "shared_default_installer": true,
+      "first_cell_clock": true,
+      "formal_total_deadline_includes_loading": true,
+      "formal_hard_seconds": 32400,
+      "formal_cleanup_seconds": 300,
+      "formal_cancel_drain_seconds": 120,
+      "save_startup_seconds": 4200,
+      "save_total_seconds": 5400,
+      "save_real_game_seconds": 300,
+      "formal_runtime_change_explicitly_recorded": true
+    }
+  ],
+  "shared_candidate_default_config": {
+    "max_output_tokens": 4096,
+    "max_prompt_chars": 32000,
+    "max_prompt_bytes": 64000,
+    "max_hypothesis_chars": 1600,
+    "min_remaining_seconds": 180,
+    "max_check_seconds": 5,
+    "request_seconds": 60,
+    "extra_seconds": 120,
+    "enable_thinking": false,
+    "preserve_thinking": false,
+    "tool_choice": "required",
+    "parallel_tool_calls": false
+  },
+  "manual_deadline_calculation": {
+    "executor": "recent_results agent; separate inline command already executed",
+    "method": "Executed the exact builder FORMAL_DEADLINE snippet with a fake monotonic clock and temporary output directory",
+    "cases": [
+      {
+        "elapsed_seconds": 0,
+        "effective_per_game_seconds": 31920,
+        "remaining_seconds": 32100
+      },
+      {
+        "elapsed_seconds": 2571.23,
+        "effective_per_game_seconds": 29528.77,
+        "remaining_seconds": 29528.77
+      },
+      {
+        "elapsed_seconds": 4200,
+        "effective_per_game_seconds": 27900,
+        "remaining_seconds": 27900
+      },
+      {
+        "elapsed_seconds": 32100,
+        "outcome": "RuntimeError before gameplay"
+      }
+    ],
+    "passed": true
+  },
+  "architecture_checks_reported_separately": {
+    "source": "architecture agent report, not independently rerun by this build check",
+    "reported_checks": [
+      "Legacy034 completion payload unchanged when new options absent",
+      "036 constructed payload disables thinking/preserved thinking, requires a tool and disables parallel calls",
+      "Complete retained-function dependencies and compact hypotheses; over-limit requests are skipped",
+      "Forced fork ACTION6/ACTION7 normalized to MOUSE/UNDO before forbidden-action filtering",
+      "Independent review reported no additional concreteP0/P1"
+    ],
+    "reported_su15_request_characters_approximate": 10648,
+    "model_execution": false
+  },
+  "no_gpu_run": true,
+  "no_notebook_upload": true,
+  "no_competition_submission": true,
+  "runtime_limitations": [
+    "No real SDK game restoration, GPU model generation, server behavior or score was validated in this local build pass.",
+    "No live Kaggle identity, quota, current job or submission-limit check was available; every configured owner remains pending live verification.",
+    "Syntax and source consistency do not prove program delivery, task correctness or leaderboard improvement."
+  ]
+}

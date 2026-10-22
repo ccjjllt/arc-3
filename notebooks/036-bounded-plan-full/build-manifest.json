@@ -1,0 +1,139 @@
+{
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "f498b05eaf24ae2f1081eec3debb1c160caf9b0a62f249696eeb15a288b1a044",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa",
+    "src/arc3_research/executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+    "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+    "src/arc3_research/experiment_config.py": "b6d662efad3f1d75b2b4423c54c0231e2f7c1d0aee76f45508ca5026485c68b6",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "8759a1cbec7bdceeb5f42eb18ff2fe2f58a86b6aaa6f08272d245106a6792016",
+    "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/036-bounded-plan-full.json": "fe7aa309e39d710fc35116f630a37ddf04bddb4f6d6623337f678bef840c4628"
+  },
+  "config": {
+    "active_streams": 10,
+    "arm_environment": {
+      "baseline": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "bounded_executable_plan": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "arm_order": [
+      "baseline",
+      "bounded_executable_plan"
+    ],
+    "budget_formula": "floor(31920 * 25 / 110) = 7254 seconds per arm; both arms complete all 25 games.",
+    "comparison_note": "Baseline then bounded_executable_plan; identical25 games/order,7254s/arm,10streams,warmup1,request_deadlinefalse. Both arms share one model load. Only the candidate installs the same DEFAULT_CONFIG implementation used by save/formal reruns. No forced cut, prefix restoration or extra per-game time.",
+    "expected_gpu_hours": 5.5,
+    "game_count": 25,
+    "game_source": "research/data-inventory.json games[*].game_id; preserve inventory order and exact version IDs",
+    "games": [
+      "ar25-0c556536",
+      "bp35-0a0ad940",
+      "cd82-fb555c5d",
+      "cn04-2fe56bfb",
+      "dc22-fdcac232",
+      "ft09-0d8bbf25",
+      "g50t-5849a774",
+      "ka59-38d34dbb",
+      "lf52-271a04aa",
+      "lp85-305b61c3",
+      "ls20-9607627b",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "re86-8af5384d",
+      "s5i5-18d95033",
+      "sb26-7fbdac44",
+      "sc25-635fd71a",
+      "sk48-d8078629",
+      "sp80-589a99af",
+      "su15-1944f8ab",
+      "tn36-ef4dde99",
+      "tr87-cd924810",
+      "tu93-0768757b",
+      "vc33-5430563c",
+      "wa30-ee6fef47"
+    ],
+    "gpu_sample_interval_seconds": 10,
+    "hard_limit_seconds": 21600,
+    "id": "036-bounded-plan-full",
+    "inference_timing": true,
+    "kernel_id": "ccjjllt/arc3-036-bounded-plan-full",
+    "kernel_title": "ARC3 036 Bounded Plan Full",
+    "n_passes_per_arm": 1,
+    "preflight_before_serving": false,
+    "purpose": "One natural full25 matched comparison of bounded executable delivery against the unchanged ordinary solver",
+    "reference_arm": "baseline",
+    "request_deadline": false,
+    "require_cache_flush": true,
+    "require_cache_flush_log": true,
+    "require_complete_pool": true,
+    "require_drained_workers": true,
+    "require_rtx_pro6000": true,
+    "requested_arm_seconds": 7254,
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "scheduler_observer": true,
+    "selection_note": "Report official mean and every game, delivery/validation/actual action/checked progress, and all known branch/main generation costs. Record the comparison once; do not convert diagnostics into extra screening stages.",
+    "startup_limit_seconds": 4200,
+    "strict_arm_budget": true,
+    "warmup_action_games": 1,
+    "weekly_gpu_hours_limit": 30,
+    "native_payload_cells": true,
+    "skip_blanket_model_precache": false,
+    "startup_io_note": "Use original009 whole-model precache plus inherited SGLang shard prefetch.033 retry reached model ready466s; initial non-precache033 cold load failed before ready. This changes launch I/O only; both arms share unchanged numerical serving.",
+    "frozen_source_sha256": {
+      "src/arc3_research/bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa",
+      "src/arc3_research/executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+      "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+      "src/arc3_research/program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+      "src/arc3_research/run_arm.py": "8759a1cbec7bdceeb5f42eb18ff2fe2f58a86b6aaa6f08272d245106a6792016",
+      "src/arc3_research/experiment_config.py": "b6d662efad3f1d75b2b4423c54c0231e2f7c1d0aee76f45508ca5026485c68b6",
+      "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "scripts/build_experiment.py": "f498b05eaf24ae2f1081eec3debb1c160caf9b0a62f249696eeb15a288b1a044"
+    },
+    "formal_alignment": {
+      "request_deadline": false,
+      "warmup_action_games": 1,
+      "additional_solver_intervention": "bounded_executable_plan candidate only; exact shared module defaults",
+      "remaining_differences": [
+        "OFFLINE fixed25 public games versus dynamically enumerated COMPETITION gateway games",
+        "7254s per research arm after readiness; formal uses total32400s from first cell minus setup/loading and300s cleanup",
+        "Research request logs/passive timing diagnostics, cache boundary and separate CPU process lifecycle",
+        "Research soft_end is the arm deadline; formal soft_end is the explicitly bounded remaining notebook time"
+      ]
+    },
+    "mechanism_revision": "036-bounded-executable-plan-v1; shared module defaults with compact branch context and bounded nonthinking Python delivery",
+    "preparation_status": "built_source_frozen_locally_not_run_not_uploaded",
+    "resource_note": "Configured owner ccjjllt is pending live account, team and available RTX PRO6000 quota verification. No run has been authorized by a historical quota snapshot.",
+    "cache_flush_wait_seconds": 120,
+    "kernel_owner_provenance": {
+      "owner": "ccjjllt",
+      "basis": "Repository owner and recorded competition team; target identity is a configuration pending a live account check",
+      "must_verify_authenticated_account_and_team_before_push": true,
+      "live_account_verified": false,
+      "quota_note": "No historical balance is treated as current quota; query live quota and existing jobs before any launch"
+    },
+    "candidate_configuration_source": "arc3_research.bounded_executable_plan.DEFAULT_CONFIG"
+  },
+  "build_config_path": "experiments/036-bounded-plan-full.json",
+  "payload_write_mode": "native-writefile",
+  "notebook_sha256": "40c69e60cac4f407c916e70dd42e32f27bf1e9cf31e3aa0fc0a7d77877a8b7ea"
+}

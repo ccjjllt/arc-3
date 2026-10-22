@@ -1,0 +1,84 @@
+{
+  "id": "036-bounded-plan-diagnostic",
+  "kernel_id": "ccjjllt/arc3-036-bounded-plan-diagnostic",
+  "kernel_title": "ARC3 036 Bounded Plan Diagnostic",
+  "purpose": "One same-prefix diagnostic of compact nonthinking executable delivery; keep the original ordinary continuation as A",
+  "comparison_note": "A then B on the unchanged ft09 cut27 and su15 cut86. Both games continue concurrently for450s and at most60 actions per arm. Candidate bootstrap and repair stay inside this window. This is delivery/consumption evidence, not natural/full-pool or hidden-score evidence.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "bounded_executable_plan_A",
+    "bounded_executable_plan_B"
+  ],
+  "reference_arm": "bounded_executable_plan_A",
+  "arm_environment": {
+    "bounded_executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "bounded_executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "600s runner allowance per arm; two concurrent450s/60-action continuations, all bootstrap/repair/checking included. 4200s startup ceiling and7200s total session cap preserve both arms plus cleanup.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 7200,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 2,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "Inspect complete code, validation, actual host actions, prediction checks and game progress. A mere nonempty response or copied pixels is not success. Only this diagnostic and the prepared natural full25 comparison are planned; no prompt grid or repeated short-screen series.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "src/arc3_research/bounded_executable_plan.py": "cc08f8e312d6269fd129a3a3d2c028519fde1dd3a07e215ca172c92076d416fa",
+    "src/arc3_research/executable_plan.py": "228b38154c2a3a190dade978522b344ee773ffe8ac2dddefd06df3a7cdd7ca70",
+    "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+    "src/arc3_research/program_repair.py": "acd151aeed18f7f5ee16dc01d4a3707b3a080a256a87c35d374fcda70bc5751a",
+    "src/arc3_research/run_arm.py": "8759a1cbec7bdceeb5f42eb18ff2fe2f58a86b6aaa6f08272d245106a6792016",
+    "src/arc3_research/experiment_config.py": "b6d662efad3f1d75b2b4423c54c0231e2f7c1d0aee76f45508ca5026485c68b6",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "scripts/build_experiment.py": "f498b05eaf24ae2f1081eec3debb1c160caf9b0a62f249696eeb15a288b1a044",
+    "src/arc3_research/executable_plan_forks.py": "ed1c7fcb610c887016a4b5c8997e8ea32c2869cd627ee02a9c093d20c7b36808",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  },
+  "cache_flush_wait_seconds": 120,
+  "revision_note": "036 changes bounded branch input/output delivery, preserves034 checkpoint restoration and action budgets;035 remains reserved for its earlier discriminating-probe proposal.",
+  "kernel_owner_provenance": {
+    "owner": "ccjjllt",
+    "basis": "Repository owner and recorded competition team; target identity is a configuration pending a live account check",
+    "must_verify_authenticated_account_and_team_before_push": true,
+    "live_account_verified": false,
+    "quota_note": "No historical balance is treated as current quota; query live quota and existing jobs before any launch"
+  },
+  "preparation_status": "built_source_frozen_locally_not_run_not_uploaded",
+  "candidate_configuration_source": "arc3_research.bounded_executable_plan.DEFAULT_CONFIG"
+}
