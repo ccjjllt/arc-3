@@ -31,7 +31,7 @@
 | 026 RECHECK | 提示交付但未形成恢复；切点和实验设计不足 | 不做v7提示版本 |
 | 028真正程序修复 | 只有CPU回放；修复调用0次 | 唯一优先能力实验，先≤1 GPU小时 |
 
-027两臂同为25题、10并发、7254秒，候选先跑；会话内部实际15097秒，约4.194小时。基线50.43不是新的正式成绩。固定已完成关卡后，动作效率全部补满也只有52.92，剩余约2.49分；应优先增加后序关卡完成深度。[027结果](../../research/027-tail-confirm-results.md)、[逐题分析](../../experiments/027-analysis/summary.json)、[019最终进展](../progress/019-fp8-ple.md)、[025结果](../../experiments/025-analysis/summary.md)。
+027两臂同为25题、10并发、7254秒，候选先跑；会话内部实际15097秒，约4.194小时。基线50.43不是新的正式成绩。固定已完成关卡后，动作效率全部补满也只有52.92，剩余约2.49分；应优先增加后序关卡完成深度。[027结果](../../research/notes/027/027-tail-confirm-results.md)、[逐题分析](../../experiments/027-analysis/summary.json)、[019最终进展](../progress/019-fp8-ple.md)、[025结果](../../experiments/025-analysis/summary.md)。
 
 ## 账号与预算
 
@@ -72,7 +72,7 @@ KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
 
 `runs/`不入Git，因此[现有028清单](../../experiments/028-fork-inputs.json)仍不足以交付。将ft09前27个完整动作及参数、rec30请求的42条原始消息、原切点观察、环境版本与seed、所需运行态和空的函数保留集导出到一个小型包，附文件hash。动作和消息仅截至切点，不能夹带未来答案。
 
-沿用[现有回放脚本](../../scripts/replay_028_prefix.py)，补一次原请求观察与重放观察的逐项比对。若原件仅保存ASCII，就核对该可见观察并明确不能据此证明未记录的内部状态。比较关卡、动作计数、前后帧／历史和函数保留状态；双次重放一致不等于原状态完全恢复。
+沿用[现有回放脚本](../../scripts/replay/replay_028_prefix.py)，补一次原请求观察与重放观察的逐项比对。若原件仅保存ASCII，就核对该可见观察并明确不能据此证明未记录的内部状态。比较关卡、动作计数、前后帧／历史和函数保留状态；双次重放一致不等于原状态完全恢复。
 
 ### 实现有输出且被执行的修复分支
 
@@ -88,7 +88,7 @@ KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
 
 ### 同步准备029候选骨架
 
-拟新增 `scripts/build_029_submission.py`、`experiments/029-repair-submission.json` 及对应输出目录；**这些文件目前尚未实现**。复用[009构建器](../../scripts/build_submission.py)，参考[020插入独立helper的方式](../../scripts/build_020_submission.py)。020硬编码了 `grounded_state` 和jiyujia，不能直接调用它打包新候选。
+拟新增 `scripts/build/build_029_submission.py`、`experiments/029-repair-submission.json` 及对应输出目录；**这些文件目前尚未实现**。复用[009构建器](../../scripts/build_submission.py)，参考[020插入独立helper的方式](../../scripts/build/build_020_submission.py)。020硬编码了 `grounded_state` 和jiyujia，不能直接调用它打包新候选。
 
 新builder的owner统一为 **zhuating**；配置、metadata、命令和实际上传身份必须一致。保持动态gateway枚举、31920秒solver预算、9小时Notebook上限以及009的正式／save分支。准备时允许helper尚未过效果门，上传与正式提交依赖后面的结果。
 
@@ -139,7 +139,7 @@ T0＋2小时必须同时交付在线触发配置，不能等历史机制成功�
 
 ```bash
 # 本地构建，保存源码及Notebook hash
-python3.12 -B scripts/build_029_submission.py \
+python3.12 -B scripts/build/build_029_submission.py \
   --config experiments/029-repair-submission.json \
   --output-dir experiments/029-submission-source
 

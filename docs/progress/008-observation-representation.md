@@ -7,7 +7,7 @@
 - 已审阅真实 `FrameView` 与通用 segmentation：现有 API 缺少绑定当前帧的区域 mask、明确 bbox/前景和裁剪诊断；已有旋转 hash 不替代本轮完整多组件区域表示。
 - 新增 [observation_representation.py](../../src/arc3_research/observation_representation.py)：getter 每次读取当前帧，带 step/level/shape/ASCII hash；bbox 零起点且含端点；显式前景字符；完整 raw rows/mask；四连通组件并集；exact 默认保姿态，旋转/镜像键仅显式请求。
 - 可按当前 segmentation node 求 bbox，显式 inset；node 请求必须带当前 reference。空 mask、未知符号、越界、旧 reference 和跨边前景均有明确返回；不默认去边框、拆符号或合并类别。
-- 新增 [手动 CPU 复算脚本](../../scripts/analyze_008_representation.py) 及 [派生结果](../../experiments/008-representation/analysis.json)，保留输入路径/行号/hash、mask 与输出大小。原始 005/007 产物未改。
+- 新增 [手动 CPU 复算脚本](../../scripts/analysis/analyze_008_representation.py) 及 [派生结果](../../experiments/008-representation/analysis.json)，保留输入路径/行号/hash、mask 与输出大小。原始 005/007 产物未改。
 - 未修改 run_arm、研究基线、007、模型或 serving；没有 SDK 动作、GPU、游戏引擎源码读取、模型日志代码执行或新增测试文件。
 
 ## 实际 CPU 结果
@@ -31,4 +31,4 @@
 
 ## 下一步
 
-保留独立原型，先明确面板/子区域选择和紧凑输出方式，再决定是否形成一因素 GPU 候选；不叠加 007 或新调度。默认 baseline 保持不变。详细来源、接口合同、反例与可复算命令见 [008 研究分析](../../research/008-representation-analysis.md)。
+保留独立原型，先明确面板/子区域选择和紧凑输出方式，再决定是否形成一因素 GPU 候选；不叠加 007 或新调度。默认 baseline 保持不变。详细来源、接口合同、反例与可复算命令见 [008 研究分析](../../research/notes/008/008-representation-analysis.md)。

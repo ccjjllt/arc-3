@@ -1,14 +1,25 @@
-# Downloaded competition assets and local experiment environments
+# Downloaded competition assets and local runtime
 research/data/
 research/runtime-bundle/
 research/notebooks/dfranzen-v3-output/
 research/notebooks/lordhansolo-source-v297/
 research/notebooks/*.zip
+
+# Local run outputs and Python environments
 runs/
 .venv/
+
+# Regenerable Python, notebook and editor caches
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 .DS_Store
+*.swp
+*.swo
+*~
 
 # Credentials must remain outside this repository
 .env

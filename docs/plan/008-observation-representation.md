@@ -1,6 +1,6 @@
 # 008 — 绑定当前画面的小区域表示
 
-日期：2026-10-11；2026-10-12更新。状态：**CPU研究及独立原型已完成，尚未接入在线agent或安排GPU运行。** 继承[007进展](../progress/007-program-state.md)与[具体轨迹/保存帧核对](../../research/007-next-direction.md)。实际结果见[008进展](../progress/008-observation-representation.md)与[CPU分析](../../research/008-representation-analysis.md)。以下保留研究方案，不表示模型采用或提分已验证。
+日期：2026-10-11；2026-10-12更新。状态：**CPU研究及独立原型已完成，尚未接入在线agent或安排GPU运行。** 继承[007进展](../progress/007-program-state.md)与[具体轨迹/保存帧核对](../../research/notes/007/007-next-direction.md)。实际结果见[008进展](../progress/008-observation-representation.md)与[CPU分析](../../research/notes/008/008-representation-analysis.md)。以下保留研究方案，不表示模型采用或提分已验证。
 
 ## 背景、目标与假设
 

@@ -1,6 +1,6 @@
 # 026 — 失败前缀修复分支进展
 
-日期：2026-10-19。状态：**notebook 已构建，待推送**。`ccjjllt/arc3-026-failure-repair`，RTX PRO 6000。计划见 [025/026 交接](../handoff/025-research-handoff.md)，CPU 研究见 [026 修复诊断](../../research/026-failure-repair.md)。
+日期：2026-10-19。状态：**notebook 已构建，待推送**。`ccjjllt/arc3-026-failure-repair`，RTX PRO 6000。计划见 [025/026 交接](../handoff/025-research-handoff.md)，CPU 研究见 [026 修复诊断](../../research/notes/026/026-failure-repair.md)。
 
 ## 设计（相对交接的偏差已记录原因）
 
@@ -11,9 +11,9 @@
 
 ## CPU 验证（均已通过，无 GPU/模型）
 
-* `scripts/replay_026_prefix.py`：四前缀 111/111 检查点精确对齐。
-* `scripts/check_026_probe_budget.py`：14/14（配额、截断、边界、K=0）。
-* `scripts/check_026_fork.py`：20/20（重核裁决内容、宿主可见性、payload 体积）。
+* `scripts/replay/replay_026_prefix.py`：四前缀 111/111 检查点精确对齐。
+* `scripts/checks/check_026_probe_budget.py`：14/14（配额、截断、边界、K=0）。
+* `scripts/checks/check_026_fork.py`：20/20（重核裁决内容、宿主可见性、payload 体积）。
 * `validate_config` + preflight 兼容（新 arm 冻结 remaining/pace0；preflight 只验模块与预算器，无全局 hook）。
 
 ## GPU

@@ -17,7 +17,7 @@
 | analyzer生成tokens | 2,133,883 | 2,183,455 |
 | 预算内GPU时间加权利用率 | 90.60% | 93.09% |
 
-24条轨迹的评分公式逐项复算一致；同12游戏/顺序/各3482秒，来源hash和配置一致，独立CPU进程、两次服务端cache flush成功，003/006/007都关闭。截止后真实动作和通关均0。候选多约61秒benchmark尾段没有变成额外分数；服务记录显示两臂各1条entry_time晚于截止的请求（316/11,161输出tokens），尚未绑定客户端发送时刻或具体游戏。因此不能把全部尾段称为旧请求排空，也不能把server/analyzer/action三种token数混用。[数值报告](../../research/010-results-analysis.md)、[资源报告](../../research/010-efficiency-analysis.md)
+24条轨迹的评分公式逐项复算一致；同12游戏/顺序/各3482秒，来源hash和配置一致，独立CPU进程、两次服务端cache flush成功，003/006/007都关闭。截止后真实动作和通关均0。候选多约61秒benchmark尾段没有变成额外分数；服务记录显示两臂各1条entry_time晚于截止的请求（316/11,161输出tokens），尚未绑定客户端发送时刻或具体游戏。因此不能把全部尾段称为旧请求排空，也不能把server/analyzer/action三种token数混用。[数值报告](../../research/notes/010/010-results-analysis.md)、[资源报告](../../research/notes/010/010-efficiency-analysis.md)
 
 ### 工具确实使用了，但分差不能直接归因
 
@@ -28,9 +28,9 @@
 - **lf52：3次命中，3→1关。** 读到了事件顺序，仍未形成有效目标规则；另有一次旧引用超出保留范围。
 - **bp35：1→2关。** 第2关在动作66已完成，历史查询直到动作83之后才发生，不能把新增1关记为查询后的收益。
 
-28个含新API的Python调用按call_id核实进入真实request/工具反馈；3次KeyError来自字段层级/status守卫误用，说明接口仍有使用摩擦。没有把捕获成功或调用次数当作理解成功。[采用与迁移证据](../../research/010-intervention-analysis.md)
+28个含新API的Python调用按call_id核实进入真实request/工具反馈；3次KeyError来自字段层级/status守卫误用，说明接口仍有使用摩擦。没有把捕获成功或调用次数当作理解成功。[采用与迁移证据](../../research/notes/010/010-intervention-analysis.md)
 
-最大涨分m0r0没有查询新工具，1→5关，贡献全池+5.9102；最大下降ft09也没有查询，6→4关，贡献−4.6074。两臂首次动作时刻和实际token分配差异较大，首次动作不等于已测出的GPU入场/纯排队时间；实际gate尚未完整还原。ft09候选第3关还因约束抄写/解释失误多用58个动作。共同动作账token截面下m0r0仍有部分优势，但这不是等算力因果对照。[零查询轨迹](../../research/010-zero-query-traces.md)
+最大涨分m0r0没有查询新工具，1→5关，贡献全池+5.9102；最大下降ft09也没有查询，6→4关，贡献−4.6074。两臂首次动作时刻和实际token分配差异较大，首次动作不等于已测出的GPU入场/纯排队时间；实际gate尚未完整还原。ft09候选第3关还因约束抄写/解释失误多用58个动作。共同动作账token截面下m0r0仍有部分优势，但这不是等算力因果对照。[零查询轨迹](../../research/notes/010/010-zero-query-traces.md)
 
 ### 下一步取舍
 
@@ -63,10 +63,10 @@ kaggle kernels push -p notebooks/010-retrievable-animation -t 9000 --accelerator
 ## 本轮完成
 
 1. 从比赛API确认009正式COMPLETE和31.16；连续读取榜单前5页/500队，定位本队247名。比赛当前4221队、金牌附近第18名36.98、第五名42.66。读取最新比赛页面、近期讨论和共享GPU余额7.5249h；原件在[10/13快照](../../research/snapshots/2026-10-13/)。
-2. 刷新两种排序各50个Notebook条目，审计三类实现及版本/源码对应：未找到有独立成绩证据的直接升级。额外用005–007保存状态检查80k tail排序敏感性，不把重排推算成分数。[Notebook审计](../../research/010-notebook-update.md)
-3. 重新阅读VISTA、Tracing、PRO-LONG、Tycho、Twin论文原文和作者实现/报告，核对预算、动作上限、重复次数、公开/隐藏协议。明确高预算近满分不能迁移为9h比赛预期。[前沿报告](../../research/010-frontier-update.md)
-4. 下载既有005 cd82公开日志补齐对照，确认其首关608秒，前300秒也0关；009短验证不构成退化证据。区分正确观察被误记和旧动画不可访问两个机制。[本地诊断](../../research/010-local-diagnostics.md)
-5. 使用公开SDK完成旧动作帧归档/取回的最小CPU研究；没有执行日志中的模型代码、没有读取引擎实现或隐藏状态。[研究脚本](../../scripts/analyze_010_animation_archive.py)、[详细可行性](../../research/010-animation-feasibility.md)
+2. 刷新两种排序各50个Notebook条目，审计三类实现及版本/源码对应：未找到有独立成绩证据的直接升级。额外用005–007保存状态检查80k tail排序敏感性，不把重排推算成分数。[Notebook审计](../../research/notes/010/010-notebook-update.md)
+3. 重新阅读VISTA、Tracing、PRO-LONG、Tycho、Twin论文原文和作者实现/报告，核对预算、动作上限、重复次数、公开/隐藏协议。明确高预算近满分不能迁移为9h比赛预期。[前沿报告](../../research/notes/010/010-frontier-update.md)
+4. 下载既有005 cd82公开日志补齐对照，确认其首关608秒，前300秒也0关；009短验证不构成退化证据。区分正确观察被误记和旧动画不可访问两个机制。[本地诊断](../../research/notes/010/010-local-diagnostics.md)
+5. 使用公开SDK完成旧动作帧归档/取回的最小CPU研究；没有执行日志中的模型代码、没有读取引擎实现或隐藏状态。[研究脚本](../../scripts/analysis/analyze_010_animation_archive.py)、[详细可行性](../../research/notes/010/010-animation-feasibility.md)
 
 ## 实际CPU结果
 
@@ -87,4 +87,4 @@ CPU结果支持“原始信息可以准确取回且短序列存储可控”的�
 
 原009生产Notebook与归档的SHA256均重新核对为 `203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5`。历史005–009源码/运行产物未覆盖；本轮新增候选模块、研究runner接入口与原生helper cell构建模式，并更新研究记录；没有新增test/CI。
 
-完整优先级、奖牌/奖金边界和赛程取舍见[010研究决策](../../research/010-research-decision.md)。工程交付、真实查询与单轮公开正分差已核验；稳定性、检索的独立收益与正式排名提升仍未确认。
+完整优先级、奖牌/奖金边界和赛程取舍见[010研究决策](../../research/notes/010/010-research-decision.md)。工程交付、真实查询与单轮公开正分差已核验；稳定性、检索的独立收益与正式排名提升仍未确认。

@@ -9,7 +9,7 @@
 ## 已完成
 
 - 刷新比赛、前500榜单、提交及额度。11:58、031启动前快照为本队393/4566、允许正式提交1次、CLI GPU23.74h；均不是此刻实时状态。
-- v1同状态诊断 `zhuating/arc3-031-recorded-state-exact-pixels` v1已COMPLETE。两臂各三个250秒切点，均0新增；ft09两边各2动作，B新代码仍用boundary填框，把背景g误成W，0次runs读取。见[结果](../../research/031-forks-results.md)和[采用审阅](../../experiments/031-forks-analysis/adoption-review.json)。
+- v1同状态诊断 `zhuating/arc3-031-recorded-state-exact-pixels` v1已COMPLETE。两臂各三个250秒切点，均0新增；ft09两边各2动作，B新代码仍用boundary填框，把背景g误成W，0次runs读取。见[结果](../../research/notes/031/031-forks-results.md)和[采用审阅](../../experiments/031-forks-analysis/adoption-review.json)。
 - v1远端28个cell与冻结源码完全一致；下载后仍为v1/COMPLETE。模型就绪1693.78秒，会话2278.67秒、约0.633h，缓存刷新和完整覆盖通过，GPU服务正常退出。原helper已归档，不重跑v1。
 - 限时公开候选刷新未找到准确源码版本与更高正式成绩的可靠绑定，不据队伍榜分直接换底座。
 - v2只在系统节点清单补齐已有runs合同，增加150字符；13项系统提示/host/sandbox/卸载核验通过，0模型或GPU调用。正式候选16项静态检查通过，helper与研究一致。

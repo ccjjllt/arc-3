@@ -1,6 +1,6 @@
 # ARC3 下一轮交接：031收尾、成功经验记忆与受验证的程序纠错
 
-**执行后更新：2026-10-22 08:43北京时间。** 031自然短跑已COMPLETE（+0.7726分、关数27→26）；032已实现并真正提交，submission57481712已COMPLETE，public30.20，低于009/31.16共0.96。032短跑+25.655、全25题候选跨会话+11.140没有迁移为本次正式提分；停止v1原样重提和扩大，保留实际复用证据。033补跑新增0关，准确像素未进入目标重算，现版不扩跑。009继续保留。当前实际进展与下一研究优先级见[032结果](../../research/032-results-analysis.md)、[执行进展](../progress/032-033-memory-and-controller.md)。
+**执行后更新：2026-10-22 08:43北京时间。** 031自然短跑已COMPLETE（+0.7726分、关数27→26）；032已实现并真正提交，submission57481712已COMPLETE，public30.20，低于009/31.16共0.96。032短跑+25.655、全25题候选跨会话+11.140没有迁移为本次正式提分；停止v1原样重提和扩大，保留实际复用证据。033补跑新增0关，准确像素未进入目标重算，现版不扩跑。009继续保留。当前实际进展与下一研究优先级见[032结果](../../research/notes/032/032-results-analysis.md)、[执行进展](../progress/032-033-memory-and-controller.md)。
 
 **下文是10月21日原始设计交接的历史内容。** 当时“仅文档／尚未实现／等待031”等描述不代表当前状态，不应据此重复启动已完成实验。
 
@@ -21,7 +21,7 @@
 | 031 v2自然短跑 | Notebook `zhuating/arc3-031-natural-aligned` **v1**；helper **v2**；10题、两臂各900秒 | 最后归档观察为13:18进入baseline；**无已归档效果结论，不是当前实时状态** |
 | 032 / 033 | 只有本交接的设计；032有可借鉴的公开实现，033有若干现存组件 | 尚无新实现、模型实验或可提交版本 |
 
-031 v2只把系统提示中的节点字段说明补齐，增加150字符。其正式候选已构建并通过静态检查，但尚未做候选自身GPU save，更没有新的competition submission。[031进展](../progress/031-exact-pixels.md) · [运行记录](../../experiments/031-natural-launch.json) · [v1采用审阅](../../experiments/031-forks-analysis/adoption-review.json) · [030结果](../../research/030-results-analysis.md)
+031 v2只把系统提示中的节点字段说明补齐，增加150字符。其正式候选已构建并通过静态检查，但尚未做候选自身GPU save，更没有新的competition submission。[031进展](../progress/031-exact-pixels.md) · [运行记录](../../experiments/031-natural-launch.json) · [v1采用审阅](../../experiments/031-forks-analysis/adoption-review.json) · [030结果](../../research/notes/030/030-results-analysis.md)
 
 **成绩与资源只能按快照引用。** 10月21日11:58，本队393/4566，公开榜铜牌附近30.85、银牌附近32.22、金牌附近37.98，第五名49.85。31.16高于当时铜牌附近0.31，距银牌附近1.06、金牌附近6.82；这些不能换算为私榜所需提升，也不构成奖牌保证。23.11 GPU小时是031 v1结束、v2启动前的账号共享CLI余额；本轮没有刷新余额或每日提交额度。[榜单历史快照](../../research/snapshots/2026-10-21-handoff/handoff-summary.json) · [23.11h余额记录](../../experiments/031-forks-launch.json)
 
@@ -54,7 +54,7 @@ KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
   kaggle kernels status zhuating/arc3-031-natural-aligned
 KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
   kaggle kernels output zhuating/arc3-031-natural-aligned -p runs/031-natural-aligned
-python3.12 -B scripts/analyze_031_natural.py
+python3.12 -B scripts/analysis/analyze_031_natural.py
 ```
 
 大输出可用`--file-pattern`只取两臂benchmark、experiment-manifest、arm-metadata、请求、transcript及必要帧。对runs访问逐条核对实际执行与后续行为，静态字段命中不能自动判采用。
@@ -151,7 +151,7 @@ A、B在CPU侧并行准备和审阅，分别交付可逆helper、冻结输入、
 
 ### 社区盲测
 
-已有40个社区代表按家族分为开发12、预留12、冻结16，接口smoke通过不代表可解、确定性或有人类基线。继续使用既有划分，不能看效果后重选游戏。先用开发池做工程与行为验证；候选冻结后，可从预留池预先指定少量独立家族做一次迁移检查，冻结16不参与调参。[社区协议](../../research/020-community-validation.md) · [固定名单](../../experiments/020-community/solver-allowlists.json)
+已有40个社区代表按家族分为开发12、预留12、冻结16，接口smoke通过不代表可解、确定性或有人类基线。继续使用既有划分，不能看效果后重选游戏。先用开发池做工程与行为验证；候选冻结后，可从预留池预先指定少量独立家族做一次迁移检查，冻结16不参与调参。[社区协议](../../research/notes/020/020-community-validation.md) · [固定名单](../../experiments/020-community/solver-allowlists.json)
 
 每对创建相同版本/seed的新环境，不假设RESET等于重建；事前核验环境有效性，事后出现异常须计入报告，不能删题优化均值。不给solver标题、描述、规则源码或未来结果。当前适配器的观测字段过滤不等于强文件隔离，需说明实际隔离范围。社区报告关数/完成率、动作与时间，**不与官方RHAE混算**；它提供迁移风险证据，不是提交前必须扩成几百题的新门槛。
 
@@ -179,7 +179,7 @@ T0是恢复执行的时刻，以下是目标安排；排队、平台故障、额
 
 | 用途 | 已有入口 / 拟交付 |
 |---|---|
-| 031收尾 | `experiments/031-natural-launch.json`；`scripts/analyze_031_natural.py`；`docs/progress/031-exact-pixels.md` |
+| 031收尾 | `experiments/031-natural-launch.json`；`scripts/analysis/analyze_031_natural.py`；`docs/progress/031-exact-pixels.md` |
 | A来源 | `research/snapshots/2026-10-21-candidates/notebooks/lalalia9__arc3-franzen-v19/source.txt`，cell 17记忆wrapper |
 | B真实组件 | `src/arc3_research/program_repair.py`、`checked_execution.py`、`checked_action.py`、`segmentation_runs.py` |
 | 失败状态与审计 | `experiments/028-fork-package.json.gz.b64`；`experiments/031-forks-analysis/adoption-review.json`；审计答案不进模型输入 |

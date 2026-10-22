@@ -7,12 +7,12 @@
 ## 代码完成
 
 - 从 Kaggle 取回 003 的 su15 / tn36 / lf52 / sk48 两组 requests/events，保存在 runs/003-goal-evidence-ab/（gitignore）。
-- 增加 scripts/compact_requests.py。复核修复按历史长度切片导致的裁剪漏数，改为消息内容对齐和工具调用 ID 去重；保留每条事件的 response usage、finish_reason 与原始行号。
+- 增加 scripts/tools/compact_requests.py。复核修复按历史长度切片导致的裁剪漏数，改为消息内容对齐和工具调用 ID 去重；保留每条事件的 response usage、finish_reason 与原始行号。
 - 动画 user 提示改为提取 text part，避免保留整段 base64；分开记录代码内容引用、AST 语法引用与工具返回，不能把名称出现等同于成功读帧。
 - 新结果写入 runs/004-reviewed-compact/；原始轨迹及旧 runs/003-compact/ 保留。恢复了旧输出漏掉的 25 个调用；新输出覆盖 raw 快照可见的全部 682 个唯一工具调用和 1405 条事件。
 - 未新增 observation_evidence.py 或 004 Notebook，未覆盖 003 Notebook/源码归档。
 
-手动核对：逐文件对照 raw 的调用 ID 集合、user cue、上下文裁剪边界、新增帧引用及 stdout。没有新增测试文件。详细原始定位、计数及限制见 [复核记录](../../research/004-review-data.md)。最后一次生成内容若未进入后续请求快照，不能仅靠 requests 文件保证完整可见。
+手动核对：逐文件对照 raw 的调用 ID 集合、user cue、上下文裁剪边界、新增帧引用及 stdout。没有新增测试文件。详细原始定位、计数及限制见 [复核记录](../../research/notes/004/004-review-data.md)。最后一次生成内容若未进入后续请求快照，不能仅靠 requests 文件保证完整可见。
 
 ## 运行完成
 
@@ -20,7 +20,7 @@
 
 ## 研究结果与效果边界
 
-以下是 003 已发生的公开开发结果，不是 004 新实验，更不是隐藏榜。综合解释见 [004-observation-attribution](../../research/004-observation-attribution.md)。
+以下是 003 已发生的公开开发结果，不是 004 新实验，更不是隐藏榜。综合解释见 [004-observation-attribution](../../research/notes/004/004-observation-attribution.md)。
 
 | 游戏 | baseline | goal_evidence | 当前可支持的观察 |
 |---|---|---|---|

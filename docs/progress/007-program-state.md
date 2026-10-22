@@ -8,7 +8,7 @@
 
 005 tr87、006 baseline ar25与transient_history ar25分别有34/39/15个已保留函数在硬超时后被清空。底座未收到keepable_functions时用缺省空列表替代，再提交空函数集合。
 
-这与普通Python异常不同：普通异常可返回有效namespace快照，执行过的新定义/删除应该保存。007仅区分缺键与有键，不把所有error都回滚。见 [研究与源码结论](../../research/007-program-state-design.md)。
+这与普通Python异常不同：普通异常可返回有效namespace快照，执行过的新定义/删除应该保存。007仅区分缺键与有键，不把所有error都回滚。见 [研究与源码结论](../../research/notes/007/007-program-state-design.md)。
 
 ## 代码完成
 
@@ -62,14 +62,14 @@ v1推送前已重新核实以下两个其它项目Notebook均为COMPLETE。北�
 
 候选3次缺失快照：re86首次0函数；ls20保21函数；re86后一次保17函数。3条反馈均进入下一模型请求。ls20立即复用旧函数，随后action334完成L3，但基线更早通过且总关卡更多；re86复用旧lines/Wpos成功，仍停在L6。代码完成与实际复用已验证，净研究效果未提升。baseline诊断为空是关闭补丁的设计，不代表没有timeout。
 
-最大回退为零直接触发的tr87/sc25，合计均分贡献−9.0085；全部12游戏实际净差−6.0343。不能将零触发分差直接归因补丁，也不能把有触发分组当作随机因果对照。详细轨迹见[触发报告](../../research/007-intervention-analysis.md)。
+最大回退为零直接触发的tr87/sc25，合计均分贡献−9.0085；全部12游戏实际净差−6.0343。不能将零触发分差直接归因补丁，也不能把有触发分组当作随机因果对照。详细轨迹见[触发报告](../../research/notes/007/007-intervention-analysis.md)。
 
 会话7812.59秒（2.1702h），北京时间15:33:26—17:43:39，已关闭GPU服务。启动13.17min主要为权重加载；B整体输出和GPU利用率更高，不能用整体算力不足解释回退。账户快照余额11.6736h、预留0；全账户差额3.5532h不能当成本轮消耗。
 
-产出：[逐游戏与结果解释](../../research/007-results-analysis.md)、[可复算comparison.json](../../experiments/007-analysis/comparison.json)、[效率报告](../../research/007-efficiency-analysis.md)、[配额原件](../../experiments/007-quota-after.json)。本次结果分析未运行新GPU作业，也未新增测试文件。
+产出：[逐游戏与结果解释](../../research/notes/007/007-results-analysis.md)、[可复算comparison.json](../../experiments/007-analysis/comparison.json)、[效率报告](../../research/notes/007/007-efficiency-analysis.md)、[配额原件](../../experiments/007-quota-after.json)。本次结果分析未运行新GPU作业，也未新增测试文件。
 
 ## 后续方向
 
-007保留为独立候选，默认仍为baseline。本轮还定位tr87 L2的表示错误：B约2336.6秒/103237 tokens，A约213.8秒/14460 tokens。应优先在已保存帧上核对裁剪边界、符号编码和类别坍塌，再设计局部的观察证据辅助；不是立即重跑同配置。见[具体病例与下一方向](../../research/007-next-direction.md)。
+007保留为独立候选，默认仍为baseline。本轮还定位tr87 L2的表示错误：B约2336.6秒/103237 tokens，A约213.8秒/14460 tokens。应优先在已保存帧上核对裁剪边界、符号编码和类别坍塌，再设计局部的观察证据辅助；不是立即重跑同配置。见[具体病例与下一方向](../../research/notes/007/007-next-direction.md)。
 
 下一轮交接已写入[008-observation-representation](../plan/008-observation-representation.md)。当前仅完成计划，尚未实现008候选或启动GPU。

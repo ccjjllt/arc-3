@@ -31,7 +31,7 @@
 ### Task 1: Compact 003 diagnostic traces
 
 **Files:**
-- Create: `scripts/compact_requests.py`
+- Create: `scripts/tools/compact_requests.py`
 - Create (gitignored under `runs/`): `runs/003-compact/{baseline,goal_evidence}__{su15,tn36,lf52,sk48}-*_p0_requests.compact.json`
 
 **Interfaces:**
@@ -39,7 +39,7 @@
 - Produces: compact JSON with only new messages per event; user prompts reduced to animation cues + prefix; assistant reasoning and tool stdout retained.
 
 - [x] **Step 1: Download traces** — done by controller via `kaggle kernels output` with file-pattern for su15/tn36/lf52/sk48 requests and events.
-- [x] **Step 2: Compact** — `python3 scripts/compact_requests.py ... --output-dir runs/003-compact`
+- [x] **Step 2: Compact** — `python3 scripts/tools/compact_requests.py ... --output-dir runs/003-compact`
 - [x] **Step 3: Confirm both arms exist as separate files**
 
 ---
@@ -47,28 +47,28 @@
 ### Task 2: Attribute sk48 traces
 
 **Files:**
-- Create: `research/004-trace-sk48.md`
+- Create: `research/notes/004/004-trace-sk48.md`
 
 See shared analysis rubric in Task 2–5 notes below. Game scores: baseline 1.37 (1/8 levels), goal_evidence 0.00 (0/8). Compact: `runs/003-compact/baseline__sk48-d8078629_p0_requests.compact.json`, `runs/003-compact/goal_evidence__sk48-d8078629_p0_requests.compact.json`. Events: `runs/003-goal-evidence-ab/{baseline,goal_evidence}/artifacts/sk48-d8078629_p0_events.jsonl`.
 
 ### Task 3: Attribute lf52 traces
 
 **Files:**
-- Create: `research/004-trace-lf52.md`
+- Create: `research/notes/004/004-trace-lf52.md`
 
 Scores: baseline 7.73 (3/10), goal_evidence 10.91 (3/10). Compact: `baseline__lf52-271a04aa_p0_requests.compact.json`, `goal_evidence__lf52-271a04aa_p0_requests.compact.json`.
 
 ### Task 4: Attribute su15 traces
 
 **Files:**
-- Create: `research/004-trace-su15.md`
+- Create: `research/notes/004/004-trace-su15.md`
 
 Scores: baseline 62.22 (7/9), goal_evidence 13.33 (3/9). Largest delta; one-run fluctuation. Compact: `baseline__su15-1944f8ab_p0_requests.compact.json`, `goal_evidence__su15-1944f8ab_p0_requests.compact.json`.
 
 ### Task 5: Attribute tn36 traces
 
 **Files:**
-- Create: `research/004-trace-tn36.md`
+- Create: `research/notes/004/004-trace-tn36.md`
 
 Scores: baseline 13.76 (3/7), goal_evidence 3.57 (1/7). Compact: `baseline__tn36-ef4dde99_p0_requests.compact.json`, `goal_evidence__tn36-ef4dde99_p0_requests.compact.json`.
 
@@ -86,7 +86,7 @@ Each note must:
 ### Task 6: Synthesize defect or stop
 
 **Files:**
-- Create: `research/004-observation-attribution.md`
+- Create: `research/notes/004/004-observation-attribution.md`
 - Create: `docs/progress/004-observation-evidence.md` (code complete vs run complete vs effect; this phase has no GPU run)
 
 Decide one of:

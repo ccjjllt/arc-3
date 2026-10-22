@@ -1,6 +1,6 @@
 # 017 — 深度研究进展
 
-日期：2026-10-18，Asia/Shanghai。状态：**比赛/数据、公开Notebook、前沿与本地原始轨迹研究已完成；选择018观察状态保真作为下一推理候选，FP8 PLE作为独立工程备选。** 对应[计划](../plan/017-research-next.md)、[综合决策](../../research/017-research-decision.md)。
+日期：2026-10-18，Asia/Shanghai。状态：**比赛/数据、公开Notebook、前沿与本地原始轨迹研究已完成；选择018观察状态保真作为下一推理候选，FP8 PLE作为独立工程备选。** 对应[计划](../plan/017-research-next.md)、[综合决策](../../research/notes/017/017-research-decision.md)。
 
 ## 本轮新增证据
 
@@ -20,10 +20,10 @@
 
 ## 可复核入口
 
-- [比赛数据与资源](../../research/017-competition-update.md)及[原始快照](../../research/snapshots/2026-10-18/)
-- [Notebook与FP8 PLE研究](../../research/017-notebook-update.md)及[源码审计索引](../../research/notebooks/2026-10-18/audit.json)
-- [前沿研究](../../research/017-frontier-update.md)及[来源账本](../../research/frontier/2026-10-18/source-ledger.json)
-- [016结果](../../research/016-results-analysis.md)、[017原始调用证据](../../research/017-local-evidence.md)
+- [比赛数据与资源](../../research/notes/017/017-competition-update.md)及[原始快照](../../research/snapshots/2026-10-18/)
+- [Notebook与FP8 PLE研究](../../research/notes/017/017-notebook-update.md)及[源码审计索引](../../research/notebooks/2026-10-18/audit.json)
+- [前沿研究](../../research/notes/017/017-frontier-update.md)及[来源账本](../../research/frontier/2026-10-18/source-ledger.json)
+- [016结果](../../research/notes/016/016-results-analysis.md)、[017原始调用证据](../../research/notes/017/017-local-evidence.md)
 - [50局复算和时序](../../experiments/016-analysis/)、[四次baseline统计](../../experiments/017-research/cross-run-coverage.json)
 
 所有结果继续区分CPU正确、模型自然采用、行为改变、公开同预算净覆盖和正式隐藏成绩。下一步最重要的未知是短提示是否会改善模型自己构造程序状态的行为；当前没有提分或获奖概率结论。

@@ -1,6 +1,6 @@
 # 010 — 按动作检索完整动画计划
 
-日期：2026-10-13。对应[研究决策](../../research/010-research-decision.md)、[进展](../progress/010-retrievable-animation.md)。
+日期：2026-10-13。对应[研究决策](../../research/notes/010/010-research-decision.md)、[进展](../progress/010-retrievable-animation.md)。
 
 ## 假设与隔离范围
 

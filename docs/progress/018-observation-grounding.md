@@ -1,6 +1,6 @@
 # 018 — 观察状态保真进展
 
-日期：2026-10-18。状态：**jiyujia v1 已COMPLETE，67.0106→63.7827，22→22关，全通2→1；两游戏有真实纠错，ar25仍转抄误用，不晋升/不扩跑。** 对应[完整分析](../../research/018-results-analysis.md)、[冻结计划](../plan/018-observation-grounding.md)。
+日期：2026-10-18。状态：**jiyujia v1 已COMPLETE，67.0106→63.7827，22→22关，全通2→1；两游戏有真实纠错，ar25仍转抄误用，不晋升/不扩跑。** 对应[完整分析](../../research/notes/018/018-results-analysis.md)、[冻结计划](../plan/018-observation-grounding.md)。
 
 ## 10/18 实际启动
 
@@ -25,7 +25,7 @@
 
 ## 已通过的验证
 
-[最终CPU报告](../../experiments/018-grounding-cpu/cpu-20261018T054036Z/report.json)为 **20/20 passed**。人工命令脚本为 [check_018_grounding.py](../../scripts/check_018_grounding.py)，复现入口及本地依赖边界见[准备说明](../../experiments/018-grounding-cpu/README.md)。
+[最终CPU报告](../../experiments/018-grounding-cpu/cpu-20261018T054036Z/report.json)为 **20/20 passed**。人工命令脚本为 [check_018_grounding.py](../../scripts/checks/check_018_grounding.py)，复现入口及本地依赖边界见[准备说明](../../experiments/018-grounding-cpu/README.md)。
 
 - 实际导入冻结ToolAgent及solver，加载原Notebook完整setup_env后构造baseline/candidate；candidate系统prompt逐字等于prefix+baseline，已有baseline实例不变。
 - 工具schema、ToolAgent行为方法对象、会话play对象、内存/运行控制不变；已有/重复prefix拒绝，卸载及空白原值恢复正确。

@@ -14,7 +14,7 @@
 | `checked_execution` / `checked_action` | 已有“冻结预测→一个动作→重新观察→失配停后缀”；实际可选调用是`action(..., expect=..., read=...)` | 把验证接到确定执行路径；021的1438条候选请求未形成实际使用，不能重跑同一可选提示 |
 | 031 v1 ft09 | B新代码真实读取segmentation后仍按boundary外接框填色，复现同一错格，未读取runs | 数据提供不等于消费；精确像素可作观测依据，不能自动算程序已修正 |
 
-证据：[028结果](../../research/028-program-repair-results.md)、[028触发审计](../../research/028-error-trigger-audit.md)、[021结果](../../research/021-results-analysis.md)、[031 v1采用审阅](../../experiments/031-forks-analysis/adoption-review.json)。031 v2只补齐系统字段清单，必须单列版本证据。
+证据：[028结果](../../research/notes/028/028-program-repair-results.md)、[028触发审计](../../research/notes/028/028-error-trigger-audit.md)、[021结果](../../research/notes/021/021-results-analysis.md)、[031 v1采用审阅](../../experiments/031-forks-analysis/adoption-review.json)。031 v2只补齐系统字段清单，必须单列版本证据。
 
 ## 七项必须冻结的边界
 
@@ -81,7 +81,7 @@
 - `src/arc3_research/checked_execution.py`：`Observation`、`ComparableState`、`execute_checked`提供一步预测、观测比较和停止后缀；不替代隔离和语义真值。
 - `src/arc3_research/checked_action.py`：`build_checked_bootstrap`、`_WRAPPER`展示原sandbox的真实action连接；当前是可选expect/read路径，不能直接声称已由控制器接管。
 - `src/arc3_research/segmentation_runs.py`：`_attach_row_runs`给出真实像素成员；读取合同、输出成本与031版本须记录。
-- `experiments/028-fork-package.json`及压缩包、`scripts/prepare_028_inputs.py`：已冻结ft09/tu93/r11l前缀。历史图像已移除，不能称完整原会话逐字恢复。
+- `experiments/028-fork-package.json`及压缩包、`scripts/prepare/prepare_028_inputs.py`：已冻结ft09/tu93/r11l前缀。历史图像已移除，不能称完整原会话逐字恢复。
 - `src/arc3_research/program_repair_forks.py`是028旧强制修复参照；`segmentation_forks.py`有独立单臂恢复、逐像素核对与可靠导出，可复用恢复逻辑，但目前仅031安装/不安装，**不是B控制器成品**。
 - `experiments/028-analysis/ft09-repair-pixel-audit.json`与`experiments/031-forks-analysis/adoption-review.json`用于后验核对；审计特例不进入线上模板。
 

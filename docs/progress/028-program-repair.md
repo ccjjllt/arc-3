@@ -6,6 +6,6 @@ ft09 cum27、tu93 cum276、r11l正常控制cum40的原始画面与完整Harness�
 
 固定输入、源码和上传记录分别位于 `experiments/028-fork-package.json.gz.b64`、`experiments/028-program-repair-source/`、`experiments/028-program-repair-launch.json`。GPU执行已结束，六个会话均实际续跑；结果导出因ActionRecord被当作dict而失败，已从原始请求、工具输出和动作回声恢复结果，没有为导出故障重跑GPU。无新正式submission。
 
-实际结果：ft09修复代码返回、执行并被主模型使用，但关键像素仍提取错误；tu93修复请求60秒超时；三对A/B均无新增关卡。本版关闭，不扩全池。详见 [028真实结果](../../research/028-program-repair-results.md)。整个会话内部约19.26分钟，模型加载约13.66分钟；求解阶段GPU中位98%，均值72.15%，不能将中位数当作全会话利用率。
+实际结果：ft09修复代码返回、执行并被主模型使用，但关键像素仍提取错误；tu93修复请求60秒超时；三对A/B均无新增关卡。本版关闭，不扩全池。详见 [028真实结果](../../research/notes/028/028-program-repair-results.md)。整个会话内部约19.26分钟，模型加载约13.66分钟；求解阶段GPU中位98%，均值72.15%，不能将中位数当作全会话利用率。
 
 同步研究发现：991次既有Python工具输出中，73次符合普通异常触发，60次下一工具已不报错。连续两次不同工具异常触发的本地v2尚无GPU收益证据，不因缩窄触发就晋升。后续配置 `experiments/030-capability-comparison.json` 仅比较独立的关内持久Python候选与原基线，一次模型加载、各25题、各7254秒、10路并发。

@@ -35,8 +35,8 @@
 | MCP v3 metadata | `research/notebooks/dfranzen__arc-agi-3-milestone-2-solution.metadata.json` |
 | 作者原始输出 | `research/notebooks/dfranzen-v3-output/benchmark.json`、`*.log`、三个选取的 `*_requests.jsonl` |
 | 全部公开环境 | `research/data/extracted/environment_files/` |
-| 版本及人工观察 | `research/data-inventory.json`、`research/data-findings.md` |
-| 研究依据 | `research/notebook-findings.md`、`research/frontier-findings.md` |
+| 版本及人工观察 | `research/data-inventory.json`、`research/overview/data-findings.md` |
+| 研究依据 | `research/overview/notebook-findings.md`、`research/overview/frontier-findings.md` |
 
 当前源码可提取修改，但未解包为本项目正式 solver。不要将 research 中第三方源码误称为我们的算法实现。
 

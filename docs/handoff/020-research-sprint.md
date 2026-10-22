@@ -1,6 +1,6 @@
 # 020 研究冲刺交接：把观察、执行和探索转化为正式候选
 
-> 10/19结果更新：020 v1已完成，41.2112→26.5081（−14.7031），不提交未修改版本。用户现接手实施，当前入口为[021实施交接](021-implementation-handoff.md)与[020结果](../../research/020-results-analysis.md)。下文保留实验开始前的研究安排；其中“运行中／等待结果”属于当时状态。
+> 10/19结果更新：020 v1已完成，41.2112→26.5081（−14.7031），不提交未修改版本。用户现接手实施，当前入口为[021实施交接](021-implementation-handoff.md)与[020结果](../../research/notes/020/020-results-analysis.md)。下文保留实验开始前的研究安排；其中“运行中／等待结果”属于当时状态。
 
 更新：2026-10-19，Asia/Shanghai。起点提交：`4dc2294`。这是用户确认的新研究方向；后续执行以本文件及实际运行记录为准，不沿用历史文档里已经过时的“下一步”。
 
@@ -93,16 +93,16 @@ CPU 加载、reset 与少量合法动作只证明接口兼容，不证明可解�
 ## 文件与接续入口
 
 - 运行方案：`experiments/020-grounded-state.json`；构建：`python scripts/build_experiment.py --config experiments/020-grounded-state.json`。
-- 状态通道：`src/arc3_research/grounded_state.py`，真实 sandbox 演示和说明见 `research/020-state-channel.md`。
-- 执行与探索：`src/arc3_research/checked_execution.py`、`bounded_probe.py`，说明见 `research/020-behavior-mechanisms.md`。
-- 社区：`scripts/prepare_020_community.py`、`src/arc3_research/community.py`、`experiments/020-community/`、`research/020-community-validation.md`。
+- 状态通道：`src/arc3_research/grounded_state.py`，真实 sandbox 演示和说明见 `research/notes/020/020-state-channel.md`。
+- 执行与探索：`src/arc3_research/checked_execution.py`、`bounded_probe.py`，说明见 `research/notes/020/020-behavior-mechanisms.md`。
+- 社区：`scripts/prepare/prepare_020_community.py`、`src/arc3_research/community.py`、`experiments/020-community/`、`research/notes/020/020-community-validation.md`。
 - 本轮实际状态：`experiments/020-status/`。020 已上传 `jiyujia/arc3-020-grounded-state` **v1 / kernel 139518619**，Kaggle 返回 RUNNING；远端 32 cells 的类型与源码逐一一致，private/offline/RTX 设置核对通过。尚无在线分数或实测 GPU 利用率。冻结 Notebook SHA256：`f09fffce64c9ded819d32f534848078f139306c78563cb8cde308a30638bba2e`；详见 `experiments/020-launch.json` 与 `020-source/kernel/`。
 
 当前已经完成 A 的两例真实 sandbox 数据消费并启动配对短筛；社区 40/40 正常接口检查通过，12/12/16 家族清单已冻结（完整 hash 见社区报告）。后续执行顺序：补齐社区到现有 Agent 的桥接与正式提交构建路径 → 取回 020 分数和关键采用轨迹 → 尽早形成 S1。B/C 的独立实现可并行，但不要阻塞 A，也不要把未接入的辅助函数称作在线机制。
 
 ## 依据
 
-- 仓库：`research/017-local-evidence.md`、`018-results-analysis.md`、`017-notebook-update.md`；保留原始轨迹和 10/18 Notebook 审计。
+- 仓库：`research/notes/017/017-local-evidence.md`、`018-results-analysis.md`、`017-notebook-update.md`；保留原始轨迹和 10/18 Notebook 审计。
 - [Franzen WRITEUP](https://raw.githubusercontent.com/da-fr/arc-agi-3-solution/refs/heads/main/WRITEUP.md)：已有机制与负面结果，10/19 复核。
 - [官方评分方法](https://docs.arcprize.org/methodology)、[公开游戏入口](https://docs.arcprize.org/available-games)：API key 解锁其余公开游戏，不代表取得隐藏题。
 - [OPINE-World v3](https://arxiv.org/html/2607.01531v3)：探索层消融，底座与预算不同。

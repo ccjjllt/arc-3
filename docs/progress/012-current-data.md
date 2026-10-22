@@ -12,13 +12,13 @@
 | 动作 | 2633 | 2356 |
 | analyzer生成tokens | 2,364,169 | 2,378,190 |
 
-26局分数由原始逐关动作数独立重算完全一致。各3772秒、源码/环境/缓存清理/独立进程和退出状态符合冻结配置；截止后动作/关卡均0。候选却有tn36/lf52两次新模型请求在截止后约0.6秒发出，未产生后续动作，作为取消边界问题单独保留。不是运行崩溃，也不能把全部退分归因新API。[结果复算](../../experiments/012-analysis/comparison.md)、[独立复核](../../experiments/012-results-review.json)、[计时报告](../../research/012-timing-analysis.md)
+26局分数由原始逐关动作数独立重算完全一致。各3772秒、源码/环境/缓存清理/独立进程和退出状态符合冻结配置；截止后动作/关卡均0。候选却有tn36/lf52两次新模型请求在截止后约0.6秒发出，未产生后续动作，作为取消边界问题单独保留。不是运行崩溃，也不能把全部退分归因新API。[结果复算](../../experiments/012-analysis/comparison.md)、[独立复核](../../experiments/012-results-review.json)、[计时报告](../../research/notes/012/012-timing-analysis.md)
 
-唯一使用者ft09第一次保存list[tuple]被拒绝；第二次在action28后存入181字节候选解，下一模型段承认选错组合，手写更正并行动，没有get。成功写入后到下一段之间尚无动作，不能说失效过早阻止读取。其余12局含cd82全零调用。[采用分析](../../research/012-intervention-analysis.md)
+唯一使用者ft09第一次保存list[tuple]被拒绝；第二次在action28后存入181字节候选解，下一模型段承认选错组合，手写更正并行动，没有get。成功写入后到下一段之间尚无动作，不能说失效过早阻止读取。其余12局含cd82全零调用。[采用分析](../../research/notes/012/012-intervention-analysis.md)
 
 实际北京时间17:21:25→19:37:28，8162.91秒（2.26747h），model-ready560.59秒，GPU服务已停止。共享余额已为0h，10/17 08:00北京刷新；账户同时存在其它新作业，余额变化不等同012耗时，不作计费分摊。[完成记录](../../experiments/012-completion.json)、[配额快照](../../experiments/012-quota-after.json)
 
-**停止当前版本扩跑，正式基线保持009/31.16。** 后续先以最小真实模型试验验证采用，再进入完整多游戏A/B；CPU检查不能替代模型主动读取与消费的证据。不因一次tuple拒绝就假定放宽类型可提分，也不强行把错误假说变成持久事实。[综合结论与下一步](../../research/012-results-analysis.md)
+**停止当前版本扩跑，正式基线保持009/31.16。** 后续先以最小真实模型试验验证采用，再进入完整多游戏A/B；CPU检查不能替代模型主动读取与消费的证据。不因一次tuple拒绝就假定放宽类型可提分，也不强行把错误假说变成持久事实。[综合结论与下一步](../../research/notes/012/012-results-analysis.md)
 
 ## 工程与CPU证据
 
@@ -26,7 +26,7 @@
 
 - [真实SDK与sandbox最终检查](../../experiments/012-current-data/cpu-20261013T083909Z/summary.json)：53项通过（含基础通信检查，并非53个独立游戏）。覆盖值精确复制、跨snippet、普通变量仍不持久、原函数保留、两个真实session隔离、无操作动作、实际RESET和ft09实际L1→L2后失效、旧绑定拒绝，以及真实硬超时后已确认值保留（请求0.5秒，底座最小执行限1秒）。HTTP请求和模型调用为0。
 - [72项受控检查](../../experiments/012-current-data/module-checks/report.json)：默认容量、严格JSON、复制隔离、128会话淘汰不复活、画面完全相同但动作数增加的失效、A→B→A不复活、异常/计时故障下原动作返回与异常identity保真。人工carrier和真实类wrapper，不冒称真实SDK动作或并发压力。
-- [两病例最终比较](../../experiments/012-current-data/check-cases/comparison.json)：cd82程序算出30像素/bbox，后续snippet直接得到9×14；ft09从分割结果算出逻辑列2并索引回原位置。baseline纯函数重算、候选计算、host确认及get四方hash一致。[病例说明](../../research/012-current-data-cases.md)
+- [两病例最终比较](../../experiments/012-current-data/check-cases/comparison.json)：cd82程序算出30像素/bbox，后续snippet直接得到9×14；ft09从分割结果算出逻辑列2并索引回原位置。baseline纯函数重算、候选计算、host确认及get四方hash一致。[病例说明](../../research/notes/012/012-current-data-cases.md)
 
 早期CPU目录保留开发记录：第一次使用sandbox不允许的globals导致探针失败；第二次把游戏报告no-op误当完整画面不变（HUD会变）；首次超时探针被禁止import time而实际只是普通异常。最终版本分别修正为直接名称检查、真实no-op与受控同帧分开验证、while循环触发明确`Tool timed out after 0.5s`（文案为请求值，实际底座最小限1秒），并在首个stored响应后发送第二写入作为确认已消费的证据。不能把早期通过项数当最终超时证据。
 

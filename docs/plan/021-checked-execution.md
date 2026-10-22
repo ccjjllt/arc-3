@@ -1,6 +1,6 @@
 # 021 — 预测失配停批
 
-日期：2026-10-19。依据 [021实施交接](../handoff/021-implementation-handoff.md) 与 [020行为机制](../../research/020-behavior-mechanisms.md)。020 区域通道已经完整跑完并回退，本候选不叠加那条通道、018 提示、FP8 或有限探索。GPU 短筛尚未启动。
+日期：2026-10-19。依据 [021实施交接](../handoff/021-implementation-handoff.md) 与 [020行为机制](../../research/notes/020/020-behavior-mechanisms.md)。020 区域通道已经完整跑完并回退，本候选不叠加那条通道、018 提示、FP8 或有限探索。GPU 短筛尚未启动。
 
 ## 要回答的问题
 

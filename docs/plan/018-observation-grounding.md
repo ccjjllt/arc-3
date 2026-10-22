@@ -1,6 +1,6 @@
 # 018 — 观察到程序状态的保真筛选
 
-日期：2026-10-18。依据 [017 综合决策](../../research/017-research-decision.md)与[原始轨迹审计](../../research/017-local-evidence.md)。这是启动前冻结方案。后续执行已COMPLETE，当前版不晋升/不扩跑；结果见[018分析](../../research/018-results-analysis.md)及[进展](../progress/018-observation-grounding.md)。以下原始资源快照与门槛保留用于审计。
+日期：2026-10-18。依据 [017 综合决策](../../research/notes/017/017-research-decision.md)与[原始轨迹审计](../../research/notes/017/017-local-evidence.md)。这是启动前冻结方案。后续执行已COMPLETE，当前版不晋升/不扩跑；结果见[018分析](../../research/notes/018/018-results-analysis.md)及[进展](../progress/018-observation-grounding.md)。以下原始资源快照与门槛保留用于审计。
 
 ## 要回答的问题
 

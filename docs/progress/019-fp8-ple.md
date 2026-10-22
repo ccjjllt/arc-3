@@ -7,7 +7,7 @@
 - [ple_weights.py](../../src/arc3_research/ple_weights.py)：纯标准库解析safetensors header及范围读取，核config/tokenizer/template、222587个非PLE键、分层小样本、128×8行PLE及BF16全局scale。180秒内部、240秒父进程硬边界，逻辑payload约651KB，不载整张量、不导torch。
 - [ple_microbench.py](../../src/arc3_research/ple_microbench.py)：冻结10个真实公开请求与10个合成精确工具题，三阶段各34次请求；1/10并发、冷/热cache、流式时间、usage、speculation与服务指标。HTTP仅loopback，绝对deadline，保存全部原件；不执行生成代码。
 - [ple_session.py](../../src/arc3_research/ple_session.py)：先CPU合同，再顺序BF16a/FP8/BF16b；不同目标之外服务参数一致，来源hash校验、显式seed、独立进程组清理、hard watchdog、GPU及主机内存采样。失败不自动扩跑或缩短后冒充完整比较。
-- [build_019_microbench.py](../../scripts/build_019_microbench.py)：沿用原Franzen precache/serving源码，增加固定seed、来源核验、prefetch join及生命周期记录；原模型服务参数保留。分别构建私有断网CPU和GPU Notebook，账号固定jiyujia。
+- [build_019_microbench.py](../../scripts/build/build_019_microbench.py)：沿用原Franzen precache/serving源码，增加固定seed、来源核验、prefetch join及生命周期记录；原模型服务参数保留。分别构建私有断网CPU和GPU Notebook，账号固定jiyujia。
 
 ## 已完成的本地核验
 
@@ -21,11 +21,11 @@
 
 ```bash
 PYTHONPATH=/private/tmp/arc3-018-check-deps \
-  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/build_019_microbench.py --mode weights_only
+  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/build/build_019_microbench.py --mode weights_only
 PYTHONPATH=/private/tmp/arc3-018-check-deps \
-  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/build_019_microbench.py --mode microbench
+  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/build/build_019_microbench.py --mode microbench
 PYTHONPATH=/private/tmp/arc3-018-check-deps \
-  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/check_019_preparation.py
+  /Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/checks/check_019_preparation.py
 ```
 
 临时依赖只用于本机nbformat/IPython构建检查，CPU/GPU远端实际模块均为标准库，不把本地临时库上传。
@@ -45,4 +45,4 @@ PYTHONPATH=/private/tmp/arc3-018-check-deps \
 
 第一次/第二次保存返回HTTP400，进一步读取API正文确认源码必须小于1MB；已修正标题与id一致性，并只对静态suite JSON做XZ+base64封装。可执行helper与launcher仍是原生可读writefile。还原后的suite字节与标识不变，最终Notebook约530KB。第三次保存成功，CPU kernel139403754 / v1，enable_gpu=false。所有失败响应和最终冻结源均保留，没有因上传失败占用GPU。
 
-离线结果检查已实现：`scripts/analyze_019_results.py --root <下载的019-results目录> --output-dir <独立派生目录>`。按冻结门槛判断请求/缓存/速度/漂移/质量，资源异常仍需单独审阅；不会自动启动下一实验。当前Qwen4Exp不支持现成的loaded-weight读取接口，内部scale实值没有被直接测量。
+离线结果检查已实现：`scripts/analysis/analyze_019_results.py --root <下载的019-results目录> --output-dir <独立派生目录>`。按冻结门槛判断请求/缓存/速度/漂移/质量，资源异常仍需单独审阅；不会自动启动下一实验。当前Qwen4Exp不支持现成的loaded-weight读取接口，内部scale实值没有被直接测量。

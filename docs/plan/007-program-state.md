@@ -2,7 +2,7 @@
 
 日期：2026-10-11（Asia/Shanghai）  
 对应进展：[007-program-state](../progress/007-program-state.md)。  
-继承：[006进展](../progress/006-transient-history.md)、[005后关病例](../../research/005-results-analysis.md)。
+继承：[006进展](../progress/006-transient-history.md)、[005后关病例](../../research/notes/005/005-results-analysis.md)。
 
 ## 背景
 
@@ -24,13 +24,13 @@
 4. 写清若修复需修改的代码、旧函数与新函数冲突处理、正常删除/重置、错误后的真实游戏状态。不能回滚已执行动作，也不能把保留下来的旧函数当成已验证的当前关规则。
 5. 仅在实际缺口明确后实现一个小的独立补丁；不同时引入全局变量持久化、目标提示、调度变化或世界模型。
 
-第一阶段产物：research/007-program-state-design.md，匹配progress中的真实完成情况。如候选不成立，记录原因，不为凑实验改代码。
+第一阶段产物：research/notes/007/007-program-state-design.md，匹配progress中的真实完成情况。如候选不成立，记录原因，不为凑实验改代码。
 
 ## GPU方案（已完成，保留原实验设计）
 
 缺失字段与合法空集合语义已定位，独立补丁实现、CPU复现及Notebook构建已完成。此前尝试并行启动遭遇GPU并发上限，随后暂缓；用户后来明确“现在可以提交了”。确认其它两个GPU作业均COMPLETE后，于北京时间2026-10-11 15:16左右成功推送 [ARC3 007 Program State v1](https://www.kaggle.com/code/ccjjllt/arc3-007-program-state)。该版约11.54秒复制bundle失败、11.89秒报FileNotFoundError，未加载模型或求解。CPU诊断v1确认canonical原路径存在；CPU诊断v2实际运行input_paths.py定位器并COMPLETE，全部输入含model/draft index以0.03065秒检查通过。首次GPU缺失原因未知，不能宣称路径已迁移。
 
-研究Notebook v2已完成。两组均正常运行，baseline 46.3578分、候选40.3235分；真实函数保留与复用发生，但本轮净差−6.0343，不晋升。路径定位实际兼容了GPU会话的扁平dataset/competition挂载；模型加载和完整求解均已核实。详见[对应进展](../progress/007-program-state.md)及[结果报告](../../research/007-results-analysis.md)。以下实验方案及判读规则仍作为原计划保留。
+研究Notebook v2已完成。两组均正常运行，baseline 46.3578分、候选40.3235分；真实函数保留与复用发生，但本轮净差−6.0343，不晋升。路径定位实际兼容了GPU会话的扁平dataset/competition挂载；模型加载和完整求解均已核实。详见[对应进展](../progress/007-program-state.md)及[结果报告](../../research/notes/007/007-results-analysis.md)。以下实验方案及判读规则仍作为原计划保留。
 
 固定12游戏：ar25、tr87、re86、m0r0、sp80、sk48、ls20、tu93、lf52、ft09、sc25、bp35。ar25/tr87有真实硬超时病例，其余覆盖程序化表示和成功代码复用。它是公开诊断集，不是未见留出；不能与006不同池均分直接比较。
 

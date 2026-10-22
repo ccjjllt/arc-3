@@ -1,6 +1,6 @@
 # 012 — 当前观察下的计算值交接
 
-日期：2026-10-13。承接[011结果](../../research/011-results-analysis.md)及[病例研究](../../research/011-evidence-reuse-next.md)。本轮用户要求继续完成下一步，先落实真实CPU工具链及交付合同，再判断GPU投入。
+日期：2026-10-13。承接[011结果](../../research/notes/011/011-results-analysis.md)及[病例研究](../../research/notes/011/011-evidence-reuse-next.md)。本轮用户要求继续完成下一步，先落实真实CPU工具链及交付合同，再判断GPU投入。
 
 ## 问题与单一改动
 

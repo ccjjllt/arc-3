@@ -12,12 +12,12 @@
 
 `ar25` 的 94 个已返回、去重 Python 调用没有使用新增 region 接口；它的局部涨分不能归因于新通道。`ft09` 也未使用；`cd82` 仅在末尾调用一次打印区域，尚未形成后续求解消费。另一方面，`r11l`确实把`positions()`用于选点击，并间接复用了区域读取函数；这条真实数据流没有带来本局涨分。全池采用索引及重点轨迹出处见下方结果报告。**CPU 能运行不等于模型实际采用，完成关卡也不等于状态全部编码正确。** 下一版应改变实际的数据消费或执行行为，不继续单纯增加提醒。
 
-- [完整结果与逐游戏分数](../../research/020-results-analysis.md)
-- [ar25 轨迹审查](../../research/020-ar25-adoption.md)
-- [cd82／ft09 轨迹审查](../../research/020-cd82-ft09-review.md)
+- [完整结果与逐游戏分数](../../research/notes/020/020-results-analysis.md)
+- [ar25 轨迹审查](../../research/notes/020/020-ar25-adoption.md)
+- [cd82／ft09 轨迹审查](../../research/notes/020/020-cd82-ft09-review.md)
 - [全12局采用索引](../../experiments/020-analysis/adoption-index.json)：720个唯一代码调用，3局出现新API语法；不是720条逐一语义审读。另见[r11l真实消费](../../experiments/020-analysis/r11l-adoption-note.md)。
 - 本次分析原件：完整评分及运行记录`runs/020-overview/`、候选日志`runs/020-candidate-logs/`、重点事件`runs/020-focused-events/`。`runs/020-grounded-state/`是额外批量下载的部分档案，不能当成完整输出集。
-- 复算：`python3 -B scripts/analyze_020_results.py`。只读 JSON，不执行历史模型代码。
+- 复算：`python3 -B scripts/analysis/analyze_020_results.py`。只读 JSON，不执行历史模型代码。
 
 正式成绩仍为 **009 v2 / submission 57101330 / public 31.16**。本轮没有新 leaderboard 成绩。
 
@@ -40,7 +40,7 @@
 
 具体实施顺序：
 
-1. 阅读 `src/arc3_research/checked_execution.py` 和 `research/020-behavior-mechanisms.md`。它当前不是 Agent 补丁，不能仅把文件打包就当作接入完成。
+1. 阅读 `src/arc3_research/checked_execution.py` 和 `research/notes/020/020-behavior-mechanisms.md`。它当前不是 Agent 补丁，不能仅把文件打包就当作接入完成。
 2. 参照 `grounded_state.py` 的 bootstrap 安装方式，为现有 Python `action(actions)` 增加可选的预测执行路径；普通 action 保持原行为。接口可以是 `action(plan, pred=..., extract=...)`，或一个很薄的同环境 helper，避免要求模型再转抄一套状态对象。
 3. 适配模型现有 `pred`／`extract`，在框架内部包装 `ComparableState`。预测输入和实际提取使用同一坐标系、字段与语义；不要默认比较整幅画面，也不要自动忽略边界像素。
 4. `execute_one` 每次只送一个动作给**原有** `action`。保留点击位置与所有已有 payload；不要在新 helper 内重新解释点击坐标或吞掉原 no-op／terminal 异常。原入口签名是 `action(actions)`，不是 `action(**payload)`，应复用原 normalization。
@@ -88,19 +88,19 @@
 
 远端CPU v1仍为ERROR，失败发生在wheel源码身份检查，未采样权重、未启动GPU。`4be361d`已修复：实际wheel整体与四文件hash绑定，PLE两个核心文件与原审计相同，另两处是预取／BF16支持差异。当前CPU/GPU构建都是18cells；**本地没有CPU v2上传记录**。
 
-若继续，先运行已有 `scripts/check_019_preparation.py`，再只上传CPU修复版。GPU微基准仍独立80分钟上限；没有真实速度／质量收益就结束该支线。它不应阻塞行为候选。分析器三处已知问题已修代码，专门分支验证尚未做；如遇不完整结果，应读原JSON确认，别把缺失当通过。
+若继续，先运行已有 `scripts/checks/check_019_preparation.py`，再只上传CPU修复版。GPU微基准仍独立80分钟上限；没有真实速度／质量收益就结束该支线。它不应阻塞行为候选。分析器三处已知问题已修代码，专门分支验证尚未做；如遇不完整结果，应读原JSON确认，别把缺失当通过。
 
 ## GPU、正式提交与命令
 
 所有GPU都使用 **jiyujia**。专用凭据仅在当前进程注入，不打印、不复制到仓库；每次上传前核对CLI/API返回用户名。通用quota曾显示已用大于总量，但RTX任务仍被平台接收，不能从该数字推算精确剩余额度。
 
-已准备的正式模板为 `experiments/020-grounded-submission.json` 与 `scripts/build_020_submission.py`，身份 `jiyujia/arc3-020-grounded-submission`。Notebook SHA256：`c16c9f339a37e89492ee82c817396e203f005cc32c9fe4885e9072838c2bdb11`。原009 builder/config未改，真实gateway动态枚举、31920秒solver预算和原save smoke保持；没有研究12游戏过滤。
+已准备的正式模板为 `experiments/020-grounded-submission.json` 与 `scripts/build/build_020_submission.py`，身份 `jiyujia/arc3-020-grounded-submission`。Notebook SHA256：`c16c9f339a37e89492ee82c817396e203f005cc32c9fe4885e9072838c2bdb11`。原009 builder/config未改，真实gateway动态枚举、31920秒solver预算和原save smoke保持；没有研究12游戏过滤。
 
 模板当前只供下一候选改造，不直接提交负向020。选中候选后按顺序：
 
 ```bash
 # 本地构建模板，不使用GPU，不提交
-python3 -B scripts/build_020_submission.py --output-dir experiments/020-submission-source
+python3 -B scripts/build/build_020_submission.py --output-dir experiments/020-submission-source
 
 # 为真正选中的新候选生成独立目录及身份后，再用jiyujia执行
 kaggle kernels push -p <候选目录> -t 32400 --accelerator NvidiaRtxPro6000

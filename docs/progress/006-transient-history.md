@@ -34,7 +34,7 @@ B共1016次被观察的Python调用；捕获640条暂态，335条符合条件，
 
 tn36首关没有任何附加，首次发生在L2，不能把其首关改善归因本机制；最大正项m0r0与第二大负项ar25整局都零附加。共享调度、生成路径和额外CPU读取仍可能间接影响机会，零附加也不是独立A/A随机对照。
 
-详见 [干预分析](../../research/006-intervention-analysis.md) 和 [零触发轨迹](../../research/006-zero-trigger-traces.md)。
+详见 [干预分析](../../research/notes/006/006-intervention-analysis.md) 和 [零触发轨迹](../../research/notes/006/006-zero-trigger-traces.md)。
 
 ## GPU与额度
 
@@ -54,4 +54,4 @@ tn36首关没有任何附加，首次发生在L2，不能把其首关改善归�
 
 人工执行summarize_experiment.py和analyze_006_results.py，检查24条分数/动作、deadline、hash和干预动作绑定；阅读原始日志与代表性轨迹。没有新增测试文件，未执行模型日志中的整段程序。
 
-[逐游戏结果](../../research/006-results-analysis.md) · [效率分析](../../research/006-efficiency-analysis.md) · [复算数据](../../experiments/006-analysis/comparison.json) · [手动实现记录](../../experiments/006-manual-checks.json)。
+[逐游戏结果](../../research/notes/006/006-results-analysis.md) · [效率分析](../../research/notes/006/006-efficiency-analysis.md) · [复算数据](../../experiments/006-analysis/comparison.json) · [手动实现记录](../../experiments/006-manual-checks.json)。

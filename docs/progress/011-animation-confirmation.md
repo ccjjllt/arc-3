@@ -22,9 +22,9 @@
 
 010差值+3.8864，011差值−1.8637；两轮简单平均仍+1.0113，但同12局重复、每顺序仅1次，不能据此声称稳定或显著收益。tn36再次1→4关，却没有一次旧动画查询；m0r0本轮候选得到更多持slot时间/tokens仍5→3关，初始排队不能独立解释总分波动。
 
-计时记录两臂各12会话完整，无丢弃、observer错误或退出后未释放slot；按全局截止时间核验，两臂均没有截止后新chat、HTTP尝试或gate准入。尾部ReadTimeout来自截止前请求，不是额外动作预算。[计时与资源分析](../../research/011-timing-analysis.md)
+计时记录两臂各12会话完整，无丢弃、observer错误或退出后未释放slot；按全局截止时间核验，两臂均没有截止后新chat、HTTP尝试或gate准入。尾部ReadTimeout来自截止前请求，不是额外动作预算。[计时与资源分析](../../research/notes/011/011-timing-analysis.md)
 
-**决策：不原样晋升动画候选，不用剩余GPU盲目重复本版本。** 下一项优先做“当前观察绑定的结构化计算值跨snippet交接”的CPU验证，已有两种游戏的直接证据与反例，尚未实现或接入运行。正式记录仍为009的31.16；本轮没有正式submission或新GPU作业。[综合结果与后续](../../research/011-results-analysis.md)、[下一候选研究](../../research/011-evidence-reuse-next.md)
+**决策：不原样晋升动画候选，不用剩余GPU盲目重复本版本。** 下一项优先做“当前观察绑定的结构化计算值跨snippet交接”的CPU验证，已有两种游戏的直接证据与反例，尚未实现或接入运行。正式记录仍为009的31.16；本轮没有正式submission或新GPU作业。[综合结果与后续](../../research/notes/011/011-results-analysis.md)、[下一候选研究](../../research/notes/011/011-evidence-reuse-next.md)
 
 ## 已完成的交付与验证
 
@@ -32,7 +32,7 @@
 - Notebook SHA256：`4d7bd650af420bcaf47d71fe8dc2e63e9198cf783badfa4e93e9b1dd3f580211`。冻结源码与构建依赖见[011-source](../../experiments/011-source/source-hashes.json)，历史009/010 Notebook未改变。
 - 计时模块SHA256：`5ff98e60341015277b84cf88dbe4d54abe842e03834b6fd4f6080c3721db00f8`。31项CPU手工核验通过，覆盖真实gate交接、真实chat方法的受控JSON/SSE响应、原参数/返回/异常identity、重试、有界记录及计时失败时保留原执行结果。详见[CPU范围和记录](../../experiments/011-timing-checks/README.md)。这些不是模型采用、生产并发性能或提分证据。
 - 独立审查确认源码、Notebook实际payload、manifest和IPython报告一致，无剩余工程启动阻断。[Notebook核验](../../experiments/011-notebook-checks.json)
-- 下一候选完成两种游戏的直接证据链及反例复核，24条摘录/14份来源hash核验一致；建议先在CPU上验证“当前观察绑定的结构化计算值跨snippet交接”，尚未实现或加入011。[研究报告](../../research/011-evidence-reuse-next.md)
+- 下一候选完成两种游戏的直接证据链及反例复核，24条摘录/14份来源hash核验一致；建议先在CPU上验证“当前观察绑定的结构化计算值跨snippet交接”，尚未实现或加入011。[研究报告](../../research/notes/011/011-evidence-reuse-next.md)
 
 ## 启动与实际日志（历史记录）
 

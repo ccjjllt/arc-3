@@ -2,13 +2,13 @@
 
 日期：2026-10-11（Asia/Shanghai）  
 对应进展：[006-transient-history](../progress/006-transient-history.md)。  
-继承：[005结果](../progress/005-full-baseline.md)、[004复核](../../research/004-review-data.md)。
+继承：[005结果](../progress/005-full-baseline.md)、[004复核](../../research/notes/004/004-review-data.md)。
 
 ## 背景与单一假设
 
 005全25为49.8997分/106关，当前完成集合的动作效率空间仅0.4764分。tn36首关轨迹提供一个具体的信息交付缺口：同一Python片段连续调用action()，较早按钮的最终棋盘不变；模型只打印no_op等字段，随后动作覆盖了默认last_animation和user摘要。模型据此把按钮当成无效，转向对1024状态的目标猜测。
 
-独立CPU复现已确认：005的前缀及全部5个动作末帧与保存画面一致；非末按钮返回7帧、256暂态像素，后三探测无暂态。详见 [复现记录](../../research/005-animation-replay.md)。这是公开SDK复现，不是恢复005历史中间帧，也没有求解收益结论。
+独立CPU复现已确认：005的前缀及全部5个动作末帧与保存画面一致；非末按钮返回7帧、256暂态像素，后三探测无暂态。详见 [复现记录](../../research/notes/005/005-animation-replay.md)。这是公开SDK复现，不是恢复005历史中间帧，也没有求解收益结论。
 
 底座并未删除全部元数据：真实history entry.result仍保存每个动作的animation、action_num与完成/死亡标记。缺口是这些较早动作的暂态事实没有自动进入当前工具反馈；不需要重新发明动画API或让模型自报marker。
 

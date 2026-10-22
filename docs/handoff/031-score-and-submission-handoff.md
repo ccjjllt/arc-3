@@ -65,11 +65,11 @@
 | 同状态续跑 | `src/arc3_research/segmentation_forks.py`、`experiments/031-segmentation-forks.json` |
 | 对齐自然短跑 | `experiments/031-natural-aligned.json` |
 | 对齐全池 | `experiments/031-full-aligned.json` |
-| 正式构建 | `scripts/build_031_submission.py`、`experiments/031-runs-submission.json` |
+| 正式构建 | `scripts/build/build_031_submission.py`、`experiments/031-runs-submission.json` |
 | 正式候选原件 | `experiments/031-submission-source/`，含manifest和static-checks |
 | 本轮执行状态 | `docs/progress/031-exact-pixels.md` |
 
-诊断v1已实际完成，实际地址为`zhuating/arc3-031-recorded-state-exact-pixels`，平台按title生成slug，和原metadata请求的slug不同。见`experiments/031-forks-launch.json`及[诊断结果](../../research/031-forks-results.md)。**不重复push或重跑v1。** 其Notebook冻结保留；当前helper将升级为v2，不能直接用当前helper重构v1。以下命令使用平台实际地址读取原件：
+诊断v1已实际完成，实际地址为`zhuating/arc3-031-recorded-state-exact-pixels`，平台按title生成slug，和原metadata请求的slug不同。见`experiments/031-forks-launch.json`及[诊断结果](../../research/notes/031/031-forks-results.md)。**不重复push或重跑v1。** 其Notebook冻结保留；当前helper将升级为v2，不能直接用当前helper重构v1。以下命令使用平台实际地址读取原件：
 
 ```bash
 KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
@@ -91,7 +91,7 @@ KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
 # 大输出使用--file-pattern，仅筛需要的文件。下载前后核对仍是Notebook v1。
 KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
   kaggle kernels output zhuating/arc3-031-natural-aligned -p runs/031-natural-aligned
-python3.12 -B scripts/analyze_031_natural.py
+python3.12 -B scripts/analysis/analyze_031_natural.py
 ```
 
 v2 helper hash为`b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450deee`；自然Notebook为`01fa4dc75e14a23f8a90150c6a2d6966bf856fd2fb7860d04232e94fec82d9cf`。全池预构建目录为`notebooks/031-full-aligned`，通过效果判断后才允许push，时限18000秒。全池分析必须使用该目录的配置和实际25题结果，不能沿用900秒的短跑预算检查。
@@ -99,7 +99,7 @@ v2 helper hash为`b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450de
 通过效果判断后，才运行正式候选自己的save smoke：
 
 ```bash
-python3.12 -B scripts/build_031_submission.py \
+python3.12 -B scripts/build/build_031_submission.py \
   --config experiments/031-runs-submission.json --output-dir experiments/031-submission-source
 KAGGLE_API_TOKEN="$HOME/.kaggle/access_token_zhuating" \
   kaggle kernels push -p experiments/031-submission-source -t 32400 --accelerator NvidiaRtxPro6000

@@ -1,6 +1,6 @@
 # 014 全25调度对照进展
 
-日期：2026-10-17。状态：**jiyujia/arc3-014-tail-allocation v1已COMPLETE；47.1991→48.6390（+1.4399），110→108关、7→8全通。加权完成覆盖下降，未通过晋升门槛；不提交当前tail、不启动同版倒序确认。** 对应[计划](../plan/014-tail-allocation.md)、[结果分析](../../research/014-results-analysis.md)。
+日期：2026-10-17。状态：**jiyujia/arc3-014-tail-allocation v1已COMPLETE；47.1991→48.6390（+1.4399），110→108关、7→8全通。加权完成覆盖下降，未通过晋升门槛；不提交当前tail、不启动同版倒序确认。** 对应[计划](../plan/014-tail-allocation.md)、[结果分析](../../research/notes/014/014-results-analysis.md)。
 
 ## 完成结果与下一步
 

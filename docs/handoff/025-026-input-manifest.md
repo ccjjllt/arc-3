@@ -2,7 +2,7 @@
 
 远程可直接读（Git 内）：`experiments/026-fork-inputs.json`、`experiments/026-fork-conv.json.gz.b64`、
 `experiments/026-repair-cpu/`（四前缀 fork 态 + replay-fidelity）、`experiments/025-admission-cpu/admission-recompute.json`、
-`scripts/analyze_025_admission.py`（重算即文档）。
+`scripts/analysis/analyze_025_admission.py`（重算即文档）。
 
 仅原机本地（`runs/` 被 gitignore，不进 Git；大请求日志不搬）。位置：本仓库同级 `runs/`，机器 zhaohuaxiang 原工作机：
 

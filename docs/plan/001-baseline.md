@@ -35,7 +35,7 @@
 
 ## 2. 评分决定研究方向
 
-Kaggle 数据页面仍写每关 `min(h/a,1)^2`。当前官方 [methodology](https://docs.arcprize.org/methodology) 与比赛提供的 `arc_agi-0.9.8` wheel 则支持每关最高 115%，并按已完成关卡权重限制游戏总分。实际源码核对见 [data-findings](../../research/data-findings.md)。
+Kaggle 数据页面仍写每关 `min(h/a,1)^2`。当前官方 [methodology](https://docs.arcprize.org/methodology) 与比赛提供的 `arc_agi-0.9.8` wheel 则支持每关最高 115%，并按已完成关卡权重限制游戏总分。实际源码核对见 [data-findings](../../research/overview/data-findings.md)。
 
 对已完成关卡 i，h 为人类基线动作数、a 为智能体动作数，使用百分制：
 
@@ -59,7 +59,7 @@ total_score = 所有游戏的 game_score 等权平均
 
 这些是公式推论，不是实测提升。
 
-另对作者 v3 的原始 benchmark 做了描述性重算：25 个公开游戏 ×4 遍共 100 条轨迹，平均分 46.4930；固定各条轨迹已完成关卡集合，其游戏完成权重上限均值为 49.1227，差 2.6297 分。因此这批记录的主要缺口是新增通关覆盖。这个差值不包含减少动作后解锁新关的间接收益，也不能外推隐藏集。四遍共享一个约 8 小时 11 分钟调度任务，并非四次独立完整运行。来源与计算见 [Notebook 分析](../../research/notebook-findings.md) 和 [重算 JSON](../../research/notebooks/dfranzen-v3-audit-recomputed.json)。
+另对作者 v3 的原始 benchmark 做了描述性重算：25 个公开游戏 ×4 遍共 100 条轨迹，平均分 46.4930；固定各条轨迹已完成关卡集合，其游戏完成权重上限均值为 49.1227，差 2.6297 分。因此这批记录的主要缺口是新增通关覆盖。这个差值不包含减少动作后解锁新关的间接收益，也不能外推隐藏集。四遍共享一个约 8 小时 11 分钟调度任务，并非四次独立完整运行。来源与计算见 [Notebook 分析](../../research/overview/notebook-findings.md) 和 [重算 JSON](../../research/notebooks/dfranzen-v3-audit-recomputed.json)。
 
 ## 3. 必须区分的四种成绩
 
@@ -72,7 +72,7 @@ total_score = 所有游戏的 game_score 等权平均
 
 ## 4. 可复现基线
 
-主要源码：[dfranzen Notebook](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution)、[GitHub](https://github.com/da-fr/arc-agi-3-solution)、[作者说明](https://github.com/da-fr/arc-agi-3-solution/blob/main/WRITEUP.md)。本地副本与版本证据见 [Notebook 研究](../../research/notebook-findings.md)。
+主要源码：[dfranzen Notebook](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution)、[GitHub](https://github.com/da-fr/arc-agi-3-solution)、[作者说明](https://github.com/da-fr/arc-agi-3-solution/blob/main/WRITEUP.md)。本地副本与版本证据见 [Notebook 研究](../../research/overview/notebook-findings.md)。
 
 选择理由：同一竞赛、实际离线单卡路径、完整模型和运行时来源、已有隐藏 public LB 记录、明确公开算法，而不是只发布一个排名或论文摘要。
 

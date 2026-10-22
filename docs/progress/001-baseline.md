@@ -11,7 +11,7 @@
 | 比赛信息 | `research/snapshots/` 的比赛、页面、榜单、讨论 JSON | 读取时点快照；榜单仅前20 |
 | 数据获取 | `research/data/arc-prize-2026-arc-agi-3.zip` 与 `extracted/` | 已下载并检查，非仅浏览网页 |
 | 资产/版本 | `research/data-inventory.json` | 148文件、31wheel、25游戏版本及183关 |
-| SDK与评分审读 | `research/data/sdk_inspection/`、`research/data-findings.md` | 检查通用接口和评分实现，没有读机制源码来解题 |
+| SDK与评分审读 | `research/data/sdk_inspection/`、`research/overview/data-findings.md` | 检查通用接口和评分实现，没有读机制源码来解题 |
 | 手动观察代码 | `research/data/manual_probe.py` | 只经 observation/action 接口运行合法随机策略 |
 | 真实运行产物 | `research/data/manual-probe-20261010-valid-scorecard/` | observations/events/scorecard、初始帧及拼图 |
 | 强基线源码与依赖 | `research/notebooks/cli-baseline/` 等 | 下载并阅读，未在我们的GPU上运行 |
@@ -35,7 +35,7 @@
 
 结果只能说明合法随机策略在该单 seed、小预算条件下未通关，以及接口可运行。不能从 0 分推出世界模型、LLM 或主动探索的效果；也不能把帧未变等同于内部状态未变。
 
-人工查看了 25 游戏初始帧拼图，确认细小对象、分区/网格和边缘 UI 广泛存在；图像不是环境规则说明。具体逐游戏数据见 [数据研究](../../research/data-findings.md)。
+人工查看了 25 游戏初始帧拼图，确认细小对象、分区/网格和边缘 UI 广泛存在；图像不是环境规则说明。具体逐游戏数据见 [数据研究](../../research/overview/data-findings.md)。
 
 ## 3. 问题及处理
 

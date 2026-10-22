@@ -21,7 +21,7 @@
 见`docs/plan/027-tail-confirm.md`：单tail参数、候选→基线、7254s/臂、主指标官方平均分、只确认一次、vc33敏感性必披露。配置`experiments/027-tail-confirm.json`已建并构建通过。
 
 ## 028（优先级2）
-见`research/028-minimal-repair-design.md`：先CPU，不做v7提示版；ft09或tr87二选一；输入无答案；修动作比较；≤2次调用≤1h。不阻塞027。
+见`research/notes/028/028-minimal-repair-design.md`：先CPU，不做v7提示版；ft09或tr87二选一；输入无答案；修动作比较；≤2次调用≤1h。不阻塞027。
 
 ## 汇报口径
 下轮汇报先给交付：候选Notebook版本、完整运行结果、正式submission编号与得分；公开题分数不换算隐藏LB；48.83上限只在已完成关内谈效率空间。

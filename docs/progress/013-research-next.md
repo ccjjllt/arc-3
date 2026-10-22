@@ -9,7 +9,7 @@
 - 前沿重新核对Memento3、PRO-LONG v3、VISTA、Tracing、Tycho、Twin、AVO及Argon官方评测，分清公开/半私有、模型、动作/计算预算、重复与消融。
 - 60份选取请求日志去重5445次Python调用，106次NameError、70次此前赋值源码、59次同request action代理；复核bp35/re86/ft09直接丢值链和不可保存callable反例。
 - 011/012真实等待区间与现有公式的CPU敏感性：136个可竞争点，代理125点匹配原首返回；tail/pace分别8/12点改变代理赢家。保留11点不一致，未称反事实得分回放。
-- 新增[综合研究决策](../../research/013-research-decision.md)、[赛情](../../research/013-competition-update.md)、[Notebook](../../research/013-notebook-update.md)、[前沿](../../research/013-frontier-update.md)、[本地证据](../../research/013-local-evidence.md)。
+- 新增[综合研究决策](../../research/notes/013/013-research-decision.md)、[赛情](../../research/notes/013/013-competition-update.md)、[Notebook](../../research/notes/013/013-notebook-update.md)、[前沿](../../research/notes/013/013-frontier-update.md)、[本地证据](../../research/notes/013/013-local-evidence.md)。
 
 ## 当前决定
 

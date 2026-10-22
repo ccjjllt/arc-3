@@ -9,7 +9,7 @@
 - 全25游戏版本ID、单组baseline、7254秒求解、9000秒总硬限、10路活跃，配置未变。
 - 模型/量化/底座沿用Franzen v3；研究warmup RESET关闭，未启用目标或观察干预。
 - 运行器支持单组预算，每10秒采GPU数据，覆盖启动、求解和收尾。
-- 新增只读结果复算脚本 scripts/analyze_005_results.py。汇总在 experiments/005-analysis/，GPU统计在 experiments/005-efficiency.json。
+- 新增只读结果复算脚本 scripts/analysis/analyze_005_results.py。汇总在 experiments/005-analysis/，GPU统计在 experiments/005-efficiency.json。
 - 原始benchmark、metadata、服务日志和GPU采样保留在 runs/005-full-baseline/；六个游戏requests/events已取回。使用已修正的compact工具，没有执行模型轨迹里的代码。
 - 已按运行manifest哈希归档005嵌入源码到 experiments/005-source/。003/005 Notebook原件均未改。
 
@@ -21,7 +21,7 @@
 
 求解窗口GPU时间加权采样估计 **92.49%**，整会话 **86.22%**；server吞吐611.91 tokens/s，cache命中94.15%，与003接近。无需先重写推理后端。
 
-最新账户剩余 **22.2307h**（10月17日北京时间08:00刷新），本轮前后快照增量 **2.3662h**，与会话2.1927h分开记账。快照范围和平台结算不同，不能把差额624.50秒全部归为本框架浪费。见 [效率报告](../../research/005-efficiency-analysis.md)。
+最新账户剩余 **22.2307h**（10月17日北京时间08:00刷新），本轮前后快照增量 **2.3662h**，与会话2.1927h分开记账。快照范围和平台结算不同，不能把差额624.50秒全部归为本框架浪费。见 [效率报告](../../research/notes/005/005-efficiency-analysis.md)。
 
 ## 实际研究结果
 
@@ -50,4 +50,4 @@
 
 25条计分按所附TAAF公式复算，完整ID和分组一一对应，动作数与per-level账目吻合；没有截止后动作或关卡。metadata、源码hash和原始结果一致。所有核对均人工运行脚本、阅读日志和轨迹，没有测试文件。
 
-[结果与逐游戏分析](../../research/005-results-analysis.md) · [GPU效率](../../research/005-efficiency-analysis.md) · [首关轨迹](../../research/005-stagnation-traces.md) · [长无动作轨迹](../../research/005-action-feedback-traces.md)。
+[结果与逐游戏分析](../../research/notes/005/005-results-analysis.md) · [GPU效率](../../research/notes/005/005-efficiency-analysis.md) · [首关轨迹](../../research/notes/005/005-stagnation-traces.md) · [长无动作轨迹](../../research/notes/005/005-action-feedback-traces.md)。

@@ -6,7 +6,7 @@
 
 对照为固定Intel BF16 PLE v1 → Albucino FP8 PLE v1 → 同一Intel BF16 PLE。主体非PLE权重、独立INT4/group32 drafter、tokenizer/template、KV/Mamba、context139264、10请求容量及Pennyroyal-v253保持一致。唯一模型数值差异为PLE的存储/反量化；所有阶段统一显式server seed190018和请求seed，不能据此保证并发逐字确定性。
 
-CPU挂载检查先于任何GPU服务：三个模型附件的config/index/header、222587个非PLE键、固定分层样本字节、128个PLE shard每个8行，以及全局BF16 scale。所有读取都有字节和时间上限。检查ZIP内四个关键运行库源码hash（模型、kernel、environ、loader），安装后再核相同hash；它们不代表全部运行库逐文件身份。合同细节见[权重说明](../../research/019-fp8-ple-contract.md)与[机器合同](../../experiments/019-weight-contract.json)。错误即停，不能看到实际误差后放宽阈值。固定runtime虽提供get_weights_by_name端点，但当前Qwen4Exp模型未实现对应方法；因此不声称直接读到了已加载GPU scale，不能把输入及源码核对当成内部数值全验证。
+CPU挂载检查先于任何GPU服务：三个模型附件的config/index/header、222587个非PLE键、固定分层样本字节、128个PLE shard每个8行，以及全局BF16 scale。所有读取都有字节和时间上限。检查ZIP内四个关键运行库源码hash（模型、kernel、environ、loader），安装后再核相同hash；它们不代表全部运行库逐文件身份。合同细节见[权重说明](../../research/notes/019/019-fp8-ple-contract.md)与[机器合同](../../experiments/019-weight-contract.json)。错误即停，不能看到实际误差后放宽阈值。固定runtime虽提供get_weights_by_name端点，但当前Qwen4Exp模型未实现对应方法；因此不声称直接读到了已加载GPU scale，不能把输入及源码核对当成内部数值全验证。
 
 实际FP8 scale为0.00019931793212890625，必须正且有限、dtype/shape及原始字节匹配。CPU按FP8值×scale后BF16舍入与基线抽样比较，NRMSE≤0.06、逐元素误差≤7%×|基线|+scale/512、无非有限值。该阈值是工程smoke门，不是无损、推理质量或隐藏分数证明。当前HF metadata/header证据与Kaggle镜像实读分开。
 
@@ -47,6 +47,6 @@ CPU挂载检查先于任何GPU服务：三个模型附件的config/index/header�
 
 - [权重CPU审计](../../src/arc3_research/ple_weights.py)
 - [固定请求客户端与离线比较](../../src/arc3_research/ple_microbench.py)
-- [服务生命周期与预算](../../src/arc3_research/ple_session.py)、[离线结果与门槛检查](../../scripts/analyze_019_results.py)
-- [Notebook构建](../../scripts/build_019_microbench.py)、[手动CPU检查](../../scripts/check_019_preparation.py)
+- [服务生命周期与预算](../../src/arc3_research/ple_session.py)、[离线结果与门槛检查](../../scripts/analysis/analyze_019_results.py)
+- [Notebook构建](../../scripts/build/build_019_microbench.py)、[手动CPU检查](../../scripts/checks/check_019_preparation.py)
 - 当前执行状态见[019进展](../progress/019-fp8-ple.md)。

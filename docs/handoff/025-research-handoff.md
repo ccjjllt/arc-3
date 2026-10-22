@@ -6,7 +6,7 @@
 
 1. **保留 009 模型与推理底座**：继续使用 `dfranzen Milestone 2 v3 / Duck-TAAF / Qwen3.8-Flash-Next`（MTP3、长上下文、前缀缓存、函数保留与 UNDO 底座不变），正式成绩基线仍为 **009 v2 / submission `57101330` / Public LB 31.16**（见 [009 进展](../progress/009-baseline-submission.md)）。
 2. **结束 019–024 原路径扩跑**：
-   - **停止 024 GPU 扩跑**：[024 结果](../../research/024-level-stall-results.md) 与 [024 可解性及随机性审计](../../research/024-level-stall.md) 已证实 `ih01-v1` 7 关数学上无解、`tt03-63be02fb` 全局 `random.choice` 未固定种子。024 结项不代表否定“主动探索”路线，而是终止在损坏或未受控题目上的无效测试。
+   - **停止 024 GPU 扩跑**：[024 结果](../../research/notes/024/024-level-stall-results.md) 与 [024 可解性及随机性审计](../../research/notes/024/024-level-stall.md) 已证实 `ih01-v1` 7 关数学上无解、`tt03-63be02fb` 全局 `random.choice` 未固定种子。024 结项不代表否定“主动探索”路线，而是终止在损坏或未受控题目上的无效测试。
    - **停止新增需要模型主动记忆/调用的工具入口**：020（−14.70 分）、021（−7.57 分，0 次传参）、022（0 次 `expect=` 调用）一致表明，向提示词追加新 API 关键字或长说明无法转化为有效决策。
    - **停止 019 FP8 PLE 扩跑**：[019 进展](../progress/019-fp8-ple.md) 已确认 RTX PRO 6000 上 10 并发热吞吐为 BF16 的 0.966 倍且质量 smoke 未过门（5/10、5/10、3/10 vs 门槛 8/10）。
 3. **下一轮双线推进**：
@@ -22,12 +22,12 @@
 
 | 实验 | 已核实结果 | 对下一阶段的约束 |
 |---|---|---|
-| [016 时间分配](../../research/016-results-analysis.md) | 官方 25 题均分 47.1340 → 47.4634（+0.3293），105→111 关 | 存在调度研究空间，但尚未形成稳定提分结论 |
+| [016 时间分配](../../research/notes/016/016-results-analysis.md) | 官方 25 题均分 47.1340 → 47.4634（+0.3293），105→111 关 | 存在调度研究空间，但尚未形成稳定提分结论 |
 | [019 FP8 PLE](../progress/019-fp8-ple.md) | 10 并发热吞吐为 BF16 均值的 0.966 倍；质量 smoke 未达标 | 无速度与质量收益，支线结项 |
-| [020 精确状态通道](../../research/020-results-analysis.md) | 12 题同预算 41.2112 → 26.5081（−14.7031），44→36 关 | 720 个唯一调用仅 3 局出现新语法；不再要求模型主动调新读取 API |
-| [021 预测失配停批](../../research/021-results-analysis.md) | 12 题同预算 36.9270 → 29.3560（−7.5710），41→38 关 | 1438 条请求 0 次传入 `pred/extract/scope`，不重复该提示前缀 |
-| [022 预测检查](../../research/022-results-analysis.md) / [023 卡关探针](../../research/023-stall-probe-results.md) | 3 题 600s 短池分数波动，但 0 次 `expect=` 调用、0 次窗口触发 | 短池涨分全部来自并发/采样方差，严禁归因于未触发的新机制 |
-| [024 64 步卡关探针](../../research/024-level-stall-results.md) | 窗口打开 3 次，但完成关数无增量（`ih01` 0/7，`tt03` 2/3） | 结束该版本；后续修复分支必须由宿主直接组织证据并严格扣减动作预算 |
+| [020 精确状态通道](../../research/notes/020/020-results-analysis.md) | 12 题同预算 41.2112 → 26.5081（−14.7031），44→36 关 | 720 个唯一调用仅 3 局出现新语法；不再要求模型主动调新读取 API |
+| [021 预测失配停批](../../research/notes/021/021-results-analysis.md) | 12 题同预算 36.9270 → 29.3560（−7.5710），41→38 关 | 1438 条请求 0 次传入 `pred/extract/scope`，不重复该提示前缀 |
+| [022 预测检查](../../research/notes/022/022-results-analysis.md) / [023 卡关探针](../../research/notes/023/023-stall-probe-results.md) | 3 题 600s 短池分数波动，但 0 次 `expect=` 调用、0 次窗口触发 | 短池涨分全部来自并发/采样方差，严禁归因于未触发的新机制 |
+| [024 64 步卡关探针](../../research/notes/024/024-level-stall-results.md) | 窗口打开 3 次，但完成关数无增量（`ih01` 0/7，`tt03` 2/3） | 结束该版本；后续修复分支必须由宿主直接组织证据并严格扣减动作预算 |
 
 ### 2. 必须纠正的四项工程与方法缺陷
 
@@ -35,7 +35,7 @@
    - **现状问题**：当前 [stall_probe.py](../../src/arc3_research/stall_probe.py) 在 `_tool_wrapper` 整段 Python 工具返回后才调用 `tracker.observe(...)` 扣减 `self.following[key] -= count`。模型在单个回合内仍可调用 `step3()` 等循环一次性连走 12 步，导致“3 步探测窗口”形同虚设。
    - **修正要求**：在 `026` 或任何限时修复/探测分支中，若限制最多执行 $K$ 个环境动作（如 $K=0$ 零动作重算或 $K=3$ 短探测），必须在 `action_handler` 每次向环境送出单步动作前检查并扣减剩余配额。一旦配额耗尽、过关（`level_completed`）或死亡（`game_over`），应像底座处理 terminal 动作一样**优雅停止当前批次剩余动作并返回带 `stop_reason="probe_budget_reached"` 的正常结果字典**（严禁直接抛出未捕获异常导致整段 Python 工具报错，否则该 snippet 内的 `print` 诊断输出和已定义的 `def` 持久化函数会被丢弃）。
 2. **修正社区与开发选关的“可复现”标准（区分环境确定性与 LLM 采样方差）**：
-   - **现状问题**：[024 记录末节](../../research/024-level-stall.md) 将选关门写成“同一 seed + 同一录像动作两次全同，且多次基线都停在同一关”。要求 LLM 多次独立运行都停在同一关过严，既浪费 GPU 算力，也会把正常的模型生成方差误判为环境不合格。
+   - **现状问题**：[024 记录末节](../../research/notes/024/024-level-stall.md) 将选关门写成“同一 seed + 同一录像动作两次全同，且多次基线都停在同一关”。要求 LLM 多次独立运行都停在同一关过严，既浪费 GPU 算力，也会把正常的模型生成方差误判为环境不合格。
    - **修正要求**：环境准入只需验证 **确定性回放**（同一环境版本、显式独立 RNG seed 与固定动作录像下，状态与过关结果 100% 一致）与 **机制可解**（排除 `ih01` 类数学无解环境）。不再要求多次 LLM 基线运行停在同一关。
 3. **009 底座跨回合只保留 `def` 函数与消息历史，不保留普通全局变量**：
    - **现状问题**：009 底座未启用 `015-native-adoption`，每次 `python` 工具调用都是全新子进程，仅通过 `retained_functions.py` 跨回合保留顶层 `def` 函数，并通过 `_history_messages` 保留工具标准输出文本；普通全局变量（如 `targets = ...`）在下一回合会消失并触发 `NameError`。
@@ -53,15 +53,15 @@
 - **截止时间**：2026-11-02 23:59 UTC（**北京时间 2026-11-03 07:59**），剩余约 14 天半。
 - **运行规格**：单张 RTX PRO 6000（96 GB 显存）、180 GB 主机内存，正式重跑上限 **9 小时**，断网运行（见 [比赛页面快照](../../research/snapshots/2026-10-18/competition-pages.json)）。
 - **评测集与提交配额**：25 道公开开发游戏；110 道隐藏评测游戏（Public / Private LB 各 55 道）。每天最多 **1 次**正式提交，最终可选择 **2 份**。
-- **金牌与奖金分开规划**：10/18 历史榜单快照（见 [017 赛情更新](../../research/017-competition-update.md)）中，第 18 名金牌参考线为 **38.20**（距 009 v2 差 7.04 分），第 5 名常规奖金线为 **48.92**（差 17.76 分；前五奖金分别为 $40k / $15k / $10k / $5k / $5k）。这要求改动必须能实质性提高后序关卡通过率或显著减少错误表征导致的无效动作。
+- **金牌与奖金分开规划**：10/18 历史榜单快照（见 [017 赛情更新](../../research/notes/017/017-competition-update.md)）中，第 18 名金牌参考线为 **38.20**（距 009 v2 差 7.04 分），第 5 名常规奖金线为 **48.92**（差 17.76 分；前五奖金分别为 $40k / $15k / $10k / $5k / $5k）。这要求改动必须能实质性提高后序关卡通过率或显著减少错误表征导致的无效动作。
 
 ### 2. 公开 Notebook 与前沿论文的取舍
 
-- **公开 Notebook（[017 Notebook 审计](../../research/017-notebook-update.md)）**：
+- **公开 Notebook（[017 Notebook 审计](../../research/notes/017/017-notebook-update.md)）**：
   - 19 本公开 Notebook 中没有核实到同时具备“完整源码 + 明确版本 + 绑定更高 LB 实测分数”的可直接替代方案。
   - **仅提取 D-prime 的首次入场排序思想**：见 [D-prime 提取源码](../../research/notebooks/2026-10-18/amatlas__dfranzen-fork-d-prime/extracted-assets/cell017-_FP_SOURCE.literal.txt)，宿主要求未开始游戏与已开局游戏按同一价值函数竞争，不依赖模型调用新接口。
   - **暂不盲目升级 Pennyroyal 3.0.2**：其多并发 `W4` 对应 3 个 speculative steps，与我们当前 `MTP3` 宽度相同，升级不会自动在 10 并发下多获一步草稿，需先核对配置兼容性。
-- **前沿论文（[017 前沿更新](../../research/017-frontier-update.md)）**：
+- **前沿论文（[017 前沿更新](../../research/notes/017/017-frontier-update.md)）**：
   - **OPINE-World / PRO-LONG / Tycho** 的核心启发是：**“找到与事实冲突的解释 → 从原始历史/帧恢复真实证据修正它 → 让修正直接驱动下一步动作”**，同时严格控制修复开销（Tycho 证明单纯提高转移预测准确率但付出过高修复成本反而降低游戏得分）。
   - Franzen 底座已内置长上下文、动画历史、UNDO 和函数保留，不能再靠泛泛追加“请验证/请总结”提示词取胜。
 
@@ -74,7 +74,7 @@
 **核心问题**：在相同的真实失败状态和剩余预算下，由宿主发起一次有限的证据复核，是否比原模型继续顺着原上下文推理更容易恢复通关？
 
 #### 1. 诊断样本池（直接复用本地已保存的原始请求 JSONL 与动作记录）
-全部取自 [017 本地机制证据](../../research/017-local-evidence.md) 及本地已落盘的 `runs/` 文件（无需重新跑几十局采集）：
+全部取自 [017 本地机制证据](../../research/notes/017/017-local-evidence.md) 及本地已落盘的 `runs/` 文件（无需重新跑几十局采集）：
 - **正例 1（`ft09` 外接框填色与字面量转抄错）**：[ft09 请求日志](../../runs/015-native-adoption/baseline/ft09-0d8bbf25_p0_requests.jsonl)（第 19–41 行将 `gWg / WOg / WWW` 误写为 `WOW`，导致第 3 关耗费 91 动作 vs 正确提取路径 14 动作）。
 - **正例 2（`tr87` 字形裁剪错位与假反证）**：[tr87 请求日志](../../runs/016-pace-allocation-jiyujia/pace_1x/tr87-cd924810_p0_requests.jsonl)（第 65–105 行将 tile top 当作 ink top，漏掉底部墨迹行，把 15 黑点裁成 11 黑点，导致轮盘搜索 `HITS []` 误判规则被否定）。
 - **正例 3（`m0r0` 预测失配后未及时停批修模）**：[m0r0 请求日志](../../runs/016-pace-allocation-jiyujia/baseline/m0r0-492f87ba_p0_requests.jsonl)（第 37 行 18 步循环中第 2 步已出现 `(44,44)` vs `(44,34)` 失配，仍继续执行 16 步）。
@@ -142,7 +142,7 @@
   - 对有希望晋升的候选，做交换运行顺序（AB / BA）的有限复测并披露收益是否集中于单题，不再将“去掉最大正向游戏仍上涨”或“所有辅助指标同时上升”设为机械一票否决门槛。
 
 ### 2. 正式提交（Submission）准备与执行规范
-> **注意**：仓库现有的 [build_020_submission.py](../../scripts/build_020_submission.py) 与 `experiments/020-grounded-submission.json` 内部硬编码了 `research_interventions: ["grounded_state"]` 与 `install_grounded_state()` 校验，**不能直接运行它来构建新候选（否则会打包已否决的 020 代码或触发校验报错）**。
+> **注意**：仓库现有的 [build_020_submission.py](../../scripts/build/build_020_submission.py) 与 `experiments/020-grounded-submission.json` 内部硬编码了 `research_interventions: ["grounded_state"]` 与 `install_grounded_state()` 校验，**不能直接运行它来构建新候选（否则会打包已否决的 020 代码或触发校验报错）**。
 
 当 `026` 或 `025` 通过官方 25 题验证后，应以 [build_submission.py](../../scripts/build_submission.py)（009 v2 原版构建器）为底座、参照 `build_020_submission.py` 的插入方式，为新候选编写对应的 `experiments/<候选编号>-submission.json` 与构建脚本（注入新候选模块并保持 `jiyujia` 账号、官方动态 gateway 枚举与 31920 秒 solver 预算）：
 
@@ -166,7 +166,7 @@ kaggle competitions submit arc-prize-2026-arc-agi-3 \
 
 ## 六、接手后的立即执行清单（Checklist）
 
-1. **[CPU / ≤1h] 完成 `025` 历史完整队列离线重算**：编写只读分析脚本，直接解析 `runs/016-pace-allocation-jiyujia/*/scheduler-observer.json` 与 `runs/014-tail-allocation/*/scheduler-observer.json`（联合同目录 `arm-metadata.json` 的 `number_of_levels`），用 `cost_multiplier=1.0` 的 009 原版公式重算未开始游戏优先级，输出真实改选率与受影响对局报告 `research/025-admission-order-analysis.md`。
+1. **[CPU / ≤1h] 完成 `025` 历史完整队列离线重算**：编写只读分析脚本，直接解析 `runs/016-pace-allocation-jiyujia/*/scheduler-observer.json` 与 `runs/014-tail-allocation/*/scheduler-observer.json`（联合同目录 `arm-metadata.json` 的 `number_of_levels`），用 `cost_multiplier=1.0` 的 009 原版公式重算未开始游戏优先级，输出真实改选率与受影响对局报告 `research/notes/025/025-admission-order-analysis.md`。
 2. **[CPU] 构建 `026` 失败前缀确定性回放与宿主修复器**：
    - 针对 `ft09`（015 baseline）、`tr87`（016 pace_1x）、`m0r0`（016 baseline）与 `r11l`（正常跨关对照），实现从动作历史重放 `Arcade` 环境、重建 `_tool_runtime_state.json` 并恢复 `_history_messages` / `_kept_functions` 的分叉器；
    - 实现宿主短修复分支，在 `action_handler` 中实现**逐动作执行前扣减配额 + 优雅截断返回 `stop_reason`（不抛未捕获异常）**，确保修复结果通过 stdout 或 `def` 函数交回主循环，完成本地 CPU 单元核验。

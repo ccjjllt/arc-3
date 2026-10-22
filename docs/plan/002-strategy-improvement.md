@@ -22,7 +22,7 @@
 
 ## 1. 证据链与反证
 
-完整来源见 [Notebook 分析](../../research/notebook-findings.md) 和 [前沿研究](../../research/frontier-findings.md)。
+完整来源见 [Notebook 分析](../../research/overview/notebook-findings.md) 和 [前沿研究](../../research/overview/frontier-findings.md)。
 
 | 证据 | 可以支持什么 | 不能支持什么 |
 |---|---|---|
@@ -34,7 +34,7 @@
 | Kepler 的 final-segment replay 限定 | 其状态/目标假设机制值得借鉴 | 其“100”是竞赛 first-exposure 100 |
 | 同版 fork 分数波动讨论 | 单次小涨分需谨慎归因 | 从未知样本量反推出统一“涨 8 分才有效”门槛 |
 
-**原始轨迹给出的新证据**：dfranzen v3 的 100 条公开 demo 轨迹均分 46.4930，固定已完成关卡集合的上限均值 49.1227。sk48 的一条轨迹中，模型自建转移函数预测了 16 步路径，真实转移匹配，但猜测的目标未触发通关；lf52 的失败轨迹漏用了暂态动画信息；tn36 的成功轨迹显式读取动画。详见原始日志与 [Notebook 分析](../../research/notebook-findings.md)。这支持优先研究目标/机制发现，不能从个案得出改进已奏效。动作效率改善仍可能间接帮助过新关。
+**原始轨迹给出的新证据**：dfranzen v3 的 100 条公开 demo 轨迹均分 46.4930，固定已完成关卡集合的上限均值 49.1227。sk48 的一条轨迹中，模型自建转移函数预测了 16 步路径，真实转移匹配，但猜测的目标未触发通关；lf52 的失败轨迹漏用了暂态动画信息；tn36 的成功轨迹显式读取动画。详见原始日志与 [Notebook 分析](../../research/overview/notebook-findings.md)。这支持优先研究目标/机制发现，不能从个案得出改进已奏效。动作效率改善仍可能间接帮助过新关。
 
 核心反证要求：**不能把恢复旧式长摘要当成创新。** 新机制必须在固定底座上，说明它保留了什么会被原版丢掉的信息，以及付出的时间、上下文和缓存成本。
 
@@ -144,7 +144,7 @@ priority(g) =
 - **Dreamer/通用 model-based RL**：本次剩余周期不把训练大型世界模型列主线。若未来有足够轨迹，可研究“下一步状态/目标机制”的轻量蒸馏。
 - **旧 ARC 静态 TTT/程序合成**：只借鉴规则表示、推断和局部程序搜索；任务接口与失败模式已经变化。
 
-准确论文 URL、读到的限制、结果可比性以 [frontier-findings](../../research/frontier-findings.md) 为准，避免在多份文档复制难以维护的“最新排名”。
+准确论文 URL、读到的限制、结果可比性以 [frontier-findings](../../research/overview/frontier-findings.md) 为准，避免在多份文档复制难以维护的“最新排名”。
 
 ## 6. 实验判断方式
 

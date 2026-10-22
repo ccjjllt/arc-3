@@ -20,7 +20,7 @@
 
 北京时间2026-10-22 20:07上传成功，同一私有目标保存为版本4，随后只读回查为RUNNING。冻结Notebook为952500字节，SHA256 `6f9e0a891f908bcfddb90144d7e4a6b0c3803b783b0b094556861c4d5b7eade5`；19份输入hash及源码归档已保存。上传前共享可用GPU约2.84小时，单会话上限7200秒；该余额是启动前快照。[启动记录](../../experiments/034-v4-launch.json) · [远端逐cell核对](../../experiments/034-v4-remote-source-check.json) · [实际源码归档](../../experiments/034-v4-source/) · [资源原件](../../experiments/034-v4-preparation/prelaunch-platform-snapshot.json)
 
-用户通知完成后，已下载最终结果。ft09 A新增2关、B新增0关；su15 A新增0关、B新增1关。两题均分A为34.9206，B为23.8095，差−11.1111。这只是指定切点的同期诊断，不能推广为全池或正式分数。[结果分析](../../research/034-v4-results-analysis.md) · [程序独立审阅](../../experiments/034-v4-analysis/program-independent-review.json) · [完整性独立审阅](../../experiments/034-v4-analysis/integrity-independent-review.json)
+用户通知完成后，已下载最终结果。ft09 A新增2关、B新增0关；su15 A新增0关、B新增1关。两题均分A为34.9206，B为23.8095，差−11.1111。这只是指定切点的同期诊断，不能推广为全池或正式分数。[结果分析](../../research/notes/034/034-v4-results-analysis.md) · [程序独立审阅](../../experiments/034-v4-analysis/program-independent-review.json) · [完整性独立审阅](../../experiments/034-v4-analysis/integrity-independent-review.json)
 
 三次辅助请求均交付完整`plan_program/predict`程序。ft09初次与真实mismatch后的修订各执行1个实际动作，两个动作相关的36像素检查均mismatch；修订确实改变了规则和动作，但保留错误网格原点，第二次仍预测失败。宿主`made_progress=true`只反映真实状态变化，B没有新增关卡，不能称修订已有效推进。
 
@@ -30,7 +30,7 @@ su15程序在零动作`plan_program`验收中因goal格式化参数缺失而Type
 
 ## v3 代码交付重设计
 
-2026-10-22，依据[下一轮交接](../handoff/034-next-round-research-plan.md)推进；本轮创建三个新子代理，未复用先前子代理。**v3已COMPLETE，两臂完整，实际源码与冻结候选一致。** ft09和su15两个切点的A/B均新增0关；两个辅助响应约8秒返回普通观察脚本，没有交付`plan_program/predict`函数，候选实际动作和预测检查均为0。不能称执行或修订机制成功，不原样扩大v3。[结果分析](../../research/034-v3-results-analysis.md) · [独立程序审阅](../../experiments/034-v3-analysis/program-independent-review.json)
+2026-10-22，依据[下一轮交接](../handoff/034-next-round-research-plan.md)推进；本轮创建三个新子代理，未复用先前子代理。**v3已COMPLETE，两臂完整，实际源码与冻结候选一致。** ft09和su15两个切点的A/B均新增0关；两个辅助响应约8秒返回普通观察脚本，没有交付`plan_program/predict`函数，候选实际动作和预测检查均为0。不能称执行或修订机制成功，不原样扩大v3。[结果分析](../../research/notes/034/034-v3-results-analysis.md) · [独立程序审阅](../../experiments/034-v3-analysis/program-independent-review.json)
 
 - 辅助分支改为独立紧凑事实包：完整当前帧、未截断暂停代码、静态依赖闭包、近期真实转移和最近反例；不重放主循环全部历史，不把旧模型判断作为事实。
 - 辅助请求独立关闭thinking、指定现有python工具；用固定Pennyroyal服务的`/tokenize`对最终payload做16384输入token上限检查。计数失败或超限不发生成请求；保存实际payload、响应、finish_reason、usage和分阶段耗时。主循环设置保持原样。[交付CPU核验](../../experiments/034-v3-cpu/delivery-checks.json) · [固定服务API依据](../../experiments/034-v3-cpu/delivery-api-evidence.json)
@@ -51,7 +51,7 @@ su15程序在零动作`plan_program`验收中因goal格式化参数缺失而Type
 
 ## v1 与 v2 历史结果
 
-2026-10-22。**034 v2于北京时间14:25:31完成，两臂与GPU均已正常关闭。** 相同切点A/B：ft09新增0/0关，su15新增0/1关；但两个额外响应都只有推理、没有可执行代码，程序验收/宿主计划动作/预测检查均为0，不能把su15推进归因于预期机制。正式最佳仍009／31.16；停止该版原样扩跑，下一步收窄到有界代码交付。[完整结果](../../research/034-v2-results-analysis.md) · [机制判断](../../experiments/034-v2-analysis/mechanism-assessment.json)。
+2026-10-22。**034 v2于北京时间14:25:31完成，两臂与GPU均已正常关闭。** 相同切点A/B：ft09新增0/0关，su15新增0/1关；但两个额外响应都只有推理、没有可执行代码，程序验收/宿主计划动作/预测检查均为0，不能把su15推进归因于预期机制。正式最佳仍009／31.16；停止该版原样扩跑，下一步收窄到有界代码交付。[完整结果](../../research/notes/034/034-v2-results-analysis.md) · [机制判断](../../experiments/034-v2-analysis/mechanism-assessment.json)。
 
 - 已新增局部程序合同、原生动作入口、自然合同建立、宿主目标/计划重算、逐动作冻结预测、失配停止与一次后续修复。
 - 原sandbox脚本模型初轮7个情景通过：批次建立、连续单动作暂停、反例后修复、unknown停后缀、验证零动作、拒收回滚、换关边界；51次原sandbox调用、9次脚本completion、0联网。只证明接线，不证明真实模型采用或游戏收益。

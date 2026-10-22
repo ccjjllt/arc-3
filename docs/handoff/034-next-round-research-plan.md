@@ -18,7 +18,7 @@
 | 028／033 | 曾出现代码实际执行却读错像素，以及全帧正确却目标仍错 | 完整代码、准确像素、正确行动是三个不同验收层次 |
 | 031 | 自然短跑22.5092→23.2819，但27→26关；r11l有实际消费后多过一关的轨迹 | 冻结备选，不因032退分自动晋升 |
 
-034没有保存分支`finish_reason`。输出恰好达到上限且推理未结束，支持“输出预算耗于推理”的解释，但不能写成已经观测到`finish_reason=length`。[034结果](../../research/034-v2-results-analysis.md) · [机制原件](../../experiments/034-v2-analysis/mechanism-assessment.json)
+034没有保存分支`finish_reason`。输出恰好达到上限且推理未结束，支持“输出预算耗于推理”的解释，但不能写成已经观测到`finish_reason=length`。[034结果](../../research/notes/034/034-v2-results-analysis.md) · [机制原件](../../experiments/034-v2-analysis/mechanism-assessment.json)
 
 009的准确身份为 `ccjjllt/arc3-009-baseline-submission` **v2**，Notebook SHA256：`203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5`；冻结源在`experiments/009-source-v2/`。后续对照从该版本提取求解器与参数，不把当前研究目录中的其他补丁默认算作009。[基线运行记录](../../experiments/009-v2-launch.json)
 
@@ -28,7 +28,7 @@
 
 官方比赛数据仍为 **25个公开开发游戏、110个隐藏评测游戏，隐藏集55／55对应Public／Private榜**；Notebook最长9小时、评测断网、每天最多1次正式提交。截止为 **北京时间2026年11月3日07:59**。16:27快照有4613队，账户排名402；榜首68.91、第二67.77、第五49.85。这些是团队当时的公开成绩，不能绑定到某份公开Notebook源码。[比赛资料](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/data) · [官方页面原件](../../research/snapshots/2026-10-22-next-round/competition-pages.json) · [比赛元信息](../../research/snapshots/2026-10-22-next-round/competition.json) · [前100队快照](../../research/snapshots/2026-10-22-next-round/leaderboard-first-100.json)
 
-按现行官方methodology和项目已核对的SDK，完成第l关的效率项为 `min((human_actions / agent_actions)^2, 1.15)`，关卡按序号加权，游戏分数受完成关卡的加权比例限制，最后对游戏取平均。内部推理不计环境动作，但会占用Notebook时间。Kaggle数据页仍有旧版cap文字，研究须保存实际SDK版本和scorecard，不混算。[官方评分说明](https://docs.arcprize.org/methodology) · [本地版本核对](../../research/data-findings.md)
+按现行官方methodology和项目已核对的SDK，完成第l关的效率项为 `min((human_actions / agent_actions)^2, 1.15)`，关卡按序号加权，游戏分数受完成关卡的加权比例限制，最后对游戏取平均。内部推理不计环境动作，但会占用Notebook时间。Kaggle数据页仍有旧版cap文字，研究须保存实际SDK版本和scorecard，不混算。[官方评分说明](https://docs.arcprize.org/methodology) · [本地版本核对](../../research/overview/data-findings.md)
 
 032那次公开运行的49.21798分，固定完成关数后最多51.45685，直接动作效率空间仅2.23888分。这只是该次运行的上限，不能外推为隐藏榜上限；它支持优先争取后续关卡，而非只压缩已经会做的动作。吞吐优化仍可能通过释放时间帮助新增关卡。[已有复算](../../research/snapshots/2026-10-22-handoff/recomputed-metrics.json)
 
@@ -142,7 +142,7 @@ Heliosli v8的关键局限仍在：首次规则注册依赖模型主动调用，
 
 候选核心实现和参数不得在全池结果之后悄悄调整。真实GPU Save必须验证模型加载、真实生成和非RESET游戏动作；随后核对保存版本、源码hash、模型／数据版本，再用准确版本提交。归档submission ID、最终状态与官方分数。保存成功不等于正式得分。
 
-正式Notebook的9小时必须覆盖安装、模型加载、网关和收尾。009的31920秒从游戏会话计时，`soft_end=None`，并非扣除启动后的全局剩余预算；034 v2模型启动已花42.85分钟。沿用全池比较前已冻结的截止实现，以最早可记录的Notebook时刻计算总截止，扣实际已耗时和收尾余量，并限制主请求及分支；不能在正式打包时才加入新的deadline行为。预算保护作为显式公共运行条件记录；不能据此倒推030／032隐藏下降原因。[预算审阅](034-executable-program-repair.md) · [034成本](../../research/034-v2-results-analysis.md)
+正式Notebook的9小时必须覆盖安装、模型加载、网关和收尾。009的31920秒从游戏会话计时，`soft_end=None`，并非扣除启动后的全局剩余预算；034 v2模型启动已花42.85分钟。沿用全池比较前已冻结的截止实现，以最早可记录的Notebook时刻计算总截止，扣实际已耗时和收尾余量，并限制主请求及分支；不能在正式打包时才加入新的deadline行为。预算保护作为显式公共运行条件记录；不能据此倒推030／032隐藏下降原因。[预算审阅](034-executable-program-repair.md) · [034成本](../../research/notes/034/034-v2-results-analysis.md)
 
 **COMPLETE且Public超过31.16，才记为本轮正式提分；未超过则完整归档负结果。** 31.16与新分数来自隐藏Public池，不能拿开发49分与之直接比较；最终Private成绩仍可能改变相对排序。
 
@@ -155,7 +155,7 @@ Heliosli v8的关键局限仍在：首次规则注册依赖模型主动调用，
 | [executable_plan_contract.py](../../src/arc3_research/executable_plan_contract.py) | 动作相关预测、前提、unknown与计划完成零动作语义 | 背景match不能冒充相关预测；不把schema通过等同规则正确 |
 | [executable_plan_forks.py](../../src/arc3_research/executable_plan_forks.py) | 复用已有切点恢复、hash与450秒／60动作限制 | A／B输入身份一致，成本都在窗口内 |
 | [experiment_config.py](../../src/arc3_research/experiment_config.py)与[build_experiment.py](../../scripts/build_experiment.py) | 新配置单独冻结，不覆盖034 v2；明确公共运行器与009差异 | 源码／输入／参数manifest可对应真实远端版本 |
-| [现有分析器](../../scripts/analyze_034_results.py) | 补交付漏斗、相关性、误停、完整池涨跌和预算分解 | 结论可追到原始请求、程序及动作 |
+| [现有分析器](../../scripts/analysis/analyze_034_results.py) | 补交付漏斗、相关性、误停、完整池涨跌和预算分解 | 结论可追到原始请求、程序及动作 |
 
 实施时先完成上述离线修改，再启动一次诊断。每次运行只保存一个可归因候选；不在远端运行中改源码，不同时混入新记忆、模型、量化或调度。
 
@@ -167,7 +167,7 @@ Heliosli v8的关键局限仍在：首次规则注册依赖模型主动调用，
 
 若交付线在一轮修正后仍不能成立，且临近截止，应停止反复微调，考虑对已冻结031 v2做一次完整对照，而非凭短跑分直接提交。031有真实计算到行动的正链，仍缺全池净收益证据。这是时间受限时的备选，不与本轮主线并行消耗GPU。
 
-仓库已有社区40家族的12开发／12预留／16冻结划分。若候选出现公开改善、却担心对反复开发的25题过拟合，可在候选冻结后使用既定冻结集作一次辅助迁移检查；不重建题库，也不把缺乏可信人类基线的社区完成率冒充官方RHAE。它不是进入本轮正式提交的新增硬门槛。[社区划分与限制](../../research/020-community-validation.md)
+仓库已有社区40家族的12开发／12预留／16冻结划分。若候选出现公开改善、却担心对反复开发的25题过拟合，可在候选冻结后使用既定冻结集作一次辅助迁移检查；不重建题库，也不把缺乏可信人类基线的社区完成率冒充官方RHAE。它不是进入本轮正式提交的新增硬门槛。[社区划分与限制](../../research/notes/020/020-community-validation.md)
 
 ## 9 时间与交付安排
 

@@ -1,6 +1,6 @@
 # 016 pace 对照进展
 
-更新：2026-10-18。状态：**jiyujia修复轮已COMPLETE，首轮门槛未通过，不晋升、不做同版倒序、不提交。** 对应[计划](../plan/016-pace-allocation.md)、[完整结果](../../research/016-results-analysis.md)、[当前决策](../../research/017-research-decision.md)。
+更新：2026-10-18。状态：**jiyujia修复轮已COMPLETE，首轮门槛未通过，不晋升、不做同版倒序、不提交。** 对应[计划](../plan/016-pace-allocation.md)、[完整结果](../../research/notes/016/016-results-analysis.md)、[当前决策](../../research/notes/017/017-research-decision.md)。
 
 | 指标 | baseline | pace_1x |
 |---|---:|---:|

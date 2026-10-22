@@ -13,7 +13,7 @@
 - 阅读12组一手论文、作者代码或官方分析，逐项记录数据集、模型、预算、best-of/replay限定及负结果。
 - 将结论落实成002的假设/实现边界和003的可执行交接，未扩展测试工程。
 
-详细证据：[notebook-findings](../../research/notebook-findings.md)、[frontier-findings](../../research/frontier-findings.md)。
+详细证据：[notebook-findings](../../research/overview/notebook-findings.md)、[frontier-findings](../../research/overview/frontier-findings.md)。
 
 ## 2. 实际产出
 

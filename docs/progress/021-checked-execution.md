@@ -1,6 +1,6 @@
 # 021 — 预测失配停批进展
 
-日期：2026-10-19。状态：**jiyujia v1 COMPLETE。36.9270 → 29.3560（−7.5710），41 → 38 关，全通 3 → 0。停批接口没有被调用。不提交。** 计划见 [021计划](../plan/021-checked-execution.md)，结果见 [021分析](../../research/021-results-analysis.md)。
+日期：2026-10-19。状态：**jiyujia v1 COMPLETE。36.9270 → 29.3560（−7.5710），41 → 38 关，全通 3 → 0。停批接口没有被调用。不提交。** 计划见 [021计划](../plan/021-checked-execution.md)，结果见 [021分析](../../research/notes/021/021-results-analysis.md)。
 
 ## 已接入
 
@@ -14,7 +14,7 @@
 命令：
 
 ```bash
-/Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/check_021_checked_execution.py
+/Users/zhaohuaxiang/.local/bin/python3.12 -B scripts/checks/check_021_checked_execution.py
 ```
 
 [报告](../../experiments/021-checked-execution-cpu/report.json) 状态 **passed**。19 次真实 sandbox 子进程，18 个场景；preflight `passed`，网络调用 0，游戏动作 0。宿主动作是假的公开帧，不是一局 ARC，也不是模型修复。
