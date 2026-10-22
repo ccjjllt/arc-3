@@ -1,0 +1,136 @@
+{
+  "name": "zero_action_validation",
+  "status": "passed",
+  "actions": [],
+  "action_calls": [],
+  "scripted_completions": [
+    {
+      "index": 0,
+      "observed_step": 0,
+      "observed_col": 1,
+      "timeout": 60.0,
+      "max_tokens": 4096,
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "last_message": {
+        "role": "user",
+        "content": "The host paused a real Python action sequence. Repair the SMALL live\nprogram/input that generated it, then recompute its current goal and plan.\nReuse the existing rule/search when evidence supports it; revise a contradicted\nrule instead of just repeating the previous actions. Current state is live.\nReturn one python tool call containing self-contained function definitions and\nimports only, with these two entry points:\n\nplan_program(frame) -> {\"goal\": nonempty current target description/data,\n \"actions\": [model-facing action dicts, at most 12],\n \"evidence_pixels\": [[row,col,color_character], ...],\n \"replaces\": [names from the paused code or retained functions], \"reason\": str}\npredict(frame, action) -> {\"expected_pixels\": [[row,col,color_character], ...],\n \"scope\": \"which observable change this checks\"}\n\nplan_program must READ frame and actually RECOMPUTE the relevant input, goal\nand actions. Do not just rename a stale hand-written target or old action list.\npredict runs before each action and returns concrete, nonempty pixel predictions\nfor the action's relevant observable consequences. Predict actual color values,\nnot flags such as ok=True. MOUSE uses row/col; other actions use only action.\nDo not propose RESET or UNDO. Return no prints or top-level calls. No function\nmay execute action(), RESET, UNDO or other environment side effects. The host\nwill run plan_program and predict itself in a zero-action sandbox, check pixel\nevidence against the current public image, and then execute the plan through\nthe ordinary action path. A pixel/schema check does NOT certify your rule.\n\nOrdinary globals do not persist. Put dependencies/parameters in the returned\nfunctions; existing retained helpers are available, but stale layout constants\nmust be rebound from this frame. Frame has ascii, shape, level, step; you may\ninternally read exact current ASCII for this computation, without printing the\nwhole image. If the rule is uncertain, make a short useful next plan, with an\nhonest prediction to test. Do not copy every pixel as a replacement task model.\n\nLive program bindings: ['old_plan', 'sentinel']\nPaused code:\nold_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n\nActive program being corrected (if present):\n\nPublic trigger:\n{\"kind\": \"bootstrap\", \"proposed_actions\": [{\"action\": \"LEFT\"}, {\"action\": \"LEFT\"}, {\"action\": \"LEFT\"}], \"already_executed_in_snippet\": 0, \"before_grid_sha256\": \"5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa\"}\nCURRENT public observation AFTER any already executed action (not the old request image):\n{\"level\": 1, \"step\": 0, \"shape\": [5, 10], \"ascii\": \"WWWWWWWWWW\\nWWWWWWWWWW\\nWgWWWWWWWW\\nWWWWWWWWWW\\nWWWWWWWWWW\", \"recent_real_actions\": [], \"last_actual_result\": null}"
+      }
+    }
+  ],
+  "tool_output": {
+    "tool": "python",
+    "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 2, in <module>\nExecutablePlanInterrupted: Old suffix stopped; host will recompute the current program",
+    "executable_plan": {
+      "status": "rejected",
+      "error": "ValueError: zero-action validation attempted a side effect or changed the observation",
+      "actual_actions": 0,
+      "next": "Continue ordinary exploration from current_frame; previous suffix did not run."
+    }
+  },
+  "step_executed": false,
+  "made_progress": false,
+  "events": [
+    {
+      "observation_id": 0,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": null,
+      "kind": "bootstrap",
+      "source_code": "old_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n",
+      "proposed_actions": [
+        {
+          "action": "LEFT"
+        },
+        {
+          "action": "LEFT"
+        },
+        {
+          "action": "LEFT"
+        }
+      ],
+      "already_executed_in_snippet": 0,
+      "before_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+    },
+    {
+      "observation_id": 0,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": null,
+      "kind": "program_recomputed",
+      "trigger": {
+        "kind": "bootstrap",
+        "source_code": "old_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n",
+        "proposed_actions": [
+          {
+            "action": "LEFT"
+          },
+          {
+            "action": "LEFT"
+          },
+          {
+            "action": "LEFT"
+          }
+        ],
+        "already_executed_in_snippet": 0,
+        "before_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+      },
+      "actual_actions": 0,
+      "request_budget_seconds": 60.0,
+      "semantic_claim": "current pixels and selected prediction only; goal/rules are hypotheses",
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "response": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "cpu-0",
+            "type": "function",
+            "function": {
+              "name": "python",
+              "arguments": "{\"code\": \"def locate(frame):\\n    rows = frame.ascii.splitlines()\\n    for row, line in enumerate(rows):\\n        if 'g' in line:\\n            return row, line.index('g'), len(line)\\n    raise ValueError(\\\"visible marker absent\\\")\\n\\ndef plan_program(frame):\\n    execute = action\\n    execute(\\\"RIGHT\\\")\\n    row, col, width = locate(frame)\\n    target = min(col + 2, width - 1)\\n    return {\\\"goal\\\": {\\\"start_col\\\": col, \\\"target_col\\\": target, \\\"observed_step\\\": frame.step},\\n            \\\"actions\\\": [{\\\"action\\\": \\\"RIGHT\\\"} for _ in range(target - col)],\\n            \\\"evidence_pixels\\\": [[row, col, 'g']],\\n            \\\"replaces\\\": [\\\"old_plan\\\"],\\n            \\\"reason\\\": \\\"Read the current marker and recompute its target and action count\\\"}\\n\\ndef predict(frame, action):\\n    row, col, width = locate(frame)\\n    delta = 1 if action[\\\"action\\\"] == \\\"RIGHT\\\" else -1\\n    next_col = max(0, min(width - 1, col + delta))\\n    return {\\\"scope\\\": \\\"visible marker source and destination pixels\\\",\\n            \\\"expected_pixels\\\": [[row, col, 'W'], [row, next_col, 'g']]}\\n\"}"
+            }
+          }
+        ]
+      },
+      "status": "rejected",
+      "error": "ValueError: zero-action validation attempted a side effect or changed the observation"
+    }
+  ],
+  "patch": {
+    "patch": "034-executable-plan-v1",
+    "games": 1,
+    "bootstrap_calls": 1,
+    "repair_calls": 0,
+    "extra_seconds": 0.027544250013306737,
+    "events": [
+      {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-cpu-check/zero_action_validation/tool_runtime_state.json",
+        "event_count": 2,
+        "statuses": [
+          "rejected"
+        ]
+      }
+    ]
+  },
+  "retained_functions": {
+    "sentinel": "def sentinel():\n    return \"original\""
+  },
+  "final_frame": {
+    "step": 0,
+    "col": 1,
+    "level": 1
+  },
+  "recorded_tokens": {
+    "generated": 37,
+    "total": 48
+  },
+  "elapsed_seconds": 0.08364399999845773
+}

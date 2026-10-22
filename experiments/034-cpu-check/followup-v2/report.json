@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-22T03:19:17.477914+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_sandbox_calls": 6,
+  "output_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-cpu-check/followup-v2",
+  "scenarios": [
+    {
+      "name": "validation_preserves_repeat_guard",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.05585800006520003,
+      "recorded_tokens": {
+        "generated": 0,
+        "total": 0
+      }
+    },
+    {
+      "name": "initial_prediction_rejected_rolls_back",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.1076212499756366,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    }
+  ],
+  "limits": [
+    "Scripted completion responses and synthetic public frames; no ARC score.",
+    "The real frozen ToolAgent._run_python_tool and child sandbox are exercised.",
+    "Synthetic token usage checks bookkeeping only; it is not inference cost."
+  ],
+  "scripted_completion_calls": 1,
+  "finished_at_utc": "2026-10-22T03:19:17.725870+00:00",
+  "source_sha256": {
+    "scripts/check_034_executable_plan.py": "fdcc81d2ce7be8ed5ad207738d41011cc1fed852bbf111a975df6cdcc666a165",
+    "src/arc3_research/executable_plan.py": "f6033f01d6421a6955af04cad87033e56dd5914aa657b6d4fb1577680d5f986c",
+    "src/arc3_research/executable_plan_contract.py": "144ee33c37feff52dfaf1537c14742d093ecf818a7bebcd62c794e286dc480cf"
+  }
+}

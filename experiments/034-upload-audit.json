@@ -1,0 +1,75 @@
+{
+  "observed_at_utc": "2026-10-22T03:26:55.359946+00:00",
+  "purpose": "Concrete upload payload audit after automatic approval reviewer rejection; does not itself launch or submit",
+  "destination": "zhuating/arc3-034-plan-diagnostic",
+  "visibility": "private",
+  "code_file": "notebooks/034-plan-diagnostic/experiment.ipynb",
+  "code_sha256": "06350686614c7486e307c3e4a21f4bb87ad9291c3d07ad482a72f054308ca741",
+  "code_bytes": 953091,
+  "metadata_file": "notebooks/034-plan-diagnostic/kernel-metadata.json",
+  "metadata_sha256": "14cc3f7782177ff4324589c734e3a13a7246692222fc5aedcec0fa5695a95cfb",
+  "kernel_directory_files": [
+    "experiment.ipynb",
+    "kernel-metadata.json",
+    "build-manifest.json"
+  ],
+  "input_sources": {
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ]
+  },
+  "embedded_trajectory_packages": [
+    {
+      "destination": "/kaggle/research/experiments/034-fork-inputs/ft09-package.json.gz.b64",
+      "games": [
+        "ft09-0d8bbf25"
+      ],
+      "forks": [
+        {
+          "game_id": "ft09-0d8bbf25",
+          "cut": 27,
+          "actions": 27,
+          "level": 3,
+          "messages": 42,
+          "retained_functions": 0
+        }
+      ]
+    },
+    {
+      "destination": "/kaggle/research/experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "games": [
+        "su15-1944f8ab"
+      ],
+      "forks": [
+        {
+          "game_id": "su15-1944f8ab",
+          "cut": 86,
+          "actions": 86,
+          "level": 5,
+          "messages": 97,
+          "retained_functions": 9
+        }
+      ]
+    }
+  ],
+  "credential_pattern_findings": [],
+  "credential_contents_read": false,
+  "researcher_posthoc_audit_bundled": false,
+  "upload_scope": "Kaggle CLI code_file and metadata; no credential files or repository directory upload",
+  "accelerator": "NvidiaRtxPro6000",
+  "max_session_seconds": 7200,
+  "operation": "New private diagnostic notebook save/run only, not a scored competition submission or purchase",
+  "authorization_context": [
+    "User requested the034handoff and then said你开始做吧",
+    "Handoff/034plan names zhuating existing execution identity and bounded GPU diagnosis; no new external destination"
+  ],
+  "original_rejection_reason": "Specific external payload/destination and GPU resource use required review; no launch occurred"
+}

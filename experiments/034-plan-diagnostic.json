@@ -1,0 +1,70 @@
+{
+  "id": "034-plan-diagnostic",
+  "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+  "kernel_title": "ARC3 034 Plan Diagnostic",
+  "purpose": "Forced current-program repair and checked execution from frozen ft09 L3 and su15 L5 prefixes; same-prefix mechanism evidence only",
+  "comparison_note": "A then B run in separate CPU processes against one loaded model server. Within each arm the two games continue concurrently for 450 seconds including the candidate bootstrap/repair. This is not natural-trigger coverage, a full-pool gain, or hidden-score evidence.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "executable_plan_A",
+    "executable_plan_B"
+  ],
+  "reference_arm": "executable_plan_A",
+  "arm_environment": {
+    "executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "600s runner allowance per arm; two concurrent450s/60-action continuations, all bootstrap/repair/checking included. 4200s startup ceiling and7200s total session cap preserve both arms plus cleanup.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 7200,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 2,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "Forced bootstrap consumes the candidate's single bootstrap opportunity; a subsequent bounded repair remains available. Compare actual subsequent actions/new levels and total cost, not pixel-contract acceptance alone.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "src/arc3_research/executable_plan.py": "443d9fecf4055831d53907e216e99c59f5c3adfb752c934716f43d74a5adbb57",
+    "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+    "src/arc3_research/executable_plan_forks.py": "f3316e64c9b14677318381ef88e7be375a3ae528c8e030b50cf562473e42d51a",
+    "src/arc3_research/program_repair.py": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061",
+    "src/arc3_research/run_arm.py": "8468e7c0eb568e4908d2c12b7858b9acde147de755797559490f5753d272e043",
+    "src/arc3_research/experiment_config.py": "7a93183e8982614a9363bd7cc9f77261fb78ca4bc6b59df4bf43bde67d18efc4",
+    "scripts/build_experiment.py": "8abc89f9000758e81a2281cfb5badbca243376c04214c3b2f53ae36f359ad9cf",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  }
+}

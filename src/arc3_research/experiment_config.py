@@ -38,6 +38,34 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError("arm_environment must name only configured arms.")
     for value in environments.values():
         arm_environment(value)
+    if any(a in ("executable_plan", "executable_plan_A", "executable_plan_B") for a in arms):
+        expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
+                    for arm in arms}
+        if environments != expected or config.get("n_passes_per_arm") != 1:
+            raise ValueError("034 requires explicit unchanged scheduling and one pass.")
+        if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
+            raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
+        if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
+            if (arms != ["executable_plan_A", "executable_plan_B"]
+                    or config.get("reference_arm") != "executable_plan_A"
+                    or config.get("games") != ["ft09-0d8bbf25", "su15-1944f8ab"]):
+                raise ValueError("034 diagnostic runs A then B on frozen ft09/su15 only.")
+            if (config.get("requested_arm_seconds") != 600
+                    or config.get("continuation_seconds") != 450
+                    or config.get("max_continuation_actions") != 60
+                    or config.get("hard_limit_seconds") != 7200
+                    or config.get("startup_limit_seconds") != 4200
+                    or config.get("warmup_action_games") != 0
+                    or config.get("request_deadline") is not False
+                    or config.get("skip_blanket_model_precache") is not False):
+                raise ValueError("034 diagnostic budget/startup contract differs from its frozen design.")
+            if not all(config.get(key) is True for key in (
+                "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+                "require_drained_workers", "require_complete_pool", "native_payload_cells",
+            )):
+                raise ValueError("034 diagnostic retains isolated, complete and drained arm contracts.")
+        elif arms not in (["baseline", "executable_plan"], ["executable_plan"]):
+            raise ValueError("034 natural runs require the isolated executable_plan arm, optionally after baseline.")
     if "tail_80k" in arms:
         expected = {
             "baseline": {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"},

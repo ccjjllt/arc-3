@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import copy
 import argparse
+import base64
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -81,6 +83,11 @@ def main() -> None:
         required.update({"controller_repair.py", "controller_repair_forks.py", "program_repair.py"})
     if any(arm in ("segmentation_forks_A", "segmentation_forks_B") for arm in arms):
         required.update({"segmentation_runs.py", "segmentation_forks.py"})
+    if any(arm in ("executable_plan", "executable_plan_A", "executable_plan_B") for arm in arms):
+        required.update({"executable_plan.py", "executable_plan_contract.py", "program_repair.py"})
+    plan_forks = any(arm in ("executable_plan_A", "executable_plan_B") for arm in arms)
+    if plan_forks:
+        required.add("executable_plan_forks.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):
@@ -107,9 +114,27 @@ def main() -> None:
                     "controller_repair_A", "controller_repair_B") for arm in arms):
         fork_package = ROOT / "experiments/028-fork-package.json.gz.b64"
         payload["experiments/028-fork-package.json.gz.b64"] = fork_package.read_text()
+    plan_input_sources = {}
+    if plan_forks:
+        # The original 028 pack contains three large transcripts. Keep the
+        # selected ft09 entry byte-equivalent as data without uploading unused
+        # games; the su15 researcher-only audit is deliberately not bundled.
+        original_pack = ROOT / "experiments/028-fork-package.json.gz.b64"
+        original_data = json.loads(gzip.decompress(base64.b64decode(original_pack.read_text())))
+        ft09 = original_data["forks"]["ft09-0d8bbf25"]
+        subset = {"schema_version": 1, "forks": {"ft09-0d8bbf25": ft09},
+                  "source_package_sha256": hashlib.sha256(original_pack.read_bytes()).hexdigest()}
+        raw = json.dumps(subset, ensure_ascii=False, separators=(",", ":")).encode()
+        payload["experiments/034-fork-inputs/ft09-package.json.gz.b64"] = (
+            base64.b64encode(gzip.compress(raw, mtime=0)).decode() + "\n")
+        su15_pack = ROOT / "experiments/034-fork-inputs/su15-package.json.gz.b64"
+        payload[str(su15_pack.relative_to(ROOT))] = su15_pack.read_text()
+        for path in (original_pack, su15_pack):
+            plan_input_sources[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in [source, Path(__file__), *payload_paths]}
     hashes[str(config_path.relative_to(ROOT))] = hashlib.sha256(config_path.read_bytes()).hexdigest()
+    hashes.update(plan_input_sources)
 
     title = config.get("kernel_title", "ARC3 " + config["id"].replace("-", " ").title())
     intro = f"""# {title}
@@ -316,6 +341,11 @@ finally:
                 "build_config_path": str(config_path.relative_to(ROOT)),
                 "payload_write_mode": "native-writefile" if config.get("native_payload_cells") else "json-source-files",
                 "notebook_sha256": hashlib.sha256(output.read_bytes()).hexdigest()}
+    if plan_forks:
+        manifest["fork_input_payload_sha256"] = {
+            name: hashlib.sha256(content.encode()).hexdigest()
+            for name, content in payload.items() if name.startswith("experiments/034-fork-inputs/")}
+        manifest["diagnostic_only"] = True
     (destination / "build-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Built {output}; {len(notebook['cells'])} cells, {output.stat().st_size} bytes")
     print(manifest["notebook_sha256"])

@@ -1,0 +1,12 @@
+{
+  "solver_input_allowlist": [
+    "su15-package.json.gz.b64"
+  ],
+  "equivalent_uncompressed_input": "su15-package.json",
+  "researcher_only_do_not_mount": [
+    "su15-package-report.json",
+    "baseline-l5-posthoc-audit.json",
+    "input-boundaries.json"
+  ],
+  "runner_integration": "Use the schema-1 forks[su15-1944f8ab] entry. Parameterize the 033 runner's GAME_ID and package path; do not copy the hard-coded ft09 identifier or researcher audit files. Replay actions with the existing session executor, compare current grid/level and prefix count, restore messages/functions, then reset continuation timer and action cap. A/B must consume the identical package."
+}
