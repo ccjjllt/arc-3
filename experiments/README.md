@@ -36,4 +36,4 @@
 | 031 | 16 | [查看文件](../docs/experiments/031.md) |
 | 032 | 29 | [查看文件](../docs/experiments/032.md) |
 | 033 | 10 | [查看文件](../docs/experiments/033.md) |
-| 034 | 38 | [查看文件](../docs/experiments/034.md) |
+| 034 | 41 | [查看文件](../docs/experiments/034.md) |

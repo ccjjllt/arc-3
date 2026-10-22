@@ -1,0 +1,313 @@
+{
+  "frame_step": 86,
+  "blob_bboxes": {
+    "Y": {
+      "bbox": [
+        1,
+        13,
+        6,
+        33
+      ],
+      "pixels": 20
+    },
+    "S": {
+      "bbox": [
+        1,
+        1,
+        60,
+        58
+      ],
+      "pixels": 8
+    },
+    "M": {
+      "bbox": [
+        1,
+        5,
+        29,
+        54
+      ],
+      "pixels": 20
+    },
+    "p": {
+      "bbox": [
+        1,
+        9,
+        2,
+        10
+      ],
+      "pixels": 4
+    },
+    "P": {
+      "bbox": [
+        37,
+        4,
+        40,
+        50
+      ],
+      "pixels": 16
+    },
+    "b": {
+      "bbox": [
+        11,
+        28,
+        19,
+        36
+      ],
+      "pixels": 69
+    }
+  },
+  "P_components": [
+    {
+      "pixels": 1,
+      "bbox": [
+        37,
+        6,
+        37,
+        6
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        37,
+        48,
+        37,
+        48
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        38,
+        5,
+        38,
+        5
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        38,
+        7,
+        38,
+        7
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        38,
+        47,
+        38,
+        47
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        38,
+        49,
+        38,
+        49
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        39,
+        4,
+        39,
+        4
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        39,
+        8,
+        39,
+        8
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        39,
+        46,
+        39,
+        46
+      ]
+    },
+    {
+      "pixels": 1,
+      "bbox": [
+        39,
+        50,
+        39,
+        50
+      ]
+    },
+    {
+      "pixels": 3,
+      "bbox": [
+        40,
+        5,
+        40,
+        7
+      ]
+    },
+    {
+      "pixels": 3,
+      "bbox": [
+        40,
+        47,
+        40,
+        49
+      ]
+    }
+  ],
+  "ball_pixels": 4,
+  "target_description": "deliver Y (4x4 block, top-left (1, 13, 6, 33)) onto a silver ball cell",
+  "actual_error": {
+    "type": "IndexError",
+    "message": "list index out of range",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"<actual-su15-program>\", line 146, in plan_program\nIndexError: list index out of range\n"
+  },
+  "selected_threat_pixels": [
+    [
+      37,
+      6
+    ]
+  ],
+  "index_only_counterfactual_plan": {
+    "status": "ready",
+    "goal": "deliver Y (4x4 block, top-left (1, 13, 6, 33)) onto a silver ball cell (ball at 54,14)",
+    "actions": [
+      {
+        "action": "MOUSE",
+        "row": 8,
+        "col": 20
+      }
+    ],
+    "evidence_pixels": [
+      [
+        1,
+        13,
+        "Y"
+      ],
+      [
+        1,
+        14,
+        "Y"
+      ],
+      [
+        2,
+        13,
+        "Y"
+      ],
+      [
+        2,
+        14,
+        "Y"
+      ],
+      [
+        54,
+        14,
+        "S"
+      ],
+      [
+        37,
+        6,
+        "P"
+      ]
+    ],
+    "replaces": [
+      "route",
+      "click",
+      "invaders",
+      "state"
+    ],
+    "reason": "step Y block toward nearest ball center (54,14), max ~7 cell hop, avoiding blue walls and the pink invader"
+  },
+  "index_only_counterfactual_prediction": {
+    "declared_mode": "change",
+    "object_target_coordinates": 6,
+    "expected_coordinates": 13,
+    "sets_equal": false,
+    "missing_expected": [
+      [
+        53,
+        44
+      ],
+      [
+        54,
+        14
+      ]
+    ],
+    "undeclared_expected": [
+      [
+        7,
+        19
+      ],
+      [
+        7,
+        20
+      ],
+      [
+        7,
+        21
+      ],
+      [
+        8,
+        19
+      ],
+      [
+        8,
+        20
+      ],
+      [
+        8,
+        21
+      ],
+      [
+        9,
+        19
+      ],
+      [
+        9,
+        20
+      ],
+      [
+        9,
+        21
+      ]
+    ],
+    "wrong_source_background_claims": [
+      [
+        1,
+        13,
+        "B",
+        "Y"
+      ],
+      [
+        1,
+        14,
+        "B",
+        "Y"
+      ],
+      [
+        2,
+        13,
+        "B",
+        "Y"
+      ],
+      [
+        2,
+        14,
+        "B",
+        "Y"
+      ]
+    ]
+  },
+  "scope": "Pure local function diagnosis from exact observed v5 frame; no game action/model/network. Index-only hypothetical edit is not delivered code and does not show a working solver."
+}

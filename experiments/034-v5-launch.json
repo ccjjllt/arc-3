@@ -1,6 +1,6 @@
 {
   "observed_at_utc": "2026-10-22T13:35:22.301524+00:00",
-  "status": "running",
+  "status": "completed",
   "kernel_id": "zhuating/arc3-034-plan-diagnostic",
   "notebook_path": "notebooks/034-plan-diagnostic-v5/experiment.ipynb",
   "notebook_sha256": "48f83080d3258cfddc81f942d7f48fbb52b818ac25634260dedb29db7cf98e01",
@@ -21,17 +21,64 @@
     "kernelId": 140147580
   },
   "push_finished_at_utc": "2026-10-22T13:35:30.785380+00:00",
-  "latest_observed_at_utc": "2026-10-22T13:36:12.503832+00:00",
+  "latest_observed_at_utc": "2026-10-22T14:59:11.029018+00:00",
   "version": 5,
-  "platform_status": "RUNNING",
+  "platform_status": "COMPLETE",
   "remote_source_verified": true,
   "remote_source_check": "experiments/034-v5-remote-source-check.json",
-  "hardware_observed_in_log": false,
+  "hardware_observed_in_log": true,
   "local_monitoring": {
-    "status": "not_started",
+    "status": "completed_results_downloaded",
     "user_will_report_completion": true,
     "remote_job_cancelled": false
   },
-  "phase": "cold_start_or_queued",
-  "platform_run_started": true
+  "phase": "finished",
+  "platform_run_started": true,
+  "gpu_server_stopped": true,
+  "session_elapsed_seconds": 3551.5422768592834,
+  "model_ready_seconds": 2629.654679298401,
+  "analysis_path": "research/notes/034/034-v5-results-analysis.md",
+  "assessment_path": "experiments/034-v5-analysis/mechanism-assessment.json",
+  "paired_artifacts_complete": true,
+  "candidate_delivered_programs": 3,
+  "candidate_checked_actions": 4,
+  "candidate_prediction_matches": 2,
+  "candidate_prediction_mismatches": 2,
+  "candidate_repairs": 1,
+  "candidate_direct_host_added_levels": 0,
+  "decision": "Do not scale or formally submit v5; archive partial task-pixel matches and failed object/domain grounding. No new GPU run with remaining3145.402seconds.",
+  "actual_results": {
+    "A": {
+      "ft09-0d8bbf25": {
+        "added_levels": 2,
+        "continuation_action_count": 33,
+        "final_score": 47.61904761904761,
+        "elapsed_seconds": 450.051786346,
+        "actions_during_forced_branch": 0
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 42,
+        "final_score": 22.22222222222222,
+        "elapsed_seconds": 450.1165098350002,
+        "actions_during_forced_branch": 0
+      }
+    },
+    "B": {
+      "ft09-0d8bbf25": {
+        "added_levels": 1,
+        "continuation_action_count": 60,
+        "final_score": 18.112051681889064,
+        "elapsed_seconds": 327.86795442799985,
+        "actions_during_forced_branch": 4
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 41,
+        "final_score": 22.22222222222222,
+        "elapsed_seconds": 450.08939062000036,
+        "actions_during_forced_branch": 0
+      }
+    }
+  }
 }

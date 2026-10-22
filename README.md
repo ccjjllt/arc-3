@@ -10,7 +10,7 @@
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
 | 最近正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
-| 当前研究 · 034 v5 | 最新启动记录为 RUNNING，结果尚未回收；检验有来源的旧 assistant 假设能否改善程序交付 | [034 进展](docs/progress/034-executable-plan.md) · [启动原件](experiments/034-v5-launch.json) |
+| 当前研究 · 034 v5 | 已 COMPLETE；2次任务像素预测命中、2次失配，仍混淆对象；两题均分34.9206→20.1671，不扩大或正式提交 | [034 v5 结果](research/notes/034/034-v5-results-analysis.md) · [完成记录](experiments/034-v5-launch.json) |
 | 已完成 · 034 v4 | 程序已交付，但两次受检动作均 mismatch；不扩大或正式提交该版 | [034 v4 结果](research/notes/034/034-v4-results-analysis.md) |
 
 实验状态、公开开发池结果与隐藏正式分数分别记录；历史文档中的“下一步”“运行中”和余额应按其记录日期理解。

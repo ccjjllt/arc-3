@@ -2,15 +2,19 @@
 
 ## v5 保留切点前的未验证假设
 
-2026-10-22。**v5已确认RUNNING，远端版本5的31个cell与冻结候选一致。** 下一版优先检验紧凑上下文是否删掉了必要的既有玩法／目标判断：仅有界复制切点前已存在的assistant自然语言原文，将其明确标为`unverified`假设，并记录来源hash与截断区间。选择不依赖手工判断哪条规则正确，不加入切点后的响应、未来动作、手工正确规则或新模型摘要轮。
+2026-10-22。**v5已COMPLETE，实际31个cell与冻结版本一致，两臂完整。两题均分34.9206→20.1671（−14.7535），不扩大或正式提交。** ft09 A新增2关／B新增1关，动作33／60；su15两臂均0关，动作42／41。B的ft09在327.87秒用完相同60动作上限而结束，未缩短候选预算。正式最佳继续保留009 v2／31.16。[结果分析](../../research/notes/034/034-v5-results-analysis.md) · [机制判断](../../experiments/034-v5-analysis/mechanism-assessment.json)
 
-本版保留v4的专用提交接口、代码合同、真实mismatch才修订、每题450秒／60动作、单请求60秒及分支累计120秒等预算；总会话上限调整为6300秒，不能缩短后臂求解窗口来凑时长。正式最佳继续保留009 v2／31.16；准备通过不代表在线交付或提分，当前不进入完整25题或正式提交。
+本版只补回切点前已有assistant自然语言原文，明确标为未验证、可能过期，并记录来源hash与截断区间；没有手工正确规则、未来轨迹或新摘要轮。保留v4专用提交工具、执行合同、thinking关闭、真实mismatch才修订；每题450秒／60动作、单请求60秒、每游戏辅助累计120秒。总会话上限6300秒，完整双臂预算未被压缩。
 
-零动作验收／运行错误的一次具体反馈修订，作为[独立候选建议](../../experiments/034-v4-analysis/program-independent-review.json)保留，不与本轮上下文改动混测。选择本轮方向的依据是旧玩法／目标判断确实未进入v4紧凑包；这仍是假设，需要真实结果检验。[下一方向审阅](../../experiments/034-v4-analysis/next-direction-review.json)
+三次辅助请求均交付完整程序，两个ft09程序通过当前计划和首预测验收，共4个host动作。前两次点击真实任务色块，4个采样像素O→R预测命中，实际每次36像素变化；这有动作相关性，但未验证完整对象或“nothing else”。随后程序误点右侧UI色条，反例修订后又误点顶部UI，均mismatch。新增的一关发生在普通主循环，直接host过关为0；已有动作可能间接影响后续，不能把它强行归为完全无贡献或独立解题。[程序独立审阅](../../experiments/034-v5-analysis/program-independent-review.json)
 
-北京时间2026-10-22 21:35上传成功，私有目标仍为`zhuating/arc3-034-plan-diagnostic`。冻结Notebook957458字节，SHA256 `48f83080d3258cfddc81f942d7f48fbb52b818ac25634260dedb29db7cf98e01`；19份源输入hash、14份Python payload及编译通过，14个原生sandbox场景通过。ft09选切点前消息39／37，共9047字符；su15选94／91，共5657字符。字段`old_conversation_included=false`表示不回放完整会话，新增`prior_assistant_text_included`另记有界旧文字。[上下文核验](../../experiments/034-v5-preparation/hypothesis-context-checks.json) · [CPU核验](../../experiments/034-v5-cpu-check/report.json) · [独立预检](../../experiments/034-v5-preparation/independent-preflight.json)
+su15程序的目标描述已转向送球／合并／避追击，但对单像素threat取第二元素而IndexError，零动作失败。它同时把顶部图例与实际黄棋子合为一个bbox；纯CPU只修索引后仍有错误动作目标和预测集合不一致，单独异常重试不足以解决。[离线诊断](../../experiments/034-v5-analysis/su15-code-errors-offline.json)
 
-上传前即时配额仍6708.032秒，已确认上次COMPLETE。6300秒会话上限保留4200启动、1800秒原双臂／缓存／收尾预留和300秒余量，不足完整预算则中止。本轮只有一次上传，API明确返回版本5，源码逐cell回读一致；尚无真实模型交付或得分结论。按用户此前安排等待跑完通知，不持续跟踪长冷启动；远端作业继续。[启动记录](../../experiments/034-v5-launch.json) · [源码核对](../../experiments/034-v5-remote-source-check.json) · [冻结源码](../../experiments/034-v5-source/)
+下一问题收窄为对象范围与角色的校验，先用本轮真实转移设计离线判据；不加入游戏专用坐标屏蔽，也不把所有界面控件一律禁用。停止v5原样重跑；零动作错误反馈继续作为独立候选，不在本轮补测。v4→v5跨会话观察不能隔离旧文本补回的因果收益。
+
+北京时间21:35上传为私有版本5。冻结Notebook957458字节，SHA256 `48f83080d3258cfddc81f942d7f48fbb52b818ac25634260dedb29db7cf98e01`；19份输入hash、14份Python payload及编译、14个原生sandbox场景均通过。ft09选切点前消息39／37共9047字符，su15选94／91共5657，在线tokenize与usage8471／10978／9166一致。[上下文核验](../../experiments/034-v5-preparation/hypothesis-context-checks.json) · [CPU核验](../../experiments/034-v5-cpu-check/report.json) · [独立预检](../../experiments/034-v5-preparation/independent-preflight.json) · [源码核对](../../experiments/034-v5-remote-source-check.json) · [冻结源码](../../experiments/034-v5-source/)
+
+最终44项官方清单文件齐全，JSON／JSONL与请求hash核对通过；一次下载TLS断连已补下载恢复。会话59.19分钟，模型启动43.83分钟。A缓存曾HTTP400，约1秒后重试200并获后端确认，完整预算保留；两CPU／GPU正常关闭。三份末请求缺response，已返回usage不是完整成本。当前共享余额3145.402秒，不够一轮完整新诊断，不启动新GPU或正式提交。[完整性独立审阅](../../experiments/034-v5-analysis/integrity-independent-review.json) · [最终平台快照](../../experiments/034-v5-final-platform-snapshot.json) · [完成记录](../../experiments/034-v5-launch.json)
 
 ## v4 辅助专用程序提交接口
 

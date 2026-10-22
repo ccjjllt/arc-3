@@ -1,0 +1,408 @@
+{
+  "status": "completed",
+  "reviewed_at_utc": "2026-10-22T14:54:45.489733+00:00",
+  "scope": "Independent read of exact v5 B events, actual generated source, paired fork summaries and complete B transcript; no model/network/game actions or solver implementation edits.",
+  "delivery": {
+    "responses": 3,
+    "full_extracted_programs": 3,
+    "validated_ready_programs": 2,
+    "validated_first_predictions": 2,
+    "host_actions": 4,
+    "prediction_matches": 2,
+    "prediction_mismatches": 2,
+    "real_mismatch_repair_requests": 1,
+    "direct_host_level_completions": 0
+  },
+  "programs": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 14,
+      "trigger": "bootstrap",
+      "status": "recomputed_plan_executed",
+      "failure_stage": null,
+      "full_code_extracted": true,
+      "program_hash": "fa5940d646142cd8ad1be3cd05b9ecbe2d43a2502303e0ce86954b6f258a358d",
+      "extracted_code_sha256_matches_event": true,
+      "validated_ready_plan": true,
+      "validated_initial_prediction": true,
+      "actual_actions": 3,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 8471,
+        "total_tokens": 10054,
+        "completion_tokens": 1583,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "request_controls": {
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_program"
+          }
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        },
+        "max_tokens": 4096
+      },
+      "input_token_count": 8471,
+      "context_metadata": {
+        "context_schema": "034-compact-evidence-v2",
+        "messages_sha256": "6304ed8341988f62928f3facf82e930e1d2141db879743a5cc6ab74d049ec512",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "prior_assistant_text_included": true,
+        "prior_assistant_text_characters": 9047,
+        "prior_assistant_source_indices": [
+          39,
+          37
+        ],
+        "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+        "related_functions": [],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 3,
+          "step": 27,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+        },
+        "message_characters": 21659,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "elapsed_seconds": 18.26729384800001,
+      "error": null
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 21,
+      "trigger": "repair",
+      "status": "recomputed_plan_executed",
+      "failure_stage": null,
+      "full_code_extracted": true,
+      "program_hash": "1d4ce0eac8769c0f7c14934cd0fba82ad08a82128594d750da24fb2aa9148ae2",
+      "extracted_code_sha256_matches_event": true,
+      "validated_ready_plan": true,
+      "validated_initial_prediction": true,
+      "actual_actions": 1,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 10978,
+        "total_tokens": 12909,
+        "completion_tokens": 1931,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "request_controls": {
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_program"
+          }
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        },
+        "max_tokens": 4096
+      },
+      "input_token_count": 10978,
+      "context_metadata": {
+        "context_schema": "034-compact-evidence-v2",
+        "messages_sha256": "e39ee420dbd4c748a03f45b1dcac27a389f0c5ae95e5ed477eb91db843d71eb4",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "prior_assistant_text_included": true,
+        "prior_assistant_text_characters": 9047,
+        "prior_assistant_source_indices": [
+          39,
+          37
+        ],
+        "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+        "related_functions": [
+          "_cell_top_left",
+          "_clickable",
+          "_grid"
+        ],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 3,
+          "step": 30,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "97b182e7fdea8878aa77be06370cbb11a2e4cefdbf51cee8d17b907754f19782"
+        },
+        "message_characters": 29824,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "elapsed_seconds": 18.45728854800018,
+      "error": null
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 2,
+      "trigger": "bootstrap",
+      "status": "rejected",
+      "failure_stage": "plan_validation",
+      "full_code_extracted": true,
+      "program_hash": "cf759492cac2ebedba2852277336bff186cfaf4197ae268e5def6814e6461327",
+      "extracted_code_sha256_matches_event": true,
+      "validated_ready_plan": false,
+      "validated_initial_prediction": false,
+      "actual_actions": 0,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 9166,
+        "total_tokens": 12449,
+        "completion_tokens": 3283,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "request_controls": {
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_program"
+          }
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        },
+        "max_tokens": 4096
+      },
+      "input_token_count": 9166,
+      "context_metadata": {
+        "context_schema": "034-compact-evidence-v2",
+        "messages_sha256": "5baa6914ac64e1e76ac0b4d690f1078751edee398b0a57a72d6f5045c05d1638",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "prior_assistant_text_included": true,
+        "prior_assistant_text_characters": 5657,
+        "prior_assistant_source_indices": [
+          94,
+          91
+        ],
+        "paused_code_sha256": "7560c549c37f34ade54f0e717079f6f7b9601ab9e99be73c41f3b57cf5c9fd27",
+        "related_functions": [
+          "click",
+          "invaders",
+          "state"
+        ],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 5,
+          "step": 86,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+        },
+        "message_characters": 27393,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "elapsed_seconds": 26.330706539999937,
+      "error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _shape(frame) for later Python calls in this game.\\nRetained your function _bbox(cells) for later Python calls in this game.\\nRetained your function _find(grid, ch) for later Python calls in this game.\\nRetained your function _find_lower(grid, ch, min_row) for later Python calls in this game.\\nRetained your function _center(bb) for later Python calls in this game.\\nRetained your function _dist(a, b) for later Python calls in this game.\\nRetained your function _analyze(frame) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 253, in <module>\\n  File \"<python_tool>\", line 146, in plan_program\\nIndexError: list index out of range'}"
+    }
+  ],
+  "checked_actions": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 4,
+      "status": "match",
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 29
+      },
+      "before_step": 27,
+      "after_step": 28,
+      "before_level": 3,
+      "after_level": 3,
+      "checked_pixels": 4,
+      "wrong_pixels": 0,
+      "real_changed_pixels": 36,
+      "frozen_scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "prediction_mode": "change"
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 7,
+      "status": "match",
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 37
+      },
+      "before_step": 28,
+      "after_step": 29,
+      "before_level": 3,
+      "after_level": 3,
+      "checked_pixels": 4,
+      "wrong_pixels": 0,
+      "real_changed_pixels": 37,
+      "frozen_scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "prediction_mode": "change"
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 10,
+      "status": "mismatch",
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 61
+      },
+      "before_step": 29,
+      "after_step": 30,
+      "before_level": 3,
+      "after_level": 3,
+      "checked_pixels": 4,
+      "wrong_pixels": 4,
+      "real_changed_pixels": 0,
+      "frozen_scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "prediction_mode": "change"
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_path": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_line": 17,
+      "status": "mismatch",
+      "action": {
+        "action": "MOUSE",
+        "row": 1,
+        "col": 61
+      },
+      "before_step": 30,
+      "after_step": 31,
+      "before_level": 3,
+      "after_level": 3,
+      "checked_pixels": 5,
+      "wrong_pixels": 5,
+      "real_changed_pixels": 0,
+      "frozen_scope": "clicked cell block plus one trailing palette pixel: block flips R->O and the trailing marker becomes Y, nothing else",
+      "prediction_mode": "change"
+    }
+  ],
+  "host_executions": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_line": 13,
+      "actual_actions": 3,
+      "made_progress": true,
+      "stop_reason": "counterexample"
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_line": 20,
+      "actual_actions": 1,
+      "made_progress": false,
+      "stop_reason": "contract_stopped"
+    }
+  ],
+  "paired_fork_outcomes": {
+    "A": {
+      "ft09-0d8bbf25": {
+        "added_levels": 2,
+        "final_score": 47.61904761904761,
+        "continuation_action_count": 33,
+        "actions_during_forced_branch": 0,
+        "elapsed_seconds": 450.051786346
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "final_score": 22.22222222222222,
+        "continuation_action_count": 42,
+        "actions_during_forced_branch": 0,
+        "elapsed_seconds": 450.1165098350002
+      }
+    },
+    "B": {
+      "ft09-0d8bbf25": {
+        "added_levels": 1,
+        "final_score": 18.112051681889064,
+        "continuation_action_count": 60,
+        "actions_during_forced_branch": 4,
+        "elapsed_seconds": 327.86795442799985
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "final_score": 22.22222222222222,
+        "continuation_action_count": 41,
+        "actions_during_forced_branch": 0,
+        "elapsed_seconds": 450.08939062000036
+      }
+    }
+  },
+  "selected_two_game_means": {
+    "A": 34.92063492063492,
+    "B": 20.167136952055642,
+    "B_minus_A": -14.753497968579275
+  },
+  "ft09_findings": [
+    "Bootstrap genuinely recomputes from each live ASCII frame. It chooses the lexicographically first uniform O 2x2 patch, producing MOUSE(5,29), (5,37), then(5,61). It no longer tiles at fixed origin0/stride6 as v4 did.",
+    "The first two matches concern 4 pixels inside truly clicked task tiles and predict real O->R changes. Actual transitions changed36 and37 pixels respectively; this is useful local action-effect evidence, not a background-only match.",
+    "Each projection checks only a2x2 subset of a6x6 task tile. The scope claims the block changes and nothing else, but neither full-object shape nor no-other-change is verified; actual changes occur outside the selected pixels.",
+    "The program does not construct/solve the known color/neighbor constraints or choose actions to satisfy them. Its local goal remains re-testing toggle dynamics; two matches cannot establish correct target choice or solving progress.",
+    "Third live recomputation selects the right-side UI/legend strip at(5,61). It causes no pixel change; all4 projected pixels mismatch.",
+    "After this real counterexample, repair changes the rule to interior cells only and hard-excludes old top-left(4,60), but its general2x2 scanner still selects top-right UI patch(0,60), clicking(1,61). No pixels change; all5 predicted tile/marker pixels mismatch.",
+    "The repair therefore changes code, rule and action while failing to identify the actual interactive object domain. All4 host actions remain on level3; later B+1 cannot be called direct host completion.",
+    "B reaches60 total continuation actions and terminates at327.868s, while A uses33 actions within450s and adds2 levels. Action economy and official diagnostic score both regress."
+  ],
+  "su15_findings": [
+    "Prior semantic hypotheses are visibly reflected in code: goal now describes delivering a yellow4x4 piece to a silver ball, merging pink pieces, limited click reach and invader avoidance. This is more task-specific than v4 pink2x2/flat-surface interpretation, but one stochastic comparison does not isolate causality.",
+    "Actual plan evaluation raises IndexError at generated source line146: evidence indexes threat[1][0] although the selected4-connected P component has only one pixel[(37,6)]. Zero host actions and zero prediction checks occur.",
+    "Pure offline diagnosis also shows _find(Y) merges the top2x2 yellow legend and a separate4x4 yellow component into bbox(1,13)-(6,33). It treats this nonrectangular union as one4x4 mover.",
+    "An index-only hypothetical edit, solely for diagnosis, would choose MOUSE(8,20). Its prediction has13 expected coordinates versus6 declared object/target coordinates, including missing declared target pixels and undeclared landing pixels; it would still fail the existing contract. Old cells are also asserted to become B although the ASCII background is c.",
+    "Thus the observed failure is not a single harmless typo. Object representation and prediction contract generation remain wrong after task semantics are supplied."
+  ],
+  "hypothesis_evidence": {
+    "included_before_model_request": true,
+    "ft09_source_indices": [
+      39,
+      37
+    ],
+    "ft09_characters": 9047,
+    "su15_source_indices": [
+      94,
+      91
+    ],
+    "su15_characters": 5657,
+    "interpretation": "Packaging succeeded; local predictions/semantic code changed, but evidence does not show corrected full rules, useful repairs or net score."
+  },
+  "offline_diagnosis_path": "experiments/034-v5-analysis/su15-code-errors-offline.json",
+  "recommendation": "Do not scale or formally submit v5 and do not launch another full diagnostic with insufficient quota. Retain the two narrow task-pixel matches as mechanism evidence. The next single research problem should be object-domain grounding: distinguish interactive objects from legend/HUD and predict their real extent before rule-discriminating actions. This is directly shared by ft09 UI clicks and su15 legend/mover merging; adding another generic delivery/context toggle or only repairing the su15 index does not address it. Prepare an offline evidence-driven design first, not another module stack.",
+  "limitations": [
+    "Selected forced checkpoints, one B->A pair; not natural trigger/full-pool/hidden-score evidence.",
+    "v4->v5 between-run differences mix stochasticity with changed context; they do not prove every observed change caused by restored hypotheses.",
+    "No host action crosses a level boundary; later ordinary-loop effects may depend on changed state, so direct and indirect contributions must not be conflated.",
+    "Program review does not replace the independent source/budget/cache/request-integrity review; known returned usage excludes missing final responses."
+  ],
+  "main_loop_level_completion": {
+    "game": "ft09-0d8bbf25",
+    "transcript_path": "runs/034-plan-diagnostic-v5/executable_plan_B/transcripts/ft09-0d8bbf25_B.txt",
+    "action_batch_line": 2185,
+    "result_line": 2186,
+    "evidence": "Ordinary Python call executes23 MOUSE actions and reports completed True, level4, stop_reason level_completed. All four earlier host checked transitions stay level3.",
+    "attribution": "The actual level boundary occurs in ordinary main loop. Candidate altered earlier state, so no claim of a clean counterfactual separation; this is not proof that checked program alone solved the level."
+  }
+}
