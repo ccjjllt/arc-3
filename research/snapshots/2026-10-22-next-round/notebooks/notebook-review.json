@@ -1,0 +1,48 @@
+{
+  "checked_at_utc": "2026-10-22T08:39:57.636373+00:00",
+  "read_only": true,
+  "scope": "Kaggle scoreDescending first 40 observed live; fetched current source and metadata for 3 targeted notebooks; static comparison only. No GPU, model request or submission.",
+  "score_binding": "List returns ref/title/author/run time/votes, no numerical score or submission-to-version binding. Metadata lastRunTime disagrees with search list; use version and source hash.",
+  "review": [
+    {
+      "url": "https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution",
+      "version": 3,
+      "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "finding": "Unchanged from baseline snapshot. Author writeup reports 27.89; do not bind newer team score to v3. Keep 009 exact saved submission rather than re-fork latest."
+    },
+    {
+      "url": "https://www.kaggle.com/code/heliosli/try-merging-it-you-might-get-lucky-and-win-gold",
+      "version": 8,
+      "sha256": "c03d1aa0e5c0f1bd0e4aa445c0203572aec396c8c8ceac9e24ee43d56189419f",
+      "finding": "Unchanged since morning 2026-10-22. Use as execution hook, hypothesis replay and first-discriminating-probe reference; no target-model quality proof. Prior detailed audit remains applicable.",
+      "audit": "../../2026-10-22-candidates/source-audit.json"
+    },
+    {
+      "url": "https://www.kaggle.com/code/weitaoguo/affectify-arc-dfranzen-form-d1",
+      "version": 2,
+      "sha256": "157eed0fdd2cd7396ddfc9fdbe89e9fde13e7d3df47e4b12b9af3e0ab1eff4bd",
+      "observed_sort_position": 3,
+      "finding": "25 of 26 cells exactly equal local shiiin9 Affectify D-prime. Harness patch and D-prime scheduling exact equal. Only changed mode-detection cell adds gateway probe after author-commented 0-score failure. Zero embedded outputs. Inherited 31.54 prose is not evidence for this fork/version.",
+      "comparison_base": "research/notebooks/shiiin9__affectify-arc-31-54-in-a-single-sub.ipynb",
+      "recommendation": "Do not merge as a new solver or revive scheduling line based on list rank. Preserve project actual rerun mode and save checks."
+    }
+  ],
+  "open_source_primary_sources": [
+    {
+      "url": "https://tufalabs.ai/research/duck-harness/",
+      "finding": "July 1 release describes minimal Python REPL, 25 public games x20 tries mean1.6002 +/-0.4475 under Qwen3.6 27B; latest Kaggle leaderboard lead cannot be attributed to released July source."
+    },
+    {
+      "url": "https://github.com/NIMI-research/Tycho",
+      "finding": "Author README reports public 25-game scorecards: Opus4.8 no-WM79.07, single85.36, actor-builder88.49, falsification-builder83.07. Adopt optional local modeling and direct fallback, not universal forced rebuilding."
+    },
+    {
+      "url": "https://github.com/ryanbbrown/Retrodict",
+      "finding": "History retrodiction, per-action expect cells, host queue halt on mismatch and short uncertain probes directly relevant. README public run99.86 used 660M tokens/$654 with GPT-5.6-sol max; incompatible budget/model, sparse expectation loophole still must be checked locally."
+    },
+    {
+      "url": "https://arcprize.org/leaderboard/community",
+      "finding": "Official page says ARC3 entries are public-set self-reported results, not independently verified hidden Kaggle scores."
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
+**下一轮研究交接（10月22日16:27官方信息核验）：** [程序交付与完整得分验证方案](docs/handoff/034-next-round-research-plan.md)。保留009 v2／31.16，先验证紧凑辅助分支能否交付并执行当前短计划，再做完整25题同期对照；补充必要历史状态、预测器适用范围、误停恢复与9小时总截止。方案结合最新Notebook源码和前沿研究，尚未实施或启动新GPU实验。[本轮官方与源码快照](research/snapshots/2026-10-22-next-round/)
+
 **034 v2已COMPLETE：** su15相同L5切点续跑，A新增0关、B新增1关；ft09均新增0关。但两次额外分支都仅返回推理、没有工具调用，验收程序与受检动作均为0；su15通关发生在普通主循环，不能归因于预期机制。会话58.30分钟、模型启动42.85分钟，服务已关闭。停止该版原样扩跑，先修代码交付；正式最佳仍009／31.16。[结果分析](research/034-v2-results-analysis.md) · [机制判断](experiments/034-v2-analysis/mechanism-assessment.json) · [完成记录](experiments/034-v2-launch.json)。
 
 **10月22日研究交接：** [034 当前程序修复与执行核验](docs/handoff/034-executable-program-repair.md)。交接时重新读取官方规则、榜单与009/030/032正式成绩，并发现Heliosli公开Notebook已更新至v8：可参考其真实动作检查接线，但尚无目标模型提分证据。交接补齐自然合同建立、目标/计划确定消费、三态检查及9小时总预算边界；当时034/035为拟议实验，当前034实施状态见上方。[公开源码审计](research/snapshots/2026-10-22-candidates/source-audit.json) · [官方快照](research/snapshots/2026-10-22-handoff/read-manifest.json)。
