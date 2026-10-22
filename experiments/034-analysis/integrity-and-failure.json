@@ -1,0 +1,80 @@
+{
+  "observed_at_utc": "2026-10-22T05:03:50.827205+00:00",
+  "platform_status": "ERROR",
+  "request_log_checks": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "request_log_sha256": "840f8e690b5eac6cdd8ceca688916955ff25f5d843514ef786592fea14c9442a",
+      "matches_remote_summary": true
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "request_log_sha256": "1a405ceefc5ae78bc5dc91dfd4e370f77d8f6767636cc069bccdbbb39a2b487b",
+      "matches_remote_summary": true
+    }
+  ],
+  "frozen_source_checks": [
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "matches_frozen": true,
+      "sha256": "443d9fecf4055831d53907e216e99c59f5c3adfb752c934716f43d74a5adbb57"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "matches_frozen": true,
+      "sha256": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "matches_frozen": true,
+      "sha256": "f3316e64c9b14677318381ef88e7be375a3ae528c8e030b50cf562473e42d51a"
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "matches_frozen": true,
+      "sha256": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061"
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "matches_frozen": true,
+      "sha256": "8468e7c0eb568e4908d2c12b7858b9acde147de755797559490f5753d272e043"
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "matches_frozen": true,
+      "sha256": "7a93183e8982614a9363bd7cc9f77261fb78ca4bc6b59df4bf43bde67d18efc4"
+    },
+    {
+      "path": "scripts/build_experiment.py",
+      "matches_frozen": true,
+      "sha256": "8abc89f9000758e81a2281cfb5badbca243376c04214c3b2f53ae36f359ad9cf"
+    },
+    {
+      "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "matches_frozen": true,
+      "sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+    }
+  ],
+  "cache_flush_log_evidence": [
+    {
+      "line": 224,
+      "text": "[2026-10-22 04:52:59] Cache flushed successfully!"
+    },
+    {
+      "line": 225,
+      "text": "[2026-10-22 04:52:59] INFO:     127.0.0.1:37326 - \"POST /flush_cache HTTP/1.1\" 200 OK"
+    },
+    {
+      "line": 920,
+      "text": "[2026-10-22 05:00:38] Cache not flushed because there are pending requests. #queue-req: 0, #running-req: 2"
+    },
+    {
+      "line": 921,
+      "text": "[2026-10-22 05:00:38] INFO:     127.0.0.1:56602 - \"POST /flush_cache HTTP/1.1\" 400 Bad Request"
+    }
+  ],
+  "serve_log_sha256": "92b401d6d7e31c7b60746bd66ae8fb87865b1692a1546d96363418ca51c43240",
+  "session_manifest_sha256": "a8c8e1aab3572e92f2d944e70fb62a5234fb2f5eaf4a70d33384ec3a2b21c82e",
+  "gpu_server_process_group_stopped": true,
+  "inference": "A client requests timed out while server had two running requests; B was correctly blocked before starting. Method efficacy remains untested."
+}

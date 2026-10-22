@@ -1,6 +1,6 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-**034首个候选已冻结：** 当前程序修复、目标/计划重算和真实动作核验已接入原生sandbox；9项CPU消费/边界检查及ft09/su15真实A/B前缀恢复通过，Notebook953091字节。GPU启动被自动审批拒绝，要求明确确认私有目标账户和具体轨迹/模型历史上传；没有实际上传或启动，尚无034模型解题或提分结果。[实施计划](docs/plan/034-executable-plan.md) · [实际进展](docs/progress/034-executable-plan.md) · [上传清单](experiments/034-upload-audit.json)。
+**034 v2已COMPLETE：** su15相同L5切点续跑，A新增0关、B新增1关；ft09均新增0关。但两次额外分支都仅返回推理、没有工具调用，验收程序与受检动作均为0；su15通关发生在普通主循环，不能归因于预期机制。会话58.30分钟、模型启动42.85分钟，服务已关闭。停止该版原样扩跑，先修代码交付；正式最佳仍009／31.16。[结果分析](research/034-v2-results-analysis.md) · [机制判断](experiments/034-v2-analysis/mechanism-assessment.json) · [完成记录](experiments/034-v2-launch.json)。
 
 **10月22日研究交接：** [034 当前程序修复与执行核验](docs/handoff/034-executable-program-repair.md)。交接时重新读取官方规则、榜单与009/030/032正式成绩，并发现Heliosli公开Notebook已更新至v8：可参考其真实动作检查接线，但尚无目标模型提分证据。交接补齐自然合同建立、目标/计划确定消费、三态检查及9小时总预算边界；当时034/035为拟议实验，当前034实施状态见上方。[公开源码审计](research/snapshots/2026-10-22-candidates/source-audit.json) · [官方快照](research/snapshots/2026-10-22-handoff/read-manifest.json)。
 
@@ -30,6 +30,7 @@
 | 028 程序修复 | ft09真实代码执行且采用但关键像素仍错；tu93修复超时；三对均无新增关 | 关闭本版，不扩全池、不为导出故障重跑 |
 | 030 关内持久Python | 开发池+4.5565，正式24.40／较009−6.76 | COMPLETE；保留009，停止扩大030；[回退分析](research/030-results-analysis.md) |
 | 032 成功经验记忆 | 短跑+25.655、全池跨会话+11.140；正式30.20／较009−0.96 | COMPLETE；保留009，不原样重提/扩大v1；[研究结论](research/032-results-analysis.md) |
+| 034 程序重算与受检执行 | v2两题相同前缀：su15新增0→1关，ft09均0；两个额外响应均无可执行代码、0受检动作 | COMPLETE；消费链未成立，不原样扩跑；先解决分支代码交付 |
 
 [016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；020改为复用008区域读取器直接交付程序输入；FP8作为支线，均不叠加018提示。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 

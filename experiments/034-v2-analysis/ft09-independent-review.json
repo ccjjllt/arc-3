@@ -1,0 +1,91 @@
+{
+  "reviewer_model": "gpt-6.1-sol",
+  "scope": "Read-only independent ft09 review; no network/GPU/solver changes",
+  "outcome": {
+    "A": {
+      "actions": 31,
+      "added_levels": 0,
+      "elapsed_seconds": 454.0686976760003
+    },
+    "B": {
+      "actions": 24,
+      "added_levels": 0,
+      "elapsed_seconds": 450.08894567600055
+    }
+  },
+  "funnel": {
+    "forced_bootstrap": 1,
+    "returned_branch_responses": 1,
+    "valid_definitions": 0,
+    "plan_validations_reached": 0,
+    "predict_validations_reached": 0,
+    "host_executions": 0,
+    "host_actions": 0,
+    "repair_requests": 0,
+    "prediction_match": 0,
+    "prediction_mismatch": 0,
+    "prediction_unknown": 0,
+    "unchecked_actions": 24
+  },
+  "findings": [
+    {
+      "claim": "Failure occurred before syntax/schema/evidence/prediction checks: response has content empty, tool_calls null, reasoning_content 14503 chars with no tool markup or entrypoint definitions. extract_definitions rejected at its initial tool_calls list check.",
+      "evidence": [
+        "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl:2",
+        "src/arc3_research/executable_plan_contract.py:198",
+        "src/arc3_research/executable_plan.py:494"
+      ],
+      "decision": "Cannot infer goal recomputation, retained definitions, predictor accuracy, host execution or repair effectiveness from ft09."
+    },
+    {
+      "claim": "Branch completion cap 4096 was fully consumed by reasoning (4097 reported reasoning_tokens; token counters differ by one). Reasoning ends mid-sentence, no code/tool call. Strong evidence of reasoning-budget exhaustion; exact finish_reason is not preserved in plan event, so branch length finish cannot be directly asserted.",
+      "evidence": [
+        "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl:2",
+        "src/arc3_research/executable_plan.py:494",
+        "src/arc3_research/executable_plan.py:496",
+        "src/arc3_research/program_repair.py:218"
+      ],
+      "decision": "Classify separately as no executable output, likely token exhaustion; do not misclassify as invalid candidate definitions or pixel counterexample."
+    },
+    {
+      "claim": "Bootstrap rejection consumes the only bootstrap opportunity, clears program and returns ordinary exploration. Repair scheduling is only invalidate path after accepted program predictions. Hence malformed bootstrap cannot use unused repair quota, and later 22-action batch remains unchecked.",
+      "evidence": [
+        "src/arc3_research/executable_plan.py:443",
+        "src/arc3_research/executable_plan.py:526",
+        "src/arc3_research/executable_plan.py:322",
+        "src/arc3_research/executable_plan.py:412",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl:5"
+      ],
+      "decision": "Zero unknown/mismatch reflects untested funnel stages; no evidence of successful checking or of overly strict contract."
+    },
+    {
+      "claim": "B ordinary continuation executed two probes plus 22-click complement target (1+1+22=24). That target also failed; final long reasoning exhausted 12288 output tokens without a tool call. A and B both have zero added levels, B takes seven fewer actions; no candidate mechanism benefit established.",
+      "evidence": [
+        "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl:3",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl:5",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/transcripts/ft09-0d8bbf25_B.txt:2618",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/transcripts/ft09-0d8bbf25_B.txt:2788",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/transcripts/ft09-0d8bbf25_B.txt:2797"
+      ]
+    },
+    {
+      "claim": "Main request logs are snapshots, and response event messages do not themselves contain newly returned assistant reply (new reply appears in later snapshot); use transcript meta for last length output. A 22 requests/21 responses; B 10/9; unmatched final requests do not prove timeout or zero additional cost.",
+      "evidence": [
+        "runs/034-plan-diagnostic-v2/executable_plan_A/ft09-0d8bbf25-A.json:624",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/ft09-0d8bbf25-B.json:497",
+        "runs/034-plan-diagnostic-v2/executable_plan_B/ft09-0d8bbf25_B_requests.jsonl:19"
+      ]
+    }
+  ],
+  "minimal_next_changes_proposed_only": [
+    "Persist branch finish_reason, elapsed seconds, content/reasoning/tool_call counts, generation cap, and failure_stage to disambiguate pre-contract generation failure from failed candidate contracts. _completion already returns finish_reason.",
+    "Use a small offline captured-response/parser fixture with this exact empty-content/null-tool_calls/long-reasoning response; do not scrape reasoning prose into executable code because this response contains no definitions to recover.",
+    "Before another expensive paired run, revise only branch output acquisition within equal frozen budget to reserve enough generation for code (supported reasoning limit or bounded format-only retry consuming remaining shared quota); a naive larger cap is not proven sufficient because ordinary ft09 outputs also hit 12288.",
+    "If retaining one-bootstrap policy, expose bootstrap rejection as distinct terminal mechanism outcome; if allowing one bounded formatting retry, freeze that protocol separately because current repair quota is semantic/prediction repair and is unreachable here."
+  ],
+  "limitations": [
+    "Branch raw HTTP response/finish_reason not saved; strong truncation inference not direct finish_reason proof.",
+    "87.18545485099912 seconds in patch snapshot is combined ft09+su15 overhead and cannot be assigned to ft09 alone.",
+    "No semantic solution to ft09 inferred from transcript hypotheses."
+  ]
+}

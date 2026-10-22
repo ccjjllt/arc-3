@@ -1,14 +1,14 @@
 {
   "observed_at_utc": "2026-10-22T03:29:10.227679+00:00",
-  "status": "not_started_approval_review_rejected",
+  "status": "failed_before_candidate_arm",
   "kernel_id": "zhuating/arc3-034-plan-diagnostic",
-  "version": null,
+  "version": 1,
   "notebook_path": "notebooks/034-plan-diagnostic/experiment.ipynb",
   "notebook_sha256": "06350686614c7486e307c3e4a21f4bb87ad9291c3d07ad482a72f054308ca741",
   "notebook_bytes": 953091,
   "maximum_session_seconds": 7200,
-  "actual_gpu_started": false,
-  "actual_upload_started": false,
+  "actual_gpu_started": true,
+  "actual_upload_started": true,
   "formal_submission_created": false,
   "approval_review_attempts": 2,
   "approval_review_reason": "Explicit approval of this exact external destination, private trajectory/model payload, and GPU resource use required despite existing broad begin authorization. Payload risk audit did not satisfy this requirement.",
@@ -19,5 +19,74 @@
     "experiments/034-cpu-check/report.json",
     "experiments/034-cpu-check/followup-v2/report.json",
     "experiments/034-cpu-check/fork-restoration.json"
-  ]
+  ],
+  "approval_received": {
+    "message": "批准",
+    "scope": "Frozen953091byte private notebook with ft09/su15 prefix/model histories and<=7200secondGPUdiagnostic",
+    "recorded_at_utc": "2026-10-22T04:15:52.004749+00:00"
+  },
+  "url": "https://www.kaggle.com/code/zhuating/arc3-034-plan-diagnostic",
+  "push_result": "Kernel version1 successfully pushed; platform execution status pending read",
+  "push_confirmed_at_beijing": "2026-10-22T12:15:52.004800+08:00",
+  "platform_status": "ERROR",
+  "remote_source_check": "experiments/034-remote-source-check.json",
+  "gpu": {
+    "name": "NVIDIA RTX PRO6000 Blackwell Server Edition",
+    "memory_total_mib": 97887,
+    "capability": [
+      12,
+      0
+    ]
+  },
+  "remote_source_verified": true,
+  "latest_observed_at_utc": "2026-10-22T05:03:50.827205+00:00",
+  "startup_observation": "Model healthy and first arm started at session2275s; two games share600s runner allowance and450s actual continuation.",
+  "coordination_model": "gpt-6.1-sol",
+  "coordination_note": "After user asked why prior subagents usedAstra, old active subagents were interrupted and the new analysis subagent explicitly usesgpt-6.1-sol.",
+  "model_precache": {
+    "files": 62,
+    "gigabytes": 185.4,
+    "seconds": 1888.95,
+    "source": "runs/034-plan-diagnostic-live/live-reconnect.log",
+    "completed": true
+  },
+  "phase": "stopped",
+  "model_ready": true,
+  "first_arm_start_session_seconds": 2275,
+  "error": "RuntimeError('Cache flush failed before executable_plan_B; refusing unmatched cache state.')",
+  "session_elapsed_seconds": 2739.144251346588,
+  "model_ready_seconds": 2274.734953403473,
+  "gpu_server_stopped": true,
+  "candidate_arm_started": false,
+  "paired_comparison_valid": false,
+  "analysis_path": "experiments/034-analysis/summary.md",
+  "failure_evidence_path": "experiments/034-analysis/integrity-and-failure.json",
+  "baseline_results": [
+    {
+      "game_id": "ft09-0d8bbf25",
+      "added_levels": 0,
+      "continuation_action_count": 26,
+      "elapsed_seconds": 450.0388592070003
+    },
+    {
+      "game_id": "su15-1944f8ab",
+      "added_levels": 0,
+      "continuation_action_count": 16,
+      "elapsed_seconds": 450.1061293480002
+    }
+  ],
+  "local_followup": {
+    "status": "implemented_cpu_verified_not_uploaded",
+    "cache_flush_wait_seconds_default": 0,
+    "suggested_opt_in_seconds": 120,
+    "check_report": "experiments/034-cpu-check/cache-drain.json",
+    "checks_passed": 75,
+    "session_runner_sha256": "306200f9734d034267ed52a1dcd6754c796b98891bcb5ab68ad73f4571cb0d2f",
+    "frozen_v1_notebook_changed": false,
+    "new_gpu_job_started": false,
+    "superseded_by_v2": true,
+    "current_checks_passed": 94,
+    "current_session_runner_sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d"
+  },
+  "followup_run": "experiments/034-v2-launch.json"
 }

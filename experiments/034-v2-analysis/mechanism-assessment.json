@@ -1,0 +1,77 @@
+{
+  "status": "mechanism_not_delivered_do_not_scale_unchanged",
+  "basis": "Both extra completions were reasoning-only and rejected before AST/schema/sandbox validation; no active program or checked action. su15 improvement arose during ordinary continuation.",
+  "outcome": {
+    "ft09_added_levels_A": 0,
+    "ft09_added_levels_B": 0,
+    "su15_added_levels_A": 0,
+    "su15_added_levels_B": 1,
+    "selected_two_game_mean_score_A": 18.253968253968253,
+    "selected_two_game_mean_score_B": 23.809523809523807,
+    "not_a_formal_score": true
+  },
+  "delivery_events": [
+    {
+      "event_path": "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "line": 2,
+      "status": "rejected",
+      "error": "ValueError: Expected an assistant message with one Python tool call",
+      "actual_actions": 0,
+      "content_characters": 0,
+      "reasoning_characters": 14503,
+      "tool_call_count": 0,
+      "usage_raw": {
+        "prompt_tokens": 61612,
+        "total_tokens": 65708,
+        "completion_tokens": 4096,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 4097
+      },
+      "finish_reason_saved": null,
+      "classification": "reasoning_only_response_no_executable_delivery",
+      "cap_inference": "completion_tokens exactly4096 and unfinished reasoning strongly suggest output cap exhaustion; raw event did not retain finish_reason."
+    },
+    {
+      "event_path": "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "line": 2,
+      "status": "rejected",
+      "error": "ValueError: Expected an assistant message with one Python tool call",
+      "actual_actions": 0,
+      "content_characters": 0,
+      "reasoning_characters": 9782,
+      "tool_call_count": 0,
+      "usage_raw": {
+        "prompt_tokens": 89613,
+        "total_tokens": 93709,
+        "completion_tokens": 4096,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 4097
+      },
+      "finish_reason_saved": null,
+      "classification": "reasoning_only_response_no_executable_delivery",
+      "cap_inference": "completion_tokens exactly4096 and unfinished reasoning strongly suggest output cap exhaustion; raw event did not retain finish_reason."
+    }
+  ],
+  "candidate_funnel": {
+    "forced_bootstrap_requests": 2,
+    "returned_responses": 2,
+    "executable_deliveries": 0,
+    "accepted_programs": 0,
+    "host_plan_actions": 0,
+    "prediction_checks": 0,
+    "counterexample_repairs": 0
+  },
+  "extra_cost": {
+    "returned_prompt_tokens": 151225,
+    "returned_completion_tokens": 8192,
+    "summed_per_game_branch_processing_seconds": 87.18545485099912,
+    "note": "Games run concurrently; this summed branch processing is not87.19seconds of additional session wall-clock orGPUbilling. Raw reasoning_tokens exceeds completion_tokens byone perresponse; do not silently normalize reportedusage."
+  },
+  "causal_limit": "One A-then-B run; no accepted/used/checked program. Neither attribute+1level to intended mechanism nor call purposeful ordinary continuation random clicking. Indirect time/context/server scheduling and sampling effects are not isolated.",
+  "decision": [
+    "Preserve009 formal31.16. No034 unchanged natural/full25/formal expansion.",
+    "First record existing completion.finish_reason and per-branch elapsed/failure stage. Never execute incomplete reasoning as code.",
+    "Check bounded executable output delivery with limited same-prefix generation probes, explicit budget/format controls and compact relevant context before repeating gameplay A/B.",
+    "Use a cut with reusable actual target/search code for local repair; ft09 current cut hasno retainedfunctions and is a probe rather than a retainedplanner."
+  ]
+}

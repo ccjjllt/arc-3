@@ -1,0 +1,251 @@
+{
+  "review_role": "independent read-only su15 result attribution requested under gpt-6.1-sol; this report does not independently certify serving-model identity",
+  "verdict": "B clears L5 through ordinary unchecked main-loop Python actions after the sole forced bootstrap was rejected before contract validation. No accepted program, host plan execution, or prediction-match evidence exists for su15.",
+  "causal_limits": "B-A +1 level is one stochastic continuation association; rejected branch restores old history and old functions and executes zero environment actions. Possible RNG/server/budget effects are uncontrolled. This is neither executable-plan mechanism success nor proof of no treatment effect.",
+  "branch": {
+    "artifact": "runs/034-plan-diagnostic-v2/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl:2",
+    "recomputed_events": 1,
+    "accepted_programs": 0,
+    "host_execution_events": 0,
+    "checked_predictions": 0,
+    "counterexamples": 0,
+    "actual_actions": 0,
+    "error": "ValueError: Expected an assistant message with one Python tool call",
+    "content": "",
+    "tool_calls": null,
+    "reasoning_chars": 9782,
+    "required_function_definitions_present": false,
+    "completion_tokens": 4096,
+    "reasoning_tokens": 4097,
+    "prompt_tokens": 89613,
+    "finish_reason": "not preserved in branch artifact; hitting 4096 cap plus abruptly cut reasoning strongly supports truncation, not a directly observed finish_reason=length",
+    "timeout": "No: returned structured response rejected by extraction; request budget is 60s, not elapsed runtime"
+  },
+  "L5_actions_row_col": [
+    {
+      "index": 1,
+      "row": 22,
+      "col": 48
+    },
+    {
+      "index": 2,
+      "row": 21,
+      "col": 12
+    },
+    {
+      "index": 3,
+      "row": 18,
+      "col": 19
+    },
+    {
+      "index": 4,
+      "row": 19,
+      "col": 41
+    },
+    {
+      "index": 5,
+      "row": 18,
+      "col": 26
+    },
+    {
+      "index": 6,
+      "row": 24,
+      "col": 21
+    },
+    {
+      "index": 7,
+      "row": 14,
+      "col": 46
+    },
+    {
+      "index": 8,
+      "row": 13,
+      "col": 53
+    },
+    {
+      "index": 9,
+      "row": 18,
+      "col": 58
+    },
+    {
+      "index": 10,
+      "row": 24,
+      "col": 54
+    },
+    {
+      "index": 11,
+      "row": 28,
+      "col": 48
+    },
+    {
+      "index": 12,
+      "row": 27,
+      "col": 41
+    },
+    {
+      "index": 13,
+      "row": 24,
+      "col": 26
+    },
+    {
+      "index": 14,
+      "row": 24,
+      "col": 28
+    },
+    {
+      "index": 15,
+      "row": 28,
+      "col": 34
+    },
+    {
+      "index": 16,
+      "row": 22,
+      "col": 33
+    },
+    {
+      "index": 17,
+      "row": 16,
+      "col": 33
+    }
+  ],
+  "L5_observed_chain": [
+    {
+      "actions": [
+        1,
+        2
+      ],
+      "effect": "4 M -> 2 p; safe3 color-multiset checks pass",
+      "transcript_lines": [
+        290,
+        292
+      ]
+    },
+    {
+      "actions": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "effect": "move two p blocks and kite invaders; all preserve p,p; no UNDO",
+      "transcript_lines": [
+        523,
+        760,
+        990,
+        1233,
+        1700,
+        1937,
+        2166,
+        2408,
+        2614,
+        2833,
+        2835,
+        3053
+      ]
+    },
+    {
+      "actions": [
+        15
+      ],
+      "effect": "safe3((28,34), [Y]); two p merge into Y; P invader detector now []",
+      "transcript_lines": [
+        3267,
+        3274
+      ]
+    },
+    {
+      "actions": [],
+      "effect": "inspection confirms no P nodes; N pixels remain near Y; absorption is model hypothesis, not certified rule",
+      "transcript_lines": [
+        3462,
+        3480,
+        3481,
+        3505
+      ]
+    },
+    {
+      "actions": [
+        16,
+        17
+      ],
+      "effect": "for [(22,33),(16,33),(14,33)] loop stops at second click because level_completed True; third click never executed",
+      "transcript_lines": [
+        3516,
+        3526,
+        3527,
+        3528
+      ]
+    }
+  ],
+  "goal_rules": {
+    "goal_change": "No L5 goal switch: build Y and deliver to ball retained throughout; ordinary loop updates threat hypotheses, initially assumes exact ball centering, but actual completion already at (16,33) vs hypothesized center (14,33).",
+    "rule_revision": "Notices invader/p overlap survival and then P disappearance after Y merge. These observational updates occur in ordinary main loop, not returned program contract."
+  },
+  "cost": {
+    "A_main": {
+      "path": "/kaggle/working/executable_plan_A/su15-1944f8ab_A_requests.jsonl",
+      "exists": true,
+      "requests": 16,
+      "responses": 15,
+      "returned_usage": {
+        "prompt_tokens": 1334124,
+        "total_tokens": 1388718,
+        "completion_tokens": 54594,
+        "reasoning_tokens": 52359
+      },
+      "usage_note": "Main requests only; bounded branch usage is in executable-plan events; timeouts may lack usage",
+      "sha256": "a480c811064e692c345e3f364d04e7435557bdc4b59faa3b838b3071f0cdf86a"
+    },
+    "B_main": {
+      "path": "/kaggle/working/executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+      "exists": true,
+      "requests": 31,
+      "responses": 30,
+      "returned_usage": {
+        "prompt_tokens": 2615861,
+        "total_tokens": 2657547,
+        "completion_tokens": 41686,
+        "reasoning_tokens": 39099
+      },
+      "usage_note": "Main requests only; bounded branch usage is in executable-plan events; timeouts may lack usage",
+      "sha256": "17d6e8662f85bd82741f6f1962ec13443374633c6c09535e3c694ae00fcf2816"
+    },
+    "B_extra_returned_usage": {
+      "prompt_tokens": 89613,
+      "completion_tokens": 4096,
+      "reasoning_tokens": 4097,
+      "total_tokens": 93709
+    },
+    "B_all_known_returned": {
+      "prompt_tokens": 2705474,
+      "completion_tokens": 45782,
+      "reasoning_tokens": 43196,
+      "total_tokens": 2751256
+    },
+    "A_actions": 15,
+    "B_actions": 28,
+    "A_seconds": 450.063933122,
+    "B_seconds": 450.10873079500016,
+    "B_L5_actions": 17,
+    "B_L6_actions": 11,
+    "extra_time_note": "87.18545485099912 seconds is shared patch snapshot across both games, not su15 alone; cannot allocate this number to su15."
+  },
+  "code_evidence": {
+    "completion_4096": "src/arc3_research/executable_plan.py:494",
+    "extraction_before_validation": "src/arc3_research/executable_plan.py:497",
+    "reject_restore_history_functions": "src/arc3_research/executable_plan.py:526",
+    "unchecked_fallback": "src/arc3_research/executable_plan.py:333",
+    "tool_calls_required": "src/arc3_research/executable_plan_contract.py:198",
+    "nonstreaming_raw_response_extraction": "src/arc3_research/program_repair.py:216"
+  },
+  "reasoning_extraction": "extract_definitions intentionally requires structured Python tool call; no valid code exists in reasoning, so this record is not evidence of code lost only by ignoring reasoning_content. reasoning_tokens>completion_tokens by 1 is raw server usage accounting; preserve rather than silently correct.",
+  "minimal_next_step": "First use existing/offline fixture to preserve finish_reason/raw response and distinguish output cap, extraction, validation, execution, prediction outcomes. Do not promote prose in reasoning to executable code. Only then pre-register an output-budget control and same-prefix repeated paired ordinary/fallback-vs-plan continuations, separately measuring accepted/used/matched plans and added levels; no GPU work authorized by this review."
+}

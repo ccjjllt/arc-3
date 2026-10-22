@@ -1,0 +1,103 @@
+{
+  "base_source_sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+  "source_hashes": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "8abc89f9000758e81a2281cfb5badbca243376c04214c3b2f53ae36f359ad9cf",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/executable_plan.py": "443d9fecf4055831d53907e216e99c59f5c3adfb752c934716f43d74a5adbb57",
+    "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+    "src/arc3_research/executable_plan_forks.py": "f3316e64c9b14677318381ef88e7be375a3ae528c8e030b50cf562473e42d51a",
+    "src/arc3_research/experiment_config.py": "7a93183e8982614a9363bd7cc9f77261fb78ca4bc6b59df4bf43bde67d18efc4",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "8468e7c0eb568e4908d2c12b7858b9acde147de755797559490f5753d272e043",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/034-plan-diagnostic-v2.json": "4204d74ecdc99d478e6f361558096cf5a8f91a012497a2f0975b7646e1cca2f3",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  },
+  "config": {
+    "id": "034-plan-diagnostic-v2",
+    "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+    "kernel_title": "ARC3 034 Plan Diagnostic",
+    "purpose": "Forced current-program repair and checked execution from frozen ft09 L3 and su15 L5 prefixes; same-prefix mechanism evidence only",
+    "comparison_note": "A then B run in separate CPU processes against one loaded model server. Within each arm the two games continue concurrently for 450 seconds including the candidate bootstrap/repair. This is not natural-trigger coverage, a full-pool gain, or hidden-score evidence.",
+    "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+    "game_count": 2,
+    "games": [
+      "ft09-0d8bbf25",
+      "su15-1944f8ab"
+    ],
+    "arm_order": [
+      "executable_plan_A",
+      "executable_plan_B"
+    ],
+    "reference_arm": "executable_plan_A",
+    "arm_environment": {
+      "executable_plan_A": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "executable_plan_B": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      }
+    },
+    "active_streams": 10,
+    "n_passes_per_arm": 1,
+    "warmup_action_games": 0,
+    "requested_arm_seconds": 600,
+    "continuation_seconds": 450,
+    "max_continuation_actions": 60,
+    "budget_formula": "600s runner allowance per arm; two concurrent450s/60-action continuations, all bootstrap/repair/checking included. 4200s startup ceiling and7200s total session cap preserve both arms plus cleanup.",
+    "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+    "hard_limit_seconds": 7200,
+    "startup_limit_seconds": 4200,
+    "expected_gpu_hours": 2,
+    "weekly_gpu_hours_limit": 30,
+    "gpu_sample_interval_seconds": 10,
+    "inference_timing": false,
+    "scheduler_observer": false,
+    "request_deadline": false,
+    "preflight_before_serving": false,
+    "strict_arm_budget": true,
+    "require_cache_flush": true,
+    "require_cache_flush_log": true,
+    "require_complete_pool": true,
+    "require_drained_workers": true,
+    "require_rtx_pro6000": true,
+    "native_payload_cells": true,
+    "skip_blanket_model_precache": false,
+    "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+    "selection_note": "Forced bootstrap consumes the candidate's single bootstrap opportunity; a subsequent bounded repair remains available. Compare actual subsequent actions/new levels and total cost, not pixel-contract acceptance alone.",
+    "runtime_source_sha256": {
+      "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+      "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    "frozen_source_sha256": {
+      "src/arc3_research/executable_plan.py": "443d9fecf4055831d53907e216e99c59f5c3adfb752c934716f43d74a5adbb57",
+      "src/arc3_research/executable_plan_contract.py": "ec4d83ddd412f58772266c19f946cf6fa0cb09dd39f95f6a8ab96b6caa23a203",
+      "src/arc3_research/executable_plan_forks.py": "f3316e64c9b14677318381ef88e7be375a3ae528c8e030b50cf562473e42d51a",
+      "src/arc3_research/program_repair.py": "d68114cf4d55d831006364bad1ad1d4f23f9590f8a16b928bb394327c214f061",
+      "src/arc3_research/run_arm.py": "8468e7c0eb568e4908d2c12b7858b9acde147de755797559490f5753d272e043",
+      "src/arc3_research/experiment_config.py": "7a93183e8982614a9363bd7cc9f77261fb78ca4bc6b59df4bf43bde67d18efc4",
+      "scripts/build_experiment.py": "8abc89f9000758e81a2281cfb5badbca243376c04214c3b2f53ae36f359ad9cf",
+      "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+    },
+    "cache_flush_wait_seconds": 120,
+    "revision_note": "v2 infrastructure repair only: bounded pending-request cache flush retry and explicit boundary budget reservation; same frozen solver, prefixes, model, two concurrent450s continuations and60-action cap. Preserve v1 failed run separately."
+  },
+  "build_config_path": "experiments/034-plan-diagnostic-v2.json",
+  "payload_write_mode": "native-writefile",
+  "notebook_sha256": "29fab97229600b3d8ba51deb2caaa9bcef9a4825981cd500973bd3dc0668f2b9",
+  "fork_input_payload_sha256": {
+    "experiments/034-fork-inputs/ft09-package.json.gz.b64": "7f2e5b5bbec48a19a9826e0a0b7115b049e0618d240054037025e1945888a836",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  },
+  "diagnostic_only": true
+}

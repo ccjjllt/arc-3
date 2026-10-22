@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "notebook_bytes": 957565,
+  "notebook_sha256": "29fab97229600b3d8ba51deb2caaa9bcef9a4825981cd500973bd3dc0668f2b9",
+  "source_changes": [
+    {
+      "cell_index": 1,
+      "first_line": "CONFIG_JSON = '{\"id\": \"034-plan-diagnostic-v2\", \"kernel_id\": \"zhuating/arc3-034-plan-diagnostic\", \"kernel_title\": \"ARC3 034 Plan Diagnostic\", \"purpose\": \"Forced"
+    },
+    {
+      "cell_index": 12,
+      "first_line": "%%writefile /kaggle/research/src/arc3_research/session_runner.py"
+    },
+    {
+      "cell_index": 15,
+      "first_line": "%%writefile /kaggle/research/experiments/034-fork-inputs/ft09-package.json.gz.b64"
+    }
+  ],
+  "helper_python_cells_compiled": 13,
+  "frozen_solver_and_inputs_unchanged": true,
+  "fork_payload_checks": [
+    {
+      "path": "/kaggle/research/experiments/034-fork-inputs/ft09-package.json.gz.b64",
+      "decompressed_bytes_equal": true,
+      "decompressed_sha256": "70b5b05aab6b118fc6fa42d733102e4c2f78c9d7d9d9f3605784256c4a1da104",
+      "compressed_bytes_equal": false
+    },
+    {
+      "path": "/kaggle/research/experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "decompressed_bytes_equal": true,
+      "decompressed_sha256": "7e5eb98fc4ca9170cfcd9c2432f23bf2f4245f702012e38c7e6d170348bdd7d6",
+      "compressed_bytes_equal": true
+    }
+  ],
+  "transport_note": "ft09 gzip OS header differs under local Python3.9; decompressed payload bytes are identical. No model-facing prefix content changed.",
+  "metadata_identical": true,
+  "destination": "zhuating/arc3-034-plan-diagnostic",
+  "cache_flush_wait_seconds": 120,
+  "hard_limit_seconds": 7200,
+  "cpu_checks_passed": 94,
+  "gpu_quota_read": {
+    "remaining_hours": 7.54,
+    "refresh_utc": "2026-10-24T00:00:00"
+  },
+  "formal_submission": false
+}

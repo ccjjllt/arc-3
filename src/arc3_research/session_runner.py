@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from pathlib import Path
 import signal
@@ -10,8 +11,97 @@ import sys
 import threading
 import time
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 from arc3_research.experiment_config import validate_config
+
+
+def cache_flush_allowance(config):
+    wait = config.get("cache_flush_wait_seconds", 0)
+    if isinstance(wait, bool) or not isinstance(wait, (int, float)) or not math.isfinite(wait) or wait < 0:
+        raise ValueError("cache_flush_wait_seconds must be finite and nonnegative")
+    return wait if wait else 30.0 + (30.0 if config.get("require_cache_flush_log") else 0.0)
+
+
+def flush_cache(server_url, serve_log, server, config, entry, *, deadline, save):
+    """Bounded cache boundary; only explicit busy responses are retryable.
+
+    cache_flush_wait_seconds=0 preserves a single historical HTTP attempt.
+    deadline also reserves complete remaining arms and their cleanup time.
+    """
+    allowance = cache_flush_allowance(config)
+    wait = config.get("cache_flush_wait_seconds", 0)
+    started = time.monotonic()
+    until = min(deadline, started + allowance)
+    require_confirmation = bool(wait or config.get("require_cache_flush_log"))
+    entry.update(cache_flush_attempts=[], cache_flush_retry_wait_seconds=0.0)
+    try:
+        while True:
+            if time.monotonic() >= until or server.poll() is not None:
+                raise RuntimeError("Cache flush deadline/server exit before confirmed success")
+            offset = serve_log.stat().st_size if serve_log.is_file() else None
+            attempt = {"log_offset": offset, "started_after_seconds": time.monotonic() - started}
+            entry["cache_flush_attempts"].append(attempt)
+            try:
+                request = Request(server_url + "/flush_cache", data=b"", method="POST")
+                with urlopen(request, timeout=min(30.0, until - time.monotonic())) as response:
+                    attempt.update(http_status=response.status, body=response.read(4096).decode(errors="replace"))
+            except HTTPError as exc:
+                attempt.update(http_status=exc.code, error=str(exc))
+                try:
+                    attempt["body"] = exc.read(4096).decode(errors="replace")
+                except Exception as read_error:
+                    attempt["body_read_error"] = str(read_error)
+                finally:
+                    exc.close()
+            except Exception as exc:
+                attempt["error"] = str(exc)
+            # Read incrementally with overlap: success can appear beyond 128KiB
+            # or straddle a read boundary. Never reuse an earlier attempt's log.
+            cursor, tail, busy_log = offset, b"", False
+            confirm_until = min(until, time.monotonic() + 30.0)
+            confirmed = False
+            while cursor is not None:
+                with serve_log.open("rb") as stream:
+                    stream.seek(cursor)
+                    while time.monotonic() < until:
+                        chunk = stream.read(131072)
+                        if not chunk:
+                            break
+                        cursor += len(chunk)
+                        text = tail + chunk
+                        confirmed |= b"Cache flushed successfully!" in text
+                        busy_log |= b"pending requests" in text.lower()
+                        tail = text[-128:]
+                if confirmed or not require_confirmation or attempt.get("http_status") != 200 or time.monotonic() >= confirm_until or server.poll() is not None:
+                    break
+                time.sleep(min(0.2, max(0.0, confirm_until - time.monotonic())))
+            attempt["backend_confirmed"] = confirmed
+            attempt["explicit_pending_requests"] = busy_log or "pending requests" in attempt.get("body", "").lower()
+            entry.update(cache_flush_http_status=attempt.get("http_status"),
+                         cache_flush_body=attempt.get("body"), cache_flush_backend_confirmed=confirmed)
+            if attempt.get("error"):
+                entry["cache_flush_error"] = attempt["error"]
+            else:
+                entry.pop("cache_flush_error", None)
+            save()
+            http_ok = attempt.get("http_status") == 200
+            if http_ok and (confirmed or not require_confirmation) and time.monotonic() < until:
+                return
+            busy = attempt.get("http_status") in (400, 503) and attempt["explicit_pending_requests"]
+            if not wait or not busy:
+                if not wait and not config.get("require_cache_flush") and not config.get("require_cache_flush_log"):
+                    return
+                raise RuntimeError("Cache flush failed or backend did not confirm; refusing unmatched cache state")
+            left = until - time.monotonic()
+            if left <= 0:
+                raise RuntimeError("Cache flush busy deadline exhausted")
+            pause = min(1.0, left)
+            time.sleep(pause)
+            entry["cache_flush_retry_wait_seconds"] += pause
+    finally:
+        entry["cache_flush_elapsed_seconds"] = time.monotonic() - started
+        save()
 
 
 def stop_group(process: subprocess.Popen, grace: float = 10.0) -> bool:
@@ -175,57 +265,39 @@ def run_session(namespace: dict) -> dict:
         # Each CPU runner has at most 120s drain + 30s output allowance.
         # Reserve another minute for outer shutdown and the notebook watchdog.
         cleanup_reserve = 150 * len(arms) + 60
+        flush_allowance = cache_flush_allowance(config)
+        flush_reserve = flush_allowance * len(arms)
         arm_budget = min(config["requested_arm_seconds"],
-                         int((remaining - cleanup_reserve) / len(arms)))
+                         int((remaining - cleanup_reserve - flush_reserve) / len(arms)))
         if config.get("strict_arm_budget") and arm_budget != config["requested_arm_seconds"]:
             raise RuntimeError("Startup consumed the frozen solver budget; aborting instead of shortening the comparison.")
         if arm_budget < 600:
             raise RuntimeError("Insufficient budget left for the configured experiment")
         report["equal_arm_budget_seconds"] = arm_budget
         report["cleanup_reserve_seconds"] = cleanup_reserve
+        report["cache_flush_reserve_seconds"] = flush_reserve
         report["arm_count"] = len(arms)
         save()
-        for arm in arms:
+        for arm_index, arm in enumerate(arms):
             out = root / arm
             out.mkdir(parents=True, exist_ok=True)
             entry = {"arm": arm, "budget_seconds": arm_budget,
-                     "started_at_epoch": time.time()}
+                     "cache_flush_started_at_epoch": time.time()}
             report["arms"].append(entry)
             monitor.set_phase(arm + "_cache_flush")
-            serve_log = root / "serve.log"
-            flush_offset = serve_log.stat().st_size if serve_log.is_file() else None
-            # Flush request caches, retaining weights and compiled kernels.
-            # If unsupported, report the limitation rather than reload the GPU.
-            try:
-                request = Request(server_url + "/flush_cache", data=b"", method="POST")
-                with urlopen(request, timeout=30) as response:
-                    entry["cache_flush_http_status"] = response.status
-                    entry["cache_flush_body"] = response.read(512).decode(errors="replace")
-            except Exception as exc:
-                entry["cache_flush_error"] = str(exc)
+            remaining_arms = len(arms) - arm_index
+            reserved = (remaining_arms * (arm_budget + 150) + 60
+                        + (remaining_arms - 1) * flush_allowance)
+            slack = config["hard_limit_seconds"] - (time.time() - start) - reserved
+            if slack <= 0:
+                raise RuntimeError("Insufficient total budget for full remaining arms and cleanup before cache flush")
+            flush_cache(server_url, root / "serve.log", server, config, entry,
+                        deadline=time.monotonic() + slack, save=save)
+            if config["hard_limit_seconds"] - (time.time() - start) < reserved:
+                raise RuntimeError("Cache flush consumed full remaining arm/cleanup budget")
+            # CPU allowance starts only after the cache boundary succeeded.
+            entry["started_at_epoch"] = time.time()
             save()
-            if config.get("require_cache_flush") and entry.get("cache_flush_http_status") != 200:
-                raise RuntimeError(f"Cache flush failed before {arm}; refusing unmatched cache state.")
-            if config.get("require_cache_flush_log"):
-                # SGLang 0.5.19 returns HTTP200 on scheduler flush success.
-                # Retain the existing confirmation from its new backend log.
-                confirmed = False
-                if flush_offset is not None:
-                    until = time.monotonic() + 30.0
-                    while time.monotonic() < until:
-                        with serve_log.open("rb") as stream:
-                            stream.seek(flush_offset)
-                            recent = stream.read(131072)
-                        if b"Cache flushed successfully!" in recent:
-                            confirmed = True
-                            break
-                        if server.poll() is not None:
-                            break
-                        time.sleep(0.2)
-                entry["cache_flush_backend_confirmed"] = confirmed
-                save()
-                if not confirmed:
-                    raise RuntimeError(f"Backend did not confirm cache flush before {arm}; aborting comparison.")
 
             command = [sys.executable, "-u", "-m", "arc3_research.run_arm",
                        "--arm", arm, "--bundle-dir", str(namespace["BUNDLE_DIR"]),
