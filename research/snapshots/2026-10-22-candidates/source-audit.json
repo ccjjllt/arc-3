@@ -1,0 +1,72 @@
+{
+  "checked_at_utc": "2026-10-22T01:45:15.666002+00:00",
+  "read_only": true,
+  "scope": "Current Kaggle scoreDescending top 40 observed via read-only CLI, then eight targeted current public source/metadata downloads. GitHub HEAD API reads for Franzen and Tufa. No downloaded code executed; no GPU or submissions.",
+  "version_score_binding": "No exact-current-version formal submission score binding established. Sorted list rank and team scores are not notebook-version scores.",
+  "upstream_heads": [
+    {
+      "repository": "https://github.com/da-fr/arc-agi-3-solution",
+      "sha": "10882e332d883af3e61616df8c8a17d03a328a75",
+      "commit_utc": "2026-09-30T19:35:18Z"
+    },
+    {
+      "repository": "https://github.com/Tufalabs/duck-harness",
+      "sha": "7652836056c59e044f093e3c13ed7438c814169e",
+      "commit_utc": "2026-07-01T14:59:32Z"
+    }
+  ],
+  "heliosli_v8": {
+    "canonical_url": "https://www.kaggle.com/code/heliosli/try-merging-it-you-might-get-lucky-and-win-gold",
+    "version": 8,
+    "source_sha256": "c03d1aa0e5c0f1bd0e4aa445c0203572aec396c8c8ceac9e24ee43d56189419f",
+    "new_since_snapshot": true,
+    "mechanism": "Model registers a pure observe(frame) and one to four predictor functions. Recorded public transitions refute candidates. Selected distinguishing probe executes only first action. Registered active rules wrap the ordinary Python action handler and interrupt remaining snippet on counterexample.",
+    "actual_attachment": [
+      "patch_rule_lab.py:30-37 adds tool and wraps action_handler",
+      "patch_rule_lab.py:74-83 refreshes real state then raises RuleCorrectionRequired"
+    ],
+    "adoption_limit": [
+      "rule_lab.py:226-234 passes through when no active registered rule exists",
+      "rule_lab.py:306-316 gives one nudge after 16384 generated tokens; it does not force model registration"
+    ],
+    "coverage_limits": [
+      "rule_lab.py:140-141 survivors include rules with zero checked transitions",
+      "rule_lab_eval.py:9-13 accepts empty or constant JSON projections; equality may be vacuous",
+      "rule_lab_eval.py:92-102 checks game_over/level_completed only if predictor declares them; terminal geometry skipped",
+      "same model supplies observation encoder and dynamics; actual frame is external evidence, but no independent truth proof of encoder/goal",
+      "pre-action prediction is computed, but post-action rl_check recomputes predictor against replay; no frozen prediction/encoder agreement contract"
+    ],
+    "failure_behavior": "rule_lab.py:243-250: if initial pre-action checker compute fails, clear active rules and execute entire original normalized batch unchecked; later/post-action failure stops suffix without retry.",
+    "cost_limits": "one 5s sandbox computation per compute; pre/post check per actual action; replay sample max96; probe depth2/node64/actions12; batch soft wall budget12s; program20000chars/state12000chars. Not empirical overhead measurement.",
+    "validation_limit": "Author states scripted-model sandbox/executor/public consumer checks only; no target-model quality gain measured. Notebook has no embedded outputs and ordinary non-competition Save writes placeholder parquet without running solver.",
+    "relation_to_021": "Improves once-registered automatic action-path attachment versus optional per-action arguments; initial adoption still unproven. Do not claim it fixes 021 or improves score until model voluntarily registers, changes action and clears more levels.",
+    "recommended_use": "Read and adapt rule_lab guarded_actions, patch hooks, counterexample protocol and bounded rl_probes. Preserve project real-save path. Improve unknown/fallback and semantic coverage explicitly; avoid blindly replacing 009."
+  },
+  "other_candidates": [
+    {
+      "ref": "habanwer/arcaid3-lexicon-view-dfranzen-m2",
+      "version": 6,
+      "new_to_this_refresh": true,
+      "mechanism": "Object permanence over predecessor frames, learned local rule grammar, death/reset transition filters, scale lock",
+      "evidence": "11 cells with outputs; embedded report 10 games mean42.88, view98/576 calls, rules40, zero errors. Output start time2026-10-08 despite newer version narrative, so not established as a fresh v6 controlled result. No paired or formal-score proof. Existing project observation work already covers part of idea."
+    },
+    {
+      "ref": "mayankraaz/arc-agi-3-neural-bfs-episodic-solver",
+      "version": 8,
+      "new_to_this_refresh": true,
+      "mechanism": "Franzen+Dprime+lalalia solved-level memory+empty animation schema+startup keepalive",
+      "evidence": "Title says v7 while metadata v8; no embedded outputs. Author reports older v5/v6 scores29.05/24.77 only. No new autonomous search algorithm established beyond reused harness. Does not support wholesale merge."
+    },
+    {
+      "refs": [
+        "dfranzen/arc-agi-3-milestone-2-solution",
+        "dennis6886/arc3-d-prime-public-base",
+        "greenalgeria/up-arc-3",
+        "lalalia9/arc3-franzen-v19",
+        "sujanmajhisuzan/arc-agi-3-m2-top-submission"
+      ],
+      "evidence": "Current downloaded raw sources byte-equal to 2026-10-21 snapshots."
+    }
+  ],
+  "recommendation": "Keep 009 as formal best. Treat Heliosli v8 as new implementation reference for active program repair plus automatic execution checks, not a validated high-score baseline. Do not conflate Tufa current leaderboard lead with its July released harness."
+}

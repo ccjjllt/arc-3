@@ -1,5 +1,7 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
+**10月22日新交接已完成：** [034 当前程序修复与执行核验](docs/handoff/034-executable-program-repair.md)。本轮重新读取官方规则、榜单与009/030/032正式成绩，并发现Heliosli公开Notebook已更新至v8：可参考其真实动作检查接线，但尚无目标模型提分证据。新交接补齐自然合同建立、目标/计划确定消费、三态检查及9小时总预算边界；034/035仍是拟议实验，未启动GPU或提交。[公开源码审计](research/snapshots/2026-10-22-candidates/source-audit.json) · [官方快照](research/snapshots/2026-10-22-handoff/read-manifest.json)。
+
 **032正式结果已COMPLETE：30.20，较009的31.16低0.96，未刷新公开榜最佳。** submission57481712的10月22日08:43北京时间API原件已保存；009 v2／57101330继续保留。032公开短跑+25.655、全25题跨会话比较+11.140未迁移为此次正式提分；候选49.22仍低于历史005基线49.90。实际经验复用证据成立，但单轮公开均值和采用轨迹不足以证明稳定泛化收益。停止032 v1原样重提和扩大，保留其机制证据；后续优先研究当前任务程序由准确输入到目标计算、动力学与实际动作的纠错闭环。正式episodes为空、结果下载403，隐藏逐题与运行直接根因未能确认。[正式成绩原件](experiments/032-formal-result-snapshot.json) · [032研究结论](research/032-results-analysis.md) · [独立结果评估](experiments/032-memory-analysis/formal-result-assessment.json) · [全25题比较](experiments/032-memory-analysis/recovery-comparison.md) · [执行进展](docs/progress/032-033-memory-and-controller.md)。
 
 031自然对照已COMPLETE：22.5092→23.2819（+0.7726），27→26关。r11l已有精确像素→搜索→执行→多过一关的完整正链；最大涨题ft09的收益尚不能归因于runs。冻结v2作为备选，不因032回退自动晋升或原样提交。[分析](experiments/031-natural-analysis/summary.md) · [独立深读](experiments/031-natural-analysis/decision-review.json)。
