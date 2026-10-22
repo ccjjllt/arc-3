@@ -46,10 +46,13 @@ def validate_config(config: dict[str, Any]) -> None:
         if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
             raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
         if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
-            if (arms != ["executable_plan_A", "executable_plan_B"]
+            delivery_v3 = config.get("research_revision") == 3
+            expected_order = (["executable_plan_B", "executable_plan_A"] if delivery_v3
+                              else ["executable_plan_A", "executable_plan_B"])
+            if (arms != expected_order
                     or config.get("reference_arm") != "executable_plan_A"
                     or config.get("games") != ["ft09-0d8bbf25", "su15-1944f8ab"]):
-                raise ValueError("034 diagnostic runs A then B on frozen ft09/su15 only.")
+                raise ValueError("034 diagnostic order must match its revision on frozen ft09/su15 only.")
             if (config.get("requested_arm_seconds") != 600
                     or config.get("continuation_seconds") != 450
                     or config.get("max_continuation_actions") != 60
@@ -64,6 +67,13 @@ def validate_config(config: dict[str, Any]) -> None:
                 "require_drained_workers", "require_complete_pool", "native_payload_cells",
             )):
                 raise ValueError("034 diagnostic retains isolated, complete and drained arm contracts.")
+            if delivery_v3 and config.get("candidate_delivery") != {
+                    "compact_context": True, "thinking": False,
+                    "max_prompt_tokens": 16384, "max_output_tokens": 4096,
+                    "max_request_seconds": 60, "max_extra_processing_seconds": 120,
+                    "max_actions_per_contract": 3, "contract_lifetime": "current_short_plan",
+                    "token_count_source": "served_model_tokenize_endpoint"}:
+                raise ValueError("034 v3 requires its frozen bounded-delivery contract.")
         elif arms not in (["baseline", "executable_plan"], ["executable_plan"]):
             raise ValueError("034 natural runs require the isolated executable_plan arm, optionally after baseline.")
     if "tail_80k" in arms:

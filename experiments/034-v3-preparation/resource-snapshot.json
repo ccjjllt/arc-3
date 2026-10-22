@@ -1,0 +1,55 @@
+{
+  "observed_at_utc": "2026-10-22T09:05:17.240307+00:00",
+  "requested_account": "zhuating",
+  "read_only": true,
+  "gpu_launched": false,
+  "formal_submitted": false,
+  "scope": "Weekly shared accelerator quota and existing ARC3 diagnostic status only",
+  "sdk_raw": {
+    "quotaRefreshTime": "2026-10-24T00:00:00.000Z",
+    "gpuQuota": {
+      "timeUsed": "6585.637.0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "21600s",
+      "minimumTimeAllowed": "21600s",
+      "hasEverRun": true
+    },
+    "tpuQuota": {
+      "timeUsed": "0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "72000s",
+      "minimumTimeAllowed": "72000s"
+    }
+  },
+  "sdk_gpu_seconds": {
+    "time_used": 92985.637,
+    "time_reserved": 0.0,
+    "total_time_allowed": 108000.0,
+    "minimum_time_allowed": 108000.0
+  },
+  "refresh_at_utc": "2026-10-24 00:00:00",
+  "diagnostic_status": {
+    "status": "COMPLETE"
+  },
+  "cli_returncode": 0,
+  "cli_quota": [
+    {
+      "resource": "GPU",
+      "used": "25.83h",
+      "remaining": "4.17h",
+      "total": "30.00h",
+      "refreshAt": "2026-10-24T00:00:00"
+    },
+    {
+      "resource": "TPU",
+      "used": "0.00h",
+      "remaining": "20.00h",
+      "total": "20.00h",
+      "refreshAt": "2026-10-24T00:00:00"
+    }
+  ],
+  "quota_scope": "Shared weekly GPU quota, not separate RTX quota or hardware availability guarantee; raw SDK duration serialization may disagree with parsed seconds and CLI.",
+  "remaining_gpu_seconds": 15014.362999999998,
+  "remaining_gpu_hours": 4.170656388888888,
+  "planning_note": "About4.17shared GPU hours remained at observation; one2h-cap diagnostic is feasible within quota, but cannot promise an additional full25paired run requiring4.03hours solving alone before refresh. Re-read before any launch."
+}

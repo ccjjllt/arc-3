@@ -364,7 +364,8 @@ def run_arm(args: argparse.Namespace) -> int:
                 Path(__file__).with_name("admission_order.py"))
             metadata["admission_order"] = admission_patch.snapshot()
         if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B"):
-            for name in ("executable_plan.py", "executable_plan_contract.py", "program_repair.py"):
+            for name in ("executable_plan.py", "executable_plan_contract.py",
+                         "executable_plan_context.py", "program_repair.py"):
                 metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
             if executable_plan_patch is not None:
                 metadata["executable_plan"] = executable_plan_patch.snapshot()

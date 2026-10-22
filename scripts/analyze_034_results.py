@@ -117,12 +117,22 @@ def plan_events(records):
     # prediction_unavailable is a separate pre-action failure, not a checked action.
     checks["unknown"] += sum(r.get("kind") == "prediction_unavailable" for r in records)
     checks = {status: checks[status] for status in ("match", "mismatch", "unknown", "boundary", "not_executed")}
-    seconds = [r.get("extra_seconds_used") for r in hosts if numeric(r.get("extra_seconds_used"))]
+    seconds = [r.get("extra_seconds_used") for r in [*hosts, *programs]
+               if numeric(r.get("extra_seconds_used"))]
     return {"event_counts": dict(Counter(r.get("kind") for r in records)),
             "program_branch_attempts": len(programs),
             "program_returned_responses": sum("response" in r for r in programs),
             "request_send_uncertain_attempts": sum("response" not in r and "before request" not in str(r.get("error", "")) for r in programs),
             "program_responses_with_usage": sum(isinstance(r.get("usage"), dict) for r in programs),
+            "complete_program_deliveries": sum(bool(r.get("program_code")) for r in programs),
+            "validated_current_plans": sum((r.get("validation") or {}).get("passed") is True for r in programs),
+            "validated_initial_predictions": sum((r.get("first_prediction_validation") or {}).get("passed") is True for r in programs),
+            "local_completed_or_abstained": sum(r.get("local_status") in ("completed", "abstain") for r in programs),
+            "finish_reasons": dict(Counter(r.get("finish_reason") for r in programs if "finish_reason" in r)),
+            "failure_stages": dict(Counter(r.get("stage") for r in programs if r.get("error"))),
+            "actual_input_token_counts": [(r.get("request_record") or {}).get("input_tokens") for r in programs],
+            "actual_request_controls": [{k: (r.get("request_record") or {}).get("request_payload", {}).get(k)
+                for k in ("tool_choice", "chat_template_kwargs", "max_tokens")} for r in programs],
             "returned_usage": usage_sum(r.get("usage") for r in programs),
             "prediction_checks": checks,
             "checked_actual_actions": sum(r.get("actual_actions", 0) for r in records if r.get("kind") == "checked_action"),
@@ -134,7 +144,7 @@ def plan_events(records):
             "extra_seconds_used": max(seconds) if seconds else None,
             "programs": programs,
             "counterexamples": [r for r in records if r.get("kind") == "counterexample"],
-            "note": "program_branch_attempts counts program_recomputed events; errors before completion can leave actual request sending uncertain. Host actions sum top-level host_plan_execution events only. Never add recursive forced_branch actions. Usage sums program_recomputed only. extra_seconds_used is cumulative max and may omit rejected final branch time; patch snapshot is authoritative when available."}
+            "note": "program_branch_attempts counts program_recomputed events; errors before completion can leave actual request sending uncertain. Host actions sum top-level host_plan_execution events only. Never add recursive forced_branch actions. Usage sums program_recomputed only. extra_seconds_used is the cumulative max across branch/host records; patch snapshot is authoritative when available. Pixel relevance is declared, not semantically certified; code and plan acceptance are not score improvement."}
 
 
 def analyze(root):

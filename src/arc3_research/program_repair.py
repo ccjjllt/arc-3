@@ -175,48 +175,119 @@ def _write_event(state_path: Path, event: dict[str, Any]) -> None:
 
 
 def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[str, Any]],
-                *, timeout: float, max_tokens: int) -> Any:
-    """Same model payload and sampling; one bounded request without retries.
+                *, timeout: float, max_tokens: int, enable_thinking: bool | None = None,
+                tool_choice_override: str | dict[str, Any] | None = None,
+                request_record: dict[str, Any] | None = None,
+                max_input_tokens: int | None = None) -> Any:
+    """One bounded auxiliary request, with optional branch-only overrides.
 
     Non-streaming HTTP makes the read timeout bound the whole generation wait;
     this branch cannot silently retry a sixty-second request several times.
+    Omitting the new arguments preserves the existing repair payload. The main
+    ToolAgent request method and its global thinking setting are never changed.
+    The input cap uses the pinned Pennyroyal /v1/tokenize endpoint, which shares
+    chat-completion preprocessing. An unavailable counter rejects the branch;
+    a character estimate is not represented as an exact token limit.
     """
+    started = time.monotonic()
+    deadline = started + float(timeout)
+    record = request_record if request_record is not None else {}
+    record.update(status="building_payload", timeout_seconds=float(timeout),
+                  input_token_cap=max_input_tokens)
     module = importlib.import_module(type(analyzer).__module__)
     payload = module.build_chat_payload(
         provider=analyzer._model.provider, model=analyzer._model.model_id,
         messages=messages, max_tokens=max_tokens,
         temperature=module._LOCAL_ANALYZER_TEMPERATURE,
         top_p=module._LOCAL_ANALYZER_TOP_P, top_k=module._LOCAL_ANALYZER_TOP_K,
-        thinking=bool(module._LOCAL_ANALYZER_ENABLE_THINKING), tools=tools,
-        tool_choice=module._request_tool_choice(tools), seed=module._LOCAL_ANALYZER_SEED)
+        thinking=(bool(module._LOCAL_ANALYZER_ENABLE_THINKING)
+                  if enable_thinking is None else bool(enable_thinking)), tools=tools,
+        tool_choice=(module._request_tool_choice(tools) if tool_choice_override is None
+                     else tool_choice_override), seed=module._LOCAL_ANALYZER_SEED)
     preferences = module._openrouter_provider_prefs(analyzer._model.provider)
     if preferences:
         payload["provider"] = preferences
     template = {**(payload.get("chat_template_kwargs") or {}),
                 **analyzer._harness_template_kwargs()}
+    if enable_thinking is not None:
+        # Apply after the harness merge, matching ToolAgent's existing override
+        # semantics, so a template default cannot silently re-enable thinking.
+        template["enable_thinking"] = bool(enable_thinking)
     if template:
         payload["chat_template_kwargs"] = template
     payload["messages"] = module._strip_control_keys(module._apply_summary_visibility(
         payload.get("messages") or [], evicted=getattr(analyzer, "_has_evicted", False)))
     payload["stream"] = False
     payload.pop("stream_options", None)
-    response = module.requests.post(
-        analyzer._model.base_url.rstrip("/") + "/chat/completions",
-        headers=analyzer._headers(), json=payload,
-        timeout=(min(float(module._CONNECT_TIMEOUT_SECONDS), timeout), timeout))
+    record.update(request_payload=copy.deepcopy(payload), status="payload_ready")
+    base_url = analyzer._model.base_url.rstrip("/")
+    stage = "tokenize" if max_input_tokens is not None else "generation"
     try:
-        response.raise_for_status()
-        body = response.json()
+        if max_input_tokens is not None:
+            if type(max_input_tokens) is not int or max_input_tokens <= 0:
+                raise ValueError("max_input_tokens must be a positive integer")
+            token_started = time.monotonic()
+            left = deadline - token_started
+            if left <= 0:
+                raise TimeoutError("Auxiliary request budget exhausted before tokenization")
+            # The pinned server schema accepts the same messages/tools/template
+            # kwargs and delegates to chat-completion preprocessing. This is a
+            # CPU-only endpoint; it neither generates nor executes game actions.
+            token_response = module.requests.post(
+                base_url + "/tokenize", headers=analyzer._headers(), json=payload,
+                timeout=(min(float(module._CONNECT_TIMEOUT_SECONDS), left, 5), min(left, 10)))
+            try:
+                record["tokenize_http_status"] = token_response.status_code
+                token_response.raise_for_status()
+                token_body = token_response.json()
+            finally:
+                token_response.close()
+            count = token_body.get("count")
+            if type(count) is not int or count <= 0:
+                raise ValueError("Tokenize endpoint did not return one exact positive count")
+            record.update(input_tokens=count, input_token_count_method="server_chat_tokenize",
+                          tokenize_elapsed_seconds=time.monotonic() - token_started)
+            if count > max_input_tokens:
+                raise ValueError(f"Compact request has {count} input tokens; limit is {max_input_tokens}")
+        stage = "generation"
+        left = deadline - time.monotonic()
+        if left <= 0:
+            raise TimeoutError("Auxiliary request budget exhausted before generation")
+        record.update(status="request_sent", generation_budget_seconds=left)
+        generation_started = time.monotonic()
+        response = module.requests.post(
+            base_url + "/chat/completions", headers=analyzer._headers(), json=payload,
+            timeout=(min(float(module._CONNECT_TIMEOUT_SECONDS), left), left))
+        try:
+            record["http_status"] = response.status_code
+            response.raise_for_status()
+            body = response.json()
+        finally:
+            response.close()
+        record.update(response_body=copy.deepcopy(body),
+                      generation_elapsed_seconds=time.monotonic() - generation_started)
+        choices = body.get("choices") or []
+        if not choices:
+            raise RuntimeError("Repair request returned no completion choices")
+        choice = choices[0]
+        record.update(status="response_returned", finish_reason=str(choice.get("finish_reason") or ""),
+                      usage=copy.deepcopy(body.get("usage")))
+        if max_input_tokens is not None and isinstance(body.get("usage"), dict):
+            served_count = body["usage"].get("prompt_tokens")
+            record["served_prompt_tokens"] = served_count
+            record["tokenize_matches_usage"] = served_count == record.get("input_tokens")
+            if type(served_count) is int and served_count > max_input_tokens:
+                raise ValueError("Server-reported prompt exceeded compact input cap")
+        return module._ChatCompletionResult(
+            message=module._extract_leaked_tool_calls(choice.get("message") or {}),
+            usage=body.get("usage"), finish_reason=str(choice.get("finish_reason") or ""),
+            served_by=str(body.get("provider") or ""))
+    except Exception as exc:
+        record.update(status="failed", failure_stage=stage,
+                      error=f"{type(exc).__name__}: {exc}")
+        raise
     finally:
-        response.close()
-    choices = body.get("choices") or []
-    if not choices:
-        raise RuntimeError("Repair request returned no completion choices")
-    choice = choices[0]
-    return module._ChatCompletionResult(
-        message=module._extract_leaked_tool_calls(choice.get("message") or {}),
-        usage=body.get("usage"), finish_reason=str(choice.get("finish_reason") or ""),
-        served_by=str(body.get("provider") or ""))
+        record["elapsed_seconds"] = time.monotonic() - started
 
 
 def run_program_repair(analyzer: Any, state_path: Path, *,

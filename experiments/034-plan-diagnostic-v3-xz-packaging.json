@@ -1,0 +1,98 @@
+{
+  "id": "034-plan-diagnostic-v3",
+  "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+  "kernel_title": "ARC3 034 Plan Diagnostic",
+  "purpose": "Bounded compact non-thinking code delivery and short-plan checked execution from frozen ft09 L3 and su15 L5 prefixes",
+  "comparison_note": "B then A in separate CPU processes against one loaded model server. Each arm runs the two frozen checkpoints concurrently for 450 seconds / 60 continuation actions per game. All candidate requests, validation, recomputation, checks and actions consume the same continuation window. This is a mechanism diagnostic, not natural coverage, full-pool gain or hidden-score evidence.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "executable_plan_B",
+    "executable_plan_A"
+  ],
+  "reference_arm": "executable_plan_A",
+  "arm_environment": {
+    "executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "600s allowance per isolated arm; two concurrent450s/60-action continuations. Candidate all extra processing cumulatively <=120s/game and single request <=60s, counted inside450s. 4200s startup ceiling and7200s total session cap reserve both complete arms, cache boundaries and cleanup. No shortened second arm.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 7200,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 2,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "First code-delivery redesign after 034 v2 zero executable deliveries. Preserve original checkpoints and no-future-evidence boundary; label construction versus repair honestly. Both ordinary and candidate continuations pay identical time/action caps; complete programs, relevant checks and actual progress are separate findings.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/executable_plan.py": "d81057289b834def1fb5e437bc3e03644bcf8b1ce3c38d6bbac2dbe4b2b8aa6f",
+    "src/arc3_research/executable_plan_context.py": "9e055a6afaa4ee85ba63d1acfb760ced41e948ef039219499f36a9c219db562b",
+    "src/arc3_research/executable_plan_contract.py": "c0d4a0a9d611495c5a0ec7dbdd97219c5e840e4e8cad6de249e7c0f661455a9a",
+    "src/arc3_research/executable_plan_forks.py": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+    "src/arc3_research/experiment_config.py": "928d698f5c3839c73384d5bc497942aa24525b87f2ffdfe83bdae1a9b453be97",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  },
+  "cache_flush_wait_seconds": 120,
+  "revision_note": "v3 changes compact request delivery, auxiliary thinking/tool controls and bounded short-plan prediction contract; reverse order B then A. Old v1/v2 source, configuration and run artifacts remain archived. Freeze current helper hashes after all local checks and before upload.",
+  "research_revision": 3,
+  "candidate_delivery": {
+    "compact_context": true,
+    "thinking": false,
+    "max_prompt_tokens": 16384,
+    "max_output_tokens": 4096,
+    "max_request_seconds": 60,
+    "max_extra_processing_seconds": 120,
+    "max_actions_per_contract": 3,
+    "contract_lifetime": "current_short_plan",
+    "token_count_source": "served_model_tokenize_endpoint"
+  },
+  "quota_note": "Re-read current shared account quota immediately before launch. Do not treat weekly_gpu_hours_limit or earlier remaining-hour records as current available RTX time.",
+  "source_freeze_note": "Frozen after local contract/delivery/native-sandbox checks and B-then-A zero-model checkpoint restoration. Any code change now requires explicit re-freeze and rebuild before upload. Old v1/v2 artifacts preserved.",
+  "fork_transport": "combined_xz_base64",
+  "transport_revision_note": "Data packaging repair only: jointly xz-compress identical ft09/su15 fork objects to stay below the actual CLI JSON-wrapped source upload limit. No candidate logic, checkpoint evidence, order or budgets changed. Preserve the previous large v3 build and audit separately."
+}

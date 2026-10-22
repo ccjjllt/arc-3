@@ -18,46 +18,55 @@ import threading
 import time
 from typing import Any
 
-from arc3_research.program_repair import _completion, _plain_messages, _payload, _remaining
+from arc3_research.program_repair import _completion, _payload, _remaining
+from arc3_research.executable_plan_context import prepare_compact_context
 from arc3_research.executable_plan_contract import (
     binding_names, compare_prediction, extract_definitions, validate_plan, validate_prediction,
 )
 
 
-PROMPT = """The host paused a real Python action sequence. Repair the SMALL live
-program/input that generated it, then recompute its current goal and plan.
-Reuse the existing rule/search when evidence supports it; revise a contradicted
-rule instead of just repeating the previous actions. Current state is live.
-Return one python tool call containing self-contained function definitions and
-imports only, with these two entry points:
+PROMPT = """Deliver a SMALL executable program now using one python tool call.
+The host paused a real action sequence. Repair its relevant input/rule or
+construct a small current decision program if no usable planner was retained.
+Reuse existing rule/search when evidence supports it; revise a contradicted
+rule instead of repeating old coordinates. Return self-contained function
+definitions and allowed computational imports only, with two entry points:
 
-plan_program(frame) -> {"goal": nonempty current target description/data,
- "actions": [model-facing action dicts, at most 12],
+plan_program(frame) -> {"status": "ready" | "completed" | "abstain",
+ "goal": nonempty local target description/data,
+ "actions": [model-facing action dicts, at most 3; empty unless ready],
  "evidence_pixels": [[row,col,color_character], ...],
  "replaces": [names from the paused code or retained functions], "reason": str}
-predict(frame, action) -> {"expected_pixels": [[row,col,color_character], ...],
- "scope": "which observable change this checks"}
+predict(frame, action) -> {"mode": "change" | "noop", "action": action,
+ "object_pixels": [[row,col,CURRENT color], ...],
+ "target_pixels": [[row,col,CURRENT color], ...],
+ "expected_pixels": [[row,col,EXPECTED color], ...],
+ "precondition": "why this action has this effect or is blocked",
+ "scope": "which task object and observable consequence this checks"}
+If no relevant prediction is possible, return {"mode":"unknown","reason":str}.
 
-plan_program must READ frame and actually RECOMPUTE the relevant input, goal
-and actions. Do not just rename a stale hand-written target or old action list.
-predict runs before each action and returns concrete, nonempty pixel predictions
-for the action's relevant observable consequences. Predict actual color values,
-not flags such as ok=True. MOUSE uses row/col; other actions use only action.
-Do not propose RESET or UNDO. Return no prints or top-level calls. Definitions
-must have no decorators, default arguments, annotations, global or nonlocal.
-Computational imports such as math, collections, itertools, heapq and numpy
-are supported. No function
-may execute action(), RESET, UNDO or other environment side effects. The host
-will run plan_program and predict itself in a zero-action sandbox, check pixel
-evidence against the current public image, and then execute the plan through
-the ordinary action path. A pixel/schema check does NOT certify your rule.
+Read frame.ascii, shape, level and step to RECOMPUTE current objects, target and
+actions. frame.recent_transitions is refreshed on EVERY call: a tuple of recent
+public transitions with action, before_frame, after_frame and result attributes.
+frame.valid_actions and frame.last_action_result are current public facts.
+Unknown historical state is not a fact; if essential state cannot be recovered,
+abstain or propose only ONE useful action. completed refers only to your local
+target, never a claim of environment success. Do not hardcode a moving target
+as current_position plus a fixed distance on every call: express a meaningful
+task target computed from the current board and known facts.
 
-Ordinary globals do not persist. Put dependencies/parameters in the returned
-functions; existing retained helpers are available, but stale layout constants
-must be rebound from this frame. Frame has ascii, shape, level, step; you may
-internally read exact current ASCII for this computation, without printing the
-whole image. If the rule is uncertain, make a short useful next plan, with an
-honest prediction to test. Do not copy every pixel as a replacement task model.
+The host executes at most THREE actions for this contract, recalculating the
+plan from the real new frame before every next action. Predictions are frozen
+BEFORE action, cover BOTH declared object and target pixels and no undeclared
+pixels. A noop must explain a task-relevant obstruction/precondition, not just
+unchanged distant background. Pixel agreement does not prove your rule correct.
+MOUSE uses row/col; other actions contain only action. No RESET/UNDO, calls to
+action(), prints or top-level execution. No decorators, default arguments,
+annotations, global or nonlocal. Computational imports math, collections,
+itertools, heapq, numpy are supported. Globals do not persist: keep parameters
+inside functions, reuse supplied helpers and rebind layout from this frame.
+Do not copy every pixel as a replacement model. No explanation outside the
+single python tool call. Keep the program short enough to finish this response.
 """
 
 
@@ -85,6 +94,12 @@ def _bootstrap(source: str) -> str:
          '            raise ExecutablePlanInterrupted(str(action_result.get("stop_detail") or "Plan stopped; inspect the live state."))\n'),
         ('    except (\n        KnownNoOpActionError,\n',
          '    except (\n        ExecutablePlanInterrupted,\n        KnownNoOpActionError,\n'),
+        ('        runtime_globals["current_frame"] = current_frame\n',
+         '        if current_frame is not None:\n'
+         '            current_frame.recent_transitions = tuple(transitions[-4:])\n'
+         '            current_frame.valid_actions = tuple(str(a) for a in state_payload.get("valid_actions", []))\n'
+         '            current_frame.last_action_result = dict(action_result)\n'
+         '        runtime_globals["current_frame"] = current_frame\n'),
     ]
     for old, new in additions:
         if source.count(old) != 1:
@@ -113,6 +128,7 @@ class _State:
     pending: dict | None = None
     prediction_support: int = 0
     in_branch: bool = False
+    program_bindings: list[str] = field(default_factory=list)
 
 
 class ExecutablePlanPatch:
@@ -251,10 +267,30 @@ class ExecutablePlanPatch:
         from inference.agent.runtime_state import load_runtime_state
         frame, history = load_runtime_state(state.path)
         if state.level is not None and frame.level != state.level:
-            state.program = None
-            state.prediction_support = 0
+            self.release(state, "level_changed")
         state.level = frame.level
         return frame, history
+
+    def release(self, state, reason):
+        if state.program is not None:
+            self.event(state, {"kind": "contract_released", "status": reason,
+                               "matched_actions": state.prediction_support})
+        state.program = None
+        state.program_hash = None
+        state.program_bindings = []
+        state.prediction_support = 0
+
+    def transition_evidence(self, before, after):
+        changed = []
+        if before.shape == after.shape:
+            for row, values in enumerate(before.grid):
+                for col, color in enumerate(values):
+                    if color != after.grid[row][col]:
+                        changed.append([row, col, self.chars[color], self.chars[after.grid[row][col]]])
+        return {"before": {"step": before.step, "level": before.level, "ascii": before.ascii},
+                "after": {"step": after.step, "level": after.level, "ascii": after.ascii},
+                "shape_changed": before.shape != after.shape,
+                "changed_pixels": changed, "changed_pixel_count": len(changed)}
 
     def interrupt(self, context, status, detail):
         agent, state = context["agent"], context["state"]
@@ -319,6 +355,8 @@ class ExecutablePlanPatch:
         normalized = agent._normalize_python_actions(actions)
         context["calls"] += 1
         frame, _ = self.current(state)
+        if not context.get("host_plan") and state.program is not None:
+            self.release(state, "ordinary_action_outside_short_plan")
         if (not context.get("host_plan") and state.program is None and not state.bootstrap_used
                 and state.source_bindings and normalized
                 and (len(normalized) > 1 or context["calls"] > 1)
@@ -331,6 +369,8 @@ class ExecutablePlanPatch:
             self.event(state, {"kind": "contract_trigger", **state.pending})
             return self.interrupt(context, "contract_requested", "Old suffix stopped; host will recompute the current program")
         if state.program is None:
+            if context.get("host_plan"):
+                return self.interrupt(context, "inactive_contract", "Short-plan contract is no longer active")
             reply = execute(actions, stale_after=stale_after)
             context["reply_state"] = copy.deepcopy(reply.get("state", context["reply_state"]))
             outcome = reply.get("action_result", {})
@@ -338,7 +378,7 @@ class ExecutablePlanPatch:
             context["executed"] += count
             state.observation_serial += count
             if any(outcome.get(k) for k in ("game_over", "level_completed", "run_complete", "done")):
-                state.program = None
+                self.release(state, "ordinary_boundary")
                 state.attempt_event += int(bool(outcome.get("game_over")))
             self.event(state, {"kind": "unchecked_action", "status": "unverified",
                                "actions": normalized, "actual_actions": count})
@@ -347,21 +387,25 @@ class ExecutablePlanPatch:
         replies, animations = [], []
         context["death_override"] = False
         for index, action in enumerate(normalized):
-            if self.stopped(state) or self.remaining(agent, state) <= 0:
+            if (self.stopped(state) or self.remaining(agent, state) <= 0
+                    or time.monotonic() >= context.get("deadline", float("inf"))):
                 return self.interrupt(context, "deadline", "Shared deadline reached; suffix stopped") if not replies else self.aggregate(context, replies, len(normalized), interrupt="deadline")
             before, _ = self.current(state)
             try:
                 predicted = self.evaluate(agent, state, state.program +
-                    "\nresult = predict(current_frame, " + repr(action) + ")")
-                valid = validate_prediction(predicted, before.grid, self.chars)
+                    "\nresult = predict(current_frame, " + repr(action) + ")",
+                    deadline=context.get("deadline"))
+                valid = validate_prediction(predicted, before.grid, self.chars, expected_action=action)
                 if not valid["passed"]:
                     raise ValueError(str(valid.get("errors")))
                 frozen = copy.deepcopy(valid["prediction"])
             except Exception as exc:
                 problem = {"kind": "prediction_unavailable", "status": "unknown",
                            "action": action, "error": f"{type(exc).__name__}: {exc}"}
-                self.invalidate(state, problem)
+                self.invalidate(state, problem, allow_repair=False)
                 return self.interrupt(context, "unknown", str(problem)) if not replies else self.aggregate(context, replies, len(normalized), interrupt="unknown")
+            if time.monotonic() >= context.get("deadline", float("inf")) or self.stopped(state):
+                return self.interrupt(context, "deadline", "Extra-processing deadline reached before action") if not replies else self.aggregate(context, replies, len(normalized), interrupt="deadline")
             from inference.agent.action_names import to_engine_action
             context["guard_remaining"] = [(to_engine_action(a["action"]),
                 {k: v for k, v in a.items() if k != "action"}) for a in normalized[index:]]
@@ -383,9 +427,9 @@ class ExecutablePlanPatch:
                 boundary = boundary or "level_changed"
             if boundary:
                 self.event(state, {"kind": "checked_action", "status": "boundary", "boundary": boundary,
-                                   "action": action, "actual_actions": count})
-                state.program = None
-                state.prediction_support = 0
+                                   "action": action, "actual_actions": count,
+                                   "expected": frozen, "transition": self.transition_evidence(before, after)})
+                self.release(state, boundary)
                 state.attempt_event += int(bool(outcome.get("game_over")))
                 break
             if not count:
@@ -394,22 +438,24 @@ class ExecutablePlanPatch:
             comparison = compare_prediction(frozen, after.grid, self.chars)
             self.event(state, {"kind": "checked_action", "action": action,
                                "expected": frozen, "observed": comparison,
-                               "status": comparison["status"], "actual_actions": count})
+                               "status": comparison["status"], "actual_actions": count,
+                               "semantic_relevance_verified": False,
+                               "transition": self.transition_evidence(before, after)})
             if comparison["status"] != "match":
                 self.invalidate(state, {"kind": "counterexample", "status": comparison["status"],
-                    "action": action, "expected": frozen, "observed": comparison})
+                    "action": action, "expected": frozen, "observed": comparison},
+                    allow_repair=comparison["status"] == "mismatch")
                 return self.aggregate(context, replies, len(normalized), interrupt=comparison["status"])
             state.prediction_support += 1
         agent._last_animation_chain = animations
         return self.aggregate(context, replies, len(normalized)) if replies else self.interrupt(context, "empty", "No actions to execute")
 
-    def invalidate(self, state, problem):
+    def invalidate(self, state, problem, *, allow_repair=True):
         source_hash = state.program_hash
         previous_program = state.program
-        state.program = None
-        state.prediction_support = 0
         self.event(state, {**problem, "invalidated_program_hash": source_hash})
-        if not state.repair_used:
+        self.release(state, problem.get("status", "invalidated"))
+        if allow_repair and not state.repair_used:
             state.pending = {"kind": "repair", "counterexample": problem,
                              "source_code": state.source_code, "previous_program_hash": source_hash,
                              "previous_program": previous_program}
@@ -453,114 +499,192 @@ class ExecutablePlanPatch:
                                         self.remaining(agent, state))
         old_functions = copy.deepcopy(agent._kept_functions)
         old_history = copy.deepcopy(agent._history_messages)
+        old_context = getattr(self.tls, "context", None)
         state.in_branch = True
+        context = {"agent": agent, "state": state, "calls": 0, "executed": 0,
+                   "validation": False, "host_plan": True, "deadline": branch_deadline}
         event = {"kind": "program_recomputed", "trigger": trigger, "actual_actions": 0,
-                 "request_budget_seconds": min(self.request_seconds, self.extra_limit - state.extra_seconds),
-                 "semantic_claim": "current pixels and selected prediction only; goal/rules are hypotheses"}
+                 "stage": "context", "timings": {}, "request_record": {},
+                 "request_budget_seconds": min(self.request_seconds, branch_deadline - started),
+                 "semantic_claim": "Current declared pixels and action binding only; goal and rules remain hypotheses"}
+        report = {"status": "rejected", "actual_actions": 0, "made_progress": False}
+        bound_hash = None
+        progress = False
+        host_started = False
         try:
             current, history_entries = self.current(state)
             source = trigger.get("source_code", state.source_code)
             bindings = _bindings(source, old_functions)
-            public_now = {"level": current.level, "step": current.step,
-                          "shape": current.shape, "ascii": current.ascii,
-                          "recent_real_actions": [{"action": h.action, "step": h.frame.step,
-                                                   "level": h.frame.level, "result": h.result}
-                                                  for h in history_entries[-2:]],
-                          "last_actual_result": agent._last_action_call_result}
-            public_trigger = {k: v for k, v in trigger.items() if k not in ("source_code", "previous_program")}
-            text = (PROMPT + "\nLive program bindings: " + repr(bindings)
-                    + "\nPaused code:\n" + source[-12000:]
-                    + "\nActive program being corrected (if present):\n" + str(trigger.get("previous_program") or "")[-16000:]
-                    + "\nPublic trigger:\n" + json.dumps(public_trigger, ensure_ascii=False)
-                    + "\nCURRENT public observation AFTER any already executed action (not the old request image):\n"
-                    + json.dumps(public_now, ensure_ascii=False))
-            history = state.latest_messages or [{"role": "system", "content": agent._system_prompt}, *old_history]
-            messages = _plain_messages(history)
-            # A pending tool call is rendered as text so there are no orphan
-            # tool IDs in the additional bounded request.
-            for message in messages:
-                if message.get("tool_calls"):
-                    message["content"] = str(message.get("content") or "") + "\n" + json.dumps(message.pop("tool_calls"))
-                if message.get("role") == "tool":
-                    message["role"] = "user"
-                    message.pop("tool_call_id", None)
-            messages.append({"role": "user", "content": text})
-            tools = agent._tools(state.path)
-            messages = agent._trim_messages_for_context(messages, tools=tools)
+            phase = time.monotonic()
+            messages, context_metadata = prepare_compact_context(
+                agent, state, trigger, current, history_entries, PROMPT)
+            event.update(context_metadata=context_metadata)
+            event["timings"]["context_seconds"] = time.monotonic() - phase
+            tools = [t for t in agent._tools(state.path)
+                     if t.get("function", {}).get("name") == "python"]
+            if len(tools) != 1:
+                raise ValueError("The existing python tool schema is unavailable")
             timeout = min(self.request_seconds, branch_deadline - time.monotonic(),
                           self.remaining(agent, state))
             if timeout < 1 or self.stopped(state):
                 raise TimeoutError("extra-branch deadline exhausted before request")
-            response = self.completion(agent, messages, tools, timeout=timeout, max_tokens=4096)
+            event["stage"] = "request"
+            phase = time.monotonic()
+            response = self.completion(agent, messages, tools, timeout=timeout, max_tokens=4096,
+                enable_thinking=False,
+                tool_choice_override={"type": "function", "function": {"name": "python"}},
+                request_record=event["request_record"], max_input_tokens=16384)
+            event["timings"]["request_seconds"] = time.monotonic() - phase
             agent._accumulate_usage_tokens(response.usage)
-            event.update(usage=response.usage, response=response.message)
+            event.update(usage=response.usage, response=response.message,
+                         finish_reason=response.finish_reason,
+                         served_by=getattr(response, "served_by", None))
+            event["stage"] = "extract"
             definitions = extract_definitions(response.message)
             code = definitions["code"]
+            event.update(program_code=code, program_hash=definitions["code_sha256"])
+            phase = time.monotonic()
+            event["stage"] = "plan_validation"
             result = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)", deadline=branch_deadline)
             validation = validate_plan(result, current.grid, self.chars,
-                                       self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
-            event.update(program_code=code, validation=validation)
+                self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
+            event["validation"] = validation
             if not validation["passed"]:
                 raise ValueError("plan rejected: " + str(validation.get("errors")))
-            first_prediction = self.evaluate(agent, state, code + "\nresult = predict(current_frame, "
-                + repr(validation["plan"]["actions"][0]) + ")", deadline=branch_deadline)
-            first_validation = validate_prediction(first_prediction, current.grid, self.chars)
-            if not first_validation["passed"]:
-                raise ValueError("first prediction rejected: " + str(first_validation.get("errors")))
-            event["first_prediction_validation"] = first_validation
-            # Re-evaluate the returned source to check determinism and commit
-            # its functions. Host action consumption below establishes use;
-            # this is not a separate cross-call retention certificate.
-            result2 = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)", commit=True, deadline=branch_deadline)
-            if _hash(result) != _hash(result2):
-                raise ValueError("plan_program is nondeterministic on unchanged observation")
-            if time.monotonic() - started > self.extra_limit - state.extra_seconds or self.stopped(state):
-                raise TimeoutError("shared extra-branch deadline exhausted before actions")
-            state.program = code
-            state.program_hash = definitions["code_sha256"]
-            state.prediction_support = 0
-            event.update(status="plan_recomputed_and_bound", program_hash=state.program_hash,
-                         goal=result["goal"], plan_hash=_hash(validation["plan"]),
-                         proposed_actions=validation["plan"]["actions"])
-            self.event(state, event)
+            plan = validation["plan"]
+            report["goal"] = plan["goal"]
+            if plan["status"] != "ready":
+                agent._kept_functions = old_functions
+                report.update(status="local_completed" if plan["status"] == "completed" else "abstained",
+                              local_status=plan["status"], environment_success_claim=False)
+                event.update(status=report["status"], stage="local_status", local_status=plan["status"])
+            else:
+                event["stage"] = "initial_prediction"
+                first_prediction = self.evaluate(agent, state, code + "\nresult = predict(current_frame, "
+                    + repr(plan["actions"][0]) + ")", deadline=branch_deadline)
+                first_validation = validate_prediction(first_prediction, current.grid, self.chars,
+                                                       expected_action=plan["actions"][0])
+                event["first_prediction_validation"] = first_validation
+                if not first_validation["passed"]:
+                    raise ValueError("first prediction rejected: " + str(first_validation.get("errors")))
+                result2 = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)",
+                                        commit=True, deadline=branch_deadline)
+                if _hash(result) != _hash(result2):
+                    raise ValueError("plan_program is nondeterministic on unchanged observation")
+                state.program = code
+                state.program_hash = bound_hash = definitions["code_sha256"]
+                state.program_bindings = bindings
+                state.prediction_support = 0
+                event["timings"]["validation_seconds"] = time.monotonic() - phase
+                event.update(status="plan_recomputed_and_bound", goal=plan["goal"],
+                             plan_hash=_hash(plan), proposed_actions=plan["actions"])
+                self.event(state, {"kind": "contract_bound", "status": "ready", "plan": plan,
+                                   "input_step": current.step, "input_grid_sha256": _hash(current.grid)})
+                self.tls.context = context
+                host_started = True
+                phase = time.monotonic()
+                last_output = {}
+                terminal_status = "short_plan_action_limit"
+                for action_index in range(3):
+                    if self.stopped(state) or min(branch_deadline - time.monotonic(), self.remaining(agent, state)) < 1:
+                        terminal_status = "deadline"
+                        break
+                    current, history_entries = self.current(state)
+                    if state.program is None:
+                        terminal_status = "contract_boundary"
+                        break
+                    if action_index:
+                        event["stage"] = "live_recomputation"
+                        result = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)",
+                                               deadline=branch_deadline)
+                        validation = validate_plan(result, current.grid, self.chars,
+                            self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
+                        self.event(state, {"kind": "plan_recomputed", "validation": validation,
+                            "input_step": current.step, "input_grid_sha256": _hash(current.grid),
+                            "recent_real_actions": [{"action": h.action, "level": h.frame.level,
+                                                     "step": h.frame.step, "result": h.result}
+                                                    for h in history_entries[-4:]]})
+                        if not validation["passed"]:
+                            raise ValueError("recomputed plan rejected: " + str(validation.get("errors")))
+                        plan = validation["plan"]
+                        if plan["status"] != "ready":
+                            terminal_status = "local_completed" if plan["status"] == "completed" else "abstained"
+                            break
+                    action = plan["actions"][0]
+                    event["stage"] = "host_action"
+                    count_before = context["executed"]
+                    old_timeout = agent._python_timeout
+                    try:
+                        agent._python_timeout = min(old_timeout, branch_deadline - time.monotonic(),
+                                                    self.remaining(agent, state))
+                        if agent._python_timeout < 1:
+                            raise TimeoutError("extra-branch deadline exhausted before action")
+                        dispatch = self.original_python(agent, state.path,
+                            {"code": "result = action(" + repr([action]) + ")"})
+                    finally:
+                        agent._python_timeout = old_timeout
+                    last_output = _payload(dispatch.content)
+                    progress |= bool(dispatch.made_progress)
+                    if state.pending is not None:
+                        terminal_status = "counterexample"
+                        break
+                    if context.get("halted") or state.program is None:
+                        terminal_status = "contract_stopped"
+                        break
+                    if context["executed"] == count_before:
+                        terminal_status = "not_executed"
+                        break
+                event["timings"]["host_execution_seconds"] = time.monotonic() - phase
+                report.update(status="recomputed_plan_executed", program_hash=bound_hash,
+                    actual_actions=context["executed"], made_progress=progress,
+                    stop_reason=terminal_status, tool_output=last_output,
+                    environment_success_claim=False)
+                event.update(status=report["status"], stage="finished", actual_actions=context["executed"],
+                             stop_reason=terminal_status)
         except Exception as exc:
             agent._kept_functions = old_functions
-            state.program = None
-            event.update(status="rejected", error=f"{type(exc).__name__}: {exc}")
-            self.event(state, event)
-            return {"status": "rejected", "error": event["error"], "actual_actions": 0,
-                    "next": "Continue ordinary exploration from current_frame; previous suffix did not run."}
+            # A completed HTTP generation can still be rejected by the
+            # served-token cross-check. Its real cost must not disappear.
+            request_record = event["request_record"]
+            if "usage" not in event and isinstance(request_record.get("usage"), dict):
+                agent._accumulate_usage_tokens(request_record["usage"])
+                event.update(usage=request_record["usage"],
+                             finish_reason=request_record.get("finish_reason"))
+                body = request_record.get("response_body") or {}
+                choices = body.get("choices") or []
+                if choices:
+                    event["response"] = choices[0].get("message")
+            report.update(status="rejected" if not context["executed"] else "execution_failed",
+                actual_actions=context["executed"], made_progress=progress,
+                program_hash=bound_hash, error=f"{type(exc).__name__}: {exc}",
+                failure_stage=event["stage"],
+                next="Continue ordinary exploration from the real current_frame; the old suffix must not be replayed.")
+            event.update(status=report["status"], error=report["error"], actual_actions=context["executed"])
         finally:
-            state.extra_seconds += time.monotonic() - started
+            self.release(state, "short_plan_ended")
+            elapsed = time.monotonic() - started
+            state.extra_seconds += elapsed
             state.in_branch = False
             agent._history_messages = old_history
-        # The bounded model branch is finished. Ordinary per-action CPU checks
-        # and real actions are charged to the game/global wall clock.
-        old_context = getattr(self.tls, "context", None)
-        context = {"agent": agent, "state": state, "calls": 0, "executed": 0,
-                   "validation": False, "host_plan": True}
-        self.tls.context = context
-        try:
-            dispatch = self.original_python(agent, state.path,
-                {"code": "result = action(" + repr(validation["plan"]["actions"]) + ")"})
-            report = {"status": "recomputed_plan_executed", "program_hash": state.program_hash,
-                      "goal": result["goal"], "actual_actions": context["executed"],
-                      "made_progress": dispatch.made_progress, "tool_output": _payload(dispatch.content),
-                      "extra_seconds_used": state.extra_seconds}
-            self.event(state, {"kind": "host_plan_execution", **report})
-        finally:
             self.tls.context = old_context
+            event.update(elapsed_seconds=elapsed, extra_seconds_used=state.extra_seconds,
+                         budget_overrun_seconds=max(0.0, time.monotonic() - branch_deadline))
+            report["extra_seconds_used"] = state.extra_seconds
+            if host_started:
+                self.event(state, {"kind": "host_plan_execution", **report})
+            self.event(state, event)
         if state.pending is not None and state.pending.get("kind") == "repair" and not state.repair_used:
             pending, state.pending = state.pending, None
             repair = self.run_branch(agent, state, pending)
             report["followup_repair"] = repair
             report["actual_actions"] += repair.get("actual_actions", 0)
             report["made_progress"] |= bool(repair.get("made_progress"))
+            report["extra_seconds_used"] = state.extra_seconds
         return report
 
     def snapshot(self):
         with self.lock:
-            return {"patch": "034-executable-plan-v1", "games": len(self.states),
+            return {"patch": "034-executable-plan-v3", "games": len(self.states),
                     "bootstrap_calls": sum(s.bootstrap_used for s in self.states),
                     "repair_calls": sum(s.repair_used for s in self.states),
                     "extra_seconds": sum(s.extra_seconds for s in self.states),

@@ -1,5 +1,28 @@
 # 034 实施进展
 
+## v3 代码交付重设计
+
+2026-10-22，依据[下一轮交接](../handoff/034-next-round-research-plan.md)推进；本轮创建三个新子代理，未复用先前子代理。**v3已确认RUNNING，实际源码与冻结候选一致；目前模型冷启动中，尚无新的交付或得分结论。** 正式最佳仍为009 v2／31.16。
+
+- 辅助分支改为独立紧凑事实包：完整当前帧、未截断暂停代码、静态依赖闭包、近期真实转移和最近反例；不重放主循环全部历史，不把旧模型判断作为事实。
+- 辅助请求独立关闭thinking、指定现有python工具；用固定Pennyroyal服务的`/tokenize`对最终payload做16384输入token上限检查。计数失败或超限不发生成请求；保存实际payload、响应、finish_reason、usage和分阶段耗时。主循环设置保持原样。[交付CPU核验](../../experiments/034-v3-cpu/delivery-checks.json) · [固定服务API依据](../../experiments/034-v3-cpu/delivery-api-evidence.json)
+- 程序合同明确ready／completed／abstain；短合同累计最多3个动作，每步重新读当前帧和更新的近期转移。局部完成和零动作不计为环境过关。短合同结束即解除，不把预测器留给后续普通动作。
+- 预测必须绑定实际动作，声明真实当前对象与目标像素、预期结果和前提；支持相关no-op与unknown。实际mismatch才允许一次修订，unknown停止后缀并回主线。宿主只核对观测和绑定，不自动证明对象语义或目标正确。
+- 额外处理累计120秒包含请求、验收、重算、检查和宿主动作，逐阶段及超出量落盘。同步阻塞回调仍可能形成尾部超时，不能声称绝不越界。
+- 14个原生sandbox脚本情景通过，共105次sandbox调用、14次脚本completion、零联网／真实模型／ARC游戏动作。新增核对了重算失败后真实动作与progress仍保留，并且每分支只计一次host汇总。[最终CPU报告](../../experiments/034-v3-cpu-check/final/report.json)
+- B→A真实公开前缀恢复通过：ft09前27动作、su15前86动作后的帧、历史、函数、代码hash全部一致。检查未调用模型；仅未使用绘图导入作本地兼容处理。[恢复报告](../../experiments/034-v3-preparation/fork-restoration.json)
+- 北京时间17:05只读配额：zhuating共享周GPU剩余约4.17小时、reserved0，现有诊断Notebook为COMPLETE。足够一次7200秒上限诊断；不足承诺同日再跑完整25题的4.03小时纯求解及冷启动。旧9.29／7.54小时余额已不适用。[资源原件](../../experiments/034-v3-preparation/resource-snapshot.json)
+
+实际冻结候选989878字节／32cells，Notebook SHA256 `fc0f8d940d96f8e58bb3a044d9d7df956b8c781d1c9c60ecf510a272d4f32840`。同一私有目标`zhuating/arc3-034-plan-diagnostic`当前版本3，B→A，两题每臂450秒／60动作，共享一次模型加载、总上限7200秒。[启动记录](../../experiments/034-v3-launch.json) · [远端逐cell核对](../../experiments/034-v3-remote-source-check.json) · [实际运行源码](../../experiments/034-v3-source/)
+
+两次上传API曾返回空响应／JSONDecodeError，早期只读回查仍旧v2；后续远端确认新v3正在运行，不能把早期响应异常当成最终上传失败。源代码已逐cell核实为最初冻结版本，未再上传。期间准备的无损xz包装未运行，已独立归档；canonical文件和18份冻结hash已恢复为实际在跑版本。[溯源归一](../../experiments/034-v3-preparation/source-provenance-normalization.json)
+
+在线日志已确认NVIDIA RTX PRO 6000 Blackwell Server Edition、Pennyroyal固定版本和原始模型参数。继承启动器在约721秒后交给研究运行器继续等服务健康，这属于已知等待路径，不代表已经开始450秒续跑。CPU接线通过不作为真实交付或得分证据；机制不成立则不扩池。
+
+用户随后表示跑完后会主动通知；已停止本地日志跟踪，远端诊断继续运行。尚未下载最终结果，不作完成或收益判断。后续收到通知后，从`experiments/034-v3-launch.json`记录的版本3及实际源码归档继续下载、完整性核对和机制分析。
+
+## v1 与 v2 历史结果
+
 2026-10-22。**034 v2于北京时间14:25:31完成，两臂与GPU均已正常关闭。** 相同切点A/B：ft09新增0/0关，su15新增0/1关；但两个额外响应都只有推理、没有可执行代码，程序验收/宿主计划动作/预测检查均为0，不能把su15推进归因于预期机制。正式最佳仍009／31.16；停止该版原样扩跑，下一步收窄到有界代码交付。[完整结果](../../research/034-v2-results-analysis.md) · [机制判断](../../experiments/034-v2-analysis/mechanism-assessment.json)。
 
 - 已新增局部程序合同、原生动作入口、自然合同建立、宿主目标/计划重算、逐动作冻结预测、失配停止与一次后续修复。

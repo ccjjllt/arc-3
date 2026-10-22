@@ -1,0 +1,577 @@
+{
+  "observed_at_utc": "2026-10-22T10:06:57.152329+00:00",
+  "kind": "read_only_successful_ordinary_plan_trigger_risk_audit",
+  "researcher_only_do_not_upload_to_solver": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "replayed_game_actions": 0,
+  "running_source_modified": false,
+  "trigger_source": {
+    "path": "src/arc3_research/executable_plan.py",
+    "lines": [
+      360,
+      363
+    ],
+    "sha256": "d81057289b834def1fb5e437bc3e03644bcf8b1ce3c38d6bbac2dbe4b2b8aa6f",
+    "condition": "Unused bootstrap + nonempty source bindings + available budget + (explicit batch length>1 or second action call in same snippet); known error not required."
+  },
+  "examples": [
+    {
+      "game": "r11l-495a7899",
+      "folder": "runs/020-grounded-state/baseline",
+      "snapshot_line": 55,
+      "support_lines": [
+        51,
+        53
+      ],
+      "action_nums": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "trigger_before_action_num": 12,
+      "trigger_mode": "second_single_action_call",
+      "first_executed_actions_before_trigger": 1,
+      "successful_level": 2,
+      "reason": "The baseline built a current-frame obstacle-distance field, found283 candidate triples, selected a ten-click plan, checked blob centers after every click, and completed L2. The first nine center checks print OK; the final MISMATCH is after the real level transition, not evidence that the plan failed.",
+      "request_log": {
+        "path": "runs/020-grounded-state/baseline/r11l-495a7899_p0_requests.jsonl",
+        "sha256": "d057e3d66a1147fbd0cb6b6d608cf5ff00bca99c3d2ea3bab05084e856197d9b",
+        "tool_call_id": "call_69fe5e6dbb9741978ec35873",
+        "code_and_result_snapshot_line": 55,
+        "line_meaning": "First later request/response snapshot containing this completed Python exchange; not a proven request-send line."
+      },
+      "code": "def blobcenters():\n    seg = current_frame.segmentation\n    out={}\n    for n in seg['nodes']:\n        if n['pixels']==20 and n['color'] in ('O','p'):\n            # center = mean of bbox of boundary points\n            b=n['boundary']\n            rs=[p[0] for p in b]; cs=[p[1] for p in b]\n            out[n['color']]=( (min(rs)+max(rs))//2, (min(cs)+max(cs))//2 )\n    return out\nplan = [((48,54),(12,24),(39,42)),((26,59),(12,24),(28,44)),((30,30),(12,24),(28,44)),\n        ((10,55),(12,24),(18,57)),((9,49),(12,24),(18,57)),((33,37),(20,20),(18,57)),\n        ((6,17),(20,20),(18,57)),((59,45),(37,30),(18,57)),((21,8),(37,30),(18,57)),\n        ((61,38),(51,40),(18,57))]\nprint('start', blobcenters())\nfor i,((r,c),eA,eB) in enumerate(plan):\n    res = action([{'action':'MOUSE','row':r,'col':c}])\n    bc = blobcenters()\n    A = bc.get('O'); B = bc.get('p')\n    flag = 'OK' if (A==eA and B==eB) else 'MISMATCH exp %s,%s'%(eA,eB)\n    print(i+1,(r,c),'noop' if res.get('no_op') else '', 'lvl' if res.get('level_completed') else '',\n          'over' if res.get('game_over') else '', 'A',A,'B',B, flag)\n    if res.get('level_completed') or res.get('game_over') or res.get('no_op'): break\n",
+      "observed_action_stdout": [
+        "[action] MOUSE(row=48, col=54) -> effect",
+        "[action] MOUSE(row=26, col=59) -> effect",
+        "[action] MOUSE(row=30, col=30) -> effect",
+        "[action] MOUSE(row=10, col=55) -> effect",
+        "[action] MOUSE(row=9, col=49) -> effect",
+        "[action] MOUSE(row=33, col=37) -> effect",
+        "[action] MOUSE(row=6, col=17) -> effect",
+        "[action] MOUSE(row=59, col=45) -> effect",
+        "[action] MOUSE(row=21, col=8) -> effect",
+        "[action] MOUSE(row=61, col=38) -> LEVEL COMPLETED"
+      ],
+      "observed_tool_error": null,
+      "supporting_search_output": {
+        "51": "n 988\n(3, (32, 30), (60, 58), (61, 32))\n(3, (32, 30), (60, 60), (61, 30))\n(3, (32, 32), (60, 56), (61, 32))\n(3, (32, 32), (60, 58), (61, 30))\n(3, (32, 32), (60, 60), (61, 28))\n(3, (32, 34), (60, 54), (61, 32))\n(3, (32, 34), (60, 56), (61, 30))\n(3, (32, 34), (60, 58), (61, 28))\nBM at (51,40) 10 at (18,57) 9\n",
+        "53": "blocked 1192\nn 283\n(2, (33, 37), (59, 45), (61, 38))\n(2, (33, 39), (59, 43), (61, 38))\n(2, (33, 39), (59, 45), (61, 36))\n(2, (35, 31), (57, 51), (61, 38))\n(2, (35, 33), (57, 49), (61, 38))\n(2, (35, 33), (57, 51), (61, 36))\nphase1 nodes [((48, 54), 3), ((30, 30), 1), ((26, 59), 1), ((10, 55), 3)]\nphase1 blobs [((39, 42), 8), ((28, 44), 4), ((18, 57), 9)]\n"
+      },
+      "bindings_declared_in_current_code": [
+        "A",
+        "B",
+        "bc",
+        "blobcenters",
+        "c",
+        "eA",
+        "eB",
+        "flag",
+        "i",
+        "plan",
+        "r",
+        "res"
+      ],
+      "events": {
+        "path": "runs/020-grounded-state/baseline/artifacts/r11l-495a7899_p0_events.jsonl",
+        "sha256": "3c163bf018d94dfd4afac4ac21f148d1624c68716b99266c433643eaea005e3e",
+        "selected_actions": [
+          {
+            "event_line": 30,
+            "action_num": 11,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=48, col=54)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 31,
+            "action_num": 12,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=26, col=59)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 32,
+            "action_num": 13,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=30, col=30)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 33,
+            "action_num": 14,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=10, col=55)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 34,
+            "action_num": 15,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=9, col=49)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 35,
+            "action_num": 16,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=33, col=37)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 36,
+            "action_num": 17,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=6, col=17)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 37,
+            "action_num": 18,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=59, col=45)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 38,
+            "action_num": 19,
+            "analysis_step": 11,
+            "level": 2,
+            "action_display": "MOUSE(row=21, col=8)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 39,
+            "action_num": 20,
+            "analysis_step": 11,
+            "level": 3,
+            "action_display": "MOUSE(row=61, col=38)",
+            "level_completed": true,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          }
+        ]
+      },
+      "historical_timing": {
+        "arm_budget_seconds": 1800,
+        "game_start_delay_seconds": 0.179035,
+        "elapsed_at_next_action_seconds": 929.5837599679999,
+        "approx_shared_seconds_left_at_interception": 870.237205032,
+        "over180seconds": true,
+        "note": "Computed from original ordinary-run timestamps, not a candidate-runtime measurement."
+      },
+      "prior_observed_multi_action_python_exchanges": [],
+      "eligibility_assessment": "Log-supported counterfactual opportunity: if this patch were installed, bootstrap unused, and the ordinary runtime reached the same action handler with the same budget, the condition would pause at the stated action. The original trace did not run034, so no actual034 trigger or score change is claimed."
+    },
+    {
+      "game": "tu93-0768757b",
+      "folder": "runs/031-natural-aligned/baseline",
+      "snapshot_line": 23,
+      "support_lines": [
+        21
+      ],
+      "action_nums": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "trigger_before_action_num": 4,
+      "trigger_mode": "second_single_action_call",
+      "first_executed_actions_before_trigger": 1,
+      "successful_level": 1,
+      "reason": "The baseline reconstructed the visible map, BFS found a16-move path, then checked the recomputed player position after every real move. The first15 positions equal expectations; the last move completes L1, so pos=None belongs to the new level boundary.",
+      "request_log": {
+        "path": "runs/031-natural-aligned/baseline/tu93-0768757b_p0_requests.jsonl",
+        "sha256": "209e69976ea7e971aeec7cd4dfe4fda4cfac549505e21506ba3a5f1fc0dd0a91",
+        "tool_call_id": "call_99f8096f28d14b989ebd9abe",
+        "code_and_result_snapshot_line": 23,
+        "line_meaning": "First later request/response snapshot containing this completed Python exchange; not a proven request-send line."
+      },
+      "code": "m=buildmap(current_frame)\ndef pos(m):\n    for k,v in m.items():\n        if v=='b': return k\ndef find_path(m,start,goal):\n    from collections import deque\n    prev={start:None}; q=deque([start])\n    while q:\n        p=q.popleft()\n        if p==goal: break\n        for d,np_ in moves2(m,p):\n            if np_ not in prev: prev[np_]=(p,d); q.append(np_)\n    if goal not in prev: return None\n    path=[];cur=goal\n    while prev[cur] is not None:\n        p,d=prev[cur]; path.append((d,cur)); cur=p\n    path.reverse(); return path\ngoal=(10,10)\nseq=find_path(m,pos(m),goal)\nprint('plan', [d for d,_ in seq])\nlog=[]\nfor d,exp in seq:\n    r=action([d])\n    m2=buildmap(current_frame)\n    got=pos(m2)\n    log.append((d,got,exp,got==exp,r['game_over'],r['level_completed']))\n    if got!=exp or r['game_over'] or r['level_completed'] or r['done']: break\nfor e in log: print(e)\nprint('state', last_action_call_result)\n",
+      "observed_action_stdout": [
+        "[action] DOWN -> effect",
+        "[action] RIGHT -> effect",
+        "[action] UP -> effect",
+        "[action] RIGHT -> effect",
+        "[action] DOWN -> effect",
+        "[action] DOWN -> effect",
+        "[action] LEFT -> effect",
+        "[action] LEFT -> effect",
+        "[action] DOWN -> effect",
+        "[action] RIGHT -> effect",
+        "[action] RIGHT -> effect",
+        "[action] DOWN -> effect",
+        "[action] RIGHT -> effect",
+        "[action] UP -> effect",
+        "[action] RIGHT -> effect",
+        "[action] DOWN -> LEVEL COMPLETED"
+      ],
+      "observed_tool_error": null,
+      "supporting_search_output": {
+        "21": "reach 31 goal True\n('DOWN', (2, 2), (4, 2))\n('RIGHT', (4, 2), (4, 4))\n('UP', (4, 4), (2, 4))\n('RIGHT', (2, 4), (2, 6))\n('DOWN', (2, 6), (4, 6))\n('DOWN', (4, 6), (6, 6))\n('LEFT', (6, 6), (6, 4))\n('LEFT', (6, 4), (6, 2))\n('DOWN', (6, 2), (8, 2))\n('RIGHT', (8, 2), (8, 4))\n('RIGHT', (8, 4), (8, 6))\n('DOWN', (8, 6), (10, 6))\n('RIGHT', (10, 6), (10, 8))\n('UP', (10, 8), (8, 8))\n('RIGHT', (8, 8), (8, 10))\n('DOWN', (8, 10), (10, 10))\nmoves 16\n['DOWN', 'RIGHT', 'UP', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT', 'DOWN', 'RIGHT', 'UP', 'RIGHT', 'DOWN']\n"
+      },
+      "bindings_declared_in_current_code": [
+        "d",
+        "e",
+        "exp",
+        "find_path",
+        "goal",
+        "got",
+        "log",
+        "m",
+        "m2",
+        "pos",
+        "r",
+        "seq"
+      ],
+      "events": {
+        "path": "runs/031-natural-aligned/baseline/artifacts/tu93-0768757b_p0_events.jsonl",
+        "sha256": "276fa26aef638537b205a6bbf2ca6bd293825a53f52871560e353837a7b936c2",
+        "selected_actions": [
+          {
+            "event_line": 8,
+            "action_num": 3,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "DOWN",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 9,
+            "action_num": 4,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 10,
+            "action_num": 5,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "UP",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 11,
+            "action_num": 6,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 12,
+            "action_num": 7,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "DOWN",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 13,
+            "action_num": 8,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "DOWN",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 14,
+            "action_num": 9,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "LEFT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 15,
+            "action_num": 10,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "LEFT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 16,
+            "action_num": 11,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "DOWN",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 17,
+            "action_num": 12,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 18,
+            "action_num": 13,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 19,
+            "action_num": 14,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "DOWN",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 20,
+            "action_num": 15,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 21,
+            "action_num": 16,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "UP",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 22,
+            "action_num": 17,
+            "analysis_step": 3,
+            "level": 1,
+            "action_display": "RIGHT",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          },
+          {
+            "event_line": 23,
+            "action_num": 18,
+            "analysis_step": 3,
+            "level": 2,
+            "action_display": "DOWN",
+            "level_completed": true,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 1
+          }
+        ]
+      },
+      "historical_timing": {
+        "arm_budget_seconds": 900,
+        "game_start_delay_seconds": 0.614073,
+        "elapsed_at_next_action_seconds": 161.53787374400008,
+        "approx_shared_seconds_left_at_interception": 737.848053256,
+        "over180seconds": true,
+        "note": "Computed from original ordinary-run timestamps, not a candidate-runtime measurement."
+      },
+      "prior_observed_multi_action_python_exchanges": [],
+      "eligibility_assessment": "Log-supported counterfactual opportunity: if this patch were installed, bootstrap unused, and the ordinary runtime reached the same action handler with the same budget, the condition would pause at the stated action. The original trace did not run034, so no actual034 trigger or score change is claimed."
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "folder": "runs/031-natural-aligned/baseline",
+      "snapshot_line": 9,
+      "support_lines": [
+        7
+      ],
+      "action_nums": [
+        2,
+        3,
+        4
+      ],
+      "trigger_before_action_num": 2,
+      "trigger_mode": "first_action_of_explicit_batch",
+      "first_executed_actions_before_trigger": 0,
+      "successful_level": 1,
+      "reason": "The baseline read the current outer/key grids, computed exactly three differing cells and sent three real clicks. All three execute, and the third completes L1. No error or failed prediction precedes this batch.",
+      "request_log": {
+        "path": "runs/031-natural-aligned/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+        "sha256": "466c6e176e22226ee2a3dd6da533f523495de045a947b70ea7e76f9c9241b0bc",
+        "tool_call_id": "call_e8bd9d1dcf8e4e4dbf4242d5",
+        "code_and_result_snapshot_line": 9,
+        "line_meaning": "First later request/response snapshot containing this completed Python exchange; not a proven request-send line."
+      },
+      "code": "g=[list(r) for r in current_frame.ascii.split('\\n')]\nouter=[[g[36+dr][36+dc] for dc in (0,8,16)] for dr in (0,8,16)]\nkey=[[g[44+dr][44+dc] for dc in (0,2,4)] for dr in (0,2,4)]\nprint('outer',outer,'key',key)\nwant=[[('R' if key[i][j]=='W' else 'b') for j in range(3)] for i in range(3)]\nwant[1][1]='?'\nprint('want',want)\ntodo=[(36+8*i,36+8*j) for i in range(3) for j in range(3) if i==1 and j==1 is False and j!=1 or i!=1]\ntodo=[(36+8*i,36+8*j) for i in range(3) for j in range(3) if not(i==1 and j==1) and outer[i][j]!=want[i][j]]\nprint('todo',todo)\nacts=[{'action':'MOUSE','row':r+2,'col':c+2} for r,c in todo]\nres=action(acts)\nprint({k:res.get(k) for k in ('executed','state','level_completed','game_over','run_complete','done','board_changed','gameplay_changed','executed_actions')})\nd=frame_diff()\nprint('changed',d['changed_cell_count'], d.get('changed_color'))\n",
+      "observed_action_stdout": [
+        "[action] batch of 3 actions, 3 executed: MOUSE(row=46, col=38), MOUSE(row=46, col=54), MOUSE(row=54, col=38) | stop_reason: level_completed"
+      ],
+      "observed_tool_error": null,
+      "supporting_search_output": {
+        "7": "[action] MOUSE(row=38, col=38) -> effect\n{'executed': True, 'action_num': 1, 'level': 1, 'score': 0, 'state': 'NOT_FINISHED', 'valid_actions': ['MOUSE'], 'board_changed': True, 'done': False, 'level_completed': False, 'game_over': False, 'run_complete': False, 'action_display': 'MOUSE(row=38, col=38)', 'gameplay_changed': True, 'executed_actions': ['MOUSE(row=38, col=38)'], 'no_op': False, 'run_elapsed_seconds': 74.52583790300014, 'time_remaining_seconds': 825.4741620969999}\nchanged 38\nappeared [{'color': 'Y', 'pixels': 2, 'hash': '5a08140d425a4ef1', 'shape_hash': '276391651f0bcabb', 'at': [63, 62], 'bbox': [63, 62, 63, 63]}]\nchanged_color [{'at': [36, 36], 'pixels': 36, 'before_color': 'b', 'after_color': 'R', 'before_hash': 'dcd1e3061cc81a56', 'after_hash': '2d4563507c6dec86'}]\nresized [{'at_before': [63, 0], 'at_after': [63, 0], 'color': 'O', 'before_pixels': 64, 'after_pixels': 62, 'before_hash': '98fa625c5a06f307', 'after_hash': '41e5a3131989b140'}]\nlast_anim False\n"
+      },
+      "bindings_declared_in_current_code": [
+        "acts",
+        "d",
+        "g",
+        "key",
+        "outer",
+        "res",
+        "todo",
+        "want"
+      ],
+      "events": {
+        "path": "runs/031-natural-aligned/baseline/artifacts/ft09-0d8bbf25_p0_events.jsonl",
+        "sha256": "3c6edce51b913c350d4d6e9358f1b938022b25c78457b7923b88a93d04cfbd36",
+        "selected_actions": [
+          {
+            "event_line": 5,
+            "action_num": 2,
+            "analysis_step": 2,
+            "level": 1,
+            "action_display": "MOUSE(row=46, col=38)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 1,
+            "batch_size": 3
+          },
+          {
+            "event_line": 6,
+            "action_num": 3,
+            "analysis_step": 2,
+            "level": 1,
+            "action_display": "MOUSE(row=46, col=54)",
+            "level_completed": false,
+            "game_over": false,
+            "batch_index": 2,
+            "batch_size": 3
+          },
+          {
+            "event_line": 7,
+            "action_num": 4,
+            "analysis_step": 2,
+            "level": 2,
+            "action_display": "MOUSE(row=54, col=38)",
+            "level_completed": true,
+            "game_over": false,
+            "batch_index": 3,
+            "batch_size": 3
+          }
+        ]
+      },
+      "historical_timing": {
+        "arm_budget_seconds": 900,
+        "game_start_delay_seconds": 0.398944,
+        "elapsed_at_next_action_seconds": 83.1936105030004,
+        "approx_shared_seconds_left_at_interception": 816.4074454969996,
+        "over180seconds": true,
+        "note": "Computed from original ordinary-run timestamps, not a candidate-runtime measurement."
+      },
+      "prior_observed_multi_action_python_exchanges": [],
+      "eligibility_assessment": "Log-supported counterfactual opportunity: if this patch were installed, bootstrap unused, and the ordinary runtime reached the same action handler with the same budget, the condition would pause at the stated action. The original trace did not run034, so no actual034 trigger or score change is claimed."
+    }
+  ],
+  "conclusion": "Three original baseline successes satisfy the structural trigger pattern. ft09 would be paused before a complete three-click solution; tu93 and r11l would be paused after one effective action in their already checked successful programs. This supports measuring disruption and contract exit in the natural full-pool comparison, not changing the currently frozen candidate or predicting regressions.",
+  "limits": [
+    "No candidate replay or model run was performed. This is not measured trigger coverage or causal harm.",
+    "Observed absence of earlier multi-action echoes is narrower than a proof about all refused/unlogged action-handler attempts.",
+    "Historical shared-budget estimates establish large remaining-time margin only on these original runs.",
+    "Level-boundary observation changes must not be counted as ordinary predictor failures."
+  ]
+}

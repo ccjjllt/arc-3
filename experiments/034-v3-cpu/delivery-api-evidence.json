@@ -1,0 +1,12 @@
+{
+  "source_commit": "d00d88efc8d6281b12be4f4073126aec95038c55",
+  "protocol_url": "https://raw.githubusercontent.com/jpezzulli/sglang-rtxpro6000/d00d88efc8d6281b12be4f4073126aec95038c55/python/sglang/srt/entrypoints/openai/protocol.py",
+  "route_url": "https://raw.githubusercontent.com/jpezzulli/sglang-rtxpro6000/d00d88efc8d6281b12be4f4073126aec95038c55/python/sglang/srt/entrypoints/http_server.py",
+  "checked": "2026-10-22",
+  "findings": [
+    "ChatCompletionRequest accepts named function ToolChoice with function.name",
+    "TokenizeRequest accepts messages/tools/tool_choice/chat_template_kwargs and converts through ChatCompletionRequest",
+    "Both /v1/tokenize and /tokenize are registered; TokenizeResponse returns count",
+    "These source checks support the request design; live service response remains the runtime acceptance evidence."
+  ]
+}

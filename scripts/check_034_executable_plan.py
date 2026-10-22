@@ -42,10 +42,13 @@ def save(path: Path, value) -> None:
 
 
 def program(marker: str, background: str, *, moves=2, unknown_after=None,
-            side_effect=False, wrong_evidence=False, replace_sentinel=False) -> str:
+            side_effect=False, wrong_evidence=False, replace_sentinel=False,
+            local_status=None, plan_error_after=None) -> str:
     """Controlled response recomputes its input, goal and plan from live ASCII."""
     prefix = 'def sentinel():\n    return "candidate"\n\n' if replace_sentinel else ""
     insertion = '    execute = action\n    execute("RIGHT")\n' if side_effect else ""
+    if plan_error_after is not None:
+        insertion += f'    if frame.step >= {plan_error_after}:\n        raise ValueError("scripted recomputation failure")\n'
     uncertain = (f'    if frame.step >= {unknown_after}:\n'
                  '        raise ValueError("scripted unavailable observation")\n'
                  if unknown_after is not None else "")
@@ -59,9 +62,12 @@ def program(marker: str, background: str, *, moves=2, unknown_after=None,
 
 def plan_program(frame):
 {insertion}    row, col, width = locate(frame)
-    target = min(col + {moves}, width - 1)
-    return {{"goal": {{"start_col": col, "target_col": target, "observed_step": frame.step}},
-            "actions": [{{"action": "RIGHT"}} for _ in range(target - col)],
+    target = min({moves + 1}, width - 1)
+    status = {local_status!r} or ("completed" if col >= target else "ready")
+    return {{"status": status,
+            "goal": {{"start_col": col, "target_col": target, "observed_step": frame.step,
+                       "transition_count": len(frame.recent_transitions)}},
+            "actions": [{{"action": "RIGHT"}} for _ in range(min(3, max(0, target - col)))] if status == "ready" else [],
             "evidence_pixels": [[row, col, {evidence_color}]],
             "replaces": ["old_plan"],
             "reason": "Read the current marker and recompute its target and action count"}}
@@ -70,7 +76,11 @@ def predict(frame, action):
 {uncertain}    row, col, width = locate(frame)
     delta = 1 if action["action"] == "RIGHT" else -1
     next_col = max(0, min(width - 1, col + delta))
-    return {{"scope": "visible marker source and destination pixels",
+    return {{"mode": "change", "action": action,
+            "object_pixels": [[row, col, {marker!r}]],
+            "target_pixels": [[row, next_col, {background!r}]],
+            "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+            "scope": "visible marker source and destination pixels",
             "expected_pixels": [[row, col, {background!r}], [row, next_col, {marker!r}]]}}
 '''
 
@@ -191,13 +201,13 @@ def main() -> None:
         {"name": "ordinary_batch_bootstrap", "snippet": PAUSED_BATCH, "responses": [good],
          "actions": ["RIGHT", "RIGHT"], "calls": 1, "start_col": 1},
         {"name": "single_helpers_pause_second", "snippet": PAUSED_SINGLES, "responses": [good],
-         "actions": ["RIGHT", "RIGHT", "RIGHT"], "calls": 1, "start_col": 2},
+         "actions": ["RIGHT", "RIGHT"], "calls": 1, "start_col": 2},
         {"name": "mismatch_repairs_then_acts", "snippet": PAUSED_BATCH, "mode": "mismatch_first",
-         "responses": [good, good], "actions": ["RIGHT", "RIGHT", "RIGHT"], "calls": 2,
+         "responses": [good, good], "actions": ["RIGHT", "RIGHT", "RIGHT", "RIGHT"], "calls": 2,
          "required_status": "mismatch"},
         {"name": "unknown_stops_suffix", "snippet": PAUSED_BATCH,
          "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], unknown_after=1), invalid],
-         "actions": ["RIGHT"], "calls": 2, "required_status": "unknown"},
+         "actions": ["RIGHT"], "calls": 1, "required_status": "unknown"},
         {"name": "zero_action_validation", "snippet": PAUSED_BATCH,
          "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], side_effect=True)],
          "actions": [], "calls": 1, "rejected": True, "rollback": True},
@@ -214,6 +224,21 @@ def main() -> None:
          "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], unknown_after=0,
                                replace_sentinel=True)],
          "actions": [], "calls": 1, "rejected": True, "rollback": True},
+        {"name": "completed_local_goal_no_action", "snippet": PAUSED_BATCH,
+         "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], local_status="completed")],
+         "actions": [], "calls": 1, "local_status": "local_completed", "inactive": True},
+        {"name": "abstain_no_action", "snippet": PAUSED_BATCH,
+         "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], local_status="abstain")],
+         "actions": [], "calls": 1, "local_status": "abstained", "inactive": True},
+        {"name": "short_contract_total_action_limit", "snippet": PAUSED_BATCH,
+         "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], moves=8)],
+         "actions": ["RIGHT", "RIGHT", "RIGHT"], "calls": 1, "inactive": True},
+        {"name": "ordinary_action_after_contract", "snippet": PAUSED_BATCH, "responses": [good],
+         "after_code": 'result = action("LEFT")',
+         "actions": ["RIGHT", "RIGHT", "LEFT"], "calls": 1, "inactive": True},
+        {"name": "recomputation_failure_keeps_action_accounting", "snippet": PAUSED_BATCH,
+         "responses": [program(ARC_COLOR_CHARS[2], ARC_COLOR_CHARS[0], plan_error_after=1)],
+         "actions": ["RIGHT"], "calls": 1, "inactive": True},
     ]
     if args.scenario:
         unknown = set(args.scenario) - {s["name"] for s in scenarios}
@@ -241,11 +266,12 @@ def main() -> None:
             retained_before = copy.deepcopy(agent._kept_functions)
             responses = []
 
-            def completion(actor, messages, tools, *, timeout, max_tokens):
+            def completion(actor, messages, tools, *, timeout, max_tokens, **request_options):
                 index = len(responses)
                 responses.append({"index": index, "observed_step": world.step,
                                   "observed_col": world.col, "timeout": timeout,
                                   "max_tokens": max_tokens, "usage": USAGE,
+                                  "request_options": request_options,
                                   "last_message": messages[-1]})
                 if index >= len(scenario["responses"]):
                     raise AssertionError("Unexpected extra scripted completion request")
@@ -274,6 +300,9 @@ def main() -> None:
                     result = agent._run_python_tool(state_path, {"code": scenario["snippet"]})
                     payload = _payload(result.content)
                     step_executed, made_progress = result.step_executed, result.made_progress
+                    if scenario.get("after_code"):
+                        extra = agent._run_python_tool(state_path, {"code": scenario["after_code"]})
+                        case["ordinary_followup"] = _payload(extra.content)
                 actions = [a["action"] for call in world.calls for a in call["actions"]]
                 statuses = [e.get("status") for e in state.events]
                 case.update(actions=actions, action_calls=world.calls, scripted_completions=responses,
@@ -295,6 +324,9 @@ def main() -> None:
                     assert agent._kept_functions == retained_before, "Candidate function escaped rollback"
                 if scenario.get("inactive"):
                     assert state.program is None and not state.repair_used
+                if scenario.get("local_status"):
+                    assert payload["executable_plan"]["status"] == scenario["local_status"]
+                    assert payload["executable_plan"]["environment_success_claim"] is False
                 if "start_col" in scenario:
                     assert payload["executable_plan"]["goal"]["start_col"] == scenario["start_col"]
                     assert responses[0]["observed_col"] == scenario["start_col"]
@@ -304,7 +336,20 @@ def main() -> None:
                 if scenario["name"] == "mismatch_repairs_then_acts":
                     assert responses[1]["observed_step"] == 1
                     assert responses[1]["observed_col"] == 0
-                    assert payload["executable_plan"]["followup_repair"]["actual_actions"] == 2
+                    assert payload["executable_plan"]["followup_repair"]["actual_actions"] == 3
+                if scenario["name"] == "short_contract_total_action_limit":
+                    assert payload["executable_plan"]["stop_reason"] == "short_plan_action_limit"
+                if scenario["name"] == "ordinary_action_after_contract":
+                    assert state.events[-1]["kind"] == "unchecked_action"
+                if scenario["name"] == "recomputation_failure_keeps_action_accounting":
+                    branch = payload["executable_plan"]
+                    assert branch["status"] == "execution_failed" and branch["made_progress"]
+                    hosts = [e for e in state.events if e["kind"] == "host_plan_execution"]
+                    assert len(hosts) == 1 and hosts[0]["actual_actions"] == 1
+                    assert hosts[0]["extra_seconds_used"] > 0
+                for request in responses:
+                    assert request["request_options"]["enable_thinking"] is False
+                    assert request["request_options"]["max_input_tokens"] == 16384
                 case["status"] = "passed"
             except Exception as exc:
                 case.update(status="failed", error=f"{type(exc).__name__}: {exc}")

@@ -1,0 +1,207 @@
+--- a/src/arc3_research/executable_plan_forks.py
++++ b/src/arc3_research/executable_plan_forks.py
+@@ -14,6 +14,7 @@
+ import gzip
+ import hashlib
+ import json
++import lzma
+ import os
+ from pathlib import Path
+ import threading
+@@ -29,6 +30,7 @@
+     "ft09-0d8bbf25": "experiments/034-fork-inputs/ft09-package.json.gz.b64",
+     "su15-1944f8ab": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+ }
++COMBINED_PACKAGE_PATH = "experiments/034-fork-inputs/combined-forks.json.xz.b64"
+ 
+ 
+ def _hash(value):
+@@ -41,18 +43,30 @@
+ 
+ def load_forks():
+     roots = (Path("/kaggle/research"), Path(__file__).resolve().parents[2])
++    combined_path = next((root / COMBINED_PACKAGE_PATH for root in roots
++                          if (root / COMBINED_PACKAGE_PATH).is_file()), None)
++    combined_raw, combined_package = None, None
++    if combined_path is not None:
++        combined_raw = combined_path.read_bytes()
++        combined_package = json.loads(lzma.decompress(base64.b64decode(combined_raw)))
++        if (combined_package.get("schema_version") != 1
++                or set(combined_package.get("forks", {})) != set(GAME_IDS)):
++            raise ValueError(f"Unsupported combined frozen fork package: {combined_path}")
+     forks, sources = {}, {}
+     for game_id, relative in PACKAGE_PATHS.items():
+-        path = next((root / relative for root in roots if (root / relative).is_file()), None)
+-        # Local dry runs can consume the original source before the notebook
+-        # builder emits its smaller, identical-ft09-entry payload.
+-        if path is None and game_id == "ft09-0d8bbf25":
+-            original = Path(__file__).resolve().parents[2] / "experiments/028-fork-package.json.gz.b64"
+-            path = original if original.is_file() else None
+-        if path is None:
+-            raise FileNotFoundError(relative)
+-        raw = path.read_bytes()
+-        package = json.loads(gzip.decompress(base64.b64decode(raw)))
++        if combined_package is not None:
++            path, raw, package = combined_path, combined_raw, combined_package
++        else:
++            path = next((root / relative for root in roots if (root / relative).is_file()), None)
++            # Local dry runs can consume the original source before the notebook
++            # builder emits its smaller, identical-ft09-entry payload.
++            if path is None and game_id == "ft09-0d8bbf25":
++                original = Path(__file__).resolve().parents[2] / "experiments/028-fork-package.json.gz.b64"
++                path = original if original.is_file() else None
++            if path is None:
++                raise FileNotFoundError(relative)
++            raw = path.read_bytes()
++            package = json.loads(gzip.decompress(base64.b64decode(raw)))
+         if package.get("schema_version") != 1 or game_id not in package.get("forks", {}):
+             raise ValueError(f"Unsupported frozen fork package: {path}")
+         fork = package["forks"][game_id]
+@@ -66,7 +80,9 @@
+         forks[game_id] = fork
+         sources[game_id] = {"path": str(path), "package_sha256": hashlib.sha256(raw).hexdigest(),
+                             "fork_sha256": _hash(fork),
+-                            "source_package_sha256": package.get("source_package_sha256")}
++                            "source_package_sha256": package.get("source_package_sha256s", {}).get(
++                                game_id, package.get("source_package_sha256")),
++                            "transport_encoding": "xz+base64" if combined_package is not None else "gzip+base64"}
+     return forks, sources
+ 
+ 
+--- a/src/arc3_research/experiment_config.py
++++ b/src/arc3_research/experiment_config.py
+@@ -47,6 +47,10 @@
+             raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
+         if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
+             delivery_v3 = config.get("research_revision") == 3
++            transport = config.get("fork_transport", "separate_gzip_base64")
++            if (transport not in ("separate_gzip_base64", "combined_xz_base64")
++                    or (not delivery_v3 and transport != "separate_gzip_base64")):
++                raise ValueError("Combined checkpoint transport is only supported by the v3 diagnostic.")
+             expected_order = (["executable_plan_B", "executable_plan_A"] if delivery_v3
+                               else ["executable_plan_A", "executable_plan_B"])
+             if (arms != expected_order
+--- a/scripts/build_experiment.py
++++ b/scripts/build_experiment.py
+@@ -7,6 +7,7 @@
+ import gzip
+ import hashlib
+ import json
++import lzma
+ from pathlib import Path
+ import sys
+ 
+@@ -123,13 +124,25 @@
+         original_pack = ROOT / "experiments/028-fork-package.json.gz.b64"
+         original_data = json.loads(gzip.decompress(base64.b64decode(original_pack.read_text())))
+         ft09 = original_data["forks"]["ft09-0d8bbf25"]
+-        subset = {"schema_version": 1, "forks": {"ft09-0d8bbf25": ft09},
+-                  "source_package_sha256": hashlib.sha256(original_pack.read_bytes()).hexdigest()}
+-        raw = json.dumps(subset, ensure_ascii=False, separators=(",", ":")).encode()
+-        payload["experiments/034-fork-inputs/ft09-package.json.gz.b64"] = (
+-            base64.b64encode(gzip.compress(raw, mtime=0)).decode() + "\n")
+         su15_pack = ROOT / "experiments/034-fork-inputs/su15-package.json.gz.b64"
+-        payload[str(su15_pack.relative_to(ROOT))] = su15_pack.read_text()
++        if config.get("fork_transport") == "combined_xz_base64":
++            su15_data = json.loads(gzip.decompress(base64.b64decode(su15_pack.read_text())))
++            combined = {"schema_version": 1,
++                "forks": {"ft09-0d8bbf25": ft09,
++                          "su15-1944f8ab": su15_data["forks"]["su15-1944f8ab"]},
++                "source_package_sha256s": {
++                    "ft09-0d8bbf25": hashlib.sha256(original_pack.read_bytes()).hexdigest(),
++                    "su15-1944f8ab": hashlib.sha256(su15_pack.read_bytes()).hexdigest()}}
++            raw = json.dumps(combined, ensure_ascii=False, separators=(",", ":")).encode()
++            payload["experiments/034-fork-inputs/combined-forks.json.xz.b64"] = (
++                base64.b64encode(lzma.compress(raw, preset=9 | lzma.PRESET_EXTREME)).decode() + "\n")
++        else:
++            subset = {"schema_version": 1, "forks": {"ft09-0d8bbf25": ft09},
++                      "source_package_sha256": hashlib.sha256(original_pack.read_bytes()).hexdigest()}
++            raw = json.dumps(subset, ensure_ascii=False, separators=(",", ":")).encode()
++            payload["experiments/034-fork-inputs/ft09-package.json.gz.b64"] = (
++                base64.b64encode(gzip.compress(raw, mtime=0)).decode() + "\n")
++            payload[str(su15_pack.relative_to(ROOT))] = su15_pack.read_text()
+         for path in (original_pack, su15_pack):
+             plan_input_sources[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+@@ -154,6 +167,20 @@
+ Apache-2.0. Model and third-party runtime licenses remain their own.
+ 
+ {config.get('comparison_note', 'Scores are public-development observations, not hidden-leaderboard results.')}
++"""
++    compact_diagnostic_transport = plan_forks and config.get("fork_transport") == "combined_xz_base64"
++    if compact_diagnostic_transport:
++        intro = f"""# {title}
++
++Private checkpoint diagnosis; no competition submission. One model load,
++order B then A, frozen ft09/su15 prefixes, 450 seconds and 60 subsequent
++actions per game. All candidate processing is inside the same window.
++Session cap7200 seconds, startup cap4200 seconds. Not a full-pool result.
++
++Base: [Franzen Milestone2 v3](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution)
++and [Tufa Duck](https://github.com/Tufalabs/duck-harness), Apache-2.0.
++Model and runtime licenses remain their own. Exact sources and configuration
++are recorded in the build manifest; decoded checkpoints are unchanged.
+ """
+     setup = '''import json, os, subprocess, sys, time, threading, signal
+ from pathlib import Path
+@@ -218,8 +245,22 @@
+     if _gpu_probe.returncode != 0 or len(_gpu_totals) != 1 or _gpu_totals[0] < 90000:
+         raise SystemExit("refusing non-RTX session: " + repr(_gpu_totals))
+ '''
+-    parameters = ("CONFIG_JSON = " + repr(json.dumps(config)) + "\n"
+-                  + "HASHES_JSON = " + repr(json.dumps(hashes)) + "\n")
++    runtime_config = copy.deepcopy(config)
++    omitted_documentation_keys = []
++    if compact_diagnostic_transport:
++        # The full config remains in the build manifest. These audit-only
++        # descriptions and duplicate hashes are never consumed by the runner;
++        # current source hashes still travel independently as HASHES_JSON.
++        for key in ("frozen_source_sha256", "runtime_source_sha256", "purpose",
++                    "comparison_note", "game_source", "budget_formula", "action_cap_note",
++                    "startup_io_note", "selection_note", "revision_note", "quota_note",
++                    "source_freeze_note", "transport_revision_note"):
++            if key in runtime_config:
++                omitted_documentation_keys.append(key)
++                runtime_config.pop(key)
++    json_options = {"separators": (",", ":")} if compact_diagnostic_transport else {}
++    parameters = ("CONFIG_JSON = " + repr(json.dumps(runtime_config, **json_options)) + "\n"
++                  + "HASHES_JSON = " + repr(json.dumps(hashes, **json_options)) + "\n")
+     if config.get("native_payload_cells", False):
+         # Keep helper source readable in the notebook. Use the original
+         # IPython writefile semantics, including the final newline, instead
+@@ -347,6 +388,7 @@
+             name: hashlib.sha256(content.encode()).hexdigest()
+             for name, content in payload.items() if name.startswith("experiments/034-fork-inputs/")}
+         manifest["diagnostic_only"] = True
++        manifest["embedded_config_omitted_documentation_keys"] = omitted_documentation_keys
+     (destination / "build-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+     print(f"Built {output}; {len(notebook['cells'])} cells, {output.stat().st_size} bytes")
+     print(manifest["notebook_sha256"])
+--- a/experiments/034-plan-diagnostic-v3.json
++++ b/experiments/034-plan-diagnostic-v3.json
+@@ -59,13 +59,13 @@
+   },
+   "frozen_source_sha256": {
+     "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+-    "scripts/build_experiment.py": "91ec943364261df8781f4b7aed36cda7992361c6f6da392e201649f029e4d9f9",
++    "scripts/build_experiment.py": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+     "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+     "src/arc3_research/executable_plan.py": "d81057289b834def1fb5e437bc3e03644bcf8b1ce3c38d6bbac2dbe4b2b8aa6f",
+     "src/arc3_research/executable_plan_context.py": "9e055a6afaa4ee85ba63d1acfb760ced41e948ef039219499f36a9c219db562b",
+     "src/arc3_research/executable_plan_contract.py": "c0d4a0a9d611495c5a0ec7dbdd97219c5e840e4e8cad6de249e7c0f661455a9a",
+-    "src/arc3_research/executable_plan_forks.py": "11fd0b6df2fc016fd2bee3a8494ff1bf6d5974b20626e5021b0d3dbf29deadb0",
+-    "src/arc3_research/experiment_config.py": "b07417724cf60b72d2b41fcd3930dadfdde61bd00d664553d11eea68d0826c69",
++    "src/arc3_research/executable_plan_forks.py": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
++    "src/arc3_research/experiment_config.py": "928d698f5c3839c73384d5bc497942aa24525b87f2ffdfe83bdae1a9b453be97",
+     "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+     "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+     "src/arc3_research/program_repair.py": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+@@ -92,5 +92,7 @@
+     "token_count_source": "served_model_tokenize_endpoint"
+   },
+   "quota_note": "Re-read current shared account quota immediately before launch. Do not treat weekly_gpu_hours_limit or earlier remaining-hour records as current available RTX time.",
+-  "source_freeze_note": "Frozen after local contract/delivery/native-sandbox checks and B-then-A zero-model checkpoint restoration. Any code change now requires explicit re-freeze and rebuild before upload. Old v1/v2 artifacts preserved."
++  "source_freeze_note": "Frozen after local contract/delivery/native-sandbox checks and B-then-A zero-model checkpoint restoration. Any code change now requires explicit re-freeze and rebuild before upload. Old v1/v2 artifacts preserved.",
++  "fork_transport": "combined_xz_base64",
++  "transport_revision_note": "Data packaging repair only: jointly xz-compress identical ft09/su15 fork objects to stay below the actual CLI JSON-wrapped source upload limit. No candidate logic, checkpoint evidence, order or budgets changed. Preserve the previous large v3 build and audit separately."
+ }

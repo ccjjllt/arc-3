@@ -10,13 +10,23 @@ named binding was supplied by that adapter, not that the new code uses it.
 Example model returns::
 
     plan_program(frame) -> {
+        "status": "ready",
         "goal": {"target": "move the visible piece onto the marked cell"},
         "actions": [{"action": "RIGHT"}],
         "evidence_pixels": [[4, 6, "A"]],
         "replaces": ["build_target"], "reason": "Re-read the piece footprint"}
     predict(frame, action) -> {
+        "mode": "change", "action": {"action": "RIGHT"},
+        "object_pixels": [[4, 6, "A"]],
+        "target_pixels": [[4, 7, "."]],
+        "precondition": "The visible target pixel is free",
         "scope": "piece pixels in screen row/column coordinates",
         "expected_pixels": [[4, 6, "."], [4, 7, "A"]]}
+
+``completed`` and ``abstain`` plans have no actions.  The former reports only
+a model-declared local goal, never a completed ARC level.  A predictor may
+instead return ``{"mode": "unknown", "reason": "..."}`` to stop this contract
+without pretending that unrelated background pixels are useful evidence.
 
 The adapter may place the returned data in an event containing ``game``,
 ``level``, ``attempt_event``, ``observation_id``, ``program_hash``, ``before``,
@@ -36,7 +46,7 @@ from typing import Any
 MAX_CODE_BYTES = 32768
 MAX_JSON_BYTES = 65536
 MAX_PIXELS = 4096
-MAX_ACTIONS = 12
+MAX_ACTIONS = 3
 _IMPORTS = {
     "array", "bisect", "collections", "copy", "fractions", "functools",
     "heapq", "itertools", "json", "math", "numpy", "operator", "re", "statistics",
@@ -325,20 +335,43 @@ def _failure(exc: Exception, status: str = "rejected") -> dict[str, Any]:
     return {"passed": False, "status": status, "errors": [str(exc)[:300]]}
 
 
+def _action(value: Any, height: int, width: int, legal: set[str] | None = None) -> dict[str, Any]:
+    """Normalize the existing model-facing action, not a new action dialect."""
+    if type(value) is not dict or type(value.get("action")) is not str:
+        raise ValueError("Action must contain its existing model API name")
+    name = value["action"]
+    if (not name or len(name) > 128 or name.upper() in _NO_AUTOMATIC_ACTIONS
+            or (legal is not None and name not in legal)):
+        raise ValueError("Action is unavailable or is an automatic RESET/UNDO")
+    if name == "MOUSE":
+        if (set(value) != {"action", "row", "col"}
+                or type(value["row"]) is not int or type(value["col"]) is not int
+                or not 0 <= value["row"] < height or not 0 <= value["col"] < width):
+            raise ValueError("MOUSE requires exact in-frame integer row/col")
+    elif set(value) != {"action"}:
+        raise ValueError("Non-MOUSE action has unexpected fields")
+    return dict(value)
+
+
 def validate_plan(value: Any, grid: Any, chars: Any, valid_actions: Any,
                   available_bindings: Any) -> dict[str, Any]:
     """Validate schema, a current-program reference and exact observed pixels.
 
     ``goal`` is a bounded nonempty string/object/list, an explicit hypothesis.
+    Only ``ready`` may contain actions; ``completed`` and ``abstain`` end this
+    local contract and do not certify an environment outcome.  The adapter
+    owns the cumulative action cap across repeated current-frame recomputations.
     The adapter must execute plan_program on this frame to obtain ``value``;
     this function cannot establish that provenance from a bare JSON result.
     """
     try:
         plan = json_copy(value)
         observed, height, width = _frame(grid, chars)
-        required = {"goal", "actions", "evidence_pixels", "replaces", "reason"}
+        required = {"status", "goal", "actions", "evidence_pixels", "replaces", "reason"}
         if type(plan) is not dict or set(plan) != required:
-            raise ValueError("Plan requires exactly goal, actions, evidence_pixels, replaces and reason")
+            raise ValueError("Plan requires exactly status, goal, actions, evidence_pixels, replaces and reason")
+        if plan["status"] not in ("ready", "completed", "abstain"):
+            raise ValueError("Plan status must be ready, completed or abstain")
         goal = plan["goal"]
         if type(goal) not in (str, dict, list) or not goal or (type(goal) is str and not goal.strip()):
             raise ValueError("Goal must describe a nonempty hypothesis, not a Boolean or empty result")
@@ -356,21 +389,14 @@ def validate_plan(value: Any, grid: Any, chars: Any, valid_actions: Any,
             raise ValueError("Current public valid_actions are unavailable")
         legal = set(valid_actions)
         actions = plan["actions"]
-        if type(actions) is not list or not 1 <= len(actions) <= MAX_ACTIONS:
-            raise ValueError("Plan must contain 1..12 actions")
-        for action in actions:
-            if type(action) is not dict or type(action.get("action")) is not str:
-                raise ValueError("Action must contain its existing model API name")
-            name = action["action"]
-            if name not in legal or name.upper() in _NO_AUTOMATIC_ACTIONS:
-                raise ValueError("Action is unavailable or is an automatic RESET/UNDO")
-            if name == "MOUSE":
-                if (set(action) != {"action", "row", "col"}
-                        or type(action["row"]) is not int or type(action["col"]) is not int
-                        or not 0 <= action["row"] < height or not 0 <= action["col"] < width):
-                    raise ValueError("MOUSE requires exact in-frame integer row/col")
-            elif set(action) != {"action"}:
-                raise ValueError("Non-MOUSE action has unexpected fields")
+        if type(actions) is not list:
+            raise ValueError("Plan actions must be a list")
+        if plan["status"] == "ready":
+            if not 1 <= len(actions) <= MAX_ACTIONS:
+                raise ValueError("Ready plan must contain 1..3 actions")
+        elif actions:
+            raise ValueError("Completed or abstain plan must contain no actions")
+        plan["actions"] = [_action(action, height, width, legal) for action in actions]
         if not isinstance(available_bindings, (dict, list, tuple, set, frozenset)):
             raise ValueError("Current program bindings are unavailable")
         available = set(available_bindings)
@@ -394,35 +420,75 @@ def validate_plan(value: Any, grid: Any, chars: Any, valid_actions: Any,
                 "plan_sha256": stable_hash(plan), "input_grid_sha256": stable_hash([list(r) for r in grid]),
                 "coverage": {"evidence_pixels": len(evidence), "frame_pixels": height * width,
                              "fraction": len(evidence) / (height * width)},
-                "claim": "Executable output schema and declared current pixels only; goal and dynamics unverified"}
+                "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"}
     except (ValueError, TypeError, RecursionError, UnicodeError) as exc:
         return _failure(exc)
 
 
-def validate_prediction(value: Any, grid: Any, chars: Any) -> dict[str, Any]:
-    """Freeze a nonempty pixel projection before the adapter sends an action.
+def validate_prediction(value: Any, grid: Any, chars: Any,
+                        expected_action: Any = None) -> dict[str, Any]:
+    """Ground and freeze a declared action effect before a real action.
 
-    Unchanged predictions are legitimate and counted explicitly.  A single
-    matching background pixel is weak coverage, not proof of correct physics.
+    Both the object/source and target/effect pixel sets must match the current
+    observation.  The frozen projection covers their union exactly, and the
+    returned action must equal the host's pending action.  These checks do not
+    establish that the named pixels are semantically relevant to that action.
+    They prevent undeclared projections, not a dishonest or mistaken model.
+
+    A grounded no-op is legitimate.  Explicit unknown ends this contract and
+    is never represented as an accepted empty/background prediction.
     """
     try:
         value = json_copy(value)
         observed, height, width = _frame(grid, chars)
-        if (type(value) is not dict or "expected_pixels" not in value
-                or set(value) - {"expected_pixels", "scope"}):
-            raise ValueError("Prediction requires expected_pixels and optional scope")
-        scope = _text(value.get("scope", "declared screen pixels (row,col,color)"), "scope", 512)
+        if type(value) is not dict:
+            raise ValueError("Prediction must be an object")
+        if value.get("mode") == "unknown":
+            if set(value) != {"mode", "reason"}:
+                raise ValueError("Unknown prediction requires exactly mode and reason")
+            reason = _text(value["reason"], "unknown reason", 1000)
+            return {"passed": False, "status": "unknown", "errors": [reason],
+                    "declared_unknown": True,
+                    "claim": "No action-effect prediction; return to the ordinary solver"}
+        required = {"mode", "action", "object_pixels", "target_pixels", "expected_pixels",
+                    "precondition", "scope"}
+        if set(value) != required or value["mode"] not in ("change", "noop"):
+            raise ValueError("Prediction requires mode change/noop, action, object_pixels, target_pixels, expected_pixels, precondition and scope")
+        pending = _action(json_copy(expected_action), height, width)
+        action = _action(value["action"], height, width)
+        if action != pending:
+            raise ValueError("Prediction action differs from the host pending action")
+        scope = _text(value["scope"], "scope", 512)
+        precondition = _text(value["precondition"], "precondition", 1000)
+        object_pixels = _pixels(value["object_pixels"], height, width, chars)
+        target_pixels = _pixels(value["target_pixels"], height, width, chars)
+        current_pixels = {(r, c): color for r, c, color in object_pixels + target_pixels}
+        differences = [{"row": r, "col": c, "claimed": color, "observed": observed[r][c]}
+                       for r, c, color in object_pixels + target_pixels if color != observed[r][c]]
+        if differences:
+            return {"passed": False, "status": "unknown", "errors": ["Prediction object/target evidence differs from current pixels"],
+                    "wrong_pixels": len(differences), "differences": differences[:16]}
         pixels = _pixels(value["expected_pixels"], height, width, chars)
+        if {(r, c) for r, c, _ in pixels} != set(current_pixels):
+            raise ValueError("Expected pixels must cover exactly the declared object and target coordinates")
         changed = sum(color != observed[r][c] for r, c, color in pixels)
-        prediction = {"expected_pixels": pixels, "scope": scope, "grid_shape": [height, width]}
-        return {"passed": True, "status": "declared_prediction", "errors": [], "prediction": prediction,
+        if value["mode"] == "change" and not changed:
+            raise ValueError("Change prediction requires at least one declared changed pixel")
+        if value["mode"] == "noop" and changed:
+            raise ValueError("Noop prediction must keep all declared pixels unchanged")
+        prediction = {"mode": value["mode"], "action": action, "object_pixels": object_pixels,
+                      "target_pixels": target_pixels, "expected_pixels": pixels,
+                      "precondition": precondition, "scope": scope, "grid_shape": [height, width]}
+        return {"passed": True, "status": "declared_action_prediction", "errors": [], "prediction": prediction,
                 "prediction_sha256": stable_hash(prediction),
                 "input_grid_sha256": stable_hash([list(r) for r in grid]),
                 "coverage": {"selected_pixels": len(pixels), "frame_pixels": height * width,
                              "fraction": len(pixels) / (height * width), "predicted_changed_pixels": changed,
                              "predicted_unchanged_pixels": len(pixels) - changed,
-                             "unchanged_only": changed == 0},
-                "claim": "Pending real transition; no physical correctness or whole-board guarantee"}
+                             "unchanged_only": changed == 0, "object_pixels": len(object_pixels),
+                             "target_pixels": len(target_pixels)},
+                "action_bound": True, "semantic_relevance_verified": False,
+                "claim": "Current object/target pixels and pending action grounded; semantic relevance, precondition and dynamics unverified"}
     except (ValueError, TypeError, RecursionError, UnicodeError) as exc:
         return _failure(exc, "unknown")
 
@@ -436,16 +502,25 @@ def compare_prediction(frozen_prediction: Any, new_grid: Any, chars: Any) -> dic
     try:
         prediction = json_copy(frozen_prediction)
         observed, height, width = _frame(new_grid, chars)
-        if (type(prediction) is not dict
-                or set(prediction) != {"expected_pixels", "scope", "grid_shape"}):
+        if (type(prediction) is not dict or set(prediction) != {
+                "mode", "action", "object_pixels", "target_pixels", "expected_pixels",
+                "precondition", "scope", "grid_shape"}):
             raise ValueError("Expected a frozen validated pixel prediction")
+        if prediction["mode"] not in ("change", "noop"):
+            raise ValueError("Frozen prediction has invalid mode")
         scope = _text(prediction["scope"], "scope", 512)
+        _text(prediction["precondition"], "precondition", 1000)
         shape = prediction["grid_shape"]
         if type(shape) is not list or len(shape) != 2 or any(type(n) is not int for n in shape):
             raise ValueError("Prediction has invalid source grid shape")
         if shape != [height, width]:
             raise ValueError("Frame shape changed; handle the lifecycle/representation boundary")
+        action = _action(prediction["action"], height, width)
+        source = _pixels(prediction["object_pixels"], height, width, chars)
+        target = _pixels(prediction["target_pixels"], height, width, chars)
         expected = _pixels(prediction["expected_pixels"], height, width, chars)
+        if {(r, c) for r, c, _ in expected} != {(r, c) for r, c, _ in source + target}:
+            raise ValueError("Frozen projection differs from declared object/target coordinates")
         actual = [[r, c, observed[r][c]] for r, c, _ in expected]
         differences = [{"row": r, "col": c, "expected": color, "observed": observed[r][c]}
                        for r, c, color in expected if color != observed[r][c]]
@@ -457,11 +532,13 @@ def compare_prediction(frozen_prediction: Any, new_grid: Any, chars: Any) -> dic
         observed_event = {"pixels": actual[:64], "pixel_count": len(actual),
                           "sha256": observed_hash, "truncated": len(actual) > 64}
         return {"status": "mismatch" if differences else "match", "scope": scope,
+                "mode": prediction["mode"], "action": action,
                 "expected": expected_event, "observed": observed_event,
                 "checked_pixels": len(expected), "different_pixels": len(differences),
                 "differences": differences[:16], "prediction_sha256": stable_hash(prediction),
                 "observed_projection_sha256": observed_hash,
-                "claim": "Agreement/disagreement of declared pixels only"}
+                "semantic_relevance_verified": False,
+                "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"}
     except (ValueError, TypeError, RecursionError, UnicodeError) as exc:
         return {"status": "unknown", "errors": [str(exc)[:300]], "differences": [], "checked_pixels": 0,
                 "claim": "No comparable pixel evidence; stop the checked plan suffix"}
