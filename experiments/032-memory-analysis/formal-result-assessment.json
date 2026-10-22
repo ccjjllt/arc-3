@@ -1,0 +1,192 @@
+{
+  "reviewed_at_utc": "2026-10-22T00:47:53.895396+00:00",
+  "scope": "Independent assessment of the actual032formalresult against thebest009submission, incorporating shortpublicresearch,25gamerecovery comparison, historicalbase variance and reviewed mechanism chains. No network,model,GPU,environment execution,submission or main-document edits.",
+  "formal_fact": {
+    "observed_at_utc": "2026-10-22T00:43:12.468290+00:00",
+    "submission_id": 57481712,
+    "kernel_id": "zhuating/arc3-032-memory-submission",
+    "version": 1,
+    "status": "COMPLETE",
+    "public_score": 30.2,
+    "best_preserved_submission_id": 57101330,
+    "best_preserved_version": "009v2",
+    "best_preserved_public_score": 31.16,
+    "delta_vs_best": -0.96,
+    "best_changed": false,
+    "direct_finding": "032冻结v1本次公榜30.20，低于009的31.16，回退0.96分。本次没有实现超过现有最佳的正式提分；保留009。"
+  },
+  "public_evidence": {
+    "short": {
+      "pool_games": 10,
+      "seconds_per_arm": 2700,
+      "baseline_mean": 45.00596570614046,
+      "candidate_mean": 70.66115213884649,
+      "delta": 25.655186432706024,
+      "baseline_levels": 40,
+      "candidate_levels": 53,
+      "signs": {
+        "positive": 5,
+        "negative": 0,
+        "zero": 5
+      },
+      "interpretation": "真实观察到较强正向轨迹和多题实际采用，值得研究；不能直接外推隐藏集或长期净效应。"
+    },
+    "full_recovery": {
+      "baseline_mean": 38.077806263914496,
+      "candidate_mean": 49.217977940834146,
+      "delta": 11.14017167691965,
+      "baseline_levels": 96,
+      "candidate_levels": 108,
+      "baseline_wins": 4,
+      "candidate_wins": 7,
+      "signs": {
+        "positive": 13,
+        "negative": 8,
+        "zero": 4
+      },
+      "comparison": "跨模型服务会话的描述性对比，候选完整25题，非同会话A/B。",
+      "interpretation": "补齐全池运行并表明总体积极与局部退步共存，尚未证明稳定+11.14。"
+    },
+    "historical_context": {
+      "005_baseline": 49.89969042103432,
+      "027_baseline": 50.42933822786015,
+      "030_baseline": 42.61336230982951,
+      "032_saved_baseline": 38.077806263914496,
+      "032_candidate_minus005": -0.6817124802001757,
+      "observed_baseline_range": 12.351531963945654,
+      "short10_baseline": 45.00596570614046,
+      "other_full_baseline_on_same10": 50.29192271263531,
+      "interpretation": "032的38.08基线偏低，候选49.22仍未超过00549.90或02750.43；基线观察跨度大于本次差值。历史运行存在warmup、deadline、臂次序、会话等差异，跨度不是标准差；既不能用历史高分替换本次对照，也不能再把弱基线差值当稳定提分预测。"
+    }
+  },
+  "mechanism_evidence": {
+    "positive": [
+      {
+        "game": "r11l",
+        "finding": "真实模型将旧关质心/足迹约束写入搜索；L4实际16次点击完成，L6扩展L5染色井规则并全通。代码、stdout、request与transcript对上。",
+        "limit": "通关后主动反思、普通history/函数及裁剪后pin没有拆分；不能把全部85.71分差归因于固定文字记忆。"
+      },
+      {
+        "game": "vc33",
+        "finding": "真实复用L4水量守恒及门条件到旋转后的L5，在L6/L7根据新观测纠正柱子污染水位读取的程序，随后全通。",
+        "limit": "证明存在程序消费与修订链，不证明普遍收益或每关无需新探测。"
+      }
+    ],
+    "negative_or_limits": [
+      {
+        "game": "sc25",
+        "finding": "L1在首条成功关记忆产生前已126动作，对比baseline36，多90动作；首次pin更晚在L3。摘要24是最后RESET后的成功尝试，不是L1总成本。",
+        "causality": "回退真实，但前置差异不能由尚未产生的通关记忆直接导致；不能把全部退步归咎于错误旧记忆。"
+      },
+      {
+        "game": "su15",
+        "finding": "前三关较快，L5双追兵动力学未解；guarded()用固定tag名单且没有执行完整材料守恒检查，实际调用绕过条件，材料损失后仍打印ok。baseline以当前动力学模型和beam搜索完成L5。",
+        "causality": "当前关建模及执行检查缺陷有源代码/stdout证据；尚未证明由某条旧记忆触发，修正guard本身能否通关也未测。"
+      },
+      {
+        "game": "s5i5",
+        "finding": "红点在step43已消失，首次pin在request65/nextaction47之后；虽有记忆交付和回读，未形成完整L2程序。",
+        "causality": "不能将先发生的关键状态丢失倒置归因于后出现的pin。"
+      }
+    ],
+    "controller_reference": {
+      "033_online_result": "准确4096像素已真正提取/交付，任务布局重建错误，后续程序仍未正确更新目标，26动作、新增0关。",
+      "cpu_counterfactual": "同一ft09切点，保持原目标算法与规则A，仅真实像素进入其计算，由程序自动导出的2点击可通L3；bbox输入不通。",
+      "limit": "研究者选择切点的CPU干预，不是模型自主纠错、全池收益或泛化控制器的证明。它为下一步可执行修正提供了具体因果位置。"
+    }
+  },
+  "conclusions_supported": [
+    "032 v1本次真实正式评分未提分，00931.16仍是已知最佳。",
+    "已经收集到真实记忆交付、采用、程序修订与行动通关证据，记忆机制并非仅存在于提示或计数器。",
+    "当前整套记忆干预的稳定净收益与隐藏迁移尚未证实；短跑强正向及全池弱基线差值的预测力被高估，应降低确信。",
+    "公开池一些回退发生在首条记忆之前，或表现为当前关动力学/程序输入/执行条件错误；不能统一归为旧记忆污染。",
+    "下一轮应把准确观测、目标/动力学程序与真实动作执行之间的断链作为主攻对象，而不继续原样扩大032v1。"
+  ],
+  "conclusions_not_supported": [
+    "不能由一次30.20断言所有形式的经验记忆无效或必然有害，也不能声称−0.96只是随机噪声或统计不显著；没有重复隐藏测量支持。",
+    "不能将开发池+25.66或跨会话+11.14当作应实现的隐藏分差、奖牌概率或稳定改进。",
+    "不能编造隐藏逐题归因，例如果断言隐藏关因错记忆、上下文膨胀、cache或吞吐损失而回退；公开轨迹没有给出这些隐藏事实。",
+    "不能把COMPLETE、保存smoke通过或公开研究服务健康当作完整隐藏逐题覆盖、运行资源无问题的证明。",
+    "不能把guard函数存在、准确像素已交付、模型心理注意、或memory header出现等同于正确计算和动作收益。",
+    "不能把033的CPU研究者干预过关写成在线模型已纠错成功。"
+  ],
+  "research_priority_adjustment": [
+    {
+      "priority": 1,
+      "direction": "当前任务程序的实际纠错与执行",
+      "concrete_focus": "以009为底座，针对模型正在使用的对象/图案输入、目标计算和动力学程序，令可核对的当前观测真正进入计算；把模型给出的预期在实际动作路径中执行并返回观察到的偏差，促使下一步程序或计划更新。su15未生效guard与033输入未进入target是具体切点。",
+      "purpose": "把已定位的表示/执行错误转化为可改变动作结果的机制，而不是再扩大文字交付或只增加提示。",
+      "evidence_limit": "这是下一研究假设，尚无该新通用实现的在线提分证据；不是声称修正一个guard即可解决整题。"
+    },
+    {
+      "priority": 2,
+      "direction": "保留记忆的有效部分，研究适用条件与可修订性",
+      "concrete_focus": "保留已通关事实、成功程序的可用结构与不确定规则的区别；让规则适用条件和当前观测冲突可被程序发现并更新。动作摘要同时区分总探索成本与最后RESET后尝试，避免把混入失败/软重置的尾部当纯成功计划。",
+      "purpose": "沿用已见真实迁移链，同时减少未经核实的概括与陈旧坐标/状态被直接执行的机会。",
+      "evidence_limit": "当前没有证据将隐藏回退锁定为错误记忆；这些修改需要形成新的实际研究结果，不能预先宣称涨分。"
+    },
+    {
+      "priority": 3,
+      "direction": "让研究结论围绕任务结果和已执行因果链",
+      "concrete_focus": "保留固定游戏ID、预算、成本与所有涨跌题；把短跑/跨会话描述与正式分数分开。已有031精确输入正链可作为输入路径参照，033现版不直接重提，032v1不原样重复提交。后续GPU用于有具体改变的新候选。",
+      "purpose": "获得与提分目标直接相关的新证据；不把增加门槛、重复基线或新增测试套件作为研究成果。",
+      "evidence_limit": "不要求所有辅助指标同时改善，不设固定重复次数/单题否决，不因本次小幅回退把整个记忆方向关闭。"
+    }
+  ],
+  "immediate_decision": {
+    "preserve_best": "009v2 /57101330 /31.16",
+    "032_frozen_v1": "正式30.20记为一次未提分结果；保留可复核来源，不原样重提或扩大。",
+    "new_formal_submission": "本评估不发起新提交；有实际新机制和结果后再基于整体证据选候选，不以另一轮全池基线或新测试门槛拖延。",
+    "hidden_cause": "未确定，不编造。",
+    "medal_claim": "本次没有新增更高分或更优奖牌位置的证据；当前名次与奖牌边界需另查，不能沿用历史快照。"
+  },
+  "sources": [
+    {
+      "path": "experiments/032-formal-result-snapshot.json",
+      "sha256": "164db1021fbe24e3f8ea366dce5ff4afabc133cf5008130594e5c0933b84cea1"
+    },
+    {
+      "path": "experiments/032-memory-analysis/summary.json",
+      "sha256": "c81447d009f80886f461865a0e5c183a85cb0ff557dca4c8f141c294146fb9a4"
+    },
+    {
+      "path": "experiments/032-memory-analysis/recovery-comparison.json",
+      "sha256": "8ae9bbfb6dc41b37b3bc5ce45f0c1abc60c2edf2e28f6402f148efa0974cad8e"
+    },
+    {
+      "path": "experiments/032-memory-analysis/recovery-mechanism-review.json",
+      "sha256": "f70a35144c2b43119b5bf0a9cb4adb029f526ea359c4a0f10202d2769b96379e"
+    },
+    {
+      "path": "experiments/032-memory-analysis/recovery-regression-review.json",
+      "sha256": "b68680734912abc36ce8a8a75596414100262af2721eabf4977bcd8210bdb427"
+    },
+    {
+      "path": "experiments/032-memory-analysis/cd82-m0r0-review.json",
+      "sha256": "56b58d288302616b527fd36b41c44aed6a433c0479c2f369ba0fc6117740bd9e"
+    },
+    {
+      "path": "experiments/032-memory-analysis/r11l-sc25-tu93-review.json",
+      "sha256": "1584763ff39764835fcdb94d37fff87c3db918b19da21b180d78ee8aa1214c85"
+    },
+    {
+      "path": "experiments/033-controller-analysis/counterfactual-conclusion.json",
+      "sha256": "a0d27617ff3b9c6074517aca513c6617f0cb5e7fdb90f720f346a2bb194118a7"
+    },
+    {
+      "path": "research/033-results-analysis.md",
+      "sha256": "50698d0eb1fe1d0d496026f5e0da520f546f174c9f07ef2e36a4a5918717d98b"
+    },
+    {
+      "path": "experiments/032-formal-diagnostics-availability.json",
+      "sha256": "ad129a8dfee5a3d97ed9e6da74c33bf51e482ab182046b4110be27d96d9c956f"
+    }
+  ],
+  "formal_diagnostics_available": {
+    "source": "experiments/032-formal-diagnostics-availability.json",
+    "observed_at_utc": "2026-10-22T00:44:56.360980+00:00",
+    "episodes": [],
+    "download_http_status": 403,
+    "implication": "隐藏逐题与正式运行日志不可得，不推断具体失败题、吞吐/上下文根因或完整110题覆盖；不以GPU保存或公开研究日志冒充正式诊断。私榜未公开，本评估只报告当前public30.20。"
+  }
+}

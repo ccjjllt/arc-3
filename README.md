@@ -1,12 +1,12 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-**032候选全25题补跑已COMPLETE，正式57481712待出分：**候选49.21798分／108关／7全通；与已保存基线38.07781／96关／4全通比较，描述性+11.14017、13题涨/8题跌/4题平。两个模型服务会话不同，不能称同会话A/B或稳定提分；49.22仍未超过005历史基线49.90。原full会话在baseline结束后被旧退出快照检查误停，该检查已修正，仅补缺失候选，未重跑baseline。032正式冻结v1于10月21日20:29提交，23:20北京时间API仍未返回publicScore；009/31.16继续保留。033本版新增0关，不扩跑、不提交。[正式提交](experiments/032-formal-submission.json) · [补跑完整比较](experiments/032-memory-analysis/recovery-comparison.md) · [032研究结果](research/032-results-analysis.md) · [候选补跑原件](experiments/032-recovery-launch.json) · [033结果](research/033-results-analysis.md) · [执行进展](docs/progress/032-033-memory-and-controller.md)。
+**032正式结果已COMPLETE：30.20，较009的31.16低0.96，未刷新公开榜最佳。** submission57481712的10月22日08:43北京时间API原件已保存；009 v2／57101330继续保留。032公开短跑+25.655、全25题跨会话比较+11.140未迁移为此次正式提分；候选49.22仍低于历史005基线49.90。实际经验复用证据成立，但单轮公开均值和采用轨迹不足以证明稳定泛化收益。停止032 v1原样重提和扩大，保留其机制证据；后续优先研究当前任务程序由准确输入到目标计算、动力学与实际动作的纠错闭环。正式episodes为空、结果下载403，隐藏逐题与运行直接根因未能确认。[正式成绩原件](experiments/032-formal-result-snapshot.json) · [032研究结论](research/032-results-analysis.md) · [独立结果评估](experiments/032-memory-analysis/formal-result-assessment.json) · [全25题比较](experiments/032-memory-analysis/recovery-comparison.md) · [执行进展](docs/progress/032-033-memory-and-controller.md)。
 
-031自然对照已COMPLETE：22.5092→23.2819（+0.7726），27→26关。r11l已有精确像素→搜索→执行→多过一关的完整正链；最大涨题ft09的收益尚不能归因于runs。冻结v2作为备选，当前优先032。[分析](experiments/031-natural-analysis/summary.md) · [独立深读](experiments/031-natural-analysis/decision-review.json)。
+031自然对照已COMPLETE：22.5092→23.2819（+0.7726），27→26关。r11l已有精确像素→搜索→执行→多过一关的完整正链；最大涨题ft09的收益尚不能归因于runs。冻结v2作为备选，不因032回退自动晋升或原样提交。[分析](experiments/031-natural-analysis/summary.md) · [独立深读](experiments/031-natural-analysis/decision-review.json)。
 
 **正式最佳仍为009 v2 / submission 57101330 / public 31.16。** 030 submission 57447779已COMPLETE，public24.40，回退6.76；停止原样重提和扩大030。开发池单轮42.6134→47.1699未迁移为正式收益，同轮基线偏弱且增益集中；不能把采用或一次全池正收益等同于稳定提分。[回退分析](research/030-results-analysis.md)。隐藏逐题及运行日志不可得，直接根因尚不能确认。
 
-10月21日11:58北京时间API历史快照：4566队，本队ccjjllt第393（teamId17139255），铜牌附近30.85、银牌附近32.22、金牌附近37.98；均为当时公开位置估算，最终看私榜及资格。20:29已使用今天一次正式提交，032尚无新分数；余额另看最新账户查询，SDK通用配额口径存在冲突，不能当独立RTX余额。[榜单历史原件](research/snapshots/2026-10-21-handoff/) · [新提交接收原件](experiments/032-after-formal-submit.json)。截止北京时间11月3日07:59。
+10月21日11:58北京时间API历史快照：4566队，本队ccjjllt第393（teamId17139255），铜牌附近30.85、银牌附近32.22、金牌附近37.98；均为当时公开位置估算，最终看私榜及资格。10月21日20:29已使用当日一次正式提交；10月22日正式032为30.20，未超过009；余额另看最新账户查询，SDK通用配额口径存在冲突，不能当独立RTX余额。[榜单历史原件](research/snapshots/2026-10-21-handoff/) · [新提交接收原件](experiments/032-after-formal-submit.json)。截止北京时间11月3日07:59。
 
 **历史结论：016已完成，015/016均未通过当轮预设标准。** 从020起主要按同预算官方分数与实际风险选择正式候选；关数、全通数和采用轨迹用于解释，不再套用“两游戏采用／去最大正向／所有指标同时不降”的通用否决条件。 016原ccjjllt会话因旧完成池误拒gave_up而中止；jiyujia修复轮完整完成。两者必须分开。
 
@@ -25,6 +25,7 @@
 | 027 tail确认 | 50.4293→44.4542；112→101关，全通8→7 | 014收益未复现，关闭该线 |
 | 028 程序修复 | ft09真实代码执行且采用但关键像素仍错；tu93修复超时；三对均无新增关 | 关闭本版，不扩全池、不为导出故障重跑 |
 | 030 关内持久Python | 开发池+4.5565，正式24.40／较009−6.76 | COMPLETE；保留009，停止扩大030；[回退分析](research/030-results-analysis.md) |
+| 032 成功经验记忆 | 短跑+25.655、全池跨会话+11.140；正式30.20／较009−0.96 | COMPLETE；保留009，不原样重提/扩大v1；[研究结论](research/032-results-analysis.md) |
 
 [016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；020改为复用008区域读取器直接交付程序输入；FP8作为支线，均不叠加018提示。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 
