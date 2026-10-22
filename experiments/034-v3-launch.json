@@ -1,6 +1,6 @@
 {
   "observed_at_utc": "2026-10-22T09:28:10.521100+00:00",
-  "status": "running",
+  "status": "completed",
   "kernel_id": "zhuating/arc3-034-plan-diagnostic",
   "notebook_path": "notebooks/034-plan-diagnostic-v3/experiment.ipynb",
   "notebook_sha256": "fc0f8d940d96f8e58bb3a044d9d7df956b8c781d1c9c60ecf510a272d4f32840",
@@ -19,7 +19,7 @@
   "retry_finished_at_utc": "2026-10-22T09:30:52.088275+00:00",
   "retry_response_document_length": 0,
   "retry_response_document_prefix": "",
-  "platform_status": "RUNNING",
+  "platform_status": "COMPLETE",
   "version": 3,
   "actual_gpu_started": true,
   "remote_source_verified": true,
@@ -36,5 +36,41 @@
     "local_log_processes_stopped": [
       88490
     ]
+  },
+  "phase": "finished",
+  "gpu_server_stopped": true,
+  "session_elapsed_seconds": 4780.174383401871,
+  "model_ready_seconds": 3828.870164871216,
+  "candidate_delivered_programs": 0,
+  "candidate_checked_actions": 0,
+  "analysis_path": "research/034-v3-results-analysis.md",
+  "assessment_path": "experiments/034-v3-analysis/mechanism-assessment.json",
+  "paired_artifacts_complete": true,
+  "decision": "do_not_scale_v3; test dedicated auxiliary submission interface",
+  "actual_results": {
+    "A": {
+      "ft09-0d8bbf25": {
+        "added_levels": 0,
+        "continuation_action_count": 25,
+        "elapsed_seconds": 450.0345851569991
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 31,
+        "elapsed_seconds": 457.8899148159999
+      }
+    },
+    "B": {
+      "ft09-0d8bbf25": {
+        "added_levels": 0,
+        "continuation_action_count": 24,
+        "elapsed_seconds": 463.4794425179998
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 40,
+        "elapsed_seconds": 450.1272274590001
+      }
+    }
   }
 }

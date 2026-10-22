@@ -46,7 +46,11 @@ def validate_config(config: dict[str, Any]) -> None:
         if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
             raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
         if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
-            delivery_v3 = config.get("research_revision") == 3
+            delivery_v3 = config.get("research_revision") in (3, 4, 5)
+            transport = config.get("fork_transport", "separate_gzip_base64")
+            if (transport not in ("separate_gzip_base64", "combined_xz_base64")
+                    or (not delivery_v3 and transport != "separate_gzip_base64")):
+                raise ValueError("Combined checkpoint transport is only supported by delivery diagnostics.")
             expected_order = (["executable_plan_B", "executable_plan_A"] if delivery_v3
                               else ["executable_plan_A", "executable_plan_B"])
             if (arms != expected_order
@@ -56,7 +60,7 @@ def validate_config(config: dict[str, Any]) -> None:
             if (config.get("requested_arm_seconds") != 600
                     or config.get("continuation_seconds") != 450
                     or config.get("max_continuation_actions") != 60
-                    or config.get("hard_limit_seconds") != 7200
+                    or config.get("hard_limit_seconds") != (6300 if config.get("research_revision") == 5 else 7200)
                     or config.get("startup_limit_seconds") != 4200
                     or config.get("warmup_action_games") != 0
                     or config.get("request_deadline") is not False
@@ -67,13 +71,24 @@ def validate_config(config: dict[str, Any]) -> None:
                 "require_drained_workers", "require_complete_pool", "native_payload_cells",
             )):
                 raise ValueError("034 diagnostic retains isolated, complete and drained arm contracts.")
-            if delivery_v3 and config.get("candidate_delivery") != {
+            if delivery_v3:
+                expected_delivery = {
                     "compact_context": True, "thinking": False,
                     "max_prompt_tokens": 16384, "max_output_tokens": 4096,
                     "max_request_seconds": 60, "max_extra_processing_seconds": 120,
                     "max_actions_per_contract": 3, "contract_lifetime": "current_short_plan",
-                    "token_count_source": "served_model_tokenize_endpoint"}:
-                raise ValueError("034 v3 requires its frozen bounded-delivery contract.")
+                    "token_count_source": "served_model_tokenize_endpoint"}
+                if config.get("research_revision") in (4, 5):
+                    expected_delivery["submission_tool"] = "submit_program"
+                if config.get("candidate_delivery") != expected_delivery:
+                    raise ValueError("034 delivery revision differs from its frozen contract.")
+                if config.get("research_revision") == 5 and config.get("hypothesis_context") != {
+                    "source": "latest_prior_assistant_natural_language",
+                    "max_messages": 2, "max_text_characters": 12000,
+                    "per_message_text_characters": 8000,
+                    "copy": "verbatim_provenance_segments", "status": "unverified_may_be_stale",
+                }:
+                    raise ValueError("034 v5 requires bounded provenance-labelled prior hypotheses.")
         elif arms not in (["baseline", "executable_plan"], ["executable_plan"]):
             raise ValueError("034 natural runs require the isolated executable_plan arm, optionally after baseline.")
     if "tail_80k" in arms:

@@ -277,7 +277,7 @@ def main() -> None:
                     raise AssertionError("Unexpected extra scripted completion request")
                 message = {"role": "assistant", "content": "", "tool_calls": [
                     {"id": f"cpu-{index}", "type": "function", "function": {
-                        "name": "python", "arguments": json.dumps({"code": scenario["responses"][index]})}}]}
+                        "name": tools[0]["function"]["name"], "arguments": json.dumps({"code": scenario["responses"][index]})}}]}
                 return tool_agent._ChatCompletionResult(message=message, usage=dict(USAGE),
                                                         finish_reason="tool_calls", served_by="scripted-cpu")
 
@@ -350,6 +350,7 @@ def main() -> None:
                 for request in responses:
                     assert request["request_options"]["enable_thinking"] is False
                     assert request["request_options"]["max_input_tokens"] == 16384
+                    assert request["request_options"]["tool_choice_override"]["function"]["name"] == "submit_program"
                 case["status"] = "passed"
             except Exception as exc:
                 case.update(status="failed", error=f"{type(exc).__name__}: {exc}")

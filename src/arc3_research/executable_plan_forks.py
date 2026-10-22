@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 import gzip
 import hashlib
 import json
+import lzma
 import os
 from pathlib import Path
 import threading
@@ -29,6 +30,7 @@ PACKAGE_PATHS = {
     "ft09-0d8bbf25": "experiments/034-fork-inputs/ft09-package.json.gz.b64",
     "su15-1944f8ab": "experiments/034-fork-inputs/su15-package.json.gz.b64",
 }
+COMBINED_PACKAGE_PATH = "experiments/034-fork-inputs/combined-forks.json.xz.b64"
 
 
 def _hash(value):
@@ -41,18 +43,30 @@ def _write(path, value):
 
 def load_forks():
     roots = (Path("/kaggle/research"), Path(__file__).resolve().parents[2])
+    combined_path = next((root / COMBINED_PACKAGE_PATH for root in roots
+                          if (root / COMBINED_PACKAGE_PATH).is_file()), None)
+    combined_raw, combined_package = None, None
+    if combined_path is not None:
+        combined_raw = combined_path.read_bytes()
+        combined_package = json.loads(lzma.decompress(base64.b64decode(combined_raw)))
+        if (combined_package.get("schema_version") != 1
+                or set(combined_package.get("forks", {})) != set(GAME_IDS)):
+            raise ValueError(f"Unsupported combined frozen fork package: {combined_path}")
     forks, sources = {}, {}
     for game_id, relative in PACKAGE_PATHS.items():
-        path = next((root / relative for root in roots if (root / relative).is_file()), None)
-        # Local dry runs can consume the original source before the notebook
-        # builder emits its smaller, identical-ft09-entry payload.
-        if path is None and game_id == "ft09-0d8bbf25":
-            original = Path(__file__).resolve().parents[2] / "experiments/028-fork-package.json.gz.b64"
-            path = original if original.is_file() else None
-        if path is None:
-            raise FileNotFoundError(relative)
-        raw = path.read_bytes()
-        package = json.loads(gzip.decompress(base64.b64decode(raw)))
+        if combined_package is not None:
+            path, raw, package = combined_path, combined_raw, combined_package
+        else:
+            path = next((root / relative for root in roots if (root / relative).is_file()), None)
+            # Local dry runs can consume the original source before the notebook
+            # builder emits its smaller, identical-ft09-entry payload.
+            if path is None and game_id == "ft09-0d8bbf25":
+                original = Path(__file__).resolve().parents[2] / "experiments/028-fork-package.json.gz.b64"
+                path = original if original.is_file() else None
+            if path is None:
+                raise FileNotFoundError(relative)
+            raw = path.read_bytes()
+            package = json.loads(gzip.decompress(base64.b64decode(raw)))
         if package.get("schema_version") != 1 or game_id not in package.get("forks", {}):
             raise ValueError(f"Unsupported frozen fork package: {path}")
         fork = package["forks"][game_id]
@@ -66,7 +80,9 @@ def load_forks():
         forks[game_id] = fork
         sources[game_id] = {"path": str(path), "package_sha256": hashlib.sha256(raw).hexdigest(),
                             "fork_sha256": _hash(fork),
-                            "source_package_sha256": package.get("source_package_sha256")}
+                            "source_package_sha256": package.get("source_package_sha256s", {}).get(
+                                game_id, package.get("source_package_sha256")),
+                            "transport_encoding": "xz+base64" if combined_package is not None else "gzip+base64"}
     return forks, sources
 
 

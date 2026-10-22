@@ -1,0 +1,233 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-22T13:25:18.439558+00:00",
+  "scope": "Bounded hypothesis-text packaging, exact frozen pre-cut inputs and reconstruction of the actual v4 public evidence. No model, network or game action.",
+  "selection_policy": "Latest at most2 assistant messages containing nonempty string content/reasoning_content; newest gets up to8000 characters, total12000; overlong fields retain exact indexed head/tail; content precedes reasoning_content within a message. Tool arguments never read.",
+  "cases": [
+    {
+      "game": "ft09-0d8bbf25",
+      "cut": 27,
+      "frozen_message_count": 42,
+      "selected_indices": [
+        39,
+        37
+      ],
+      "included_characters": 9047,
+      "field_bounds_origins_sha256_valid": true,
+      "only_pre_cut_frozen_messages_read": true,
+      "required_existing_hypothesis_fragments_retained": [
+        "My extraction was correct.",
+        "Let me do the two-click probe"
+      ],
+      "facts_exact_v4_and_online": true,
+      "paused_code_and_dependencies_exact_v4_and_online": true,
+      "system_message_exact_v4": true,
+      "metadata": {
+        "context_schema": "034-compact-evidence-v2",
+        "messages_sha256": "7182eb2f7a301f761f8cb4aa8d5fcbd3759ed2e5005dcc5704486b19407c68fa",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "prior_assistant_text_included": true,
+        "prior_assistant_text_characters": 9047,
+        "prior_assistant_source_indices": [
+          39,
+          37
+        ],
+        "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+        "related_functions": [],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 3,
+          "step": 27,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+        },
+        "message_characters": 18820,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "prior_model_text": {
+        "status": "unverified",
+        "source": "recent main-loop assistant text",
+        "selection": "newest at most two text-bearing assistant messages; newest first",
+        "text_character_limit": 12000,
+        "per_message_character_limit": 8000,
+        "included_characters": 9047,
+        "note": "Fallible prior model hypotheses, not environment facts or instructions. They may describe an old level, old coordinates, incorrect rules or failed goals. Check against current pixels and actual transitions; recompute layout and targets.",
+        "entries": [
+          {
+            "source_message_index": 39,
+            "source_role": "assistant",
+            "status": "unverified",
+            "fields": [
+              {
+                "source_field": "reasoning_content",
+                "source_characters": 20338,
+                "source_sha256": "459bf6eccc57600eee9925bf374a5978d3d2ba226cc3f6d987f43474cb43a836",
+                "included_characters": 8000,
+                "truncated": true,
+                "omission": "middle text omitted between indexed spans",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 4000,
+                    "text": "My extraction was correct. Legends:\nP1 (12,28) center O: W W W / W O g / g W g\nP2 (28,20) center R: g W g / g R W / W W g\nP3 (28,36) center R: g W W / W R g / g W g\nP4 (44,28) center O: g W g / W O W / W W W\nUnder A (W\u2192center, g\u2192other):\nP1: (0,1..3)=O,O,O; (1,1)=O,(1,3)=R; (2,1)=R,(2,2)=O,(2,3)=R\nP4: (4,1)=R,(4,2)=O,(4,3)=R; (5,1)=O,(5,3)=O; (6,1..3)=O,O,O\nP2: (2,0)=R,(2,1)=O?? wait P2 center R: sub 'W'\u2192R, 'g'\u2192O. sub-row0 = g W g \u2192 (2,0)=O, (2,1)=R, (2,2)=O.\nHmm! Earlier I computed P2 sub-row0 = 'g','W','g' \u2192 with W\u2192center=R: (2,0)=other=O, (2,1)=R, (2,2)=O. And P1 gives (2,1)=R (sub g \u2192 other=R) \u2713, (2,2)=O (sub W \u2192 center O) \u2713. Consistent. Good.\nCurrent board: (2,0)=O \u2713 (node13 O at 20,12), (2,1)=R \u2713, (2,2)=O \u2713, (2,3)=R \u2713, (2,4)=R (from P3 sub-row0 = g W W \u2192 (2,2)=O,(2,3)=R,(2,4)=R) \u2713 current (2,4)=R \u2713.\nRow 3: P2 sub-row1 = g R W \u2192 (3,0)=O, self, (3,2)=R \u2713 current (3,2)=R \u2713. P3 sub-row1 = W R g \u2192 (3,2)=R \u2713, (3,4)=O \u2713.\nRow 4: P2 sub-row2 = W W g \u2192 (4,0)=R,(4,1)=R,(4,2)=O; P4 sub-row0 = g W g \u2192 (4,1)=R,(4,2)=O,(4,3)=R; P3 sub-row2 = g W g \u2192 (4,2)=O,(4,3)=R,(4,4)=O. Current row4: R,R,O,R,O \u2713.\nRow 5: P4 \u2192 (5,1)=O,(5,3)=O \u2713 current.\nRow 6: O O O \u2713.\nRow 0: O O O \u2713. Row 1: (1,1)=O \u2713, (1,3)=R \u2713.\nSo the board is exactly the A-target. No win. So the intended rule for level 3 must be B (the complement) \u2014 meaning the general rule is actually \"W \u2192 the OTHER color, g \u2192 the pattern's center color\"?? But that contradicts levels 1 and 2 where painting the W cells won.\nHmm hold on! Wait. Let me re-examine level 2. In level 2, all cells were blue and I painted the W cells orange \u2192 win. Under B, W\u2192other. Level 2 patterns had center O. Under B: W\u2192other=blue, g\u2192center=orange. Then the target would be: orange where g. Level 2 pattern1: W g g / W O W / W g W \u2192 orange at (0,1),(0,2),(2,1) + pattern2: W g W / g O g / W W g \u2192 orange at (0,1)... Under B, the target for level 2 would be orange at g-positions: grid (0,1),(0,2),(2,1) from P1 and (2,1),(3,0),(3,2),(4,2) from P2 \u2014 7 cells: (0,1),(0,2),(2,1),(3,0),(3,2),(4,2) \u2014 that's 6 distinct + overlap. But I painted the W positions and it WON. So B is definitively refuted for level 2.\nUnless... the level-2 win was triggered by something else \u2014 e.g., the win condition in level 2 was \"at least N cells painted\"? No.\nHmm, so level 3's rule should be A, and the board matches A, but no win. Something else must be required.\nIDEA: Maybe in level 3, the win condition requires each pattern's legend to match its neighbors AND the pattern's own cell to be the right color \u2014 but pattern cells can't change... \nANOTHER IDEA: maybe the check requires the pattern cells to be \"satisfied\" too, in the sense that the pattern's own cell color as derived from OTHER patterns... but no other pattern covers a pattern cell.\nANOTHER IDEA: Maybe the goal in level 3 is to also paint cells that are NOT covered by any pattern? Are there uncovered cells? Covered positions: P1 rows0-2 cols1-3; P2 rows2-4 cols0-2; P3 rows2-4 cols2-4; P4 rows4-6 cols1-3. Existing cells: row0: (0,1),(0,2),(0,3) \u2713covered. row1: (1,1),(1,3) \u2713. row2: all 5 \u2713. row3: (3,0),(3,2),(3,4) \u2713. row4: all 5 \u2713. row5: (5,1),(5,3) \u2713. row6: (6,1),(6,2),(6,3) \u2713. All 23 cells covered. OK.\nHmm, so what's left? Maybe the level-3 goal is different from \"match the legend\": maybe it's \"make all patterns consistent\" but the patterns themselves can be ROTATED by clicking them? Hmm, but the legends are already consistent...\nHmm wait, actually are they? Let me check the diagonal overlaps. P1 and P2 overlap only at row 2 (P1 rows0-2, P2 rows2-4). P2 and P3 overlap at col 2 in rows 2-4: P2 covers cols 0-2, P3 covers cols 2-4 \u2192 overlap col 2, rows 2,3,4: (2,2),(3,2),(4,2). P2 says: (2,2)=O (sub g\u2192O), (3,2)=R (sub W\u2192R), (4,2)=O (sub g\u2192O). P3 says: (2,2)=O (sub-row0 col0... P3 sub(0,0)='g' \u2192 grid (2,2)=other=O \u2713), (3,2)= W\u2192R \u2713, (4,2)= sub(2,0)='g'\u2192O \u2713. Consistent.\nP1 & P4: no overlap (rows 0-2 vs 4-6). P2 & P4: overlap row 4 cols 1-2 \u2713 checked. P3 & P4: row 4 cols 2-3 \u2713 checked.\nSo A gives a"
+                  },
+                  {
+                    "start": 16338,
+                    "end": 20338,
+                    "text": "ot.\nSo maybe the rule is: the fixed global mapping g\u2192base, W\u2192highlight, and the R-center patterns must be ROTATED/FLIPPED (by clicking them) to become consistent!\nCheck: is P2's legend a rotation of the \"needed\" legend? The needed legend for P2's region (from the global mapping and current cell colors):\n(2,0)=O\u2192W, (2,1)=R\u2192g, (2,2)=O\u2192W\n(3,0)=O\u2192W, (3,2)=R\u2192g\n(4,0)=R\u2192g, (4,1)=R\u2192g, (4,2)=O\u2192W\nNeeded P2 legend: W g W / W \u00b7 g / g g W.\nP2 actual: g W g / g R W / W W g. That's exactly the complement (swap W\u2194g) of the needed legend. A rotation of P2 gives rotations of [g W g / g \u00b7 W / W W g]:\n0\u00b0: g W g / g \u00b7 W / W W g\n90\u00b0 CW: rotate \u2192 row0 = W g g? let me compute. Matrix M = [[g,W,g],[g,\u00b7,W],[W,W,g]]. 90\u00b0 CW: new[i][j] = M[2-j][i]. new[0] = [M[2][0], M[1][0], M[0][0]] = [W,g,g]; new[1] = [M[2][1], M[1][1], M[0][1]] = [W,\u00b7,W]; new[2] = [M[2][2], M[1][2], M[0][2]] = [g,W,g].\nSo 90\u00b0: W g g / W \u00b7 W / g W g. Needed: W g W / W \u00b7 g / g g W. Not equal.\n180\u00b0: [[g,W,W],[W,\u00b7,g],[g,W,g]] vs needed. No.\n270\u00b0: new[i][j]=M[j][2-i]: new[0]=[M[0][2],M[1][2],M[2][2]]=[g,W,g]; new[1]=[M[0][1],M[1][1],M[2][1]]=[W,\u00b7,W]; new[2]=[M[0][0],M[1][0],M[2][0]]=[g,g,W]. No.\nSo no rotation of P2 matches the needed legend. So rotation doesn't fix it (unless combined with a flip).\nHmm. What about a flip (mirror)? P2 mirrored horizontally: reverse each row: [g,W,g]\u2192[g,W,g]; [g,\u00b7,W]\u2192[W,\u00b7,g]; [W,W,g]\u2192[g,W,W]. Needed: W g W / W \u00b7 g / g g W. No.\nMirror vertically: rows reversed: [W,W,g],[g,\u00b7,W],[g,W,g]. Needed W g W/W \u00b7 g/g g W. No.\nTranspose: new[i][j]=M[j][i]: new[0]=[g,g,W]; new[1]=[W,\u00b7,W]; new[2]=[g,W,g]. Needed: [W,g,W],[W,\u00b7,g],[g,g,W]. No.\nAnti-transpose: new[i][j]=M[2-j][2-i]: new[0]=[g,W,g]... let me: new[0][0]=M[2][2]=g, new[0][1]=M[1][2]=W, new[0][2]=M[0][2]=g \u2192 [g,W,g]; new[1]=[M[2][1],M[1][1],M[0][1]]=[W,\u00b7,W]; new[2]=[M[2][0],M[1][0],M[0][0]]=[W,g,g]. No.\nSo P2 can't be transformed into the needed legend by any dihedral transform. So the \"rotate the pattern\" hypothesis fails \u2014 unless the needed legend changes as cells change (i.e., we must find a cell configuration such that ALL FOUR patterns are satisfied under a fixed mapping, allowing rotations).\nThat's a proper constraint-satisfaction problem! Let's formalize:\n- 23 cells, each \u2208 {R, O}.\n- Each pattern p has a legend (fixed, unless rotatable) mapping its 8 neighbor positions to symbols {W, g}.\n- Fixed global mapping: W\u2192O, g\u2192R (per the top-right palette: top=R for g? or W?). Hmm, we need to fix the mapping direction. Let's consider both.\n- If patterns can be rotated by clicking them, we need an assignment of rotations + cell colors satisfying all patterns.\nBut under no rotation, is there a solution with a fixed mapping? Conflicts at (2,1),(2,2) between P1 and P2 (P1 needs (2,1)=R,(2,2)=O; P2 needs (2,1)=O,(2,2)=R) \u2192 impossible. So rotations must be allowed if the fixed-mapping hypothesis is right.\nAlternatively, per-pattern mapping by center color (A) \u2014 solved, no win.\nHmm, so let me test whether clicking a pattern cell does something (rotates it). That's the key probe. If it rotates, then I'll solve the CSP with rotations.\nLet me do the probe: click the center of pattern P2 at (28,20) \u2192 click (30,22). Then diff.\nRisk: if clicking a pattern cell destroys it irreversibly, the level becomes unsolvable and I might have to die/reset. But we can also test on P4 or P1... any pattern. Hmm. Alternatively probe clicking an ORANGE cell first to learn the toggle behavior (safe, reversible). Let's do both probes in sequence: first click an orange cell (6,22) [expect red?], then click it again [expect orange?], then click a pattern cell and see what happens. Actually, careful: doing the pattern probe might break things; but knowledge is essential. Let me do the safe probe first, evaluate, then decide.\nActually, let me think about the value of the orange\u2192red probe. If clicking cycles R\u2192O\u2192R, then I can reach B. If the cycle is longer (e.g., R\u2192O\u2192gray\u2192white...), hmm.\nLet me do the two-click probe on (6,22) and check the frames."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "source_message_index": 37,
+            "source_role": "assistant",
+            "status": "unverified",
+            "fields": [
+              {
+                "source_field": "reasoning_content",
+                "source_characters": 1047,
+                "source_sha256": "e4e6d87d66738f8022e9c17cbf660cf3621fe60ed51a2d46d09ce936d9475d46",
+                "included_characters": 1047,
+                "truncated": false,
+                "omission": null,
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 1047,
+                    "text": "Now I see the pattern cells' details in the current frame. Let me re-extract each pattern's legend from the current nodes (careful, some pattern pieces are the same colors as cells).\nPattern at (12,28): nodes 7 (W 16 at 12,28-15,33 = 4x6 region: rows12-15, cols28-33), 9 (O 4 at 14,30-15,31), 10 (g 8 at 14-17,32-33), 11 (g 4 at 16-17,28-29), 12 (W 4 at 16-17,30-31).\nSub-grid for pattern at rows 12-17, cols 28-33 (sub-rows 12-13, 14-15, 16-17; sub-cols 28-29, 30-31, 32-33):\n(0,0): rows12-13 cols28-29 \u2192 W (part of node7)\n(0,1): rows12-13 cols30-31 \u2192 W\n(0,2): rows12-13 cols32-33 \u2192 W\n(1,0): rows14-15 cols28-29 \u2192 W (node7 covers rows12-15 cols28-29? node7 bbox (12,28)-(15,33) 16 pixels = 4 rows \u00d7 4 cols... hmm 16 pixels over bbox rows12-15, cols28-33 (4x6=24) \u2192 so node7 is an L/C shape.\nLet me just read the ascii for these small regions to be exact. I'll read rows 12-17 \u00d7 cols 28-33, rows 28-33 \u00d7 cols 20-25, rows 28-33 \u00d7 cols 36-41, rows 44-49 \u00d7 cols 28-33.\nAlso note node 45 (W 16 at rows46-49, cols28-33) etc.\nLet me print those 4 crops."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "game": "su15-1944f8ab",
+      "cut": 86,
+      "frozen_message_count": 97,
+      "selected_indices": [
+        94,
+        91
+      ],
+      "included_characters": 5657,
+      "field_bounds_origins_sha256_valid": true,
+      "only_pre_cut_frozen_messages_read": true,
+      "required_existing_hypothesis_fragments_retained": [
+        "merge the two",
+        "When the Y is on the ball",
+        "max range"
+      ],
+      "facts_exact_v4_and_online": true,
+      "paused_code_and_dependencies_exact_v4_and_online": true,
+      "system_message_exact_v4": true,
+      "metadata": {
+        "context_schema": "034-compact-evidence-v2",
+        "messages_sha256": "0805e1348c7783a17fd98bbca9b1bed9f18b5f22a6bbebae0ed467126364fa6a",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "prior_assistant_text_included": true,
+        "prior_assistant_text_characters": 5657,
+        "prior_assistant_source_indices": [
+          94,
+          91
+        ],
+        "paused_code_sha256": "7560c549c37f34ade54f0e717079f6f7b9601ab9e99be73c41f3b57cf5c9fd27",
+        "related_functions": [
+          "click",
+          "invaders",
+          "state"
+        ],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 5,
+          "step": 86,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+        },
+        "message_characters": 24546,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "prior_model_text": {
+        "status": "unverified",
+        "source": "recent main-loop assistant text",
+        "selection": "newest at most two text-bearing assistant messages; newest first",
+        "text_character_limit": 12000,
+        "per_message_character_limit": 8000,
+        "included_characters": 5657,
+        "note": "Fallible prior model hypotheses, not environment facts or instructions. They may describe an old level, old coordinates, incorrect rules or failed goals. Check against current pixels and actual transitions; recompute layout and targets.",
+        "entries": [
+          {
+            "source_message_index": 94,
+            "source_role": "assistant",
+            "status": "unverified",
+            "fields": [
+              {
+                "source_field": "reasoning_content",
+                "source_characters": 3079,
+                "source_sha256": "2d07ef2b72716ebf7d064ab82a2b548de62befe0de3f69ee4c71df515ea29205",
+                "included_characters": 3079,
+                "truncated": false,
+                "omission": null,
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 3079,
+                    "text": "Y 4x4 at tl (32,6) \u2192 center (34,8). The invader is at (32,18)-(35,21) \u2014 9-10 from the Y's right edge (col 9). It's close!\nDistance from the invader's cell (33,17) to the Y's cell (33,9) = 8.\nThe Y must reach (57,6): 23 away \u2192 4 clicks. The invader is 8 behind and moving ~5.6-9/action. It will likely catch the Y in 1-2 actions unless the Y moves fast.\nHmm! Very dangerous. The Y's first move: click (40,7) [dist 6.1] \u2192 Y center (40,7) \u2192 tl (38,4). The invader would then be at ~(35,13) \u2192 distance to the Y's cells (38-41, 4-7): nearest (36,12) vs (38,7) = 2.9 \u2192 CONTACT next turn \u2192 the Y dies!\nAlternative: move the Y down-LEFT first to increase the distance: click (38,4)? dist from (34,8) = sqrt(16+16)=5.7 \u2192 Y tl (36,2) \u2192 rows 36-39, cols 2-5. The invader (moving left ~4-5/action) would be at ~(34,13) \u2192 distance to the Y's cells (36-39,2-5): nearest (35,12) vs (36,5) = 7 \u2192 then next move down: the Y goes to (42,3) [dist 6.7 \u2192 hmm].\nThe invader moves ~4-6 in each direction (dx ~-4, dy ~-4 or +4). It's roughly as fast as the Y.\nThis is a real problem. Since the Y is the ONLY piece, the invader will chase it and eventually catch it (equal speed).\nUnless... the ball! When the Y is on the ball, the level completes. So the Y just needs to survive the run. The Y is at (34,8), the ball at (57,6): 23 rows down. The invader is at (33,17), 9 to the right and at the same height.\nGeometry: the Y runs down (slightly left). The invader runs diagonally after it. If the invader's speed is ~5.6 and the Y's is ~6-7 per action (I control the click distance up to 8!), the Y can gain slightly.\nActually, I can move the Y up to 8 per action (max range). The invader's observed speed: (37,34)\u2192(33,30) = 5.66; (33,30)\u2192(29,26)? = 5.66; (29,26)\u2192(29,22) = 4; (29,22)\u2192(32,18) = 5. So ~4-5.7 per action. My Y can move 7-8 per action. So the Y CAN outrun it if it moves in a straight line at max distance!\nRoute with max steps (~7.5-8): (34,8) \u2192 (41,6) [7.3] \u2192 (48,5) [7.1] \u2192 (55,6) [7.1] \u2192 (57,6) [2.2]. That's 4 clicks (the last is short). Or (34,8)\u2192(42,5) [8.06 \u2014 slightly over 8, risky] \u2192 use (41,5) [7.6] \u2192 (48,4) [7.1] \u2192 (55,5) [7.1] \u2192 (57,6) [2.2].\nAlternatively 3 clicks of ~8 + final: (34,8)\u2192(41,6)[7.3]\u2192(48,6)[7.0]\u2192(55,6)[7.0]\u2192(57,6)[2.2] = 4 clicks.\nLet me just go as fast as possible: batch the delivery clicks with a check after each \u2014 if the Y is destroyed, undo and reassess. Actually, batching is risky: if the Y dies mid-batch, subsequent clicks would be no-ops and the level would be lost (the undo net: I can undo the death, but the batch would have continued...). Let me do them one at a time with a death check, and undo immediately if the Y dies.\nLet me write a delivery loop: for each target point, click, then check if the Y still exists; if not \u2192 undo (restores the Y and the invader before the fatal action) and break to reassess.\nNote: the death check must be right after the click. If the Y dies, undo restores the state before the click (the Y alive, the invader back). Then I'd try a different escape direction.\nLet's go: route (41,6), (48,6), (55,6), (57,6)."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "source_message_index": 91,
+            "source_role": "assistant",
+            "status": "unverified",
+            "fields": [
+              {
+                "source_field": "reasoning_content",
+                "source_characters": 2578,
+                "source_sha256": "94944677d279a1befe57caac8eb037178aa4c90cf4304a9c15f4d378d1835d2b",
+                "included_characters": 2578,
+                "truncated": false,
+                "omission": null,
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 2578,
+                    "text": "Two p's: p_a at tl (32,5) \u2192 center (33,6); p_b at tl (30,14) \u2192 center (31,15). The invader is at (29,22)-(32,25) \u2014 right between/next to them! Distance to p_b (31,15): the invader's nearest cell (30,22) vs p_b's cell (31,16) \u2192 6. To p_a (33,6): nearest invader cell (32,22) vs p_a's cell (33,10) \u2192 12.\nBar = 39 px \u2192 ~19 actions.\nNow merge the two p's \u2192 Y. They're 11 apart \u2192 merge click within 8 of both: e.g., (32,10): to p_a (33,6) = sqrt(1+16)=4.1; to p_b (31,15) = sqrt(1+25)=5.1 \u2713. The click point (32,10) is 12 from the invader \u2713.\nThe Y will be at center (32,10) \u2192 tl (30,8) \u2192 rows 30-33, cols 8-11.\nBut the invader is at (29,22)-(32,25) \u2014 moving left toward the Y! Distance from the invader's cell (30,22) to the Y's cell (31,11) = 11. The invader moves ~5.6-9 per action \u2192 in 1-2 actions it could reach the Y. The Y needs 4 actions to reach the ball (25 away).\nHmm, dangerous. Can I merge at a point farther from the invader? The merge click must be within 8 of both p's. The valid region is the intersection of two discs (radius 8) around (33,6) and (31,15) \u2014 centered around (32,10), extending from roughly rows 26-37, cols 4-17 (lens shape). The farthest point from the invader (30,22) in that lens is around (35,7) or (28,7)? Let me compute: candidates within 8 of both:\n (35,8): to p_a = sqrt(4+4)=2.8; to p_b = sqrt(16+49)=8.06 \u2717 (just over)\n (34,8): to p_a = sqrt(1+4)=2.2; to p_b = sqrt(9+49)=7.6 \u2713. Distance from the invader's cell (30,22): sqrt(16+196)=14.6 \u2192 better than 11.\n (36,7): to p_a = sqrt(9+1)=3.2; to p_b = sqrt(25+64)=9.4 \u2717.\n (34,7): to p_a=2.2... to p_b = sqrt(9+64)=8.5 \u2717.\nSo (34,8) is good: Y at center (34,8) \u2192 tl (32,6) \u2192 rows 32-35, cols 6-9. Distance to the ball center (57,6): 23 \u2192 3-4 clicks: (40,7) [6.1], (46,6) [6.1], (52,6) [6.0], (57,6) [5.1] \u2713 4 clicks.\nAnd the invader would be ~14 behind at the merge.\nAlso: after the merge, the Y is the only piece \u2192 the invader chases it. The Y moves 6/action; the invader ~5.6-9. Tight, but the ball is a straight shot down and the Y starts 14 ahead.\nAlternatively, I could route the Y away from the invader first (the invader is to the right; the Y goes down-left) \u2014 the direct route to (57,6) goes down and slightly left, away from the invader's approach angle... the invader approaches from the right, and the Y moves down. Hmm, the invader will cut the corner.\nLet me just go: merge at (34,8) with safe3(['Y']), then deliver with 4 clicks, each checked (if the Y dies \u2192 undo \u2192 but then I'm back to 2 p's and the invader adjacent... I'd retry with a different route).\nLet me do the merge now."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "synthetic_limit_and_exclusion_checks": true,
+  "empty_history_supported": true,
+  "facts_remain_exact_v4": true,
+  "solver_adapter_modified": false,
+  "gpu_calls": 0,
+  "model_calls": 0,
+  "real_game_actions": 0,
+  "limits": [
+    "Character bounds are not tokens; existing final served tokenizer and16384 cap remain authoritative.",
+    "Prior text is unverified and may describe a previous level or failed rule; CPU success proves only provenance/packet integrity."
+  ]
+}

@@ -1,8 +1,36 @@
 # 034 实施进展
 
+## v5 保留切点前的未验证假设
+
+2026-10-22。**v5已确认RUNNING，远端版本5的31个cell与冻结候选一致。** 下一版优先检验紧凑上下文是否删掉了必要的既有玩法／目标判断：仅有界复制切点前已存在的assistant自然语言原文，将其明确标为`unverified`假设，并记录来源hash与截断区间。选择不依赖手工判断哪条规则正确，不加入切点后的响应、未来动作、手工正确规则或新模型摘要轮。
+
+本版保留v4的专用提交接口、代码合同、真实mismatch才修订、每题450秒／60动作、单请求60秒及分支累计120秒等预算；总会话上限调整为6300秒，不能缩短后臂求解窗口来凑时长。正式最佳继续保留009 v2／31.16；准备通过不代表在线交付或提分，当前不进入完整25题或正式提交。
+
+零动作验收／运行错误的一次具体反馈修订，作为[独立候选建议](../../experiments/034-v4-analysis/program-independent-review.json)保留，不与本轮上下文改动混测。选择本轮方向的依据是旧玩法／目标判断确实未进入v4紧凑包；这仍是假设，需要真实结果检验。[下一方向审阅](../../experiments/034-v4-analysis/next-direction-review.json)
+
+北京时间2026-10-22 21:35上传成功，私有目标仍为`zhuating/arc3-034-plan-diagnostic`。冻结Notebook957458字节，SHA256 `48f83080d3258cfddc81f942d7f48fbb52b818ac25634260dedb29db7cf98e01`；19份源输入hash、14份Python payload及编译通过，14个原生sandbox场景通过。ft09选切点前消息39／37，共9047字符；su15选94／91，共5657字符。字段`old_conversation_included=false`表示不回放完整会话，新增`prior_assistant_text_included`另记有界旧文字。[上下文核验](../../experiments/034-v5-preparation/hypothesis-context-checks.json) · [CPU核验](../../experiments/034-v5-cpu-check/report.json) · [独立预检](../../experiments/034-v5-preparation/independent-preflight.json)
+
+上传前即时配额仍6708.032秒，已确认上次COMPLETE。6300秒会话上限保留4200启动、1800秒原双臂／缓存／收尾预留和300秒余量，不足完整预算则中止。本轮只有一次上传，API明确返回版本5，源码逐cell回读一致；尚无真实模型交付或得分结论。按用户此前安排等待跑完通知，不持续跟踪长冷启动；远端作业继续。[启动记录](../../experiments/034-v5-launch.json) · [源码核对](../../experiments/034-v5-remote-source-check.json) · [冻结源码](../../experiments/034-v5-source/)
+
+## v4 辅助专用程序提交接口
+
+2026-10-22。**v4已COMPLETE，远端版本4的31个cell与冻结候选逐项一致，两臂产物完整。** 本地14个原生sandbox场景和独立预检在运行前通过；真实结果显示交付接口已进入执行，但未带来净收益。[CPU核验](../../experiments/034-v4-cpu-check/report.json) · [提交接口核验](../../experiments/034-v4-preparation/delivery-interface-checks.json) · [独立预检](../../experiments/034-v4-preparation/independent-preflight.json)
+
+本版唯一研究干预为辅助专用`submit_program`接口及配套提交指令，替换v3中“普通Python观察执行工具”与“仅交付函数定义”之间的语义冲突。宿主仍按原合同验收、执行程序，不新增模型观察轮；事实包、主循环、模型、切点和全部预算保持v3。两个切点采用无损xz合并运输，解码对象与v3逐项一致，不构成新的求解机制。[冻结配置](../../experiments/034-plan-diagnostic-v4.json)
+
+北京时间2026-10-22 20:07上传成功，同一私有目标保存为版本4，随后只读回查为RUNNING。冻结Notebook为952500字节，SHA256 `6f9e0a891f908bcfddb90144d7e4a6b0c3803b783b0b094556861c4d5b7eade5`；19份输入hash及源码归档已保存。上传前共享可用GPU约2.84小时，单会话上限7200秒；该余额是启动前快照。[启动记录](../../experiments/034-v4-launch.json) · [远端逐cell核对](../../experiments/034-v4-remote-source-check.json) · [实际源码归档](../../experiments/034-v4-source/) · [资源原件](../../experiments/034-v4-preparation/prelaunch-platform-snapshot.json)
+
+用户通知完成后，已下载最终结果。ft09 A新增2关、B新增0关；su15 A新增0关、B新增1关。两题均分A为34.9206，B为23.8095，差−11.1111。这只是指定切点的同期诊断，不能推广为全池或正式分数。[结果分析](../../research/034-v4-results-analysis.md) · [程序独立审阅](../../experiments/034-v4-analysis/program-independent-review.json) · [完整性独立审阅](../../experiments/034-v4-analysis/integrity-independent-review.json)
+
+三次辅助请求均交付完整`plan_program/predict`程序。ft09初次与真实mismatch后的修订各执行1个实际动作，两个动作相关的36像素检查均mismatch；修订确实改变了规则和动作，但保留错误网格原点，第二次仍预测失败。宿主`made_progress=true`只反映真实状态变化，B没有新增关卡，不能称修订已有效推进。
+
+su15程序在零动作`plan_program`验收中因goal格式化参数缺失而TypeError，未产生host动作或预测检查。后续普通主循环的`MOUSE(15,32)`清除L5，不能归因于候选程序执行。完整程序交付、运行有效性、规则正确性和得分必须分开评价。
+
+结论：不原样扩大v4，不做正式提交；正式最佳仍009 v2／31.16。下一版单独检验保留已有未验证假设，不同时加入零动作错误反馈、空间提示或触发策略改动。
+
 ## v3 代码交付重设计
 
-2026-10-22，依据[下一轮交接](../handoff/034-next-round-research-plan.md)推进；本轮创建三个新子代理，未复用先前子代理。**v3已确认RUNNING，实际源码与冻结候选一致；目前模型冷启动中，尚无新的交付或得分结论。** 正式最佳仍为009 v2／31.16。
+2026-10-22，依据[下一轮交接](../handoff/034-next-round-research-plan.md)推进；本轮创建三个新子代理，未复用先前子代理。**v3已COMPLETE，两臂完整，实际源码与冻结候选一致。** ft09和su15两个切点的A/B均新增0关；两个辅助响应约8秒返回普通观察脚本，没有交付`plan_program/predict`函数，候选实际动作和预测检查均为0。不能称执行或修订机制成功，不原样扩大v3。[结果分析](../../research/034-v3-results-analysis.md) · [独立程序审阅](../../experiments/034-v3-analysis/program-independent-review.json)
 
 - 辅助分支改为独立紧凑事实包：完整当前帧、未截断暂停代码、静态依赖闭包、近期真实转移和最近反例；不重放主循环全部历史，不把旧模型判断作为事实。
 - 辅助请求独立关闭thinking、指定现有python工具；用固定Pennyroyal服务的`/tokenize`对最终payload做16384输入token上限检查。计数失败或超限不发生成请求；保存实际payload、响应、finish_reason、usage和分阶段耗时。主循环设置保持原样。[交付CPU核验](../../experiments/034-v3-cpu/delivery-checks.json) · [固定服务API依据](../../experiments/034-v3-cpu/delivery-api-evidence.json)
@@ -13,13 +41,13 @@
 - B→A真实公开前缀恢复通过：ft09前27动作、su15前86动作后的帧、历史、函数、代码hash全部一致。检查未调用模型；仅未使用绘图导入作本地兼容处理。[恢复报告](../../experiments/034-v3-preparation/fork-restoration.json)
 - 北京时间17:05只读配额：zhuating共享周GPU剩余约4.17小时、reserved0，现有诊断Notebook为COMPLETE。足够一次7200秒上限诊断；不足承诺同日再跑完整25题的4.03小时纯求解及冷启动。旧9.29／7.54小时余额已不适用。[资源原件](../../experiments/034-v3-preparation/resource-snapshot.json)
 
-实际冻结候选989878字节／32cells，Notebook SHA256 `fc0f8d940d96f8e58bb3a044d9d7df956b8c781d1c9c60ecf510a272d4f32840`。同一私有目标`zhuating/arc3-034-plan-diagnostic`当前版本3，B→A，两题每臂450秒／60动作，共享一次模型加载、总上限7200秒。[启动记录](../../experiments/034-v3-launch.json) · [远端逐cell核对](../../experiments/034-v3-remote-source-check.json) · [实际运行源码](../../experiments/034-v3-source/)
+实际冻结候选989878字节／32cells，Notebook SHA256 `fc0f8d940d96f8e58bb3a044d9d7df956b8c781d1c9c60ecf510a272d4f32840`。私有目标`zhuating/arc3-034-plan-diagnostic`实际运行版本3，B→A，两题每臂450秒／60动作，共享一次模型加载、总上限7200秒。[启动记录](../../experiments/034-v3-launch.json) · [远端逐cell核对](../../experiments/034-v3-remote-source-check.json) · [实际运行源码](../../experiments/034-v3-source/)
 
-两次上传API曾返回空响应／JSONDecodeError，早期只读回查仍旧v2；后续远端确认新v3正在运行，不能把早期响应异常当成最终上传失败。源代码已逐cell核实为最初冻结版本，未再上传。期间准备的无损xz包装未运行，已独立归档；canonical文件和18份冻结hash已恢复为实际在跑版本。[溯源归一](../../experiments/034-v3-preparation/source-provenance-normalization.json)
+两次上传API曾返回空响应／JSONDecodeError，早期只读回查仍旧v2；后续远端确认新v3运行，不能把早期响应异常当成最终上传失败。源代码已逐cell核实为最初冻结版本，未再上传。期间准备的无损xz包装未在v3运行，已独立归档；canonical文件和18份冻结hash已恢复为实际运行版本。[溯源归一](../../experiments/034-v3-preparation/source-provenance-normalization.json)
 
-在线日志已确认NVIDIA RTX PRO 6000 Blackwell Server Edition、Pennyroyal固定版本和原始模型参数。继承启动器在约721秒后交给研究运行器继续等服务健康，这属于已知等待路径，不代表已经开始450秒续跑。CPU接线通过不作为真实交付或得分证据；机制不成立则不扩池。
+在线日志确认NVIDIA RTX PRO 6000 Blackwell Server Edition、Pennyroyal固定版本和原始模型参数。继承启动器在约721秒后交给研究运行器继续等服务健康；实际模型启动3828.87秒，会话4780.17秒，CPU进程组和GPU服务均已确认关闭。启动耗时单列，续跑结束存在在途请求和清理尾部，不将实际时长裁成精确450秒。
 
-用户随后表示跑完后会主动通知；已停止本地日志跟踪，远端诊断继续运行。尚未下载最终结果，不作完成或收益判断。后续收到通知后，从`experiments/034-v3-launch.json`记录的版本3及实际源码归档继续下载、完整性核对和机制分析。
+用户通知跑完后，已下载最终两臂记录并核对完整性。实际辅助输入4435／6564 tokens、输出139／131，reasoning tokens均为0，finish reason均为tool_calls；服务tokenize与usage一致。两份脚本在extract阶段拒收，未执行或产生观察输出，因此只能确认长推理耗尽的失败形态已改变，不能评价程序重算、预测相关性或修订能力。后续普通主循环的ft09／su15分别执行24／40动作，仍停L3／L5，均不算候选程序消费。
 
 ## v1 与 v2 历史结果
 

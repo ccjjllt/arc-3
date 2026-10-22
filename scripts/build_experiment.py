@@ -7,6 +7,7 @@ import base64
 import gzip
 import hashlib
 import json
+import lzma
 from pathlib import Path
 import sys
 
@@ -123,13 +124,25 @@ def main() -> None:
         original_pack = ROOT / "experiments/028-fork-package.json.gz.b64"
         original_data = json.loads(gzip.decompress(base64.b64decode(original_pack.read_text())))
         ft09 = original_data["forks"]["ft09-0d8bbf25"]
-        subset = {"schema_version": 1, "forks": {"ft09-0d8bbf25": ft09},
-                  "source_package_sha256": hashlib.sha256(original_pack.read_bytes()).hexdigest()}
-        raw = json.dumps(subset, ensure_ascii=False, separators=(",", ":")).encode()
-        payload["experiments/034-fork-inputs/ft09-package.json.gz.b64"] = (
-            base64.b64encode(gzip.compress(raw, mtime=0)).decode() + "\n")
         su15_pack = ROOT / "experiments/034-fork-inputs/su15-package.json.gz.b64"
-        payload[str(su15_pack.relative_to(ROOT))] = su15_pack.read_text()
+        if config.get("fork_transport") == "combined_xz_base64":
+            su15_data = json.loads(gzip.decompress(base64.b64decode(su15_pack.read_text())))
+            combined = {"schema_version": 1,
+                "forks": {"ft09-0d8bbf25": ft09,
+                          "su15-1944f8ab": su15_data["forks"]["su15-1944f8ab"]},
+                "source_package_sha256s": {
+                    "ft09-0d8bbf25": hashlib.sha256(original_pack.read_bytes()).hexdigest(),
+                    "su15-1944f8ab": hashlib.sha256(su15_pack.read_bytes()).hexdigest()}}
+            raw = json.dumps(combined, ensure_ascii=False, separators=(",", ":")).encode()
+            payload["experiments/034-fork-inputs/combined-forks.json.xz.b64"] = (
+                base64.b64encode(lzma.compress(raw, preset=9 | lzma.PRESET_EXTREME)).decode() + "\n")
+        else:
+            subset = {"schema_version": 1, "forks": {"ft09-0d8bbf25": ft09},
+                      "source_package_sha256": hashlib.sha256(original_pack.read_bytes()).hexdigest()}
+            raw = json.dumps(subset, ensure_ascii=False, separators=(",", ":")).encode()
+            payload["experiments/034-fork-inputs/ft09-package.json.gz.b64"] = (
+                base64.b64encode(gzip.compress(raw, mtime=0)).decode() + "\n")
+            payload[str(su15_pack.relative_to(ROOT))] = su15_pack.read_text()
         for path in (original_pack, su15_pack):
             plan_input_sources[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -154,6 +167,20 @@ serving code are retained with attribution; source repository license is
 Apache-2.0. Model and third-party runtime licenses remain their own.
 
 {config.get('comparison_note', 'Scores are public-development observations, not hidden-leaderboard results.')}
+"""
+    compact_diagnostic_transport = plan_forks and config.get("fork_transport") == "combined_xz_base64"
+    if compact_diagnostic_transport:
+        intro = f"""# {title}
+
+Private checkpoint diagnosis; no competition submission. One model load,
+order B then A, frozen ft09/su15 prefixes, 450 seconds and 60 subsequent
+actions per game. All candidate processing is inside the same window.
+Session cap7200 seconds, startup cap4200 seconds. Not a full-pool result.
+
+Base: [Franzen Milestone2 v3](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution)
+and [Tufa Duck](https://github.com/Tufalabs/duck-harness), Apache-2.0.
+Model and runtime licenses remain their own. Exact sources and configuration
+are recorded in the build manifest; decoded checkpoints are unchanged.
 """
     setup = '''import json, os, subprocess, sys, time, threading, signal
 from pathlib import Path
@@ -218,8 +245,22 @@ if ARC3_EXPERIMENT.get("require_rtx_pro6000"):
     if _gpu_probe.returncode != 0 or len(_gpu_totals) != 1 or _gpu_totals[0] < 90000:
         raise SystemExit("refusing non-RTX session: " + repr(_gpu_totals))
 '''
-    parameters = ("CONFIG_JSON = " + repr(json.dumps(config)) + "\n"
-                  + "HASHES_JSON = " + repr(json.dumps(hashes)) + "\n")
+    runtime_config = copy.deepcopy(config)
+    omitted_documentation_keys = []
+    if compact_diagnostic_transport:
+        # The full config remains in the build manifest. These audit-only
+        # descriptions and duplicate hashes are never consumed by the runner;
+        # current source hashes still travel independently as HASHES_JSON.
+        for key in ("frozen_source_sha256", "runtime_source_sha256", "purpose",
+                    "comparison_note", "game_source", "budget_formula", "action_cap_note",
+                    "startup_io_note", "selection_note", "revision_note", "quota_note",
+                    "source_freeze_note", "transport_revision_note"):
+            if key in runtime_config:
+                omitted_documentation_keys.append(key)
+                runtime_config.pop(key)
+    json_options = {"separators": (",", ":")} if compact_diagnostic_transport else {}
+    parameters = ("CONFIG_JSON = " + repr(json.dumps(runtime_config, **json_options)) + "\n"
+                  + "HASHES_JSON = " + repr(json.dumps(hashes, **json_options)) + "\n")
     if config.get("native_payload_cells", False):
         # Keep helper source readable in the notebook. Use the original
         # IPython writefile semantics, including the final newline, instead
@@ -347,6 +388,7 @@ finally:
             name: hashlib.sha256(content.encode()).hexdigest()
             for name, content in payload.items() if name.startswith("experiments/034-fork-inputs/")}
         manifest["diagnostic_only"] = True
+        manifest["embedded_config_omitted_documentation_keys"] = omitted_documentation_keys
     (destination / "build-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Built {output}; {len(notebook['cells'])} cells, {output.stat().st_size} bytes")
     print(manifest["notebook_sha256"])

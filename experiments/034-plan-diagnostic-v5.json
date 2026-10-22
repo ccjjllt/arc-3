@@ -1,0 +1,107 @@
+{
+  "id": "034-plan-diagnostic-v5",
+  "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+  "kernel_title": "ARC3 034 Plan Diagnostic",
+  "purpose": "Restore bounded verbatim prior assistant task hypotheses after v4 delivered wrong task models",
+  "comparison_note": "B then A, same frozen ft09/su15 checkpoints,450 seconds and60 subsequent actions per game; all candidate costs included. The only solver intervention is bounded verbatim prior assistant text under unverified hypotheses, with provenance and stale-layout warnings. No additional model call, feedback retry, thinking change, rule hint or trigger change. Total session ceiling reduced to6300s for current quota, preserving4200s startup and complete equal arms.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "executable_plan_B",
+    "executable_plan_A"
+  ],
+  "reference_arm": "executable_plan_A",
+  "arm_environment": {
+    "executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "600s allowance per isolated arm; two concurrent450s/60-action continuations. Candidate all extra processing <=120s/game and single request <=60s inside450s. 4200s startup ceiling plus1800s full-arm/cache/cleanup reservation fits6300s with300s slack. Abort rather than shorten either arm.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 6300,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 1.75,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "Mechanism diagnostic after v4 valid delivery but wrong dynamics/goal and negative paired score. Inspect whether prior unverified task hypotheses improve current-frame program quality; not a full-pool selection result.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/executable_plan.py": "07097f1c71a983ea48a931d63c1bdb30fa00f2394d5fa6089a783cfa4a188959",
+    "src/arc3_research/executable_plan_context.py": "a595fec1b9204e75079087e7d62b8e60c4573bdfa409cc01c5bca708be02065d",
+    "src/arc3_research/executable_plan_contract.py": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+    "src/arc3_research/executable_plan_forks.py": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+    "src/arc3_research/experiment_config.py": "1a83076e06410b40a95261e4fe86c1464e15080fa3558310533db424390652b8",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+  },
+  "cache_flush_wait_seconds": 120,
+  "revision_note": "v5 only restores latest at-most2 pre-cut assistant natural-language messages as bounded verbatim unverified hypotheses. Retain exact source hashes/segments and stale-level warnings; no game-specific summary or future action/answer supplied. Dedicated submit_program, thinking=false, one bootstrap and one real-mismatch repair unchanged.",
+  "research_revision": 5,
+  "candidate_delivery": {
+    "compact_context": true,
+    "thinking": false,
+    "max_prompt_tokens": 16384,
+    "max_output_tokens": 4096,
+    "max_request_seconds": 60,
+    "max_extra_processing_seconds": 120,
+    "max_actions_per_contract": 3,
+    "contract_lifetime": "current_short_plan",
+    "token_count_source": "served_model_tokenize_endpoint",
+    "submission_tool": "submit_program"
+  },
+  "quota_note": "Current post-v4 account snapshot available6708.032seconds. Re-read immediately before launch; do not launch6300s session unless that much remains. No full-pool or formal submission authorized by this config.",
+  "source_freeze_note": "Freeze after hypothesis-context CPU checks; v4 source/run kept separately.",
+  "fork_transport": "combined_xz_base64",
+  "transport_revision_note": "Use the already CPU-verified lossless combined-xz fork transport to reduce upload size. Decoded checkpoint objects must exactly match v3. The earlier empty upload responses did not prove a size-limit root cause.",
+  "hypothesis_context": {
+    "source": "latest_prior_assistant_natural_language",
+    "max_messages": 2,
+    "max_text_characters": 12000,
+    "copy": "verbatim_provenance_segments",
+    "status": "unverified_may_be_stale",
+    "per_message_text_characters": 8000
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-22T13:34:33.421501+00:00",
+  "scope": "Independent final-v5 static source/build/provenance/guard audit, no solver edits, GPU launch, model/network or game calls by reviewer.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v5/experiment.ipynb",
+    "sha256": "48f83080d3258cfddc81f942d7f48fbb52b818ac25634260dedb29db7cf98e01",
+    "bytes": 957458,
+    "cells": 31
+  },
+  "source_manifest": {
+    "all_current_input_hashes_match": true,
+    "input_count": 19,
+    "input_checks": [
+      {
+        "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+        "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+        "equal": true
+      },
+      {
+        "path": "scripts/build_experiment.py",
+        "sha256": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/__init__.py",
+        "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan.py",
+        "sha256": "07097f1c71a983ea48a931d63c1bdb30fa00f2394d5fa6089a783cfa4a188959",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_context.py",
+        "sha256": "a595fec1b9204e75079087e7d62b8e60c4573bdfa409cc01c5bca708be02065d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_contract.py",
+        "sha256": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_forks.py",
+        "sha256": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/experiment_config.py",
+        "sha256": "1a83076e06410b40a95261e4fe86c1464e15080fa3558310533db424390652b8",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/goal_evidence.py",
+        "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/input_paths.py",
+        "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_repair.py",
+        "sha256": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_state.py",
+        "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/run_arm.py",
+        "sha256": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/session_runner.py",
+        "sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/transient_history.py",
+        "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "equal": true
+      },
+      {
+        "path": "scripts/summarize_experiment.py",
+        "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-plan-diagnostic-v5.json",
+        "sha256": "0eb00ac7abeb3c0d913c54b96372a54f164564a417b0b796d81a9f6c6c6373f2",
+        "equal": true
+      },
+      {
+        "path": "experiments/028-fork-package.json.gz.b64",
+        "sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+        "sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+        "equal": true
+      }
+    ],
+    "all14_native_python_payloads_equal_source": true,
+    "compiled_helpers": 14,
+    "complete_config_and_hashes_in_manifest": true,
+    "embedded_runtime_config_validates": true,
+    "embedded_runtime_hypothesis_context_exact": true,
+    "embedded_HASHES_JSON_exact_manifest": true
+  },
+  "attribution": {
+    "solver_intervention": "Bounded prior assistant text restored as verbatim provenance-labelled unverified hypotheses; at most2 messages/12000total/8000per_message characters. No rule/goal summary invented by host.",
+    "all_other_existing_context_helpers_exact_ast": [
+      "delivery_tool_schema",
+      "_hash",
+      "_frame_id",
+      "recent_transition_facts",
+      "_global_references",
+      "_bound_names",
+      "related_function_sources"
+    ],
+    "facts_assignment_exact_ast_v4": true,
+    "system_user_message_construction_exact_ast_v4": true,
+    "adapter_diff_only_patch_log_identity": true,
+    "unchanged_native_modules": [
+      "src/arc3_research/__init__.py",
+      "src/arc3_research/executable_plan_contract.py",
+      "src/arc3_research/executable_plan_forks.py",
+      "src/arc3_research/goal_evidence.py",
+      "src/arc3_research/input_paths.py",
+      "src/arc3_research/program_repair.py",
+      "src/arc3_research/program_state.py",
+      "src/arc3_research/run_arm.py",
+      "src/arc3_research/session_runner.py",
+      "src/arc3_research/transient_history.py",
+      "scripts/summarize_experiment.py"
+    ],
+    "inherited_notebook_cells17_through30_exact_v4": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "contract_execution_trigger_tools_token_cap_thinking_and_model_unchanged": true,
+    "no_additional_model_retry_or_observation_round": true
+  },
+  "hypothesis_provenance": {
+    "frozen_cases": [
+      {
+        "game": "ft09-0d8bbf25",
+        "cut": 27,
+        "source_message_indices": [
+          39,
+          37
+        ],
+        "included_characters": 9047,
+        "all_spans_exact_source_substrings": true,
+        "only_pre_cut_frozen_assistant_text": true,
+        "unverified_warning_present": true
+      },
+      {
+        "game": "su15-1944f8ab",
+        "cut": 86,
+        "source_message_indices": [
+          94,
+          91
+        ],
+        "included_characters": 5657,
+        "all_spans_exact_source_substrings": true,
+        "only_pre_cut_frozen_assistant_text": true,
+        "unverified_warning_present": true
+      }
+    ],
+    "synthetic_limit_and_exclusion_check_passed": true,
+    "only_assistant_content_reasoning_content_strings_read": true,
+    "source_field_sha_and_indexed_spans_verified": true,
+    "prior_text_kept_under_unverified_hypotheses": true,
+    "full_old_conversation_not_replayed": true,
+    "metadata_note": "old_conversation_included=false denotes no complete old conversation replay; prior_assistant_text_included=true explicitly identifies bounded old text."
+  },
+  "transport": {
+    "combined_xz_payload_byte_identical_v4": true,
+    "both_decoded_forks_equal_v4": true,
+    "fork_restore_and_continuation_module_exact_v4": true
+  },
+  "budget": {
+    "hard_cap_seconds": 6300,
+    "startup_ceiling_seconds": 4200,
+    "arm_allowances_seconds": 1200,
+    "cache_reserve_seconds": 240,
+    "cleanup_reserve_seconds": 360,
+    "structural_required_seconds": 6000,
+    "remaining_margin_seconds": 300,
+    "continuation_seconds_per_game": 450,
+    "max_continuation_actions_per_game": 60,
+    "candidate_single_request_seconds": 60,
+    "candidate_total_extra_seconds": 120,
+    "strict_arm_budget_unchanged": true,
+    "session_runner_exact_v4": true,
+    "no_shortened_second_arm": true,
+    "legacy_and_v5_guard_checks": [
+      {
+        "revision": 1,
+        "original_config_valid": true,
+        "opposite_cap_rejected": true,
+        "startup4199_and4201_rejected": true
+      },
+      {
+        "revision": 2,
+        "original_config_valid": true,
+        "opposite_cap_rejected": true,
+        "startup4199_and4201_rejected": true
+      },
+      {
+        "revision": 3,
+        "original_config_valid": true,
+        "opposite_cap_rejected": true,
+        "startup4199_and4201_rejected": true
+      },
+      {
+        "revision": 4,
+        "original_config_valid": true,
+        "opposite_cap_rejected": true,
+        "startup4199_and4201_rejected": true
+      },
+      {
+        "revision": 5,
+        "original_config_valid": true,
+        "opposite_cap_rejected": true,
+        "startup4199_and4201_rejected": true
+      }
+    ],
+    "feasibility_note": "6300 reduces total ceiling only; 4200+2*600+2*120+2*150+60=6000. Startup polling/sampling has300s slack. Quota/current remote state must still be re-read immediately before launch."
+  },
+  "existing_cpu_report": {
+    "status": "passed",
+    "scenarios": 14,
+    "native_sandbox_calls": 105,
+    "scripted_completion_calls": 14,
+    "network_attempts": 0,
+    "real_model_calls": 0,
+    "real_game_actions": 0
+  },
+  "limitations": [
+    "Local preflight proves wiring, provenance and preserved bounds, not online token counts, program quality, correct dynamics, goal choice or score gain.",
+    "Prior assistant text may contain wrong rules or stale coordinates/levels. Its explicit unverified label does not establish the model will treat it correctly.",
+    "Character bounds do not imply token counts. The same served-token endpoint16384 cap remains authoritative.",
+    "Two forced selected checkpoints in B-then-A order remain mechanism diagnostics, not complete-pool or formal-score evidence.",
+    "Only source currently frozen by the recorded SHA is reviewed; any subsequent source/config/build change requires hash reconciliation."
+  ],
+  "blocking_findings": [],
+  "gpu_launched": false,
+  "formal_submitted": false
+}

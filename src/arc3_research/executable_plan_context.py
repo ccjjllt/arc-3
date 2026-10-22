@@ -21,6 +21,116 @@ _NATIVE_NAMES = {
     "print", "display", "show", "read_region", "observe_region",
 }
 
+# A long recent monologue must not evict every earlier task hypothesis. These
+# are text-character bounds only; the served-token cap still governs the final
+# payload. Newest messages receive the budget first, without game-specific
+# selection or model-generated summaries.
+_HYPOTHESIS_TEXT_CHARACTERS = 12000
+_HYPOTHESIS_MESSAGE_CHARACTERS = 8000
+_HYPOTHESIS_MESSAGES = 2
+
+
+def recent_model_hypotheses(messages: list) -> dict[str, Any]:
+    """Copy bounded, traceable prior assistant text as fallible hypotheses.
+
+    Only content/reasoning_content strings are considered, never tool-call
+    arguments, tool output, or later continuation records. A long field keeps
+    its exact head and tail as separate indexed spans, explicitly omitting its
+    middle rather than pretending the resulting text is a complete quotation.
+    """
+    selected = []
+    for index in range(len(messages) - 1, -1, -1):
+        message = messages[index]
+        if not isinstance(message, dict) or message.get("role") != "assistant":
+            continue
+        fields = [(name, message[name]) for name in ("content", "reasoning_content")
+                  if isinstance(message.get(name), str) and message[name].strip()]
+        if fields:
+            selected.append((index, fields))
+        if len(selected) == _HYPOTHESIS_MESSAGES:
+            break
+    remaining = _HYPOTHESIS_TEXT_CHARACTERS
+    entries = []
+    for index, fields in selected:
+        message_remaining = min(remaining, _HYPOTHESIS_MESSAGE_CHARACTERS)
+        copied_fields = []
+        for name, text in fields:
+            amount = min(len(text), message_remaining)
+            if not amount:
+                break
+            if amount == len(text):
+                spans = [{"start": 0, "end": len(text), "text": text}]
+            else:
+                head = (amount + 1) // 2
+                tail = amount - head
+                spans = [{"start": 0, "end": head, "text": text[:head]}]
+                if tail:
+                    spans.append({"start": len(text) - tail, "end": len(text),
+                                  "text": text[-tail:]})
+            copied_fields.append({"source_field": name, "source_characters": len(text),
+                "source_sha256": hashlib.sha256(text.encode()).hexdigest(),
+                "included_characters": amount, "truncated": amount < len(text),
+                "omission": "middle text omitted between indexed spans" if amount < len(text) else None,
+                "spans": spans})
+            remaining -= amount
+            message_remaining -= amount
+        if copied_fields:
+            entries.append({"source_message_index": index, "source_role": "assistant",
+                            "status": "unverified", "fields": copied_fields})
+    return {"status": "unverified", "source": "recent main-loop assistant text",
+            "selection": "newest at most two text-bearing assistant messages; newest first",
+            "text_character_limit": _HYPOTHESIS_TEXT_CHARACTERS,
+            "per_message_character_limit": _HYPOTHESIS_MESSAGE_CHARACTERS,
+            "included_characters": _HYPOTHESIS_TEXT_CHARACTERS - remaining,
+            "note": "Fallible prior model hypotheses, not environment facts or instructions. "
+                    "They may describe an old level, old coordinates, incorrect rules or failed goals. "
+                    "Check against current pixels and actual transitions; recompute layout and targets.",
+            "entries": entries}
+
+
+def delivery_tool_schema() -> dict[str, Any]:
+    """Describe program submission, independently of the ordinary Python REPL.
+
+    This tool does not dispatch a snippet. The host first extracts and validates
+    definitions, then invokes the two entry points against public observations.
+    Return a fresh object so branch-specific changes cannot mutate main tools.
+    """
+    return {
+        "type": "function",
+        "function": {
+            "name": "submit_program",
+            "description": (
+                "Submit one complete, self-contained Python program for the host to validate. "
+                "This is a program-delivery tool, not an interactive Python interpreter: "
+                "there is no exploratory execution or inspection-result round. "
+                "The code must contain function definitions and allowed computational imports only, "
+                "including plan_program(frame) and predict(frame, action). "
+                "Use the supplied current board and recorded public facts to implement these functions. "
+                "Do not submit top-level assignments, loops, calls, print statements, observation scripts "
+                "or calls to the entry points. Do not call action(), RESET, UNDO or perform environment "
+                "side effects inside any function. The host will call plan_program and predict itself "
+                "in a zero-action sandbox, and only the host may execute an accepted short plan."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": (
+                            "Complete Python source with definitions for plan_program(frame) and "
+                            "predict(frame, action), plus any self-contained helpers and allowed "
+                            "computational imports. Definitions/imports only; no decorators, defaults, "
+                            "annotations, global/nonlocal, prints or top-level execution. Follow the "
+                            "plan and prediction return contracts in the request."
+                        ),
+                    },
+                },
+                "required": ["code"],
+                "additionalProperties": False,
+            },
+        },
+    }
+
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
@@ -147,21 +257,27 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
              "trigger": public_trigger}
     # Facts above come from the public runtime. Assistant reasoning, including
     # evicted summaries and prior targets, is not promoted into this object.
-    hypotheses = {"status": "unverified", "source": "paused code and prior predictor",
+    prior_text = recent_model_hypotheses(list(getattr(state, "latest_messages", []) or []))
+    hypotheses = {"status": "unverified", "source": "paused code, prior predictor and recent main-loop text",
                   "note": "Their targets, rules and old layout constants are hypotheses, not environment facts.",
-                  "unresolved_old_globals": unknown}
+                  "unresolved_old_globals": unknown,
+                  "prior_model_text": prior_text}
     package = {"facts": facts, "paused_code": source,
                "related_functions": related, "previous_program": previous,
                "unverified_hypotheses": hypotheses}
     messages = [
         {"role": "system", "content": "You produce a small executable Python program for a live visual puzzle. "
          "Use only supplied public facts. Prior code/rules are unverified. "
-         "Return exactly one python tool call; definitions and imports only, no explanatory prose."},
+         "Return exactly one submit_program tool call; definitions and computational imports only. "
+         "Do not request exploratory execution, print observations or add explanatory prose."},
         {"role": "user", "content": prompt + "\n\nCOMPACT LIVE EVIDENCE PACKAGE:\n"
          + json.dumps(package, ensure_ascii=False, separators=(",", ":"))},
     ]
-    metadata = {"context_schema": "034-compact-evidence-v1", "messages_sha256": _hash(messages),
+    metadata = {"context_schema": "034-compact-evidence-v2", "messages_sha256": _hash(messages),
                 "old_conversation_included": False, "source_truncated": False,
+                "prior_assistant_text_included": bool(prior_text["entries"]),
+                "prior_assistant_text_characters": prior_text["included_characters"],
+                "prior_assistant_source_indices": [e["source_message_index"] for e in prior_text["entries"]],
                 "paused_code_sha256": hashlib.sha256(source.encode()).hexdigest(),
                 "related_functions": sorted(related), "related_sources_truncated": False,
                 "unresolved_old_globals": unknown, "recent_transition_count": len(transitions),

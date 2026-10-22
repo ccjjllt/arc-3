@@ -1,0 +1,77 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-22T12:04:13.310067+00:00",
+  "scope": "Independent final-v4 source/build diff review; no model, GPU or live game calls; solver unchanged by reviewer.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v4/experiment.ipynb",
+    "sha256": "6f9e0a891f908bcfddb90144d7e4a6b0c3803b783b0b094556861c4d5b7eade5",
+    "bytes": 952500,
+    "cells": 31
+  },
+  "source_manifest": {
+    "all_current_input_hashes_match": true,
+    "input_count": 19,
+    "all_14_native_python_payloads_equal_source": true,
+    "helpers_compiled": 14
+  },
+  "interface_wiring": {
+    "schema_name": "submit_program",
+    "forced_tool_choice": "submit_program",
+    "extract_expected_tool_name": "submit_program",
+    "pure_definition_submission_accepted": true,
+    "wrong_tool_name_rejected": true,
+    "schema_does_not_mutate_main_tools": true,
+    "main_completion_source_exact_v3": true,
+    "contract_validation_after_tool_extraction_unchanged": true
+  },
+  "attribution": {
+    "intervention": "auxiliary program-submission interface and matching submission instructions",
+    "fact_package_builder_only_changed_statement": "messages system instruction",
+    "all_other_fact_builder_statements_exact_ast_equal": true,
+    "main_loop_helpers_exact_v3": [
+      "src/arc3_research/__init__.py",
+      "src/arc3_research/goal_evidence.py",
+      "src/arc3_research/input_paths.py",
+      "src/arc3_research/program_repair.py",
+      "src/arc3_research/program_state.py",
+      "src/arc3_research/run_arm.py",
+      "src/arc3_research/session_runner.py",
+      "src/arc3_research/transient_history.py",
+      "scripts/summarize_experiment.py"
+    ],
+    "inherited_harness_launcher_monitor_and_ending_exact_v3": true,
+    "runtime_config_values_equal_v3_except_declared_interface_transport_revision_identity": true,
+    "candidate_delivery_budget_values_exact_v3": true
+  },
+  "transport": {
+    "encoding": "xz+base64",
+    "both_forks_exact_object_equal_v3": {
+      "ft09-0d8bbf25": true,
+      "su15-1944f8ab": true
+    },
+    "schema_version": 1,
+    "run_forks_restore_and_continuation_exact_ast_v3": true,
+    "source_provenance_by_game": {
+      "ft09-0d8bbf25": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "su15-1944f8ab": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd"
+    },
+    "embedded_transport_sha256": "794e069589273ab7a21a06fffbce23f2e3098a6c1d364b787da71131a9721359",
+    "old_transport_payload_bytes": 155562,
+    "new_transport_payload_bytes": 119153
+  },
+  "audit_configuration": {
+    "full_config_in_build_manifest": true,
+    "embedded_hashes_equal_complete_manifest": true,
+    "omitted_keys_exactly_declared": true,
+    "runtime_validate_config_passed": true,
+    "note": "Full runtime-source expectations remain in local full manifest; embedded runtime config omits those duplicate expectations. preflight_before_serving remains false as v3; no newly lost active runtime hash enforcement."
+  },
+  "limitations": [
+    "Local preflight proves wiring and lossless data transport, not that the served model will deliver a valid program or increase score.",
+    "Two forced selected checkpoints remain a mechanism diagnostic; B then A has no order reversal and does not establish full-pool or formal-score improvement.",
+    "Online request payload, runtime hashes, actual budgets and arm drain must still be checked after the remote run."
+  ],
+  "blocking_findings": [],
+  "gpu_launched": false,
+  "formal_submitted": false
+}

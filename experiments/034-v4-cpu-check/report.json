@@ -1,0 +1,204 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-22T11:58:19.326310+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_sandbox_calls": 105,
+  "output_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-v4-cpu-check",
+  "scenarios": [
+    {
+      "name": "ordinary_batch_bootstrap",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.3069897498935461,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "single_helpers_pause_second",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.22421970800496638,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "mismatch_repairs_then_acts",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.4994165829848498,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "unknown_stops_suffix",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.27279787498991936,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "zero_action_validation",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.07996775000356138,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "invalid_evidence_rolls_back_functions",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.08087454200722277,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "level_boundary_stops_plan",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.18787270807661116,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "validation_preserves_repeat_guard",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.053158332942985,
+      "recorded_tokens": {
+        "generated": 0,
+        "total": 0
+      }
+    },
+    {
+      "name": "initial_prediction_rejected_rolls_back",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.10614599997643381,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "completed_local_goal_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.0803889170056209,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "abstain_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.07996562507469207,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "short_contract_total_action_limit",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.3633633750723675,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "ordinary_action_after_contract",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "LEFT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.32950483402237296,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "recomputation_failure_keeps_action_accounting",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.22045458399225026,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    }
+  ],
+  "limits": [
+    "Scripted completion responses and synthetic public frames; no ARC score.",
+    "The real frozen ToolAgent._run_python_tool and child sandbox are exercised.",
+    "Synthetic token usage checks bookkeeping only; it is not inference cost."
+  ],
+  "scripted_completion_calls": 14,
+  "finished_at_utc": "2026-10-22T11:58:22.339822+00:00",
+  "source_sha256": {
+    "scripts/check_034_executable_plan.py": "8e711e14652ba1177f6b3cc84ec3e1f3045c485725181cb169b0d6ec1bcfa4da",
+    "src/arc3_research/executable_plan.py": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+    "src/arc3_research/executable_plan_contract.py": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7"
+  }
+}

@@ -196,23 +196,29 @@ def binding_names(code: str) -> list[str]:
     return sorted(visitor.names)
 
 
-def extract_definitions(message: dict[str, Any]) -> dict[str, Any]:
-    """Extract one Python tool call with definitions/imports only; never exec.
+def extract_definitions(message: dict[str, Any], *,
+                        expected_tool_name: str = "python") -> dict[str, Any]:
+    """Extract one named delivery call with definitions/imports only; never exec.
 
+    The default accepts the existing Python tool for compatibility. An auxiliary
+    branch may explicitly require its dedicated program-submission tool instead.
     Required signatures are exactly plan_program(frame) and predict(frame,
     action). Imports use a small computational allowlist including numpy. Decorators,
     defaults, annotations and type parameters can execute while defining a
     function, so they are rejected.  The real sandbox must still block actions
     while evaluating the functions; static checks are not a security boundary.
     """
+    if (type(expected_tool_name) is not str or not expected_tool_name.isidentifier()
+            or len(expected_tool_name) > 64):
+        raise ValueError("Expected tool name must be a bounded identifier")
     if type(message) is not dict or type(message.get("tool_calls")) is not list:
-        raise ValueError("Expected an assistant message with one Python tool call")
+        raise ValueError("Expected an assistant message with one " + expected_tool_name + " tool call")
     calls = message["tool_calls"]
     if len(calls) != 1 or type(calls[0]) is not dict:
-        raise ValueError("Return exactly one Python tool call")
+        raise ValueError("Return exactly one " + expected_tool_name + " tool call")
     function = calls[0].get("function")
-    if type(function) is not dict or function.get("name") != "python":
-        raise ValueError("Expected the existing python tool")
+    if type(function) is not dict or function.get("name") != expected_tool_name:
+        raise ValueError("Expected the " + expected_tool_name + " tool")
     arguments = function.get("arguments")
     arguments = _json_object(arguments) if type(arguments) is str else json_copy(arguments)
     if type(arguments) is not dict or set(arguments) != {"code"}:

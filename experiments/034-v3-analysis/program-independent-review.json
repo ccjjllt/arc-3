@@ -1,0 +1,246 @@
+{
+  "reviewed_at_utc": "2026-10-22T11:55:48.578761+00:00",
+  "scope": "Independent read-only audit of actual v3 auxiliary requests/responses and ordinary continuation. No model requests, GPU launch, environment replay or solver edits.",
+  "decision": "Do not expand v3 unchanged: real auxiliary tool calls returned, but neither returned the required plan_program/predict definitions; no accepted program or checked action. Prior output-cap bottleneck changed to delivery-contract noncompliance.",
+  "funnel": {
+    "auxiliary_requests": 2,
+    "returned_python_tool_calls": 2,
+    "required_executable_program_deliveries": 0,
+    "accepted_programs": 0,
+    "host_plan_actions": 0,
+    "prediction_checks": 0,
+    "counterexample_repairs": 0
+  },
+  "games": {
+    "ft09-0d8bbf25": {
+      "auxiliary_event": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+        "line": 2,
+        "sha256": "9a8da2882e85da1eafb07c40e50e034d07f2ce860aee397f83bab5d8a32e88c9"
+      },
+      "actual_controls": {
+        "model": "flashnext",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "python"
+          }
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        },
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "top_k": 20
+      },
+      "input_tokens": 4435,
+      "tokenize_matches_served_usage": true,
+      "usage": {
+        "prompt_tokens": 4435,
+        "total_tokens": 4574,
+        "completion_tokens": 139,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "finish_reason": "tool_calls",
+      "auxiliary_elapsed_seconds": 8.125343959999554,
+      "status": "rejected",
+      "failure_stage": "extract",
+      "error": "ValueError: Return only function definitions and allowed imports",
+      "actual_returned_code": "cur = current_frame.segmentation\ninfo = []\nfor n in cur['nodes']:\n    b = n['boundary']\n    rs = [p[0] for p in b]; cs = [p[1] for p in b]\n    info.append((n.get('color'), n.get('pixels'), (min(rs),min(cs)), (max(rs),max(cs))))\ninfo.sort()\nfor t in info:\n    print(t)\nprint('valid', valid_actions)\nprint('last', last_action_call_result)\n",
+      "code_kind": "Top-level observation/print script, not required definitions. It was rejected before native sandbox execution.",
+      "actual_actions": 0,
+      "program_code_saved": false,
+      "related_functions": [],
+      "unverified_hypotheses": {
+        "status": "unverified",
+        "source": "paused code and prior predictor",
+        "note": "Their targets, rules and old layout constants are hypotheses, not environment facts.",
+        "unresolved_old_globals": []
+      },
+      "context_schema": {
+        "context_schema": "034-compact-evidence-v1",
+        "messages_sha256": "2008bdd6953c4fc650ab73c4ed2d9bb41bc4b582aedc009a4572c8d72ed041ae",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+        "related_functions": [],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 3,
+          "step": 27,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+        },
+        "message_characters": 11148,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "continuation": {
+        "A": {
+          "added_levels": 0,
+          "action_count": 25,
+          "elapsed_seconds": 450.0345851569991,
+          "levels_completed": 2,
+          "state": "gave_up"
+        },
+        "B": {
+          "added_levels": 0,
+          "action_count": 24,
+          "elapsed_seconds": 463.4794425179998,
+          "levels_completed": 2,
+          "state": "gave_up"
+        }
+      },
+      "ordinary_main_loop_evidence": [
+        {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+          "line": 11,
+          "finding": "Ordinary loop builds target from current segmentation under an explicitly labelled hypothesis B and issues a batch of target flips. No candidate predictor was active; this is not repaired-program execution."
+        },
+        {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+          "line": 29,
+          "finding": "Ordinary loop revisits previous won level2 to sanity-check its rule. This is investigation, not an auxiliary-branch validation or counterexample repair."
+        }
+      ]
+    },
+    "su15-1944f8ab": {
+      "auxiliary_event": {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+        "line": 2,
+        "sha256": "4d5b3a6849f4fb384c2ab2f0cf80656410cbe127c667c787751d9212e61750e9"
+      },
+      "actual_controls": {
+        "model": "flashnext",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "python"
+          }
+        },
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        },
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "top_k": 20
+      },
+      "input_tokens": 6564,
+      "tokenize_matches_served_usage": true,
+      "usage": {
+        "prompt_tokens": 6564,
+        "total_tokens": 6695,
+        "completion_tokens": 131,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "finish_reason": "tool_calls",
+      "auxiliary_elapsed_seconds": 8.174182922999535,
+      "status": "rejected",
+      "failure_stage": "extract",
+      "error": "ValueError: Return only function definitions and allowed imports",
+      "actual_returned_code": "print(current_frame.shape, current_frame.level, current_frame.step)\nseg = current_frame.segmentation\nnodes = seg['nodes']\nfrom collections import Counter\nprint(Counter((n['color'], n['pixels']) for n in nodes).most_common(20))\nfor n in nodes:\n    if n['color'] in 'PSMpYybB' and n['pixels']>=3:\n        pass\n# summarize colors present\nprint(Counter(n['color'] for n in nodes))\n",
+      "code_kind": "Top-level observation/print script, not required definitions. It was rejected before native sandbox execution.",
+      "actual_actions": 0,
+      "program_code_saved": false,
+      "related_functions": [
+        "click",
+        "invaders",
+        "state"
+      ],
+      "unverified_hypotheses": {
+        "status": "unverified",
+        "source": "paused code and prior predictor",
+        "note": "Their targets, rules and old layout constants are hypotheses, not environment facts.",
+        "unresolved_old_globals": []
+      },
+      "context_schema": {
+        "context_schema": "034-compact-evidence-v1",
+        "messages_sha256": "8b91fbe5f8efc82b958ae77f2992cb5db1fc8dbc580a0756109fa1f93dfc99b6",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "paused_code_sha256": "7560c549c37f34ade54f0e717079f6f7b9601ab9e99be73c41f3b57cf5c9fd27",
+        "related_functions": [
+          "click",
+          "invaders",
+          "state"
+        ],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 2,
+        "current_observation": {
+          "level": 5,
+          "step": 86,
+          "shape": [
+            64,
+            64
+          ],
+          "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+        },
+        "message_characters": 20391,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "continuation": {
+        "A": {
+          "added_levels": 0,
+          "action_count": 31,
+          "elapsed_seconds": 457.8899148159999,
+          "levels_completed": 4,
+          "state": "gave_up"
+        },
+        "B": {
+          "added_levels": 0,
+          "action_count": 40,
+          "elapsed_seconds": 450.1272274590001,
+          "levels_completed": 4,
+          "state": "gave_up"
+        }
+      },
+      "ordinary_main_loop_evidence": [
+        {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+          "line": 3,
+          "finding": "First ordinary continuation executes segmentation inspection similar to the rejected auxiliary probe. Auxiliary probe output was never executed or fed as new factual output."
+        },
+        {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/034-plan-diagnostic-v3/executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+          "line": 9,
+          "finding": "Ordinary loop defines val/safe4 and checks conservation of M/p/Y values, using UNDO when its test fails. These helpers arise in the ordinary loop; no accepted candidate plan/predict exists."
+        }
+      ]
+    }
+  },
+  "request_contract_conflict": {
+    "fact": "The branch uses the ordinary Python tool description. It tells the model to run one ephemeral snippet, use segmentation as primary view, and use print for compact output, while branch system/user instructions demand definitions/imports only and no prints.",
+    "causal_status": "Plausible delivery-design cause, not isolated by this two-case comparison. Both actual outputs closely follow the ordinary tool priming.",
+    "ordinary_tool_description_excerpt": "Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+    "recommendation": "First isolate an auxiliary-only tool description and code argument description that accurately say this is a source-submission contract, not an observation execution turn. Do not change the ordinary main-loop tool. An optional single zero-action inspection then explicit program submission is a separate bounded candidate, not a reinterpretation of v3 probes as successful programs."
+  },
+  "context_boundaries": {
+    "fact": "Current full ASCII and two real transitions were supplied; code and selected dependencies were untruncated. unverified_hypotheses contains only labels/note/unresolved globals, not earlier natural-language rule or goal judgments.",
+    "ft09": "No retained related functions; paused code is probe/segmentation inspection. This primarily tests new construction.",
+    "su15": "Only click/invaders/state supplied as dependency closure; no mature target/search planner. Label as construction using control/inspection helpers.",
+    "interpretation": "Because delivery failed before any plan or predictor existed, v3 does not measure quality of inferred rules, state recomputation, prediction relevance or repair. If next delivery succeeds but goal is wrong, inspect whether compact context removed necessary evidence before assigning the failure to generic rule reasoning."
+  },
+  "outcome": {
+    "A_added_levels": 0,
+    "B_added_levels": 0,
+    "all_four_continuations_added_zero_levels": true,
+    "score_claim": "No same-cut gain in this run; not a full-25 or formal-score test. More ordinary actions are not evidence of useful program execution."
+  },
+  "limitations": [
+    "One B-then-A pair; not a stability estimate or isolated switch ablation.",
+    "Actual request controls were verified, but their individual causal effects are not separated.",
+    "Input reduction and absence of reasoning support successful request delivery, not successful program synthesis.",
+    "No source or future solution was supplied or executed by this audit."
+  ]
+}

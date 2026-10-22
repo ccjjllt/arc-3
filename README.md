@@ -1,8 +1,12 @@
 # ARC Prize 2026 · ARC-AGI-3 研究项目
 
-**034 v3正在运行：** 已实现紧凑事实包、辅助thinking关闭与工具交付、动作相关预测、累计3步短合同及退出；14个原生sandbox场景通过，A/B切点恢复hash一致。私有两题诊断已确认v3 RUNNING且远端源码精确一致，目前冷启动中，尚无新增得分结论。[实际进展](docs/progress/034-executable-plan.md) · [启动记录](experiments/034-v3-launch.json)。
+**034 v4已COMPLETE：** 专用接口交付3份完整程序，ft09两次受检动作均mismatch，实际反例引发了规则／动作修订但仍错误；ft09 A新增2关／B新增0关，su15 A新增0关／B新增1关。su15候选在零动作验收时TypeError，通关来自普通主循环。两题均分34.9206→23.8095（−11.1111），不扩v4、不正式提交。[结果分析](research/034-v4-results-analysis.md) · [程序独立审阅](experiments/034-v4-analysis/program-independent-review.json) · [完整性独立审阅](experiments/034-v4-analysis/integrity-independent-review.json)。
 
-**下一轮研究交接（10月22日16:27官方信息核验）：** [程序交付与完整得分验证方案](docs/handoff/034-next-round-research-plan.md)。保留009 v2／31.16，先验证紧凑辅助分支能否交付并执行当前短计划，再做完整25题同期对照；补充必要历史状态、预测器适用范围、误停恢复与9小时总截止。方案结合最新Notebook源码和前沿研究，尚未实施或启动新GPU实验。[本轮官方与源码快照](research/snapshots/2026-10-22-next-round/)
+**034 v5已RUNNING：** 只检验补回切点前已有assistant自然语言原文，明确标为未验证假设，记录来源hash及截断区间；不提供手工正确规则、未来证据或新增摘要轮。远端版本5的31个cell与冻结候选一致，本地14场景与独立预检通过；会话总上限6300秒，保留每题450秒／60动作等求解预算。正式最佳仍009 v2／31.16，尚无v5在线结论。[实际进展](docs/progress/034-executable-plan.md) · [启动记录](experiments/034-v5-launch.json) · [远端源码](experiments/034-v5-remote-source-check.json)。
+
+**034 v3已COMPLETE：** 两题A/B均新增0关。辅助请求约8秒返回普通观察脚本，未交付规划／预测函数，候选实际动作与预测检查均为0。已定位普通Python工具说明与函数提交合同之间的语义冲突，v4检验专用接口；不能把本地接线或快速响应当作机制成功。[结果分析](research/034-v3-results-analysis.md) · [独立完整性审阅](experiments/034-v3-analysis/integrity-independent-review.json)。
+
+**下一轮研究交接（10月22日16:27官方信息核验）：** [程序交付与完整得分验证方案](docs/handoff/034-next-round-research-plan.md)。保留009 v2／31.16，先验证紧凑辅助分支能否交付并执行当前短计划，再做完整25题同期对照；补充必要历史状态、预测器适用范围、误停恢复与9小时总截止。交接时方案尚未实施，当前执行状态见文首。[本轮官方与源码快照](research/snapshots/2026-10-22-next-round/)
 
 **034 v2已COMPLETE：** su15相同L5切点续跑，A新增0关、B新增1关；ft09均新增0关。但两次额外分支都仅返回推理、没有工具调用，验收程序与受检动作均为0；su15通关发生在普通主循环，不能归因于预期机制。会话58.30分钟、模型启动42.85分钟，服务已关闭。停止该版原样扩跑，先修代码交付；正式最佳仍009／31.16。[结果分析](research/034-v2-results-analysis.md) · [机制判断](experiments/034-v2-analysis/mechanism-assessment.json) · [完成记录](experiments/034-v2-launch.json)。
 
@@ -34,7 +38,7 @@
 | 028 程序修复 | ft09真实代码执行且采用但关键像素仍错；tu93修复超时；三对均无新增关 | 关闭本版，不扩全池、不为导出故障重跑 |
 | 030 关内持久Python | 开发池+4.5565，正式24.40／较009−6.76 | COMPLETE；保留009，停止扩大030；[回退分析](research/030-results-analysis.md) |
 | 032 成功经验记忆 | 短跑+25.655、全池跨会话+11.140；正式30.20／较009−0.96 | COMPLETE；保留009，不原样重提/扩大v1；[研究结论](research/032-results-analysis.md) |
-| 034 程序重算与受检执行 | v2两题相同前缀：su15新增0→1关，ft09均0；两个额外响应均无可执行代码、0受检动作 | COMPLETE；消费链未成立，不原样扩跑；先解决分支代码交付 |
+| 034 程序重算与受检执行 | v4交付3份程序、2次受检动作均mismatch；ft09 A/B新增2/0关，su15新增0/1关（普通主循环）；均分−11.1111 | v4 COMPLETE，不扩池／不正式提交；v5仅补回有来源的旧assistant假设，已RUNNING，结果待回收 |
 
 [016完整分析](research/016-results-analysis.md)已复算50局并核对冻结源码、预算、缓存、排空和截止行为；会话内部4.2054h。015/016新审计覆盖18份请求、1281次去重Python调用：ft09外接框填色/转抄错误、tr87裁剪错位、ar25颜色与物理足迹边界均有纯CPU字面量证据。018已实际检验局部ASCII核对输入的短提示，局部纠错存在而整体回退；020改为复用008区域读取器直接交付程序输入；FP8作为支线，均不叠加018提示。[本地证据](research/017-local-evidence.md)、[018计划](docs/plan/018-observation-grounding.md)、[018进展](docs/progress/018-observation-grounding.md)。
 

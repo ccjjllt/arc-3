@@ -1,0 +1,1925 @@
+{
+  "name": "mismatch_repairs_then_acts",
+  "status": "passed",
+  "actions": [
+    "RIGHT",
+    "RIGHT",
+    "RIGHT",
+    "RIGHT"
+  ],
+  "action_calls": [
+    {
+      "actions": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "before": {
+        "step": 0,
+        "col": 1,
+        "level": 1
+      },
+      "after": {
+        "step": 1,
+        "col": 0,
+        "level": 1
+      }
+    },
+    {
+      "actions": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "before": {
+        "step": 1,
+        "col": 0,
+        "level": 1
+      },
+      "after": {
+        "step": 2,
+        "col": 1,
+        "level": 1
+      }
+    },
+    {
+      "actions": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "before": {
+        "step": 2,
+        "col": 1,
+        "level": 1
+      },
+      "after": {
+        "step": 3,
+        "col": 2,
+        "level": 1
+      }
+    },
+    {
+      "actions": [
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "before": {
+        "step": 3,
+        "col": 2,
+        "level": 1
+      },
+      "after": {
+        "step": 4,
+        "col": 3,
+        "level": 1
+      }
+    }
+  ],
+  "scripted_completions": [
+    {
+      "index": 0,
+      "observed_step": 0,
+      "observed_col": 1,
+      "timeout": 60.0,
+      "max_tokens": 4096,
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "request_options": {
+        "enable_thinking": false,
+        "tool_choice_override": {
+          "type": "function",
+          "function": {
+            "name": "submit_program"
+          }
+        },
+        "request_record": {},
+        "max_input_tokens": 16384
+      },
+      "last_message": {
+        "role": "user",
+        "content": "Deliver a SMALL executable program now using one submit_program tool call.\nThe host paused a real action sequence. Repair its relevant input/rule or\nconstruct a small current decision program if no usable planner was retained.\nReuse existing rule/search when evidence supports it; revise a contradicted\nrule instead of repeating old coordinates. Return self-contained function\ndefinitions and allowed computational imports only, with two entry points:\n\nplan_program(frame) -> {\"status\": \"ready\" | \"completed\" | \"abstain\",\n \"goal\": nonempty local target description/data,\n \"actions\": [model-facing action dicts, at most 3; empty unless ready],\n \"evidence_pixels\": [[row,col,color_character], ...],\n \"replaces\": [names from the paused code or retained functions], \"reason\": str}\npredict(frame, action) -> {\"mode\": \"change\" | \"noop\", \"action\": action,\n \"object_pixels\": [[row,col,CURRENT color], ...],\n \"target_pixels\": [[row,col,CURRENT color], ...],\n \"expected_pixels\": [[row,col,EXPECTED color], ...],\n \"precondition\": \"why this action has this effect or is blocked\",\n \"scope\": \"which task object and observable consequence this checks\"}\nIf no relevant prediction is possible, return {\"mode\":\"unknown\",\"reason\":str}.\n\nRead frame.ascii, shape, level and step to RECOMPUTE current objects, target and\nactions. frame.recent_transitions is refreshed on EVERY call: a tuple of recent\npublic transitions with action, before_frame, after_frame and result attributes.\nframe.valid_actions and frame.last_action_result are current public facts.\nUnknown historical state is not a fact; if essential state cannot be recovered,\nabstain or propose only ONE useful action. completed refers only to your local\ntarget, never a claim of environment success. Do not hardcode a moving target\nas current_position plus a fixed distance on every call: express a meaningful\ntask target computed from the current board and known facts.\n\nThe host executes at most THREE actions for this contract, recalculating the\nplan from the real new frame before every next action. Predictions are frozen\nBEFORE action, cover BOTH declared object and target pixels and no undeclared\npixels. A noop must explain a task-relevant obstruction/precondition, not just\nunchanged distant background. Pixel agreement does not prove your rule correct.\nMOUSE uses row/col; other actions contain only action. No RESET/UNDO, calls to\naction(), prints or top-level execution. No decorators, default arguments,\nannotations, global or nonlocal. Computational imports math, collections,\nitertools, heapq, numpy are supported. Globals do not persist: keep parameters\ninside functions, reuse supplied helpers and rebind layout from this frame.\nDo not copy every pixel as a replacement model. No explanation outside the\nsingle submit_program tool call. Keep the program short enough to finish this response.\n\n\nCOMPACT LIVE EVIDENCE PACKAGE:\n{\"facts\":{\"current_observation\":{\"level\":1,\"step\":0,\"shape\":[5,10],\"grid_sha256\":\"5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa\",\"ascii\":\"WWWWWWWWWW\\nWWWWWWWWWW\\nWgWWWWWWWW\\nWWWWWWWWWW\\nWWWWWWWWWW\"},\"recent_real_transitions\":[],\"last_actual_result\":null,\"available_actions\":[\"RIGHT\",\"LEFT\"],\"remaining_game_seconds\":1000.0,\"auxiliary_seconds_already_used\":0.0,\"trigger\":{\"kind\":\"bootstrap\",\"proposed_actions\":[{\"action\":\"LEFT\"},{\"action\":\"LEFT\"},{\"action\":\"LEFT\"}],\"already_executed_in_snippet\":0,\"before_grid_sha256\":\"5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa\"}},\"paused_code\":\"old_plan = [\\\"LEFT\\\", \\\"LEFT\\\", \\\"LEFT\\\"]\\naction(old_plan)\\nprint(\\\"OLD_SUFFIX_EXECUTED\\\")\\n\",\"related_functions\":{},\"previous_program\":\"\",\"unverified_hypotheses\":{\"status\":\"unverified\",\"source\":\"paused code and prior predictor\",\"note\":\"Their targets, rules and old layout constants are hypotheses, not environment facts.\",\"unresolved_old_globals\":[]}}"
+      }
+    },
+    {
+      "index": 1,
+      "observed_step": 1,
+      "observed_col": 0,
+      "timeout": 60.0,
+      "max_tokens": 4096,
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "request_options": {
+        "enable_thinking": false,
+        "tool_choice_override": {
+          "type": "function",
+          "function": {
+            "name": "submit_program"
+          }
+        },
+        "request_record": {},
+        "max_input_tokens": 16384
+      },
+      "last_message": {
+        "role": "user",
+        "content": "Deliver a SMALL executable program now using one submit_program tool call.\nThe host paused a real action sequence. Repair its relevant input/rule or\nconstruct a small current decision program if no usable planner was retained.\nReuse existing rule/search when evidence supports it; revise a contradicted\nrule instead of repeating old coordinates. Return self-contained function\ndefinitions and allowed computational imports only, with two entry points:\n\nplan_program(frame) -> {\"status\": \"ready\" | \"completed\" | \"abstain\",\n \"goal\": nonempty local target description/data,\n \"actions\": [model-facing action dicts, at most 3; empty unless ready],\n \"evidence_pixels\": [[row,col,color_character], ...],\n \"replaces\": [names from the paused code or retained functions], \"reason\": str}\npredict(frame, action) -> {\"mode\": \"change\" | \"noop\", \"action\": action,\n \"object_pixels\": [[row,col,CURRENT color], ...],\n \"target_pixels\": [[row,col,CURRENT color], ...],\n \"expected_pixels\": [[row,col,EXPECTED color], ...],\n \"precondition\": \"why this action has this effect or is blocked\",\n \"scope\": \"which task object and observable consequence this checks\"}\nIf no relevant prediction is possible, return {\"mode\":\"unknown\",\"reason\":str}.\n\nRead frame.ascii, shape, level and step to RECOMPUTE current objects, target and\nactions. frame.recent_transitions is refreshed on EVERY call: a tuple of recent\npublic transitions with action, before_frame, after_frame and result attributes.\nframe.valid_actions and frame.last_action_result are current public facts.\nUnknown historical state is not a fact; if essential state cannot be recovered,\nabstain or propose only ONE useful action. completed refers only to your local\ntarget, never a claim of environment success. Do not hardcode a moving target\nas current_position plus a fixed distance on every call: express a meaningful\ntask target computed from the current board and known facts.\n\nThe host executes at most THREE actions for this contract, recalculating the\nplan from the real new frame before every next action. Predictions are frozen\nBEFORE action, cover BOTH declared object and target pixels and no undeclared\npixels. A noop must explain a task-relevant obstruction/precondition, not just\nunchanged distant background. Pixel agreement does not prove your rule correct.\nMOUSE uses row/col; other actions contain only action. No RESET/UNDO, calls to\naction(), prints or top-level execution. No decorators, default arguments,\nannotations, global or nonlocal. Computational imports math, collections,\nitertools, heapq, numpy are supported. Globals do not persist: keep parameters\ninside functions, reuse supplied helpers and rebind layout from this frame.\nDo not copy every pixel as a replacement model. No explanation outside the\nsingle submit_program tool call. Keep the program short enough to finish this response.\n\n\nCOMPACT LIVE EVIDENCE PACKAGE:\n{\"facts\":{\"current_observation\":{\"level\":1,\"step\":1,\"shape\":[5,10],\"grid_sha256\":\"72e7027bd5d932a5ef6f318ba3ff376e97eca01657c941fe37813d29c0e5537d\",\"ascii\":\"WWWWWWWWWW\\nWWWWWWWWWW\\ngWWWWWWWWW\\nWWWWWWWWWW\\nWWWWWWWWWW\"},\"recent_real_transitions\":[{\"action\":\"RIGHT\",\"after\":{\"level\":1,\"step\":1,\"shape\":[5,10],\"grid_sha256\":\"72e7027bd5d932a5ef6f318ba3ff376e97eca01657c941fe37813d29c0e5537d\"},\"result\":{\"executed\":true,\"level_completed\":false,\"game_over\":false,\"gameplay_changed\":true},\"before_available\":false,\"after_ascii\":\"WWWWWWWWWW\\nWWWWWWWWWW\\ngWWWWWWWWW\\nWWWWWWWWWW\\nWWWWWWWWWW\"}],\"last_actual_result\":{\"executed\":true,\"action_num\":1,\"level\":1,\"score\":null,\"state\":\"NOT_FINISHED\",\"valid_actions\":[\"RIGHT\",\"LEFT\"],\"board_changed\":true,\"done\":false,\"level_completed\":false,\"game_over\":false,\"run_complete\":false,\"action_display\":null,\"gameplay_changed\":true,\"executed_actions\":[\"RIGHT\"],\"executed_count\":1,\"requested_count\":1,\"stopped_early\":true,\"executable_plan_interrupt\":true,\"stop_reason\":\"executable_plan\",\"stop_detail\":\"034 mismatch; remaining code and plan suffix stopped.\"},\"available_actions\":[\"RIGHT\",\"LEFT\"],\"remaining_game_seconds\":1000.0,\"auxiliary_seconds_already_used\":0.1352134170010686,\"trigger\":{\"kind\":\"repair\",\"counterexample\":{\"kind\":\"counterexample\",\"status\":\"mismatch\",\"action\":{\"action\":\"RIGHT\"},\"expected\":{\"mode\":\"change\",\"action\":{\"action\":\"RIGHT\"},\"object_pixels\":[[2,1,\"g\"]],\"target_pixels\":[[2,2,\"W\"]],\"expected_pixels\":[[2,1,\"W\"],[2,2,\"g\"]],\"precondition\":\"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\",\"scope\":\"visible marker source and destination pixels\",\"grid_shape\":[5,10]},\"observed\":{\"status\":\"mismatch\",\"scope\":\"visible marker source and destination pixels\",\"mode\":\"change\",\"action\":{\"action\":\"RIGHT\"},\"expected\":{\"pixels\":[[2,1,\"W\"],[2,2,\"g\"]],\"pixel_count\":2,\"sha256\":\"d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e\",\"truncated\":false},\"observed\":{\"pixels\":[[2,1,\"W\"],[2,2,\"W\"]],\"pixel_count\":2,\"sha256\":\"38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277\",\"truncated\":false},\"checked_pixels\":2,\"different_pixels\":1,\"differences\":[{\"row\":2,\"col\":2,\"expected\":\"g\",\"observed\":\"W\"}],\"prediction_sha256\":\"068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf\",\"observed_projection_sha256\":\"38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277\",\"semantic_relevance_verified\":false,\"claim\":\"Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified\"}},\"previous_program_hash\":\"144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439\"}},\"paused_code\":\"old_plan = [\\\"LEFT\\\", \\\"LEFT\\\", \\\"LEFT\\\"]\\naction(old_plan)\\nprint(\\\"OLD_SUFFIX_EXECUTED\\\")\\n\",\"related_functions\":{\"locate\":\"def locate(frame):\\n    rows = frame.ascii.splitlines()\\n    for row, line in enumerate(rows):\\n        if 'g' in line:\\n            return row, line.index('g'), len(line)\\n    raise ValueError(\\\"visible marker absent\\\")\"},\"previous_program\":\"def locate(frame):\\n    rows = frame.ascii.splitlines()\\n    for row, line in enumerate(rows):\\n        if 'g' in line:\\n            return row, line.index('g'), len(line)\\n    raise ValueError(\\\"visible marker absent\\\")\\n\\ndef plan_program(frame):\\n    row, col, width = locate(frame)\\n    target = min(3, width - 1)\\n    status = None or (\\\"completed\\\" if col >= target else \\\"ready\\\")\\n    return {\\\"status\\\": status,\\n            \\\"goal\\\": {\\\"start_col\\\": col, \\\"target_col\\\": target, \\\"observed_step\\\": frame.step,\\n                       \\\"transition_count\\\": len(frame.recent_transitions)},\\n            \\\"actions\\\": [{\\\"action\\\": \\\"RIGHT\\\"} for _ in range(min(3, max(0, target - col)))] if status == \\\"ready\\\" else [],\\n            \\\"evidence_pixels\\\": [[row, col, 'g']],\\n            \\\"replaces\\\": [\\\"old_plan\\\"],\\n            \\\"reason\\\": \\\"Read the current marker and recompute its target and action count\\\"}\\n\\ndef predict(frame, action):\\n    row, col, width = locate(frame)\\n    delta = 1 if action[\\\"action\\\"] == \\\"RIGHT\\\" else -1\\n    next_col = max(0, min(width - 1, col + delta))\\n    return {\\\"mode\\\": \\\"change\\\", \\\"action\\\": action,\\n            \\\"object_pixels\\\": [[row, col, 'g']],\\n            \\\"target_pixels\\\": [[row, next_col, 'W']],\\n            \\\"precondition\\\": \\\"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\\\",\\n            \\\"scope\\\": \\\"visible marker source and destination pixels\\\",\\n            \\\"expected_pixels\\\": [[row, col, 'W'], [row, next_col, 'g']]}\\n\",\"unverified_hypotheses\":{\"status\":\"unverified\",\"source\":\"paused code and prior predictor\",\"note\":\"Their targets, rules and old layout constants are hypotheses, not environment facts.\",\"unresolved_old_globals\":[]}}"
+      }
+    }
+  ],
+  "tool_output": {
+    "tool": "python",
+    "executable_plan": {
+      "status": "recomputed_plan_executed",
+      "actual_actions": 4,
+      "made_progress": true,
+      "goal": {
+        "observed_step": 0,
+        "start_col": 1,
+        "target_col": 3,
+        "transition_count": 0
+      },
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "stop_reason": "counterexample",
+      "tool_output": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nExecutablePlanInterrupted: 034 mismatch; remaining code and plan suffix stopped."
+      },
+      "environment_success_claim": false,
+      "extra_seconds_used": 0.4455271669430658,
+      "followup_repair": {
+        "status": "recomputed_plan_executed",
+        "actual_actions": 3,
+        "made_progress": true,
+        "goal": {
+          "observed_step": 1,
+          "start_col": 0,
+          "target_col": 3,
+          "transition_count": 1
+        },
+        "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+        "stop_reason": "short_plan_action_limit",
+        "tool_output": {
+          "tool": "python",
+          "returncode": 0,
+          "result": {
+            "executed": true,
+            "action_num": 4,
+            "level": 1,
+            "score": null,
+            "state": "NOT_FINISHED",
+            "valid_actions": [
+              "RIGHT",
+              "LEFT"
+            ],
+            "board_changed": true,
+            "done": false,
+            "level_completed": false,
+            "game_over": false,
+            "run_complete": false,
+            "action_display": null,
+            "gameplay_changed": true,
+            "executed_actions": [
+              "RIGHT"
+            ],
+            "executed_count": 1,
+            "requested_count": 1,
+            "stopped_early": false
+          }
+        },
+        "environment_success_claim": false,
+        "extra_seconds_used": 0.4455271669430658
+      }
+    },
+    "paused_snippet_status": "old_suffix_abandoned; recomputed program actually executed"
+  },
+  "step_executed": true,
+  "made_progress": true,
+  "events": [
+    {
+      "observation_id": 0,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": null,
+      "kind": "bootstrap",
+      "source_code": "old_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n",
+      "proposed_actions": [
+        {
+          "action": "LEFT"
+        },
+        {
+          "action": "LEFT"
+        },
+        {
+          "action": "LEFT"
+        }
+      ],
+      "already_executed_in_snippet": 0,
+      "before_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+    },
+    {
+      "observation_id": 0,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "contract_bound",
+      "status": "ready",
+      "plan": {
+        "actions": [
+          {
+            "action": "RIGHT"
+          },
+          {
+            "action": "RIGHT"
+          }
+        ],
+        "evidence_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "goal": {
+          "observed_step": 0,
+          "start_col": 1,
+          "target_col": 3,
+          "transition_count": 0
+        },
+        "reason": "Read the current marker and recompute its target and action count",
+        "replaces": [
+          "old_plan"
+        ],
+        "status": "ready"
+      },
+      "input_step": 0,
+      "input_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+    },
+    {
+      "observation_id": 0,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "prediction_frozen",
+      "action": {
+        "action": "RIGHT"
+      },
+      "before": {
+        "step": 0,
+        "grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ],
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "evidence": "prediction before real action, unproven dynamics"
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "checked_action",
+      "action": {
+        "action": "RIGHT"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ],
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "observed": {
+        "status": "mismatch",
+        "scope": "visible marker source and destination pixels",
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "expected": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+          "truncated": false
+        },
+        "observed": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "W"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+          "truncated": false
+        },
+        "checked_pixels": 2,
+        "different_pixels": 1,
+        "differences": [
+          {
+            "row": 2,
+            "col": 2,
+            "expected": "g",
+            "observed": "W"
+          }
+        ],
+        "prediction_sha256": "068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf",
+        "observed_projection_sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+        "semantic_relevance_verified": false,
+        "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+      },
+      "status": "mismatch",
+      "actual_actions": 1,
+      "semantic_relevance_verified": false,
+      "transition": {
+        "before": {
+          "step": 0,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWgWWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "after": {
+          "step": 1,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\ngWWWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "shape_changed": false,
+        "changed_pixels": [
+          [
+            2,
+            0,
+            "W",
+            "g"
+          ],
+          [
+            2,
+            1,
+            "g",
+            "W"
+          ]
+        ],
+        "changed_pixel_count": 2
+      }
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "counterexample",
+      "status": "mismatch",
+      "action": {
+        "action": "RIGHT"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ],
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "observed": {
+        "status": "mismatch",
+        "scope": "visible marker source and destination pixels",
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "expected": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+          "truncated": false
+        },
+        "observed": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "W"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+          "truncated": false
+        },
+        "checked_pixels": 2,
+        "different_pixels": 1,
+        "differences": [
+          {
+            "row": 2,
+            "col": 2,
+            "expected": "g",
+            "observed": "W"
+          }
+        ],
+        "prediction_sha256": "068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf",
+        "observed_projection_sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+        "semantic_relevance_verified": false,
+        "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+      },
+      "invalidated_program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439"
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "contract_released",
+      "status": "mismatch",
+      "matched_actions": 0
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "host_plan_execution",
+      "status": "recomputed_plan_executed",
+      "actual_actions": 1,
+      "made_progress": true,
+      "goal": {
+        "observed_step": 0,
+        "start_col": 1,
+        "target_col": 3,
+        "transition_count": 0
+      },
+      "stop_reason": "counterexample",
+      "tool_output": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nExecutablePlanInterrupted: 034 mismatch; remaining code and plan suffix stopped."
+      },
+      "environment_success_claim": false,
+      "extra_seconds_used": 0.1352134170010686
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "program_recomputed",
+      "trigger": {
+        "kind": "bootstrap",
+        "source_code": "old_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n",
+        "proposed_actions": [
+          {
+            "action": "LEFT"
+          },
+          {
+            "action": "LEFT"
+          },
+          {
+            "action": "LEFT"
+          }
+        ],
+        "already_executed_in_snippet": 0,
+        "before_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+      },
+      "actual_actions": 1,
+      "stage": "finished",
+      "timings": {
+        "context_seconds": 0.00011679204180836678,
+        "request_seconds": 2.195802517235279e-05,
+        "validation_seconds": 0.07871570799034089,
+        "host_execution_seconds": 0.05557916592806578
+      },
+      "request_record": {},
+      "request_budget_seconds": 60.0,
+      "semantic_claim": "Current declared pixels and action binding only; goal and rules remain hypotheses",
+      "context_metadata": {
+        "context_schema": "034-compact-evidence-v1",
+        "messages_sha256": "e7542b49981289da4b2d7423ab19cd7369001c8ac47808aebc006619f147d5f1",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "paused_code_sha256": "0188b6279936fc1a27042580b282d7ce69ed891c2617187ac87912e92cd23d90",
+        "related_functions": [],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 0,
+        "current_observation": {
+          "level": 1,
+          "step": 0,
+          "shape": [
+            5,
+            10
+          ],
+          "grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+        },
+        "message_characters": 4165,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "response": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "cpu-0",
+            "type": "function",
+            "function": {
+              "name": "submit_program",
+              "arguments": "{\"code\": \"def locate(frame):\\n    rows = frame.ascii.splitlines()\\n    for row, line in enumerate(rows):\\n        if 'g' in line:\\n            return row, line.index('g'), len(line)\\n    raise ValueError(\\\"visible marker absent\\\")\\n\\ndef plan_program(frame):\\n    row, col, width = locate(frame)\\n    target = min(3, width - 1)\\n    status = None or (\\\"completed\\\" if col >= target else \\\"ready\\\")\\n    return {\\\"status\\\": status,\\n            \\\"goal\\\": {\\\"start_col\\\": col, \\\"target_col\\\": target, \\\"observed_step\\\": frame.step,\\n                       \\\"transition_count\\\": len(frame.recent_transitions)},\\n            \\\"actions\\\": [{\\\"action\\\": \\\"RIGHT\\\"} for _ in range(min(3, max(0, target - col)))] if status == \\\"ready\\\" else [],\\n            \\\"evidence_pixels\\\": [[row, col, 'g']],\\n            \\\"replaces\\\": [\\\"old_plan\\\"],\\n            \\\"reason\\\": \\\"Read the current marker and recompute its target and action count\\\"}\\n\\ndef predict(frame, action):\\n    row, col, width = locate(frame)\\n    delta = 1 if action[\\\"action\\\"] == \\\"RIGHT\\\" else -1\\n    next_col = max(0, min(width - 1, col + delta))\\n    return {\\\"mode\\\": \\\"change\\\", \\\"action\\\": action,\\n            \\\"object_pixels\\\": [[row, col, 'g']],\\n            \\\"target_pixels\\\": [[row, next_col, 'W']],\\n            \\\"precondition\\\": \\\"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\\\",\\n            \\\"scope\\\": \\\"visible marker source and destination pixels\\\",\\n            \\\"expected_pixels\\\": [[row, col, 'W'], [row, next_col, 'g']]}\\n\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "served_by": "scripted-cpu",
+      "program_code": "def locate(frame):\n    rows = frame.ascii.splitlines()\n    for row, line in enumerate(rows):\n        if 'g' in line:\n            return row, line.index('g'), len(line)\n    raise ValueError(\"visible marker absent\")\n\ndef plan_program(frame):\n    row, col, width = locate(frame)\n    target = min(3, width - 1)\n    status = None or (\"completed\" if col >= target else \"ready\")\n    return {\"status\": status,\n            \"goal\": {\"start_col\": col, \"target_col\": target, \"observed_step\": frame.step,\n                       \"transition_count\": len(frame.recent_transitions)},\n            \"actions\": [{\"action\": \"RIGHT\"} for _ in range(min(3, max(0, target - col)))] if status == \"ready\" else [],\n            \"evidence_pixels\": [[row, col, 'g']],\n            \"replaces\": [\"old_plan\"],\n            \"reason\": \"Read the current marker and recompute its target and action count\"}\n\ndef predict(frame, action):\n    row, col, width = locate(frame)\n    delta = 1 if action[\"action\"] == \"RIGHT\" else -1\n    next_col = max(0, min(width - 1, col + delta))\n    return {\"mode\": \"change\", \"action\": action,\n            \"object_pixels\": [[row, col, 'g']],\n            \"target_pixels\": [[row, next_col, 'W']],\n            \"precondition\": \"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\",\n            \"scope\": \"visible marker source and destination pixels\",\n            \"expected_pixels\": [[row, col, 'W'], [row, next_col, 'g']]}\n",
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [
+            {
+              "action": "RIGHT"
+            },
+            {
+              "action": "RIGHT"
+            }
+          ],
+          "evidence_pixels": [
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "goal": {
+            "observed_step": 0,
+            "start_col": 1,
+            "target_col": 3,
+            "transition_count": 0
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [
+            "old_plan"
+          ],
+          "status": "ready"
+        },
+        "plan_sha256": "4c60f695e19634f1253d70fe80550d3b31ec055a71777ba6fe06a645f8a4abf0",
+        "input_grid_sha256": "ebb8d0b5bf2576915c6551189a354aceb15d39cc896615fcea6b857c70bc2dcd",
+        "coverage": {
+          "evidence_pixels": 1,
+          "frame_pixels": 50,
+          "fraction": 0.02
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      },
+      "first_prediction_validation": {
+        "passed": true,
+        "status": "declared_action_prediction",
+        "errors": [],
+        "prediction": {
+          "mode": "change",
+          "action": {
+            "action": "RIGHT"
+          },
+          "object_pixels": [
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "target_pixels": [
+            [
+              2,
+              2,
+              "W"
+            ]
+          ],
+          "expected_pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+          "scope": "visible marker source and destination pixels",
+          "grid_shape": [
+            5,
+            10
+          ]
+        },
+        "prediction_sha256": "068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf",
+        "input_grid_sha256": "ebb8d0b5bf2576915c6551189a354aceb15d39cc896615fcea6b857c70bc2dcd",
+        "coverage": {
+          "selected_pixels": 2,
+          "frame_pixels": 50,
+          "fraction": 0.04,
+          "predicted_changed_pixels": 2,
+          "predicted_unchanged_pixels": 0,
+          "unchanged_only": false,
+          "object_pixels": 1,
+          "target_pixels": 1
+        },
+        "action_bound": true,
+        "semantic_relevance_verified": false,
+        "claim": "Current object/target pixels and pending action grounded; semantic relevance, precondition and dynamics unverified"
+      },
+      "status": "recomputed_plan_executed",
+      "goal": {
+        "observed_step": 0,
+        "start_col": 1,
+        "target_col": 3,
+        "transition_count": 0
+      },
+      "plan_hash": "9727c870e2c67d9551be6e9c3872af6eedc07fcf8ce88a0c8062db3dbefe3c03",
+      "proposed_actions": [
+        {
+          "action": "RIGHT"
+        },
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "stop_reason": "counterexample",
+      "elapsed_seconds": 0.1352134170010686,
+      "extra_seconds_used": 0.1352134170010686,
+      "budget_overrun_seconds": 0.0
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "contract_bound",
+      "status": "ready",
+      "plan": {
+        "actions": [
+          {
+            "action": "RIGHT"
+          },
+          {
+            "action": "RIGHT"
+          },
+          {
+            "action": "RIGHT"
+          }
+        ],
+        "evidence_pixels": [
+          [
+            2,
+            0,
+            "g"
+          ]
+        ],
+        "goal": {
+          "observed_step": 1,
+          "start_col": 0,
+          "target_col": 3,
+          "transition_count": 1
+        },
+        "reason": "Read the current marker and recompute its target and action count",
+        "replaces": [
+          "old_plan"
+        ],
+        "status": "ready"
+      },
+      "input_step": 1,
+      "input_grid_sha256": "72e7027bd5d932a5ef6f318ba3ff376e97eca01657c941fe37813d29c0e5537d"
+    },
+    {
+      "observation_id": 1,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "prediction_frozen",
+      "action": {
+        "action": "RIGHT"
+      },
+      "before": {
+        "step": 1,
+        "grid_sha256": "72e7027bd5d932a5ef6f318ba3ff376e97eca01657c941fe37813d29c0e5537d"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            0,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            0,
+            "W"
+          ],
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "evidence": "prediction before real action, unproven dynamics"
+    },
+    {
+      "observation_id": 2,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "checked_action",
+      "action": {
+        "action": "RIGHT"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            0,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            0,
+            "W"
+          ],
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "observed": {
+        "status": "match",
+        "scope": "visible marker source and destination pixels",
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "expected": {
+          "pixels": [
+            [
+              2,
+              0,
+              "W"
+            ],
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "15306490a251fc167173628bb5a4f5013739cc812e139068278ca565563219cb",
+          "truncated": false
+        },
+        "observed": {
+          "pixels": [
+            [
+              2,
+              0,
+              "W"
+            ],
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "15306490a251fc167173628bb5a4f5013739cc812e139068278ca565563219cb",
+          "truncated": false
+        },
+        "checked_pixels": 2,
+        "different_pixels": 0,
+        "differences": [],
+        "prediction_sha256": "bde8c601b5ae8a43c205464cf4351e12bacc7e35fc571f7b2110f2c05a20d4aa",
+        "observed_projection_sha256": "15306490a251fc167173628bb5a4f5013739cc812e139068278ca565563219cb",
+        "semantic_relevance_verified": false,
+        "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+      },
+      "status": "match",
+      "actual_actions": 1,
+      "semantic_relevance_verified": false,
+      "transition": {
+        "before": {
+          "step": 1,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\ngWWWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "after": {
+          "step": 2,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWgWWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "shape_changed": false,
+        "changed_pixels": [
+          [
+            2,
+            0,
+            "g",
+            "W"
+          ],
+          [
+            2,
+            1,
+            "W",
+            "g"
+          ]
+        ],
+        "changed_pixel_count": 2
+      }
+    },
+    {
+      "observation_id": 2,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "plan_recomputed",
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [
+            {
+              "action": "RIGHT"
+            },
+            {
+              "action": "RIGHT"
+            }
+          ],
+          "evidence_pixels": [
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "goal": {
+            "observed_step": 2,
+            "start_col": 1,
+            "target_col": 3,
+            "transition_count": 2
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [
+            "old_plan"
+          ],
+          "status": "ready"
+        },
+        "plan_sha256": "050059b3bc63bbac58919a84cc3e398ab31c5009f24f860dc9e83977091a6622",
+        "input_grid_sha256": "ebb8d0b5bf2576915c6551189a354aceb15d39cc896615fcea6b857c70bc2dcd",
+        "coverage": {
+          "evidence_pixels": 1,
+          "frame_pixels": 50,
+          "fraction": 0.02
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      },
+      "input_step": 2,
+      "input_grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa",
+      "recent_real_actions": [
+        {
+          "action": "RIGHT",
+          "level": 1,
+          "step": 1,
+          "result": {
+            "executed": true,
+            "level_completed": false,
+            "game_over": false,
+            "gameplay_changed": true
+          }
+        },
+        {
+          "action": "RIGHT",
+          "level": 1,
+          "step": 2,
+          "result": {
+            "executed": true,
+            "level_completed": false,
+            "game_over": false,
+            "gameplay_changed": true
+          }
+        }
+      ]
+    },
+    {
+      "observation_id": 2,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "prediction_frozen",
+      "action": {
+        "action": "RIGHT"
+      },
+      "before": {
+        "step": 2,
+        "grid_sha256": "5e0fb1e05bcd4970d0cd7a831bc13386020e45236b50bebfd1488daa26ccf0aa"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ],
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "evidence": "prediction before real action, unproven dynamics"
+    },
+    {
+      "observation_id": 3,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "checked_action",
+      "action": {
+        "action": "RIGHT"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            1,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            1,
+            "W"
+          ],
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "observed": {
+        "status": "match",
+        "scope": "visible marker source and destination pixels",
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "expected": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+          "truncated": false
+        },
+        "observed": {
+          "pixels": [
+            [
+              2,
+              1,
+              "W"
+            ],
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+          "truncated": false
+        },
+        "checked_pixels": 2,
+        "different_pixels": 0,
+        "differences": [],
+        "prediction_sha256": "068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf",
+        "observed_projection_sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+        "semantic_relevance_verified": false,
+        "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+      },
+      "status": "match",
+      "actual_actions": 1,
+      "semantic_relevance_verified": false,
+      "transition": {
+        "before": {
+          "step": 2,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWgWWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "after": {
+          "step": 3,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWWgWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "shape_changed": false,
+        "changed_pixels": [
+          [
+            2,
+            1,
+            "g",
+            "W"
+          ],
+          [
+            2,
+            2,
+            "W",
+            "g"
+          ]
+        ],
+        "changed_pixel_count": 2
+      }
+    },
+    {
+      "observation_id": 3,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "plan_recomputed",
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [
+            {
+              "action": "RIGHT"
+            }
+          ],
+          "evidence_pixels": [
+            [
+              2,
+              2,
+              "g"
+            ]
+          ],
+          "goal": {
+            "observed_step": 3,
+            "start_col": 2,
+            "target_col": 3,
+            "transition_count": 3
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [
+            "old_plan"
+          ],
+          "status": "ready"
+        },
+        "plan_sha256": "43c231a3599c7c96b7d5a3caa156ffdc68a00b0c28331fd5130bfa574a4a1bd9",
+        "input_grid_sha256": "95a1f6fcf6c2825db845d4faf8be90fabf667839c3e27fa31bbd9c86d80112d6",
+        "coverage": {
+          "evidence_pixels": 1,
+          "frame_pixels": 50,
+          "fraction": 0.02
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      },
+      "input_step": 3,
+      "input_grid_sha256": "6d4103dc30ece493d371a6f29bf9bd4ac9202ec2160dbb6ceb75e967f5cb8542",
+      "recent_real_actions": [
+        {
+          "action": "RIGHT",
+          "level": 1,
+          "step": 1,
+          "result": {
+            "executed": true,
+            "level_completed": false,
+            "game_over": false,
+            "gameplay_changed": true
+          }
+        },
+        {
+          "action": "RIGHT",
+          "level": 1,
+          "step": 2,
+          "result": {
+            "executed": true,
+            "level_completed": false,
+            "game_over": false,
+            "gameplay_changed": true
+          }
+        },
+        {
+          "action": "RIGHT",
+          "level": 1,
+          "step": 3,
+          "result": {
+            "executed": true,
+            "level_completed": false,
+            "game_over": false,
+            "gameplay_changed": true
+          }
+        }
+      ]
+    },
+    {
+      "observation_id": 3,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "prediction_frozen",
+      "action": {
+        "action": "RIGHT"
+      },
+      "before": {
+        "step": 3,
+        "grid_sha256": "6d4103dc30ece493d371a6f29bf9bd4ac9202ec2160dbb6ceb75e967f5cb8542"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            3,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ],
+          [
+            2,
+            3,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "evidence": "prediction before real action, unproven dynamics"
+    },
+    {
+      "observation_id": 4,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "checked_action",
+      "action": {
+        "action": "RIGHT"
+      },
+      "expected": {
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "object_pixels": [
+          [
+            2,
+            2,
+            "g"
+          ]
+        ],
+        "target_pixels": [
+          [
+            2,
+            3,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            2,
+            2,
+            "W"
+          ],
+          [
+            2,
+            3,
+            "g"
+          ]
+        ],
+        "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+        "scope": "visible marker source and destination pixels",
+        "grid_shape": [
+          5,
+          10
+        ]
+      },
+      "observed": {
+        "status": "match",
+        "scope": "visible marker source and destination pixels",
+        "mode": "change",
+        "action": {
+          "action": "RIGHT"
+        },
+        "expected": {
+          "pixels": [
+            [
+              2,
+              2,
+              "W"
+            ],
+            [
+              2,
+              3,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "bf8446d20c925079c4a2797a61390fdb0eb2ddcf5d4246c6f94bc1ef3bade50f",
+          "truncated": false
+        },
+        "observed": {
+          "pixels": [
+            [
+              2,
+              2,
+              "W"
+            ],
+            [
+              2,
+              3,
+              "g"
+            ]
+          ],
+          "pixel_count": 2,
+          "sha256": "bf8446d20c925079c4a2797a61390fdb0eb2ddcf5d4246c6f94bc1ef3bade50f",
+          "truncated": false
+        },
+        "checked_pixels": 2,
+        "different_pixels": 0,
+        "differences": [],
+        "prediction_sha256": "42697eb3468519d0b8f2fb282d9f077b78fbfb9b1a7c3fd1a1dd079b196489cb",
+        "observed_projection_sha256": "bf8446d20c925079c4a2797a61390fdb0eb2ddcf5d4246c6f94bc1ef3bade50f",
+        "semantic_relevance_verified": false,
+        "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+      },
+      "status": "match",
+      "actual_actions": 1,
+      "semantic_relevance_verified": false,
+      "transition": {
+        "before": {
+          "step": 3,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWWgWWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "after": {
+          "step": 4,
+          "level": 1,
+          "ascii": "WWWWWWWWWW\nWWWWWWWWWW\nWWWgWWWWWW\nWWWWWWWWWW\nWWWWWWWWWW"
+        },
+        "shape_changed": false,
+        "changed_pixels": [
+          [
+            2,
+            2,
+            "g",
+            "W"
+          ],
+          [
+            2,
+            3,
+            "W",
+            "g"
+          ]
+        ],
+        "changed_pixel_count": 2
+      }
+    },
+    {
+      "observation_id": 4,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "contract_released",
+      "status": "short_plan_ended",
+      "matched_actions": 3
+    },
+    {
+      "observation_id": 4,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "host_plan_execution",
+      "status": "recomputed_plan_executed",
+      "actual_actions": 3,
+      "made_progress": true,
+      "goal": {
+        "observed_step": 1,
+        "start_col": 0,
+        "target_col": 3,
+        "transition_count": 1
+      },
+      "stop_reason": "short_plan_action_limit",
+      "tool_output": {
+        "tool": "python",
+        "returncode": 0,
+        "result": {
+          "executed": true,
+          "action_num": 4,
+          "level": 1,
+          "score": null,
+          "state": "NOT_FINISHED",
+          "valid_actions": [
+            "RIGHT",
+            "LEFT"
+          ],
+          "board_changed": true,
+          "done": false,
+          "level_completed": false,
+          "game_over": false,
+          "run_complete": false,
+          "action_display": null,
+          "gameplay_changed": true,
+          "executed_actions": [
+            "RIGHT"
+          ],
+          "executed_count": 1,
+          "requested_count": 1,
+          "stopped_early": false
+        }
+      },
+      "environment_success_claim": false,
+      "extra_seconds_used": 0.4455271669430658
+    },
+    {
+      "observation_id": 4,
+      "attempt_event": 0,
+      "level": 1,
+      "program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+      "kind": "program_recomputed",
+      "trigger": {
+        "kind": "repair",
+        "counterexample": {
+          "kind": "counterexample",
+          "status": "mismatch",
+          "action": {
+            "action": "RIGHT"
+          },
+          "expected": {
+            "mode": "change",
+            "action": {
+              "action": "RIGHT"
+            },
+            "object_pixels": [
+              [
+                2,
+                1,
+                "g"
+              ]
+            ],
+            "target_pixels": [
+              [
+                2,
+                2,
+                "W"
+              ]
+            ],
+            "expected_pixels": [
+              [
+                2,
+                1,
+                "W"
+              ],
+              [
+                2,
+                2,
+                "g"
+              ]
+            ],
+            "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+            "scope": "visible marker source and destination pixels",
+            "grid_shape": [
+              5,
+              10
+            ]
+          },
+          "observed": {
+            "status": "mismatch",
+            "scope": "visible marker source and destination pixels",
+            "mode": "change",
+            "action": {
+              "action": "RIGHT"
+            },
+            "expected": {
+              "pixels": [
+                [
+                  2,
+                  1,
+                  "W"
+                ],
+                [
+                  2,
+                  2,
+                  "g"
+                ]
+              ],
+              "pixel_count": 2,
+              "sha256": "d157dcaccc9d6aadc1dcc19faa5fde0ec62da69952a9f994c2f300d011b7548e",
+              "truncated": false
+            },
+            "observed": {
+              "pixels": [
+                [
+                  2,
+                  1,
+                  "W"
+                ],
+                [
+                  2,
+                  2,
+                  "W"
+                ]
+              ],
+              "pixel_count": 2,
+              "sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+              "truncated": false
+            },
+            "checked_pixels": 2,
+            "different_pixels": 1,
+            "differences": [
+              {
+                "row": 2,
+                "col": 2,
+                "expected": "g",
+                "observed": "W"
+              }
+            ],
+            "prediction_sha256": "068c677a0a1c2558a720fc917e7bacb46a6e7b21fe62dd4d871f956a0514c8bf",
+            "observed_projection_sha256": "38503559e146b4842e310bf1e819499ac5874903f924500d317290111e441277",
+            "semantic_relevance_verified": false,
+            "claim": "Agreement/disagreement of frozen declared object/target pixels only; semantic relevance and goal unverified"
+          }
+        },
+        "source_code": "old_plan = [\"LEFT\", \"LEFT\", \"LEFT\"]\naction(old_plan)\nprint(\"OLD_SUFFIX_EXECUTED\")\n",
+        "previous_program_hash": "144711c99f00e2b089a118d0c4c6134eba6a86dfac4135218a2f316556fc6439",
+        "previous_program": "def locate(frame):\n    rows = frame.ascii.splitlines()\n    for row, line in enumerate(rows):\n        if 'g' in line:\n            return row, line.index('g'), len(line)\n    raise ValueError(\"visible marker absent\")\n\ndef plan_program(frame):\n    row, col, width = locate(frame)\n    target = min(3, width - 1)\n    status = None or (\"completed\" if col >= target else \"ready\")\n    return {\"status\": status,\n            \"goal\": {\"start_col\": col, \"target_col\": target, \"observed_step\": frame.step,\n                       \"transition_count\": len(frame.recent_transitions)},\n            \"actions\": [{\"action\": \"RIGHT\"} for _ in range(min(3, max(0, target - col)))] if status == \"ready\" else [],\n            \"evidence_pixels\": [[row, col, 'g']],\n            \"replaces\": [\"old_plan\"],\n            \"reason\": \"Read the current marker and recompute its target and action count\"}\n\ndef predict(frame, action):\n    row, col, width = locate(frame)\n    delta = 1 if action[\"action\"] == \"RIGHT\" else -1\n    next_col = max(0, min(width - 1, col + delta))\n    return {\"mode\": \"change\", \"action\": action,\n            \"object_pixels\": [[row, col, 'g']],\n            \"target_pixels\": [[row, next_col, 'W']],\n            \"precondition\": \"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\",\n            \"scope\": \"visible marker source and destination pixels\",\n            \"expected_pixels\": [[row, col, 'W'], [row, next_col, 'g']]}\n"
+      },
+      "actual_actions": 3,
+      "stage": "finished",
+      "timings": {
+        "context_seconds": 0.0004019578918814659,
+        "request_seconds": 1.0292045772075653e-05,
+        "validation_seconds": 0.08252266701310873,
+        "host_execution_seconds": 0.2266350839054212
+      },
+      "request_record": {},
+      "request_budget_seconds": 60.0,
+      "semantic_claim": "Current declared pixels and action binding only; goal and rules remain hypotheses",
+      "context_metadata": {
+        "context_schema": "034-compact-evidence-v1",
+        "messages_sha256": "d739e8beeb1946d5b42283bd0871364a9598cfe9029bfdb8a4d1b64bdea0545f",
+        "old_conversation_included": false,
+        "source_truncated": false,
+        "paused_code_sha256": "0188b6279936fc1a27042580b282d7ce69ed891c2617187ac87912e92cd23d90",
+        "related_functions": [
+          "locate"
+        ],
+        "related_sources_truncated": false,
+        "unresolved_old_globals": [],
+        "recent_transition_count": 1,
+        "current_observation": {
+          "level": 1,
+          "step": 1,
+          "shape": [
+            5,
+            10
+          ],
+          "grid_sha256": "72e7027bd5d932a5ef6f318ba3ff376e97eca01657c941fe37813d29c0e5537d"
+        },
+        "message_characters": 7946,
+        "token_limit_check": "final_payload_server_tokenize_before_generation"
+      },
+      "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 37,
+        "total_tokens": 48
+      },
+      "response": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "cpu-1",
+            "type": "function",
+            "function": {
+              "name": "submit_program",
+              "arguments": "{\"code\": \"def locate(frame):\\n    rows = frame.ascii.splitlines()\\n    for row, line in enumerate(rows):\\n        if 'g' in line:\\n            return row, line.index('g'), len(line)\\n    raise ValueError(\\\"visible marker absent\\\")\\n\\ndef plan_program(frame):\\n    row, col, width = locate(frame)\\n    target = min(3, width - 1)\\n    status = None or (\\\"completed\\\" if col >= target else \\\"ready\\\")\\n    return {\\\"status\\\": status,\\n            \\\"goal\\\": {\\\"start_col\\\": col, \\\"target_col\\\": target, \\\"observed_step\\\": frame.step,\\n                       \\\"transition_count\\\": len(frame.recent_transitions)},\\n            \\\"actions\\\": [{\\\"action\\\": \\\"RIGHT\\\"} for _ in range(min(3, max(0, target - col)))] if status == \\\"ready\\\" else [],\\n            \\\"evidence_pixels\\\": [[row, col, 'g']],\\n            \\\"replaces\\\": [\\\"old_plan\\\"],\\n            \\\"reason\\\": \\\"Read the current marker and recompute its target and action count\\\"}\\n\\ndef predict(frame, action):\\n    row, col, width = locate(frame)\\n    delta = 1 if action[\\\"action\\\"] == \\\"RIGHT\\\" else -1\\n    next_col = max(0, min(width - 1, col + delta))\\n    return {\\\"mode\\\": \\\"change\\\", \\\"action\\\": action,\\n            \\\"object_pixels\\\": [[row, col, 'g']],\\n            \\\"target_pixels\\\": [[row, next_col, 'W']],\\n            \\\"precondition\\\": \\\"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\\\",\\n            \\\"scope\\\": \\\"visible marker source and destination pixels\\\",\\n            \\\"expected_pixels\\\": [[row, col, 'W'], [row, next_col, 'g']]}\\n\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "served_by": "scripted-cpu",
+      "program_code": "def locate(frame):\n    rows = frame.ascii.splitlines()\n    for row, line in enumerate(rows):\n        if 'g' in line:\n            return row, line.index('g'), len(line)\n    raise ValueError(\"visible marker absent\")\n\ndef plan_program(frame):\n    row, col, width = locate(frame)\n    target = min(3, width - 1)\n    status = None or (\"completed\" if col >= target else \"ready\")\n    return {\"status\": status,\n            \"goal\": {\"start_col\": col, \"target_col\": target, \"observed_step\": frame.step,\n                       \"transition_count\": len(frame.recent_transitions)},\n            \"actions\": [{\"action\": \"RIGHT\"} for _ in range(min(3, max(0, target - col)))] if status == \"ready\" else [],\n            \"evidence_pixels\": [[row, col, 'g']],\n            \"replaces\": [\"old_plan\"],\n            \"reason\": \"Read the current marker and recompute its target and action count\"}\n\ndef predict(frame, action):\n    row, col, width = locate(frame)\n    delta = 1 if action[\"action\"] == \"RIGHT\" else -1\n    next_col = max(0, min(width - 1, col + delta))\n    return {\"mode\": \"change\", \"action\": action,\n            \"object_pixels\": [[row, col, 'g']],\n            \"target_pixels\": [[row, next_col, 'W']],\n            \"precondition\": \"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\",\n            \"scope\": \"visible marker source and destination pixels\",\n            \"expected_pixels\": [[row, col, 'W'], [row, next_col, 'g']]}\n",
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [
+            {
+              "action": "RIGHT"
+            },
+            {
+              "action": "RIGHT"
+            },
+            {
+              "action": "RIGHT"
+            }
+          ],
+          "evidence_pixels": [
+            [
+              2,
+              0,
+              "g"
+            ]
+          ],
+          "goal": {
+            "observed_step": 1,
+            "start_col": 0,
+            "target_col": 3,
+            "transition_count": 1
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [
+            "old_plan"
+          ],
+          "status": "ready"
+        },
+        "plan_sha256": "acb7d706e56edeacfcaef8517d04bd04338f67276537ce390930778dcb072134",
+        "input_grid_sha256": "b20ba3a248de6f93477aafd5cf7f95f90ac4201c491f07e7bee6f9f357bc6dfe",
+        "coverage": {
+          "evidence_pixels": 1,
+          "frame_pixels": 50,
+          "fraction": 0.02
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      },
+      "first_prediction_validation": {
+        "passed": true,
+        "status": "declared_action_prediction",
+        "errors": [],
+        "prediction": {
+          "mode": "change",
+          "action": {
+            "action": "RIGHT"
+          },
+          "object_pixels": [
+            [
+              2,
+              0,
+              "g"
+            ]
+          ],
+          "target_pixels": [
+            [
+              2,
+              1,
+              "W"
+            ]
+          ],
+          "expected_pixels": [
+            [
+              2,
+              0,
+              "W"
+            ],
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "precondition": "Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column",
+          "scope": "visible marker source and destination pixels",
+          "grid_shape": [
+            5,
+            10
+          ]
+        },
+        "prediction_sha256": "bde8c601b5ae8a43c205464cf4351e12bacc7e35fc571f7b2110f2c05a20d4aa",
+        "input_grid_sha256": "b20ba3a248de6f93477aafd5cf7f95f90ac4201c491f07e7bee6f9f357bc6dfe",
+        "coverage": {
+          "selected_pixels": 2,
+          "frame_pixels": 50,
+          "fraction": 0.04,
+          "predicted_changed_pixels": 2,
+          "predicted_unchanged_pixels": 0,
+          "unchanged_only": false,
+          "object_pixels": 1,
+          "target_pixels": 1
+        },
+        "action_bound": true,
+        "semantic_relevance_verified": false,
+        "claim": "Current object/target pixels and pending action grounded; semantic relevance, precondition and dynamics unverified"
+      },
+      "status": "recomputed_plan_executed",
+      "goal": {
+        "observed_step": 1,
+        "start_col": 0,
+        "target_col": 3,
+        "transition_count": 1
+      },
+      "plan_hash": "9338249a02a6f51a6938bec81e68bd9e1bfd97e93f461d49dcd9cf6936cd11af",
+      "proposed_actions": [
+        {
+          "action": "RIGHT"
+        },
+        {
+          "action": "RIGHT"
+        },
+        {
+          "action": "RIGHT"
+        }
+      ],
+      "stop_reason": "short_plan_action_limit",
+      "elapsed_seconds": 0.31031374994199723,
+      "extra_seconds_used": 0.4455271669430658,
+      "budget_overrun_seconds": 0.0
+    }
+  ],
+  "patch": {
+    "patch": "034-executable-plan-v4",
+    "games": 1,
+    "bootstrap_calls": 1,
+    "repair_calls": 1,
+    "extra_seconds": 0.4455271669430658,
+    "events": [
+      {
+        "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-v4-cpu-check/mismatch_repairs_then_acts/tool_runtime_state.json",
+        "event_count": 20,
+        "statuses": [
+          "ready",
+          "mismatch",
+          "mismatch",
+          "mismatch",
+          "recomputed_plan_executed",
+          "recomputed_plan_executed",
+          "ready",
+          "match",
+          "match",
+          "match",
+          "short_plan_ended",
+          "recomputed_plan_executed",
+          "recomputed_plan_executed"
+        ]
+      }
+    ]
+  },
+  "retained_functions": {
+    "sentinel": "def sentinel():\n    return \"original\"",
+    "locate": "def locate(frame):\n    rows = frame.ascii.splitlines()\n    for row, line in enumerate(rows):\n        if 'g' in line:\n            return row, line.index('g'), len(line)\n    raise ValueError(\"visible marker absent\")",
+    "plan_program": "def plan_program(frame):\n    row, col, width = locate(frame)\n    target = min(3, width - 1)\n    status = None or (\"completed\" if col >= target else \"ready\")\n    return {\"status\": status,\n            \"goal\": {\"start_col\": col, \"target_col\": target, \"observed_step\": frame.step,\n                       \"transition_count\": len(frame.recent_transitions)},\n            \"actions\": [{\"action\": \"RIGHT\"} for _ in range(min(3, max(0, target - col)))] if status == \"ready\" else [],\n            \"evidence_pixels\": [[row, col, 'g']],\n            \"replaces\": [\"old_plan\"],\n            \"reason\": \"Read the current marker and recompute its target and action count\"}",
+    "predict": "def predict(frame, action):\n    row, col, width = locate(frame)\n    delta = 1 if action[\"action\"] == \"RIGHT\" else -1\n    next_col = max(0, min(width - 1, col + delta))\n    return {\"mode\": \"change\", \"action\": action,\n            \"object_pixels\": [[row, col, 'g']],\n            \"target_pixels\": [[row, next_col, 'W']],\n            \"precondition\": \"Adjacent destination is empty and a RIGHT/LEFT move translates the marker one column\",\n            \"scope\": \"visible marker source and destination pixels\",\n            \"expected_pixels\": [[row, col, 'W'], [row, next_col, 'g']]}"
+  },
+  "final_frame": {
+    "step": 4,
+    "col": 3,
+    "level": 1
+  },
+  "recorded_tokens": {
+    "generated": 74,
+    "total": 96
+  },
+  "elapsed_seconds": 0.4994165829848498
+}

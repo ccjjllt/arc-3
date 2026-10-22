@@ -1,0 +1,890 @@
+{
+  "status": "passed_with_explicit_limits",
+  "reviewed_at_utc": "2026-10-22T13:20:23.755610+00:00",
+  "review_kind": "Independent read-only audit of raw v4 manifest, fork summaries, request and event logs; no shared-analyzer import, solver edits, model calls, replay, launch or submission.",
+  "frozen_notebook_sha256": "6f9e0a891f908bcfddb90144d7e4a6b0c3803b783b0b094556861c4d5b7eade5",
+  "notebook_sha256_matches_build_manifest": true,
+  "remote_cell_sources_match_frozen_notebook": true,
+  "remote_cells": 31,
+  "source_manifest_checks": [
+    {
+      "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+      "expected": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "actual": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "scripts/build_experiment.py",
+      "expected": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+      "actual": "7914c09e50863474094da918d2c67985a484bd176b50d39e9f6f0a31ee0644c3",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/__init__.py",
+      "expected": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "actual": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "expected": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+      "actual": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_context.py",
+      "expected": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+      "actual": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+      "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "expected": "d7649e5215e51e662fcfab7f3b9f9cf38861baaa5b9d58ef896125cca9d4c946",
+      "actual": "d7649e5215e51e662fcfab7f3b9f9cf38861baaa5b9d58ef896125cca9d4c946",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "expected": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "actual": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "expected": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "actual": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "expected": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "actual": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "experiments/034-plan-diagnostic-v4.json",
+      "expected": "ed88182bc064551586354840f459eb7af5415284b6a8f59fd671af53d4b2cf51",
+      "actual": "ed88182bc064551586354840f459eb7af5415284b6a8f59fd671af53d4b2cf51",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "experiments/028-fork-package.json.gz.b64",
+      "expected": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "actual": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    },
+    {
+      "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "expected": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "actual": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "equal": true,
+      "verified_against": "frozen_v4_source_archive"
+    }
+  ],
+  "embedded_payload_checks": {
+    "src/arc3_research/__init__.py": {
+      "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/executable_plan.py": {
+      "sha256": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/executable_plan_context.py": {
+      "sha256": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/executable_plan_contract.py": {
+      "sha256": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/executable_plan_forks.py": {
+      "sha256": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/experiment_config.py": {
+      "sha256": "d7649e5215e51e662fcfab7f3b9f9cf38861baaa5b9d58ef896125cca9d4c946",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/goal_evidence.py": {
+      "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/input_paths.py": {
+      "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/program_repair.py": {
+      "sha256": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/program_state.py": {
+      "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/run_arm.py": {
+      "sha256": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/session_runner.py": {
+      "sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "matches_frozen_archive": true
+    },
+    "src/arc3_research/transient_history.py": {
+      "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "matches_frozen_archive": true
+    },
+    "scripts/summarize_experiment.py": {
+      "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "matches_frozen_archive": true
+    },
+    "experiments/034-fork-inputs/combined-forks.json.xz.b64": {
+      "sha256": "794e069589273ab7a21a06fffbce23f2e3098a6c1d364b787da71131a9721359",
+      "matches_build_manifest": true
+    }
+  },
+  "arms": {
+    "A": {
+      "runner_entry": {
+        "arm": "executable_plan_A",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792673870.0941532,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 202943,
+            "started_after_seconds": 2.5899999855028e-05,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 0.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 0.01067177000004449,
+        "started_at_epoch": 1792673870.1216588,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 471.04968070983887,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "arm_metadata_status": "completed",
+      "actual_runner_concurrency": 2,
+      "declared_service_stream_capacity": 10,
+      "per_game_configured_seconds": 450,
+      "per_game_action_cap": 60,
+      "same_initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "forks_sha256_matches_frozen_transport": true,
+      "live_recorded_source_checks": {
+        "executable_plan.py": {
+          "expected": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+          "actual": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "expected": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+          "actual": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "program_repair.py": {
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "program_state.py": {
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "run_arm.py": {
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "transient_history.py": {
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "tool_agent.py": {
+          "expected": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "actual": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "equal": true
+        }
+      },
+      "games": {
+        "ft09-0d8bbf25": {
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 4,
+          "added_levels": 2,
+          "final_score": 47.61904761904761,
+          "continuation_actions": 46,
+          "actual_action_list_length": 46,
+          "action_cap_respected": true,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.0577284660003,
+          "elapsed_tail_over450_seconds": 0.057728466000298795,
+          "last_real_action_seconds": 434.45765380139164,
+          "all_real_actions_before450": true,
+          "continuation_started_at_epoch": 1792673874.6002479,
+          "continuation_deadline_epoch": 1792674324.6002479,
+          "request_sha256": "0de4c8aadb5da138dc87244df112550af69fe245d1d3673d15a9ba2b0ee39214",
+          "request_hash_matches_saved_run_summary": true,
+          "request_events": 22,
+          "returned_response_events": 21,
+          "last_request_has_no_response_event": true,
+          "request_minus_response": 1,
+          "known_main_returned_usage": {
+            "prompt_tokens": 1715604,
+            "total_tokens": 1769858,
+            "completion_tokens": 54254,
+            "reasoning_tokens": 46674
+          },
+          "incoming_main_request_prefix_equals_frozen_history": true,
+          "prediction_checks": {
+            "match": 0,
+            "mismatch": 0,
+            "unknown": 0,
+            "boundary": 0,
+            "not_executed": 0
+          },
+          "host_plan_actions": 0,
+          "frozen_identity": {
+            "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+            "messages_sha256": "bd020f05bd8090518661b113b7d9cd6d9fb01969465a39c22fb63ba25f8521f1",
+            "functions_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "branch_source_code_sha256": "a2c5745a9f606448ea7abbd8a2b8d1e36e5bca344411b525a3813b7ea5211610",
+            "prefix_recorded_actions": 27,
+            "native_frame_step": 27,
+            "history_messages": 41,
+            "initial_levels_completed": 2
+          },
+          "fork_source_matches_frozen_transport": true,
+          "game_run_started_at_utc": "2026-10-22T12:57:51.041038",
+          "history_clock_origin": "GameRun.started_at, not continuation_started_at",
+          "replay_to_continuation_offset_seconds": 3.5592098236083984,
+          "last_action_history_wallclock_seconds": 438.01686362500004,
+          "timestamp_conversion_note": "Converted serialized GameRun wallclock to continuation-relative seconds using UTC wallclock start offset; microsecond serialization precision. Raw history timestamps are not directly comparable with450s."
+        },
+        "su15-1944f8ab": {
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 4,
+          "added_levels": 0,
+          "final_score": 22.22222222222222,
+          "continuation_actions": 17,
+          "actual_action_list_length": 17,
+          "action_cap_respected": true,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 463.85141572899965,
+          "elapsed_tail_over450_seconds": 13.851415728999655,
+          "last_real_action_seconds": 365.82390995340256,
+          "all_real_actions_before450": true,
+          "continuation_started_at_epoch": 1792673874.6001558,
+          "continuation_deadline_epoch": 1792674324.6001558,
+          "request_sha256": "1ebda7386cdd59a8478edda583d5426c4bb3b006eac1e3351af9787a75c500b6",
+          "request_hash_matches_saved_run_summary": true,
+          "request_events": 18,
+          "returned_response_events": 17,
+          "last_request_has_no_response_event": true,
+          "request_minus_response": 1,
+          "known_main_returned_usage": {
+            "prompt_tokens": 1440748,
+            "total_tokens": 1490309,
+            "completion_tokens": 49561,
+            "reasoning_tokens": 45501
+          },
+          "incoming_main_request_prefix_equals_frozen_history": true,
+          "prediction_checks": {
+            "match": 0,
+            "mismatch": 0,
+            "unknown": 0,
+            "boundary": 0,
+            "not_executed": 0
+          },
+          "host_plan_actions": 0,
+          "frozen_identity": {
+            "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+            "messages_sha256": "4c9c025c48752aa80cd89cb98a2cc9626b211a913078834a43b592c089a60d84",
+            "functions_sha256": "946196c149bfe0a6a67065ca3bde249ea7d50bb0bed69b56a822df4537348841",
+            "branch_source_code_sha256": "3cb781f6d360e8fa88c4392a1edcc61457975bebcd766c45fcbbd4d69c6710e0",
+            "prefix_recorded_actions": 86,
+            "native_frame_step": 86,
+            "history_messages": 96,
+            "initial_levels_completed": 4
+          },
+          "fork_source_matches_frozen_transport": true,
+          "game_run_started_at_utc": "2026-10-22T12:57:51.505251",
+          "history_clock_origin": "GameRun.started_at, not continuation_started_at",
+          "replay_to_continuation_offset_seconds": 3.094904899597168,
+          "last_action_history_wallclock_seconds": 368.91881485299973,
+          "timestamp_conversion_note": "Converted serialized GameRun wallclock to continuation-relative seconds using UTC wallclock start offset; microsecond serialization precision. Raw history timestamps are not directly comparable with450s."
+        }
+      },
+      "main_known_returned_usage": {
+        "prompt_tokens": 3156352,
+        "total_tokens": 3260167,
+        "completion_tokens": 103815,
+        "reasoning_tokens": 92175
+      },
+      "fork_summary_elapsed_seconds": 467.5237738410001,
+      "patch_snapshot": null
+    },
+    "B": {
+      "runner_entry": {
+        "arm": "executable_plan_B",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792673411.0234656,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 38756,
+            "started_after_seconds": 3.1429999580723234e-05,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 0.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 0.00332127000001492,
+        "started_at_epoch": 1792673411.04334,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 459.0498855113983,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "arm_metadata_status": "completed",
+      "actual_runner_concurrency": 2,
+      "declared_service_stream_capacity": 10,
+      "per_game_configured_seconds": 450,
+      "per_game_action_cap": 60,
+      "same_initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "forks_sha256_matches_frozen_transport": true,
+      "live_recorded_source_checks": {
+        "executable_plan.py": {
+          "expected": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+          "actual": "e2e316c5e21360fe521bde7e061213980321c84b60d9369c0dde7c39cd2b9685",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "expected": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+          "actual": "11620ffeb36b5bf1ee111bdcd02b75944f03fa5719472c873d84e6c6ed1a8f71",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "program_repair.py": {
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "program_state.py": {
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "run_arm.py": {
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "transient_history.py": {
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "tool_agent.py": {
+          "expected": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "actual": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "equal": true
+        }
+      },
+      "games": {
+        "ft09-0d8bbf25": {
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 2,
+          "added_levels": 0,
+          "final_score": 14.285714285714285,
+          "continuation_actions": 17,
+          "actual_action_list_length": 17,
+          "action_cap_respected": true,
+          "actions_during_forced_branch": 2,
+          "elapsed_seconds": 450.1022687599998,
+          "elapsed_tail_over450_seconds": 0.10226875999978802,
+          "last_real_action_seconds": 449.6365768500368,
+          "all_real_actions_before450": true,
+          "continuation_started_at_epoch": 1792673418.8077605,
+          "continuation_deadline_epoch": 1792673868.8077605,
+          "request_sha256": "37ee2e5bda4ce1cc5d810c13eee6b87a13950be91115fe957c58455458b83004",
+          "request_hash_matches_saved_run_summary": true,
+          "request_events": 10,
+          "returned_response_events": 10,
+          "last_request_has_no_response_event": false,
+          "request_minus_response": 0,
+          "known_main_returned_usage": {
+            "prompt_tokens": 894055,
+            "total_tokens": 945794,
+            "completion_tokens": 51739,
+            "reasoning_tokens": 48356
+          },
+          "incoming_main_request_prefix_equals_frozen_history": true,
+          "prediction_checks": {
+            "match": 0,
+            "mismatch": 2,
+            "unknown": 0,
+            "boundary": 0,
+            "not_executed": 0
+          },
+          "host_plan_actions": 2,
+          "frozen_identity": {
+            "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+            "messages_sha256": "bd020f05bd8090518661b113b7d9cd6d9fb01969465a39c22fb63ba25f8521f1",
+            "functions_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "branch_source_code_sha256": "a2c5745a9f606448ea7abbd8a2b8d1e36e5bca344411b525a3813b7ea5211610",
+            "prefix_recorded_actions": 27,
+            "native_frame_step": 27,
+            "history_messages": 41,
+            "initial_levels_completed": 2
+          },
+          "fork_source_matches_frozen_transport": true,
+          "game_run_started_at_utc": "2026-10-22T12:50:15.157894",
+          "history_clock_origin": "GameRun.started_at, not continuation_started_at",
+          "replay_to_continuation_offset_seconds": 3.6498665809631348,
+          "last_action_history_wallclock_seconds": 453.28644343099995,
+          "timestamp_conversion_note": "Converted serialized GameRun wallclock to continuation-relative seconds using UTC wallclock start offset; microsecond serialization precision. Raw history timestamps are not directly comparable with450s."
+        },
+        "su15-1944f8ab": {
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 5,
+          "added_levels": 1,
+          "final_score": 33.33333333333333,
+          "continuation_actions": 33,
+          "actual_action_list_length": 33,
+          "action_cap_respected": true,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.08202002100006,
+          "elapsed_tail_over450_seconds": 0.08202002100006212,
+          "last_real_action_seconds": 436.87730957833946,
+          "all_real_actions_before450": true,
+          "continuation_started_at_epoch": 1792673418.8064973,
+          "continuation_deadline_epoch": 1792673868.8064973,
+          "request_sha256": "28d6a37da2ef8b27f8869151c6836430338ed1819b806df9f03a7b53727fc2d3",
+          "request_hash_matches_saved_run_summary": true,
+          "request_events": 21,
+          "returned_response_events": 20,
+          "last_request_has_no_response_event": true,
+          "request_minus_response": 1,
+          "known_main_returned_usage": {
+            "prompt_tokens": 1772317,
+            "total_tokens": 1823094,
+            "completion_tokens": 50777,
+            "reasoning_tokens": 48386
+          },
+          "incoming_main_request_prefix_equals_frozen_history": true,
+          "prediction_checks": {
+            "match": 0,
+            "mismatch": 0,
+            "unknown": 0,
+            "boundary": 0,
+            "not_executed": 0
+          },
+          "host_plan_actions": 0,
+          "frozen_identity": {
+            "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+            "messages_sha256": "4c9c025c48752aa80cd89cb98a2cc9626b211a913078834a43b592c089a60d84",
+            "functions_sha256": "946196c149bfe0a6a67065ca3bde249ea7d50bb0bed69b56a822df4537348841",
+            "branch_source_code_sha256": "3cb781f6d360e8fa88c4392a1edcc61457975bebcd766c45fcbbd4d69c6710e0",
+            "prefix_recorded_actions": 86,
+            "native_frame_step": 86,
+            "history_messages": 96,
+            "initial_levels_completed": 4
+          },
+          "fork_source_matches_frozen_transport": true,
+          "game_run_started_at_utc": "2026-10-22T12:50:15.668782",
+          "history_clock_origin": "GameRun.started_at, not continuation_started_at",
+          "replay_to_continuation_offset_seconds": 3.1377153396606445,
+          "last_action_history_wallclock_seconds": 440.0150249180001,
+          "timestamp_conversion_note": "Converted serialized GameRun wallclock to continuation-relative seconds using UTC wallclock start offset; microsecond serialization precision. Raw history timestamps are not directly comparable with450s."
+        }
+      },
+      "main_known_returned_usage": {
+        "prompt_tokens": 2666372,
+        "total_tokens": 2768888,
+        "completion_tokens": 102516,
+        "reasoning_tokens": 96742
+      },
+      "fork_summary_elapsed_seconds": 453.92504134599994,
+      "patch_snapshot": {
+        "patch": "034-executable-plan-v4",
+        "games": 2,
+        "bootstrap_calls": 2,
+        "repair_calls": 1,
+        "extra_seconds": 63.92521863999991,
+        "events": [
+          {
+            "path": "/kaggle/working/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state.json",
+            "event_count": 36,
+            "statuses": [
+              "rejected",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified"
+            ]
+          },
+          {
+            "path": "/kaggle/working/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state.json",
+            "event_count": 20,
+            "statuses": [
+              "ready",
+              "mismatch",
+              "mismatch",
+              "mismatch",
+              "recomputed_plan_executed",
+              "recomputed_plan_executed",
+              "ready",
+              "mismatch",
+              "mismatch",
+              "mismatch",
+              "recomputed_plan_executed",
+              "recomputed_plan_executed",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified",
+              "unverified"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "paired_comparisons": [
+    {
+      "game": "ft09-0d8bbf25",
+      "A_added_levels": 2,
+      "B_added_levels": 0,
+      "B_minus_A_added_levels": -2,
+      "A_score": 47.61904761904761,
+      "B_score": 14.285714285714285,
+      "B_minus_A_score": -33.33333333333333,
+      "A_actions": 46,
+      "B_actions": 17,
+      "frozen_input_identity_matches": {
+        "grid_sha256": true,
+        "messages_sha256": true,
+        "functions_sha256": true,
+        "branch_source_code_sha256": true,
+        "prefix_recorded_actions": true,
+        "native_frame_step": true,
+        "history_messages": true,
+        "initial_levels_completed": true
+      }
+    },
+    {
+      "game": "su15-1944f8ab",
+      "A_added_levels": 0,
+      "B_added_levels": 1,
+      "B_minus_A_added_levels": 1,
+      "A_score": 22.22222222222222,
+      "B_score": 33.33333333333333,
+      "B_minus_A_score": 11.111111111111107,
+      "A_actions": 17,
+      "B_actions": 33,
+      "frozen_input_identity_matches": {
+        "grid_sha256": true,
+        "messages_sha256": true,
+        "functions_sha256": true,
+        "branch_source_code_sha256": true,
+        "prefix_recorded_actions": true,
+        "native_frame_step": true,
+        "history_messages": true,
+        "initial_levels_completed": true
+      }
+    }
+  ],
+  "two_selected_game_mean": {
+    "A": 34.92063492063492,
+    "B": 23.809523809523807,
+    "difference": -11.11111111111111
+  },
+  "candidate_branch_events": [
+    {
+      "arm": "B",
+      "game": "ft09-0d8bbf25",
+      "status": "recomputed_plan_executed",
+      "failure_stage": "finished",
+      "error": null,
+      "finish_reason": "tool_calls",
+      "elapsed_seconds": 17.86548561299969,
+      "usage": {
+        "prompt_tokens": 4423,
+        "total_tokens": 6254,
+        "completion_tokens": 1831,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "actual_input_tokens": 4423,
+      "actual_actions": 1,
+      "source_path": "runs/034-plan-diagnostic-v4/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl"
+    },
+    {
+      "arm": "B",
+      "game": "ft09-0d8bbf25",
+      "status": "recomputed_plan_executed",
+      "failure_stage": "finished",
+      "error": null,
+      "finish_reason": "tool_calls",
+      "elapsed_seconds": 25.365302274999976,
+      "usage": {
+        "prompt_tokens": 9267,
+        "total_tokens": 12315,
+        "completion_tokens": 3048,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "actual_input_tokens": 9267,
+      "actual_actions": 1,
+      "source_path": "runs/034-plan-diagnostic-v4/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl"
+    },
+    {
+      "arm": "B",
+      "game": "su15-1944f8ab",
+      "status": "rejected",
+      "failure_stage": "plan_validation",
+      "error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _shape(frame) for later Python calls in this game.\\nRetained your function _morph(g, r0, r1, c0, c1) for later Python calls in this game.\\nRetained your function _target_pair(g) for later Python calls in this game.\\nRetained your function _solid_rect(g, ch, r0, r1, c0, c1) for later Python calls in this game.\\nRetained your function _candidates(frame) for later Python calls in this game.\\nRetained your function _valid(frame) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 182, in <module>\\n  File \"<python_tool>\", line 130, in plan_program\\nTypeError: %d format: a real number is required, not str'}",
+      "finish_reason": "tool_calls",
+      "elapsed_seconds": 20.694430752000244,
+      "usage": {
+        "prompt_tokens": 6551,
+        "total_tokens": 8782,
+        "completion_tokens": 2231,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "actual_input_tokens": 6551,
+      "actual_actions": 0,
+      "source_path": "runs/034-plan-diagnostic-v4/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl"
+    }
+  ],
+  "session": {
+    "status": "completed",
+    "elapsed_seconds": 3495.83549284935,
+    "elapsed_minutes": 58.2639248808225,
+    "elapsed_gpu_allocation_hours": 0.971065414680375,
+    "model_ready_seconds": 2559.5315248966217,
+    "model_ready_minutes": 42.65885874827703,
+    "startup_within4200_seconds": true,
+    "session_within7200_seconds": true,
+    "server_stopped": true,
+    "all_cache_boundaries_http200_and_backend_confirmed": true,
+    "both_cpu_groups_stopped": true,
+    "gpu_sampling": {
+      "path": "/kaggle/working/gpu-utilization.jsonl",
+      "interval_seconds": 10.0,
+      "sample_count": 360,
+      "error_count": 0,
+      "stopped": true
+    },
+    "cache_confirm_lines_in_serve_log": [
+      224,
+      939
+    ]
+  },
+  "key_findings": [
+    "Both arms completed in isolated CPU processes after matched successful cache boundaries against the same loaded model. Source hashes, frozen prefixes, request hashes and decoded transport match.",
+    "A gained2levels onft09 and0onsu15; B gained0onft09 and1onsu15. Two-checkpoint mean changed34.920635 to23.809524, a net-11.111111; do not scale v4 unchanged.",
+    "All recorded real actions fell within450seconds after converting GameRun history timestamps to the continuation clock. Actual return/cleanup tails differ and remain reported.",
+    "The delivery/execution chain now exists onft09:2complete auxiliary responses,2host actions,2relevant frozen-pixel mismatches and1repair; no correct predicted transition or new level arose from that chain.",
+    "su15 auxiliary failed before any real candidate action; its B+1level occurred only in the ordinary main loop and cannot establish program-mechanism benefit.",
+    "Three final main requests lack response events; Bft09 has equal requests/responses. Returned usage is incomplete total generated cost, not a full exact model-budget accounting."
+  ],
+  "limitations": [
+    "Single B-then-A selected-checkpoint diagnostic, no order reversal or complete25-game/formal-score evidence.",
+    "Request usage includes returned responses only; unmatched requests cannot be assigned known generation cost.",
+    "Only live source hashes actually recorded in arm metadata are runtime checks; unrecorded runtime expectations remain provenance.",
+    "Summed concurrent game processing time is not incremental session wall clock or billed cost.",
+    "Source checks use frozen v4 archive because current working sources may subsequently change."
+  ],
+  "remote_version": 4,
+  "platform_status": "COMPLETE",
+  "source_manifest_input_count": 19,
+  "candidate_actual_host_actions": 2,
+  "candidate_prediction_checks": {
+    "match": 0,
+    "mismatch": 2,
+    "unknown": 0,
+    "boundary": 0,
+    "not_executed": 0
+  },
+  "actual_repairs": 1,
+  "decision": {
+    "scale_full_pool": false,
+    "formal_submit": false,
+    "baseline": "009 v2 /57101330 /31.16",
+    "reason": "Successful delivery alone has not produced useful rule correction, and the paired diagnostic score is lower. Next change should address evidence/goal/rule interpretation or delivery runtime robustness, not repeat interface tuning or expand unchanged."
+  },
+  "next_session_feasibility": {
+    "snapshot_available_seconds": 6708.0320000000065,
+    "fixed_startup_ceiling_seconds": 4200,
+    "complete_arm_allowances_seconds": 1200,
+    "cache_reserve_seconds": 240,
+    "cleanup_reserve_seconds": 360,
+    "structural_minimum_seconds": 6000,
+    "suggested_bounded_cap_if_next_experiment_is_justified": 6300,
+    "startup_polling_margin_seconds": 300,
+    "fits_snapshot": true,
+    "no_shortened_second_arm": true,
+    "note": "This is feasibility only. Re-read current quota and remote state immediately before launch; positive research rationale is separate."
+  }
+}

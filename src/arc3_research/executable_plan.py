@@ -19,13 +19,13 @@ import time
 from typing import Any
 
 from arc3_research.program_repair import _completion, _payload, _remaining
-from arc3_research.executable_plan_context import prepare_compact_context
+from arc3_research.executable_plan_context import prepare_compact_context, delivery_tool_schema
 from arc3_research.executable_plan_contract import (
     binding_names, compare_prediction, extract_definitions, validate_plan, validate_prediction,
 )
 
 
-PROMPT = """Deliver a SMALL executable program now using one python tool call.
+PROMPT = """Deliver a SMALL executable program now using one submit_program tool call.
 The host paused a real action sequence. Repair its relevant input/rule or
 construct a small current decision program if no usable planner was retained.
 Reuse existing rule/search when evidence supports it; revise a contradicted
@@ -66,7 +66,7 @@ annotations, global or nonlocal. Computational imports math, collections,
 itertools, heapq, numpy are supported. Globals do not persist: keep parameters
 inside functions, reuse supplied helpers and rebind layout from this frame.
 Do not copy every pixel as a replacement model. No explanation outside the
-single python tool call. Keep the program short enough to finish this response.
+single submit_program tool call. Keep the program short enough to finish this response.
 """
 
 
@@ -520,10 +520,9 @@ class ExecutablePlanPatch:
                 agent, state, trigger, current, history_entries, PROMPT)
             event.update(context_metadata=context_metadata)
             event["timings"]["context_seconds"] = time.monotonic() - phase
-            tools = [t for t in agent._tools(state.path)
-                     if t.get("function", {}).get("name") == "python"]
-            if len(tools) != 1:
-                raise ValueError("The existing python tool schema is unavailable")
+            # The branch submits an artifact. Ordinary REPL descriptions
+            # encouraged the v3 model to print observations instead of deliver.
+            tools = [delivery_tool_schema()]
             timeout = min(self.request_seconds, branch_deadline - time.monotonic(),
                           self.remaining(agent, state))
             if timeout < 1 or self.stopped(state):
@@ -532,7 +531,7 @@ class ExecutablePlanPatch:
             phase = time.monotonic()
             response = self.completion(agent, messages, tools, timeout=timeout, max_tokens=4096,
                 enable_thinking=False,
-                tool_choice_override={"type": "function", "function": {"name": "python"}},
+                tool_choice_override={"type": "function", "function": {"name": "submit_program"}},
                 request_record=event["request_record"], max_input_tokens=16384)
             event["timings"]["request_seconds"] = time.monotonic() - phase
             agent._accumulate_usage_tokens(response.usage)
@@ -540,7 +539,7 @@ class ExecutablePlanPatch:
                          finish_reason=response.finish_reason,
                          served_by=getattr(response, "served_by", None))
             event["stage"] = "extract"
-            definitions = extract_definitions(response.message)
+            definitions = extract_definitions(response.message, expected_tool_name="submit_program")
             code = definitions["code"]
             event.update(program_code=code, program_hash=definitions["code_sha256"])
             phase = time.monotonic()
@@ -684,7 +683,7 @@ class ExecutablePlanPatch:
 
     def snapshot(self):
         with self.lock:
-            return {"patch": "034-executable-plan-v3", "games": len(self.states),
+            return {"patch": "034-executable-plan-v5", "games": len(self.states),
                     "bootstrap_calls": sum(s.bootstrap_used for s in self.states),
                     "repair_calls": sum(s.repair_used for s in self.states),
                     "extra_seconds": sum(s.extra_seconds for s in self.states),

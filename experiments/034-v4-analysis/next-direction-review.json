@@ -1,0 +1,150 @@
+{
+  "status": "completed_read_only_review",
+  "reviewed_at_utc": "2026-10-22T13:22:29.010863+00:00",
+  "scope": "Inspect v4 actual auxiliary programs/requests and only the pre-cut frozen history. No model calls, game actions, GPU runs, solver edits or future-answer construction.",
+  "recommended_single_intervention": "Restore a bounded verbatim slice of recent main-loop natural-language reasoning/content in the unverified_hypotheses section; retain explicit provenance and old-level/layout warnings.",
+  "seeds": {
+    "ft09-0d8bbf25": {
+      "package_path": "experiments/028-fork-package.json.gz.b64",
+      "package_sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "cut": 27,
+      "frozen_message_count": 42,
+      "last_two_nonempty_assistant_texts": [
+        {
+          "message_index": 37,
+          "fields": [
+            "reasoning_content"
+          ],
+          "characters": 1047,
+          "text_sha256": "e4e6d87d66738f8022e9c17cbf660cf3621fe60ed51a2d46d09ce936d9475d46"
+        },
+        {
+          "message_index": 39,
+          "fields": [
+            "reasoning_content"
+          ],
+          "characters": 20338,
+          "text_sha256": "459bf6eccc57600eee9925bf374a5978d3d2ba226cc3f6d987f43474cb43a836"
+        }
+      ]
+    },
+    "su15-1944f8ab": {
+      "package_path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "package_sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "cut": 86,
+      "frozen_message_count": 97,
+      "last_two_nonempty_assistant_texts": [
+        {
+          "message_index": 91,
+          "fields": [
+            "reasoning_content"
+          ],
+          "characters": 2578,
+          "text_sha256": "94944677d279a1befe57caac8eb037178aa4c90cf4304a9c15f4d378d1835d2b"
+        },
+        {
+          "message_index": 94,
+          "fields": [
+            "reasoning_content"
+          ],
+          "characters": 3079,
+          "text_sha256": "2d07ef2b72716ebf7d064ab82a2b548de62befe0de3f69ee4c71df515ea29205"
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "game": "ft09-0d8bbf25",
+      "observed_failure": "Both auxiliary programs impose a zero-origin six-pixel tiling, then revise the color-effect rule after mismatch while retaining the wrong spatial decomposition. Actual relevant-pixel checks remain mismatches.",
+      "missing_semantics": "Frozen assistant message39 discusses an encoded local-pattern/neighbor constraint task, a candidate target that did not complete the level, and competing hypotheses needing a probe. None of this natural-language task model appears in the compact evidence package. Earlier message23 records actual object starts and grid spacing.",
+      "already_present_counterevidence": "Paused code itself names a real region starting at (4,20), so missing narrative cannot be identified as the sole cause of the zero-origin tiling. Current full pixels also expose spacing.",
+      "classification": "Wrong spatial abstraction plus rule/target inference; context loss is a concrete contributing hypothesis, not established sole cause.",
+      "pre_cut_message_evidence": [
+        23,
+        31,
+        37,
+        39
+      ],
+      "do_not_promote_to_fact": "The old main model has already failed one target and explicitly debates multiple rules. Its reasoning must remain uncertain and rechecked against current pixels/transitions."
+    },
+    {
+      "game": "su15-1944f8ab",
+      "observed_failure": "The delivered program fails before any host action because a goal-format string has one missing numeric argument. Its predictor also contains frame-vs-grid and tuple-arity errors. Independently, it treats a small palette exemplar as the task object and invents a flat-placement interpretation.",
+      "missing_semantics": "Frozen assistant messages91/94 discuss combining pieces, movement range, delivery to a ball and a pursuing hazard. Retained click/invaders/state helpers mostly expose control/observation, not the whole task objective or transition model. The last two transitions span the end of the prior level and do not teach the complete game.",
+      "classification": "Immediate zero-action code-validity failure plus a distinct semantic/target-model failure. Repairing the TypeError alone would not certify a correct planner or useful prediction.",
+      "pre_cut_message_evidence": [
+        7,
+        10,
+        13,
+        91,
+        94
+      ],
+      "do_not_promote_to_fact": "Messages91/94 concern the prior level and include fixed coordinates and uncertain pursuit-speed estimates. Carry only as labelled old hypotheses; recompute new-layout objects and targets from the current frame."
+    }
+  ],
+  "options": {
+    "A_zero_action_exception_feedback": {
+      "benefit": "Directly addresses the actual su15 first runtime failure and gives the model concrete tracebacks without spending game actions.",
+      "limit": "Does not address ft09, where code already executed twice and both spatial/rule models were wrong; an extra request also changes call-count/repair-budget policy. Several additional su15 predictor defects mean one feedback turn is not assured to succeed.",
+      "decision": "Reasonable later code-delivery robustness experiment; do not mix into the next context test."
+    },
+    "B_bounded_unverified_history": {
+      "benefit": "Restores already available task/goal hypotheses omitted by the current compact package, matching the original handoff intent. Directly targets task relearning and invented goals in both games. No new model turn or runtime action type is required.",
+      "limit": "The main reasoning itself includes errors and old coordinates. It may bias the auxiliary model, increase tokenization/generation cost or still be ignored. The ft09 paused code already contains alignment counterevidence.",
+      "decision": "Recommended next single intervention, evaluated as a candidate package change, without claiming this guarantees score gain."
+    },
+    "C_auxiliary_thinking": {
+      "benefit": "Could improve spatial reasoning and code consistency in principle.",
+      "limit": "v4 has zero reasoning tokens but no isolated comparison establishes thinking as the cause. v2 spent the entire4096 output budget without delivering; unbounded restoration risks recreating that failure. No locally verified low-reasoning-budget setting has been established for this exact Pennyroyal/Qwen endpoint.",
+      "decision": "Do not change thinking in the same candidate. If later tested, first verify supported controls and budget semantics, then preserve code-delivery limits."
+    }
+  },
+  "minimal_B_design": {
+    "source": "state.latest_messages already records the main loop and is seeded from fork.messages in the forced diagnostic. Never ingest a later continuation response or baseline posthoc trace.",
+    "selection": "Use a game-independent deterministic rule for the most recent1-2 assistant messages having nonempty content and/or reasoning_content; preserve original text rather than generating a curated rule summary.",
+    "bounds": "Set an explicit small character/text-slice bound with provenance and visible omission markers. Prefer retaining both beginning and ending spans when one reasoning entry is long; do not silently truncate code or current facts. Actual served-token count and the16384 cap remain authoritative.",
+    "provenance": [
+      "source message index",
+      "source field",
+      "full-text SHA256",
+      "included character ranges",
+      "truncated flag",
+      "unverified status",
+      "current level and warning that narrative may describe old layouts"
+    ],
+    "request_instruction": "Treat these as fallible prior model hypotheses. Test them using current pixels and recorded transitions; recompute targets and action locations. Do not present old coordinates or predicted outcomes as environment observations.",
+    "unchanged": [
+      "submit_program tool and code contract",
+      "thinking=false",
+      "same current complete frame and exact transition facts",
+      "one bootstrap and at most one real-mismatch repair",
+      "450s/60actions per game",
+      "120s total branch processing",
+      "main-loop/model/scheduler",
+      "009 formal baseline"
+    ]
+  },
+  "CPU_discriminators_before_GPU": [
+    "Construct the candidate packet from the exact frozen seeds and assert included text hashes/ranges originate only from pre-cut messages; no future baseline actions or outcomes.",
+    "Assert facts, paused code, dependency closure, game/action/time caps and submit_program schema are byte/object equivalent to v4; only unverified narrative and its instruction/provenance change.",
+    "Inspect both packet previews once for task/goal-hypothesis presence and clear old-level labels. This is packet integrity, not a claim that the model will use it.",
+    "Replay the already returned code through existing zero-action sandbox evidence only if needed to demonstrate runtime/geometry failure. Do not hand-patch its rule or feed a repaired game-specific solution to the next request.",
+    "Retain existing native-sandbox checks. Do not grow a general test framework or introduce an extra model-error-repair loop for this candidate."
+  ],
+  "online_success_evidence": "Complete code and real host execution are now achieved on ft09; next seek a current-state task interpretation and action-relevant prediction that survives the real transition, then measurable paired progression. Full25 and formal score remain separate gates.",
+  "limits": [
+    "These two selected checkpoints do not measure natural trigger harm or full-pool generalization.",
+    "v4 su15+1 arose after a zero-action rejected auxiliary program; it is ordinary main-loop progress.",
+    "No guarantee the proposed history slice fits the live tokenizer without checking; characters are not tokens."
+  ],
+  "source_paths": [
+    "runs/034-plan-diagnostic-v4/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+    "runs/034-plan-diagnostic-v4/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+    "experiments/034-v4-source/src/arc3_research/executable_plan_context.py",
+    "experiments/034-v4-source/src/arc3_research/executable_plan_forks.py"
+  ],
+  "solver_modified": false,
+  "gpu_launched": false,
+  "formal_submitted": false
+}
