@@ -1,0 +1,105 @@
+{
+  "check": "035-mounted-reasoning-template-v1",
+  "observed_at_utc": "2026-10-24T10:50:13.554954+00:00",
+  "model_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/fixture-model",
+  "passed": true,
+  "model_generation_calls": 0,
+  "model_weight_loads": 0,
+  "gpu_calls": 0,
+  "local_files_only": true,
+  "network_requested": false,
+  "template_updated": false,
+  "source_files": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/fixture-model/chat_template.jinja",
+      "bytes": 120,
+      "sha256": "9d15dc3772c5977cb201ff2a57515e430e801bdbeaddb03581bf2d05516da8a8",
+      "archive": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/template-check-chat_template.jinja"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/fixture-model/tokenizer_config.json",
+      "bytes": 185,
+      "sha256": "d56fd1b42419637f95721ba13e4e856225e8ec349e2dacc27098c43d22c0e515",
+      "template_fields_archive": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/template-check-tokenizer-template-config.json",
+      "template_fields_sha256": "f45f005d5a700f30e2d9045b2788076244ae9009629077b77beecb0e1446678b"
+    }
+  ],
+  "transformers_version": "035-cpu-fixture-no-real-tokenizer",
+  "tokenizer_class": "FixtureTokenizer",
+  "active_template_source": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface-final/supported_fixture/fixture-model/chat_template.jinja",
+  "active_template_sha256": "9d15dc3772c5977cb201ff2a57515e430e801bdbeaddb03581bf2d05516da8a8",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "Inspect the current state before choosing an action."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_state",
+        "description": "Inspect one visible state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "detail"
+          ]
+        }
+      }
+    }
+  ],
+  "renders": {
+    "off": {
+      "chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "rendered_sha256": "af9610a4f5c332e3f9d4eef61434b827a12195b1bb6a2c12ab7b80c5d89f92a7",
+      "rendered_bytes": 58
+    },
+    "low": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "low"
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\nKeep your thinking brief\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "8f834e3dbc3110c816cdd43f377eb38e67e5a0d8966673688d3d54d6b8303668",
+      "rendered_bytes": 72
+    },
+    "medium": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "medium"
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "7b52c660a00194e62aef95b29533812729d48f315f6535be08802ac5f38d295c",
+      "rendered_bytes": 47
+    }
+  },
+  "low_specific_instruction": "Keep your thinking brief",
+  "checks": {
+    "off_closed_think": true,
+    "low_open_think": true,
+    "medium_open_think": true,
+    "low_effort_branch_in_template": true,
+    "low_instruction_in_template": true,
+    "low_instruction_in_low": true,
+    "low_instruction_absent_off": true,
+    "low_instruction_absent_medium": true,
+    "all_renderings_distinct": true
+  },
+  "decision": "allow_C_generation_with_explicit_low"
+}

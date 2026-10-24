@@ -1,0 +1,56 @@
+{
+  "status": "strictly_reconciled",
+  "matching_fields": [
+    "messages",
+    "tools",
+    "chat_template_kwargs",
+    "tool_choice",
+    "analysis_step",
+    "action",
+    "request_index_within_turn"
+  ],
+  "per_game_log_gap": 4,
+  "late_responses": [
+    {
+      "path": "executable_plan_A/requests.jsonl",
+      "event": "response",
+      "matching_fields": [
+        "messages",
+        "tools",
+        "chat_template_kwargs",
+        "tool_choice",
+        "analysis_step",
+        "action",
+        "request_index_within_turn"
+      ],
+      "matches_count": 1,
+      "candidates": [
+        {
+          "game": "su15-1944f8ab",
+          "request_index_in_game": 18
+        }
+      ],
+      "already_in_per_game_log": false,
+      "usage": {
+        "prompt_tokens": 94089,
+        "total_tokens": 102536,
+        "completion_tokens": 8447,
+        "prompt_tokens_details": {
+          "cached_tokens": 93952,
+          "image_tokens": 9200
+        },
+        "reasoning_tokens": 8370
+      },
+      "finish_reason": "tool_calls",
+      "counted_once_as_late_response": true
+    }
+  ],
+  "remaining_gap_after_unique_match": 3,
+  "known_main_usage_after_crossfile_match": {
+    "prompt_tokens": 5072105,
+    "completion_tokens": 200403,
+    "total_tokens": 5272508,
+    "reasoning_tokens": 174091
+  },
+  "missing_response_is_not_proven_timeout": true
+}

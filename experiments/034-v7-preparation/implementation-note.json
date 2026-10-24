@@ -1,0 +1,71 @@
+{
+  "revision": 7,
+  "scope": "Short artifact delivery and feedback for an unchanged, zero-action validation failure",
+  "changed_sources": {
+    "src/arc3_research/executable_plan.py": {
+      "sha256": "4d1a16e35b5691bdf509ee28f967c1d70d43342b534ae250b4455feee972492d",
+      "bytes": 51628,
+      "nonempty_lines": 837
+    },
+    "src/arc3_research/executable_plan_context.py": {
+      "sha256": "b474bc96ad19f4ca270df88a0ccc82eebd221dcd6e49a0883bf68510e2e5832a",
+      "bytes": 18245,
+      "nonempty_lines": 306
+    }
+  },
+  "delivery_limits": {
+    "nonempty_lines": 120,
+    "utf8_bytes": 12000,
+    "contract_defaults_unchanged": true
+  },
+  "shared_repair_quota": 1,
+  "eligible_stages": [
+    "extract",
+    "plan_validation",
+    "initial_prediction"
+  ],
+  "requirements": [
+    "zero real actions",
+    "same level, step and grid",
+    "remaining original time budget",
+    "attributed contract or candidate computation error"
+  ],
+  "excluded": [
+    "request/token count failures",
+    "timeout/deadline/budget failure",
+    "side-effect or capability refusal",
+    "native infrastructure or unattributed errors",
+    "declared unknown",
+    "post-action failure",
+    "second repair request"
+  ],
+  "feedback": {
+    "source": "complete original failed source as previous_program, not rewritten by host",
+    "error": "actual validation errors, host traceback and full child error payload when present",
+    "duplicate_source_in_feedback": false,
+    "prior_assistant_text": "initial unchanged; validation-feedback retry omits old prose with explicit source-index/hash references",
+    "malformed_source_dependency_analysis": "syntax-invalid previous source retained unchanged but not parsed for dependency discovery"
+  },
+  "preserved": [
+    "v6 current object evidence",
+    "main loop and trigger",
+    "thinking false",
+    "4096 output tokens",
+    "16384 served input tokens",
+    "60 second request cap",
+    "120 second aggregate extra cap",
+    "450 second fork allowance",
+    "60 action allowance",
+    "max 3 actual actions per contract",
+    "evaluate rollback on rejection",
+    "one real mismatch repair shares validation-feedback slot"
+  ],
+  "checks": {
+    "syntax_compile": "passed",
+    "diff_check": "passed",
+    "native_suite_before_serialization_equivalent_change": "25 passed; checker agent refreshing source hashes",
+    "unicode_feedback": "experiments/034-v7-preparation/unicode-feedback-check.json"
+  },
+  "evidence_boundary": "No model or game result is claimed by these local implementation checks.",
+  "authoritative_native_cpu_report": "experiments/034-v7-cpu-check-final/report.json"
+}

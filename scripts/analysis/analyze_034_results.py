@@ -147,13 +147,15 @@ def plan_events(records):
             "note": "program_branch_attempts counts program_recomputed events; errors before completion can leave actual request sending uncertain. Host actions sum top-level host_plan_execution events only. Never add recursive forced_branch actions. Usage sums program_recomputed only. extra_seconds_used is the cumulative max across branch/host records; patch snapshot is authoritative when available. Pixel relevance is declared, not semantically certified; code and plan acceptance are not score improvement."}
 
 
-def analyze(root):
+def analyze(root, arm_labels=("A", "B")):
+    if tuple(arm_labels) not in (("A", "B"), ("A", "B", "C")):
+        raise ValueError("Expected A/B or A/B/C diagnostic labels")
     problems, sources = [], []
     manifest_path = root / "experiment-manifest.json"
     manifest = read_json(manifest_path, problems)
     sources.append(origin(manifest_path))
     arms = {}
-    for arm in ("A", "B"):
+    for arm in arm_labels:
         folder = root / f"executable_plan_{arm}"
         arm_entry = next((entry for entry in (manifest or {}).get("arms", [])
                           if entry.get("arm") == f"executable_plan_{arm}"), {})
@@ -196,20 +198,28 @@ def analyze(root):
             "total_added_levels": sum(g["added_levels"] for g in games.values()) if all(numeric(g["added_levels"]) for g in games.values()) else None,
             "total_continuation_actions": sum(g["continuation_action_count"] for g in games.values()) if all(numeric(g["continuation_action_count"]) for g in games.values()) else None,
             "extra_seconds_patch_snapshot": ((summary or {}).get("patch") or {}).get("extra_seconds")}
-    comparisons = {}
-    for game in GAMES:
-        a, b = (arms[arm]["games"][game] for arm in ("A", "B"))
-        comparisons[game] = {"B_minus_A_" + key: b[key] - a[key] if numeric(a[key]) and numeric(b[key]) else None
-                             for key in ("added_levels", "continuation_action_count", "elapsed_seconds")}
-        ra, rb = a.get("result") or {}, b.get("result") or {}
-        comparisons[game]["restored_equal"] = {key: ra[key] == rb[key] if key in ra and key in rb else None
-            for key in ("grid_sha256", "messages_sha256", "functions_sha256", "branch_source_code_sha256", "prefix_recorded_actions")}
+    def compare_labels(reference, candidate):
+        paired = {}
+        for game in GAMES:
+            a, b = (arms[arm]["games"][game] for arm in (reference, candidate))
+            prefix = candidate + "_minus_" + reference + "_"
+            paired[game] = {prefix + key: b[key] - a[key] if numeric(a[key]) and numeric(b[key]) else None
+                           for key in ("added_levels", "continuation_action_count", "elapsed_seconds")}
+            ra, rb = a.get("result") or {}, b.get("result") or {}
+            paired[game]["restored_equal"] = {key: ra[key] == rb[key] if key in ra and key in rb else None
+                for key in ("grid_sha256", "messages_sha256", "functions_sha256", "branch_source_code_sha256", "prefix_recorded_actions")}
+        return paired
+    comparisons = compare_labels("A", "B")
+    if "C" in arms:
+        comparisons = {"B_minus_A": comparisons,
+                       "C_minus_A": compare_labels("A", "C"),
+                       "C_minus_B": compare_labels("B", "C")}
     states = [g["status"] for a in arms.values() for g in a["games"].values()]
     summaries_present = all(a["fork_summary"] is not None for a in arms.values())
     status = "complete" if all(s == "complete" for s in states) and manifest and summaries_present else "awaiting" if all(s == "awaiting" for s in states) and not manifest else "partial"
     if problems and status == "complete":
         status = "partial"
-    return {"created_at_utc": datetime.now(timezone.utc).isoformat(), "status": status,
+    report = {"created_at_utc": datetime.now(timezone.utc).isoformat(), "status": status,
         "scope": "034 forced same-prefix diagnostic only; no natural coverage, full-pool improvement or hidden-score claim",
         "session_manifest": manifest, "sources": sources, "parse_or_consistency_problems": problems,
         "arms": arms, "paired_comparisons": comparisons,
@@ -224,17 +234,31 @@ def analyze(root):
             "final_score includes the restored prefix; paired added_levels is the continuation measure.",
             "checked_action and counterexample describe the same failed prediction; counted once.",
             "forced_branch.actual_actions includes recursive repair; host event totals are a separate cross-check, never added to that aggregate."]}
+    if "C" in arms:
+        report["scope"] = "035 three-arm same-prefix reasoning-mode diagnostic; no natural/full-pool/hidden-score claim"
+        means = {}
+        for label, data in arms.items():
+            scores = [(game.get("result") or {}).get("final_score") for game in data["games"].values()]
+            means[label] = sum(scores) / len(scores) if scores and all(numeric(score) for score in scores) else None
+        report["selected_game_mean_scores"] = means
+        report["mean_score_differences"] = {
+            candidate + "_minus_" + reference:
+                means[candidate] - means[reference] if numeric(means[candidate]) and numeric(means[reference]) else None
+            for reference, candidate in (("A", "B"), ("A", "C"), ("B", "C"))}
+        report["configured_reasoning_modes"] = ((manifest or {}).get("experiment") or {}).get("auxiliary_reasoning_modes")
+    return report
 
 
 def write(report, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "summary.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     session = report.get("session_manifest") or {}
-    lines = ["# 034 强制切点诊断", "", f"产物状态：{report['status']}；会话状态：{session.get('status', 'unknown')}。仅比较相同前缀续跑；不能称为自然覆盖或full-pool提升。", "",
+    family = "035" if "C" in report["arms"] else "034"
+    lines = [f"# {family} 强制切点诊断", "", f"产物状态：{report['status']}；会话状态：{session.get('status', 'unknown')}。仅比较相同前缀续跑；不能称为自然覆盖或full-pool提升。", "",
              f"会话错误：`{session.get('error')}`。", "",
              "| arm | game | status | 新增关 | 续跑动作 | host计划动作 | match/mismatch/unknown |", "|---|---|---|---|---|---|---|"]
     details = []
-    review = ["# 034 已保存程序与实际行为审阅", "", "仅静态展示已保存产物，不执行模型代码。缺项为null；验收通过不等于任务语义正确。"]
+    review = [f"# {family} 已保存程序与实际行为审阅", "", "仅静态展示已保存产物，不执行模型代码。缺项为null；验收通过不等于任务语义正确。"]
     for arm, data in report["arms"].items():
         for game, value in data["games"].items():
             event = value["plan_events"]
@@ -244,6 +268,9 @@ def write(report, output_dir):
             details.extend(["", f"{arm}/{game} 主usage：`{json.dumps(value['main_requests']['returned_usage'])}`；额外usage：`{json.dumps(event['returned_usage'])}`；拒收：`{len(event['rejections']) if event['rejections'] is not None else None}`。"])
             review.extend(["", f"## {arm}/{game}", "", "```json", json.dumps(value, ensure_ascii=False, indent=2), "```"])
     lines.extend(details)
+    if "selected_game_mean_scores" in report:
+        lines.extend(["", "各臂两题均分：`" + json.dumps(report["selected_game_mean_scores"]) + "`。",
+                      "均分差：`" + json.dumps(report["mean_score_differences"]) + "`。"])
     lines.extend(["", "配对差值：", "```json", json.dumps(report["paired_comparisons"], ensure_ascii=False, indent=2), "```", "",
                   "成本：", "```json", json.dumps(report["session_cost"], ensure_ascii=False, indent=2), "```", "",
                   "详见summary.json与review.md。额外请求usage只取program_recomputed；主response usage独立。失配不重复计数，递归forced_branch与host_plan_execution动作不相加。"])
@@ -255,8 +282,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT / "runs/034-plan-diagnostic")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "experiments/034-analysis")
+    parser.add_argument("--arms", nargs="+", choices=("A", "B", "C"), default=["A", "B"],
+                        help="Use A B C for the035 three-arm diagnostic; default retains034 A/B.")
     args = parser.parse_args()
-    report = analyze(args.root)
+    report = analyze(args.root, tuple(args.arms))
     write(report, args.output_dir)
     print(json.dumps({"status": report["status"], "output_dir": str(args.output_dir),
                       "paired_comparisons": report["paired_comparisons"],

@@ -176,6 +176,7 @@ def _write_event(state_path: Path, event: dict[str, Any]) -> None:
 
 def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[str, Any]],
                 *, timeout: float, max_tokens: int, enable_thinking: bool | None = None,
+                reasoning_effort: str | None = None,
                 tool_choice_override: str | dict[str, Any] | None = None,
                 request_record: dict[str, Any] | None = None,
                 max_input_tokens: int | None = None) -> Any:
@@ -191,6 +192,8 @@ def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[
     """
     started = time.monotonic()
     deadline = started + float(timeout)
+    if reasoning_effort is not None and (reasoning_effort != "low" or enable_thinking is not True):
+        raise ValueError("Auxiliary reasoning_effort supports only low with enable_thinking=True")
     record = request_record if request_record is not None else {}
     record.update(status="building_payload", timeout_seconds=float(timeout),
                   input_token_cap=max_input_tokens)
@@ -213,6 +216,12 @@ def _completion(analyzer: Any, messages: list[dict[str, Any]], tools: list[dict[
         # Apply after the harness merge, matching ToolAgent's existing override
         # semantics, so a template default cannot silently re-enable thinking.
         template["enable_thinking"] = bool(enable_thinking)
+    if reasoning_effort is not None:
+        # Apply after the same harness merge, before tokenization and generation.
+        # Leaving this unset preserves every existing auxiliary request payload.
+        if "thinking" in template and template["thinking"] is not True:
+            raise ValueError("Auxiliary low reasoning conflicts with the thinking template key")
+        template["reasoning_effort"] = reasoning_effort
     if template:
         payload["chat_template_kwargs"] = template
     payload["messages"] = module._strip_control_keys(module._apply_summary_visibility(

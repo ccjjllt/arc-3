@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "scope": "Post-run read-only audit of 30 synthetic native CPU cases; no model/network/GPU/game score.",
+  "native_scenarios": 30,
+  "pure_contract_checks": 7,
+  "native_sandbox_calls": 249,
+  "scripted_completion_calls": 43,
+  "zero_action_feedback_packages": 12,
+  "maximum_requests_per_case": 2,
+  "request_timeout_maximum_seconds": 60.0,
+  "output_token_cap": 4096,
+  "input_token_cap": 16384,
+  "enable_thinking": false,
+  "token_bookkeeping_single_counted": true,
+  "feedback_package_audit": [
+    {
+      "scenario": "invalid_evidence_rolls_back_functions",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": null,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "initial_prediction_rejected_rolls_back",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": null,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "top_level_constant_feedback_delivers_short_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "oversized_feedback_delivers_short_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "computed_default_feedback_delivers_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "mutable_default_feedback_delivers_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "multiple_static_errors_share_single_feedback",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "syntax_invalid_feedback_preserves_failed_source",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "plan_type_error_feedback_delivers_short_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": null,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "prediction_type_error_feedback_delivers_short_program",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": null,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "second_invalid_stops_and_restores_state",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    },
+    {
+      "scenario": "zero_action_fix_shares_mismatch_repair_quota",
+      "request_index": 1,
+      "failed_source_copies": 1,
+      "structured_diagnostic_copies": 1,
+      "before_after_identical": true,
+      "rollback_before_retry": true
+    }
+  ],
+  "report_sha256": "ff6ad1b82ca296144b7a2c100e5d67c3f839743b27866af3108c385e97a08530",
+  "limitations": [
+    "The configured game/arm budgets are not proven by a synthetic world with 1000 seconds remaining.",
+    "CPU checks establish native wiring and contract behavior, not ARC rules, adoption, or score."
+  ]
+}

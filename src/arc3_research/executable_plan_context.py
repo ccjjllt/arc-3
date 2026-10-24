@@ -107,7 +107,14 @@ def delivery_tool_schema() -> dict[str, Any]:
                 "there is no exploratory execution or inspection-result round. "
                 "The code must contain function definitions and allowed computational imports only, "
                 "including plan_program(frame) and predict(frame, action). "
+                "Deliver one current decision and its related prediction within 12000 UTF-8 bytes "
+                "and the 4096-token response. There is no line-count limit. Put constants inside functions. "
                 "Use the supplied current board and recorded public facts to implement these functions. "
+                "frame.ascii is a string: rows = frame.ascii.splitlines(); color = rows[row][col]. "
+                "Use each observed case-sensitive color character verbatim, without inferring a role "
+                "or translating a color name into a character. An abstain plan has no actions and "
+                "may have empty evidence_pixels/replaces; ready and completed retain their nonempty "
+                "evidence and binding requirements. "
                 "Do not submit top-level assignments, loops, calls, print statements, observation scripts "
                 "or calls to the entry points. Do not call action(), RESET, UNDO or perform environment "
                 "side effects inside any function. The host will call plan_program and predict itself "
@@ -121,9 +128,12 @@ def delivery_tool_schema() -> dict[str, Any]:
                         "description": (
                             "Complete Python source with definitions for plan_program(frame) and "
                             "predict(frame, action), plus any self-contained helpers and allowed "
-                            "computational imports. Definitions/imports only; no decorators, defaults, "
-                            "annotations, global/nonlocal, prints or top-level execution. Follow the "
-                            "plan and prediction return contracts in the request."
+                            "computational imports. Definitions/imports only; no decorators, annotations, "
+                            "global/nonlocal, prints or top-level execution. Helpers may have immutable "
+                            "literal defaults; no computed or mutable defaults. Entry points have the "
+                            "exact signatures above, without defaults. Follow the plan and prediction "
+                            "return contracts in the request. Maximum 12000 UTF-8 bytes, including "
+                            "all helpers and imports; no line-count limit."
                         ),
                     },
                 },
@@ -244,7 +254,19 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
     """Build a standalone branch request; never append the old conversation."""
     source = str(trigger.get("source_code", state.source_code) or "")
     previous = str(trigger.get("previous_program") or "")
-    related, unknown = related_function_sources(source, previous,
+    # The failed source must remain visible verbatim even if it has invalid
+    # syntax. Dependency discovery must not turn that rejection into a second
+    # context-construction failure before the model can receive its feedback.
+    previous_dependencies = previous
+    previous_dependency_error = None
+    validation_feedback = trigger.get("validation_feedback") is not None
+    if validation_feedback and previous:
+        try:
+            _global_references(previous)
+        except (SyntaxError, ValueError) as exc:
+            previous_dependencies = ""
+            previous_dependency_error = f"{type(exc).__name__}: {exc}"
+    related, unknown = related_function_sources(source, previous_dependencies,
                                                 dict(getattr(agent, "_kept_functions", {})))
     public_trigger = {k: copy.deepcopy(v) for k, v in trigger.items()
                       if k not in {"source_code", "previous_program"}}
@@ -270,9 +292,26 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
     # Facts above come from the public runtime. Assistant reasoning, including
     # evicted summaries and prior targets, is not promoted into this object.
     prior_text = recent_model_hypotheses(list(getattr(state, "latest_messages", []) or []))
+    if validation_feedback:
+        # The full failed source and actual error replace optional old prose
+        # in this retry's bounded packet. Keep indexed hash references so this
+        # omission is explicit and traceable, never a silent source truncation.
+        prior_text["note"] = ("Prior assistant text omitted in this validation-feedback request "
+                              "to keep the full failed source and actual host error within the "
+                              "unchanged served-token limit. Indexed hashes refer to earlier text.")
+        prior_text["omitted_in_validation_feedback"] = True
+        prior_text["referenced_characters"] = prior_text["included_characters"]
+        prior_text["included_characters"] = 0
+        for entry in prior_text["entries"]:
+            for field in entry["fields"]:
+                field.pop("spans", None)
+                field["included_characters"] = 0
+                field["content_omitted"] = True
+                field["omission"] = "full text omitted in validation-feedback retry; source hash retained"
     hypotheses = {"status": "unverified", "source": "paused code, prior predictor and recent main-loop text",
                   "note": "Their targets, rules and old layout constants are hypotheses, not environment facts.",
                   "unresolved_old_globals": unknown,
+                  "previous_program_dependency_error": previous_dependency_error,
                   "prior_model_text": prior_text}
     package = {"facts": facts, "paused_code": source,
                "related_functions": related, "previous_program": previous,
@@ -283,14 +322,15 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
          "Return exactly one submit_program tool call; definitions and computational imports only. "
          "Do not request exploratory execution, print observations or add explanatory prose."},
         {"role": "user", "content": prompt + "\n\nCOMPACT LIVE EVIDENCE PACKAGE:\n"
-         + json.dumps(package, ensure_ascii=False, separators=(",", ":"))},
+         + json.dumps(package, ensure_ascii=validation_feedback, separators=(",", ":"))},
     ]
     metadata = {"context_schema": "034-compact-evidence-v3", "messages_sha256": _hash(messages),
                 "object_evidence_status": geometry.get("status"),
                 "object_evidence_sha256": _hash(geometry),
                 "old_conversation_included": False, "source_truncated": False,
-                "prior_assistant_text_included": bool(prior_text["entries"]),
+                "prior_assistant_text_included": bool(prior_text["included_characters"]),
                 "prior_assistant_text_characters": prior_text["included_characters"],
+                "validation_feedback_prior_text_omitted": validation_feedback,
                 "prior_assistant_source_indices": [e["source_message_index"] for e in prior_text["entries"]],
                 "paused_code_sha256": hashlib.sha256(source.encode()).hexdigest(),
                 "related_functions": sorted(related), "related_sources_truncated": False,

@@ -1,0 +1,436 @@
+{
+  "reviewer": "/root/v7_program_result_audit",
+  "scope": "Independent retrospective review of frozen v7 and actual downloaded auxiliary model/event outputs. Solver sources read-only. Counterfactual code evaluation uses saved public frames and a local Python stand-in: zero real actions, network/model/GPU calls; not actual candidate execution or native sandbox replay.",
+  "counts": {
+    "auxiliary_requests": 4,
+    "delivered_under120_nonempty_lines": 1,
+    "definition_extraction_accepted": 0,
+    "zero_action_feedback_requests": 2,
+    "all_retry_feedback_integrity_passed": true,
+    "host_actions": 0,
+    "checked_actions": 0,
+    "matches": 0,
+    "mismatches": 0,
+    "real_counterexample_repairs": 0,
+    "direct_program_levels": 0,
+    "tool_code_artifact_responses": 4,
+    "syntactically_valid_artifacts": 3,
+    "all_artifacts_within12000_bytes": true
+  },
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/034-plan-diagnostic-v7/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "01261c2fb4caf0ccdd21311d6ec127869f247fe9e66205292a95f2873c95bdc6",
+      "online": {
+        "auxiliary_requests": 2,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "source_file": "experiments/034-v7-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+          "source_sha256": "87ae9eb04278b672354812c81f5218513b1c19e50d7c204bc31b6e26bd163b73",
+          "nonempty_lines": 165,
+          "bytes": 6635,
+          "actual_status": "rejected",
+          "stage": "extract",
+          "error": "ValueError: Python source has 165 nonempty lines; maximum is 120",
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 21.670675139999958,
+          "request": {
+            "input_tokens": 12898,
+            "usage": {
+              "prompt_tokens": 12898,
+              "total_tokens": 15164,
+              "completion_tokens": 2266,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "submission_tool": "submit_program",
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            },
+            "context_metadata": {
+              "context_schema": "034-compact-evidence-v3",
+              "messages_sha256": "5277b589d688f54f1ea4427c8d1cbc29c7b6baae7d76c2822ebe7a238fbcc8b1",
+              "object_evidence_status": "available",
+              "object_evidence_sha256": "91d64967078d0491ba5293cd696593375871582ddc1a9a2edbd65eb185fb0e0c",
+              "old_conversation_included": false,
+              "source_truncated": false,
+              "prior_assistant_text_included": true,
+              "prior_assistant_text_characters": 9047,
+              "validation_feedback_prior_text_omitted": false,
+              "prior_assistant_source_indices": [
+                39,
+                37
+              ],
+              "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+              "related_functions": [],
+              "related_sources_truncated": false,
+              "unresolved_old_globals": [],
+              "recent_transition_count": 2,
+              "current_observation": {
+                "level": 3,
+                "step": 27,
+                "shape": [
+                  64,
+                  64
+                ],
+                "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+              },
+              "message_characters": 30798,
+              "token_limit_check": "final_payload_server_tokenize_before_generation"
+            }
+          },
+          "parse": "SyntaxError: unexpected EOF while parsing (<unknown>, line 165)",
+          "old_no_line_limit_extract": "ValueError: Invalid Python source",
+          "geometry_helper_referenced": false
+        },
+        {
+          "index": 2,
+          "source_file": "experiments/034-v7-analysis/extracted-programs/ft09-0d8bbf25-3.py",
+          "source_sha256": "819160437e968992301967c159e49a5a7345e012090226cd533451e8ae56d858",
+          "nonempty_lines": 129,
+          "bytes": 5686,
+          "actual_status": "rejected",
+          "stage": "extract",
+          "error": "ValueError: Python source has 129 nonempty lines; maximum is 120",
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 11.773634248999997,
+          "request": {
+            "input_tokens": 11877,
+            "usage": {
+              "prompt_tokens": 11877,
+              "total_tokens": 13683,
+              "completion_tokens": 1806,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "submission_tool": "submit_program",
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            },
+            "context_metadata": {
+              "context_schema": "034-compact-evidence-v3",
+              "messages_sha256": "36fd998f5a6e965cc5bb7672dab2bd9facfeb5fccdf596b2d1fef611730cc11b",
+              "object_evidence_status": "available",
+              "object_evidence_sha256": "91d64967078d0491ba5293cd696593375871582ddc1a9a2edbd65eb185fb0e0c",
+              "old_conversation_included": false,
+              "source_truncated": false,
+              "prior_assistant_text_included": false,
+              "prior_assistant_text_characters": 0,
+              "validation_feedback_prior_text_omitted": true,
+              "prior_assistant_source_indices": [
+                39,
+                37
+              ],
+              "paused_code_sha256": "14b7596f6cb1770cf0cf0693b772455e60c5dba191204d72f80deb48b35fb36b",
+              "related_functions": [],
+              "related_sources_truncated": false,
+              "unresolved_old_globals": [],
+              "recent_transition_count": 2,
+              "current_observation": {
+                "level": 3,
+                "step": 27,
+                "shape": [
+                  64,
+                  64
+                ],
+                "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+              },
+              "message_characters": 29660,
+              "token_limit_check": "final_payload_server_tokenize_before_generation"
+            }
+          },
+          "parse": "passed",
+          "literal_defaults": [],
+          "top_level_non_import_non_definition": [],
+          "old_no_line_limit_extract": "passed",
+          "geometry_helper_referenced": false,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_equal": true,
+            "failed_source_exact_value_copies": 1,
+            "previous_source_hash_matches": true,
+            "actual_error_exact": true,
+            "actual_host_traceback_present": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "current_observation_exact_initial": true,
+            "same_recent_transitions": true,
+            "same_object_evidence": true,
+            "same_paused_code": true,
+            "same_related_sources": true,
+            "old_natural_language_omitted_explicitly": true,
+            "prior_source_hashes_equal_initial": true
+          }
+        }
+      ]
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_file": "runs/034-plan-diagnostic-v7/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "caaeb777b3d47bdca18057ec216fe59d6f3d5248500fb171f081ec1703a4f067",
+      "online": {
+        "auxiliary_requests": 2,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "source_file": "experiments/034-v7-analysis/extracted-programs/su15-1944f8ab-2.py",
+          "source_sha256": "bc8219231b4e2ee288dd324b0abafe0bb7514d455d286d026fc1639d43deabe3",
+          "nonempty_lines": 183,
+          "bytes": 8496,
+          "actual_status": "rejected",
+          "stage": "extract",
+          "error": "ValueError: Python source has 183 nonempty lines; maximum is 120",
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 25.3367152310002,
+          "request": {
+            "input_tokens": 11770,
+            "usage": {
+              "prompt_tokens": 11770,
+              "total_tokens": 14711,
+              "completion_tokens": 2941,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "submission_tool": "submit_program",
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            },
+            "context_metadata": {
+              "context_schema": "034-compact-evidence-v3",
+              "messages_sha256": "a3097aad73c66b078d1824e3e7d1e253a16b2c195f8483bf7681ae7f95618c27",
+              "object_evidence_status": "available",
+              "object_evidence_sha256": "5dc19a1dc60e5aa9daab219ce1ceada1c1100d130278293fd8ef1b733cacf54d",
+              "old_conversation_included": false,
+              "source_truncated": false,
+              "prior_assistant_text_included": true,
+              "prior_assistant_text_characters": 5657,
+              "validation_feedback_prior_text_omitted": false,
+              "prior_assistant_source_indices": [
+                94,
+                91
+              ],
+              "paused_code_sha256": "7560c549c37f34ade54f0e717079f6f7b9601ab9e99be73c41f3b57cf5c9fd27",
+              "related_functions": [
+                "click",
+                "invaders",
+                "state"
+              ],
+              "related_sources_truncated": false,
+              "unresolved_old_globals": [],
+              "recent_transition_count": 2,
+              "current_observation": {
+                "level": 5,
+                "step": 86,
+                "shape": [
+                  64,
+                  64
+                ],
+                "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+              },
+              "message_characters": 33514,
+              "token_limit_check": "final_payload_server_tokenize_before_generation"
+            }
+          },
+          "parse": "passed",
+          "literal_defaults": [],
+          "top_level_non_import_non_definition": [
+            {
+              "line": 82,
+              "type": "Assign",
+              "source": "_GRID = None"
+            }
+          ],
+          "old_no_line_limit_extract": "ValueError: Return only function definitions and allowed imports",
+          "geometry_helper_referenced": false
+        },
+        {
+          "index": 2,
+          "source_file": "experiments/034-v7-analysis/extracted-programs/su15-1944f8ab-3.py",
+          "source_sha256": "a7c7ff19cc4c59d061ef1991dd698184b56addbc1c6646e212ce3eafb94580c8",
+          "nonempty_lines": 105,
+          "bytes": 4391,
+          "actual_status": "rejected",
+          "stage": "extract",
+          "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters",
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 13.596734977000096,
+          "request": {
+            "input_tokens": 12879,
+            "usage": {
+              "prompt_tokens": 12879,
+              "total_tokens": 14408,
+              "completion_tokens": 1529,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "submission_tool": "submit_program",
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            },
+            "context_metadata": {
+              "context_schema": "034-compact-evidence-v3",
+              "messages_sha256": "21a45eae8acaaab6b756d43eeed8f78b3e8ee99479f951e6285ea05ccd6ec998",
+              "object_evidence_status": "available",
+              "object_evidence_sha256": "5dc19a1dc60e5aa9daab219ce1ceada1c1100d130278293fd8ef1b733cacf54d",
+              "old_conversation_included": false,
+              "source_truncated": false,
+              "prior_assistant_text_included": false,
+              "prior_assistant_text_characters": 0,
+              "validation_feedback_prior_text_omitted": true,
+              "prior_assistant_source_indices": [
+                94,
+                91
+              ],
+              "paused_code_sha256": "7560c549c37f34ade54f0e717079f6f7b9601ab9e99be73c41f3b57cf5c9fd27",
+              "related_functions": [
+                "click",
+                "invaders",
+                "state"
+              ],
+              "related_sources_truncated": false,
+              "unresolved_old_globals": [],
+              "recent_transition_count": 2,
+              "current_observation": {
+                "level": 5,
+                "step": 86,
+                "shape": [
+                  64,
+                  64
+                ],
+                "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+              },
+              "message_characters": 37736,
+              "token_limit_check": "final_payload_server_tokenize_before_generation"
+            }
+          },
+          "parse": "passed",
+          "literal_defaults": [
+            {
+              "function": "_comps",
+              "line": 21,
+              "defaults": [
+                "10"
+              ]
+            }
+          ],
+          "top_level_non_import_non_definition": [],
+          "old_no_line_limit_extract": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters",
+          "geometry_helper_referenced": false,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_equal": true,
+            "failed_source_exact_value_copies": 1,
+            "previous_source_hash_matches": true,
+            "actual_error_exact": true,
+            "actual_host_traceback_present": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "current_observation_exact_initial": true,
+            "same_recent_transitions": true,
+            "same_object_evidence": true,
+            "same_paused_code": true,
+            "same_related_sources": true,
+            "old_natural_language_omitted_explicitly": true,
+            "prior_source_hashes_equal_initial": true
+          }
+        }
+      ]
+    }
+  ],
+  "conclusion": "Both actual zero-action validation failures triggered one complete specific feedback request and the model returned substantially shorter artifacts, so feedback delivery worked. Neither revised artifact passed extraction, so execution and prediction mechanisms were not tested. The new120-line threshold rejects an otherwise definition-compliant129-line ft09 revision, while the existing all-defaults ban rejects su15 literal default10. These interface burdens must not be summarized as inability to write Python. Offline lowering these exact burdens still yields ft09 abstention and su15 projection-schema failure; neither establishes useful rules or score gain.",
+  "format_constraint_assessment": {
+    "new_line_limit": "Both first artifacts under12000bytes but165/183nonemptylines rejected. ft09 followup129lines/5686bytes is only9lines over120; no-line-limit extractor accepts it. Nonempty line count depends on layout; it is not a direct measure of dynamic cost or semantic complexity. This run does not isolate whether the120line limit causes inferior score.",
+    "existing_default_restriction": "su15 followup105lines/4391bytes contains only one default: _comps(...,r0=10), a static integer literal. Whole-program defaults ban rejects it despite no computation at definition. Arbitrary computed defaults must not be inferred safe from this example.",
+    "errors_masked_by_first_failure": "ft09 first artifact has missing final} syntaxEOF; su15 first artifact has top-level assignment. Both are masked by line-limit-first rejection. Concrete feedback reported the first actual host error faithfully, but did not expose all independently detectable static issues.",
+    "scope": "Do not change solver or select a candidate retrospectively from these evaluations. No next GPU run initiated by this reviewer."
+  },
+  "offline_evidence": "experiments/034-v7-analysis/generated-code-offline-review.json",
+  "coverage_evidence": "experiments/034-v7-analysis/prediction-coverage-audit.json",
+  "recommendation": "Archive v7 negative mechanism result. If the parent proposes further work, reduce unnecessary interface burden and report all available static artifact defects together before adding representations or retry budgets; keep outcome/coverage evaluation separate. This is a research recommendation, not an implemented candidate.",
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v7_program_audit.py",
+    "sha256": "4d6db560d067463b166250512cbfa11674c0f7274a9435efd8d61d2a7be741ba"
+  }
+}

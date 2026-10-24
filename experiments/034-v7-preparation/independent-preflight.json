@@ -1,0 +1,418 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-24T06:34:23.594567+00:00",
+  "scope": "Independent final v7 adapter/context/build/facts review; reviewer authored the separately checked contract bounds. No model/network/GPU or real game calls.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v7/experiment.ipynb",
+    "sha256": "ab793c287c15a3feaaf76aa099fb1a5e44cc2915d00d76365d0e251da5cc42ca",
+    "bytes": 983048,
+    "cells": 32
+  },
+  "source_manifest": {
+    "all_current_input_hashes_match": true,
+    "input_count": 20,
+    "input_checks": [
+      {
+        "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+        "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+        "equal": true
+      },
+      {
+        "path": "scripts/build_experiment.py",
+        "sha256": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/__init__.py",
+        "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan.py",
+        "sha256": "4d1a16e35b5691bdf509ee28f967c1d70d43342b534ae250b4455feee972492d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_context.py",
+        "sha256": "b474bc96ad19f4ca270df88a0ccc82eebd221dcd6e49a0883bf68510e2e5832a",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_contract.py",
+        "sha256": "388fc7277e923d6091351dae2328d28d949dd74c37b73a59284719a6cd5ed1f2",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_forks.py",
+        "sha256": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/experiment_config.py",
+        "sha256": "4bcfacb85107b0a265be5804f532e63e080615ccd5dad46ac4809d74e6b769cf",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/goal_evidence.py",
+        "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/input_paths.py",
+        "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/object_evidence.py",
+        "sha256": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_repair.py",
+        "sha256": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_state.py",
+        "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/run_arm.py",
+        "sha256": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/session_runner.py",
+        "sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/transient_history.py",
+        "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "equal": true
+      },
+      {
+        "path": "scripts/summarize_experiment.py",
+        "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-plan-diagnostic-v7.json",
+        "sha256": "2ae42e605e23a14dd368f5fb8de7b59235a86d48cf56d4b99f41ad0de824f5c3",
+        "equal": true
+      },
+      {
+        "path": "experiments/028-fork-package.json.gz.b64",
+        "sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+        "sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+        "equal": true
+      }
+    ],
+    "all_frozen_source_hashes_match": true,
+    "frozen_count": 19,
+    "native_python_payloads": 15,
+    "native_python_exact_source_and_compiled": true,
+    "embedded_HASHES_JSON_exact_manifest": true,
+    "embedded_config_validates": true
+  },
+  "forks": {
+    "lossless_combined_payload_exact_v6": true,
+    "decoded_exact_original_028_and_su15_fork_objects": true,
+    "fork_count": 2
+  },
+  "attribution": {
+    "unchanged_infrastructure_byte_exact_v6": [
+      "executable_plan_forks.py",
+      "object_evidence.py",
+      "program_repair.py",
+      "run_arm.py",
+      "session_runner.py",
+      "program_state.py",
+      "transient_history.py",
+      "input_paths.py",
+      "goal_evidence.py"
+    ],
+    "all_post_harness_notebook_cells_byte_exact_v6": true,
+    "unchanged_config_fields": [
+      "arm_order",
+      "games",
+      "reference_arm",
+      "arm_environment",
+      "active_streams",
+      "n_passes_per_arm",
+      "warmup_action_games",
+      "requested_arm_seconds",
+      "continuation_seconds",
+      "max_continuation_actions",
+      "hard_limit_seconds",
+      "startup_limit_seconds",
+      "strict_arm_budget",
+      "require_cache_flush",
+      "require_cache_flush_log",
+      "require_complete_pool",
+      "require_drained_workers",
+      "require_rtx_pro6000",
+      "candidate_delivery",
+      "hypothesis_context",
+      "runtime_source_sha256",
+      "cache_flush_wait_seconds",
+      "object_evidence"
+    ],
+    "same_private_target_metadata_as_v6": true,
+    "actual_runtime_source_hashes_match": true,
+    "native_main_loop_source_unchanged": true,
+    "intervention": "Bounded short artifact delivery plus exactly one eligible zero-action validation-feedback request sharing the existing real-mismatch repair slot; failed source/error retained, old prose omitted only in this feedback request."
+  },
+  "actual_v6_request_context_reconstruction": [
+    {
+      "game": "ft09-0d8bbf25",
+      "level": 3,
+      "step": 27,
+      "initial_all_public_facts_exact_v6": true,
+      "initial_existing_code_hypotheses_exact_v6": true,
+      "feedback_current_facts_unchanged_except_trigger": true,
+      "complete_failed_source_once": true,
+      "feedback_only_omits_old_natural_language_text_keeps_hashes": true,
+      "failed_source_utf8_bytes": 11314,
+      "feedback_message_characters": 29505
+    },
+    {
+      "game": "su15-1944f8ab",
+      "level": 5,
+      "step": 86,
+      "initial_all_public_facts_exact_v6": true,
+      "initial_existing_code_hypotheses_exact_v6": true,
+      "feedback_current_facts_unchanged_except_trigger": true,
+      "complete_failed_source_once": true,
+      "feedback_only_omits_old_natural_language_text_keeps_hashes": true,
+      "failed_source_utf8_bytes": 9953,
+      "feedback_message_characters": 35135
+    }
+  ],
+  "per_case_budget_and_request_audit": {
+    "max_scripted_requests": 2,
+    "all_non_exhaustion_case_elapsed_sums_match": true,
+    "checks": [
+      {
+        "case": "ordinary_batch_bootstrap",
+        "branch_count": 1,
+        "elapsed_sum": 0.39339837501756847,
+        "recorded_extra_seconds": 0.39339837501756847,
+        "no_double_charge": true
+      },
+      {
+        "case": "single_helpers_pause_second",
+        "branch_count": 1,
+        "elapsed_sum": 0.20069625007454306,
+        "recorded_extra_seconds": 0.20069625007454306,
+        "no_double_charge": true
+      },
+      {
+        "case": "mismatch_repairs_then_acts",
+        "branch_count": 2,
+        "elapsed_sum": 0.5583686659811065,
+        "recorded_extra_seconds": 0.5583686659811065,
+        "no_double_charge": true
+      },
+      {
+        "case": "unknown_stops_suffix",
+        "branch_count": 1,
+        "elapsed_sum": 0.2703407499939203,
+        "recorded_extra_seconds": 0.2703407499939203,
+        "no_double_charge": true
+      },
+      {
+        "case": "zero_action_validation",
+        "branch_count": 1,
+        "elapsed_sum": 0.03223795804660767,
+        "recorded_extra_seconds": 0.03223795804660767,
+        "no_double_charge": true
+      },
+      {
+        "case": "invalid_evidence_rolls_back_functions",
+        "branch_count": 2,
+        "elapsed_sum": 0.08275166596285999,
+        "recorded_extra_seconds": 0.08275166596285999,
+        "no_double_charge": true
+      },
+      {
+        "case": "level_boundary_stops_plan",
+        "branch_count": 1,
+        "elapsed_sum": 0.18664291698951274,
+        "recorded_extra_seconds": 0.18664291698951274,
+        "no_double_charge": true
+      },
+      {
+        "case": "validation_preserves_repeat_guard",
+        "branch_count": 0,
+        "elapsed_sum": 0,
+        "recorded_extra_seconds": 0.0,
+        "no_double_charge": true
+      },
+      {
+        "case": "initial_prediction_rejected_rolls_back",
+        "branch_count": 2,
+        "elapsed_sum": 0.12135449901688844,
+        "recorded_extra_seconds": 0.12135449901688844,
+        "no_double_charge": true
+      },
+      {
+        "case": "completed_local_goal_no_action",
+        "branch_count": 1,
+        "elapsed_sum": 0.050005000084638596,
+        "recorded_extra_seconds": 0.050005000084638596,
+        "no_double_charge": true
+      },
+      {
+        "case": "abstain_no_action",
+        "branch_count": 1,
+        "elapsed_sum": 0.10353929200209677,
+        "recorded_extra_seconds": 0.10353929200209677,
+        "no_double_charge": true
+      },
+      {
+        "case": "short_contract_total_action_limit",
+        "branch_count": 1,
+        "elapsed_sum": 0.4219882079632953,
+        "recorded_extra_seconds": 0.4219882079632953,
+        "no_double_charge": true
+      },
+      {
+        "case": "ordinary_action_after_contract",
+        "branch_count": 1,
+        "elapsed_sum": 0.29701091698370874,
+        "recorded_extra_seconds": 0.29701091698370874,
+        "no_double_charge": true
+      },
+      {
+        "case": "recomputation_failure_keeps_action_accounting",
+        "branch_count": 1,
+        "elapsed_sum": 0.23084958305116743,
+        "recorded_extra_seconds": 0.23084958305116743,
+        "no_double_charge": true
+      },
+      {
+        "case": "top_level_constant_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 0.3202628750586882,
+        "recorded_extra_seconds": 0.3202628750586882,
+        "no_double_charge": true
+      },
+      {
+        "case": "oversized_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 0.5675073750317097,
+        "recorded_extra_seconds": 0.5675073750317097,
+        "no_double_charge": true
+      },
+      {
+        "case": "syntax_invalid_feedback_preserves_failed_source",
+        "branch_count": 2,
+        "elapsed_sum": 0.3579743739683181,
+        "recorded_extra_seconds": 0.3579743739683181,
+        "no_double_charge": true
+      },
+      {
+        "case": "plan_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 0.37128912610933185,
+        "recorded_extra_seconds": 0.37128912610933185,
+        "no_double_charge": true
+      },
+      {
+        "case": "prediction_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 0.44585608306806535,
+        "recorded_extra_seconds": 0.44585608306806535,
+        "no_double_charge": true
+      },
+      {
+        "case": "second_invalid_stops_and_restores_state",
+        "branch_count": 2,
+        "elapsed_sum": 0.08205512503627688,
+        "recorded_extra_seconds": 0.08205512503627688,
+        "no_double_charge": true
+      },
+      {
+        "case": "zero_action_fix_shares_mismatch_repair_quota",
+        "branch_count": 2,
+        "elapsed_sum": 0.21741795900743455,
+        "recorded_extra_seconds": 0.21741795900743455,
+        "no_double_charge": true
+      },
+      {
+        "case": "mismatch_repair_validation_failure_does_not_retry",
+        "branch_count": 2,
+        "elapsed_sum": 0.27696137386374176,
+        "recorded_extra_seconds": 0.27696137386374176,
+        "no_double_charge": true
+      },
+      {
+        "case": "native_transport_failure_is_not_program_feedback",
+        "branch_count": 1,
+        "elapsed_sum": 0.001436208956874907,
+        "recorded_extra_seconds": 0.001436208956874907,
+        "no_double_charge": true
+      },
+      {
+        "case": "declared_unknown_does_not_request_code_repair",
+        "branch_count": 1,
+        "elapsed_sum": 0.07578629092313349,
+        "recorded_extra_seconds": 0.07578629092313349,
+        "no_double_charge": true
+      }
+    ]
+  },
+  "unicode_feedback_boundary_evidence": {
+    "path": "experiments/034-v7-preparation/unicode-feedback-check.json",
+    "source_hashes_current": true,
+    "checks": [
+      "invalid UTF-8 metadata does not mask rejection",
+      "raw failed source round-trips unchanged in feedback JSON",
+      "feedback message is UTF-8 encodable",
+      "event JSONL round-trips unchanged failed source"
+    ]
+  },
+  "verification_evidence": {
+    "native_cpu_report": "experiments/034-v7-cpu-check-final/report.json",
+    "source_hashes_current": true,
+    "scenarios": 25,
+    "native_sandbox_calls": 194,
+    "scripted_completion_calls": 35,
+    "contract_bound_report": "experiments/034-v7-preparation/contract-bounds-checks.json",
+    "contract_bound_checks": 42
+  },
+  "manual_control_flow_review": {
+    "zero_action_eligibility": "Requires zero real actions plus level/step/grid hash unchanged; validation side-effect attempts refused even when runtime observation stayed equal. Only extract/plan/initial-prediction artifact failures eligible.",
+    "source_and_original_error": "Full prior source is in previous_program only; raw invalid submission retained only when no source decoded. Native error payload included without truncation by the adapter; native runtime error may already sanitize internals.",
+    "rollback": "evaluate restores kept functions on failure, action result, step summary, timeout, repeat-guard same object/contents and TLS; run_branch restores kept functions on rejection and main history/TLS before its only recursive follow-up.",
+    "one_shared_quota": "repair_used is set when repair branch enters; both real-action mismatch and zero-action validation use same state.pending kind=repair. No third generation permitted.",
+    "budget_accounting": "Each branch finally accounts its own elapsed time before recursively invoking the next branch; second deadline uses remaining120s minus first elapsed. No parent timer includes follow-up.450s game/600s arm/7200s session unchanged."
+  },
+  "observability_and_encoding": {
+    "event_metadata": "Accepted and rejected submissions log actual nonempty line count, UTF-8 byte count and source hash when encodable; complete response/error remain available.",
+    "event_json_encoding": "JSONL uses ensure_ascii=True so malformed UTF-8 source cannot hide the original rejection; JSON-decoded data are unchanged.",
+    "feedback_json_encoding": "Only validation-feedback packages use ensure_ascii=True to preserve complete raw failed source, including unpaired-surrogate boundary cases, as escaped JSON. Initial packages retain previous encoding and decoded public facts.",
+    "contract_default_diagnostic": "Default extraction acceptance/rejection stays the same; oversized-byte errors include actual length and cap, successful extraction adds lengths metadata."
+  },
+  "resolved_review_findings": [
+    "Native infrastructure/startup/protocol failures are excluded using frozen candidate-traceback attribution or explicit completed returncode; they do not spend a code-repair generation.",
+    "Declared unknown prediction remains a stop condition and does not spend code-repair quota.",
+    "Malformed UTF-8 source no longer raises inside feedback hashing or event serialization and cannot mask the original rejection."
+  ],
+  "limitations": [
+    "CPU uses scripted responses/synthetic public observations, and cannot establish real model delivery, task relevance, physics/goal correctness or ARC score.",
+    "Exact served-token fit is checked live at the unchanged16384 cap; local text length is not a token count.",
+    "Two existing forced checkpoints do not establish natural trigger coverage or full-pool gain."
+  ],
+  "findings": [],
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v7_preflight.py",
+    "sha256": "622dedd183e282e6e3b88fd4d0229039b59bb726f8604e6472f2ef854f21631f"
+  }
+}

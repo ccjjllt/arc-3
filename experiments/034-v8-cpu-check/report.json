@@ -1,0 +1,675 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T07:50:06.981558+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_sandbox_calls": 249,
+  "injected_native_transport_faults": 1,
+  "output_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-v8-cpu-check",
+  "scenarios": [
+    {
+      "name": "ordinary_batch_bootstrap",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.526461875066161,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "single_helpers_pause_second",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.8597744159633294,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "mismatch_repairs_then_acts",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 3.8954646249767393,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "unknown_stops_suffix",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.0100329590495676,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "zero_action_validation",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.8532251249998808,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "invalid_evidence_rolls_back_functions",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.7299463329836726,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "level_boundary_stops_plan",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.3078278749017045,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "validation_preserves_repeat_guard",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.29355933296028525,
+      "recorded_tokens": {
+        "generated": 0,
+        "total": 0
+      }
+    },
+    {
+      "name": "initial_prediction_rejected_rolls_back",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.9218368750298396,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "completed_local_goal_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.5652550830272958,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "abstain_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.5970538329565898,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "short_contract_total_action_limit",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.1660147910006344,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "ordinary_action_after_contract",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "LEFT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.1854152500163764,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "recomputation_failure_keeps_action_accounting",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.2944328340236098,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "top_level_constant_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.1926954579539597,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "oversized_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.0085956250550225,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "over_120_lines_runs_without_format_gate",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.0663960829842836,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "literal_helper_default_runs_in_native_child",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.1983130420558155,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "computed_default_feedback_delivers_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.9631603331072256,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "mutable_default_feedback_delivers_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.0124771249247715,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "multiple_static_errors_share_single_feedback",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.8520342499250546,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "syntax_invalid_feedback_preserves_failed_source",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.8708261249121279,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "plan_type_error_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.320730709005147,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "prediction_type_error_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 2.2056585829705,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "second_invalid_stops_and_restores_state",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.8324536250438541,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "zero_action_fix_shares_mismatch_repair_quota",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.1904634999809787,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "mismatch_repair_validation_failure_does_not_retry",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 1.6751159999985248,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "feedback_budget_exhausted_does_not_request",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.4553367079934105,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "native_transport_failure_is_not_program_feedback",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.46148362499661744,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "declared_unknown_does_not_request_code_repair",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.6521287920186296,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    }
+  ],
+  "limits": [
+    "Scripted completion responses and synthetic public frames; no ARC score.",
+    "The real frozen ToolAgent._run_python_tool and child sandbox are exercised.",
+    "One scenario injects a native transport error before child launch to verify it is not treated as a model-code error.",
+    "Synthetic token usage checks bookkeeping only; it is not inference cost."
+  ],
+  "contract_checks": [
+    {
+      "name": "immutable_helper_defaults",
+      "status": "passed",
+      "accepted": true
+    },
+    {
+      "name": "legacy_defaults_remain_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Definitions cannot have defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "entry_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "entry_signature",
+            "line": 8,
+            "message": "Required signature is plan_program(frame) with no defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "computed_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "mutable_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "static_diagnostics_are_bounded",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 2,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 3,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 4,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 5,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 6,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 7,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 8,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 9,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 10,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 11,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 12,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 13,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 14,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 15,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 16,
+            "message": "Return only function definitions and allowed imports"
+          }
+        ],
+        "total_errors": 20,
+        "truncated_count": 4,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "truncation_does_not_hide_side_effect_rejection",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 2,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 3,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 4,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 5,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 6,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 7,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 8,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 9,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 10,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 11,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 12,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 13,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 14,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 15,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 16,
+            "message": "Return only function definitions and allowed imports"
+          }
+        ],
+        "total_errors": 21,
+        "truncated_count": 5,
+        "has_side_effect_rejection": true
+      }
+    }
+  ],
+  "scripted_completion_calls": 43,
+  "finished_at_utc": "2026-10-24T07:50:54.862122+00:00",
+  "source_sha256": {
+    "scripts/checks/check_034_executable_plan.py": "7cdaae6702403bb1a731990884e74898f34f2614b5350539dfea30f6b3bf92b4",
+    "src/arc3_research/executable_plan.py": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+    "src/arc3_research/executable_plan_contract.py": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f"
+  }
+}

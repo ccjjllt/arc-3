@@ -1,0 +1,177 @@
+{
+  "reviewed_at": "2026-10-24",
+  "reviewer": "fresh subagent /root/v9_next_strategy",
+  "scope": "Independent next-experiment design only; read local v9 artifacts, research overviews and 2026-10-22 notebook audits; verified primary model/service documentation. No implementation edits, model requests, GPU jobs or submission.",
+  "decision": "Stop contract tuning of the independent program branch. The next justified narrow experiment is a controlled auxiliary reasoning-mode comparison under the unchanged v9 program contract and original per-game budget. A reasoning-mode experiment is not evidence that the program approach works, and a positive two-checkpoint result is not a submission candidate.",
+  "v9_evidence": {
+    "sources": [
+      "runs/034-plan-diagnostic-v9/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "runs/034-plan-diagnostic-v9/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "experiments/034-plan-diagnostic-v9.json",
+      "research/notes/034/034-v8-results-analysis.md"
+    ],
+    "all_four_sources_extracted": true,
+    "host_actions": 0,
+    "real_action_prediction_checks": 0,
+    "real_rule_counterexample_repairs": 0,
+    "ft09": "Initial program returned completed with unsupported goal and invalid replaces. Feedback program returned ready but invented replacement bindings that were not present at the checkpoint. This is not a correct planner blocked only by metadata: the revised goal also reverts to painting lower orange cells red rather than establishing the game's winning relation.",
+    "su15": "Initial plan passed declared-current-pixel validation, but its proposed mover was the top yellow legend component and its first expected-pixel set did not cover the declared coordinates. The feedback program then abstained because it could not recover mover/ball geometry. Correctly accepted abstention is zero action, not repaired rule understanding.",
+    "already_agreed_stop_rule": "v9 selection_note and the v8 results note explicitly stop contract tuning if both checkpoints still have zero host action. That condition is satisfied. Do not relax replaces, expected-pixel projection, current evidence or object identity to manufacture execution.",
+    "causal_limit": "v2 thinking-enabled requests had approximately 61k/89k input tokens and no artifact-specific compact request. v3-v9 disabled thinking while changing context/interface. These runs cannot estimate the effect of thinking alone."
+  },
+  "single_hypothesis": "Under a compact current-state request and the already frozen v9 artifact interface, a small amount of auxiliary reasoning may improve object/goal selection and produce useful checked actions often enough to repay its time cost. The comparator is the same artifact branch with reasoning disabled; the ordinary 009 main loop remains unchanged.",
+  "recommended_intervention": {
+    "name": "branch-only low reasoning versus branch-only non-thinking",
+    "why_low": "The online failure has moved from missing code to poor state/goal reasoning. The 4096 total completion-token cap remains binding, so unbounded default reasoning could consume the delivery budget. The model documents a low effort mode; it is a research configuration, not a guaranteed reasoning-token quota.",
+    "control": {
+      "enable_thinking": false,
+      "reasoning_effort": null
+    },
+    "treatment": {
+      "enable_thinking": true,
+      "reasoning_effort": "low"
+    },
+    "interpretation": "This estimates the whole low-reasoning mode versus non-thinking mode. Do not separately attribute any effect to the toggle and the effort setting. For a literal one-bit ablation, use true versus false and omit reasoning_effort in both; do not run both designs or choose after seeing outcomes.",
+    "not_supported_claims": [
+      "No verified separate hard cap on reasoning tokens in the pinned service.",
+      "No claim that reasoning_effort=low guarantees code before 4096 tokens or 60 seconds.",
+      "No claim that Qwen Cloud-specific thinking_budget fields work in local Pennyroyal."
+    ]
+  },
+  "fair_experiment": {
+    "preferred_arms": [
+      "R0: exact 009 continuation without the artifact branch",
+      "R1: exact frozen v9 artifact branch, thinking disabled",
+      "R2: same frozen v9 artifact branch, low reasoning enabled only for auxiliary requests"
+    ],
+    "order": "Freeze one arm order before upload, for example R2 -> R1 -> R0; two games run concurrently inside each arm. No repeated attempts or best-of selection. One sequential arm order is still vulnerable to service/time variation and is diagnostic rather than a stable effect estimate.",
+    "checkpoints": "The same ft09 cut27 and su15 cut86; restore identical frames, old functions, history and paused source. No new hand-written game rules or post-checkpoint actions enter any solver input.",
+    "per_game": {
+      "seconds": 450,
+      "subsequent_action_cap": 60,
+      "auxiliary_total_seconds_included_in_game": 120,
+      "auxiliary_request_seconds": 60,
+      "auxiliary_total_completion_tokens_per_request_including_reasoning": 4096,
+      "auxiliary_input_token_cap": 16384,
+      "auxiliary_requests_maximum": 2,
+      "one_shared_validation_or_real_mismatch_followup": true
+    },
+    "other_controls": "Keep model weights/quantization/Pennyroyal version, temperature/top-p/top-k, tool choice, all prompt text, object evidence, byte/AST checks, plan/prediction validation, trigger, rollback, main-loop reasoning, scheduler, two-game concurrency, cache flush/drain and scoring unchanged. The R1/R2 first request must differ only by the declared reasoning-mode fields; the rendered token prefix may differ as a necessary consequence of the mode.",
+    "session_budget": "Retain 7200 seconds hard cap, 4200 seconds startup ceiling, 600 seconds per isolated arm and 120-second bounded cache waits. Actual session_runner.py cleanup_reserve is 150 * arms + 60 = 510 seconds for three arms. Worst-case reservation: 4200 + 3*600 + 3*120 + 510 = 6870 seconds, leaving 330 seconds. session_runner.py lines 264-297 must still compute full arm_budget=600 and preserve all future-arm/cache/cleanup reserves on the actual saved build. Abort rather than shorten a game/arm. This is a feasible one-session design, not guaranteed startup performance.",
+    "logging": "Freeze hashes for source/config and each payload. Retain full response, reasoning_content, tool arguments, actual returned plan, finish_reason, reported reasoning/completion usage, service-tokenize count and elapsed wall time. Separate returned-code, validated-plan, relevant-prediction, actual-host-action, mismatch-repair and level metrics. Predicted background equality is not task success.",
+    "primary_diagnostic_outcome": "Net completed levels and paired mean score within 450 seconds, with actual checked task actions and corrected behavior as mechanism evidence. Evaluate R2 against R1 for the reasoning-mode hypothesis and against R0 for whether the added branch is worth pursuing.",
+    "selection_limit": "Two highly selected checkpoints only screen a mechanism. They do not establish generalization, formal improvement or causality of one successful ordinary-loop continuation."
+  },
+  "minimum_implementation": [
+    "Add explicit auxiliary reasoning-mode configuration, defaulting to the frozen v9 behavior for backward compatibility. Do not change the artifact contract.",
+    "Pass branch-only enable_thinking and optional reasoning_effort through _completion after harness defaults are merged. Existing _completion already accepts enable_thinking but has no explicit effort parameter. Serialize the exact same mode into tokenize and generation payloads; preserve all unrelated kwargs.",
+    "Enable the optional reference/control/treatment arm names and runner budget validation without mutating frozen historical configs or output archives. Keep ordinary ToolAgent requests untouched.",
+    "Record configured and actual request mode and reject conflicting thinking keys. Do not add summarization, memory, a role oracle, an extra analysis request, more repairs or extra output/time budget."
+  ],
+  "offline_before_gpu": [
+    "Use the existing request-builder checker to prove R1/R2 payloads differ only in the declared mode fields and use identical tools/messages/sampling/output limits. Verify legacy no-override calls retain exact behavior and ordinary main-loop payloads are unchanged.",
+    "Check pinned server parsing/rendering with the model tokenizer/template that the saved runtime actually mounts: true+low and false must render different intended reasoning prefixes; tokenize and generation must agree. Official documentation proves an API path, not that the mounted historical tokenizer honors every newly documented option. If local tokenizer files are unavailable, leave this item explicitly pending for live preflight, not marked passed.",
+    "Run a few existing native CPU scenarios for rejection, valid abstain, shared followup quota, rollback and real mismatch. These script the model and cannot prove reasoning helps.",
+    "Freeze and inspect exact build/source/arm restore hashes, no change in current object/plan semantics, and full worst-case session reserves before upload."
+  ],
+  "gpu_only_questions": [
+    "Does the fixed mounted model/serving stack actually emit reasoning in the treatment and deliver complete tool code under the unchanged total completion/time cap?",
+    "Does the generated program choose a task object/goal supported by current evidence, pass an action-related prediction, execute and change an erroneous behavior after feedback?",
+    "Does useful progress repay all auxiliary time inside the same 450-second budget, including losses against ordinary continuation?"
+  ],
+  "stop_rules": [
+    "If actual mode is not demonstrated, treat the experiment as invalid configuration; do not infer solver quality.",
+    "If both treatment checkpoints remain zero host action, or reasoning repeatedly exhausts 4096/60 seconds without code, stop the independent compact-program branch. Do not increase its output/time budget or relax the contract in response.",
+    "If it runs but uses wrong objects/goals or vacuous predictions without explainable corrected progress, do not expand. More validated code is insufficient.",
+    "If the treatment has no positive net score/level signal against the contemporaneous 009 arm, preserve the negative result and return to the main 009 solver; do not call a code-quality gain a score improvement.",
+    "Only a useful mechanism and positive same-budget diagnostic signal justify freezing one candidate for a complete 25-game contemporaneous 009 comparison. Full25 must retain every game, largest wins/losses, total time and all auxiliary costs."
+  ],
+  "submission_gate": "No official submission from these checkpoint diagnostics. The research objective is full25 mean-score/level net improvement at the same model/time budget. Only then prepare the same core implementation/parameters, verify a genuine GPU save with model loading and actual game actions, submit the exact saved version and archive submission ID/status/score. Success requires an official score above 31.16, not delivery, validator acceptance or a selected public-game win.",
+  "external_evidence": [
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "kind": "model author primary documentation",
+      "read_at": "2026-10-24",
+      "locations": "lines 327-361, 470-528",
+      "supports": "Model documents enable_thinking and reasoning_effort low/medium/xhigh; per-turn low effort need not improve overall task time. This motivates a bounded mode comparison, not a score prediction.",
+      "limit": "Current main README is mutable; it is not proof of the frozen mounted tokenizer behavior. Record runtime artifacts and verify on the mounted version."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jpezzulli/sglang-rtxpro6000/d00d88efc8d6281b12be4f4073126aec95038c55/python/sglang/srt/entrypoints/openai/protocol.py",
+      "kind": "exact pinned service primary source",
+      "read_at": "2026-10-24",
+      "locations": "lines 757-801, 826-866, 933-987",
+      "supports": "Accepts reasoning_effort and chat_template_kwargs, mirrors a missing thinking-toggle key, and defines completion cap to include reasoning plus visible output. No thinking_budget field found in this schema."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jpezzulli/sglang-rtxpro6000/d00d88efc8d6281b12be4f4073126aec95038c55/python/sglang/srt/entrypoints/openai/serving_chat.py",
+      "kind": "exact pinned service primary source",
+      "read_at": "2026-10-24",
+      "locations": "lines 899-936, 1277-1311",
+      "supports": "Promotes effort from template kwargs, passes request reasoning_effort and remaining kwargs to apply_chat_template. This proves the request-to-template path, not that a particular model returns correct code."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/da-fr/arc-agi-3-solution/main/WRITEUP.md",
+      "kind": "baseline author primary writeup",
+      "read_at": "2026-10-24",
+      "locations": "lines 4-17, 25-48, 51-53",
+      "supports": "Author reports own 27.89 and the same Pennyroyal version/model family; discusses retaining thinking and throughput. These are author observations from another configuration, not an isolated auxiliary-reasoning experiment or the current team score."
+    },
+    {
+      "url": "https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound/blob/main/chat_template.jinja",
+      "kind": "quantizer primary exact model-family template",
+      "read_at": "2026-10-24",
+      "locations": "rendered page lines 305-315 and 423-430 (template lines approximately 44-54 and 162-169)",
+      "supports": "The Intel quantized model template itself accepts low/medium/xhigh, injects a short-thinking instruction for low, defaults to xhigh, and uses an open think block for thinking versus a closed empty block for disabled thinking.",
+      "limit": "This is current upstream Intel source. It has not been byte-matched to the mounted Kaggle version1 file. Archive the mounted chat_template hash and rendered off/low prefixes in the new run before asserting actual low mode."
+    }
+  ],
+  "high_score_notebook_and_frontier_limits": {
+    "local_reviews": [
+      "research/overview/frontier-findings.md",
+      "research/overview/notebook-findings.md",
+      "research/snapshots/2026-10-22-next-round/notebooks/notebook-review.json",
+      "research/snapshots/2026-10-22-candidates/source-audit.json"
+    ],
+    "conclusion": "The recent Heliosli source provides useful execution hooks but no target-model quality/score proof; the Affectify fork's list position is not a version-specific formal score. Tycho and other frontier agents motivate optional modeling with direct fallback, but their models and compute do not establish a Kaggle small-model gain. None justifies merging a new module or overriding v9's precommitted stop rule. These local review snapshots are dated 2026-10-22, not a claim of a newly refreshed leaderboard."
+  },
+  "three_arm_identifiability": "Prefer A009/Boff/Clow to only A009/Clow. C versus B isolates the declared auxiliary reasoning-mode treatment; B versus A measures interruption/validation overhead; C versus A tests net usefulness. With only A/C, a negative result would conflate the unchanged artifact branch and reasoning mode. This one extra reference arm uses the same model load and fits the existing 7200-second ceiling; two selected checkpoints and sequential order remain high-variance diagnostic evidence.",
+  "bounded_scope": "New 035 experiment, one prespecified diagnostic only. Freeze v9 contract and prompts; do not call it v10 contract repair. If treatment still has no useful action/object grounding or fails net benefit, stop this independent branch and return to 009 main-loop research. No follow-on budget expansion or repeated mode search.",
+  "local_protocol_evidence": [
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "lines": "739-749",
+      "finding": "The current branch supplies submit_program, enable_thinking=False, max_tokens=4096, max_input_tokens=16384 and the existing bounded timeout."
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "lines": "177-217",
+      "finding": "Completion helper already supports a branch-only thinking override after harness kwargs merge; there is no explicit reasoning-effort override yet. Add a nullable validated override that is absent by default."
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "lines": "222-268",
+      "finding": "The exact recorded payload is used for /tokenize and /chat/completions with one common deadline; the new effort field must follow the same path."
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "lines": "264-297",
+      "finding": "cleanup_reserve=150*len(arms)+60 and bounded cache allowances are deducted before arm-budget selection and reserved again before flush."
+    },
+    {
+      "path": "runs/034-plan-diagnostic-v9/serve.log",
+      "lines": "12",
+      "finding": "Actual args use model_path and tokenizer_path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1, chat_template at the same root/chat_template.jinja, reasoning_parser=qwen3, tool_call_parser=qwen3_coder and only preserve_thinking=True as server template default."
+    },
+    {
+      "path": "experiments/034-v9-source/kernel-metadata.json",
+      "lines": "1",
+      "finding": "Mounted main model is dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1; this matches the exact Qwen3.8-Flash-Next family covered by the official modelcard, not generic Qwen3 advice."
+    }
+  ],
+  "mounted_template_verification_status": {
+    "status": "pending_actual_file",
+    "facts": "v9 serve.log identifies the exact mounted chat_template path. No local copy/hash of that mounted file was found in downloaded artifacts or /private/tmp. Upstream Intel and Qwen templates independently support the exact requested mode; this is stronger than generic family advice but not a substitute for mounted-file verification.",
+    "required": "Before solver/model generation, inspect and hash the mounted chat_template.jinja and render a fixed harmless text/tool payload with enable_thinking=False and enable_thinking=True,reasoning_effort=low. Save whether low-specific instruction and open/closed think prefixes differ as intended. Do not patch or update the mounted template if it fails; report unsupported configuration instead."
+  }
+}

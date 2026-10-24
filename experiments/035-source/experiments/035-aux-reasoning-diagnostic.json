@@ -1,0 +1,157 @@
+{
+  "id": "035-aux-reasoning-diagnostic",
+  "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+  "kernel_title": "ARC3 Auxiliary Reasoning Diagnostic",
+  "purpose": "One controlled auxiliary reasoning-mode diagnostic with concurrent off and009 no-branch controls; v9 contract frozen",
+  "comparison_note": "C low reasoning versus B off versus A original009 no auxiliary branch, C→B→A in one model service. Same frozen ft09/su15 prefixes,450s/60actions per game,600s per arm. Only B/C solver difference is auxiliary reasoning mode; all contracts, context, triggers, original main loop, model and budgets remain fixed. This is a mechanism/quality screen, not full25 or formal score evidence.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "executable_plan_C",
+    "executable_plan_B",
+    "executable_plan_A"
+  ],
+  "reference_arm": "executable_plan_A",
+  "arm_environment": {
+    "executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_C": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "Same450s/60actions each game,600s each of3isolated arms. Startup4200 +1800 solver allowances +360 cache reserve +510 cleanup=6870s, within unchanged7200s cap. Abort rather than shorten any arm. All auxiliary reasoning/output/execution within original120s extra/450s game budgets.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 7200,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 2,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "One preregistered diagnostic. C/B screens reasoning quality; B/A screens branch overhead; C/A screens net score. Legal abstain, syntax acceptance, main-loop-only progress and sparse pixel agreement are not mechanism success. If C still lacks useful task-grounded execution, stop this independent branch. Full25 net gain before formal submission.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "29e907058127c369f3882dd836285a7467fcb9da2866914b24232d0c7990d3fe",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/executable_plan.py": "5cf3ce4a58cec757245d1749cd3bd6312bc1ac2d999c814585d89c9b059a297d",
+    "src/arc3_research/executable_plan_context.py": "2ece4a0fc44fcf9a9cde5c47427f4842fb7080445366d0cdee5f736cfbeb373c",
+    "src/arc3_research/executable_plan_contract.py": "340819298324c4873dd2a1c997c29802cea47701bc69a60c4b749ec6ce931d87",
+    "src/arc3_research/executable_plan_forks.py": "c0124b7a3214a994efbf7f123bcfba43959baea94684101f5a892ce6782a2f5b",
+    "src/arc3_research/experiment_config.py": "313d83086e5094f7d6382f911b61dab9438cc9673c953c7286bb528eea8529b3",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "1c49e25c48668f7093223a4440318ecf3fe3d18c6ce2c8e6b969bcae321a4f9b",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "caf2367d76e11a81a5527f3d926c592ada72ea392fa5a1c7ba486ced9d027781",
+    "src/arc3_research/session_runner.py": "4d6eec5e8817dc56b0640909b9c63b1b6834b8e858b9d5774b35d1814c01c0d7",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+    "src/arc3_research/object_evidence.py": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+    "src/arc3_research/reasoning_mode.py": "55ba3055831106ac3e586a5d0511610dec61a829775ada825190fcff4dadfb28"
+  },
+  "cache_flush_wait_seconds": 120,
+  "revision_note": "035 stops contract tuning. C uses enable_thinking=True and reasoning_effort=low on auxiliary requests only; B keeps v9 off payload; A installs no auxiliary patch. max_tokens4096 includes hidden reasoning and visible code. Mounted actual tokenizer template must be CPU-rendered and hashed before first C generation; unsupported low aborts, no template update or budget increase.",
+  "research_revision": 1,
+  "candidate_delivery": {
+    "compact_context": true,
+    "thinking": "explicit_per_arm",
+    "max_prompt_tokens": 16384,
+    "max_output_tokens": 4096,
+    "max_request_seconds": 60,
+    "max_extra_processing_seconds": 120,
+    "max_actions_per_contract": 3,
+    "contract_lifetime": "current_short_plan",
+    "token_count_source": "served_model_tokenize_endpoint",
+    "submission_tool": "submit_program"
+  },
+  "quota_note": "Re-read current shared quota immediately before launch; retain original7200s total ceiling,4200s startup and complete equal600s arms/450s-60action games; do not shorten either arm.",
+  "source_freeze_note": "Freeze after default-off equivalence, C low final-tokenize/chat-payload parity, three-arm routing/reserve and original native checks. Preserve exact034v9 archive.",
+  "fork_transport": "combined_xz_base64",
+  "transport_revision_note": "Use the already CPU-verified lossless combined-xz fork transport to reduce upload size. Decoded checkpoint objects must exactly match v3. The earlier empty upload responses did not prove a size-limit root cause.",
+  "hypothesis_context": {
+    "source": "latest_prior_assistant_natural_language",
+    "max_messages": 2,
+    "max_text_characters": 12000,
+    "copy": "verbatim_provenance_segments",
+    "status": "unverified_may_be_stale",
+    "per_message_text_characters": 8000
+  },
+  "object_evidence": {
+    "geometry": "same_color_4_connected_components",
+    "source": "current_ascii_and_two_recent_real_transitions",
+    "roles": "model_hypotheses_only",
+    "runtime_attribute": "frame.object_evidence"
+  },
+  "short_program_feedback": {
+    "max_nonempty_lines": null,
+    "max_code_bytes": 12000,
+    "max_followup_requests": 1,
+    "quota_shared_with_real_mismatch_repair": true,
+    "zero_action_failure_stages": [
+      "extract",
+      "plan_validation",
+      "initial_prediction"
+    ],
+    "validation_feedback_prior_text": "provenance_only_no_old_natural_language",
+    "allow_literal_helper_defaults": true,
+    "static_diagnostics": "bounded_aggregate"
+  },
+  "execution_interface": {
+    "ascii_type": "str",
+    "ascii_access": "splitlines_row_col",
+    "abstain": "no_action_empty_evidence_and_replaces_allowed",
+    "plan_diagnostics": "bounded_aggregate",
+    "feedback_actual_returned_plan": true
+  },
+  "research_family": "035",
+  "auxiliary_reasoning_modes": {
+    "executable_plan_A": "none",
+    "executable_plan_B": "off",
+    "executable_plan_C": "low"
+  },
+  "template_preflight": {
+    "actual_mounted_template": true,
+    "render_modes": [
+      "off",
+      "low",
+      "medium"
+    ],
+    "unsupported_mode_action": "abort_comparison_no_template_update",
+    "model_or_network_calls": 0
+  }
+}

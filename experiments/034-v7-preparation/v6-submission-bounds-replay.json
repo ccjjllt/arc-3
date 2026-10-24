@@ -1,0 +1,39 @@
+{
+  "observed_at_utc": "2026-10-24T06:29:26.481885+00:00",
+  "scope": "Read saved v6 model submissions unchanged and run current v7 bounded extraction only; no sandbox execution, LLM/network/GPU or real game actions. Does not establish that a model can repair these programs. Native tuple/float error feedback is separately exercised by the scripted CPU suite.",
+  "source_sha256": "388fc7277e923d6091351dae2328d28d949dd74c37b73a59284719a6cd5ed1f2",
+  "max_nonempty_lines": 120,
+  "max_code_bytes": 12000,
+  "games": [
+    {
+      "source_event_file": "runs/034-plan-diagnostic-v6/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "source_event_file_sha256": "3a09079128047c9e509d4eac156661773c48cedfebe4c9b059601a01ab8be5d9",
+      "actual_v6_failure_stage": "extract",
+      "actual_v6_error": "ValueError: Return only function definitions and allowed imports",
+      "raw_program_sha256": "21ccb6ac189e6208dbbda141ff4bc9e82bf56f40f5ecc5cbce47c29a138c3f84",
+      "raw_program_bytes": 11314,
+      "raw_nonempty_lines": 276,
+      "v7_contract_replay": {
+        "accepted": false,
+        "error": "ValueError: Python source has 276 nonempty lines; maximum is 120"
+      }
+    },
+    {
+      "source_event_file": "runs/034-plan-diagnostic-v6/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "source_event_file_sha256": "a55eff4255f15ce6466a29cf5aa7098c4ffb7710ba88abf5a2c2197ddf33c940",
+      "actual_v6_failure_stage": "initial_prediction",
+      "actual_v6_error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _comps(frame) for later Python calls in this game.\\nRetained your function _centroid(pts) for later Python calls in this game.\\nRetained your function _inside(grid, r, c) for later Python calls in this game.\\nRetained your function _first(grid, r, c) for later Python calls in this game.\\nRetained your function _find_target(grid, comps) for later Python calls in this game.\\nRetained your function _find_piece(comps) for later Python calls in this game.\\nRetained your function _nearest_S(grid, comps, r, c) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 238, in <module>\\n  File \"<python_tool>\", line 220, in predict\\nTypeError: can only concatenate tuple (not \"float\") to tuple'}",
+      "raw_program_sha256": "283ea4565ad5da14c185d3f3c3c2b40c3805964c82a26170656731d86f7eaddb",
+      "raw_program_bytes": 9953,
+      "raw_nonempty_lines": 226,
+      "v7_contract_replay": {
+        "accepted": false,
+        "error": "ValueError: Python source has 226 nonempty lines; maximum is 120"
+      }
+    }
+  ],
+  "real_actions": 0,
+  "real_model_calls": 0,
+  "network_calls": 0,
+  "gpu_calls": 0
+}

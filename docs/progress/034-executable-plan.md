@@ -1,5 +1,72 @@
 # 034 实施进展
 
+## v9 完成：停止合同调参
+
+2026-10-24。v9已COMPLETE，44份返回产物全部回收，实际版本9与冻结的32cells候选逐项一致。A两题均分20.2479，B18.2540，差−1.9939；ft09 A新增1关／B0，su15均0。两题host动作／预测检查／真实反例修订／程序直接过关全部0，触发预定停损，停止合同调参，不扩大或正式提交v9。[完整结果](../../research/notes/034/034-v9-results-analysis.md)
+
+四份源码都交付，实际返回值和反馈可靠；ft09首份错误提取背景却宣称completed，修订仍误读旧动作且预测集合不全；su15首份把顶部组件当棋子，预测集合与声明完全不交，修订后合法弃权。继续放宽绑定或像素要求不能证明正确规则。[程序审阅](../../experiments/034-v9-analysis/program-independent-review.json) · [原样复现](../../experiments/034-v9-analysis/generated-code-offline-review.json)
+
+会话36.23分钟、模型准备20.80分钟；辅助34.285／40.840秒计入原450秒，成本未双算。A cache第3次才成功后开始，所有真实动作重基后在450秒内，su15 A保留2.071秒在途／收尾尾部。共享A日志补计一条su15尾响应，逐题表面4缺口校正为3，不能称4次超时。CPU／GPU正常收尾。[完整性](../../experiments/034-v9-analysis/integrity-independent-review.json) · [尾响应补计](../../experiments/034-v9-analysis/main-response-reconciliation.json) · [完成记录](../../experiments/034-v9-launch.json)
+
+下一独立假设记为035：保持v9合同及PROMPT，仅比较辅助low推理／关闭思考，并同期保留009无辅助基线；不叫v10合同修复，不把关闭思考的效果当作已证明。[035设计](../plan/035-auxiliary-reasoning-mode.md) · [035实际进展](035-auxiliary-reasoning.md)
+
+## v9 已保存排队
+
+2026-10-24。v9已在同一私有诊断目标一次push为版本9，平台状态QUEUED，远端32个cell源码和类型与冻结候选一致；没有重复上传、额外作业或正式submission。SDK的`to_dict()`会省略默认值QUEUED=0，已改用`response.status.name`确认排队。[启动记录](../../experiments/034-v9-launch.json) · [远端核对](../../experiments/034-v9-remote-source-check.json)
+
+34个原生场景／279次child／49次脚本completion／15项纯合同检查通过。四份v8实际计划回归证明三份弃权正常停止，su15错误ready仍因2个重复坐标和6个错色拒收。首轮checker因历史输入定位问题在child执行前失败，原报告保留，改用可追溯fixture后完整重跑通过。CPU不代表真实模型规则或得分收益。[最终CPU报告](../../experiments/034-v9-cpu-check-final/report.json) · [原样输出fixture](../../experiments/034-v9-preparation/v8-plan-fixtures.json)
+
+冻结Notebook为32cells／1006499字节，SHA256 `b5788a726e38955ad2edc0b8b20ea231ecf6efaa22f6fff12f049ef2ab0273c5`；20份manifest／19份预冻结输入／15份Python payload一致。独立审核确认模型、thinking、原始事实、主循环、触发、回滚、预测检查、两切点和预算保持v8。辅助反馈含单份完整失败源码、实际returned_plan和多项诊断，不替模型改目标或像素。[独立预检](../../experiments/034-v9-preparation/independent-preflight.json) · [构建审计](../../experiments/034-v9-preparation/build-audit.json) · [源码归档](../../experiments/034-v9-source/)
+
+仍450秒／60动作、每臂600秒、辅助120秒包含在450秒、单请求60秒、总7200秒。启动前GPU即时余额约27.97小时。完成后先看实际动作与规则修订，若仍双题0host动作就停止合同调参；没有扩大25题或正式提交的依据。[v9计划](../plan/034-v9-typed-status-interface.md)
+
+## v8 回收结论与v9准备
+
+2026-10-24。v8已COMPLETE，官方42项输出＋平台日志全部回收，远端版本8与冻结32cells一致。A/B两题都0新增关，均分18.2540→18.2540，差0。四份完整程序全extract通过，但三份真实abstain、一份错误ready全部在plan验收停止；host动作／预测检查／规则反例修订均0。交付门槛已越过，不代表行动机制成立，不扩大或正式提交v8。[完整结果](../../research/notes/034/034-v8-results-analysis.md)
+
+ft09两份把ascii字符串误当二维数组，捕获异常后弃权，反馈却只报空replaces；su15把大写B背景当目标，首份既重复坐标又有6处错色，修订后仍弃权。离线原样复现不算在线推进，单独放宽字段不会获得有效动作。[独立程序审阅](../../experiments/034-v8-analysis/program-independent-review.json) · [原样复现](../../experiments/034-v8-analysis/generated-code-offline-review.json)
+
+会话42.58分钟，模型启动27.20分钟；辅助31.997／39.506秒计入原450秒，没有重复。所有真实动作在预算内，结束尾耗时0.041–0.097秒保留；B缓存首试成功，A两次400后第3次200并获后端确认。主60请求／56响应，本轮无共享尾响应可补，缺4条不能称4次超时。GPU／CPU正常收尾，剩余即时余额约27.97小时。[完整性](../../experiments/034-v8-analysis/integrity-independent-review.json) · [完成记录](../../experiments/034-v8-launch.json)
+
+依据本轮新子代理的独立审阅，只再做一次类型明确／状态敏感的接口修正：ascii:str示例，真实returned_plan＋多项计划诊断，合法弃权不当作ready填空错误；ready和预测证据保持严格。先原样输出回归与窄原生CPU核验，再原预算诊断。若仍双题零host动作，停止这一方向的合同调参。v9已完成核验并保存排队，未创建正式submission。[v9计划](../plan/034-v9-typed-status-interface.md) · [配置](../../experiments/034-plan-diagnostic-v9.json)
+
+## v8 交付接口修复
+
+2026-10-24。按用户授权继续研究提分，本轮新建三个子代理，未复用前轮代理。根据v7实际拒收，取消120非空行硬门槛，保留12000 UTF-8字节／AST节点资源限制；允许辅助函数使用有界不可变字面量默认值，入口仍严格。新增最多16项静态诊断及省略计数，反馈一次处理同时可发现的问题；被截断的副作用拒绝仍通过独立标志阻止重试。原零动作／观测不变、回滚、一次共享反馈和所有求解预算保持。[计划](../plan/034-v8-delivery-interface.md)
+
+30个原生CPU场景及7个纯合同检查全部通过，249次child调用／43次脚本completion；12份错误反馈各含一份完整失败源码，最多2请求，未重复计费。它们是合成世界的接线证据，不是真实模型或ARC得分。[CPU报告](../../experiments/034-v8-cpu-check/report.json) · [复核](../../experiments/034-v8-cpu-check/independent-review.json)
+
+真实v7保存源码原样重验，两份修订稿在v8可提取，两份初稿仍因语法或结构错误被拒收；未执行这些源码，不作为模型修复或规则正确的证据。v7已知ft09 abstain、su15预测集合错误仍待实际反馈解决。[纯提取复查](../../experiments/034-v8-preparation/contract-review.json)
+
+已冻结v8 Notebook，32cells／990984字节，SHA256 `d56ab961983f72e75dc8e57f5ece2a1ce1087329ef7deb70616702176e904c6e`；20份manifest输入、19份预冻结输入及15份Python payload核对通过。[构建审计](../../experiments/034-v8-preparation/build-audit.json) · [配置](../../experiments/034-plan-diagnostic-v8.json) · [源码归档](../../experiments/034-v8-source/)
+
+最终独立预检通过，在同一私有诊断目标一次push返回版本8，实际32个cell源码与类型匹配冻结版。v8现已COMPLETE，两题分数差0、host动作0，不扩大或正式提交；结果详上。原预算B→A：450秒／60动作，每臂600秒，辅助总120秒，启动4200秒／总7200秒；启动前可用GPU约28.69小时为历史快照。[独立预检](../../experiments/034-v8-preparation/independent-preflight.json) · [启动记录](../../experiments/034-v8-launch.json) · [远端核对](../../experiments/034-v8-remote-source-check.json)
+
+## v7 短程序交付与零动作错误反馈
+
+2026-10-24。**v7已COMPLETE，远端版本7的32个cell与冻结候选一致。两题均分23.8095→18.2540（−5.5556）；真实零动作反馈已工作，短程序交付仍未解决，不扩大或正式提交。** 按用户明确要求，仅处理短交付与零动作验收反馈：候选代码上限120非空行／12000 UTF-8字节；保持原定义／计算导入合同，不由宿主改代码。首次extract、plan或首预测失败，若0真实动作且level／step／grid完全未变，才可获得一次具体错误反馈。[计划](../plan/034-v7-short-program-feedback.md)
+
+反馈含完整失败源码、真实异常／child traceback或schema错误与不变观测证据，并与原真实mismatch共用一次repair额度，每游戏仍最多2个辅助请求。修好后实际失配不再补发；第二次验收失败停止。基础设施、超时、副作用拒绝、合法unknown与预算不足均不自动重试。失败函数、history与repeat guard回滚；日志单独记录实际代码长度、失败阶段、反馈资格与实际消费。
+
+首次事实和旧假设保留v6。反馈请求为保完整失败源码和错误，仅省略旧自然语言正文，保留来源index/hash并明确标记；不截断失败代码。原16384输入上限仍以服务tokenize判断，thinking=False、4096输出上限不变。对象目录、mainloop、自然触发、模型和游戏事实不变。
+
+25个原生手工场景全部通过，194次真实子sandbox调用、35次脚本completion、1次显式注入基础设施故障；网络／真实模型／GPU／真实ARC动作均0。涵盖长度／常量／语法拒收反馈、plan和predict类型错修好后执行、两次请求上限、反馈后失配不再修、失配修订失败不再补发、预算耗尽、unknown／infra不重试、回滚和动作／耗时不双计。42项纯合同检查和4项Unicode反馈往返也通过。它们证明接线与边界，不证明真实模型会交付正确程序或提分。[权威CPU报告](../../experiments/034-v7-cpu-check-final/report.json) · [合同边界](../../experiments/034-v7-preparation/contract-bounds-checks.json) · [专项反馈](../../experiments/034-v7-preparation/unicode-feedback-check.json) · [实施记录](../../experiments/034-v7-preparation/implementation-note.json)
+
+最终冻结Notebook983048字节／32cells，SHA256 `ab793c287c15a3feaaf76aa099fb1a5e44cc2915d00d76365d0e251da5cc42ca`；20份manifest输入、19份预冻结hash、15份Python payload及编译全部一致。独立重建v6两份初始事实与代码／旧假设一致，反馈完整失败源码恰一处；非模拟耗尽场景的branch elapsed之和与extra_seconds一致。[构建审计](../../experiments/034-v7-preparation/build-audit.json) · [独立预检](../../experiments/034-v7-preparation/independent-preflight.json) · [冻结配置](../../experiments/034-plan-diagnostic-v7.json)
+
+原ft09／su15切点B→A，每题450秒／60动作，单请求60秒、辅助累计120秒全部计入450秒；每臂600秒、启动4200秒、总7200秒。启动前共享可用约29.26小时，上次私有版本6已COMPLETE且源码一致。不做正式submission，009 v2／31.16继续保留。
+
+
+北京时间2026-10-24 14:36，同一私有目标`zhuating/arc3-034-plan-diagnostic`一次上传成功为版本7，随后平台RUNNING；32个cell源码逐项一致。用户通知跑完后已完整下载并完成两份独立审阅。[启动记录](../../experiments/034-v7-launch.json) · [远端源码核对](../../experiments/034-v7-remote-source-check.json) · [冻结源码](../../experiments/034-v7-source/)
+
+本次ft09两臂均新增0关，续跑29／16动作；su15 A新增1关／B新增0关，23／42动作。两题首次代码165／183非空行超120，经完整错误反馈后缩到129／105行；ft09仍被新行数门槛拒收，su15则因字面量默认参数`r0=10`被全禁defaults合同拒收。四份代码均小于12000字节。每游戏恰好首次＋一次反馈，失败源码恰一份、真实错误／棋盘不变证据／旧NL省略标记均在线核对通过，没有第三次请求。
+
+所有程序均止于extract，host动作／预测检查／真实反例修订／直接过关均0，覆盖审计“不适用”。离线仅取消ft09行限，虽可提取却返回abstain；su15把默认字面量移入函数后，计划通过但expected49像素与声明73像素完全不相交。这是本地Frame替身的机械反事实，不是原生执行或实际模型修复。说明120行格式门槛及全禁默认参数确有接口负担，放宽本身又不足以解决目标／规则和预测问题。[完整结果](../../research/notes/034/034-v7-results-analysis.md) · [机制判断](../../experiments/034-v7-analysis/mechanism-assessment.json) · [程序独立审阅](../../experiments/034-v7-analysis/program-independent-review.json) · [离线诊断](../../experiments/034-v7-analysis/generated-code-offline-review.json)
+
+辅助处理分别33.444／38.933秒，与逐请求求和相同；会话34.23分钟、启动18.79分钟。源码20份manifest来源、恢复、四请求hash、实际payload/tokenize、cache及CPU／GPU收尾一致，全部真实动作在450秒内。逐题末response表面缺4条，B共享日志一条尾响应可按7字段唯一匹配并补计，实际仍缺3条；known usage不是完整成本，不称4次超时。[完整性独立审阅](../../experiments/034-v7-analysis/integrity-independent-review.json) · [尾响应补计](../../experiments/034-v7-analysis/main-response-reconciliation.json) · [最终平台快照](../../experiments/034-v7-final-platform-snapshot.json)
+
+下一设计先降低人为接口负担：按字节／AST资源控制短代码、审查静态安全字面量默认值、汇总可同时发现的静态错误；保持零动作／副作用检查、一次共享反馈与原预算。不继续叠表示，也不把放宽验收当作得分成功。当前仅归档结果，未修改solver、未准备或启动下一候选；正式最佳仍009 v2／31.16。
+
 ## v6 当前对象几何与变化证据
 
 2026-10-24。**v6已COMPLETE，远端版本6的32个cell与冻结候选逐项一致。两题均分18.2540→23.8095（+5.5556），但辅助host动作／预测检查／真实修订均为0，不能把su15普通主循环的新增1关作为对象目录收益，不扩大或正式提交。** 新配额读取为30 GPU小时，旧52分钟余额已过期。依据v5真实失败，下一版只检验“可直接使用的当前连通区域几何与近期变化表示＋配套使用说明”。角色仍是模型假设，不是宿主UI黑名单或正确对象答案。[计划](../plan/034-v6-object-evidence.md) · [设计独立审阅](../../experiments/034-v6-preparation/design-independent-review.json)

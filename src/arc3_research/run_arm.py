@@ -115,6 +115,28 @@ def run_arm(args: argparse.Namespace) -> int:
             raise RuntimeError("run_arm only supports public OFFLINE research.")
         if args.budget_seconds <= 0:
             raise ValueError("budget-seconds must be positive.")
+        research_family = getattr(args, "research_family", None)
+        auxiliary_mode = getattr(args, "auxiliary_reasoning_mode", None)
+        model_dir = getattr(args, "model_dir", None)
+        if research_family == "035":
+            expected_modes = {"executable_plan_A": None, "executable_plan_B": "off",
+                              "executable_plan_C": "low"}
+            if args.arm not in expected_modes or auxiliary_mode != expected_modes[args.arm]:
+                raise ValueError("035 requires A without a branch, B off, and C low.")
+            if args.arm == "executable_plan_C":
+                recorded_inputs = json.loads((job_dir.parent / "input-paths.json").read_text())
+                resolved_model = Path(recorded_inputs["paths"]["model"]).resolve(strict=True)
+                if model_dir is None or model_dir.resolve(strict=True) != resolved_model:
+                    raise ValueError("035 C must use the model actually resolved in input-paths.json.")
+                model_dir = resolved_model
+                metadata["mounted_model_dir"] = str(model_dir)
+                metadata["mounted_model_path_source"] = str(job_dir.parent / "input-paths.json")
+            elif model_dir is not None:
+                raise ValueError("Only 035 C performs mounted-template verification.")
+            metadata["research_family"] = "035"
+            metadata["auxiliary_reasoning_mode"] = auxiliary_mode or "none"
+        elif research_family is not None or auxiliary_mode is not None or model_dir is not None or args.arm == "executable_plan_C":
+            raise ValueError("Explicit auxiliary reasoning controls require the 035 diagnostic.")
         overrides = parse_arm_environment(getattr(args, "environment_json", "{}"))
         if args.arm == "tail_80k" and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "1", "ARC3_PRIORITY_PACE": "0",
@@ -152,7 +174,7 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError("admission_009 requires frozen baseline scheduler.")
-        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B") and overrides != {
+        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C") and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }:
             raise ValueError(args.arm + " requires frozen baseline scheduler.")
@@ -363,7 +385,7 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["admission_order.py"] = _sha256(
                 Path(__file__).with_name("admission_order.py"))
             metadata["admission_order"] = admission_patch.snapshot()
-        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B"):
+        if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C"):
             for name in ("executable_plan.py", "executable_plan_contract.py",
                          "executable_plan_context.py", "program_repair.py"):
                 metadata["source_sha256"][name] = _sha256(Path(__file__).with_name(name))
@@ -372,7 +394,10 @@ def run_arm(args: argparse.Namespace) -> int:
             else:
                 metadata["source_sha256"]["executable_plan_forks.py"] = _sha256(
                     Path(__file__).with_name("executable_plan_forks.py"))
-                metadata["diagnostic_forced_trigger"] = args.arm == "executable_plan_B"
+                metadata["diagnostic_forced_trigger"] = args.arm in ("executable_plan_B", "executable_plan_C")
+                if research_family == "035":
+                    metadata["source_sha256"]["reasoning_mode.py"] = _sha256(
+                        Path(__file__).with_name("reasoning_mode.py"))
         metadata["inference_timing_enabled"] = bool(getattr(args, "inference_timing", False))
         if timing_patch is not None:
             metadata["source_sha256"]["inference_timing.py"] = _sha256(
@@ -408,12 +433,18 @@ def run_arm(args: argparse.Namespace) -> int:
                 metadata["benchmark_wall_seconds"] = time.monotonic() - benchmark_start
                 loop.remove_signal_handler(signal.SIGUSR1)
 
-        if args.arm in ("executable_plan_A", "executable_plan_B"):
+        if args.arm in ("executable_plan_A", "executable_plan_B", "executable_plan_C"):
             from arc3_research.executable_plan_forks import run_forks
             bm.start_time = datetime.now()
+            fork_options = {}
+            if research_family == "035":
+                fork_options = {"arm_label": args.arm.rsplit("_", 1)[-1],
+                                "auxiliary_reasoning_mode": auxiliary_mode,
+                                "model_dir": model_dir}
             fork_summary = run_forks(
                 bm=bm, job_dir=job_dir, budget_seconds=args.budget_seconds,
-                use_plan=args.arm == "executable_plan_B")
+                use_plan=args.arm in ("executable_plan_B", "executable_plan_C"),
+                **fork_options)
             bm.end_time = datetime.now()
             _write_json(job_dir / "executable-plan-forks.json", fork_summary)
             _write_json(job_dir / "benchmark.json", bm.to_json_dict())
@@ -616,7 +647,13 @@ def main() -> int:
                                  "persistent_python", "segmentation_runs",
                                  "segmentation_forks_A", "segmentation_forks_B",
                                  "solved_level_memory", "controller_repair_A", "controller_repair_B",
-                                 "executable_plan", "executable_plan_A", "executable_plan_B"))
+                                 "executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C"))
+    parser.add_argument("--research-family", choices=("035",),
+                        help="Explicit three-arm reasoning diagnostic; omitted for frozen legacy runs.")
+    parser.add_argument("--auxiliary-reasoning-mode", choices=("off", "low"),
+                        help="035 B is off; C is low. A receives no auxiliary mode.")
+    parser.add_argument("--model-dir", type=Path,
+                        help="Actual resolved model mount for 035 C template verification.")
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

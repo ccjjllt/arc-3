@@ -1,0 +1,697 @@
+{
+  "scope": "Diagnostic reconstruction of actual plan results with unmodified source and saved ASCII. No candidate alteration, native replay or real actions. Not online mechanism success.",
+  "native_ascii_evidence": "research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py FrameView initializes self.ascii=ascii and _frame_from_payload passes str(payload.get(ascii,...)).",
+  "results": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_index": 1,
+      "source_sha256": "6f77861c806911b84691f1af93155c262ed8a7357344a13e57a57d79e76ef49f",
+      "online_first_error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+      "offline_scope": "Unmodified accepted source, exact saved current frame; SimpleNamespace.ascii is the same str type as native FrameView. No real game/actions/network/model/GPU. Predictor calls below were not reached online.",
+      "offline_plan": {
+        "status": "abstain",
+        "goal": "legend-consistent cell grid",
+        "actions": [],
+        "evidence_pixels": [],
+        "replaces": [],
+        "reason": "cannot recompute board layout"
+      },
+      "offline_validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "replaces must name current program bindings"
+        ]
+      },
+      "actual_online_error_reproduced": true,
+      "caught_exceptions": [
+        {
+          "function": "_legend",
+          "line": 25,
+          "type": "IndexError",
+          "message": "string index out of range"
+        },
+        {
+          "function": "_conflicts",
+          "line": 32,
+          "type": "IndexError",
+          "message": "string index out of range"
+        },
+        {
+          "function": "plan_program",
+          "line": 52,
+          "type": "IndexError",
+          "message": "string index out of range"
+        }
+      ],
+      "evidence_count": 0,
+      "evidence_unique_coordinates": 0,
+      "evidence_duplicate_count": 0,
+      "wrong_evidence_count": 0,
+      "wrong_evidence_first16": [],
+      "object_evidence_used": false
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "event_index": 2,
+      "source_sha256": "054f494bc77b5c28bf6f27b1cf99bf342763706d525c04db095680141eacc650",
+      "online_first_error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+      "offline_scope": "Unmodified accepted source, exact saved current frame; SimpleNamespace.ascii is the same str type as native FrameView. No real game/actions/network/model/GPU. Predictor calls below were not reached online.",
+      "offline_plan": {
+        "status": "abstain",
+        "goal": "uniform cell blocks",
+        "actions": [],
+        "evidence_pixels": [],
+        "replaces": [],
+        "reason": "cannot recompute the cell grid from this frame"
+      },
+      "offline_validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "replaces must name current program bindings"
+        ]
+      },
+      "actual_online_error_reproduced": true,
+      "caught_exceptions": [
+        {
+          "function": "_cell_layout",
+          "line": 5,
+          "type": "IndexError",
+          "message": "string index out of range"
+        },
+        {
+          "function": "_candidates",
+          "line": 42,
+          "type": "IndexError",
+          "message": "string index out of range"
+        },
+        {
+          "function": "plan_program",
+          "line": 64,
+          "type": "IndexError",
+          "message": "string index out of range"
+        }
+      ],
+      "evidence_count": 0,
+      "evidence_unique_coordinates": 0,
+      "evidence_duplicate_count": 0,
+      "wrong_evidence_count": 0,
+      "wrong_evidence_first16": [],
+      "object_evidence_used": false
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_index": 1,
+      "source_sha256": "14cd2af6d11845ec4a06828f0bdd9c4432e18452ce1f1a7617581f55427486dd",
+      "online_first_error": "ValueError: plan rejected: ['Duplicate pixel coordinate']",
+      "offline_scope": "Unmodified accepted source, exact saved current frame; SimpleNamespace.ascii is the same str type as native FrameView. No real game/actions/network/model/GPU. Predictor calls below were not reached online.",
+      "offline_plan": {
+        "status": "ready",
+        "goal": "deepest blue pocket (col 31, rows 56-62) is the level-5 target; single MOUSE there tests whether the next frame is a fresh level (target consumed) or an invalid-spot no-op",
+        "actions": [
+          {
+            "action": "MOUSE",
+            "row": 61,
+            "col": 30
+          }
+        ],
+        "evidence_pixels": [
+          [
+            56,
+            31,
+            "B"
+          ],
+          [
+            57,
+            31,
+            "B"
+          ],
+          [
+            58,
+            31,
+            "B"
+          ],
+          [
+            59,
+            28,
+            "B"
+          ],
+          [
+            60,
+            33,
+            "B"
+          ],
+          [
+            61,
+            31,
+            "B"
+          ],
+          [
+            62,
+            31,
+            "B"
+          ],
+          [
+            61,
+            30,
+            "S"
+          ],
+          [
+            61,
+            31,
+            "S"
+          ],
+          [
+            61,
+            32,
+            "S"
+          ],
+          [
+            62,
+            30,
+            "S"
+          ],
+          [
+            62,
+            31,
+            "S"
+          ],
+          [
+            62,
+            32,
+            "S"
+          ]
+        ],
+        "replaces": [
+          "route",
+          "click",
+          "invaders",
+          "state",
+          "alive",
+          "noop",
+          "safe",
+          "safe2",
+          "safe3",
+          "dots",
+          "pcs"
+        ],
+        "reason": "Level 5 just began after the previous pocket click completed level 4, so the paused Y-runner route and its level-4 coordinates are stale. Current frame has no Y piece; the only blue pocket column inside the solid field is the widest one (rows 11-19, cols 28-36). One click at its centre distinguishes target-consumption from a no-op without assuming the merge/chase rules."
+      },
+      "offline_validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "Duplicate pixel coordinate"
+        ]
+      },
+      "actual_online_error_reproduced": true,
+      "caught_exceptions": [],
+      "evidence_count": 13,
+      "evidence_unique_coordinates": 11,
+      "evidence_duplicate_count": 2,
+      "wrong_evidence_count": 6,
+      "wrong_evidence_first16": [
+        {
+          "row": 61,
+          "col": 30,
+          "claimed": "S",
+          "observed": "B"
+        },
+        {
+          "row": 61,
+          "col": 31,
+          "claimed": "S",
+          "observed": "B"
+        },
+        {
+          "row": 61,
+          "col": 32,
+          "claimed": "S",
+          "observed": "B"
+        },
+        {
+          "row": 62,
+          "col": 30,
+          "claimed": "S",
+          "observed": "B"
+        },
+        {
+          "row": 62,
+          "col": 31,
+          "claimed": "S",
+          "observed": "B"
+        },
+        {
+          "row": 62,
+          "col": 32,
+          "claimed": "S",
+          "observed": "B"
+        }
+      ],
+      "object_evidence_used": false,
+      "offline_target": {
+        "target": [
+          62,
+          31
+        ],
+        "band": [
+          [
+            56,
+            31
+          ],
+          [
+            57,
+            31
+          ],
+          [
+            58,
+            31
+          ],
+          [
+            59,
+            28
+          ],
+          [
+            60,
+            33
+          ],
+          [
+            61,
+            31
+          ],
+          [
+            62,
+            31
+          ]
+        ],
+        "target_current_color": "B",
+        "band_current_colors": [
+          "B"
+        ]
+      },
+      "offline_unreached_prediction": {
+        "mode": "change",
+        "action": {
+          "action": "MOUSE",
+          "row": 61,
+          "col": 30
+        },
+        "object_pixels": [
+          [
+            56,
+            31,
+            "B"
+          ],
+          [
+            57,
+            31,
+            "B"
+          ],
+          [
+            58,
+            31,
+            "B"
+          ],
+          [
+            59,
+            28,
+            "B"
+          ],
+          [
+            60,
+            33,
+            "B"
+          ],
+          [
+            61,
+            31,
+            "B"
+          ],
+          [
+            62,
+            31,
+            "B"
+          ]
+        ],
+        "target_pixels": [
+          [
+            61,
+            30,
+            "B"
+          ],
+          [
+            61,
+            31,
+            "B"
+          ],
+          [
+            61,
+            32,
+            "B"
+          ],
+          [
+            62,
+            30,
+            "B"
+          ],
+          [
+            62,
+            31,
+            "B"
+          ],
+          [
+            62,
+            32,
+            "B"
+          ],
+          [
+            63,
+            30,
+            "W"
+          ],
+          [
+            63,
+            31,
+            "W"
+          ],
+          [
+            63,
+            32,
+            "W"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            61,
+            30,
+            "S"
+          ],
+          [
+            61,
+            31,
+            "S"
+          ],
+          [
+            61,
+            32,
+            "S"
+          ],
+          [
+            62,
+            30,
+            "S"
+          ],
+          [
+            62,
+            31,
+            "S"
+          ],
+          [
+            62,
+            32,
+            "S"
+          ],
+          [
+            63,
+            30,
+            "S"
+          ],
+          [
+            63,
+            31,
+            "S"
+          ],
+          [
+            63,
+            32,
+            "S"
+          ]
+        ],
+        "precondition": "the pocket interior is solid blue field with a single reachable cell; clicking it registers the target hit that completed the previous level",
+        "scope": "level target object: expect level_completed/score change and a new board layout; if the frame is byte-identical the pocket is not the actionable target and the rule is contradicted"
+      },
+      "offline_unreached_prediction_validation": {
+        "passed": false,
+        "status": "unknown",
+        "errors": [
+          "Expected pixels must cover exactly the declared object and target coordinates"
+        ]
+      },
+      "offline_prediction_coverage": {
+        "declared_object": 7,
+        "declared_target": 9,
+        "declared_union": 14,
+        "expected": 9,
+        "missing_declared": 5,
+        "outside_declared": 0
+      }
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_index": 2,
+      "source_sha256": "2c59b44a8729dab895197c96c3e3184d0721ef0260fccc36c3e04a859c5bb0ad",
+      "online_first_error": "ValueError: plan rejected: ['Pixel projection must be a bounded nonempty list']",
+      "offline_scope": "Unmodified accepted source, exact saved current frame; SimpleNamespace.ascii is the same str type as native FrameView. No real game/actions/network/model/GPU. Predictor calls below were not reached online.",
+      "offline_plan": {
+        "status": "abstain",
+        "goal": "pocket target at row 62 col 31 exists but no reachable piece component was found",
+        "actions": [],
+        "evidence_pixels": [],
+        "replaces": [
+          "route"
+        ],
+        "reason": "no knight-reachable component to move; guessing a screen coordinate has no rule support"
+      },
+      "offline_validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "Pixel projection must be a bounded nonempty list"
+        ]
+      },
+      "actual_online_error_reproduced": true,
+      "caught_exceptions": [],
+      "evidence_count": 0,
+      "evidence_unique_coordinates": 0,
+      "evidence_duplicate_count": 0,
+      "wrong_evidence_count": 0,
+      "wrong_evidence_first16": [],
+      "object_evidence_used": false,
+      "offline_target": {
+        "target": [
+          62,
+          31
+        ],
+        "band": [
+          [
+            56,
+            31
+          ],
+          [
+            57,
+            31
+          ],
+          [
+            58,
+            31
+          ],
+          [
+            59,
+            28
+          ],
+          [
+            60,
+            33
+          ],
+          [
+            61,
+            31
+          ],
+          [
+            62,
+            31
+          ]
+        ],
+        "target_current_color": "B",
+        "band_current_colors": [
+          "B"
+        ]
+      },
+      "offline_candidates": {
+        "candidates": [],
+        "piece_components": 21,
+        "piece_component_anchors": [
+          [
+            "b",
+            [
+              11,
+              30
+            ],
+            69
+          ],
+          [
+            "M",
+            [
+              25,
+              6
+            ],
+            4
+          ],
+          [
+            "M",
+            [
+              26,
+              42
+            ],
+            4
+          ],
+          [
+            "M",
+            [
+              26,
+              53
+            ],
+            4
+          ],
+          [
+            "M",
+            [
+              28,
+              14
+            ],
+            4
+          ],
+          [
+            "P",
+            [
+              37,
+              6
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              37,
+              48
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              38,
+              5
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              38,
+              7
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              38,
+              47
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              38,
+              49
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              39,
+              4
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              39,
+              8
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              39,
+              46
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              39,
+              50
+            ],
+            1
+          ],
+          [
+            "P",
+            [
+              40,
+              5
+            ],
+            3
+          ],
+          [
+            "P",
+            [
+              40,
+              47
+            ],
+            3
+          ],
+          [
+            "S",
+            [
+              53,
+              44
+            ],
+            1
+          ],
+          [
+            "S",
+            [
+              54,
+              14
+            ],
+            1
+          ],
+          [
+            "S",
+            [
+              59,
+              58
+            ],
+            1
+          ],
+          [
+            "S",
+            [
+              60,
+              3
+            ],
+            1
+          ]
+        ]
+      }
+    }
+  ]
+}

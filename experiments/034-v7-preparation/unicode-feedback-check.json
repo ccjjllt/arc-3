@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": [
+    "invalid UTF-8 metadata does not mask rejection",
+    "raw failed source round-trips unchanged in feedback JSON",
+    "feedback message is UTF-8 encodable",
+    "event JSONL round-trips unchanged failed source"
+  ],
+  "network_requests": 0,
+  "model_requests": 0,
+  "real_actions": 0,
+  "metadata": {
+    "max_nonempty_lines": 120,
+    "max_code_bytes": 12000,
+    "source_available": true,
+    "nonempty_lines": 2,
+    "code_bytes": null,
+    "code_sha256": null,
+    "utf8_error": "'utf-8' codec can't encode character '\\ud800' in position 37: surrogates not allowed"
+  },
+  "source_sha256": {
+    "src/arc3_research/executable_plan.py": "4d1a16e35b5691bdf509ee28f967c1d70d43342b534ae250b4455feee972492d",
+    "src/arc3_research/executable_plan_context.py": "b474bc96ad19f4ca270df88a0ccc82eebd221dcd6e49a0883bf68510e2e5832a"
+  }
+}

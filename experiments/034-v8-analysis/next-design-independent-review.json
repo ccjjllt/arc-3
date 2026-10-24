@@ -1,0 +1,94 @@
+{
+  "review_kind": "independent_local_evidence_and_next_design",
+  "scope": "Read-only review of saved v8 artifacts and current implementation. No implementation changes, model calls, GPU, network, native replay, or game actions. This report file is the only write.",
+  "evidence_files": [
+    "experiments/034-v8-analysis/summary.json",
+    "experiments/034-v8-analysis/generated-code-offline-review.json",
+    "experiments/034-v8-analysis/extracted-programs/ft09-0d8bbf25-1.py",
+    "experiments/034-v8-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+    "experiments/034-v8-analysis/extracted-programs/su15-1944f8ab-1.py",
+    "experiments/034-v8-analysis/extracted-programs/su15-1944f8ab-2.py",
+    "src/arc3_research/executable_plan.py",
+    "src/arc3_research/executable_plan_contract.py",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py"
+  ],
+  "observed_v8": {
+    "programs_extracted": 4,
+    "online_plan_validation_passed": 0,
+    "online_host_actions": 0,
+    "direct_host_added_levels": 0,
+    "both_arms_added_levels": {
+      "ft09-0d8bbf25": 0,
+      "su15-1944f8ab": 0
+    },
+    "delivery_conclusion": "Source extraction is solved for these four attempts. It is not evidence of effective action, rule repair, or higher score.",
+    "defects": [
+      {
+        "kind": "ambiguous_runtime_type_contract",
+        "game": "ft09-0d8bbf25",
+        "evidence": "Both accepted sources index frame.ascii[r][c]. Native FrameView.ascii is str. Saved-source offline reconstruction catches IndexError inside helpers; broad except returns abstain. The prompt names ascii but gives neither its type nor a parsing example.",
+        "causal_limit": "The offline report reproduces the failure with saved input and unmodified code; no repaired-source game result exists."
+      },
+      {
+        "kind": "status_insensitive_validation",
+        "game": "ft09-0d8bbf25; su15-1944f8ab revision",
+        "evidence": "Three actual returned plans are abstain with no actions. They are rejected by nonempty replaces or nonempty evidence rules shared with ready. This converts an explicit lack of supported action into a repair request/schema failure.",
+        "causal_limit": "Accepting abstain would correctly stop the branch and may save its follow-up cost. It does not turn it into a valid action or prove higher score."
+      },
+      {
+        "kind": "fail_first_plan_diagnostics",
+        "game": "su15-1944f8ab initial",
+        "evidence": "The first reported error is duplicate pixel coordinate. Saved exact output also has six current-pixel color mismatches. The never-reached prediction omits five declared coordinates. Correcting only the first error cannot make the saved program acceptable.",
+        "causal_limit": "The predictor result is offline and was not reached online."
+      },
+      {
+        "kind": "unsupported_task_rules_and_roles",
+        "game": "both",
+        "evidence": "ft09 revision switches to a minority-color objective and assumed cell geometry. su15 selects a deepest blue band, applies knight reachability to component anchors in screen pixels, and later abstains. Neither uses object_evidence. These are hypothesis choices, not verified task rules.",
+        "causal_limit": "Clearer types and valid statuses will not by themselves validate object roles, layout, target, or dynamics."
+      }
+    ]
+  },
+  "one_main_change": {
+    "name": "Make the existing program execution interface typed and status aware",
+    "hypothesis": "A precise runtime API and truthful zero-action result classification will distinguish API mistakes from deliberate abstention, allowing the one existing feedback opportunity to address all observable ready-plan errors rather than an incidental first guard.",
+    "boundary": "One interface/feedback correction, with no new memory, object representation, solver module, action oracle, extra model call, trigger change, or thinking change.",
+    "specific_changes": [
+      "State frame.ascii: str, frame.shape: tuple[int,int], row/col are zero-based screen coordinates, and colors are case sensitive. Show rows = frame.ascii.splitlines(); pixel = rows[row][col] in a tiny definition-only example. Do not add a second frame grid representation merely to hide the ambiguity.",
+      "Accept a well-formed abstain with actions=[], evidence_pixels=[], replaces=[] as a terminal local abstention. Keep goal/reason, bounded JSON, supplied nonempty evidence accuracy, and supplied binding-name checks. Do not request automatic validation repair or claim execution success for it. Keep all ready action/evidence/binding requirements and completed-local semantics.",
+      "For a rejected ready plan, aggregate independent discoverable schema, action, binding, duplicate-coordinate and observed-color errors with field/index and bounded details. Never run a real action while any error remains.",
+      "Record the actual plan return value before validation and include its bounded representation plus structured validation in feedback. For an oversized value preserve hash, total size and explicit omission metadata. Do not erase it behind only ValueError text. Continue to preserve candidate-attributed uncaught native traceback; do not invent a traceback for intentionally caught errors.",
+      "Retain the single shared follow-up limit, extraction bounds, prediction coverage requirement and all costs inside the original game budget."
+    ],
+    "do_not_claim": "This is a contract repair candidate. It is not evidence that the auxiliary solver understands the games or will improve the score."
+  },
+  "thinking_assessment": {
+    "supported": "Thinking-disabled compact requests now deliver complete source in all four v8 attempts.",
+    "not_supported": "Turning thinking off improves program quality or score. v2 thinking-enabled long-context failure and v3-v8 compact thinking-disabled failures differ in context, tool contract, output limits and runtime interface; they are not a controlled thinking ablation.",
+    "recommendation": "Do not change thinking in the same typed-interface candidate. Keep the ordinary main loop as the incumbent solver. If the corrected interface reaches actual action but repeatedly chooses unsupported goals/rules, close this contract-repair sequence and make auxiliary reasoning a separate, explicitly budgeted hypothesis rather than continuing to relax guards.",
+    "future_test_if_justified": "Any reasoning-enabled follow-up must retain compact context and dedicated submission, reserve enough output for source, charge total tokens/time to the same budget, and compare against the corrected thinking-disabled interface. It cannot reuse v2 as its matched control."
+  },
+  "offline_validation_before_any_new_run": [
+    "Use actual native FrameView and saved ASCII to verify the documented splitlines pixel accessor and shape assertion; a SimpleNamespace substitute alone is insufficient for the API contract.",
+    "Feed the three saved abstain returns through revised validation: terminal abstain, zero game actions, no automatic follow-up, no environment-success claim. Do not count them as successfully delivered action programs.",
+    "Feed su15 initial saved ready return through revised validation: report both duplicate coordinates and all six wrong current-color claims in one bounded result; no real action.",
+    "Confirm the saved su15 never-reached predictor remains rejected for incomplete declared coverage. Validation must not silently delete, recolor, deduplicate or extend a submitted prediction to make it pass.",
+    "With one narrow scripted native scenario, confirm an uncaught type/index error gets attributed feedback containing actual payload, while explicit abstain consumes no repair, and a later real counterexample still shares at most one follow-up.",
+    "Verify feedback size/hash/omission accounting and that exactly the intended API text and result handling differ from frozen v8. CPU scripted completion is not evidence that a real model adopts the interface."
+  ],
+  "requires_real_model_and_environment": [
+    "Whether the same model actually uses the typed API without swallowed errors.",
+    "Whether it produces a ready plan and complete action-related prediction rather than correct but unhelpful abstention.",
+    "Whether actual execution changes a task object, yields useful rule evidence and causes a revised decision after a genuine counterexample.",
+    "Whether the additional computation increases levels and full-pool score under the same total budget; saved-source CPU replay cannot establish this.",
+    "Whether any public-pool gain transfers to the saved real-GPU official submission."
+  ],
+  "decision_gates": {
+    "next_online_scope": "Only the two existing cutpoints, same A/B continuation, 450 seconds and 60 subsequent actions per game, at most the existing two auxiliary requests. Treat construction and retained-program repair separately.",
+    "minimum_to_consider_full_pool": "At least one real host action with a complete task-related prediction and interpretable actual feedback that changes the next decision or produces meaningful advancement. A parsed source, validated abstain, or unrelated ordinary-main-loop level is insufficient. A real counterexample repair claim additionally requires an actual mismatch and changed subsequent behavior.",
+    "hard_stop_contract_tuning": "If both cutpoints still produce zero host actions after this API/state correction, close the current auxiliary independent-program delivery design as not established. Return resources to the ordinary main-loop incumbent; do not launch another iteration merely to relax ready evidence/coverage gates.",
+    "hard_stop_semantic_failure": "If the interface works but actions repeat unsupported roles/rules and yield no meaningful advancement, do not expand to 25 or submit. A future candidate must target rule discrimination/reasoning as a new hypothesis, not call the interface fixed a score gain.",
+    "score_gate": "Freeze only a mechanism-positive candidate for same-budget full-25 paired evaluation, keep every gain and loss, then consider formal saved-GPU submission. Official score above 31.16 remains the success criterion; no promise of score improvement is made."
+  },
+  "research_judgment": "One final bounded interface correction is justified because v8 exposes a concrete host/API defect and four extracted programs, but repeated independent-program failures substantially weaken the case for indefinite contract tuning. Typed abstention should make a negative conclusion easier to observe, not easier to relabel as success."
+}

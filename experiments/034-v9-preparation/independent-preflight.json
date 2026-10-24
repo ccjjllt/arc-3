@@ -1,0 +1,690 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-24T09:33:12.974666+00:00",
+  "reviewer_independence": "Fresh reviewer authored no v9 core, config, notebook or checker implementation. Read-only review except this report and temporary review script.",
+  "scope": "Frozen v9 candidate, v8 attribution, exact original facts and lossless checkpoint transport, native CPU evidence. No network, model, GPU or real game calls.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v9/experiment.ipynb",
+    "sha256": "b5788a726e38955ad2edc0b8b20ea231ecf6efaa22f6fff12f049ef2ab0273c5",
+    "cells": 32,
+    "bytes": 1006499,
+    "sdk_normalized_bytes": 1004895,
+    "below_1MiB": true
+  },
+  "source_manifest": {
+    "all_20_current_hashes_match": true,
+    "all_19_frozen_hashes_match": true,
+    "embedded_hashes_exact": true,
+    "runtime_config_exact_omitting_only_documented_keys": true,
+    "native_python_payloads_exact_current_source_and_compiled": 15,
+    "archive_exact_all_inputs_and_metadata": true
+  },
+  "forks": {
+    "combined_payload_byte_identical_v8": true,
+    "decoded_exact_original_checkpoint_objects": true,
+    "fork_count": 2
+  },
+  "v8_attribution": {
+    "byte_exact_infrastructure_modules": [
+      "executable_plan_forks.py",
+      "object_evidence.py",
+      "program_repair.py",
+      "run_arm.py",
+      "session_runner.py",
+      "program_state.py",
+      "transient_history.py",
+      "input_paths.py",
+      "goal_evidence.py"
+    ],
+    "all_post_harness_notebook_cells_exact_v8": true,
+    "same_config_fields": [
+      "arm_order",
+      "games",
+      "reference_arm",
+      "arm_environment",
+      "active_streams",
+      "n_passes_per_arm",
+      "warmup_action_games",
+      "requested_arm_seconds",
+      "continuation_seconds",
+      "max_continuation_actions",
+      "hard_limit_seconds",
+      "startup_limit_seconds",
+      "strict_arm_budget",
+      "require_cache_flush",
+      "require_cache_flush_log",
+      "require_complete_pool",
+      "require_drained_workers",
+      "require_rtx_pro6000",
+      "candidate_delivery",
+      "hypothesis_context",
+      "runtime_source_sha256",
+      "cache_flush_wait_seconds",
+      "object_evidence",
+      "short_program_feedback"
+    ],
+    "same_runtime_source_hashes": true,
+    "same_private_kernel_and_model_metadata": true,
+    "context_only_changed_function": "delivery_tool_schema",
+    "contract_changed_existing_function": "validate_plan",
+    "contract_added_function": "_validate_plan_diagnostics",
+    "adapter_changed_methods": [
+      "queue_validation_feedback",
+      "run_branch",
+      "snapshot"
+    ],
+    "adapter_other_methods_ast_unchanged": 15,
+    "prediction_contract_ast_identical": true,
+    "extraction_contract_ast_identical": true
+  },
+  "actual_v8_context_reconstruction": [
+    {
+      "game": "ft09-0d8bbf25",
+      "level": 3,
+      "step": 27,
+      "initial_entire_evidence_package_exact_v8": true,
+      "feedback_all_public_facts_unchanged_except_trigger": true,
+      "failed_source_once": true,
+      "returned_plan_once_exact": true,
+      "plan_diagnostics_once_exact": true,
+      "only_old_natural_language_spans_omitted_provenance_retained": true
+    },
+    {
+      "game": "su15-1944f8ab",
+      "level": 5,
+      "step": 86,
+      "initial_entire_evidence_package_exact_v8": true,
+      "feedback_all_public_facts_unchanged_except_trigger": true,
+      "failed_source_once": true,
+      "returned_plan_once_exact": true,
+      "plan_diagnostics_once_exact": true,
+      "only_old_natural_language_spans_omitted_provenance_retained": true
+    }
+  ],
+  "native_cpu_evidence": {
+    "path": "experiments/034-v9-cpu-check-final/report.json",
+    "sha256": "ccd17fec930592e815ed9a88cbe5903d8279148df08391f0e06de69ca004099d",
+    "source_hashes_exact_candidate": true,
+    "scenarios": 34,
+    "native_sandbox_calls": 279,
+    "scripted_completion_calls": 49,
+    "pure_contract_checks": 15,
+    "all_scenarios_passed": true,
+    "max_requests_per_scenario": 2,
+    "all_non_exhaustion_elapsed_sums_match": true,
+    "per_case_time_accounting": [
+      {
+        "case": "ordinary_batch_bootstrap",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.40799283399246633,
+        "recorded_extra_seconds": 0.40799283399246633
+      },
+      {
+        "case": "single_helpers_pause_second",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.2323927499819547,
+        "recorded_extra_seconds": 0.2323927499819547
+      },
+      {
+        "case": "mismatch_repairs_then_acts",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.5652125830529258,
+        "recorded_extra_seconds": 0.5652125830529258
+      },
+      {
+        "case": "unknown_stops_suffix",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.256765375030227,
+        "recorded_extra_seconds": 0.256765375030227
+      },
+      {
+        "case": "zero_action_validation",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.031912583974190056,
+        "recorded_extra_seconds": 0.031912583974190056
+      },
+      {
+        "case": "invalid_evidence_rolls_back_functions",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.06545929098501801,
+        "recorded_extra_seconds": 0.06545929098501801
+      },
+      {
+        "case": "level_boundary_stops_plan",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.18905687506776303,
+        "recorded_extra_seconds": 0.18905687506776303
+      },
+      {
+        "case": "validation_preserves_repeat_guard",
+        "branch_count": 0,
+        "sum_elapsed_seconds": 0,
+        "recorded_extra_seconds": 0.0
+      },
+      {
+        "case": "initial_prediction_rejected_rolls_back",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.12921570800244808,
+        "recorded_extra_seconds": 0.12921570800244808
+      },
+      {
+        "case": "completed_local_goal_no_action",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.03273012500721961,
+        "recorded_extra_seconds": 0.03273012500721961
+      },
+      {
+        "case": "abstain_no_action",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.03171487501822412,
+        "recorded_extra_seconds": 0.03171487501822412
+      },
+      {
+        "case": "abstain_empty_evidence_and_bindings_does_not_use_repair",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.03153604199178517,
+        "recorded_extra_seconds": 0.03153604199178517
+      },
+      {
+        "case": "completed_empty_evidence_still_rejected",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.06344837392680347,
+        "recorded_extra_seconds": 0.06344837392680347
+      },
+      {
+        "case": "ready_multiple_plan_errors_share_one_feedback_then_execute",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.40896179201081395,
+        "recorded_extra_seconds": 0.40896179201081395
+      },
+      {
+        "case": "short_contract_total_action_limit",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.3640517919557169,
+        "recorded_extra_seconds": 0.3640517919557169
+      },
+      {
+        "case": "ordinary_action_after_contract",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.298004416981712,
+        "recorded_extra_seconds": 0.298004416981712
+      },
+      {
+        "case": "recomputation_failure_keeps_action_accounting",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.2305027920519933,
+        "recorded_extra_seconds": 0.2305027920519933
+      },
+      {
+        "case": "top_level_constant_feedback_delivers_short_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.29124995798338205,
+        "recorded_extra_seconds": 0.29124995798338205
+      },
+      {
+        "case": "oversized_feedback_delivers_short_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.3857381669804454,
+        "recorded_extra_seconds": 0.3857381669804454
+      },
+      {
+        "case": "over_120_lines_runs_without_format_gate",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.3035289580002427,
+        "recorded_extra_seconds": 0.3035289580002427
+      },
+      {
+        "case": "literal_helper_default_runs_in_native_child",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.29113124997820705,
+        "recorded_extra_seconds": 0.29113124997820705
+      },
+      {
+        "case": "ascii_str_splitlines_uses_actual_native_api",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.421190166962333,
+        "recorded_extra_seconds": 0.421190166962333
+      },
+      {
+        "case": "computed_default_feedback_delivers_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.2948974589817226,
+        "recorded_extra_seconds": 0.2948974589817226
+      },
+      {
+        "case": "mutable_default_feedback_delivers_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.29261637502349913,
+        "recorded_extra_seconds": 0.29261637502349913
+      },
+      {
+        "case": "multiple_static_errors_share_single_feedback",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.3029194580158219,
+        "recorded_extra_seconds": 0.3029194580158219
+      },
+      {
+        "case": "syntax_invalid_feedback_preserves_failed_source",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.2935852500377223,
+        "recorded_extra_seconds": 0.2935852500377223
+      },
+      {
+        "case": "plan_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.3416482489556074,
+        "recorded_extra_seconds": 0.3416482489556074
+      },
+      {
+        "case": "prediction_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.45580374996643513,
+        "recorded_extra_seconds": 0.45580374996643513
+      },
+      {
+        "case": "second_invalid_stops_and_restores_state",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.06408874900080264,
+        "recorded_extra_seconds": 0.06408874900080264
+      },
+      {
+        "case": "zero_action_fix_shares_mismatch_repair_quota",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.26178933295886964,
+        "recorded_extra_seconds": 0.26178933295886964
+      },
+      {
+        "case": "mismatch_repair_validation_failure_does_not_retry",
+        "branch_count": 2,
+        "sum_elapsed_seconds": 0.23227791802491993,
+        "recorded_extra_seconds": 0.23227791802491993
+      },
+      {
+        "case": "native_transport_failure_is_not_program_feedback",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.0015183750074356794,
+        "recorded_extra_seconds": 0.0015183750074356794
+      },
+      {
+        "case": "declared_unknown_does_not_request_code_repair",
+        "branch_count": 1,
+        "sum_elapsed_seconds": 0.0701005409937352,
+        "recorded_extra_seconds": 0.0701005409937352
+      }
+    ],
+    "legal_abstain_no_action_no_repair": true,
+    "ready_feedback_actual_plan_and_diagnostics_exact_first_rejection": true,
+    "no_network_model_gpu_or_real_game": true
+  },
+  "saved_v8_fixture_regressions": {
+    "fixture_path": "experiments/034-v9-preparation/v8-plan-fixtures.json",
+    "fixture_sha256": "1d185c4287ea9a68fae7aa7b55f4831d1bab573249caae57d272bad540e415a5",
+    "results": {
+      "scope": "Pure validation of archived offline_plan values on exact saved public ASCII; no model program execution or game actions.",
+      "fixture_sha256": "1d185c4287ea9a68fae7aa7b55f4831d1bab573249caae57d272bad540e415a5",
+      "results": [
+        {
+          "game": "ft09-0d8bbf25",
+          "event_index": 1,
+          "source_sha256": "6f77861c806911b84691f1af93155c262ed8a7357344a13e57a57d79e76ef49f",
+          "saved_observation_grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+          "archived_status": "abstain",
+          "status": "passed",
+          "validation": {
+            "passed": true,
+            "status": "validated_current_evidence",
+            "errors": [],
+            "plan": {
+              "actions": [],
+              "evidence_pixels": [],
+              "goal": "legend-consistent cell grid",
+              "reason": "cannot recompute board layout",
+              "replaces": [],
+              "status": "abstain"
+            },
+            "plan_diagnostics": {
+              "errors": [],
+              "total_errors": 0,
+              "truncated_count": 0,
+              "status_aware": true,
+              "aggregate_errors": true,
+              "duplicate_coordinates": [],
+              "total_duplicate_coordinates": 0,
+              "wrong_pixels": 0,
+              "differences": []
+            },
+            "plan_sha256": "81391160eaa8adc883e0ddfe0dd66e243f7e1ce30f18c270704c47013cc9fe22",
+            "input_grid_sha256": "28c5cfaba22397543220099e720cde1811eb9aca1a8d343033d1cd3640bbe344",
+            "coverage": {
+              "evidence_pixels": 0,
+              "frame_pixels": 4096,
+              "fraction": 0.0
+            },
+            "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+          }
+        },
+        {
+          "game": "ft09-0d8bbf25",
+          "event_index": 2,
+          "source_sha256": "054f494bc77b5c28bf6f27b1cf99bf342763706d525c04db095680141eacc650",
+          "saved_observation_grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+          "archived_status": "abstain",
+          "status": "passed",
+          "validation": {
+            "passed": true,
+            "status": "validated_current_evidence",
+            "errors": [],
+            "plan": {
+              "actions": [],
+              "evidence_pixels": [],
+              "goal": "uniform cell blocks",
+              "reason": "cannot recompute the cell grid from this frame",
+              "replaces": [],
+              "status": "abstain"
+            },
+            "plan_diagnostics": {
+              "errors": [],
+              "total_errors": 0,
+              "truncated_count": 0,
+              "status_aware": true,
+              "aggregate_errors": true,
+              "duplicate_coordinates": [],
+              "total_duplicate_coordinates": 0,
+              "wrong_pixels": 0,
+              "differences": []
+            },
+            "plan_sha256": "fa9159c8b2fe5390512ef970a72f159f1b7fd26b9c50f8d5e6cfc59108955e98",
+            "input_grid_sha256": "28c5cfaba22397543220099e720cde1811eb9aca1a8d343033d1cd3640bbe344",
+            "coverage": {
+              "evidence_pixels": 0,
+              "frame_pixels": 4096,
+              "fraction": 0.0
+            },
+            "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+          }
+        },
+        {
+          "game": "su15-1944f8ab",
+          "event_index": 1,
+          "source_sha256": "14cd2af6d11845ec4a06828f0bdd9c4432e18452ce1f1a7617581f55427486dd",
+          "saved_observation_grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+          "archived_status": "ready",
+          "status": "passed",
+          "validation": {
+            "passed": false,
+            "status": "rejected_evidence",
+            "errors": [
+              "Unknown replaced binding",
+              "Duplicate pixel coordinate",
+              "Duplicate pixel coordinate",
+              "Evidence differs from current pixels"
+            ],
+            "plan_diagnostics": {
+              "errors": [
+                {
+                  "code": "plan_replaces_unknown",
+                  "field": "replaces",
+                  "message": "Unknown replaced binding",
+                  "unknown_bindings": [
+                    "safe",
+                    "safe2",
+                    "safe3",
+                    "dots",
+                    "pcs"
+                  ]
+                },
+                {
+                  "code": "evidence_duplicate_coordinate",
+                  "field": "evidence_pixels[8]",
+                  "message": "Duplicate pixel coordinate",
+                  "row": 61,
+                  "col": 31,
+                  "first_index": 5,
+                  "index": 8
+                },
+                {
+                  "code": "evidence_duplicate_coordinate",
+                  "field": "evidence_pixels[11]",
+                  "message": "Duplicate pixel coordinate",
+                  "row": 62,
+                  "col": 31,
+                  "first_index": 6,
+                  "index": 11
+                },
+                {
+                  "code": "evidence_wrong_pixels",
+                  "field": "evidence_pixels",
+                  "message": "Evidence differs from current pixels",
+                  "wrong_pixels": 6,
+                  "differences": [
+                    {
+                      "row": 61,
+                      "col": 30,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 7
+                    },
+                    {
+                      "row": 61,
+                      "col": 31,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 8
+                    },
+                    {
+                      "row": 61,
+                      "col": 32,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 9
+                    },
+                    {
+                      "row": 62,
+                      "col": 30,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 10
+                    },
+                    {
+                      "row": 62,
+                      "col": 31,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 11
+                    },
+                    {
+                      "row": 62,
+                      "col": 32,
+                      "claimed": "S",
+                      "observed": "B",
+                      "index": 12
+                    }
+                  ]
+                }
+              ],
+              "total_errors": 4,
+              "truncated_count": 0,
+              "status_aware": true,
+              "aggregate_errors": true,
+              "duplicate_coordinates": [
+                {
+                  "row": 61,
+                  "col": 31,
+                  "first_index": 5,
+                  "index": 8
+                },
+                {
+                  "row": 62,
+                  "col": 31,
+                  "first_index": 6,
+                  "index": 11
+                }
+              ],
+              "total_duplicate_coordinates": 2,
+              "wrong_pixels": 6,
+              "differences": [
+                {
+                  "row": 61,
+                  "col": 30,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 7
+                },
+                {
+                  "row": 61,
+                  "col": 31,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 8
+                },
+                {
+                  "row": 61,
+                  "col": 32,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 9
+                },
+                {
+                  "row": 62,
+                  "col": 30,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 10
+                },
+                {
+                  "row": 62,
+                  "col": 31,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 11
+                },
+                {
+                  "row": 62,
+                  "col": 32,
+                  "claimed": "S",
+                  "observed": "B",
+                  "index": 12
+                }
+              ]
+            },
+            "wrong_pixels": 6,
+            "differences": [
+              {
+                "row": 61,
+                "col": 30,
+                "claimed": "S",
+                "observed": "B",
+                "index": 7
+              },
+              {
+                "row": 61,
+                "col": 31,
+                "claimed": "S",
+                "observed": "B",
+                "index": 8
+              },
+              {
+                "row": 61,
+                "col": 32,
+                "claimed": "S",
+                "observed": "B",
+                "index": 9
+              },
+              {
+                "row": 62,
+                "col": 30,
+                "claimed": "S",
+                "observed": "B",
+                "index": 10
+              },
+              {
+                "row": 62,
+                "col": 31,
+                "claimed": "S",
+                "observed": "B",
+                "index": 11
+              },
+              {
+                "row": 62,
+                "col": 32,
+                "claimed": "S",
+                "observed": "B",
+                "index": 12
+              }
+            ]
+          }
+        },
+        {
+          "game": "su15-1944f8ab",
+          "event_index": 2,
+          "source_sha256": "2c59b44a8729dab895197c96c3e3184d0721ef0260fccc36c3e04a859c5bb0ad",
+          "saved_observation_grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+          "archived_status": "abstain",
+          "status": "passed",
+          "validation": {
+            "passed": true,
+            "status": "validated_current_evidence",
+            "errors": [],
+            "plan": {
+              "actions": [],
+              "evidence_pixels": [],
+              "goal": "pocket target at row 62 col 31 exists but no reachable piece component was found",
+              "reason": "no knight-reachable component to move; guessing a screen coordinate has no rule support",
+              "replaces": [
+                "route"
+              ],
+              "status": "abstain"
+            },
+            "plan_diagnostics": {
+              "errors": [],
+              "total_errors": 0,
+              "truncated_count": 0,
+              "status_aware": true,
+              "aggregate_errors": true,
+              "duplicate_coordinates": [],
+              "total_duplicate_coordinates": 0,
+              "wrong_pixels": 0,
+              "differences": []
+            },
+            "plan_sha256": "0ab2039884f1671331892c6bc1efdfd95a0801b5b5dc29edd8fc9c0a1ce38b42",
+            "input_grid_sha256": "9a27cb27f46cb625807eee2a6dfed45ca92601758e1f76759cf777e7341b3baa",
+            "coverage": {
+              "evidence_pixels": 0,
+              "frame_pixels": 4096,
+              "fraction": 0.0
+            },
+            "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+          }
+        }
+      ]
+    },
+    "claim": "Pure validation replay only. Three honest abstains stop normally; the unsafe ready plan remains rejected. These are zero new actions and no score evidence."
+  },
+  "separate_contract_review": {
+    "path": "experiments/034-v9-preparation/contract-review.json",
+    "exact_candidate_hash": true,
+    "focused_cases": 18,
+    "malformed_shape_resource_checks": 98
+  },
+  "manual_control_flow_review": {
+    "legal_abstain": "Validated empty abstain restores previous functions and returns local_status=abstain, actual_actions=0, environment_success_claim=False. It does not queue repair, certify rules or certify completion.",
+    "strict_ready_completed": "Ready still requires1..3 legal actions and nonempty verified evidence/current binding. Completed still requires zero actions and nonempty verified evidence/current binding. Provided abstain evidence and replaces are checked normally.",
+    "prediction": "Entire validate_prediction AST is byte-equivalent after AST normalization; source/target nonempty current pixels, exact union, action binding, mode/noop and declared_unknown unchanged.",
+    "no_host_repair": "Duplicate coordinates and wrong colors remain errors; no deduplication, color substitution, role inference or automatic modification of returned program.",
+    "actual_feedback": "A strict-JSON copy of actual result is recorded; invalid non-JSON results record an explicit unavailable reason. Plan diagnostics appear once in feedback and are capped at16 errors with total/truncated counts. Source preserved once.",
+    "shared_quota": "Existing repair_used shared by zero-action validation and real mismatch; queue requires zero actions and unchanged level/step/grid and excludes capability/time/transport failures. No third generation.",
+    "rollback": "Native evaluate method and all trigger/action/runtime rollback methods AST-identical v8. run_branch retains finally release, functions/history/TLS restoration and per-branch time charge before recursive follow-up.",
+    "budgets": "450 seconds/60 continuation actions,600 seconds per isolated arm,B→A,120 seconds all-extra including60-second request,16384 input/4096 output,4200 startup/7200 session unchanged. No shortened arm or free repair time."
+  },
+  "limitations": [
+    "The two forced checkpoints are diagnostic cases, not the full25 pool or formal evaluation.",
+    "Native CPU uses scripted model completions and synthetic frames; fixture replay is pure validation. Neither proves current-model usefulness or score improvement.",
+    "Exact served-token fit remains checked live against16384; extra actual-result fields may cause an honest cap stop rather than evidence truncation.",
+    "This review does not spend GPU quota or establish the service state; root must read quota/status before one bounded push."
+  ],
+  "findings": [],
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v9_independent_preflight.py",
+    "sha256": "268001144396c7362ced6abaa9f28fb9b66db072786a6b4283d65427216a66b4"
+  }
+}

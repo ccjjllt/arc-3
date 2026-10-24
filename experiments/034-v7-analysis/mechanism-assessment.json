@@ -1,0 +1,49 @@
+{
+  "observed_at_utc": "2026-10-24T07:40:31.939623+00:00",
+  "status": "complete_negative_pair_feedback_working_delivery_unresolved",
+  "scope": "two selected forced checkpoints, not full25 or official score",
+  "returned_program_sources": 4,
+  "syntactically_complete_sources": 3,
+  "within_12000byte_cap": 4,
+  "within_120nonempty_line_cap": 1,
+  "extracted_programs": 0,
+  "validated_current_plans": 0,
+  "zero_action_error_feedback_requests": 2,
+  "feedback_complete_failed_source_and_actual_errors": true,
+  "max_auxiliary_requests_per_game": 2,
+  "actual_host_actions": 0,
+  "prediction_checks": 0,
+  "prediction_coverage": "not_applicable_no_checked_actions",
+  "real_counterexample_repairs": 0,
+  "direct_host_added_levels": 0,
+  "two_selected_game_mean_A": 23.809523809523807,
+  "two_selected_game_mean_B": 18.253968253968253,
+  "two_selected_game_mean_difference": -5.555555555555554,
+  "A_added_levels": 1,
+  "B_added_levels": 0,
+  "interface_limitations": [
+    "New120nonempty-line gate blocks129line/5686byte ft09 revision which old extraction accepts",
+    "Blanket defaults ban blocks literal r0=10 in105line/4391byte su15 revision",
+    "First length error masks other statically visible syntax/top-level-assignment problems"
+  ],
+  "offline_counterfactual_limits": [
+    "ft09 with only line gate removed extracts but plan abstains",
+    "su15 literal default mechanically moved into helper extracts and plans but prediction expected/declared union are disjoint",
+    "offline Frame stand-in only; no native sandbox, model, actual action or score evidence"
+  ],
+  "main_log_reconciliation": {
+    "per_game_missing_responses": 4,
+    "shared_file_uniquely_matched_late_response": 1,
+    "remaining_missing_responses": 3,
+    "shared_response_usage": {
+      "prompt_tokens": 60073,
+      "completion_tokens": 6274,
+      "reasoning_tokens": 5963,
+      "total_tokens": 66347
+    }
+  },
+  "decision": "do_not_scale_or_formally_submit_v7",
+  "next_gpu_started": false,
+  "formal_submitted": false,
+  "next_design": "reduce artificial interface burden; use byte/AST resource bounds, review safe literal defaults, aggregate statically discoverable errors; keep real action, timing and single feedback limits"
+}

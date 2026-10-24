@@ -1,0 +1,149 @@
+{
+  "observed_at_utc": "2026-10-24T10:47:40.087618+00:00",
+  "scope": "Static configuration and CPU control-flow tests with stubbed runtime imports; no game model GPU network or real mounted tokenizer",
+  "tests": [
+    {
+      "name": "five_changed_sources_compile",
+      "passed": true,
+      "count": 5
+    },
+    {
+      "name": "035_validates_without_mutating_input",
+      "passed": true
+    },
+    {
+      "name": "legacy_configuration_guards_preserved",
+      "passed": true,
+      "revisions": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "035_invalid_mutations_rejected",
+      "passed": true,
+      "count": 32,
+      "fields": [
+        "id",
+        "research_family",
+        "research_revision",
+        "research_revision",
+        "arm_order",
+        "reference_arm",
+        "continuation_seconds",
+        "max_continuation_actions",
+        "requested_arm_seconds",
+        "hard_limit_seconds",
+        "startup_limit_seconds",
+        "active_streams",
+        "n_passes_per_arm",
+        "request_deadline",
+        "skip_blanket_model_precache",
+        "require_complete_pool",
+        "require_drained_workers",
+        "require_cache_flush",
+        "cache_flush_wait_seconds",
+        "template_preflight",
+        "hypothesis_context",
+        "object_evidence",
+        "execution_interface",
+        "short_program_feedback",
+        "candidate_delivery.thinking",
+        "candidate_delivery.max_output_tokens",
+        "candidate_delivery.max_prompt_tokens",
+        "candidate_delivery.max_request_seconds",
+        "candidate_delivery.max_extra_processing_seconds",
+        "modes.executable_plan_C",
+        "modes.executable_plan_B",
+        "modes.executable_plan_A"
+      ]
+    },
+    {
+      "name": "unchanged_budget_reservation",
+      "passed": true,
+      "seconds": {
+        "startup": 4200,
+        "solver_arms": 1800,
+        "cleanup": 510,
+        "cache": 360
+      },
+      "total_seconds": 6870,
+      "hard_limit_seconds": 7200
+    },
+    {
+      "name": "original_checkpoint_payloads_load",
+      "passed": true,
+      "forks_sha256": "178a0001da2c441a5a64081ca843c05e576ece6a83ac38b5c91c40ca5f39c212",
+      "sources": {
+        "ft09-0d8bbf25": {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/028-fork-package.json.gz.b64",
+          "package_sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+          "fork_sha256": "52f208d77d7154fc180fd9fecab37d5713459b85df3bd618a34828e475d897a8",
+          "source_package_sha256": null,
+          "transport_encoding": "gzip+base64"
+        },
+        "su15-1944f8ab": {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-fork-inputs/su15-package.json.gz.b64",
+          "package_sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+          "fork_sha256": "024576dd0ba846caaaf9cd5866c880c0c23ea239d8d8ce9bdf76fe5af8f5ac2d",
+          "source_package_sha256": null,
+          "transport_encoding": "gzip+base64"
+        }
+      }
+    },
+    {
+      "name": "legacy_default_fork_outputs_and_install_kwargs_equal_v9",
+      "passed": true,
+      "arms": [
+        "A",
+        "B"
+      ],
+      "clock_field_excluded": "elapsed_seconds"
+    },
+    {
+      "name": "explicit_three_arm_label_patch_and_verification_routing",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "fork_control_rejects_mode_swaps",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "unsupported_template_propagates_before_patch_or_generation",
+      "passed": true
+    },
+    {
+      "name": "run_arm_rejects_cli_mode_swaps_before_runtime_setup",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "run_arm_rejects_absent_or_unrelated_model_mount_before_runtime_setup",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "returned_failed_template_proof_also_aborts_before_patch",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "src/arc3_research/experiment_config.py": "313d83086e5094f7d6382f911b61dab9438cc9673c953c7286bb528eea8529b3",
+    "src/arc3_research/session_runner.py": "4d6eec5e8817dc56b0640909b9c63b1b6834b8e858b9d5774b35d1814c01c0d7",
+    "src/arc3_research/run_arm.py": "caf2367d76e11a81a5527f3d926c592ada72ea392fa5a1c7ba486ced9d027781",
+    "src/arc3_research/executable_plan_forks.py": "c0124b7a3214a994efbf7f123bcfba43959baea94684101f5a892ce6782a2f5b",
+    "scripts/build_experiment.py": "29e907058127c369f3882dd836285a7467fcb9da2866914b24232d0c7990d3fe"
+  },
+  "status": "passed",
+  "gpu_launched": false,
+  "formal_submitted": false,
+  "mounted_tokenizer_verified": false,
+  "mounted_verification_note": "Actual Kaggle mount remains runtime fail-closed; helper proof reviewed separately."
+}

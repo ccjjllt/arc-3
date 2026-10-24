@@ -4,7 +4,8 @@ Installs in memory on the frozen actor. No game names, answers or hidden state.
 A native snippet is ended before a queued batch (or its second action call).
 One bounded model request builds a current-frame plan and predictor. The host
 executes that plan, freezes predictions before each real action, and sends a
-structured counterexample to one subsequent bounded repair request. Unknown
+structured counterexample or zero-action validation error to one subsequent
+bounded repair request, sharing the same one-repair quota. Unknown
 checks stop the snippet; an invalid contract can be abandoned for exploration.
 """
 from __future__ import annotations
@@ -17,17 +18,23 @@ import json
 from pathlib import Path
 import threading
 import time
+import traceback
 from typing import Any
 
 from arc3_research.program_repair import _completion, _payload, _remaining
 from arc3_research.executable_plan_context import prepare_compact_context, delivery_tool_schema
 from arc3_research.object_evidence import object_evidence
 from arc3_research.executable_plan_contract import (
-    binding_names, compare_prediction, extract_definitions, validate_plan, validate_prediction,
+    DefinitionContractError, binding_names, compare_prediction, extract_definitions, json_copy,
+    validate_plan, validate_prediction,
 )
 
 
 PROMPT = """Deliver a SMALL executable program now using one submit_program tool call.
+Implement ONE current decision and its related prediction first, not a large
+general solver. Deliver complete source within 12000 UTF-8 bytes and this
+4096-token response. There is no line-count limit; do not compress line breaks
+to satisfy one. Keep constants and parameters inside functions, never at top level.
 The host paused a real action sequence. Repair its relevant input/rule or
 construct a small current decision program if no usable planner was retained.
 Reuse existing rule/search when evidence supports it; revise a contradicted
@@ -39,6 +46,10 @@ plan_program(frame) -> {"status": "ready" | "completed" | "abstain",
  "actions": [model-facing action dicts, at most 3; empty unless ready],
  "evidence_pixels": [[row,col,color_character], ...],
  "replaces": [names from the paused code or retained functions], "reason": str}
+ready needs 1..3 actions, nonempty current evidence_pixels and nonempty replaces.
+completed needs no actions but still needs nonempty current evidence_pixels and
+nonempty replaces. abstain needs no actions and may use evidence_pixels=[] and
+replaces=[]; keep its goal and reason nonempty and explain the uncertainty.
 predict(frame, action) -> {"mode": "change" | "noop", "action": action,
  "object_pixels": [[row,col,CURRENT color], ...],
  "target_pixels": [[row,col,CURRENT color], ...],
@@ -47,8 +58,12 @@ predict(frame, action) -> {"mode": "change" | "noop", "action": action,
  "scope": "which task object and observable consequence this checks"}
 If no relevant prediction is possible, return {"mode":"unknown","reason":str}.
 
-Read frame.ascii, shape, level and step to RECOMPUTE current objects, target and
-actions. frame.recent_transitions is refreshed on EVERY call: a tuple of recent
+frame.ascii is a str, not a dictionary or a list of rows. Read it with
+rows = frame.ascii.splitlines(); color = rows[row][col]. The characters are
+case-sensitive color codes, not color names or proved object roles. Copy the
+actual observed character exactly; do not translate a verbal "blue" hypothesis
+into 'B'. Read frame.shape, frame.level and frame.step to RECOMPUTE current objects, target
+and actions. frame.recent_transitions is refreshed on EVERY call: a tuple of recent
 public transitions with action, before_frame, after_frame and result attributes.
 frame.valid_actions and frame.last_action_result are current public facts.
 Unknown historical state is not a fact; if essential state cannot be recovered,
@@ -80,17 +95,78 @@ BEFORE action, cover BOTH declared object and target pixels and no undeclared
 pixels. A noop must explain a task-relevant obstruction/precondition, not just
 unchanged distant background. Pixel agreement does not prove your rule correct.
 MOUSE uses row/col; other actions contain only action. No RESET/UNDO, calls to
-action(), prints or top-level execution. No decorators, default arguments,
-annotations, global or nonlocal. Computational imports math, collections,
+action(), prints or top-level execution. No decorators, annotations, global or
+nonlocal. Helper defaults may use only immutable literal
+values, such as r0=10 or a tuple of literals; no computed or mutable defaults.
+The two entry points must have the exact signatures above, without defaults.
+Computational imports math, collections,
 itertools, heapq, numpy are supported. Globals do not persist: keep parameters
 inside functions, reuse supplied helpers and rebind layout from this frame.
 Do not copy every pixel as a replacement model. No explanation outside the
 single submit_program tool call. Keep the program short enough to finish this response.
+If validation_feedback is supplied, it records a real host rejection before any
+action. Correct all reported errors together in the supplied previous_program;
+contract_diagnostics lists the statically discovered failures, with any omitted
+error count. returned_plan is the actual strict-JSON plan result, when available;
+plan_diagnostics lists output-contract failures together, with any omitted error
+count. Do not merely fix the first error or claim the rejected code ran
+or that its rules were confirmed. This shares the
+single repair opportunity with a later real-action counterexample.
 """
+
+_DELIVERY_MAX_NONEMPTY_LINES = None
+_DELIVERY_MAX_CODE_BYTES = 12000
+
+
+class _ValidationSideEffect(ValueError):
+    """An attempted environment action is not an automatic repair opportunity."""
+
+
+class _NativeEvaluationError(ValueError):
+    def __init__(self, payload):
+        self.payload = copy.deepcopy(payload)
+        super().__init__("program did not return result: " + str(payload.get("error") or payload)[:1200])
+
+
+def _submitted_source(message):
+    """Copy raw delivered source for feedback, without accepting or repairing it."""
+    try:
+        calls = message["tool_calls"]
+        if len(calls) != 1:
+            return None
+        arguments = calls[0]["function"]["arguments"]
+        if isinstance(arguments, str):
+            arguments = json.loads(arguments)
+        code = arguments.get("code")
+        return code if isinstance(code, str) else None
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return None
+
+
+def _delivery_source_metadata(code):
+    metadata = {"max_nonempty_lines": _DELIVERY_MAX_NONEMPTY_LINES,
+                "max_code_bytes": _DELIVERY_MAX_CODE_BYTES,
+                "source_available": isinstance(code, str)}
+    if isinstance(code, str):
+        metadata["nonempty_lines"] = sum(bool(line.strip()) for line in code.splitlines())
+        try:
+            encoded = code.encode("utf-8")
+            metadata.update(code_bytes=len(encoded), code_sha256=hashlib.sha256(encoded).hexdigest())
+        except UnicodeError as exc:
+            metadata.update(code_bytes=None, code_sha256=None, utf8_error=str(exc))
+    return metadata
 
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def _returned_plan_record(value: Any) -> dict[str, Any]:
+    """Record the actual bounded JSON result without normalizing a bad plan."""
+    try:
+        return {"returned_plan": json_copy(value)}
+    except (ValueError, TypeError, RecursionError, UnicodeError) as exc:
+        return {"returned_plan_unavailable": {"reason": str(exc)}}
 
 
 def _bindings(code: str, functions: dict) -> list[str]:
@@ -175,7 +251,10 @@ class _State:
 
 class ExecutablePlanPatch:
     def __init__(self, *, min_remaining_seconds=180, max_check_seconds=5,
-                 request_seconds=60, extra_seconds=120, completion=None):
+                 request_seconds=60, extra_seconds=120, completion=None,
+                 auxiliary_reasoning_mode="off"):
+        if auxiliary_reasoning_mode not in ("off", "low"):
+            raise ValueError("auxiliary_reasoning_mode must be off or low")
         from inference.agent import tool_agent, python_tool_sandbox
         from inference.utils.grid_utils import ARC_COLOR_CHARS
         if getattr(tool_agent.ToolAgent, "_executable_plan_installed", False):
@@ -198,6 +277,7 @@ class ExecutablePlanPatch:
         self.request_seconds = float(request_seconds)
         self.extra_limit = float(extra_seconds)
         self.completion = completion or _completion
+        self.auxiliary_reasoning_mode = auxiliary_reasoning_mode
 
         def analyze(agent, state_path, *args, **kwargs):
             agent._ensure_session(state_path)
@@ -302,7 +382,7 @@ class ExecutablePlanPatch:
         path = state.path.with_name(state.path.stem + "_executable-plan.jsonl")
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("a") as f:
-            f.write(json.dumps(entry, ensure_ascii=False, allow_nan=False) + "\n")
+            f.write(json.dumps(entry, ensure_ascii=True, allow_nan=False) + "\n")
         return entry
 
     def current(self, state):
@@ -370,9 +450,9 @@ class ExecutablePlanPatch:
             after, _ = self.current(state)
             if (context["blocked"] or dispatch.step_executed or after.level != before.level
                     or after.step != before.step or _hash(after.grid) != _hash(before.grid)):
-                raise ValueError("zero-action validation attempted a side effect or changed the observation")
+                raise _ValidationSideEffect("zero-action validation attempted a side effect or changed the observation")
             if payload.get("error") or "result" not in payload:
-                raise ValueError("program did not return result: " + str(payload)[:1200])
+                raise _NativeEvaluationError(payload)
             if not commit:
                 agent._kept_functions = old_functions
             return payload["result"]
@@ -525,6 +605,101 @@ class ExecutablePlanPatch:
         context["guard_remaining"] = None
         return reply
 
+    def queue_validation_feedback(self, agent, state, trigger, context, event,
+                                  before, exc, deadline):
+        """Reuse the one repair slot only for an unchanged, zero-action failure.
+
+        A rejected artifact is never executed or repaired by the host. The next
+        bounded model call receives its original source and actual host error.
+        Side-effect refusals and exhausted infrastructure budgets stop here.
+        """
+        summary = {"eligible": False, "queued": False, "stage": event["stage"],
+                   "actual_actions": context["executed"], "observation_unchanged": False}
+        event["zero_action_feedback"] = summary
+        if event["stage"] not in {"extract", "plan_validation", "initial_prediction"}:
+            summary["reason"] = "not_an_artifact_validation_failure"
+            return
+        if context["executed"]:
+            summary["reason"] = "real_actions_already_executed"
+            return
+        if (event.get("first_prediction_validation") or {}).get("declared_unknown"):
+            summary["reason"] = "declared_unknown"
+            return
+        after, _ = self.current(state)
+        def identity(frame):
+            return {"level": frame.level, "step": frame.step, "grid_sha256": _hash(frame.grid)}
+        before_id, after_id = identity(before), identity(after)
+        summary["observation_unchanged"] = before_id == after_id
+        if not summary["observation_unchanged"]:
+            summary["reason"] = "observation_changed"
+            return
+        contract_diagnostics = event.get("contract_diagnostics")
+        diagnostic_messages = [str(item.get("message", ""))
+                               for item in (contract_diagnostics or {}).get("errors", [])]
+        detail = "\n".join([str(exc), *diagnostic_messages]).lower()
+        if (isinstance(exc, TimeoutError)
+                or any(text in detail for text in ("timeout", "timed out", "deadline"))):
+            summary["reason"] = "time_budget_failure"
+            return
+        if isinstance(exc, _NativeEvaluationError):
+            native_error = exc.payload.get("error")
+            if native_error:
+                # This is the frozen child's structured candidate traceback.
+                # A dead process, invalid protocol, missing transport response
+                # or startup error has no such attribution to candidate code.
+                if (not isinstance(native_error, str)
+                        or not native_error.startswith("Traceback (most recent call last):")
+                        or 'File "<python_tool>"' not in native_error):
+                    summary["reason"] = "native_infrastructure_or_unattributed_failure"
+                    return
+            elif exc.payload.get("returncode") != 0:
+                summary["reason"] = "native_result_unavailable_without_completed_execution"
+                return
+        elif not isinstance(exc, ValueError):
+            summary["reason"] = "not_an_attributed_artifact_error"
+            return
+        if (isinstance(exc, _ValidationSideEffect)
+                or bool((contract_diagnostics or {}).get("has_side_effect_rejection"))
+                or any(text in detail for text in (
+                    "contains an action or executable-i/o call", "import is outside",
+                    "functions must not mutate global bindings", "not allowed in the sandbox"))):
+            summary["reason"] = "side_effect_or_capability_refusal"
+            return
+        if state.repair_used:
+            summary["reason"] = "shared_repair_quota_exhausted"
+            return
+        if (not self.can_branch(agent, state)
+                or deadline - time.monotonic() < 1):
+            summary["reason"] = "remaining_budget"
+            return
+        response = event.get("response")
+        failed_source = _submitted_source(response)
+        feedback = {"stage": event["stage"], "error": event["error"],
+                    "exception_type": type(exc).__name__, "traceback": traceback.format_exc(),
+                    "actual_actions": 0, "observation_unchanged": True,
+                    "before": before_id, "after": after_id}
+        if contract_diagnostics is not None:
+            feedback["contract_diagnostics"] = copy.deepcopy(contract_diagnostics)
+        for key in ("returned_plan", "returned_plan_unavailable", "plan_diagnostics"):
+            if key in event:
+                feedback[key] = copy.deepcopy(event[key])
+        if isinstance(exc, _NativeEvaluationError):
+            feedback["sandbox_payload"] = copy.deepcopy(exc.payload)
+        for source, target in (("validation", "validation_errors"),
+                               ("first_prediction_validation", "prediction_errors")):
+            if source == "validation" and "plan_diagnostics" in event:
+                continue
+            if event.get(source) is not None:
+                feedback[target] = copy.deepcopy(event[source].get("errors", []))
+        if failed_source is None:
+            feedback["raw_submission"] = copy.deepcopy(response)
+        state.pending = {"kind": "repair", "repair_reason": "zero_action_validation",
+                         "source_code": trigger.get("source_code", state.source_code),
+                         "previous_program": failed_source or "",
+                         "previous_program_hash": _delivery_source_metadata(failed_source).get("code_sha256"),
+                         "validation_feedback": feedback}
+        summary.update(eligible=True, queued=True, reason="one_shared_repair_requested")
+
     def run_branch(self, agent, state, trigger):
         kind = trigger["kind"]
         if kind == "bootstrap":
@@ -547,10 +722,12 @@ class ExecutablePlanPatch:
                    "validation": False, "host_plan": True, "deadline": branch_deadline}
         event = {"kind": "program_recomputed", "trigger": trigger, "actual_actions": 0,
                  "stage": "context", "timings": {}, "request_record": {},
+                 "auxiliary_reasoning_mode": self.auxiliary_reasoning_mode,
                  "request_budget_seconds": min(self.request_seconds, branch_deadline - started),
                  "semantic_claim": "Current declared pixels and action binding only; goal and rules remain hypotheses"}
         report = {"status": "rejected", "actual_actions": 0, "made_progress": False}
         bound_hash = None
+        current = None
         progress = False
         host_started = False
         try:
@@ -571,8 +748,11 @@ class ExecutablePlanPatch:
                 raise TimeoutError("extra-branch deadline exhausted before request")
             event["stage"] = "request"
             phase = time.monotonic()
+            event["request_record"]["auxiliary_reasoning_mode"] = self.auxiliary_reasoning_mode
+            reasoning_options = ({"reasoning_effort": "low"}
+                                 if self.auxiliary_reasoning_mode == "low" else {})
             response = self.completion(agent, messages, tools, timeout=timeout, max_tokens=4096,
-                enable_thinking=False,
+                enable_thinking=self.auxiliary_reasoning_mode == "low", **reasoning_options,
                 tool_choice_override={"type": "function", "function": {"name": "submit_program"}},
                 request_record=event["request_record"], max_input_tokens=16384)
             event["timings"]["request_seconds"] = time.monotonic() - phase
@@ -581,15 +761,22 @@ class ExecutablePlanPatch:
                          finish_reason=response.finish_reason,
                          served_by=getattr(response, "served_by", None))
             event["stage"] = "extract"
-            definitions = extract_definitions(response.message, expected_tool_name="submit_program")
+            event["delivery_code"] = _delivery_source_metadata(_submitted_source(response.message))
+            definitions = extract_definitions(response.message, expected_tool_name="submit_program",
+                max_nonempty_lines=_DELIVERY_MAX_NONEMPTY_LINES, max_code_bytes=_DELIVERY_MAX_CODE_BYTES,
+                allow_literal_defaults=True)
             code = definitions["code"]
             event.update(program_code=code, program_hash=definitions["code_sha256"])
             phase = time.monotonic()
             event["stage"] = "plan_validation"
             result = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)", deadline=branch_deadline)
             validation = validate_plan(result, current.grid, self.chars,
-                self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
-            event["validation"] = validation
+                self.module._normalize_valid_actions(agent._current_valid_actions), bindings,
+                status_aware=True, aggregate_errors=True)
+            event.update(_returned_plan_record(result))
+            event["validation"] = {key: copy.deepcopy(value) for key, value in validation.items()
+                                   if key != "plan_diagnostics"}
+            event["plan_diagnostics"] = copy.deepcopy(validation["plan_diagnostics"])
             if not validation["passed"]:
                 raise ValueError("plan rejected: " + str(validation.get("errors")))
             plan = validation["plan"]
@@ -639,8 +826,13 @@ class ExecutablePlanPatch:
                         result = self.evaluate(agent, state, code + "\nresult = plan_program(current_frame)",
                                                deadline=branch_deadline)
                         validation = validate_plan(result, current.grid, self.chars,
-                            self.module._normalize_valid_actions(agent._current_valid_actions), bindings)
-                        self.event(state, {"kind": "plan_recomputed", "validation": validation,
+                            self.module._normalize_valid_actions(agent._current_valid_actions), bindings,
+                            status_aware=True, aggregate_errors=True)
+                        self.event(state, {"kind": "plan_recomputed",
+                            "validation": {key: copy.deepcopy(value) for key, value in validation.items()
+                                           if key != "plan_diagnostics"},
+                            **_returned_plan_record(result),
+                            "plan_diagnostics": copy.deepcopy(validation["plan_diagnostics"]),
                             "input_step": current.step, "input_grid_sha256": _hash(current.grid),
                             "recent_real_actions": [{"action": h.action, "level": h.frame.level,
                                                      "step": h.frame.step, "result": h.result}
@@ -701,6 +893,11 @@ class ExecutablePlanPatch:
                 failure_stage=event["stage"],
                 next="Continue ordinary exploration from the real current_frame; the old suffix must not be replayed.")
             event.update(status=report["status"], error=report["error"], actual_actions=context["executed"])
+            if isinstance(exc, DefinitionContractError):
+                event["contract_diagnostics"] = exc.to_dict()
+            if current is not None:
+                self.queue_validation_feedback(agent, state, trigger, context, event,
+                                               current, exc, branch_deadline)
         finally:
             self.release(state, "short_plan_ended")
             elapsed = time.monotonic() - started
@@ -725,7 +922,8 @@ class ExecutablePlanPatch:
 
     def snapshot(self):
         with self.lock:
-            return {"patch": "034-executable-plan-v6", "games": len(self.states),
+            return {"patch": "034-executable-plan-v9", "games": len(self.states),
+                    "auxiliary_reasoning_mode": self.auxiliary_reasoning_mode,
                     "bootstrap_calls": sum(s.bootstrap_used for s in self.states),
                     "repair_calls": sum(s.repair_used for s in self.states),
                     "extra_seconds": sum(s.extra_seconds for s in self.states),

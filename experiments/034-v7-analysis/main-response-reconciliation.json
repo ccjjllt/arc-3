@@ -1,0 +1,38 @@
+{
+  "scope": "read-only cross-file late main response reconciliation; raw per-game counts and usage left unchanged",
+  "shared_path": "runs/034-plan-diagnostic-v7/executable_plan_B/requests.jsonl",
+  "shared_sha256": "03fd2b67ba08db4ce1b6c8eaf77c55cb5426e1c2c902a62634e1c9f9fd44195e",
+  "matched_request_path": "runs/034-plan-diagnostic-v7/executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+  "matched_request_line": 35,
+  "matching_fields": [
+    "messages",
+    "tools",
+    "chat_template_kwargs",
+    "tool_choice",
+    "analysis_step",
+    "action",
+    "request_index_within_turn"
+  ],
+  "unique_match": true,
+  "shared_response_usage": {
+    "prompt_tokens": 60073,
+    "total_tokens": 66347,
+    "completion_tokens": 6274,
+    "prompt_tokens_details": {
+      "cached_tokens": 58240,
+      "image_tokens": 6400
+    },
+    "reasoning_tokens": 5963
+  },
+  "per_game_missing_responses": 4,
+  "uniquely_matched_shared_responses": 1,
+  "remaining_missing_responses": 3,
+  "B_known_main_returned_usage_cross_file_corrected": {
+    "prompt_tokens": 3620990,
+    "total_tokens": 3719629,
+    "completion_tokens": 98639,
+    "reasoning_tokens": 89559
+  },
+  "returned_usage_still_incomplete": true,
+  "independent_audit": "experiments/034-v7-analysis/integrity-independent-review.json"
+}

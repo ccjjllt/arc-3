@@ -1,0 +1,485 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-24T07:54:18.791023+00:00",
+  "scope": "Final v8 delivery/context/config/notebook/payload/facts review. Reviewer authored the separately checked v8 extraction contract, so this is independent review of the other implementation/build and shared control flow, not an independent review of the contract itself. No model/network/GPU or real game calls.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v8/experiment.ipynb",
+    "sha256": "d56ab961983f72e75dc8e57f5ece2a1ce1087329ef7deb70616702176e904c6e",
+    "bytes": 990984,
+    "cells": 32
+  },
+  "source_manifest": {
+    "all_current_input_hashes_match": true,
+    "input_count": 20,
+    "input_checks": [
+      {
+        "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+        "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+        "equal": true
+      },
+      {
+        "path": "scripts/build_experiment.py",
+        "sha256": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/__init__.py",
+        "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan.py",
+        "sha256": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_context.py",
+        "sha256": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_contract.py",
+        "sha256": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_forks.py",
+        "sha256": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/experiment_config.py",
+        "sha256": "4b5698c2fec8d349a922481ff665b98e6d7cd1f0f725307d9931870015c97c33",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/goal_evidence.py",
+        "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/input_paths.py",
+        "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/object_evidence.py",
+        "sha256": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_repair.py",
+        "sha256": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_state.py",
+        "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/run_arm.py",
+        "sha256": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/session_runner.py",
+        "sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/transient_history.py",
+        "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "equal": true
+      },
+      {
+        "path": "scripts/summarize_experiment.py",
+        "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-plan-diagnostic-v8.json",
+        "sha256": "fa2634bb8ac217b7f81e9045482bf3ca86e450c2c35579bd50fbecabd7fbf52c",
+        "equal": true
+      },
+      {
+        "path": "experiments/028-fork-package.json.gz.b64",
+        "sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+        "sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+        "equal": true
+      }
+    ],
+    "all_frozen_source_hashes_match": true,
+    "frozen_count": 19,
+    "native_python_payloads": 15,
+    "native_python_exact_source_and_compiled": true,
+    "embedded_HASHES_JSON_exact_manifest": true,
+    "embedded_config_validates": true,
+    "archive_exact_all_manifest_inputs_and_metadata": true
+  },
+  "forks": {
+    "lossless_combined_payload_exact_v7": true,
+    "decoded_exact_original_028_and_su15_fork_objects": true,
+    "fork_count": 2
+  },
+  "attribution": {
+    "unchanged_infrastructure_byte_exact_v7": [
+      "executable_plan_forks.py",
+      "object_evidence.py",
+      "program_repair.py",
+      "run_arm.py",
+      "session_runner.py",
+      "program_state.py",
+      "transient_history.py",
+      "input_paths.py",
+      "goal_evidence.py"
+    ],
+    "all_post_harness_notebook_cells_byte_exact_v7": true,
+    "unchanged_config_fields": [
+      "arm_order",
+      "games",
+      "reference_arm",
+      "arm_environment",
+      "active_streams",
+      "n_passes_per_arm",
+      "warmup_action_games",
+      "requested_arm_seconds",
+      "continuation_seconds",
+      "max_continuation_actions",
+      "hard_limit_seconds",
+      "startup_limit_seconds",
+      "strict_arm_budget",
+      "require_cache_flush",
+      "require_cache_flush_log",
+      "require_complete_pool",
+      "require_drained_workers",
+      "require_rtx_pro6000",
+      "candidate_delivery",
+      "hypothesis_context",
+      "runtime_source_sha256",
+      "cache_flush_wait_seconds",
+      "object_evidence"
+    ],
+    "same_private_target_metadata_as_v7": true,
+    "actual_runtime_source_hashes_match": true,
+    "native_main_loop_source_unchanged": true,
+    "intervention": "Remove formatting-dependent line gate; allow statically bounded immutable literal helper defaults; aggregate static extraction diagnostics into the unchanged single shared zero-action/mismatch follow-up. No new facts/trigger/model/main-loop/representation/budget."
+  },
+  "actual_v7_request_context_reconstruction": [
+    {
+      "game": "ft09-0d8bbf25",
+      "level": 3,
+      "step": 27,
+      "initial_all_public_facts_exact_v7": true,
+      "initial_existing_code_hypotheses_exact_v7": true,
+      "feedback_current_facts_unchanged_except_trigger": true,
+      "complete_failed_source_once": true,
+      "feedback_only_omits_old_natural_language_text_keeps_hashes": true,
+      "full_supplied_structured_diagnostics_preserved": true,
+      "failed_source_utf8_bytes": 6635,
+      "feedback_message_characters": 24758
+    },
+    {
+      "game": "su15-1944f8ab",
+      "level": 5,
+      "step": 86,
+      "initial_all_public_facts_exact_v7": true,
+      "initial_existing_code_hypotheses_exact_v7": true,
+      "feedback_current_facts_unchanged_except_trigger": true,
+      "complete_failed_source_once": true,
+      "feedback_only_omits_old_natural_language_text_keeps_hashes": true,
+      "full_supplied_structured_diagnostics_preserved": true,
+      "failed_source_utf8_bytes": 8496,
+      "feedback_message_characters": 32836
+    }
+  ],
+  "per_case_budget_and_request_audit": {
+    "max_scripted_requests": 2,
+    "all_non_exhaustion_case_elapsed_sums_match": true,
+    "checks": [
+      {
+        "case": "ordinary_batch_bootstrap",
+        "branch_count": 1,
+        "elapsed_sum": 2.129981750040315,
+        "recorded_extra_seconds": 2.129981750040315,
+        "no_double_charge": true
+      },
+      {
+        "case": "single_helpers_pause_second",
+        "branch_count": 1,
+        "elapsed_sum": 1.3648046249290928,
+        "recorded_extra_seconds": 1.3648046249290928,
+        "no_double_charge": true
+      },
+      {
+        "case": "mismatch_repairs_then_acts",
+        "branch_count": 2,
+        "elapsed_sum": 3.5291391250211746,
+        "recorded_extra_seconds": 3.5291391250211746,
+        "no_double_charge": true
+      },
+      {
+        "case": "unknown_stops_suffix",
+        "branch_count": 1,
+        "elapsed_sum": 1.6655842500040308,
+        "recorded_extra_seconds": 1.6655842500040308,
+        "no_double_charge": true
+      },
+      {
+        "case": "zero_action_validation",
+        "branch_count": 1,
+        "elapsed_sum": 0.30395637499168515,
+        "recorded_extra_seconds": 0.30395637499168515,
+        "no_double_charge": true
+      },
+      {
+        "case": "invalid_evidence_rolls_back_functions",
+        "branch_count": 2,
+        "elapsed_sum": 0.37389170902315527,
+        "recorded_extra_seconds": 0.37389170902315527,
+        "no_double_charge": true
+      },
+      {
+        "case": "level_boundary_stops_plan",
+        "branch_count": 1,
+        "elapsed_sum": 0.912523083970882,
+        "recorded_extra_seconds": 0.912523083970882,
+        "no_double_charge": true
+      },
+      {
+        "case": "validation_preserves_repeat_guard",
+        "branch_count": 0,
+        "elapsed_sum": 0,
+        "recorded_extra_seconds": 0.0,
+        "no_double_charge": true
+      },
+      {
+        "case": "initial_prediction_rejected_rolls_back",
+        "branch_count": 2,
+        "elapsed_sum": 0.6262738750083372,
+        "recorded_extra_seconds": 0.6262738750083372,
+        "no_double_charge": true
+      },
+      {
+        "case": "completed_local_goal_no_action",
+        "branch_count": 1,
+        "elapsed_sum": 0.16185783396940678,
+        "recorded_extra_seconds": 0.16185783396940678,
+        "no_double_charge": true
+      },
+      {
+        "case": "abstain_no_action",
+        "branch_count": 1,
+        "elapsed_sum": 0.27216475002933294,
+        "recorded_extra_seconds": 0.27216475002933294,
+        "no_double_charge": true
+      },
+      {
+        "case": "short_contract_total_action_limit",
+        "branch_count": 1,
+        "elapsed_sum": 1.7449165830621496,
+        "recorded_extra_seconds": 1.7449165830621496,
+        "no_double_charge": true
+      },
+      {
+        "case": "ordinary_action_after_contract",
+        "branch_count": 1,
+        "elapsed_sum": 1.5582222500815988,
+        "recorded_extra_seconds": 1.5582222500815988,
+        "no_double_charge": true
+      },
+      {
+        "case": "recomputation_failure_keeps_action_accounting",
+        "branch_count": 1,
+        "elapsed_sum": 0.9466799999354407,
+        "recorded_extra_seconds": 0.9466799999354407,
+        "no_double_charge": true
+      },
+      {
+        "case": "top_level_constant_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 1.7455646670423448,
+        "recorded_extra_seconds": 1.7455646670423448,
+        "no_double_charge": true
+      },
+      {
+        "case": "oversized_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 1.732825167127885,
+        "recorded_extra_seconds": 1.732825167127885,
+        "no_double_charge": true
+      },
+      {
+        "case": "over_120_lines_runs_without_format_gate",
+        "branch_count": 1,
+        "elapsed_sum": 1.5886075829621404,
+        "recorded_extra_seconds": 1.5886075829621404,
+        "no_double_charge": true
+      },
+      {
+        "case": "literal_helper_default_runs_in_native_child",
+        "branch_count": 1,
+        "elapsed_sum": 1.926405958016403,
+        "recorded_extra_seconds": 1.926405958016403,
+        "no_double_charge": true
+      },
+      {
+        "case": "computed_default_feedback_delivers_program",
+        "branch_count": 2,
+        "elapsed_sum": 1.5583917918847874,
+        "recorded_extra_seconds": 1.5583917918847874,
+        "no_double_charge": true
+      },
+      {
+        "case": "mutable_default_feedback_delivers_program",
+        "branch_count": 2,
+        "elapsed_sum": 1.6155180418863893,
+        "recorded_extra_seconds": 1.6155180418863893,
+        "no_double_charge": true
+      },
+      {
+        "case": "multiple_static_errors_share_single_feedback",
+        "branch_count": 2,
+        "elapsed_sum": 1.5566793339094147,
+        "recorded_extra_seconds": 1.5566793339094147,
+        "no_double_charge": true
+      },
+      {
+        "case": "syntax_invalid_feedback_preserves_failed_source",
+        "branch_count": 2,
+        "elapsed_sum": 1.558004750055261,
+        "recorded_extra_seconds": 1.558004750055261,
+        "no_double_charge": true
+      },
+      {
+        "case": "plan_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 2.0085815839702263,
+        "recorded_extra_seconds": 2.0085815839702263,
+        "no_double_charge": true
+      },
+      {
+        "case": "prediction_type_error_feedback_delivers_short_program",
+        "branch_count": 2,
+        "elapsed_sum": 1.81441083305981,
+        "recorded_extra_seconds": 1.81441083305981,
+        "no_double_charge": true
+      },
+      {
+        "case": "second_invalid_stops_and_restores_state",
+        "branch_count": 2,
+        "elapsed_sum": 0.32282929203938693,
+        "recorded_extra_seconds": 0.32282929203938693,
+        "no_double_charge": true
+      },
+      {
+        "case": "zero_action_fix_shares_mismatch_repair_quota",
+        "branch_count": 2,
+        "elapsed_sum": 0.900958291022107,
+        "recorded_extra_seconds": 0.900958291022107,
+        "no_double_charge": true
+      },
+      {
+        "case": "mismatch_repair_validation_failure_does_not_retry",
+        "branch_count": 2,
+        "elapsed_sum": 1.3973952080123127,
+        "recorded_extra_seconds": 1.3973952080123127,
+        "no_double_charge": true
+      },
+      {
+        "case": "native_transport_failure_is_not_program_feedback",
+        "branch_count": 1,
+        "elapsed_sum": 0.012971332995221019,
+        "recorded_extra_seconds": 0.012971332995221019,
+        "no_double_charge": true
+      },
+      {
+        "case": "declared_unknown_does_not_request_code_repair",
+        "branch_count": 1,
+        "elapsed_sum": 0.35507166699972004,
+        "recorded_extra_seconds": 0.35507166699972004,
+        "no_double_charge": true
+      }
+    ]
+  },
+  "verification_evidence": {
+    "native_cpu_report": "experiments/034-v8-cpu-check/report.json",
+    "source_hashes_current": true,
+    "scenarios": 30,
+    "native_sandbox_calls": 249,
+    "scripted_completion_calls": 43,
+    "contract_report": "experiments/034-v8-preparation/contract-review.json",
+    "contract_cases": 10,
+    "separate_cpu_review": "experiments/034-v8-cpu-check/independent-review.json",
+    "independent_pure_contract_checks": 7
+  },
+  "manual_control_flow_review": {
+    "zero_action_eligibility": "Requires zero real actions plus level/step/grid hash unchanged; validation side-effect attempts refused even when runtime observation stayed equal. Only extract/plan/initial-prediction artifact failures eligible.",
+    "source_and_original_error": "Full prior source is in previous_program only; raw invalid submission retained only when no source decoded. Native error payload included without truncation by the adapter; native runtime error may already sanitize internals.",
+    "rollback": "evaluate restores kept functions on failure, action result, step summary, timeout, repeat-guard same object/contents and TLS; run_branch restores kept functions on rejection and main history/TLS before its only recursive follow-up.",
+    "one_shared_quota": "repair_used is set when repair branch enters; both real-action mismatch and zero-action validation use same state.pending kind=repair. No third generation permitted.",
+    "budget_accounting": "Each branch finally accounts its own elapsed time before recursively invoking the next branch; second deadline uses remaining120s minus first elapsed. No parent timer includes follow-up.450s game/600s arm/7200s session unchanged."
+  },
+  "observability_and_encoding": {
+    "event_metadata": "Accepted and rejected submissions log actual nonempty line count, UTF-8 byte count and source hash when encodable; complete response/error remain available.",
+    "event_json_encoding": "JSONL uses ensure_ascii=True so malformed UTF-8 source cannot hide the original rejection; JSON-decoded data are unchanged.",
+    "feedback_json_encoding": "Only validation-feedback packages use ensure_ascii=True to preserve complete raw failed source, including unpaired-surrogate boundary cases, as escaped JSON. Initial packages retain previous encoding and decoded public facts.",
+    "contract_diagnostics": "Structured extraction errors copied in full into event and eligible retry; max16 explicit retained items plus total/truncated counts, global capability-rejection flag survives truncation. Failure source is preserved once. Default strict extraction policy retains legacy acceptance; the v8 adapter explicitly opts into literal helper defaults."
+  },
+  "resolved_review_findings": [
+    "Native infrastructure/startup/protocol failures are excluded using frozen candidate-traceback attribution or explicit completed returncode; they do not spend a code-repair generation.",
+    "Declared unknown prediction remains a stop condition and does not spend code-repair quota.",
+    "Capability rejection flag survives diagnostic truncation; adapter rejects automatic code-repair even if unsafe item is not in the retained first16 errors.",
+    "Malformed UTF-8 source no longer raises inside feedback hashing or event serialization and cannot mask the original rejection."
+  ],
+  "limitations": [
+    "CPU uses scripted responses/synthetic public observations, and cannot establish real model delivery, task relevance, physics/goal correctness or ARC score.",
+    "Exact served-token fit is checked live at the unchanged16384 cap; local text length is not a token count.",
+    "Two existing forced checkpoints do not establish natural trigger coverage or full-pool gain."
+  ],
+  "findings": [],
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v8_preflight.py",
+    "sha256": "d222362a9c1ed71aba8c584c7bc8b9a03cc12a5e5cf6fc881984bc5b6511b2e7"
+  },
+  "context_function_audit": {
+    "all_context_functions_except_delivery_tool_schema_ast_identical_v7": true,
+    "functions": [
+      "recent_model_hypotheses",
+      "_hash",
+      "_frame_id",
+      "recent_transition_facts",
+      "_global_references",
+      "_bound_names",
+      "related_function_sources",
+      "prepare_compact_context"
+    ]
+  },
+  "adapter_function_audit": {
+    "unchanged_method_count": 15,
+    "changed_methods": [
+      "queue_validation_feedback",
+      "run_branch",
+      "snapshot"
+    ],
+    "changes_reviewed": "queue_validation_feedback copies full structured diagnostics and consults global refusal flag; run_branch explicitly opts into safe literal defaults and records the structured exception; snapshot revision identifier only. Trigger/actions/native zero-action evaluation/recompute hooks and all other methods are AST-identical to v7."
+  },
+  "target_metadata": {
+    "id": "zhuating/arc3-034-plan-diagnostic",
+    "is_private": true,
+    "enable_internet": false,
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ],
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "kernel_sources": []
+  }
+}

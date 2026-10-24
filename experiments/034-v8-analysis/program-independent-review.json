@@ -1,0 +1,359 @@
+{
+  "reviewer": "/root/v8_result_program",
+  "scope": "Independent read-only review of actual frozen v8 auxiliary requests, source artifacts and event traces. Only saved-frame diagnostics execute unmodified accepted source locally with a read-only FrameView stand-in; no native replay, real game/actions, network, model or GPU. Core solver unchanged.",
+  "counts": {
+    "auxiliary_requests": 4,
+    "complete_code_artifacts": 4,
+    "definition_extraction_accepted": 4,
+    "programs_over_previous120line_gate": 4,
+    "artifact_byte_limit_violations": 0,
+    "zero_action_feedback_requests": 2,
+    "native_plan_evaluations": 4,
+    "plan_validated": 0,
+    "initial_predictions_evaluated_online": 0,
+    "host_actions": 0,
+    "checked_actions": 0,
+    "matches": 0,
+    "mismatches": 0,
+    "real_counterexample_repairs": 0,
+    "direct_program_levels": 0,
+    "object_evidence_referenced_by_returned_source": 0
+  },
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/034-plan-diagnostic-v8/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "aee338f0757bfe815db4386d3a510ce454519f49267af66a9a2da7fa7abdfa7a",
+      "online": {
+        "auxiliary_requests": 2,
+        "definition_extraction_accepted": 2,
+        "native_plan_evaluations": 2,
+        "plan_validated": 0,
+        "initial_prediction_evaluated": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "accounting": {
+        "nonoverlapping_program_recomputed_elapsed_sum": 31.99723118999964,
+        "final_cumulative_extra_seconds_used": 31.99723118999964,
+        "no_double_count": true,
+        "each_artifact_actual_actions_zero": true,
+        "shared_repair_requests": 1,
+        "no_third_request": true,
+        "last_failure_repair_reason": "shared_repair_quota_exhausted",
+        "no_host_execution_event": true
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "source_file": "experiments/034-v8-analysis/extracted-programs/ft09-0d8bbf25-1.py",
+          "source_sha256": "6f77861c806911b84691f1af93155c262ed8a7357344a13e57a57d79e76ef49f",
+          "bytes": 5422,
+          "nonempty_lines": 130,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "literal_defaults": [],
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 18.582613507999895,
+          "request": {
+            "input_tokens": 12998,
+            "usage": {
+              "prompt_tokens": 12998,
+              "total_tokens": 14683,
+              "completion_tokens": 1685,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_actual_plan_status": "abstain",
+          "offline_actual_plan_actions": [],
+          "offline_online_error_reproduced": true
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "source_file": "experiments/034-v8-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+          "source_sha256": "054f494bc77b5c28bf6f27b1cf99bf342763706d525c04db095680141eacc650",
+          "bytes": 6844,
+          "nonempty_lines": 162,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "literal_defaults": [],
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 13.414617681999744,
+          "request": {
+            "input_tokens": 11318,
+            "usage": {
+              "prompt_tokens": 11318,
+              "total_tokens": 13454,
+              "completion_tokens": 2136,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_actual_plan_status": "abstain",
+          "offline_actual_plan_actions": [],
+          "offline_online_error_reproduced": true,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_equal": true,
+            "failed_source_exact_value_copies_in_request_package": 1,
+            "previous_source_hash_matches": true,
+            "actual_error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "feedback_actual_actions_zero": true,
+            "current_observation_exact_initial": true,
+            "same_recent_transitions": true,
+            "same_object_evidence": true,
+            "same_paused_code": true,
+            "same_related_functions": true,
+            "old_natural_language_omitted_explicitly": true,
+            "prior_source_hashes_equal_initial": true
+          }
+        }
+      ]
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_file": "runs/034-plan-diagnostic-v8/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "2cb4152e6beedf4acfba2cb752d4d5ec1d586a836a057ec5cd6acfa2a3aa8ef0",
+      "online": {
+        "auxiliary_requests": 2,
+        "definition_extraction_accepted": 2,
+        "native_plan_evaluations": 2,
+        "plan_validated": 0,
+        "initial_prediction_evaluated": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "accounting": {
+        "nonoverlapping_program_recomputed_elapsed_sum": 39.50630926099984,
+        "final_cumulative_extra_seconds_used": 39.50630926099984,
+        "no_double_count": true,
+        "each_artifact_actual_actions_zero": true,
+        "shared_repair_requests": 1,
+        "no_third_request": true,
+        "last_failure_repair_reason": "shared_repair_quota_exhausted",
+        "no_host_execution_event": true
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "source_file": "experiments/034-v8-analysis/extracted-programs/su15-1944f8ab-1.py",
+          "source_sha256": "14cd2af6d11845ec4a06828f0bdd9c4432e18452ce1f1a7617581f55427486dd",
+          "bytes": 5891,
+          "nonempty_lines": 145,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "literal_defaults": [
+            {
+              "function": "_route",
+              "line": 65,
+              "source": "60000"
+            }
+          ],
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['Duplicate pixel coordinate']",
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 20.73827778399982,
+          "request": {
+            "input_tokens": 11877,
+            "usage": {
+              "prompt_tokens": 11877,
+              "total_tokens": 13702,
+              "completion_tokens": 1825,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_actual_plan_status": "ready",
+          "offline_actual_plan_actions": [
+            {
+              "action": "MOUSE",
+              "row": 61,
+              "col": 30
+            }
+          ],
+          "offline_online_error_reproduced": true
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "source_file": "experiments/034-v8-analysis/extracted-programs/su15-1944f8ab-2.py",
+          "source_sha256": "2c59b44a8729dab895197c96c3e3184d0721ef0260fccc36c3e04a859c5bb0ad",
+          "bytes": 8025,
+          "nonempty_lines": 209,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "literal_defaults": [
+            {
+              "function": "_pieces",
+              "line": 63,
+              "source": "10"
+            },
+            {
+              "function": "_pieces",
+              "line": 63,
+              "source": "62"
+            }
+          ],
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['Pixel projection must be a bounded nonempty list']",
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 18.768031477000022,
+          "request": {
+            "input_tokens": 11759,
+            "usage": {
+              "prompt_tokens": 11759,
+              "total_tokens": 14162,
+              "completion_tokens": 2403,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_equals_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tool_choice": {
+              "type": "function",
+              "function": {
+                "name": "submit_program"
+              }
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_actual_plan_status": "abstain",
+          "offline_actual_plan_actions": [],
+          "offline_online_error_reproduced": true,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_equal": true,
+            "failed_source_exact_value_copies_in_request_package": 1,
+            "previous_source_hash_matches": true,
+            "actual_error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "feedback_actual_actions_zero": true,
+            "current_observation_exact_initial": true,
+            "same_recent_transitions": true,
+            "same_object_evidence": true,
+            "same_paused_code": true,
+            "same_related_functions": true,
+            "old_natural_language_omitted_explicitly": true,
+            "prior_source_hashes_equal_initial": true
+          }
+        }
+      ]
+    }
+  ],
+  "conclusion": "v8 fixes the source-delivery gate for these four artifacts: all complete sources are accepted, including safe literal helper defaults, with no line-count rejection. It does not establish a usable program branch: all four native plan validations reject and no prediction or action executes. Zero-action feedback faithfully delivers the actual first plan-validation error and full source once, but neither follow-up yields an accepted plan. ft09 actually abstains after caught string-index errors, and su15 follow-up abstains after selecting background as its target and finding no candidate. Relaxing metadata/evidence gates would not turn these abstentions into useful actions.",
+  "failure_analysis": {
+    "ft09": "Both unmodified programs treat frame.ascii (native str) as a two-dimensional row container. First _legend line25 and second _cell_layout line5 raise IndexError, caught by plan_program; returned status=abstain/actions=[]/replaces=[]/evidence_pixels=[]. Online reports the first schema error about empty replaces and does not expose the handled root cause. The feedback revision retains the same API mistake.",
+    "su15_first": "This source parses ASCII correctly and returns ready MOUSE(61,30), but _target reads uppercase B background runs as a pocket and chooses (62,31), contradicting its own prose about lowercase b rows11–19. Evidence has13 records,2 duplicate coordinates,6 wrong S claims. Duplicate is actual first online error. An unreached offline predictor also fails exact declared projection coverage.",
+    "su15_retry": "The duplicate-evidence feedback leads to a new piece search with safe literal defaults, but target remains background(62,31); no component anchor is knight-connected under its pixel-distance rule. Actual return is abstain/actions=[]/evidence=[]/replaces=[route]. Nonempty-evidence rejection does not mean a useful ready plan was withheld.",
+    "representation": "All four artifacts ignore the already supplied frame.object_evidence helper. ft09 uses assumed board constants and su15 synthesizes its own background run/anchor representation. No real action exists to verify selected roles, object-footprint completeness, dynamics or target correctness."
+  },
+  "feedback_assessment": {
+    "delivery_integrity": "Both retries receive the actual host first error, actual before=after identity, complete failed source exactly once in the compact request package, same live facts and dependency code; old prose omitted explicitly with hashes retained.",
+    "static_aggregate_online": "No static source rejection occurs, so aggregate static diagnostics have no online error case in v8. This run validates acceptance of these sources, not effectiveness of aggregate diagnostics.",
+    "runtime_gap": "Plan output is not retained in program_recomputed, and validate_plan remains fail-first. A user-level catch that converts a real API exception into abstain prevents native traceback attribution; the current feedback therefore shows schema symptoms, not the hidden error or full returned plan.",
+    "repair_quota": "Exactly first+one shared follow-up per game; second failures report shared_repair_quota_exhausted. No real-mismatch repair call or third request exists.",
+    "time_accounting": "Use the sum of each distinct program_recomputed elapsed_seconds or final cumulative extra_seconds_used per game, not both. ft09 31.99723118999964 seconds; su15 39.50630926099984 seconds; sum across concurrent games71.50354045099948 seconds is not additional wall duration."
+  },
+  "recommendation": "Do not expand v8 to full25 or submit it. Next primary issue is runtime/API-grounded plan quality, not another permissive acceptance change: provide a compact explicit typed frame example (ASCII string -> splitlines), retain actual plan output in diagnostics, distinguish legitimate abstention from malformed ready plans, and require a real relevant action/prediction before considering score evidence. Reuse current real frames for focused diagnostics before spending another GPU run; do not infer that these interface repairs guarantee a score improvement.",
+  "offline_evidence": "experiments/034-v8-analysis/generated-code-offline-review.json",
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v8_program_audit.py",
+    "sha256": "51314394c4e1549050bdcae71c57a4701828912d94727de0be9027722313124d"
+  }
+}

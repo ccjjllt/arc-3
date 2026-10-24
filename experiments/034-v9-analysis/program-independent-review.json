@@ -1,0 +1,1270 @@
+{
+  "reviewer": "/root/v9_result_program",
+  "scope": "Independent review of frozen v9 actual source, requests, native returned plans, validation diagnostics and event traces. CPU saved-frame reproduction described separately is not online mechanism success.",
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/034-plan-diagnostic-v9/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "3a93082a1223817d29846633517ddb944499d69982bbd5ed19924da522b0f334",
+      "online": {
+        "requests": 2,
+        "definition_extractions": 2,
+        "plan_validations": 2,
+        "plans_passed": 0,
+        "initial_predictions": 0,
+        "prediction_passed": 0,
+        "host_execution_events": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "accounting": {
+        "nonoverlapping_elapsed_sum": 34.284577375000026,
+        "final_cumulative_extra_seconds": 34.284577375000026,
+        "single_count_matches": true,
+        "all_program_events_zero_actions": true,
+        "repair_requests": 1,
+        "no_third_request": true
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "source_file": "experiments/034-v9-analysis/extracted-programs/ft09-0d8bbf25-1.py",
+          "source_sha256": "584422444d3ab8f73b27206a20b0aec3fa5bc5a77c337ff141f8e938ba305485",
+          "bytes": 8529,
+          "nonempty_lines": 223,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "actual_error": "ValueError: plan rejected: ['replaces must name current program bindings or be empty for abstain']",
+          "returned_plan": {
+            "actions": [],
+            "evidence_pixels": [
+              [
+                4,
+                20,
+                "R"
+              ],
+              [
+                4,
+                28,
+                "O"
+              ],
+              [
+                4,
+                36,
+                "O"
+              ],
+              [
+                12,
+                20,
+                "O"
+              ],
+              [
+                12,
+                36,
+                "R"
+              ],
+              [
+                20,
+                12,
+                "O"
+              ],
+              [
+                20,
+                20,
+                "R"
+              ],
+              [
+                20,
+                28,
+                "O"
+              ],
+              [
+                20,
+                36,
+                "R"
+              ],
+              [
+                20,
+                44,
+                "R"
+              ],
+              [
+                28,
+                12,
+                "O"
+              ],
+              [
+                28,
+                28,
+                "R"
+              ],
+              [
+                28,
+                44,
+                "O"
+              ],
+              [
+                36,
+                12,
+                "R"
+              ],
+              [
+                36,
+                20,
+                "R"
+              ],
+              [
+                36,
+                28,
+                "O"
+              ],
+              [
+                36,
+                36,
+                "R"
+              ],
+              [
+                36,
+                44,
+                "O"
+              ],
+              [
+                44,
+                20,
+                "O"
+              ],
+              [
+                44,
+                36,
+                "O"
+              ],
+              [
+                52,
+                20,
+                "O"
+              ],
+              [
+                52,
+                28,
+                "O"
+              ],
+              [
+                52,
+                36,
+                "O"
+              ],
+              [
+                3,
+                3,
+                "c"
+              ],
+              [
+                3,
+                11,
+                "c"
+              ],
+              [
+                3,
+                14,
+                "c"
+              ],
+              [
+                3,
+                20,
+                "c"
+              ],
+              [
+                3,
+                28,
+                "c"
+              ],
+              [
+                3,
+                43,
+                "c"
+              ],
+              [
+                3,
+                51,
+                "c"
+              ],
+              [
+                3,
+                54,
+                "c"
+              ],
+              [
+                11,
+                3,
+                "c"
+              ],
+              [
+                11,
+                11,
+                "c"
+              ],
+              [
+                11,
+                14,
+                "c"
+              ],
+              [
+                11,
+                20,
+                "c"
+              ],
+              [
+                11,
+                43,
+                "c"
+              ],
+              [
+                11,
+                51,
+                "c"
+              ],
+              [
+                11,
+                57,
+                "c"
+              ],
+              [
+                19,
+                3,
+                "c"
+              ],
+              [
+                19,
+                6,
+                "c"
+              ],
+              [
+                19,
+                12,
+                "c"
+              ],
+              [
+                19,
+                20,
+                "c"
+              ],
+              [
+                19,
+                28,
+                "c"
+              ],
+              [
+                19,
+                36,
+                "c"
+              ],
+              [
+                19,
+                51,
+                "c"
+              ],
+              [
+                19,
+                57,
+                "c"
+              ],
+              [
+                27,
+                3,
+                "c"
+              ],
+              [
+                27,
+                6,
+                "c"
+              ],
+              [
+                27,
+                12,
+                "c"
+              ],
+              [
+                27,
+                28,
+                "c"
+              ],
+              [
+                27,
+                51,
+                "c"
+              ],
+              [
+                27,
+                57,
+                "c"
+              ],
+              [
+                35,
+                3,
+                "c"
+              ],
+              [
+                35,
+                6,
+                "c"
+              ],
+              [
+                35,
+                12,
+                "c"
+              ],
+              [
+                35,
+                20,
+                "c"
+              ],
+              [
+                35,
+                28,
+                "c"
+              ],
+              [
+                35,
+                36,
+                "c"
+              ],
+              [
+                35,
+                51,
+                "c"
+              ],
+              [
+                35,
+                57,
+                "c"
+              ],
+              [
+                43,
+                3,
+                "c"
+              ],
+              [
+                43,
+                11,
+                "c"
+              ],
+              [
+                43,
+                14,
+                "c"
+              ],
+              [
+                43,
+                20,
+                "c"
+              ],
+              [
+                43,
+                43,
+                "c"
+              ],
+              [
+                43,
+                51,
+                "c"
+              ],
+              [
+                43,
+                57,
+                "c"
+              ],
+              [
+                51,
+                3,
+                "c"
+              ],
+              [
+                51,
+                11,
+                "c"
+              ],
+              [
+                51,
+                14,
+                "c"
+              ],
+              [
+                51,
+                20,
+                "c"
+              ],
+              [
+                51,
+                28,
+                "c"
+              ],
+              [
+                51,
+                43,
+                "c"
+              ],
+              [
+                51,
+                51,
+                "c"
+              ],
+              [
+                51,
+                57,
+                "c"
+              ],
+              [
+                57,
+                3,
+                "c"
+              ],
+              [
+                57,
+                11,
+                "c"
+              ],
+              [
+                57,
+                14,
+                "c"
+              ],
+              [
+                57,
+                43,
+                "c"
+              ],
+              [
+                57,
+                51,
+                "c"
+              ],
+              [
+                57,
+                57,
+                "c"
+              ]
+            ],
+            "goal": "every cell matches the pattern legend that covers it",
+            "reason": "no cell currently disagrees with the legend reading tested; local target satisfied",
+            "replaces": [
+              "frame_diff",
+              "current_frame.segmentation"
+            ],
+            "status": "completed"
+          },
+          "plan_diagnostics": {
+            "errors": [
+              {
+                "code": "plan_replaces",
+                "field": "replaces",
+                "message": "replaces must name current program bindings or be empty for abstain"
+              }
+            ],
+            "total_errors": 1,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_validated": false,
+          "prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 22.921131264999985,
+          "request": {
+            "input_tokens": 13241,
+            "usage": {
+              "prompt_tokens": 13241,
+              "total_tokens": 15823,
+              "completion_tokens": 2582,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_matches_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_returned_plan_exactly_reproduced": true
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "source_file": "experiments/034-v9-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+          "source_sha256": "43d19d4614ad2a7450417d114a128cb08fcc77bcb4a4519bc819a04280aad5f8",
+          "bytes": 5650,
+          "nonempty_lines": 134,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "actual_status": "rejected",
+          "stage": "plan_validation",
+          "actual_error": "ValueError: plan rejected: ['Unknown replaced binding']",
+          "returned_plan": {
+            "actions": [
+              {
+                "action": "MOUSE",
+                "col": 23,
+                "row": 47
+              }
+            ],
+            "evidence_pixels": [
+              [
+                4,
+                20,
+                "R"
+              ],
+              [
+                4,
+                28,
+                "O"
+              ],
+              [
+                4,
+                36,
+                "O"
+              ],
+              [
+                12,
+                20,
+                "O"
+              ],
+              [
+                12,
+                36,
+                "R"
+              ],
+              [
+                20,
+                12,
+                "O"
+              ],
+              [
+                20,
+                20,
+                "R"
+              ],
+              [
+                20,
+                28,
+                "O"
+              ],
+              [
+                20,
+                36,
+                "R"
+              ],
+              [
+                20,
+                44,
+                "R"
+              ],
+              [
+                28,
+                12,
+                "O"
+              ],
+              [
+                28,
+                28,
+                "R"
+              ],
+              [
+                28,
+                44,
+                "O"
+              ],
+              [
+                36,
+                12,
+                "R"
+              ],
+              [
+                36,
+                20,
+                "R"
+              ],
+              [
+                36,
+                28,
+                "O"
+              ],
+              [
+                36,
+                36,
+                "R"
+              ],
+              [
+                36,
+                44,
+                "O"
+              ],
+              [
+                44,
+                20,
+                "O"
+              ],
+              [
+                44,
+                36,
+                "O"
+              ],
+              [
+                52,
+                20,
+                "O"
+              ],
+              [
+                52,
+                28,
+                "O"
+              ],
+              [
+                52,
+                36,
+                "O"
+              ],
+              [
+                0,
+                60,
+                "R"
+              ],
+              [
+                1,
+                60,
+                "R"
+              ],
+              [
+                2,
+                60,
+                "R"
+              ],
+              [
+                3,
+                60,
+                "R"
+              ],
+              [
+                4,
+                60,
+                "O"
+              ],
+              [
+                5,
+                60,
+                "O"
+              ],
+              [
+                6,
+                60,
+                "O"
+              ],
+              [
+                7,
+                60,
+                "O"
+              ],
+              [
+                63,
+                53,
+                "Y"
+              ],
+              [
+                63,
+                63,
+                "Y"
+              ]
+            ],
+            "goal": "paint the uniform 6x6 orange cell at top-left (44,20) red; lower band holds 5 uniform cells of which 5 are still orange; the two recorded MOUSE clicks each recoloured one whole uniform cell and advanced the row-63 counter by one",
+            "reason": "both recorded clicks landed inside a uniform 6x6 orange cell and turned that entire cell red while adding one yellow pixel to the row-63 counter, so repeat that effect on the next remaining orange cell",
+            "replaces": [
+              "_cells",
+              "_pick",
+              "_fp"
+            ],
+            "status": "ready"
+          },
+          "plan_diagnostics": {
+            "errors": [
+              {
+                "code": "plan_replaces_unknown",
+                "field": "replaces",
+                "message": "Unknown replaced binding",
+                "unknown_bindings": [
+                  "_cells",
+                  "_pick",
+                  "_fp"
+                ]
+              }
+            ],
+            "total_errors": 1,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_validated": false,
+          "prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 11.36344611000004,
+          "request": {
+            "input_tokens": 13331,
+            "usage": {
+              "prompt_tokens": 13331,
+              "total_tokens": 15011,
+              "completion_tokens": 1680,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_matches_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_returned_plan_exactly_reproduced": true,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_exact": true,
+            "complete_failed_source_value_copies": 1,
+            "source_hash_exact": true,
+            "actual_error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions": 0,
+            "returned_plan_exact": true,
+            "returned_plan_object_copies": 1,
+            "plan_diagnostics_exact": true,
+            "current_frame_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "old_natural_language_explicitly_omitted": true
+          }
+        }
+      ],
+      "recent_transition_summary": [
+        {
+          "action": "MOUSE(row=54, col=38)",
+          "before": {
+            "level": 3,
+            "step": 25,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "043205796e20c37b5421e2ea2ec873a9ad9e29d50b49984c981d28c3cb3d6d78"
+          },
+          "after": {
+            "level": 3,
+            "step": 26,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "6563f643eb5e9d3ae47f0d799bc6dc3c1e5e6cae1816a0f48768167307720d93"
+          },
+          "changed_pixel_colors": [
+            [
+              "O",
+              "Y"
+            ],
+            [
+              "R",
+              "O"
+            ]
+          ],
+          "changed_pixel_count": 37
+        },
+        {
+          "action": "MOUSE(row=6, col=22)",
+          "before": {
+            "level": 3,
+            "step": 26,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "6563f643eb5e9d3ae47f0d799bc6dc3c1e5e6cae1816a0f48768167307720d93"
+          },
+          "after": {
+            "level": 3,
+            "step": 27,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1"
+          },
+          "changed_pixel_colors": [
+            [
+              "O",
+              "R"
+            ],
+            [
+              "O",
+              "Y"
+            ]
+          ],
+          "changed_pixel_count": 37
+        }
+      ]
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_file": "runs/034-plan-diagnostic-v9/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "84d252228e994be5e87ba36a845104461745b68a80ce3207dcfdf054b9e09bf6",
+      "online": {
+        "requests": 2,
+        "definition_extractions": 2,
+        "plan_validations": 2,
+        "plans_passed": 2,
+        "initial_predictions": 1,
+        "prediction_passed": 0,
+        "host_execution_events": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_levels": 0
+      },
+      "accounting": {
+        "nonoverlapping_elapsed_sum": 40.840437105999854,
+        "final_cumulative_extra_seconds": 40.840437105999854,
+        "single_count_matches": true,
+        "all_program_events_zero_actions": true,
+        "repair_requests": 1,
+        "no_third_request": true
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "source_file": "experiments/034-v9-analysis/extracted-programs/su15-1944f8ab-1.py",
+          "source_sha256": "b603b1b9154a8bdd8950643f8a44504a880fcc158c309c40559773e842bd405d",
+          "bytes": 9130,
+          "nonempty_lines": 192,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "actual_status": "rejected",
+          "stage": "initial_prediction",
+          "actual_error": "ValueError: first prediction rejected: ['Expected pixels must cover exactly the declared object and target coordinates']",
+          "returned_plan": {
+            "actions": [
+              {
+                "action": "MOUSE",
+                "col": 28,
+                "row": 11
+              }
+            ],
+            "evidence_pixels": [
+              [
+                3,
+                30,
+                "Y"
+              ],
+              [
+                3,
+                31,
+                "Y"
+              ],
+              [
+                4,
+                30,
+                "Y"
+              ],
+              [
+                4,
+                31,
+                "Y"
+              ],
+              [
+                5,
+                30,
+                "Y"
+              ],
+              [
+                5,
+                31,
+                "Y"
+              ],
+              [
+                3,
+                32,
+                "Y"
+              ],
+              [
+                4,
+                32,
+                "Y"
+              ],
+              [
+                6,
+                30,
+                "Y"
+              ],
+              [
+                6,
+                31,
+                "Y"
+              ],
+              [
+                5,
+                32,
+                "Y"
+              ],
+              [
+                3,
+                33,
+                "Y"
+              ],
+              [
+                4,
+                33,
+                "Y"
+              ],
+              [
+                7,
+                30,
+                "c"
+              ],
+              [
+                7,
+                31,
+                "c"
+              ],
+              [
+                6,
+                32,
+                "Y"
+              ],
+              [
+                5,
+                33,
+                "Y"
+              ],
+              [
+                3,
+                34,
+                "c"
+              ],
+              [
+                4,
+                34,
+                "c"
+              ],
+              [
+                7,
+                32,
+                "c"
+              ],
+              [
+                6,
+                33,
+                "Y"
+              ],
+              [
+                5,
+                34,
+                "c"
+              ],
+              [
+                7,
+                33,
+                "c"
+              ],
+              [
+                6,
+                34,
+                "c"
+              ],
+              [
+                7,
+                34,
+                "c"
+              ],
+              [
+                60,
+                3,
+                "S"
+              ]
+            ],
+            "goal": "move the merged piece (component Y at (4, 31)) one <=8 step toward ball (60, 3)",
+            "reason": "merged piece exists; step it toward the ball and re-plan from the real frame",
+            "replaces": [
+              "route",
+              "click",
+              "state",
+              "invaders"
+            ],
+            "status": "ready"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_validated": true,
+          "prediction_validation": {
+            "passed": false,
+            "status": "unknown",
+            "errors": [
+              "Expected pixels must cover exactly the declared object and target coordinates"
+            ]
+          },
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "initial_prediction",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 25.46897534699997,
+          "request": {
+            "input_tokens": 12113,
+            "usage": {
+              "prompt_tokens": 12113,
+              "total_tokens": 14860,
+              "completion_tokens": 2747,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_matches_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_returned_plan_exactly_reproduced": true
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "source_file": "experiments/034-v9-analysis/extracted-programs/su15-1944f8ab-2.py",
+          "source_sha256": "7cd60c0496a7d485a1f6b2aeb7c43d369286ec38ad33c701d7540d4b40d790fd",
+          "bytes": 6021,
+          "nonempty_lines": 142,
+          "syntactically_complete": true,
+          "definition_extraction_accepted": true,
+          "actual_status": "abstained",
+          "stage": "local_status",
+          "actual_error": null,
+          "returned_plan": {
+            "actions": [],
+            "evidence_pixels": [],
+            "goal": "deliver the pink/purple piece onto the isolated S ball below row 10",
+            "reason": "could not recover both a play-area mover piece and an isolated S ball from this frame",
+            "replaces": [],
+            "status": "abstain"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_validated": true,
+          "prediction_validation": null,
+          "zero_action_feedback": null,
+          "elapsed_seconds": 15.371461758999885,
+          "request": {
+            "input_tokens": 13333,
+            "usage": {
+              "prompt_tokens": 13333,
+              "total_tokens": 15206,
+              "completion_tokens": 1873,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "tokenize_matches_usage": true,
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "thinking": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            }
+          },
+          "object_evidence_referenced": false,
+          "offline_returned_plan_exactly_reproduced": true,
+          "feedback_integrity": {
+            "trigger_kind": "repair",
+            "repair_reason": "zero_action_validation",
+            "complete_failed_source_exact": true,
+            "complete_failed_source_value_copies": 1,
+            "source_hash_exact": true,
+            "actual_error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions": 0,
+            "returned_plan_exact": true,
+            "returned_plan_object_copies": 1,
+            "plan_diagnostics_exact": true,
+            "current_frame_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "old_natural_language_explicitly_omitted": true
+          }
+        }
+      ],
+      "recent_transition_summary": [
+        {
+          "action": "MOUSE(row=48, col=6)",
+          "before": {
+            "level": 4,
+            "step": 84,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "4cac94033e513903017bf2d12afd648ace2105da731fb5414c7d6333385314b8"
+          },
+          "after": {
+            "level": 4,
+            "step": 85,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "798cdc32cb01ca261b9f7d7f0291724bf5384deca31c803b2f0dade00f8eda07"
+          },
+          "changed_pixel_colors": [
+            [
+              "B",
+              "P"
+            ],
+            [
+              "B",
+              "Y"
+            ],
+            [
+              "P",
+              "B"
+            ],
+            [
+              "W",
+              "B"
+            ],
+            [
+              "Y",
+              "B"
+            ]
+          ],
+          "changed_pixel_count": 49
+        },
+        {
+          "action": "MOUSE(row=55, col=6)",
+          "before": {
+            "level": 4,
+            "step": 85,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "798cdc32cb01ca261b9f7d7f0291724bf5384deca31c803b2f0dade00f8eda07"
+          },
+          "after": {
+            "level": 5,
+            "step": 86,
+            "shape": [
+              64,
+              64
+            ],
+            "grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174"
+          },
+          "changed_pixel_colors": [],
+          "changed_pixel_count": 0
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "auxiliary_requests": 4,
+    "complete_source_artifacts": 4,
+    "plan_validations": 4,
+    "plans_passed": 2,
+    "initial_predictions": 1,
+    "predictions_passed": 0,
+    "zero_action_feedback_requests": 2,
+    "host_actions": 0,
+    "checked_actions": 0,
+    "matches": 0,
+    "mismatches": 0,
+    "real_counterexample_repairs": 0,
+    "direct_program_levels": 0,
+    "legal_abstentions": 1,
+    "object_evidence_referenced_by_source": 0
+  },
+  "offline_evidence": "experiments/034-v9-analysis/generated-code-offline-review.json",
+  "conclusion": "Both games have zero host actions, triggering the predeclared stop. Source delivery and exact actual-plan feedback now function, but no useful predictor/action loop or real counterexample repair is established. Do not continue contract loosening, expand this candidate, or formally submit it.",
+  "failure_analysis": {
+    "ft09_initial": "_grid_cells only admits character c and returns cyan background patches, not the R/O task cells. _plan_cell can only choose cur==O, so its completed return is vacuous; offline scores are not satisfied. It also names invalid replacements frame_diff/current_frame.segmentation. This is not evidence the task was locally solved.",
+    "ft09_retry": "Ready plan selects a real orange 6x6 block at(44,20), but introduces its own new helper names _cells/_pick/_fp as replacements, not paused bindings. Its claim that both recent clicks were O->R conflicts with saved transitions: the first changed R->O. The unreached predictor omits all11 declared counter pixels and adds undeclared(63,52); relaxing replaces would still not yield an accepted prediction. No goal/rule revision was tested against a real action.",
+    "su15_initial": "Plan evidence is grounded but the selected Y component is at rows3..6/cols30..33 in the separated top band; its task role is unverified. The source treats this top-band component as the current merged mover without same-level transition support, and takes a step toward a lowest-S heuristic target. _footprint expands its16 pixels to25 by adding a 2x2 neighborhood; predicted new25 coordinates are wholly disjoint from the26 declared object+ball coordinates. The first prediction is correctly rejected. Component role and movement model are not supported by same-level transitions (latest transition is a level boundary).",
+    "su15_retry": "New row>=10 filter excludes all p/Y components, and plan legitimately abstains with no actions/evidence/bindings. This validates status-aware stopping, not movement, repaired rules or progress. Both plans ignore M/P play-area components and the supplied object_evidence catalogue."
+  },
+  "feedback_assessment": {
+    "integrity": "Each retry has the complete previous source exactly once, the exact actual returned_plan exactly once, matching aggregated plan diagnostics, unchanged current frame/recent transitions/object catalogue and paused dependencies. Old prose is explicitly omitted.",
+    "quota": "Exactly initial+one shared zero-action retry per game, no third request and no real-action counterexample. ft09 retry cannot request a third; su15 legal abstain ends normally.",
+    "time": "Sum distinct program_recomputed elapsed durations once per game. It exactly matches final cumulative extra_seconds_used in both games; do not add cumulative totals again. Concurrent-game sums are not additional wall time.",
+    "interpretation": "Aggregate plan diagnostics work, but each online rejected plan has only one diagnosed field. This run does not demonstrate multi-error plan recovery. Ordinary main-loop actions/levels are separate from zero-action program branch."
+  },
+  "stop_decision": {
+    "both_games_zero_host_actions": true,
+    "predeclared_stop_triggered": true,
+    "further_contract_tuning": false,
+    "expand_full25_this_candidate": false,
+    "formal_submission_this_candidate": false
+  },
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v9_program_audit.py",
+    "sha256": "4985d76f939aa5476ee812b4ea240d7871a677b7c57cd00a5fa7875ac77a53b6"
+  }
+}

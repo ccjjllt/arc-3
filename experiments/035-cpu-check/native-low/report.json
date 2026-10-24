@@ -1,0 +1,1429 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T10:49:06.494525+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_sandbox_calls": 44,
+  "injected_native_transport_faults": 0,
+  "auxiliary_reasoning_mode": "low",
+  "output_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/native-low",
+  "scenarios": [
+    {
+      "name": "mismatch_repairs_then_acts",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.6164087500656024,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "invalid_evidence_rolls_back_functions",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.11922045797109604,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "abstain_empty_evidence_and_bindings_does_not_use_repair",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.0895176250487566,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "ready_multiple_plan_errors_share_one_feedback_then_execute",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.370524083962664,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "zero_action_fix_shares_mismatch_repair_quota",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.210225792019628,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    }
+  ],
+  "limits": [
+    "Scripted completion responses and synthetic public frames; no ARC score.",
+    "The real frozen ToolAgent._run_python_tool and child sandbox are exercised.",
+    "One scenario injects a native transport error before child launch to verify it is not treated as a model-code error.",
+    "Synthetic token usage checks bookkeeping only; it is not inference cost.",
+    "The synthetic world reports 1000 seconds remaining; this does not verify real 450-second game deadlines."
+  ],
+  "contract_checks": [
+    {
+      "name": "immutable_helper_defaults",
+      "status": "passed",
+      "accepted": true
+    },
+    {
+      "name": "legacy_defaults_remain_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Definitions cannot have defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "entry_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "entry_signature",
+            "line": 8,
+            "message": "Required signature is plan_program(frame) with no defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "computed_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "mutable_default_remains_rejected",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "static_diagnostics_are_bounded",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 2,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 3,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 4,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 5,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 6,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 7,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 8,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 9,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 10,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 11,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 12,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 13,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 14,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 15,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 16,
+            "message": "Return only function definitions and allowed imports"
+          }
+        ],
+        "total_errors": 20,
+        "truncated_count": 4,
+        "has_side_effect_rejection": false
+      }
+    },
+    {
+      "name": "truncation_does_not_hide_side_effect_rejection",
+      "status": "passed",
+      "accepted": false,
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 2,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 3,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 4,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 5,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 6,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 7,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 8,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 9,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 10,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 11,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 12,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 13,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 14,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 15,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 16,
+            "message": "Return only function definitions and allowed imports"
+          }
+        ],
+        "total_errors": 21,
+        "truncated_count": 5,
+        "has_side_effect_rejection": true
+      }
+    },
+    {
+      "name": "status_aware_empty_abstain",
+      "status": "passed",
+      "accepted": true,
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [],
+          "evidence_pixels": [],
+          "goal": {
+            "observed_step": 0,
+            "start_col": 1,
+            "target_col": 3,
+            "transition_count": 0
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [],
+          "status": "abstain"
+        },
+        "plan_diagnostics": {
+          "errors": [],
+          "total_errors": 0,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        },
+        "plan_sha256": "d97e3a750dc6376543aba0397629460f1b9121f1affe57c1bfc9575f344a5b74",
+        "input_grid_sha256": "ebb8d0b5bf2576915c6551189a354aceb15d39cc896615fcea6b857c70bc2dcd",
+        "coverage": {
+          "evidence_pixels": 0,
+          "frame_pixels": 50,
+          "fraction": 0.0
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      }
+    },
+    {
+      "name": "legacy_empty_abstain_still_rejected",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "replaces must name current program bindings"
+        ]
+      }
+    },
+    {
+      "name": "abstain_actions_still_rejected",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "Completed or abstain plan must contain no actions"
+        ],
+        "plan_diagnostics": {
+          "errors": [
+            {
+              "code": "plan_action_count",
+              "field": "actions",
+              "message": "Completed or abstain plan must contain no actions"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        }
+      }
+    },
+    {
+      "name": "abstain_empty_reason_still_rejected",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "reason must be a bounded nonempty string"
+        ],
+        "plan_diagnostics": {
+          "errors": [
+            {
+              "code": "plan_reason",
+              "field": "reason",
+              "message": "reason must be a bounded nonempty string"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        }
+      }
+    },
+    {
+      "name": "completed_empty_evidence_still_rejected",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "Pixel projection must be a bounded list (empty only for abstain)"
+        ],
+        "plan_diagnostics": {
+          "errors": [
+            {
+              "code": "evidence_count",
+              "field": "evidence_pixels",
+              "message": "Pixel projection must be a bounded list (empty only for abstain)",
+              "pixel_count": 0,
+              "maximum": 50
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        }
+      }
+    },
+    {
+      "name": "ready_empty_replaces_still_rejected",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected",
+        "errors": [
+          "replaces must name current program bindings or be empty for abstain"
+        ],
+        "plan_diagnostics": {
+          "errors": [
+            {
+              "code": "plan_replaces",
+              "field": "replaces",
+              "message": "replaces must name current program bindings or be empty for abstain"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        }
+      }
+    },
+    {
+      "name": "ready_complete_plan_still_accepted",
+      "status": "passed",
+      "accepted": true,
+      "validation": {
+        "passed": true,
+        "status": "validated_current_evidence",
+        "errors": [],
+        "plan": {
+          "actions": [
+            {
+              "action": "RIGHT"
+            },
+            {
+              "action": "RIGHT"
+            }
+          ],
+          "evidence_pixels": [
+            [
+              2,
+              1,
+              "g"
+            ]
+          ],
+          "goal": {
+            "observed_step": 0,
+            "start_col": 1,
+            "target_col": 3,
+            "transition_count": 0
+          },
+          "reason": "Read the current marker and recompute its target and action count",
+          "replaces": [
+            "old_plan"
+          ],
+          "status": "ready"
+        },
+        "plan_diagnostics": {
+          "errors": [],
+          "total_errors": 0,
+          "truncated_count": 0,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [],
+          "total_duplicate_coordinates": 0,
+          "wrong_pixels": 0,
+          "differences": []
+        },
+        "plan_sha256": "4c60f695e19634f1253d70fe80550d3b31ec055a71777ba6fe06a645f8a4abf0",
+        "input_grid_sha256": "ebb8d0b5bf2576915c6551189a354aceb15d39cc896615fcea6b857c70bc2dcd",
+        "coverage": {
+          "evidence_pixels": 1,
+          "frame_pixels": 50,
+          "fraction": 0.02
+        },
+        "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+      }
+    },
+    {
+      "name": "plan_diagnostics_are_bounded_without_accepting_invalid_plan",
+      "status": "passed",
+      "accepted": false,
+      "validation": {
+        "passed": false,
+        "status": "rejected_evidence",
+        "errors": [
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate",
+          "Duplicate pixel coordinate"
+        ],
+        "plan_diagnostics": {
+          "errors": [
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[1]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 1
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[2]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 2
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[3]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 3
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[4]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 4
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[5]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 5
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[6]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 6
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[7]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 7
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[8]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 8
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[9]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 9
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[10]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 10
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[11]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 11
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[12]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 12
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[13]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 13
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[14]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 14
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[15]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 15
+            },
+            {
+              "code": "evidence_duplicate_coordinate",
+              "field": "evidence_pixels[16]",
+              "message": "Duplicate pixel coordinate",
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 16
+            }
+          ],
+          "total_errors": 21,
+          "truncated_count": 5,
+          "status_aware": true,
+          "aggregate_errors": true,
+          "duplicate_coordinates": [
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 1
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 2
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 3
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 4
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 5
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 6
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 7
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 8
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 9
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 10
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 11
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 12
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 13
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 14
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 15
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "first_index": 0,
+              "index": 16
+            }
+          ],
+          "total_duplicate_coordinates": 20,
+          "wrong_pixels": 21,
+          "differences": [
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 0
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 1
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 2
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 3
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 4
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 5
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 6
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 7
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 8
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 9
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 10
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 11
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 12
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 13
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 14
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "claimed": "W",
+              "observed": "g",
+              "index": 15
+            }
+          ]
+        },
+        "wrong_pixels": 21,
+        "differences": [
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 0
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 1
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 2
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 3
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 4
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 5
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 6
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 7
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 8
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 9
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 10
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 11
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 12
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 13
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 14
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "claimed": "W",
+            "observed": "g",
+            "index": 15
+          }
+        ]
+      }
+    }
+  ],
+  "real_v8_plan_regressions": {
+    "scope": "Pure validation of archived offline_plan values on exact saved public ASCII; no model program execution or game actions.",
+    "fixture_sha256": "1d185c4287ea9a68fae7aa7b55f4831d1bab573249caae57d272bad540e415a5",
+    "results": [
+      {
+        "game": "ft09-0d8bbf25",
+        "event_index": 1,
+        "source_sha256": "6f77861c806911b84691f1af93155c262ed8a7357344a13e57a57d79e76ef49f",
+        "saved_observation_grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+        "archived_status": "abstain",
+        "status": "passed",
+        "validation": {
+          "passed": true,
+          "status": "validated_current_evidence",
+          "errors": [],
+          "plan": {
+            "actions": [],
+            "evidence_pixels": [],
+            "goal": "legend-consistent cell grid",
+            "reason": "cannot recompute board layout",
+            "replaces": [],
+            "status": "abstain"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_sha256": "81391160eaa8adc883e0ddfe0dd66e243f7e1ce30f18c270704c47013cc9fe22",
+          "input_grid_sha256": "28c5cfaba22397543220099e720cde1811eb9aca1a8d343033d1cd3640bbe344",
+          "coverage": {
+            "evidence_pixels": 0,
+            "frame_pixels": 4096,
+            "fraction": 0.0
+          },
+          "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+        }
+      },
+      {
+        "game": "ft09-0d8bbf25",
+        "event_index": 2,
+        "source_sha256": "054f494bc77b5c28bf6f27b1cf99bf342763706d525c04db095680141eacc650",
+        "saved_observation_grid_sha256": "1ae3dee748dc3c819d35a284d83a0f6e64aca148c392562e0edb440bbacffde1",
+        "archived_status": "abstain",
+        "status": "passed",
+        "validation": {
+          "passed": true,
+          "status": "validated_current_evidence",
+          "errors": [],
+          "plan": {
+            "actions": [],
+            "evidence_pixels": [],
+            "goal": "uniform cell blocks",
+            "reason": "cannot recompute the cell grid from this frame",
+            "replaces": [],
+            "status": "abstain"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_sha256": "fa9159c8b2fe5390512ef970a72f159f1b7fd26b9c50f8d5e6cfc59108955e98",
+          "input_grid_sha256": "28c5cfaba22397543220099e720cde1811eb9aca1a8d343033d1cd3640bbe344",
+          "coverage": {
+            "evidence_pixels": 0,
+            "frame_pixels": 4096,
+            "fraction": 0.0
+          },
+          "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+        }
+      },
+      {
+        "game": "su15-1944f8ab",
+        "event_index": 1,
+        "source_sha256": "14cd2af6d11845ec4a06828f0bdd9c4432e18452ce1f1a7617581f55427486dd",
+        "saved_observation_grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+        "archived_status": "ready",
+        "status": "passed",
+        "validation": {
+          "passed": false,
+          "status": "rejected_evidence",
+          "errors": [
+            "Unknown replaced binding",
+            "Duplicate pixel coordinate",
+            "Duplicate pixel coordinate",
+            "Evidence differs from current pixels"
+          ],
+          "plan_diagnostics": {
+            "errors": [
+              {
+                "code": "plan_replaces_unknown",
+                "field": "replaces",
+                "message": "Unknown replaced binding",
+                "unknown_bindings": [
+                  "safe",
+                  "safe2",
+                  "safe3",
+                  "dots",
+                  "pcs"
+                ]
+              },
+              {
+                "code": "evidence_duplicate_coordinate",
+                "field": "evidence_pixels[8]",
+                "message": "Duplicate pixel coordinate",
+                "row": 61,
+                "col": 31,
+                "first_index": 5,
+                "index": 8
+              },
+              {
+                "code": "evidence_duplicate_coordinate",
+                "field": "evidence_pixels[11]",
+                "message": "Duplicate pixel coordinate",
+                "row": 62,
+                "col": 31,
+                "first_index": 6,
+                "index": 11
+              },
+              {
+                "code": "evidence_wrong_pixels",
+                "field": "evidence_pixels",
+                "message": "Evidence differs from current pixels",
+                "wrong_pixels": 6,
+                "differences": [
+                  {
+                    "row": 61,
+                    "col": 30,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 7
+                  },
+                  {
+                    "row": 61,
+                    "col": 31,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 8
+                  },
+                  {
+                    "row": 61,
+                    "col": 32,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 9
+                  },
+                  {
+                    "row": 62,
+                    "col": 30,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 10
+                  },
+                  {
+                    "row": 62,
+                    "col": 31,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 11
+                  },
+                  {
+                    "row": 62,
+                    "col": 32,
+                    "claimed": "S",
+                    "observed": "B",
+                    "index": 12
+                  }
+                ]
+              }
+            ],
+            "total_errors": 4,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [
+              {
+                "row": 61,
+                "col": 31,
+                "first_index": 5,
+                "index": 8
+              },
+              {
+                "row": 62,
+                "col": 31,
+                "first_index": 6,
+                "index": 11
+              }
+            ],
+            "total_duplicate_coordinates": 2,
+            "wrong_pixels": 6,
+            "differences": [
+              {
+                "row": 61,
+                "col": 30,
+                "claimed": "S",
+                "observed": "B",
+                "index": 7
+              },
+              {
+                "row": 61,
+                "col": 31,
+                "claimed": "S",
+                "observed": "B",
+                "index": 8
+              },
+              {
+                "row": 61,
+                "col": 32,
+                "claimed": "S",
+                "observed": "B",
+                "index": 9
+              },
+              {
+                "row": 62,
+                "col": 30,
+                "claimed": "S",
+                "observed": "B",
+                "index": 10
+              },
+              {
+                "row": 62,
+                "col": 31,
+                "claimed": "S",
+                "observed": "B",
+                "index": 11
+              },
+              {
+                "row": 62,
+                "col": 32,
+                "claimed": "S",
+                "observed": "B",
+                "index": 12
+              }
+            ]
+          },
+          "wrong_pixels": 6,
+          "differences": [
+            {
+              "row": 61,
+              "col": 30,
+              "claimed": "S",
+              "observed": "B",
+              "index": 7
+            },
+            {
+              "row": 61,
+              "col": 31,
+              "claimed": "S",
+              "observed": "B",
+              "index": 8
+            },
+            {
+              "row": 61,
+              "col": 32,
+              "claimed": "S",
+              "observed": "B",
+              "index": 9
+            },
+            {
+              "row": 62,
+              "col": 30,
+              "claimed": "S",
+              "observed": "B",
+              "index": 10
+            },
+            {
+              "row": 62,
+              "col": 31,
+              "claimed": "S",
+              "observed": "B",
+              "index": 11
+            },
+            {
+              "row": 62,
+              "col": 32,
+              "claimed": "S",
+              "observed": "B",
+              "index": 12
+            }
+          ]
+        }
+      },
+      {
+        "game": "su15-1944f8ab",
+        "event_index": 2,
+        "source_sha256": "2c59b44a8729dab895197c96c3e3184d0721ef0260fccc36c3e04a859c5bb0ad",
+        "saved_observation_grid_sha256": "00dd9c7808cf2a1cf616eb76f69f873d6246b2a9a64aaf5067277e0c6ad04174",
+        "archived_status": "abstain",
+        "status": "passed",
+        "validation": {
+          "passed": true,
+          "status": "validated_current_evidence",
+          "errors": [],
+          "plan": {
+            "actions": [],
+            "evidence_pixels": [],
+            "goal": "pocket target at row 62 col 31 exists but no reachable piece component was found",
+            "reason": "no knight-reachable component to move; guessing a screen coordinate has no rule support",
+            "replaces": [
+              "route"
+            ],
+            "status": "abstain"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "plan_sha256": "0ab2039884f1671331892c6bc1efdfd95a0801b5b5dc29edd8fc9c0a1ce38b42",
+          "input_grid_sha256": "9a27cb27f46cb625807eee2a6dfed45ca92601758e1f76759cf777e7341b3baa",
+          "coverage": {
+            "evidence_pixels": 0,
+            "frame_pixels": 4096,
+            "fraction": 0.0
+          },
+          "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+        }
+      }
+    ]
+  },
+  "scripted_completion_calls": 9,
+  "finished_at_utc": "2026-10-24T10:49:07.970929+00:00",
+  "source_sha256": {
+    "scripts/checks/check_034_executable_plan.py": "28c082c882f0587297f736f48f8be3ea0394b6afa9fd905e53e468ca1ca2ef35",
+    "src/arc3_research/executable_plan.py": "5cf3ce4a58cec757245d1749cd3bd6312bc1ac2d999c814585d89c9b059a297d",
+    "src/arc3_research/executable_plan_contract.py": "340819298324c4873dd2a1c997c29802cea47701bc69a60c4b749ec6ce931d87"
+  }
+}

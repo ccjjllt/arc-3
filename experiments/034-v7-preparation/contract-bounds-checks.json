@@ -1,0 +1,523 @@
+{
+  "scope": "pure CPU extraction only; no candidate execution, model requests or ARC actions",
+  "old_source": "experiments/034-v6-source/src/arc3_research/executable_plan_contract.py",
+  "old_source_sha256": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+  "new_source": "src/arc3_research/executable_plan_contract.py",
+  "new_source_sha256": "388fc7277e923d6091351dae2328d28d949dd74c37b73a59284719a6cd5ed1f2",
+  "limits": {
+    "default_max_code_bytes": 32768,
+    "default_max_nonempty_lines": null,
+    "v7_max_code_bytes": 12000,
+    "v7_max_nonempty_lines": 120,
+    "accepted_explicit_limit_range": [
+      1,
+      32768
+    ],
+    "booleans_rejected": true
+  },
+  "default_behavior_note": "Prior acceptance/rejection and semantic errors are unchanged. An oversized-byte error now includes actual UTF-8 length and limit. Successful results add code_bytes/nonempty_lines metadata.",
+  "checks": [
+    {
+      "name": "actual_v6_ft09-0d8bbf25",
+      "passed": true,
+      "default_before": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      },
+      "default_after": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      },
+      "v7_limits": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 276 nonempty lines; maximum is 120"
+      }
+    },
+    {
+      "name": "actual_v6_su15-1944f8ab",
+      "passed": true,
+      "default_before": {
+        "status": "accepted",
+        "definitions": [
+          "_centroid",
+          "_comps",
+          "_find_piece",
+          "_find_target",
+          "_first",
+          "_grid",
+          "_inside",
+          "_nearest_S",
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "283ea4565ad5da14c185d3f3c3c2b40c3805964c82a26170656731d86f7eaddb",
+        "code_bytes": 9953,
+        "nonempty_lines": 226
+      },
+      "default_after": {
+        "status": "accepted",
+        "definitions": [
+          "_centroid",
+          "_comps",
+          "_find_piece",
+          "_find_target",
+          "_first",
+          "_grid",
+          "_inside",
+          "_nearest_S",
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "283ea4565ad5da14c185d3f3c3c2b40c3805964c82a26170656731d86f7eaddb",
+        "code_bytes": 9953,
+        "nonempty_lines": 226
+      },
+      "v7_limits": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 226 nonempty lines; maximum is 120"
+      }
+    },
+    {
+      "name": "default_compatibility_short",
+      "passed": true,
+      "before": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "1a695b6b84939a6c3a900f308fa9995dc9859ef6cdc3e031fa8b06b577affa5e",
+        "code_bytes": 85,
+        "nonempty_lines": 4
+      },
+      "after": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "1a695b6b84939a6c3a900f308fa9995dc9859ef6cdc3e031fa8b06b577affa5e",
+        "code_bytes": 85,
+        "nonempty_lines": 4
+      }
+    },
+    {
+      "name": "default_compatibility_blank_lines",
+      "passed": true,
+      "before": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "036f3a567db3b0d3551fd980e0095ddd6b1a1b44bc6383de11afbe86cc8dc32a",
+        "code_bytes": 92,
+        "nonempty_lines": 4
+      },
+      "after": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "036f3a567db3b0d3551fd980e0095ddd6b1a1b44bc6383de11afbe86cc8dc32a",
+        "code_bytes": 92,
+        "nonempty_lines": 4
+      }
+    },
+    {
+      "name": "default_compatibility_unicode",
+      "passed": true,
+      "before": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "aacf3a76dc1baff259da27871899b6884c29202addb1a19f9df8218e9304b339",
+        "code_bytes": 104,
+        "nonempty_lines": 5
+      },
+      "after": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "aacf3a76dc1baff259da27871899b6884c29202addb1a19f9df8218e9304b339",
+        "code_bytes": 104,
+        "nonempty_lines": 5
+      }
+    },
+    {
+      "name": "default_compatibility_annotation",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      }
+    },
+    {
+      "name": "default_compatibility_top_assignment",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      }
+    },
+    {
+      "name": "default_compatibility_top_call",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Return only function definitions and allowed imports"
+      }
+    },
+    {
+      "name": "default_compatibility_decorator",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      }
+    },
+    {
+      "name": "default_compatibility_default_argument",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Definitions cannot have decorators, defaults, annotations or type parameters"
+      }
+    },
+    {
+      "name": "default_compatibility_global_mutation",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Functions must not mutate global bindings"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Functions must not mutate global bindings"
+      }
+    },
+    {
+      "name": "default_compatibility_forbidden_import",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Import is outside the pure standard-library contract"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Import is outside the pure standard-library contract"
+      }
+    },
+    {
+      "name": "default_compatibility_missing_predict",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Missing predict"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Missing predict"
+      }
+    },
+    {
+      "name": "default_compatibility_forbidden_action",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Function contains an action or executable-I/O call"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Function contains an action or executable-I/O call"
+      }
+    },
+    {
+      "name": "default_compatibility_32768_bytes",
+      "passed": true,
+      "before": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "ca31d2129325749dee8a3bea913d3a2ba6464aec8edc86c57cbcc5acfc9678fa",
+        "code_bytes": 32768,
+        "nonempty_lines": 4
+      },
+      "after": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "ca31d2129325749dee8a3bea913d3a2ba6464aec8edc86c57cbcc5acfc9678fa",
+        "code_bytes": 32768,
+        "nonempty_lines": 4
+      }
+    },
+    {
+      "name": "default_compatibility_32769_bytes",
+      "passed": true,
+      "before": {
+        "status": "rejected",
+        "error": "ValueError: Python source exceeds the byte limit"
+      },
+      "after": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 32769 UTF-8 bytes; maximum is 32768"
+      }
+    },
+    {
+      "name": "nonempty_lines_120",
+      "passed": true,
+      "outcome": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "c8334c3e9a634553f8c681723a44a52bc22ab48fe11524c0772b4c59009dfc33",
+        "code_bytes": 2173,
+        "nonempty_lines": 120
+      }
+    },
+    {
+      "name": "nonempty_lines_121",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 121 nonempty lines; maximum is 120"
+      }
+    },
+    {
+      "name": "utf8_byte_cap_104",
+      "passed": true,
+      "source_characters": 96,
+      "source_utf8_bytes": 104,
+      "outcome": {
+        "status": "accepted",
+        "definitions": [
+          "plan_program",
+          "predict"
+        ],
+        "code_sha256": "aacf3a76dc1baff259da27871899b6884c29202addb1a19f9df8218e9304b339",
+        "code_bytes": 104,
+        "nonempty_lines": 5
+      }
+    },
+    {
+      "name": "utf8_byte_cap_103",
+      "passed": true,
+      "source_characters": 96,
+      "source_utf8_bytes": 104,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 104 UTF-8 bytes; maximum is 103"
+      }
+    },
+    {
+      "name": "legacy_python_default_tool",
+      "passed": true,
+      "metadata": {
+        "code_bytes": 85,
+        "nonempty_lines": 4
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_True",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_False",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_0",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_-1",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_1.5",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_'120'",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_32769",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_{}",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_[]",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_code_bytes_invalid_None",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Code byte limit must be an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_True",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_False",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_0",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_-1",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_1.5",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_'120'",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_32769",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_{}",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "max_nonempty_lines_invalid_[]",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Nonempty line limit must be None or an integer from 1 to 32768"
+      }
+    },
+    {
+      "name": "line_limit_before_ast",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 121 nonempty lines; maximum is 120"
+      }
+    },
+    {
+      "name": "byte_limit_before_ast",
+      "passed": true,
+      "outcome": {
+        "status": "rejected",
+        "error": "ValueError: Python source has 85 UTF-8 bytes; maximum is 84"
+      }
+    }
+  ],
+  "passed": true,
+  "check_count": 42
+}

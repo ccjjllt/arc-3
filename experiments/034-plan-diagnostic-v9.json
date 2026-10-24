@@ -1,0 +1,135 @@
+{
+  "id": "034-plan-diagnostic-v9",
+  "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+  "kernel_title": "ARC3 034 Plan Diagnostic",
+  "purpose": "Typed and status-aware execution interface with actual returned-plan and aggregate plan diagnostics",
+  "comparison_note": "Same frozen ft09/su15 checkpoints and original B→A450s/60-action budgets. One intervention: typed/status-aware interface. Explicit ascii:str/splitlines; accept genuine no-action abstain with empty evidence/replaces; return actual evaluated plan and simultaneous actionable diagnostics. Ready/completed grounding and prediction projection stay strict. No model, thinking, trigger, geometry or main-loop change.",
+  "game_source": "Original028 ft09 cut27 entry plus034 su15 cut86 from032 candidate; no future response or baseline posthoc action supplied",
+  "game_count": 2,
+  "games": [
+    "ft09-0d8bbf25",
+    "su15-1944f8ab"
+  ],
+  "arm_order": [
+    "executable_plan_B",
+    "executable_plan_A"
+  ],
+  "reference_arm": "executable_plan_A",
+  "arm_environment": {
+    "executable_plan_A": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    },
+    "executable_plan_B": {
+      "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+      "ARC3_PRIORITY_PACE": "0"
+    }
+  },
+  "active_streams": 10,
+  "n_passes_per_arm": 1,
+  "warmup_action_games": 0,
+  "requested_arm_seconds": 600,
+  "continuation_seconds": 450,
+  "max_continuation_actions": 60,
+  "budget_formula": "Same600s isolated arm allowances, concurrent450s/60-action per game,120s all-extra branch and60s request cap within450. Retain4200s startup ceiling, strict equal arms/cache/drain and7200s total cap. Abort instead of shortening second arm.",
+  "action_cap_note": "Frozen before the first online run: the historical su15 baseline used40 actions onL5, so both arms/games use60 instead of30 to avoid truncating ordinary recovery. This is not a shortest-path estimate; no baseline action is passed to the model.",
+  "hard_limit_seconds": 7200,
+  "startup_limit_seconds": 4200,
+  "expected_gpu_hours": 2,
+  "weekly_gpu_hours_limit": 30,
+  "gpu_sample_interval_seconds": 10,
+  "inference_timing": false,
+  "scheduler_observer": false,
+  "request_deadline": false,
+  "preflight_before_serving": false,
+  "strict_arm_budget": true,
+  "require_cache_flush": true,
+  "require_cache_flush_log": true,
+  "require_complete_pool": true,
+  "require_drained_workers": true,
+  "require_rtx_pro6000": true,
+  "native_payload_cells": true,
+  "skip_blanket_model_precache": false,
+  "startup_io_note": "Retain009 original blanket model precache and inherited numerical serving; false means do not skip the blanket precache",
+  "selection_note": "If typed/status-aware interface still yields zero host action in both checkpoints, stop contract tuning of this independent program branch. Legal abstain acceptance is not action or score gain. Require meaningful action/rule revision before full25; full25 net gain before formal candidate.",
+  "runtime_source_sha256": {
+    "src/ARC3-Inference/inference/agent/priority_scheduler.py": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe",
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  },
+  "frozen_source_sha256": {
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "scripts/build_experiment.py": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "src/arc3_research/executable_plan.py": "23b20cadfc56a42fa6cf445d959e4cc1081854622e16066b8ba25fca988fb3b1",
+    "src/arc3_research/executable_plan_context.py": "2ece4a0fc44fcf9a9cde5c47427f4842fb7080445366d0cdee5f736cfbeb373c",
+    "src/arc3_research/executable_plan_contract.py": "340819298324c4873dd2a1c997c29802cea47701bc69a60c4b749ec6ce931d87",
+    "src/arc3_research/executable_plan_forks.py": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+    "src/arc3_research/experiment_config.py": "7ce4994ec8df3c7f9a9c81d7f36c60cd49957dbe6b44243f86d80cd2f9943332",
+    "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+    "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+    "src/arc3_research/program_repair.py": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+    "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+    "src/arc3_research/run_arm.py": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+    "src/arc3_research/session_runner.py": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+    "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+    "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+    "experiments/028-fork-package.json.gz.b64": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+    "experiments/034-fork-inputs/su15-package.json.gz.b64": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+    "src/arc3_research/object_evidence.py": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3"
+  },
+  "cache_flush_wait_seconds": 120,
+  "revision_note": "v9 retains v8 byte/AST-bounded artifact and immutable literal helper defaults. Distinguish valid abstain from malformed ready; actual returned plan and bounded plan diagnostics accompany the single shared validation/mismatch follow-up. No host deduplication, color repair, role oracle or modified model program.",
+  "research_revision": 9,
+  "candidate_delivery": {
+    "compact_context": true,
+    "thinking": false,
+    "max_prompt_tokens": 16384,
+    "max_output_tokens": 4096,
+    "max_request_seconds": 60,
+    "max_extra_processing_seconds": 120,
+    "max_actions_per_contract": 3,
+    "contract_lifetime": "current_short_plan",
+    "token_count_source": "served_model_tokenize_endpoint",
+    "submission_tool": "submit_program"
+  },
+  "quota_note": "Re-read current shared quota immediately before launch; retain original7200s total ceiling,4200s startup and complete equal600s arms/450s-60action games; do not shorten either arm.",
+  "source_freeze_note": "Freeze after saved-v8-output regressions and native status/diagnostic/shared-quota/rollback/budget checks. Preserve v8 source/run archive exactly.",
+  "fork_transport": "combined_xz_base64",
+  "transport_revision_note": "Use the already CPU-verified lossless combined-xz fork transport to reduce upload size. Decoded checkpoint objects must exactly match v3. The earlier empty upload responses did not prove a size-limit root cause.",
+  "hypothesis_context": {
+    "source": "latest_prior_assistant_natural_language",
+    "max_messages": 2,
+    "max_text_characters": 12000,
+    "copy": "verbatim_provenance_segments",
+    "status": "unverified_may_be_stale",
+    "per_message_text_characters": 8000
+  },
+  "object_evidence": {
+    "geometry": "same_color_4_connected_components",
+    "source": "current_ascii_and_two_recent_real_transitions",
+    "roles": "model_hypotheses_only",
+    "runtime_attribute": "frame.object_evidence"
+  },
+  "short_program_feedback": {
+    "max_nonempty_lines": null,
+    "max_code_bytes": 12000,
+    "max_followup_requests": 1,
+    "quota_shared_with_real_mismatch_repair": true,
+    "zero_action_failure_stages": [
+      "extract",
+      "plan_validation",
+      "initial_prediction"
+    ],
+    "validation_feedback_prior_text": "provenance_only_no_old_natural_language",
+    "allow_literal_helper_defaults": true,
+    "static_diagnostics": "bounded_aggregate"
+  },
+  "execution_interface": {
+    "ascii_type": "str",
+    "ascii_access": "splitlines_row_col",
+    "abstain": "no_action_empty_evidence_and_replaces_allowed",
+    "plan_diagnostics": "bounded_aggregate",
+    "feedback_actual_returned_plan": true
+  }
+}

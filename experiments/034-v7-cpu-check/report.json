@@ -1,0 +1,308 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T06:28:18.397721+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_sandbox_calls": 177,
+  "output_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/034-v7-cpu-check",
+  "scenarios": [
+    {
+      "name": "ordinary_batch_bootstrap",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.5046652919845656,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "single_helpers_pause_second",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.29586695798207074,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "mismatch_repairs_then_acts",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.6995014169951901,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "unknown_stops_suffix",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.35916079208254814,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "zero_action_validation",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.0922710410086438,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "invalid_evidence_rolls_back_functions",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.1496127499267459,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "level_boundary_stops_plan",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.2608086249092594,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "validation_preserves_repeat_guard",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.07123041700106114,
+      "recorded_tokens": {
+        "generated": 0,
+        "total": 0
+      }
+    },
+    {
+      "name": "initial_prediction_rejected_rolls_back",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.2153096249094233,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "completed_local_goal_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.11014070804230869,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "abstain_no_action",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.09327116701751947,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "short_contract_total_action_limit",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.7672013340052217,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "ordinary_action_after_contract",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT",
+        "LEFT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.41548079100903124,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "recomputation_failure_keeps_action_accounting",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.2648381249746308,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    },
+    {
+      "name": "top_level_constant_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.33821158402133733,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "oversized_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.34863008302636445,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "plan_type_error_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.4165841250214726,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "prediction_type_error_feedback_delivers_short_program",
+      "status": "passed",
+      "actions": [
+        "RIGHT",
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.5414537079632282,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "second_invalid_stops_and_restores_state",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.11907858296763152,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "zero_action_fix_shares_mismatch_repair_quota",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.24443608289584517,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "mismatch_repair_validation_failure_does_not_retry",
+      "status": "passed",
+      "actions": [
+        "RIGHT"
+      ],
+      "error": null,
+      "elapsed_seconds": 0.3140801669796929,
+      "recorded_tokens": {
+        "generated": 74,
+        "total": 96
+      }
+    },
+    {
+      "name": "feedback_budget_exhausted_does_not_request",
+      "status": "passed",
+      "actions": [],
+      "error": null,
+      "elapsed_seconds": 0.05708529194816947,
+      "recorded_tokens": {
+        "generated": 37,
+        "total": 48
+      }
+    }
+  ],
+  "limits": [
+    "Scripted completion responses and synthetic public frames; no ARC score.",
+    "The real frozen ToolAgent._run_python_tool and child sandbox are exercised.",
+    "Synthetic token usage checks bookkeeping only; it is not inference cost."
+  ],
+  "scripted_completion_calls": 31,
+  "finished_at_utc": "2026-10-24T06:28:25.237326+00:00",
+  "source_sha256": {
+    "scripts/checks/check_034_executable_plan.py": "09ced516431f8aaef114c9a4310877734f639f633591cc20ff19f93c5b5b8658",
+    "src/arc3_research/executable_plan.py": "d6b138704dbfb436deaf84c48571c3b744b6eb17391d1362177ef8e1be12e77e",
+    "src/arc3_research/executable_plan_contract.py": "388fc7277e923d6091351dae2328d28d949dd74c37b73a59284719a6cd5ed1f2"
+  }
+}

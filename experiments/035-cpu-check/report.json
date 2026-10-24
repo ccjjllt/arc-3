@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T10:50:50.668425+00:00",
+  "config_sha256": "dd5bb995ef0df42da5da7decca216236d96d0d1ce748de86f419ba43de164da8",
+  "reports": [
+    {
+      "path": "experiments/035-cpu-check/native-off/report.json",
+      "sha256": "b8b2bf0cd4e3b3da6c2e09bebb90c7aab0742e81dff796391c6029b7988dee95",
+      "status": "passed"
+    },
+    {
+      "path": "experiments/035-cpu-check/native-low/report.json",
+      "sha256": "47e8676722e79854adde1ae105fd65072f15a2574256b3e6a161813a69c729c1",
+      "status": "passed"
+    },
+    {
+      "path": "experiments/035-cpu-check/interface-final/report.json",
+      "sha256": "bf584557e67a8e6b88aadd61b50bc424ea42de02f376d7e491f72ebe49cfa75c",
+      "status": "passed"
+    }
+  ],
+  "native_scenarios_per_mode": 5,
+  "native_sandbox_calls": 88,
+  "scripted_completion_calls": 18,
+  "network_attempts": 0,
+  "real_model_calls": 0,
+  "gpu_calls": 0,
+  "real_arc_game_actions": 0,
+  "off_low_synthetic_actions_equal": true,
+  "runtime_and_checker_hashes_match_current_sources": true,
+  "limits": [
+    "Synthetic frames and predetermined completion responses verify wiring, rollback, request sharing and accounting, not reasoning quality or game score.",
+    "HTTP request bodies were captured at requests.post with a non-network response fixture; no real inference/tokenizer service call occurred.",
+    "Template guard was checked using a marked local tokenizer fixture. The actual mounted template must pass CPU rendering in arm C before any generation.",
+    "Equal 450s/60action game deadlines are config invariants here; the synthetic world itself reports1000s and does not measure real serving latency.",
+    "Low reasoning shares the same4096 total output tokens and60s request cap; a reasoning-only or truncated completion is possible and is a diagnostic outcome."
+  ],
+  "risks": [
+    "Only two selected checkpoints are studied; positive results cannot establish complete25 net score or official submission gain.",
+    "At maximal4200s startup the complete three-arm reserve is6870s within7200s, leaving330s slack; slow or failed flush must abort rather than shorten arms."
+  ]
+}

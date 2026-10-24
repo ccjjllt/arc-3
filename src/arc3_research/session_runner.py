@@ -304,6 +304,15 @@ def run_session(namespace: dict) -> dict:
                        "--working-dir", str(out), "--game-list", ",".join(config["games"]),
                        "--budget-seconds", str(arm_budget),
                        "--warmup-action-games", str(config.get("warmup_action_games", 0))]
+            if config.get("research_family") == "035":
+                command.extend(["--research-family", "035"])
+                mode = config["auxiliary_reasoning_modes"][arm]
+                entry["auxiliary_reasoning_mode"] = mode
+                if arm != "executable_plan_A":
+                    command.extend(["--auxiliary-reasoning-mode", mode])
+                if mode == "low":
+                    model_dir = Path(namespace["ARC3_INPUT_PATHS"]["model"]).resolve(strict=True)
+                    command.extend(["--model-dir", str(model_dir)])
             if config.get("inference_timing", False):
                 command.append("--inference-timing")
             if config.get("request_deadline", False):

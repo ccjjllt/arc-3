@@ -1,0 +1,368 @@
+{
+  "scope": "v9 online task-object prediction and saved-frame projection diagnostic.",
+  "online_status": "no_accepted_prediction_or_action",
+  "host_actions": 0,
+  "checked_actions": 0,
+  "semantic_relevance_verified": false,
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "online_initial_predictions": 0,
+      "accepted_predictions": 0,
+      "host_actions": 0,
+      "checked_actions": 0,
+      "actual_effect_coverage": null,
+      "direct_program_progress": false
+    },
+    {
+      "game": "su15-1944f8ab",
+      "online_initial_predictions": 1,
+      "accepted_predictions": 0,
+      "host_actions": 0,
+      "checked_actions": 0,
+      "actual_effect_coverage": null,
+      "direct_program_progress": false
+    }
+  ],
+  "saved_frame_diagnostics": [
+    {
+      "game": "ft09-0d8bbf25",
+      "delivery": 2,
+      "prediction_reached_online": false,
+      "validation": {
+        "passed": false,
+        "status": "unknown",
+        "errors": [
+          "Expected pixels must cover exactly the declared object and target coordinates"
+        ]
+      },
+      "projection": {
+        "declared_object": 36,
+        "declared_target": 11,
+        "declared_union": 47,
+        "expected": 37,
+        "missing_declared": 11,
+        "outside_declared": 1,
+        "missing_declared_coordinates": [
+          [
+            63,
+            53
+          ],
+          [
+            63,
+            54
+          ],
+          [
+            63,
+            55
+          ],
+          [
+            63,
+            56
+          ],
+          [
+            63,
+            57
+          ],
+          [
+            63,
+            58
+          ],
+          [
+            63,
+            59
+          ],
+          [
+            63,
+            60
+          ],
+          [
+            63,
+            61
+          ],
+          [
+            63,
+            62
+          ],
+          [
+            63,
+            63
+          ]
+        ],
+        "outside_declared_coordinates": [
+          [
+            63,
+            52
+          ]
+        ],
+        "object_bbox": [
+          44,
+          20,
+          49,
+          25
+        ],
+        "target_bbox": [
+          63,
+          53,
+          63,
+          63
+        ],
+        "expected_bbox": [
+          44,
+          20,
+          63,
+          52
+        ]
+      },
+      "actual_action_executed": false
+    },
+    {
+      "game": "su15-1944f8ab",
+      "delivery": 1,
+      "prediction_reached_online": true,
+      "validation": {
+        "passed": false,
+        "status": "unknown",
+        "errors": [
+          "Expected pixels must cover exactly the declared object and target coordinates"
+        ]
+      },
+      "projection": {
+        "declared_object": 25,
+        "declared_target": 1,
+        "declared_union": 26,
+        "expected": 25,
+        "missing_declared": 26,
+        "outside_declared": 25,
+        "missing_declared_coordinates": [
+          [
+            3,
+            30
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            3,
+            32
+          ],
+          [
+            3,
+            33
+          ],
+          [
+            3,
+            34
+          ],
+          [
+            4,
+            30
+          ],
+          [
+            4,
+            31
+          ],
+          [
+            4,
+            32
+          ],
+          [
+            4,
+            33
+          ],
+          [
+            4,
+            34
+          ],
+          [
+            5,
+            30
+          ],
+          [
+            5,
+            31
+          ],
+          [
+            5,
+            32
+          ],
+          [
+            5,
+            33
+          ],
+          [
+            5,
+            34
+          ],
+          [
+            6,
+            30
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            6,
+            32
+          ],
+          [
+            6,
+            33
+          ],
+          [
+            6,
+            34
+          ],
+          [
+            7,
+            30
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            7,
+            32
+          ],
+          [
+            7,
+            33
+          ],
+          [
+            7,
+            34
+          ],
+          [
+            60,
+            3
+          ]
+        ],
+        "outside_declared_coordinates": [
+          [
+            10,
+            26
+          ],
+          [
+            10,
+            27
+          ],
+          [
+            10,
+            28
+          ],
+          [
+            10,
+            29
+          ],
+          [
+            10,
+            30
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            11,
+            28
+          ],
+          [
+            11,
+            29
+          ],
+          [
+            11,
+            30
+          ],
+          [
+            12,
+            26
+          ],
+          [
+            12,
+            27
+          ],
+          [
+            12,
+            28
+          ],
+          [
+            12,
+            29
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            13,
+            26
+          ],
+          [
+            13,
+            27
+          ],
+          [
+            13,
+            28
+          ],
+          [
+            13,
+            29
+          ],
+          [
+            13,
+            30
+          ],
+          [
+            14,
+            26
+          ],
+          [
+            14,
+            27
+          ],
+          [
+            14,
+            28
+          ],
+          [
+            14,
+            29
+          ],
+          [
+            14,
+            30
+          ]
+        ],
+        "object_bbox": [
+          3,
+          30,
+          7,
+          34
+        ],
+        "target_bbox": [
+          60,
+          3,
+          60,
+          3
+        ],
+        "expected_bbox": [
+          10,
+          26,
+          14,
+          30
+        ]
+      },
+      "actual_action_executed": false
+    }
+  ],
+  "interpretation": "No actual action exists for measuring changed-pixel coverage or dynamics. su15 initial projection was evaluated online but rejected before action. ft09 retry predictor is an unreached offline diagnostic only. Do not count either as a match, repaired rule or score gain."
+}

@@ -10,7 +10,11 @@
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
 | 最近正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
-| 当前研究 · 034 v6 | 已 COMPLETE；两题均分+5.5556，但辅助程序均在动作前失败，新增关来自普通主循环，不扩池 | [034 v6 结果](research/notes/034/034-v6-results-analysis.md) · [进展](docs/progress/034-executable-plan.md) |
+| 当前研究 · 035 | 合同冻结，比较辅助low推理／off／原009三臂；CPU和独立预检通过，同一私有kernel版本10已排队，实际模板待在线CPU验证 | [035计划](docs/plan/035-auxiliary-reasoning-mode.md) · [进展](docs/progress/035-auxiliary-reasoning.md) |
+| 已完成 · 034 v9 | 程序动作仍0，A/B均分20.2479→18.2540，差−1.9939；执行停损，停止合同调参，不扩池或正式提交 | [v9结果](research/notes/034/034-v9-results-analysis.md) |
+| 已完成 · 034 v8 | 四份源码全交付，但三份弃权／一份无效ready，程序动作0；两题均分差0，不扩池或正式提交 | [v8结果](research/notes/034/034-v8-results-analysis.md) |
+| 已完成 · 034 v7 | 零动作反馈真实送达并缩短代码，但全部被提取合同拒收，程序动作0；同期两题均分−5.5556，不扩池 | [034 v7 结果](research/notes/034/034-v7-results-analysis.md) |
+| 已完成 · 034 v6 | 两题均分+5.5556，但辅助程序均在动作前失败，新增关来自普通主循环，不扩池 | [034 v6 结果](research/notes/034/034-v6-results-analysis.md) |
 | 已完成 · 034 v5 | 2次局部任务像素预测命中，仍混淆对象；两题均分34.9206→20.1671，不扩大或正式提交 | [034 v5 结果](research/notes/034/034-v5-results-analysis.md) |
 | 已完成 · 034 v4 | 程序已交付，但两次受检动作均 mismatch；不扩大或正式提交该版 | [034 v4 结果](research/notes/034/034-v4-results-analysis.md) |
 

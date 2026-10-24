@@ -1,0 +1,56 @@
+{
+  "observed_at_utc": "2026-10-24T10:48:03.658276+00:00",
+  "status": "passed",
+  "reviewer": "fresh implementation agent /root/035_reasoning_mode",
+  "source_files": {
+    "src/arc3_research/program_repair.py": "1c49e25c48668f7093223a4440318ecf3fe3d18c6ce2c8e6b969bcae321a4f9b",
+    "src/arc3_research/executable_plan.py": "5cf3ce4a58cec757245d1749cd3bd6312bc1ac2d999c814585d89c9b059a297d",
+    "src/arc3_research/reasoning_mode.py": "55ba3055831106ac3e586a5d0511610dec61a829775ada825190fcff4dadfb28"
+  },
+  "checks": {
+    "legacy_no_override_final_payload_exactly_equal_v9": true,
+    "off_final_payload_exactly_equal_v9": true,
+    "low_overrides_harness_thinking_and_effort": true,
+    "off_low_differ_only_enable_thinking_and_reasoning_effort": true,
+    "tokenize_and_generation_exact_same_payload": true,
+    "no_agent_or_main_loop_mutation": true,
+    "invalid_effort_rejected_before_http": 4,
+    "conflicting_thinking_alias_rejected_before_http": true,
+    "invalid_adapter_mode_rejected_before_runtime_import": 4,
+    "prompt_exactly_equal_frozen_v9": true,
+    "compiled_sources": 3,
+    "actual_AutoTokenizer_local_fixture_off_low_medium_proof": {
+      "off_closed_think": true,
+      "low_open_think": true,
+      "medium_open_think": true,
+      "low_effort_branch_in_template": true,
+      "low_instruction_in_template": true,
+      "low_instruction_in_low": true,
+      "low_instruction_absent_off": true,
+      "low_instruction_absent_medium": true,
+      "all_renderings_distinct": true
+    },
+    "unsupported_local_fixture_fails_closed": true
+  },
+  "fixed_limits": {
+    "max_tokens_including_reasoning": 4096,
+    "max_input_tokens": 16384,
+    "request_seconds": 60,
+    "extra_seconds": 120,
+    "max_host_actions": 3,
+    "shared_followup": 1
+  },
+  "fixture": {
+    "model_dir": "/private/tmp/arc3-035-tokenizer-fixture",
+    "is_actual_kaggle_mounted_model": false,
+    "upstream_template_source": "https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound/raw/main/chat_template.jinja",
+    "upstream_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+    "upstream_current_template_is_not_mounted_evidence": true,
+    "proof_path": "/private/tmp/arc3-035-tokenizer-fixture/fixture-proof.json"
+  },
+  "actual_kaggle_mounted_template_check": "pending live CPU pre-generation check; unsupported or invalid render must abort arm C",
+  "network_model_calls": 0,
+  "gpu_calls": 0,
+  "real_game_actions": 0,
+  "network_reads_note": "Primary upstream template downloaded once, without tokenization/model generation, to a local fixture; payload tests used scripted HTTP and attempted no network."
+}

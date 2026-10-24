@@ -1,0 +1,54 @@
+{
+  "scope": "v7 online action-prediction coverage; no actual checked actions. Counterfactual diagnostics retained separately.",
+  "checked_actions": 0,
+  "online_coverage_status": "not_applicable_no_checked_actions",
+  "semantic_relevance_verified": false,
+  "online_games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "host_actions": 0,
+      "checked_actions": 0,
+      "predicted_changed_pixels": null,
+      "actual_change_coverage": null,
+      "object_role_correctness": null,
+      "reason": "Both initial and followup artifact extraction rejected before plan/prediction evaluation. No evidence to classify real matches, mismatches, misclicks or object coverage."
+    },
+    {
+      "game": "su15-1944f8ab",
+      "host_actions": 0,
+      "checked_actions": 0,
+      "predicted_changed_pixels": null,
+      "actual_change_coverage": null,
+      "object_role_correctness": null,
+      "reason": "Both initial and followup artifact extraction rejected before plan/prediction evaluation. No evidence to classify real matches, mismatches, misclicks or object coverage."
+    }
+  ],
+  "offline_counterfactual": [
+    {
+      "game": "ft09-0d8bbf25",
+      "online_result": false,
+      "intervention": "none; remove only nonempty-line acceptance cap",
+      "plan_status": "abstain",
+      "plan_schema_validated": true,
+      "prediction_status": "not_requested_for_abstention"
+    },
+    {
+      "game": "su15-1944f8ab",
+      "online_result": false,
+      "intervention": "mechanical move _comps parameter default literal10 into its body; no other change",
+      "plan_status": "ready",
+      "plan_schema_validated": true,
+      "prediction_schema_validated": false,
+      "error": [
+        "Expected pixels must cover exactly the declared object and target coordinates"
+      ],
+      "object_pixels": 4,
+      "target_pixels": 69,
+      "declared_union": 73,
+      "expected_pixels": 49,
+      "declared_missing_from_projection": 73,
+      "projection_outside_declared": 49,
+      "frame_recomputed": true
+    }
+  ]
+}

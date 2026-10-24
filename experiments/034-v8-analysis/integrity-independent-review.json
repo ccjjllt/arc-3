@@ -1,0 +1,1668 @@
+{
+  "status": "passed_with_explicit_limits",
+  "reviewed_at_utc": "2026-10-24T09:22:39.679671+00:00",
+  "review_kind": "Independent raw output/provenance audit without result-analyzer imports, network/model calls, real game actions, solver edits or archived module execution.",
+  "notebook_sha256": "d56ab961983f72e75dc8e57f5ece2a1ce1087329ef7deb70616702176e904c6e",
+  "notebook_hash_matches_build_and_launch": true,
+  "launch_remote_cell_verification": true,
+  "source_manifest_checks": [
+    {
+      "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+      "expected": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "actual": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "equal": true
+    },
+    {
+      "path": "scripts/build_experiment.py",
+      "expected": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+      "actual": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/__init__.py",
+      "expected": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "actual": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "expected": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+      "actual": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_context.py",
+      "expected": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+      "actual": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "expected": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+      "actual": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "expected": "4b5698c2fec8d349a922481ff665b98e6d7cd1f0f725307d9931870015c97c33",
+      "actual": "4b5698c2fec8d349a922481ff665b98e6d7cd1f0f725307d9931870015c97c33",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "expected": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "actual": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/object_evidence.py",
+      "expected": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+      "actual": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "expected": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "actual": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "equal": true
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "equal": true
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "expected": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "actual": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "equal": true
+    },
+    {
+      "path": "experiments/034-plan-diagnostic-v8.json",
+      "expected": "fa2634bb8ac217b7f81e9045482bf3ca86e450c2c35579bd50fbecabd7fbf52c",
+      "actual": "fa2634bb8ac217b7f81e9045482bf3ca86e450c2c35579bd50fbecabd7fbf52c",
+      "equal": true
+    },
+    {
+      "path": "experiments/028-fork-package.json.gz.b64",
+      "expected": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "actual": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "equal": true
+    },
+    {
+      "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "expected": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "actual": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "equal": true
+    }
+  ],
+  "manifest_source_hashes_equal_frozen_build": true,
+  "embedded_native_source_checks": [
+    {
+      "path": "src/arc3_research/__init__.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_context.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/object_evidence.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "same_bytes_as_archive": true
+    }
+  ],
+  "combined_fork_objects_equal_original_inputs": true,
+  "all_raw_json_jsonl_parse": {
+    "passed": true,
+    "files": 28,
+    "errors": []
+  },
+  "arms": {
+    "A": {
+      "metadata_status": "completed",
+      "session_arm": {
+        "arm": "executable_plan_A",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792830582.867115,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 204329,
+            "started_after_seconds": 2.928000003521447e-05,
+            "http_status": 400,
+            "error": "HTTP Error 400: Bad Request",
+            "body": "Flush cache failed.\n",
+            "backend_confirmed": false,
+            "explicit_pending_requests": true
+          },
+          {
+            "log_offset": 205605,
+            "started_after_seconds": 1.0115287429998716,
+            "http_status": 400,
+            "error": "HTTP Error 400: Bad Request",
+            "body": "Flush cache failed.\n",
+            "backend_confirmed": false,
+            "explicit_pending_requests": true
+          },
+          {
+            "log_offset": 206340,
+            "started_after_seconds": 2.028674836999926,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 2.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 2.039428637000128,
+        "started_at_epoch": 1792830584.927493,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 456.0563368797302,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "live_source_checks": {
+        "run_arm.py": {
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "transient_history.py": {
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "program_state.py": {
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "executable_plan.py": {
+          "actual": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+          "expected": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "actual": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+          "expected": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "actual": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+          "expected": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+          "equal": true
+        },
+        "program_repair.py": {
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        }
+      },
+      "initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "forks_hash_matches_original": true,
+      "requested_stream_capacity": 10,
+      "actual_parallel_games": 2,
+      "fork_continuation_seconds_per_game": 450,
+      "fork_action_cap_per_game": 60,
+      "arm_budget_seconds": 600,
+      "games": [
+        {
+          "game": "ft09-0d8bbf25",
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 2,
+          "added_levels": 0,
+          "final_score": 14.285714285714285,
+          "continuation_actions": 8,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.07181419100016,
+          "elapsed_tail_over450_seconds": 0.07181419100015773,
+          "action_cap_respected": true,
+          "continuation_clock_offset_seconds": 3.6351072788238525,
+          "max_actual_action_seconds_from_continuation": 397.8124300401764,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "per_game_request_log_sha256_matches": true,
+          "main_requests": 14,
+          "main_responses_in_per_game_log": 13
+        },
+        {
+          "game": "su15-1944f8ab",
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 4,
+          "added_levels": 0,
+          "final_score": 22.22222222222222,
+          "continuation_actions": 27,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.0966004109996,
+          "elapsed_tail_over450_seconds": 0.09660041099959926,
+          "action_cap_respected": true,
+          "continuation_clock_offset_seconds": 3.105156421661377,
+          "max_actual_action_seconds_from_continuation": 418.75753560933845,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "per_game_request_log_sha256_matches": true,
+          "main_requests": 15,
+          "main_responses_in_per_game_log": 14
+        }
+      ],
+      "main_response_reconciliation": {
+        "per_game_gap": 2,
+        "shared_response_entries": 0,
+        "entries": [],
+        "remaining_gap": 2,
+        "gap_is_not_proof_of_timeout": true
+      }
+    },
+    "B": {
+      "metadata_status": "completed",
+      "session_arm": {
+        "arm": "executable_plan_B",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792830123.7922251,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 38758,
+            "started_after_seconds": 2.5000000050567905e-05,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 0.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 0.0032692500001303415,
+        "started_at_epoch": 1792830123.8114314,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 459.0547173023224,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "live_source_checks": {
+        "run_arm.py": {
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "transient_history.py": {
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "program_state.py": {
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "executable_plan.py": {
+          "actual": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+          "expected": "524e2738edadef6b5bce570448184397316f8ae16096eb325a7aeedae6325168",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "actual": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+          "expected": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "actual": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+          "expected": "ad3310c15db956bbfa2e5dcda39b187275362707fccbd8ca2adab177a0d89e77",
+          "equal": true
+        },
+        "program_repair.py": {
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        }
+      },
+      "initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "forks_hash_matches_original": true,
+      "requested_stream_capacity": 10,
+      "actual_parallel_games": 2,
+      "fork_continuation_seconds_per_game": 450,
+      "fork_action_cap_per_game": 60,
+      "arm_budget_seconds": 600,
+      "games": [
+        {
+          "game": "ft09-0d8bbf25",
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 2,
+          "added_levels": 0,
+          "final_score": 14.285714285714285,
+          "continuation_actions": 29,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.0405398600001,
+          "elapsed_tail_over450_seconds": 0.04053986000008081,
+          "action_cap_respected": true,
+          "continuation_clock_offset_seconds": 3.698354959487915,
+          "max_actual_action_seconds_from_continuation": 444.9490656985122,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "per_game_request_log_sha256_matches": true,
+          "main_requests": 15,
+          "main_responses_in_per_game_log": 14
+        },
+        {
+          "game": "su15-1944f8ab",
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 4,
+          "added_levels": 0,
+          "final_score": 22.22222222222222,
+          "continuation_actions": 22,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.06812579999996,
+          "elapsed_tail_over450_seconds": 0.0681257999999616,
+          "action_cap_respected": true,
+          "continuation_clock_offset_seconds": 3.1540234088897705,
+          "max_actual_action_seconds_from_continuation": 438.90674987311036,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "per_game_request_log_sha256_matches": true,
+          "main_requests": 16,
+          "main_responses_in_per_game_log": 15
+        }
+      ],
+      "main_response_reconciliation": {
+        "per_game_gap": 2,
+        "shared_response_entries": 0,
+        "entries": [],
+        "remaining_gap": 2,
+        "gap_is_not_proof_of_timeout": true
+      }
+    }
+  },
+  "initial_benchmark_hash_equal_between_arms": true,
+  "tool_agent_equal_between_arms": true,
+  "paired_comparisons": [
+    {
+      "game": "ft09-0d8bbf25",
+      "A_added_levels": 0,
+      "B_added_levels": 0,
+      "A_score": 14.285714285714285,
+      "B_score": 14.285714285714285,
+      "B_minus_A_score": 0.0,
+      "A_actions": 8,
+      "B_actions": 29
+    },
+    {
+      "game": "su15-1944f8ab",
+      "A_added_levels": 0,
+      "B_added_levels": 0,
+      "A_score": 22.22222222222222,
+      "B_score": 22.22222222222222,
+      "B_minus_A_score": 0.0,
+      "A_actions": 27,
+      "B_actions": 22
+    }
+  ],
+  "two_selected_game_mean": {
+    "A": 18.253968253968253,
+    "B": 18.253968253968253,
+    "B_minus_A": 0.0,
+    "scope": "Two forced checkpoints only, not complete-pool or formal score."
+  },
+  "session": {
+    "started_at_epoch": 1792828491.8180058,
+    "elapsed_seconds": 2554.8297295570374,
+    "model_ready_seconds": 1631.9739072322845,
+    "equal_arm_budget_seconds": 600,
+    "cleanup_reserve_seconds": 360,
+    "cache_flush_reserve_seconds": 240,
+    "arm_count": 2,
+    "status": "completed",
+    "gpu_server_process_group_stopped": true,
+    "gpu_server_leader_exited": true,
+    "gpu_server_stopped": true,
+    "gpu_sampling": {
+      "path": "/kaggle/working/gpu-utilization.jsonl",
+      "interval_seconds": 10.0,
+      "sample_count": 266,
+      "error_count": 0,
+      "stopped": true
+    },
+    "elapsed_minutes": 42.58049549261729,
+    "model_ready_minutes": 27.199565120538075,
+    "within7200_cap": true,
+    "startup_within4200_cap": true
+  },
+  "all_cache_boundaries_first_attempt_http200_and_backend_confirmed": false,
+  "all_cache_boundaries_final_http200_and_backend_confirmed": true,
+  "cache_retry_note": "B cleared on first attempt. A first two HTTP400 attempts explicitly reported pending requests; after2.0s retry waits, third attemptHTTP200 and backend confirmation preceded A start. Final cache separation succeeded; first-attempt success was not symmetric.",
+  "cache_backend_success_line_numbers": [
+    224,
+    956
+  ],
+  "hardware_observed_in_platform_log": true,
+  "per_game_request_response_gap": 4,
+  "known_final_request_response_gap_after_crossfile_match": 4,
+  "shared_log_late_response_reconciliation": [],
+  "auxiliary_provenance_events": [
+    {
+      "game": "ft09-0d8bbf25",
+      "program_request_count": 2,
+      "at_most_one_followup": true,
+      "branch_elapsed_seconds_sum": 31.99723118999964,
+      "final_cumulative_matches_sum": true,
+      "within120seconds_extra": true,
+      "actual_actions_once_counted_from_program_events": 0,
+      "host_plan_execution_count": 0,
+      "checked_actions_count": 0,
+      "rounds": [
+        {
+          "round": 1,
+          "trigger_kind": "bootstrap",
+          "repair_reason": null,
+          "status": "rejected",
+          "stage": "plan_validation",
+          "actual_actions": 0,
+          "error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+          "elapsed_seconds": 18.582613507999895,
+          "cumulative_extra_seconds": 18.582613507999895,
+          "budget_overrun_seconds": 0.0,
+          "request_elapsed_seconds": 18.406231139000056,
+          "input_tokens": 12998,
+          "usage": {
+            "prompt_tokens": 12998,
+            "total_tokens": 14683,
+            "completion_tokens": 1685,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 0
+          },
+          "finish_reason": "tool_calls",
+          "tokenize_equals_returned_usage": true,
+          "input_within16384_cap": true,
+          "request_under60_seconds": true,
+          "tokenize_http_status": 200,
+          "generation_http_status": 200,
+          "actual_tool_choice": {
+            "type": "function",
+            "function": {
+              "name": "submit_program"
+            }
+          },
+          "actual_tool_names": [
+            "submit_program"
+          ],
+          "actual_chat_template_kwargs": {
+            "enable_thinking": false,
+            "preserve_thinking": true
+          },
+          "actual_max_tokens": 4096,
+          "response_matches_request_record": true,
+          "context_messages_hash_matches": true,
+          "delivery_code_recomputed": {
+            "nonempty_lines": 130,
+            "code_bytes": 5422,
+            "code_sha256": "6f77861c806911b84691f1af93155c262ed8a7357344a13e57a57d79e76ef49f"
+          },
+          "delivery_metadata_exact": true,
+          "delivered_code_equals_submitted_code": true,
+          "within12000_byte_cap": true,
+          "line_cap_is_disabled": true,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "facts_grid_hash_matches_seed": true,
+          "facts_object_evidence_hash_matches_context": true
+        },
+        {
+          "round": 2,
+          "trigger_kind": "repair",
+          "repair_reason": "zero_action_validation",
+          "status": "rejected",
+          "stage": "plan_validation",
+          "actual_actions": 0,
+          "error": "ValueError: plan rejected: ['replaces must name current program bindings']",
+          "elapsed_seconds": 13.414617681999744,
+          "cumulative_extra_seconds": 31.99723118999964,
+          "budget_overrun_seconds": 0.0,
+          "request_elapsed_seconds": 13.279393343000038,
+          "input_tokens": 11318,
+          "usage": {
+            "prompt_tokens": 11318,
+            "total_tokens": 13454,
+            "completion_tokens": 2136,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 0
+          },
+          "finish_reason": "tool_calls",
+          "tokenize_equals_returned_usage": true,
+          "input_within16384_cap": true,
+          "request_under60_seconds": true,
+          "tokenize_http_status": 200,
+          "generation_http_status": 200,
+          "actual_tool_choice": {
+            "type": "function",
+            "function": {
+              "name": "submit_program"
+            }
+          },
+          "actual_tool_names": [
+            "submit_program"
+          ],
+          "actual_chat_template_kwargs": {
+            "enable_thinking": false,
+            "preserve_thinking": true
+          },
+          "actual_max_tokens": 4096,
+          "response_matches_request_record": true,
+          "context_messages_hash_matches": true,
+          "delivery_code_recomputed": {
+            "nonempty_lines": 162,
+            "code_bytes": 6844,
+            "code_sha256": "054f494bc77b5c28bf6f27b1cf99bf342763706d525c04db095680141eacc650"
+          },
+          "delivery_metadata_exact": true,
+          "delivered_code_equals_submitted_code": true,
+          "within12000_byte_cap": true,
+          "line_cap_is_disabled": true,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "facts_grid_hash_matches_seed": true,
+          "facts_object_evidence_hash_matches_context": true,
+          "feedback_checks": {
+            "complete_previous_code_equals_prior_return": true,
+            "complete_previous_code_hash_matches_trigger": true,
+            "exact_prior_error": true,
+            "feedback_source_stage_is_prior_stage": true,
+            "actual_actions_zero": true,
+            "before_after_identity_equal": true,
+            "observation_grid_equals_initial": true,
+            "unchanged_facts_grid": true,
+            "unchanged_object_evidence": true,
+            "old_text_explicitly_omitted": true,
+            "no_failed_source_truncation": true
+          }
+        }
+      ]
+    },
+    {
+      "game": "su15-1944f8ab",
+      "program_request_count": 2,
+      "at_most_one_followup": true,
+      "branch_elapsed_seconds_sum": 39.50630926099984,
+      "final_cumulative_matches_sum": true,
+      "within120seconds_extra": true,
+      "actual_actions_once_counted_from_program_events": 0,
+      "host_plan_execution_count": 0,
+      "checked_actions_count": 0,
+      "rounds": [
+        {
+          "round": 1,
+          "trigger_kind": "bootstrap",
+          "repair_reason": null,
+          "status": "rejected",
+          "stage": "plan_validation",
+          "actual_actions": 0,
+          "error": "ValueError: plan rejected: ['Duplicate pixel coordinate']",
+          "elapsed_seconds": 20.73827778399982,
+          "cumulative_extra_seconds": 20.73827778399982,
+          "budget_overrun_seconds": 0.0,
+          "request_elapsed_seconds": 20.3576517959998,
+          "input_tokens": 11877,
+          "usage": {
+            "prompt_tokens": 11877,
+            "total_tokens": 13702,
+            "completion_tokens": 1825,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 0
+          },
+          "finish_reason": "tool_calls",
+          "tokenize_equals_returned_usage": true,
+          "input_within16384_cap": true,
+          "request_under60_seconds": true,
+          "tokenize_http_status": 200,
+          "generation_http_status": 200,
+          "actual_tool_choice": {
+            "type": "function",
+            "function": {
+              "name": "submit_program"
+            }
+          },
+          "actual_tool_names": [
+            "submit_program"
+          ],
+          "actual_chat_template_kwargs": {
+            "enable_thinking": false,
+            "preserve_thinking": true
+          },
+          "actual_max_tokens": 4096,
+          "response_matches_request_record": true,
+          "context_messages_hash_matches": true,
+          "delivery_code_recomputed": {
+            "nonempty_lines": 145,
+            "code_bytes": 5891,
+            "code_sha256": "14cd2af6d11845ec4a06828f0bdd9c4432e18452ce1f1a7617581f55427486dd"
+          },
+          "delivery_metadata_exact": true,
+          "delivered_code_equals_submitted_code": true,
+          "within12000_byte_cap": true,
+          "line_cap_is_disabled": true,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "facts_grid_hash_matches_seed": true,
+          "facts_object_evidence_hash_matches_context": true
+        },
+        {
+          "round": 2,
+          "trigger_kind": "repair",
+          "repair_reason": "zero_action_validation",
+          "status": "rejected",
+          "stage": "plan_validation",
+          "actual_actions": 0,
+          "error": "ValueError: plan rejected: ['Pixel projection must be a bounded nonempty list']",
+          "elapsed_seconds": 18.768031477000022,
+          "cumulative_extra_seconds": 39.50630926099984,
+          "budget_overrun_seconds": 0.0,
+          "request_elapsed_seconds": 18.398628058999748,
+          "input_tokens": 11759,
+          "usage": {
+            "prompt_tokens": 11759,
+            "total_tokens": 14162,
+            "completion_tokens": 2403,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 0
+          },
+          "finish_reason": "tool_calls",
+          "tokenize_equals_returned_usage": true,
+          "input_within16384_cap": true,
+          "request_under60_seconds": true,
+          "tokenize_http_status": 200,
+          "generation_http_status": 200,
+          "actual_tool_choice": {
+            "type": "function",
+            "function": {
+              "name": "submit_program"
+            }
+          },
+          "actual_tool_names": [
+            "submit_program"
+          ],
+          "actual_chat_template_kwargs": {
+            "enable_thinking": false,
+            "preserve_thinking": true
+          },
+          "actual_max_tokens": 4096,
+          "response_matches_request_record": true,
+          "context_messages_hash_matches": true,
+          "delivery_code_recomputed": {
+            "nonempty_lines": 209,
+            "code_bytes": 8025,
+            "code_sha256": "2c59b44a8729dab895197c96c3e3184d0721ef0260fccc36c3e04a859c5bb0ad"
+          },
+          "delivery_metadata_exact": true,
+          "delivered_code_equals_submitted_code": true,
+          "within12000_byte_cap": true,
+          "line_cap_is_disabled": true,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "facts_grid_hash_matches_seed": true,
+          "facts_object_evidence_hash_matches_context": true,
+          "feedback_checks": {
+            "complete_previous_code_equals_prior_return": true,
+            "complete_previous_code_hash_matches_trigger": true,
+            "exact_prior_error": true,
+            "feedback_source_stage_is_prior_stage": true,
+            "actual_actions_zero": true,
+            "before_after_identity_equal": true,
+            "observation_grid_equals_initial": true,
+            "unchanged_facts_grid": true,
+            "unchanged_object_evidence": true,
+            "old_text_explicitly_omitted": true,
+            "no_failed_source_truncation": true
+          }
+        }
+      ]
+    }
+  ],
+  "known_returned_cost_usage_not_dollars": {
+    "main_loop_after_crossfile_match": {
+      "prompt_tokens": 4784289,
+      "completion_tokens": 202513,
+      "total_tokens": 4986802,
+      "reasoning_tokens": 188845
+    },
+    "auxiliary_unique_program_requests": {
+      "prompt_tokens": 47952,
+      "completion_tokens": 8049,
+      "total_tokens": 56001,
+      "reasoning_tokens": 0
+    },
+    "note": "No pricing inferred; final log gaps may lack returned usage."
+  },
+  "limitations": [
+    "Selected-checkpoint B-then-A diagnostic does not establish stable causal score effect, natural-trigger effect, full-pool effect or formal gains.",
+    "Per-request elapsed nests inside branch elapsed and per-game450s; use unique program_recomputed elapsed for extra processing time, not cumulative summaries.",
+    "History action clocks are rebased by continuation epoch minus GameRun.started_at; actual cleanup/in-flight tails are retained.",
+    "Missing response entries are not by themselves proven timeouts; shared requests.jsonl responses are counted only after unique matching on all seven request fields.",
+    "All source/manifest checks are frozen provenance; live subset comes from arm metadata."
+  ],
+  "final_platform_snapshot": {
+    "observed_at_utc": "2026-10-24T09:18:58.800060+00:00",
+    "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+    "version": 8,
+    "platform_status": {
+      "status": "COMPLETE"
+    },
+    "metadata": {
+      "id": 140147580,
+      "ref": "zhuating/arc3-034-plan-diagnostic",
+      "title": "ARC3 034 Plan Diagnostic",
+      "author": "zhuating",
+      "slug": "arc3-034-plan-diagnostic",
+      "lastRunTime": "2026-10-21T09:18:55.801Z",
+      "language": "python",
+      "kernelType": "notebook",
+      "isPrivate": true,
+      "enableGpu": true,
+      "enableInternet": false,
+      "categoryIds": [
+        "gpu"
+      ],
+      "datasetDataSources": [
+        "dfranzen/pennyroyal-v253",
+        "dfranzen/taaf-kaggle-source-bundle-copy"
+      ],
+      "competitionDataSources": [
+        "arc-prize-2026-arc-agi-3"
+      ],
+      "modelDataSources": [
+        "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+        "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+      ],
+      "enableTpu": false,
+      "currentVersionNumber": 8,
+      "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c",
+      "machineShape": "NvidiaRtxPro6000"
+    },
+    "source_cell_count": 32,
+    "remote_sources_match_frozen_v8": true,
+    "notebook_sha256": "d56ab961983f72e75dc8e57f5ece2a1ce1087329ef7deb70616702176e904c6e",
+    "gpu_quota": {
+      "total_seconds": 108000.0,
+      "used_seconds": 7294.729,
+      "reserved_seconds": 0.0,
+      "available_seconds": 100705.271
+    }
+  },
+  "download": {
+    "observed_at_utc": "2026-10-24T09:18:58.800060+00:00",
+    "kernel_id": "zhuating/arc3-034-plan-diagnostic",
+    "version": 8,
+    "platform_status": {
+      "status": "COMPLETE"
+    },
+    "output_dir": "runs/034-plan-diagnostic-v8",
+    "status": "complete_verified_official_inventory",
+    "api_return_types": [
+      "list",
+      "str"
+    ],
+    "finished_at_utc": "2026-10-24T09:19:52.088498+00:00",
+    "downloaded_file_count": 43,
+    "files": [
+      {
+        "path": "arc3-034-plan-diagnostic.log",
+        "bytes": 66799,
+        "sha256": "cfba6a06e4b72466b4e29413430a5895ab8b8a77543baa8be67c9b23f122b534"
+      },
+      {
+        "path": "executable_plan_A/arm-metadata.json",
+        "bytes": 4651,
+        "sha256": "232d82a5b71703dc0913d7d287e5b3ea2a0c549b1655f3b9d00808e158a881ef"
+      },
+      {
+        "path": "executable_plan_A/benchmark.json",
+        "bytes": 43203,
+        "sha256": "1af018b12b7ec56c12b3efa23d123a41b9491c56d4fb014bea1564fc3757c32e"
+      },
+      {
+        "path": "executable_plan_A/executable-plan-forks.json",
+        "bytes": 21358,
+        "sha256": "0f9adb945fee8facabc8981aa8f2f13fd04d47c814ee79a36840bbed839d5b23"
+      },
+      {
+        "path": "executable_plan_A/executable-plan-restored.json",
+        "bytes": 1553,
+        "sha256": "4cd1a0e8e6c5527ec929657b13ddf34c537bffb53511bf722f6d8203a4a9981f"
+      },
+      {
+        "path": "executable_plan_A/ft09-0d8bbf25-A.json",
+        "bytes": 4700,
+        "sha256": "0c308636b654c9f7c269c31e4f4bb8b718de727dd7d3200b9e587451cce877bd"
+      },
+      {
+        "path": "executable_plan_A/ft09-0d8bbf25_A_requests.jsonl",
+        "bytes": 7614846,
+        "sha256": "aad2b4a6f62996269b16e49683d67c0d7aef3659ccb3f9b12908fe54c0286c7c"
+      },
+      {
+        "path": "executable_plan_A/git_status.txt",
+        "bytes": 356,
+        "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+      },
+      {
+        "path": "executable_plan_A/goal-evidence.json",
+        "bytes": 253,
+        "sha256": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593"
+      },
+      {
+        "path": "executable_plan_A/program-state.json",
+        "bytes": 211,
+        "sha256": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303"
+      },
+      {
+        "path": "executable_plan_A/prompts/ft09-0d8bbf25_A.log",
+        "bytes": 203572,
+        "sha256": "a135deec36b019c61a023580936e9db966473e8fcd9a6e1d295b772fe71a4105"
+      },
+      {
+        "path": "executable_plan_A/prompts/su15-1944f8ab_A.log",
+        "bytes": 293523,
+        "sha256": "8abdfa4e5cdbf656d341d951d8f79cf5d6477681dfe232b0ca33d0cfc28df326"
+      },
+      {
+        "path": "executable_plan_A/run.log",
+        "bytes": 1353,
+        "sha256": "22396f591795fcc715ff5a24a91a20408ec2ada47d9e465ea47249f7aa583963"
+      },
+      {
+        "path": "executable_plan_A/su15-1944f8ab-A.json",
+        "bytes": 10393,
+        "sha256": "2e904d052b419b91eb3bec6319b51911295f2fd4d8137e7319645598ba461321"
+      },
+      {
+        "path": "executable_plan_A/su15-1944f8ab_A_requests.jsonl",
+        "bytes": 8944539,
+        "sha256": "0dbc77558dc14f2b671034d1b0f1a49dd6d4da8ac24c93d85e46806f04ec502f"
+      },
+      {
+        "path": "executable_plan_A/transcripts/ft09-0d8bbf25_A.txt",
+        "bytes": 402987,
+        "sha256": "f58ae5772f729533c21ec0ff5c38109e4dd6b0b682857f2d96b4f35b2d4d916f"
+      },
+      {
+        "path": "executable_plan_A/transcripts/su15-1944f8ab_A.txt",
+        "bytes": 447933,
+        "sha256": "fb1f571b4d76638a24799c217b148cf204499893daf7ec5107344ee5483e51aa"
+      },
+      {
+        "path": "executable_plan_A/transient-history.json",
+        "bytes": 385,
+        "sha256": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665"
+      },
+      {
+        "path": "executable_plan_B/arm-metadata.json",
+        "bytes": 4651,
+        "sha256": "ef2c43c0465271320a9f7098c84733c53cfbfd132d77282d28525bba6f0a712b"
+      },
+      {
+        "path": "executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+        "bytes": 129150,
+        "sha256": "aee338f0757bfe815db4386d3a510ce454519f49267af66a9a2da7fa7abdfa7a"
+      },
+      {
+        "path": "executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+        "bytes": 145122,
+        "sha256": "2cb4152e6beedf4acfba2cb752d4d5ec1d586a836a057ec5cd6acfa2a3aa8ef0"
+      },
+      {
+        "path": "executable_plan_B/benchmark.json",
+        "bytes": 47898,
+        "sha256": "748d29c53cd5d16d9c5c012ee10cde311e346b258b6ea66358e598033d549523"
+      },
+      {
+        "path": "executable_plan_B/executable-plan-forks.json",
+        "bytes": 31549,
+        "sha256": "e34e02305d0cc251bbb8b04310b76b16524a8889b49acf9c5d4822fe4306689d"
+      },
+      {
+        "path": "executable_plan_B/executable-plan-restored.json",
+        "bytes": 1553,
+        "sha256": "48597db824438ba61c9ba4f7d0bbac9699a830b7f120084fc7a0f9a49be0bae1"
+      },
+      {
+        "path": "executable_plan_B/ft09-0d8bbf25-B.json",
+        "bytes": 12569,
+        "sha256": "2301d0a9ffe5fa61b5c3968460cb775d25427fd7f8b570ca8a6a35781cfed880"
+      },
+      {
+        "path": "executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+        "bytes": 8393694,
+        "sha256": "733d5d36c7636fce571346213eab9a9f3bc9a438f27d4cd4767c3cf3e3c94b88"
+      },
+      {
+        "path": "executable_plan_B/git_status.txt",
+        "bytes": 356,
+        "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+      },
+      {
+        "path": "executable_plan_B/goal-evidence.json",
+        "bytes": 253,
+        "sha256": "bee79c84ecb191f1f3273e85616cd55e7146fd790f1dc8ae4da55393f2b71593"
+      },
+      {
+        "path": "executable_plan_B/program-state.json",
+        "bytes": 211,
+        "sha256": "27b92178575e0881f77015f7811ddae6897b9a37f60d8a99732cd8a48b1b6303"
+      },
+      {
+        "path": "executable_plan_B/prompts/ft09-0d8bbf25_B.log",
+        "bytes": 205640,
+        "sha256": "af68ac7fa7de25d4ff5c7600eb0f0a258dd52cc992da8c566b61ff0604c46618"
+      },
+      {
+        "path": "executable_plan_B/prompts/su15-1944f8ab_B.log",
+        "bytes": 264047,
+        "sha256": "5f0af74f2f607900699d4c3a16224e10afcaf07deacb030bf04e19ca4ead4166"
+      },
+      {
+        "path": "executable_plan_B/run.log",
+        "bytes": 1354,
+        "sha256": "5931b569d4c65e0da7eb37b2ff4c0e3e3dd273914f95cfa45942e8a20fc278d4"
+      },
+      {
+        "path": "executable_plan_B/su15-1944f8ab-B.json",
+        "bytes": 9737,
+        "sha256": "02efccfbf6875be91d8c7908c5a8bc01a15d2616b34b8398e85d300ef32d8048"
+      },
+      {
+        "path": "executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+        "bytes": 9981577,
+        "sha256": "77c0119533da50f6265c8cc55b3b3286ee66d497ab9b16347ca60dc14c2b887a"
+      },
+      {
+        "path": "executable_plan_B/transcripts/ft09-0d8bbf25_B.txt",
+        "bytes": 454479,
+        "sha256": "363ea044c5cb336f6de114ded997b81d341a4a9c9e42cc6d47caeef661fa1dcd"
+      },
+      {
+        "path": "executable_plan_B/transcripts/su15-1944f8ab_B.txt",
+        "bytes": 464751,
+        "sha256": "95bcabb0dd1e2f98e8535b9ad52de7405768e91963120070ac53d56ed9c65343"
+      },
+      {
+        "path": "executable_plan_B/transient-history.json",
+        "bytes": 385,
+        "sha256": "184ddc6b4a23dfe3fabea11f1b80fa2b08e0b7424343db8e81da0de304979665"
+      },
+      {
+        "path": "experiment-manifest.json",
+        "bytes": 9439,
+        "sha256": "0b28af62f6c2eb4b1b11784c3e24bc9a5c301d3ffafb1c38bf00ac1a6c9fb8a9"
+      },
+      {
+        "path": "gpu-utilization.jsonl",
+        "bytes": 51401,
+        "sha256": "a54e07dc53f7f277b0335c4c2c7a65943d38075ee3ac5c22274f21cef4374def"
+      },
+      {
+        "path": "input-paths.json",
+        "bytes": 798,
+        "sha256": "3c4a6252cfc470e1de026a80af538100aa166ff42f0dacc23f2011aa2d2571ce"
+      },
+      {
+        "path": "serve.log",
+        "bytes": 367836,
+        "sha256": "3a90e302fac76bcfa9836137b5b3ba6a245ce24175a55211fa7e31d9f5594438"
+      },
+      {
+        "path": "summary/summary.json",
+        "bytes": 20980,
+        "sha256": "da7ad8eb02491a12e42af0aaba2a46be8f8bdf1acb75ec8ed387a79f9ca01b5a"
+      },
+      {
+        "path": "summary/summary.md",
+        "bytes": 5787,
+        "sha256": "4b4c74c638f4eeb893a247f7d118bf8db44f36ed02e694bacb92c2ab427684dc"
+      }
+    ],
+    "inventory_verification": {
+      "observed_at_utc": "2026-10-24T09:23:39.911829+00:00",
+      "pages": 1,
+      "next_page_token_empty": true,
+      "official_output_file_count": 42,
+      "official_outputs_all_local": true,
+      "outputs": [
+        {
+          "path": "executable_plan_A/arm-metadata.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/benchmark.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/executable-plan-forks.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/executable-plan-restored.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/ft09-0d8bbf25-A.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/ft09-0d8bbf25_A_requests.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/git_status.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/goal-evidence.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/program-state.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/prompts/ft09-0d8bbf25_A.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/prompts/su15-1944f8ab_A.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/run.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/su15-1944f8ab-A.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/su15-1944f8ab_A_requests.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/transcripts/ft09-0d8bbf25_A.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/transcripts/su15-1944f8ab_A.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_A/transient-history.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/arm-metadata.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/benchmark.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/executable-plan-forks.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/executable-plan-restored.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/ft09-0d8bbf25-B.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/git_status.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/goal-evidence.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/program-state.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/prompts/ft09-0d8bbf25_B.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/prompts/su15-1944f8ab_B.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/run.log",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/su15-1944f8ab-B.json",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/transcripts/ft09-0d8bbf25_B.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/transcripts/su15-1944f8ab_B.txt",
+          "exists": true
+        },
+        {
+          "path": "executable_plan_B/transient-history.json",
+          "exists": true
+        },
+        {
+          "path": "experiment-manifest.json",
+          "exists": true
+        },
+        {
+          "path": "gpu-utilization.jsonl",
+          "exists": true
+        },
+        {
+          "path": "input-paths.json",
+          "exists": true
+        },
+        {
+          "path": "serve.log",
+          "exists": true
+        },
+        {
+          "path": "summary/summary.json",
+          "exists": true
+        },
+        {
+          "path": "summary/summary.md",
+          "exists": true
+        }
+      ],
+      "platform_log_returned": true,
+      "platform_log_exact": true
+    }
+  },
+  "local_download_record_integrity": {
+    "file_count": 43,
+    "all_match": true,
+    "checks": [
+      {
+        "path": "arc3-034-plan-diagnostic.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/arm-metadata.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/benchmark.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/executable-plan-forks.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/executable-plan-restored.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/ft09-0d8bbf25-A.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/ft09-0d8bbf25_A_requests.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/git_status.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/goal-evidence.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/program-state.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/prompts/ft09-0d8bbf25_A.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/prompts/su15-1944f8ab_A.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/run.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/su15-1944f8ab-A.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/su15-1944f8ab_A_requests.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/transcripts/ft09-0d8bbf25_A.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/transcripts/su15-1944f8ab_A.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_A/transient-history.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/arm-metadata.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/benchmark.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/executable-plan-forks.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/executable-plan-restored.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/ft09-0d8bbf25-B.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/ft09-0d8bbf25_B_requests.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/git_status.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/goal-evidence.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/program-state.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/prompts/ft09-0d8bbf25_B.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/prompts/su15-1944f8ab_B.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/run.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/su15-1944f8ab-B.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/su15-1944f8ab_B_requests.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/transcripts/ft09-0d8bbf25_B.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/transcripts/su15-1944f8ab_B.txt",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "executable_plan_B/transient-history.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "experiment-manifest.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "gpu-utilization.jsonl",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "input-paths.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "serve.log",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "summary/summary.json",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      },
+      {
+        "path": "summary/summary.md",
+        "exists": true,
+        "bytes_match": true,
+        "sha256_matches_local_download_record": true
+      }
+    ],
+    "limits": "Local hashes are downloader-generated, not platform-provided hashes. Official inventory completeness is independently supported by the final paginated API inventory:42 outputs, next-page token empty, plus exact platform log gives43 local files."
+  },
+  "platform_status": {
+    "status": "COMPLETE"
+  },
+  "platform_version": 8,
+  "platform_remote_source_matches_v8": true,
+  "download_integrity": {
+    "status": "complete_verified_official_inventory",
+    "official_inventory_pages": 1,
+    "next_page_token_empty": true,
+    "official_output_file_count": 42,
+    "all_official_outputs_exist": true,
+    "platform_log_exact": true,
+    "local_total_file_count": 43,
+    "missing_files": [],
+    "inventory_record": "experiments/034-v8-download.json",
+    "reviewed_at_utc": "2026-10-24T09:25:07.470807+00:00"
+  }
+}

@@ -1,0 +1,474 @@
+{
+  "purpose": "v8 pure extraction checks; candidate code was parsed/compiled but never executed",
+  "contract_source_sha256": "f9441789593f0a1a77a43289a659baf19e3fd2c85b01068d02813fe734783c7f",
+  "source_review": [
+    {
+      "path": "experiments/034-v7-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+      "sha256": "87ae9eb04278b672354812c81f5218513b1c19e50d7c204bc31b6e26bd163b73",
+      "v7_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "source_line_limit",
+              "line": null,
+              "message": "Python source has 165 nonempty lines; maximum is 120"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "has_side_effect_rejection": false
+        }
+      },
+      "v8_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "source_syntax",
+              "line": 157,
+              "message": "Invalid Python source: '{' was never closed",
+              "column": 12
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "has_side_effect_rejection": false
+        }
+      }
+    },
+    {
+      "path": "experiments/034-v7-analysis/extracted-programs/ft09-0d8bbf25-3.py",
+      "sha256": "819160437e968992301967c159e49a5a7345e012090226cd533451e8ae56d858",
+      "v7_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "source_line_limit",
+              "line": null,
+              "message": "Python source has 129 nonempty lines; maximum is 120"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "has_side_effect_rejection": false
+        }
+      },
+      "v8_policy": {
+        "passed": true,
+        "metadata": {
+          "definitions": [
+            "blocks",
+            "cell6",
+            "cell_colors",
+            "grid_of",
+            "pick",
+            "plan_program",
+            "predict"
+          ],
+          "code_bytes": 5686,
+          "nonempty_lines": 129,
+          "code_sha256": "819160437e968992301967c159e49a5a7345e012090226cd533451e8ae56d858"
+        }
+      }
+    },
+    {
+      "path": "experiments/034-v7-analysis/extracted-programs/su15-1944f8ab-2.py",
+      "sha256": "bc8219231b4e2ee288dd324b0abafe0bb7514d455d286d026fc1639d43deabe3",
+      "v7_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "source_line_limit",
+              "line": null,
+              "message": "Python source has 183 nonempty lines; maximum is 120"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "has_side_effect_rejection": false
+        }
+      },
+      "v8_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "module_statement",
+              "line": 82,
+              "message": "Return only function definitions and allowed imports"
+            },
+            {
+              "code": "global_binding",
+              "line": 86,
+              "message": "Functions must not mutate global bindings"
+            }
+          ],
+          "total_errors": 2,
+          "truncated_count": 0,
+          "has_side_effect_rejection": true
+        }
+      }
+    },
+    {
+      "path": "experiments/034-v7-analysis/extracted-programs/su15-1944f8ab-3-mechanical-default-only.py",
+      "sha256": "3a431a960399c5d6c8d714331e9cf25087b91ca4698dfd7a8ed4ad92ba890450",
+      "v7_policy": {
+        "passed": true,
+        "metadata": {
+          "definitions": [
+            "_comps",
+            "_ctr",
+            "_grid",
+            "_pick",
+            "_pix",
+            "_walk",
+            "plan_program",
+            "predict"
+          ],
+          "code_bytes": 4396,
+          "nonempty_lines": 106,
+          "code_sha256": "3a431a960399c5d6c8d714331e9cf25087b91ca4698dfd7a8ed4ad92ba890450"
+        }
+      },
+      "v8_policy": {
+        "passed": true,
+        "metadata": {
+          "definitions": [
+            "_comps",
+            "_ctr",
+            "_grid",
+            "_pick",
+            "_pix",
+            "_walk",
+            "plan_program",
+            "predict"
+          ],
+          "code_bytes": 4396,
+          "nonempty_lines": 106,
+          "code_sha256": "3a431a960399c5d6c8d714331e9cf25087b91ca4698dfd7a8ed4ad92ba890450"
+        }
+      }
+    },
+    {
+      "path": "experiments/034-v7-analysis/extracted-programs/su15-1944f8ab-3.py",
+      "sha256": "a7c7ff19cc4c59d061ef1991dd698184b56addbc1c6646e212ce3eafb94580c8",
+      "v7_policy": {
+        "passed": false,
+        "exception_type": "DefinitionContractError",
+        "diagnostics": {
+          "errors": [
+            {
+              "code": "function_default",
+              "line": 21,
+              "message": "Definitions cannot have defaults"
+            }
+          ],
+          "total_errors": 1,
+          "truncated_count": 0,
+          "has_side_effect_rejection": false
+        }
+      },
+      "v8_policy": {
+        "passed": true,
+        "metadata": {
+          "definitions": [
+            "_comps",
+            "_ctr",
+            "_grid",
+            "_pick",
+            "_pix",
+            "_walk",
+            "plan_program",
+            "predict"
+          ],
+          "code_bytes": 4391,
+          "nonempty_lines": 105,
+          "code_sha256": "a7c7ff19cc4c59d061ef1991dd698184b56addbc1c6646e212ce3eafb94580c8"
+        }
+      }
+    }
+  ],
+  "focused_cases": {
+    "signed_nested_immutable_tuple": {
+      "passed": true,
+      "metadata": {
+        "definitions": [
+          "helper",
+          "plan_program",
+          "predict"
+        ],
+        "code_bytes": 152,
+        "nonempty_lines": 6,
+        "code_sha256": "47309aba8df0257557b61abb353f8f1286e83214ccac08ace133de3965eadf0a"
+      }
+    },
+    "legacy_defaults_remain_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Definitions cannot have defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "entry_default_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "entry_signature",
+            "line": 1,
+            "message": "Required signature is plan_program(frame) with no defaults"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "computed_default_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "mutable_default_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "nonfinite_float_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "name_default_rejected": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "function_default",
+            "line": 1,
+            "message": "Helper defaults must be bounded immutable literals"
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    },
+    "aggregate_static_errors": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "function_decorator",
+            "line": 3,
+            "message": "Definitions cannot have decorators"
+          },
+          {
+            "code": "function_annotation",
+            "line": 3,
+            "message": "Definitions cannot have annotations"
+          },
+          {
+            "code": "function_default",
+            "line": 9,
+            "message": "Helper defaults must be bounded immutable literals"
+          },
+          {
+            "code": "global_binding",
+            "line": 4,
+            "message": "Functions must not mutate global bindings"
+          },
+          {
+            "code": "forbidden_call",
+            "line": 5,
+            "message": "Function contains an action or executable-I/O call"
+          },
+          {
+            "code": "entry_signature",
+            "line": 3,
+            "message": "Required signature is plan_program(frame) with no defaults"
+          }
+        ],
+        "total_errors": 7,
+        "truncated_count": 0,
+        "has_side_effect_rejection": true
+      }
+    },
+    "truncation_preserves_refusal": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "module_statement",
+            "line": 1,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 2,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 3,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 4,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 5,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 6,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 7,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 8,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 9,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 10,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 11,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 12,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 13,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 14,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 15,
+            "message": "Return only function definitions and allowed imports"
+          },
+          {
+            "code": "module_statement",
+            "line": 16,
+            "message": "Return only function definitions and allowed imports"
+          }
+        ],
+        "total_errors": 21,
+        "truncated_count": 5,
+        "has_side_effect_rejection": true
+      }
+    },
+    "syntax_has_line_column": {
+      "passed": false,
+      "exception_type": "DefinitionContractError",
+      "diagnostics": {
+        "errors": [
+          {
+            "code": "source_syntax",
+            "line": 2,
+            "message": "Invalid Python source: '{' was never closed",
+            "column": 10
+          }
+        ],
+        "total_errors": 1,
+        "truncated_count": 0,
+        "has_side_effect_rejection": false
+      }
+    }
+  },
+  "all_focused_assertions_passed": true,
+  "safety_limits": {
+    "helper_literal_expression_nodes": 128,
+    "helper_literal_depth": 8,
+    "diagnostics_retained": 16,
+    "python_ast_nodes": 12000,
+    "v8_source_bytes": 12000,
+    "v8_nonempty_line_cap": null
+  },
+  "limits": "Extraction acceptance proves syntax and contract only, not current-frame use, action quality, prediction relevance or scoring gain."
+}

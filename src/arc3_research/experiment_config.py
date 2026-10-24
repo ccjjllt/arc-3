@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import copy
 from pathlib import Path
 from typing import Any
 
@@ -38,6 +39,42 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError("arm_environment must name only configured arms.")
     for value in environments.values():
         arm_environment(value)
+    if (config.get("research_family") == "035"
+            or config.get("id") == "035-aux-reasoning-diagnostic"
+            or "executable_plan_C" in arms):
+        expected_arms = ["executable_plan_C", "executable_plan_B", "executable_plan_A"]
+        expected_modes = {"executable_plan_A": "none", "executable_plan_B": "off",
+                          "executable_plan_C": "low"}
+        if (config.get("id") != "035-aux-reasoning-diagnostic"
+                or config.get("research_family") != "035"
+                or type(config.get("research_revision")) is not int
+                or config.get("research_revision") != 1
+                or arms != expected_arms
+                or config.get("reference_arm") != "executable_plan_A"
+                or config.get("auxiliary_reasoning_modes") != expected_modes
+                or config.get("cache_flush_wait_seconds") != 120
+                or environments != {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+                                           "ARC3_PRIORITY_PACE": "0"} for arm in expected_arms}
+                or config.get("candidate_delivery", {}).get("thinking") != "explicit_per_arm"
+                or config.get("template_preflight") != {
+                    "actual_mounted_template": True,
+                    "render_modes": ["off", "low", "medium"],
+                    "unsupported_mode_action": "abort_comparison_no_template_update",
+                    "model_or_network_calls": 0,
+                }):
+            raise ValueError("035 requires the frozen C-low/B-off/A-none diagnostic and unchanged environments.")
+        # Reuse every v9 checkpoint, budget, geometry and interface constraint.
+        # Only the explicit third arm and auxiliary reasoning setting differ.
+        proxy = copy.deepcopy(config)
+        proxy.pop("research_family")
+        proxy.pop("auxiliary_reasoning_modes")
+        proxy["id"] = "034-plan-diagnostic-v9"
+        proxy["research_revision"] = 9
+        proxy["arm_order"] = expected_arms[1:]
+        proxy["arm_environment"].pop("executable_plan_C")
+        proxy["candidate_delivery"]["thinking"] = False
+        validate_config(proxy)
+        return
     if any(a in ("executable_plan", "executable_plan_A", "executable_plan_B") for a in arms):
         expected = {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0"}
                     for arm in arms}
@@ -46,7 +83,7 @@ def validate_config(config: dict[str, Any]) -> None:
         if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
             raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
         if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
-            delivery_v3 = config.get("research_revision") in (3, 4, 5, 6)
+            delivery_v3 = config.get("research_revision") in (3, 4, 5, 6, 7, 8, 9)
             transport = config.get("fork_transport", "separate_gzip_base64")
             if (transport not in ("separate_gzip_base64", "combined_xz_base64")
                     or (not delivery_v3 and transport != "separate_gzip_base64")):
@@ -78,24 +115,49 @@ def validate_config(config: dict[str, Any]) -> None:
                     "max_request_seconds": 60, "max_extra_processing_seconds": 120,
                     "max_actions_per_contract": 3, "contract_lifetime": "current_short_plan",
                     "token_count_source": "served_model_tokenize_endpoint"}
-                if config.get("research_revision") in (4, 5, 6):
+                if config.get("research_revision") in (4, 5, 6, 7, 8, 9):
                     expected_delivery["submission_tool"] = "submit_program"
                 if config.get("candidate_delivery") != expected_delivery:
                     raise ValueError("034 delivery revision differs from its frozen contract.")
-                if config.get("research_revision") in (5, 6) and config.get("hypothesis_context") != {
+                if config.get("research_revision") in (5, 6, 7, 8, 9) and config.get("hypothesis_context") != {
                     "source": "latest_prior_assistant_natural_language",
                     "max_messages": 2, "max_text_characters": 12000,
                     "per_message_text_characters": 8000,
                     "copy": "verbatim_provenance_segments", "status": "unverified_may_be_stale",
                 }:
-                    raise ValueError("034 v5/v6 require bounded provenance-labelled prior hypotheses.")
-                if config.get("research_revision") == 6 and config.get("object_evidence") != {
+                    raise ValueError("034 v5-v9 require bounded provenance-labelled prior hypotheses.")
+                if config.get("research_revision") in (6, 7, 8, 9) and config.get("object_evidence") != {
                     "geometry": "same_color_4_connected_components",
                     "source": "current_ascii_and_two_recent_real_transitions",
                     "roles": "model_hypotheses_only",
                     "runtime_attribute": "frame.object_evidence",
                 }:
-                    raise ValueError("034 v6 requires observed component geometry, never host-assigned roles.")
+                    raise ValueError("034 v6-v9 require observed component geometry, never host-assigned roles.")
+                if config.get("research_revision") == 7 and config.get("short_program_feedback") != {
+                    "max_nonempty_lines": 120, "max_code_bytes": 12000,
+                    "max_followup_requests": 1,
+                    "quota_shared_with_real_mismatch_repair": True,
+                    "zero_action_failure_stages": ["extract", "plan_validation", "initial_prediction"],
+                    "validation_feedback_prior_text": "provenance_only_no_old_natural_language",
+                }:
+                    raise ValueError("034 v7 requires short programs and one shared bounded validation/mismatch follow-up.")
+                if config.get("research_revision") in (8, 9) and config.get("short_program_feedback") != {
+                    "max_nonempty_lines": None, "max_code_bytes": 12000,
+                    "allow_literal_helper_defaults": True,
+                    "static_diagnostics": "bounded_aggregate",
+                    "max_followup_requests": 1,
+                    "quota_shared_with_real_mismatch_repair": True,
+                    "zero_action_failure_stages": ["extract", "plan_validation", "initial_prediction"],
+                    "validation_feedback_prior_text": "provenance_only_no_old_natural_language",
+                }:
+                    raise ValueError("034 v8/v9 require byte/AST-bounded delivery, literal helper defaults and aggregated static feedback.")
+                if config.get("research_revision") == 9 and config.get("execution_interface") != {
+                    "ascii_type": "str", "ascii_access": "splitlines_row_col",
+                    "abstain": "no_action_empty_evidence_and_replaces_allowed",
+                    "plan_diagnostics": "bounded_aggregate",
+                    "feedback_actual_returned_plan": True,
+                }:
+                    raise ValueError("034 v9 requires a typed, status-aware interface and actual returned-plan feedback.")
         elif arms not in (["baseline", "executable_plan"], ["executable_plan"]):
             raise ValueError("034 natural runs require the isolated executable_plan arm, optionally after baseline.")
     if "tail_80k" in arms:

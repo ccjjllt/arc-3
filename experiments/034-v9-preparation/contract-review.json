@@ -1,0 +1,197 @@
+{
+  "scope": "Pure bounded host validation only: no candidate source execution, native action, game, model, network or GPU. Real v8 saved-output validation is independently handled by checker agent.",
+  "contract_source_sha256": "340819298324c4873dd2a1c997c29802cea47701bc69a60c4b749ec6ce931d87",
+  "api": {
+    "signature": "validate_plan(..., *, status_aware=False, aggregate_errors=False)",
+    "legacy_default_preserved": true,
+    "plan_diagnostics": [
+      "errors (max16)",
+      "total_errors",
+      "truncated_count",
+      "status_aware",
+      "aggregate_errors",
+      "duplicate_coordinates (max16)",
+      "total_duplicate_coordinates",
+      "wrong_pixels",
+      "differences (max16)"
+    ],
+    "rejected_plan_executable_field_present": false
+  },
+  "cases": [
+    {
+      "name": "ready_still_accepts",
+      "passed": true,
+      "result_status": "validated_current_evidence",
+      "diagnostic_codes": []
+    },
+    {
+      "name": "legacy_empty_abstain_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": []
+    },
+    {
+      "name": "explicit_empty_abstain_accepted",
+      "passed": true,
+      "result_status": "validated_current_evidence",
+      "diagnostic_codes": []
+    },
+    {
+      "name": "aggregate_without_status_awareness_keeps_strict_abstain",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_replaces",
+        "evidence_count"
+      ]
+    },
+    {
+      "name": "ready_empty_evidence_and_replaces_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_action_count",
+        "plan_replaces",
+        "evidence_count"
+      ]
+    },
+    {
+      "name": "completed_empty_evidence_and_replaces_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_replaces",
+        "evidence_count"
+      ]
+    },
+    {
+      "name": "abstain_with_nonempty_wrong_evidence_rejected",
+      "passed": true,
+      "result_status": "rejected_evidence",
+      "diagnostic_codes": [
+        "evidence_wrong_pixels"
+      ]
+    },
+    {
+      "name": "abstain_unknown_replaces_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_replaces_unknown"
+      ]
+    },
+    {
+      "name": "abstain_actions_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_action_count"
+      ]
+    },
+    {
+      "name": "abstain_reason_empty_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_reason"
+      ]
+    },
+    {
+      "name": "duplicate_and_wrong_pixels_reported_together",
+      "passed": true,
+      "result_status": "rejected_evidence",
+      "diagnostic_codes": [
+        "evidence_duplicate_coordinate",
+        "evidence_wrong_pixels"
+      ]
+    },
+    {
+      "name": "duplicated_out_of_frame_and_bad_color_checked_independently",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "evidence_coordinate",
+        "evidence_color",
+        "evidence_duplicate_coordinate",
+        "evidence_coordinate",
+        "evidence_color"
+      ]
+    },
+    {
+      "name": "diagnostics_capped_at_16_without_losing_total_or_wrong_pixels",
+      "passed": true,
+      "result_status": "rejected_evidence",
+      "diagnostic_codes": [
+        "evidence_count",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate",
+        "evidence_duplicate_coordinate"
+      ]
+    },
+    {
+      "name": "schema_and_replaces_and_evidence_errors_aggregate",
+      "passed": true,
+      "result_status": "rejected_evidence",
+      "diagnostic_codes": [
+        "plan_schema",
+        "plan_reason",
+        "plan_replaces_duplicate",
+        "plan_replaces_unknown",
+        "evidence_wrong_pixels"
+      ]
+    },
+    {
+      "name": "strict_tuple_rejected",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_json"
+      ]
+    },
+    {
+      "name": "json_byte_limit_retained",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_json"
+      ]
+    },
+    {
+      "name": "goal_byte_limit_retained",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_goal_limit"
+      ]
+    },
+    {
+      "name": "diagnostics_remain_bounded_for_huge_extra_key",
+      "passed": true,
+      "result_status": "rejected",
+      "diagnostic_codes": [
+        "plan_schema"
+      ]
+    }
+  ],
+  "malformed_shape_resource_checks": 98,
+  "input_not_mutated": true,
+  "all_passed": true,
+  "limitations": [
+    "A valid abstain proves only schema-valid refusal, not program usefulness.",
+    "Duplicate and wrong-pixel findings reject the ready plan; no deduplication or color correction occurs.",
+    "Ready/completed retain nonempty verified evidence and real replacement-binding requirements.",
+    "Prediction contract remains unchanged."
+  ]
+}

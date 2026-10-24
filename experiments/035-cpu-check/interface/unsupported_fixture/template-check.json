@@ -1,0 +1,106 @@
+{
+  "check": "035-mounted-reasoning-template-v1",
+  "observed_at_utc": "2026-10-24T10:48:58.053495+00:00",
+  "model_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/fixture-model",
+  "passed": false,
+  "model_generation_calls": 0,
+  "model_weight_loads": 0,
+  "gpu_calls": 0,
+  "local_files_only": true,
+  "network_requested": false,
+  "template_updated": false,
+  "source_files": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/fixture-model/chat_template.jinja",
+      "bytes": 57,
+      "sha256": "837d5d4c5f4999c7b2fd06e3c65adc2ba20002b2789deefed14d1b9ac25caf8f",
+      "archive": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/template-check-chat_template.jinja"
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/fixture-model/tokenizer_config.json",
+      "bytes": 121,
+      "sha256": "b443decdd5a75f9192a2fad2bd25479717946b74fc72e6d48df6bb96d88ca63d",
+      "template_fields_archive": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/template-check-tokenizer-template-config.json",
+      "template_fields_sha256": "0e229a490bce957fcdb4656e0e691cf3735651e730906707200ad36d32187a44"
+    }
+  ],
+  "transformers_version": "035-cpu-fixture-no-real-tokenizer",
+  "tokenizer_class": "FixtureTokenizer",
+  "active_template_source": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/035-cpu-check/interface/unsupported_fixture/fixture-model/chat_template.jinja",
+  "active_template_sha256": "837d5d4c5f4999c7b2fd06e3c65adc2ba20002b2789deefed14d1b9ac25caf8f",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "Inspect the current state before choosing an action."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_state",
+        "description": "Inspect one visible state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "detail"
+          ]
+        }
+      }
+    }
+  ],
+  "renders": {
+    "off": {
+      "chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "rendered_sha256": "af9610a4f5c332e3f9d4eef61434b827a12195b1bb6a2c12ab7b80c5d89f92a7",
+      "rendered_bytes": 58
+    },
+    "low": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "low"
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "7b52c660a00194e62aef95b29533812729d48f315f6535be08802ac5f38d295c",
+      "rendered_bytes": 47
+    },
+    "medium": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "medium"
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "7b52c660a00194e62aef95b29533812729d48f315f6535be08802ac5f38d295c",
+      "rendered_bytes": 47
+    }
+  },
+  "low_specific_instruction": "Keep your thinking brief",
+  "checks": {
+    "off_closed_think": true,
+    "low_open_think": true,
+    "medium_open_think": true,
+    "low_effort_branch_in_template": false,
+    "low_instruction_in_template": false,
+    "low_instruction_in_low": false,
+    "low_instruction_absent_off": true,
+    "low_instruction_absent_medium": true,
+    "all_renderings_distinct": false
+  },
+  "error": "RuntimeError: Mounted tokenizer does not prove low effort: low_effort_branch_in_template, low_instruction_in_template, low_instruction_in_low, all_renderings_distinct",
+  "decision": "abort_C_before_generation"
+}
