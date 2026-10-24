@@ -1,5 +1,26 @@
 # 034 实施进展
 
+## v6 当前对象几何与变化证据
+
+2026-10-24。**v6已COMPLETE，远端版本6的32个cell与冻结候选逐项一致。两题均分18.2540→23.8095（+5.5556），但辅助host动作／预测检查／真实修订均为0，不能把su15普通主循环的新增1关作为对象目录收益，不扩大或正式提交。** 新配额读取为30 GPU小时，旧52分钟余额已过期。依据v5真实失败，下一版只检验“可直接使用的当前连通区域几何与近期变化表示＋配套使用说明”。角色仍是模型假设，不是宿主UI黑名单或正确对象答案。[计划](../plan/034-v6-object-evidence.md) · [设计独立审阅](../../experiments/034-v6-preparation/design-independent-review.json)
+
+新纯函数在宿主事实包和原生`frame.object_evidence`中共用，提供逐帧ID、颜色、像素数、bbox和精确展开范围（矩形bbox／非矩形完整runs），不合并同色分离实例。近期最多两次真实变化只按当前坐标投影，跨关／形状边界不提供对象动作支持。多色、断开对象可以是多个分量组合；静止不等于UI，控件也可能可操作。超出完整几何界限明确unavailable，没有静默截断。
+
+28项纯几何检查、7项原生child检查及原有14场景通过；原生动作后目录和ID重新计算，host／child逐值相等。v5预测覆盖校准复现4／36、4／36、4／16、4／16，第四次遥远计数条另为1／52；它只用于后续审计，不发送给求解器或新增验收门槛。[几何核验](../../experiments/034-v6-preparation/object-facts-cpu.json) · [原生刷新](../../experiments/034-v6-preparation/native-object-checks.json) · [回归核验](../../experiments/034-v6-cpu-check/final/report.json) · [覆盖校准](../../experiments/034-v6-preparation/coverage-audit-calibration.json)
+
+两切点catalog含近期事实为7323／4312字符，最终请求仍以服务tokenize的16384-token上限为准。v5旧假设保留；thinking、模型、主循环、执行合同与真实mismatch修订不变，无新增模型轮次或异常重试。同ft09／su15切点B→A，每游戏450秒／60动作，额外处理120秒计入450，单请求60秒；每臂600秒、启动4200、总7200秒。准备通过不表示程序会采用目录或得分会提高。
+
+冻结Notebook970283字节／32cells，SHA256 `1927e60863c4c39ee5e23d33bd284f3182b03e5208897b5fa20eecac92ac3a9a`；20份manifest源输入hash、19份预冻结hash和15份Python payload编译通过。[构建审计](../../experiments/034-v6-preparation/build-audit.json) · [冻结配置](../../experiments/034-plan-diagnostic-v6.json)
+
+
+私有目标仍为`zhuating/arc3-034-plan-diagnostic`，本轮一次push明确返回版本6，随后平台RUNNING；实际32个cell逐项核对一致。启动前即时共享额度108000秒。用户通知跑完后已完整回收产物并完成独立审阅。正式最佳仍009 v2／31.16。[启动记录](../../experiments/034-v6-launch.json) · [远端逐cell核对](../../experiments/034-v6-remote-source-check.json) · [最终独立预检](../../experiments/034-v6-preparation/independent-preflight.json) · [实际源码归档](../../experiments/034-v6-source/)
+
+本次ft09 A/B均新增0关（11／24动作）；su15 A0／B1关（均24动作）。ft09程序未使用目录，因顶层常量违反提交合同而extract拒收；su15使用目录并通过当前计划验收，但初预测tuple+float而失败。两份响应都未截断、未超输入token上限。覆盖审计为“不适用／没有checked_action”，不能称对象角色或完整预测通过。[完整结果](../../research/notes/034/034-v6-results-analysis.md) · [机制判断](../../experiments/034-v6-analysis/mechanism-assessment.json) · [程序独立审阅](../../experiments/034-v6-analysis/program-independent-review.json) · [覆盖审计](../../experiments/034-v6-analysis/component-coverage-independent-audit.json)
+
+离线机械复现表明，单独允许ft09常量仍识别0棋盘格且错误局部完成；su15修类型后还出现下标、重复坐标及预测集合错误，角色判断也未获支持。下一候选先收窄到短程序与零动作错误反馈，并与现有一次真实mismatch修订共享后续额度；不继续叠表示模块，尚未实施或启动下一GPU。可运行不等于规则正确或提分。[离线诊断](../../experiments/034-v6-analysis/generated-code-offline-review.json)
+
+20份manifest源／输入、15个Python payload、四请求hash、恢复输入及实际目录重算核对一致。会话44.24分钟、模型启动28.89分钟；两cache均首轮200+后端确认，两CPU／GPU正常关闭。四末请求缺response，known usage不是完整成本。当前共享剩余约29.26小时；余额充足不替代机制和得分证据。[独立完整性审阅](../../experiments/034-v6-analysis/integrity-independent-review.json) · [最终平台快照](../../experiments/034-v6-final-platform-snapshot.json)
+
 ## v5 保留切点前的未验证假设
 
 2026-10-22。**v5已COMPLETE，实际31个cell与冻结版本一致，两臂完整。两题均分34.9206→20.1671（−14.7535），不扩大或正式提交。** ft09 A新增2关／B新增1关，动作33／60；su15两臂均0关，动作42／41。B的ft09在327.87秒用完相同60动作上限而结束，未缩短候选预算。正式最佳继续保留009 v2／31.16。[结果分析](../../research/notes/034/034-v5-results-analysis.md) · [机制判断](../../experiments/034-v5-analysis/mechanism-assessment.json)

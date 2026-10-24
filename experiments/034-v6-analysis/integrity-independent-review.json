@@ -1,0 +1,796 @@
+{
+  "status": "passed_with_explicit_limits",
+  "reviewed_at_utc": "2026-10-24T05:51:44.843930+00:00",
+  "review_kind": "Independent raw v6 audit without shared result-analyzer imports, network/model calls, real game actions, or solver edits. Frozen source modules are loaded only for pure context/geometry comparison.",
+  "notebook_sha256": "1927e60863c4c39ee5e23d33bd284f3182b03e5208897b5fa20eecac92ac3a9a",
+  "notebook_hash_matches_build_and_launch": true,
+  "remote_archive_cell_sources_match_frozen_notebook": true,
+  "source_manifest_checks": [
+    {
+      "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+      "expected": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "actual": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "scripts/build_experiment.py",
+      "expected": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+      "actual": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/__init__.py",
+      "expected": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "actual": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "expected": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+      "actual": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_context.py",
+      "expected": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+      "actual": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+      "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "expected": "b5af29c5fb131c90643f130919541d3b5b2a56bd090ef466095396adf252d236",
+      "actual": "b5af29c5fb131c90643f130919541d3b5b2a56bd090ef466095396adf252d236",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "expected": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "actual": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/object_evidence.py",
+      "expected": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+      "actual": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "expected": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "actual": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "expected": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "actual": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "experiments/034-plan-diagnostic-v6.json",
+      "expected": "c2c21324ec284df221520a534c4399fd2315f535facac43e4b6c2462f630de05",
+      "actual": "c2c21324ec284df221520a534c4399fd2315f535facac43e4b6c2462f630de05",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "experiments/028-fork-package.json.gz.b64",
+      "expected": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "actual": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    },
+    {
+      "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "expected": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "actual": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "equal": true,
+      "verified_against": "frozen_v6_source_archive"
+    }
+  ],
+  "all_raw_json_jsonl_parse": {
+    "passed": true,
+    "files": 29
+  },
+  "arms": {
+    "A": {
+      "metadata_status": "completed",
+      "session_arm": {
+        "arm": "executable_plan_A",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792818916.2116475,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 202241,
+            "started_after_seconds": 2.9639999866049038e-05,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 0.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 0.011279389999799605,
+        "started_at_epoch": 1792818916.2395117,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 456.0548129081726,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "live_source_checks": {
+        "run_arm.py": {
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "transient_history.py": {
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "program_state.py": {
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "tool_agent.py": {
+          "actual": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "expected": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "equal": true
+        },
+        "executable_plan.py": {
+          "actual": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+          "expected": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "actual": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+          "expected": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+          "equal": true
+        },
+        "program_repair.py": {
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        }
+      },
+      "initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "requested_stream_capacity": 10,
+      "actual_parallel_games": 2,
+      "fork_continuation_seconds_per_game": 450,
+      "fork_action_cap_per_game": 60,
+      "arm_budget_seconds": 600,
+      "games": [
+        {
+          "game": "ft09-0d8bbf25",
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 2,
+          "added_levels": 0,
+          "final_score": 14.285714285714285,
+          "continuation_actions": 11,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.0356011660001,
+          "elapsed_tail_over450_seconds": 0.03560116600010588,
+          "action_cap_reached": false,
+          "continuation_clock_offset_seconds": 3.600099802017212,
+          "max_actual_action_seconds_from_continuation": 444.0535321439829,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "initial_main_history_prefix_matches_frozen_seed": true,
+          "request_hash_matches_fork": true,
+          "request_events": 12,
+          "response_events": 11,
+          "request_minus_response_count": 1,
+          "last_request_has_no_response_event": true,
+          "known_returned_usage": {
+            "prompt_tokens": 941487,
+            "total_tokens": 995795,
+            "completion_tokens": 54308,
+            "reasoning_tokens": 49567
+          },
+          "fork_summary_agrees_with_benchmark": true
+        },
+        {
+          "game": "su15-1944f8ab",
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 4,
+          "added_levels": 0,
+          "final_score": 22.22222222222222,
+          "continuation_actions": 24,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.1006817450002,
+          "elapsed_tail_over450_seconds": 0.10068174500020177,
+          "action_cap_reached": false,
+          "continuation_clock_offset_seconds": 3.1104495525360107,
+          "max_actual_action_seconds_from_continuation": 447.74927418546395,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "initial_main_history_prefix_matches_frozen_seed": true,
+          "request_hash_matches_fork": true,
+          "request_events": 23,
+          "response_events": 22,
+          "request_minus_response_count": 1,
+          "last_request_has_no_response_event": true,
+          "known_returned_usage": {
+            "prompt_tokens": 1931629,
+            "total_tokens": 1986762,
+            "completion_tokens": 55133,
+            "reasoning_tokens": 52862
+          },
+          "fork_summary_agrees_with_benchmark": true
+        }
+      ]
+    },
+    "B": {
+      "metadata_status": "completed",
+      "session_arm": {
+        "arm": "executable_plan_B",
+        "budget_seconds": 600,
+        "cache_flush_started_at_epoch": 1792818457.1423771,
+        "cache_flush_attempts": [
+          {
+            "log_offset": 38851,
+            "started_after_seconds": 2.288999985466944e-05,
+            "http_status": 200,
+            "body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+            "backend_confirmed": true,
+            "explicit_pending_requests": false
+          }
+        ],
+        "cache_flush_retry_wait_seconds": 0.0,
+        "cache_flush_http_status": 200,
+        "cache_flush_body": "Cache flushed.\nPlease check backend logs for more details. (When there are running or waiting requests, the operation will not be performed.)\n",
+        "cache_flush_backend_confirmed": true,
+        "cache_flush_elapsed_seconds": 0.0030416700001296704,
+        "started_at_epoch": 1792818457.161498,
+        "cpu_process_group_stopped": true,
+        "cpu_process_leader_exited": true,
+        "exit_code": 0,
+        "elapsed_seconds": 459.0493519306183,
+        "benchmark_exists": true,
+        "game_state_counts": {
+          "gave_up": 2
+        },
+        "all_games_failed_to_run": false,
+        "lingering_worker_threads": [],
+        "forced_cpu_process_exit": false,
+        "environment_overrides": {
+          "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+          "ARC3_PRIORITY_PACE": "0"
+        },
+        "complete_pool": true
+      },
+      "live_source_checks": {
+        "run_arm.py": {
+          "actual": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "expected": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+          "equal": true
+        },
+        "goal_evidence.py": {
+          "actual": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "expected": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+          "equal": true
+        },
+        "transient_history.py": {
+          "actual": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "expected": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+          "equal": true
+        },
+        "program_state.py": {
+          "actual": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "expected": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+          "equal": true
+        },
+        "tool_agent.py": {
+          "actual": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "expected": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+          "equal": true
+        },
+        "executable_plan.py": {
+          "actual": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+          "expected": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+          "equal": true
+        },
+        "executable_plan_contract.py": {
+          "actual": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "expected": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+          "equal": true
+        },
+        "executable_plan_context.py": {
+          "actual": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+          "expected": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+          "equal": true
+        },
+        "program_repair.py": {
+          "actual": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "expected": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+          "equal": true
+        },
+        "executable_plan_forks.py": {
+          "actual": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "expected": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+          "equal": true
+        }
+      },
+      "initial_benchmark_sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67",
+      "requested_stream_capacity": 10,
+      "actual_parallel_games": 2,
+      "fork_continuation_seconds_per_game": 450,
+      "fork_action_cap_per_game": 60,
+      "arm_budget_seconds": 600,
+      "games": [
+        {
+          "game": "ft09-0d8bbf25",
+          "state": "gave_up",
+          "initial_levels_completed": 2,
+          "final_levels_completed": 2,
+          "added_levels": 0,
+          "final_score": 14.285714285714285,
+          "continuation_actions": 24,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 450.05648706400007,
+          "elapsed_tail_over450_seconds": 0.05648706400006631,
+          "action_cap_reached": false,
+          "continuation_clock_offset_seconds": 3.6829111576080322,
+          "max_actual_action_seconds_from_continuation": 434.24168793439185,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "initial_main_history_prefix_matches_frozen_seed": true,
+          "request_hash_matches_fork": true,
+          "request_events": 13,
+          "response_events": 12,
+          "request_minus_response_count": 1,
+          "last_request_has_no_response_event": true,
+          "known_returned_usage": {
+            "prompt_tokens": 996838,
+            "total_tokens": 1046371,
+            "completion_tokens": 49533,
+            "reasoning_tokens": 45371
+          },
+          "fork_summary_agrees_with_benchmark": true
+        },
+        {
+          "game": "su15-1944f8ab",
+          "state": "gave_up",
+          "initial_levels_completed": 4,
+          "final_levels_completed": 5,
+          "added_levels": 1,
+          "final_score": 33.33333333333333,
+          "continuation_actions": 24,
+          "actions_during_forced_branch": 0,
+          "elapsed_seconds": 451.8347177400001,
+          "elapsed_tail_over450_seconds": 1.8347177400000874,
+          "action_cap_reached": false,
+          "continuation_clock_offset_seconds": 3.172349214553833,
+          "max_actual_action_seconds_from_continuation": 429.2488984914462,
+          "all_actual_actions_within450_seconds": true,
+          "continuation_history_matches_benchmark": true,
+          "restore_checks": {
+            "grid_sha256": true,
+            "messages_sha256": true,
+            "functions_sha256": true,
+            "branch_source_code_sha256": true,
+            "prefix_recorded_actions": true,
+            "initial_levels_completed": true
+          },
+          "initial_main_history_prefix_matches_frozen_seed": true,
+          "request_hash_matches_fork": true,
+          "request_events": 17,
+          "response_events": 16,
+          "request_minus_response_count": 1,
+          "last_request_has_no_response_event": true,
+          "known_returned_usage": {
+            "prompt_tokens": 1389235,
+            "total_tokens": 1440171,
+            "completion_tokens": 50936,
+            "reasoning_tokens": 48840
+          },
+          "fork_summary_agrees_with_benchmark": true
+        }
+      ]
+    }
+  },
+  "candidate_branches": [
+    {
+      "game": "ft09-0d8bbf25",
+      "status": "rejected",
+      "stage": "extract",
+      "actual_actions": 0,
+      "error": "ValueError: Return only function definitions and allowed imports",
+      "elapsed_seconds": 26.60140884600014,
+      "request_elapsed_seconds": 26.53638909700021,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 12709,
+        "total_tokens": 16124,
+        "completion_tokens": 3415,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "input_tokens": 12709,
+      "tokenize_equals_returned_usage": true,
+      "tokenize_http_status": 200,
+      "generation_http_status": 200,
+      "actual_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_program"
+        }
+      },
+      "actual_tool_names": [
+        "submit_program"
+      ],
+      "actual_chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "actual_max_tokens": 4096,
+      "actual_timeout_seconds": 60.0,
+      "within_input_cap": true,
+      "package_grid_hash_matches_frozen_seed": true,
+      "object_evidence_status": "available",
+      "object_component_count": 52,
+      "object_pixels_covered": 4096,
+      "object_geometry_errors": [],
+      "object_geometry_recomputed_from_exact_public_facts_equals_payload": true,
+      "object_evidence_hash_matches_context_metadata": true,
+      "prior_hypotheses_match_frozen_seed_pure_copy": true,
+      "prior_hypothesis_hash_and_verbatim_spans_match_seed": true,
+      "prior_hypotheses_identical_to_v5": true,
+      "prior_hypothesis_source_indices": [
+        39,
+        37
+      ],
+      "prior_hypothesis_text_characters": 9047,
+      "response_top_level_ast_types": [
+        "Import",
+        "Assign",
+        "Assign",
+        "Assign",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef"
+      ],
+      "response_mentions_object_evidence": false,
+      "checked_actions": {},
+      "host_plan_execution_count": 0,
+      "real_counterexamples": 0
+    },
+    {
+      "game": "su15-1944f8ab",
+      "status": "rejected",
+      "stage": "initial_prediction",
+      "actual_actions": 0,
+      "error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _comps(frame) for later Python calls in this game.\\nRetained your function _centroid(pts) for later Python calls in this game.\\nRetained your function _inside(grid, r, c) for later Python calls in this game.\\nRetained your function _first(grid, r, c) for later Python calls in this game.\\nRetained your function _find_target(grid, comps) for later Python calls in this game.\\nRetained your function _find_piece(comps) for later Python calls in this game.\\nRetained your function _nearest_S(grid, comps, r, c) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 238, in <module>\\n  File \"<python_tool>\", line 220, in predict\\nTypeError: can only concatenate tuple (not \"float\") to tuple'}",
+      "elapsed_seconds": 26.533534856999722,
+      "request_elapsed_seconds": 25.88268340500008,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "prompt_tokens": 11580,
+        "total_tokens": 14791,
+        "completion_tokens": 3211,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "input_tokens": 11580,
+      "tokenize_equals_returned_usage": true,
+      "tokenize_http_status": 200,
+      "generation_http_status": 200,
+      "actual_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_program"
+        }
+      },
+      "actual_tool_names": [
+        "submit_program"
+      ],
+      "actual_chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "actual_max_tokens": 4096,
+      "actual_timeout_seconds": 60.0,
+      "within_input_cap": true,
+      "package_grid_hash_matches_frozen_seed": true,
+      "object_evidence_status": "available",
+      "object_component_count": 32,
+      "object_pixels_covered": 4096,
+      "object_geometry_errors": [],
+      "object_geometry_recomputed_from_exact_public_facts_equals_payload": true,
+      "object_evidence_hash_matches_context_metadata": true,
+      "prior_hypotheses_match_frozen_seed_pure_copy": true,
+      "prior_hypothesis_hash_and_verbatim_spans_match_seed": true,
+      "prior_hypotheses_identical_to_v5": true,
+      "prior_hypothesis_source_indices": [
+        94,
+        91
+      ],
+      "prior_hypothesis_text_characters": 5657,
+      "response_top_level_ast_types": [
+        "Import",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef",
+        "FunctionDef"
+      ],
+      "response_mentions_object_evidence": true,
+      "checked_actions": {},
+      "host_plan_execution_count": 0,
+      "real_counterexamples": 0
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "game": "ft09-0d8bbf25",
+      "A_added_levels": 0,
+      "B_added_levels": 0,
+      "A_score": 14.285714285714285,
+      "B_score": 14.285714285714285,
+      "B_minus_A_score": 0.0,
+      "A_actions": 11,
+      "B_actions": 24
+    },
+    {
+      "game": "su15-1944f8ab",
+      "A_added_levels": 0,
+      "B_added_levels": 1,
+      "A_score": 22.22222222222222,
+      "B_score": 33.33333333333333,
+      "B_minus_A_score": 11.111111111111107,
+      "A_actions": 24,
+      "B_actions": 24
+    }
+  ],
+  "two_selected_game_mean": {
+    "A": 18.253968253968253,
+    "B": 23.809523809523807,
+    "B_minus_A": 5.555555555555554,
+    "scope": "Two selected forced checkpoints only; ordinary continuation benefit cannot be attributed to failed program mechanism."
+  },
+  "session": {
+    "started_at_epoch": 1792816723.6075304,
+    "elapsed_seconds": 2654.299731492996,
+    "model_ready_seconds": 1733.534568309784,
+    "equal_arm_budget_seconds": 600,
+    "cleanup_reserve_seconds": 360,
+    "cache_flush_reserve_seconds": 240,
+    "arm_count": 2,
+    "status": "completed",
+    "gpu_server_process_group_stopped": true,
+    "gpu_server_leader_exited": true,
+    "gpu_server_stopped": true,
+    "gpu_sampling": {
+      "path": "/kaggle/working/gpu-utilization.jsonl",
+      "interval_seconds": 10.0,
+      "sample_count": 276,
+      "error_count": 0,
+      "stopped": true
+    },
+    "elapsed_minutes": 44.238328858216605,
+    "model_ready_minutes": 28.892242805163065,
+    "within7200_cap": true,
+    "startup_within4200_cap": true
+  },
+  "manifest_source_hashes_equal_frozen_build": true,
+  "initial_benchmark_hash_equal_between_arms": true,
+  "known_final_request_response_gap": 4,
+  "embedded_native_source_checks": [
+    {
+      "path": "src/arc3_research/__init__.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_context.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_contract.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/executable_plan_forks.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/object_evidence.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/program_repair.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "same_bytes_as_archive": true
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "same_bytes_as_archive": true
+    }
+  ],
+  "combined_fork_objects_equal_original_inputs": true,
+  "cache_backend_success_line_numbers": [
+    225,
+    935
+  ],
+  "all_cache_boundaries_first_attempt_http200_and_backend_confirmed": true,
+  "hardware_observed_in_platform_log": true,
+  "download_integrity": {
+    "status": "complete",
+    "inventory_file_count_including_platform_log": 44,
+    "missing_files": [],
+    "note": "Official file inventory does not expose content hashes. Four per-game request SHA256 summaries, parsed JSONs, source hashes and frozen checkpoint checks independently agree."
+  },
+  "platform_status": {
+    "status": "COMPLETE"
+  },
+  "platform_version": 6,
+  "platform_observed_at_utc": "2026-10-24T05:47:44.780590+00:00",
+  "limitations": [
+    "One selected-checkpoint B-then-A diagnostic does not establish stable causality or full-pool effect; v5-v6 comparisons lack a repeated paired baseline.",
+    "Both candidate branches failed before any real host action; the B su15 added level is ordinary-main-loop continuation evidence, not executable-program benefit.",
+    "Known returned usage excludes unreturned final requests. Request-response gaps are not a proven timeout count.",
+    "History clocks are rebased using benchmark GameRun.started_at and continuation epochs; history raw times also contain replay overhead.",
+    "Only subset recorded live by arm metadata is verified as live source. All other source hashes are frozen/embedded provenance.",
+    "Shared account quota changes do not independently prove this session billing."
+  ],
+  "decision": "Do not scale or formally submit v6. Preserve observed selected-game positive difference, but program quality hypothesis remains untested due zero-action extraction/initial-prediction failures."
+}

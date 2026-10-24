@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T04:34:33.061095+00:00",
+  "network_attempts": 0,
+  "real_model_calls": 0,
+  "real_game_actions": 0,
+  "native_child_calls": 7,
+  "synthetic_native_protocol_actions": 1,
+  "checks": [
+    {
+      "name": "native_host_equal_and_exact_complete_footprint",
+      "status": "passed",
+      "components": 4
+    },
+    {
+      "name": "same_color_diagonal_is_separate_4_connected_component",
+      "status": "passed"
+    },
+    {
+      "name": "native_action_refreshes_current_geometry_and_transitions_not_old_ids",
+      "status": "passed",
+      "static_B_id_before": 2,
+      "static_B_id_after": 1,
+      "changed_pixels": 4
+    },
+    {
+      "name": "property_recomputes_without_mutable_catalog_cache",
+      "status": "passed"
+    },
+    {
+      "name": "native_projects_only_last_two_transitions",
+      "status": "passed"
+    },
+    {
+      "name": "native_level_boundary_supplies_no_action_support",
+      "status": "passed"
+    },
+    {
+      "name": "missing_before_frame_gives_no_transition_support",
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "src/arc3_research/object_evidence.py": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+    "src/arc3_research/executable_plan.py": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+    "src/arc3_research/executable_plan_context.py": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44"
+  },
+  "script_path": "/private/tmp/arc3_034_v6_native_check.py",
+  "script_sha256": "2bc5f6cf717f704912539a6eccef52d663e4469d27f7e26a33b1ee1996448665",
+  "limits": [
+    "Synthetic public frames and scripted action handler, not ARC score or object-role correctness.",
+    "Actual isolated child sandbox and host action protocol exercised; no model, network or GPU."
+  ]
+}

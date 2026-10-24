@@ -86,7 +86,7 @@ def main() -> None:
         required.update({"segmentation_runs.py", "segmentation_forks.py"})
     if any(arm in ("executable_plan", "executable_plan_A", "executable_plan_B") for arm in arms):
         required.update({"executable_plan.py", "executable_plan_contract.py",
-                         "executable_plan_context.py", "program_repair.py"})
+                         "executable_plan_context.py", "object_evidence.py", "program_repair.py"})
     plan_forks = any(arm in ("executable_plan_A", "executable_plan_B") for arm in arms)
     if plan_forks:
         required.add("executable_plan_forks.py")

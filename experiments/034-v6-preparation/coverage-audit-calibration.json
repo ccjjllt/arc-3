@@ -1,0 +1,541 @@
+{
+  "audit": "034 v6 retrospective footprint coverage calibration on v5 actual checked actions",
+  "reviewer": "/root/v6_object_design_review",
+  "scope": "Pure read-only local analysis; no model/GPU/network or real action. Only this report written; no new test-script subsystem and no changed runtime acceptance rule.",
+  "source": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+  "source_sha256": "7b9d722b6bdb86fed8322798f548c596cea42a488730b2f2bfd3c3b68a72facc",
+  "helper_crosschecked": "src/arc3_research/object_evidence.py",
+  "helper_source_sha256": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+  "method": "Use each checked_action transition.before ASCII and full frozen expected object_pixels/target_pixels/expected_pixels. Independently flood-fill same-color 4-neighbor components. For every component touched by the declared projection, count object-only, target-only, union and expected intersections. Expand current helper rect=true bbox or rect=false runs and assert exact equality to independent flood fill. Component IDs are frame-local, not tracked objects.",
+  "calibration_passed": true,
+  "recovered_clicked_component_union_coverages": [
+    "4/36",
+    "4/36",
+    "4/16",
+    "4/16"
+  ],
+  "object_only_counts_note": "First three object_pixels contain only 2 pixels of clicked component; target/union/expected contain 4. The fourth object list additionally names one remote counter pixel, which is audited as a separate component, never folded into the clicked component.",
+  "actions": [
+    {
+      "event_line": 4,
+      "before_step": 27,
+      "after_step": 28,
+      "level": 3,
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 29
+      },
+      "status": "match",
+      "scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "before_ascii_sha256": "0fb40a20fd28ef796672895ca8cae50f2d05196a688d308e48bed7467a565865",
+      "all_components": 52,
+      "helper_crosscheck": "Exact per-component count/bbox/color/pixel-set equality; rect bbox and irregular runs expanded independently.",
+      "object_pixel_coordinates": [
+        [
+          4,
+          28,
+          "O"
+        ],
+        [
+          5,
+          29,
+          "O"
+        ]
+      ],
+      "target_pixel_coordinates": [
+        [
+          4,
+          28,
+          "O"
+        ],
+        [
+          4,
+          29,
+          "O"
+        ],
+        [
+          5,
+          28,
+          "O"
+        ],
+        [
+          5,
+          29,
+          "O"
+        ]
+      ],
+      "expected_pixel_coordinates": [
+        [
+          4,
+          28,
+          "R"
+        ],
+        [
+          4,
+          29,
+          "R"
+        ],
+        [
+          5,
+          28,
+          "R"
+        ],
+        [
+          5,
+          29,
+          "R"
+        ]
+      ],
+      "real_changed_pixels": 36,
+      "checked_pixels": 4,
+      "wrong_checked_pixels": 0,
+      "declared_union_equals_expected_coordinates": true,
+      "all_declared_source_colors_match_before": true,
+      "intersected_components": [
+        {
+          "component_id": 3,
+          "color": "O",
+          "bbox": [
+            4,
+            28,
+            9,
+            33
+          ],
+          "component_pixels": 36,
+          "contains_click_coordinate": true,
+          "object_selected_pixels": 2,
+          "target_selected_pixels": 4,
+          "declared_union_selected_pixels": 4,
+          "expected_selected_pixels": 4,
+          "object_fraction_of_component": 0.05555555555555555,
+          "declared_union_fraction_of_component": 0.1111111111111111,
+          "expected_covers_entire_component": false,
+          "missing_component_pixels_from_expected": 32
+        }
+      ],
+      "clicked_component_coverage": {
+        "component_id": 3,
+        "color": "O",
+        "bbox": [
+          4,
+          28,
+          9,
+          33
+        ],
+        "component_pixels": 36,
+        "contains_click_coordinate": true,
+        "object_selected_pixels": 2,
+        "target_selected_pixels": 4,
+        "declared_union_selected_pixels": 4,
+        "expected_selected_pixels": 4,
+        "object_fraction_of_component": 0.05555555555555555,
+        "declared_union_fraction_of_component": 0.1111111111111111,
+        "expected_covers_entire_component": false,
+        "missing_component_pixels_from_expected": 32
+      },
+      "interpretation": "Whole-block scope is not established: only a proper subset of clicked same-color component is predicted. No conclusion about UI/semantic role is derived by this geometry audit."
+    },
+    {
+      "event_line": 7,
+      "before_step": 28,
+      "after_step": 29,
+      "level": 3,
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 37
+      },
+      "status": "match",
+      "scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "before_ascii_sha256": "264e863cf2f08efae221430f79d52481e0f214ea30713353ca49ed30f424173e",
+      "all_components": 52,
+      "helper_crosscheck": "Exact per-component count/bbox/color/pixel-set equality; rect bbox and irregular runs expanded independently.",
+      "object_pixel_coordinates": [
+        [
+          4,
+          36,
+          "O"
+        ],
+        [
+          5,
+          37,
+          "O"
+        ]
+      ],
+      "target_pixel_coordinates": [
+        [
+          4,
+          36,
+          "O"
+        ],
+        [
+          4,
+          37,
+          "O"
+        ],
+        [
+          5,
+          36,
+          "O"
+        ],
+        [
+          5,
+          37,
+          "O"
+        ]
+      ],
+      "expected_pixel_coordinates": [
+        [
+          4,
+          36,
+          "R"
+        ],
+        [
+          4,
+          37,
+          "R"
+        ],
+        [
+          5,
+          36,
+          "R"
+        ],
+        [
+          5,
+          37,
+          "R"
+        ]
+      ],
+      "real_changed_pixels": 37,
+      "checked_pixels": 4,
+      "wrong_checked_pixels": 0,
+      "declared_union_equals_expected_coordinates": true,
+      "all_declared_source_colors_match_before": true,
+      "intersected_components": [
+        {
+          "component_id": 4,
+          "color": "O",
+          "bbox": [
+            4,
+            36,
+            9,
+            41
+          ],
+          "component_pixels": 36,
+          "contains_click_coordinate": true,
+          "object_selected_pixels": 2,
+          "target_selected_pixels": 4,
+          "declared_union_selected_pixels": 4,
+          "expected_selected_pixels": 4,
+          "object_fraction_of_component": 0.05555555555555555,
+          "declared_union_fraction_of_component": 0.1111111111111111,
+          "expected_covers_entire_component": false,
+          "missing_component_pixels_from_expected": 32
+        }
+      ],
+      "clicked_component_coverage": {
+        "component_id": 4,
+        "color": "O",
+        "bbox": [
+          4,
+          36,
+          9,
+          41
+        ],
+        "component_pixels": 36,
+        "contains_click_coordinate": true,
+        "object_selected_pixels": 2,
+        "target_selected_pixels": 4,
+        "declared_union_selected_pixels": 4,
+        "expected_selected_pixels": 4,
+        "object_fraction_of_component": 0.05555555555555555,
+        "declared_union_fraction_of_component": 0.1111111111111111,
+        "expected_covers_entire_component": false,
+        "missing_component_pixels_from_expected": 32
+      },
+      "interpretation": "Whole-block scope is not established: only a proper subset of clicked same-color component is predicted. No conclusion about UI/semantic role is derived by this geometry audit."
+    },
+    {
+      "event_line": 10,
+      "before_step": 29,
+      "after_step": 30,
+      "level": 3,
+      "action": {
+        "action": "MOUSE",
+        "row": 5,
+        "col": 61
+      },
+      "status": "mismatch",
+      "scope": "the clicked cell object: its block must flip O->R and nothing else",
+      "before_ascii_sha256": "d2c5aaaaa9498f17f3eb22c536d87fd015bade346fa8a5a72af06dce106a582f",
+      "all_components": 52,
+      "helper_crosscheck": "Exact per-component count/bbox/color/pixel-set equality; rect bbox and irregular runs expanded independently.",
+      "object_pixel_coordinates": [
+        [
+          4,
+          60,
+          "O"
+        ],
+        [
+          5,
+          61,
+          "O"
+        ]
+      ],
+      "target_pixel_coordinates": [
+        [
+          4,
+          60,
+          "O"
+        ],
+        [
+          4,
+          61,
+          "O"
+        ],
+        [
+          5,
+          60,
+          "O"
+        ],
+        [
+          5,
+          61,
+          "O"
+        ]
+      ],
+      "expected_pixel_coordinates": [
+        [
+          4,
+          60,
+          "R"
+        ],
+        [
+          4,
+          61,
+          "R"
+        ],
+        [
+          5,
+          60,
+          "R"
+        ],
+        [
+          5,
+          61,
+          "R"
+        ]
+      ],
+      "real_changed_pixels": 0,
+      "checked_pixels": 4,
+      "wrong_checked_pixels": 4,
+      "declared_union_equals_expected_coordinates": true,
+      "all_declared_source_colors_match_before": true,
+      "intersected_components": [
+        {
+          "component_id": 5,
+          "color": "O",
+          "bbox": [
+            4,
+            60,
+            7,
+            63
+          ],
+          "component_pixels": 16,
+          "contains_click_coordinate": true,
+          "object_selected_pixels": 2,
+          "target_selected_pixels": 4,
+          "declared_union_selected_pixels": 4,
+          "expected_selected_pixels": 4,
+          "object_fraction_of_component": 0.125,
+          "declared_union_fraction_of_component": 0.25,
+          "expected_covers_entire_component": false,
+          "missing_component_pixels_from_expected": 12
+        }
+      ],
+      "clicked_component_coverage": {
+        "component_id": 5,
+        "color": "O",
+        "bbox": [
+          4,
+          60,
+          7,
+          63
+        ],
+        "component_pixels": 16,
+        "contains_click_coordinate": true,
+        "object_selected_pixels": 2,
+        "target_selected_pixels": 4,
+        "declared_union_selected_pixels": 4,
+        "expected_selected_pixels": 4,
+        "object_fraction_of_component": 0.125,
+        "declared_union_fraction_of_component": 0.25,
+        "expected_covers_entire_component": false,
+        "missing_component_pixels_from_expected": 12
+      },
+      "interpretation": "Whole-block scope is not established: only a proper subset of clicked same-color component is predicted. No conclusion about UI/semantic role is derived by this geometry audit."
+    },
+    {
+      "event_line": 17,
+      "before_step": 30,
+      "after_step": 31,
+      "level": 3,
+      "action": {
+        "action": "MOUSE",
+        "row": 1,
+        "col": 61
+      },
+      "status": "mismatch",
+      "scope": "clicked cell block plus one trailing palette pixel: block flips R->O and the trailing marker becomes Y, nothing else",
+      "before_ascii_sha256": "d2c5aaaaa9498f17f3eb22c536d87fd015bade346fa8a5a72af06dce106a582f",
+      "all_components": 52,
+      "helper_crosscheck": "Exact per-component count/bbox/color/pixel-set equality; rect bbox and irregular runs expanded independently.",
+      "object_pixel_coordinates": [
+        [
+          0,
+          60,
+          "R"
+        ],
+        [
+          1,
+          61,
+          "R"
+        ],
+        [
+          63,
+          51,
+          "O"
+        ]
+      ],
+      "target_pixel_coordinates": [
+        [
+          0,
+          60,
+          "R"
+        ],
+        [
+          0,
+          61,
+          "R"
+        ],
+        [
+          1,
+          60,
+          "R"
+        ],
+        [
+          1,
+          61,
+          "R"
+        ],
+        [
+          63,
+          51,
+          "O"
+        ]
+      ],
+      "expected_pixel_coordinates": [
+        [
+          0,
+          60,
+          "O"
+        ],
+        [
+          0,
+          61,
+          "O"
+        ],
+        [
+          1,
+          60,
+          "O"
+        ],
+        [
+          1,
+          61,
+          "O"
+        ],
+        [
+          63,
+          51,
+          "Y"
+        ]
+      ],
+      "real_changed_pixels": 0,
+      "checked_pixels": 5,
+      "wrong_checked_pixels": 5,
+      "declared_union_equals_expected_coordinates": true,
+      "all_declared_source_colors_match_before": true,
+      "intersected_components": [
+        {
+          "component_id": 1,
+          "color": "R",
+          "bbox": [
+            0,
+            60,
+            3,
+            63
+          ],
+          "component_pixels": 16,
+          "contains_click_coordinate": true,
+          "object_selected_pixels": 2,
+          "target_selected_pixels": 4,
+          "declared_union_selected_pixels": 4,
+          "expected_selected_pixels": 4,
+          "object_fraction_of_component": 0.125,
+          "declared_union_fraction_of_component": 0.25,
+          "expected_covers_entire_component": false,
+          "missing_component_pixels_from_expected": 12
+        },
+        {
+          "component_id": 50,
+          "color": "O",
+          "bbox": [
+            63,
+            0,
+            63,
+            51
+          ],
+          "component_pixels": 52,
+          "contains_click_coordinate": false,
+          "object_selected_pixels": 1,
+          "target_selected_pixels": 1,
+          "declared_union_selected_pixels": 1,
+          "expected_selected_pixels": 1,
+          "object_fraction_of_component": 0.019230769230769232,
+          "declared_union_fraction_of_component": 0.019230769230769232,
+          "expected_covers_entire_component": false,
+          "missing_component_pixels_from_expected": 51
+        }
+      ],
+      "clicked_component_coverage": {
+        "component_id": 1,
+        "color": "R",
+        "bbox": [
+          0,
+          60,
+          3,
+          63
+        ],
+        "component_pixels": 16,
+        "contains_click_coordinate": true,
+        "object_selected_pixels": 2,
+        "target_selected_pixels": 4,
+        "declared_union_selected_pixels": 4,
+        "expected_selected_pixels": 4,
+        "object_fraction_of_component": 0.125,
+        "declared_union_fraction_of_component": 0.25,
+        "expected_covers_entire_component": false,
+        "missing_component_pixels_from_expected": 12
+      },
+      "interpretation": "Whole-block scope is not established: only a proper subset of clicked same-color component is predicted. No conclusion about UI/semantic role is derived by this geometry audit."
+    }
+  ],
+  "v6_retrieval_requirement": "After v6 completes, repeat the same per-action audit using actual checked_action before/expected records for every host action. Report actual shape coverage alongside match/mismatch, role hypothesis, real changed pixels, direct level progress and paired game score. Do not send this calibration or case-specific exclusions to the model. A connected component is geometric evidence rather than a guaranteed complete semantic object; partial coverage may be legitimate if the program explicitly scopes its claim to that subpart.",
+  "limitations": [
+    "Coverage is relative to same-color 4-connected geometry; it does not prove object identity, action relevance, dynamics, interactivity or a correct task goal.",
+    "A full-component match still cannot establish no changes elsewhere or correctness of a whole-screen effect claim.",
+    "UI/task interpretations come from independent v5 behavior review, not from this automatic coverage measurement."
+  ]
+}

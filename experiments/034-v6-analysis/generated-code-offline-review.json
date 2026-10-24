@@ -1,0 +1,841 @@
+{
+  "scope": "Read-only retrospective generated-code evaluation on saved public observations; no solver source edits, no real actions, no network/model/GPU. Local Python frame stand-in, not a second native sandbox run.",
+  "real_actions": 0,
+  "network_calls": 0,
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "source_event_sha256": "3a09079128047c9e509d4eac156661773c48cedfebe4c9b059601a01ab8be5d9",
+      "raw_program_sha256": "21ccb6ac189e6208dbbda141ff4bc9e82bf56f40f5ecc5cbce47c29a138c3f84",
+      "actual_stage": "extract",
+      "actual_error": "ValueError: Return only function definitions and allowed imports",
+      "checked_actions": 0,
+      "host_actions": 0,
+      "repair_requests": 0,
+      "extract": "ValueError: Return only function definitions and allowed imports",
+      "offline_original_plan": {
+        "status": "completed",
+        "goal": "legend-consistent board: 0 cells, 4 legend blocks, 0 cells disagreeing with their legend symbols, 0 conflicting cells",
+        "actions": [],
+        "evidence_pixels": [
+          [
+            14,
+            30,
+            "O"
+          ],
+          [
+            30,
+            22,
+            "R"
+          ],
+          [
+            30,
+            38,
+            "R"
+          ],
+          [
+            46,
+            30,
+            "O"
+          ]
+        ],
+        "replaces": [
+          "r1",
+          "d1",
+          "cc",
+          "cur",
+          "n",
+          "rs",
+          "cs",
+          "b"
+        ],
+        "reason": "every legend-covered cell already matches the legend-derived color; local target reached"
+      },
+      "rejected_top_level_nodes": [
+        {
+          "type": "Assign",
+          "line": 3,
+          "source": "CELL_H = 8"
+        },
+        {
+          "type": "Assign",
+          "line": 4,
+          "source": "CELL_W = 8"
+        },
+        {
+          "type": "Assign",
+          "line": 5,
+          "source": "MIN_CELL = 24"
+        }
+      ],
+      "offline_literal_inlining_extract": "passed",
+      "offline_literal_inlining_plan": {
+        "status": "completed",
+        "goal": "legend-consistent board: 0 cells, 4 legend blocks, 0 cells disagreeing with their legend symbols, 0 conflicting cells",
+        "actions": [],
+        "evidence_pixels": [
+          [
+            14,
+            30,
+            "O"
+          ],
+          [
+            30,
+            22,
+            "R"
+          ],
+          [
+            30,
+            38,
+            "R"
+          ],
+          [
+            46,
+            30,
+            "O"
+          ]
+        ],
+        "replaces": [
+          "r1",
+          "d1",
+          "cc",
+          "cur",
+          "n",
+          "rs",
+          "cs",
+          "b"
+        ],
+        "reason": "every legend-covered cell already matches the legend-derived color; local target reached"
+      },
+      "offline_after_literal_inline_analysis": {
+        "cells": [],
+        "cell_map": {},
+        "pats": [
+          {
+            "r0": 12,
+            "c0": 28,
+            "r1": 17,
+            "c1": 33,
+            "center": "O"
+          },
+          {
+            "r0": 28,
+            "c0": 20,
+            "r1": 33,
+            "c1": 25,
+            "center": "R"
+          },
+          {
+            "r0": 28,
+            "c0": 36,
+            "r1": 33,
+            "c1": 41,
+            "center": "R"
+          },
+          {
+            "r0": 44,
+            "c0": 28,
+            "r1": 49,
+            "c1": 33,
+            "center": "O"
+          }
+        ],
+        "key": "Y",
+        "want": {},
+        "conflicts": [],
+        "mism": []
+      },
+      "geometry_helper_referenced": false,
+      "literal_fix_interpretation": "Inlining three immutable literal globals makes extraction pass but plan still reports completed with zero detected cells, four patterns and no derived targets. This is not an online result or evidence of safe generic automatic repair."
+    },
+    {
+      "game": "su15-1944f8ab",
+      "source_event_sha256": "a55eff4255f15ce6466a29cf5aa7098c4ffb7710ba88abf5a2c2197ddf33c940",
+      "raw_program_sha256": "283ea4565ad5da14c185d3f3c3c2b40c3805964c82a26170656731d86f7eaddb",
+      "actual_stage": "initial_prediction",
+      "actual_error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _comps(frame) for later Python calls in this game.\\nRetained your function _centroid(pts) for later Python calls in this game.\\nRetained your function _inside(grid, r, c) for later Python calls in this game.\\nRetained your function _first(grid, r, c) for later Python calls in this game.\\nRetained your function _find_target(grid, comps) for later Python calls in this game.\\nRetained your function _find_piece(comps) for later Python calls in this game.\\nRetained your function _nearest_S(grid, comps, r, c) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 238, in <module>\\n  File \"<python_tool>\", line 220, in predict\\nTypeError: can only concatenate tuple (not \"float\") to tuple'}",
+      "checked_actions": 0,
+      "host_actions": 0,
+      "repair_requests": 0,
+      "extract": "passed",
+      "offline_original_plan": {
+        "status": "ready",
+        "goal": "merge split piece at (38,6) then deliver to ball (53,44)",
+        "actions": [
+          {
+            "action": "MOUSE",
+            "row": 38,
+            "col": 6
+          }
+        ],
+        "evidence_pixels": [
+          [
+            53,
+            44,
+            "S"
+          ],
+          [
+            40,
+            27,
+            "B"
+          ]
+        ],
+        "replaces": [
+          "route",
+          "safe",
+          "safe2",
+          "safe3",
+          "invaders",
+          "state",
+          "click"
+        ],
+        "reason": "piece exists only as split sub-pieces; click within range of both to combine"
+      },
+      "offline_original_predict_error": "TypeError: can only concatenate tuple (not \"float\") to tuple",
+      "offline_single_typo_fixed_error": "TypeError: 'int' object is not subscriptable",
+      "offline_two_type_fixes_prediction": {
+        "mode": "change",
+        "action": {
+          "action": "MOUSE",
+          "row": 38,
+          "col": 6
+        },
+        "object_pixels": [
+          [
+            40,
+            27,
+            "B"
+          ],
+          [
+            37,
+            6,
+            "P"
+          ],
+          [
+            37,
+            48,
+            "P"
+          ],
+          [
+            38,
+            5,
+            "P"
+          ],
+          [
+            38,
+            7,
+            "P"
+          ],
+          [
+            38,
+            47,
+            "P"
+          ],
+          [
+            38,
+            49,
+            "P"
+          ],
+          [
+            39,
+            4,
+            "P"
+          ],
+          [
+            39,
+            8,
+            "P"
+          ],
+          [
+            39,
+            46,
+            "P"
+          ],
+          [
+            39,
+            50,
+            "P"
+          ],
+          [
+            40,
+            5,
+            "P"
+          ],
+          [
+            40,
+            6,
+            "P"
+          ],
+          [
+            40,
+            7,
+            "P"
+          ],
+          [
+            40,
+            47,
+            "P"
+          ],
+          [
+            40,
+            48,
+            "P"
+          ],
+          [
+            40,
+            49,
+            "P"
+          ]
+        ],
+        "target_pixels": [
+          [
+            53,
+            44,
+            "S"
+          ],
+          [
+            54,
+            14,
+            "S"
+          ],
+          [
+            59,
+            58,
+            "S"
+          ],
+          [
+            60,
+            3,
+            "S"
+          ],
+          [
+            53,
+            44,
+            "S"
+          ]
+        ],
+        "expected_pixels": [
+          [
+            37,
+            6,
+            "B"
+          ],
+          [
+            37,
+            48,
+            "B"
+          ],
+          [
+            38,
+            5,
+            "B"
+          ],
+          [
+            38,
+            7,
+            "B"
+          ],
+          [
+            38,
+            47,
+            "B"
+          ],
+          [
+            38,
+            49,
+            "B"
+          ],
+          [
+            39,
+            4,
+            "B"
+          ],
+          [
+            39,
+            8,
+            "B"
+          ],
+          [
+            39,
+            46,
+            "B"
+          ],
+          [
+            39,
+            50,
+            "B"
+          ],
+          [
+            40,
+            5,
+            "B"
+          ],
+          [
+            40,
+            6,
+            "B"
+          ],
+          [
+            40,
+            7,
+            "B"
+          ],
+          [
+            40,
+            47,
+            "B"
+          ],
+          [
+            40,
+            48,
+            "B"
+          ],
+          [
+            40,
+            49,
+            "B"
+          ],
+          [
+            43,
+            32,
+            "B"
+          ],
+          [
+            43,
+            33,
+            "B"
+          ],
+          [
+            43,
+            34,
+            "B"
+          ],
+          [
+            44,
+            32,
+            "B"
+          ],
+          [
+            44,
+            33,
+            "B"
+          ],
+          [
+            44,
+            34,
+            "B"
+          ],
+          [
+            45,
+            32,
+            "B"
+          ],
+          [
+            45,
+            33,
+            "B"
+          ],
+          [
+            45,
+            34,
+            "B"
+          ],
+          [
+            38,
+            6,
+            "B"
+          ]
+        ],
+        "precondition": "MOUSE click issues a bounded relocation of the active piece toward the ball target at (53,44); it is blocked only if the click is out of range of the piece",
+        "scope": "checks the active piece footprint vacates its old cells and the commanded click neighbourhood changes colour"
+      },
+      "offline_two_type_fixes_validation": {
+        "passed": false,
+        "status": "unknown",
+        "errors": [
+          "Duplicate pixel coordinate"
+        ]
+      },
+      "prediction_duplicate_coordinates": {
+        "object_pixels": [],
+        "target_pixels": [
+          [
+            53,
+            44
+          ]
+        ],
+        "expected_pixels": []
+      },
+      "offline_two_type_fixes_plus_dedup_validation": {
+        "passed": false,
+        "status": "unknown",
+        "errors": [
+          "Expected pixels must cover exactly the declared object and target coordinates"
+        ]
+      },
+      "offline_prediction_set_disagreement": {
+        "declared_not_expected": [
+          [
+            40,
+            27
+          ],
+          [
+            53,
+            44
+          ],
+          [
+            54,
+            14
+          ],
+          [
+            59,
+            58
+          ],
+          [
+            60,
+            3
+          ]
+        ],
+        "expected_not_declared": [
+          [
+            38,
+            6
+          ],
+          [
+            43,
+            32
+          ],
+          [
+            43,
+            33
+          ],
+          [
+            43,
+            34
+          ],
+          [
+            44,
+            32
+          ],
+          [
+            44,
+            33
+          ],
+          [
+            44,
+            34
+          ],
+          [
+            45,
+            32
+          ],
+          [
+            45,
+            33
+          ],
+          [
+            45,
+            34
+          ]
+        ],
+        "declared_union_count": 21,
+        "expected_count": 26
+      },
+      "offline_piece_selection": {
+        "centroid_and_returned_color": [
+          [
+            40.0,
+            27.0
+          ],
+          "P"
+        ],
+        "target_and_role": [
+          [
+            53,
+            44
+          ],
+          "isolated S ball marker"
+        ],
+        "family_components": [
+          {
+            "color": "p",
+            "pixel_count": 4,
+            "pixels": [
+              [
+                1,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                2,
+                9
+              ],
+              [
+                2,
+                10
+              ]
+            ]
+          },
+          {
+            "color": "Y",
+            "pixel_count": 4,
+            "pixels": [
+              [
+                1,
+                13
+              ],
+              [
+                1,
+                14
+              ],
+              [
+                2,
+                13
+              ],
+              [
+                2,
+                14
+              ]
+            ]
+          },
+          {
+            "color": "Y",
+            "pixel_count": 16,
+            "pixels": [
+              [
+                3,
+                30
+              ],
+              [
+                3,
+                31
+              ],
+              [
+                3,
+                32
+              ],
+              [
+                3,
+                33
+              ],
+              [
+                4,
+                30
+              ],
+              [
+                4,
+                31
+              ],
+              [
+                4,
+                32
+              ],
+              [
+                4,
+                33
+              ],
+              [
+                5,
+                30
+              ],
+              [
+                5,
+                31
+              ],
+              [
+                5,
+                32
+              ],
+              [
+                5,
+                33
+              ],
+              [
+                6,
+                30
+              ],
+              [
+                6,
+                31
+              ],
+              [
+                6,
+                32
+              ],
+              [
+                6,
+                33
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                37,
+                6
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                37,
+                48
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                38,
+                5
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                38,
+                7
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                38,
+                47
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                38,
+                49
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                39,
+                4
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                39,
+                8
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                39,
+                46
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 1,
+            "pixels": [
+              [
+                39,
+                50
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 3,
+            "pixels": [
+              [
+                40,
+                5
+              ],
+              [
+                40,
+                6
+              ],
+              [
+                40,
+                7
+              ]
+            ]
+          },
+          {
+            "color": "P",
+            "pixel_count": 3,
+            "pixels": [
+              [
+                40,
+                47
+              ],
+              [
+                40,
+                48
+              ],
+              [
+                40,
+                49
+              ]
+            ]
+          }
+        ],
+        "solo_S_target_candidates": [
+          [
+            [
+              53,
+              44
+            ]
+          ],
+          [
+            [
+              54,
+              14
+            ]
+          ],
+          [
+            [
+              59,
+              58
+            ]
+          ],
+          [
+            [
+              60,
+              3
+            ]
+          ]
+        ]
+      },
+      "geometry_helper_referenced": true
+    }
+  ]
+}

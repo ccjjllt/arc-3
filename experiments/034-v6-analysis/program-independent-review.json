@@ -1,0 +1,287 @@
+{
+  "reviewer": "/root/v6_program_results",
+  "status": "completed",
+  "scope": "Independent retrospective review of actual frozen v6 and downloaded B model/event outputs. Solver sources read-only; reports/extracted programs only. Offline mechanical edits are diagnostics, never online candidate results.",
+  "conclusion": "v6 did not enter checked execution on either cut. Geometry was available in both actual requests and consumed by one program, but neither produced host actions. This run cannot evaluate real coverage, real role correction or rule revision. The su15 +1 level belongs to ordinary main loop; no mechanism gain is demonstrated.",
+  "counts": {
+    "auxiliary_requests": 2,
+    "complete_code_tool_deliveries": 2,
+    "definition_extraction_accepted": 1,
+    "initial_plan_validated": 1,
+    "initial_predict_validated": 0,
+    "host_actions": 0,
+    "checked_actions": 0,
+    "matches": 0,
+    "mismatches": 0,
+    "real_counterexample_repairs": 0,
+    "direct_program_levels": 0
+  },
+  "games": [
+    {
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/034-plan-diagnostic-v6/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "3a09079128047c9e509d4eac156661773c48cedfebe4c9b059601a01ab8be5d9",
+      "program_file": "experiments/034-v6-analysis/extracted-programs/ft09-0d8bbf25-2.py",
+      "program_sha256": "21ccb6ac189e6208dbbda141ff4bc9e82bf56f40f5ecc5cbce47c29a138c3f84",
+      "program_lines": 300,
+      "function_count": 11,
+      "delivery_tool": "submit_program",
+      "request": {
+        "prompt_tokens": 12709,
+        "completion_tokens": 3415,
+        "reasoning_tokens": 0,
+        "finish_reason": "tool_calls",
+        "tokenize_input_tokens": 12709,
+        "tokenize_equals_usage": true,
+        "seconds": 26.60140884600014,
+        "object_evidence_status": "available",
+        "object_evidence_hash_matches_metadata": true
+      },
+      "online": {
+        "status": "rejected",
+        "stage": "extract",
+        "error": "ValueError: Return only function definitions and allowed imports",
+        "actual_host_actions": 0,
+        "checked_actions": 0,
+        "prediction_matches": 0,
+        "prediction_mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_level_completions": 0
+      },
+      "helper_adoption": {
+        "geometry_in_facts": true,
+        "code_references_object_evidence": false,
+        "recent_observed_effects_consumed": false
+      },
+      "findings": [
+        "Complete tool delivery was rejected before execution because of three module-scope literal assignments: CELL_H=8, CELL_W=8, MIN_CELL=24. This is an actual schema violation, not output truncation.",
+        "Program does not read frame.object_evidence. It rewrites segmentation using a zero-origin 8-pixel seed grid and a cropped flood fill; this conflicts with the supplied exact current-frame geometry and usage instructions.",
+        "Retrospectively evaluating the original program with its constants bound yields zero board cells, four pattern blocks, zero targets/mismatches and local completed. Inlining those three literals makes extraction pass but leaves exactly the same vacuous completed result. Allowing constants alone is not a substantive fix.",
+        "Its unexecuted predictor declares pattern pixels as targets but fills expected only for clicked block. This would violate exact declared-coordinate coverage for a normal ready action with pattern targets; it also asserts other cells unchanged without checking all of them.",
+        "No actual role correction, action prediction or task progress was tested online."
+      ],
+      "offline": {
+        "literal_inline_extract": "passed",
+        "plan": {
+          "status": "completed",
+          "goal": "legend-consistent board: 0 cells, 4 legend blocks, 0 cells disagreeing with their legend symbols, 0 conflicting cells",
+          "actions": [],
+          "evidence_pixels": [
+            [
+              14,
+              30,
+              "O"
+            ],
+            [
+              30,
+              22,
+              "R"
+            ],
+            [
+              30,
+              38,
+              "R"
+            ],
+            [
+              46,
+              30,
+              "O"
+            ]
+          ],
+          "replaces": [
+            "r1",
+            "d1",
+            "cc",
+            "cur",
+            "n",
+            "rs",
+            "cs",
+            "b"
+          ],
+          "reason": "every legend-covered cell already matches the legend-derived color; local target reached"
+        },
+        "cells": 0,
+        "patterns": 4,
+        "targets": 0
+      }
+    },
+    {
+      "game": "su15-1944f8ab",
+      "event_file": "runs/034-plan-diagnostic-v6/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "a55eff4255f15ce6466a29cf5aa7098c4ffb7710ba88abf5a2c2197ddf33c940",
+      "program_file": "experiments/034-v6-analysis/extracted-programs/su15-1944f8ab-2.py",
+      "program_sha256": "283ea4565ad5da14c185d3f3c3c2b40c3805964c82a26170656731d86f7eaddb",
+      "program_lines": 236,
+      "function_count": 10,
+      "delivery_tool": "submit_program",
+      "request": {
+        "prompt_tokens": 11580,
+        "completion_tokens": 3211,
+        "reasoning_tokens": 0,
+        "finish_reason": "tool_calls",
+        "tokenize_input_tokens": 11580,
+        "tokenize_equals_usage": true,
+        "seconds": 26.533534856999722,
+        "object_evidence_status": "available",
+        "object_evidence_hash_matches_metadata": true
+      },
+      "online": {
+        "status": "rejected",
+        "stage": "initial_prediction",
+        "error": "ValueError: program did not return result: {'tool': 'python', 'function_retention': 'Retained your function _grid(frame) for later Python calls in this game.\\nRetained your function _comps(frame) for later Python calls in this game.\\nRetained your function _centroid(pts) for later Python calls in this game.\\nRetained your function _inside(grid, r, c) for later Python calls in this game.\\nRetained your function _first(grid, r, c) for later Python calls in this game.\\nRetained your function _find_target(grid, comps) for later Python calls in this game.\\nRetained your function _find_piece(comps) for later Python calls in this game.\\nRetained your function _nearest_S(grid, comps, r, c) for later Python calls in this game.\\nRetained your function plan_program(frame) for later Python calls in this game.\\nRetained your function predict(frame, action) for later Python calls in this game.', 'error': 'Traceback (most recent call last):\\n  File \"<python_tool>\", line 238, in <module>\\n  File \"<python_tool>\", line 220, in predict\\nTypeError: can only concatenate tuple (not \"float\") to tuple'}",
+        "actual_host_actions": 0,
+        "checked_actions": 0,
+        "prediction_matches": 0,
+        "prediction_mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "direct_program_level_completions": 0
+      },
+      "helper_adoption": {
+        "geometry_in_facts": true,
+        "code_references_object_evidence": true,
+        "recent_observed_effects_consumed": false
+      },
+      "findings": [
+        "The actual submitted _comps(frame) does consume frame.object_evidence and expands rect/runs into exact component footprints. This proves API adoption, not semantic object grouping.",
+        "The online plan validates only schema/current declared pixels. It chooses merge at (38,6), target (53,44) from the first single-pixel S, and a synthetic piece centroid (40,27) whose actual color is background B.",
+        "Several P four-connected fragments belong to each drawn triangular outline. The program treats them as separate mergeable pieces and picks two nearby fragments of one outline. It also averages the largest lower bars from two widely separated outlines into background at (40,27). This is direct code behavior; no online action tested its semantic prediction.",
+        "The target S-ball role is an unsupported hardcoded color/size and row cutoff (>=10). Same-level object effects are unavailable in this new-level packet: both recent records are boundary/unknown. Retained main-loop hypotheses distinguish piece sizes, chasing invaders and a ball, but do not establish current S as ball.",
+        "Initial online predict fails at pc + float because pc is the centroid tuple and scalar column variable is pc_. A local one-token variable substitution then reveals len(grid)[0] int-subscript TypeError. Fixing those two mechanical errors still fails prediction validation on duplicate target coordinates; removing exact duplicates still fails because expected coordinates differ from declared object+target union.",
+        "Predictor also ignores chosen merge action dynamics: its predicted location follows the centroid-to-target line, while action is (38,6). It erases the family without predicting a correct new family footprint. These are latent code/contract issues, not measured online mismatches."
+      ],
+      "offline": {
+        "original_plan": {
+          "status": "ready",
+          "goal": "merge split piece at (38,6) then deliver to ball (53,44)",
+          "actions": [
+            {
+              "action": "MOUSE",
+              "row": 38,
+              "col": 6
+            }
+          ],
+          "evidence_pixels": [
+            [
+              53,
+              44,
+              "S"
+            ],
+            [
+              40,
+              27,
+              "B"
+            ]
+          ],
+          "replaces": [
+            "route",
+            "safe",
+            "safe2",
+            "safe3",
+            "invaders",
+            "state",
+            "click"
+          ],
+          "reason": "piece exists only as split sub-pieces; click within range of both to combine"
+        },
+        "original_prediction_error": "TypeError: can only concatenate tuple (not \"float\") to tuple",
+        "one_variable_fix_error": "TypeError: 'int' object is not subscriptable",
+        "two_type_fixes_validation": {
+          "passed": false,
+          "status": "unknown",
+          "errors": [
+            "Duplicate pixel coordinate"
+          ]
+        },
+        "two_type_fixes_plus_exact_duplicate_removal_validation": {
+          "passed": false,
+          "status": "unknown",
+          "errors": [
+            "Expected pixels must cover exactly the declared object and target coordinates"
+          ]
+        },
+        "coordinate_disagreement": {
+          "declared_not_expected": [
+            [
+              40,
+              27
+            ],
+            [
+              53,
+              44
+            ],
+            [
+              54,
+              14
+            ],
+            [
+              59,
+              58
+            ],
+            [
+              60,
+              3
+            ]
+          ],
+          "expected_not_declared": [
+            [
+              38,
+              6
+            ],
+            [
+              43,
+              32
+            ],
+            [
+              43,
+              33
+            ],
+            [
+              43,
+              34
+            ],
+            [
+              44,
+              32
+            ],
+            [
+              44,
+              33
+            ],
+            [
+              44,
+              34
+            ],
+            [
+              45,
+              32
+            ],
+            [
+              45,
+              33
+            ],
+            [
+              45,
+              34
+            ]
+          ],
+          "declared_union_count": 21,
+          "expected_count": 26
+        }
+      }
+    }
+  ],
+  "coverage_audit": "experiments/034-v6-analysis/component-coverage-independent-audit.json",
+  "offline_detail": "experiments/034-v6-analysis/generated-code-offline-review.json",
+  "recommendation": {
+    "do_not_scale": "No full 25-game comparison or formal submission for v6. Preserve 009 v2 / 31.16.",
+    "next_research": "Stop adding another representation module. If continuing this line, focus on delivering a much shorter executable decision and bounded feedback from real zero-action code/contract validation errors, while preserving total auxiliary time/actions. Repairable syntax/types and semantic/goal failures must be reported separately.",
+    "why_not_only_constants": "ft09 literal inlining still reports completed with zero cells; su15 has multiple sequential runtime and contract faults. A permissive import/constant change alone would not validate object roles or get a checked action.",
+    "why_not_claim_geometry_failure": "No executed v6 action exists to test the representation intervention online. Available geometry/adoption and latent bad grouping can be described; causal effectiveness or ineffectiveness of geometry cannot be isolated from this run."
+  },
+  "limitations": [
+    "Only two selected checkpoints in one B→A session; no population-level score estimate.",
+    "Component IDs and four-connectivity are geometry rather than semantic object identity.",
+    "Offline stand-in execution is diagnostic Python evaluation on saved frames; native runtime errors are taken from actual online event evidence.",
+    "Online coverage is not evaluated, not a zero-percent pass or a failed full-footprint prediction."
+  ]
+}

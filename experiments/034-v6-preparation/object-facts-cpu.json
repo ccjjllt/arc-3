@@ -1,0 +1,556 @@
+{
+  "kind": "034_v6_object_evidence_manual_cpu_check",
+  "status": "passed",
+  "scope": "Pure CPU component/observation checks on frozen public pixels and archived real transitions; no network, model, game actions or score claim.",
+  "helper_source": "src/arc3_research/object_evidence.py",
+  "helper_sha256": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+  "total_checks": 28,
+  "checks": [
+    {
+      "name": "diagonal_same_color_not_joined",
+      "passed": true,
+      "components": [
+        {
+          "id": 0,
+          "color": "A",
+          "pixel_count": 1,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "rect": true
+        },
+        {
+          "id": 1,
+          "color": "B",
+          "pixel_count": 1,
+          "bbox": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "rect": true
+        },
+        {
+          "id": 2,
+          "color": "B",
+          "pixel_count": 1,
+          "bbox": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "rect": true
+        },
+        {
+          "id": 3,
+          "color": "A",
+          "pixel_count": 1,
+          "bbox": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "rect": true
+        }
+      ]
+    },
+    {
+      "name": "single_pixel",
+      "passed": true,
+      "components": [
+        {
+          "id": 0,
+          "color": "Z",
+          "pixel_count": 1,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "rect": true
+        }
+      ]
+    },
+    {
+      "name": "nonrectangular_exact_runs_hole",
+      "passed": true,
+      "components": [
+        {
+          "id": 0,
+          "color": "A",
+          "pixel_count": 8,
+          "bbox": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "rect": false,
+          "runs": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              2
+            ],
+            [
+              2,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "id": 1,
+          "color": "B",
+          "pixel_count": 1,
+          "bbox": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "rect": true
+        }
+      ]
+    },
+    {
+      "name": "diagonal_four_singletons",
+      "passed": true
+    },
+    {
+      "name": "click_membership_uses_footprint_not_bbox",
+      "passed": true
+    },
+    {
+      "name": "unchanged_is_observation_without_ui_role",
+      "passed": true
+    },
+    {
+      "name": "explicit_level_boundary_unknown",
+      "passed": true
+    },
+    {
+      "name": "shape_boundary_unknown",
+      "passed": true
+    },
+    {
+      "name": "unknown_level_not_support",
+      "passed": true
+    },
+    {
+      "name": "older_same_level_is_screen_overlap",
+      "passed": true
+    },
+    {
+      "name": "rectangular_input_validation",
+      "passed": true
+    },
+    {
+      "name": "per_frame_pixel_bound",
+      "passed": true
+    },
+    {
+      "name": "transition_bound_no_silent_selection",
+      "passed": true
+    },
+    {
+      "name": "json_bound_no_partial_components",
+      "passed": true
+    },
+    {
+      "name": "embedded_function_without_module_globals",
+      "passed": true
+    },
+    {
+      "name": "ft09-0d8bbf25_frozen_cut_exact_coverage",
+      "passed": true,
+      "component_count": 52,
+      "json_characters": 7323
+    },
+    {
+      "name": "ft09-0d8bbf25_observations_not_mutated",
+      "passed": true
+    },
+    {
+      "name": "ft09_v5_action_1_screen_effects",
+      "passed": true
+    },
+    {
+      "name": "ft09_v5_action_2_screen_effects",
+      "passed": true
+    },
+    {
+      "name": "ft09_v5_action_3_screen_effects",
+      "passed": true
+    },
+    {
+      "name": "ft09_v5_action_4_screen_effects",
+      "passed": true
+    },
+    {
+      "name": "ft09_4x4_bars_not_merged_with_6x6_objects",
+      "passed": true
+    },
+    {
+      "name": "ft09_static_bar_is_not_labeled_ui",
+      "passed": true
+    },
+    {
+      "name": "su15-1944f8ab_frozen_cut_exact_coverage",
+      "passed": true,
+      "component_count": 32,
+      "json_characters": 4312
+    },
+    {
+      "name": "su15-1944f8ab_observations_not_mutated",
+      "passed": true
+    },
+    {
+      "name": "su15_same_color_legend_and_piece_separate",
+      "passed": true,
+      "components": [
+        {
+          "id": 5,
+          "color": "Y",
+          "pixel_count": 4,
+          "bbox": [
+            1,
+            13,
+            2,
+            14
+          ],
+          "rect": true
+        },
+        {
+          "id": 6,
+          "color": "Y",
+          "pixel_count": 16,
+          "bbox": [
+            3,
+            30,
+            6,
+            33
+          ],
+          "rect": true
+        }
+      ]
+    },
+    {
+      "name": "su15_singleton_threat_components_retained",
+      "passed": true
+    },
+    {
+      "name": "su15_cross_level_and_older_level_no_effects",
+      "passed": true
+    }
+  ],
+  "fixtures": [
+    {
+      "game": "ft09-0d8bbf25",
+      "cut": 27,
+      "level": 3,
+      "source": "experiments/034-v5-source/experiments/028-fork-package.json.gz.b64",
+      "source_sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+      "component_count": 52,
+      "catalog_json_characters": 7323,
+      "recent": [
+        {
+          "action": "MOUSE(row=54, col=38)",
+          "before_level": 3,
+          "after_level": 3,
+          "after_is_current": false,
+          "status": "observed_screen_overlap",
+          "changed_pixels": 37,
+          "changed_by_component": [
+            [
+              49,
+              36
+            ],
+            [
+              51,
+              1
+            ]
+          ],
+          "click": {
+            "row": 54,
+            "col": 38,
+            "current_component_at_coordinate": 49,
+            "before_color": "R",
+            "after_color": "O"
+          }
+        },
+        {
+          "action": "MOUSE(row=6, col=22)",
+          "before_level": 3,
+          "after_level": 3,
+          "after_is_current": true,
+          "status": "observed_screen_overlap",
+          "changed_pixels": 37,
+          "changed_by_component": [
+            [
+              2,
+              36
+            ],
+            [
+              51,
+              1
+            ]
+          ],
+          "click": {
+            "row": 6,
+            "col": 22,
+            "current_component_at_coordinate": 2,
+            "before_color": "O",
+            "after_color": "R"
+          }
+        }
+      ],
+      "v5_checked_actions": [
+        {
+          "action": {
+            "action": "MOUSE",
+            "row": 5,
+            "col": 29
+          },
+          "prediction_status": "match",
+          "actual_changed_pixels": 36,
+          "clicked_current_component": {
+            "id": 3,
+            "color": "R",
+            "pixel_count": 36,
+            "bbox": [
+              4,
+              28,
+              9,
+              33
+            ],
+            "rect": true
+          },
+          "observed": {
+            "action": "MOUSE(row=5, col=29)",
+            "before_level": 3,
+            "after_level": 3,
+            "after_is_current": true,
+            "status": "observed_screen_overlap",
+            "changed_pixels": 36,
+            "changed_by_component": [
+              [
+                3,
+                36
+              ]
+            ],
+            "click": {
+              "row": 5,
+              "col": 29,
+              "current_component_at_coordinate": 3,
+              "before_color": "O",
+              "after_color": "R"
+            }
+          },
+          "json_characters": 7026
+        },
+        {
+          "action": {
+            "action": "MOUSE",
+            "row": 5,
+            "col": 37
+          },
+          "prediction_status": "match",
+          "actual_changed_pixels": 37,
+          "clicked_current_component": {
+            "id": 4,
+            "color": "R",
+            "pixel_count": 36,
+            "bbox": [
+              4,
+              36,
+              9,
+              41
+            ],
+            "rect": true
+          },
+          "observed": {
+            "action": "MOUSE(row=5, col=37)",
+            "before_level": 3,
+            "after_level": 3,
+            "after_is_current": true,
+            "status": "observed_screen_overlap",
+            "changed_pixels": 37,
+            "changed_by_component": [
+              [
+                4,
+                36
+              ],
+              [
+                51,
+                1
+              ]
+            ],
+            "click": {
+              "row": 5,
+              "col": 37,
+              "current_component_at_coordinate": 4,
+              "before_color": "O",
+              "after_color": "R"
+            }
+          },
+          "json_characters": 7033
+        },
+        {
+          "action": {
+            "action": "MOUSE",
+            "row": 5,
+            "col": 61
+          },
+          "prediction_status": "mismatch",
+          "actual_changed_pixels": 0,
+          "clicked_current_component": {
+            "id": 5,
+            "color": "O",
+            "pixel_count": 16,
+            "bbox": [
+              4,
+              60,
+              7,
+              63
+            ],
+            "rect": true
+          },
+          "observed": {
+            "action": "MOUSE(row=5, col=61)",
+            "before_level": 3,
+            "after_level": 3,
+            "after_is_current": true,
+            "status": "observed_screen_overlap",
+            "changed_pixels": 0,
+            "changed_by_component": [],
+            "click": {
+              "row": 5,
+              "col": 61,
+              "current_component_at_coordinate": 5,
+              "before_color": "O",
+              "after_color": "O"
+            }
+          },
+          "json_characters": 7019
+        },
+        {
+          "action": {
+            "action": "MOUSE",
+            "row": 1,
+            "col": 61
+          },
+          "prediction_status": "mismatch",
+          "actual_changed_pixels": 0,
+          "clicked_current_component": {
+            "id": 1,
+            "color": "R",
+            "pixel_count": 16,
+            "bbox": [
+              0,
+              60,
+              3,
+              63
+            ],
+            "rect": true
+          },
+          "observed": {
+            "action": "MOUSE(row=1, col=61)",
+            "before_level": 3,
+            "after_level": 3,
+            "after_is_current": true,
+            "status": "observed_screen_overlap",
+            "changed_pixels": 0,
+            "changed_by_component": [],
+            "click": {
+              "row": 1,
+              "col": 61,
+              "current_component_at_coordinate": 1,
+              "before_color": "R",
+              "after_color": "R"
+            }
+          },
+          "json_characters": 7019
+        }
+      ]
+    },
+    {
+      "game": "su15-1944f8ab",
+      "cut": 86,
+      "level": 5,
+      "source": "experiments/034-v5-source/experiments/034-fork-inputs/su15-package.json.gz.b64",
+      "source_sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+      "component_count": 32,
+      "catalog_json_characters": 4312,
+      "recent": [
+        {
+          "action": "MOUSE(row=48, col=6)",
+          "before_level": 4,
+          "after_level": 4,
+          "after_is_current": false,
+          "status": "boundary",
+          "effects": "unknown"
+        },
+        {
+          "action": "MOUSE(row=55, col=6)",
+          "before_level": 4,
+          "after_level": 5,
+          "after_is_current": true,
+          "status": "boundary",
+          "effects": "unknown"
+        }
+      ],
+      "Y_components": [
+        {
+          "id": 5,
+          "color": "Y",
+          "pixel_count": 4,
+          "bbox": [
+            1,
+            13,
+            2,
+            14
+          ],
+          "rect": true
+        },
+        {
+          "id": 6,
+          "color": "Y",
+          "pixel_count": 16,
+          "bbox": [
+            3,
+            30,
+            6,
+            33
+          ],
+          "rect": true
+        }
+      ],
+      "P_singleton_count": 10
+    }
+  ],
+  "limits": {
+    "current_frame_pixels": 4096,
+    "total_public_frame_pixels": 20480,
+    "transition_records": 2,
+    "complete_compact_json_characters": 24000
+  },
+  "interpretation": "Exact connected geometry separates previously merged same-color blobs and keeps 4x4 bars distinct from 6x6 blocks. It neither infers task roles nor prevents all semantic mistakes; zero screen changes are not UI proof. Component ids are recalculated per frame."
+}

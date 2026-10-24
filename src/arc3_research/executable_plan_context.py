@@ -14,6 +14,8 @@ import json
 import symtable
 from typing import Any
 
+from arc3_research.object_evidence import object_evidence
+
 
 _NATIVE_NAMES = {
     "current_frame", "previous_frame", "history", "transitions", "last_transition",
@@ -247,6 +249,15 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
     public_trigger = {k: copy.deepcopy(v) for k, v in trigger.items()
                       if k not in {"source_code", "previous_program"}}
     transitions = recent_transition_facts(current, history_entries)
+    entries = list(history_entries)
+    indices = [i for i, h in enumerate(entries) if str(h.action).strip()][-2:]
+    object_records = [{"action": str(entries[i].action),
+                       "before_ascii": entries[i - 1].frame.ascii,
+                       "after_ascii": entries[i].frame.ascii,
+                       "before_level": entries[i - 1].frame.level,
+                       "after_level": entries[i].frame.level}
+                      for i in indices if i > 0]
+    geometry = object_evidence(current.ascii, object_records)
     from arc3_research.program_repair import _remaining
     facts = {"current_observation": {**_frame_id(current), "ascii": current.ascii},
              "recent_real_transitions": transitions,
@@ -255,6 +266,7 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
              "remaining_game_seconds": _remaining(agent),
              "auxiliary_seconds_already_used": float(getattr(state, "extra_seconds", 0)),
              "trigger": public_trigger}
+    facts["object_evidence"] = geometry
     # Facts above come from the public runtime. Assistant reasoning, including
     # evicted summaries and prior targets, is not promoted into this object.
     prior_text = recent_model_hypotheses(list(getattr(state, "latest_messages", []) or []))
@@ -273,7 +285,9 @@ def prepare_compact_context(agent, state, trigger, current, history_entries,
         {"role": "user", "content": prompt + "\n\nCOMPACT LIVE EVIDENCE PACKAGE:\n"
          + json.dumps(package, ensure_ascii=False, separators=(",", ":"))},
     ]
-    metadata = {"context_schema": "034-compact-evidence-v2", "messages_sha256": _hash(messages),
+    metadata = {"context_schema": "034-compact-evidence-v3", "messages_sha256": _hash(messages),
+                "object_evidence_status": geometry.get("status"),
+                "object_evidence_sha256": _hash(geometry),
                 "old_conversation_included": False, "source_truncated": False,
                 "prior_assistant_text_included": bool(prior_text["entries"]),
                 "prior_assistant_text_characters": prior_text["included_characters"],

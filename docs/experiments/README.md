@@ -39,4 +39,4 @@
 | [031](031.md) | [进展](../progress/031-exact-pixels.md) | 2 | 4 | 16 | 3 | 2 |
 | [032](032.md) | [进展](../progress/032-033-memory-and-controller.md) | 1 | 3 | 29 | 2 | 15 |
 | [033](033.md) | — | 2 | 2 | 10 | 2 | 4 |
-| [034](034.md) | [计划](../plan/034-executable-plan.md) · [进展](../progress/034-executable-plan.md) | 5 | 7 | 41 | 3 | 10 |
+| [034](034.md) | [计划](../plan/034-executable-plan.md) · [计划](../plan/034-v6-object-evidence.md) · [进展](../progress/034-executable-plan.md) | 6 | 8 | 50 | 3 | 11 |

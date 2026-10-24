@@ -12,6 +12,7 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass, field
 import hashlib
+import inspect
 import json
 from pathlib import Path
 import threading
@@ -20,6 +21,7 @@ from typing import Any
 
 from arc3_research.program_repair import _completion, _payload, _remaining
 from arc3_research.executable_plan_context import prepare_compact_context, delivery_tool_schema
+from arc3_research.object_evidence import object_evidence
 from arc3_research.executable_plan_contract import (
     binding_names, compare_prediction, extract_definitions, validate_plan, validate_prediction,
 )
@@ -55,6 +57,23 @@ target, never a claim of environment success. Do not hardcode a moving target
 as current_position plus a fixed distance on every call: express a meaningful
 task target computed from the current board and known facts.
 
+Use frame.object_evidence for exact current same-color connected components,
+not a bounding box joining every pixel of one color or a grid with an assumed
+origin. The supplied component catalogue is recomputed from this frame; IDs
+are not stable across calls. Components are geometric observations, not proved
+objects or roles. A task object may comprise several components. In your goal
+state the selected component instances, their hypothesized roles and which
+actual transition supports that choice. Distinguish an active piece, target,
+legend, counter and control by evidence, not color or a fixed screen cutoff.
+An unchanged component is not automatically UI; a UI control can be actionable.
+Recent effect counts refer to screen coordinates, not tracked object identity
+or causation. A level/shape boundary gives no action support for new-level
+objects. If uncertain, choose ONE action that distinguishes the competing
+roles/rules and predicts its relevant consequence, or abstain.
+For each object/effect you claim, predict its complete relevant footprint
+(expand rectangular bbox or row runs), not a few convenient sampled pixels.
+Do not claim "nothing else changes" unless your projection checks that claim.
+
 The host executes at most THREE actions for this contract, recalculating the
 plan from the real new frame before every next action. Predictions are frozen
 BEFORE action, cover BOTH declared object and target pixels and no undeclared
@@ -84,6 +103,29 @@ def _bindings(code: str, functions: dict) -> list[str]:
 
 
 def _bootstrap(source: str) -> str:
+    # The same pure geometry helper is used by the request and native child.
+    # It is infrastructure, never retained model code or a game-role oracle.
+    helper = inspect.getsource(object_evidence)
+    frame_anchor = "class FrameView:\n"
+    if source.count(frame_anchor) != 1:
+        raise RuntimeError("034 object-evidence FrameView anchor differs")
+    source = source.replace(frame_anchor, helper + "\n" + frame_anchor, 1)
+    property_anchor = "    @property\n    def segmentation(self):\n"
+    object_property = '''    @property
+    def object_evidence(self):
+        records = [{"action": t.action,
+                    "before_ascii": t.before_frame.ascii,
+                    "after_ascii": t.after_frame.ascii,
+                    "before_level": t.before_frame.level,
+                    "after_level": t.after_frame.level}
+                   for t in getattr(self, "recent_transitions", ())[-2:]
+                   if t.before_frame is not None and t.after_frame is not None]
+        return object_evidence(self.ascii, records)
+
+'''
+    if source.count(property_anchor) != 1:
+        raise RuntimeError("034 object-evidence property anchor differs")
+    source = source.replace(property_anchor, object_property + property_anchor, 1)
     additions = [
         ('    class KnownNoOpActionError(BaseException):\n',
          '    class ExecutablePlanInterrupted(BaseException):\n        pass\n\n'
@@ -683,7 +725,7 @@ class ExecutablePlanPatch:
 
     def snapshot(self):
         with self.lock:
-            return {"patch": "034-executable-plan-v5", "games": len(self.states),
+            return {"patch": "034-executable-plan-v6", "games": len(self.states),
                     "bootstrap_calls": sum(s.bootstrap_used for s in self.states),
                     "repair_calls": sum(s.repair_used for s in self.states),
                     "extra_seconds": sum(s.extra_seconds for s in self.states),

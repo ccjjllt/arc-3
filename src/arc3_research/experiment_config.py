@@ -46,7 +46,7 @@ def validate_config(config: dict[str, Any]) -> None:
         if config.get("active_streams") != 10 or not config.get("require_rtx_pro6000"):
             raise ValueError("034 keeps the 10-stream RTX PRO 6000 serving contract.")
         if any(a in ("executable_plan_A", "executable_plan_B") for a in arms):
-            delivery_v3 = config.get("research_revision") in (3, 4, 5)
+            delivery_v3 = config.get("research_revision") in (3, 4, 5, 6)
             transport = config.get("fork_transport", "separate_gzip_base64")
             if (transport not in ("separate_gzip_base64", "combined_xz_base64")
                     or (not delivery_v3 and transport != "separate_gzip_base64")):
@@ -78,17 +78,24 @@ def validate_config(config: dict[str, Any]) -> None:
                     "max_request_seconds": 60, "max_extra_processing_seconds": 120,
                     "max_actions_per_contract": 3, "contract_lifetime": "current_short_plan",
                     "token_count_source": "served_model_tokenize_endpoint"}
-                if config.get("research_revision") in (4, 5):
+                if config.get("research_revision") in (4, 5, 6):
                     expected_delivery["submission_tool"] = "submit_program"
                 if config.get("candidate_delivery") != expected_delivery:
                     raise ValueError("034 delivery revision differs from its frozen contract.")
-                if config.get("research_revision") == 5 and config.get("hypothesis_context") != {
+                if config.get("research_revision") in (5, 6) and config.get("hypothesis_context") != {
                     "source": "latest_prior_assistant_natural_language",
                     "max_messages": 2, "max_text_characters": 12000,
                     "per_message_text_characters": 8000,
                     "copy": "verbatim_provenance_segments", "status": "unverified_may_be_stale",
                 }:
-                    raise ValueError("034 v5 requires bounded provenance-labelled prior hypotheses.")
+                    raise ValueError("034 v5/v6 require bounded provenance-labelled prior hypotheses.")
+                if config.get("research_revision") == 6 and config.get("object_evidence") != {
+                    "geometry": "same_color_4_connected_components",
+                    "source": "current_ascii_and_two_recent_real_transitions",
+                    "roles": "model_hypotheses_only",
+                    "runtime_attribute": "frame.object_evidence",
+                }:
+                    raise ValueError("034 v6 requires observed component geometry, never host-assigned roles.")
         elif arms not in (["baseline", "executable_plan"], ["executable_plan"]):
             raise ValueError("034 natural runs require the isolated executable_plan arm, optionally after baseline.")
     if "tail_80k" in arms:

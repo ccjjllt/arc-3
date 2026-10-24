@@ -1,0 +1,257 @@
+{
+  "status": "passed_no_blocking_findings",
+  "reviewed_at_utc": "2026-10-24T04:38:24.383388+00:00",
+  "scope": "Independent final v6 source/build/facts/guard review; no solver edits, network/model/GPU or real ARC game calls.",
+  "notebook": {
+    "path": "notebooks/034-plan-diagnostic-v6/experiment.ipynb",
+    "sha256": "1927e60863c4c39ee5e23d33bd284f3182b03e5208897b5fa20eecac92ac3a9a",
+    "bytes": 970283,
+    "cells": 32
+  },
+  "source_manifest": {
+    "all_current_input_hashes_match": true,
+    "input_count": 20,
+    "input_checks": [
+      {
+        "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+        "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+        "equal": true
+      },
+      {
+        "path": "scripts/build_experiment.py",
+        "sha256": "ada79fbd6c81e44641ecc17645131fce77cffd24876ecbdc86e85ad4e61aee92",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/__init__.py",
+        "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan.py",
+        "sha256": "e6be2045adc92708302c4122343af78b2bb35eefb8db909f5f3c102ffc923716",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_context.py",
+        "sha256": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_contract.py",
+        "sha256": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/executable_plan_forks.py",
+        "sha256": "cd59585d752510cc37c316ada5e14d3a6240ca02f1733ba433b156da4f14b575",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/experiment_config.py",
+        "sha256": "b5af29c5fb131c90643f130919541d3b5b2a56bd090ef466095396adf252d236",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/goal_evidence.py",
+        "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/input_paths.py",
+        "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/object_evidence.py",
+        "sha256": "9c43e2966b8544256ab38abfd0ec13ec8a23a5779fa3aebcf041f7ebfe646af3",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_repair.py",
+        "sha256": "969d82d82dcf789d1dd1d436d81ff252c255d2dda74281d60d5ae46eb668a709",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/program_state.py",
+        "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/run_arm.py",
+        "sha256": "44a556a16efe8e719fc23d0b41392f883f0a55c8a5e3720654afffad3f3bbbcc",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/session_runner.py",
+        "sha256": "5aae70aa10e1753ab971072537d9c8e2b081d158cadf0bab967b3575c6f98c0d",
+        "equal": true
+      },
+      {
+        "path": "src/arc3_research/transient_history.py",
+        "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+        "equal": true
+      },
+      {
+        "path": "scripts/summarize_experiment.py",
+        "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-plan-diagnostic-v6.json",
+        "sha256": "c2c21324ec284df221520a534c4399fd2315f535facac43e4b6c2462f630de05",
+        "equal": true
+      },
+      {
+        "path": "experiments/028-fork-package.json.gz.b64",
+        "sha256": "10defa5914b41481e542f24f4fc3aed046cfd2b87be6f5ac671a98064fa6cd5c",
+        "equal": true
+      },
+      {
+        "path": "experiments/034-fork-inputs/su15-package.json.gz.b64",
+        "sha256": "08d451e40c2526be270b42aa614842b18702bf13297d4c70fa4e5bf35193fffd",
+        "equal": true
+      }
+    ],
+    "all_frozen_source_hashes_match": true,
+    "frozen_count": 19,
+    "native_python_payloads": 15,
+    "native_python_exact_source_and_compiled": true,
+    "embedded_HASHES_JSON_exact_manifest": true,
+    "embedded_config_validates": true
+  },
+  "forks": {
+    "lossless_combined_payload_exact_v5": true,
+    "decoded_exact_original_028_and_su15_fork_objects": true,
+    "fork_count": 2,
+    "fork_transport": "combined_xz_base64"
+  },
+  "attribution": {
+    "intervention": "Shared current same-color component geometry and last-two observed screen-coordinate effects in compact facts and live FrameView, with corresponding object-role/full-footprint instructions. No host semantic role oracle or game-specific masks.",
+    "unchanged_infrastructure_byte_exact_v5": [
+      "executable_plan_contract.py",
+      "executable_plan_forks.py",
+      "program_repair.py",
+      "run_arm.py",
+      "session_runner.py",
+      "program_state.py",
+      "transient_history.py",
+      "input_paths.py",
+      "goal_evidence.py"
+    ],
+    "all_post_harness_notebook_cells_byte_exact_v5": true,
+    "adapter_function_class_ast_unchanged_except_bootstrap_and_snapshot_label": [
+      "_hash",
+      "_bindings",
+      "_State",
+      "ExecutablePlanPatch",
+      "install_executable_plan"
+    ],
+    "old_bootstrap_tail_exact_ast_v5": true,
+    "existing_context_helpers_exact_ast_v5": [
+      "recent_model_hypotheses",
+      "delivery_tool_schema",
+      "_hash",
+      "_frame_id",
+      "recent_transition_facts",
+      "_global_references",
+      "_bound_names",
+      "related_function_sources"
+    ],
+    "old_facts_prior_hypotheses_package_messages_assignment_AST_exact_v5": true,
+    "old_hypotheses_12000_8000_two_messages_unchanged": true,
+    "no_new_model_round_runtime_retry_or_contract_validation": true
+  },
+  "real_saved_request_fact_reconstruction": [
+    {
+      "source_event": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "trigger": "bootstrap",
+      "level": 3,
+      "step": 27,
+      "v5_known_prompt_tokens": 8471,
+      "original_public_facts_byte_equal": true,
+      "all_other_package_fields_equal_with_identical_inputs": true,
+      "geometry_status": "available",
+      "geometry_json_characters": 7323,
+      "geometry_sha256": "91d64967078d0491ba5293cd696593375871582ddc1a9a2edbd65eb185fb0e0c"
+    },
+    {
+      "source_event": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "trigger": "repair",
+      "level": 3,
+      "step": 30,
+      "v5_known_prompt_tokens": 10978,
+      "original_public_facts_byte_equal": true,
+      "all_other_package_fields_equal_with_identical_inputs": true,
+      "geometry_status": "available",
+      "geometry_json_characters": 7304,
+      "geometry_sha256": "43ca6575d826a47dcdd55f163c8ff02b076169463a2a794ff9d087f7b338c273"
+    },
+    {
+      "source_event": "runs/034-plan-diagnostic-v5/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "trigger": "bootstrap",
+      "level": 5,
+      "step": 86,
+      "v5_known_prompt_tokens": 9166,
+      "original_public_facts_byte_equal": true,
+      "all_other_package_fields_equal_with_identical_inputs": true,
+      "geometry_status": "available",
+      "geometry_json_characters": 4312,
+      "geometry_sha256": "5dc19a1dc60e5aa9daab219ce1ceada1c1100d130278293fd8ef1b733cacf54d"
+    }
+  ],
+  "execution_guardrails": {
+    "unchanged_config_fields": [
+      "arm_order",
+      "games",
+      "reference_arm",
+      "arm_environment",
+      "active_streams",
+      "n_passes_per_arm",
+      "warmup_action_games",
+      "requested_arm_seconds",
+      "continuation_seconds",
+      "max_continuation_actions",
+      "startup_limit_seconds",
+      "strict_arm_budget",
+      "require_cache_flush",
+      "require_cache_flush_log",
+      "require_complete_pool",
+      "require_drained_workers",
+      "require_rtx_pro6000",
+      "candidate_delivery",
+      "hypothesis_context",
+      "runtime_source_sha256",
+      "cache_flush_wait_seconds"
+    ],
+    "session_hard_limit_seconds": 7200,
+    "previous_v5_session_cap_seconds": 6300,
+    "session_cap_change_reason": "Restore already planned7200s ceiling after quota refresh; no change to450s/60-action game budgets or600s arm allowance.",
+    "same_private_target_metadata_as_v5": true,
+    "actual_runtime_source_hashes_match": true,
+    "one_bootstrap_and_one_real_mismatch_repair_unchanged": true,
+    "native_main_loop_source_unchanged": true
+  },
+  "verification_evidence": {
+    "native_property_report": "experiments/034-v6-preparation/native-object-checks.json",
+    "native_property_source_hashes_current": true,
+    "native_child_calls": 7,
+    "synthetic_native_protocol_actions": 1,
+    "legacy_native_cpu_report": "experiments/034-v6-cpu-check/final/report.json",
+    "legacy_scenarios": 14,
+    "legacy_native_sandbox_calls": 105,
+    "legacy_scripted_completions": 14
+  },
+  "limitations": [
+    "Component geometry does not establish task-object identity, correct roles, rule understanding or score improvement.",
+    "Same-color components may split semantic objects; unchanged regions may still be actionable. Prompt explicitly preserves these uncertainties.",
+    "Adding geometry and instructions increases the payload. Local character counts are not served-model tokens. In particular the stored v5 repair already used10978tokens; v6 fit must be measured by live exact /tokenize, which rejects above16384 before generation. No unsupported exact token-fit claim.",
+    "No extra tokenizer/model/server started for this review; online real adoption/prediction/game progression remains to be measured.",
+    "Only public pre-cut observations enter initial facts. The extra saved repair request used here is retrospective offline verification, never added to the launch checkpoint input."
+  ],
+  "findings": [],
+  "review_script": {
+    "path": "/private/tmp/arc3_034_v6_preflight.py",
+    "sha256": "50d450233b92c1c92c0136dfbff08de513c4883cfb7d8202319d05b6aaf46786"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "review": "034-v6 minimal object evidence design independent review",
+  "reviewer": "/root/v6_object_design_review",
+  "scope": "Read-only source and observed v5 program/transitions review. No model request, network, GPU or real action; only this report is written.",
+  "source_sha256": {
+    "src/arc3_research/executable_plan_context.py": "7738b7b6e168891b59146bb9b9fd5e0c74dad2e3a5b6642f3f01b930ef866a44",
+    "src/arc3_research/executable_plan.py": "c1453a23769f10e95ee0bc3d11be7029b0b7ad55cf5ed6dad0458e96265933ac",
+    "src/arc3_research/executable_plan_contract.py": "9d9a7d50de10c9112775f1a24ea63e213d594e9eca8067f6844d8476f7655fd7",
+    "research/notes/034/034-v5-results-analysis.md": "38de0482c9568f9ebb0011fe17597a9f42077126a6b95a767b98fba1f33de693",
+    "experiments/034-v5-analysis/program-independent-review.json": "0666093b837448b875aa0ede7503111e859b3503dca6072bb6b042c8a4ce2866",
+    "experiments/034-v5-analysis/su15-code-errors-offline.json": "ae451da3e5477597bc9a572bea6158295c6633bbb4d4c5520304666d218aeee1"
+  },
+  "decision": "Proceed only as a bounded representation-and-use diagnostic. A shared current-frame 4-connected component catalogue can make object-instance errors less likely and cheaper to avoid, but it is not a role checker, UI guard or full-object coverage constraint. Keep unchanged host contracts and judge actual adoption, coverage and game outcomes from logs.",
+  "observed_v5_failures": [
+    {
+      "case": "ft09",
+      "observed": "The first two checked clicks truly changed task pixels, but declared only a 2x2 subset of a 6x6 same-color component (4/36 = 11.1% coverage). Later clicks selected 4x4 side/top color-strip components and produced no change. The repair excluded one old coordinate while preserving the same bad patch-scanning rule.",
+      "implication": "Component footprint and observed transition support can distinguish local 36-pixel effect evidence from arbitrary uniform patches. Merely making a component selectable does not tell whether it is a task piece or a control."
+    },
+    {
+      "case": "su15",
+      "observed": "The delivered _find(Y) combines disjoint 2x2 and 4x4 regions into one bounding box. It also indexes threat[1] on a one-pixel 4-connected P fragment, then has independent prediction-set/background errors.",
+      "implication": "Per-color connected instances remove one factual union error; a 4-connected fragment is not automatically an entire semantic object, and same-color component separation alone does not identify the mover or repair prediction generation."
+    }
+  ],
+  "offline_geometry_crosscheck": {
+    "method": "Independent flood fill of exact current ASCII from actual v5 auxiliary request; all colors, 4-neighbor adjacency, row-major frame-local ids. Exact row runs use inclusive endpoints.",
+    "ft09": {
+      "components": 52,
+      "full_catalog_minimal_json_bytes": 8191,
+      "row_runs": 433,
+      "largest_component_pixels": 3028,
+      "task_click_components": [
+        {
+          "bbox": [
+            4,
+            28,
+            9,
+            33
+          ],
+          "pixels": 36
+        },
+        {
+          "bbox": [
+            4,
+            36,
+            9,
+            41
+          ],
+          "pixels": 36
+        }
+      ],
+      "bad_click_components": [
+        {
+          "bbox": [
+            4,
+            60,
+            7,
+            63
+          ],
+          "pixels": 16
+        },
+        {
+          "bbox": [
+            0,
+            60,
+            3,
+            63
+          ],
+          "pixels": 16
+        }
+      ],
+      "last_two_real_transitions": "Both click-containing task footprints show 36 actual color changes plus one remote counter-pixel change. This is genuine spatial support, but neither color, size nor support licenses a fixed game-specific rule."
+    },
+    "su15": {
+      "components": 32,
+      "full_catalog_minimal_json_bytes": 3715,
+      "row_runs": 158,
+      "largest_component_pixels": 3279,
+      "separate_Y_components": [
+        {
+          "bbox": [
+            1,
+            13,
+            2,
+            14
+          ],
+          "pixels": 4
+        },
+        {
+          "bbox": [
+            3,
+            30,
+            6,
+            33
+          ],
+          "pixels": 16
+        }
+      ],
+      "critical_boundary_fact": "The last transition crosses L4 step85 to L5 step86. Both upper Y components occur identically in before and after. The preceding click occurred on L4. These facts cannot certify either current Y component as the active L5 mover. Even the larger 4x4 component may be display/preview; do not label it active merely because separation succeeded.",
+      "fragmentation_warning": "The threat glyph contains multiple disconnected P fragments, including one-pixel components. A model may group components into a multicolor/disconnected object hypothesis; host must not force a single component to equal a semantic object."
+    }
+  },
+  "minimum_implementation": [
+    "Use one pure deterministic helper for context and frame.object_evidence. It supplies geometric candidates, not object truths. Include every color and exact pixel count, bbox and reconstructible full row runs; avoid per-game names, fixed coordinate cutoffs, size thresholds and static/UI classifiers.",
+    "Make ids explicitly local to frame identity/hash. Recompute on every current-frame refresh; do not retain ids across movement, recoloring, split, merge or level boundaries. A source-colour change can create a different current component.",
+    "For recent public transitions, preserve before/after frame level, step and compatible-shape status, action coordinates when genuinely available, exact changed-pixel count and spatial intersection counts. Label these as coordinate-overlap facts, not object identity, motion matching, click causality or proof of interactivity. A remote counter/background component may overlap changes without being controlled.",
+    "Do not assign evidence from an earlier level to current-level roles. Retain boundary records as such. Unknown or zero direct support is not negative interactivity evidence and must not disable actions.",
+    "Request code to select/recompute component instances or explicitly hypothesized unions/subsets and state role uncertainty in existing goal/reason/scope fields. Prefer complete stated footprint in object_pixels and complete target/landing footprint in target_pixels, using generated loops over row runs. Keep old action-bound prediction validation; no semantic acceptance gate or new required return schema.",
+    "Keep the current board, paused code/dependency closure, prior text hypotheses, auxiliary thinking settings, output/input limits, request count, short-plan lifecycle, 450s/60-action arm budgets, arm order and main loop unchanged. Candidate is the complete evidence representation plus its use instructions, not an isolated causal test of a single sentence."
+  ],
+  "minimum_stronger_observation_without_behavior_gate": [
+    "Pre-register a retrospective geometry coverage audit from logged frozen predictions and exact before frames. Report which connected components each object_pixels selection intersects, selected/component pixel counts, and whether the prediction actually covers its textually claimed scope. This may be manual on four or fewer host actions; do not build a new testing subsystem.",
+    "Do not auto-fail partial component coverage: legitimate object hypotheses can be multicolor, disconnected, touch background, or deliberately test a named subpart. Instead make the model declare such restricted scope, then report that it is a subpart check and cannot support a whole-object claim.",
+    "If code still scans arbitrary same-color patches or globally merges all pixels of a color while ignoring the catalogue, record non-adoption. A correct deterministic catalogue plus unchanged wrong behavior refutes this delivery design, even if it passes native sandbox checks."
+  ],
+  "offline_launch_gates": [
+    "On exact v5 ft09 and su15 frames, catalogue partitions all pixels once, reconstructs ASCII exactly, bbox/count/runs agree and separate same-color disjoint components remain separate.",
+    "Check at least one movement/recoloring refresh, a no-change action, a disconnected/multicolor glyph and a level boundary. Context and sandbox catalogue must be exactly equal for identical public frame/history inputs; prior ids or prior-level support must not leak into current objects.",
+    "Using observed v5 predictions, retrospective audit must recover 4/36 coverage on first task actions and identify the separate 16-pixel bad-click component; this establishes audit informativeness, not candidate solving ability.",
+    "Preserve bounded input behavior. Full row-run catalogues alone add about 8.2KB/3.7KB at the two initial cuts; support fields may add more. Verify final frozen request remains within 16384 served-token input cap when a repair includes the prior program and counterexample. Do not silently truncate current pixels, geometry, paused code or dependencies. If exact token count is unavailable locally, treat the existing server-tokenize rejection as a delivery failure rather than lowering safeguards to force execution.",
+    "Existing native 14-scenario smoke verification should still pass without changing expected action/time/accounting semantics. New checks are small pure helper/refresh checks only."
+  ],
+  "online_decision_criteria": {
+    "delivery": "Complete code, finish reason, exact served input, generation/validation/total branch time; no over-cap or zero-action exception hidden as role success.",
+    "adoption": "Does current code actually use instance geometry from the live frame rather than global color unions, stale bboxes or arbitrary 2x2 patches? Are unions or fragment groupings acknowledged as hypotheses?",
+    "scope": "For every host action, report exact declared object/target footprints and full-component intersection coverage; distinguish changed task footprint from remote counter/UI support. A narrow projection match remains narrow evidence.",
+    "repair": "After a real failed prediction, did the revised object/role hypothesis and next action change for a reason supported by the counterexample, rather than blacklisting the old coordinate and selecting another lookalike?",
+    "progress": "Direct checked-program level changes and useful rule-discriminating actions must be distinguished from later ordinary-loop completions and from pure catalogue/contract acceptance.",
+    "score": "Same-session A/B, full unchanged budgets, preserve both game gains and losses, action efficiency and whole branch cost. Positive selected-cut behavior permits considering a full-pool trial only; formal 31.16 improvement remains unproved until the normal final submission stage.",
+    "negative_stops": [
+      "Complete full-scope predictions but still wrong role or wrong task goal: representation delivered, role/rule understanding remains bottleneck; do not add another generic context hint and call it solved.",
+      "Catalogue ignored, global-color union or same UI confusion remains: representation-plus-use intervention failed; do not scale unchanged.",
+      "Zero-action code or contract errors recur: executable quality remains bottleneck; role claims alone have no execution evidence.",
+      "Better object scope or isolated matches without positive paired score: mechanism diagnostic only, no net-gain claim and no formal submission."
+    ]
+  },
+  "answer_to_root_question": "No hard semantic gate is needed for this narrow experiment. The change has research辨别力 because it creates an exact, executable shared representation and permits checking whether instance grounding and full stated scope improve. It is insufficient to constrain wrong-object choices by itself. The smallest useful strengthening is observational footprint auditing and explicit boundary/identity/causality limits, not an auto-UI classifier or mandatory full-component semantics.",
+  "limits": [
+    "Two selected checkpoints and one stochastic B→A pair cannot establish whole-pool gain or isolate representation from matching instructions.",
+    "This review does not inspect unprovided hidden environment state or infer true roles from visual geometry alone.",
+    "Catalogue byte counts are exact JSON lengths of an independent minimal representation, not served token counts or the as-yet unbuilt v6 format."
+  ]
+}
