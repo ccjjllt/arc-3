@@ -1,0 +1,125 @@
+{
+  "messages": [
+    {
+      "id": 3542700,
+      "postDate": "2026-10-22T09:30:32.383Z",
+      "content": "<p>Honestly, I’m frustrated and exhausted by this submission experience.</p>\n<p>My notebook runs for 8.3 hours on the public practice games and scores 46.90. When submitted for competition evaluation, it finishes in less than an hour with 0.00.</p>\n<p>I understand that the hidden games are different. I’m not expecting the same score. But the dramatically shorter runtime makes me question whether the agent even ran as intended. So I’m left with no explanation beyond “0.00.” Did initialization fail? Did the agent execute any actions? Did it terminate early? Or did it genuinely play and solve nothing?</p>\n<p>With limited submission attempts and days left, repeatedly submitting speculative fixes is incredibly discouraging. I’m not asking for hidden game details, just enough execution diagnostics to distinguish an actual performance failure from a broken run.\nEven a minimal report would help:</p>\n<ul>\n<li>Did the model server and agent initialize?</li>\n<li>How many games started and actions executed?</li>\n<li>What was the actual execution duration?</li>\n<li>Why did the run stop?</li>\n</ul>\n<p>Has anyone encountered this and found a concrete cause? Is there a supported way to debug it without burning another submission blindly?</p>",
+      "rawMarkdown": "Honestly, I’m frustrated and exhausted by this submission experience.\n\nMy notebook runs for 8.3 hours on the public practice games and scores 46.90. When submitted for competition evaluation, it finishes in less than an hour with 0.00.\n\nI understand that the hidden games are different. I’m not expecting the same score. But the dramatically shorter runtime makes me question whether the agent even ran as intended. So I’m left with no explanation beyond “0.00.” Did initialization fail? Did the agent execute any actions? Did it terminate early? Or did it genuinely play and solve nothing?\n\nWith limited submission attempts and days left, repeatedly submitting speculative fixes is incredibly discouraging. I’m not asking for hidden game details, just enough execution diagnostics to distinguish an actual performance failure from a broken run.\nEven a minimal report would help:\n- Did the model server and agent initialize?\n- How many games started and actions executed?\n- What was the actual execution duration?\n- Why did the run stop?\n\nHas anyone encountered this and found a concrete cause? Is there a supported way to debug it without burning another submission blindly?",
+      "votes": 10
+    },
+    {
+      "id": 3542775,
+      "postDate": "2026-10-22T12:22:39.663Z",
+      "content": "<p>I suspect this may be on the Kaggle side.</p>\n<p>Others are reporting similar problems here:\n<a href=\"https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/751598\" target=\"_blank\">https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/751598</a></p>\n<p>Our checkpoint read pass went from about 5 minutes to 35, with the same model versions, container and launcher.</p>\n<p>We tested plain file reads before importing PyTorch or allocating model memory and they were already slow. On one RTX PRO 6000 worker, 16 readers managed about 119 MiB/s, with NFS read requests taking 120 ms on average. A fresh worker with the same configuration gave about 291 MiB/s and 49 ms.</p>\n<p>There was almost no local RPC queueing, and no NFS retransmissions or errors were recorded. We cleared the local file cache between tests, although we couldn’t control the server-side cache.</p>\n<p>Adding more readers didn’t help much: going from 16 to 64 improved average throughput over full shards by only about 4%.</p>\n<p>That seems to narrow it down to the remote storage read path, though we can’t tell from these measurements whether the delay is in the network or the storage backend.</p>\n<p>Could someone at Kaggle check for contention or bandwidth limits on the model mounts? The difference between otherwise similarly configured workers might also be worth looking into.</p>",
+      "rawMarkdown": "I suspect this may be on the Kaggle side.\n\nOthers are reporting similar problems here:\nhttps://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/751598\n\nOur checkpoint read pass went from about 5 minutes to 35, with the same model versions, container and launcher.\n\nWe tested plain file reads before importing PyTorch or allocating model memory and they were already slow. On one RTX PRO 6000 worker, 16 readers managed about 119 MiB/s, with NFS read requests taking 120 ms on average. A fresh worker with the same configuration gave about 291 MiB/s and 49 ms.\n\nThere was almost no local RPC queueing, and no NFS retransmissions or errors were recorded. We cleared the local file cache between tests, although we couldn’t control the server-side cache.\n\nAdding more readers didn’t help much: going from 16 to 64 improved average throughput over full shards by only about 4%.\n\nThat seems to narrow it down to the remote storage read path, though we can’t tell from these measurements whether the delay is in the network or the storage backend.\n\nCould someone at Kaggle check for contention or bandwidth limits on the model mounts? The difference between otherwise similarly configured workers might also be worth looking into.",
+      "votes": 5,
+      "replies": [
+        {
+          "id": 3542790,
+          "postDate": "2026-10-22T12:54:10.223Z",
+          "content": "<p>Thank you for sharing the insights. Thank you for helping me understand what might be happening with our runs.</p>\n<p>Just wondering what is your next steps? Have you found a workaround that lets submissions run successfully now, or are you holding off until Kaggle investigates? Trying to figure out whether there’s something useful we can do on our side before spending another submission.</p>",
+          "rawMarkdown": "Thank you for sharing the insights. Thank you for helping me understand what might be happening with our runs.\n\nJust wondering what is your next steps? Have you found a workaround that lets submissions run successfully now, or are you holding off until Kaggle investigates? Trying to figure out whether there’s something useful we can do on our side before spending another submission.",
+          "replies": [
+            {
+              "id": 3542907,
+              "postDate": "2026-10-22T16:32:56.037Z",
+              "content": "<p>The scorecard can expire after 15 minutes if there’s no game action while the model loads. Increasing the model startup timeout alone won’t prevent that.</p>\n<p>A proposed workaround is to send a counted RESET every 5 minutes until the server is ready. Downsides are extra actions on that game and loading time eating into the 9hr budget. The per-game timeout also needs enough headroom.</p>\n<p>We’ve tested the mechanism locally, but haven’t validated a complete submission with it yet.</p>",
+              "rawMarkdown": "The scorecard can expire after 15 minutes if there’s no game action while the model loads. Increasing the model startup timeout alone won’t prevent that.\n\nA proposed workaround is to send a counted RESET every 5 minutes until the server is ready. Downsides are extra actions on that game and loading time eating into the 9hr budget. The per-game timeout also needs enough headroom.\n\nWe’ve tested the mechanism locally, but haven’t validated a complete submission with it yet."
+            },
+            {
+              "id": 3542927,
+              "postDate": "2026-10-22T16:51:26.187Z",
+              "content": "<p>Like It is all random but are you looking for team mates by any chance?</p>",
+              "rawMarkdown": "Like It is all random but are you looking for team mates by any chance?"
+            },
+            {
+              "id": 3543061,
+              "postDate": "2026-10-22T20:50:37.080Z",
+              "content": "<p>I hear you - the variance is real! Here’s hoping we can be lucky <em>and</em> good.\nThanks for the offer! Not planning any team merge for this one, but wish you the best of…luck!</p>",
+              "rawMarkdown": "I hear you - the variance is real! Here’s hoping we can be lucky *and* good.\nThanks for the offer! Not planning any team merge for this one, but wish you the best of…luck!"
+            },
+            {
+              "id": 3543292,
+              "postDate": "2026-10-23T06:09:56.390Z",
+              "content": "<p>Quick update: yesterday’s submission with the ‘startup guard’ completed successfully and posted a score within the expected range. Startup took about 46 minutes.</p>\n<p>The guard sends a RESET every five minutes while waiting for the model server, then stops once it’s ready. As mentioned, startup eats into the 9hr budget (around 30 minutes less playing time available now) and RESETs count towards the action total, so this doesn’t remove the cost of the slow loading.</p>",
+              "rawMarkdown": "Quick update: yesterday’s submission with the ‘startup guard’ completed successfully and posted a score within the expected range. Startup took about 46 minutes.\n\nThe guard sends a RESET every five minutes while waiting for the model server, then stops once it’s ready. As mentioned, startup eats into the 9hr budget (around 30 minutes less playing time available now) and RESETs count towards the action total, so this doesn’t remove the cost of the slow loading."
+            },
+            {
+              "id": 3543845,
+              "postDate": "2026-10-24T05:21:53.173Z",
+              "content": "<p>Thank you very much. For my case, the startup took around this duration as well. I finally got a non-zero score</p>",
+              "rawMarkdown": "Thank you very much. For my case, the startup took around this duration as well. I finally got a non-zero score"
+            },
+            {
+              "id": 3543878,
+              "postDate": "2026-10-24T08:27:57.770Z",
+              "rawMarkdown": "",
+              "isDeleted": true
+            },
+            {
+              "id": 3543879,
+              "postDate": "2026-10-24T08:29:09.180Z",
+              "content": "<p><a href=\"/aquaursaresearch\" target=\"_blank\">@aquaursaresearch</a> Hey Saw your mails are disabled through kaggle we were looking for teamates wanna team up. We are chasing for top 3.</p>",
+              "rawMarkdown": "@aquaursaresearch Hey Saw your mails are disabled through kaggle we were looking for teamates wanna team up. We are chasing for top 3."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3542914,
+      "postDate": "2026-10-22T16:37:12.807Z",
+      "content": "<p>This happens when your model is idle for 15 minutes , try fixing it and your problem will be solved</p>",
+      "rawMarkdown": "This happens when your model is idle for 15 minutes , try fixing it and your problem will be solved",
+      "votes": 1
+    },
+    {
+      "id": 3543378,
+      "postDate": "2026-10-23T10:35:22.563Z",
+      "content": "<p>yeah same here too 0 gotten 2/3 times</p>",
+      "rawMarkdown": "yeah same here too 0 gotten 2/3 times\n"
+    },
+    {
+      "id": 3543312,
+      "postDate": "2026-10-23T07:07:08.360Z",
+      "content": "<p>Got 2 kaggle error, any idea?</p>",
+      "rawMarkdown": "Got 2 kaggle error, any idea?",
+      "replies": [
+        {
+          "id": 3543535,
+          "postDate": "2026-10-23T16:00:14.260Z",
+          "content": "<p>your model might be idle for 15 minutes , or some dataset error</p>",
+          "rawMarkdown": "your model might be idle for 15 minutes , or some dataset error"
+        }
+      ]
+    },
+    {
+      "id": 3542767,
+      "postDate": "2026-10-22T12:05:17.837Z",
+      "content": "<p><a href=\"/derrickgoh\" target=\"_blank\">@derrickgoh</a> Same here. I had this before, adjusted startup to wait for the model before connecting to the gateway, and submissions worked again. Now we're getting Kaggle Error even on an older baseline. Wondering if something changed with the host-side timeout? Just a guess.</p>",
+      "rawMarkdown": "@derrickgoh Same here. I had this before, adjusted startup to wait for the model before connecting to the gateway, and submissions worked again. Now we're getting Kaggle Error even on an older baseline. Wondering if something changed with the host-side timeout? Just a guess.",
+      "replies": [
+        {
+          "id": 3542789,
+          "postDate": "2026-10-22T12:53:58.290Z",
+          "content": "<p>Thank you for sharing the insights. Thank you for helping me understand what might be happening with our runs.</p>\n<p>Just wondering what is your next steps? Have you found a workaround that lets submissions run successfully now, such as extending the startup wait, or are you holding off until Kaggle investigates? Trying to figure out whether there’s something useful we can do on our side before spending another submission.</p>",
+          "rawMarkdown": "Thank you for sharing the insights. Thank you for helping me understand what might be happening with our runs.\n\nJust wondering what is your next steps? Have you found a workaround that lets submissions run successfully now, such as extending the startup wait, or are you holding off until Kaggle investigates? Trying to figure out whether there’s something useful we can do on our side before spending another submission.",
+          "replies": [
+            {
+              "id": 3542926,
+              "postDate": "2026-10-22T16:49:28.607Z",
+              "content": "<p>Still getting Kaggle Error here too. I've tweaked the startup checks to avoid restarting the model while loading is still progressing. I'm out of GPU quota for the week though, so I haven't tested the latest changes yet. I've attached a SKILL.md with the steps if you want your coding agent to try them. Still experimental, so no confirmed fix yet.</p>",
+              "rawMarkdown": "Still getting Kaggle Error here too. I've tweaked the startup checks to avoid restarting the model while loading is still progressing. I'm out of GPU quota for the week though, so I haven't tested the latest changes yet. I've attached a SKILL.md with the steps if you want your coding agent to try them. Still experimental, so no confirmed fix yet."
+            },
+            {
+              "id": 3543843,
+              "postDate": "2026-10-24T05:18:16.817Z",
+              "content": "<p>Thank you for the insights. Apparently it seems like the problem is fixed. I extend the waiting time for the server startup to give more time for model to be loaded. It seems right now the model can be loaded in 20-40 minutes.</p>",
+              "rawMarkdown": "Thank you for the insights. Apparently it seems like the problem is fixed. I extend the waiting time for the server startup to give more time for model to be loaded. It seems right now the model can be loaded in 20-40 minutes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

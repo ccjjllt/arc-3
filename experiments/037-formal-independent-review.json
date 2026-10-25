@@ -1,0 +1,72 @@
+{
+  "reviewed_at_utc": "2026-10-25T13:43:09.781221+00:00",
+  "reviewer": "new independent agent /root/review_037_score_fresh",
+  "scope": "Local read-only audit of newly downloaded CLI result, frozen v83/009/037 source and existing save evidence. No model, GPU, environment action, remote mutation, or solver edit.",
+  "formal_result": {
+    "submission_id": 57615378,
+    "status": "COMPLETE",
+    "public_score": 26.71,
+    "delta_vs_009": -4.45,
+    "delta_vs_upstream_displayed": -8.64,
+    "source": "/private/tmp/arc3-037-scored-submissions-cli.json"
+  },
+  "verified": {
+    "tracked_live_source_hashes_match": true,
+    "tracked_archive_hashes_match": true,
+    "v83_versus_franzen_changed_cells": [
+      0,
+      16
+    ],
+    "harness_patch_identical": true,
+    "formal_solver_configuration_same": true,
+    "known_formal_submission_ids": [
+      57615378,
+      57481712,
+      57447779,
+      57101330,
+      57096804,
+      57092815
+    ],
+    "no_unmodified_v83_own_formal_control_in_returned_submissions": true,
+    "our009_docker": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c",
+    "037_and_v83_docker": "gcr.io/kaggle-private-byod/python@sha256:00377cd1b3d470a605bc5b0ceca79969e369644e9b36802242a1c70e627372f9",
+    "docker_differs_from_009": true
+  },
+  "interpretation": {
+    "established": [
+      "This actual037submission is below our009 best31.16 and upstream displayed35.35. It did not improve the public leaderboard score.",
+      "The frozen candidate adds segmentation_runs_v2 to actual scored v83; deployment image/inputs were pinned and read back before formal submission.",
+      "GPU save passed with real actions, but does not establish formal hidden per-game coverage, full runtime, throughput or reason for score loss.",
+      "No own unmodified v83 formal control is present in the returned submission history. v83 core solver is the same Franzen-derived solver already underlying009; the displayed35.35 is one upstream result, not an independently reproduced new algorithm."
+    ],
+    "plausible_but_unproved": [
+      "The row-runs field can increase tool output/context cost and expose the unchanged3072token tool-output cap. One existingft09 frame expanded default repr from13891 to20355chars (+46.53%), but this is not measured overhead across the formal hidden run.",
+      "Stochastic generation and shared scheduling can vary outcomes; one037score versus historical009/upstream scores cannot quantify or separate that effect.",
+      "The inherited runtime image differs from009, but there is no evidence its effect explains the loss."
+    ],
+    "not_established": [
+      "That all4.45points versus009 or all8.64points versusupstream were caused by exact-pixel representation.",
+      "That the formal run hitOOM, prematurely ended, failed model load, or used wrong inputs.",
+      "That removingruns will necessarily recover35.35, or that repeated unchanged submissions will improve expected score."
+    ]
+  },
+  "recommendation": {
+    "current": "Keep009/31.16 as best; stop037unchanged resubmission or extension based only on this result.",
+    "next_direct_candidate": "Use the same pinnedv83 source/image/inputs with original unmodified solver (remove037runs intervention), perform necessary own GPU save, then one exploratory formal submission when quota permits. This supplies an own reference and a direct opportunity to recover a higher public score.",
+    "boundary": "A single originalv83run is still only one reference, not a variance estimate or a clean proof of031causality. Do not add memory/medium/D-prime simultaneously; do not require community validation or broad research.",
+    "formal_diagnostics": "Root is separately checking available official diagnostics; update causal assessment only if those return concrete evidence."
+  },
+  "evidence_paths": [
+    "experiments/037-highscore-submission.json",
+    "experiments/037-submission-source/build-manifest.json",
+    "experiments/037-save-independent-review.json",
+    "experiments/037-before-formal-source-check.json",
+    "research/notes/031/031-next-mechanism-notes.md",
+    "experiments/031-natural-analysis/decision-review.json"
+  ],
+  "source_hashes": {
+    "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb": "8221f1e64ad7d4c8b3ecbbcbd83f68c9469707246484b0bbcaa5254da809905e",
+    "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+    "experiments/037-submission-source/submission.ipynb": "a4457c0605349539198dc3a516549bf6ed4c976a132e4a8255d34d9be62a6b57"
+  }
+}

@@ -1,0 +1,578 @@
+# Priced Curiosity: EC
+
+ARC Prize 2026, ARC-AGI-3. Graph-exploration agent with a score-aware probe controller (exact marginal cost of actions under RHAE).
+
+Config: `{"variant": "EC", "over": {"theta": 0.002}, "seed": 0, "cap": 10000}`
+
+Code licence: CC-BY 4.0 (the winner licence in the competition rules). Exploration core follows Rudakov, Shock and Cowley, arXiv 2512.24156 (MIT).
+
+!pip install --no-index --find-links \
+    /kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels \
+    arc-agi python-dotenv
+
+import os
+os.makedirs('/tmp/pc',exist_ok=True)
+
+%%writefile /tmp/pc/rhae.py
+# RHAE scoring and marginal-cost analysis (units: per-level s in [0,1.15], game score in [0,1])
+import math
+
+CAP=1.15
+SQ=math.sqrt(CAP)
+
+def s(A,B):
+    return min(CAP,(B/A)**2) if A>0 else 0.0
+
+def game_score(acts,Bs,done):
+    # acts[i],Bs[i],done[i] for level i+1; mirrors arc_agi EnvironmentScoreCalculator.to_score incl. the clamp
+    L=len(Bs)
+    W=L*(L+1)/2
+    tot=0.0;mw=0
+    for i in range(L):
+        si=s(acts[i],Bs[i]) if done[i] else 0.0
+        tot+=(i+1)*si
+        if si>0:mw+=i+1
+    return min(tot/W,mw/W)
+
+def level_actions(steps,L):
+    # steps: [(action_id,levels_completed_after,full_reset)] of one play, starting after the initial full reset
+    # ACTION1-7 count; a level RESET counts; a level's A is all actions between level changes
+    acts=[0]*L;done=[False]*L;n=0;prev=0;lc=0
+    for aid,lca,fr in steps:
+        if 1<=aid<=7 or (aid==0 and not fr):n+=1
+        if lca!=lc:
+            if lc<L:acts[lc]=n-prev;done[lc]=True
+            prev=n;lc=lca
+    if lc<L:acts[lc]=n-prev
+    return acts,done
+
+def total_score(games):
+    return sum(games)/len(games) if games else 0.0
+
+def A0(B):
+    return B/SQ
+
+def dk(A,B,k):
+    return s(A,B)-s(A+k,B)
+
+def dk_exact(A,B,k):
+    # closed form of section 2.3(b)
+    a0=A0(B)
+    if A+k<=a0:return 0.0
+    if A<a0:return CAP-(B/(A+k))**2
+    return B*B*k*(2*A+k)/(A*A*(A+k)**2)
+
+def Dk(a,B,k):
+    return dk(max(a,A0(B)),B,k)
+
+def Ck(a,B,k,l,L):
+    return l/(L*(L+1)/2)*Dk(a,B,k)
+
+def thr_approx(B,k,l,L,th):
+    W=L*(L+1)/2
+    return (2*k*l*B*B/(W*th))**(1/3)
+
+def thr_exact(B,k,l,L,th):
+    # smallest real a>=0 with Ck(a)<=th; Ck is constant on [0,A0] and decreasing after
+    if Ck(0,B,k,l,L)<=th:return 0.0
+    lo,hi=A0(B),A0(B)+1
+    while Ck(hi,B,k,l,L)>th:hi*=2
+    for _ in range(200):
+        m=(lo+hi)/2
+        if Ck(m,B,k,l,L)>th:lo=m
+        else:hi=m
+    return hi
+
+
+%%writefile /tmp/pc/agent.py
+# V0 graph explorer + probe generator + action-economy controller; env-agnostic
+# frame processing and tiering follow Rudakov, Shock, Cowley (arXiv 2512.24156)
+import hashlib,random,math
+from collections import deque
+import numpy as np
+from scipy import ndimage
+import rhae
+
+SAL=set(range(6,16))
+MASK=16
+NT=5
+K=8
+SIMPLE=(1,2,3,4,5)
+
+def comps(g):
+    out=[]
+    for c in np.unique(g):
+        lab,n=ndimage.label(g==c)
+        for i,sl in enumerate(ndimage.find_objects(lab)):
+            m=lab[sl]==i+1
+            ys,xs=np.nonzero(m)
+            ys=ys+sl[0].start;xs=xs+sl[1].start
+            h=sl[0].stop-sl[0].start;w=sl[1].stop-sl[1].start;area=len(ys)
+            cy,cx=ys.mean(),xs.mean()
+            j=int(np.argmin((ys-cy)**2+(xs-cx)**2))
+            out.append({'c':int(c),'area':area,'h':h,'w':w,'y0':sl[0].start,'x0':sl[1].start,
+                        'rect':area==h*w,'py':int(ys[j]),'px':int(xs[j]),'ys':ys,'xs':xs})
+    out.sort(key=lambda o:(o['y0'],o['x0'],o['c']))
+    return out
+
+def on_edge(o,H,W,d=3):
+    e=[]
+    if o['x0']+o['w']-1<d:e.append('v')
+    if o['x0']>W-1-d:e.append('v')
+    if o['y0']+o['h']-1<d:e.append('h')
+    if o['y0']>H-1-d:e.append('h')
+    return e
+
+def status_mask(g):
+    # likely status bars: components hugging an edge that are long, or come with >=2 twins on an edge
+    H,W=g.shape
+    cs=comps(g)
+    m=np.zeros(g.shape,bool)
+    for o in cs:
+        e=on_edge(o,H,W)
+        if not e:continue
+        r=o['w']/o['h']
+        long=(r>=5 and 'h' in e) or (r<=0.2 and 'v' in e)
+        tw=sum(1 for p in cs if p is not o and p['c']==o['c'] and p['area']==o['area'] and p['rect']==o['rect'] and on_edge(p,H,W))
+        if long or tw>=2:m[o['ys'],o['xs']]=True
+    return m
+
+def tier(o):
+    sal=o['c'] in SAL
+    med=2<=o['w']<=32 and 2<=o['h']<=32
+    if o['c']==MASK:return 4
+    if sal and med:return 0
+    if med:return 1
+    if sal:return 2
+    return 3
+
+def sig(o):
+    a=o['w']/o['h']
+    asp='sq' if max(o['w'],o['h'])<=1.5*min(o['w'],o['h']) else ('wide' if a>1 else 'tall')
+    return ('C',o['c'],int(math.log2(o['area'])),o['rect'],asp)
+
+def hsh(g):
+    return hashlib.blake2b(np.ascontiguousarray(g,dtype=np.uint8).tobytes(),digest_size=16).hexdigest()
+
+DEFAULT={'variant':'V0','theta':0.01,'F':20,'U0':20,'transfer':True,'front':False,'bank':False,
+         'fix':False,'stall':False,'rank':'salience','K':K,'base':'v0','alpha':0.3}
+
+def variant_cfg(name,**kw):
+    c=dict(DEFAULT);c['variant']=name
+    if name=='RAND':
+        c['base']='rand';c.update(kw);return c
+    if name.startswith('V1'):
+        # V1 base (exploit-first); controller flags as for the V0 family
+        c=variant_cfg(name[3:] or 'V0');c['variant']=name;c['base']='v1'
+        if c['transfer'] is False:raise ValueError(name)
+        c.update(kw);return c
+    if name=='FIX':c['fix']=True
+    elif name=='STALL':c['stall']=True
+    elif name in('EC','EC-oracleB'):c['front']=c['bank']=True
+    elif name=='EC-noBank':c['front']=True
+    elif name=='EC-noFront':c['bank']=True
+    elif name=='EC-noTransfer':c['front']=c['bank']=True;c['transfer']=False
+    elif name!='V0':raise ValueError(name)
+    c.update(kw)
+    return c
+
+class Node:
+    __slots__=('cands','res','tgt','dead','tiers')
+    def __init__(s,cands):
+        s.cands=cands
+        s.tiers=[c[0] for c in cands]
+        s.res=[0]*len(cands)  # 0 untested, 1 changed frame, -1 no change, -2 dead
+        s.tgt=[None]*len(cands)
+        s.dead=[0]*len(cands)
+
+class Policy:
+    def __init__(s,cfg,seed=0,bhat=None,L=None):
+        s.cfg=cfg;s.seed=seed;s.rng=random.Random(seed)
+        s.bhat=bhat  # function level->B estimate
+        s.L=L
+        s.tried_game=set();s.tried_level=set()
+        s.level=-1;s.a=0;s.u=0;s.seen=set()
+        s.burst=deque();s.log=[];s.pending=None
+        s.stats={'probes':0,'probe_novel':0,'gameovers':0,'resets':0,'afe':[],'level_actions':[]}
+        s.afe=None
+        s.val={};s.xb=0;s.pkey=None  # V1 only
+
+    # ---- level / graph state
+    def new_level(s,g):
+        s.mask=status_mask(g)
+        s.nodes={};s.active=0;s.path=[]
+        s.a=0;s.u=0;s.seen=set();s.tried_level=set();s.burst.clear()
+        s.afe=None;s.prev=None
+        if s.cfg['base']!='v0':
+            s.xb=0;s.pkey=None
+            for k in s.val:s.val[k]=0.5+0.5*(s.val[k]-0.5)
+
+    # ---- V1: exploit-first base
+    def upd(s,key,r):
+        v=s.val.get(key,0.5);s.val[key]=v+s.cfg['alpha']*(r-v)
+
+    def exploit(s,h,cs):
+        n=s.nodes[h];best=None
+        for i in range(len(n.cands)):
+            if n.res[i]==-2:continue
+            v=s.val.get(s.aff(h,i,cs),0.5)
+            if n.res[i]==-1:v-=1.0  # known no-op in this state
+            elif n.res[i]==1 and n.tgt[i] in s.seen:v-=0.5  # known to return to a seen state
+            sc=(v,n.res[i]==0,-n.tiers[i],-i)
+            if best is None or sc>best[0]:best=(sc,i)
+        return best[1] if best else 0
+
+    def decide_v1(s,h,cs):
+        n=s.nodes[h];Un=sum(1 for r in n.res if r==0)
+        if s.cfg['base']=='rand':
+            ok=[i for i,r in enumerate(n.res) if r!=-2] or list(range(len(n.cands)))
+            return s.rng.choice(ok),'EXPLOIT','rand',[],None,Un
+        if s.xb>0:
+            s.xb-=1;i,why=s.v0(h);return i,'PROBE',why,['burst'],None,Un
+        trig,C=s.trig_k(s.cfg['K'])
+        if trig:
+            s.xb=s.cfg['K']-1;i,why=s.v0(h);return i,'PROBE',why,trig,C,Un
+        return s.exploit(h,cs),'EXPLOIT','exploit',[],C,Un
+
+    def observe(s,g):
+        gm=g.copy();gm[s.mask]=MASK
+        cs=comps(gm)
+        h=hsh(gm)
+        if h not in s.nodes:
+            order=list(range(len(cs)));s.rng.shuffle(order)
+            cands=[(0,('A',a),None) for a in s.avail if a in SIMPLE]
+            if 6 in s.avail:
+                cands+=sorted([(tier(cs[i]),('C',i),(cs[i]['px'],cs[i]['py'])) for i in order],key=lambda t:t[0])
+            if not cands:cands=[(0,('A',a),None) for a in s.avail if a!=0 and a!=7] or [(0,('A',1),None)]
+            s.nodes[h]=Node(cands)
+        return h,cs
+
+    def frontier_ok(s,n):
+        return any(r==0 and t<=s.active for r,t in zip(n.res,n.tiers))
+
+    def plan(s,h):
+        # BFS over changed-frame edges to nearest node with untested candidates in the active tier
+        prev={h:None};q=deque([h])
+        while q:
+            v=q.popleft()
+            if v!=h and s.frontier_ok(s.nodes[v]):
+                path=[];x=v
+                while prev[x] is not None:
+                    p,i=prev[x];path.append((p,i));x=p
+                return path[::-1]
+            n=s.nodes[v]
+            for i,(r,t) in enumerate(zip(n.res,n.tgt)):
+                if r==1 and t in s.nodes and t not in prev and n.tiers[i]<=s.active:
+                    prev[t]=(v,i);q.append(t)
+        return None
+
+    def v0(s,h):
+        n=s.nodes[h]
+        for i,(r,t) in enumerate(zip(n.res,n.tiers)):
+            if r==0 and t<=s.active:return i,'untested'
+        if s.path and s.path[0][0]==h:
+            return s.path.pop(0)[1],'path'
+        while True:
+            p=s.plan(h)
+            if p:
+                s.path=p[1:];return p[0][1],'bfs'
+            if s.active>=NT-1:break
+            s.active+=1
+            for i,(r,t) in enumerate(zip(n.res,n.tiers)):
+                if r==0 and t<=s.active:return i,'untested'
+        ok=[i for i,r in enumerate(n.res) if r==1] or [i for i,r in enumerate(n.res) if r!=-2] or list(range(len(n.cands)))
+        return s.rng.choice(ok),'random'
+
+    # ---- affordances and probes
+    def aff(s,h,i,cs):
+        c=s.nodes[h].cands[i]
+        return c[1] if c[1][0]=='A' else sig(cs[c[1][1]])
+
+    def pool(s,h,cs):
+        tried=s.tried_game if s.cfg['transfer'] else s.tried_level
+        n=s.nodes[h];best={}
+        for i,c in enumerate(n.cands):
+            if n.res[i]==-2:continue
+            f=s.aff(h,i,cs)
+            if f in tried or f in best:continue
+            best[f]=i
+        items=list(best.items())
+        if s.cfg['rank']=='uniform':
+            r=random.Random(hash((s.seed,h))&0xffffffff);r.shuffle(items)
+        else:
+            cnt={}
+            for o in cs:cnt[o['c']]=cnt.get(o['c'],0)+1
+            def key(it):
+                f,i=it
+                if f[0]=='A':return (0,0,0,0,f[1])
+                o=cs[n.cands[i][1][1]]
+                return (1,cnt[o['c']],o['area'],int(o['c']==MASK),i)
+            items.sort(key=key)
+        return items
+
+    def triggers(s,U):
+        if not U:return [],None
+        return s.trig_k(min(len(U),s.cfg['K']))
+
+    def trig_k(s,k):
+        cfg=s.cfg;t=[]
+        B=s.bhat(s.level+1);L=max(s.L or 1,s.level+1)
+        C=rhae.Ck(max(s.a,1),B,k,s.level+1,L)
+        if cfg['front'] and s.a<B and C<=cfg['theta']:t.append('front')
+        if cfg['bank'] and s.a>=B and C<=cfg['theta']:t.append('bank')
+        if cfg['fix'] and s.a<cfg['F']:t.append('fix')
+        if cfg['stall'] and s.u>=cfg['U0']:t.append('stall')
+        return t,C
+
+    # ---- main entry: returns (action_id, x, y, info)
+    def act(s,frame,levels_completed,state,avail):
+        s.avail=list(avail)
+        if state=='GAME_OVER':
+            if s.prev is not None:
+                ph,pi=s.prev;n=s.nodes[ph];n.dead[pi]+=1
+                if n.dead[pi]>=3:n.res[pi]=-2
+            s.prev=None;s.path=[];s.burst.clear()
+            if s.cfg['base']!='v0':
+                if s.pkey is not None:s.upd(s.pkey,-1.0)
+                s.pkey=None;s.xb=0
+            s.stats['gameovers']+=1;s.stats['resets']+=1
+            s.a+=1;s.u+=1
+            return 0,None,None,{'mode':'RESET'}
+        g=np.asarray(frame,dtype=np.uint8)
+        if levels_completed!=s.level:
+            if s.cfg['base']!='v0' and s.pkey is not None and levels_completed>s.level:s.upd(s.pkey,1.0)
+            if s.level>=0:s.stats['level_actions'].append(s.a);s.stats['afe'].append(s.afe)
+            s.level=levels_completed;s.new_level(g)
+        h,cs=s.observe(g)
+        novel=False
+        if s.prev is not None:
+            ph,pi=s.prev;n=s.nodes[ph]
+            ch=h!=ph
+            if n.res[pi]!=-2:
+                n.res[pi]=1 if ch else -1
+                n.tgt[pi]=h if ch else None
+            novel=ch and h not in s.seen
+            if s.pending=='probe' and novel:s.stats['probe_novel']+=1
+            if s.path and s.path[0][0]!=h:s.path=[]
+        if novel:
+            s.u=0
+            if s.afe is None:s.afe=s.a
+        elif s.prev is not None:s.u+=1
+        if s.cfg['base']!='v0' and s.pkey is not None:s.upd(s.pkey,1.0 if novel else 0.0)
+        s.seen.add(h)
+        mode='EXPLOIT';trig=[];C=None
+        i=None
+        if s.cfg['base']=='v0':
+            U=s.pool(h,cs)
+            Ud=dict(U)
+            while s.burst:
+                f=s.burst.popleft()
+                if f in Ud:i=Ud[f];mode='PROBE';break
+            if i is None:
+                trig,C=s.triggers(U)
+                if trig:
+                    k=min(len(U),s.cfg['K'])
+                    s.burst.extend(f for f,_ in U[:k])
+                    f=s.burst.popleft();i=Ud[f];mode='PROBE'
+            if i is None:
+                i,why=s.v0(h)
+            else:
+                why='probe';s.stats['probes']+=1;s.path=[]
+        else:
+            i,mode,why,trig,C,nU=s.decide_v1(h,cs)
+            U=range(nU)
+            if mode=='PROBE':s.stats['probes']+=1
+            s.pkey=s.aff(h,i,cs)
+        f=s.aff(h,i,cs)
+        s.tried_game.add(f);s.tried_level.add(f)
+        c=s.nodes[h].cands[i]
+        s.prev=(h,i);s.pending='probe' if mode=='PROBE' else None
+        s.a+=1
+        if c[1][0]=='A':
+            aid,x,y=c[1][1],None,None
+        else:
+            aid=6;x,y=c[2]
+            H,W=g.shape
+            assert isinstance(x,int) and isinstance(y,int) and 0<=x<W and 0<=y<H and 0<=x<=63 and 0<=y<=63
+        return aid,x,y,{'mode':mode,'why':why,'trig':trig,'C':C,'U':len(U),'novel':novel,'h':h[:8]}
+
+
+%%writefile /tmp/pc/ndimage_shim.py
+# numpy-only stand-in for scipy.ndimage.label / find_objects (4-connectivity), used only if scipy is missing
+import sys,types
+from collections import deque
+import numpy as np
+
+def label(mask):
+    mask=np.asarray(mask,bool);H,W=mask.shape
+    lab=np.zeros((H,W),dtype=np.int32);n=0
+    for y,x in zip(*np.nonzero(mask)):
+        if lab[y,x]:continue
+        n+=1;lab[y,x]=n;q=deque([(y,x)])
+        while q:
+            cy,cx=q.popleft()
+            for ny,nx in((cy-1,cx),(cy+1,cx),(cy,cx-1),(cy,cx+1)):
+                if 0<=ny<H and 0<=nx<W and mask[ny,nx] and not lab[ny,nx]:
+                    lab[ny,nx]=n;q.append((ny,nx))
+    return lab,n
+
+def find_objects(lab):
+    out=[]
+    for i in range(1,int(lab.max())+1):
+        ys,xs=np.nonzero(lab==i)
+        out.append((slice(ys.min(),ys.max()+1),slice(xs.min(),xs.max()+1)))
+    return out
+
+nd=types.ModuleType('scipy.ndimage');nd.label=label;nd.find_objects=find_objects
+sp=sys.modules.get('scipy') or types.ModuleType('scipy');sp.ndimage=nd
+sys.modules['scipy']=sp;sys.modules['scipy.ndimage']=nd
+
+
+%%writefile /tmp/pc/my_agent.py
+# Priced Curiosity agent adapter for the ARC-AGI-3-Agents framework (Kaggle submission)
+# policy code lives in PC_DIR (rhae.py, agent.py, bhat.json, cfg.json)
+import os,sys,time,json,random,logging
+import numpy as np
+PC_DIR=os.environ.get('PC_DIR','/tmp/pc')
+sys.path.insert(0,PC_DIR)
+try:
+    import scipy.ndimage
+except Exception:
+    import ndimage_shim
+import agent as pc
+from agents.agent import Agent
+from arcengine import GameAction,GameState
+
+BH={int(k):v for k,v in json.load(open(os.path.join(PC_DIR,'bhat.json'))).items()}
+CFG=json.load(open(os.path.join(PC_DIR,'cfg.json')))
+POOL=max(BH)
+DEADLINE=float(os.environ.get('PC_DEADLINE') or time.time()+4*3600)
+GAME_CAP=int(os.environ.get('PC_GAME_CAP') or 200000)
+log=logging.getLogger()
+
+def bh(l):
+    return BH[min(l,POOL)]
+
+class MyAgent(Agent):
+    MAX_ACTIONS=10**9
+
+    def __init__(self,*a,**k):
+        super().__init__(*a,**k)
+        self.pol=None;self.n=0;self.errs=0;self.rng=random.Random(0);self._data={}
+
+    @property
+    def name(self):
+        return f'{super().name}.pc'
+
+    def is_done(self,frames,latest_frame):
+        if latest_frame.state is GameState.WIN:return True
+        if time.time()>DEADLINE or self.n>=GAME_CAP:
+            log.info(f'{self.game_id} stopping: n={self.n} errs={self.errs}')
+            return True
+        return False
+
+    def fallback(self,f):
+        if f.state is GameState.GAME_OVER:return 0,None,None
+        av=[a for a in f.available_actions if a not in(0,7)] or [1]
+        a=self.rng.choice(av)
+        if a==6:return 6,self.rng.randint(0,63),self.rng.randint(0,63)
+        return a,None,None
+
+    def choose_action(self,frames,latest_frame):
+        f=latest_frame
+        if f.state is GameState.NOT_PLAYED or not f.frame:
+            self._data={};return GameAction.RESET
+        self.n+=1
+        try:
+            if self.pol is None:
+                self.pol=pc.Policy(pc.variant_cfg(CFG['variant'],**CFG.get('over',{})),seed=CFG.get('seed',0),bhat=bh,L=f.win_levels or None)
+            aid,x,y,_=self.pol.act(np.array(f.frame[-1],dtype=np.uint8),f.levels_completed,f.state.name,f.available_actions)
+        except Exception as e:
+            self.errs+=1
+            if self.errs<=3:log.exception(f'{self.game_id} policy error: {e}')
+            aid,x,y=self.fallback(f)
+        if aid==6:
+            x=int(min(63,max(0,int(x))));y=int(min(63,max(0,int(y))))
+            assert 0<=x<=63 and 0<=y<=63
+            self._data={'x':x,'y':y}
+        else:
+            self._data={}
+        return GameAction.from_id(aid)
+
+    def do_action_request(self,action):
+        # per-agent coordinates: GameAction members are shared singletons across game threads
+        raw=None
+        for t in range(5):
+            raw=self.arc_env.step(action,data=dict(self._data),reasoning=None)
+            if raw is not None:break
+            time.sleep(1+t)
+        if raw is None:raw=self.arc_env.observation_space
+        return self._convert_raw_frame_data(raw)
+
+
+%%writefile /tmp/pc/bhat.json
+{"1": 30, "2": 54, "3": 51, "4": 54, "5": 96, "6": 80, "7": 109}
+
+%%writefile /tmp/pc/cfg.json
+{"variant": "EC", "over": {"theta": 0.002}, "seed": 0, "cap": 10000}
+
+# smoke test of the policy on random frames (runs in every mode)
+import sys,numpy as np
+sys.path.insert(0,'/tmp/pc')
+try:
+    import scipy.ndimage;print('scipy ok')
+except Exception:
+    import ndimage_shim;print('scipy missing: numpy shim')
+import agent as pc,json
+cfg=json.load(open('/tmp/pc/cfg.json'));tab={int(k):v for k,v in json.load(open('/tmp/pc/bhat.json')).items()}
+pol=pc.Policy(pc.variant_cfg(cfg['variant'],**cfg['over']),seed=0,bhat=lambda l:tab[min(l,max(tab))],L=7)
+r=np.random.default_rng(0);g=r.integers(0,4,size=(64,64))
+for i in range(60):
+    if i%7==0:g=r.integers(0,4,size=(64,64))
+    a,x,y,info=pol.act(g,0,'NOT_FINISHED',[1,2,3,4,6])
+    assert a in(1,2,3,4,6)
+    if a==6:assert 0<=x<=63 and 0<=y<=63
+print('policy smoke test ok',pol.stats['probes'],'probes')
+
+
+import os,time
+if os.getenv('KAGGLE_IS_COMPETITION_RERUN'):
+    !curl --fail --retry 999 --retry-all-errors --retry-delay 5 --retry-max-time 600 http://gateway:8001/api/games
+    !cp -r /kaggle/input/competitions/arc-prize-2026-arc-agi-3/ARC-AGI-3-Agents /kaggle/working/ARC-AGI-3-Agents
+    !cp /tmp/pc/my_agent.py /kaggle/working/ARC-AGI-3-Agents/agents/templates/my_agent.py
+    with open('/kaggle/working/ARC-AGI-3-Agents/agents/__init__.py','w') as f:
+        f.write("""from typing import Type
+from dotenv import load_dotenv
+from .agent import Agent, Playback
+from .swarm import Swarm
+from .templates.random_agent import Random
+from .templates.my_agent import MyAgent
+
+load_dotenv()
+
+AVAILABLE_AGENTS: dict[str, Type[Agent]] = {
+    'random': Random,
+    'myagent': MyAgent,
+}
+""")
+    with open('/kaggle/working/ARC-AGI-3-Agents/.env','w') as f:
+        f.write("""SCHEME=http
+HOST=gateway
+PORT=8001
+ARC_API_KEY=test-key-123
+ARC_BASE_URL=http://gateway:8001/
+OPERATION_MODE=online
+ENVIRONMENTS_DIR=
+RECORDINGS_DIR=/kaggle/working/server_recording
+""")
+    os.environ['PC_DIR']='/tmp/pc'
+    os.environ['PC_DEADLINE']=str(time.time()+4.0*3600)
+    os.environ['PC_GAME_CAP']='10000'
+    !cd /kaggle/working/ARC-AGI-3-Agents && MPLBACKEND=agg python main.py --agent myagent
+
+
+import os
+if not os.getenv('KAGGLE_IS_COMPETITION_RERUN'):
+    import pandas as pd
+    submission=pd.DataFrame(data=[['1_0','1',True,1]],columns=['row_id','game_id','end_of_game','score'])
+    submission.to_parquet('/kaggle/working/submission.parquet',index=False)

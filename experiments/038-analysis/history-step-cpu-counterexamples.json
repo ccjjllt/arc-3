@@ -1,0 +1,113 @@
+{
+  "checked_at_utc": "2026-10-25T13:58:34.212956+00:00",
+  "status": "passed",
+  "kind": "New CPU re-execution of two real logged snippets against stored public observations, using actual new helper",
+  "model_calls": 0,
+  "network_attempts": 0,
+  "game_source_reads": 0,
+  "game_actions": 0,
+  "gpu_calls": 0,
+  "native_sandbox_calls": 10,
+  "source_hashes": {
+    "src/arc3_research/history_step_compat.py": "2aa4cd0d792c95a20124d57555757849aa0516d81de8c8de7b71c7b3429790ab",
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/python_tool_sandbox.py": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943"
+  },
+  "stored_observations": {
+    "path": "runs/036-main-reasoning-medium/baseline/intermediate_states.pkl",
+    "sha256": "ade17b98f02204176e96e9861706b680d06324cc2dddb4b702fc052e1fe1c018",
+    "parser": "Restricted unpickler; arrays via numpy, SDK/game classes inert records; no engine import or environment execution."
+  },
+  "cases": [
+    {
+      "game": "ar25-0c556536",
+      "source_call_id": "call_a9b9ef2159744f4abc7ca66d",
+      "source_request_line": 19,
+      "cut_action_count": 22,
+      "history_entries": 23,
+      "current_frame_sha256": "4420a015685ad467ee1df5522cf646282496f793f55bf9e5f517e11b02654f35",
+      "matches_actual_request_image": true,
+      "initial_state_sha256": "ad265f59041282d1406e5935c4b1ae1ed968f41b5ffa1e722d3b8c6c1be0c896",
+      "state_scope": "All saved observation frames/actions through this cut; result metadata is empty because the original snippet never reads it. This is not full agent/chat replay.",
+      "original_code": "\ndef snap2(frame):\n    d={}\n    for n in frame.segmentation['nodes']:\n        key=None\n        if n['color']=='B' and n['pixels']==64: key='Bshape'\n        elif n['color']=='c' and n['pixels']>10: key='c'\n        elif n['color']=='Y' and n['pixels']>10: key='Y'\n        elif n['color']=='S': key='S'\n        elif n['color']=='B' and n['pixels']<10: key='Bbar'\n        if key: d[key]=(n['boundary'][0], n['pixels'])\n    return d\nfor e in history[-6:]:\n    print(e.action, snap2(e.frame))\nprint('---level1 divider check---')\nfor e in history[:20]:\n    s=[ (n['color'],n['boundary'][0],n['pixels']) for n in e.frame.segmentation['nodes'] if n['color']=='S']\n    print(e.step, e.action, s)\n",
+      "baseline": {
+        "stdout": "LEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 45], 44)}\nLEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 48], 43)}\nLEFT {'S': ([0, 36], 168), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nLEFT {'S': ([0, 33], 168), 'Bbar': ([0, 63], 1), 'Y': ([42, 9], 72), 'c': ([18, 15], 72), 'Bshape': ([18, 45], 64)}\nRIGHT {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nDOWN {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\n---level1 divider check---\n",
+        "result": null,
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 18, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "frame_step_control_code": "\ndef snap2(frame):\n    d={}\n    for n in frame.segmentation['nodes']:\n        key=None\n        if n['color']=='B' and n['pixels']==64: key='Bshape'\n        elif n['color']=='c' and n['pixels']>10: key='c'\n        elif n['color']=='Y' and n['pixels']>10: key='Y'\n        elif n['color']=='S': key='S'\n        elif n['color']=='B' and n['pixels']<10: key='Bbar'\n        if key: d[key]=(n['boundary'][0], n['pixels'])\n    return d\nfor e in history[-6:]:\n    print(e.action, snap2(e.frame))\nprint('---level1 divider check---')\nfor e in history[:20]:\n    s=[ (n['color'],n['boundary'][0],n['pixels']) for n in e.frame.segmentation['nodes'] if n['color']=='S']\n    print(e.frame.step, e.action, s)\n",
+      "frame_step_control": {
+        "stdout": "LEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 45], 44)}\nLEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 48], 43)}\nLEFT {'S': ([0, 36], 168), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nLEFT {'S': ([0, 33], 168), 'Bbar': ([0, 63], 1), 'Y': ([42, 9], 72), 'c': ([18, 15], 72), 'Bshape': ([18, 45], 64)}\nRIGHT {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nDOWN {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\n---level1 divider check---\n0  [('S', [0, 30], 189)]\n1 UP [('S', [0, 30], 189)]\n2 RIGHT [('S', [0, 30], 189)]\n3 DOWN [('S', [0, 30], 189)]\n4 DOWN [('S', [0, 30], 189)]\n5 DOWN [('S', [0, 30], 189)]\n6 DOWN [('S', [0, 30], 189)]\n7 DOWN [('S', [0, 30], 189)]\n8 DOWN [('S', [0, 30], 189)]\n9 DOWN [('S', [0, 30], 189)]\n10 DOWN [('S', [0, 30], 189)]\n11 DOWN [('S', [0, 30], 189)]\n12 DOWN [('S', [0, 30], 189)]\n13 DOWN [('S', [0, 30], 189)]\n14 LEFT [('S', [0, 30], 189)]\n15 LEFT [('S', [0, 30], 189)]\n16 LEFT [('S', [0, 30], 189)]\n17 LEFT [('S', [0, 30], 189)]\n18 LEFT [('S', [0, 30], 189)]\n19 LEFT [('S', [0, 36], 168)]\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "candidate_original_code": {
+        "stdout": "LEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 45], 44)}\nLEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 48], 43)}\nLEFT {'S': ([0, 36], 168), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nLEFT {'S': ([0, 33], 168), 'Bbar': ([0, 63], 1), 'Y': ([42, 9], 72), 'c': ([18, 15], 72), 'Bshape': ([18, 45], 64)}\nRIGHT {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nDOWN {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\n---level1 divider check---\n0  [('S', [0, 30], 189)]\n1 UP [('S', [0, 30], 189)]\n2 RIGHT [('S', [0, 30], 189)]\n3 DOWN [('S', [0, 30], 189)]\n4 DOWN [('S', [0, 30], 189)]\n5 DOWN [('S', [0, 30], 189)]\n6 DOWN [('S', [0, 30], 189)]\n7 DOWN [('S', [0, 30], 189)]\n8 DOWN [('S', [0, 30], 189)]\n9 DOWN [('S', [0, 30], 189)]\n10 DOWN [('S', [0, 30], 189)]\n11 DOWN [('S', [0, 30], 189)]\n12 DOWN [('S', [0, 30], 189)]\n13 DOWN [('S', [0, 30], 189)]\n14 LEFT [('S', [0, 30], 189)]\n15 LEFT [('S', [0, 30], 189)]\n16 LEFT [('S', [0, 30], 189)]\n17 LEFT [('S', [0, 30], 189)]\n18 LEFT [('S', [0, 30], 189)]\n19 LEFT [('S', [0, 36], 168)]\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "candidate_stdout_equals_explicit_frame_step": true,
+      "existing_fields_and_readonly_check": {
+        "stdout": "compatibility_ok\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "uninstall_restores_error": true
+    },
+    {
+      "game": "ft09-0d8bbf25",
+      "source_call_id": "call_41c5c29f6935410a9e546a57",
+      "source_request_line": 101,
+      "cut_action_count": 123,
+      "history_entries": 124,
+      "current_frame_sha256": "c0401a8e1365b7c83a736cb0ede6f31e5184e8d7183d284708f1810f0ef674e3",
+      "matches_actual_request_image": true,
+      "initial_state_sha256": "bbb3191a2c6a073bd11ebc057b5371c3d65e8f9da645d37d34984d19a003224e",
+      "state_scope": "All saved observation frames/actions through this cut; result metadata is empty because the original snippet never reads it. This is not full agent/chat replay.",
+      "original_code": "\nimport itertools\nh6=[e for e in history if e.frame.level==6]\nprev=None\nfor e in h6:\n    row=''.join(e.frame.ascii.split('\\n')[63])\n    seg=[(k,len(list(v))) for k,v in itertools.groupby(row)]\n    o=sum(l for k,l in seg if k=='O')\n    print('step',e.step,e.action if isinstance(e.action,str) else 'act','O=',o)\n",
+      "baseline": {
+        "stdout": "",
+        "result": null,
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "frame_step_control_code": "\nimport itertools\nh6=[e for e in history if e.frame.level==6]\nprev=None\nfor e in h6:\n    row=''.join(e.frame.ascii.split('\\n')[63])\n    seg=[(k,len(list(v))) for k,v in itertools.groupby(row)]\n    o=sum(l for k,l in seg if k=='O')\n    print('step',e.frame.step,e.action if isinstance(e.action,str) else 'act','O=',o)\n",
+      "frame_step_control": {
+        "stdout": "step 105 MOUSE(row=55, col=41) O= 64\nstep 106 MOUSE(row=25, col=23) O= 64\nstep 107 MOUSE(row=9, col=7) O= 63\nstep 108 MOUSE(row=17, col=7) O= 62\nstep 109 MOUSE(row=17, col=23) O= 62\nstep 110 MOUSE(row=17, col=31) O= 62\nstep 111 MOUSE(row=17, col=39) O= 61\nstep 112 MOUSE(row=25, col=15) O= 60\nstep 113 MOUSE(row=25, col=31) O= 60\nstep 114 MOUSE(row=33, col=15) O= 60\nstep 115 MOUSE(row=33, col=39) O= 59\nstep 116 MOUSE(row=33, col=47) O= 58\nstep 117 MOUSE(row=41, col=23) O= 58\nstep 118 MOUSE(row=41, col=31) O= 58\nstep 119 MOUSE(row=41, col=47) O= 57\nstep 120 MOUSE(row=41, col=55) O= 56\nstep 121 MOUSE(row=49, col=47) O= 56\nstep 122 MOUSE(row=49, col=55) O= 56\nstep 123 MOUSE(row=41, col=55) O= 56\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "candidate_original_code": {
+        "stdout": "step 105 MOUSE(row=55, col=41) O= 64\nstep 106 MOUSE(row=25, col=23) O= 64\nstep 107 MOUSE(row=9, col=7) O= 63\nstep 108 MOUSE(row=17, col=7) O= 62\nstep 109 MOUSE(row=17, col=23) O= 62\nstep 110 MOUSE(row=17, col=31) O= 62\nstep 111 MOUSE(row=17, col=39) O= 61\nstep 112 MOUSE(row=25, col=15) O= 60\nstep 113 MOUSE(row=25, col=31) O= 60\nstep 114 MOUSE(row=33, col=15) O= 60\nstep 115 MOUSE(row=33, col=39) O= 59\nstep 116 MOUSE(row=33, col=47) O= 58\nstep 117 MOUSE(row=41, col=23) O= 58\nstep 118 MOUSE(row=41, col=31) O= 58\nstep 119 MOUSE(row=41, col=47) O= 57\nstep 120 MOUSE(row=41, col=55) O= 56\nstep 121 MOUSE(row=49, col=47) O= 56\nstep 122 MOUSE(row=49, col=55) O= 56\nstep 123 MOUSE(row=41, col=55) O= 56\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "candidate_stdout_equals_explicit_frame_step": true,
+      "existing_fields_and_readonly_check": {
+        "stdout": "compatibility_ok\n",
+        "result": null,
+        "error": "",
+        "action_results": [],
+        "keepable_functions": []
+      },
+      "uninstall_restores_error": true
+    }
+  ],
+  "limits": [
+    "CPU removal of this specific AttributeError does not prove online score gain.",
+    "All ten historical failures were followed by a successful tool return, so this is bounded correction overhead, not permanently blocked games.",
+    "The alias returns post-action frame.step, identical to the existing documented frame.step. It must not be interpreted as next-action number from user prompt."
+  ]
+}

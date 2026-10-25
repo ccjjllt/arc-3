@@ -1,0 +1,297 @@
+{
+  "id": "039-history-step",
+  "variant": "history_step",
+  "config": {
+    "id": "039-history-step",
+    "kernel_id": "zhuating/arc3-039-history-step",
+    "kernel_title": "ARC3 039 History Step",
+    "purpose": "The scored The AGI Boys v83 with only the read-only HistoryEntryView.step alias",
+    "base_notebook": "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb",
+    "base_source_sha256": "8221f1e64ad7d4c8b3ecbbcbd83f68c9469707246484b0bbcaa5254da809905e",
+    "hard_limit_seconds": 32400,
+    "machine_shape": "NvidiaRtxPro6000",
+    "enable_internet": false,
+    "input_resolution_timeout_seconds": 60,
+    "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+    "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+    "save_placeholder_is_scored": false,
+    "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+    "solver": {
+      "n_passes": 1,
+      "concurrency": 120,
+      "active_streams": 10,
+      "max_runtime_s_per_game": 31920,
+      "warmup_action_games": 1,
+      "save_request_logs": false,
+      "research_interventions": [
+        "history_step_compat"
+      ]
+    },
+    "official_save_protocol": {
+      "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+      "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+      "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+      "observed_date_local": "2026-10-12",
+      "relevant_lines": "2-10, 75-78, 114-133",
+      "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+    },
+    "revision": 1,
+    "save_smoke": {
+      "game_ids": [
+        "sb26-7fbdac44",
+        "cd82-fb555c5d"
+      ],
+      "budget_seconds": 300,
+      "n_passes": 1,
+      "concurrency": 2,
+      "startup_timeout_seconds": 2400,
+      "total_timeout_seconds": 3600,
+      "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+      "cleanup": "Only the process group of the model Popen started by this save"
+    },
+    "preparation_status": "prepared locally, not run, pushed or submitted",
+    "source_provenance": "experiments/037-highscore-source/provenance.json",
+    "source_provenance_sha256": "6b55eb6fc4d3e6931752d9e8f5deb6ac514fe61a762b19a121d7dc070219126d",
+    "upstream": {
+      "ref": "romantamrazov/the-agi-boys-i-am-better",
+      "version": 83,
+      "script_version_id": 359573474,
+      "displayed_public_score": 35.35,
+      "url": "https://www.kaggle.com/code/romantamrazov/the-agi-boys-i-am-better?scriptVersionId=359573474"
+    },
+    "deployment": {
+      "docker_image_version_id": 31401,
+      "docker_image": "gcr.io/kaggle-private-byod/python@sha256:00377cd1b3d470a605bc5b0ceca79969e369644e9b36802242a1c70e627372f9",
+      "docker_image_pinning_type": "original",
+      "image_evidence": "v83 downloaded metadata and v86 downloaded metadata both identify dockerImageVersionId31401; paired v86 API metadata supplies this exact image digest",
+      "image_evidence_api": "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/api-metadata.json",
+      "image_evidence_notebook": "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/the-agi-boys-i-am-better.ipynb",
+      "expected_data_sources": [
+        {
+          "sourceType": "competition",
+          "sourceId": 133468
+        },
+        {
+          "sourceType": "datasetVersion",
+          "sourceId": 20092813
+        },
+        {
+          "sourceType": "datasetVersion",
+          "sourceId": 20134793
+        },
+        {
+          "sourceType": "modelInstanceVersion",
+          "sourceId": 1007514
+        },
+        {
+          "sourceType": "modelInstanceVersion",
+          "sourceId": 1007009
+        }
+      ],
+      "dataset_sources": [
+        "dfranzen/pennyroyal-v253/1",
+        "dfranzen/taaf-kaggle-source-bundle-copy/1"
+      ],
+      "model_sources": [
+        "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+        "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+      ],
+      "competition_sources": [
+        "arc-prize-2026-arc-agi-3"
+      ],
+      "remote_input_ids_must_match_before_submit": true,
+      "input_pin_evidence": "Official version1 dataset download headers resolve pennyroyal/1 to datasetVersion20134793 and bundle/1 to datasetVersion20092813; model API maps Intel1 to1007514 and draft1 to1007009. All IDs match v83. Backend admission and actual saved notebook input IDs still require read-back.",
+      "input_pin_evidence_file": "experiments/037-highscore-source/runtime-input-pins-evidence.json",
+      "dataset_pin_headers_file": "experiments/037-highscore-source/dataset-version-headers.json"
+    },
+    "research_transfer_risks": [
+      "Upstream35.35 is one historical formal score, not a guaranteed reproduced score.",
+      "GPU save proves execution only; official public score determines whether this version improves our31.16best.",
+      "The compatibility alias removes observed attribute failures but its full-game score effect is unmeasured; no uplift magnitude is claimed."
+    ],
+    "variant": "history_step",
+    "adapter_037_config": "experiments/037-highscore-submission.json",
+    "adapter_037_config_sha256": "7b8deea1a0e2645be190982d78f975b6f49227e856840b174b064f043dcd64c8",
+    "adapter_037_builder": "scripts/build/build_037_submission.py",
+    "adapter_037_builder_sha256": "37f536395fad3c83ac1855e4f2c9116cbb1a82ead3d3b83b83b08140289d8e91",
+    "reuse_note": "Run the frozen037 builder locally into a temporary directory solely to reuse its v83 input/save adapter; remove all four segmentation installation cells, rebuild provenance/configuration, and add only the selected variant.",
+    "history_step_compat": {
+      "implementation": "src/arc3_research/history_step_compat.py",
+      "implementation_sha256": "2aa4cd0d792c95a20124d57555757849aa0516d81de8c8de7b71c7b3429790ab",
+      "patch_version": "history-step-compat-v1",
+      "field": "HistoryEntryView.step",
+      "value": "self.frame.step",
+      "read_only": true,
+      "missing_frame_behavior": "AttributeError",
+      "new_model_tools": false,
+      "new_model_requests": false,
+      "prompt_modified": false,
+      "action_handling_modified": false
+    }
+  },
+  "source_hashes": {
+    "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb": "8221f1e64ad7d4c8b3ecbbcbd83f68c9469707246484b0bbcaa5254da809905e",
+    "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/kernel-metadata.json": "bb77a047e46ce790f8a7426af1197ec3b92d96714f9863f4176248c1e33ad5fd",
+    "scripts/build/build_037_submission.py": "37f536395fad3c83ac1855e4f2c9116cbb1a82ead3d3b83b83b08140289d8e91",
+    "experiments/037-highscore-submission.json": "7b8deea1a0e2645be190982d78f975b6f49227e856840b174b064f043dcd64c8",
+    "src/arc3_research/submission_inputs.py": "a037cecf8978ef49774a18e7c833ddf1a7dadc045fd620c38d8ccabc3996797c",
+    "experiments/009-source/support/official-starter-build_notebook.py": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "experiments/037-highscore-source/provenance.json": "6b55eb6fc4d3e6931752d9e8f5deb6ac514fe61a762b19a121d7dc070219126d",
+    "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/the-agi-boys-i-am-better.ipynb": "888363e0eedeb5ae220373328d528e99c8fe5a4212c922f225e6c48bd9a87921",
+    "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/api-metadata.json": "d26eaeb92167730bd6c7ed37673a3ec0aa5f8e9db395cb7cec9a17b4b3014c67",
+    "src/arc3_research/segmentation_runs.py": "b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450deee",
+    "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+    "experiments/037-highscore-source/runtime-input-pins-evidence.json": "04eeaf4cb03883c65cbd8af1d633dccce10e48219e434f997b17b669b72d763e",
+    "experiments/037-highscore-source/dataset-version-headers.json": "4e91b17bdbbad7e912b4a2c07a95840723d4313b6e8f3097c0be0417a7388679",
+    "scripts/build/build_highscore_variant.py": "4d21fb27e58268c17af059eea57085a1d921f1a178a14cac6a4a30f0961bbaca",
+    "experiments/039-history-step.json": "2aa7b870b081aa0648dd8ebe6410ac7ab3fdaeef007539ac6c491c462dabb726",
+    "src/arc3_research/history_step_compat.py": "2aa4cd0d792c95a20124d57555757849aa0516d81de8c8de7b71c7b3429790ab"
+  },
+  "notebook_sha256": "ac9f48b8827f566ada2a6fea9cf8032a26637ccb3f7a804d48cb1f27807d9e20",
+  "metadata_sha256": "29f73ec32649da23ed432a203f41962f28c2869e32a03b976c42e690c5859b3f",
+  "cell_count": 29,
+  "base_source_sha256": "8221f1e64ad7d4c8b3ecbbcbd83f68c9469707246484b0bbcaa5254da809905e",
+  "upstream": {
+    "ref": "romantamrazov/the-agi-boys-i-am-better",
+    "version": 83,
+    "script_version_id": 359573474,
+    "displayed_public_score": 35.35,
+    "url": "https://www.kaggle.com/code/romantamrazov/the-agi-boys-i-am-better?scriptVersionId=359573474"
+  },
+  "deployment_metadata": {
+    "id": "zhuating/arc3-039-history-step",
+    "title": "ARC3 039 History Step",
+    "code_file": "submission.ipynb",
+    "language": "python",
+    "kernel_type": "notebook",
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_tpu": false,
+    "enable_internet": false,
+    "machine_shape": "NvidiaRtxPro6000",
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:00377cd1b3d470a605bc5b0ceca79969e369644e9b36802242a1c70e627372f9",
+    "docker_image_pinning_type": "original",
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253/1",
+      "dfranzen/taaf-kaggle-source-bundle-copy/1"
+    ],
+    "kernel_sources": [],
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ]
+  },
+  "original_patch_cell_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+  "generated_patch_cell_sha256": "6fdcd1ae7445c0cfc26eec1047363aa0c196c867d289a35b6f64403b5a43dce2",
+  "intermediate037_notebook_executed": false,
+  "intermediate037_notebook_sha256": "a4457c0605349539198dc3a516549bf6ed4c976a132e4a8255d34d9be62a6b57",
+  "removed037_cell_indices": [
+    13,
+    14,
+    15,
+    16
+  ],
+  "inserted_cell_indices": [
+    13,
+    14,
+    15,
+    16
+  ],
+  "sole_solver_change": "history_step_compat_v1",
+  "segmentation_runs_installed": false,
+  "build_dependency_note": "Some source hashes identify037's local adapter dependencies, including its unused segmentation helper; that helper has no payload/import/install cell in this delivered notebook.",
+  "formal_branch_configuration_check": {
+    "formal_upstream": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "formal_candidate": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "save_upstream": {
+      "solver": {
+        "max_runtime_s_per_game": 1500,
+        "analyzer_timeout": 900.0,
+        "concurrency": 10,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": [
+        "bp35",
+        "cd82",
+        "cn04",
+        "dc22",
+        "g50t",
+        "ka59",
+        "lf52",
+        "ls20",
+        "m0r0",
+        "s5i5",
+        "sk48",
+        "sp80",
+        "su15",
+        "tn36",
+        "wa30"
+      ]
+    },
+    "save_candidate": {
+      "solver": {
+        "max_runtime_s_per_game": 300,
+        "analyzer_timeout": 900.0,
+        "concurrency": 2,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    }
+  },
+  "remote_input_ids_must_match": [
+    {
+      "sourceType": "competition",
+      "sourceId": 133468
+    },
+    {
+      "sourceType": "datasetVersion",
+      "sourceId": 20092813
+    },
+    {
+      "sourceType": "datasetVersion",
+      "sourceId": 20134793
+    },
+    {
+      "sourceType": "modelInstanceVersion",
+      "sourceId": 1007514
+    },
+    {
+      "sourceType": "modelInstanceVersion",
+      "sourceId": 1007009
+    }
+  ],
+  "push_timeout_seconds": 32400,
+  "submission_command_template": "kaggle competitions submit arc-prize-2026-arc-agi-3 -k zhuating/arc3-039-history-step -v <actual-successful-gpu-smoke-version> -f submission.parquet -m <message>",
+  "state": "built_locally_not_pushed_not_submitted"
+}

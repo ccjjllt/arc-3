@@ -1,0 +1,598 @@
+--- Franzenv3
++++ ouyangruize/arc-agi-3-milestone-2-solution
+@@ -984,7 +984,7 @@
+              reply = _recv()
+              if reply.get("type") == "action_error":
+                  raise RuntimeError(str(reply.get("error", "action failed")))
+-@@ -363,28 +505,225 @@ _SANDBOX_BOOTSTRAP = textwrap.dedent(
++@@ -363,28 +505,226 @@ _SANDBOX_BOOTSTRAP = textwrap.dedent(
+                  raise RuntimeError("Invalid action response from sandbox host.")
+              action_result = reply.get("action_result") or {}
+              action_results.append(action_result)
+@@ -1027,10 +1027,11 @@
+ +                # call did without waiting for the next turn's opener
+ +                print(_echo)
+ +            gameplay_changed = action_result.get("gameplay_changed")
+-+            if gameplay_changed is True:
+-+                # a real change means the snippet's beliefs are current again
+++            animated = bool((action_result.get("animation") or {}).get("transient_pixels", 0))
+++            if gameplay_changed is True or animated:
+++                # Visible or intermediate motion keeps the snippet's beliefs live.
+ +                del _stale_state[:]
+-+            if gameplay_changed is False and action_result.get("executed"):
+++            if gameplay_changed is False and not animated and action_result.get("executed"):
+ +                _executed = action_result.get("executed_actions")
+ +                _name = (
+ +                    _executed[-1]
+@@ -8010,7 +8011,7 @@
+  from inference.framework.kaggle import (
+      DEFAULT_QWEN_MODEL_DATASET_SOURCE,
+      DEFAULT_SERVED_MODEL_NAME,
+-@@ -53,10 +64,242 @@ from inference.utils.viewer_artifacts import (
++@@ -53,10 +64,244 @@ from inference.utils.viewer_artifacts import (
+      reset_raw_events_sidecar,
+  )
+  
+@@ -8147,6 +8148,8 @@
+ +    if item.get("level_completed"):
+ +        return "LEVEL COMPLETED"
+ +    changed = item.get("gameplay_changed")
+++    if changed is False and (item.get("animation") or {}).get("transient_pixels", 0):
+++        return "animated effect (intermediate frames changed; final board restored)"
+ +    if changed is False:
+ +        return (
+ +            "NO-OP (executed, no change inside the board area)"
+@@ -8597,7 +8600,7 @@
+              if action.id.value not in self.game.current_state.available_actions:
+                  message = f"{_format_action_display(action.id.name, dict(action.data))} is not valid right now."
+                  if executed_payloads:
+-@@ -636,8 +1124,35 @@ class _HarnessGameSession:
++@@ -636,8 +1124,38 @@ class _HarnessGameSession:
+              if payload.get("level_completed"):
+                  stop_reason = "level_completed"
+                  break
+@@ -8606,6 +8609,9 @@
+ +                and NOOP_GUARD_BORDER_WIDTH > 0
+ +                and batch_size >= 2
+ +                and not payload.get("gameplay_changed", True)
+++                # A transient animation is evidence of a real intermediate effect;
+++                # the final frame alone cannot certify a no-op.
+++                and not (payload.get("animation") or {}).get("transient_pixels", 0)
+ +            ):
+ +                stop_reason = "no_op_action"
+ +                break
+@@ -10119,6 +10125,465 @@
+ subprocess.run(["git", "apply", "--include=ARC3-Inference/*", "-v", "/kaggle/harness-changes.patch"], cwd=f"{BUNDLE_DIR}/src", check=True)
+ print('harness patch applied successfully')
+ 
++from pathlib import Path
++
++def apply_framework_upgrades(arc3_root: Path) -> None:
++    rf_path = arc3_root / "inference" / "utils" / "retained_functions.py"
++    sb_path = arc3_root / "inference" / "agent" / "python_tool_sandbox.py"
++
++    rf_text = rf_path.read_text(encoding="utf-8")
++    sb_text = sb_path.read_text(encoding="utf-8")
++
++    # --- 1. Upgrade retained_functions.py ---
++    target_rf_1 = """def _source_parts(source, retain_imports=True):
++    tree = ast.parse(source, '<retained>', 'exec')
++    if (not tree.body or not isinstance(tree.body[-1], ast.FunctionDef)
++            or (not retain_imports and len(tree.body) != 1)):
++        raise ValueError('only top-level function definitions can be retained')
++    imports = _import_statements(tree.body[:-1])
++    return tree.body[-1], imports"""
++
++    replacement_rf_1 = """def _is_safe_constant(val, _depth=0):
++    if _depth > 4:
++        return False
++    if val is None or isinstance(val, (bool, int, float, str, bytes)):
++        return len(repr(val)) <= 500
++    if isinstance(val, (tuple, list, set, frozenset)):
++        return len(val) <= 64 and all(_is_safe_constant(x, _depth + 1) for x in val)
++    if isinstance(val, dict):
++        return len(val) <= 64 and all(
++            _is_safe_constant(k, _depth + 1) and _is_safe_constant(v, _depth + 1)
++            for k, v in val.items()
++        )
++    return False
++
++
++def _strip_annotations(node):
++    for sub in ast.walk(node):
++        if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
++            sub.returns = None
++            if hasattr(sub, 'type_params'):
++                sub.type_params = []
++            for a in [*sub.args.posonlyargs, *sub.args.args, *sub.args.kwonlyargs,
++                      *(x for x in (sub.args.vararg, sub.args.kwarg) if x is not None)]:
++                a.annotation = None
++    return node
++
++
++def _sanitize_function_ast(source_segment, namespace, available, known_funcs, imports):
++    try:
++        tree = ast.parse(source_segment, '<retained>', 'exec')
++        if not tree.body or not isinstance(tree.body[-1], ast.FunctionDef):
++            return source_segment
++        node = tree.body[-1]
++        modified = False
++        if getattr(node, 'type_params', []) or node.returns is not None:
++            modified = True
++        for a in [*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs,
++                  *(x for x in (node.args.vararg, node.args.kwarg) if x is not None)]:
++            if a.annotation is not None:
++                modified = True
++        _strip_annotations(node)
++
++        for default_list in (node.args.defaults, node.args.kw_defaults):
++            for idx, d in enumerate(default_list):
++                if d is None:
++                    continue
++                try:
++                    ast.literal_eval(d)
++                except Exception:
++                    if isinstance(d, ast.Name) and d.id in namespace and _is_safe_constant(namespace[d.id]):
++                        default_list[idx] = ast.parse(repr(namespace[d.id]), mode='eval').body
++                        modified = True
++
++        mod = ast.Module(body=[node], type_ignores=[])
++        code = next(c for c in compile(mod, '<retained>', 'exec').co_consts
++                    if isinstance(c, types.CodeType))
++        reads, stores = set(), set()
++        pending = [code]
++        while pending:
++            cur = pending.pop()
++            for ins in dis.get_instructions(cur):
++                if ins.opname in ('LOAD_GLOBAL', 'LOAD_NAME'):
++                    reads.add(ins.argval)
++                elif ins.opname in ('STORE_GLOBAL', 'DELETE_GLOBAL', 'STORE_FAST', 'STORE_DEREF'):
++                    stores.add(ins.argval)
++            pending.extend(c for c in cur.co_consts if isinstance(c, types.CodeType))
++
++        missing = sorted(reads - set(available) - set(known_funcs) - set(imports) - stores - {node.name})
++        inlined = []
++        for g in missing:
++            if g in namespace and _is_safe_constant(namespace[g]):
++                inlined.append(ast.parse(f"{g} = {repr(namespace[g])}").body[0])
++        if inlined:
++            insert_idx = 1 if (
++                node.body and isinstance(node.body[0], ast.Expr)
++                and isinstance(getattr(node.body[0], 'value', None), ast.Constant)
++                and isinstance(node.body[0].value.value, str)
++            ) else 0
++            node.body[insert_idx:insert_idx] = inlined
++            modified = True
++
++        return ast.unparse(node) if modified else source_segment
++    except Exception:
++        return source_segment
++
++
++def _source_parts(source, retain_imports=True):
++    tree = ast.parse(source, '<retained>', 'exec')
++    if (not tree.body or not isinstance(tree.body[-1], ast.FunctionDef)
++            or (not retain_imports and len(tree.body) != 1)):
++        raise ValueError('only top-level function definitions can be retained')
++    imports = _import_statements(tree.body[:-1])
++    return _strip_annotations(tree.body[-1]), imports"""
++
++    assert target_rf_1 in rf_text, "target_rf_1 not found"
++    rf_text = rf_text.replace(target_rf_1, replacement_rf_1, 1)
++
++    target_rf_2 = """        candidates[name] = ast.get_source_segment(code_text, node)"""
++    replacement_rf_2 = """        raw_seg = ast.get_source_segment(code_text, node)
++        candidates[name] = _sanitize_function_ast(
++            raw_seg, namespace, available, set(previous) | set(fresh), imports)"""
++    assert target_rf_2 in rf_text, "target_rf_2 not found"
++    rf_text = rf_text.replace(target_rf_2, replacement_rf_2, 1)
++
++    rf_path.write_text(rf_text, encoding="utf-8")
++
++    # --- 2. Upgrade python_tool_sandbox.py ---
++    target_sb_imports = """    import os
++    import sys
++    import traceback"""
++    replacement_sb_imports = """    import os
++    import signal as _sig_mod
++    import sys
++    import traceback"""
++    assert target_sb_imports in sb_text, "target_sb_imports not found"
++    sb_text = sb_text.replace(target_sb_imports, replacement_sb_imports, 1)
++
++    # 2a. Expand SAFE_MODULES and SAFE_BUILTINS
++    target_sb_1 = """        "statistics",
++        "string",
++    }"""
++    replacement_sb_1 = """        "statistics",
++        "string",
++        "time",
++        "typing",
++        "dataclasses",
++        "enum",
++        "numbers",
++        "pprint",
++    }"""
++    assert target_sb_1 in sb_text, "target_sb_1 not found"
++    sb_text = sb_text.replace(target_sb_1, replacement_sb_1, 1)
++
++    target_sb_builtins = """        "ValueError",
++        "RuntimeError",
++        "zip",
++    }"""
++    replacement_sb_builtins = """        "ValueError",
++        "RuntimeError",
++        "TimeoutError",
++        "zip",
++    }"""
++    assert target_sb_builtins in sb_text, "target_sb_builtins not found"
++    sb_text = sb_text.replace(target_sb_builtins, replacement_sb_builtins, 1)
++
++    # 2b. IPC-safe soft timeout hooks around _send / _recv
++    target_sb_ipc = """    def _send(payload):
++        HOST_STDOUT.write(json.dumps(payload, ensure_ascii=False) + "\\n")
++        HOST_STDOUT.flush()
++
++
++    def _recv():
++        line = sys.stdin.readline()
++        if not line:
++            raise EOFError("sandbox input closed")
++        return json.loads(line)"""
++
++    replacement_sb_ipc = """    _in_ipc = False
++    _soft_timeout_pending = False
++    _soft_timeout_secs = 30
++
++    class SandboxSoftTimeoutError(BaseException):
++        pass
++
++    def _send(payload):
++        global _in_ipc
++        _in_ipc = True
++        try:
++            HOST_STDOUT.write(json.dumps(payload, ensure_ascii=False) + "\\n")
++            HOST_STDOUT.flush()
++        finally:
++            _in_ipc = False
++
++
++    def _recv():
++        global _in_ipc, _soft_timeout_pending
++        _in_ipc = True
++        try:
++            line = sys.stdin.readline()
++            if not line:
++                raise EOFError("sandbox input closed")
++            return json.loads(line)
++        finally:
++            _in_ipc = False
++            if _soft_timeout_pending:
++                _soft_timeout_pending = False
++                raise SandboxSoftTimeoutError(
++                    f"Tool timed out after {_soft_timeout_secs}s (partial stdout preserved)"
++                )"""
++    assert target_sb_ipc in sb_text, "target_sb_ipc not found"
++    sb_text = sb_text.replace(target_sb_ipc, replacement_sb_ipc, 1)
++
++    # 2c. Add __getattr__ delegation to HistoryEntryView and TransitionView + _LazyAnimation in _json_safe
++    target_sb_views = """    class HistoryEntryView:
++        def __init__(self, *, action, frame, result=None):
++            self.action = action
++            self.frame = frame
++            self.result = dict(result) if isinstance(result, dict) else {}
++
++        def __str__(self):
++            return f"AsciiHistoryEntryView(action={self.action!r}, frame={self.frame})"
++
++        __repr__ = __str__
++
++
++    class TransitionView:
++        def __init__(self, *, action, before_frame, after_frame, result):
++            self.action = action
++            self.before_frame = before_frame
++            self.after_frame = after_frame
++            self.frame = after_frame
++            self.result = dict(result) if isinstance(result, dict) else {}
++
++        def __str__(self):
++            return (
++                "ActionTransitionView("
++                f"action={self.action!r}, "
++                f"before_frame={self.before_frame}, "
++                f"after_frame={self.after_frame})"
++            )
++
++        __repr__ = __str__"""
++
++    replacement_sb_views = """    class HistoryEntryView:
++        def __init__(self, *, action, frame, result=None):
++            self.action = action
++            self.frame = frame
++            self.result = dict(result) if isinstance(result, dict) else {}
++
++        def __getattr__(self, name):
++            if name in ("step", "level", "ascii", "shape", "segmentation", "_grid") and self.frame is not None:
++                return getattr(self.frame, name)
++            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
++
++        def __str__(self):
++            return f"AsciiHistoryEntryView(action={self.action!r}, frame={self.frame})"
++
++        __repr__ = __str__
++
++
++    class TransitionView:
++        def __init__(self, *, action, before_frame, after_frame, result):
++            self.action = action
++            self.before_frame = before_frame
++            self.after_frame = after_frame
++            self.frame = after_frame
++            self.result = dict(result) if isinstance(result, dict) else {}
++
++        def __getattr__(self, name):
++            if name in ("step", "level", "ascii", "shape", "segmentation", "_grid") and self.frame is not None:
++                return getattr(self.frame, name)
++            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
++
++        def __str__(self):
++            return (
++                "ActionTransitionView("
++                f"action={self.action!r}, "
++                f"before_frame={self.before_frame}, "
++                f"after_frame={self.after_frame})"
++            )
++
++        __repr__ = __str__"""
++    assert target_sb_views in sb_text, "target_sb_views not found"
++    sb_text = sb_text.replace(target_sb_views, replacement_sb_views, 1)
++
++    target_sb_json = """    def _json_safe(value):
++        if value is None or isinstance(value, (str, int, float, bool)):
++            return value"""
++    replacement_sb_json = """    def _json_safe(value):
++        if hasattr(value, "_get") and callable(getattr(value, "_get", None)):
++            value = value._get()
++        if value is None or isinstance(value, (str, int, float, bool)):
++            return value"""
++    assert target_sb_json in sb_text, "target_sb_json not found"
++    sb_text = sb_text.replace(target_sb_json, replacement_sb_json, 1)
++
++    # 2d. Pre-import common stdlib utilities in runtime_globals & alias last_action_result
++    target_sb_globals = """        runtime_globals["__builtins__"]["__import__"] = _safe_import
++        _animation_views = []"""
++    replacement_sb_globals = """        runtime_globals["__builtins__"]["__import__"] = _safe_import
++        import collections as _col_mod, copy as _copy_mod, functools as _ft_mod, heapq as _hq_mod
++        import itertools as _it_mod, math as _math_mod, re as _re_mod, time as _time_mod
++        runtime_globals.update({
++            "collections": _col_mod,
++            "deque": _col_mod.deque,
++            "defaultdict": _col_mod.defaultdict,
++            "Counter": _col_mod.Counter,
++            "copy": _copy_mod,
++            "deepcopy": _copy_mod.deepcopy,
++            "functools": _ft_mod,
++            "heapq": _hq_mod,
++            "heappush": _hq_mod.heappush,
++            "heappop": _hq_mod.heappop,
++            "itertools": _it_mod,
++            "json": json,
++            "math": _math_mod,
++            "re": _re_mod,
++            "time": _time_mod,
++        })
++        _animation_views = []"""
++    assert target_sb_globals in sb_text, "target_sb_globals not found"
++    sb_text = sb_text.replace(target_sb_globals, replacement_sb_globals, 1)
++
++    target_sb_refresh = """            runtime_globals["last_action_call_result"] = action_result"""
++    replacement_sb_refresh = """            runtime_globals["last_action_call_result"] = action_result
++            runtime_globals["last_action_result"] = action_result"""
++    assert target_sb_refresh in sb_text, "target_sb_refresh not found"
++    sb_text = sb_text.replace(target_sb_refresh, replacement_sb_refresh, 1)
++
++    # 2e. Add .items() and .values() to _LazyAnimation and alias last_action_timeline / last_action_frames
++    target_sb_anim = """                def keys(self):
++                    return self._get().keys()
++
++                def get(self, key, default=None):
++                    return self._get().get(key, default)
++
++                def __repr__(self):
++                    return repr(self._get())
++
++            runtime_globals["last_animation_frames"] = _LazyAnimation("frames", [])
++            runtime_globals["last_animation_timeline"] = _LazyAnimation("timeline", {})"""
++
++    replacement_sb_anim = """                def keys(self):
++                    return self._get().keys()
++
++                def items(self):
++                    val = self._get()
++                    return val.items() if hasattr(val, "items") else ()
++
++                def values(self):
++                    val = self._get()
++                    return val.values() if hasattr(val, "values") else ()
++
++                def get(self, key, default=None):
++                    return self._get().get(key, default)
++
++                def __repr__(self):
++                    return repr(self._get())
++
++            runtime_globals["last_animation_frames"] = _LazyAnimation("frames", [])
++            runtime_globals["last_animation_timeline"] = _LazyAnimation("timeline", {})
++            runtime_globals["last_action_frames"] = runtime_globals["last_animation_frames"]
++            runtime_globals["last_action_timeline"] = runtime_globals["last_animation_timeline"]"""
++    assert target_sb_anim in sb_text, "target_sb_anim not found"
++    sb_text = sb_text.replace(target_sb_anim, replacement_sb_anim, 1)
++
++    # 2f. Soft timeout inside child process so partial stdout & action_results are preserved on timeout
++    target_sb_exec = """        try:
++            _code_text = str(initial.get("code", ""))
++            _tree = ast.parse(_code_text, "<python_tool>")
++            _last_expr = None
++            if _tree.body and isinstance(_tree.body[-1], ast.Expr):
++                _last_expr = ast.Expression(_tree.body[-1].value)
++                ast.copy_location(_last_expr, _tree.body[-1])
++                _tree.body = _tree.body[:-1]
++            with contextlib.redirect_stdout(stdout):
++                if _tree.body:
++                    exec(compile(_tree, "<python_tool>", "exec"), runtime_globals, runtime_globals)
++                if _last_expr is not None:
++                    _value = eval(compile(_last_expr, "<python_tool>", "eval"), runtime_globals, runtime_globals)
++                    if _value is not None:
++                        print(repr(_value))
++                        if runtime_globals.get("result") is None:
++                            runtime_globals["result"] = _value
++            _send(
++                {
++                    "type": "final",
++                    **_collect_retention_payload(),
++                    "stdout": stdout.getvalue(),
++                    "result": _json_safe(runtime_globals.get("result")),
++                    "action_results": _json_safe(action_results),
++                }
++            )
++        except (
++            KnownNoOpActionError,
++            RepeatedActionInStateError,
++            KnownDeathActionError,
++            TerminalStateActionError,
++            Exception,
++        ) as exc:"""
++
++    replacement_sb_exec = """        global _soft_timeout_secs
++        _soft_timeout_secs = timeout_seconds
++        _has_sigalrm = hasattr(_sig_mod, "SIGALRM") and hasattr(_sig_mod, "setitimer")
++        if _has_sigalrm and timeout_seconds >= 3:
++            def _on_soft_timeout(signum, frame):
++                global _soft_timeout_pending
++                if _in_ipc:
++                    _soft_timeout_pending = True
++                    return
++                raise SandboxSoftTimeoutError(f"Tool timed out after {timeout_seconds}s (partial stdout preserved)")
++            _sig_mod.signal(_sig_mod.SIGALRM, _on_soft_timeout)
++            _sig_mod.setitimer(_sig_mod.ITIMER_REAL, max(1.5, float(timeout_seconds) - 1.5))
++
++        try:
++            _code_text = str(initial.get("code", ""))
++            _tree = ast.parse(_code_text, "<python_tool>")
++            _last_expr = None
++            if _tree.body and isinstance(_tree.body[-1], ast.Expr):
++                _last_expr = ast.Expression(_tree.body[-1].value)
++                ast.copy_location(_last_expr, _tree.body[-1])
++                _tree.body = _tree.body[:-1]
++            with contextlib.redirect_stdout(stdout):
++                if _tree.body:
++                    exec(compile(_tree, "<python_tool>", "exec"), runtime_globals, runtime_globals)
++                if _last_expr is not None:
++                    _value = eval(compile(_last_expr, "<python_tool>", "eval"), runtime_globals, runtime_globals)
++                    if _value is not None:
++                        print(repr(_value))
++                        if runtime_globals.get("result") is None:
++                            runtime_globals["result"] = _value
++            if _has_sigalrm and timeout_seconds >= 3:
++                _sig_mod.setitimer(_sig_mod.ITIMER_REAL, 0.0)
++            _send(
++                {
++                    "type": "final",
++                    **_collect_retention_payload(),
++                    "stdout": stdout.getvalue(),
++                    "result": _json_safe(runtime_globals.get("result")),
++                    "action_results": _json_safe(action_results),
++                }
++            )
++        except (
++            SandboxSoftTimeoutError,
++            KnownNoOpActionError,
++            RepeatedActionInStateError,
++            KnownDeathActionError,
++            TerminalStateActionError,
++            Exception,
++        ) as exc:
++            if _has_sigalrm and timeout_seconds >= 3:
++                _sig_mod.setitimer(_sig_mod.ITIMER_REAL, 0.0)"""
++
++    assert target_sb_exec in sb_text, "target_sb_exec not found"
++    sb_text = sb_text.replace(target_sb_exec, replacement_sb_exec, 1)
++
++    sb_path.write_text(sb_text, encoding="utf-8")
++    print("Framework upgrades applied successfully!")
++apply_framework_upgrades(BUNDLE_DIR / "src" / "ARC3-Inference")
++
++
+ # True only inside a real competition rerun; switches diagnostics + soft deadline.
+ TRUE_SUBMISSION = os.environ.get("KAGGLE_IS_COMPETITION_RERUN", "").strip().lower() in {"1", "true"}
+ NOTEBOOK_START_EPOCH = time.time()
+@@ -10163,7 +10628,7 @@
+     'LOCAL_ANALYZER_TOOL_TIMEOUT': '30',
+     'LOCAL_ANALYZER_YIELD_SECONDS': '0',
+     'LOCAL_ANALYZER_YIELD_TOKENS': '2048',
+-    'LOCAL_ANALYZER_TEMPERATURE': '0.7',
++    'LOCAL_ANALYZER_TEMPERATURE': '0.5',
+     'LOCAL_ANALYZER_TOP_P': '0.95',
+     'LOCAL_ANALYZER_TOP_K': '20',
+ 
+@@ -10207,6 +10672,7 @@
+     'ARC3_PERSISTENT_FUNCTIONS': '1',
+     'ARC3_PERSISTENT_FUNCTIONS_SCOPE': 'game',
+     'ARC3_PERSISTENT_FUNCTIONS_IMPORTS': '1',
++    'ARC3_PERSISTENT_FUNCTIONS_REPAIR_HINTS': '1',
+ 
+     ########## controls ##########
+     'EXPOSE_UNDO': 'on',
+@@ -10716,10 +11182,10 @@
+ bm.solver.concurrency = 10
+ bm.solver.max_actions_per_game = None
+ bm.solver.save_request_logs = True
+-bm.n_passes = 4
++bm.n_passes = 1
+ bm.game_weights = None
+ 
+-demo_excluded_games = [] if TRUE_SUBMISSION else []
++demo_excluded_games = [] if TRUE_SUBMISSION else ['ar25', 'bp35', 'cd82', 'cn04', 'dc22', 'g50t', 'ka59', 'lf52', 'lp85', 'ls20', 'm0r0', 'r11l', 're86', 's5i5', 'sb26', 'sc25', 'sk48', 'sp80', 'su15', 'tn36', 'tr87', 'tu93', 'vc33', 'wa30']
+ 
+ if TRUE_SUBMISSION:  # overrides for contest run
+     bm.solver.save_request_logs = False
+@@ -10730,7 +11196,7 @@
+ else:
+     if USE_PRIORITY_SCHEDULING:
+         bm.solver.concurrency = (25 - len(demo_excluded_games)) * bm.n_passes
+-        bm.solver.max_runtime_s_per_game = 532*60 * bm.solver.concurrency // 110
++        bm.solver.max_runtime_s_per_game = 5*60  # rehearsal only proves the run completes
+     if float(getattr(target, 'max_runtime_s', 0.0) or 0.0) != 32400.0:
+         raise RuntimeError(
+             f'Expected the 32400-second notebook budget, got {target.max_runtime_s!r}.'
+@@ -10827,6 +11293,20 @@
+     _stop_monitor = start_monitor(2)
+     print(_sysline())
+ 
++# --- arc-agi-3-agent: replace the slot priority with the formula found in simulation ---
++# Source: arceval/duck/form_priority.py, embedded verbatim. Active in the real submission.
++# Keeps the scheduler's flow (unstarted games first, swaps only at context trims) and
++# replaces only priority_value (plus a pace tracker: mean tokens per cleared level).
++import sys as _fp_sys, types as _fp_types
++_FP_SOURCE = '"""dfranzen の配分の優先度を、模擬で見つけた式に差し替える（本番でも効かせる）。\n\n彼の配分の流れ（まだ始めていないゲームが先、動いているゲームは履歴を削るときだけ\n入れ替える）はそのまま使い、**優先度の値を出す関数だけ**を替える。\n\n    優先度 = e^{lp·(ℓ-1)}·norm(N) × 2^{-a/ec} × ペース × 2^{-(t/ts)²} × (1 + 伸びしろ/8)\n\n    ℓ  挑戦中のレベル（1始まり）      N  総レベル数（分からなければ10）。norm は 6〜10 に丸めて\n                                         55/(N(N+1)/2)（彼と同じ）\n    a  このレベルで打った手数          t  このレベルで生成したトークン\n    ペース = clip((ref / これまでの1レベルあたりの平均トークン)^pp, 0.25, 4)。\n             1レベルも越えていなければ 1\n    伸びしろ = 残りのレベル数で 3以上→b3, 2→b2, 1→b1, 0→0\n\narceval/sim/simulate.py の Form（level_form=2, eff_form=1, shape=0, c_action=0,\ncombine=2, fade=0）と同じ値を出す（テストで見張る）。\n\n## 取り付け\n\n    install(tool_agent_module)\n\n  - `tool_agent.priority_value` を差し替える（彼の `_snapshot_priority` はこの名前で呼ぶ）\n  - `tool_agent.ProgressPace` を差し替える。各ゲームの分析役は作られるときにこの名前で\n    ペースの入れ物を作り、レベルを越えるたびに `record_completion(そのレベルのトークン, 基準)`\n    を呼ぶ。我々の入れ物は「これまでの1レベルあたりの平均トークン」を返す\n  - `ARC3_PRIORITY_PACE=1` にする。そうしないと彼のコードはペースを記録せず、優先度の\n    材料（PrioritySnapshot.cost_multiplier）にも載せない\n\n★ 本番の提出でも効かせる（そのための差し替え）。取り付けに失敗したら raise する ――\n  提出の前の Save & Run で必ず同じコードが走るので、そこで見つかる。\n"""\nfrom __future__ import annotations\n\nimport math\nimport os\nimport threading\nimport time\n\n# 模擬で選んだ式（data/datarun/forms-joint、2026-10-02）\nCHOSEN = {"level_pow": 0.2, "eff_const": 100.0, "pace_pow": 0.25, "pace_ref": 30_000.0,\n          "token_scale": 124_000.0, "b1": 2.5, "b2": 3.5, "b3": 4.0}\nSCALE = 1000.0   # 彼の優先度は整数。帯（100万）より十分小さく、順位が潰れない桁にする\n\n\nclass FormPace:\n    """これまでに越えたレベルの、1レベルあたりの平均生成トークン。\n\n    彼の ProgressPace と同じ呼ばれ方をする（`record_completion`, `cost_multiplier`）。\n    `cost_multiplier()` は倍率ではなく**平均トークンそのもの**を返す（0 なら、まだ無い）。\n    これを読むのは差し替えた `form_priority` だけ。\n    """\n\n    def __init__(self):\n        self.completed = 0\n        self.tokens = 0.0\n\n    def record_completion(self, tokens_used: float, reference_tokens: float = 0.0) -> None:\n        self.completed += 1\n        self.tokens += max(0.0, float(tokens_used))\n\n    def cost_multiplier(self) -> float:\n        return self.tokens / self.completed if self.completed else 0.0\n\n\ndef _levels(total) -> int | None:\n    try:\n        n = int(total)\n    except (TypeError, ValueError):\n        return None\n    return n if n > 0 else None\n\n\ndef form_value(level: int, actions: float, tokens: float, pace: float, total_levels,\n               params: dict = CHOSEN) -> float:\n    """優先度（小数）。pace はこれまでの1レベルあたりの平均トークン（0 ならまだ無い）。"""\n    level = max(1, int(level))\n    n = _levels(total_levels) or 10\n    n_clamped = min(10, max(6, n))\n    norm = 55 / (n_clamped * (n_clamped + 1) / 2)\n    a = max(0.0, float(actions))\n    t = max(0.0, float(tokens))\n    value = math.exp(params["level_pow"] * (level - 1)) * norm\n    value *= 2 ** (-(a / params["eff_const"]))\n    if pace > 0:\n        value *= min(4.0, max(0.25, (params["pace_ref"] / max(1.0, pace)) ** params["pace_pow"]))\n    value *= 2 ** (-((t / params["token_scale"]) ** 2))\n    remaining = max(0, n - level)\n    bonus = (0.0, params["b1"], params["b2"], params["b3"])[min(remaining, 3)]\n    return value * (1.0 + bonus / 8.0)\n\n\ndef form_priority(state, **_ignored) -> int:\n    """彼の `priority_value(state, ...)` と同じ呼ばれ方で、整数の優先度を返す。\n\n    state は PrioritySnapshot（level, actions, tokens, cost_multiplier, total_levels）。\n    彼の寄せ（tail_fraction）や係数の引数は使わない（この式は寄せを持たない）。\n    """\n    value = form_value(state.level, state.actions, state.tokens,\n                       float(getattr(state, "cost_multiplier", 0.0) or 0.0),\n                       getattr(state, "total_levels", None))\n    return max(1, int(value * SCALE))\n\n\n# ---- D′（2026-10-03、data/datarun/refine-fine。LB の v1 から模擬で +1.5 前後） ----\n#\n#     優先度 = A·M·C + B·φ\n#\n#     A = (1 + 0.5·(ℓ-1))·norm(N) × (300/(300+a))^2.5          深さ（線形）× 手数の効率\n#     M = clip((3万 / ペース)^0.4, 0.25, 4)（1レベルも越えていなければ 1）\n#     C = 0.1·max(0.1, 1 - a/115) + 0.9·max(0.1, 1 - t/T)        詰まりの減衰（線形、下限 0.1）\n#         T = 22.5万 × clip(ペース/3万, 0.5, 2)^0.5（遅いゲームほど我慢を長く。越えていなければ ×1）\n#     B = 残りのレベル数で 3以上→16, 2→14, 1→10, 0→0（伸びしろ。足し算）\n#     φ = 寄せ。走行の最後の4割で 1 → 0（彼の tail_fraction をそのまま使う）\n#\n#   加えて「全員まず1回」をやめる: まだ始めていないゲームも、この式の値（ℓ=1, a=t=0）で並べる。\n#\n# arceval/sim/simulate.py の Form（D_PRIME_FORM）と同じ値を出す（テストで見張る）。\n\nD_PRIME = {"level_pow": 0.5, "eff_const": 300.0, "eff_pow": 2.5, "pace_pow": 0.4,\n           "pace_ref": 30_000.0, "c_action": 0.1, "action_scale": 115.0, "c_token": 0.9,\n           "token_scale": 225_000.0, "lin_floor": 0.1, "rel_pow": 0.5,\n           "b0": 8.0, "b1": 10.0, "b2": 14.0, "b3": 16.0, "fade": 0.4}\n# 模擬の Form の引数で書いた同じ式（テストで突き合わせる）\nD_PRIME_FORM = {"fade": 0.4, "level_form": 3, "level_pow": 0.5, "eff_form": 0, "eff_const": 300.0,\n                "eff_pow": 2.5, "shape": 3, "c_action": 0.1, "c_token": 0.9, "token_scale": 225000.0,\n                "combine": 1, "b1": 10.0, "b2": 14.0, "b3": 16.0, "pace_pow": 0.4, "form_fresh": 0,\n                "lin_floor": 0.1, "eff_floor": 0.2, "rel_pow": 0.5}\n\n\ndef d_parts(level: int, actions: float, tokens: float, pace: float, total_levels,\n            params: dict = D_PRIME) -> tuple:\n    """(A·M·C, B)。pace はこれまでの1レベルあたりの平均トークン（0 ならまだ無い）。"""\n    level = max(1, int(level))\n    n = _levels(total_levels) or 10\n    n_clamped = min(10, max(6, n))\n    norm = 55 / (n_clamped * (n_clamped + 1) / 2)\n    a = max(0.0, float(actions))\n    t = max(0.0, float(tokens))\n    A = (1.0 + params["level_pow"] * (level - 1)) * norm\n    A *= (params["eff_const"] / (params["eff_const"] + a)) ** params["eff_pow"]\n    if pace > 0:\n        A *= min(4.0, max(0.25, (params["pace_ref"] / max(1.0, pace)) ** params["pace_pow"]))\n    scale = params["token_scale"]\n    rel = pace if pace > 0 else params["pace_ref"]\n    scale *= min(2.0, max(0.5, rel / params["pace_ref"])) ** params["rel_pow"]\n    floor = params["lin_floor"]\n    C = (params["c_action"] * max(floor, 1.0 - a / params["action_scale"])\n         + params["c_token"] * max(floor, 1.0 - t / scale))\n    remaining = max(0, n - level)\n    b0 = params.get("b0", 6.0) if (level >= 4 and remaining == 0) else 0.0\n    B_raw = (b0, params["b1"], params["b2"], params["b3"])[min(remaining, 3)]\n    return A * C, B_raw\n\n\ndef d_value(level, actions, tokens, pace, total_levels, phi: float = 1.0) -> float:\n    u, v = d_parts(level, actions, tokens, pace, total_levels)\n    return u + v * phi\n\n\ndef d_priority(state, *, tail_fraction=None, **_ignored) -> int:\n    """彼の `priority_value(state, tail_fraction=..., ...)` と同じ呼ばれ方。\n\n    寄せ φ は彼が渡す tail_fraction（残り時間 ÷ 寄せの窓。窓の外では 1 より大きい）を\n    0〜1 に切って使う。渡されなければ 1（寄せ無し）。\n    """\n    phi = 1.0 if tail_fraction is None else min(1.0, max(0.0, float(tail_fraction)))\n    value = d_value(state.level, state.actions, state.tokens,\n                    float(getattr(state, "cost_multiplier", 0.0) or 0.0),\n                    getattr(state, "total_levels", None), phi)\n    return max(1, int(value * SCALE))\n\n\nFRESH = {"replaced": 0}\n_TL = threading.local()\n\n\ndef install_d(tool_agent, solver) -> str:\n    """D′ を取り付ける。v1 の install と違い、「全員まず1回」も外す。\n\n    彼のコードで、まだ始めていないゲームは `gate.acquire(200万 − 待ち順)` で並ぶ（どの\n    優先度より上の帯）。これを、この式の値（ℓ=1, a=t=0、そのゲームの総レベル数）と、\n    寄せで値が変わるようにスナップショットつきで並べ直す。総レベル数は、その遊びを\n    走らせているスレッドで `_HarnessGameSession.play` が始まるときに覚えておく。\n    """\n    for name in ("priority_value", "ProgressPace", "_PriorityGate", "PrioritySnapshot",\n                 "_PRIORITY_UNTRIMMED_BASE", "_PRIORITY_BAND"):\n        if not hasattr(tool_agent, name):\n            raise RuntimeError(f"tool_agent に {name} が無い。彼の版が変わった。")\n    session_cls = getattr(solver, "_HarnessGameSession", None)\n    if session_cls is None or not callable(getattr(session_cls, "play", None)):\n        raise RuntimeError("solver に _HarnessGameSession.play が無い。彼の版が変わった。")\n    gate_cls = tool_agent._PriorityGate\n    for name in ("acquire", "_enqueue_and_wait", "_snapshot_priority"):\n        if not callable(getattr(gate_cls, name, None)):\n            raise RuntimeError(f"_PriorityGate に {name} が無い。彼の版が変わった。")\n\n    tool_agent.priority_value = d_priority\n    tool_agent.ProgressPace = FormPace\n    os.environ["ARC3_PRIORITY_PACE"] = "1"\n    os.environ["ARC3_PRIORITY_REFRESH_QUEUE"] = "1"\n    os.environ["ARC3_PRIORITY_TAIL_FADE"] = "1"\n    os.environ["ARC3_PRIORITY_TAIL_FADE_FRACTION"] = str(D_PRIME["fade"])\n\n    if not getattr(session_cls.play, "_ours_d", False):\n        orig_play = session_cls.play\n\n        def play(self, *args, **kwargs):\n            run = getattr(getattr(self, "game", None), "game_run", None)\n            _TL.n = getattr(run, "number_of_levels", None)\n            try:\n                return orig_play(self, *args, **kwargs)\n            finally:\n                _TL.n = None\n\n        play._ours_d = True\n        session_cls.play = play\n\n    if not getattr(gate_cls.acquire, "_ours_d", False):\n        orig_acquire = gate_cls.acquire\n        fresh_floor = tool_agent._PRIORITY_UNTRIMMED_BASE - tool_agent._PRIORITY_BAND\n        snapshot_cls = tool_agent.PrioritySnapshot\n\n        def acquire(self, priority):\n            if priority < fresh_floor:\n                return orig_acquire(self, priority)\n            # まだ始めていないゲーム: 帯で先頭に並べず、この式の値で並べる\n            snap = snapshot_cls(1, 0, 0.0, 0.0, getattr(_TL, "n", None))\n            value = self._snapshot_priority(snap, time.monotonic())\n            with self._cond:\n                self._enqueue_and_wait(value, snap)\n            FRESH["replaced"] += 1\n\n        acquire._ours_d = True\n        gate_cls.acquire = acquire\n\n    line = ("#OURS_FORM ok version=d_prime priority_value replaced; fresh-first removed; "\n            "tail fade " + str(D_PRIME["fade"]) + "; "\n            + " ".join(f"{k}={v:g}" for k, v in D_PRIME.items() if k != "fade"))\n    print(line, flush=True)\n    return line\n\n\ndef install(tool_agent) -> str:\n    for name in ("priority_value", "ProgressPace", "_PriorityGate"):\n        if not hasattr(tool_agent, name):\n            raise RuntimeError(f"tool_agent に {name} が無い。彼の版が変わった。")\n    tool_agent.priority_value = form_priority\n    tool_agent.ProgressPace = FormPace\n    os.environ["ARC3_PRIORITY_PACE"] = "1"\n    line = ("#OURS_FORM ok priority_value replaced; pace=mean tokens per cleared level; "\n            + " ".join(f"{k}={v:g}" for k, v in CHOSEN.items()))\n    print(line, flush=True)\n    return line\n'
++_fp_mod = _fp_types.ModuleType('ours_form_priority')
++_fp_sys.modules['ours_form_priority'] = _fp_mod
++exec(compile(_FP_SOURCE, 'ours_form_priority.py', 'exec'), _fp_mod.__dict__)
++import inference.agent.tool_agent as _fp_ta
++import inference.framework.solver as _fp_solver
++_fp_mod.install_d(_fp_ta, _fp_solver)
++
++
+ print('Starting benchmark...')
+ 
+ # Build the live competition game list from the gateway's available environments.
+@@ -10920,6 +11400,8 @@
+         columns=["row_id", "game_id", "end_of_game", "score"],
+     ).to_parquet(WORKING_DIR / "submission.parquet", index=False)
+ 
++print('#OURS_FRESH replaced=' + str(_fp_mod.FRESH['replaced']), flush=True)
++
+ from html import escape
+ 
+ from IPython.display import HTML, display

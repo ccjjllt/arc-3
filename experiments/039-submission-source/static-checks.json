@@ -1,0 +1,103 @@
+{
+  "status": "passed_local_static_only",
+  "variant": "history_step",
+  "compiled_code_cell_indices": [
+    0,
+    1,
+    6,
+    8,
+    10,
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28
+  ],
+  "original_v83_harness_patch_retained": true,
+  "removed_all_four_037_segmentation_cells": true,
+  "segmentation_runs_not_installed": true,
+  "formal_configuration_equals_original_v83": true,
+  "formal_configuration_fixture": {
+    "formal_upstream": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "formal_candidate": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "save_upstream": {
+      "solver": {
+        "max_runtime_s_per_game": 1500,
+        "analyzer_timeout": 900.0,
+        "concurrency": 10,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": [
+        "bp35",
+        "cd82",
+        "cn04",
+        "dc22",
+        "g50t",
+        "ka59",
+        "lf52",
+        "ls20",
+        "m0r0",
+        "s5i5",
+        "sk48",
+        "sp80",
+        "su15",
+        "tn36",
+        "wa30"
+      ]
+    },
+    "save_candidate": {
+      "solver": {
+        "max_runtime_s_per_game": 300,
+        "analyzer_timeout": 900.0,
+        "concurrency": 2,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    }
+  },
+  "unchanged_deployment_cells_except_identity": true,
+  "baseline_identity_cell_changes": [
+    0,
+    2
+  ],
+  "native_payload_cells": true,
+  "new_helper_before_benchmark_unpickle": true,
+  "gpu_or_model_run": false,
+  "formal_score_known": false,
+  "notebook_sha256": "ac9f48b8827f566ada2a6fea9cf8032a26637ccb3f7a804d48cb1f27807d9e20",
+  "private_offline_RTX_PRO6000": true
+}

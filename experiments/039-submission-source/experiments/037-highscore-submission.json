@@ -1,0 +1,124 @@
+{
+  "id": "037-highscore-submission",
+  "kernel_id": "zhuating/arc3-037-highscore-pixels",
+  "kernel_title": "ARC3 037 Highscore Pixels",
+  "purpose": "Improve the public 35.35 The AGI Boys v83 with one exact component pixel row-runs intervention",
+  "base_notebook": "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb",
+  "base_source_sha256": "8221f1e64ad7d4c8b3ecbbcbd83f68c9469707246484b0bbcaa5254da809905e",
+  "hard_limit_seconds": 32400,
+  "machine_shape": "NvidiaRtxPro6000",
+  "enable_internet": false,
+  "input_resolution_timeout_seconds": 60,
+  "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+  "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+  "save_placeholder_is_scored": false,
+  "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+  "solver": {
+    "n_passes": 1,
+    "concurrency": 120,
+    "active_streams": 10,
+    "max_runtime_s_per_game": 31920,
+    "warmup_action_games": 1,
+    "save_request_logs": false,
+    "research_interventions": [
+      "segmentation_runs"
+    ]
+  },
+  "official_save_protocol": {
+    "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+    "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+    "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "observed_date_local": "2026-10-12",
+    "relevant_lines": "2-10, 75-78, 114-133",
+    "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+  },
+  "revision": 1,
+  "save_smoke": {
+    "game_ids": [
+      "sb26-7fbdac44",
+      "cd82-fb555c5d"
+    ],
+    "budget_seconds": 300,
+    "n_passes": 1,
+    "concurrency": 2,
+    "startup_timeout_seconds": 2400,
+    "total_timeout_seconds": 3600,
+    "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+    "cleanup": "Only the process group of the model Popen started by this save"
+  },
+  "preparation_status": "prepared locally, not run, pushed or submitted",
+  "segmentation_runs": {
+    "implementation": "src/arc3_research/segmentation_runs.py",
+    "implementation_sha256": "b4c5cc5b398d8b7365c1f2e2b022b5f3bc7a575afcc7e3e56c46b5a92450deee",
+    "field": "nodes[*].runs",
+    "coordinates": "absolute row, inclusive column start/end",
+    "scope": "Exact original 4-connected equal-color component membership in host and isolated Python sandbox",
+    "original_fields_unchanged": true,
+    "tool_description_change": "Unchanged existing FIELD_GUIDANCE; v2 also adds the same runs data contract to the system node-field enumeration",
+    "new_model_tools": false,
+    "new_model_requests": false,
+    "original_python_lifecycle_unchanged": true,
+    "patch_version": "segmentation-runs-v2",
+    "system_field_contract_change": "Only the runs field beside pixels/boundary; absolute row coordinates and inclusive column endpoints, no additional strategy or example"
+  },
+  "source_provenance": "experiments/037-highscore-source/provenance.json",
+  "source_provenance_sha256": "6b55eb6fc4d3e6931752d9e8f5deb6ac514fe61a762b19a121d7dc070219126d",
+  "upstream": {
+    "ref": "romantamrazov/the-agi-boys-i-am-better",
+    "version": 83,
+    "script_version_id": 359573474,
+    "displayed_public_score": 35.35,
+    "url": "https://www.kaggle.com/code/romantamrazov/the-agi-boys-i-am-better?scriptVersionId=359573474"
+  },
+  "deployment": {
+    "docker_image_version_id": 31401,
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:00377cd1b3d470a605bc5b0ceca79969e369644e9b36802242a1c70e627372f9",
+    "docker_image_pinning_type": "original",
+    "image_evidence": "v83 downloaded metadata and v86 downloaded metadata both identify dockerImageVersionId31401; paired v86 API metadata supplies this exact image digest",
+    "image_evidence_api": "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/api-metadata.json",
+    "image_evidence_notebook": "research/snapshots/2026-10-25-strategy/notebook-sources/romantamrazov__the-agi-boys-i-am-better/the-agi-boys-i-am-better.ipynb",
+    "expected_data_sources": [
+      {
+        "sourceType": "competition",
+        "sourceId": 133468
+      },
+      {
+        "sourceType": "datasetVersion",
+        "sourceId": 20092813
+      },
+      {
+        "sourceType": "datasetVersion",
+        "sourceId": 20134793
+      },
+      {
+        "sourceType": "modelInstanceVersion",
+        "sourceId": 1007514
+      },
+      {
+        "sourceType": "modelInstanceVersion",
+        "sourceId": 1007009
+      }
+    ],
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253/1",
+      "dfranzen/taaf-kaggle-source-bundle-copy/1"
+    ],
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ],
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "remote_input_ids_must_match_before_submit": true,
+    "input_pin_evidence": "Official version1 dataset download headers resolve pennyroyal/1 to datasetVersion20134793 and bundle/1 to datasetVersion20092813; model API maps Intel1 to1007514 and draft1 to1007009. All IDs match v83. Backend admission and actual saved notebook input IDs still require read-back.",
+    "input_pin_evidence_file": "experiments/037-highscore-source/runtime-input-pins-evidence.json",
+    "dataset_pin_headers_file": "experiments/037-highscore-source/dataset-version-headers.json"
+  },
+  "research_transfer_risks": [
+    "031 v2 has a real exact-pixels-to-search-to-action chain but mixed short-run results; this 037 candidate has no measured new score.",
+    "Exact row-runs enlarge tool output and may be ignored/truncated; original3072 token tool-output cap is unchanged.",
+    "The35.35 score is bound to upstreamv83; reproducing source and settings does not guarantee reproducing this stochastic score.",
+    "GPU save validates execution only; official public score determines whether this candidate improves our score."
+  ]
+}

@@ -4,12 +4,14 @@
 
 ## 当前进展
 
-以下来自仓库截至 **2026-10-24** 的已保存记录：
+以下来自仓库截至 **2026-10-25** 的已保存记录：
 
 | 项目 | 状态与结论 | 入口 |
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
-| 最近正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
+| 已准备 · 038 / 039 | 原样v83参考与仅历史step兼容两版已本地冻结；真实CPU反例通过，尚未上传或计分 | [研究决策](research/notes/038/038-research-decision.md) · [038](docs/progress/038-highscore-baseline.md) · [039](docs/progress/039-history-step.md) |
+| 最近正式结果 · 037 | submission 57615378，public **26.71**，较009低4.45；保留009，停止原样重提 | [037进展与结果](docs/progress/037-highscore-pixels.md) · [正式原件](experiments/037-formal-result-snapshot.json) |
+| 历史正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
 | 最新结果 · 036 | 完整25题39.4358→40.6409（+1.2051）、97→100关；去最大涨题后−2.3161，不直接晋级正式候选 | [036结果](research/notes/036/036-results-analysis.md) · [进展](docs/progress/036-main-reasoning-medium.md) |
 | 已完成 · 035 | low真实生效，但A/B/C均分18.2540、新增关及程序动作均0；执行停损，结束独立辅助分支 | [035结果](research/notes/035/035-results-analysis.md) · [进展](docs/progress/035-auxiliary-reasoning.md) |
 | 已完成 · 034 v9 | 程序动作仍0，A/B均分20.2479→18.2540，差−1.9939；执行停损，停止合同调参，不扩池或正式提交 | [v9结果](research/notes/034/034-v9-results-analysis.md) |

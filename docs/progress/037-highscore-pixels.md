@@ -33,3 +33,11 @@
 [正式记录](../../experiments/037-formal-submission.json) · [接收原件](../../experiments/037-after-formal-submit.json) · [新独立复核](../../experiments/037-save-independent-review.json)
 
 2026-10-25 13:21北京时间，用户再次通知后实时查询：正式提交57615378在CLI列表仍PENDING、publicScore为空；GetSubmission也未返回分数或错误。Notebook状态COMPLETE属于已完成保存检查，不能当作正式评分完成。距离11:32提交约1小时49分钟，未重新push或提交，等待正式结果。
+
+## 正式评分完成
+
+2026-10-25 21:40北京时间用户通知后，通过CLI提交列表及GetSubmission双重确认：**57615378 COMPLETE／public26.71**，较本队009／31.16低4.45，较上游v83页面35.35低8.64，本次未提分。正式接口未返回错误说明，episodes为空，下载正式产物接口403，无法据此判断退分对应哪些题或是否发生资源异常。保存日志只证明保存运行，不能替代正式轨迹。
+
+再次新派独立代理复核，冻结源码与输入仍一致；尚无本队原样v83正式对照，且009和037的Docker不同。新增runs确有工具输出膨胀风险，但无正式证据将这次退分归因于它。保留009最佳，停止037原样重提；建议下一候选恢复v83原样solver、使用相同固定容器/输入，先建立本队正式参考。本轮仅查询和分析结果，未启动新GPU或提交。
+
+[正式结果原件](../../experiments/037-formal-result-snapshot.json) · [诊断可用性](../../experiments/037-formal-diagnostics-availability.json) · [新独立评估](../../experiments/037-formal-independent-review.json)

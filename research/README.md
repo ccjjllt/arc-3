@@ -4,7 +4,7 @@
 
 ## 通用总览
 
-- [2026-10-25 最新提分与获奖研究审计](overview/2026-10-25-research-strategy.md)
+- [2026-10-25-research-strategy.md](overview/2026-10-25-research-strategy.md)
 - [data-findings.md](overview/data-findings.md)
 - [frontier-findings.md](overview/frontier-findings.md)
 - [notebook-findings.md](overview/notebook-findings.md)
@@ -46,6 +46,7 @@
 - [034](notes/034)：9 份 · [实验入口](../docs/experiments/034.md)
 - [035](notes/035)：1 份 · [实验入口](../docs/experiments/035.md)
 - [036](notes/036)：1 份 · [实验入口](../docs/experiments/036.md)
+- [038](notes/038)：5 份 · [实验入口](../docs/experiments/038.md)
 
 ## 原始资料
 

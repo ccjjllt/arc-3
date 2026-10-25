@@ -1,0 +1,768 @@
+{
+  "observed_at_utc": "2026-10-25T13:58:32.122493+00:00",
+  "scope": "All eligible failures in 036 two-arm public25 logs, deduplicated by arm/game/tool_call_id",
+  "summary": {
+    "cases": 10,
+    "games": 8,
+    "by_arm": {
+      "baseline": 6,
+      "main_medium": 4
+    },
+    "repair_completion_tokens": 2282,
+    "repair_prompt_tokens_with_repeat_and_cache": 740557,
+    "repair_sum_request_seconds_not_gpu_wallclock": 43.346092321998185,
+    "failure_generation_completion_tokens": 14518,
+    "all_next_tool_results_without_error": true,
+    "cost_boundary": "These are observed tokens and request latencies of ten subsequent responses. They are not a causal estimate of recoverable tokens, per-game elapsed savings, or GPU wallclock; calls from different concurrent games overlap and repairs can include other reasoning."
+  },
+  "cases": [
+    {
+      "arm": "baseline",
+      "game": "ar25-0c556536",
+      "request_log": "runs/036-main-reasoning-medium/baseline/ar25-0c556536_p0_requests.jsonl",
+      "call_id": "call_a9b9ef2159744f4abc7ca66d",
+      "failure_tool_first_seen_line": 21,
+      "code": "\ndef snap2(frame):\n    d={}\n    for n in frame.segmentation['nodes']:\n        key=None\n        if n['color']=='B' and n['pixels']==64: key='Bshape'\n        elif n['color']=='c' and n['pixels']>10: key='c'\n        elif n['color']=='Y' and n['pixels']>10: key='Y'\n        elif n['color']=='S': key='S'\n        elif n['color']=='B' and n['pixels']<10: key='Bbar'\n        if key: d[key]=(n['boundary'][0], n['pixels'])\n    return d\nfor e in history[-6:]:\n    print(e.action, snap2(e.frame))\nprint('---level1 divider check---')\nfor e in history[:20]:\n    s=[ (n['color'],n['boundary'][0],n['pixels']) for n in e.frame.segmentation['nodes'] if n['color']=='S']\n    print(e.step, e.action, s)\n",
+      "code_sha256": "3a8bbee50d64c046fcea5904ccfe66f1812cc7afbfd519872b861550fe0a596c",
+      "logged_failure_payload": {
+        "tool": "python",
+        "function_retention": "Retained your function snap2(frame) for later Python calls in this game.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 18, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'",
+        "stdout": "LEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 45], 44)}\nLEFT {'S': ([0, 30], 189), 'Y': ([48, 51], 18), 'c': ([45, 48], 43)}\nLEFT {'S': ([0, 36], 168), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nLEFT {'S': ([0, 33], 168), 'Bbar': ([0, 63], 1), 'Y': ([42, 9], 72), 'c': ([18, 15], 72), 'Bshape': ([18, 45], 64)}\nRIGHT {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\nDOWN {'S': ([0, 36], 168), 'Bbar': ([0, 63], 2), 'Y': ([42, 9], 72), 'c': ([18, 21], 72), 'Bshape': ([18, 45], 64)}\n---level1 divider check---\n"
+      },
+      "generation_request_line": 19,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 6,
+        "action": 23,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "abb6b9aea3e88959e6887b5af0eb3611da34cf03c2a30d5d7aa8f446753f06e7",
+      "failure_generation_response_line": 20,
+      "failure_generation_usage": {
+        "prompt_tokens": 25329,
+        "total_tokens": 26696,
+        "completion_tokens": 1367,
+        "prompt_tokens_details": {
+          "cached_tokens": 22016,
+          "image_tokens": 4000
+        },
+        "reasoning_tokens": 1109
+      },
+      "failure_generation_timing": {
+        "seq": 45,
+        "t": 134.05909292199976,
+        "kind": "chat_return",
+        "request_id": 10,
+        "duration_s": 18.622434778999377,
+        "generated_tokens": 1367,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 21,
+      "repair_response_line": 22,
+      "repair_usage": {
+        "prompt_tokens": 27199,
+        "total_tokens": 28032,
+        "completion_tokens": 833,
+        "prompt_tokens_details": {
+          "cached_tokens": 25280,
+          "image_tokens": 4000
+        },
+        "reasoning_tokens": 704
+      },
+      "repair_timing": {
+        "seq": 49,
+        "t": 146.37765211000078,
+        "kind": "chat_return",
+        "request_id": 11,
+        "duration_s": 12.021117205000337,
+        "generated_tokens": 833,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_153e6b679cb44ee1bba376cc",
+      "next_tool_result_first_seen_line": 23,
+      "next_code": "\nfor i,e in enumerate(history):\n    s=[(n['color'],n['boundary'][0],n['pixels']) for n in e.frame.segmentation['nodes'] if n['color']=='S']\n    b=[(n['boundary'][0],n['pixels']) for n in e.frame.segmentation['nodes'] if n['color']=='B' and n['pixels']==40]\n    print(i, e.action, 'S',s, 'B40',b)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "0  S [('S', [0, 30], 189)] B40 [([15, 18], 40)]\n1 UP S [('S', [0, 30], 189)] B40 [([12, 18], 40)]\n2 RIGHT S [('S', [0, 30], 189)] B40 [([12, 21], 40)]\n3 DOWN S [('S', [0, 30], 189)] B40 [([15, 21], 40)]\n4 DOWN S [('S', [0, 30], 189)] B40 [([18, 21], 40)]\n5 DOWN S [('S', [0, 30], 189)] B40 [([21, 21], 40)]\n6 DOWN S [('S', [0, 30], 189)] B40 [([24, 21], 40)]\n7 DOWN S [('S', [0, 30], 189)] B40 [([27, 21], 40)]\n8 DOWN S [('S', [0, 30], 189)] B40 [([30, 21], 40)]\n9 DOWN S [('S', [0, 30], 189)] B40 [([33, 21], 40)]\n10 DOWN S [('S', [0, 30], 189)] B40 [([36, 21], 40)]\n11 DOWN S [('S', [0, 30], 189)] B40 [([39, 21], 40)]\n12 DOWN S [('S', [0, 30], 189)] B40 [([42, 21], 40)]\n13 DOWN S [('S', [0, 30], 189)] B40 [([45, 21], 40)]\n14 LEFT S [('S', [0, 30], 189)] B40 [([45, 18], 40)]\n15 LEFT S [('S', [0, 30], 189)] B40 [([45, 15], 40)]\n16 LEFT S [('S', [0, 30], 189)] B40 [([45, 12], 40)]\n17 LEFT S [('S', [0, 30], 189)] B40 [([45, 9], 40)]\n18 LEFT S [('S', [0, 30], 189)] B40 [([45, 6], 40)]\n19 LEFT S [('S', [0, 36], 168)] B40 []\n20 LEFT S [('S', [0, 33], 168)] B40 []\n21 RIGHT S [('S', [0, 36], 168)] B40 []\n22 DOWN S [('S', [0, 36], 168)] B40 []\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "baseline",
+      "game": "ft09-0d8bbf25",
+      "request_log": "runs/036-main-reasoning-medium/baseline/ft09-0d8bbf25_p0_requests.jsonl",
+      "call_id": "call_41c5c29f6935410a9e546a57",
+      "failure_tool_first_seen_line": 103,
+      "code": "\nimport itertools\nh6=[e for e in history if e.frame.level==6]\nprev=None\nfor e in h6:\n    row=''.join(e.frame.ascii.split('\\n')[63])\n    seg=[(k,len(list(v))) for k,v in itertools.groupby(row)]\n    o=sum(l for k,l in seg if k=='O')\n    print('step',e.step,e.action if isinstance(e.action,str) else 'act','O=',o)\n",
+      "code_sha256": "9e16c2f7d059a204cb28435bde9c1fa2ffad1ee35fed284ff4acbe6e78bac3de",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 101,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 26,
+        "action": 124,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "ab847215cc58b164a5fdbab910e8349e1ec8d082dd4a5a2ec67e2978d646c082",
+      "failure_generation_response_line": 102,
+      "failure_generation_usage": {
+        "prompt_tokens": 69157,
+        "total_tokens": 70245,
+        "completion_tokens": 1088,
+        "prompt_tokens_details": {
+          "cached_tokens": 67584,
+          "image_tokens": 8000
+        },
+        "reasoning_tokens": 961
+      },
+      "failure_generation_timing": {
+        "seq": 219,
+        "t": 5457.167481094,
+        "kind": "chat_return",
+        "request_id": 51,
+        "duration_s": 14.251660060999711,
+        "generated_tokens": 1088,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 103,
+      "repair_response_line": 104,
+      "repair_usage": {
+        "prompt_tokens": 70318,
+        "total_tokens": 70457,
+        "completion_tokens": 139,
+        "prompt_tokens_details": {
+          "cached_tokens": 69120,
+          "image_tokens": 8000
+        },
+        "reasoning_tokens": 20
+      },
+      "repair_timing": {
+        "seq": 223,
+        "t": 5459.9145395430005,
+        "kind": "chat_return",
+        "request_id": 52,
+        "duration_s": 2.5639672729994345,
+        "generated_tokens": 139,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_d331e4aa50d840e18149af96",
+      "next_tool_result_first_seen_line": 105,
+      "next_code": "\nimport itertools\nh6=[e for e in history if e.frame.level==6]\nfor e in h6:\n    row=''.join(e.frame.ascii.split('\\n')[63])\n    seg=[(k,len(list(v))) for k,v in itertools.groupby(row)]\n    o=sum(l for k,l in seg if k=='O')\n    print(e.frame.step, str(e.action)[:28], 'O=',o)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "105 MOUSE(row=55, col=41) O= 64\n106 MOUSE(row=25, col=23) O= 64\n107 MOUSE(row=9, col=7) O= 63\n108 MOUSE(row=17, col=7) O= 62\n109 MOUSE(row=17, col=23) O= 62\n110 MOUSE(row=17, col=31) O= 62\n111 MOUSE(row=17, col=39) O= 61\n112 MOUSE(row=25, col=15) O= 60\n113 MOUSE(row=25, col=31) O= 60\n114 MOUSE(row=33, col=15) O= 60\n115 MOUSE(row=33, col=39) O= 59\n116 MOUSE(row=33, col=47) O= 58\n117 MOUSE(row=41, col=23) O= 58\n118 MOUSE(row=41, col=31) O= 58\n119 MOUSE(row=41, col=47) O= 57\n120 MOUSE(row=41, col=55) O= 56\n121 MOUSE(row=49, col=47) O= 56\n122 MOUSE(row=49, col=55) O= 56\n123 MOUSE(row=41, col=55) O= 56\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "baseline",
+      "game": "g50t-5849a774",
+      "request_log": "runs/036-main-reasoning-medium/baseline/g50t-5849a774_p0_requests.jsonl",
+      "call_id": "call_bc5a0651acf642199dccf8fd",
+      "failure_tool_first_seen_line": 107,
+      "code": "out=[]\nfor i,h in enumerate(history):\n    a=h.frame.ascii.split('\\n')\n    gray=[(r,c) for r in range(6,64) for c in range(64) if a[r][c] in 'gG']\n    # player top-left\n    pl=[(r,c) for r in range(6,64) for c in range(64) if a[r][c]=='b']\n    pl=(min(x[0] for x in pl),min(x[1] for x in pl)) if pl else None\n    hud=''.join(a[2][0:16])\n    out.append((i,h.step,h.action,pl,gray[:4],len(gray),hud))\nfor o in out: print(o)\n",
+      "code_sha256": "d6c75996552e87a10af9378bdff489b4b26c6340a8f49605316632f16b9ea069",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 9, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 105,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 26,
+        "action": 98,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "6628c4487eb2a37ba09c404d76ce43cbe996dfb2556f1ff59087c1524282ee09",
+      "failure_generation_response_line": 106,
+      "failure_generation_usage": {
+        "prompt_tokens": 69027,
+        "total_tokens": 70937,
+        "completion_tokens": 1910,
+        "prompt_tokens_details": {
+          "cached_tokens": 63552,
+          "image_tokens": 5600
+        },
+        "reasoning_tokens": 1713
+      },
+      "failure_generation_timing": {
+        "seq": 227,
+        "t": 4740.8691994010005,
+        "kind": "chat_return",
+        "request_id": 53,
+        "duration_s": 27.09514052600025,
+        "generated_tokens": 1910,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 107,
+      "repair_response_line": 108,
+      "repair_usage": {
+        "prompt_tokens": 71010,
+        "total_tokens": 71211,
+        "completion_tokens": 201,
+        "prompt_tokens_details": {
+          "cached_tokens": 68992,
+          "image_tokens": 5600
+        },
+        "reasoning_tokens": 9
+      },
+      "repair_timing": {
+        "seq": 231,
+        "t": 4745.708114561001,
+        "kind": "chat_return",
+        "request_id": 54,
+        "duration_s": 4.66806340400035,
+        "generated_tokens": 201,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_bcaa1a112377465da0cfa80f",
+      "next_tool_result_first_seen_line": 109,
+      "next_code": "out=[]\nfor i,h in enumerate(history):\n    a=h.frame.ascii.split('\\n')\n    gray=[(r,c) for r in range(6,64) for c in range(64) if a[r][c] in 'gG']\n    pl=[(r,c) for r in range(6,64) for c in range(64) if a[r][c]=='b']\n    pl=(min(x[0] for x in pl),min(x[1] for x in pl)) if pl else None\n    hud=''.join(a[2][0:16])\n    out.append((i,h.frame.step,h.action,pl,gray[:3],len(gray),hud))\nfor o in out: print(o)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "(0, 0, '', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(1, 1, 'DOWN', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(2, 2, 'DOWN', (20, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(3, 3, 'DOWN', (26, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(4, 4, 'DOWN', (32, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(5, 5, 'DOWN', (32, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(6, 6, 'SPACE', (8, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(7, 7, 'DOWN', (14, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(8, 8, 'RIGHT', (14, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(9, 9, 'SPACE', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(10, 10, 'SPACE', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(11, 11, 'DOWN', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(12, 12, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(13, 13, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(14, 14, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(15, 15, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(16, 16, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(17, 17, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(18, 18, 'LEFT', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(19, 19, 'DOWN', (20, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(20, 20, 'DOWN', (26, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(21, 21, 'SPACE', (8, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(22, 22, 'RIGHT', (8, 0), [(14, 14), (14, 15), (14, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(23, 23, 'RIGHT', (8, 0), [(20, 14), (20, 15), (20, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(24, 24, 'RIGHT', (8, 0), [(26, 14), (26, 15), (26, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(25, 25, 'RIGHT', (8, 0), [(26, 14), (26, 15), (26, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(26, 26, 'LEFT', (8, 0), [(26, 14), (26, 15), (26, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(27, 27, 'RIGHT', (8, 0), [(26, 14), (26, 15), (26, 16)], 24, 'WgWgWbWbWWWWWWWW')\n(28, 28, 'SPACE', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(29, 29, 'DOWN', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(30, 30, 'DOWN', (20, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(31, 31, 'UP', (14, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(32, 32, 'DOWN', (20, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(33, 33, 'SPACE', (8, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(34, 34, 'DOWN', (14, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(35, 35, 'SPACE', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(36, 36, 'RIGHT', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(37, 37, 'RIGHT', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(38, 38, 'RIGHT', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(39, 39, 'RIGHT', (8, 0), [], 0, 'WbWbWwwwWWWWWWWW')\n(40, 40, 'SPACE', (8, 0), [], 0, 'WgWgWbWbWWWWWWWW')\n(41, 41, 'DOWN', (14, 0), [(8, 20), (8, 21), (8, 22)], 24, 'WgWgWbWbWWWWWWWW')\n(42, 42, 'DOWN', (20, 0), [(8, 26), (8, 27), (8, 28)], 24, 'WgWgWbWbWWWWWWWW')\n(43, 43, 'DOWN', (26, 0), [(8, 32), (8, 33), (8, 34)], 24, 'WgWgWbWbWWWWWWWW')\n(44, 44, 'DOWN', (32, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(45, 45, 'DOWN', (38, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(46, 46, 'DOWN', (44, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(47, 47, 'DOWN', (49, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(48, 48, 'RIGHT', (49, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(49, 49, 'RIGHT', (49, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(50, 50, 'RIGHT', (49, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(51, 51, 'RIGHT', (49, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWWWWWWWW')\n(52, 52, 'RIGHT', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(53, 53, 'LEFT', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(54, 54, 'LEFT', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(55, 55, 'UP', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(56, 56, 'UP', (14, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(57, 57, 'UP', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(58, 58, 'LEFT', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(59, 59, 'LEFT', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(60, 60, 'LEFT', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(61, 61, 'LEFT', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(62, 62, 'LEFT', (8, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(63, 63, 'DOWN', (14, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(64, 64, 'DOWN', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(65, 65, 'RIGHT', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(66, 66, 'SPACE', (19, 0), [], 0, 'WgWgWbWbWwwwWWWW')\n(67, 67, 'DOWN', (19, 0), [(26, 44), (26, 45), (26, 46)], 24, 'WgWgWbWbWwwwWWWW')\n(68, 68, 'DOWN', (19, 0), [(26, 38), (26, 39), (26, 40)], 24, 'WgWgWbWbWwwwWWWW')\n(69, 69, 'DOWN', (19, 0), [(20, 38), (20, 39), (20, 40)], 24, 'WgWgWbWbWwwwWWWW')\n(70, 70, 'DOWN', (19, 0), [(14, 38), (14, 39), (14, 40)], 24, 'WgWgWbWbWwwwWWWW')\n(71, 71, 'LEFT', (19, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWwwwWWWW')\n(72, 72, 'LEFT', (19, 0), [(8, 38), (8, 39), (8, 40)], 24, 'WgWgWbWbWwwwWWWW')\n(73, 73, 'SPACE', (19, 0), [], 0, 'WgWgWgWgWbWbWWWW')\n(74, 74, 'LEFT', (19, 0), [(32, 50), (32, 51), (32, 52)], 24, 'WgWgWgWgWbWbWWWW')\n(75, 75, 'LEFT', (19, 0), [(38, 50), (38, 51), (38, 52)], 24, 'WgWgWgWgWbWbWWWW')\n(76, 76, 'SPACE', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(77, 77, 'DOWN', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(78, 78, 'SPACE', (19, 0), [], 0, 'WgWgWbWbWwwwWWWW')\n(79, 79, 'UP', (19, 0), [(32, 50), (32, 51), (32, 52)], 24, 'WgWgWbWbWwwwWWWW')\n(80, 80, 'DOWN', (19, 0), [(32, 50), (32, 51), (32, 52)], 24, 'WgWgWbWbWwwwWWWW')\n(81, 81, 'LEFT', (19, 0), [(32, 50), (32, 51), (32, 52)], 24, 'WgWgWbWbWwwwWWWW')\n(82, 82, 'LEFT', (19, 0), [(32, 50), (32, 51), (32, 52)], 24, 'WgWgWbWbWwwwWWWW')\n(83, 83, 'SPACE', (19, 0), [], 0, 'WgWgWgWgWbWbWWWW')\n(84, 84, 'DOWN', (19, 0), [(20, 50), (20, 51), (20, 52)], 24, 'WgWgWgWgWbWbWWWW')\n(85, 85, 'DOWN', (19, 0), [(26, 50), (26, 51), (26, 52)], 48, 'WgWgWgWgWbWbWWWW')\n(86, 86, 'DOWN', (19, 0), [(26, 44), (26, 45), (26, 46)], 48, 'WgWgWgWgWbWbWWWW')\n(87, 87, 'DOWN', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(88, 88, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(89, 89, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(90, 90, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(91, 91, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(92, 92, 'UP', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(93, 93, 'UP', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(94, 94, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(95, 95, 'LEFT', (19, 0), [(26, 38), (26, 39), (26, 40)], 48, 'WgWgWgWgWbWbWWWW')\n(96, 96, 'SPACE', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n(97, 97, 'LEFT', (19, 0), [], 0, 'WbWbWwwwWwwwWWWW')\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "baseline",
+      "game": "g50t-5849a774",
+      "request_log": "runs/036-main-reasoning-medium/baseline/g50t-5849a774_p0_requests.jsonl",
+      "call_id": "call_1974848f44884ce8ba9d0fc6",
+      "failure_tool_first_seen_line": 155,
+      "code": "out=[]\nfor h in history[150:]:\n    a=h.frame.ascii.split('\\n')\n    tot=sum(1 for i in range(64) for j in range(64) if a[i][j]=='Y')\n    mx=max([j for i in range(18,28) for j in range(40,60) if a[i][j]=='Y'],default=-1)\n    mn=min([j for i in range(18,28) for j in range(30,52) if a[i][j]=='Y'],default=-1)\n    out.append((h.step,h.action,'Y',tot,'headR',mx,'lineL',mn))\nfor o in out: print(o)\n",
+      "code_sha256": "21234dc5137807f8598024cf16949550180ceccd31c308fa63d6332992147baa",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 7, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 153,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 33,
+        "action": 176,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "8dc75f3d24018da67c095280416c864c487432624c2d1485bfff8280a9bb34ba",
+      "failure_generation_response_line": 154,
+      "failure_generation_usage": {
+        "prompt_tokens": 57534,
+        "total_tokens": 59293,
+        "completion_tokens": 1759,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 5600
+        },
+        "reasoning_tokens": 1567
+      },
+      "failure_generation_timing": {
+        "seq": 333,
+        "t": 6029.129031036,
+        "kind": "chat_return",
+        "request_id": 77,
+        "duration_s": 32.92368236400034,
+        "generated_tokens": 1759,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 155,
+      "repair_response_line": 156,
+      "repair_usage": {
+        "prompt_tokens": 59366,
+        "total_tokens": 59571,
+        "completion_tokens": 205,
+        "prompt_tokens_details": {
+          "cached_tokens": 57472,
+          "image_tokens": 5600
+        },
+        "reasoning_tokens": 20
+      },
+      "repair_timing": {
+        "seq": 337,
+        "t": 6033.353868441,
+        "kind": "chat_return",
+        "request_id": 78,
+        "duration_s": 3.5940948689985817,
+        "generated_tokens": 205,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_4469e1e353a545edb4dc8e9b",
+      "next_tool_result_first_seen_line": 157,
+      "next_code": "out=[]\nfor h in history[150:]:\n    a=h.frame.ascii.split('\\n')\n    tot=sum(1 for i in range(64) for j in range(64) if a[i][j]=='Y')\n    mx=max([j for i in range(18,28) for j in range(40,60) if a[i][j]=='Y'],default=-1)\n    mn=min([j for i in range(18,28) for j in range(30,52) if a[i][j]=='Y'],default=-1)\n    out.append((h.frame.step,h.action,tot,mx,mn))\nfor o in out: print(o)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "(150, 'DOWN', 0, -1, -1)\n(151, 'RIGHT', 0, -1, -1)\n(152, 'RIGHT', 0, -1, -1)\n(153, 'RIGHT', 48, 54, 33)\n(154, 'RIGHT', 48, 54, 33)\n(155, 'DOWN', 48, 54, 33)\n(156, 'UP', 48, 54, 33)\n(157, 'UP', 48, 54, 33)\n(158, 'RIGHT', 48, 54, 33)\n(159, 'RIGHT', 48, 54, 33)\n(160, 'RIGHT', 48, 54, 33)\n(161, 'RIGHT', 48, 54, 33)\n(162, 'DOWN', 48, 54, 33)\n(163, 'DOWN', 32, 48, 37)\n(164, 'SPACE', 42, 48, 33)\n(165, 'UP', 42, 48, 33)\n(166, 'UP', 42, 48, 33)\n(167, 'RIGHT', 42, 48, 33)\n(168, 'RIGHT', 42, 48, 33)\n(169, 'RIGHT', 42, 48, 33)\n(170, 'RIGHT', 42, 48, 33)\n(171, 'RIGHT', 42, 48, 33)\n(172, 'RIGHT', 38, 54, 37)\n(173, 'RIGHT', 38, 54, 37)\n(174, 'DOWN', 38, 54, 37)\n(175, 'DOWN', 38, 54, 37)\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "baseline",
+      "game": "su15-1944f8ab",
+      "request_log": "runs/036-main-reasoning-medium/baseline/su15-1944f8ab_p0_requests.jsonl",
+      "call_id": "call_73c1cc5521244bd89b58e989",
+      "failure_tool_first_seen_line": 65,
+      "code": "vals=[]\nfor h in history:\n    w=[n['pixels'] for n in h.frame.segmentation['nodes'] if n['color']=='W']\n    vals.append((h.step, max(w) if w else None, h.action))\nprint(vals[-14:])\n",
+      "code_sha256": "b1d72f0bb9a9ee558275c5394c8d031b9c5ca80f712b17fbb60563795b88be10",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 4, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 63,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 17,
+        "action": 22,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "f74ad995a9b3e7ddaf997c8633df07d96f10a74ddb1cb4837240d54ac1caf6bb",
+      "failure_generation_response_line": 64,
+      "failure_generation_usage": {
+        "prompt_tokens": 70035,
+        "total_tokens": 71284,
+        "completion_tokens": 1249,
+        "prompt_tokens_details": {
+          "cached_tokens": 60288,
+          "image_tokens": 6000
+        },
+        "reasoning_tokens": 1164
+      },
+      "failure_generation_timing": {
+        "seq": 138,
+        "t": 5433.6354051,
+        "kind": "chat_return",
+        "request_id": 32,
+        "duration_s": 17.011731409000276,
+        "generated_tokens": 1249,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 65,
+      "repair_response_line": 66,
+      "repair_usage": {
+        "prompt_tokens": 71357,
+        "total_tokens": 71461,
+        "completion_tokens": 104,
+        "prompt_tokens_details": {
+          "cached_tokens": 70016,
+          "image_tokens": 6000
+        },
+        "reasoning_tokens": 9
+      },
+      "repair_timing": {
+        "seq": 142,
+        "t": 5437.764503198001,
+        "kind": "chat_return",
+        "request_id": 33,
+        "duration_s": 2.7535568790008256,
+        "generated_tokens": 104,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_ff897672a6364e92a95792be",
+      "next_tool_result_first_seen_line": 67,
+      "next_code": "vals=[]\nfor h in history:\n    w=[n['pixels'] for n in h.frame.segmentation['nodes'] if n['color']=='W' and n['boundary'][0][0]==63]\n    vals.append((h.frame.step, max(w) if w else None, h.action))\nprint(vals)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "[(0, 64, ''), (1, 62, 'MOUSE(row=53, col=10)'), (2, 60, 'MOUSE(row=45, col=18)'), (3, 58, 'MOUSE(row=15, col=49)'), (4, 56, 'MOUSE(row=47, col=16)'), (5, 54, 'MOUSE(row=41, col=22)'), (6, 52, 'MOUSE(row=35, col=28)'), (7, 50, 'MOUSE(row=29, col=34)'), (8, 48, 'MOUSE(row=23, col=40)'), (9, 64, 'MOUSE(row=19, col=44)'), (10, 62, 'MOUSE(row=57, col=16)'), (11, 60, 'MOUSE(row=50, col=20)'), (12, 56, 'MOUSE(row=43, col=23)'), (13, 48, 'MOUSE(row=46, col=21)'), (14, 46, 'MOUSE(row=37, col=27)'), (15, 44, 'MOUSE(row=42, col=24)'), (16, 42, 'MOUSE(row=42, col=24)'), (17, 30, 'MOUSE(row=43, col=24)'), (18, 28, 'MOUSE(row=50, col=25)'), (19, 26, 'MOUSE(row=42, col=32)'), (20, 24, 'MOUSE(row=34, col=32)'), (21, 22, 'MOUSE(row=26, col=34)')]\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "baseline",
+      "game": "tu93-0768757b",
+      "request_log": "runs/036-main-reasoning-medium/baseline/tu93-0768757b_p0_requests.jsonl",
+      "call_id": "call_eb210f647f97497e93ed4ee4",
+      "failure_tool_first_seen_line": 155,
+      "code": "out=[]\nfor k,h in enumerate(history[-16:]):\n    try:\n        P,d=gcells(h.frame)\n        out.append((h.step,h.action,P,{k2:v for k2,v in d.items()}))\n    except Exception as e: out.append((h.step,h.action,'ERR',str(e)))\nfor x in out: print(x)\n",
+      "code_sha256": "0a644a4cc5bf59fa62e0091f10c3dc1e3a32e1fe3a976a8d5a76ef6248bfb275",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 6, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 153,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true
+        },
+        "tool_choice": "auto",
+        "analysis_step": 33,
+        "action": 211,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "b2ed66848736169bb8b6dca27a881f9c1b39f37e32c8d0a66efbb08242dcc4ed",
+      "failure_generation_response_line": 154,
+      "failure_generation_usage": {
+        "prompt_tokens": 112482,
+        "total_tokens": 114103,
+        "completion_tokens": 1621,
+        "prompt_tokens_details": {
+          "cached_tokens": 111360,
+          "image_tokens": 14800
+        },
+        "reasoning_tokens": 1516
+      },
+      "failure_generation_timing": {
+        "seq": 323,
+        "t": 4266.648707914001,
+        "kind": "chat_return",
+        "request_id": 77,
+        "duration_s": 25.901814763999937,
+        "generated_tokens": 1621,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 155,
+      "repair_response_line": 156,
+      "repair_usage": {
+        "prompt_tokens": 114176,
+        "total_tokens": 114281,
+        "completion_tokens": 105,
+        "prompt_tokens_details": {
+          "cached_tokens": 112448,
+          "image_tokens": 14800
+        },
+        "reasoning_tokens": 28
+      },
+      "repair_timing": {
+        "seq": 327,
+        "t": 4270.719679553,
+        "kind": "chat_return",
+        "request_id": 78,
+        "duration_s": 2.8626205259988637,
+        "generated_tokens": 105,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_5b0ec85123f44163a196a62e",
+      "next_tool_result_first_seen_line": 157,
+      "next_code": "out=[]\nfor h in history[-16:]:\n    P,d=gcells(h.frame)\n    out.append((h.frame.step,h.action,P,d.get('r'),d.get('R')))\nfor x in out: print(x)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "(195, 'UP', (10, 4), None, None)\n(196, 'UP', (8, 4), None, None)\n(197, 'LEFT', (8, 2), None, None)\n(198, 'UP', (6, 2), None, None)\n(199, 'UP', (4, 2), None, None)\n(200, 'UP', (2, 2), None, None)\n(201, 'LEFT', (4, 0), [(0, 4)], [(2, 10)])\n(202, 'RIGHT', (4, 2), [(0, 4)], [(2, 10)])\n(203, 'RIGHT', (4, 4), [(0, 4)], [(2, 10)])\n(204, 'RIGHT', (4, 6), [(2, 4)], [(2, 10)])\n(205, 'DOWN', (6, 6), [(4, 4)], [(2, 10)])\n(206, 'DOWN', (8, 6), [(4, 6)], [(2, 10)])\n(207, 'RIGHT', (8, 8), [(6, 6)], [(2, 10)])\n(208, 'UP', (6, 8), [(8, 6)], [(2, 10)])\n(209, 'UP', (4, 8), [(8, 8)], [(2, 10)])\n(210, 'RIGHT', (4, 8), [(8, 8)], [(2, 10)])\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "main_medium",
+      "game": "cd82-fb555c5d",
+      "request_log": "runs/036-main-reasoning-medium/main_medium/cd82-fb555c5d_p0_requests.jsonl",
+      "call_id": "call_6cb8e7685ce44b70a69efa80",
+      "failure_tool_first_seen_line": 115,
+      "code": "\ndef summ(fr):\n    a=fr.ascii.split('\\n')\n    cont=''.join(a[34+r][27:37] for r in range(10))\n    cage=[n for n in fr.segmentation['nodes'] if n['color']=='g']\n    cb=cage[0]['bbox'] if cage else None\n    return cont,cb\nrows=[]\nfor h in history:\n    if h.frame is None: continue\n    rows.append((h.step,h.frame.level,str(h.action)))\nprint('n hist',len(rows))\nprint([ (s,l,a) for s,l,a in rows if l==1 ][-14:])\n",
+      "code_sha256": "c38b2c2e1a182c502caac656890d9a8e9b230b19ae2a6389f6fcfa7e07a30dba",
+      "logged_failure_payload": {
+        "tool": "python",
+        "function_retention": "Retained your function summ(fr) for later Python calls in this game.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 11, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 113,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true,
+          "reasoning_effort": "medium"
+        },
+        "tool_choice": "auto",
+        "analysis_step": 38,
+        "action": 90,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "c594f2c0e4e89ab30fa4b51f4d58656be62cb9ddac4cf5afb46e8e335cc2e982",
+      "failure_generation_response_line": 114,
+      "failure_generation_usage": {
+        "prompt_tokens": 71837,
+        "total_tokens": 72538,
+        "completion_tokens": 701,
+        "prompt_tokens_details": {
+          "cached_tokens": 70208,
+          "image_tokens": 8000
+        },
+        "reasoning_tokens": 530
+      },
+      "failure_generation_timing": {
+        "seq": 243,
+        "t": 6054.678320155,
+        "kind": "chat_return",
+        "request_id": 57,
+        "duration_s": 11.150021665999702,
+        "generated_tokens": 701,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 115,
+      "repair_response_line": 116,
+      "repair_usage": {
+        "prompt_tokens": 72635,
+        "total_tokens": 72747,
+        "completion_tokens": 112,
+        "prompt_tokens_details": {
+          "cached_tokens": 71808,
+          "image_tokens": 8000
+        },
+        "reasoning_tokens": 12
+      },
+      "repair_timing": {
+        "seq": 247,
+        "t": 6058.1557232059995,
+        "kind": "chat_return",
+        "request_id": 58,
+        "duration_s": 3.3175797639996745,
+        "generated_tokens": 112,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_33ba2608aba4437c9522c072",
+      "next_tool_result_first_seen_line": 117,
+      "next_code": "\nh=history[-1]\nprint([x for x in dir(h) if not x.startswith('_')])\nprint([x for x in dir(h.frame) if not x.startswith('_')])\nlv=[i for i,h in enumerate(history) if h.frame.level==1]\nprint('level1 entries',len(lv), lv[-6:])\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "['action', 'frame', 'result']\n['ascii', 'level', 'segmentation', 'shape', 'step']\nlevel1 entries 75 [69, 70, 71, 72, 73, 74]\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "main_medium",
+      "game": "re86-8af5384d",
+      "request_log": "runs/036-main-reasoning-medium/main_medium/re86-8af5384d_p0_requests.jsonl",
+      "call_id": "call_0ac877e7afcd4ac19a466c3c",
+      "failure_tool_first_seen_line": 201,
+      "code": "\nfor h in history[-6:]:\n    g=h.frame.ascii.split('\\n')\n    # find the shape's H line: the row with most non-background cells in rows 0..40\n    best=None\n    for r in range(0,45):\n        row=g[r]\n        cnt=sum(1 for ch in row if ch not in 'Bgpw')\n        if best is None or cnt>best[1]: best=(r,cnt)\n    r=best[0]\n    cols=[ch for ch in g[r] if ch not in 'Bgpw']\n    # sample the dominant color in that row\n    import collections\n    cc=collections.Counter(ch for ch in g[r] if ch not in 'Bgpw')\n    print('step',h.step,'action',h.action,'row',r,dict(cc))\n",
+      "code_sha256": "ca2391994ad20da5bc7e2bb5cfd87f4808c2faae46dfddcfa4636261e8e81da4",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 15, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 199,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true,
+          "reasoning_effort": "medium"
+        },
+        "tool_choice": "auto",
+        "analysis_step": 50,
+        "action": 427,
+        "request_index_within_turn": 2
+      },
+      "generation_request_messages_sha256": "1f9b748d6e68869f121c4a59964fa27078a046cfbeaaf3d6941fb9b0e77af3c0",
+      "failure_generation_response_line": 200,
+      "failure_generation_usage": {
+        "prompt_tokens": 76652,
+        "total_tokens": 77522,
+        "completion_tokens": 870,
+        "prompt_tokens_details": {
+          "cached_tokens": 76224,
+          "image_tokens": 6800
+        },
+        "reasoning_tokens": 657
+      },
+      "failure_generation_timing": {
+        "seq": 425,
+        "t": 6072.737038043,
+        "kind": "chat_return",
+        "request_id": 100,
+        "duration_s": 12.976307584000097,
+        "generated_tokens": 870,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 201,
+      "repair_response_line": 202,
+      "repair_usage": {
+        "prompt_tokens": 77596,
+        "total_tokens": 77762,
+        "completion_tokens": 166,
+        "prompt_tokens_details": {
+          "cached_tokens": 77504,
+          "image_tokens": 6800
+        },
+        "reasoning_tokens": 11
+      },
+      "repair_timing": {
+        "seq": 429,
+        "t": 6076.434977469,
+        "kind": "chat_return",
+        "request_id": 101,
+        "duration_s": 2.599573051000334,
+        "generated_tokens": 166,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_cd2e91d1ada14f61a82003e5",
+      "next_tool_result_first_seen_line": 203,
+      "next_code": "\nimport collections\nfor h in history[-6:]:\n    g=h.frame.ascii.split('\\n')\n    best=None\n    for r in range(0,45):\n        cnt=sum(1 for ch in g[r] if ch not in 'Bgpw')\n        if best is None or cnt>best[1]: best=(r,cnt)\n    r=best[0]\n    cc=collections.Counter(ch for ch in g[r] if ch not in 'Bgpw')\n    print('step',h.frame.step,'act',h.action,'row',r,dict(cc))\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "step 421 act DOWN row 18 {'R': 37, 'c': 2, 'b': 1}\nstep 422 act DOWN row 21 {'S': 1, 'R': 37}\nstep 423 act DOWN row 24 {'S': 1, 'R': 37}\nstep 424 act LEFT row 24 {'S': 1, 'R': 37}\nstep 425 act LEFT row 24 {'S': 1, 'R': 36}\nstep 426 act LEFT row 24 {'Y': 36, 'S': 1}\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "main_medium",
+      "game": "tu93-0768757b",
+      "request_log": "runs/036-main-reasoning-medium/main_medium/tu93-0768757b_p0_requests.jsonl",
+      "call_id": "call_eb36a161e1334cc993d1197a",
+      "failure_tool_first_seen_line": 113,
+      "code": "import collections\n# Rebuild orange & player positions from actual frames using raw ascii crops (rows 4-14, cols 3-17)\ndef snap(fr):\n    rows=fr.ascii.split('\\n')\n    g={}\n    for r in range(4,15):\n        line=rows[r]\n        for c in range(3,18):\n            g[(r,c)]=line[c]\n    return g\nseq=[]\nfor h in history:\n    if h.action in ('RESET',None): \n        continue\n    g=snap(h.frame)\n    O=[(r,c) for (r,c),v in g.items() if v=='O']\n    b=[(r,c) for (r,c),v in g.items() if v=='b']\n    seq.append((h.step,h.action,tuple(O),tuple(b)))\nfor s in seq: print(s)\n",
+      "code_sha256": "b5502e5a678fa19b67a8a56ce5f2ce47ddb726f70d0529b3e85e86be17245c37",
+      "logged_failure_payload": {
+        "tool": "python",
+        "function_retention": "Retained your function snap(fr) for later Python calls in this game.",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 18, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 111,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true,
+          "reasoning_effort": "medium"
+        },
+        "tool_choice": "auto",
+        "analysis_step": 30,
+        "action": 134,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "c79886de0fa1f5ea7beaeab33a57c5782bbb4fdb60d6b900056eff0278d23db2",
+      "failure_generation_response_line": 112,
+      "failure_generation_usage": {
+        "prompt_tokens": 78068,
+        "total_tokens": 81824,
+        "completion_tokens": 3756,
+        "prompt_tokens_details": {
+          "cached_tokens": 76992,
+          "image_tokens": 7200
+        },
+        "reasoning_tokens": 3531
+      },
+      "failure_generation_timing": {
+        "seq": 239,
+        "t": 3779.2118914479997,
+        "kind": "chat_return",
+        "request_id": 56,
+        "duration_s": 50.20023448200027,
+        "generated_tokens": 3756,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 113,
+      "repair_response_line": 114,
+      "repair_usage": {
+        "prompt_tokens": 82955,
+        "total_tokens": 83188,
+        "completion_tokens": 233,
+        "prompt_tokens_details": {
+          "cached_tokens": 78016,
+          "image_tokens": 7600
+        },
+        "reasoning_tokens": 77
+      },
+      "repair_timing": {
+        "seq": 243,
+        "t": 3785.0170452639995,
+        "kind": "chat_return",
+        "request_id": 57,
+        "duration_s": 5.414553044999593,
+        "generated_tokens": 233,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_6e00579bfb2b45cd8fcadc8b",
+      "next_tool_result_first_seen_line": 115,
+      "next_code": "out=[]\nfor i,h in enumerate(history):\n    if h.action=='RESET' or h.frame is None: continue\n    g,_=gridN(h.frame)\n    O=sorted([(r,c) for (r,c),v in g.items() if v=='O'])\n    b=[(r,c) for (r,c),v in g.items() if v=='b']\n    N=[(r,c) for (r,c),v in g.items() if v=='N']\n    out.append((i,h.action,O,b,N))\nfor o in out[-24:]: print(o)\n",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "(108, 'LEFT', [(4, 9), (10, 7), (10, 11), (12, 9)], [], [(10, 9)])\n(110, 'LEFT', [(10, 5), (10, 9), (12, 7)], [(4, 15)], [])\n(111, 'RIGHT', [(8, 9), (10, 7), (12, 9)], [(4, 17)], [(10, 9)])\n(112, 'LEFT', [(6, 9), (8, 7), (10, 9), (14, 9)], [(4, 15)], [])\n(113, 'RIGHT', [(4, 9), (10, 7), (10, 11), (12, 9)], [(4, 17)], [(10, 9)])\n(114, 'LEFT', [(6, 9), (10, 9), (10, 13), (12, 7)], [(4, 15)], [])\n(115, 'RIGHT', [(8, 9), (10, 7), (10, 15)], [(4, 17)], [(10, 9)])\n(116, 'LEFT', [(6, 9), (8, 7), (10, 9), (10, 17)], [(4, 15)], [])\n(117, 'RIGHT', [(4, 9), (10, 7), (10, 15), (12, 9)], [(4, 17)], [(10, 9)])\n(118, 'LEFT', [(6, 9), (10, 13), (12, 7), (14, 9)], [(4, 15)], [(10, 9)])\n(119, 'LEFT', [(8, 9), (10, 7), (10, 11), (12, 9)], [(4, 13)], [(10, 9)])\n(120, 'LEFT', [(8, 7), (10, 9)], [(4, 11)], [])\n(121, 'LEFT', [(8, 9), (10, 7), (12, 9)], [(4, 9)], [(10, 9)])\n(122, 'LEFT', [(6, 9), (10, 5), (12, 7), (14, 9)], [(4, 7)], [(10, 9)])\n(123, 'LEFT', [(4, 9), (10, 3), (10, 7), (12, 9)], [(4, 5)], [(10, 9)])\n(124, 'LEFT', [(6, 9), (8, 7), (10, 5), (10, 9)], [(4, 3)], [])\n(125, 'DOWN', [(8, 9), (10, 7)], [(6, 3)], [(10, 9)])\n(126, 'DOWN', [(6, 9), (10, 9), (12, 7)], [(8, 3)], [])\n(127, 'DOWN', [(4, 9), (10, 7), (10, 11), (12, 9)], [(10, 3)], [(10, 9)])\n(128, 'RIGHT', [(6, 9), (8, 7), (10, 13), (14, 9)], [(10, 5)], [(10, 9)])\n(129, 'DOWN', [(8, 9), (10, 7), (10, 15), (12, 9)], [(12, 5)], [(10, 9)])\n(130, 'DOWN', [(10, 9), (10, 17), (12, 7)], [(14, 5)], [])\n(131, 'RIGHT', [(8, 9), (10, 7), (10, 15), (12, 9)], [(14, 7)], [(10, 9)])\n(132, 'RIGHT', [(6, 9), (8, 7), (10, 13), (14, 9)], [], [(10, 9)])\n"
+      },
+      "next_result_has_error": false
+    },
+    {
+      "arm": "main_medium",
+      "game": "wa30-ee6fef47",
+      "request_log": "runs/036-main-reasoning-medium/main_medium/wa30-ee6fef47_p0_requests.jsonl",
+      "call_id": "call_b6d911a14a25468fbcc1ba3a",
+      "failure_tool_first_seen_line": 65,
+      "code": "for h in history:\n    if h.frame is None: continue\n    o = [ (n['boundary'][0][0]//4, n['boundary'][0][1]//4) for n in h.frame.segmentation['nodes'] if n['color']=='O']\n    p = [ (n['boundary'][0][0]//4, n['boundary'][0][1]//4) for n in h.frame.segmentation['nodes'] if n['color']=='N']\n    print(h.step, h.action, 'O',o,'P',p)",
+      "code_sha256": "d39eb8a52999219b428bc5718b5174fd3915448727fd6984414c0cf84ee04cc2",
+      "logged_failure_payload": {
+        "tool": "python",
+        "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 5, in <module>\nAttributeError: 'HistoryEntryView' object has no attribute 'step'"
+      },
+      "generation_request_line": 63,
+      "logged_generation_kwargs": {
+        "chat_template_kwargs": {
+          "preserve_thinking": true,
+          "reasoning_effort": "medium"
+        },
+        "tool_choice": "auto",
+        "analysis_step": 27,
+        "action": 67,
+        "request_index_within_turn": 1
+      },
+      "generation_request_messages_sha256": "81645e13106e0b0e92d597110836a4f20795e00a4b80cb879bf050bd5a57e5b9",
+      "failure_generation_response_line": 64,
+      "failure_generation_usage": {
+        "prompt_tokens": 93675,
+        "total_tokens": 93872,
+        "completion_tokens": 197,
+        "prompt_tokens_details": {
+          "cached_tokens": 89920,
+          "image_tokens": 20800
+        },
+        "reasoning_tokens": 49
+      },
+      "failure_generation_timing": {
+        "seq": 133,
+        "t": 2505.5565897179995,
+        "kind": "chat_return",
+        "request_id": 32,
+        "duration_s": 3.914570750999701,
+        "generated_tokens": 197,
+        "finish_reason": "tool_calls"
+      },
+      "repair_request_line": 65,
+      "repair_response_line": 66,
+      "repair_usage": {
+        "prompt_tokens": 93945,
+        "total_tokens": 94129,
+        "completion_tokens": 184,
+        "prompt_tokens_details": {
+          "cached_tokens": 93824,
+          "image_tokens": 20800
+        },
+        "reasoning_tokens": 19
+      },
+      "repair_timing": {
+        "seq": 137,
+        "t": 2509.248511332,
+        "kind": "chat_return",
+        "request_id": 33,
+        "duration_s": 3.5509663060001913,
+        "generated_tokens": 184,
+        "finish_reason": "tool_calls"
+      },
+      "next_tool_call_id": "call_532cb274c4974b3c8abaccc4",
+      "next_tool_result_first_seen_line": 67,
+      "next_code": "rows=[]\nfor h in history:\n    if h.frame is None: continue\n    o = [ (n['boundary'][0][0]//4, n['boundary'][0][1]//4) for n in h.frame.segmentation['nodes'] if n['color']=='O']\n    p = [ (n['boundary'][0][0]//4, n['boundary'][0][1]//4) for n in h.frame.segmentation['nodes'] if n['color']=='N']\n    rows.append((h.frame.step, str(h.action), tuple(o), tuple(p)))\nfor r in rows[-16:]: print(r)",
+      "next_payload": {
+        "tool": "python",
+        "returncode": 0,
+        "stdout": "(51, 'DOWN', ((9, 9),), ((5, 3),))\n(52, 'DOWN', ((8, 9),), ((6, 3),))\n(53, 'DOWN', ((8, 9),), ((7, 3),))\n(54, 'DOWN', ((8, 8),), ((8, 3),))\n(55, 'DOWN', ((8, 7),), ((9, 3),))\n(56, 'RIGHT', ((8, 6),), ((9, 4),))\n(57, 'RIGHT', ((8, 5),), ((9, 5),))\n(58, 'LEFT', ((8, 4),), ((9, 4),))\n(59, 'LEFT', ((8, 4),), ((9, 3),))\n(60, 'UP', ((8, 5),), ((8, 3),))\n(61, 'RIGHT', ((8, 6),), ((8, 4),))\n(62, 'RIGHT', ((8, 7),), ((8, 5),))\n(63, 'DOWN', ((8, 8),), ((9, 5),))\n(64, 'DOWN', ((8, 9),), ((10, 5),))\n(65, 'LEFT', ((8, 10),), ((10, 4),))\n(66, 'UP', ((8, 11),), ((9, 4),))\n"
+      },
+      "next_result_has_error": false
+    }
+  ]
+}
