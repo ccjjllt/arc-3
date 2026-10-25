@@ -64,6 +64,7 @@
 - [check_026_probe_budget.py](checks/check_026_probe_budget.py)
 - [check_034_executable_plan.py](checks/check_034_executable_plan.py)
 - [check_035_aux_reasoning.py](checks/check_035_aux_reasoning.py)
+- [check_036_main_reasoning.py](checks/check_036_main_reasoning.py)
 
 ## 专用 Notebook 与输入包构建 · `build/`
 

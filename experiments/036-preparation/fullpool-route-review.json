@@ -1,0 +1,439 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T12:15:57.993311+00:00",
+  "real_model_calls": 0,
+  "network_attempts": 0,
+  "gpu_calls": 0,
+  "real_arc_actions": 0,
+  "checks": [
+    {
+      "name": "legacy_config_032-memory-full",
+      "passed": true
+    },
+    {
+      "name": "legacy_config_034-plan-diagnostic-v9",
+      "passed": true
+    },
+    {
+      "name": "legacy_config_035-aux-reasoning-diagnostic",
+      "passed": true
+    },
+    {
+      "name": "036_config_valid",
+      "passed": true
+    },
+    {
+      "name": "036_reject_budget",
+      "passed": true
+    },
+    {
+      "name": "036_reject_hard_cap",
+      "passed": true
+    },
+    {
+      "name": "036_reject_startup",
+      "passed": true
+    },
+    {
+      "name": "036_reject_warmup",
+      "passed": true
+    },
+    {
+      "name": "036_reject_stream_count",
+      "passed": true
+    },
+    {
+      "name": "036_reject_passes",
+      "passed": true
+    },
+    {
+      "name": "036_reject_game_subset",
+      "passed": true
+    },
+    {
+      "name": "036_reject_game_order",
+      "passed": true
+    },
+    {
+      "name": "036_reject_cache_wait",
+      "passed": true
+    },
+    {
+      "name": "036_reject_cache_boundary",
+      "passed": true
+    },
+    {
+      "name": "036_reject_drain",
+      "passed": true
+    },
+    {
+      "name": "036_reject_incomplete_allowed",
+      "passed": true
+    },
+    {
+      "name": "036_reject_mode",
+      "passed": true
+    },
+    {
+      "name": "036_reject_arm_order",
+      "passed": true
+    },
+    {
+      "name": "036_reject_family",
+      "passed": true
+    },
+    {
+      "name": "036_reject_deadline",
+      "passed": true
+    },
+    {
+      "name": "036_reject_aux_module",
+      "passed": true
+    },
+    {
+      "name": "036_reject_scheduler",
+      "passed": true
+    },
+    {
+      "name": "candidate_completed",
+      "passed": true
+    },
+    {
+      "name": "candidate_fixed_runtime",
+      "passed": true
+    },
+    {
+      "name": "candidate_installs_before_benchmark_creation",
+      "passed": true,
+      "events": [
+        "verify_template",
+        "install",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "benchmark_run",
+        "uninstall"
+      ]
+    },
+    {
+      "name": "baseline_completed",
+      "passed": true
+    },
+    {
+      "name": "baseline_fixed_runtime",
+      "passed": true
+    },
+    {
+      "name": "baseline_verifies_without_install",
+      "passed": true,
+      "events": [
+        "verify_template",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "benchmark_run"
+      ]
+    },
+    {
+      "name": "main_medium_reject_summary_nonzero",
+      "passed": true,
+      "error": "RuntimeError: 036 requires the original disabled summary schedule in both arms."
+    },
+    {
+      "name": "main_medium_reject_output_changed",
+      "passed": true,
+      "error": "RuntimeError: 036 requires unchanged 009 output, thinking and sampling settings in both arms."
+    },
+    {
+      "name": "main_medium_reject_template_unsupported",
+      "passed": true,
+      "error": "RuntimeError: fixture unsupported template"
+    },
+    {
+      "name": "main_medium_reject_wrong_mount",
+      "passed": true,
+      "error": "ValueError: 036 must use the model actually resolved in input-paths.json in both arms."
+    },
+    {
+      "name": "main_medium_reject_bad_scheduler",
+      "passed": true,
+      "error": "ValueError: 036 requires the explicit frozen scheduler in both arms."
+    },
+    {
+      "name": "baseline_reject_summary_nonzero",
+      "passed": true,
+      "error": "RuntimeError: 036 requires the original disabled summary schedule in both arms."
+    },
+    {
+      "name": "baseline_reject_output_changed",
+      "passed": true,
+      "error": "RuntimeError: 036 requires unchanged 009 output, thinking and sampling settings in both arms."
+    },
+    {
+      "name": "baseline_reject_template_unsupported",
+      "passed": true,
+      "error": "RuntimeError: fixture unsupported template"
+    },
+    {
+      "name": "baseline_reject_wrong_mount",
+      "passed": true,
+      "error": "ValueError: 036 must use the model actually resolved in input-paths.json in both arms."
+    },
+    {
+      "name": "baseline_reject_bad_scheduler",
+      "passed": true,
+      "error": "ValueError: baseline requires frozen scheduler or empty env."
+    },
+    {
+      "name": "candidate_error_uninstalls",
+      "passed": true,
+      "events": [
+        "verify_template",
+        "install",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "uninstall"
+      ]
+    },
+    {
+      "name": "candidate_requires_family",
+      "passed": true
+    },
+    {
+      "name": "036_payload_contains_main_module",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_reasoning_mode.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_program_repair.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_executable_plan.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_executable_plan_forks.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_executable_plan_context.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_object_evidence.py",
+      "passed": true
+    },
+    {
+      "name": "036_payload_excludes_solved_level_memory.py",
+      "passed": true
+    },
+    {
+      "name": "all036_native_python_cells_compile",
+      "passed": true,
+      "compiled_cells": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "inherited_harness_patch_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_serving_launcher_unchanged",
+      "passed": true
+    },
+    {
+      "name": "009_setup_dictionary_and_tail_unchanged",
+      "passed": true
+    },
+    {
+      "name": "009_real_tool_agent_settings_verified",
+      "passed": true
+    },
+    {
+      "name": "frozen_runtime_src/ARC3-Inference/inference/agent/priority_scheduler.py",
+      "passed": true,
+      "sha256": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe"
+    },
+    {
+      "name": "frozen_runtime_src/ARC3-Inference/inference/agent/tool_agent.py",
+      "passed": true,
+      "sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+    },
+    {
+      "name": "frozen_runtime_src/ARC3-Inference/inference/framework/solver.py",
+      "passed": true,
+      "sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    }
+  ],
+  "limits": [
+    "Route execution uses fixture SDK, fixture benchmark and fixture template verifier. Actual mounted-template rendering and actual ToolAgent patch behavior are checked separately. No performance or score claim."
+  ],
+  "route_cases": {
+    "candidate": {
+      "installed": false,
+      "verify_calls": 1,
+      "install_calls": 1,
+      "uninstall_calls": 1,
+      "patch_during_benchmark": true,
+      "concurrency": 25,
+      "max_runtime": 7254.0,
+      "warmup": "1",
+      "exit_code": 0,
+      "events": [
+        "verify_template",
+        "install",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "benchmark_run",
+        "uninstall"
+      ],
+      "metadata_status": "completed",
+      "error": null
+    },
+    "baseline": {
+      "installed": false,
+      "verify_calls": 1,
+      "install_calls": 0,
+      "uninstall_calls": 0,
+      "patch_during_benchmark": false,
+      "concurrency": 25,
+      "max_runtime": 7254.0,
+      "warmup": "1",
+      "exit_code": 0,
+      "events": [
+        "verify_template",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "benchmark_run"
+      ],
+      "metadata_status": "completed",
+      "error": null
+    },
+    "cleanup_after_benchmark_failure": {
+      "installed": false,
+      "verify_calls": 1,
+      "install_calls": 1,
+      "uninstall_calls": 1,
+      "exit_code": 1,
+      "events": [
+        "verify_template",
+        "install",
+        "target_unpickle",
+        "benchmark_unpickle",
+        "uninstall"
+      ],
+      "metadata_status": "failed",
+      "error": "RuntimeError: fixture benchmark failure"
+    }
+  },
+  "source_sha256": {
+    "src/arc3_research/experiment_config.py": "9d2a2ce199599c83abaa1b79fb63ced4b945c570722459f4fa83c3d49cccfcd3",
+    "src/arc3_research/run_arm.py": "a1e3c319f1c228ad1754b370046777bb6403aff3dd2f89a335ca9b4ae256423e",
+    "src/arc3_research/session_runner.py": "b2e910d8ebee93f5c27089309027cf199a13ad86cc342591991cfd6b2342325b",
+    "scripts/build_experiment.py": "d382d815878c05d399682a4f6303d7dbbb17cd0302beaf07ef4eb31f38be9378"
+  },
+  "check_count": 56,
+  "real_tool_agent_settings": {
+    "actual": {
+      "max_output_tokens": 12288,
+      "enable_thinking": true,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "top_k": 20,
+      "summary_interval_tokens": 0
+    },
+    "expected": {
+      "max_output_tokens": 12288,
+      "enable_thinking": true,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "top_k": 20,
+      "summary_interval_tokens": 0
+    },
+    "passed": true,
+    "source": "literal009 setup dictionaries via AST; real frozen ToolAgent import; model ID and server URL are CPU placeholders; warmup1",
+    "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+    "real_model_calls": 0,
+    "gpu_calls": 0,
+    "real_arc_actions": 0
+  },
+  "runtime_source_sha256": [
+    {
+      "path": "src/ARC3-Inference/inference/agent/priority_scheduler.py",
+      "sha256": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/tool_agent.py",
+      "sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/solver.py",
+      "sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    }
+  ],
+  "legacy_interface_builds": [
+    {
+      "legacy_config": "032-memory-full",
+      "interface_build_passed": true,
+      "original_config_unmodified": true,
+      "notebook_sha256": "654e1b8abc1ee267a3e4a1f58cdab5b72e79b26c538fa1034c79d4caee812799"
+    },
+    {
+      "legacy_config": "034-plan-diagnostic-v9",
+      "interface_build_passed": true,
+      "frozen_source_sha256_omitted_from_temporary_cpu_interface_copy": true,
+      "historical_archive_modified": false,
+      "native_python_cells_compiled": 15,
+      "notebook_sha256": "5db816ad1ff21dfa817b9d60e59c545b06930b459a8c0215b632a3748054a719"
+    },
+    {
+      "legacy_config": "035-aux-reasoning-diagnostic",
+      "interface_build_passed": true,
+      "frozen_source_sha256_omitted_from_temporary_cpu_interface_copy": true,
+      "historical_archive_modified": false,
+      "native_python_cells_compiled": 16,
+      "notebook_sha256": "03ff6b1843d90f0293714e6df47dd8aae5033e353c62615bbde36712a1f1c539"
+    }
+  ],
+  "temporary036_build": {
+    "config_sha256": "fa8fe2c8ad817b7182d19468a92d339251c8552426f943b02160901886a24568",
+    "notebook_sha256": "649efb58eeb8a8055a6e64813d50d70f11d564409b9859ec2da0d7f396d55a5c",
+    "notebook_bytes": 768552,
+    "cell_count": 28,
+    "native_python_cells_compiled": 12,
+    "final_source_freeze_applied": false,
+    "source_hashes": {
+      "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "scripts/build_experiment.py": "d382d815878c05d399682a4f6303d7dbbb17cd0302beaf07ef4eb31f38be9378",
+      "src/arc3_research/__init__.py": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "src/arc3_research/experiment_config.py": "9d2a2ce199599c83abaa1b79fb63ced4b945c570722459f4fa83c3d49cccfcd3",
+      "src/arc3_research/goal_evidence.py": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "src/arc3_research/inference_timing.py": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+      "src/arc3_research/input_paths.py": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "src/arc3_research/main_reasoning.py": "33f1deb1854c549e1705fd17c99cf6032c9da7b167ed40c12d9f4de71ec6d39e",
+      "src/arc3_research/program_state.py": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "src/arc3_research/run_arm.py": "a1e3c319f1c228ad1754b370046777bb6403aff3dd2f89a335ca9b4ae256423e",
+      "src/arc3_research/scheduler_observer.py": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+      "src/arc3_research/session_runner.py": "b2e910d8ebee93f5c27089309027cf199a13ad86cc342591991cfd6b2342325b",
+      "src/arc3_research/transient_history.py": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "scripts/summarize_experiment.py": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "experiments/036-main-reasoning-medium.json": "fa8fe2c8ad817b7182d19468a92d339251c8552426f943b02160901886a24568"
+    },
+    "temporary_build_not_for_upload": true,
+    "final_notebook_owner": "parent"
+  }
+}

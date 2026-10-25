@@ -1,0 +1,868 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-24T12:08:32.537273+00:00",
+  "author": "new independent main-loop audit agent; read-only solver/GPU/model audit",
+  "scope": "035 A main requests, actual mounted tokenizer template, frozen009 and historical full25 artifacts; no solver edits, model/GPU calls, or upload",
+  "decision": "Recommend one preregistered full25 009-default versus main-medium comparison after narrow offline payload/template validation. Stop the independent auxiliary-program family; no more ft09/su15 contract or auxiliary-budget experiments.",
+  "observed_defect": {
+    "claim": "Main deliberation dominates returned generation under a time-limited solver; whether the default xhigh instruction yields worthwhile marginal solving benefit has never been isolated. This is a compute-allocation uncertainty, not proven excessive/wasted reasoning.",
+    "035_A": {
+      "total": {
+        "games_with_logs": 2,
+        "requests": 38,
+        "responses": 36,
+        "finish_reasons": {
+          "tool_calls": 36
+        },
+        "usage_returned_only": {
+          "prompt_tokens": 3124683,
+          "completion_tokens": 107832,
+          "reasoning_tokens": 98863,
+          "completion_ge6000": 5,
+          "completion_ge10000": 2
+        },
+        "reasoning_share_of_completion": 0.9168243193115216
+      },
+      "games": [
+        {
+          "source": {
+            "path": "runs/035-aux-reasoning-diagnostic/executable_plan_A/ft09-0d8bbf25_A_requests.jsonl",
+            "sha256": "ea3a4d20b3de00d049b47e6911d5c67ed50131c263ff3638549965ed60467b5a"
+          },
+          "requests": 17,
+          "responses": 16,
+          "finish_reasons": {
+            "tool_calls": 16
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 16
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 1331691,
+            "completion_tokens": 52291,
+            "reasoning_tokens": 45729,
+            "completion_ge6000": 2,
+            "completion_ge10000": 1
+          },
+          "reasoning_share_of_completion": 0.874509953911763,
+          "response_rows": [
+            {
+              "analysis_step": 7,
+              "action": 28,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2912,
+              "reasoning_tokens": 2150,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 7,
+              "action": 28,
+              "request_index_within_turn": 1,
+              "completion_tokens": 3085,
+              "reasoning_tokens": 2911,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 8,
+              "action": 29,
+              "request_index_within_turn": 1,
+              "completion_tokens": 3750,
+              "reasoning_tokens": 3172,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 8,
+              "action": 29,
+              "request_index_within_turn": 1,
+              "completion_tokens": 11373,
+              "reasoning_tokens": 11239,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 8,
+              "action": 29,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1896,
+              "reasoning_tokens": 1677,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 9,
+              "action": 30,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1618,
+              "reasoning_tokens": 959,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 10,
+              "action": 52,
+              "request_index_within_turn": 1,
+              "completion_tokens": 6293,
+              "reasoning_tokens": 6081,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 10,
+              "action": 52,
+              "request_index_within_turn": 1,
+              "completion_tokens": 5514,
+              "reasoning_tokens": 5302,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 11,
+              "action": 53,
+              "request_index_within_turn": 1,
+              "completion_tokens": 3600,
+              "reasoning_tokens": 2898,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 12,
+              "action": 54,
+              "request_index_within_turn": 1,
+              "completion_tokens": 878,
+              "reasoning_tokens": 292,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2141,
+              "reasoning_tokens": 1625,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 1,
+              "completion_tokens": 564,
+              "reasoning_tokens": 33,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 2,
+              "completion_tokens": 4466,
+              "reasoning_tokens": 4176,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1819,
+              "reasoning_tokens": 1678,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 2,
+              "completion_tokens": 1547,
+              "reasoning_tokens": 889,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 13,
+              "action": 73,
+              "request_index_within_turn": 1,
+              "completion_tokens": 835,
+              "reasoning_tokens": 647,
+              "finish_reason": "tool_calls"
+            }
+          ]
+        },
+        {
+          "source": {
+            "path": "runs/035-aux-reasoning-diagnostic/executable_plan_A/su15-1944f8ab_A_requests.jsonl",
+            "sha256": "78c2ae82eb026585bacf30ca558b4e90138fa28999c7efed9124b5cf83ab350c"
+          },
+          "requests": 21,
+          "responses": 20,
+          "finish_reasons": {
+            "tool_calls": 20
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 20
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 1792992,
+            "completion_tokens": 55541,
+            "reasoning_tokens": 53134,
+            "completion_ge6000": 3,
+            "completion_ge10000": 1
+          },
+          "reasoning_share_of_completion": 0.9566626456131506,
+          "response_rows": [
+            {
+              "analysis_step": 45,
+              "action": 87,
+              "request_index_within_turn": 1,
+              "completion_tokens": 706,
+              "reasoning_tokens": 437,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 45,
+              "action": 87,
+              "request_index_within_turn": 2,
+              "completion_tokens": 3167,
+              "reasoning_tokens": 3103,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 46,
+              "action": 90,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2907,
+              "reasoning_tokens": 2764,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 47,
+              "action": 93,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1241,
+              "reasoning_tokens": 1176,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 48,
+              "action": 94,
+              "request_index_within_turn": 1,
+              "completion_tokens": 6189,
+              "reasoning_tokens": 6076,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 49,
+              "action": 95,
+              "request_index_within_turn": 1,
+              "completion_tokens": 8622,
+              "reasoning_tokens": 8567,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 50,
+              "action": 97,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2186,
+              "reasoning_tokens": 2104,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 51,
+              "action": 99,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1618,
+              "reasoning_tokens": 1490,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 52,
+              "action": 100,
+              "request_index_within_turn": 1,
+              "completion_tokens": 1426,
+              "reasoning_tokens": 1132,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 53,
+              "action": 103,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2769,
+              "reasoning_tokens": 2508,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 54,
+              "action": 106,
+              "request_index_within_turn": 1,
+              "completion_tokens": 11215,
+              "reasoning_tokens": 11147,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 55,
+              "action": 107,
+              "request_index_within_turn": 1,
+              "completion_tokens": 5273,
+              "reasoning_tokens": 5183,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 56,
+              "action": 108,
+              "request_index_within_turn": 1,
+              "completion_tokens": 390,
+              "reasoning_tokens": 249,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 56,
+              "action": 108,
+              "request_index_within_turn": 2,
+              "completion_tokens": 550,
+              "reasoning_tokens": 448,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 57,
+              "action": 109,
+              "request_index_within_turn": 1,
+              "completion_tokens": 823,
+              "reasoning_tokens": 721,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 57,
+              "action": 109,
+              "request_index_within_turn": 2,
+              "completion_tokens": 109,
+              "reasoning_tokens": 32,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 57,
+              "action": 109,
+              "request_index_within_turn": 3,
+              "completion_tokens": 106,
+              "reasoning_tokens": 10,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 57,
+              "action": 109,
+              "request_index_within_turn": 4,
+              "completion_tokens": 89,
+              "reasoning_tokens": 24,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 57,
+              "action": 109,
+              "request_index_within_turn": 5,
+              "completion_tokens": 3508,
+              "reasoning_tokens": 3415,
+              "finish_reason": "tool_calls"
+            },
+            {
+              "analysis_step": 58,
+              "action": 110,
+              "request_index_within_turn": 1,
+              "completion_tokens": 2647,
+              "reasoning_tokens": 2548,
+              "finish_reason": "tool_calls"
+            }
+          ]
+        }
+      ],
+      "outcome": "Both selected continuation games made0 additional levels. Every returned main response had tool_calls; no main length stop. Do not transpose auxiliary4096 truncation failure onto the main12288-token loop.",
+      "tail_limit": "Two A per-game terminal requests lack a returned response; returned-only usage is a lower bound. Shared-file reconciliation is owned by the separate integrity audit."
+    },
+    "025_historical": {
+      "total": {
+        "games_with_logs": 12,
+        "requests": 942,
+        "responses": 941,
+        "finish_reasons": {
+          "tool_calls": 933,
+          "length": 8
+        },
+        "usage_returned_only": {
+          "prompt_tokens": 66996840,
+          "completion_tokens": 1985913,
+          "reasoning_tokens": 1759376,
+          "completion_ge6000": 71,
+          "completion_ge10000": 16
+        },
+        "reasoning_share_of_completion": 0.8859280341082414
+      },
+      "games": [
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/ar25-0c556536_p0_requests.jsonl",
+            "sha256": "2fa05765423580855822b5ae577f2b53f7c6dc50a77b9c27055ea613682c94d3"
+          },
+          "requests": 101,
+          "responses": 101,
+          "finish_reasons": {
+            "tool_calls": 98,
+            "length": 3
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 101
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 7407480,
+            "completion_tokens": 191443,
+            "reasoning_tokens": 173077,
+            "completion_ge6000": 6,
+            "completion_ge10000": 4
+          },
+          "reasoning_share_of_completion": 0.9040654398437132
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/bp35-0a0ad940_p0_requests.jsonl",
+            "sha256": "1f46c6f86672938444a6353821446c5113865328c71643241e0047d84006ad12"
+          },
+          "requests": 73,
+          "responses": 73,
+          "finish_reasons": {
+            "tool_calls": 72,
+            "length": 1
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 73
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 4992518,
+            "completion_tokens": 159535,
+            "reasoning_tokens": 148013,
+            "completion_ge6000": 5,
+            "completion_ge10000": 2
+          },
+          "reasoning_share_of_completion": 0.9277776036606388
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/cd82-fb555c5d_p0_requests.jsonl",
+            "sha256": "c1064f10cc4510f481d878ed075216cf1d9626030b982edc4e4a29c18ff289bb"
+          },
+          "requests": 99,
+          "responses": 98,
+          "finish_reasons": {
+            "tool_calls": 98
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 98
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 6959449,
+            "completion_tokens": 183967,
+            "reasoning_tokens": 166828,
+            "completion_ge6000": 7,
+            "completion_ge10000": 2
+          },
+          "reasoning_share_of_completion": 0.906836552207733
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/cn04-2fe56bfb_p0_requests.jsonl",
+            "sha256": "f9d185dfd1f6390b1240b83a624fb9897dc0fa47136e5753c562aaab2a79e151"
+          },
+          "requests": 63,
+          "responses": 63,
+          "finish_reasons": {
+            "tool_calls": 63
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 63
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 4143517,
+            "completion_tokens": 113470,
+            "reasoning_tokens": 74230,
+            "completion_ge6000": 2,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.6541817220410682
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/dc22-fdcac232_p0_requests.jsonl",
+            "sha256": "cbc795f9fd7aab16be856e0819b755ea0e9ec5f64bc34cda3771a10139bac80d"
+          },
+          "requests": 45,
+          "responses": 45,
+          "finish_reasons": {
+            "tool_calls": 45
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 45
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 2866880,
+            "completion_tokens": 114136,
+            "reasoning_tokens": 105997,
+            "completion_ge6000": 3,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.9286903343379828
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/ft09-0d8bbf25_p0_requests.jsonl",
+            "sha256": "7e4422e4ce395c466a3ab9eeb647643751204d7a11de3f4963f5e2ca8bd56dff"
+          },
+          "requests": 52,
+          "responses": 52,
+          "finish_reasons": {
+            "tool_calls": 52
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 52
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 3784917,
+            "completion_tokens": 116742,
+            "reasoning_tokens": 99290,
+            "completion_ge6000": 5,
+            "completion_ge10000": 1
+          },
+          "reasoning_share_of_completion": 0.8505079577187302
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/g50t-5849a774_p0_requests.jsonl",
+            "sha256": "7255f0d3e6624ddc9b39051263d73644da2871e2fcf7cbc97be6079ab19f2621"
+          },
+          "requests": 70,
+          "responses": 70,
+          "finish_reasons": {
+            "tool_calls": 67,
+            "length": 3
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 70
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 5220238,
+            "completion_tokens": 226628,
+            "reasoning_tokens": 213682,
+            "completion_ge6000": 13,
+            "completion_ge10000": 3
+          },
+          "reasoning_share_of_completion": 0.94287554935842
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/ka59-38d34dbb_p0_requests.jsonl",
+            "sha256": "a2fc5f4148f2a27a965f355a7d048fe20204c2b752198736fb8d9ce9b40b60ed"
+          },
+          "requests": 110,
+          "responses": 110,
+          "finish_reasons": {
+            "tool_calls": 109,
+            "length": 1
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 110
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 8410811,
+            "completion_tokens": 298130,
+            "reasoning_tokens": 284894,
+            "completion_ge6000": 18,
+            "completion_ge10000": 4
+          },
+          "reasoning_share_of_completion": 0.9556032603226781
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/lf52-271a04aa_p0_requests.jsonl",
+            "sha256": "cad4fc420ffe8a321ed462e99a60b10178c3be3f947511828eea25095240da71"
+          },
+          "requests": 57,
+          "responses": 57,
+          "finish_reasons": {
+            "tool_calls": 57
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 57
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 3543009,
+            "completion_tokens": 89228,
+            "reasoning_tokens": 80607,
+            "completion_ge6000": 1,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.9033823463486798
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/lp85-305b61c3_p0_requests.jsonl",
+            "sha256": "0a7b04e501c3bec7eb880afa9604a861392e91c8f3838b2af3ad638dfad2ea6f"
+          },
+          "requests": 105,
+          "responses": 105,
+          "finish_reasons": {
+            "tool_calls": 105
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 105
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 7942558,
+            "completion_tokens": 204496,
+            "reasoning_tokens": 169373,
+            "completion_ge6000": 6,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.828246029262186
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/ls20-9607627b_p0_requests.jsonl",
+            "sha256": "97cb21cf1d976bd111bad92913db8e3387a25ce24ef660c51af7a2cd37b8756b"
+          },
+          "requests": 111,
+          "responses": 111,
+          "finish_reasons": {
+            "tool_calls": 111
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 111
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 8358731,
+            "completion_tokens": 179590,
+            "reasoning_tokens": 147805,
+            "completion_ge6000": 3,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.8230135308202016
+        },
+        {
+          "source": {
+            "path": "runs/025-admission-order/admission_009/m0r0-492f87ba_p0_requests.jsonl",
+            "sha256": "d5624197f6495a940c00dfd05611876e5379a5db8b77722604f388a3a4b8a19e"
+          },
+          "requests": 56,
+          "responses": 56,
+          "finish_reasons": {
+            "tool_calls": 56
+          },
+          "chat_template_kwargs": {
+            "{\"preserve_thinking\": true}": 56
+          },
+          "usage_returned_only": {
+            "prompt_tokens": 3366732,
+            "completion_tokens": 108548,
+            "reasoning_tokens": 95580,
+            "completion_ge6000": 2,
+            "completion_ge10000": 0
+          },
+          "reasoning_share_of_completion": 0.880532114824778
+        }
+      ],
+      "coverage_warning": "Only12 of25 game request logs are downloaded. admission_009 changes admission order, so these logs describe the unchanged009 solving algorithm under a different schedule. They are not an unmodified synchronous control and are not a25-game reasoning distribution.",
+      "inference": "88.59% returned completion is reasoning; only8/941 returned responses end length. Token truncation alone is not the dominant observed main-loop failure. Long reasoning can still be useful and token share is not GPU wall-time share."
+    }
+  },
+  "one_main_hypothesis": {
+    "candidate": "Set reasoning_effort=medium on all ordinary ToolAgent main generation requests; baseline omits this key and actual mounted template resolves xhigh. Keep thinking enabled and retain original12288 max output, model, state/history, segmentation, tool execution and scheduler.",
+    "expected_mechanism": "If shorter deliberation preserves enough rule/model accuracy, it may complete more observe-tool-action cycles within unchanged time and improve full25 official-formula mean.",
+    "alternative": "Medium may harm difficult rule inference/search and reduce score despite more actions or fewer reasoning tokens. Main medium has not been generated or scored here; auxiliary low failure proves neither direction.",
+    "single_factor_scope": "One request-template parameter, not an auxiliary branch, summary, memory, persistent-state or scheduling bundle. Existing _harness_template_kwargs is the minimal payload hook. Rolling summaries default ARC3_SUMMARY_INTERVAL_TOKENS=0 and must be asserted0 in both arms; no summaries then fall outside or inside the intervention accidentally. If summaries are enabled, stop and resolve scope before launch."
+  },
+  "actual_template_evidence": {
+    "source": {
+      "path": "runs/035-aux-reasoning-diagnostic/executable_plan_C/reasoning-template-verification.json",
+      "sha256": "4f1d467279c15b85d07357c9b867e93ad8ea157aa432cffbe2427fa8c9687aa1"
+    },
+    "template_source": {
+      "path": "runs/035-aux-reasoning-diagnostic/executable_plan_C/reasoning-template-verification-chat_template.jinja",
+      "sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041"
+    },
+    "mounted_observed_at_utc": "2026-10-24T11:28:40.159003+00:00",
+    "mounted_model_dir": "/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1",
+    "template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+    "direct_source_facts": {
+      "default": "resolved_reasoning_effort = reasoning_effort|default('xhigh')",
+      "accepted": [
+        "xhigh",
+        "medium",
+        "low"
+      ],
+      "xhigh_instruction": "Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.",
+      "medium": "Accepted by actual mounted template, does not inject xhigh or low effort instructions and still emits open<think>.",
+      "medium_render_sha256": "475da179a9c1d45861ff638de217e6390d3e66cd96f39361a5fe6c2ebacabd70",
+      "guard_passed": true
+    },
+    "evidence_boundary": "035 main logs contain preserve_thinking=True and no reasoning_effort key; together with this actual template they establish defaultxhigh.035 preflight CPU-rendered medium successfully, but did not run a medium main completion. Main payload capture and current mounted-template revalidation are required before036. No web documentation is needed to infer from these primary local runtime artifacts."
+  },
+  "budget_fair_design": {
+    "pool": "All exact25 inventory game IDs in existing032-memory-full.json, original order, from game start; no checkpoint selection, future response or game-specific hint.",
+    "config_sources": [
+      {
+        "path": "experiments/009-baseline-submission.json",
+        "sha256": "15fded53a855256401ef15cf47f045bbe68e2c3dbb169f1a4c90de089fb3c076"
+      },
+      {
+        "path": "experiments/030-capability-comparison.json",
+        "sha256": "18e9114c94dba09fef424f8d94797f2d5c5571300541b2c14b72de2375253839"
+      },
+      {
+        "path": "experiments/032-memory-full.json",
+        "sha256": "9c64927cb33e19d14e780cc8e9ec5aee1090893078443862f9268f46408c90c6"
+      }
+    ],
+    "formal009_reference": {
+      "n_passes": 1,
+      "concurrency": 120,
+      "active_streams": 10,
+      "max_runtime_s_per_game": 31920,
+      "warmup_action_games": 1,
+      "max_main_output": 12288
+    },
+    "recommended_research": {
+      "requested_arm_seconds": 7254,
+      "max_runtime_s_per_game": 7254,
+      "formula": "floor(31920*25/110)=7254",
+      "hard_limit_seconds": 21600,
+      "startup_limit_seconds": 4200,
+      "n_passes_per_arm": 1,
+      "concurrency": 25,
+      "active_streams": 10,
+      "warmup_action_games": 1,
+      "max_main_output": 12288,
+      "analyzer_timeout_seconds": 900,
+      "max_actions_per_game": null,
+      "max_generated_tokens_per_game": null,
+      "same_overrides": {
+        "ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+        "ARC3_PRIORITY_PACE": "0"
+      },
+      "request_deadline": false,
+      "skip_blanket_model_precache": false,
+      "strict_arm_budget": true,
+      "cache_flush_and_log_required": true,
+      "complete_pool_and_drained_workers_required": true,
+      "arm_order": "Freeze a single order before generation; recommend main_medium then baseline to avoid a repeated reference-first convention. Both use one model service with verified cache flush. Order cannot remove stochastic or shared-service confounding.",
+      "diagnostics": "Per-arm isolated CPU processes and identical passive request logging. Do not introduce new active deadline or scheduler hooks.",
+      "resource": "21600s is outer reserve, not guaranteed actual spend. Expected two7254s solving arms plus shared load/export around4.5-6h, compatible with parent-reported26.51GPUh only after fresh quota read."
+    },
+    "important_difference": "030 used warmup0 and18000s outer cap;032 full uses warmup1 and21600s outer cap. Use032 budget alignment to009, not a mistaken7250s or changed main output. ResearchOFFLINE25/time scaling and formal live competition environment remain different."
+  },
+  "selection_and_stop_rules": {
+    "primary": "Same-round full25 mean of official per-game score formula, all25 preserved; no auxiliary success counter or action count can substitute.",
+    "secondary": [
+      "Completed levels, won games, per-game gains/losses, all main request finish/usage/timeouts, delivered tool calls, actual actions and remaining level; derive fewer reasoning tokens only from returned usage with missing-cost caveat.",
+      "Inspect largest gain/loss and report mean after removing largest gain as sensitivity, without replacing primary mean or discarding that game.",
+      "Compare candidate against historical original-baseline envelope as context. It is not a replacement for the synchronous control."
+    ],
+    "invalid_run": "Abort unsupported mountedtemplate or altered model/maxoutput/prompt/state/scheduler; do not silently fall back, increase budget or shorten one arm. Incomplete25/process failure remains invalid score comparison, with failure evidence retained.",
+    "negative": "If full25 net mean<=0, do not formally submit this mode; stop it and use the retained whole-pool traces for next error audit.",
+    "positive": "A positive single run is exploratory. Examine whether it comes from recovering a weak baseline or one outlier before selecting a formal candidate; no guaranteed score claim. A credible positive candidate must use exact frozen same core implementation/parameters in real GPU save and exact version official submission.",
+    "formal_success": "Only official score>31.16 is improvement completion. Preserve negative official result and return to transfer analysis; do not cherry-pick public cases."
+  },
+  "offline_before_gpu": [
+    "Use original native ToolAgent and capture actual requests at requests.post without network: baseline payload exactly unchanged; candidate differs only chat_template_kwargs.reasoning_effort=medium; temperature0.7/top_p0.95/top_k20/seed/model/tools/messages/max_tokens12288 unchanged.",
+    "Inspect final assembled request after kwargs merging, not only helper return/log reconstruction. Ensure /tokenize and chat kwargs agree when tokenize is used. Assert thinking remains enabled, preserve_thinking=True, empty reasoning ladder and summaryinterval0.",
+    "Render baseline and candidate using current actual mounted tokenizer template; verify default resolvesxhigh, medium is accepted, open<think> remains, only the intended effort instruction differs. Save template/tokenizer hashes. No template downloads or update.",
+    "Confirm helper installation is arm-local/default-off and all prohibited auxiliary/memory/persistent-state patches absent; sourcefreeze includes baseline notebook/runtime hashes; independent preflight final notebook cells and schema/args.",
+    "Assert every exact25 game in original order,7254s arms,10streams,1pass,warmup1,original numerical serving and cleanup; reserve enough startup and both complete arms under21600 total; read fresh quota before one launch."
+  ],
+  "gpu_required": [
+    "Current mounted-template render can run CPU on the GPU notebook before generation; guard must fail closed if source differs or mode unsupported.",
+    "Main-medium output quality, number of useful tools/actions and full25 net mean require real model/game execution. Neither CPU rendering nor this audit establishes improvement.",
+    "If credible net positive, real save smoke/model actions and formal exact-version submission are still required."
+  ],
+  "negative_results_and_variance": {
+    "history_sources": [
+      {
+        "path": "research/notes/030/030-results-analysis.md",
+        "sha256": "cad1577b956144bff2e7f51aa873f6558d92218f09cc9de7145ff953d207e229"
+      },
+      {
+        "path": "research/notes/032/032-results-analysis.md",
+        "sha256": "c3d73a485cc68d0481b22729e0e7f644feacee8ee1ea6263c0957b6ca8b9d12e"
+      }
+    ],
+    "030": "25-game public+4.5565 yet formal24.40, below00931.16 by6.76. Public total levels103→102; two biggest gains exceeded entire net mean. Do not add persistent variables.",
+    "032": "Short+25.655 and cross-session full25+11.140 yet formal30.20, below00931.16 by0.96. Do not re-add solved-level memory.",
+    "baseline_full25_summaries": [
+      {
+        "experiment": "025",
+        "source": {
+          "path": "experiments/025-analysis/summary.json",
+          "sha256": "938d45e0f18116c1d15b778864393a97fe550dc27d7685fab68fbd34b2897ba5"
+        },
+        "summary": {
+          "run_count": 25,
+          "scored_run_count": 25,
+          "mean_score": 45.87573158295716,
+          "mean_completion_ceiling": 48.83145743145743,
+          "mean_efficiency_gap": 2.9557258485002724,
+          "levels_completed": 106,
+          "levels_available": 183,
+          "mean_levels_completed": 4.24,
+          "mean_completion_fraction": 0.5964603174603175,
+          "wins": 7,
+          "actions": 5336,
+          "generated_tokens": 4449839,
+          "action_attached_generated_tokens": 4449839,
+          "analyzer_reported_generated_tokens": 4528520,
+          "analyzer_reported_run_count": 25,
+          "unattached_generated_tokens": 78681,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 163002.63441027,
+          "mean_run_elapsed_seconds": 6520.1053764108,
+          "state_counts": {
+            "cancelled": 18,
+            "won": 7
+          },
+          "stop_reason_counts": {
+            "unknown": 18,
+            "won": 7
+          },
+          "game_count": 25,
+          "mean_game_score": 45.87573158295716,
+          "benchmark_elapsed_seconds": 7263.581685,
+          "generated_tokens_per_benchmark_second": 612.6232474523346
+        }
+      },
+      {
+        "experiment": "030",
+        "source": {
+          "path": "experiments/030-analysis/report.json",
+          "sha256": "24151d4d689d99117845e9a195a4b60c549fc66eae3c1a3c6debc4ab6c8c9746"
+        },
+        "summary": {
+          "run_count": 25,
+          "scored_run_count": 25,
+          "mean_score": 42.61336230982951,
+          "mean_completion_ceiling": 45.09119769119769,
+          "mean_efficiency_gap": 2.4778353813681857,
+          "levels_completed": 103,
+          "levels_available": 183,
+          "mean_levels_completed": 4.12,
+          "mean_completion_fraction": 0.5692698412698413,
+          "wins": 5,
+          "actions": 5377,
+          "generated_tokens": 4332548,
+          "action_attached_generated_tokens": 4332548,
+          "analyzer_reported_generated_tokens": 4461854,
+          "analyzer_reported_run_count": 25,
+          "unattached_generated_tokens": 129306,
+          "final_generated_tokens": 0,
+          "uncached_input_tokens": 0,
+          "sum_run_elapsed_seconds": 163665.749570977,
+          "mean_run_elapsed_seconds": 6546.62998283908,
+          "state_counts": {
+            "cancelled": 20,
+            "won": 5
+          },
+          "stop_reason_counts": {
+            "unknown": 20,
+            "won": 5
+          },
+          "game_count": 25,
+          "mean_game_score": 42.61336230982951,
+          "benchmark_elapsed_seconds": 7273.709512,
+          "generated_tokens_per_benchmark_second": 595.6449034501943
+        }
+      }
+    ],
+    "interpretation": "Observed substantial stochastic and budget/schedule sensitivity. A lower effort is a narrow untested parameter, not a proven solution or literature-based score promise."
+  },
+  "implementation_status": "Design recommendation only. This agent wrote this review artifact, changed no solver/config/notebook, ran no model/GPU and made no upload/submission."
+}

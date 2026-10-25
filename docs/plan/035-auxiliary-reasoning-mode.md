@@ -34,4 +34,4 @@ C第一次模型生成前，使用本地真实挂载tokenizer做CPU渲染，记�
 
 依据：[034 v9结果](../../research/notes/034/034-v9-results-analysis.md) · [独立设计审阅](../../experiments/034-v9-analysis/next-strategy-independent-review.json) · [冻结配置](../../experiments/035-aux-reasoning-diagnostic.json)
 
-实际执行：10个原生场景、请求对比与独立冻结预检通过；已一次保存为同一私有kernel的版本10，平台QUEUED，33cells远端源码一致。实际挂载模板验证仍待C首个生成前在线CPU执行。Kaggle按新标题调整了同一kernel的slug，后续使用launch.observed_kernel_ref。[运行记录](../../experiments/035-launch.json) · [实施进展](../progress/035-auxiliary-reasoning.md)
+执行结论：真实挂载low生效，A/B/C均分均18.253968，新增关和程序动作均0。已按本计划停损结束独立辅助程序分支，不扩大、不正式提交。66份输出与源码归档完整。[结果](../../research/notes/035/035-results-analysis.md) · [进展](../progress/035-auxiliary-reasoning.md)

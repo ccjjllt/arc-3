@@ -1,0 +1,80 @@
+{
+  "observed_at_utc": "2026-10-24T17:33:26.766049+00:00",
+  "scope": "Exact generated pure transform functions and actual stdout from036 main_medium tr87L4; no solver edits",
+  "code_from_frozen_runtime_requests": {
+    "bad": {
+      "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+      "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+      "call_index_0based": 62,
+      "request_line_1based": 127,
+      "result_line_1based": 127,
+      "tool_call_id": "call_7cff0beae8fa4cc0a385e7f1",
+      "level": 4,
+      "step_before_call": 238,
+      "code": "\ndef norm(mm):\n    rows=[r for r in mm if '#' in r]\n    if not rows: return ()\n    r0=min(r.index('#') for r in rows); r1=max(len(r)-1-r.rindex('#') for r in rows)\n    return tuple(r[r0:len(r)-r1] for r in rows)\ndef rotCW(b):\n    R=len(b); C=len(b[0])\n    return norm([''.join(b[R-1-r][c] for r in range(R)) for c in range(C)])\ndef canon(b):\n    cur=norm(b); best=None\n    for _ in range(4):\n        if best is None or cur<best: best=cur\n        cur=rotCW(cur)\n    return best\nA=norm(['#','#','#','#','#']); B=norm(['#####','.#..#','.#..#','.####','....#'])\nprint('fixed? equal should be False:',canon(A)==canon(B), px(B), canon(B))\nC=norm(['....#','.####','.#..#','.#..#','#####'])\nprint('B rot180 same canon:',canon(B)==canon(C))\n",
+      "code_sha256": "54eba543e17b8acf0a016975b5a8cdfcd7cd46ee04820e5fe8d0e134072b942d",
+      "stdout": "fixed? equal should be False: True 14 ('#', '#', '#', '#', '#')\nB rot180 same canon: True\n",
+      "error": null
+    },
+    "fixed": {
+      "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+      "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+      "call_index_0based": 65,
+      "request_line_1based": 133,
+      "result_line_1based": 133,
+      "tool_call_id": "call_f38d63bb33af4f0e8efb6257",
+      "level": 4,
+      "step_before_call": 238,
+      "code": "\ndef norm(mm):\n    rows=[r for r in mm if '#' in r]\n    if not rows: return ()\n    left=min(r.index('#') for r in rows)\n    right=min(len(r)-1-r.rindex('#') for r in rows)\n    return tuple(r[left:len(r)-right] for r in rows)\ndef rotCW(b):\n    R=len(b); C=len(b[0])\n    return norm([''.join(b[R-1-r][c] for r in range(R)) for c in range(C)])\ndef canon(b):\n    cur=norm(b); best=None\n    for _ in range(4):\n        if best is None or cur<best: best=cur\n        cur=rotCW(cur)\n    return best\nB=('#####','.#..#','.#..#','.####','....#')\ncur=B\nfor i in range(4):\n    print(i,px(cur))\n    cur=rotCW(cur)\nprint('cycle ok?',cur==B, 'px preserved', all(px(rotCW(B,k)) if False else True for k in [0]))\nA=norm(['#','#','#','#','#'])\nprint('canon A==canon B?',canon(A)==canon(B))\n",
+      "code_sha256": "46b16c8561fc88e35f16120e3996ad150491e2ab552b3db7aa373da0f52deda1",
+      "stdout": "0 14\n1 14\n2 14\n3 14\ncycle ok? True px preserved True\ncanon A==canon B? False\n",
+      "error": null
+    },
+    "observed_rotation_loss": {
+      "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+      "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+      "call_index_0based": 63,
+      "request_line_1based": 129,
+      "result_line_1based": 129,
+      "tool_call_id": "call_31fc764b65504190a5f21f4b",
+      "level": 4,
+      "step_before_call": 238,
+      "code": "\nB=('#####','.#..#','.#..#','.####','....#')\ncur=B\nfor i in range(4):\n    print(i,px(cur),cur)\n    cur=rotCW(cur)\nprint('after 4 back to start?',cur==B)\n",
+      "code_sha256": "e4c34174500700c5b2198ba9b0fc5e0801818f1221b858c7d66b918d667a6c25",
+      "stdout": "0 14 ('#####', '.#..#', '.#..#', '.####', '....#')\n1 14 ('....#', '.####', '.#..#', '.#..#', '#####')\n2 5 ('#', '#', '#', '#', '#')\n3 5 ('#####',)\nafter 4 back to start? False\n",
+      "error": null
+    },
+    "observed_raw_crop_loss": {
+      "source": "/Users/zhaohuaxiang/ccjjllt/arc-3/runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+      "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+      "call_index_0based": 64,
+      "request_line_1based": 131,
+      "result_line_1based": 131,
+      "tool_call_id": "call_ea2309d979c34767bf848343",
+      "level": 4,
+      "step_before_call": 238,
+      "code": "\nb1=('....#','.####','.#..#','.#..#','#####')\nR=len(b1); C=len(b1[0])\nraw=[''.join(b1[R-1-r][c] for r in range(R)) for c in range(C)]\nprint('raw:',raw)\nprint('normed:',norm(raw), px(norm(raw)))\n",
+      "code_sha256": "8169d580b5ab194cb6f347681ba577d48ecaebced719a4ad8d004afacbd334c1",
+      "stdout": "raw: ['#....', '####.', '#..#.', '#..#.', '#####']\nnormed: ('#', '#', '#', '#', '#') 5\n",
+      "error": null
+    }
+  },
+  "shape_from_actual_generated_probe": [
+    "#####",
+    ".#..#",
+    ".#..#",
+    ".####",
+    "....#"
+  ],
+  "comparison_line_shape": [
+    "#",
+    "#",
+    "#",
+    "#",
+    "#"
+  ],
+  "limits": [
+    "The model itself fixed this bug during036 before completingL4.",
+    "This is a local program defect/counterexample, not a demonstrated cause of the entire tr87 score loss or proof that invariant prompting improves score."
+  ]
+}

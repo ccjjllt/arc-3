@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-24T17:39:13.090018+00:00",
+  "reviewer": "new_independent_036_next_design_review_agent",
+  "scope": "Read-only research decision based on frozen036 criteria and archived030/032/036 evidence. No solver edit, network, model, GPU or submission.",
+  "decision": {
+    "formal_submission_now": false,
+    "retain_formal_best": "009 v2 / submission57101330 /31.16",
+    "priority": "3_offline_cross_game_audit_before_another_GPU_or_prompt_change",
+    "reason": "The positive25-game mean is retained, but leave-largest-gain-out is negative. A single already-corrected tr87 helper bug is a concrete defect, not sufficient evidence of a general score bottleneck or of why the entire game regressed."
+  },
+  "036_evidence": {
+    "baseline_mean": 39.43577490664345,
+    "medium_mean": 40.64089548097322,
+    "mean_delta": 1.2051205743297633,
+    "completed_levels": "97 ->100",
+    "gains_losses_ties": [
+      10,
+      9,
+      6
+    ],
+    "largest_gain_game": "r11l-495a7899",
+    "largest_gain": 85.71428571428571,
+    "leave_largest_gain_out_mean_delta": -2.316094639821272,
+    "interpretation": "Descriptive single shared-service sequential comparison; not paired random seeds, stable mode benefit or formal gain. Sensitivity analysis does not delete the game from the primary25-game mean."
+  },
+  "historical_caution": [
+    "030 public +4.5565, yet formal24.40 versus00931.16; largest gains partly recovered a weak reference run. Even stronger public evidence did not ensure transfer.",
+    "032 short/full public gains yet formal30.20 versus00931.16; cross-session and reference variability remained material. Mechanism use and successful saved execution are separate from formal score gain."
+  ],
+  "options": {
+    "1_reverse_order_medium_replication": {
+      "priority": "hold, not the immediate next step",
+      "benefit": "Could test robustness to order and stochastic reference collapse while preserving the single parameter.",
+      "limit": "Costs another full-pool GPU session and does not explain the local helper/goal failures. Repeating until positive risks selection. One reversed run still cannot establish general mode causality.",
+      "if_later_selected": "Predeclare one repetition, opposite arm order, unchanged original009/medium implementations/model/output/time/game order; retain both trials and every loss, never choose the more favorable run."
+    },
+    "2_change_fullpool_prompt_from_tr87_only": {
+      "priority": "reject as immediate action",
+      "reason": "Selection on the largest loss and a bug already fixed by the original trajectory can overfit one case, add deliberation overhead everywhere, and cannot explain remainingL5 goal mismatch. Do not combine medium with an invariant prompt before isolating either effect."
+    },
+    "3_offline_cross_game_audit": {
+      "priority": "do next",
+      "fixed_scope": "Inspect frozen036 saved traces from both arms across all25 IDs using a rule chosen before reading further score-dependent examples. A small option is the first two newly-defined geometry/object helpers per game where their stated intent yields a checkable property. Keep all eligible failures and successes; record games with no applicable helper.",
+      "evidence_unit": "A helper source/call_id and input derived from the same actual frame or recorded stdout; a pure-function counterexample, the property implied by the helper intent, whether failure was detected before actual actions, repeated stale use after failure, and attributable action/time cost only where logs establish it.",
+      "candidate_properties": [
+        "Rigid rotation preserves occupied pixel count and four90degree rotations return the normalized shape.",
+        "A normalization intended only to trim empty margins preserves occupied pixel count and is idempotent.",
+        "A shape canonicalizer cannot equate different occupied-pixel counts."
+      ],
+      "do_not_infer": [
+        "Do not assume every game transformation preserves pixels, orientation, colors or objects. Apply only properties implied by the generated helper intent.",
+        "No true invariant proves the chosen task goal or world model is correct.",
+        "No MISMATCH line is valid counterexample evidence until input parsing, compared data types and actual transition linkage are checked.",
+        "No code-error count or recovered local example substitutes for useful actions or full-pool score."
+      ],
+      "output": "One compact table of eligible helpers, positive/negative control examples, failure stages and conservatively established cost. No new module or model request required."
+    }
+  },
+  "next_GPU_gate": [
+    "Complete036 raw/source/request integrity audit first; retain the positive mean, negative sensitivity, full losses and any missing cost evidence.",
+    "Find the same preventable defect class in at least two independent game families, or repeated independently observed runs, with credible action/time exposure before the original loop corrected it. This is a prioritization threshold, not a claim of statistical significance.",
+    "Show a cheap rule-based or prompt-only check can distinguish the saved failures from applicable correct helpers without using game IDs, future frames, goal answers or fabricated simulator truth. Include positive controls; abstain when the intended invariant is unclear.",
+    "Freeze one bounded main-loop candidate on original009 default effort; change only the invariant instruction/check, not medium, memory, output limits, new auxiliary calls or budgets. Its checking cost remains inside the original wall time.",
+    "After narrow CPU request/source checks and independent freeze audit, run one complete25 contemporaneous comparison with original009, retain all outcomes and prespecified largest-gain sensitivity. Do not replace this with selected-case successes.",
+    "Only a credible explained complete-pool net gain supports exact-version realGPU saved preparation and then a formal submission. Only official score>31.16 counts as final improvement."
+  ],
+  "if_offline_audit_is_negative": "Do not launch an invariant-prompt candidate from tr87 alone. Archive the negative audit and reassess whether one preregistered opposite-order medium replication would answer a useful remaining question; do not perform a parameter sweep or automatic retry loop.",
+  "source_hashes": {
+    "docs/plan/036-main-reasoning-medium.md": "ae6a8c8b57ff6b64e12e2a3dce6b51fa99a7690e12940fef19a4da3a174b9de0",
+    "experiments/036-analysis/score-independent-review.json": "57a2369da278edb5ee16650dc09175ed77cec975e0483b71626decc8701ad945",
+    "experiments/036-analysis/error-next-step-review.json": "7588e3055c07c094e8ee8c482f81d02d833426549e9642b970ab3687950d137f",
+    "research/notes/030/030-results-analysis.md": "cad1577b956144bff2e7f51aa873f6558d92218f09cc9de7145ff953d207e229",
+    "research/notes/032/032-results-analysis.md": "c3d73a485cc68d0481b22729e0e7f644feacee8ee1ea6263c0957b6ca8b9d12e"
+  },
+  "formal_submission_created": false,
+  "remote_mutations": false,
+  "solver_modified": false
+}

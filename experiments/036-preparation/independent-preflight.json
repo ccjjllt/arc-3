@@ -1,0 +1,321 @@
+{
+  "status": "passed_no_blocking_findings",
+  "observed_at_utc": "2026-10-24T12:19:37.083838+00:00",
+  "reviewer": "new_current_turn_independent_036_frozen_audit",
+  "notebook_sha256": "90d130cc5ed14d8515cb71890ef1e8b8a54a0cdc312d93d61c8452564ebdb47d",
+  "notebook": {
+    "path": "notebooks/036-main-reasoning-medium/experiment.ipynb",
+    "sha256": "90d130cc5ed14d8515cb71890ef1e8b8a54a0cdc312d93d61c8452564ebdb47d",
+    "cell_count": 28,
+    "bytes": 770189,
+    "native_python_cells": 12
+  },
+  "config_sha256": "c93b44ab15cbf4a3ba9447cb497879fbf41caa0b0301dc3eab69d3feac09ac14",
+  "checks": [
+    {
+      "name": "notebook_hash_matches_manifest",
+      "passed": true
+    },
+    {
+      "name": "canonical_frozen_config_matches_manifest",
+      "passed": true
+    },
+    {
+      "name": "all15_build_inputs_current_and_archived_exact",
+      "passed": true,
+      "count": 15
+    },
+    {
+      "name": "frozen14_inputs_are_all_non_config_build_inputs",
+      "passed": true
+    },
+    {
+      "name": "source_archive_build-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "source_archive_kernel-metadata.json",
+      "passed": true
+    },
+    {
+      "name": "embedded_config_and_source_hashes_exact",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/__init__.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/experiment_config.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/goal_evidence.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/inference_timing.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/input_paths.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/main_reasoning.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/program_state.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/run_arm.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/scheduler_observer.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/session_runner.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_src/arc3_research/transient_history.py",
+      "passed": true
+    },
+    {
+      "name": "native_payload_scripts/summarize_experiment.py",
+      "passed": true
+    },
+    {
+      "name": "native12_payload_dependencies_only",
+      "passed": true,
+      "payloads": [
+        "src/arc3_research/__init__.py",
+        "src/arc3_research/experiment_config.py",
+        "src/arc3_research/goal_evidence.py",
+        "src/arc3_research/inference_timing.py",
+        "src/arc3_research/input_paths.py",
+        "src/arc3_research/main_reasoning.py",
+        "src/arc3_research/program_state.py",
+        "src/arc3_research/run_arm.py",
+        "src/arc3_research/scheduler_observer.py",
+        "src/arc3_research/session_runner.py",
+        "src/arc3_research/transient_history.py",
+        "scripts/summarize_experiment.py"
+      ]
+    },
+    {
+      "name": "original_baseline_helpers_present",
+      "passed": true
+    },
+    {
+      "name": "28_cells_and_all_clean_outputs",
+      "passed": true
+    },
+    {
+      "name": "tail14_cells_unchanged_from035",
+      "passed": true
+    },
+    {
+      "name": "original009_harness_patch_byte_identical",
+      "passed": true
+    },
+    {
+      "name": "12288_and_sampling_originate_in_original009_setup_env",
+      "passed": true,
+      "max_output_tokens": 12288,
+      "enable_thinking": true,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "top_k": 20
+    },
+    {
+      "name": "baseline_runtime_src/ARC3-Inference/inference/agent/priority_scheduler.py",
+      "passed": true
+    },
+    {
+      "name": "baseline_runtime_src/ARC3-Inference/inference/agent/tool_agent.py",
+      "passed": true
+    },
+    {
+      "name": "baseline_runtime_src/ARC3-Inference/inference/framework/solver.py",
+      "passed": true
+    },
+    {
+      "name": "same_exact_inventory25_in_order",
+      "passed": true
+    },
+    {
+      "name": "strict036_config_validation_passed",
+      "passed": true
+    },
+    {
+      "name": "frozen_budget_math",
+      "passed": true,
+      "total_reserve_seconds": 19308,
+      "hard_limit_seconds": 21600,
+      "slack_seconds": 2292
+    },
+    {
+      "name": "kernel_identity_private_gpu_and_offline",
+      "passed": true
+    },
+    {
+      "name": "model_dataset_docker_pins_identical035",
+      "passed": true
+    },
+    {
+      "name": "main_mode_cpu_report_matches_frozen_helper_and_checker",
+      "passed": true
+    },
+    {
+      "name": "fullpool_route_cpu_report_matches_frozen_sources",
+      "passed": true,
+      "check_count": 56,
+      "report_sha256": "e166d9c80104c8a2d67d083b3f1362498605cfcb558c144534ae004c0e8fc69d"
+    },
+    {
+      "name": "guard_and_patch_before_benchmark_unpickle",
+      "passed": true
+    },
+    {
+      "name": "only_default_effort_wrapper_preserves_explicit_ladder",
+      "passed": true
+    },
+    {
+      "name": "summary_actual_zero_guard_in_both_arms",
+      "passed": true
+    },
+    {
+      "name": "explicit_output_sampling_assertions_and_no_sets",
+      "passed": true
+    },
+    {
+      "name": "both_arms_mount_model_match_input_paths",
+      "passed": true
+    },
+    {
+      "name": "comparison_aborts_instead_of_shortening_arm_budget",
+      "passed": true
+    }
+  ],
+  "checks_passed": 41,
+  "blocking_findings": [],
+  "manual_source_review": {
+    "single_intervention": "Candidate only sets main chat_template_kwargs.reasoning_effort=medium when original method supplies none. Explicit adaptive ladder values remain unchanged.",
+    "runtime_preflight": "Both isolated arm processes verify actual resolved mounted model template, disabled summary interval and original 12288/thinking/sampling constants before benchmark/analyzer unpickle and first generation.",
+    "reference_isolation": "Baseline verifies the template but never imports installer or installs candidate. No executable-plan, program-repair, memory or checkpoint helper is in native payload.",
+    "server_mount_linkage": "Inherited launcher uses MODEL_DIR from resolver as --model-path and MODEL_DIR/chat_template.jinja as --chat-template; no alternate tokenizer/template argument.",
+    "original009_settings": "009 setup_env already supplies 12*1024 output, thinking true, temperature0.7, top_p0.95 and top_k20. The new run_arm code asserts inherited values without assigning new values.",
+    "inherited_code": "Research tail14 exactly matches frozen035. Original009 harness patch is exact. Formal009 save-specific health bookkeeping differs from inherited research launcher; numerical serving is unchanged.",
+    "budget": "Startup4200 + 2*7254 solver + cleanup360 + cache240 =19308<21600; strict guard aborts on lost budget. Full25 order,10streams,warmup1,one pass retained.",
+    "interpretation": "Medium is a template instruction difference, not a hard reasoning token cap. Token share is motivation only. Fullpool score/levels and all gains/losses decide promotion."
+  },
+  "source_rows": [
+    {
+      "path": "research/notebooks/cli-baseline/arc-agi-3-milestone-2-solution.ipynb",
+      "sha256": "88a379f17c3a4ba8c98715fc23155346ccd6eb289bdafebadfc61a3178f9d9bd",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "scripts/build_experiment.py",
+      "sha256": "d382d815878c05d399682a4f6303d7dbbb17cd0302beaf07ef4eb31f38be9378",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/__init__.py",
+      "sha256": "269d658595dd81051d2a0acc4101d500c41f2598a480c32433a26f449b9830bb",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/experiment_config.py",
+      "sha256": "9d2a2ce199599c83abaa1b79fb63ced4b945c570722459f4fa83c3d49cccfcd3",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/goal_evidence.py",
+      "sha256": "317e773349b6794235899667a89a3962fd1c962e22731979ce1e8d34127b4a81",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/inference_timing.py",
+      "sha256": "3524a1ad794747e2345551affa860fd467167dd4b8ca44b9ffe2ce8f62a6ba43",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/input_paths.py",
+      "sha256": "f0d045f3903ef879a075db62cc6d6d5c579860010e9db1ecad3ad640f01a7701",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/main_reasoning.py",
+      "sha256": "33f1deb1854c549e1705fd17c99cf6032c9da7b167ed40c12d9f4de71ec6d39e",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/program_state.py",
+      "sha256": "72a8d18cd056751b6141039ac4946e5a77efb7506dfd5e2a6d014e6990a7501c",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/run_arm.py",
+      "sha256": "a1e3c319f1c228ad1754b370046777bb6403aff3dd2f89a335ca9b4ae256423e",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/scheduler_observer.py",
+      "sha256": "78781a629d5a765389a9789224b0274fdcb8c1025e2807150abb6defbbbe2411",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/session_runner.py",
+      "sha256": "b2e910d8ebee93f5c27089309027cf199a13ad86cc342591991cfd6b2342325b",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "src/arc3_research/transient_history.py",
+      "sha256": "a90295262d8125f6d33e5f42a9ba992ced9a96c820db38ea5d4bd231bc70114c",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "scripts/summarize_experiment.py",
+      "sha256": "9811a81c51872495590e1945f2308822307f2e82453e8a728a51161f9be259ab",
+      "current_matches": true,
+      "archive_matches": true
+    },
+    {
+      "path": "experiments/036-main-reasoning-medium.json",
+      "sha256": "c93b44ab15cbf4a3ba9447cb497879fbf41caa0b0301dc3eab69d3feac09ac14",
+      "current_matches": true,
+      "archive_matches": true
+    }
+  ],
+  "limitations": [
+    "CPU request transport/tokenizer loader and route benchmark are explicitly marked fixtures.",
+    "036 actual mounted tokenizer rendering remains pending until the launched run; 035 prior-mounted template supports expected hash only.",
+    "No real model call, GPU action, ARC action, throughput or score observed by this audit.",
+    "Comparison is sequential candidate then baseline in one service, not randomized repeated trials.",
+    "No formal submission is authorized by this preflight result alone; full25 net gain remains necessary."
+  ],
+  "real_model_calls": 0,
+  "network_calls": 0,
+  "gpu_calls": 0,
+  "real_arc_actions": 0,
+  "actual_mounted_guard_status": "pending_runtime"
+}

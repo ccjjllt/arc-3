@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-24T17:35:10.967573+00:00",
+  "author": "new independent036 error audit agent",
+  "scope": "Read-only trace review of largest gain and largest loss; pure local normalization counterexample replay; no solver change, model, GPU, network or real game action.",
+  "decision": "Do not promote036 medium directly to a formal submission. Its small positive full25 mean is outlier-dependent and not an explained broad gain. Preserve009 and the complete result. Do not start another GPU run solely to tune effort.",
+  "score_context": {
+    "benchmark_sources": {
+      "baseline": {
+        "path": "runs/036-essential-preview/baseline/benchmark.json",
+        "sha256": "3b115497440d02f5777eb357a0da9d0eefd325f57038508c48e3381f407afc28"
+      },
+      "main_medium": {
+        "path": "runs/036-essential-preview/main_medium/benchmark.json",
+        "sha256": "76bade6af72137e36db93dffe5778f26d1fdcbfb98b9dd9d804b33219d2606f1"
+      }
+    },
+    "baseline_mean": 39.43577490664345,
+    "candidate_mean": 40.64089548097322,
+    "mean_delta": 1.2051205743297633,
+    "sum_per_game_deltas": 30.12801435824408,
+    "largest_gain_game": "r11l-495a7899",
+    "largest_gain": 85.71428571428572,
+    "mean_delta_without_largest_gain": -2.3160946398350686,
+    "positive_negative_tied": [
+      10,
+      9,
+      6
+    ],
+    "interpretation": "Leave-largest-gain-out is a preregistered sensitivity, not permission to drop that game from the primary mean. One shared-service sequential run gives no stable causal mode effect."
+  },
+  "historical_transfer_context": {
+    "sources": [
+      {
+        "path": "research/notes/030/030-results-analysis.md",
+        "sha256": "cad1577b956144bff2e7f51aa873f6558d92218f09cc9de7145ff953d207e229"
+      },
+      {
+        "path": "research/notes/032/032-results-analysis.md",
+        "sha256": "c3d73a485cc68d0481b22729e0e7f644feacee8ee1ea6263c0957b6ca8b9d12e"
+      },
+      {
+        "path": "docs/plan/036-main-reasoning-medium.md",
+        "sha256": "ae6a8c8b57ff6b64e12e2a3dce6b51fa99a7690e12940fef19a4da3a174b9de0"
+      }
+    ],
+    "030": "Public+4.5565 yet formal24.40 versus00931.16. r11l recovered a weak14.286 baseline; largest two positives exceeded total net gain. This history limits confidence in another r11l-dependent public increase. It does not invalidate the current same-round comparison.",
+    "032": "Public cross-session+11.140 did not transfer to formal30.20. Actual program/experience use and fullpool scoring are necessary evidence but not proof of official transfer.",
+    "historical_baselines": "02545.8757/03042.6134 versus current39.4358 provide variance context only. Different conditions cannot replace the contemporaneous036 baseline."
+  },
+  "trace_summary": {
+    "r11l-495a7899": {
+      "baseline": {
+        "score": 14.285714285714285,
+        "completed_levels": 2,
+        "state": "cancelled",
+        "total_actions": 39,
+        "actions_per_level": [
+          7,
+          32,
+          0,
+          0,
+          0,
+          0
+        ],
+        "final_wallclock_seconds": 7253.325463146999,
+        "per_level_action_times": [
+          {
+            "level": 1,
+            "actions": 7,
+            "first_action_seconds": 854.198472352,
+            "last_action_seconds": 1061.4276114000004
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "first_action_seconds": 1180.7999694240007,
+            "last_action_seconds": 6968.693330112001
+          }
+        ],
+        "completed_python_calls_with_visible_tool_output": 64,
+        "visible_python_errors": 7,
+        "error_count_limit": "Different opportunities and trajectories; counts alone are not cause or quality scores."
+      },
+      "main_medium": {
+        "score": 100.0,
+        "completed_levels": 6,
+        "state": "won",
+        "total_actions": 103,
+        "actions_per_level": [
+          11,
+          13,
+          12,
+          17,
+          28,
+          22
+        ],
+        "final_wallclock_seconds": 4185.1405041299995,
+        "per_level_action_times": [
+          {
+            "level": 1,
+            "actions": 11,
+            "first_action_seconds": 907.7135355819998,
+            "last_action_seconds": 1367.729234089
+          },
+          {
+            "level": 2,
+            "actions": 13,
+            "first_action_seconds": 1415.256498466,
+            "last_action_seconds": 1910.9537569350002
+          },
+          {
+            "level": 3,
+            "actions": 12,
+            "first_action_seconds": 2147.390852345,
+            "last_action_seconds": 2322.0826328310004
+          },
+          {
+            "level": 4,
+            "actions": 17,
+            "first_action_seconds": 2663.321760885,
+            "last_action_seconds": 3182.2004806039995
+          },
+          {
+            "level": 5,
+            "actions": 28,
+            "first_action_seconds": 3281.145883868,
+            "last_action_seconds": 3815.0817539539994
+          },
+          {
+            "level": 6,
+            "actions": 22,
+            "first_action_seconds": 4155.566221502,
+            "last_action_seconds": 4184.860932897
+          }
+        ],
+        "completed_python_calls_with_visible_tool_output": 90,
+        "visible_python_errors": 8,
+        "error_count_limit": "Different opportunities and trajectories; counts alone are not cause or quality scores."
+      }
+    },
+    "tr87-cd924810": {
+      "baseline": {
+        "score": 100.0,
+        "completed_levels": 6,
+        "state": "won",
+        "total_actions": 338,
+        "actions_per_level": [
+          37,
+          57,
+          39,
+          29,
+          42,
+          134
+        ],
+        "final_wallclock_seconds": 7161.5278914890005,
+        "per_level_action_times": [
+          {
+            "level": 1,
+            "actions": 37,
+            "first_action_seconds": 1883.3868191959991,
+            "last_action_seconds": 2146.735508128
+          },
+          {
+            "level": 2,
+            "actions": 57,
+            "first_action_seconds": 2329.786272498999,
+            "last_action_seconds": 2391.6491967740003
+          },
+          {
+            "level": 3,
+            "actions": 39,
+            "first_action_seconds": 2469.4801633059997,
+            "last_action_seconds": 2496.030694036999
+          },
+          {
+            "level": 4,
+            "actions": 29,
+            "first_action_seconds": 2569.5917029209995,
+            "last_action_seconds": 2583.7742221070002
+          },
+          {
+            "level": 5,
+            "actions": 42,
+            "first_action_seconds": 2617.6640858009996,
+            "last_action_seconds": 3046.3737265849995
+          },
+          {
+            "level": 6,
+            "actions": 134,
+            "first_action_seconds": 3164.823914597,
+            "last_action_seconds": 7160.453934825
+          }
+        ],
+        "completed_python_calls_with_visible_tool_output": 77,
+        "visible_python_errors": 12,
+        "error_count_limit": "Different opportunities and trajectories; counts alone are not cause or quality scores."
+      },
+      "main_medium": {
+        "score": 31.73343535596263,
+        "completed_levels": 4,
+        "state": "cancelled",
+        "total_actions": 354,
+        "actions_per_level": [
+          86,
+          46,
+          46,
+          69,
+          107,
+          0
+        ],
+        "final_wallclock_seconds": 7278.177868680001,
+        "per_level_action_times": [
+          {
+            "level": 1,
+            "actions": 86,
+            "first_action_seconds": 1786.1662838799998,
+            "last_action_seconds": 2913.274578555
+          },
+          {
+            "level": 2,
+            "actions": 46,
+            "first_action_seconds": 3067.17599476,
+            "last_action_seconds": 3248.7582938970004
+          },
+          {
+            "level": 3,
+            "actions": 46,
+            "first_action_seconds": 3601.952418204,
+            "last_action_seconds": 3652.522528668
+          },
+          {
+            "level": 4,
+            "actions": 69,
+            "first_action_seconds": 3708.8193865999997,
+            "last_action_seconds": 4166.962232534999
+          },
+          {
+            "level": 5,
+            "actions": 107,
+            "first_action_seconds": 4450.605452444001,
+            "last_action_seconds": 7219.446040396
+          }
+        ],
+        "completed_python_calls_with_visible_tool_output": 100,
+        "visible_python_errors": 9,
+        "error_count_limit": "Different opportunities and trajectories; counts alone are not cause or quality scores."
+      }
+    }
+  },
+  "largest_gain_review": {
+    "game": "r11l-495a7899",
+    "observed": "Candidate6levels/103actions versus baseline2levels/39actions. Candidate constructed current-state centroid/footprint programs and executed real sequences: L2 4+6clicks, L3 7+4clicks with genuine level transitions. Baseline spent most of its time onL2, eventually completing it at6968.69s; only about285s remained forL3, where no game action occurred.",
+    "evidence": [
+      {
+        "arm": "main_medium",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/main_medium/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "a26b2fd1f3b7291d1c5a358cfc30c8a016ac9fd0fdb15eb1c158c8e54c7998a4",
+        "call_index_0based": 26,
+        "tool_call_id": "call_c5eaaa6324dc42f785c0dd99",
+        "request_line_1based": 55,
+        "result_line_1based": 55,
+        "level": 2,
+        "step_before_call": 15,
+        "code_sha256": "4de918fe27d515a43424fe6643d9997725488d05fc1d7a742b4bad79c46bb5e3",
+        "code_excerpt": "\ndef plan2():\n    from collections import deque\n    g = current_frame.ascii.split('\\n')\n    S=set(); GR=set(); blk=set()\n    for r in range(64):\n        for c in range(64):\n            v=g[r][c]\n            if v=='S': S.add((r,c))\n            elif v=='g': GR.add((r,c))\n            elif v=='B': blk.add((r,c))\n    bad=S|GR\n    D={p:0 for p in bad}; q=deque()\n    for (r,c) in bad:\n        for dr,dc in ((1,0),(-1,0),(0,1),(0,-1)):\n            n=(r+dr,c+dc)\n            if n not in D and 0<=n[0]<64 and 0<=n[1]<64: D[n]=1; q.append(n)\n    while q:\n        r,c=q.popleft()\n        for dr,dc in ((1,0),(-1,0),(0,1),(0,-1)):\n            n=(r+dr,c+dc)\n            if n not in D and 0<=n[0]<64 and 0<=n[1]<64: D[n]=D[(r,c)]+1; q.append(n)\n    def dd(p): return D.get(p,99)\n    ring_p=ringcells(18,57); ring_O=ringcells(51,40)\n    def dfok(cr,cc,ring):\n        if (cr,cc) not in blk: return False\n        for (r,c) in dfoot(cr,cc):\n            if 0<=r<64 and 0<=c<64 and ((r,c) in bad or (r,c) in ring): ret",
+        "stdout": "((8, 1, (20, 62), (16, 52), (25, 48)), (10, [(21, 8), (3, 30), (9, 49)], (36, 50), (63, 23), (54, 47), (16, 43), (36, 40)))\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/main_medium/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "a26b2fd1f3b7291d1c5a358cfc30c8a016ac9fd0fdb15eb1c158c8e54c7998a4",
+        "call_index_0based": 28,
+        "tool_call_id": "call_f6b58186855f4068911e841d",
+        "request_line_1based": 59,
+        "result_line_1based": 59,
+        "level": 2,
+        "step_before_call": 19,
+        "code_sha256": "9f833230732be65bc5a3ab899b5258bbfef4085316454bd9ead4bee1c152e7d6",
+        "code_excerpt": "\nseq = [{'action':'MOUSE','row':21,'col':8},{'action':'MOUSE','row':36,'col':50},{'action':'MOUSE','row':3,'col':30},{'action':'MOUSE','row':63,'col':23},{'action':'MOUSE','row':9,'col':49},{'action':'MOUSE','row':54,'col':47}]\nres = action(seq)\nprint('exec',res.get('executed'),'stop',res.get('stop_reason'))\nfor t in transitions[-6:]:\n    r=t.result\n    g=t.after_frame.ascii.split('\\n')\n    M=[(x,y) for x in range(64) for y in range(64) if g[x][y]=='M']\n    print(t.action,'-> M',M,'lvl',r.get('level'),'lvl_done',r.get('level_completed'),'over',r.get('game_over'),'noop',r.get('no_op'))\n",
+        "stdout": "[action] batch of 6 actions, 6 executed: MOUSE(row=21, col=8), MOUSE(row=36, col=50), MOUSE(row=3, col=30), MOUSE(row=63, col=23), MOUSE(row=9, col=49), MOUSE(row=54, col=47) | stop_reason: level_completed\nexec True stop level_completed\nMOUSE(row=21, col=8) -> M [(11, 29), (18, 57)] lvl 2 lvl_done False over False noop False\nMOUSE(row=36, col=50) -> M [(16, 43), (18, 57)] lvl 2 lvl_done False over False noop False\nMOUSE(row=3, col=30) -> M [(16, 43), (18, 57)] lvl 2 lvl_done False over False noop False\nMOUSE(row=63, col=23) -> M [(18, 57), (36, 40)] lvl 2 lvl_done False over False noop False\nMOUSE(row=9, col=49) -> M [(18, 57), (36, 40)] lvl 2 lvl_done False over False noop False\nMOUSE(row=54, col=47) -> M [(15, 27), (37, 44)] lvl 3 lvl_done True over False noop False\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/main_medium/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "a26b2fd1f3b7291d1c5a358cfc30c8a016ac9fd0fdb15eb1c158c8e54c7998a4",
+        "call_index_0based": 42,
+        "tool_call_id": "call_c2498e9e72994a0e9e4dad12",
+        "request_line_1based": 87,
+        "result_line_1based": 87,
+        "level": 3,
+        "step_before_call": 26,
+        "code_sha256": "83bb0f70eaab41d599e808f9249967eb14086ca578a31721adedc81e51a6f79b",
+        "code_excerpt": "\nNS3 = nsearch2(120)\nPS = psearch()\nprint('NS',len(NS3),'PS',len(PS))\nfound=None; fails={}\nfor sc,assign,order in NS3:\n    for sc2,pq,pord in PS:\n        r=diag3((assign,order),(pq,pord))\n        if r[0]=='OK': found=(assign,order,pq,pord,r[1]); break\n        fails[r[0]]=fails.get(r[0],0)+1\n    if found: break\nprint('fails',fails)\nprint('found',bool(found))\nif found:\n    print('N',found[0],found[1]); print('p',found[2],found[3]); print('clicks',len(found[4]))\n    for c in found[4]: print(c)\n",
+        "stdout": "NS 120 PS 10\nfails {}\nfound True\nN ((40, 44), (46, 55), (63, 58), (63, 63)) (0, 3, 1, 2)\np ((62, 41), (52, 27)) (0, 1)\nclicks 11\n('M', (40, 44))\n('S', (21, 23))\n('M', (63, 63))\n('S', (9, 34))\n('M', (46, 55))\n('S', (16, 39))\n('M', (63, 58))\n('S', (34, 37))\n('M', (62, 41))\n('S', (40, 52))\n('M', (52, 27))\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/main_medium/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "a26b2fd1f3b7291d1c5a358cfc30c8a016ac9fd0fdb15eb1c158c8e54c7998a4",
+        "call_index_0based": 44,
+        "tool_call_id": "call_30fe86c595674c96a8638e29",
+        "request_line_1based": 91,
+        "result_line_1based": 91,
+        "level": 3,
+        "step_before_call": 33,
+        "code_sha256": "2e7d816dbf26ce472ef7ad104057aa6d8e634a65623f28a628bc3876c7713403",
+        "code_excerpt": "\nprint([o for o in objs(current_frame) if o[0] in 'WpM' and o[1]<=20])\nseq2=[{'action':'MOUSE','row':34,'col':37},{'action':'MOUSE','row':62,'col':41},{'action':'MOUSE','row':40,'col':52},{'action':'MOUSE','row':52,'col':27}]\nres=action(seq2)\nprint('exec',res.get('executed'),'stop',res.get('stop_reason'))\nfor t in transitions[-4:]:\n    g=t.after_frame.ascii.split('\\n')\n    M=[(x,y) for x in range(64) for y in range(64) if g[x][y]=='M']\n    print(t.action,'noop',t.result.get('no_op'),'M',M,'lvl',t.result.get('level'),'done',t.result.get('level_completed'),'over',t.result.get('game_over'))\n",
+        "stdout": "[('p', 1, (34, 37, 34, 37)), ('p', 20, (35, 42, 39, 46)), ('M', 1, (37, 44, 37, 44)), ('p', 1, (40, 52, 40, 52)), ('W', 1, (50, 54, 50, 54)), ('W', 1, (50, 56, 50, 56)), ('W', 1, (51, 53, 51, 53)), ('W', 1, (51, 57, 51, 57)), ('W', 1, (52, 52, 52, 52)), ('W', 1, (52, 58, 52, 58)), ('M', 1, (53, 55, 53, 55)), ('p', 1, (54, 33, 54, 33)), ('p', 1, (54, 35, 54, 35)), ('W', 1, (54, 52, 54, 52)), ('W', 1, (54, 58, 54, 58)), ('p', 1, (55, 32, 55, 32)), ('p', 1, (55, 36, 55, 36)), ('W', 1, (55, 53, 55, 53)), ('W', 1, (55, 57, 55, 57)), ('p', 1, (56, 31, 56, 31)), ('p', 1, (56, 37, 56, 37)), ('W', 1, (56, 54, 56, 54)), ('W', 1, (56, 56, 56, 56)), ('p', 1, (58, 31, 58, 31)), ('p', 1, (58, 37, 58, 37)), ('p', 1, (59, 32, 59, 32)), ('p', 1, (59, 36, 59, 36)), ('p', 1, (60, 33, 60, 33)), ('p', 1, (60, 35, 60, 35)), ('W', 8, (61, 56, 63, 60))]\n[action] batch of 4 actions, 4 executed: MOUSE(row=34, col=37), MOUSE(row=62, col=41), MOUSE(row=40, col=52), MOUSE(row=52, col=27) | stop_reason: level_completed\nexec True stop level_completed\nMOUSE(row=34, col=37) noop False M [(37, 44), (53, 55)] lvl 3 done False over False\nMOUSE(row=62, col=41) noop False M [(51, 46), (53, 55)] lvl 3 done False over False\nMOUSE(row=40, col=52) noop False M [(51, 46), (53, 55)] lvl 3 done False over False\nMOUSE(row=52, col=27) noop False M [(9, 17), (9, 23), (10, 18), (10, 22), (11, 19), (11, 21), (13, 31), (44, 46), (45, 18)] lvl 4 done True over False\n",
+        "error": null
+      },
+      {
+        "arm": "baseline",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/baseline/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "2cb2748685f4482b1be2ac0395f77e79022b971908eb0947c9c1d6c0f4a446b4",
+        "call_index_0based": 50,
+        "tool_call_id": "call_62b19d98c12e45949d4635a9",
+        "request_line_1based": 109,
+        "result_line_1based": 109,
+        "level": 2,
+        "step_before_call": 34,
+        "code_sha256": "fd4c3f1ffde0ca7b85cf8481f7c8be8c8d32ded64ebcaa1fdda6c27b9fdf3eb4",
+        "code_excerpt": "S=[('sw',(51,40)),('tp',(57,46)),('sw',(58,50)),('tp',(45,40)),('sw',(25,53)),('tp',(51,34))]\nst = full2(current_frame)\nfor kind,cell in S:\n    pred = apply2(st, kind, cell)\n    if pred is None: print('PREFAIL',kind,cell); break\n    res = action([{'action':'MOUSE','row':cell[0],'col':cell[1]}])\n    obs = full2(current_frame)\n    ok = key(obs)==key(pred)\n    print(kind, cell, 'ok' if ok else 'MISMATCH', 'COMPLETED' if res.get('level_completed') else '', 'OVER' if res.get('game_over') else '', 'DONE' if res.get('done') else '')\n    if not ok:\n        print(' pred',pred); print(' obs ',obs); break\n    st=obs\n    if res.get('level_completed') or res.get('game_over') or res.get('done'): break\n",
+        "stdout": "[action] MOUSE(row=51, col=40) -> effect\nsw (51, 40) MISMATCH   \n pred (((51, 40), 'O'), ((12, 57), 'p'), ((25, 53), 'O'), ((24, 57), 'p'), ((58, 50), 'O'))\n obs  (((51, 40), 'O'), ((12, 57), 'p'), ((58, 50), 'O'))\n",
+        "error": null
+      },
+      {
+        "arm": "baseline",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/baseline/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "2cb2748685f4482b1be2ac0395f77e79022b971908eb0947c9c1d6c0f4a446b4",
+        "call_index_0based": 54,
+        "tool_call_id": "call_e14d856146424984adf682c0",
+        "request_line_1based": 117,
+        "result_line_1based": 117,
+        "level": 2,
+        "step_before_call": 35,
+        "code_sha256": "91eedfa0a7b7ec9dd62a93e001994ee587909d00db92c02b2e32c73a3e03fb3d",
+        "code_excerpt": "def full5(fr):\n    seg=fr.segmentation; nodes=seg['nodes']; dia=[]; hubs=[]\n    for i,n in enumerate(nodes):\n        if n['pixels']==1 and n['color'] in 'pO':\n            for m in nodes:\n                if i in m['children'] and m['color'] in ('G','W') and m['pixels'] in (12,24):\n                    dia.append(((n['boundary'][0][0],n['boundary'][0][1]), n['color'], 'W' if m['color']=='W' else 'G')); break\n        if n['pixels']==1 and n['color']=='M':\n            for m in nodes:\n                if i in m['children'] and m['pixels']==20:\n                    hubs.append((m['color'],(n['boundary'][0][0],n['boundary'][0][1]))); break\n    return tuple(sorted(dia)), tuple(sorted(hubs))\nS=[('tp',(57,46)),('sw',(58,50)),('tp',(45,40)),('sw',(25,53)),('tp',(51,34))]\nst=list(full5(current_frame)[0])\nprint('start', st)\nfor kind,cell in S:\n    idx=[i for i,(p,t,k) in enumerate(st) if k=='W'][0]\n    if kind=='tp':\n        if any(p==cell for p,t,k in st): print('blocked',cell); break\n        st[idx]",
+        "stdout": "start [((12, 57), 'p', 'G'), ((24, 57), 'p', 'G'), ((25, 53), 'O', 'G'), ((51, 40), 'O', 'W'), ((58, 50), 'O', 'G')]\n[action] MOUSE(row=57, col=46) -> effect\ntp (57, 46) MISMATCH (((12, 57), 'p', 'G'), ((24, 57), 'p', 'G'), ((25, 53), 'O', 'G'), ((57, 46), 'O', 'W'), ((58, 50), 'O', 'G')) vs (((12, 57), 'p'), ((24, 57), 'p'), ((25, 53), 'O'), ((57, 46), 'O'), ((58, 50), 'O')) (('O', (46, 49)), ('p', (18, 57)))  \n[action] MOUSE(row=58, col=50) -> effect\nsw (58, 50) MISMATCH (((12, 57), 'p', 'G'), ((24, 57), 'p', 'G'), ((25, 53), 'O', 'G'), ((57, 46), 'O', 'G'), ((58, 50), 'O', 'W')) vs (((12, 57), 'p'), ((24, 57), 'p'), ((25, 53), 'O'), ((57, 46), 'O'), ((58, 50), 'O')) (('O', (46, 49)), ('p', (18, 57)))  \n[action] MOUSE(row=45, col=40) -> effect\ntp (45, 40) MISMATCH (((12, 57), 'p', 'G'), ((24, 57), 'p', 'G'), ((25, 53), 'O', 'G'), ((45, 40), 'O', 'W'), ((57, 46), 'O', 'G')) vs (((12, 57), 'p'), ((24, 57), 'p'), ((25, 53), 'O'), ((45, 40), 'O'), ((58, 50), 'O')) (('O', (42, 46)), ('p', (18, 57)))  \n[action] MOUSE(row=25, col=53) -> effect\nsw (25, 53) MISMATCH (((12, 57), 'p', 'G'), ((24, 57), 'p', 'G'), ((25, 53), 'O', 'W'), ((45, 40), 'O', 'G'), ((57, 46), 'O', 'G')) vs (((12, 57), 'p'), ((24, 57), 'p'), ((25, 53), 'O'), ((45, 40), 'O'), ((58, 50), 'O')) (('O', (42, 46)), ('p', (18, 57)))  \n[action] MOUSE(row=51, col=34) -> LEVEL COMPLETED\ntp (51, 34) MISMATCH (((34, 37), 'p', 'G'), ((40, 52), 'p', 'G')) vs (((12, 57), 'p'), ((24, 57), 'p'), ((25, 53), 'O'), ((51, 34), 'O'), ((58, 50), 'O')) (('N', (15, 27)), ('p', (37, 44))) COMPLETED \n",
+        "error": null
+      },
+      {
+        "arm": "baseline",
+        "game_id": "r11l-495a7899",
+        "source": "runs/036-essential-preview/baseline/r11l-495a7899_p0_requests.jsonl",
+        "source_sha256": "2cb2748685f4482b1be2ac0395f77e79022b971908eb0947c9c1d6c0f4a446b4",
+        "call_index_0based": 63,
+        "tool_call_id": "call_3163b8d1a01d48a9a7604942",
+        "request_line_1based": 135,
+        "result_line_1based": 135,
+        "level": 3,
+        "step_before_call": 40,
+        "code_sha256": "af1ce506e93d9ded7696d1131753816afdfe6b52cf12bcc4e42fdfad4015d68d",
+        "code_excerpt": "a0=current_frame.ascii.split('\\n')\nBLK=set((r,c) for r in range(64) for c in range(64) if r==0 or c==0 or r==63 or c==63 or a0[r][c] in 'Sg')\nringN=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nringp=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\nBLK=frozenset(BLK|set(ringN)|set(ringp))\nFOOTS={}\nPOS=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        f=frozenset(dfoot(r,c))\n        if not (f & BLK): POS.append((r,c)); FOOTS[(r,c)]=f\n# parking candidates: coarse sample of POS\npark=[p fo",
+        "stdout": "",
+        "error": "Tool timed out after 30s"
+      }
+    ],
+    "limits": [
+      "This is real useful main-loop programming, not auxiliary mechanism evidence.",
+      "Baseline same-color component parsing merged adjacent pieces and missed objects (e.g.G24); later MISMATCH comparisons also mixed3-field observed tuples with2-field predictions. Those checks are not reliable evidence of a dynamics failure.",
+      "The final L2 level-completion transition legitimately loads a new frame; treating it as ordinary old-plan mismatch is another comparison-boundary error.",
+      "More retained-thinking or more Python errors do not themselves identify why the mode trajectories diverged. Candidate also had8 visible Python errors, yet solved; baseline7 visible errors and stalled."
+    ]
+  },
+  "largest_loss_review": {
+    "game": "tr87-cd924810",
+    "observed": "Candidate4levels/354actions versus baseline6levels/338actions. Candidate had86actions onL1 and69 onL4 versus37/29 for reference. Candidate reachedL5 around4166.96s, baseline reachedL5 at2583.77s and completedL5 at3046.37s. Candidate L5 consumed107actions through7219.45s without completion. This is not explained simply by fewer actions or a delivery failure.",
+    "specific_reproducible_defect": {
+      "level": 4,
+      "mechanism": "Generated norm cropped right margin with max instead of min. On an actual14pixel glyph, two rotations silently removed9pixels. The resulting canon equated that glyph with a5pixel line, corrupting shape mapping and comparison.",
+      "observed_bad_source_request_line": 127,
+      "observed_pixel_counterexample_request_line": 129,
+      "observed_fixed_source_request_line": 133,
+      "actual_bad_pixels": [
+        14,
+        14,
+        5,
+        5
+      ],
+      "actual_fixed_pixels": [
+        14,
+        14,
+        14,
+        14
+      ],
+      "offline_replay": "experiments/036-analysis/normalization-counterexample.json",
+      "exact_generated_source": "experiments/036-analysis/normalization-source.json",
+      "read_only_replay_script": "experiments/036-analysis/replay-normalization.py"
+    },
+    "evidence": [
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 48,
+        "tool_call_id": "call_55d01a3a0a2941c29cb581a3",
+        "request_line_1based": 99,
+        "result_line_1based": 99,
+        "level": 4,
+        "step_before_call": 179,
+        "code_sha256": "48845c94d7f4b4baa807f666e46ba2821d4e36a09ed96d282b0f6b59c2f1c7d0",
+        "code_excerpt": "\ndef solve_chain(tg, rows=(51,57), c0=7, n=7):\n    log=[]; done=False\n    for step in range(n):\n        col=cursor2(current_frame)\n        for i in range(9):\n            cur=canon(cb(current_frame,rows[0],c0+1+7*col,rows[1],c0+5+7*col))\n            if cur==tg[col]: log.append((col,'OK',i)); break\n            r=action(['UP'])\n            if r.get('level_completed') or r.get('run_complete'): done=True; log.append(('DONE',col,i)); break\n        if done: break\n        if step<n-1: action(['RIGHT'])\n    return log\nS2P,P2Y,other=build4(current_frame)\nsk=[cb(current_frame,40,7+1+7*k,46,7+5+7*k) for k in range(7)]\ntg=[]\nfor c in sk:\n    p=S2P.get(canon(c)); y=P2Y.get(canon(p)) if p else None\n    tg.append(canon(y) if y else None)\nlog=solve_chain(tg)\nprint(log)\nprint('completed?',last_action_call_result.get('level_completed'),'over?',last_action_call_result.get('game_over'),'bar',wrun(current_frame)[0])\nprint('match:',[canon(cb(current_frame,51,8+7*i,57,12+7*i))==tg[i] for i in range(7)])\n",
+        "stdout": "",
+        "error": "Tool timed out after 30s"
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 61,
+        "tool_call_id": "call_783b6f2577d24fefb50aef85",
+        "request_line_1based": 125,
+        "result_line_1based": 125,
+        "level": 4,
+        "step_before_call": 238,
+        "code_sha256": "eb3fc5c5ec4efd75a0d8615756060cb78d5275e2c84be9c1d987dc20bdfc63f2",
+        "code_excerpt": "\nA=norm(['#','#','#','#','#'])\nB=norm(['#####','.#..#','.#..#','.####','....#'])\nprint('px',px(A),px(B))\nprint('canon2 A',canon2(A))\nprint('canon2 B',canon2(B))\nprint('equal?',canon2(A)==canon2(B))\nprint('canon  equal?',canon(A)==canon(B))\nprint('rotCW A',rotCW(A))\nprint('rotCW B',rotCW(B))\n",
+        "stdout": "px 5 14\ncanon2 A ('#', '#', '#', '#', '#')\ncanon2 B ('#', '#', '#', '#', '#')\nequal? True\ncanon  equal? True\nrotCW A ('#####',)\nrotCW B ('....#', '.####', '.#..#', '.#..#', '#####')\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 63,
+        "tool_call_id": "call_31fc764b65504190a5f21f4b",
+        "request_line_1based": 129,
+        "result_line_1based": 129,
+        "level": 4,
+        "step_before_call": 238,
+        "code_sha256": "e4c34174500700c5b2198ba9b0fc5e0801818f1221b858c7d66b918d667a6c25",
+        "code_excerpt": "\nB=('#####','.#..#','.#..#','.####','....#')\ncur=B\nfor i in range(4):\n    print(i,px(cur),cur)\n    cur=rotCW(cur)\nprint('after 4 back to start?',cur==B)\n",
+        "stdout": "0 14 ('#####', '.#..#', '.#..#', '.####', '....#')\n1 14 ('....#', '.####', '.#..#', '.#..#', '#####')\n2 5 ('#', '#', '#', '#', '#')\n3 5 ('#####',)\nafter 4 back to start? False\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 64,
+        "tool_call_id": "call_ea2309d979c34767bf848343",
+        "request_line_1based": 131,
+        "result_line_1based": 131,
+        "level": 4,
+        "step_before_call": 238,
+        "code_sha256": "8169d580b5ab194cb6f347681ba577d48ecaebced719a4ad8d004afacbd334c1",
+        "code_excerpt": "\nb1=('....#','.####','.#..#','.#..#','#####')\nR=len(b1); C=len(b1[0])\nraw=[''.join(b1[R-1-r][c] for r in range(R)) for c in range(C)]\nprint('raw:',raw)\nprint('normed:',norm(raw), px(norm(raw)))\n",
+        "stdout": "raw: ['#....', '####.', '#..#.', '#..#.', '#####']\nnormed: ('#', '#', '#', '#', '#') 5\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 65,
+        "tool_call_id": "call_f38d63bb33af4f0e8efb6257",
+        "request_line_1based": 133,
+        "result_line_1based": 133,
+        "level": 4,
+        "step_before_call": 238,
+        "code_sha256": "46b16c8561fc88e35f16120e3996ad150491e2ab552b3db7aa373da0f52deda1",
+        "code_excerpt": "\ndef norm(mm):\n    rows=[r for r in mm if '#' in r]\n    if not rows: return ()\n    left=min(r.index('#') for r in rows)\n    right=min(len(r)-1-r.rindex('#') for r in rows)\n    return tuple(r[left:len(r)-right] for r in rows)\ndef rotCW(b):\n    R=len(b); C=len(b[0])\n    return norm([''.join(b[R-1-r][c] for r in range(R)) for c in range(C)])\ndef canon(b):\n    cur=norm(b); best=None\n    for _ in range(4):\n        if best is None or cur<best: best=cur\n        cur=rotCW(cur)\n    return best\nB=('#####','.#..#','.#..#','.####','....#')\ncur=B\nfor i in range(4):\n    print(i,px(cur))\n    cur=rotCW(cur)\nprint('cycle ok?',cur==B, 'px preserved', all(px(rotCW(B,k)) if False else True for k in [0]))\nA=norm(['#','#','#','#','#'])\nprint('canon A==canon B?',canon(A)==canon(B))\n",
+        "stdout": "0 14\n1 14\n2 14\n3 14\ncycle ok? True px preserved True\ncanon A==canon B? False\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 68,
+        "tool_call_id": "call_69c0479943cf40e0acea360b",
+        "request_line_1based": 139,
+        "result_line_1based": 139,
+        "level": 4,
+        "step_before_call": 243,
+        "code_sha256": "7e8dec4886f16424a353834c232ab31d1df29b17d2e1aad9f54407341c1df38a",
+        "code_excerpt": "\nPAIR=[((3,12,9,18),(3,22,9,28)),((3,35,9,41),(3,45,9,51)),((11,12,17,18),(11,22,17,28)),((11,35,17,41),(11,45,17,51)),\n      ((19,12,25,18),(19,22,25,28)),((19,35,25,41),(19,45,25,51)),((27,12,33,18),(27,22,33,28)),((27,35,33,41),(27,45,33,51))]\nnodes=current_frame.segmentation['nodes']\nS2P={}; P2Y={}\nfor (p,q) in PAIR:\n    a=colat(p,nodes); b_=colat(q,nodes)\n    g=fullcell(current_frame,*p); h=fullcell(current_frame,*q)\n    if (a,b_)==('S','P'): S2P[canon(g)]=h\n    elif (a,b_)==('P','Y'): P2Y[canon(g)]=h\nsk=[fullcell(current_frame,40,7+7*i,46,13+7*i) for i in range(7)]\ntg=[]\nfor c in sk:\n    p=S2P.get(canon(c)); y=P2Y.get(canon(p)) if p else None\n    tg.append(canon(y) if y else None)\nlog=[]; done=False\nfor target_col in [2,1]:\n    while cursor2(current_frame)!=target_col and not done:\n        r=action(['LEFT'])\n        if r.get('level_completed') or r.get('run_complete'): done=True\n  ",
+        "stdout": "[action] LEFT -> effect\n[action] LEFT -> effect\n[action] UP -> effect\n[action] LEFT -> effect\n[action] UP -> LEVEL COMPLETED\n[(2, 'OK', 1), ('DONE', 1, 0)] cursor 0 done True\n",
+        "error": null
+      },
+      {
+        "arm": "main_medium",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/main_medium/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "aaab8e43ce54d252b4d7bc15b315d44f8a0e7055a0b58db63d7e677cbec9f3af",
+        "call_index_0based": 99,
+        "tool_call_id": "call_de68521ea2d54043ba8fb782",
+        "request_line_1based": 203,
+        "result_line_1based": 203,
+        "level": 5,
+        "step_before_call": 355,
+        "code_sha256": "dbf8d31f56fc7056f698a7ea8877903827f3d6308ef1a079ef2dd7adb9475b40",
+        "code_excerpt": "\nBOX=[(10,8,16,14),(10,18,16,24),(10,31,16,37),(10,41,16,54),(22,8,28,21),(22,25,28,31),(22,38,28,44),(22,48,28,54)]\nSKY=glyphs(current_frame,43,14,49,48); PINK=glyphs(current_frame,52,14,58,48)\nTG={0:[SKY[4]],1:[PINK[3]],2:[SKY[1]],3:[PINK[1],PINK[2]],4:[SKY[2],SKY[3]],5:[PINK[0]],6:[SKY[0]],7:[PINK[4]]}\ndef rot(g,k):\n    for _ in range(k%4): g=rotCW(g)\n    return g\nfor i in range(8):\n    v=glyphs(current_frame,*BOX[i]); t=TG[i]\n    ex = tuple(v)==tuple(t)\n    rots_ok=all(canon(a)==canon(b) for a,b in zip(v,t))\n    offs=[next((k for k in range(4) if rot(a,k)==b), None) for a,b in zip(v,t)] if rots_ok else None\n    print(i,'exact',ex,'canonOK',rots_ok,'rotOff',offs)\nprint('bar',bar())\n",
+        "stdout": "0 exact False canonOK True rotOff [1]\n1 exact False canonOK True rotOff [2]\n2 exact False canonOK True rotOff [2]\n3 exact False canonOK True rotOff [1, 2]\n4 exact False canonOK True rotOff [1, 1]\n5 exact True canonOK True rotOff [0]\n6 exact False canonOK True rotOff [1]\n7 exact False canonOK True rotOff [2]\nbar 11\n",
+        "error": null
+      },
+      {
+        "arm": "baseline",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/baseline/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "120263436b46eaec460ba40364db324f1b5a1941c6bf025f3b02e365f2d317a9",
+        "call_index_0based": 52,
+        "tool_call_id": "call_990da3f841c84f4ebbcd8b27",
+        "request_line_1based": 105,
+        "result_line_1based": 105,
+        "level": 5,
+        "step_before_call": 203,
+        "code_sha256": "846509bdbaa76b479b664e836bd1e854b15f22f276514a9411adfe5506a00f1a",
+        "code_excerpt": "tl=parse5(); Q=tl[8]['g']; A=tl[9]['g']\nm={0:Q[0],1:A[0],2:Q[1],3:A[1],4:Q[2],5:A[3],6:Q[4],7:A[4]}\nfor i in range(8):\n    g=tl[i]['g']\n    print(i,tl[i]['col'],'shape_ok',all(rkey(x)==rkey(m[i]) for x in g),'exact_ok',all(k2(x)==k2(m[i]) for x in g),'poses',[k2(x)[:6] for x in g],'want',k2(m[i])[:6])\n",
+        "stdout": "0 S shape_ok True exact_ok True poses ['BB0BB0'] want BB0BB0\n1 P shape_ok True exact_ok False poses ['00BBB0'] want BBB00B\n2 S shape_ok False exact_ok False poses ['0000B0'] want 00B000\n3 P shape_ok True exact_ok False poses ['0BBBB0', 'BBBB0B'] want 00B00B\n4 S shape_ok True exact_ok False poses ['00B00B', '00B00B'] want 0BBB00\n5 P shape_ok True exact_ok False poses ['0000B0'] want B0000B\n6 S shape_ok True exact_ok True poses ['0000B0'] want 0000B0\n7 P shape_ok True exact_ok False poses ['BBBBBB'] want BBBBBB\n",
+        "error": null
+      },
+      {
+        "arm": "baseline",
+        "game_id": "tr87-cd924810",
+        "source": "runs/036-essential-preview/baseline/tr87-cd924810_p0_requests.jsonl",
+        "source_sha256": "120263436b46eaec460ba40364db324f1b5a1941c6bf025f3b02e365f2d317a9",
+        "call_index_0based": 53,
+        "tool_call_id": "call_4359a93cdb094949a8faade0",
+        "request_line_1based": 107,
+        "result_line_1based": 107,
+        "level": 5,
+        "step_before_call": 203,
+        "code_sha256": "22e9debc2c0030eba505957a9fc410ed64b51da006a9367cf7a955154c9d8275",
+        "code_excerpt": "tl=parse5(); Q=tl[8]['g']; A=tl[9]['g']\ntgt={0:rkey(Q[0]),1:rkey(A[0]),2:rkey(Q[1]),3:rkey(A[1]),4:rkey(Q[2]),5:rkey(A[3]),6:rkey(Q[4]),7:rkey(A[4])}\nres=solve5(2,tgt[2])\nprint(res,last_action_call_result['level_completed'],last_action_call_result['state'],'hud',hud_left())\ntl=parse5()\nprint('shape ok',[all(rkey(x)==tgt[i] for x in tl[i]['g']) for i in range(8)])\n",
+        "stdout": "[action] LEFT -> effect\n[action] UP -> LEVEL COMPLETED\n('completed', 0) True NOT_FINISHED hud 64\nshape ok [False, False, False, False, False, False, False, False]\n",
+        "error": null
+      }
+    ],
+    "causal_boundaries": [
+      "The main loop itself repaired this bug and then completedL4. It is a genuine local software defect, not a proven cause of all−68.2666 score or evidence that medium universally reduces reasoning quality.",
+      "The first L4 large loop timed out after executing45actions; its cost cannot be attributed entirely to the normalization bug without a counterfactual.",
+      "At the candidateL5 tail, all8rotation-canonical target matches were true but the level had not completed. This disproves sufficiency of that chosen goal projection; it does not identify which remaining rule/target hypothesis is wrong.",
+      "Do not infer that exact orientation is required from candidateL5 rotation offsets: baselineL5 had several exact_ok=False, then completed after repairing the remaining shape.",
+      "Baseline had12visible tool errors, candidate9. Baseline still solved. Error counts are opportunity-dependent and cannot diagnose the score difference."
+    ]
+  },
+  "next_step": {
+    "one_defect_to_target": "Generated geometric transform helpers may corrupt their own representations before any action checks the program assumptions.",
+    "candidate_hypothesis_only": "Within the existing main loop, require a tiny intrinsic-invariant check before using a new geometric transform in a multi-action plan: pixel count under rigid rotation, four rotations returning the original, normalization idempotence, and canonical equality never conflating different pixel counts. On failure fix the helper before choosing actions. No separate model branch, new state, game-ID-specific knowledge, larger tokens or budget.",
+    "why_this_is_focused": "This addresses the exact observed14→5counterexample. It does not attempt to solve unknown goal semantics or promise score gain. Avoid reintroducing the stopped034/035 auxiliary delivery family or030persistent state.",
+    "before_any_gpu": "Use the archived generated bad/fixed helpers for the small pureCPU replay, verify a proposed instruction or helper contract reaches the original request without changing other solver settings, then define a separate bounded diagnostic and promotion rule. A fixture pass is not evidence that the model follows a prompt or scores higher.",
+    "current_action": "Archive036 and this replay; do not modify frozen solver or startGPU/formal submission in this audit."
+  },
+  "remaining_uncertainty": [
+    "036 integrity/mode/request coverage and budget fairness are owned by the independent integrity audit; this trace review does not certify those.",
+    "Shared service competition, stochastic generation and sequential arm order remain alternative explanations for trajectory differences.",
+    "The largest-gain/large-loss pairs are diagnostic cases, not a replacement for the retained full25 result."
+  ]
+}

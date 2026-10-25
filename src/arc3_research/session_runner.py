@@ -313,6 +313,9 @@ def run_session(namespace: dict) -> dict:
                 if mode == "low":
                     model_dir = Path(namespace["ARC3_INPUT_PATHS"]["model"]).resolve(strict=True)
                     command.extend(["--model-dir", str(model_dir)])
+            if config.get("research_family") == "036":
+                model_dir = Path(namespace["ARC3_INPUT_PATHS"]["model"]).resolve(strict=True)
+                command.extend(["--research-family", "036", "--model-dir", str(model_dir)])
             if config.get("inference_timing", False):
                 command.append("--inference-timing")
             if config.get("request_deadline", False):

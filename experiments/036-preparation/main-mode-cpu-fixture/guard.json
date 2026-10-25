@@ -1,0 +1,92 @@
+{
+  "check": "036-mounted-main-reasoning-template-v1",
+  "passed": true,
+  "observed_at_utc": "2026-10-24T12:12:37.325307+00:00",
+  "model_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model",
+  "expected_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+  "local_files_only": true,
+  "network_requested": false,
+  "template_updated": false,
+  "model_generation_calls": 0,
+  "model_weight_loads": 0,
+  "gpu_calls": 0,
+  "active_template_source": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/chat_template.jinja",
+  "active_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+  "source_files": [
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/chat_template.jinja",
+      "sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+      "bytes": 8952
+    },
+    {
+      "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/tokenizer_config.json",
+      "sha256": "d8fffe26aa4bd6b69c44a4e8120576381ab07e7c22744233bd220c0cf5a4de3b",
+      "bytes": 50
+    }
+  ],
+  "template_archive": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/guard-chat_template.jinja",
+  "transformers_version": "036-cpu-fixture-no-real-tokenizer",
+  "tokenizer_class": "FixtureTokenizer",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "Inspect the current state before choosing an action."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_state",
+        "description": "Inspect one visible state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "detail"
+          ]
+        }
+      }
+    }
+  ],
+  "renders": {
+    "default": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\nReasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.\n\ntools and neutral message\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "ea7606581e6d78018c7da43c03cd368951dcd0ffb8f39ced89c04093fb0370e6",
+      "rendered_bytes": 282
+    },
+    "medium": {
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "medium"
+      },
+      "rendered_prompt": "CPU FIXTURE ONLY\ntools and neutral message\n<|im_start|>assistant\n<think>\n",
+      "rendered_sha256": "dab8a9da5273d2f091cca586b0f57cdec922a87976e15e0bef1e2f77c8d35b67",
+      "rendered_bytes": 73
+    }
+  },
+  "checks": {
+    "template_default_is_xhigh": true,
+    "template_supports_medium": true,
+    "default_contains_xhigh_instruction_once": true,
+    "medium_omits_xhigh_instruction": true,
+    "both_omit_low_instruction": true,
+    "both_keep_thinking_open": true,
+    "only_rendered_difference_is_xhigh_instruction": true,
+    "renderings_distinct": true
+  },
+  "decision": "allow_036_default_versus_medium_comparison"
+}

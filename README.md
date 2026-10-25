@@ -10,7 +10,8 @@
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
 | 最近正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
-| 当前研究 · 035 | 合同冻结，比较辅助low推理／off／原009三臂；CPU和独立预检通过，同一私有kernel版本10已排队，实际模板待在线CPU验证 | [035计划](docs/plan/035-auxiliary-reasoning-mode.md) · [进展](docs/progress/035-auxiliary-reasoning.md) |
+| 最新结果 · 036 | 完整25题39.4358→40.6409（+1.2051）、97→100关；去最大涨题后−2.3161，不直接晋级正式候选 | [036结果](research/notes/036/036-results-analysis.md) · [进展](docs/progress/036-main-reasoning-medium.md) |
+| 已完成 · 035 | low真实生效，但A/B/C均分18.2540、新增关及程序动作均0；执行停损，结束独立辅助分支 | [035结果](research/notes/035/035-results-analysis.md) · [进展](docs/progress/035-auxiliary-reasoning.md) |
 | 已完成 · 034 v9 | 程序动作仍0，A/B均分20.2479→18.2540，差−1.9939；执行停损，停止合同调参，不扩池或正式提交 | [v9结果](research/notes/034/034-v9-results-analysis.md) |
 | 已完成 · 034 v8 | 四份源码全交付，但三份弃权／一份无效ready，程序动作0；两题均分差0，不扩池或正式提交 | [v8结果](research/notes/034/034-v8-results-analysis.md) |
 | 已完成 · 034 v7 | 零动作反馈真实送达并缩短代码，但全部被提取合同拒收，程序动作0；同期两题均分−5.5556，不扩池 | [034 v7 结果](research/notes/034/034-v7-results-analysis.md) |

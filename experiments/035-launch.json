@@ -1,6 +1,6 @@
 {
   "observed_at_utc": "2026-10-24T10:53:19.647645+00:00",
-  "status": "push_returned",
+  "status": "completed",
   "kernel_id": "zhuating/arc3-034-plan-diagnostic",
   "notebook_path": "notebooks/035-aux-reasoning-diagnostic/experiment.ipynb",
   "notebook_sha256": "ebe8a40219330c10913796d732811493aaa3ff1cfa32906a7207188fa2a6e6dc",
@@ -20,20 +20,79 @@
     "kernelId": 140147580
   },
   "push_finished_at_utc": "2026-10-24T10:53:24.130324+00:00",
-  "latest_observed_at_utc": "2026-10-24T10:54:06.536139+00:00",
+  "latest_observed_at_utc": "2026-10-24T12:11:56.559361+00:00",
   "version": 10,
-  "platform_status": "QUEUED",
+  "platform_status": "COMPLETE",
   "remote_source_verified": true,
   "remote_source_check": "experiments/035-remote-source-check.json",
-  "platform_run_started": false,
-  "phase": "platform_run",
-  "next_step": "When complete, download both arms and audit delivery, real actions/predictions/repairs and paired score. Verify actual mounted low mode and compare C/B/C-A/B-A. Stop independent branch if no useful grounded execution/net signal. Full25 only after mechanism and positive net signal; formal only after full25 gain.",
+  "platform_run_started": true,
+  "phase": "finished",
+  "next_step": "Auxiliary branch ended. One main-loop default-medium hypothesis with full25 and original7254s per arm, after offline checks and independent preflight. No035 formal submission.",
   "local_monitoring": {
-    "status": "yield_to_user_completion_notice",
+    "status": "completed_results_downloaded",
     "user_will_report_completion": true,
     "remote_job_cancelled": false
   },
   "observed_kernel_ref": "zhuating/arc3-auxiliary-reasoning-diagnostic",
   "observed_kernel_id": 140147580,
-  "platform_title_slug_note": "Kaggle updated the same kernel id140147580 slug to match the035 title during save; this is not a second job. Frozen source remains exact; no repeat upload."
+  "platform_title_slug_note": "Kaggle updated the same kernel id140147580 slug to match the035 title during save; this is not a second job. Frozen source remains exact; no repeat upload.",
+  "analysis_path": "research/notes/035/035-results-analysis.md",
+  "assessment_path": "experiments/035-analysis/mechanism-assessment.json",
+  "all_three_arms_artifacts_complete": true,
+  "actual_mounted_low_mode_verified": true,
+  "stop_rule_triggered": true,
+  "decision": "End independent auxiliary-program branch. Do not expand035 or submit it. Return to009 main loop and evaluate one default-reasoning-mode factor in a complete contemporaneous25-game comparison.",
+  "gpu_server_stopped": true,
+  "session_elapsed_seconds": 3073.661779165268,
+  "model_ready_seconds": 1662.132842540741,
+  "actual_results": {
+    "A": {
+      "ft09-0d8bbf25": {
+        "added_levels": 0,
+        "continuation_action_count": 45,
+        "final_score": 14.285714285714285,
+        "elapsed_seconds": 457.79948867400026,
+        "actions_during_forced_branch": 0
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 24,
+        "final_score": 22.22222222222222,
+        "elapsed_seconds": 450.06161223499976,
+        "actions_during_forced_branch": 0
+      }
+    },
+    "B": {
+      "ft09-0d8bbf25": {
+        "added_levels": 0,
+        "continuation_action_count": 28,
+        "final_score": 14.285714285714285,
+        "elapsed_seconds": 450.0399218870002,
+        "actions_during_forced_branch": 0
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 36,
+        "final_score": 22.22222222222222,
+        "elapsed_seconds": 450.11202392600035,
+        "actions_during_forced_branch": 0
+      }
+    },
+    "C": {
+      "ft09-0d8bbf25": {
+        "added_levels": 0,
+        "continuation_action_count": 39,
+        "final_score": 14.285714285714285,
+        "elapsed_seconds": 451.54139385100007,
+        "actions_during_forced_branch": 0
+      },
+      "su15-1944f8ab": {
+        "added_levels": 0,
+        "continuation_action_count": 29,
+        "final_score": 22.22222222222222,
+        "elapsed_seconds": 453.988694592,
+        "actions_during_forced_branch": 0
+      }
+    }
+  }
 }

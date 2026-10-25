@@ -12,6 +12,18 @@ ALLOWED_ARM_ENVIRONMENT = {
     "ARC3_PRIORITY_PACE": frozenset({"0", "1"}),
 }
 
+# 036 deliberately returns to the complete public pool and the original 032
+# order. Do not derive this from a filtered result or a mutable inventory.
+_FULL_PUBLIC_GAME_IDS = [
+    "ar25-0c556536", "bp35-0a0ad940", "cd82-fb555c5d", "cn04-2fe56bfb",
+    "dc22-fdcac232", "ft09-0d8bbf25", "g50t-5849a774", "ka59-38d34dbb",
+    "lf52-271a04aa", "lp85-305b61c3", "ls20-9607627b", "m0r0-492f87ba",
+    "r11l-495a7899", "re86-8af5384d", "s5i5-18d95033", "sb26-7fbdac44",
+    "sc25-635fd71a", "sk48-d8078629", "sp80-589a99af", "su15-1944f8ab",
+    "tn36-ef4dde99", "tr87-cd924810", "tu93-0768757b", "vc33-5430563c",
+    "wa30-ee6fef47",
+]
+
 
 def arm_environment(value: Any) -> dict[str, str]:
     if not isinstance(value, dict):
@@ -39,6 +51,53 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError("arm_environment must name only configured arms.")
     for value in environments.values():
         arm_environment(value)
+    if (config.get("research_family") == "036"
+            or config.get("id") == "036-main-reasoning-medium"
+            or "main_medium" in arms):
+        expected_arms = ["main_medium", "baseline"]
+        if (config.get("id") != "036-main-reasoning-medium"
+                or config.get("research_family") != "036"
+                or type(config.get("research_revision")) is not int
+                or config["research_revision"] != 1
+                or arms != expected_arms
+                or config.get("reference_arm") != "baseline"
+                or config.get("main_reasoning_modes") != {
+                    "main_medium": "medium", "baseline": "default"}
+                or environments != {arm: {"ARC3_PRIORITY_TAIL_LOOKUP": "remaining",
+                                           "ARC3_PRIORITY_PACE": "0"} for arm in expected_arms}
+                or config.get("template_preflight") != {
+                    "actual_mounted_template": True,
+                    "render_modes": ["default", "medium"],
+                    "unsupported_mode_action": "abort_comparison_no_template_update",
+                    "model_or_network_calls": 0,
+                }):
+            raise ValueError("036 requires the frozen medium/default main-loop comparison and unchanged environments.")
+        if (config.get("games") != _FULL_PUBLIC_GAME_IDS
+                or config.get("game_count") != 25
+                or config.get("requested_arm_seconds") != 7254
+                or config.get("hard_limit_seconds") != 21600
+                or config.get("startup_limit_seconds") != 4200
+                or config.get("warmup_action_games") != 1
+                or config.get("active_streams") != 10
+                or config.get("n_passes_per_arm") != 1
+                or config.get("cache_flush_wait_seconds") != 120
+                or config.get("request_deadline") is not False
+                or config.get("skip_blanket_model_precache") is not False
+                or config.get("preflight_before_serving") is not False):
+            raise ValueError("036 must retain all 25 games in order and the frozen full-pool budget/startup contract.")
+        if not all(config.get(key) is True for key in (
+            "strict_arm_budget", "require_cache_flush", "require_cache_flush_log",
+            "require_drained_workers", "require_complete_pool", "native_payload_cells",
+            "require_rtx_pro6000", "inference_timing", "scheduler_observer",
+        )):
+            raise ValueError("036 requires isolated, complete, cache-flushed and drained full-pool arms.")
+        if any(key in config for key in (
+            "auxiliary_reasoning_modes", "candidate_delivery", "fork_transport",
+            "hypothesis_context", "object_evidence", "short_program_feedback",
+            "execution_interface",
+        )):
+            raise ValueError("036 changes only default main-loop effort; auxiliary and checkpoint contracts are not allowed.")
+        return
     if (config.get("research_family") == "035"
             or config.get("id") == "035-aux-reasoning-diagnostic"
             or "executable_plan_C" in arms):

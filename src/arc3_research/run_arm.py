@@ -101,6 +101,7 @@ def run_arm(args: argparse.Namespace) -> int:
     segmentation_runs_patch = None
     solved_memory_patch = None
     executable_plan_patch = None
+    main_reasoning_patch = None
     community_baselines = None
     timing_patch = None
     deadline_patch = None
@@ -135,8 +136,20 @@ def run_arm(args: argparse.Namespace) -> int:
                 raise ValueError("Only 035 C performs mounted-template verification.")
             metadata["research_family"] = "035"
             metadata["auxiliary_reasoning_mode"] = auxiliary_mode or "none"
-        elif research_family is not None or auxiliary_mode is not None or model_dir is not None or args.arm == "executable_plan_C":
-            raise ValueError("Explicit auxiliary reasoning controls require the 035 diagnostic.")
+        elif research_family == "036":
+            if args.arm not in ("main_medium", "baseline") or auxiliary_mode is not None:
+                raise ValueError("036 requires main_medium or baseline, without auxiliary reasoning controls.")
+            recorded_inputs = json.loads((job_dir.parent / "input-paths.json").read_text())
+            resolved_model = Path(recorded_inputs["paths"]["model"]).resolve(strict=True)
+            if model_dir is None or model_dir.resolve(strict=True) != resolved_model:
+                raise ValueError("036 must use the model actually resolved in input-paths.json in both arms.")
+            model_dir = resolved_model
+            metadata["research_family"] = "036"
+            metadata["main_reasoning_mode"] = "medium" if args.arm == "main_medium" else "default"
+            metadata["mounted_model_dir"] = str(model_dir)
+            metadata["mounted_model_path_source"] = str(job_dir.parent / "input-paths.json")
+        elif research_family is not None or auxiliary_mode is not None or model_dir is not None or args.arm in ("executable_plan_C", "main_medium"):
+            raise ValueError("Explicit reasoning controls require their matching 035 or 036 experiment.")
         overrides = parse_arm_environment(getattr(args, "environment_json", "{}"))
         if args.arm == "tail_80k" and overrides != {
             "ARC3_PRIORITY_TAIL_LOOKUP": "1", "ARC3_PRIORITY_PACE": "0",
@@ -182,6 +195,10 @@ def run_arm(args: argparse.Namespace) -> int:
             "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
         }, {}):
             raise ValueError("baseline requires frozen scheduler or empty env.")
+        if research_family == "036" and overrides != {
+            "ARC3_PRIORITY_TAIL_LOOKUP": "remaining", "ARC3_PRIORITY_PACE": "0",
+        }:
+            raise ValueError("036 requires the explicit frozen scheduler in both arms.")
         os.environ.update(overrides)
         metadata["environment_overrides"] = overrides
         if args.arm == "observation_grounding":
@@ -210,6 +227,37 @@ def run_arm(args: argparse.Namespace) -> int:
         from arc3_research.goal_evidence import install_goal_evidence
         from arc3_research.transient_history import install_transient_history
         from arc3_research.program_state import install_program_state
+
+        if research_family == "036":
+            # Verify the mounted server template in both fresh CPU processes.
+            # Install before unpickling the benchmark/analyzer, so every main
+            # request sees the selected default. The reference never installs.
+            from inference.agent import tool_agent
+            from arc3_research.main_reasoning import verify_main_reasoning_template
+            proof = verify_main_reasoning_template(
+                model_dir, job_dir / "main-reasoning-template.json")
+            if tool_agent._summary_interval_tokens() != 0:
+                raise RuntimeError("036 requires the original disabled summary schedule in both arms.")
+            generation_settings = {
+                "max_output_tokens": tool_agent._LOCAL_ANALYZER_MAX_OUTPUT,
+                "enable_thinking": tool_agent._LOCAL_ANALYZER_ENABLE_THINKING,
+                "temperature": tool_agent._LOCAL_ANALYZER_TEMPERATURE,
+                "top_p": tool_agent._LOCAL_ANALYZER_TOP_P,
+                "top_k": tool_agent._LOCAL_ANALYZER_TOP_K,
+            }
+            if generation_settings != {"max_output_tokens": 12288,
+                                       "enable_thinking": True,
+                                       "temperature": 0.7, "top_p": 0.95, "top_k": 20}:
+                raise RuntimeError("036 requires unchanged 009 output, thinking and sampling settings in both arms.")
+            metadata["main_generation_settings"] = generation_settings
+            metadata["main_reasoning_template"] = proof
+            metadata["main_reasoning_patch_installed"] = False
+            if args.arm == "main_medium":
+                from arc3_research.main_reasoning import install_main_reasoning
+                main_reasoning_patch = install_main_reasoning(
+                    default_effort="medium", template_verification=proof)
+                metadata["main_reasoning_patch_installed"] = True
+                metadata["main_reasoning"] = main_reasoning_patch.snapshot()
 
         env_dir = Path(os.environ.get(
             "ARC3_RESEARCH_ENV_DIR",
@@ -385,6 +433,9 @@ def run_arm(args: argparse.Namespace) -> int:
             metadata["source_sha256"]["admission_order.py"] = _sha256(
                 Path(__file__).with_name("admission_order.py"))
             metadata["admission_order"] = admission_patch.snapshot()
+        if research_family == "036":
+            metadata["source_sha256"]["main_reasoning.py"] = _sha256(
+                Path(__file__).with_name("main_reasoning.py"))
         if args.arm in ("executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C"):
             for name in ("executable_plan.py", "executable_plan_contract.py",
                          "executable_plan_context.py", "program_repair.py"):
@@ -617,6 +668,10 @@ def run_arm(args: argparse.Namespace) -> int:
             _write_json(job_dir / "executable-plan-summary.json", executable_plan_patch.snapshot())
             if not live:
                 executable_plan_patch.uninstall()
+        if main_reasoning_patch is not None:
+            _write_json(job_dir / "main-reasoning-summary.json", main_reasoning_patch.snapshot())
+            if not live:
+                main_reasoning_patch.uninstall()
         if community_baselines is not None:
             _write_json(job_dir / "community-baselines.json", {
                 "dropped": community_baselines,
@@ -647,13 +702,14 @@ def main() -> int:
                                  "persistent_python", "segmentation_runs",
                                  "segmentation_forks_A", "segmentation_forks_B",
                                  "solved_level_memory", "controller_repair_A", "controller_repair_B",
-                                 "executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C"))
-    parser.add_argument("--research-family", choices=("035",),
-                        help="Explicit three-arm reasoning diagnostic; omitted for frozen legacy runs.")
+                                 "executable_plan", "executable_plan_A", "executable_plan_B", "executable_plan_C",
+                                 "main_medium"))
+    parser.add_argument("--research-family", choices=("035", "036"),
+                        help="Explicit reasoning comparison; omitted for frozen legacy runs.")
     parser.add_argument("--auxiliary-reasoning-mode", choices=("off", "low"),
                         help="035 B is off; C is low. A receives no auxiliary mode.")
     parser.add_argument("--model-dir", type=Path,
-                        help="Actual resolved model mount for 035 C template verification.")
+                        help="Actual resolved model mount for 035 C or both 036 template verifications.")
     parser.add_argument("--bundle-dir", required=True, type=Path)
     parser.add_argument("--working-dir", required=True, type=Path,
                         help="Output directory for this arm only.")

@@ -1,0 +1,105 @@
+{
+  "status": "passed_counterexample_reproduced",
+  "scope": "offline pure-function counterexample replay",
+  "real_model_calls": 0,
+  "gpu_calls": 0,
+  "network_calls": 0,
+  "game_actions": 0,
+  "solver_modified": false,
+  "shape": [
+    "#####",
+    ".#..#",
+    ".#..#",
+    ".####",
+    "....#"
+  ],
+  "shape_pixels": 14,
+  "versions": {
+    "bad": {
+      "source_path": "tr87-medium-normalization-bad.py",
+      "source_sha256": "86243401c605524ae1fd25fe9da1d3cdf5e8147e4aa14e87ba773632e62ad6fa",
+      "pixels_before_each_rotation": [
+        14,
+        14,
+        5,
+        5
+      ],
+      "rotations": [
+        [
+          "#####",
+          ".#..#",
+          ".#..#",
+          ".####",
+          "....#"
+        ],
+        [
+          "....#",
+          ".####",
+          ".#..#",
+          ".#..#",
+          "#####"
+        ],
+        [
+          "#",
+          "#",
+          "#",
+          "#",
+          "#"
+        ],
+        [
+          "#####"
+        ]
+      ],
+      "pixels_after_four_rotations": 5,
+      "four_rotations_return_original": false,
+      "canonical_conflates_shape_with_five_pixel_line": true
+    },
+    "fixed": {
+      "source_path": "tr87-medium-normalization-fixed.py",
+      "source_sha256": "0a07d053479dd907bb9d9671f8f6878efffe4273852ceb8472bb993ea9864c79",
+      "pixels_before_each_rotation": [
+        14,
+        14,
+        14,
+        14
+      ],
+      "rotations": [
+        [
+          "#####",
+          ".#..#",
+          ".#..#",
+          ".####",
+          "....#"
+        ],
+        [
+          "....#",
+          ".####",
+          ".#..#",
+          ".#..#",
+          "#####"
+        ],
+        [
+          "#....",
+          "####.",
+          "#..#.",
+          "#..#.",
+          "#####"
+        ],
+        [
+          "#####",
+          "#..#.",
+          "#..#.",
+          "####.",
+          "#...."
+        ]
+      ],
+      "pixels_after_four_rotations": 14,
+      "four_rotations_return_original": true,
+      "canonical_conflates_shape_with_five_pixel_line": false
+    }
+  },
+  "limits": [
+    "The model itself fixed this bug during036 before completingL4.",
+    "This is a local program defect/counterexample, not a demonstrated cause of the entire tr87 score loss or proof that invariant prompting improves score."
+  ]
+}

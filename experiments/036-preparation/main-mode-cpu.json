@@ -1,0 +1,440 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-24T12:12:37.207727+00:00",
+  "python": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "network_attempts": 0,
+  "real_model_calls": 0,
+  "gpu_calls": 0,
+  "real_game_actions": 0,
+  "runtime_mounted_guard_pending": true,
+  "checks": [
+    {
+      "name": "mounted_guard_wiring_with_marked_fixture",
+      "passed": true,
+      "archived_035_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+      "fixture_tokenizer": true,
+      "proof_path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/guard.json",
+      "changed_template_rejection": {
+        "check": "036-mounted-main-reasoning-template-v1",
+        "passed": false,
+        "observed_at_utc": "2026-10-24T12:12:37.325833+00:00",
+        "model_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model",
+        "expected_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+        "local_files_only": true,
+        "network_requested": false,
+        "template_updated": false,
+        "model_generation_calls": 0,
+        "model_weight_loads": 0,
+        "gpu_calls": 0,
+        "active_template_source": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/chat_template.jinja",
+        "active_template_sha256": "514d5304fcac63bda60e6faf860d5657010cf43cbc4c633c8bf678ee184e7a37",
+        "source_files": [
+          {
+            "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/chat_template.jinja",
+            "sha256": "514d5304fcac63bda60e6faf860d5657010cf43cbc4c633c8bf678ee184e7a37",
+            "bytes": 8953
+          },
+          {
+            "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model/tokenizer_config.json",
+            "sha256": "d8fffe26aa4bd6b69c44a4e8120576381ab07e7c22744233bd220c0cf5a4de3b",
+            "bytes": 50
+          }
+        ],
+        "error": "ValueError: Mounted chat template differs from the frozen 035 template",
+        "decision": "abort_entire_036_comparison_before_generation"
+      },
+      "loader_calls": [
+        {
+          "path": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model",
+          "kwargs": {
+            "local_files_only": true,
+            "trust_remote_code": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "real_main_http_payload_single_field_difference",
+      "passed": true,
+      "baseline": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "medium": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true,
+            "reasoning_effort": "medium"
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "explicit_low": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true,
+            "reasoning_effort": "low"
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "server_default_baseline": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "server_default_medium": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true,
+            "reasoning_effort": "medium"
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "candidate_snapshot": {
+        "name": "main_reasoning",
+        "enabled": true,
+        "default_effort": "medium",
+        "defaulted_calls": 3,
+        "explicit_calls": 1,
+        "counter_unit": "template_kwargs_method_calls_including_request_logging",
+        "preserves_explicit_effort_ladder": true,
+        "summary_interval_tokens": 0,
+        "template_verified": true,
+        "active_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+        "model_dir": "/Users/zhaohuaxiang/ccjjllt/arc-3/experiments/036-preparation/main-mode-cpu-fixture/fixture-model",
+        "adds_framework_model_calls": false,
+        "adds_framework_game_actions": false,
+        "changes_max_output_tokens": false,
+        "changes_auxiliary_branch": false
+      },
+      "restored": {
+        "url": "http://cpu.invalid/v1/chat/completions",
+        "payload": {
+          "model": "cpu-no-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Use observed facts."
+            },
+            {
+              "role": "user",
+              "content": "Inspect this current state."
+            }
+          ],
+          "stream": false,
+          "temperature": 0.7,
+          "top_p": 0.95,
+          "max_tokens": 12288,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "python",
+                "description": "Run one ephemeral Python snippet against preloaded ASCII game state. Available globals: `current_frame`, `previous_frame`, `history`, `transitions`, `last_transition`, `valid_actions`, `last_action_call_result`, and `action(actions)` for executing one or more real environment actions. `current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, `.level`, and `.shape` (a `(rows, cols)` tuple); `history[-1].frame` is the current post-action frame, not the previous frame. For before/after diffs, compare `previous_frame` to `current_frame` or use `last_transition.before_frame` and `.after_frame`. For MOUSE, pass `row` and `col` integer fields; legacy x/y fields are rejected. The raw numeric grid is not available. Use `.segmentation` as the primary view; use `.ascii` only to read a small, specific region. Use `print(...)` for compact output or assign final data to `result`.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Python code to run. The snippet is ephemeral and is not saved across tool calls."
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            }
+          ],
+          "tool_choice": "auto",
+          "top_k": 20,
+          "chat_template_kwargs": {
+            "enable_thinking": true,
+            "preserve_thinking": true
+          }
+        },
+        "timeout": [
+          10.0,
+          60
+        ],
+        "transport_kwargs": {
+          "stream": false
+        }
+      },
+      "duplicate_install_rejected": true,
+      "auxiliary_branch_imported_or_installed": false,
+      "only_changed_field": "chat_template_kwargs.reasoning_effort"
+    },
+    {
+      "name": "invalid_installations_fail_closed_and_restore",
+      "passed": true,
+      "rejections": [
+        {
+          "name": "missing_template_proof",
+          "error": "036 requires a passed mounted-template proof before installation"
+        },
+        {
+          "name": "unpassed_template_proof",
+          "error": "036 requires a passed mounted-template proof before installation"
+        },
+        {
+          "name": "different_default_effort",
+          "error": "036 varies only the default effort from implicit xhigh to medium"
+        },
+        {
+          "name": "nonzero_actual_summary_interval",
+          "error": "036 requires the actual summary interval to remain zero"
+        }
+      ],
+      "runtime_source_unchanged_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+    }
+  ],
+  "limits": [
+    "HTTP and tokenizer loader are explicitly marked CPU fixtures.",
+    "Actual mounted tokenizer proof is mandatory in both arms before generation.",
+    "No score, generation quality, latency or throughput claim.",
+    "12288 is an explicit CPU request argument, not proof of an online environment setting."
+  ],
+  "checks_passed": 3,
+  "helper_sha256": "33f1deb1854c549e1705fd17c99cf6032c9da7b167ed40c12d9f4de71ec6d39e",
+  "checker_sha256": "75adf553843c481c9365082676ae6e6d5e9802b796a37bb0bd8eb900383379af"
+}

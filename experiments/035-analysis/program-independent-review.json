@@ -1,0 +1,1199 @@
+{
+  "reviewer": "/root/035_results_program",
+  "scope": "Independent frozen035 raw-event review; read-only source/response/template audit plus unmodified saved-frame Python reproduction. No network, model, GPU or real ARC action.",
+  "mounted_template": {
+    "report": "runs/035-aux-reasoning-diagnostic/executable_plan_C/reasoning-template-verification.json",
+    "actual_archived_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+    "passed": true,
+    "checks": {
+      "off_closed_think": true,
+      "low_open_think": true,
+      "medium_open_think": true,
+      "low_effort_branch_in_template": true,
+      "low_instruction_in_template": true,
+      "low_instruction_in_low": true,
+      "low_instruction_absent_off": true,
+      "low_instruction_absent_medium": true,
+      "all_renderings_distinct": true
+    },
+    "model_generation_calls": 0,
+    "template_updated": false,
+    "decision": "allow_C_generation_with_explicit_low"
+  },
+  "initial_request_pairing": [
+    {
+      "game": "ft09-0d8bbf25",
+      "initial_B_C_payload_equal_except_chat_template_kwargs_and_measured_remaining_seconds": true,
+      "B_remaining_game_seconds": 449.915776,
+      "C_remaining_game_seconds": 449.952278,
+      "remaining_seconds_absolute_difference": 0.03650199999998449,
+      "B_chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "C_chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "low"
+      }
+    },
+    {
+      "game": "su15-1944f8ab",
+      "initial_B_C_payload_equal_except_chat_template_kwargs_and_measured_remaining_seconds": true,
+      "B_remaining_game_seconds": 449.908013,
+      "C_remaining_game_seconds": 449.944863,
+      "remaining_seconds_absolute_difference": 0.03685000000001537,
+      "B_chat_template_kwargs": {
+        "enable_thinking": false,
+        "preserve_thinking": true
+      },
+      "C_chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true,
+        "reasoning_effort": "low"
+      }
+    }
+  ],
+  "games": [
+    {
+      "arm": "B",
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/035-aux-reasoning-diagnostic/executable_plan_B/artifacts/ft09-0d8bbf25_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "dfd173fe98f118067ffba0bc2f8fa5bdf8df28d5fd4a3a0d9a8a585f7ca8c761",
+      "online": {
+        "requests": 2,
+        "source_artifacts": 2,
+        "syntactically_complete_sources": 2,
+        "definition_extractions": 2,
+        "native_plan_attempts": 2,
+        "returned_plans": 1,
+        "plans_passed": 0,
+        "initial_predictions": 0,
+        "predictions_passed": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "matches": 0,
+        "mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "zero_action_feedback_requests": 1,
+        "direct_program_levels": 0,
+        "ordinary_main_loop_unchecked_action_events": 8
+      },
+      "accounting": {
+        "sum_distinct_program_elapsed_seconds": 24.910614938000435,
+        "final_cumulative_extra_seconds": 24.910614938000435,
+        "single_count_matches": true,
+        "initial_plus_one_shared_retry": true,
+        "no_third_request": true,
+        "extra_seconds_under_120": true,
+        "individual_request_budget_max_seconds": 60.0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "status": "rejected",
+          "stage": "plan_validation",
+          "error": "_NativeEvaluationError: program did not return result: Traceback (most recent call last):\n  File \"<python_tool>\", line 169, in <module>\n  File \"<python_tool>\", line 84, in plan_program\n  File \"<python_tool>\", line 37, in _legends\nNameError: name 'gc2' is not defined",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 160,
+            "code_bytes": 6579,
+            "code_sha256": "d91006ac517073f57c16ef0ccb0fe8681c8214db2764f191972c5a0c2c8e05eb"
+          },
+          "source_available": true,
+          "syntax_complete": true,
+          "definition_extraction_accepted": true,
+          "returned_plan": null,
+          "plan_validation": null,
+          "plan_diagnostics": null,
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 13.684424540000236,
+          "actual_actions": 0,
+          "request": {
+            "mode": "off",
+            "input_tokens": 13241,
+            "usage": {
+              "prompt_tokens": 13241,
+              "total_tokens": 15346,
+              "completion_tokens": 2105,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 13.446045653000056,
+            "reasoning_characters": 0,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/B-ft09-0d8bbf25-1.py",
+          "object_evidence_attribute_used": false
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['Unknown replaced binding']",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 131,
+            "code_bytes": 5639,
+            "code_sha256": "f67356847518523ed73d9108ef6bd0d9ccd893d97beb4ccfce6c6edd41a14ca6"
+          },
+          "source_available": true,
+          "syntax_complete": true,
+          "definition_extraction_accepted": true,
+          "returned_plan": {
+            "actions": [
+              {
+                "action": "MOUSE",
+                "col": 15,
+                "row": 57
+              }
+            ],
+            "evidence_pixels": [
+              [
+                19,
+                31,
+                "c"
+              ],
+              [
+                31,
+                19,
+                "c"
+              ],
+              [
+                31,
+                43,
+                "c"
+              ],
+              [
+                43,
+                31,
+                "c"
+              ],
+              [
+                57,
+                15,
+                "c"
+              ]
+            ],
+            "goal": "Every 3x3 legend mark is satisfied (W means the overlapped cell equals that legend's centre colour, g means the opposite colour). Probe one legend-linked cell to re-test the toggle effect.",
+            "reason": "Recomputed the cell grid and the four legends from this frame; all marks currently agree with the W/g rule, so one click on a legend-linked cell tests whether the toggle is what the puzzle tracks.",
+            "replaces": [
+              "r1",
+              "d1",
+              "cc",
+              "cur",
+              "n",
+              "b",
+              "rs",
+              "cs",
+              "gc2"
+            ],
+            "status": "ready"
+          },
+          "plan_validation": {
+            "passed": false,
+            "status": "rejected",
+            "errors": [
+              "Unknown replaced binding"
+            ]
+          },
+          "plan_diagnostics": {
+            "errors": [
+              {
+                "code": "plan_replaces_unknown",
+                "field": "replaces",
+                "message": "Unknown replaced binding",
+                "unknown_bindings": [
+                  "gc2"
+                ]
+              }
+            ],
+            "total_errors": 1,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 11.226190398000199,
+          "actual_actions": 0,
+          "request": {
+            "mode": "off",
+            "input_tokens": 12430,
+            "usage": {
+              "prompt_tokens": 12430,
+              "total_tokens": 14196,
+              "completion_tokens": 1766,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 11.066605251000055,
+            "reasoning_characters": 0,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/B-ft09-0d8bbf25-2.py",
+          "object_evidence_attribute_used": false,
+          "feedback_integrity": {
+            "trigger_repair": true,
+            "reason_zero_action": true,
+            "error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions_zero": true,
+            "current_observation_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "prior_model_text_explicitly_omitted": true,
+            "previous_source_exact": true,
+            "previous_source_once": true,
+            "previous_hash_exact": true
+          }
+        }
+      ]
+    },
+    {
+      "arm": "B",
+      "game": "su15-1944f8ab",
+      "event_file": "runs/035-aux-reasoning-diagnostic/executable_plan_B/artifacts/su15-1944f8ab_B_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "30af01c1c9c1f9eab96eba81759802e3a8891a3951a5cb73212a53077521b29f",
+      "online": {
+        "requests": 2,
+        "source_artifacts": 2,
+        "syntactically_complete_sources": 1,
+        "definition_extractions": 1,
+        "native_plan_attempts": 1,
+        "returned_plans": 1,
+        "plans_passed": 0,
+        "initial_predictions": 0,
+        "predictions_passed": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "matches": 0,
+        "mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "zero_action_feedback_requests": 1,
+        "direct_program_levels": 0,
+        "ordinary_main_loop_unchecked_action_events": 20
+      },
+      "accounting": {
+        "sum_distinct_program_elapsed_seconds": 34.59191834500007,
+        "final_cumulative_extra_seconds": 34.59191834500007,
+        "single_count_matches": true,
+        "initial_plus_one_shared_retry": true,
+        "no_third_request": true,
+        "extra_seconds_under_120": true,
+        "individual_request_budget_max_seconds": 60.0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "status": "rejected",
+          "stage": "plan_validation",
+          "error": "ValueError: plan rejected: ['Plan requires exactly status, goal, actions, evidence_pixels, replaces and reason', 'Plan actions must be a list']",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 173,
+            "code_bytes": 7286,
+            "code_sha256": "56fc6590a8b6fff25f0ec56b5d7117244cb4f195a4daa06baea131d4b4197c49"
+          },
+          "source_available": true,
+          "syntax_complete": true,
+          "definition_extraction_accepted": true,
+          "returned_plan": {
+            "evidence_pixels": [],
+            "goal": "local target: deliver a Y/p mass onto the S ball below the level divider",
+            "reason": "no Y or p mass below the divider in this frame; nothing to move toward the ball",
+            "replaces": [],
+            "status": "abstain"
+          },
+          "plan_validation": {
+            "passed": false,
+            "status": "rejected",
+            "errors": [
+              "Plan requires exactly status, goal, actions, evidence_pixels, replaces and reason",
+              "Plan actions must be a list"
+            ]
+          },
+          "plan_diagnostics": {
+            "errors": [
+              {
+                "code": "plan_schema",
+                "field": "$",
+                "message": "Plan requires exactly status, goal, actions, evidence_pixels, replaces and reason",
+                "missing_fields": [
+                  "actions"
+                ],
+                "unexpected_fields": []
+              },
+              {
+                "code": "plan_actions",
+                "field": "actions",
+                "message": "Plan actions must be a list"
+              }
+            ],
+            "total_errors": 2,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "plan_validation",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 16.84751537300008,
+          "actual_actions": 0,
+          "request": {
+            "mode": "off",
+            "input_tokens": 12113,
+            "usage": {
+              "prompt_tokens": 12113,
+              "total_tokens": 14640,
+              "completion_tokens": 2527,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 16.420052648000365,
+            "reasoning_characters": 0,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/B-su15-1944f8ab-1.py",
+          "object_evidence_attribute_used": false
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "status": "rejected",
+          "stage": "extract",
+          "error": "DefinitionContractError: Invalid Python source: Generator expression must be parenthesized",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 176,
+            "code_bytes": 7318,
+            "code_sha256": "54970641a1b70afe81a4031b710621919549f74b290f64102fae0b16bb81b796"
+          },
+          "source_available": true,
+          "syntax_complete": false,
+          "definition_extraction_accepted": false,
+          "returned_plan": null,
+          "plan_validation": null,
+          "plan_diagnostics": null,
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 17.74440297199999,
+          "actual_actions": 0,
+          "request": {
+            "mode": "off",
+            "input_tokens": 12890,
+            "usage": {
+              "prompt_tokens": 12890,
+              "total_tokens": 15398,
+              "completion_tokens": 2508,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 0
+            },
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": false,
+              "preserve_thinking": true
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 17.619625564000216,
+            "reasoning_characters": 0,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/B-su15-1944f8ab-2.py",
+          "syntax_error": {
+            "type": "SyntaxError",
+            "message": "Generator expression must be parenthesized",
+            "line": 86,
+            "offset": 14
+          },
+          "feedback_integrity": {
+            "trigger_repair": true,
+            "reason_zero_action": true,
+            "error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions_zero": true,
+            "current_observation_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "prior_model_text_explicitly_omitted": true,
+            "previous_source_exact": true,
+            "previous_source_once": true,
+            "previous_hash_exact": true,
+            "returned_plan_exact": true,
+            "plan_diagnostics_exact": true
+          }
+        }
+      ]
+    },
+    {
+      "arm": "C",
+      "game": "ft09-0d8bbf25",
+      "event_file": "runs/035-aux-reasoning-diagnostic/executable_plan_C/artifacts/ft09-0d8bbf25_C_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "3ec5871783168175b36224f52656701238c9fd4f13efcfe3429c44cc3852d9af",
+      "online": {
+        "requests": 2,
+        "source_artifacts": 1,
+        "syntactically_complete_sources": 0,
+        "definition_extractions": 0,
+        "native_plan_attempts": 0,
+        "returned_plans": 0,
+        "plans_passed": 0,
+        "initial_predictions": 0,
+        "predictions_passed": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "matches": 0,
+        "mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "zero_action_feedback_requests": 1,
+        "direct_program_levels": 0,
+        "ordinary_main_loop_unchecked_action_events": 9
+      },
+      "accounting": {
+        "sum_distinct_program_elapsed_seconds": 60.79278869299992,
+        "final_cumulative_extra_seconds": 60.79278869299992,
+        "single_count_matches": true,
+        "initial_plus_one_shared_retry": true,
+        "no_third_request": true,
+        "extra_seconds_under_120": true,
+        "individual_request_budget_max_seconds": 60.0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "status": "rejected",
+          "stage": "extract",
+          "error": "DefinitionContractError: Expected an assistant message with one submit_program tool call",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": false
+          },
+          "source_available": false,
+          "syntax_complete": false,
+          "definition_extraction_accepted": false,
+          "returned_plan": null,
+          "plan_validation": null,
+          "plan_diagnostics": null,
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 30.116573233000054,
+          "actual_actions": 0,
+          "request": {
+            "mode": "low",
+            "input_tokens": 13265,
+            "usage": {
+              "prompt_tokens": 13265,
+              "total_tokens": 17361,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 4098
+            },
+            "finish_reason": "length",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true,
+              "reasoning_effort": "low"
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 29.777923681000175,
+            "reasoning_characters": 8793,
+            "visible_content_characters": 0,
+            "tool_calls": 0
+          },
+          "object_evidence_attribute_used": false
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "status": "rejected",
+          "stage": "extract",
+          "error": "DefinitionContractError: Invalid Python source: expected an indented block after 'if' statement on line 60",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 58,
+            "code_bytes": 2692,
+            "code_sha256": "fa6f1b792d020d6c3631478b8e09912c2df6a08ea10598d7f44c0bd48fdeeebb"
+          },
+          "source_available": true,
+          "syntax_complete": false,
+          "definition_extraction_accepted": false,
+          "returned_plan": null,
+          "plan_validation": null,
+          "plan_diagnostics": null,
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 30.676215459999867,
+          "actual_actions": 0,
+          "request": {
+            "mode": "low",
+            "input_tokens": 14193,
+            "usage": {
+              "prompt_tokens": 14193,
+              "total_tokens": 18289,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 3017
+            },
+            "finish_reason": "length",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true,
+              "reasoning_effort": "low"
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 30.62222015200018,
+            "reasoning_characters": 7118,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/C-ft09-0d8bbf25-2.py",
+          "syntax_error": {
+            "type": "IndentationError",
+            "message": "expected an indented block",
+            "line": 60,
+            "offset": 36
+          },
+          "feedback_integrity": {
+            "trigger_repair": true,
+            "reason_zero_action": true,
+            "error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions_zero": true,
+            "current_observation_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "prior_model_text_explicitly_omitted": true,
+            "previous_source_empty": true,
+            "raw_submission_exact": true,
+            "raw_submission_once": true,
+            "contract_diagnostics_exact": true
+          }
+        }
+      ]
+    },
+    {
+      "arm": "C",
+      "game": "su15-1944f8ab",
+      "event_file": "runs/035-aux-reasoning-diagnostic/executable_plan_C/artifacts/su15-1944f8ab_C_tool_runtime_state_executable-plan.jsonl",
+      "event_sha256": "1a53a8497501b2dfc6985572559b7b676a606b31fc0259aec96223f199cd9f48",
+      "online": {
+        "requests": 2,
+        "source_artifacts": 1,
+        "syntactically_complete_sources": 1,
+        "definition_extractions": 1,
+        "native_plan_attempts": 1,
+        "returned_plans": 1,
+        "plans_passed": 1,
+        "initial_predictions": 1,
+        "predictions_passed": 0,
+        "host_actions": 0,
+        "checked_actions": 0,
+        "matches": 0,
+        "mismatches": 0,
+        "real_counterexample_repairs": 0,
+        "zero_action_feedback_requests": 1,
+        "direct_program_levels": 0,
+        "ordinary_main_loop_unchecked_action_events": 19
+      },
+      "accounting": {
+        "sum_distinct_program_elapsed_seconds": 45.82016502200008,
+        "final_cumulative_extra_seconds": 45.82016502200008,
+        "single_count_matches": true,
+        "initial_plus_one_shared_retry": true,
+        "no_third_request": true,
+        "extra_seconds_under_120": true,
+        "individual_request_budget_max_seconds": 60.0
+      },
+      "deliveries": [
+        {
+          "index": 1,
+          "event_index": 1,
+          "status": "rejected",
+          "stage": "extract",
+          "error": "DefinitionContractError: Expected an assistant message with one submit_program tool call",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": false
+          },
+          "source_available": false,
+          "syntax_complete": false,
+          "definition_extraction_accepted": false,
+          "returned_plan": null,
+          "plan_validation": null,
+          "plan_diagnostics": null,
+          "initial_prediction_validation": null,
+          "zero_action_feedback": {
+            "eligible": true,
+            "queued": true,
+            "stage": "extract",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "one_shared_repair_requested"
+          },
+          "elapsed_seconds": 34.53712850000011,
+          "actual_actions": 0,
+          "request": {
+            "mode": "low",
+            "input_tokens": 12137,
+            "usage": {
+              "prompt_tokens": 12137,
+              "total_tokens": 16233,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 4098
+            },
+            "finish_reason": "length",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true,
+              "reasoning_effort": "low"
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 34.20214738799996,
+            "reasoning_characters": 11120,
+            "visible_content_characters": 0,
+            "tool_calls": 0
+          },
+          "object_evidence_attribute_used": false
+        },
+        {
+          "index": 2,
+          "event_index": 2,
+          "status": "rejected",
+          "stage": "initial_prediction",
+          "error": "ValueError: first prediction rejected: ['Expected pixels must cover exactly the declared object and target coordinates']",
+          "delivery": {
+            "max_nonempty_lines": null,
+            "max_code_bytes": 12000,
+            "source_available": true,
+            "nonempty_lines": 69,
+            "code_bytes": 3315,
+            "code_sha256": "7cea99833c0a0ce88ab59bfd4f68d1ee555fc035800a11004106f8f5bffa0f6f"
+          },
+          "source_available": true,
+          "syntax_complete": true,
+          "definition_extraction_accepted": true,
+          "returned_plan": {
+            "actions": [
+              {
+                "action": "MOUSE",
+                "col": 32,
+                "row": 12
+              }
+            ],
+            "evidence_pixels": [
+              [
+                3,
+                30,
+                "Y"
+              ],
+              [
+                3,
+                31,
+                "Y"
+              ],
+              [
+                3,
+                32,
+                "Y"
+              ],
+              [
+                3,
+                33,
+                "Y"
+              ],
+              [
+                4,
+                30,
+                "Y"
+              ],
+              [
+                4,
+                31,
+                "Y"
+              ],
+              [
+                4,
+                32,
+                "Y"
+              ],
+              [
+                4,
+                33,
+                "Y"
+              ],
+              [
+                5,
+                30,
+                "Y"
+              ],
+              [
+                5,
+                31,
+                "Y"
+              ],
+              [
+                5,
+                32,
+                "Y"
+              ],
+              [
+                5,
+                33,
+                "Y"
+              ],
+              [
+                6,
+                30,
+                "Y"
+              ],
+              [
+                6,
+                31,
+                "Y"
+              ],
+              [
+                6,
+                32,
+                "Y"
+              ],
+              [
+                6,
+                33,
+                "Y"
+              ],
+              [
+                11,
+                30,
+                "b"
+              ],
+              [
+                11,
+                31,
+                "b"
+              ],
+              [
+                11,
+                32,
+                "b"
+              ],
+              [
+                11,
+                33,
+                "b"
+              ],
+              [
+                11,
+                34,
+                "b"
+              ]
+            ],
+            "goal": "Move Y piece from rows 3-6 cols 30-33 toward ball at rows 11-19 cols 28-36 by clicking (12,32)",
+            "reason": "Y center (4.5,31.5) to ball center (15,32) distance ~10.5 exceeds max move ~8. Click (12,32) at distance ~7.5 to advance Y into playfield overlapping ball.",
+            "replaces": [
+              "click",
+              "invaders",
+              "state"
+            ],
+            "status": "ready"
+          },
+          "plan_validation": {
+            "passed": true,
+            "status": "validated_current_evidence",
+            "errors": [],
+            "plan": {
+              "actions": [
+                {
+                  "action": "MOUSE",
+                  "col": 32,
+                  "row": 12
+                }
+              ],
+              "evidence_pixels": [
+                [
+                  3,
+                  30,
+                  "Y"
+                ],
+                [
+                  3,
+                  31,
+                  "Y"
+                ],
+                [
+                  3,
+                  32,
+                  "Y"
+                ],
+                [
+                  3,
+                  33,
+                  "Y"
+                ],
+                [
+                  4,
+                  30,
+                  "Y"
+                ],
+                [
+                  4,
+                  31,
+                  "Y"
+                ],
+                [
+                  4,
+                  32,
+                  "Y"
+                ],
+                [
+                  4,
+                  33,
+                  "Y"
+                ],
+                [
+                  5,
+                  30,
+                  "Y"
+                ],
+                [
+                  5,
+                  31,
+                  "Y"
+                ],
+                [
+                  5,
+                  32,
+                  "Y"
+                ],
+                [
+                  5,
+                  33,
+                  "Y"
+                ],
+                [
+                  6,
+                  30,
+                  "Y"
+                ],
+                [
+                  6,
+                  31,
+                  "Y"
+                ],
+                [
+                  6,
+                  32,
+                  "Y"
+                ],
+                [
+                  6,
+                  33,
+                  "Y"
+                ],
+                [
+                  11,
+                  30,
+                  "b"
+                ],
+                [
+                  11,
+                  31,
+                  "b"
+                ],
+                [
+                  11,
+                  32,
+                  "b"
+                ],
+                [
+                  11,
+                  33,
+                  "b"
+                ],
+                [
+                  11,
+                  34,
+                  "b"
+                ]
+              ],
+              "goal": "Move Y piece from rows 3-6 cols 30-33 toward ball at rows 11-19 cols 28-36 by clicking (12,32)",
+              "reason": "Y center (4.5,31.5) to ball center (15,32) distance ~10.5 exceeds max move ~8. Click (12,32) at distance ~7.5 to advance Y into playfield overlapping ball.",
+              "replaces": [
+                "click",
+                "invaders",
+                "state"
+              ],
+              "status": "ready"
+            },
+            "plan_sha256": "d877ab58607be13718c7640aff298f19697f3b940d9333d7e5ddbfaf2a9191f7",
+            "input_grid_sha256": "9a27cb27f46cb625807eee2a6dfed45ca92601758e1f76759cf777e7341b3baa",
+            "coverage": {
+              "evidence_pixels": 21,
+              "frame_pixels": 4096,
+              "fraction": 0.005126953125
+            },
+            "claim": "Executable output schema and declared current pixels only; local goal, dynamics and environment completion unverified"
+          },
+          "plan_diagnostics": {
+            "errors": [],
+            "total_errors": 0,
+            "truncated_count": 0,
+            "status_aware": true,
+            "aggregate_errors": true,
+            "duplicate_coordinates": [],
+            "total_duplicate_coordinates": 0,
+            "wrong_pixels": 0,
+            "differences": []
+          },
+          "initial_prediction_validation": {
+            "passed": false,
+            "status": "unknown",
+            "errors": [
+              "Expected pixels must cover exactly the declared object and target coordinates"
+            ]
+          },
+          "zero_action_feedback": {
+            "eligible": false,
+            "queued": false,
+            "stage": "initial_prediction",
+            "actual_actions": 0,
+            "observation_unchanged": true,
+            "reason": "shared_repair_quota_exhausted"
+          },
+          "elapsed_seconds": 11.283036521999975,
+          "actual_actions": 0,
+          "request": {
+            "mode": "low",
+            "input_tokens": 14490,
+            "usage": {
+              "prompt_tokens": 14490,
+              "total_tokens": 16300,
+              "completion_tokens": 1810,
+              "prompt_tokens_details": null,
+              "reasoning_tokens": 645
+            },
+            "finish_reason": "tool_calls",
+            "max_tokens": 4096,
+            "max_input_tokens": 16384,
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true,
+              "reasoning_effort": "low"
+            },
+            "tokenize_matches_usage": true,
+            "request_budget_seconds": 60.0,
+            "request_generation_seconds": 10.699298880000015,
+            "reasoning_characters": 1726,
+            "visible_content_characters": 0,
+            "tool_calls": 1
+          },
+          "source_file": "experiments/035-analysis/extracted-programs/C-su15-1944f8ab-2.py",
+          "object_evidence_attribute_used": false,
+          "feedback_integrity": {
+            "trigger_repair": true,
+            "reason_zero_action": true,
+            "error_exact": true,
+            "stage_exact": true,
+            "before_equals_after": true,
+            "actual_actions_zero": true,
+            "current_observation_identical": true,
+            "recent_transitions_identical": true,
+            "object_evidence_identical": true,
+            "paused_code_identical": true,
+            "related_functions_identical": true,
+            "prior_model_text_explicitly_omitted": true,
+            "previous_source_empty": true,
+            "raw_submission_exact": true,
+            "raw_submission_once": true,
+            "contract_diagnostics_exact": true
+          }
+        }
+      ]
+    }
+  ],
+  "counts_by_arm": {
+    "B": {
+      "requests": 4,
+      "source_artifacts": 4,
+      "syntactically_complete_sources": 3,
+      "definition_extractions": 3,
+      "native_plan_attempts": 3,
+      "returned_plans": 2,
+      "plans_passed": 0,
+      "initial_predictions": 0,
+      "predictions_passed": 0,
+      "host_actions": 0,
+      "checked_actions": 0,
+      "matches": 0,
+      "mismatches": 0,
+      "real_counterexample_repairs": 0,
+      "zero_action_feedback_requests": 2,
+      "direct_program_levels": 0,
+      "ordinary_main_loop_unchecked_action_events": 28
+    },
+    "C": {
+      "requests": 4,
+      "source_artifacts": 2,
+      "syntactically_complete_sources": 1,
+      "definition_extractions": 1,
+      "native_plan_attempts": 1,
+      "returned_plans": 1,
+      "plans_passed": 1,
+      "initial_predictions": 1,
+      "predictions_passed": 0,
+      "host_actions": 0,
+      "checked_actions": 0,
+      "matches": 0,
+      "mismatches": 0,
+      "real_counterexample_repairs": 0,
+      "zero_action_feedback_requests": 2,
+      "direct_program_levels": 0,
+      "ordinary_main_loop_unchecked_action_events": 28
+    }
+  },
+  "usage_counter_caveat": "Both C initial responses report reasoning_tokens=4098 while completion_tokens=4096. These are preserved raw service counters and cannot be used as an exact arithmetic partition. Empty visible content, no tool call and finish_reason=length directly establish no program delivery at that output limit.",
+  "failure_analysis": {
+    "C_ft09": "Initial4096-token completion has only reasoning and no tool call; retry also hits4096 with raw3017 reasoning tokens and an incomplete58-nonempty-line Python source ending after an if colon. No accepted program or action.",
+    "C_su15": "Initial4096-token completion has only reasoning and no tool call. Retry returns complete3315-byte code and a valid ready plan; it treats a top-band16-pixelY component as the mover and the b component as the target without action support. It checks fixed coordinate windows rather than locating moved objects. First prediction is rejected because its expected coordinates do not equal the declared object/target union. No real action verifies either role or movement rule.",
+    "B_ft09": "Initial source raises NameError for gc2 inside _legends. Retry removes that exception but names unknown replaced bindings; saved-frame reproduction shows12 of its15 assumed cells have cyan-majority c (two O, one W) and its clicked coordinate(57,15) is c. The unreached predictor is a syntactically acceptable whole-region c-to-R projection over36 pixels, not evidence of a task-related toggle or progress.",
+    "B_su15": "Initial source selects no Y/p mover below row10 and returns abstain without actions, so it is structurally rejected. Retry adds actions but introduces an unparenthesized generator-with-default expression in _geom; rejected at extraction before any execution. Neither source demonstrates corrected object roles or movement."
+  },
+  "feedback_assessment": {
+    "quota": "Each arm/game issues initial+one shared zero-action-validation retry; no third request and no real-counterexample repair.",
+    "integrity": "Every retry retains exact actual error/stage, unchanged observation/catalogue/transitions/dependencies. B retries carry complete failed source exactly once; C no-source retries carry the exact raw response once, including its failed reasoning. Old main-loop prose is explicitly omitted.",
+    "cost": "Sum distinct program_recomputed.elapsed_seconds once per game; it exactly equals final cumulative extra_seconds_used. All below120s and each request budget <=60s. Concurrent-game sums are not extra wall time."
+  },
+  "stop_decision": {
+    "actual_low_mode_proven": true,
+    "comparison_configuration_valid": true,
+    "C_both_games_zero_host_actions": true,
+    "C_useful_task_grounded_execution": false,
+    "predeclared_independent_branch_stop_triggered": true,
+    "further_contract_tuning": false,
+    "expand_full25_this_candidate": false,
+    "formal_submission_this_candidate": false
+  },
+  "offline_evidence": "experiments/035-analysis/generated-code-offline-review.json",
+  "review_script": {
+    "path": "/private/tmp/arc3_035_program_audit.py",
+    "sha256": "0bb96e879fc448c62f0e6c1a34e29923017b6dbdc6695edd88127d54b13dd7ef"
+  }
+}

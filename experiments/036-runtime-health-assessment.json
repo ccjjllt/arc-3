@@ -1,0 +1,46 @@
+{
+  "observed_at_utc": "2026-10-24T15:58:12.775082+00:00",
+  "assessment": "running_within_expected_schedule_no_process_failure_observed",
+  "kernel_id": 140147580,
+  "version": 11,
+  "platform_status_at_check": "RUNNING",
+  "remote_source_matches_frozen036": true,
+  "current_phase": "baseline",
+  "main_medium": {
+    "stage": "arm_finished",
+    "utc": "2026-10-24T14:50:20.905070+00:00",
+    "arm": "main_medium",
+    "status": "completed",
+    "wall_seconds": 7397.450739108,
+    "exit_code": 0,
+    "game_state_counts": {
+      "won": 5,
+      "cancelled": 20
+    },
+    "lingering_worker_threads": []
+  },
+  "baseline_latest_parent_heartbeat": {
+    "elapsed_seconds": 3900,
+    "session_seconds": 12909,
+    "heartbeat_count_observed": 66
+  },
+  "model_startup_and_boundary_seconds_approximately": 1607,
+  "expected_remaining_from_last_heartbeat_seconds": {
+    "solver_nominal": 3354,
+    "parent_allowance_including_preparation_and_drain": 3504
+  },
+  "estimated_completion_note": "Around 2026-10-25 00:55 Asia/Shanghai if the baseline uses the same bounded preparation/drain path as the first arm; estimate, not guarantee. Outer cap around02:20 Asia/Shanghai.",
+  "evidence": [
+    "experiments/036-runtime-health-snapshot.json",
+    "experiments/036-runtime-live-check.json",
+    "runs/036-runtime-health/live-log.txt"
+  ],
+  "limits": [
+    "Parent heartbeats prove the session runner, GPU server process and CPU arm process remain alive; they do not independently prove recent game-action or generation progress.",
+    "Version11 running output files were unavailable through the read-only output endpoint. Actual per-request logs/GPU samples and both mounted-template proof files still require completion download.",
+    "First-arm end-of-budget cancelled states and request timeouts do not alone indicate platform failure; full paired scoring and budget compliance remain pending."
+  ],
+  "remote_mutations": false,
+  "cancelled_or_restarted": false,
+  "formal_submission_created": false
+}

@@ -92,6 +92,8 @@ def main() -> None:
         required.add("executable_plan_forks.py")
     if config.get("research_family") == "035":
         required.add("reasoning_mode.py")
+    if "main_medium" in arms:
+        required.add("main_reasoning.py")
     if config.get("inference_timing", False):
         required.add("inference_timing.py")
     for key in ("scheduler_observer", "request_deadline"):

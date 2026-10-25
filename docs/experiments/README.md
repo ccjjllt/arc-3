@@ -40,4 +40,5 @@
 | [032](032.md) | [进展](../progress/032-033-memory-and-controller.md) | 1 | 3 | 29 | 2 | 15 |
 | [033](033.md) | — | 2 | 2 | 10 | 2 | 4 |
 | [034](034.md) | [计划](../plan/034-executable-plan.md) · [计划](../plan/034-v6-object-evidence.md) · [计划](../plan/034-v7-short-program-feedback.md) · [计划](../plan/034-v8-delivery-interface.md) · [计划](../plan/034-v9-typed-status-interface.md) · [进展](../progress/034-executable-plan.md) | 9 | 11 | 81 | 3 | 14 |
-| [035](035.md) | [计划](../plan/035-auxiliary-reasoning-mode.md) · [进展](../progress/035-auxiliary-reasoning.md) | 0 | 1 | 6 | 1 | 0 |
+| [035](035.md) | [计划](../plan/035-auxiliary-reasoning-mode.md) · [进展](../progress/035-auxiliary-reasoning.md) | 1 | 1 | 9 | 1 | 1 |
+| [036](036.md) | [计划](../plan/036-main-reasoning-medium.md) · [进展](../progress/036-main-reasoning-medium.md) | 1 | 1 | 16 | 1 | 5 |
