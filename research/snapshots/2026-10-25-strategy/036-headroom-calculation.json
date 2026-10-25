@@ -1,0 +1,41 @@
+{
+  "source": "experiments/036-analysis/summary.json",
+  "source_sha256": "3071877adf2ac9ef5f848a1d4ccb95bf85c5c979d9ecc6edc80fb795bd96c2c1",
+  "scope": "036 public25, descriptive only; no new model or environment execution",
+  "arms": [
+    {
+      "label": "baseline",
+      "mean_score": 39.43577490664345,
+      "mean_completion_ceiling": 41.589610389610385,
+      "mean_efficiency_gap": 2.153835482966935,
+      "levels_completed": 97,
+      "levels_available": 183,
+      "wins": 4,
+      "actions": 5116
+    },
+    {
+      "label": "main_medium",
+      "mean_score": 40.64089548097322,
+      "mean_completion_ceiling": 42.881673881673876,
+      "mean_efficiency_gap": 2.240778400700664,
+      "levels_completed": 100,
+      "levels_available": 183,
+      "wins": 5,
+      "actions": 5655
+    }
+  ],
+  "both_below_20": [
+    "bp35-0a0ad940",
+    "cn04-2fe56bfb",
+    "g50t-5849a774",
+    "lf52-271a04aa",
+    "sk48-d8078629",
+    "wa30-ee6fef47"
+  ],
+  "hindsight_best_of_two_per_game_mean": 50.71738001684096,
+  "hindsight_warning": "Not a feasible ensemble result: uses both observed outcomes, double runs and an oracle selector; no attainable uplift is claimed.",
+  "at_completion_ceiling": {
+    "reference": 16,
+    "candidate": 16
+  }
+}

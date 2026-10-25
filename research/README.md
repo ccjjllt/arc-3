@@ -4,6 +4,7 @@
 
 ## 通用总览
 
+- [2026-10-25 最新提分与获奖研究审计](overview/2026-10-25-research-strategy.md)
 - [data-findings.md](overview/data-findings.md)
 - [frontier-findings.md](overview/frontier-findings.md)
 - [notebook-findings.md](overview/notebook-findings.md)
