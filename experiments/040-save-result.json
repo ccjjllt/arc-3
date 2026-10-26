@@ -1,0 +1,122 @@
+{
+  "status": "READY_AWAITING_TEAM_SUBMISSION_QUOTA",
+  "observed_at_utc": "2026-10-26T14:24:37.857364+00:00",
+  "kernel_ref": "jiyujia/arc3-040-dprime-fresh-first",
+  "kernel_version": 1,
+  "kernel_numeric_id": 140991585,
+  "notebook_sha256": "8e742d69135c687896365dd6d8a4388b4f33d54eda87760b35301ded4481ae47",
+  "save_status": "COMPLETE/passed",
+  "save_elapsed_seconds": 1159.0429716530002,
+  "model_ready_elapsed_seconds": 838.1463818329999,
+  "benchmark_started_elapsed_seconds": 842.662366817,
+  "save_games": [
+    {
+      "game_id": "sb26-7fbdac44",
+      "state": "cancelled",
+      "non_reset_actions": 73,
+      "generated_tokens": 33069,
+      "levels_completed": 4,
+      "offline_score": 27.77777777777778
+    },
+    {
+      "game_id": "cd82-fb555c5d",
+      "state": "cancelled",
+      "non_reset_actions": 38,
+      "generated_tokens": 32805,
+      "levels_completed": 0,
+      "offline_score": 0.0
+    }
+  ],
+  "token_measurement": "Recorded action-attached generated_tokens plus serialized final_generated_tokens, matching the original save validator; not a complete model-generation accounting. sb26 solver_note33928 differs from recorded33069.",
+  "dprime_snapshot": {
+    "patch": "dprime-priority-v1",
+    "form": "dprime",
+    "parameters": {
+      "level_pow": 0.5,
+      "eff_const": 300.0,
+      "eff_pow": 2.5,
+      "pace_pow": 0.4,
+      "pace_ref": 30000.0,
+      "c_action": 0.1,
+      "action_scale": 115.0,
+      "c_token": 0.9,
+      "token_scale": 225000.0,
+      "lin_floor": 0.1,
+      "rel_pow": 0.5,
+      "b1": 10.0,
+      "b2": 14.0,
+      "b3": 16.0
+    },
+    "fade_fraction": 0.4,
+    "price_fresh": false,
+    "priority_scale": 1000.0,
+    "environment": {
+      "ARC3_PRIORITY_PACE": "1",
+      "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+      "ARC3_PRIORITY_TAIL_FADE": "1",
+      "ARC3_PRIORITY_TAIL_FADE_FRACTION": "0.4"
+    },
+    "source_hashes": {
+      "gate.acquire": "b42cafec50e428f00ed6bd1e26eb6b165170f6d3d8a3ae1468ef99b74cb8eb74",
+      "gate.snapshot": "8257ff0e0d898b39cb423b3166848fa062a3d486a35498f4d36ccd79b14e4708",
+      "session.play": "cbd293a763b44ab65ba1c6107e7431c06e1644ee56c65885bd02e8d27d4e72e1"
+    },
+    "priority_calls": 0,
+    "fresh_priced": 0,
+    "pace_instances": 2,
+    "pace_updates": 4,
+    "counter_semantics": "Best-effort CPython thread counters; execution evidence, not timing or score.",
+    "active": true,
+    "new_model_requests": false,
+    "new_tools": false,
+    "prompt_modified": false
+  },
+  "checks": {
+    "platform_complete": true,
+    "remote_exact_source_and_metadata_passed": true,
+    "version1": true,
+    "local_frozen_sha": true,
+    "archive_notebook_matches": true,
+    "save_passed": true,
+    "health200": true,
+    "placeholder_written": true,
+    "cleanup_complete": true,
+    "source_hash_manifest_equal": true,
+    "current_and_archive_dependencies_match": true,
+    "benchmark_hash": true,
+    "game_stats_recomputed_equal": true,
+    "exact_two_games": true,
+    "real_actions_and_recorded_tokens": true,
+    "300_second_budget": true,
+    "snapshot_embedded_equals_final": true,
+    "dprime_active_initial_and_final": true,
+    "price_fresh_false": true,
+    "dprime_config_stable": true,
+    "two_real_pace_instances": true,
+    "pace_updates_match_cleared_levels": true,
+    "no_fresh_repricing": true
+  },
+  "checks_passed": 23,
+  "remote_source_check": "experiments/040-postsave-source-check.json",
+  "independent_review": "experiments/040-save-independent-review.json",
+  "formal_submission_created": false,
+  "submission_id": null,
+  "public_score": null,
+  "quota_observed": {
+    "used_today": 1,
+    "lifetime_submissions": 5,
+    "remaining_today": 0
+  },
+  "best_preserved": {
+    "submission_id": 57101330,
+    "public_score": 31.16
+  },
+  "limits": [
+    "Two-game300-second smoke is not a leaderboard score or score-gain measurement.",
+    "priority_calls0: the real GPU run did not invoke D-prime priority scoring/reordering. Only pace instances/updates were exercised.",
+    "CPU real-gate checks establish formula/queue compatibility; hidden110-game scheduling effect remains unmeasured."
+  ],
+  "next_action": "On the next user-triggered check when team submission quota is available, recheck exact version1/source and prior submissions, then submit this existing passed version once. No rebuild, repeated GPU save, automatic polling or monitoring.",
+  "independent_review_status": "passed",
+  "independent_review_checks_passed": 32
+}

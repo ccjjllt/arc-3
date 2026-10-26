@@ -11,3 +11,5 @@ CPU检查要覆盖公式与公开实现一致、实际runtime模块别名、安�
 [配置](../../experiments/040-dprime-fresh-first.json) · [来源绑定边界](../../research/notes/040/040-scored-version.md) · [独立算法审查](../../research/notes/040/040-dprime-audit.md)
 
 实际执行：21:41北京时间，jiyujia v1已启动GPU保存，14项远端核验通过；准确SHA及等待完成通知的后续动作见[进展](../progress/040-dprime-fresh-first.md)。
+
+22:21结果更新：保存passed／平台COMPLETE；sb26完成4关，cd82为0关。pace2实例/4更新，priority_calls0，短测尚未验证调度重排收益。独立复核32项通过，保留准确v1等待团队正式额度，继续以进展记录为准。

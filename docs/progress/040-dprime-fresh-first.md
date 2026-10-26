@@ -1,4 +1,4 @@
-# 040：D-prime保留新题优先，GPU保存运行中
+# 040：D-prime保留新题优先，保存通过待正式额度
 
 2026-10-26 21:41北京时间。用户授权继续优化后，新派实现与独立审查代理，以实际最高分009v2为固定底座，构建并启动一次新候选。当前最佳仍009／31.16，040尚无正式提交或公开分数。
 
@@ -29,3 +29,17 @@ Kaggle已接受 **jiyujia/arc3-040-dprime-fresh-first version1，Notebook ID1409
 当前团队正式额度0，**未创建040正式提交**。等待用户完成通知后读取本次save report、benchmark和dprime快照；运行及准确版本检查通过且额度可用时，只提交该成功版本一次。不重复push、不设置自动监控或连续轮询。
 
 [运行页面](https://www.kaggle.com/code/jiyujia/arc3-040-dprime-fresh-first) · [启动记录](../../experiments/040-launch.json) · [远端核验](../../experiments/040-remote-source-check.json) · [CPU原件](../../experiments/040-preparation/dprime-cpu-check.json) · [独立审查](../../experiments/040-preparation/builder-review.json) · [计划](../plan/040-dprime-fresh-first.md)
+
+## 保存完成，保留准确v1等待正式额度
+
+2026-10-26 22:21北京时间，用户通知完成后官方API确认**COMPLETE，仍为version1**。29cells再次逐字匹配，009镜像、五个输入版本、GPU/私有/断网等14项回读核验通过。保存报告passed，真实RTX PRO6000，health200在838.15秒就绪，总检查1159.04秒，输出已写、模型拥有进程组已清理。
+
+两题300秒短测：sb26有73次非RESET动作、记录33069个动作挂接/序列化最终tokens、完成4关；cd82有38次非RESET动作、同口径32805 tokens、完成0关。两题按预算cancelled，正常结束。这些数字不代表隐藏正式分数；sb26 solver_note的33928与保存的动作挂接33069不同，不把后者称为完整模型生成总量。
+
+helper安装与最终快照均active、price_fresh=False、fade0.4，实际创建2个PaceTracker并更新4次；fresh_priced=0。**priority_calls=0，此次短测没有触发D-prime优先级评分/重排**，因此不能据它声称调度已经提高吞吐或分数。兼容证据来自既有实际CPU gate检查，正式收益仍需隐藏评分。日志末尾SIGQUIT出现在本次主动SIGTERM清理阶段；没有Notebook traceback，不能把正常清理信号当作中途模型崩溃。
+
+root完成23项保存复算，最新派独立代理另完成32项复核，全部通过。benchmark hash、冻结manifest、运行报告source hashes均一致。
+
+团队查询仍为今日已用1、累计5、剩0。状态**READY_AWAITING_TEAM_SUBMISSION_QUOTA，未创建040正式提交**。保留已通过的jiyujia版本1，下一次用户触发检查且额度恢复时，核对版本、源码和无重复提交后直接正式提交一次；不重跑保存，不设置自动监控。当前正式最佳仍009／31.16。
+
+[保存结果](../../experiments/040-save-result.json) · [完成后源码核验](../../experiments/040-postsave-source-check.json) · [输出下载清单](../../experiments/040-save-output-manifest.json) · [新代理独立复核](../../experiments/040-save-independent-review.json)

@@ -1,0 +1,90 @@
+{
+  "observed_at_utc": "2026-10-26T14:24:34.289661+00:00",
+  "agent": "/root/r040_save_result_review_fresh",
+  "scope": "Fresh independent local-only audit of downloaded nine core save artifacts, exact frozen sources, CPU/prelaunch evidence and root official post-save readback. No network/GPU/model/game execution by reviewer.",
+  "kernel_ref": "jiyujia/arc3-040-dprime-fresh-first",
+  "version": 1,
+  "notebook_sha256": "8e742d69135c687896365dd6d8a4388b4f33d54eda87760b35301ded4481ae47",
+  "passed": true,
+  "checks": {
+    "local_notebook_exact_sha": true,
+    "archived_notebook_exact_sha": true,
+    "all_current_dependency_hashes": true,
+    "all_archived_dependency_hashes": true,
+    "runtime_source_hashes_equal_manifest": true,
+    "mode_save_not_formal": true,
+    "save_report_passed": true,
+    "health200_observed": true,
+    "save_deadlines_respected": true,
+    "benchmark_sha_matches": true,
+    "exact_two_games": true,
+    "recomputed_game_fields_equal_report": true,
+    "both_real_actions_tokens": true,
+    "both_expected_budget_end_states": true,
+    "helper_install_and_final_active": true,
+    "fresh_pricing_remains_false": true,
+    "snapshot_configuration_unchanged": true,
+    "final_snapshot_equals_save_report": true,
+    "pace_instances_two": true,
+    "pace_updates_equal_actual_level_clears": true,
+    "helper_cpu_hash_matches_runtime_manifest": true,
+    "inputs_resolved_without_missing": true,
+    "cleanup_completed": true,
+    "placeholder_written_file_has_parquet_magic": true,
+    "actual_rtx_pro6000_logged": true,
+    "notebook_has_no_fatal_cell_traceback": true,
+    "model_readiness_and_chat200_logged": true,
+    "no_cuda_oom_in_core_logs": true,
+    "sigquit_follows_owned_sigterm": true,
+    "postsave_platform_complete_v1": true,
+    "postsave_all14_remote_checks_passed": true,
+    "postsave_exact_notebook_sha": true
+  },
+  "checks_passed": 32,
+  "checks_total": 32,
+  "runtime": {
+    "save_status": "passed",
+    "health_ready_elapsed_seconds": 838.1463818329999,
+    "elapsed_seconds": 1159.0429716530002,
+    "game_metrics": [
+      {
+        "game_id": "sb26-7fbdac44",
+        "state": "cancelled",
+        "non_reset_actions": 73,
+        "generated_tokens": 33069,
+        "levels_completed": 4,
+        "offline_score": 27.77777777777778
+      },
+      {
+        "game_id": "cd82-fb555c5d",
+        "state": "cancelled",
+        "non_reset_actions": 38,
+        "generated_tokens": 32805,
+        "levels_completed": 0,
+        "offline_score": 0.0
+      }
+    ],
+    "token_metric_scope": "Sum of generated_tokens attached to saved action history plus final_generated_tokens, matching save validator. Not a full per-request generation total.",
+    "dprime_counters": {
+      "priority_calls": 0,
+      "fresh_priced": 0,
+      "pace_instances": 2,
+      "pace_updates": 4
+    },
+    "actual_device": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+  },
+  "nonblocking_log_notes": [
+    "serve.log has sitecustomize ModuleNotFoundError for wrapt; subsequent model readiness, health200 and real chat200/gameplay show this did not prevent this save from completing.",
+    "SIGQUIT follows the notebook-owned SIGTERM and detokenizer exit-15 during cleanup, rather than preceding gameplay shutdown.",
+    "FastAPI ORJSONResponse deprecation warning is present; no Notebook fatal traceback found."
+  ],
+  "limitations": [
+    "priority_calls=0: this two-game300s run did not exercise D-prime priority-value decisions or queue reordering; it proves compatible installation and actual PaceTracker instances/updates, not scheduling benefit.",
+    "CPU real-gate/formula checks supply compatibility evidence; hidden110-game coverage and public score remain unmeasured.",
+    "Short smoke scores are not a controlled comparison with009/038 or a leaderboard score.",
+    "Parquet file existence/magic checked; row content was not independently decoded because pandas is absent in reviewer Python environment. Builder/save protocol and placeholder_written establish intended unscored placeholder.",
+    "sb26 solver_note reports33928tokens while saved action-attached+final metric is33069; do not describe the latter as complete generated-token total."
+  ],
+  "blocking_issues": [],
+  "recommendation": "No save/source blocker found. Preserve exact version1. Formal submission may proceed once team quota is available after root confirms no duplicate submission; do not claim gain from smoke."
+}

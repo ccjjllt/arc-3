@@ -1,5 +1,5 @@
 {
-  "status": "GPU_SAVE_RUNNING",
+  "status": "READY_AWAITING_TEAM_SUBMISSION_QUOTA",
   "prepared_at_utc": "2026-10-26T13:40:08.614342+00:00",
   "kernel_ref": "jiyujia/arc3-040-dprime-fresh-first",
   "intended_kernel_version": 1,
@@ -28,7 +28,7 @@
   "public_score": null,
   "independent_prelaunch_review": "experiments/040-preparation/builder-review.json",
   "cpu_check": "experiments/040-preparation/dprime-cpu-check.json",
-  "monitoring": "none_wait_for_user_completion_notice_after_launch",
+  "monitoring": "none_waiting_for_next_submission_opportunity",
   "retry_policy": "One push attempt; inspect exact remote version/source before any retry after an ambiguous response.",
   "kernel_version": 1,
   "kernel_numeric_id": 140991585,
@@ -36,9 +36,15 @@
   "push_command_executions": 1,
   "remote_source_verified": true,
   "remote_source_check": "experiments/040-remote-source-check.json",
-  "last_observed_at_utc": "2026-10-26T13:41:25.186549+00:00",
+  "last_observed_at_utc": "2026-10-26T14:24:37.857364+00:00",
   "last_observed_at_beijing": "2026-10-26 21:41:25",
-  "platform_status": "RUNNING",
-  "save_result_not_yet_read": true,
-  "next_action": "Wait for user completion notice; then read save report/benchmark/dprime snapshots. If runtime/source checks pass and team quota is available, submit this exact successful version once. No repeated push or automatic monitoring."
+  "platform_status": "COMPLETE",
+  "save_result_not_yet_read": false,
+  "next_action": "On the next user-triggered check when team submission quota is available, recheck exact version1/source and prior submissions, then submit this existing passed version once. No rebuild, repeated GPU save, automatic polling or monitoring.",
+  "save_status": "COMPLETE",
+  "save_report_status": "passed",
+  "save_result": "experiments/040-save-result.json",
+  "postsave_source_check": "experiments/040-postsave-source-check.json",
+  "team_formal_submissions_remaining_at_result_review": 0,
+  "save_independent_review": "experiments/040-save-independent-review.json"
 }
