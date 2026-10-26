@@ -9,6 +9,7 @@
 | 项目 | 状态与结论 | 入口 |
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
+| GPU保存运行中 · 040 v1 | jiyujia账号启动D-prime公式／pace／fade候选，保留009新题优先；CPU与远端核验通过，尚无正式分 | [040进展](docs/progress/040-dprime-fresh-first.md) · [运行页面](https://www.kaggle.com/code/jiyujia/arc3-040-dprime-fresh-first) |
 | 最新正式结果 · 038 | submission 57650170，public **27.73**，较009低3.43；核心正式代码与009相同，结束原样重提 | [结果与下一步](research/notes/038/038-formal-results-analysis.md) · [038进展](docs/progress/038-highscore-baseline.md) |
 | 已准备备选 · 039 | step兼容修复本地冻结，收益证据较小，降为低优先级；优先核验D-prime准确得分版本及调度差异 | [039](docs/progress/039-history-step.md) |
 | 历史正式结果 · 037 | submission 57615378，public **26.71**，较009低4.45；保留009，停止原样重提 | [037进展与结果](docs/progress/037-highscore-pixels.md) · [正式原件](experiments/037-formal-result-snapshot.json) |

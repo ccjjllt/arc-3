@@ -1,0 +1,217 @@
+{
+  "public_source_sha256": "519114fdf50ee2f3fd04ebe756697d892dd6b6af638abf4340367f8a20c2030c",
+  "method": "AST-extracted original public norm_levels/value_base/value_dprime, no helper implementation, model, game or network. Rank cases plus finite normal-domain grid.",
+  "cases": [
+    {
+      "name": "fresh10",
+      "level": 1,
+      "actions": 0,
+      "tokens": 0,
+      "pace": 0,
+      "total_levels": 10,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 17000,
+          "base_formula_comparable": 900
+        },
+        "0.5": {
+          "dprime": 9000,
+          "base_formula_comparable": 500
+        },
+        "0": {
+          "dprime": 1000,
+          "base_formula_comparable": 100
+        }
+      }
+    },
+    {
+      "name": "fresh6",
+      "level": 1,
+      "actions": 0,
+      "tokens": 0,
+      "pace": 0,
+      "total_levels": 6,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 18619,
+          "base_formula_comparable": 1061
+        },
+        "0.5": {
+          "dprime": 10619,
+          "base_formula_comparable": 661
+        },
+        "0": {
+          "dprime": 2619,
+          "base_formula_comparable": 261
+        }
+      }
+    },
+    {
+      "name": "stalled_short_fast_early",
+      "level": 3,
+      "actions": 0,
+      "tokens": 500000,
+      "pace": 1000,
+      "total_levels": 6,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 19879,
+          "base_formula_comparable": 396
+        },
+        "0.5": {
+          "dprime": 11879,
+          "base_formula_comparable": 296
+        },
+        "0": {
+          "dprime": 3879,
+          "base_formula_comparable": 196
+        }
+      }
+    },
+    {
+      "name": "stalled10_typical_pace",
+      "level": 3,
+      "actions": 300,
+      "tokens": 500000,
+      "pace": 30000,
+      "total_levels": 10,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 16035,
+          "base_formula_comparable": 1
+        },
+        "0.5": {
+          "dprime": 8035,
+          "base_formula_comparable": 1
+        },
+        "0": {
+          "dprime": 35,
+          "base_formula_comparable": 1
+        }
+      }
+    },
+    {
+      "name": "final10_fresh_level",
+      "level": 10,
+      "actions": 0,
+      "tokens": 0,
+      "pace": 30000,
+      "total_levels": 10,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 5500,
+          "base_formula_comparable": 1000
+        },
+        "0.5": {
+          "dprime": 5500,
+          "base_formula_comparable": 1000
+        },
+        "0": {
+          "dprime": 5500,
+          "base_formula_comparable": 1000
+        }
+      }
+    },
+    {
+      "name": "opening10_after_100k",
+      "level": 1,
+      "actions": 10,
+      "tokens": 100000,
+      "pace": 0,
+      "total_levels": 10,
+      "scores_by_phi": {
+        "1": {
+          "dprime": 16544,
+          "base_formula_comparable": 316
+        },
+        "0.5": {
+          "dprime": 8544,
+          "base_formula_comparable": 167
+        },
+        "0": {
+          "dprime": 544,
+          "base_formula_comparable": 18
+        }
+      }
+    }
+  ],
+  "grid": {
+    "count": 18000,
+    "level_domain": "total_levels6..10, currentlevel1..N",
+    "actions": [
+      0,
+      1,
+      25,
+      115,
+      300,
+      10000
+    ],
+    "tokens": [
+      0,
+      62000,
+      159100,
+      225000,
+      1000000
+    ],
+    "pace": [
+      0,
+      1,
+      1000,
+      30000,
+      1000000
+    ],
+    "phi": [
+      0,
+      0.5,
+      1
+    ],
+    "all_finite_nonnegative": true,
+    "max_integer_priority": 41428
+  },
+  "findings": [
+    "SCALE1000 is a common positive multiplier within Dprime and does not change ordering; normal-domain values remain far below1e6 warm-band gap.",
+    "Fresh N6 ranks above fresh N10; equal-state same-N ties use gate insertion sequence.",
+    "An already progressed N6 game with cheap early clears and500k tokens/no actions in current level outranks fresh N10 even when tail phi reaches0. No strict coverage guarantee.",
+    "Dprime tail16 for many remaining levels can rank early-game exploration above a final level until tail fading; this is a policy choice, not a parser/runtime error.",
+    "No denominator zero in normal nonnegative actions: eff denominator300+a, pace denominator max1, token scale bounded by sqrt.5..sqrt2. Nonfinite malformed external values not guaranteed by original source."
+  ],
+  "runtime_identity": {
+    "009_notebook_sha256": "203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5",
+    "method": "git hash-object of locally inspected runtime source equals destination blob prefixes embedded in exact009 patch",
+    "files": {
+      "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": {
+        "git_blob": "84a9cdda9c851ea2dcf3eea9f0b3158d437bea16",
+        "patch_destination_prefix": "84a9cdd",
+        "matches": true
+      },
+      "research/runtime-bundle/src/ARC3-Inference/inference/framework/solver.py": {
+        "git_blob": "e40976c69db03c39b0b3c3a3295813a58efcb7c8",
+        "patch_destination_prefix": "e40976c",
+        "matches": true
+      },
+      "research/runtime-bundle/src/ARC3-Inference/inference/agent/priority_scheduler.py": {
+        "git_blob": "14bb787f2fa28ae8f868956d08a85db73b925479",
+        "patch_destination_prefix": "14bb787",
+        "matches": true
+      }
+    }
+  },
+  "recommended_isolated_candidate": {
+    "price_fresh": false,
+    "formula": "dprime",
+    "pace": "public mean generated tokens per completed level",
+    "tail_fade_fraction": 0.4,
+    "streams": 10,
+    "reason": "PRICE_FRESH=0 is an existing public optional switch; retaining009 fresh-first removes identified starvation pathway while isolating scoring/pace/fade. This is not full reproduction of33.55 or proven improvement.",
+    "no_new_aging_or_thresholds": true
+  },
+  "integration_checks": [
+    "Install before creating game analyzers; unpickled solver creates ToolAgent at play time, so install before bm.run is sufficient.",
+    "SetPACE1 plus replace both ProgressPace and priority_value; otherwise cost_multiplier units conflict.",
+    "KeepSCORE_NORMALIZATION1/TAIL_LOOKUPremaining so _maybe_handover supplies total_levels.",
+    "Finite clock configured before initialgateacquire; formal31920s and savefinitebudget satisfy tailfade.",
+    "Withprice_freshFalse, gate.acquire and session.play must remain original; noTLSneeded.",
+    "Completion accounting consumes per-level generated tokens after transition, resets actions/tokens start baselines, and de-duplicates completion by level. Final win yields no further priority need."
+  ],
+  "status": "algorithm_and_runtime_static_review_passed_for_normal_inputs; helper_and_GPU_readiness_require_root_checks"
+}

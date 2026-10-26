@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-10-26T13:35:59.674648+00:00",
+  "checks": [
+    {
+      "name": "exact_public_parameters",
+      "passed": true
+    },
+    {
+      "name": "exact_integer_priority_matches_public_oracle",
+      "passed": true,
+      "cases": 32400
+    },
+    {
+      "name": "pace_is_public_mean_not_baseline_ratio",
+      "passed": true
+    },
+    {
+      "name": "benchmark_unpickled_before_install_without_agents",
+      "passed": true
+    },
+    {
+      "name": "default_preserves_original_fresh_methods",
+      "passed": true
+    },
+    {
+      "name": "actual_unpickled_solver_constructs_new_pace",
+      "passed": true
+    },
+    {
+      "name": "real_gate_fade_04_matches_public",
+      "passed": true,
+      "values": [
+        19879,
+        11879,
+        3879
+      ]
+    },
+    {
+      "name": "fresh_not_repriced_in_default_mode",
+      "passed": true
+    },
+    {
+      "name": "real_gate_refresh_keeps_fresh_absolute_priority",
+      "passed": true,
+      "order": [
+        "fresh",
+        "returning"
+      ],
+      "errors": []
+    },
+    {
+      "name": "live_snapshot_records_executed_policy",
+      "passed": true,
+      "snapshot": {
+        "patch": "dprime-priority-v1",
+        "form": "dprime",
+        "parameters": {
+          "level_pow": 0.5,
+          "eff_const": 300.0,
+          "eff_pow": 2.5,
+          "pace_pow": 0.4,
+          "pace_ref": 30000.0,
+          "c_action": 0.1,
+          "action_scale": 115.0,
+          "c_token": 0.9,
+          "token_scale": 225000.0,
+          "lin_floor": 0.1,
+          "rel_pow": 0.5,
+          "b1": 10.0,
+          "b2": 14.0,
+          "b3": 16.0
+        },
+        "fade_fraction": 0.4,
+        "price_fresh": false,
+        "priority_scale": 1000.0,
+        "environment": {
+          "ARC3_PRIORITY_PACE": "1",
+          "ARC3_PRIORITY_REFRESH_QUEUE": "1",
+          "ARC3_PRIORITY_TAIL_FADE": "1",
+          "ARC3_PRIORITY_TAIL_FADE_FRACTION": "0.4"
+        },
+        "source_hashes": {
+          "gate.acquire": "b42cafec50e428f00ed6bd1e26eb6b165170f6d3d8a3ae1468ef99b74cb8eb74",
+          "gate.snapshot": "8257ff0e0d898b39cb423b3166848fa062a3d486a35498f4d36ccd79b14e4708",
+          "session.play": "cbd293a763b44ab65ba1c6107e7431c06e1644ee56c65885bd02e8d27d4e72e1"
+        },
+        "priority_calls": 5,
+        "fresh_priced": 0,
+        "pace_instances": 1,
+        "pace_updates": 0,
+        "counter_semantics": "Best-effort CPython thread counters; execution evidence, not timing or score.",
+        "active": true,
+        "new_model_requests": false,
+        "new_tools": false,
+        "prompt_modified": false
+      }
+    },
+    {
+      "name": "uninstall_restores_all_targets_and_environment",
+      "passed": true
+    },
+    {
+      "name": "optional_public_fresh_path_executed",
+      "passed": true
+    },
+    {
+      "name": "optional_play_supplies_public_total_levels_and_clears_tls",
+      "passed": true
+    },
+    {
+      "name": "final_uninstall_restores_originals",
+      "passed": true
+    }
+  ],
+  "network_attempts": 0,
+  "model_calls": 0,
+  "game_actions": 0,
+  "gpu_calls": 0,
+  "limits": [
+    "CPU parity and scheduling compatibility, not score/throughput evidence.",
+    "No hidden game data or real environment actions used.",
+    "Optional fresh-pricing=True checked for parity; candidate default False preserves baseline fresh protection."
+  ],
+  "candidate_price_fresh": false,
+  "helper_sha256": "484d1e08b8de491a108ed3057b75f8a7b4a5994d01bd5f8476374d8d849640fc",
+  "public_notebook_sha256": "2d21f788f48c842a1c50785c6e1efa84ed1962385ab4b87c7fbfef214f9ba79e",
+  "runtime_source_hashes": {
+    "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "research/runtime-bundle/src/ARC3-Inference/inference/framework/solver.py": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+  }
+}

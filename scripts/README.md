@@ -65,6 +65,7 @@
 - [check_034_executable_plan.py](checks/check_034_executable_plan.py)
 - [check_035_aux_reasoning.py](checks/check_035_aux_reasoning.py)
 - [check_036_main_reasoning.py](checks/check_036_main_reasoning.py)
+- [check_040_dprime.py](checks/check_040_dprime.py)
 
 ## 专用 Notebook 与输入包构建 · `build/`
 
@@ -76,6 +77,7 @@
 - [build_031_submission.py](build/build_031_submission.py)
 - [build_032_submission.py](build/build_032_submission.py)
 - [build_037_submission.py](build/build_037_submission.py)
+- [build_040_submission.py](build/build_040_submission.py)
 - [build_highscore_variant.py](build/build_highscore_variant.py)
 
 ## 实验输入准备 · `prepare/`

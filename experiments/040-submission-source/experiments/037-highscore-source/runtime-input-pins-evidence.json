@@ -1,0 +1,40 @@
+{
+  "observed_at_utc": "2026-10-25T03:02:10.347004+00:00",
+  "source_notebook_version": 83,
+  "script_version_id": 359573474,
+  "runtime_image_version_id": 31401,
+  "runtime_image_digest": "gcr.io/kaggle-private-byod/python@sha256:00377cd1b3d470a605bc5b0ceca79969e369644e9b36802242a1c70e627372f9",
+  "image_mapping_evidence": "same live official GetKernel response forv86 has metadata.dockerImage digest and blob.metadata.kaggle.dockerImageVersionId31401; separately downloadedv83 has31401",
+  "datasets": [
+    {
+      "ref": "dfranzen/pennyroyal-v253/1",
+      "dataset_id": 12273106,
+      "dataset_version_id": 20134793,
+      "version": 1
+    },
+    {
+      "ref": "dfranzen/taaf-kaggle-source-bundle-copy/1",
+      "dataset_id": 12250142,
+      "dataset_version_id": 20092813,
+      "version": 1
+    }
+  ],
+  "models": [
+    {
+      "ref": "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "model_instance_id": 755057,
+      "model_instance_version_id": 1007009,
+      "version": 1
+    },
+    {
+      "ref": "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1",
+      "model_instance_id": 755365,
+      "model_instance_version_id": 1007514,
+      "version": 1
+    }
+  ],
+  "all_v83_input_ids_matched": true,
+  "pinning_metadata_file": "runtime-input-pins.json",
+  "push_boundary": "CLI validation accepts versioned dataset refs; request forwards them unmodified. No SaveKernel request has been made in this audit, so successful backend admission/readback is still to be verified by the actual save.",
+  "network_effects": "Read-only metadata and streamed dataset headers; no package bodies, GPU jobs, uploads or submissions."
+}

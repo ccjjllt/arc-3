@@ -1,0 +1,106 @@
+{
+  "id": "040-dprime-fresh-first",
+  "kernel_id": "jiyujia/arc3-040-dprime-fresh-first",
+  "kernel_title": "ARC3 040 Dprime Fresh First",
+  "purpose": "Evaluate only published D-prime priority formula, mean-token pace and0.4 tail fade over the highest observed own009 solver; preserve baseline fresh-first admission.",
+  "base_notebook": "notebooks/009-baseline-submission/submission.ipynb",
+  "base_source_sha256": "203da467cb0534fdf50b5683a55a524e647023e0d490524c59f2fda9a73b5dd5",
+  "hard_limit_seconds": 32400,
+  "machine_shape": "NvidiaRtxPro6000",
+  "enable_internet": false,
+  "input_resolution_timeout_seconds": 60,
+  "formal_mode": "KAGGLE_IS_COMPETITION_RERUN supplied by Kaggle; live COMPETITION gateway only",
+  "save_mode": "real_model_health_then_two_public_games_then_official_unscored_placeholder",
+  "save_placeholder_is_scored": false,
+  "formal_submission_file_owner": "Kaggle gateway; notebook never writes scores in a competition rerun",
+  "solver": {
+    "n_passes": 1,
+    "concurrency": 120,
+    "active_streams": 10,
+    "max_runtime_s_per_game": 31920,
+    "warmup_action_games": 1,
+    "save_request_logs": false,
+    "research_interventions": [
+      "dprime_priority_fresh_first"
+    ]
+  },
+  "official_save_protocol": {
+    "source_url": "https://raw.githubusercontent.com/arcprize/ARC-AGI-3-Kaggle-Starter/main/scripts/build_notebook.py",
+    "source_snapshot": "experiments/009-source/support/official-starter-build_notebook.py",
+    "source_sha256": "8c9961bc3a9006c0f187392426fc9a659176362b54592c4aad5b6b1a3f3da318",
+    "observed_date_local": "2026-10-12",
+    "relevant_lines": "2-10, 75-78, 114-133",
+    "scope": "Official placeholder is emitted only after the real GPU save smoke passes. The gateway alone writes the formal rerun submission; smoke is not a leaderboard score."
+  },
+  "revision": 1,
+  "save_smoke": {
+    "game_ids": [
+      "sb26-7fbdac44",
+      "cd82-fb555c5d"
+    ],
+    "budget_seconds": 300,
+    "n_passes": 1,
+    "concurrency": 2,
+    "startup_timeout_seconds": 2400,
+    "total_timeout_seconds": 3600,
+    "validation": "Each game has non-RESET actions > 0, generated tokens > 0, and state won/cancelled; health must have returned 200",
+    "cleanup": "Only the process group of the model Popen started by this save"
+  },
+  "preparation_status": "local preparation; no GPU or formal score yet",
+  "dprime": {
+    "implementation": "src/arc3_research/dprime_priority.py",
+    "price_fresh": false,
+    "fade_fraction": 0.4,
+    "public_source": "research/snapshots/2026-10-26-dprime/arc3-franzen-dprime.ipynb",
+    "public_source_sha256": "2d21f788f48c842a1c50785c6e1efa84ed1962385ab4b87c7fbfef214f9ba79e",
+    "public_cell_index": 17,
+    "public_cell_source_sha256": "519114fdf50ee2f3fd04ebe756697d892dd6b6af638abf4340367f8a20c2030c",
+    "source_version": 2,
+    "source_ref": "tantan0327/arc3-franzen-dprime",
+    "historical_notebook_card_score": 33.55,
+    "scored_version_binding": "UNRESOLVED; this is an unproven modified scheduler candidate, not a reproduction or guarantee of33.55",
+    "reason_keep_fresh_first": "Public PRICE_FRESH=1 admits finite legitimate progressed snapshots above never-started long games even after fade. PRICE_FRESH=0 is an existing public option and retains009 baseline coverage priority.",
+    "independent_formula_review": "experiments/040-preparation/independent-algorithm-review.json",
+    "implementation_sha256": "484d1e08b8de491a108ed3057b75f8a7b4a5994d01bd5f8476374d8d849640fc"
+  },
+  "deployment": {
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c",
+    "docker_image_pinning_type": "original",
+    "machine_shape": "NvidiaRtxPro6000",
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253/1",
+      "dfranzen/taaf-kaggle-source-bundle-copy/1"
+    ],
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ],
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "expected_data_sources": [
+      {
+        "sourceType": "competition",
+        "sourceId": 133468
+      },
+      {
+        "sourceType": "datasetVersion",
+        "sourceId": 20092813
+      },
+      {
+        "sourceType": "datasetVersion",
+        "sourceId": 20134793
+      },
+      {
+        "sourceType": "modelInstanceVersion",
+        "sourceId": 1007514
+      },
+      {
+        "sourceType": "modelInstanceVersion",
+        "sourceId": 1007009
+      }
+    ],
+    "input_pins_evidence": "experiments/037-highscore-source/runtime-input-pins-evidence.json",
+    "remote_version_source_and_input_ids_must_match_before_submit": true
+  }
+}
