@@ -1,0 +1,103 @@
+{
+  "reviewed_at_utc": "2026-10-25T14:13:52.818106+00:00",
+  "reviewer": "new independent agent /root/r038_launch_review_fresh",
+  "scope": "Read-only local artifact and frozen-source comparison; executed only reviewed small configuration cell on CPU fixtures. No model, GPU, network, or remote mutations.",
+  "kernel_ref_at_review": "zhuating/arc3-038-highscore-baseline",
+  "notebook_sha256_at_review": "4711d9846e5d953cab075df1f78138e27eb39e277c8ce008b8ad349f87f4ad1f",
+  "metadata_sha256_at_review": "bbc18e368900fb01519630d51367df1c4117dff77f576ec3d4d98492e27f9092",
+  "checks": {
+    "upload_sha_matches_manifest": true,
+    "upload_matches_frozen_notebook": true,
+    "upload_matches_frozen_metadata": true,
+    "all_live_tracked_inputs_match": true,
+    "all_frozen_tracked_inputs_match": true,
+    "scored_v83_source_matches": true,
+    "baseline_25_cells": true,
+    "v83_patch_exact": true,
+    "no_031_039_install": true,
+    "solver_interventions_empty": true,
+    "model_serving_setup_unchanged": true,
+    "v83_precache_import_benchmark_monitor_unchanged": true,
+    "formal_budget_and_streams": true,
+    "actual_formal_config_equals_v83": true,
+    "save_budget_300_2400_3600": true,
+    "actual_save_config_two_games_window": true,
+    "formal_gateway_prefix_unchanged": true,
+    "formal_soft_end_none_and_native_run": true,
+    "pinned_image_and_inputs": true,
+    "owner_identity_consistent": true,
+    "private_gpu_offline": true,
+    "size_under_source_limit": true
+  },
+  "passed": true,
+  "check_count": 22,
+  "blocking_findings": [],
+  "formal_and_save_configuration": {
+    "v83_True": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "candidate_True": {
+      "solver": {
+        "max_runtime_s_per_game": 31920,
+        "analyzer_timeout": 900.0,
+        "concurrency": 120,
+        "max_actions_per_game": null,
+        "save_request_logs": false
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    },
+    "v83_False": {
+      "solver": {
+        "max_runtime_s_per_game": 1500,
+        "analyzer_timeout": 900.0,
+        "concurrency": 10,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": [
+        "bp35",
+        "cd82",
+        "cn04",
+        "dc22",
+        "g50t",
+        "ka59",
+        "lf52",
+        "ls20",
+        "m0r0",
+        "s5i5",
+        "sk48",
+        "sp80",
+        "su15",
+        "tn36",
+        "wa30"
+      ]
+    },
+    "candidate_False": {
+      "solver": {
+        "max_runtime_s_per_game": 300,
+        "analyzer_timeout": 900.0,
+        "concurrency": 2,
+        "max_actions_per_game": null,
+        "save_request_logs": true
+      },
+      "n_passes": 1,
+      "game_weights": null,
+      "demo_excluded_games": []
+    }
+  },
+  "owner_change_note": "User authorizes jiyujia GPU quota. If owner changes after this snapshot, update config/kernel metadata/embedded config consistently and rebuild both upload and frozen archive, then record their new hashes. This report does not validate the future owner-adjusted bytes. Root should verify authenticated account/team and remote accepted version/image/input IDs after save.",
+  "score_boundary": "35.35 is upstream historical score; local/source checks do not prove reproduction or score gain."
+}

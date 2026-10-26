@@ -1,0 +1,18 @@
+{
+  "observed_at_utc": "2026-10-26T02:13:45.498645+00:00",
+  "agent": "/root/r038_formal_submit_review_new",
+  "scope": "Independent read-only local review of exact jiyujia version1 candidate and existing runtime evidence",
+  "passed": true,
+  "checks": [
+    "Exact notebook/frozen archive SHA256 matches",
+    "Target is jiyujia/arc3-038-highscore-baseline version1",
+    "Saved GPU smoke passed including HTTP200, real actions/tokens, output and cleanup",
+    "Core solver patch and formal settings match upstream scored v83",
+    "No segmentation-runs or history-step installation intervention",
+    "Existing remote readback COMPLETE/version1 and 13 checks passed"
+  ],
+  "limitations": [
+    "Agent did not independently call remote APIs; root performed current quota, duplicate and exact remote-source checks.",
+    "Saved short smoke success does not establish a formal public score."
+  ]
+}

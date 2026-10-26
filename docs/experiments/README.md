@@ -43,5 +43,5 @@
 | [035](035.md) | [计划](../plan/035-auxiliary-reasoning-mode.md) · [进展](../progress/035-auxiliary-reasoning.md) | 1 | 1 | 9 | 1 | 1 |
 | [036](036.md) | [计划](../plan/036-main-reasoning-medium.md) · [进展](../progress/036-main-reasoning-medium.md) | 1 | 1 | 16 | 1 | 5 |
 | [037](037.md) | [进展](../progress/037-highscore-pixels.md) | 0 | 1 | 21 | 1 | 1 |
-| [038](038.md) | [进展](../progress/038-highscore-baseline.md) | 5 | 1 | 3 | 0 | 0 |
+| [038](038.md) | [进展](../progress/038-highscore-baseline.md) | 5 | 2 | 24 | 0 | 1 |
 | [039](039.md) | [进展](../progress/039-history-step.md) | 0 | 1 | 3 | 0 | 0 |

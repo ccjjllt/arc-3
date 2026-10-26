@@ -55,8 +55,8 @@ def validate_config(config: dict, adapter_config: dict) -> None:
     expected["research_interventions"] = [] if variant == "baseline" else ["history_step_compat"]
     if config["solver"] != expected or "segmentation_runs" in config:
         raise ValueError("Unexpected solver intervention or old segmentation configuration")
-    if config["kernel_id"].split("/", 1)[0] != "zhuating":
-        raise ValueError("Retain the observed owner zhuating")
+    if config["kernel_id"].split("/", 1)[0] not in {"zhuating", "jiyujia"}:
+        raise ValueError("Use a verified, user-authorized team account")
 
 
 def validate_cells(notebook: dict, reference: dict, original: dict, config: dict,

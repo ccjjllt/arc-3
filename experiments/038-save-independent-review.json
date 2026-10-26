@@ -1,0 +1,84 @@
+{
+  "reviewed_at_utc": "2026-10-25T15:51:55.703107+00:00",
+  "reviewer": "new independent agent /root/r038_save_review_fresh",
+  "status": "passed",
+  "check_count": 26,
+  "checks": {
+    "frozen_notebook_hash": true,
+    "upload_and_frozen_notebook_equal": true,
+    "current_source_hashes": true,
+    "archived_source_hashes": true,
+    "save_source_hashes_equal_manifest": true,
+    "mode_source_hashes_equal_manifest": true,
+    "save_passed": true,
+    "actual_model_health200": true,
+    "model_cleanup_completed": true,
+    "save_mode_identity": true,
+    "save_budget300": true,
+    "save_within3600": true,
+    "model_ready_within2400": true,
+    "one_pass": true,
+    "exact_two_games": true,
+    "both_have_real_actions": true,
+    "both_have_generation": true,
+    "legal_save_end_states": true,
+    "actual_RTX_PRO6000_log": true,
+    "benchmark_sha": true,
+    "benchmark_report_game_counts": true,
+    "placeholder_written_and_nonempty_parquet": true,
+    "no031_or039_install": true,
+    "baseline_has_no_solver_intervention": true,
+    "formal_config_identical_v83": true,
+    "completed_remote_v1_verified": true
+  },
+  "kernel_ref": "jiyujia/arc3-038-highscore-baseline",
+  "kernel_version": 1,
+  "notebook_sha256": "51e11dc5d8d1a0a4852db9208b81dd2a1a453bfef4cf59f05092d64e3a3c06e8",
+  "runtime": {
+    "model_ready_seconds": 627.116615258,
+    "save_elapsed_seconds": 951.2564720039999,
+    "budget_seconds": 300,
+    "games": [
+      {
+        "game_id": "sb26-7fbdac44",
+        "state": "cancelled",
+        "levels_completed": 3,
+        "non_reset_actions": 62,
+        "action_attached_generated_tokens": 32991,
+        "offline_score": 16.666666666666664,
+        "solver_note": "tokens=32991"
+      },
+      {
+        "game_id": "cd82-fb555c5d",
+        "state": "cancelled",
+        "levels_completed": 0,
+        "non_reset_actions": 53,
+        "action_attached_generated_tokens": 30693,
+        "offline_score": 0.0,
+        "solver_note": "tokens=36420"
+      }
+    ]
+  },
+  "blocking_findings": [],
+  "observations": [
+    "The saved artifact is an official unscored placeholder; these two short offline results do not reproduce35.35 or establish leaderboard improvement.",
+    "cd82 has0completed levels but positive real actions and generation, satisfying the prespecified execution smoke.",
+    "cd82solver_note reports36420 tokens whereas the benchmark action-attached count is30693; neither is promoted to a complete cost measure.",
+    "A deadline-near HTTP timeout and cancelled states appear at the bounded save window; the run exported valid reports and cleaned up its model process.",
+    "Nonfatal sitecustomize wrapt import warnings occur in the server log and also in037; real model health and generation succeeded. No evidence here identifies formal-run failures."
+  ],
+  "decision": "Ready for one exploratory formal submission of this exact savedv1 when team quota is available, after a fresh version/source and quota check. Root reports currentteam quota0, so no submit now.",
+  "remote_mutations": false,
+  "solver_modified": false,
+  "evidence_paths": [
+    "runs/038-highscore-save/save-smoke-report.json",
+    "runs/038-highscore-save/benchmark.json",
+    "runs/038-highscore-save/submission-mode.json",
+    "runs/038-highscore-save/input-paths.json",
+    "runs/038-highscore-save/serve.log",
+    "runs/038-highscore-save/arc3-038-highscore-baseline.log",
+    "runs/038-highscore-save/submission.parquet",
+    "experiments/038-postsave-source-check.json",
+    "experiments/038-submission-source-jiyujia/build-manifest.json"
+  ]
+}
