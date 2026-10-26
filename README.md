@@ -9,8 +9,9 @@
 | 项目 | 状态与结论 | 入口 |
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
-| 正式待评分 · 038；已准备 · 039 | 038原样v83以jiyujia v1正式提交，submission 57650170，PENDING；039历史step兼容版本地冻结 | [研究决策](research/notes/038/038-research-decision.md) · [038](docs/progress/038-highscore-baseline.md) · [039](docs/progress/039-history-step.md) |
-| 最近正式结果 · 037 | submission 57615378，public **26.71**，较009低4.45；保留009，停止原样重提 | [037进展与结果](docs/progress/037-highscore-pixels.md) · [正式原件](experiments/037-formal-result-snapshot.json) |
+| 最新正式结果 · 038 | submission 57650170，public **27.73**，较009低3.43；核心正式代码与009相同，结束原样重提 | [结果与下一步](research/notes/038/038-formal-results-analysis.md) · [038进展](docs/progress/038-highscore-baseline.md) |
+| 已准备备选 · 039 | step兼容修复本地冻结，收益证据较小，降为低优先级；优先核验D-prime准确得分版本及调度差异 | [039](docs/progress/039-history-step.md) |
+| 历史正式结果 · 037 | submission 57615378，public **26.71**，较009低4.45；保留009，停止原样重提 | [037进展与结果](docs/progress/037-highscore-pixels.md) · [正式原件](experiments/037-formal-result-snapshot.json) |
 | 历史正式结果 · 032 | public 30.20，未刷新最佳；保留成功经验复用证据 | [032 结果](research/notes/032/032-results-analysis.md) |
 | 最新结果 · 036 | 完整25题39.4358→40.6409（+1.2051）、97→100关；去最大涨题后−2.3161，不直接晋级正式候选 | [036结果](research/notes/036/036-results-analysis.md) · [进展](docs/progress/036-main-reasoning-medium.md) |
 | 已完成 · 035 | low真实生效，但A/B/C均分18.2540、新增关及程序动作均0；执行停损，结束独立辅助分支 | [035结果](research/notes/035/035-results-analysis.md) · [进展](docs/progress/035-auxiliary-reasoning.md) |

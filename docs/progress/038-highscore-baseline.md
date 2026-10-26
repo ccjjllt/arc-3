@@ -39,3 +39,13 @@ CLI已成功push一次：**jiyujia/arc3-038-highscore-baseline version1，Notebo
 等待用户通知完成后读取该提交的正式结果，不重复提交、不设置自动监控或持续轮询。
 
 [正式提交记录](../../experiments/038-formal-submission.json) · [平台列表回执](../../experiments/038-after-formal-submissions.json) · [初始详情](../../experiments/038-submission-detail-initial.json) · [提交前源码核验](../../experiments/038-before-formal-source-check.json) · [新代理复核](../../experiments/038-formal-independent-review.json)
+
+## 正式完成：27.73，未刷新最佳
+
+2026-10-26 21:04北京时间，用户通知后官方CLI和GetSubmission均确认**57650170 COMPLETE／public27.73**。较009最佳31.16低3.43，较037高1.02，较上游历史35.35低7.62。原样v83本队参考已完成，不安排原样重提。
+
+本轮准确比较009v2与038v1，代码仅配置/来源cell0与配置cell18不同；正式cell18求值结果完全一致，核心patch、模型/提示/采样/调度环境、启动器、gateway/soft_end均逐字相同。没有038带来实质新算法的证据。镜像及历史输入固定方式不同，但隐藏逐题诊断仍为空、下载403，不能单因归咎于镜像、随机性或平台，也不能由037与038的一次差值证明像素字段有害。
+
+039降为低优先级小兼容备选。下一项优先核验D-prime准确得分版本，在009固定环境上隔离调度变化，目标是增加关卡覆盖。新代理完成独立只读复核。本轮未启动新GPU或提交。
+
+[完整分析](../../research/notes/038/038-formal-results-analysis.md) · [最终记录](../../experiments/038-formal-submission.json) · [最终回执](../../experiments/038-formal-result-snapshot.json) · [源码/配置审计](../../experiments/038-analysis/038-vs009-runtime-audit.json) · [独立复核](../../experiments/038-formal-result-independent-review.json)

@@ -46,7 +46,7 @@
 - [034](notes/034)：9 份 · [实验入口](../docs/experiments/034.md)
 - [035](notes/035)：1 份 · [实验入口](../docs/experiments/035.md)
 - [036](notes/036)：1 份 · [实验入口](../docs/experiments/036.md)
-- [038](notes/038)：5 份 · [实验入口](../docs/experiments/038.md)
+- [038](notes/038)：6 份 · [实验入口](../docs/experiments/038.md)
 
 ## 原始资料
 

@@ -9,3 +9,5 @@
 当前**未上传、未GPU运行、未正式提交**。优先取得038原样v83参考，再安排本候选的必要运行检查和正式比较；不以CPU反例成功声称提分。
 
 [研究决策](../../research/notes/038/038-research-decision.md) · [补丁](../../src/arc3_research/history_step_compat.py) · [Notebook](../../notebooks/039-history-step/submission.ipynb) · [CPU反例](../../experiments/038-analysis/history-step-cpu-counterexamples.json)
+
+2026-10-26更新：038原样正式27.73，未刷新009的31.16。复核后039降为低优先级兼容备选，不机械晋级为下一次正式提交；当前证据只支持消除少量可自行恢复的接口错误，没有实质新增过关证据。优先核验D-prime调度的准确得分版本和独立移植范围。039仍未上传、GPU运行或正式提交。[结果分析与优先级](../../research/notes/038/038-formal-results-analysis.md)
