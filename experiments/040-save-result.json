@@ -1,5 +1,5 @@
 {
-  "status": "READY_AWAITING_TEAM_SUBMISSION_QUOTA",
+  "status": "FORMAL_SUBMITTED_PENDING",
   "observed_at_utc": "2026-10-26T14:24:37.857364+00:00",
   "kernel_ref": "jiyujia/arc3-040-dprime-fresh-first",
   "kernel_version": 1,
@@ -99,8 +99,8 @@
   "checks_passed": 23,
   "remote_source_check": "experiments/040-postsave-source-check.json",
   "independent_review": "experiments/040-save-independent-review.json",
-  "formal_submission_created": false,
-  "submission_id": null,
+  "formal_submission_created": true,
+  "submission_id": 57685414,
   "public_score": null,
   "quota_observed": {
     "used_today": 1,
@@ -116,7 +116,10 @@
     "priority_calls0: the real GPU run did not invoke D-prime priority scoring/reordering. Only pace instances/updates were exercised.",
     "CPU real-gate checks establish formula/queue compatibility; hidden110-game scheduling effect remains unmeasured."
   ],
-  "next_action": "On the next user-triggered check when team submission quota is available, recheck exact version1/source and prior submissions, then submit this existing passed version once. No rebuild, repeated GPU save, automatic polling or monitoring.",
+  "next_action": "Wait for the user completion notice, then read submission57685414 status and public score. No repeat submission, GPU save, automatic monitoring or continuous polling.",
   "independent_review_status": "passed",
-  "independent_review_checks_passed": 32
+  "independent_review_checks_passed": 32,
+  "last_observed_at_utc": "2026-10-27T01:51:58.145071+00:00",
+  "formal_submission": "experiments/040-formal-submission.json",
+  "quota_observed_context": "Historical save-review snapshot from2026-10-26; latest formal acceptance in040-formal-submission.json."
 }

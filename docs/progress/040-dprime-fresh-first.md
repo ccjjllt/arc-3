@@ -1,4 +1,4 @@
-# 040：D-prime保留新题优先，保存通过待正式额度
+# 040：D-prime保留新题优先，正式提交待评分
 
 2026-10-26 21:41北京时间。用户授权继续优化后，新派实现与独立审查代理，以实际最高分009v2为固定底座，构建并启动一次新候选。当前最佳仍009／31.16，040尚无正式提交或公开分数。
 
@@ -43,3 +43,13 @@ root完成23项保存复算，最新派独立代理另完成32项复核，全部
 团队查询仍为今日已用1、累计5、剩0。状态**READY_AWAITING_TEAM_SUBMISSION_QUOTA，未创建040正式提交**。保留已通过的jiyujia版本1，下一次用户触发检查且额度恢复时，核对版本、源码和无重复提交后直接正式提交一次；不重跑保存，不设置自动监控。当前正式最佳仍009／31.16。
 
 [保存结果](../../experiments/040-save-result.json) · [完成后源码核验](../../experiments/040-postsave-source-check.json) · [输出下载清单](../../experiments/040-save-output-manifest.json) · [新代理独立复核](../../experiments/040-save-independent-review.json)
+
+## 2026-10-27正式提交已接受
+
+用户明确通知有额度并要求submission。实时CLI确认今日已用0、剩1，团队历史不存在040；官方回读仍为准确jiyujia v1／COMPLETE，29cells及镜像、五输入版本等14项全部通过。本轮新派独立代理复核冻结hash、保存passed及price_fresh=False，无阻断。
+
+直接提交现有成功版本，CLI执行1次并正常退出。北京时间**2026-10-27 09:51:24**接受唯一新提交 **57685414，PENDING**，提交者jiyujia、团队ccjjllt，描述绑定SHA256 `8e742d69135c687896365dd6d8a4388b4f33d54eda87760b35301ded4481ae47`。今日剩0次，040尚无公开分；最佳仍009／31.16。
+
+等待用户完成通知后读取该ID正式结果，不重复提交或GPU保存、不设置自动轮询。
+
+[正式提交记录](../../experiments/040-formal-submission.json) · [平台接受列表](../../experiments/040-after-formal-submissions.json) · [初始回执](../../experiments/040-submission-detail-initial.json) · [提交前源码核验](../../experiments/040-before-formal-source-check.json) · [本轮独立复核](../../experiments/040-formal-independent-review.json)
