@@ -78,6 +78,7 @@
 - [build_032_submission.py](build/build_032_submission.py)
 - [build_037_submission.py](build/build_037_submission.py)
 - [build_040_submission.py](build/build_040_submission.py)
+- [build_041_exact_public.py](build/build_041_exact_public.py)
 - [build_highscore_variant.py](build/build_highscore_variant.py)
 
 ## 实验输入准备 · `prepare/`

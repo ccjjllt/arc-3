@@ -1,0 +1,161 @@
+{
+  "observed_at_utc": "2026-10-28T00:55:54.311406+00:00",
+  "agent": "/root/r041_submission_review_fresh",
+  "scope": "Fresh independent local review of exact candidate, downloaded original-demo output/logs and root current official remote readback. No network/model/GPU/submission by reviewer.",
+  "kernel_ref": "jiyujia/arc3-041-exact-public-v83",
+  "version": 1,
+  "notebook_sha256": "3efa7a1cc75156e62599daca754b6349f513ba7591a8d08da30fa4716c549d34",
+  "passed": true,
+  "checks": {
+    "local_candidate_sha_bound": true,
+    "frozen_archive_sha_equal": true,
+    "original_scored_file_sha_bound": true,
+    "manifest_hash_bound": true,
+    "exact_23cells": true,
+    "all_23_types_equal": true,
+    "all_23_source_values_equal_including_markdown": true,
+    "no_extra_helper_or_adapter_source": true,
+    "private_own_ref": true,
+    "gpu_offline_RTX": true,
+    "v83_image_digest": true,
+    "five_notebook_input_versions_original": true,
+    "current_remote_complete": true,
+    "current_remote_v1_identity": true,
+    "current_remote_15checks_passed": true,
+    "native_patch_applied_successfully": true,
+    "actual_RTX_device_logged": true,
+    "model_server_startup_complete": true,
+    "benchmark_one_pass": true,
+    "original_demo_10games": true,
+    "all_demo_runs_finished_normal_states": true,
+    "all_10_real_non_reset_actions": true,
+    "all_10_recorded_generated_tokens": true,
+    "one_actual_win": true,
+    "benchmark_start_end_recorded": true,
+    "original_placeholder_file_exists": true,
+    "placeholder_parquet_magic": true,
+    "placeholder_known_hash": true,
+    "no_uncaught_notebook_traceback": true,
+    "no_cuda_oom_or_fatal_in_logs": true,
+    "final_benchmark_and_notebook_export_logged": true
+  },
+  "checks_passed": 31,
+  "checks_total": 31,
+  "runtime": {
+    "benchmark_start_time": "2026-10-27T12:32:41.034599",
+    "benchmark_end_time": "2026-10-27T12:57:48.018324",
+    "benchmark_elapsed_seconds": 1506.983725,
+    "last_notebook_log_elapsed_seconds": 2243.871517745,
+    "games": [
+      {
+        "game_id": "tu93-0768757b",
+        "state": "gave_up",
+        "levels_completed": 5,
+        "offline_score": 33.33333333333333,
+        "non_reset_actions": 110,
+        "recorded_generated_tokens": 92387,
+        "solver_note": "tokens=92758"
+      },
+      {
+        "game_id": "lp85-305b61c3",
+        "state": "gave_up",
+        "levels_completed": 7,
+        "offline_score": 77.77777777777779,
+        "non_reset_actions": 117,
+        "recorded_generated_tokens": 101001,
+        "solver_note": "tokens=101001"
+      },
+      {
+        "game_id": "vc33-5430563c",
+        "state": "gave_up",
+        "levels_completed": 3,
+        "offline_score": 21.428571428571427,
+        "non_reset_actions": 85,
+        "recorded_generated_tokens": 92227,
+        "solver_note": "tokens=92227"
+      },
+      {
+        "game_id": "r11l-495a7899",
+        "state": "gave_up",
+        "levels_completed": 2,
+        "offline_score": 14.285714285714285,
+        "non_reset_actions": 40,
+        "recorded_generated_tokens": 96957,
+        "solver_note": "tokens=96957"
+      },
+      {
+        "game_id": "sc25-635fd71a",
+        "state": "gave_up",
+        "levels_completed": 4,
+        "offline_score": 40.67060176461838,
+        "non_reset_actions": 175,
+        "recorded_generated_tokens": 88999,
+        "solver_note": "tokens=88999"
+      },
+      {
+        "game_id": "ar25-0c556536",
+        "state": "gave_up",
+        "levels_completed": 4,
+        "offline_score": 27.77777777777778,
+        "non_reset_actions": 140,
+        "recorded_generated_tokens": 83067,
+        "solver_note": "tokens=85786"
+      },
+      {
+        "game_id": "sb26-7fbdac44",
+        "state": "won",
+        "levels_completed": 8,
+        "offline_score": 97.51826220684353,
+        "non_reset_actions": 157,
+        "recorded_generated_tokens": 65389,
+        "solver_note": "tokens=65389"
+      },
+      {
+        "game_id": "re86-8af5384d",
+        "state": "gave_up",
+        "levels_completed": 4,
+        "offline_score": 27.77777777777778,
+        "non_reset_actions": 202,
+        "recorded_generated_tokens": 88303,
+        "solver_note": "tokens=98336"
+      },
+      {
+        "game_id": "ft09-0d8bbf25",
+        "state": "gave_up",
+        "levels_completed": 4,
+        "offline_score": 47.61904761904761,
+        "non_reset_actions": 64,
+        "recorded_generated_tokens": 93562,
+        "solver_note": "tokens=93562"
+      },
+      {
+        "game_id": "tr87-cd924810",
+        "state": "gave_up",
+        "levels_completed": 4,
+        "offline_score": 47.61904761904761,
+        "non_reset_actions": 145,
+        "recorded_generated_tokens": 93311,
+        "solver_note": "tokens=93311"
+      }
+    ],
+    "sum_completed_levels": 45,
+    "offline_mean_score": 43.58079115905095,
+    "wins": 1,
+    "submission_parquet_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "benchmark_sha256": "945f1e4a1763df7d355b769e3dfa310adb45c97dccc6d7286874d542fbe7ce74"
+  },
+  "nonblocking_log_notes": [
+    "Original12minute launch releases benchmark before backend ready; first requests report ConnectionError and retry grace900s. Subsequent real generated tokens/actions and server startup prove this resolved in save.",
+    "Original demo returns9gave_up and1won; all10 have real actions/tokens and benchmark finalization, no uncaught runtime failure.",
+    "No save-smoke-report is expected because this is the unchanged original23cells, not a two-game save adapter."
+  ],
+  "limitations": [
+    "Offline mean43.5808 is not a formal leaderboard score or evidence of reproducing35.35.",
+    "Parquet schema not re-decoded: local pandas/pyarrow unavailable. PAR1 magic and known identical original placeholder hash verified.",
+    "Recorded action-attached/final tokens undercount some solver_note totals; do not call them full model-generation totals.",
+    "No explicit customhealth hard-assertion, watchdog or owned-process cleanup was added to originalsource; do not claim those executed.",
+    "Current quota/duplicate submission checks and final formal action belong to root, not this reviewer."
+  ],
+  "blocking_issues": [],
+  "recommendation": "Submit existing exactv1 once after root confirms current quota and duplicate exclusion; no rebuild/source changes or repeated GPU save needed."
+}

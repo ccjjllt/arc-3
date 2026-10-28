@@ -42,4 +42,5 @@
 | 037 | 21 | [查看文件](../docs/experiments/037.md) |
 | 038 | 28 | [查看文件](../docs/experiments/038.md) |
 | 039 | 3 | [查看文件](../docs/experiments/039.md) |
-| 040 | 19 | [查看文件](../docs/experiments/040.md) |
+| 040 | 21 | [查看文件](../docs/experiments/040.md) |
+| 041 | 16 | [查看文件](../docs/experiments/041.md) |

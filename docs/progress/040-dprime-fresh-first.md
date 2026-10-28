@@ -1,4 +1,4 @@
-# 040：D-prime保留新题优先，正式提交待评分
+# 040：D-prime保留新题优先，正式26.54
 
 2026-10-26 21:41北京时间。用户授权继续优化后，新派实现与独立审查代理，以实际最高分009v2为固定底座，构建并启动一次新候选。当前最佳仍009／31.16，040尚无正式提交或公开分数。
 
@@ -53,3 +53,9 @@ root完成23项保存复算，最新派独立代理另完成32项复核，全部
 等待用户完成通知后读取该ID正式结果，不重复提交或GPU保存、不设置自动轮询。
 
 [正式提交记录](../../experiments/040-formal-submission.json) · [平台接受列表](../../experiments/040-after-formal-submissions.json) · [初始回执](../../experiments/040-submission-detail-initial.json) · [提交前源码核验](../../experiments/040-before-formal-source-check.json) · [本轮独立复核](../../experiments/040-formal-independent-review.json)
+
+## 正式完成：26.54
+
+2026-10-27用户通知未提高后，CLI列表和官方GetSubmission均确认**57685414 COMPLETE／public26.54**，比009最佳31.16低4.62。本次调度候选未刷新最佳，短测通过不代表隐藏收益；单次分数也不能分离公式、pace和fade各自的因果影响。
+
+用户明确决定10月28日用最高公开得分Notebook原始源码提交一次。本轮按该决定准备041全23cells原样副本，停止040继续调参或原样重投；等待用户明日发消息后操作，不创建自动化。[041进展](041-exact-public-v83.md) · [正式回执](../../experiments/040-formal-result-snapshot.json)

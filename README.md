@@ -4,12 +4,13 @@
 
 ## 当前进展
 
-以下来自仓库截至 **2026-10-27** 的已保存记录：
+以下来自仓库截至 **2026-10-28** 的已保存记录：
 
 | 项目 | 状态与结论 | 入口 |
 |---|---|---|
 | 正式最佳 · 009 v2 | submission 57101330，public **31.16** | [009 实验索引](docs/experiments/009.md) |
-| 正式待评分 · 040 v1 | submission **57685414**，PENDING；D-prime保留新题优先候选，尚无正式分 | [040进展](docs/progress/040-dprime-fresh-first.md) · [运行页面](https://www.kaggle.com/code/jiyujia/arc3-040-dprime-fresh-first) |
+| 原样正式待评分 · 041 v1 | submission **57718364**，PENDING；得分v83全部23cells源码保留，尚无正式分 | [041进展](docs/progress/041-exact-public-v83.md) · [正式记录](experiments/041-formal-submission.json) |
+| 最近正式结果 · 040 v1 | submission **57685414**，public **26.54**，较009低4.62；停止本版重提 | [040进展](docs/progress/040-dprime-fresh-first.md) · [正式记录](experiments/040-formal-submission.json) |
 | 最新正式结果 · 038 | submission 57650170，public **27.73**，较009低3.43；核心正式代码与009相同，结束原样重提 | [结果与下一步](research/notes/038/038-formal-results-analysis.md) · [038进展](docs/progress/038-highscore-baseline.md) |
 | 已准备备选 · 039 | step兼容修复本地冻结，收益证据较小，降为低优先级；优先核验D-prime准确得分版本及调度差异 | [039](docs/progress/039-history-step.md) |
 | 历史正式结果 · 037 | submission 57615378，public **26.71**，较009低4.45；保留009，停止原样重提 | [037进展与结果](docs/progress/037-highscore-pixels.md) · [正式原件](experiments/037-formal-result-snapshot.json) |

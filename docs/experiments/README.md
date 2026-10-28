@@ -45,4 +45,5 @@
 | [037](037.md) | [进展](../progress/037-highscore-pixels.md) | 0 | 1 | 21 | 1 | 1 |
 | [038](038.md) | [进展](../progress/038-highscore-baseline.md) | 6 | 2 | 28 | 0 | 1 |
 | [039](039.md) | [进展](../progress/039-history-step.md) | 0 | 1 | 3 | 0 | 0 |
-| [040](040.md) | [计划](../plan/040-dprime-fresh-first.md) · [进展](../progress/040-dprime-fresh-first.md) | 2 | 1 | 19 | 2 | 1 |
+| [040](040.md) | [计划](../plan/040-dprime-fresh-first.md) · [进展](../progress/040-dprime-fresh-first.md) | 2 | 1 | 21 | 2 | 1 |
+| [041](041.md) | [进展](../progress/041-exact-public-v83.md) | 0 | 1 | 16 | 1 | 1 |
