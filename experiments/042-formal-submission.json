@@ -1,0 +1,69 @@
+{
+  "status": "COMPLETE",
+  "observed_at_utc": "2026-10-30T00:44:42.169405+00:00",
+  "submission_id": 57767406,
+  "competition": "arc-prize-2026-arc-agi-3",
+  "team_name": "ccjjllt",
+  "submitted_by": "jiyujia",
+  "submitted_at_utc": "2026-10-29T10:07:25.540Z",
+  "submitted_at_beijing": "2026-10-29 18:07:25",
+  "kernel_ref": "jiyujia/arc3-042-startup-ready",
+  "kernel_version": 1,
+  "kernel_numeric_id": 141425517,
+  "script_version_id": 363333844,
+  "notebook_sha256": "7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+  "source_upstream": {
+    "ref": "romantamrazov/the-agi-boys-i-am-better",
+    "version": 83,
+    "script_version_id": 359573474,
+    "historical_public_score": 35.35
+  },
+  "source_modifications": [
+    "cell4: startup limit12min to90min",
+    "cell12: health200 plus live process and remaining deadline required before continuing"
+  ],
+  "solver_interventions": [],
+  "file_name": "submission.parquet",
+  "description": "042 v83 startup readiness90m; health200 before games; v1; sha 7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+  "cli_exit_code": 0,
+  "submit_command_executions": 1,
+  "save_platform_status": "COMPLETE",
+  "save_result": "experiments/042-save-result.json",
+  "source_check": "experiments/042-before-formal-source-check.json",
+  "independent_save_review": "experiments/042-save-independent-review.json",
+  "accepted_evidence": "experiments/042-after-formal-submissions.json",
+  "initial_detail": "experiments/042-submission-detail-initial.json",
+  "team_remaining_after_cli": 0,
+  "public_score": 26.09,
+  "best_preserved": {
+    "submission_id": 57101330,
+    "public_score": 31.16
+  },
+  "latest_remote_submission": {
+    "ref": 57767406,
+    "totalBytes": 3807,
+    "date": "2026-10-29T10:07:25.540Z",
+    "description": "042 v83 startup readiness90m; health200 before games; v1; sha 7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+    "fileName": "submission.parquet",
+    "publicScore": "26.09",
+    "status": "COMPLETE",
+    "submittedBy": "jiyujia",
+    "submittedByRef": "jiyujia",
+    "teamName": "ccjjllt",
+    "url": "/submissions/57767406/57767406.raw"
+  },
+  "limits": [
+    "Offline demo49.56 is not a public leaderboard score.",
+    "Startup was ready within old12min threshold; this GPU run does not validate actual slow-start recovery.",
+    "041zero root cause unconfirmed; no guarantee042 avoids zero or beats31.16."
+  ],
+  "next_action": "Retain009 v2 as best31.16. Stop unchanged042 resubmissions. Keep readiness as a robustness measure without claimed score benefit. Reuse existing038 static audit; choose a future single solver change only from concrete failure/coverage evidence. No new submission, GPU run or monitoring started during this result review.",
+  "monitoring": "none_result_review_complete",
+  "public_score_display": "26.09",
+  "delta_vs_best": -5.07,
+  "submission_file_bytes": 3807,
+  "latest_result_snapshot": "experiments/042-formal-result-snapshot.json",
+  "diagnostics_availability": "experiments/042-formal-diagnostics-availability.json",
+  "independent_result_review": "experiments/042-formal-result-independent-review.json",
+  "causal_status": "UNCONFIRMED: nonzero result does not establish that readiness caused improvement or that041zero root cause is resolved."
+}

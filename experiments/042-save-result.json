@@ -1,0 +1,157 @@
+{
+  "status": "SAVE_COMPLETE_VALIDATED",
+  "observed_at_utc": "2026-10-29T10:07:03.089747+00:00",
+  "kernel_ref": "jiyujia/arc3-042-startup-ready",
+  "kernel_version": 1,
+  "notebook_sha256": "7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+  "platform_status": "COMPLETE",
+  "checks": {
+    "platform_complete": true,
+    "version1": true,
+    "remote_source_and_metadata": true,
+    "local_hash": true,
+    "frozen_hash": true,
+    "ready": true,
+    "health200": true,
+    "process_alive": true,
+    "90min_limit": true,
+    "within_deadline": true,
+    "ready_before_benchmark_before_reset": true,
+    "ten_games": true,
+    "one_pass": true,
+    "all_real_inference_actions": true,
+    "all_terminal_bounded_states": true,
+    "has_end_time": true,
+    "real_RTX": true,
+    "patch_applied": true,
+    "no_fatal_exception": true,
+    "parquet_magic": true,
+    "original_placeholder_hash": true
+  },
+  "checks_passed": 21,
+  "readiness": {
+    "experiment": "042",
+    "status": "ready",
+    "limit_from_notebook_start_seconds": 5400.0,
+    "elapsed_before_wait_seconds": 48.583332538604736,
+    "health_checks": 171,
+    "health_200_observed": true,
+    "process_alive_after_health": true,
+    "wait_elapsed_seconds": 511.079094317,
+    "notebook_elapsed_seconds": 559.6624268556047,
+    "last_health_error_type": "HTTPError",
+    "last_http_status": 200
+  },
+  "log_timing_seconds": {
+    "ready_log": 565.076992844,
+    "benchmark_log": 566.957144143,
+    "first_reset_log": 567.409838249
+  },
+  "save_games": [
+    {
+      "game_id": "tu93-0768757b",
+      "state": "gave_up",
+      "levels_completed": 3,
+      "offline_score": 13.22551440329218,
+      "non_reset_actions": 66,
+      "recorded_generated_tokens": 96844
+    },
+    {
+      "game_id": "lp85-305b61c3",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 41.66666666666667,
+      "non_reset_actions": 76,
+      "recorded_generated_tokens": 79715
+    },
+    {
+      "game_id": "vc33-5430563c",
+      "state": "gave_up",
+      "levels_completed": 3,
+      "offline_score": 21.428571428571427,
+      "non_reset_actions": 79,
+      "recorded_generated_tokens": 88246
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "state": "gave_up",
+      "levels_completed": 3,
+      "offline_score": 28.57142857142857,
+      "non_reset_actions": 38,
+      "recorded_generated_tokens": 78706
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "state": "gave_up",
+      "levels_completed": 3,
+      "offline_score": 26.046304123227202,
+      "non_reset_actions": 92,
+      "recorded_generated_tokens": 94687
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "state": "gave_up",
+      "levels_completed": 6,
+      "offline_score": 58.333333333333336,
+      "non_reset_actions": 187,
+      "recorded_generated_tokens": 83510
+    },
+    {
+      "game_id": "sb26-7fbdac44",
+      "state": "won",
+      "levels_completed": 8,
+      "offline_score": 100.0,
+      "non_reset_actions": 152,
+      "recorded_generated_tokens": 52449
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 41.66666666666667,
+      "non_reset_actions": 317,
+      "recorded_generated_tokens": 93072
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "state": "won",
+      "levels_completed": 6,
+      "offline_score": 100.0,
+      "non_reset_actions": 104,
+      "recorded_generated_tokens": 93724
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 64.6740757552345,
+      "non_reset_actions": 254,
+      "recorded_generated_tokens": 75200
+    }
+  ],
+  "offline_demo_mean_score": 49.56125609484206,
+  "levels_completed": 47,
+  "wins": 2,
+  "recorded_non_reset_actions": 1365,
+  "recorded_generated_tokens": 836153,
+  "benchmark_start_time": "2026-10-29T01:23:42.060609",
+  "benchmark_end_time": "2026-10-29T01:49:03.486464",
+  "benchmark_elapsed_seconds": 1521.425855,
+  "remote_source_check": "experiments/042-before-formal-source-check.json",
+  "formal_submission_created": true,
+  "public_score": 26.09,
+  "limits": [
+    "Offline49.56 is not a leaderboard score or proof of improvement.",
+    "Readiness at559.66s is earlier than previous12min limit; late-load behavior was CPU-tested but not exercised in this GPU save.",
+    "041zero root cause remains unconfirmed.",
+    "Handled analyzer request timeout at per-game budget boundary; not a notebook crash.",
+    "Recorded generation tokens do not necessarily capture every model response."
+  ],
+  "independent_review": "experiments/042-save-independent-review.json",
+  "formal_status": "COMPLETE",
+  "submission_id": 57767406,
+  "formal_submission": "experiments/042-formal-submission.json",
+  "delta_vs_best": -5.07,
+  "last_observed_at_utc": "2026-10-30T00:44:42.169405+00:00",
+  "next_action": "Retain009 v2 as best31.16. Stop unchanged042 resubmissions. Keep readiness as a robustness measure without claimed score benefit. Reuse existing038 static audit; choose a future single solver change only from concrete failure/coverage evidence. No new submission, GPU run or monitoring started during this result review."
+}

@@ -1,0 +1,164 @@
+{
+  "passed": true,
+  "checks_passed": 27,
+  "checks": {
+    "exactly_one_source_replacement": true,
+    "already_installed_fails_before_write": true,
+    "missing_anchor_fails_before_write": true,
+    "duplicated_anchor_fails_before_write": true,
+    "real_timeout_report_has_no_retention_field": true,
+    "old_timeout_discards_known_helper": true,
+    "new_timeout_preserves_known_helper": true,
+    "count_only_log": true,
+    "real_reuse_baseline_nameerror_candidate_success": true,
+    "transport_failure_missing": true,
+    "missing_without_error": true,
+    "explicit_empty": true,
+    "explicit_empty_unchanged_from_original": true,
+    "explicit_none": true,
+    "explicit_none_unchanged_from_original": true,
+    "invalid_metadata": true,
+    "invalid_metadata_unchanged_from_original": true,
+    "completed_new": true,
+    "completed_new_unchanged_from_original": true,
+    "malformed_non_dictionary": true,
+    "malformed_non_dictionary_unchanged_from_original": true,
+    "missing_and_no_previous_functions_unchanged": true,
+    "disabled_is_unchanged": true,
+    "existing_scope_game_keeps_last_complete_report": true,
+    "existing_scope_levelup_keeps_last_complete_report": true,
+    "existing_scope_turn_keeps_last_complete_report": true,
+    "scope_reset_methods_unchanged": true
+  },
+  "install_report": {
+    "experiment": "043",
+    "active": true,
+    "matched": 1,
+    "target": "/var/folders/9s/sdk1x32s58g8dycwh6c74bqc0000gp/T/arc043-check-0qd32r2o/inference/agent/tool_agent.py",
+    "relative_target": "inference/agent/tool_agent.py",
+    "before_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+    "after_sha256": "5ba879207bc886a425973b5930668c7403bf40c3edacc412ce7ea910f77ec35e",
+    "sole_behavior_change": "preserve previous functions when retention report is absent",
+    "explicit_empty_report_clears": true,
+    "explicit_invalid_report_keeps_original_behavior": true,
+    "scope_reset_logic_unchanged": true,
+    "log_marker": "[043-retention]"
+  },
+  "runtime_source_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+  "patch_sha256": "8d0a3ec845766cb372c7a604dfb02a1f2e1976d330edf7f1cdb500e9bc12ff8f",
+  "real_timeout_result": {
+    "error": "Tool timed out after 1s",
+    "stdout": "",
+    "action_results": []
+  },
+  "old_after_timeout": {
+    "kept_names": [],
+    "payload": {
+      "function_retention": "Your previous function helper is no longer retained; redefine it if needed."
+    },
+    "reuse": {
+      "stdout": "",
+      "result": null,
+      "error": "Traceback (most recent call last):\n  File \"<python_tool>\", line 1, in <module>\nNameError: name 'helper' is not defined",
+      "action_results": [],
+      "keepable_functions": [],
+      "retention_rejected": []
+    }
+  },
+  "new_after_timeout": {
+    "kept_names": [
+      "helper"
+    ],
+    "payload": {
+      "function_retention": "The snippet did not finish, so nothing new was retained; your retained functions from earlier calls are unchanged."
+    },
+    "reuse": {
+      "stdout": "3\n",
+      "result": null,
+      "error": "",
+      "action_results": [],
+      "keepable_functions": [
+        {
+          "name": "helper",
+          "source": "def helper(x):\n    return x + 1"
+        }
+      ],
+      "retention_rejected": []
+    }
+  },
+  "boundary_cases": [
+    {
+      "name": "transport_failure_missing",
+      "kept_names": [
+        "helper"
+      ],
+      "payload": {
+        "function_retention": "The snippet did not finish, so nothing new was retained; your retained functions from earlier calls are unchanged."
+      },
+      "log": "[043-retention] preserved_functions=1\n"
+    },
+    {
+      "name": "missing_without_error",
+      "kept_names": [
+        "helper"
+      ],
+      "payload": {
+        "function_retention": "The snippet did not finish, so nothing new was retained; your retained functions from earlier calls are unchanged."
+      },
+      "log": "[043-retention] preserved_functions=1\n"
+    },
+    {
+      "name": "explicit_empty",
+      "kept_names": [],
+      "payload": {
+        "function_retention": "Your previous function helper is no longer retained; redefine it if needed."
+      },
+      "log": ""
+    },
+    {
+      "name": "explicit_none",
+      "kept_names": [],
+      "payload": {
+        "function_retention": "Your previous function helper is no longer retained; redefine it if needed."
+      },
+      "log": ""
+    },
+    {
+      "name": "invalid_metadata",
+      "kept_names": [],
+      "payload": {
+        "function_retention": "Your retained functions were cleared after a retention error; redefine any you need."
+      },
+      "log": ""
+    },
+    {
+      "name": "completed_new",
+      "kept_names": [
+        "new"
+      ],
+      "payload": {
+        "function_retention": "Retained your function new(x) for later Python calls in this game.\nYour previous function helper is no longer retained; redefine it if needed."
+      },
+      "log": ""
+    },
+    {
+      "name": "malformed_non_dictionary",
+      "kept_names": [],
+      "payload": {
+        "function_retention": "Your retained functions were cleared after a retention error; redefine any you need."
+      },
+      "log": ""
+    }
+  ],
+  "limitations": [
+    "CPU only; no model/GPU/game actions or score measurement.",
+    "Uses actual sandbox, function validator and extracted recorder method; environment getters are substitutes.",
+    "One-second timeout fixture exercises the real timeout branch; production timeout remains30 seconds.",
+    "Scope reset methods verified unchanged; this is not an end-to-end game lifecycle replay.",
+    "Missing-without-error fixture is unreachable under the present final/error protocol, included as a contract boundary."
+  ],
+  "candidate_status": "ABANDONED_DUPLICATES_007",
+  "promote_to_gpu": false,
+  "duplicate_evidence": "research/notes/007/007-results-analysis.md",
+  "duplicate_summary": "Same missing-snapshot retention mechanism already GPU-tested:46.3578 to40.3235; no new score evidence. CPU correctness does not justify repeating."
+}

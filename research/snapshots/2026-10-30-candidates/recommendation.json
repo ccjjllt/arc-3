@@ -1,0 +1,47 @@
+{
+  "observed_at_utc": "2026-10-30T00:54:26.729774+00:00",
+  "reviewer": "/root/r043_public_strategy_fresh",
+  "selected_candidate": "Retain previous Python functions when an unsuccessful sandbox result omits keepable_functions. Preserve explicit-empty-list semantics and fail-closed checks for malformed explicitmetadata.",
+  "source_url": "https://www.kaggle.com/code/ondrewsha/arc-agi-3-stack-s9",
+  "source_version": 2,
+  "source_cell_index": 5,
+  "source_sha256": "188e8f5b93d5953744d5f44529296caa034e33ddff9c497fd9455e494065807e",
+  "local_source": "research/snapshots/2026-10-30-candidates/ondrewsha__arc-agi-3-stack-s9/source.ipynb",
+  "baseline_evidence": "research/runtime-bundle/src/ARC3-Inference/inference/agent/tool_agent.py:4614; missing keepable_functions iterates[] then replaces self._kept_functions with{}.",
+  "score_binding": {
+    "author_reported_score": 32.16,
+    "reported_scored_version": 1,
+    "header_says_v2_only_adds_header": true,
+    "independently_verified_numeric_score_version_binding": false,
+    "retrieval_gaps": [
+      "Kaggle searchAPI has rank but no numeric score",
+      "versionLabel1 query Notfound",
+      "web page inaccessible",
+      "IAB initialization timeout"
+    ],
+    "isolated_fix_benefit": null
+  },
+  "attribution": {
+    "stack_author": "ondrewsha / Андрей Рябов",
+    "header_credit": "Daniel Franzen Milestone2 notebook, Apache-2.0, basedonTufaLabsDuckharness",
+    "separate_license_for_S9_added_modifications_verified": false,
+    "note": "Header explicitly names Apache-2.0 for Franzen upstream; do not claim a separately verified license for all S9 modifications. Retain attribution and original upstream notices."
+  },
+  "required_local_evidence": [
+    "Real timeout/error trace with previousretainedfunctions lost",
+    "CPU tests covermissingmetadata vs explicit empty/invalidmetadata",
+    "MatchedGPUcomparison with completed result and intervention counters",
+    "Do not interpret one demo or32.16wholeS9 as isolated causal benefit."
+  ],
+  "rejected_for_today": [
+    "Fablehandbook layer lacksbound newlayer score and detectormostlycheckedonsk48",
+    "Dprime andsolvedlevelmemory repeats alreadytestedmechanisms",
+    "Coldstartkeepalive addsactions and is notnewsolver"
+  ],
+  "broader_review": "research/snapshots/2026-10-30-candidates/candidate-review.json",
+  "no_gpu_or_submission_launched": true,
+  "status": "WITHDRAWN_ALREADY_TESTED",
+  "withdrawn_reason": "007 already tested missingmetadata functionpreservation:12games mean46.3578→40.3235 (-6.0343), actualpreservationandreuse verified; not an untested candidate.",
+  "superseded_candidate": "S9 H3v2.1 inference audit only; under review",
+  "still_recommend": false
+}

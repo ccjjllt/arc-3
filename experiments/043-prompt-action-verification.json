@@ -1,0 +1,70 @@
+{
+  "observed_at_utc": "2026-10-30T02:07:05.456687+00:00",
+  "selection": "r11l ordinary audit and re86 unique stagnation event selected before trace download using root event/time/action data. Two sampled games, not all11events.",
+  "passed": true,
+  "records": [
+    {
+      "game_id": "r11l-495a7899",
+      "file": "runs/043-inference-audit-save/r11l-495a7899_p0_requests.jsonl",
+      "file_bytes": 31856274,
+      "file_sha256": "64cf39cc6e6856d83a843e7907af8313643c28b32cf5eb5f80a77ebe77d41a48",
+      "event_index_0based": 3,
+      "event_action_num": 14,
+      "event_level": 2,
+      "request_line_1based": 55,
+      "analysis_step": 13,
+      "event_text_exactly_contained_in_request": true,
+      "generated_action_result_visible_at_request_line": 57,
+      "event_runtime_seconds": 642.3565561771393,
+      "first_following_action": {
+        "action": {
+          "id": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 35
+          }
+        },
+        "generated_tokens": 6073,
+        "uncached_input_tokens": 0,
+        "wallclock_seconds": 653.7444211080001
+      },
+      "first_action_after_event_seconds": 11.387864930860815,
+      "level_completed_runtime_seconds": 766.601491659,
+      "level_completed_after_event_seconds": 124.2449354818607,
+      "final_levels_completed": 4
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "file": "runs/043-inference-audit-save/re86-8af5384d_p0_requests.jsonl",
+      "file_bytes": 32649583,
+      "file_sha256": "c29f0b96d382bda7946c9a1e06e29e56f4c4264a255b150c9787d2a684620ebf",
+      "event_index_0based": 6,
+      "event_action_num": 198,
+      "event_level": 5,
+      "request_line_1based": 101,
+      "analysis_step": 26,
+      "event_text_exactly_contained_in_request": true,
+      "generated_action_result_visible_at_request_line": 105,
+      "event_runtime_seconds": 1232.3475024700165,
+      "first_following_action": {
+        "action": {
+          "id": "ACTION2",
+          "data": {}
+        },
+        "generated_tokens": 25726,
+        "uncached_input_tokens": 0,
+        "wallclock_seconds": 1308.283163913
+      },
+      "first_action_after_event_seconds": 75.93566144298347,
+      "level_completed_runtime_seconds": 1322.9620760930002,
+      "level_completed_after_event_seconds": 90.6145736229837,
+      "final_levels_completed": 5
+    }
+  ],
+  "limits": [
+    "Exact prompt delivery and subsequent actions/level completion are verified; not causal score improvement.",
+    "re86 first response after stagnation computed without actions; the next response executed65actions and completedL5, rather than following the1-2action instruction literally.",
+    "Continuation prompts repeat an event text; counted as one observer event, not multiple independent interventions.",
+    "tr87 audit near deadline had no subsequent action; not11/11effective."
+  ]
+}

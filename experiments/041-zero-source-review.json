@@ -1,0 +1,67 @@
+{
+  "observed_at_utc": "2026-10-28T01:29:55.902346+00:00",
+  "agent": "/root/r041_zero_cause_fresh",
+  "read_only_local_audit": true,
+  "no_network_or_gpu_or_submit": true,
+  "submission_id": 57718364,
+  "confirmed": {
+    "notebook_sha256": "3efa7a1cc75156e62599daca754b6349f513ba7591a8d08da30fa4716c549d34",
+    "all_23_cell_source_values_equal_v83": true,
+    "remote_pre_submit_passed": true,
+    "submitted_kernel_ref": "jiyujia/arc3-041-exact-public-v83",
+    "submitted_version": 1,
+    "final_status": "COMPLETE",
+    "final_public_score": "0.00",
+    "formal_file_bytes": 3411,
+    "saved_placeholder_bytes": 2648,
+    "placeholder_write_ast_guards": [
+      {
+        "line": 89,
+        "nearest_guard": "not TRUE_SUBMISSION"
+      }
+    ],
+    "demo_saved_completed_levels": 45,
+    "demo_saved_score_is_offline_only": 43.58079115905095
+  },
+  "strong_runtime_warning_signs": {
+    "first_complete_observation_utc": "2026-10-28T01:28:47.852167+00:00",
+    "submitted_at_utc": "2026-10-28T00:55:18.977Z",
+    "elapsed_until_complete_observed_seconds": 2008.875167,
+    "interpretation": "An upper bound on elapsed submission-to-completion including queue, not measured runtime. At<=33m29s it did not consume the intended9h before this observation.",
+    "formal3411_bytes_match_community_zero_case_size": true,
+    "size_limit": "Only byte count available; content cannot be called empty without decoding it. It differs from2648B offline placeholder."
+  },
+  "source_runtime_risks": {
+    "startup_release_seconds": 720,
+    "health_required_before_release": false,
+    "per_agent_initial_request_retry_seconds": 900,
+    "warmup_reset_games": 1,
+    "mechanism": "Cold serving can still be loading when benchmark/game scorecards open. One warmupRESET buys initial activity, but cannot establish repeated activity or inference readiness. A slow first model load can outlast the original initial retry/scorecard window.",
+    "other_unexcluded_failures": [
+      "Formal input mount/path failure despite same configured inputs",
+      "Formal environment marker/API/gateway branch state",
+      "Server process exit/OOM or platform termination",
+      "Gateway/scoring infrastructure issue"
+    ]
+  },
+  "can_reject_from_local_evidence": [
+    "No evidence that root submitted a different local candidate/hash or added its own solver patches.",
+    "Client used code submission -k/-v; did not upload the saved offlineparquet as the official scored contents.",
+    "The source writes its offlineplaceholder only under notTRUE_SUBMISSION; normal formalbranch uses livegateway and does not write that placeholder."
+  ],
+  "cannot_confirm": [
+    "Actual formalTRUE_SUBMISSION environment marker value/branch without hidden logs",
+    "Exact model readiness/load duration or game actions in the formalrerun",
+    "Specific cause of early completion or whether infrastructure fault, runtime error or scorecard inactivity",
+    "Any causal attribution to Docker/randomness/pixels/officialcache issue from these snapshots"
+  ],
+  "diagnostic_boundary": {
+    "episodes": [],
+    "download_submission": {
+      "available": false,
+      "error_type": "HTTPError",
+      "http_status": 403
+    }
+  },
+  "recommended_next_action": "Use submission57718364, confirmed0.00/3411B and<=33m29s completionbound as concrete diagnostic evidence for Kaggle engineering/log request; user authorization is required before external contact. Do not unchangedresubmit or claim a verifiedstartupfix without formal evidence. A narrowly instrumented future candidate could record early modelreadiness/gateway timing, but is not yet a proven solution."
+}

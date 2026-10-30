@@ -1,0 +1,151 @@
+{
+  "observed_at_utc": "2026-10-29T01:11:23.192605+00:00",
+  "agent": "/root/r042_startup_decision_fresh",
+  "scope": "Read-only source and already-downloaded official wheel/competition-message review; no network, game actions, GPU or model calls.",
+  "decision": "Approve minimal startup readiness change in cells4 and12: explicit90min constant/comment plus fail-closed requiredhealth200/liveprocess wait. All21othercells and model launch prefix unchanged. No GPU/formal success claimed.",
+  "prior_result_is_not_proof": {
+    "submission_id": 57718364,
+    "status": "COMPLETE",
+    "public_score": 0.0,
+    "bytes": 3411,
+    "completion_observation_upper_bound_seconds": 2008.875167,
+    "root_cause": "Unconfirmed: no hidden formal logs."
+  },
+  "source_evidence": [
+    {
+      "file": "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb",
+      "cell": 4,
+      "finding": "SetsNOTEBOOK_START_TIME; SERVER_STARTUP_TIMEOUT12*60; warmup1 and initialHTTP retry900. Source copy/wheel/install/model setup follows before gateway access."
+    },
+    {
+      "file": "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb",
+      "cell": 12,
+      "lines": "318-351",
+      "finding": "Launch model subprocess; poll/health loop exits at12min fromNOTEBOOK_START_TIME; process exit merelybreaks and expiry printsrelease, so both cases continue tobenchmark even withouthealth200."
+    },
+    {
+      "file": "experiments/037-highscore-source/the-agi-boys-i-am-better-v83.ipynb",
+      "cell": 20,
+      "lines": "4-19,68-84",
+      "finding": "First notebook-levelgatewayapi/games readiness check and COMPETITIONArcade object creation occur afterlauncher. available_environments enumeration precedesbm.run. No explicit scorecardopen inthiscell."
+    },
+    {
+      "file": "research/runtime-bundle/src/tufa-arc-agi-framework/src/taaf/benchmark.py",
+      "lines": "127-164",
+      "finding": "Afterrunentered, solver.setup, RunSession, then serialgame_copy.start_game(session); only thereafter run_games solver task."
+    },
+    {
+      "file": "research/runtime-bundle/src/tufa-arc-agi-framework/src/taaf/game_api.py",
+      "lines": "65-74,158-204",
+      "finding": "_CompetitionScorecard.open_run invokesArcade.create_scorecard once. GameAPI._start_game lazily createsArcade andsharedcard, thenArcade.make. This is afterhealthgate if cell12cannotfallthrough."
+    },
+    {
+      "file": "research/data/extracted/arc_agi_3_wheels/arc_agi-0.9.8-py3-none-any.whl",
+      "member": "arc_agi/base.py",
+      "lines": "147-155,413-447,609-615",
+      "finding": "ArcadeconstructorinitializesdefaultcardNone andscansgames. create_scorecard sendsPOST/api/scorecard/open inCOMPETITION. make lazilycreatesdefaultcardifneeded."
+    },
+    {
+      "file": "research/data/extracted/arc_agi_3_wheels/arc_agi-0.9.8-py3-none-any.whl",
+      "member": "arc_agi/scorecard.py",
+      "lines": "24-53,902-910",
+      "finding": "BundledSDKfallback stale15min; scorecardidle calculatedfromlast_update. ActualremoteKaggle gatewayconfiguration isnotproven identical bythislocalcopy."
+    }
+  ],
+  "public_messages": [
+    {
+      "id": 753489,
+      "path": "research/snapshots/2026-10-29-startup/topic-753489.json",
+      "url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/753489",
+      "claim": "Author self-reports57716231 public26.16 withstockFranzen+90minwaitonly. No publickernelavailable toverifybyte-levelscope.",
+      "weight": "Plausibilityevidenceforboundedwait; not causalproof or promisedscore. Local47.39vsLB26.16 areincomparablepools, not confirmed20pointproductionloss."
+    },
+    {
+      "id": 753447,
+      "path": "research/snapshots/2026-10-29-startup/topic-753447.json",
+      "url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/753447",
+      "claim": "Authorself-reportsaccepted57586341 public27.05 andlinksfrozen lifecyclewrappercommit3418ffa20142a71e74cb1f01121874ecc66c0585.",
+      "weight": "Narrowrootprimarysourceiflaterneeded; wrappercode notread bythisagent, not necessary toadopt foronehealthgate."
+    }
+  ],
+  "recommended_patch_requirements": [
+    "Onlycell4 timeout/comment andcell12terminalwaitblock change; model/servingarguments/prompt/sampling/gamepolicy/dependencyinputpinsunchanged.",
+    "Set explicitstartupdeadline atNOTEBOOK_START_TIME+90*60 toretainoneNotebook-startclock andcapsetup+loadwait; alternative launch-relative90min mustbedocumented andnotclaimedtotal90min.",
+    "Check proc.poll()outside swallowednetworkexceptions; onexit printlogtail andraise. Do notbreakthrough.",
+    "Advanceonlyafterlocalmodel/healthHTTP200. Maintainexplicitreadyflag, thenassert/failifdeadlineexpired. Preserveoriginalgatewayconstruction andwarmup untilafterreadiness.",
+    "Do notopenArcade.make, scorecards orsendRESET/action duringcoldload; newkeepaliveaddsstate/actioncost andisnotneededfor delayedownscorecardopen.",
+    "Keepplatformtimeout32400 forformal eligibility; 90minstartupdoesnotcreateanextra9h budget. Preserveoriginalsolver31920 forscopeclarity butrecordthat slowstart reducesactualremainingplaytime.",
+    "Savedemoremainsoriginal10games25min; inspect actualhealthready->Startingbenchmark->actionsorder andgeneratedoutputbeforeformalsubmission."
+  ],
+  "budget": {
+    "notebook_platform_seconds": 32400,
+    "startup_absolute_budget_seconds": 5400,
+    "nominal_remaining_after_full_wait_seconds": 27000,
+    "original_solver_per_game_seconds": 31920,
+    "note": "With90minwait, actualplatformtimeleftisabout7.5h minusunaccountedpreclock/teardown, thoughsolvercapremains532min. GlobalKagglecapwins. Originalformalsoft_endNone stillrisksplatformhardcut; do notclaimgracefulfull532min.",
+    "save_nominal_max_seconds": 6900,
+    "save_nominal_max_minutes": 115,
+    "quota_read_by_parent_hours": 2.12,
+    "headroom_nominal_minutes": 12.2,
+    "quota_limits": "2.12hissharedinstantbalance; rendering/setupbeforeNOTEBOOK_START_TIME andothertrainingusecanconsumeheadroom. Freshprepushquotareadrequired; do notstopunrelatedjobs orassumeformalrerunfree."
+  },
+  "validation_scenarios": [
+    "Readyafter720sbutbefore5400:baselinewouldrelease;candidatekeepswaitingthenadvancesonce.",
+    "health500/connectionerror/timeoutthen200: retrieswithoutgatewaycalls before200.",
+    "Processnonzeroexitbeforehealth: failimmediatelywithlogtail;neverenterbenchmark.",
+    "Neverreadyby5400: explicitfailure;neverenterbenchmark.",
+    "Setupalreadyconsumedstartupbudgetbeforepoll: failwithoutearlyunhealthyrelease.",
+    "Readyneardeadline andreadyflag remainsvalid: normaladvance; noextra5400saddedaftersetup.",
+    "Staticcellsourcecomparison confirmsallother22sourcesunchanged.",
+    "Runtime savedlogconfirmshealth200beforeanyscorecard/gameopen; savecompletion alone notformalhealthproof."
+  ],
+  "unresolved_limits": [
+    "Kaggle mayhaveNotebook-level idle/activity policies independentofscorecard;localSDKcannotprove90minwaitalwaysallowed.",
+    "Mountdeadlock beforePython orwithinblockingprecacheread cannot be repairedbyhealthwait.",
+    "Health200 doesnotguarantee laterGPU/modelstability orabsenceofruntimeOOM.",
+    "Actualformalendpoint firstactionandclosure remainunavailable unlessplatformexposeslogs.",
+    "Thisstartupchange doesnotestablishanyscoreimprovement orguarantee35.35."
+  ],
+  "implementation_blockers_found": [],
+  "next_review": "Root remote exactsource/metadata readback and actualGPU savedreadiness->benchmark->realactions verification remain required before formal submission.",
+  "final_reviewed_at_utc": "2026-10-29T01:12:52.314213+00:00",
+  "status": "passed_final_local_review",
+  "passed": true,
+  "notebook_sha256": "7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+  "checks": {
+    "exact_expected_notebook_sha": true,
+    "manifest_notebook_sha": true,
+    "23cells": true,
+    "bytes_under1MB": true,
+    "only4_12source_changes": true,
+    "all_other21cells_equal_original_v83": true,
+    "cell4_only_timeout_and_comment": true,
+    "model_launch_prefix_unchanged": true,
+    "exact_audited_fragment_payload": true,
+    "manifest_dependency_hashes": true,
+    "cpu_fragment_hash_matches": true,
+    "cpu11cases_passed": true,
+    "failure_cases_never_release": true,
+    "success_cases_require_ready_alive": true,
+    "privileged_code_free_fragment": true,
+    "formal_gateway_unchanged": true,
+    "formal_customization_unchanged": true,
+    "metadata_same_except_identity": true,
+    "correct_private_offline_RTX_target": true,
+    "original_v83_docker": true,
+    "exact_notebook_input_ids": true,
+    "no_extra_research_helpers": true
+  },
+  "checks_passed": 22,
+  "blocking_issues": [],
+  "final_artifact_review": {
+    "passed": true,
+    "notebook_sha256": "7e7920ff6f74b4206d617ed46443bf4f2d30978a1261d6fbfd66625adfc98ee9",
+    "changedcells": [
+      4,
+      12
+    ],
+    "checks_passed": 22,
+    "blocking_issues": []
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "status": "SAVE_COMPLETE_VALIDATED",
+  "observed_at_utc": "2026-10-30T02:05:41.847533+00:00",
+  "kernel_ref": "jiyujia/arc3-043-inference-audit",
+  "kernel_version": 1,
+  "notebook_sha256": "16cc3e6684ce9fba5880fa73e9491ce746e4c8699e1312d10508e65c270bb3ab",
+  "platform_status": "COMPLETE",
+  "checks": {
+    "source_identity_complete": true,
+    "local_frozen_hash_equal": true,
+    "actual_helper_hash": true,
+    "ready_health200_alive": true,
+    "ready_install_benchmark_reset_order": true,
+    "ten_games_one_pass": true,
+    "all_terminal": true,
+    "all_real_actions_generation": true,
+    "audit_real_events": true,
+    "actual_rtx": true,
+    "patch_applied": true,
+    "no_fatal_or_audit_skipped": true,
+    "save_self_checks": true,
+    "valid_parquet_magic": true,
+    "placeholder_hash": true,
+    "sampled_actual_request_delivery_and_following_actions": true
+  },
+  "readiness": {
+    "experiment": "042",
+    "status": "ready",
+    "limit_from_notebook_start_seconds": 2700.0,
+    "elapsed_before_wait_seconds": 52.8697464466095,
+    "health_checks": 168,
+    "health_200_observed": true,
+    "process_alive_after_health": true,
+    "wait_elapsed_seconds": 502.0728781370001,
+    "notebook_elapsed_seconds": 554.9426245836096,
+    "last_health_error_type": "HTTPError",
+    "last_http_status": 200
+  },
+  "install": {
+    "experiment": "043",
+    "active": true,
+    "base": "042",
+    "helper_sha256": "c4e0ef0323d09409b3639d94aabae11ac65418cbe24647dfb7a6177727130a8e",
+    "level_tokens": 30000,
+    "stagnation_tokens": 20000,
+    "impossible_count": 3,
+    "min_gap_tokens": 12000,
+    "max_per_level": 2,
+    "formal": false
+  },
+  "log_timing_seconds": {
+    "ready": 560.382673947,
+    "installed": 562.400106374,
+    "benchmark": 562.561922256,
+    "reset": 563.081352656
+  },
+  "save_games": [
+    {
+      "game_id": "tu93-0768757b",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 33.33333333333333,
+      "non_reset_actions": 112,
+      "recorded_generated_tokens": 86264
+    },
+    {
+      "game_id": "lp85-305b61c3",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 41.66666666666667,
+      "non_reset_actions": 97,
+      "recorded_generated_tokens": 98147
+    },
+    {
+      "game_id": "vc33-5430563c",
+      "state": "gave_up",
+      "levels_completed": 4,
+      "offline_score": 35.714285714285715,
+      "non_reset_actions": 124,
+      "recorded_generated_tokens": 95776
+    },
+    {
+      "game_id": "r11l-495a7899",
+      "state": "gave_up",
+      "levels_completed": 4,
+      "offline_score": 47.61904761904761,
+      "non_reset_actions": 57,
+      "recorded_generated_tokens": 90674
+    },
+    {
+      "game_id": "sc25-635fd71a",
+      "state": "gave_up",
+      "levels_completed": 3,
+      "offline_score": 22.782303736723275,
+      "non_reset_actions": 97,
+      "recorded_generated_tokens": 90031
+    },
+    {
+      "game_id": "ar25-0c556536",
+      "state": "gave_up",
+      "levels_completed": 7,
+      "offline_score": 77.77777777777779,
+      "non_reset_actions": 250,
+      "recorded_generated_tokens": 88511
+    },
+    {
+      "game_id": "sb26-7fbdac44",
+      "state": "won",
+      "levels_completed": 8,
+      "offline_score": 100.0,
+      "non_reset_actions": 141,
+      "recorded_generated_tokens": 60944
+    },
+    {
+      "game_id": "re86-8af5384d",
+      "state": "gave_up",
+      "levels_completed": 5,
+      "offline_score": 41.66666666666667,
+      "non_reset_actions": 277,
+      "recorded_generated_tokens": 91899
+    },
+    {
+      "game_id": "ft09-0d8bbf25",
+      "state": "gave_up",
+      "levels_completed": 4,
+      "offline_score": 44.870654144010544,
+      "non_reset_actions": 69,
+      "recorded_generated_tokens": 91509
+    },
+    {
+      "game_id": "tr87-cd924810",
+      "state": "gave_up",
+      "levels_completed": 4,
+      "offline_score": 47.61904761904761,
+      "non_reset_actions": 141,
+      "recorded_generated_tokens": 81740
+    }
+  ],
+  "offline_demo_mean_score": 49.30497832775592,
+  "levels_completed": 49,
+  "wins": 1,
+  "recorded_non_reset_actions": 1365,
+  "recorded_generated_tokens": 875495,
+  "audit_events": 11,
+  "audit_agents": 7,
+  "benchmark_start_time": "2026-10-30T01:17:01.298493",
+  "benchmark_end_time": "2026-10-30T01:42:25.348466",
+  "benchmark_elapsed_seconds": 1524.049973,
+  "remote_source_check": "experiments/043-before-formal-source-check.json",
+  "formal_submission_created": true,
+  "public_score": null,
+  "limits": [
+    "Save is not a contemporaneous paired A/B; no isolated H3 score gain established.",
+    "49.30 offline is not a public leaderboard score.",
+    "Following actions and completed levels are temporal associations, not causal gains.",
+    "One audit occurred close to the deadline with no following action; not all11audits were effective.",
+    "Readiness report experiment label042 inherited from frozen base, freshly downloaded from043version1."
+  ],
+  "prompt_action_verification": "experiments/043-prompt-action-verification.json",
+  "independent_review": "experiments/043-save-independent-review.json",
+  "formal_status": "PENDING",
+  "submission_id": 57789256,
+  "formal_submission": "experiments/043-formal-submission.json"
+}

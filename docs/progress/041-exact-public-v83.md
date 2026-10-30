@@ -1,4 +1,4 @@
-# 041：最高公开得分v83原始23cells副本，正式待评分
+# 041：最高公开得分v83原始23cells副本，正式0.00待诊断
 
 2026-10-27。用户在040正式仍未提高后，明确要求明天用公开最高分Notebook直接提交一次，并在后续选择“我明天发消息后再提交”。本轮仅准备并保存原样副本，**未创建041正式提交、未创建定时任务**。
 
@@ -37,3 +37,17 @@ CLI实时额度剩1次、历史中没有041。直接对既有**jiyujia/arc3-041-
 **43.58是离线演示结果，041正式分数仍为空；当前正式最佳仍009／31.16。** 等用户完成通知后读取57718364，不设置自动监控、不重复提交。
 
 [正式提交记录](../../experiments/041-formal-submission.json) · [平台接受列表](../../experiments/041-after-formal-submissions.json) · [初始回执](../../experiments/041-submission-detail-initial.json) · [保存分析](../../experiments/041-save-result.json) · [独立31项复核](../../experiments/041-save-independent-review.json) · [提交前源码核验](../../experiments/041-before-formal-source-check.json)
+
+## 正式0.00：早结束迹象，不能确认根因
+
+2026-10-28用户报告零分后，官方CLI与GetSubmission确认**57718364 COMPLETE／public0.00／最终文件3411字节**。第一次记录COMPLETE的查询时刻为01:28:47.852UTC，距00:55:18.977提交约**33分28.875秒**。这是含排队的完成时间上界，不是精确worker运行时长；可以确认它没有进行完整9小时评测。0分不得与离线43.58混淆。
+
+客户端提交记录、v1与sourcehash正确，全部23cells确为原v83。提交使用-k/-v代码重跑接口，最终3411B与保存占位2648B不同，没有直接上传离线演示文件作为正式成绩的证据。原源码仅在not TRUE_SUBMISSION写占位，实际formal环境标记及其执行分支仍需正式日志确认。
+
+当前更应怀疑正式冷启动／gateway scorecard提前结束。原版模型等待在12分钟时释放，未强制health200，首请求再给900秒重试；慢读模型或首次有效动作过迟可能触发游戏／HTTP窗口结束。新读取的[讨论751598](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/751598)也有多个参赛者报告相同3411B＋COMPLETE0分，而保存运行正常。署名María的[3545231更新](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/751598#3545231)称平台问题仍在调查，并请勿继续提供单个submissionID；API未独立验证其staff身份。
+
+这些是诊断方向，不是041根因证明。本次episodes仍为空、下载403；没有正式模型加载时间、首动作、关闭原因或逐题日志，无法区分平台异常、原启动脆弱性或其它具体执行失败。没有把0分归因于模型解题能力或承诺重提即可恢复35.35。
+
+保留009／31.16，暂不原样重复041；下一步先核查正式模型启动和首个／持续gateway动作。本次只做只读诊断与记录，未发外部消息、运行新GPU、提交或创建自动化。
+
+[最终回执](../../experiments/041-formal-result-snapshot.json) · [诊断可用性](../../experiments/041-formal-diagnostics-availability.json) · [诊断事实与假设](../../experiments/041-zero-diagnosis.json) · [新代理源码审查](../../experiments/041-zero-source-review.json)

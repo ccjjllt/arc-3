@@ -1,0 +1,256 @@
+{
+  "observed_at_utc": "2026-10-30T00:56:48.915709+00:00",
+  "reviewer": "/root/r043_failure_mechanism_fresh",
+  "scope": "Read-only new bounded trace audit plus historical experiment review. No model, GPU or gameplay execution.",
+  "local_inventory": "Original036/032 full run files no longer exist in runs; historical audit JSON remains. Do not claim this turn repeated the full50trace audit.",
+  "download": {
+    "ref": "zhuating/arc3-auxiliary-reasoning-diagnostic",
+    "version": 11,
+    "selection_reason": "r11l/tr87 known timeout examples from036 error review plus mediumsp80; three logs selected before inspecting current download; canceled after discovering the exact proposed fix was already tested negatively in007.",
+    "requested_files": [
+      "baseline/r11l-495a7899_p0_requests.jsonl",
+      "baseline/tr87-cd924810_p0_requests.jsonl",
+      "main_medium/sp80-589a99af_p0_requests.jsonl"
+    ],
+    "complete_files": [
+      {
+        "path": "/private/tmp/r043-failure-logs/baseline/r11l-495a7899_p0_requests.jsonl",
+        "bytes": 41258998,
+        "sha256": "2cb2748685f4482b1be2ac0395f77e79022b971908eb0947c9c1d6c0f4a446b4",
+        "original036_manifest_hash_match": true
+      }
+    ],
+    "other_files_not_audited": true
+  },
+  "new_r11l_audit": {
+    "unique_tool_results": 65,
+    "timeouts": 2,
+    "cleared_function_counts": [
+      14,
+      19
+    ],
+    "cases": [
+      {
+        "tool_call_id": "call_40991463d0bd403ca87764d8",
+        "first_result_line_1based": 65,
+        "next_action_index": 20,
+        "payload": {
+          "tool": "python",
+          "function_retention": "Your previous function click_for is no longer retained; redefine it if needed.\nYour previous function state is no longer retained; redefine it if needed.\nYour previous function terrain_mask is no longer retained; redefine it if needed.\nYour previous function read_state is no longer retained; redefine it if needed.\nYour previous function empty is no longer retained; redefine it if needed.\nYour previous function show is no longer retained; redefine it if needed.\nYour previous function hub_foot is no longer retained; redefine it if needed.\nYour previous function plan_for is no longer retained; redefine it if needed.\nYour previous function apply_mv is no longer retained; redefine it if needed.\nYour previous function diamond_foot is no longer retained; redefine it if needed.\nYour previous function full is no longer retained; redefine it if needed.\nYour previous function valid is no longer retained; redefine it if needed.\nYour previous function hubs_of is no longer retained; redefine it if needed.\nYour previous function emp is no longer retained; redefine it if needed.",
+          "error": "Tool timed out after 30s"
+        },
+        "cleared_function_names": [
+          "click_for",
+          "state",
+          "terrain_mask",
+          "read_state",
+          "empty",
+          "show",
+          "hub_foot",
+          "plan_for",
+          "apply_mv",
+          "diamond_foot",
+          "full",
+          "valid",
+          "hubs_of",
+          "emp"
+        ],
+        "code": "def build_blocked(fr, water_src=None):\n    a = (water_src or fr).ascii.split('\n')\n    blocked=set()\n    for r in range(64):\n        for c in range(64):\n            if r==0 or c==0: blocked.add((r,c)); continue\n            if a[r][c] in 'Sg': blocked.add((r,c))\n    return blocked\ndef state_ok(st, blocked):\n    foots=[]\n    for pos,tok in st:\n        f=set(diamond_foot(pos[0],pos[1]))\n        for cell in f:\n            if cell in blocked: return False\n        foots.append(f)\n    for i in range(len(foots)):\n        for j in range(i+1,len(foots)):\n            if foots[i]&foots[j]: return False\n    hubs=hubs_of(st)\n    hl=list(hubs.values())\n    for k,(hr,hc) in enumerate(hl):\n        hf=set(hub_foot(hr,hc))\n        for cell in hf:\n            if cell in blocked: return False\n        for f in foots:\n            if hf&f: return False\n        for other in hl[k+1:]:\n            if hf & set(hub_foot(other[0],other[1])): return False\n    return True\ndef plan2(st, blocked, maxd=8):\n    import collections\n    PR=(18,57); ORR=(51,40)\n    n=len(st)\n    def goal(s):\n        return (any(s[i][0]==PR and s[i][1]=='p' for i in range(1,n))\n                and any(s[i][0]==ORR and s[i][1]=='O' for i in range(1,n)))\n    if goal(st): return []\n    seen={st:None}; q=collections.deque([st]); found=None\n    for d in range(maxd):\n        stop=False\n        for _ in range(len(q)):\n            s=q.popleft()\n            for i in range(1,n):\n                l=list(s); l[0],l[i]=l[i],l[0]; l=tuple(l)\n                if l not in seen and state_ok(l,blocked):\n                    seen[l]=(s,('swap',i))\n                    if goal(l): found=l; stop=True; break\n                    q.append(l)\n                elif l not in seen:\n                    seen[l]=(s,('swap',i))  # mark invalid-but-seen to avoid recompute\n                if stop: break\n            if stop: break\n            for (r,c) in CAND:\n                if any(s[j][0]==(r,c) for j in range(n)): continue\n                l=list(s); l[0]=((r,c),s[0][1]); l=tuple(l)\n                if l in seen: continue\n                if not state_ok(l,blocked):\n                    seen[l]=(s,None); continue\n                seen[l]=(s,('tp',(r,c)))\n                if goal(l): found=l; stop=True; break\n                q.append(l)\n            if stop: break\n        if stop: break\n    if found is None: return None\n    chain=[]; s=found\n    while seen[s] is not None:\n        prev,mv=seen[s]\n        if mv is not None: chain.append(mv)\n        s=prev\n    chain.reverse(); return chain\nWATER_SRC = history[7].frame\nBLK2 = build_blocked(current_frame, WATER_SRC)\nst = read_state(current_frame)\nprint('state_ok now', state_ok(st, BLK2))\nCAND=[(r,c) for r in range(3,61) for c in range(3,61) if all(x not in BLK2 for x in diamond_foot(r,c))]\nprint('cands', len(CAND))\npl = plan2(st, BLK2)\nprint('plan', pl)\n",
+        "subsequent_tools": [
+          {
+            "tool_call_id": "call_dc113c725f02466fb113235d",
+            "first_result_line_1based": 67,
+            "next_action_index": 20,
+            "payload": {
+              "tool": "python",
+              "function_retention": "Retained your function dfoot(cr, cc) for later Python calls in this game.\nRetained your function hfoot(cr, cc) for later Python calls in this game.\nYour function blocked_all was not retained: unavailable dependencies: a0, water. Pass snippet-specific data as arguments or redefine it if needed.",
+              "returncode": 0,
+              "stdout": "hub-valid count 2153\n[((0, 1), 28), ((0, 2), 34), ((0, 3), 40), ((0, 4), 40), ((0, 5), 40), ((0, 6), 32), ((0, 7), 1), ((1, 0), 30), ((1, 1), 64), ((1, 2), 64), ((1, 3), 64), ((1, 4), 64), ((1, 5), 64), ((1, 6), 64), ((1, 7), 40), ((2, 0), 40), ((2, 1), 64), ((2, 2), 53), ((2, 3), 32), ((2, 4), 37), ((2, 5), 64), ((2, 6), 64), ((2, 7), 40), ((3, 0), 39), ((3, 1), 49), ((3, 4), 24), ((3, 5), 61), ((3, 6), 44), ((3, 7), 16), ((4, 0), 7), ((4, 1), 44), ((4, 2), 10), ((4, 3), 32), ((4, 4), 63), ((4, 5), 64), ((4, 6), 27), ((5, 3), 15), ((5, 4), 64), ((5, 5), 64), ((5, 6), 64), ((5, 7), 5), ((6, 2), 13), ((6, 3), 63), ((6, 4), 64), ((6, 5), 64), ((6, 6), 57), ((6, 7), 12), ((7, 3), 40), ((7, 4), 40), ((7, 5), 35), ((7, 6), 10)]\n"
+            },
+            "code": "a0 = history[7].frame.ascii.split('\n')\nwater=set()\nfor r in range(64):\n    for c in range(64):\n        if a0[r][c]=='S': water.add((r,c))\ndef dfoot(cr,cc): return [(cr+dr,cc+dc) for dr in range(-2,3) for dc in range(-2,3) if abs(dr)+abs(dc)<=2]\ndef hfoot(cr,cc): return [(cr+dr,cc+dc) for dr in range(-2,3) for dc in range(-2,3) if not(abs(dr)==2 and abs(dc)==2)]\ndef blocked_all():\n    b=set(water)\n    for r in range(64):\n        for c in range(64):\n            if r==0 or c==0 or a0[r][c]=='g': b.add((r,c))\n    return b\nBL=blocked_all()\n# hub-valid cells: hub footprint free of blocked\nhv=[(r,c) for r in range(3,61) for c in range(3,61) if all(x not in BL for x in hfoot(r,c))]\nprint('hub-valid count', len(hv))\n# cluster into regions by simple grid summary\nimport collections\nreg=collections.Counter()\nfor (r,c) in hv: reg[(r//8,c//8)]+=1\nprint(sorted(reg.items()))\n"
+          },
+          {
+            "tool_call_id": "call_812007243e0d486187feb8e6",
+            "first_result_line_1based": 69,
+            "next_action_index": 20,
+            "payload": {
+              "tool": "python",
+              "function_retention": "Your function blocked was not retained: unavailable dependencies: a0, water. Pass snippet-specific data as arguments or redefine it if needed.\nYour function hubok was not retained: unavailable dependencies: BL. Pass snippet-specific data as arguments or redefine it if needed.\nYour function dfootok was not retained: unavailable dependencies: BL. Pass snippet-specific data as arguments or redefine it if needed.",
+              "returncode": 0,
+              "stdout": "hub (19, 35) (True, [])\nhub (55, 42) (True, [])\nhub (34, 48) (True, [])\nhub (15, 38) (True, [])\nhub (29, 46) (True, [])\ndiam (12, 45) (True, [])\ndiam (60, 45) (True, [])\ndiam (18, 57) (True, [])\ndiam (12, 20) (True, [])\ndiam (21, 8) (True, [])\ndiam (51, 40) (True, [])\ndiam (25, 53) (True, [])\n"
+            },
+            "code": "a0 = history[7].frame.ascii.split('\n')\nwater=set((r,c) for r in range(64) for c in range(64) if a0[r][c]=='S')\ndef blocked():\n    b=set(water)\n    for r in range(64):\n        for c in range(64):\n            if r==0 or c==0 or a0[r][c]=='g': b.add((r,c))\n    return b\nBL=blocked()\ndef hubok(h):\n    bad=[x for x in hfoot(h[0],h[1]) if x in BL]\n    return len(bad)==0, bad[:4]\nfor h in [(19,35),(55,42),(34,48),(15,38),(29,46)]:\n    print('hub',h,hubok(h))\ndef dfootok(d):\n    bad=[x for x in dfoot(d[0],d[1]) if x in BL]\n    return len(bad)==0, bad[:4]\nfor d in [(12,45),(60,45),(18,57),(12,20),(21,8),(51,40),(25,53)]:\n    print('diam',d,dfootok(d))\n"
+          },
+          {
+            "tool_call_id": "call_70a46f0f20d14bb68c98e186",
+            "first_result_line_1based": 71,
+            "next_action_index": 21,
+            "payload": {
+              "tool": "python",
+              "function_retention": "Retained your function full2(fr) for later Python calls in this game.\nRetained your function apply(st, kind, cell) for later Python calls in this game.",
+              "returncode": 0,
+              "stdout": "start (((18, 57), 'O'), ((21, 8), 'O'), ((25, 53), 'O'), ((51, 40), 'p'), ((60, 45), 'p'))\n[action] MOUSE(row=12, col=45) -> effect\ntp (12, 45) MISMATCH  \n pred ((((12, 45), 'O'),), ((21, 8), 'O'), ((25, 53), 'O'), ((51, 40), 'p'), ((60, 45), 'p'))\n obs (((12, 45), 'O'), ((21, 8), 'O'), ((25, 53), 'O'), ((51, 40), 'p'), ((60, 45), 'p'))\n"
+            },
+            "code": "def full2(fr):\n    seg=fr.segmentation; dm=[]\n    for n in seg['nodes']:\n        b=n['boundary'][0]\n        if n['pixels']==12 and n['color'] in ('W','G'): dm.append({'b':n['color'],'c':(b[0]+2,b[1]),'core':None})\n    for n in seg['nodes']:\n        if n['pixels']!=1 or n['color'] not in ('O','p'): continue\n        r,c=n['boundary'][0]\n        for d in dm:\n            if abs(d['c'][0]-r)+abs(d['c'][1]-c)<=2: d['core']=n['color']\n    w=[d for d in dm if d['b']=='W'][0]; gs=[d for d in dm if d['b']=='G']\n    return ((w['c'],w['core']),)+tuple((g['c'],g['core']) for g in gs)\n# plan: list of (click, expected_state)\nS=[('tp',(12,45)),('sw',(60,45)),('tp',(18,57)),('sw',(12,45)),('sw',(51,40)),('tp',(12,20)),('sw',(21,8)),('tp',(51,40)),('sw',(12,45))]\nst = full2(current_frame)\nprint('start', show2(st) if False else st)\ndef apply(st, kind, cell):\n    l=list(st)\n    if kind=='tp':\n        if any(x[0]==cell for x in st): return None\n        l[0]=((cell,st[0][1]),)\n        return tuple(l)\n    idx=[i for i in range(1,len(st)) if st[i][0]==cell]\n    if not idx: return None\n    i=idx[0]; l=list(st); l[0],l[i]=l[i],l[0]; return tuple(l)\nimport json\nfor kind,cell in S:\n    pred = apply(st, kind, cell)\n    if pred is None:\n        print('PRECHECK FAIL', kind, cell); break\n    res = action([{'action':'MOUSE','row':cell[0],'col':cell[1]}])\n    obs = full2(current_frame)\n    ok = (obs==pred)\n    print(kind, cell, 'ok' if ok else 'MISMATCH', 'completed' if res.get('level_completed') else '', 'over' if res.get('game_over') else '')\n    if not ok:\n        print(' pred', pred); print(' obs', obs); break\n    st = obs\n    if res.get('level_completed') or res.get('game_over') or res.get('done'): break\n"
+          },
+          {
+            "tool_call_id": "call_2f8cdf106c2d4f7da944038d",
+            "first_result_line_1based": 73,
+            "next_action_index": 22,
+            "payload": {
+              "tool": "python",
+              "function_retention": "Retained your function apply2(st, kind, cell) for later Python calls in this game.",
+              "returncode": 0,
+              "stdout": "[action] MOUSE(row=60, col=45) -> effect\nsw (60, 45) MISMATCH  \n pred (((60, 45), 'p'), ((21, 8), 'O'), ((25, 53), 'O'), ((51, 40), 'p'), ((12, 45), 'O'))\n obs  (((60, 45), 'p'), ((12, 45), 'O'), ((21, 8), 'O'), ((25, 53), 'O'), ((51, 40), 'p'))\n"
+            },
+            "code": "def apply2(st, kind, cell):\n    l=list(st)\n    if kind=='tp':\n        if any(x[0]==cell for x in st): return None\n        l[0]=(cell, st[0][1])\n        return tuple(l)\n    idx=[i for i in range(1,len(st)) if st[i][0]==cell]\n    if not idx: return None\n    i=idx[0]; l=list(st); l[0],l[i]=l[i],l[0]; return tuple(l)\nS=[('sw',(60,45)),('tp',(18,57)),('sw',(12,45)),('sw',(51,40)),('tp',(12,20)),('sw',(21,8)),('tp',(51,40)),('sw',(12,45))]\nst = full2(current_frame)\nfor kind,cell in S:\n    pred = apply2(st, kind, cell)\n    if pred is None:\n        print('PRECHECK FAIL', kind, cell, st); break\n    res = action([{'action':'MOUSE','row':cell[0],'col':cell[1]}])\n    obs = full2(current_frame)\n    ok = (obs==pred)\n    print(kind, cell, 'ok' if ok else 'MISMATCH', 'COMPLETED' if res.get('level_completed') else '', 'OVER' if res.get('game_over') else '')\n    if not ok:\n        print(' pred', pred); print(' obs ', obs); break\n    st = obs\n    if res.get('level_completed') or res.get('game_over') or res.get('done'): break\n"
+          }
+        ]
+      },
+      {
+        "tool_call_id": "call_3163b8d1a01d48a9a7604942",
+        "first_result_line_1based": 135,
+        "next_action_index": 40,
+        "payload": {
+          "tool": "python",
+          "function_retention": "Your previous function buildBL is no longer retained; redefine it if needed.\nYour previous function full4 is no longer retained; redefine it if needed.\nYour previous function hubok is no longer retained; redefine it if needed.\nYour previous function apply3 is no longer retained; redefine it if needed.\nYour previous function apply is no longer retained; redefine it if needed.\nYour previous function apply2 is no longer retained; redefine it if needed.\nYour previous function g_hub is no longer retained; redefine it if needed.\nYour previous function dfoot is no longer retained; redefine it if needed.\nYour previous function bfs_goal is no longer retained; redefine it if needed.\nYour previous function valid_cfg is no longer retained; redefine it if needed.\nYour previous function buildBL2 is no longer retained; redefine it if needed.\nYour previous function full2 is no longer retained; redefine it if needed.\nYour previous function full3 is no longer retained; redefine it if needed.\nYour previous function hubpos is no longer retained; redefine it if needed.\nYour previous function line is no longer retained; redefine it if needed.\nYour previous function hfoot is no longer retained; redefine it if needed.\nYour previous function key is no longer retained; redefine it if needed.\nYour previous function full5 is no longer retained; redefine it if needed.\nYour previous function seg_int is no longer retained; redefine it if needed.",
+          "error": "Tool timed out after 30s"
+        },
+        "cleared_function_names": [
+          "buildBL",
+          "full4",
+          "hubok",
+          "apply3",
+          "apply",
+          "apply2",
+          "g_hub",
+          "dfoot",
+          "bfs_goal",
+          "valid_cfg",
+          "buildBL2",
+          "full2",
+          "full3",
+          "hubpos",
+          "line",
+          "hfoot",
+          "key",
+          "full5",
+          "seg_int"
+        ],
+        "code": "a0=current_frame.ascii.split('\n')\nBLK=set((r,c) for r in range(64) for c in range(64) if r==0 or c==0 or r==63 or c==63 or a0[r][c] in 'Sg')\nringN=[(50,54),(50,56),(51,53),(51,57),(52,52),(52,58),(54,52),(54,58),(55,53),(55,57),(56,54),(56,56)]\nringp=[(54,33),(54,35),(55,32),(55,36),(56,31),(56,37),(58,31),(58,37),(59,32),(59,36),(60,33),(60,35)]\nBLK=frozenset(BLK|set(ringN)|set(ringp))\nFOOTS={}\nPOS=[]\nfor r in range(2,62):\n    for c in range(2,62):\n        f=frozenset(dfoot(r,c))\n        if not (f & BLK): POS.append((r,c)); FOOTS[(r,c)]=f\n# parking candidates: coarse sample of POS\npark=[p for p in POS if p[0]%3==0 and p[1]%3==0]\ntargets=[(40,44),(53,60),(59,56),(60,60),(54,26),(60,42)]\nCAND=sorted(set(park)|set(targets)|set(POS[i] for i in range(0,len(POS),7)))\nprint('cands', len(CAND))\nimport itertools\nstart=( ((16,14),'N'), ((9,34),'N'), ((16,39),'N'), ((21,23),'N'), ((34,37),'p'), ((40,52),'p') )\ndef hubs_of(st):\n    g={}\n    for pos,tok in st: g.setdefault(tok,[]).append(pos)\n    return {t:(sum(p[0] for p in ps)//len(ps), sum(p[1] for p in ps)//len(ps)) for t,ps in g.items()}\ndef valid(st):\n    fs=[]\n    for pos,tok in st:\n        f=FOOTS.get(pos)\n        if f is None: return False\n        fs.append(f)\n    for i in range(len(fs)):\n        for j in range(i+1,len(fs)):\n            if fs[i]&fs[j]: return False\n    h=hubs_of(st)\n    hs=[]\n    for t,hh in h.items():\n        hf=frozenset(hfoot(hh[0],hh[1]))\n        if hf & BLK: return False\n        hs.append(hf)\n    for i in range(len(hs)):\n        for j in range(i+1,len(hs)):\n            if hs[i]&hs[j]: return False\n    return True\ndef goal(st):\n    h=hubs_of(st)\n    return h.get('N')==(53,55) and h.get('p')==(57,34)\nprint('start valid', valid(start), 'cands valid', sum(1 for c in CAND if FOOTS.get(c)))\nimport collections\nq=collections.deque([start]); seen={start:None}; found=None; exp=0; CAP=120000\nwhile q and exp<CAP and found is None:\n    s=q.popleft(); exp+=1\n    wp,wt=s[0]\n    # swaps\n    for i in range(1,6):\n        l=list(s); l[0],l[i]=l[i],l[0]; l=tuple(l)\n        if l in seen or not valid(l): continue\n        seen[l]=(s,('sw',s[i][0]))\n        if goal(l): found=l; break\n        q.append(l)\n    if found: break\n    for c in CAND:\n        if c==wp or any(p==c for p,t in s): continue\n        l=((c,wt),)+s[1:]\n        if l in seen or not valid(l): continue\n        seen[l]=(s,('tp',c))\n        if goal(l): found=l; break\n        q.append(l)\n    if found: break\nprint('expansions', exp, 'found', found is not None)\nif found:\n    chain=[]; s=found\n    while seen[s] is not None:\n        prev,mv=seen[s]; chain.append(mv); s=prev\n    chain.reverse(); print('plan len', len(chain)); print(chain)\n",
+        "subsequent_tools": []
+      }
+    ],
+    "interpretation": "New trace confirms missing snapshot clears old functions and model rebuilds helpers. First timeout followed by successfuldfoot/hfoot redefinition, thenfull2/apply withtuple-shape mismatch. No immediate old-functionNameError. Secondtimeout near end has no later saved tool. No counterfactual cost or score gain estimated."
+  },
+  "historical_full_pool_count": {
+    "source": "experiments/038-analysis/execution-audit.json",
+    "sha256": "7b84b3668cf9e4b58b36ff73808b9c712421fbbaca0fcb3e72b4cf37f93dbd73",
+    "unique_tools": 4593,
+    "timeouts": {
+      "count": 20,
+      "games": 12,
+      "decision": "Timeout means incomplete compute, not proof of an impossible model. No GPU-wallclock estimate from20times30sec; some snippets execute actions and may require recovery."
+    },
+    "not_recounted_this_turn": true
+  },
+  "decisive_prior_experiment": {
+    "experiment": "007 program_state",
+    "same_proposed_missing_snapshot_semantics": true,
+    "existing_implementation": "src/arc3_research/program_state.py",
+    "design": "research/notes/007/007-program-state-design.md",
+    "results": "research/notes/007/007-results-analysis.md",
+    "intervention": "research/notes/007/007-intervention-analysis.md",
+    "comparison_source": "experiments/007-analysis/comparison.json",
+    "comparison_sha256": "9887babf7a659ea0ccb040d3c17d82e830a5218755e1c06584706b2ab8310ad4",
+    "baseline": {
+      "run_count": 12,
+      "scored_run_count": 12,
+      "mean_score": 46.35778261499965,
+      "mean_completion_ceiling": 49.36147186147186,
+      "mean_efficiency_gap": 3.003689246472208,
+      "levels_completed": 51,
+      "levels_available": 89,
+      "mean_levels_completed": 4.25,
+      "mean_completion_fraction": 0.593452380952381,
+      "wins": 4,
+      "actions": 2655,
+      "generated_tokens": 2025627,
+      "action_attached_generated_tokens": 2025627,
+      "analyzer_reported_generated_tokens": 2107894,
+      "analyzer_reported_run_count": 12,
+      "unattached_generated_tokens": 82267,
+      "final_generated_tokens": 0,
+      "uncached_input_tokens": 0,
+      "sum_run_elapsed_seconds": 36242.311693981,
+      "mean_run_elapsed_seconds": 3020.1926411650834,
+      "state_counts": {
+        "cancelled": 8,
+        "won": 4
+      },
+      "stop_reason_counts": {
+        "unknown": 8,
+        "won": 4
+      },
+      "game_count": 12,
+      "mean_game_score": 46.35778261499965,
+      "benchmark_elapsed_seconds": 3490.02185,
+      "generated_tokens_per_benchmark_second": 580.4052487522391
+    },
+    "candidate": {
+      "run_count": 12,
+      "scored_run_count": 12,
+      "mean_score": 40.32349358058185,
+      "mean_completion_ceiling": 45.33549783549784,
+      "mean_efficiency_gap": 5.012004254915989,
+      "levels_completed": 50,
+      "levels_available": 89,
+      "mean_levels_completed": 4.166666666666667,
+      "mean_completion_fraction": 0.5871031746031746,
+      "wins": 2,
+      "actions": 2591,
+      "generated_tokens": 2114430,
+      "action_attached_generated_tokens": 2114430,
+      "analyzer_reported_generated_tokens": 2159836,
+      "analyzer_reported_run_count": 12,
+      "unattached_generated_tokens": 45406,
+      "final_generated_tokens": 0,
+      "uncached_input_tokens": 0,
+      "sum_run_elapsed_seconds": 38668.87872789,
+      "mean_run_elapsed_seconds": 3222.4065606575,
+      "state_counts": {
+        "cancelled": 10,
+        "won": 2
+      },
+      "stop_reason_counts": {
+        "unknown": 10,
+        "won": 2
+      },
+      "game_count": 12,
+      "mean_game_score": 40.32349358058185,
+      "benchmark_elapsed_seconds": 3513.267308,
+      "generated_tokens_per_benchmark_second": 601.8414810581786
+    },
+    "delta": {
+      "score": -6.034289034417806,
+      "ceiling": -4.025974025974025,
+      "completed_levels": -1,
+      "wins": -2,
+      "analyzer_tokens": 51942,
+      "games_better_equal_worse": [
+        5,
+        2,
+        5
+      ]
+    },
+    "natural_adoption": "3missing snapshots/2nonempty;21functionsls20 and17re86 retained and subsequentlycalled; only2games affected directly; score negative.",
+    "conclusion": "This is not a new candidate. An additional genuine bug example does not override the previous negative same-mechanismGPU experiment. Do not launch or submit unchangedtimeoutmissing repair as a newscore improvement."
+  },
+  "candidate_status": "REJECT_REPEATING_007_WITHOUT_NEW_DIFFERENT_MECHANISM",
+  "limits": [
+    "Single historicalAB does not prove repair universally harmful; correctness and net score are different.",
+    "Local cleanCPU reproduction already existed in007; repeating it would not supply missingnet-benefit evidence.",
+    "Shared scheduling and stochastic trajectories prevent attributing all007decline to directlytriggeredcalls.",
+    "No hidden formal traces; do not diagnose042score26.09 using these oldpublictraces."
+  ]
+}

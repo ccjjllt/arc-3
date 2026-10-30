@@ -1,0 +1,84 @@
+# 042: finish model readiness before the later benchmark cell can open games.
+url, t0 = f"http://127.0.0.1:{SERVED_MODEL_PORT}/health", time.time()
+ARC3_STARTUP_LIMIT_SECONDS = float(SERVER_STARTUP_TIMEOUT)
+_arc3_wait_start = time.monotonic()
+_arc3_elapsed_before_wait = max(0.0, time.time() - NOTEBOOK_START_TIME)
+_arc3_ready_deadline = _arc3_wait_start + max(
+    0.0, ARC3_STARTUP_LIMIT_SECONDS - _arc3_elapsed_before_wait
+)
+_arc3_ready_report = {
+    "experiment": "042",
+    "status": "waiting",
+    "limit_from_notebook_start_seconds": ARC3_STARTUP_LIMIT_SECONDS,
+    "elapsed_before_wait_seconds": _arc3_elapsed_before_wait,
+    "health_checks": 0,
+    "health_200_observed": False,
+    "process_alive_after_health": False,
+}
+
+
+def _arc3_write_readiness():
+    _arc3_ready_report["wait_elapsed_seconds"] = time.monotonic() - _arc3_wait_start
+    _arc3_ready_report["notebook_elapsed_seconds"] = (
+        _arc3_elapsed_before_wait + _arc3_ready_report["wait_elapsed_seconds"]
+    )
+    (Path(WORKING_DIR) / "startup-readiness.json").write_text(
+        json.dumps(_arc3_ready_report, indent=2) + "\n"
+    )
+
+
+def _arc3_readiness_failure(reason, returncode=None):
+    _arc3_ready_report.update(status="failed", failure=reason, returncode=returncode)
+    _arc3_write_readiness()
+    print("042 startup readiness failed:", reason, "returncode:", returncode, flush=True)
+    try:
+        show_log_tail()
+    except Exception as log_error:
+        print("Could not read model log tail:", type(log_error).__name__, flush=True)
+    if reason == "readiness_deadline":
+        raise TimeoutError("042: model health200 was not confirmed within90minutes of notebook start")
+    raise RuntimeError(f"042: model process exited before benchmark, returncode={returncode}")
+
+
+_arc3_write_readiness()
+last_report = -30
+while True:
+    _arc3_returncode = proc.poll()
+    if _arc3_returncode is not None:
+        _arc3_readiness_failure("model_process_exited", _arc3_returncode)
+    _arc3_remaining = _arc3_ready_deadline - time.monotonic()
+    if _arc3_remaining <= 0:
+        _arc3_readiness_failure("readiness_deadline")
+    _arc3_healthy = False
+    _arc3_ready_report["health_checks"] += 1
+    try:
+        with urllib.request.urlopen(url, timeout=min(5.0, _arc3_remaining)) as response:
+            _arc3_ready_report["last_http_status"] = response.status
+            _arc3_healthy = response.status == 200
+    except Exception as health_error:
+        _arc3_ready_report["last_health_error_type"] = type(health_error).__name__
+    if _arc3_healthy:
+        _arc3_ready_report["health_200_observed"] = True
+    _arc3_returncode = proc.poll()
+    if _arc3_returncode is not None:
+        _arc3_readiness_failure("model_process_exited", _arc3_returncode)
+    _arc3_remaining = _arc3_ready_deadline - time.monotonic()
+    if _arc3_remaining <= 0:
+        _arc3_readiness_failure("readiness_deadline")
+    if _arc3_healthy:
+        _arc3_ready_report.update(
+            status="ready", health_200_observed=True, process_alive_after_health=True
+        )
+        _arc3_write_readiness()
+        print(
+            f"READY health200 after {_arc3_ready_report['notebook_elapsed_seconds']:.1f}s "
+            "from notebook start; model process alive; benchmark may now start.",
+            flush=True,
+        )
+        break
+    elapsed = int(time.monotonic() - _arc3_wait_start)
+    if elapsed - last_report >= 30:
+        _arc3_write_readiness()
+        print(f"Waiting for model health200: {elapsed}s waited, {_arc3_remaining:.1f}s left", flush=True)
+        last_report = elapsed
+    time.sleep(min(3.0, _arc3_remaining))

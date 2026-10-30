@@ -1,0 +1,691 @@
+{
+  "observed_at_utc": "2026-10-30T01:01:30.600428+00:00",
+  "reviewer": "/root/r043_failure_mechanism_fresh",
+  "scope": "No model/GPU/game execution. Read-only quantitative audit of one freshly redownloaded036requestlog and stored005intervalanalysis; no new fullpool comparison.",
+  "upstream_h3": {
+    "path": "research/snapshots/2026-10-30-candidates/ondrewsha__arc-agi-3-stack-s9/source.ipynb",
+    "sha256": "188e8f5b93d5953744d5f44529296caa034e33ddff9c497fd9455e494065807e",
+    "cell_index": 20,
+    "version_label_in_code": "H3v2.1",
+    "triggers": {
+      "T1": "level generatedtokens>=30000, repeat every+30000, T1/T3combinedmax2 perlevel",
+      "T2": "generatedtokens since last actualaction>=20000; once pernoactionepisode; stale oldexecuted_count must notreset clock",
+      "T3": "3 assistantmessages matchingimpossible regex since audit",
+      "minimum_gap": "12000 generatedtokens"
+    },
+    "coverage": "Original cell appends optional current-level action/object coverage after anytrigger. This is another intervention, not needed for T2 trigger correctness."
+  },
+  "r11l036": {
+    "path": "/private/tmp/r043-failure-logs/baseline/r11l-495a7899_p0_requests.jsonl",
+    "bytes": 41258998,
+    "sha256": "2cb2748685f4482b1be2ac0395f77e79022b971908eb0947c9c1d6c0f4a446b4",
+    "requests": 68,
+    "responses": 67,
+    "missing_response_count": 1,
+    "returned_completion_tokens": 151799,
+    "tokens_by_latest_visible_level": {
+      "1": 13995,
+      "2": 121527,
+      "3": 16277
+    },
+    "same_next_action_segments": [
+      {
+        "next_action_index": 1,
+        "level": 1,
+        "first_response_line_1based": 2,
+        "responses": 2,
+        "returned_completion_tokens": 706,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 0,
+        "last_response_line_1based": 4
+      },
+      {
+        "next_action_index": 2,
+        "level": 1,
+        "first_response_line_1based": 6,
+        "responses": 2,
+        "returned_completion_tokens": 3678,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 706,
+        "last_response_line_1based": 8
+      },
+      {
+        "next_action_index": 3,
+        "level": 1,
+        "first_response_line_1based": 10,
+        "responses": 1,
+        "returned_completion_tokens": 2059,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 4384,
+        "last_response_line_1based": 10
+      },
+      {
+        "next_action_index": 4,
+        "level": 1,
+        "first_response_line_1based": 12,
+        "responses": 1,
+        "returned_completion_tokens": 2857,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 6443,
+        "last_response_line_1based": 12
+      },
+      {
+        "next_action_index": 5,
+        "level": 1,
+        "first_response_line_1based": 14,
+        "responses": 1,
+        "returned_completion_tokens": 1671,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 9300,
+        "last_response_line_1based": 14
+      },
+      {
+        "next_action_index": 6,
+        "level": 1,
+        "first_response_line_1based": 16,
+        "responses": 1,
+        "returned_completion_tokens": 398,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 10971,
+        "last_response_line_1based": 16
+      },
+      {
+        "next_action_index": 7,
+        "level": 1,
+        "first_response_line_1based": 18,
+        "responses": 1,
+        "returned_completion_tokens": 2626,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 11369,
+        "last_response_line_1based": 18
+      },
+      {
+        "next_action_index": 8,
+        "level": 2,
+        "first_response_line_1based": 20,
+        "responses": 2,
+        "returned_completion_tokens": 8672,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 13995,
+        "last_response_line_1based": 22
+      },
+      {
+        "next_action_index": 12,
+        "level": 2,
+        "first_response_line_1based": 24,
+        "responses": 1,
+        "returned_completion_tokens": 7304,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 22667,
+        "last_response_line_1based": 24
+      },
+      {
+        "next_action_index": 13,
+        "level": 2,
+        "first_response_line_1based": 26,
+        "responses": 2,
+        "returned_completion_tokens": 3128,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 29971,
+        "last_response_line_1based": 28
+      },
+      {
+        "next_action_index": 14,
+        "level": 2,
+        "first_response_line_1based": 30,
+        "responses": 2,
+        "returned_completion_tokens": 6361,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 33099,
+        "last_response_line_1based": 32
+      },
+      {
+        "next_action_index": 17,
+        "level": 2,
+        "first_response_line_1based": 34,
+        "responses": 10,
+        "returned_completion_tokens": 21849,
+        "crossing20k_response_line_1based": 48,
+        "total_tokens_before_segment": 39460,
+        "last_response_line_1based": 52
+      },
+      {
+        "next_action_index": 19,
+        "level": 2,
+        "first_response_line_1based": 54,
+        "responses": 4,
+        "returned_completion_tokens": 8670,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 61309,
+        "last_response_line_1based": 60
+      },
+      {
+        "next_action_index": 20,
+        "level": 2,
+        "first_response_line_1based": 62,
+        "responses": 5,
+        "returned_completion_tokens": 15871,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 69979,
+        "last_response_line_1based": 70
+      },
+      {
+        "next_action_index": 21,
+        "level": 2,
+        "first_response_line_1based": 72,
+        "responses": 1,
+        "returned_completion_tokens": 608,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 85850,
+        "last_response_line_1based": 72
+      },
+      {
+        "next_action_index": 22,
+        "level": 2,
+        "first_response_line_1based": 74,
+        "responses": 1,
+        "returned_completion_tokens": 483,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 86458,
+        "last_response_line_1based": 74
+      },
+      {
+        "next_action_index": 29,
+        "level": 2,
+        "first_response_line_1based": 76,
+        "responses": 6,
+        "returned_completion_tokens": 16199,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 86941,
+        "last_response_line_1based": 86
+      },
+      {
+        "next_action_index": 30,
+        "level": 2,
+        "first_response_line_1based": 88,
+        "responses": 9,
+        "returned_completion_tokens": 26449,
+        "crossing20k_response_line_1based": 100,
+        "total_tokens_before_segment": 103140,
+        "last_response_line_1based": 104
+      },
+      {
+        "next_action_index": 34,
+        "level": 2,
+        "first_response_line_1based": 106,
+        "responses": 2,
+        "returned_completion_tokens": 920,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 129589,
+        "last_response_line_1based": 108
+      },
+      {
+        "next_action_index": 35,
+        "level": 2,
+        "first_response_line_1based": 110,
+        "responses": 4,
+        "returned_completion_tokens": 5013,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 130509,
+        "last_response_line_1based": 116
+      },
+      {
+        "next_action_index": 40,
+        "level": 3,
+        "first_response_line_1based": 118,
+        "responses": 9,
+        "returned_completion_tokens": 16277,
+        "crossing20k_response_line_1based": null,
+        "total_tokens_before_segment": 135522,
+        "last_response_line_1based": 134
+      }
+    ],
+    "segments_at_least20k": [
+      {
+        "next_action_index": 17,
+        "level": 2,
+        "first_response_line_1based": 34,
+        "responses": 10,
+        "returned_completion_tokens": 21849,
+        "crossing20k_response_line_1based": 48,
+        "total_tokens_before_segment": 39460,
+        "last_response_line_1based": 52
+      },
+      {
+        "next_action_index": 30,
+        "level": 2,
+        "first_response_line_1based": 88,
+        "responses": 9,
+        "returned_completion_tokens": 26449,
+        "crossing20k_response_line_1based": 100,
+        "total_tokens_before_segment": 103140,
+        "last_response_line_1based": 104
+      }
+    ],
+    "impossible_matching_unique_messages": 14,
+    "impossible_matching_excerpts": [
+      {
+        "first_seen_line_1based": 9,
+        "next_action_index": 3,
+        "matching_excerpts": [
+          "urple square) lands in the ring. Ring center (21,39), dark gray fixed at (59,27). Needed white = (2*21-59, 2*39-27) = (-17, 51). Off-board, impossible. Unless the dark gray diamond can also be moved (clicking it moves it?).\nAlternatively, maybe clicking moves whichever object you click! I clicked (21,39) whic",
+          "ple square to dark gray is drawn. The purple square follows the midpoint.\nMaybe the goal: get the purple square (magenta core) to the ring? Impossible as computed with fixed dark gray... unless the purple square moves independently, i.e., the purple square moves when clicked? Let's test clicking directly on t"
+        ]
+      },
+      {
+        "first_seen_line_1based": 11,
+        "next_action_index": 4,
+        "matching_excerpts": [
+          "). So purple = midpoint of white & dark gray (rounded).\nGoal hypothesis: get the purple square (magenta core) onto the ring center (21,39)? Impossible with fixed dark gray at (59,27): white would need to be at (-17,51).\nAlternative: get the white diamond onto the ring center — I did that in step 1 and the lev",
+          "is the game \"Aiming/catching\": the ring is the target and the *purple square* must be moved onto the ring by moving the white handle... but impossible geometry with gray fixed. Unless the gray diamond moves too! Note the gray diamond is the anchor at (59,27) — has it stayed fixed across both moves? Yes, it's ",
+          " ring is not the white's target.\nMaybe the goal is for the *magenta core* (purple square center) to reach the ring center. With gray fixed, impossible. So the gray must be movable somehow. What if clicking ON the gray diamond moves the gray diamond (the click target object), while clicking empty space moves t"
+        ]
+      },
+      {
+        "first_seen_line_1based": 13,
+        "next_action_index": 5,
+        "matching_excerpts": [
+          ", so midpoint ranges over the set {(r+59)/2, (c+27)/2} for white in board. To get midpoint at (21,39): white = (42-59, 78-27) = (-17, 51) — impossible. To get midpoint at ring, no.\nSo the goal must be something else. Maybe the goal is to get the white diamond into the ring (done at step 2, but no completion).",
+          "t? Hmm, gray stayed at (59,27) even when white was at (59,33) adjacent.\nHmm, maybe the goal is: get the purple square to overlap the ring — impossible; so maybe the goal is to get the *line* to pass through the ring center. Let's compute: line from white to gray passes through (21,39)? With gray (59,27): dire",
+          " purple square is a \"peg\" that the string passes through. Maybe the goal is to place the white so that the purple square lands on the ring? impossible.\nLet me reconsider: maybe the ring center isn't (21,39). Ring pixels: (18,38),(18,40),(19,37),(19,41),(20,36),(20,42),(22,36),(22,42),(23,37),(23,41),(24,38),(",
+          "urple square overlap the ring — the purple square is 20px (radius ~2.5), so its center could reach the ring center if midpoint = (21,39)... impossible.\nMaybe the objective is to make the white diamond overlap the gray diamond (i.e., \"connect the two\")? At step 3, white at (59,33), gray at (59,27): 6 apart. If",
+          "So midpoint row ranges from 59/2=29.5 (white row 0) to 59 (white row 63 → 61). Col ranges 27/2=13.5 to (63+27)/2=45.\nRing center (21,39) is not reachable by the midpoint (row 21 < 29.5). So the midpoint can never be at the ring.\nTherefore the target must be for the white diamond. White was at the ring center at "
+        ]
+      },
+      {
+        "first_seen_line_1based": 23,
+        "next_action_index": 12,
+        "matching_excerpts": [
+          "st go into the ring!\nIn level 1: the purple square's group = {white, gray}. To get the purple square into the purple ring... we showed it's impossible with the gray fixed at (59,27) — but the gray CAN be moved (swap). And the final state before the win: white (17,35), gray (21,39) → square at (19,37), which i"
+        ]
+      },
+      {
+        "first_seen_line_1based": 25,
+        "next_action_index": 13,
+        "matching_excerpts": [
+          " E in the orange ring has a PURPLE core ✗. Hmm, so the orange ring's diamond can't get an orange core easily.\nHmm, so color-matching may be impossible for the orange ring, since the orange ring is at (51,40), near the bottom-right where the purple hub lives. Unless we move the purple hub far away... The purpl"
+        ]
+      },
+      {
+        "first_seen_line_1based": 27,
+        "next_action_index": 13,
+        "matching_excerpts": [
+          "51,40) I'd need members summing to ~3*(51,40) = (153,120); with grays at (21,8) and (18,57) fixed, the white would need to be at (114,55) — impossible. So the orange hub can't reach the orange ring while those grays are members. If the white moves to the bottom right, the assignment changes (the white would j"
+        ]
+      },
+      {
+        "first_seen_line_1based": 39,
+        "next_action_index": 17,
+        "matching_excerpts": [
+          " p.\n  Hmm, step 4: I want an O-token gray at (51,40) but the white there has p. I need to give the white an O token while it's at (51,40) — impossible via a swap (a swap moves the white away).\n  Reorder: give the white an O token BEFORE it arrives at (51,40) via a teleport. The white gets an O token by swappi"
+        ]
+      },
+      {
+        "first_seen_line_1based": 61,
+        "next_action_index": 20,
+        "matching_excerpts": [
+          "0,40). So the white did move there during the animation, then everything reverted.\nWhy revert? Maybe because the white at (40,40) would be \"unreachable\"/invalid due to some rule.\nLet me test with a different teleport cell to learn the rule. Test clicking (14,30): the predicted hub = mean{(14,30),(21,8),(25,53)"
+        ]
+      },
+      {
+        "first_seen_line_1based": 67,
+        "next_action_index": 20,
+        "matching_excerpts": [
+          "ative: teleport the white (p) to (18,57) — but (18,57) is occupied by g4. So I need g4 out of (18,57) without the white being at (18,57)... impossible: the only way to move a gray is to swap with the white.\n   Hmm, but wait: the white can teleport to an EMPTY cell. So the sequence must be: (18,57) empty → whi",
+          "an O-token gray, say g3@E): W[O]@E, g3[p]@(51,40) ✗.\n   Hmm, the white is at (51,40) with p. I need it to have O while staying at (51,40) — impossible via swaps (they move it).\n   So I need to leave (51,40) and come back with O. \n   Move 7': Teleport W[p]@(51,40) → E2 (now (51,40) is empty). Hubs: p group = {"
+        ]
+      },
+      {
+        "first_seen_line_1based": 77,
+        "next_action_index": 29,
+        "matching_excerpts": [
+          " e.g., ALL diamonds must be in rings? There are 5 diamonds and only 2 rings. Hmm.\nOr maybe the win requires the hubs to be *in* the rings — impossible.\nOr maybe the win requires each ring to contain a diamond whose core matches AND the corresponding hub to be inside the ring's... no.\nHmm, wait. Let me reconsi"
+        ]
+      },
+      {
+        "first_seen_line_1based": 79,
+        "next_action_index": 29,
+        "matching_excerpts": [
+          "cial.\nNew idea: maybe the win requires the ring to contain a diamond whose core matches AND the corresponding hub to be INSIDE that ring... impossible.\nAnother idea: maybe the level's goal is to get the white into a ring? Hmm.\nWait. Let me reconsider the problem from scratch. What if the rings are not \"target"
+        ]
+      },
+      {
+        "first_seen_line_1based": 81,
+        "next_action_index": 29,
+        "matching_excerpts": [
+          "ray in each ring AND the white in a ring\"? There are only 2 rings, both occupied by grays. If the white also needed to be in a ring, that's impossible (only 2 rings).\nWhat if the win requires the number of members in each hub group to be equal? Currently the purple group = {G(12,20), G(18,57)} = 2; the orange"
+        ]
+      },
+      {
+        "first_seen_line_1based": 89,
+        "next_action_index": 30,
+        "matching_excerpts": [
+          "at if the win requires the ring to contain a matching gray AND the white to be at a specific place — e.g., the white must be in a ring too (impossible with 2 rings) OR the white must be \"parked\" somewhere specific like the center of the board?\nAlternatively, maybe the win requires BOTH rings matched simultane",
+          " Maybe the win condition is something completely different that I haven't considered, e.g., \"all 5 diamonds must be in the ring positions\"? Impossible. Or \"the hubs must touch each other\"? Or \"the white must be inside the orange ring\"?\nLet me look at the level-2 initial state again for the goal: the initial s",
+          " the trail? Fine.\nLet me try: maybe the win requires the ring to contain a matching gray AND the HUB of that color to be INSIDE the ring... impossible simultaneously? Actually maybe not impossible: the hub could be inside the ring if the ring is empty and the group's centroid is at the ring center. But then t",
+          "quires the ring to contain a matching gray AND the HUB of that color to be INSIDE the ring... impossible simultaneously? Actually maybe not impossible: the hub could be inside the ring if the ring is empty and the group's centroid is at the ring center. But then the ring wouldn't contain a diamond. So the goa",
+          "b's core? The white's core is O and the orange socket has a gray. If the rule were \"every bulb (including the white) must be in a socket\" — impossible with 5 bulbs and 2 sockets.\nWait, maybe the win requires every socket to have a matching bulb AND every bulb to be connected to a hub of the matching color... ",
+          "tate has a bulb sitting in the purple socket (mismatched) — which would be a weird initial condition for a \"hub in socket\" goal, though not impossible.\nCan I achieve \"both hubs in their sockets\"? The sockets are 7x7 outlines; the hub (5x5 minus corners) fits inside. But the hub position = the centroid of its "
+        ]
+      },
+      {
+        "first_seen_line_1based": 97,
+        "next_action_index": 30,
+        "matching_excerpts": [
+          "all clear cells (subsampled) and increase the cap, and check the BFS speed. Also, maybe my target (the specific hub-in-socket centroids) is unreachable with these parking cells.\nActually, let me first check whether ANY configuration satisfies the H1 goal (positions + tokens). Let me do a direct search over con"
+        ]
+      }
+    ],
+    "interpretation": [
+      "2same-actionepisodescross20k: action17=21849 andaction30=26449, bothL2. Known036benchmark eventuallycompletedL2; noactiontokenbound is not an oracle forwrongreasoning.",
+      "Action17 firstcrossingresponse isline48 andaction30line100; a later eligibleuserprompt would be needed to trigger. These are offlinepotentialcrossings, not claims actualH3ran.",
+      "67responseusages are visible;1requestresponse missing. Missingtoken cost isunknown, notzero.",
+      "Groupingresponse.action gives potentialno-actionepisodes; counters atactual_build_user_prompt are notlogged. Do not claim exactfullH3triggercounts fromthisreplay.",
+      "Regex matches include conditionalimpossibility ofa configuration and phrases suchas notimpossible; not14globalclaims thatthegameisunsolvable."
+    ]
+  },
+  "historical005": {
+    "path": "experiments/005-analysis/no-action-token-intervals.json",
+    "sha256": "454b95cedd2689e1b473250603089cd8f83ecf050932e8fe1276322b5bf43bc9",
+    "scope": "benchmark history.generated_tokens per action plus final/unattached analyzer tail",
+    "positive_interval_distribution": {
+      "count": 1119,
+      "p50": 2120.0,
+      "p75": 4847.0,
+      "p90": 9495.800000000005,
+      "p95": 13464.699999999975,
+      "p99": 28047.919999999976,
+      "max": 91507
+    },
+    "threshold20000": {
+      "before_action_count": 19,
+      "tail_count": 2,
+      "game_count": 15,
+      "before_action_on_eventually_completed_level": 11,
+      "before_action_in_eventually_won_game": 8,
+      "all_intervals": [
+        {
+          "game_id": "ar25-0c556536",
+          "game_state": "won",
+          "level": 5,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 127,
+          "action_number": 128,
+          "action_number_in_level": 1,
+          "tokens": 25187,
+          "elapsed_seconds": 1382.4671292479998
+        },
+        {
+          "game_id": "ar25-0c556536",
+          "game_state": "won",
+          "level": 7,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 212,
+          "action_number": 213,
+          "action_number_in_level": 1,
+          "tokens": 20079,
+          "elapsed_seconds": 327.6627549670002
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "game_state": "cancelled",
+          "level": 1,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 12,
+          "action_number": 13,
+          "action_number_in_level": 13,
+          "tokens": 28928,
+          "elapsed_seconds": 419.7099363299999
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 33,
+          "action_number": 34,
+          "action_number_in_level": 11,
+          "tokens": 27756,
+          "elapsed_seconds": 410.93979179100006
+        },
+        {
+          "game_id": "cn04-2fe56bfb",
+          "game_state": "won",
+          "level": 2,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 31,
+          "action_number": 32,
+          "action_number_in_level": 16,
+          "tokens": 20535,
+          "elapsed_seconds": 333.17297585899996
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "game_state": "won",
+          "level": 3,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 34,
+          "action_number": 35,
+          "action_number_in_level": 24,
+          "tokens": 33849,
+          "elapsed_seconds": 519.9929982030003
+        },
+        {
+          "game_id": "ft09-0d8bbf25",
+          "game_state": "won",
+          "level": 3,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 17,
+          "action_number": 18,
+          "action_number_in_level": 7,
+          "tokens": 20440,
+          "elapsed_seconds": 309.0548407269998
+        },
+        {
+          "game_id": "g50t-5849a774",
+          "game_state": "cancelled",
+          "level": 3,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 174,
+          "action_number": 175,
+          "action_number_in_level": 34,
+          "tokens": 30466,
+          "elapsed_seconds": 442.14706974
+        },
+        {
+          "game_id": "ka59-38d34dbb",
+          "game_state": "cancelled",
+          "level": 6,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 246,
+          "action_number": 247,
+          "action_number_in_level": 36,
+          "tokens": 40867,
+          "elapsed_seconds": 639.128546937
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "game_state": "cancelled",
+          "level": 3,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 116,
+          "action_number": 117,
+          "action_number_in_level": 13,
+          "tokens": 28247,
+          "elapsed_seconds": 449.31895230800046
+        },
+        {
+          "game_id": "lf52-271a04aa",
+          "game_state": "cancelled",
+          "level": 4,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 158,
+          "action_number": 159,
+          "action_number_in_level": 9,
+          "tokens": 28112,
+          "elapsed_seconds": 480.4512053670005
+        },
+        {
+          "game_id": "lp85-305b61c3",
+          "game_state": "won",
+          "level": 6,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 69,
+          "action_number": 70,
+          "action_number_in_level": 8,
+          "tokens": 21704,
+          "elapsed_seconds": 318.6932432429994
+        },
+        {
+          "game_id": "ls20-9607627b",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 56,
+          "action_number": 57,
+          "action_number_in_level": 37,
+          "tokens": 20965,
+          "elapsed_seconds": 302.466573102
+        },
+        {
+          "game_id": "m0r0-492f87ba",
+          "game_state": "cancelled",
+          "level": 4,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 199,
+          "action_number": 200,
+          "action_number_in_level": 20,
+          "tokens": 25612,
+          "elapsed_seconds": 393.1462965009996
+        },
+        {
+          "game_id": "r11l-495a7899",
+          "game_state": "won",
+          "level": 3,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 27,
+          "action_number": 28,
+          "action_number_in_level": 1,
+          "tokens": 27441,
+          "elapsed_seconds": 428.14338944300016
+        },
+        {
+          "game_id": "s5i5-18d95033",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 39,
+          "action_number": 40,
+          "action_number_in_level": 16,
+          "tokens": 50927,
+          "elapsed_seconds": 2983.3673860390004
+        },
+        {
+          "game_id": "sk48-d8078629",
+          "game_state": "cancelled",
+          "level": 3,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 127,
+          "action_number": 128,
+          "action_number_in_level": 66,
+          "tokens": 50022,
+          "elapsed_seconds": 2174.075435641
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": false,
+          "kind": "before_action",
+          "history_index": 33,
+          "action_number": 34,
+          "action_number_in_level": 24,
+          "tokens": 62305,
+          "elapsed_seconds": 3026.1311281149997
+        },
+        {
+          "game_id": "tu93-0768757b",
+          "game_state": "won",
+          "level": 5,
+          "level_eventually_completed": true,
+          "kind": "before_action",
+          "history_index": 107,
+          "action_number": 108,
+          "action_number_in_level": 6,
+          "tokens": 31589,
+          "elapsed_seconds": 500.392108602
+        },
+        {
+          "game_id": "bp35-0a0ad940",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": false,
+          "kind": "terminal_tail",
+          "tokens": 91507,
+          "elapsed_seconds": 3776.51883869
+        },
+        {
+          "game_id": "sp80-589a99af",
+          "game_state": "cancelled",
+          "level": 2,
+          "level_eventually_completed": false,
+          "kind": "terminal_tail",
+          "tokens": 34483,
+          "elapsed_seconds": 569.8930170060012
+        }
+      ],
+      "enumeration_check": "Storedtop3pergame: each thirdlargest<20000, so allbeforeactionintervals>=20000 areincluded. Tails countedseparately."
+    },
+    "corrections": [
+      "ft09successfulL3interval is33849, not33839.",
+      "62305 belongs tosp80unfinishedL2, notbp35. bp35longtail=91507."
+    ],
+    "limits": [
+      "24k/32k mean 24000/32000 here; 24576/32768 are additionally reported to remove unit ambiguity.",
+      "An action-attached count approximates generation accumulated since the prior environment action, including the initial interval. Batch actions often have zero counts.",
+      "The tail is analyzer-reported generation not yet attached to an action (recorded final + residual); it is not an extra sum to add to analyzer totals.",
+      "These are offline threshold crossings on the observed baseline, not actual feedback firings or measured false positives. Completion after a large interval does not establish whether interrupting it helps or hurts.",
+      "Intervals include queue and Python computation in elapsed time; tokens alone cannot identify why no environment action occurred. Alias/retained-code inspection requires request traces."
+    ]
+  },
+  "recommendation": {
+    "variant": "STAGNATION_ONLY before FULL_H3",
+    "reason": "T2 ties to a concrete long no-action episode, is bounded once per episode, and needs no level-wide timer, regex judgement or additionalcoveragepanel. FullH3 adds broadT1/T3 exposure even duringverifiedprogress andsemanticregexfalsepositives. Current evidence supports a targeted exploratory candidate, not proven scoregain.",
+    "retain": [
+      "20000generatedtokens threshold",
+      "oncepernoactionepisode",
+      "rearm onlyafterrealexecutedaction/newlevel/session",
+      "countmodeltokens not queuewalltime",
+      "minimumgap12000 if multipletriggers remain",
+      "advisory text only; neverexecute orforce anenvironmentaction inwrapper",
+      "unchangedmodel/promptoutsideconditionaladdition/sampling/scheduler/outputbudget"
+    ],
+    "avoid": [
+      "Do not equate slowreasoning withfailure. 11of19longbeforeactionintervals endedonlevelseventuallysolved.",
+      "The upstreamphrase More reasoning will not settle this is stronger than evidence; any wording change must be recordedas a newcandidatechoice.",
+      "No assuredgainfromtinyshortGPUrun; require actualnaturaltriggerdelivery evidence andfatalerrorchecks before exploratorysubmission."
+    ]
+  },
+  "prior_stall_differences": {
+    "023": "4consecutiveexecutedbatches with no gameplaychange; zeroactualtriggers.",
+    "024": "64executedactions inonelevel; 3triggers and no extra completedlevels.",
+    "newT2": "Can trigger before anynewaction atall; therefore notthesameactioncountcondition. Still priorfailureswarnagainst treatinggenericpromptasproven."
+  }
+}
